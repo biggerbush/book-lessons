@@ -1,0 +1,20 @@
+const fig=(g,x,y,r,c)=>{const e=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:c},e);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},e);return e};
+const hay=(g,cx,by,w,h,n)=>{const r=[mk('path',{d:`M${cx-w/2} ${by}Q${cx} ${by-h*1.6} ${cx+w/2} ${by}Z`,fill:'var(--gain)','fill-opacity':.3},g)];
+  for(let i=0;i<n;i++){const a=(i*.618)%1,b=(i*.371+.2)%1,x=cx+(a-.5)*w*.85,ht=h*(1-Math.abs(a-.5)*1.5)*(.6+.4*b);
+    r.push(mk('path',{d:`M${x.toFixed(1)} ${by}Q${(x+(b-.5)*50).toFixed(1)} ${(by-ht*.6).toFixed(1)} ${(x+(a-.5)*70).toFixed(1)} ${(by-ht).toFixed(1)}`,fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round'},g))}return r};
+const starD=r=>{let s='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r*.45:r;s+=(i?'L':'M')+(q*Math.cos(a)).toFixed(1)+' '+(q*Math.sin(a)).toFixed(1)}return s+'Z'};
+const H0=hay($('hay0'),1290,462,240,90,18);
+const wmn=fig($('wm'),300,380,40,'ink');mk('rect',{x:275,y:472,width:50,height:76,rx:6,class:'gain'},wmn);
+const FX=[980,1140,1300],FAM=FX.map(x=>fig($('fam'),x,470,32,'ink'));
+hay($('hp'),760,612,240,80,16);
+const BUB=FX.map(x=>{const b=mk('g',{},$('bub'));mk('rect',{x:x-36,y:356,width:72,height:58,rx:14,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},b);
+  const tx=mk('text',{x:x,y:398,'font-size':36,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},b);tx.textContent='?!';return b});
+fig($('swf'),260,320,44,'gain');
+const SMK=[0,1,2].map(()=>mk('circle',{cx:900,cy:300,r:14,fill:'var(--muted)'},$('smk')));
+[640,760,880].forEach(x=>fig($('wk'),x,590,20,'ink'));
+const CX=[1080,1170,1260,1350,1440],CRW=CX.map(x=>fig($('crw'),x,470,26,'ink')),ARM=CX.map(x=>[-1,1].map(s=>mk('path',{stroke:'var(--gain)','stroke-width':8,'stroke-linecap':'round',fill:'none'},$('crw'))));
+const PX=[260,510,760,1010,1260];PX.forEach(x=>fig($('ppl'),x,410,36,'ink'));
+const ST=PX.map(x=>mk('path',{d:starD(26),class:'gain'},$('stars')));
+const TRL=$('trail'),TL=TRL.getTotalLength(),SPK=[];
+for(let i=0;i<9;i++){const q=TRL.getPointAtLength(TL*(i+.5)/9);SPK.push([mk('path',{d:starD(16),class:'gain'},$('spk')),q.x,q.y-38])}
+fig($('memf'),1120,600,36,'ink');fig($('youf'),260,520,44,'gain');fig($('colf'),1300,520,44,'ink');

@@ -9,7 +9,7 @@ titles → Claude: brief + 10-lesson outline → Claude: each lesson script → 
 
 ## Setup (once)
 1. `pip install -r requirements.txt`
-2. Environment variables: `ANTHROPIC_API_KEY`, `ELEVENLABS_API_KEY`
+2. `ANTHROPIC_API_KEY` as an environment variable. `ELEVENLABS_API_KEY` as an environment variable, or (Claude Code cloud) as a network secret for `api.elevenlabs.io` with header `xi-api-key`
 3. In `config.json`, set `elevenlabs_voice_id` to your voice. Optionally change the model, lesson length, tone and audience there too.
 4. Optional:
    - **Cloudflare R2 / S3 audio hosting:** set `S3_BUCKET`, `S3_ENDPOINT_URL`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_PUBLIC_BASE_URL`

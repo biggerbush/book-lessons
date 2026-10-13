@@ -213,9 +213,10 @@ def split_text(text: str, limit: int = 4000) -> list[str]:
 
 
 def tts(text: str, out: Path, prev_text: str = "", next_text: str = "") -> None:
+    # Without the env var, the key is expected to come from a network secret that the
+    # cloud environment's proxy adds to requests for api.elevenlabs.io.
     key = os.environ.get("ELEVENLABS_API_KEY")
-    if not key:
-        sys.exit("ELEVENLABS_API_KEY is not set")
+    headers = {"xi-api-key": key} if key else {}
     url = (f"https://api.elevenlabs.io/v1/text-to-speech/{CONFIG['elevenlabs_voice_id']}"
            f"?output_format={CONFIG['elevenlabs_output_format']}")
     body = {"text": text, "model_id": CONFIG["elevenlabs_model_id"]}
@@ -224,7 +225,7 @@ def tts(text: str, out: Path, prev_text: str = "", next_text: str = "") -> None:
     if next_text:
         body["next_text"] = next_text
     for attempt in range(5):
-        r = requests.post(url, json=body, headers={"xi-api-key": key}, timeout=300)
+        r = requests.post(url, json=body, headers=headers, timeout=300)
         if r.status_code == 200:
             out.write_bytes(r.content)
             return

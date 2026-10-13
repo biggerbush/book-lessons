@@ -35,6 +35,16 @@ Return ONLY a JSON object, no other text:
 }}
 Each lesson covers one distinct, important idea or chapter, in an order that builds. Lesson 1 hooks the listener; lesson {n} ties the ideas together.{notes}"""
 
+EXTEND_PROMPT = """The audio summary of "{title}" by {author} is being extended from {have} to {n} lessons.
+Overview: {summary}
+
+Lessons already made (keep them exactly, do not repeat their ideas):
+{outline}
+
+Plan the {k} further lessons, numbered {first} to {n}. Return ONLY a JSON object, no other text:
+{{"lessons": [ {{"title": "short lesson title, max 8 words", "key_idea": "one sentence: the single idea this lesson teaches"}} ]}}   (exactly {k})
+Each covers one distinct, important idea or chapter of the book, in an order that builds on the lessons above. Lesson {n} ties the ideas together.{notes}"""
+
 SCRIPT_PROMPT = """Book: "{title}" by {author}
 Overview: {summary}
 

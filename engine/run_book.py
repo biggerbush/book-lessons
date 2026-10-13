@@ -214,6 +214,12 @@ def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: 
             state["lessons"] = [{"n": i + 1, "title": l["title"], "key_idea": l["key_idea"], "stage": "new"}
                                 for i, l in enumerate(plan["lessons"])]
             checkpoint(f"Plan '{plan['title']}' ({len(state['lessons'])} lessons)")
+        have = len(state["lessons"])
+        if state.get("plan") and n_lessons > have and have > 0:      # asked for more lessons than the draft has: plan only the extra ones
+            extra = brain.extend(state["plan"], [{"title": l["title"], "key_idea": l["key_idea"]} for l in state["lessons"]], n_lessons, notes)
+            state["plan"]["lessons"] = state["plan"]["lessons"][:have] + extra
+            state["lessons"] += [{"n": have + i + 1, "title": l["title"], "key_idea": l["key_idea"], "stage": "new"} for i, l in enumerate(extra)]
+            checkpoint(f"Plan {len(extra)} more lessons for '{state['plan']['title']}' (now {n_lessons})")
         state.update(status="working", message="")
         for L in state["lessons"]:
             if L.get("stage") == "built":

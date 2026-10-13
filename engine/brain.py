@@ -107,6 +107,17 @@ class RealBrain:
             plan["author"] = author
         return plan
 
+    def extend(self, plan: dict, done: list[dict], n: int, notes: str) -> list[dict]:
+        outline = "\n".join(f"{i + 1}. {l['title']}: {l['key_idea']}" for i, l in enumerate(done))
+        nt = f"\n\nSource notes:\n<source_notes>\n{notes}\n</source_notes>" if notes else ""
+        text = self.llm.ask(P.WRITER_SYSTEM, P.EXTEND_PROMPT.format(
+            title=plan["title"], author=plan["author"], have=len(done), n=n, summary=plan["summary"], outline=outline,
+            k=n - len(done), first=len(done) + 1, notes=nt), 4000, "plan the extra lessons")
+        new = parse_json(text)["lessons"][:n - len(done)]
+        if len(new) != n - len(done):
+            raise ValueError(f"expected {n - len(done)} extra lessons, got {len(new)}")
+        return new
+
     def script(self, plan: dict, n: int, lesson: dict, scenes: int = 9) -> tuple[dict, str, Script]:
         outline = "\n".join(f"{i + 1}. {l['title']}: {l['key_idea']}" for i, l in enumerate(plan["lessons"]))
         redo = ""
@@ -163,6 +174,9 @@ class MockBrain:
 
     def plan(self, title: str, author: str, n: int, notes: str) -> dict:
         return mock.plan(title, n)
+
+    def extend(self, plan, done, n, notes):
+        return [{"title": f"Dry run lesson {i + 1}", "key_idea": "Filler idea for the pipeline test."} for i in range(len(done), n)]
 
     def script(self, plan, n, lesson, scenes=9):
         text = mock.script_response()

@@ -1,0 +1,26 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const dog=(g,x,y)=>{mk('path',{d:`M${x-35} ${y-30}V${y}M${x-15} ${y-30}V${y}M${x+12} ${y-30}V${y}M${x+28} ${y-30}V${y}M${x-44} ${y-54}l-14-12`,stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round',fill:'none'},g);
+  mk('rect',{x:x-45,y:y-62,width:82,height:38,rx:16,class:'ink'},g);mk('circle',{cx:x+40,cy:y-66,r:22,class:'ink'},g);
+  mk('path',{d:`M${x+24} ${y-80}l-8-18 18 6zM${x+52} ${y-82}l10-16 4 18z`,class:'ink'},g);mk('circle',{cx:x+48,cy:y-70,r:4,fill:'var(--stage)'},g)};
+const horse=(g,x,y)=>{mk('path',{d:`M${x+20} ${y-100}V${y}M${x+50} ${y-100}V${y}M${x+170} ${y-100}V${y}M${x+200} ${y-100}V${y}M${x+218} ${y-150}q30 20 20 80`,stroke:'var(--ink)','stroke-width':10,'stroke-linecap':'round',fill:'none'},g);
+  const H={fill:'var(--line)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'};
+  mk('polygon',Object.assign({points:`${x+20},${y-160} ${x-20},${y-240} ${x+15},${y-252} ${x+75},${y-160}`},H),g);
+  mk('ellipse',Object.assign({cx:x-35,cy:y-235,rx:40,ry:22},H),g);
+  mk('rect',Object.assign({x:x,y:y-175,width:220,height:90,rx:40},H),g);
+  fig(g,x+120,y-280,30,'loss');mk('path',{d:`M${x+88} ${y-300}h64l-6-22h-52z`,class:'loss'},g)};
+fig($('t0'),1250,380,34,'gain');fig($('t0'),1420,380,34,'ink');
+fig($('carn1'),340,552,40,'ink');
+const dm1=mk('g',{},$('dog1'));dog(dm1,500,720);const rx=mk('text',{x:500,y:760,class:'m','font-size':20,'text-anchor':'middle'},dm1);rx.textContent='REX';
+horse($('cop1'),1180,720);
+const pm2=mk('g',{},$('pair2'));fig(pm2,440,445,34,'ink');dog(pm2,560,592);
+horse($('cop2'),1130,780);
+// Rex drawn at origin; moved along the arc over the hill in render
+const dm3=mk('g',{},$('dog3'));dog(dm3,0,0);
+const ARC3=k=>{const a=1-k;return [a*a*700+2*a*k*1090+k*k*1410, a*a*760+2*a*k*420+k*k*760]};
+fig($('p4a'),520,400,34,'ink');fig($('p4b'),980,420,34,'gain');fig($('p4c'),1320,420,34,'ink');
+const AR4=[400,440,480].map(y=>mk('path',{d:`M170 ${y}H350m-16-12 16 12-16 12`,fill:'none',stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('arr4')));
+fig($('p5a'),440,450,34,'loss');fig($('p5b'),1120,480,34,'ink');
+[[220,400],[220,540],[660,400],[660,540]].forEach(([x,y])=>{fig($('crowd5'),x,y,18,'ink');const l=x<440;mk('path',{d:`M${l?250:630} ${y+40}L${l?395:485} ${y<450?480:540}`,stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'8 8','stroke-linecap':'round'},$('crowd5'))});
+fig($('st6f'),420,430,44,'ink');[1040,1160,1280].forEach(x=>fig($('tm6'),x,560,18,'ink'));fig($('mgr6'),1160,410,26,'ink');
+fig($('p7'),300,500,40,'gain');fig($('w7'),1000,500,34,'ink');
+fig($('ref8'),1340,390,30,'gain');

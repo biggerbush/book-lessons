@@ -231,7 +231,13 @@ def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: 
         log(f"Done. Estimated cost ${cost_usd(state['usage']):.2f}. Review the draft, then approve it.")
         return 0
     except Exception as exc:
-        log(f"FAILED: {exc}")
+        log(f"FAILED: {type(exc).__name__}: {exc}")
+        if state.get("status") not in ("failed", "needs_source"):     # early failure (e.g. the planning call): record it for the admin page
+            state.update(status="failed", message=f"{type(exc).__name__}: {str(exc)[:300]}")
+            try:
+                checkpoint(f"Draft '{title}': failed")
+            except Exception as exc2:
+                log(f"could not save the failure: {exc2}")
         return 1
 
 

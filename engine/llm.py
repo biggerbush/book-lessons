@@ -19,7 +19,9 @@ def cost_usd(usage: dict, model: str | None = None) -> float:
 class LLM:
     def __init__(self, usage: dict):
         import anthropic
-        self.client = anthropic.Anthropic()
+        import os
+        ws = os.environ.get("ANTHROPIC_WORKSPACE_ID", "").strip()          # only needed for keys not scoped to a workspace
+        self.client = anthropic.Anthropic(default_headers={"anthropic-workspace-id": ws} if ws else None)
         self.usage = usage
 
     def ask(self, system: str, user, max_tokens: int, label: str = "") -> str:

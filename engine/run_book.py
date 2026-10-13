@@ -33,7 +33,7 @@ def build_html(plan: dict, n: int, lesson: dict, meta: dict, script: timing.Scri
     e = htmllib.escape
     book, author = plan["title"], plan["author"]
     if mp3 is not None:
-        audio = '<audio id="vo" preload="auto" src="data:audio/mpeg;base64,' + base64.b64encode(mp3.read_bytes()).decode() + '"></audio>'
+        audio = f'<audio id="vo" preload="auto" src="lesson-{n:02d}.mp3"></audio>'
     else:
         audio = '<audio id="vo" preload="none"></audio>'
     note = (f"A paraphrased summary of &ldquo;{e(lesson['title'])}&rdquo;, from <em>{e(book)}</em> by {e(author)}. "
@@ -149,6 +149,7 @@ def process_lesson(ctx: dict, state: dict, L: dict) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
     page = out_dir / f"lesson-{n:02d}.html"
     page.write_text(build_html(plan, n, outline, meta, script, real_cfg, parts, mp3), encoding="utf8")
+    shutil.copyfile(mp3, out_dir / f"lesson-{n:02d}.mp3")        # the page streams its narration from this file (small page, fast start)
     qa.thumbnail(page, out_dir / f"thumb-{n:02d}.jpg", 3.0)
     res = qa.inspect(page, real_cfg["SC"])
     final_issues = res["errors"] + res["issues"]

@@ -86,6 +86,23 @@ def update_drafts_index() -> None:
 
 # ---------------------------------------------------------------- approve / reject
 
+_URI = re.compile(r'src="data:audio/[a-z0-9]+;base64,([A-Za-z0-9+/=]+)"')
+
+
+def externalize_audio(folder) -> int:
+    """Lessons built by older runs embed their narration as base64 (slow first load). Move it into lesson-NN.mp3 next to the page."""
+    import base64
+    n = 0
+    for p in sorted(folder.glob("lesson-*.html")):
+        s = p.read_text(encoding="utf8")
+        m = _URI.search(s)
+        if m:
+            p.with_suffix(".mp3").write_bytes(base64.b64decode(m.group(1)))
+            p.write_text(s[:m.start()] + f'src="{p.with_suffix(".mp3").name}"' + s[m.end():], encoding="utf8")
+            n += 1
+    return n
+
+
 def approve(slug: str) -> None:
     src = DRAFTS / slug
     if not (src / "book.json").exists():
@@ -104,6 +121,7 @@ def approve(slug: str) -> None:
     if dest.exists():
         shutil.rmtree(dest)
     shutil.move(str(src), str(dest))
+    externalize_audio(dest)
     (dest / "book.json").unlink(missing_ok=True)
 
     lessons = [{k: v for k, v in l.items() if k not in ("issues", "timing")} for l in book["lessons"]]

@@ -1,0 +1,27 @@
+const fig=(g,x,y,r,a)=>{mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)};
+const gA=mk('g',{},$('pA'));fig(gA,1250,592,24,{class:'loss'});
+const gB=mk('g',{},$('pB'));fig(gB,1410,592,24,{class:'gain'});
+const PZ=[0,1,2,3].map(i=>{const g=mk('g',{},$('pz')),x=140+i*190,n=i+2,s=150/n;
+  mk('rect',{x:x,y:470,width:150,height:150,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('rect',{x:x+150-s,y:470,width:s,height:s,class:'gain','fill-opacity':.8},g);
+  let d='';for(let k=1;k<n;k++)d+='M'+(x+k*s)+' 470v150M'+x+' '+(470+k*s)+'h150';
+  mk('path',{d:d,stroke:'var(--line)','stroke-width':3},g);return g});
+fig($('actor'),1310,520,30,{class:'ink'});
+const CP=['EFFORT','GOOD STRATEGIES','HELP FROM OTHERS'].map((s,i)=>{const y=300+i*120,g=mk('g',{},$('chips'));
+  mk('path',{d:'M548 '+(y+32)+'L470 '+(430+i*60),fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},g);
+  mk('rect',{x:560,y:y,width:320,height:64,rx:32,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);
+  const e=mk('text',{x:720,y:y+40,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);e.textContent=s;return g});
+const wk=mk('g',{},$('walk'));fig(wk,0,-68,16,{class:'ink'});
+const RP=$('roadc');let RL=600;try{RL=RP.getTotalLength()}catch(e){}
+[520,1080].forEach(c=>{const g=mk('g',{},$('views'));
+  mk('path',{d:'M'+(c-120)+' 500h240',stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},g);
+  mk('rect',{x:c-100,y:430,width:60,height:70,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  mk('path',{d:'M'+(c-108)+' 430l38-36 38 36z',fill:'var(--ink)'},g);
+  mk('rect',{x:c+10,y:400,width:90,height:100,fill:'var(--muted)'},g)});
+const RN=[];for(let i=0;i<5;i++)RN.push(mk('path',{d:'M'+(215+i*30)+' 0l-6 18',stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round'},$('rain')));
+fig($('you5'),1190,440,34,{class:'ink'});
+const CK=[0,1,2].map(i=>{const y=420+i*36,g=mk('g',{},$('chk'));
+  mk('path',{d:'M402 '+y+'l8 8 14-16',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  mk('path',{d:'M432 '+(y+2)+'h44',stroke:'var(--line)','stroke-width':5,'stroke-linecap':'round'},g);return g});
+fig($('ph'),1170,390,22,{class:'ink'});
+fig($('refl'),1360,280,18,{class:'gain'});

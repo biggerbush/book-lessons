@@ -22,7 +22,7 @@ _BOXES_JS = """() => {
       if (e.style && e.style.opacity !== '') o *= parseFloat(e.style.opacity);
       if (e === svg) break; } return o; };
   const out = [];
-  for (const t of svg.querySelectorAll('text')) {
+  for (const t of svg.querySelectorAll('text:not(#wm text)')) {
     const s = (t.textContent || '').trim(); if (!s) continue;
     if (eff(t) < 0.6) continue;
     const b = t.getBoundingClientRect(); if (b.width === 0 || b.height === 0) continue;

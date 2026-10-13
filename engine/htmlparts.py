@@ -38,7 +38,7 @@ def extract(html: str) -> dict:
 
     parts["title"] = grab(r"<title>(.*?)</title>").group(1)
     parts["aria"] = grab(r'aria-label="(Animated[^"]*)"').group(1)
-    m = grab(r'fill="url\(#dots\)" opacity="\.7"/>\n(.*?)\n    </svg>')
+    m = grab(r'fill="url\(#dots\)" opacity="\.7"/>\n(.*?)(?:\n      <g id="wm"[\s\S]*?\n      </g>)?\n    </svg>')
     parts["scenes"] = m.group(1)
     parts["note"] = grab(r'<p class="note">(.*?)</p>').group(1)
     parts["audio"] = grab(r'(<audio id="vo"[^>]*></audio>)').group(1)

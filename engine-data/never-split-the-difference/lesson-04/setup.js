@@ -1,0 +1,14 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const rv=(u,id,c,d=.5)=>rise($(id),p(u,c,c+d));
+[['fsal1',380,420,40],['fyou1',1000,420,40],['pers2',260,430,36],['fyou5',300,520,38],['fthem5',1300,520,38],['fthem6',320,540,38],['fsab7',920,530,30]].forEach(q=>fig($(q[0]),q[1],q[2],q[3],'ink'));
+const CV=[0,1,2].map(()=>mk('path',{d:'M0 -30L30 0L0 30',fill:'none',stroke:'var(--loss)','stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round'},$('push1')));
+const Q3=[[['Is now a good time','to talk?'],['Is now a bad time','to talk?']],[['Does this work','for you?'],['Is this a ridiculous','idea?']]];
+const R3=Q3.map((q,r)=>{const y=280+r*260,g=mk('g',{},$('cards3'));
+  [0,1].forEach(c=>{const x=c?840:120;mk('rect',{x:x,y:y,width:640,height:220,rx:18,fill:'var(--stage)',stroke:c?'var(--gain)':'var(--line)','stroke-width':c?5:3},g);
+    q[c].forEach((s,j)=>{const tx=mk('text',{x:x+40,y:y+95+j*55,'font-size':42,class:c?'d':'d5',style:c?'fill:var(--ink)':'fill:var(--muted)'},g);tx.textContent=s});
+    mk('rect',{x:x+490,y:y+150,width:120,height:50,rx:25,fill:c?'var(--gain)':'none',stroke:c?'none':'var(--loss)','stroke-width':4},g);
+    const pl=mk('text',{x:x+550,y:y+184,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--'+(c?'on-gain':'loss')+')'},g);pl.textContent=c?'NO':'YES'});
+  mk('path',{d:'M772 '+(y+110)+'h52m-16-16 16 16-16 16',fill:'none',stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+const DT=[0,1,2].map(i=>mk('circle',{cx:250+i*30,cy:565,r:7,class:'loss'},$('dots4')));
+const LN=[];for(let i=0;i<8;i++)LN.push(mk('path',{d:'M190 '+(300+i*46)+'h'+(180+(i*37)%60),class:'s-ink','stroke-width':8,'stroke-linecap':'round'},$('lns7')));
+const WV=[0,1,2].map(i=>mk('path',{d:'M'+(1280-i*22)+' '+(650-i*12)+'q-'+(22+i*6)+' '+(50+i*12)+' 0 '+(100+i*24),fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},$('wav8')));

@@ -48,7 +48,12 @@ a{color:inherit}
 :root[data-theme="light"] .theme .moon{display:none}
 .kick{position:absolute;inset:0;z-index:5;display:grid;place-items:center;background:rgba(11,21,36,.55);border:0;color:#fff;font:800 clamp(18px,3vw,28px) var(--display);cursor:pointer}
 .kick span{display:inline-flex;align-items:center;gap:10px;background:var(--gain);color:var(--on-gain);padding:14px 22px;border-radius:999px}
-.frame{position:relative;background-repeat:no-repeat;background-position:center 28px;background-size:min(1148px,calc(100% - 32px)) auto}
+.frame{position:relative}
+.loading{position:absolute;left:16px;right:16px;top:28px;aspect-ratio:16/9;max-width:1148px;margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--muted);font:500 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.loading button{font:600 14px var(--body);letter-spacing:0;text-transform:none;background:var(--gain);color:var(--on-gain);border:0;border-radius:999px;padding:10px 18px}
+.spin{width:26px;height:26px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--gain);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation-duration:2.4s}}
 .crumb a{text-decoration:none}.crumb a:hover{color:var(--ink)}
 
 main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
@@ -285,7 +290,7 @@ function playerView(b,n){
   app.innerHTML=draftBanner(b)+
    '<a class="back" href="#/'+b.id+'">'+ICON.prev.replace('<svg','<svg width="12" height="12"')+' '+esc(b.title)+'</a>'+
    '<div class="ptitle"><div class="eyebrow">'+esc(b.title)+' · Lesson '+n+' of '+b.lessons.length+'</div><h2>'+esc(l.t)+'</h2></div>'+
-   '<div class="frame" style="background-image:url('+thumbUrl(b,n)+')"><iframe id="lf" title="'+esc(b.title+", lesson "+n+": "+l.t)+'" allow="autoplay; fullscreen" allowfullscreen></iframe></div>'+
+   '<div class="frame"><div class="loading" id="ld" role="status"><span class="spin" aria-hidden="true"></span><span id="ldt">Loading lesson…</span></div><iframe id="lf" title="'+esc(b.title+", lesson "+n+": "+l.t)+'" allow="autoplay; fullscreen" allowfullscreen></iframe></div>'+
    '<div class="eyebrow all-h">All lessons</div>'+
    '<ol class="lessons" style="margin-top:0">'+b.lessons.map((x,i)=>rowHtml(b,x,i+1,i+1===n)).join("")+'</ol>';
   app.querySelectorAll(".row").forEach(a=>a.addEventListener("click",()=>{wantPlay=true}));
@@ -303,9 +308,32 @@ function playerView(b,n){
   });
 
   const f=$("#lf");
-  f.addEventListener("load",()=>onFrameLoad(f,b,n),{once:true});
-  f.src=lessonUrl(b,n);
+  startFrame(f,b,n);
   window.scrollTo(0,0);
+}
+
+/* Open the lesson and start it as soon as its controls exist (not when every byte has arrived).
+   If it has not come up after a few seconds, retry on its own, then offer a button. */
+let frameTimer=null;
+function startFrame(f,b,n,attempt=0){
+  clearInterval(frameTimer);
+  const url=lessonUrl(b,n)+(attempt?"?r="+attempt+"-"+Date.now():"");
+  let done=false, t0=Date.now();
+  f.src=url;
+  frameTimer=setInterval(()=>{
+    if(!f.isConnected){clearInterval(frameTimer);return}
+    let ready=false;
+    try{const d=f.contentDocument; ready=!!(d&&d.getElementById("play")&&d.readyState!=="loading"&&/lesson-\d+\.html/.test(f.contentWindow.location.pathname))}catch(e){}
+    if(ready&&!done){done=true;clearInterval(frameTimer);const ld=$("#ld");if(ld)ld.remove();onFrameLoad(f,b,n);return}
+    const waited=Date.now()-t0;
+    if(waited>9000&&attempt<2){clearInterval(frameTimer);startFrame(f,b,n,attempt+1);return}
+    if(waited>9000&&attempt>=2){
+      clearInterval(frameTimer);
+      const ld=$("#ld");
+      if(ld){ld.innerHTML='<span>This lesson is taking a while to load.</span><button type="button" id="retry">Try again</button>';
+        $("#retry").addEventListener("click",()=>{wantPlay=true;ld.innerHTML='<span class="spin" aria-hidden="true"></span><span>Loading lesson\u2026</span>';startFrame(f,b,n,attempt+1)})}
+    }
+  },150);
 }
 
 /* warm the cache with the next lesson's page and narration so Next / autoplay start at once */
@@ -348,7 +376,11 @@ function onFrameLoad(f,b,n){
       }catch(e){}
     },1200);
   }
-  prefetchNext(b,n);
+  try{                                               // do not compete with this lesson's own narration for bandwidth
+    const au=doc.getElementById("vo");let fired=false;
+    const go=()=>{if(!fired){fired=true;prefetchNext(b,n)}};
+    if(au){au.addEventListener("canplaythrough",go,{once:true});setTimeout(go,15000)}else go();
+  }catch(e){prefetchNext(b,n)}
   let sawPlaying=false, fired=false;
   stopWatcher();
   watcher=setInterval(()=>{

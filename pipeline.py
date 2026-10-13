@@ -143,13 +143,13 @@ def ask_claude(book: dict, prompt: str, schema: type[BaseModel], max_tokens: int
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",
     )
+    usage = book.setdefault("usage", {"input_tokens": 0, "output_tokens": 0, "tts_chars": 0})
+    usage["input_tokens"] += resp.usage.input_tokens  # counted first: failed responses are billed too
+    usage["output_tokens"] += resp.usage.output_tokens
     if resp.stop_reason == "refusal":
         raise RuntimeError(f"Claude declined the request: {resp.stop_details}")
     if resp.stop_reason == "max_tokens":
         raise RuntimeError("Claude's answer was cut off (max_tokens); raise max_tokens and retry")
-    usage = book.setdefault("usage", {"input_tokens": 0, "output_tokens": 0, "tts_chars": 0})
-    usage["input_tokens"] += resp.usage.input_tokens
-    usage["output_tokens"] += resp.usage.output_tokens
     return resp.parsed_output
 
 
@@ -163,7 +163,10 @@ def plan_book(book: dict) -> None:
 
 Return the book's real title and author, a short brief, and exactly {n} lessons. Each lesson teaches one
 distinct, important idea from the book, in an order that builds naturally. Lesson 1 should hook the listener;
-lesson {n} should tie the ideas together.{notes}""", BookPlan, max_tokens=8000)
+lesson {n} should tie the ideas together.{notes}""", BookPlan, max_tokens=16000)
+    if len(plan.lessons) < n:
+        save_book(book)  # keep the usage of the failed attempt
+        raise RuntimeError(f"Claude planned {len(plan.lessons)} lessons instead of {n}; re-run to retry")
 
     book.update(title=plan.title, author=plan.author,
                 brief={"one_liner": plan.one_liner, "summary": plan.summary,
@@ -302,7 +305,7 @@ def process(title: str, voice: bool, force: bool) -> str:
 def cost(book: dict) -> float:
     u = book.get("usage", {})
     pin, pout = PRICES.get(book.get("model", ""), (0, 0))
-    tts_rate = TTS_PRICE_PER_1K_CHARS.get(CONFIG["elevenlabs_model_id"], 0.18)
+    tts_rate = CONFIG.get("elevenlabs_usd_per_1k_chars") or TTS_PRICE_PER_1K_CHARS.get(CONFIG["elevenlabs_model_id"], 0.18)
     return (u.get("input_tokens", 0) * pin + u.get("output_tokens", 0) * pout) / 1e6 \
         + u.get("tts_chars", 0) / 1000 * tts_rate
 
@@ -466,6 +469,8 @@ def main() -> None:
         log(f"Lesson {a.lesson} redone. Review page: {build_review().relative_to(ROOT)}")
     elif a.cmd == "approve":
         book = load_book(a.slug)
+        if book["status"] not in ("review", "published"):
+            sys.exit(f"Can't approve: '{a.slug}' is {book['status']}, not ready for review")
         missing = [l["n"] for l in book["lessons"] if not l.get("audio")]
         if missing:
             sys.exit(f"Can't approve: lessons {missing} have no voiceover yet")

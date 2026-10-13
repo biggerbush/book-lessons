@@ -136,6 +136,23 @@ def approve(slug: str) -> None:
     log(f"Published '{book['title']}' ({len(lessons)} lessons) as site/{dest.name}/")
 
 
+def approve_all() -> None:
+    """Publish every finished (ready, non-dry) draft, one after another."""
+    done, skipped = [], []
+    for p in sorted(DRAFTS.glob("*/book.json")):
+        b = json.loads(p.read_text(encoding="utf8"))
+        if b.get("dry") or b.get("status") != "ready" or not b.get("lessons"):
+            skipped.append(p.parent.name)
+            continue
+        try:
+            approve(p.parent.name)
+            done.append(p.parent.name)
+        except SystemExit as e:
+            log(f"Skipped {p.parent.name}: {e}")
+            skipped.append(p.parent.name)
+    log(f"Published {len(done)} book(s): {', '.join(done) or 'none'}. Left as they were: {', '.join(skipped) or 'none'}.")
+
+
 def reject(slug: str) -> None:
     src = DRAFTS / slug
     if src.exists():
@@ -174,6 +191,9 @@ if __name__ == "__main__":
     args = [a for a in sys.argv[1:] if a != "--commit"]
     if len(args) != 2 or args[0] not in ("approve", "reject") or not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,80}", args[1]):
         sys.exit(__doc__)
-    {"approve": approve, "reject": reject}[args[0]](args[1])
+    if args[0] == "approve" and args[1] == "all":
+        approve_all()
+    else:
+        {"approve": approve, "reject": reject}[args[0]](args[1])
     if "--commit" in sys.argv:
         git_commit_push(f"{'Publish' if args[0] == 'approve' else 'Reject draft'} {args[1]}")

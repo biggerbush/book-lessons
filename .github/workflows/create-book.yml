@@ -5,6 +5,13 @@ run-name: "Create book: ${{ inputs.title }}${{ inputs.mode == 'dry' && ' (dry ru
 # Nothing goes public until the draft is approved (workflow "Review book").
 
 on:
+  workflow_call:
+    inputs:
+      title: {required: true, type: string}
+      author: {required: false, type: string, default: ""}
+      lessons: {required: false, type: string, default: "10"}
+      notes: {required: false, type: string, default: ""}
+      mode: {required: false, type: string, default: "real"}
   workflow_dispatch:
     inputs:
       title:

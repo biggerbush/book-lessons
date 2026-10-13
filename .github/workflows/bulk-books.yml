@@ -1,0 +1,85 @@
+name: Bulk add books
+run-name: "Bulk add books (${{ inputs.mode }}, ${{ inputs.parallel }} at a time)"
+
+# Started from the admin page. One line per book: "Title | Author". Runs the "Create book" workflow for each book,
+# a few at a time (so spend and API limits stay under control). Every book still ends as a DRAFT to review.
+
+on:
+  workflow_dispatch:
+    inputs:
+      books:
+        description: "One book per line: Title | Author"
+        required: true
+        type: string
+      lessons:
+        description: Lessons per book (1-12)
+        required: false
+        type: string
+        default: "10"
+      parallel:
+        description: How many books to build at the same time (1-5)
+        required: false
+        type: string
+        default: "2"
+      mode:
+        description: "real = uses Claude + ElevenLabs credits. dry = free pipeline test."
+        required: false
+        type: choice
+        options: [real, dry]
+        default: real
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.p.outputs.matrix }}
+      parallel: ${{ steps.p.outputs.parallel }}
+    steps:
+      - id: p
+        env:
+          BOOKS: ${{ inputs.books }}
+          PARALLEL: ${{ inputs.parallel }}
+        run: |
+          python3 - <<'PY'
+          import json, os
+          rows, seen = [], set()
+          for line in os.environ["BOOKS"].splitlines():
+              line = line.strip()
+              if not line or line.startswith("#"):
+                  continue
+              title, _, author = (x.strip() for x in line.partition("|"))
+              if title and title.lower() not in seen:
+                  seen.add(title.lower())
+                  rows.append({"title": title[:120], "author": author[:120]})
+          if not rows:
+              raise SystemExit("No books found. Use one line per book: Title | Author")
+          if len(rows) > 40:
+              raise SystemExit("Too many books in one go (max 40).")
+          par = min(5, max(1, int(os.environ.get("PARALLEL") or 2)))
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write("matrix=" + json.dumps(rows) + "\n")
+              f.write(f"parallel={par}\n")
+          print(f"{len(rows)} book(s), {par} at a time")
+          PY
+
+  build:
+    needs: plan
+    strategy:
+      fail-fast: false
+      max-parallel: ${{ fromJSON(needs.plan.outputs.parallel) }}
+      matrix:
+        book: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    permissions:
+      contents: write
+      actions: write
+    uses: ./.github/workflows/create-book.yml
+    secrets: inherit
+    with:
+      title: ${{ matrix.book.title }}
+      author: ${{ matrix.book.author }}
+      lessons: ${{ inputs.lessons }}
+      mode: ${{ inputs.mode }}

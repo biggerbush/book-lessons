@@ -1,0 +1,27 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+// flame outline: base at (0,0), pointed tip at (0,-s), side tongue on the left
+const fpath=(s,pts)=>{const f=v=>(v*s).toFixed(1);let d='M'+f(pts[0][0])+' '+f(pts[0][1]);for(let i=1;i<pts.length;i+=3)d+='C'+[pts[i],pts[i+1],pts[i+2]].map(q=>f(q[0])+' '+f(q[1])).join(' ');return d+'z'};
+const fd=s=>fpath(s,[[0,0],[-.35,0],[-.48,-.2],[-.4,-.42],[-.34,-.58],[-.2,-.62],[-.18,-.8],[-.08,-.68],[-.05,-.62],[-.06,-.56],[.02,-.72],[.1,-.85],[.05,-1],[.3,-.82],[.5,-.6],[.44,-.36],[.4,-.12],[.28,0],[0,0]]);
+const fi=s=>fpath(s,[[0,-.06],[-.18,-.06],[-.22,-.2],[-.14,-.3],[-.08,-.38],[-.02,-.42],[0,-.54],[.06,-.42],[.2,-.32],[.17,-.2],[.15,-.1],[.1,-.06],[0,-.06]]);
+const flameIcon=(g,s,cls)=>{mk('path',{d:fd(s),class:cls},g);mk('path',{d:fi(s),fill:'var(--stage)'},g)};
+const FL=[];const flame=(g,x,y,s,cls)=>{const fg=mk('g',{transform:'translate('+x+' '+y+')'},g);flameIcon(fg,s,cls);FL.push([fg,x,y])};
+const star=(x,y,R)=>{let d='';for(let i=0;i<10;i++){const r=i%2?R*.42:R,a=-Math.PI/2+i*Math.PI/5;d+=(i?'L':'M')+(x+r*Math.cos(a)).toFixed(1)+' '+(y+r*Math.sin(a)).toFixed(1)}return d+'z'};
+const txt=(g,s,a)=>{const e=mk('text',a,g);e.textContent=s;return e};
+const PL=[0,1,2,3].map(i=>{const g=mk('g',{},$('pills')),y=290+i*58;mk('rect',{x:1240,y:y,width:130,height:44,rx:10,class:'loss'},g);mk('circle',{cx:1262,cy:y+22,r:8,fill:'var(--stage)'},g);mk('path',{d:'M1280 '+(y+22)+'h70',stroke:'var(--stage)','stroke-width':6,'stroke-linecap':'round'},g);return g});
+const NT=[[210,290,-6],[360,270,5],[280,410,3],[450,390,-4],[220,540,6],[400,550,-3]].map(([x,y,a])=>{const o=mk('g',{},$('notes')),g=mk('g',{},o);mk('rect',{x:x,y:y,width:130,height:130,rx:6,class:'loss',transform:'rotate('+a+' '+(x+65)+' '+(y+65)+')'},g);txt(g,'!',{x:x+65,y:y+92,'font-size':80,'text-anchor':'middle',class:'d',style:'fill:var(--stage)'});return [o,g]});
+fig($('me'),860,430,34,'ink');
+$('st2').setAttribute('d',star(150,490,28));
+[270,440,610].forEach(x=>flame($('fires'),x,700,160,'gain'));
+fig($('st'),1200,560,34,'ink');
+[[1150,520],[1252,512]].forEach(([x,y])=>mk('path',{d:'M'+x+' '+y+'q-8 12-8 18a8 8 0 0 0 16 0q0-6-8-18z',class:'loss'},$('st')));
+fig($('pn3'),260,470,30,'ink');
+fig($('pn4'),1070,440,30,'ink');
+const BB=['INTERRUPTION','CALL','MEETING'].map((s,i)=>{const o=mk('g',{},$('bubs')),g=mk('g',{},o);mk('rect',{x:450,y:330+i*80,width:240,height:56,rx:28,class:'loss'},g);txt(g,s,{x:570,y:365+i*80,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--stage)'});return [o,g]});
+fig($('i1'),615,350,16,'ink');fig($('i1'),675,350,16,'ink');mk('circle',{cx:645,cy:405,r:11,class:'gain'},$('i1'));
+flameIcon($('f1'),120,'gain');
+const TB=[0,1,2,3,4,5].map(i=>[mk('rect',{width:100,height:70,rx:10,class:'gain'},$('tblocks')),145+(i%3)*120,i<3?320:550,1110+(i%3)*125,450+Math.floor(i/3)*100]);
+flame($('yes'),1150,400,100,'gain');
+'MTWTFSS'.split('').forEach((c,i)=>txt($('week'),c,{x:625+i*130,y:264,'font-size':20,'text-anchor':'middle',class:'m'}));
+const RL=['Parent','Friend','Manager'].map((s,i)=>{const y=290+i*160,g=mk('g',{},$('roles'));fig(g,150,y-16,16,'ink');mk('rect',{x:137,y:y-52,width:26,height:16,rx:4,class:'gain'},g);mk('path',{d:'M128 '+(y-36)+'h44',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},g);txt(g,s,{x:200,y:y+12,'font-size':36,class:'d5'});return g});
+const GB=[[1,300,90,'MANAGER'],[3,300,90,'MANAGER'],[2,420,90,'FRIEND'],[5,320,120,'PARENT'],[6,460,120,'PARENT']].map(([c,y,h,s])=>{const g=mk('g',{},$('goals'));mk('rect',{x:570+c*130,y:y,width:110,height:h,rx:10,class:'gain'},g);txt(g,s,{x:625+c*130,y:y+h/2+7,'font-size':18,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'});return g});
+const FB=[[0,300,70],[0,520,100],[2,300,80],[4,300,140],[4,500,80],[1,600,60],[6,300,100],[3,560,90]].map(([c,y,h])=>mk('rect',{x:570+c*130,y:y,width:110,height:h,rx:10,fill:'var(--line)'},$('fills')));

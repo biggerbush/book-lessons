@@ -144,7 +144,10 @@ The lesson has {scene_count} scenes (s0 to s{last}). Narration, with the cue nam
 {script}
 
 Design every scene: one clear visual metaphor or diagram per scene that makes the narrated idea obvious, built up cue by cue.
-Make the closing scene bold and simple (the question as large type with a small graphic). Check your coordinates for overlaps before you answer."""
+Make the closing scene bold and simple (the question as large type with a small graphic). Check your coordinates for overlaps before you answer.
+
+SIZE LIMIT: the three blocks together must be about the same size as the reference lessons (roughly 18,000 to 24,000 characters, never more than 30,000).
+Keep each scene to a handful of simple shapes and short text, reuse the helpers, and use loops for repeated elements. Do not write comments or explanations, and do not repeat yourself. Output only the three blocks."""
 
 FIX_PROMPT = """Your previous code for this lesson had problems found by automatic checks and a visual review.
 Fix them and return the COMPLETE three blocks again (not a diff). Keep everything that worked.

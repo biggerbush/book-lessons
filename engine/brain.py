@@ -102,6 +102,9 @@ class RealBrain:
         text = self.llm.ask(P.WRITER_SYSTEM, P.PLAN_PROMPT.format(n=n, title=title, by=by, notes=nt), 6000, "plan the book")
         plan = parse_json(text)
         plan["lessons"] = plan["lessons"][:n]
+        plan["title"] = title                         # keep the title the user typed (so approval matches the library entry)
+        if author and not plan.get("author"):
+            plan["author"] = author
         return plan
 
     def script(self, plan: dict, n: int, lesson: dict, scenes: int = 9) -> tuple[dict, str, Script]:
@@ -140,7 +143,7 @@ class RealBrain:
         else:
             prompt = P.FIX_PROMPT.format(issues="\n".join("- " + i for i in (issues or [])), scenes=previous["scenes"],
                                          setup=previous["setup"], render=previous["render"])
-        text = self.llm.ask(P.design_system(), prompt, 40000, f"{'fix' if previous else 'design'} scenes for lesson {n}")
+        text = self.llm.ask(P.design_system(), prompt, 64000, f"{'fix' if previous else 'design'} scenes for lesson {n}")
         return parse_design_response(text)
 
     def review(self, blocks: list[dict]) -> dict:

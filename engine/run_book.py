@@ -174,6 +174,8 @@ def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: 
     state = publish.load_state(slug) or {"slug": slug, "title": title, "author": author, "dry": dry, "status": "planning",
                                          "usage": new_usage(), "lessons": [], "created": publish.now()}
     state.update(dry=dry)
+    if state.get("plan"):
+        state["plan"]["title"] = title                   # the title the user typed, not a long subtitle from an earlier plan
     if state.get("status") == "failed":                  # retrying a failed run: any new failure must be recorded again
         state.update(status="working", message="")
     notes_file = DATA / slug / "source-notes.txt"

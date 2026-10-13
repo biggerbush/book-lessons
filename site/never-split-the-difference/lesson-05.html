@@ -1,0 +1,282 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Never Split the Difference Lesson 5</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Never Split the Difference: Open questions that start with how or what give the other side the feeling of control while quietly steering them toward solving your problem. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">NEVER SPLIT THE DIFFERENCE · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Ask how and what</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">questions.</text>
+<text class="b" x="120" y="600" font-size="32">Let them feel in control while you steer the conversation.</text>
+<g id="wheelg"><g id="wheel">
+<circle cx="1290" cy="380" r="130" fill="none" class="s-ink" stroke-width="18"/>
+<path class="s-ink" d="M1290 380v130M1290 380l-113-65M1290 380l113-65" stroke-width="14" stroke-linecap="round"/>
+<circle class="ink" cx="1290" cy="380" r="34"/>
+<g id="hands"><circle class="gain" cx="1168" cy="336" r="24"/><circle class="gain" cx="1412" cy="336" r="24"/></g>
+</g></g>
+<g id="feel"><text class="m" x="1290" y="600" font-size="24" text-anchor="middle">OR SO THEY FEEL</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The illusion of control.</text>
+<text class="b" x="120" y="176" font-size="32">People dig in when they feel cornered or pushed.</text>
+<rect id="wall" class="loss" x="1180" y="380" width="22" height="300" rx="6"/>
+<g id="pp"></g>
+<g id="push"><path class="s-loss" d="M540 560h360m-30-30 30 30-30 30" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="720" y="520" font-size="22" text-anchor="middle" style="fill:var(--loss)">PUSHED</text></g>
+<g id="crown"><path class="gain" d="M1010 425l10-60 25 30 15-40 15 40 25-30 10 60z"/><text class="m" x="1060" y="720" font-size="22" text-anchor="middle" style="fill:var(--gain)">FEELS IN CHARGE</text></g>
+<g id="qm"><path class="s-ink" d="M400 378l20 40 20-40" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><rect class="s-ink" x="320" y="230" width="200" height="150" rx="24" fill="var(--stage)" stroke-width="6"/><text class="d" x="420" y="345" font-size="110" text-anchor="middle" style="fill:var(--gain)">?</text><text class="m" x="550" y="300" font-size="22">CALIBRATED QUESTION</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start with how or what.</text>
+<text class="b" x="120" y="176" font-size="32">Questions that can’t be answered with yes or no.</text>
+<g id="hw"><rect class="gain" x="120" y="240" width="320" height="100" rx="18"/><text class="d" x="150" y="312" font-size="60" style="fill:var(--on-gain)">How…?</text><rect class="gain" x="120" y="370" width="320" height="100" rx="18"/><text class="d" x="150" y="442" font-size="60" style="fill:var(--on-gain)">What…?</text></g>
+<g id="yn"><rect class="s-ink" x="540" y="250" width="150" height="100" rx="14" fill="none" stroke-width="5"/><text class="d5" x="615" y="315" font-size="40" text-anchor="middle">YES</text><rect class="s-ink" x="730" y="250" width="150" height="100" rx="14" fill="none" stroke-width="5"/><text class="d5" x="805" y="315" font-size="40" text-anchor="middle">NO</text><text class="m" x="540" y="420" font-size="20">NO SIMPLE YES OR NO</text></g>
+<line id="ynx" class="s-loss" x1="530" y1="370" x2="530" y2="370" stroke-width="8" stroke-linecap="round"/>
+<g id="cloud"><g fill="var(--line)"><circle cx="1140" cy="330" r="50"/><circle cx="1210" cy="295" r="60"/><circle cx="1280" cy="330" r="50"/><circle cx="1210" cy="365" r="45"/><circle cx="1185" cy="425" r="12"/><circle cx="1195" cy="452" r="7"/></g>
+<circle id="td0" class="ink" cx="1170" cy="335" r="10"/><circle id="td1" class="ink" cx="1210" cy="335" r="10"/><circle id="td2" class="ink" cx="1250" cy="335" r="10"/>
+<text class="m" x="1210" y="700" font-size="20" text-anchor="middle">STOP · THINK · EXPLAIN</text></g>
+<g id="tc"></g>
+<g id="cards"></g>
+<g id="info"><text class="m" x="120" y="770" font-size="22">EVERY EXPLANATION HANDS YOU NEW INFORMATION</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Skip the why.</text>
+<text class="b" x="120" y="176" font-size="32">“Why” makes people defend themselves.</text>
+<g id="why"><rect class="s-loss" x="120" y="250" width="380" height="170" rx="30" fill="none" stroke-width="7"/><text class="d" x="310" y="375" font-size="100" text-anchor="middle" style="fill:var(--loss)">Why?</text><rect class="ink" x="540" y="450" width="110" height="100" rx="24"/><rect class="ink" x="620" y="465" width="170" height="34" rx="17"/></g>
+<g id="acc"><text class="m" x="120" y="650" font-size="22">TO MOST PEOPLE, WHY SOUNDS LIKE</text><text class="d5" x="120" y="715" font-size="50" style="fill:var(--loss)">an accusation.</text></g>
+<g id="dm"></g>
+<g id="def"><path d="M1150 568l100 26M1150 594l100-26" stroke="var(--stage)" stroke-width="10" stroke-linecap="round"/><path class="s-loss" d="M1050 400q-80 130 0 260" fill="none" stroke-width="10" stroke-linecap="round"/><path class="s-loss" d="M830 482h120" stroke-width="5" stroke-dasharray="10 10"/><text class="m" x="1200" y="720" font-size="22" text-anchor="middle">DEFENSIVE, NOT OPEN</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The ransom demand.</text>
+<text class="b" x="120" y="176" font-size="32">A kidnapper calls with a huge demand.</text>
+<g id="kgrp"><rect class="s-loss" x="140" y="230" width="240" height="100" rx="20" fill="var(--stage)" stroke-width="5"/><text class="d" x="260" y="302" font-size="60" text-anchor="middle" style="fill:var(--loss)">$$$</text><g id="kid"></g><rect class="ink" x="304" y="395" width="18" height="44" rx="5"/><text class="m" x="260" y="660" font-size="22" text-anchor="middle">KIDNAPPER</text></g>
+<g id="nocard"><rect class="s-loss" x="520" y="240" width="320" height="240" rx="18" fill="var(--stage)" stroke-width="5"/><text class="d" x="550" y="370" font-size="80">No</text><g id="af"><circle class="loss" cx="750" cy="345" r="52"/><path d="M722 325l18 8M778 325l-18 8M728 375q22-16 44 0" stroke="var(--stage)" stroke-width="6" fill="none" stroke-linecap="round"/></g><text class="m" x="550" y="450" font-size="20">ANGERS HIM</text></g>
+<g id="yescard"><rect class="s-loss" x="520" y="520" width="320" height="240" rx="18" fill="var(--stage)" stroke-width="5"/><text class="d" x="550" y="650" font-size="80">Yes</text><rect id="bar0" class="loss" x="730" y="660" width="70" height="28" rx="6"/><rect id="bar1" class="loss" x="730" y="622" width="70" height="28" rx="6"/><rect id="bar2" class="loss" x="730" y="584" width="70" height="28" rx="6"/><text class="m" x="550" y="735" font-size="20">MORE DEMANDS</text></g>
+<g id="reply"><rect class="gain" x="920" y="240" width="560" height="200" rx="24"/><path class="gain" d="M1160 438l40 40 10-40z"/><text class="d" x="955" y="322" font-size="50" style="fill:var(--on-gain)">How am I supposed</text><text class="d" x="955" y="398" font-size="50" style="fill:var(--on-gain)">to do that?</text><g id="vos"></g><rect class="ink" x="1238" y="505" width="16" height="40" rx="5"/><text class="m" x="1200" y="730" font-size="22" text-anchor="middle">VOSS</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Now it’s their problem.</text>
+<text class="b" x="120" y="176" font-size="32">A question hands them a puzzle to solve.</text>
+<g id="kid2"></g>
+<g id="pc"><g id="piece"><path class="gain" d="M-50 -50h35a15 15 0 0 1 30 0h35v35a15 15 0 0 1 0 30v35h-100z"/><text class="m" x="0" y="100" font-size="20" text-anchor="middle">YOUR PROBLEM</text></g></g>
+<g id="gears"><text class="m" x="880" y="360" font-size="20">YOUR OBSTACLES</text></g>
+<g id="bulb"><g id="rays"></g><circle class="gain" cx="1200" cy="390" r="70"/><rect class="ink" x="1172" y="466" width="56" height="40" rx="8"/></g>
+<g id="emp"><text class="m" x="120" y="760" font-size="24" style="fill:var(--gain)">VOSS CALLS THIS FORCING EMPATHY</text></g>
+<g id="own"><text class="d" x="120" y="830" font-size="44">He works on your problem as if it were his own.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Everyday versions.</text>
+<text class="b" x="120" y="176" font-size="32">Use it with a boss, a client, or a landlord.</text>
+<g id="trio"></g>
+<g id="sb0"><rect class="s-gain" x="120" y="470" width="880" height="100" rx="24" fill="var(--stage)" stroke-width="5"/><text class="d5" x="150" y="533" font-size="40">“What about this is important to you?”</text></g>
+<g id="sb1"><rect class="s-gain" x="120" y="610" width="880" height="100" rx="24" fill="var(--stage)" stroke-width="5"/><text class="d5" x="150" y="673" font-size="40">“How can we solve this problem?”</text></g>
+<g id="comp"><circle class="s-ink" cx="1260" cy="620" r="110" fill="var(--stage)" stroke-width="6"/><text class="m" x="1260" y="540" font-size="20" text-anchor="middle">N</text>
+<g id="needle"><polygon class="gain" points="1260,555 1274,620 1246,620"/><polygon class="ink" points="1246,620 1274,620 1260,685"/><circle class="ink" cx="1260" cy="620" r="8"/></g>
+<text class="m" x="1260" y="790" font-size="22" text-anchor="middle">YOU QUIETLY STEER</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stay calm and curious.</text>
+<text class="b" x="120" y="176" font-size="32">Gentle tone. Real curiosity. Then silence.</text>
+<g id="face"><circle class="s-ink" cx="340" cy="450" r="120" fill="none" stroke-width="7"/><path class="s-ink" d="M285 420q15 12 30 0M365 420q15 12 30 0" fill="none" stroke-width="6" stroke-linecap="round"/><path class="s-gain" d="M280 490q60 40 120 0" fill="none" stroke-width="8" stroke-linecap="round"/><text class="m" x="340" y="640" font-size="22" text-anchor="middle">GENTLE AND CURIOUS</text></g>
+<g id="clk"><circle class="s-ink" cx="800" cy="450" r="120" fill="var(--stage)" stroke-width="7"/><g id="ticks"></g><line id="hand" class="s-gain" x1="800" y1="450" x2="800" y2="360" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="800" cy="450" r="10"/><text class="m" x="800" y="640" font-size="22" text-anchor="middle">ASK, THEN PAUSE</text></g>
+<g id="room"><rect class="s-line" x="1090" y="390" width="300" height="120" rx="60" fill="none" stroke-width="5"/><circle id="rd0" class="gain" cx="1180" cy="450" r="14"/><circle id="rd1" class="gain" cx="1240" cy="450" r="14"/><circle id="rd2" class="gain" cx="1300" cy="450" r="14"/><text class="m" x="1240" y="640" font-size="22" text-anchor="middle">ROOM TO ANSWER</text></g>
+<g id="guide"><text class="d" x="120" y="780" font-size="44">The one asking the questions <tspan style="fill:var(--gain)">guides the talk.</tspan></text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qcirc"><circle class="gain" cx="1340" cy="250" r="70"/><text class="d" x="1340" y="282" font-size="90" text-anchor="middle" style="fill:var(--on-gain)">?</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Skip the yes or no.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Ask: <tspan style="fill:var(--gain)">“How am I supposed</tspan></text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">to do that?”</text></g>
+<g id="listen"><text class="m" x="143" y="700" font-size="26">THEN LISTEN CLOSELY TO WHAT COMES BACK</text><path class="s-gain" d="M1424 220q22 30 0 60M1446 200q36 50 0 100" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Ask How and What Questions&rdquo;, from <em>Never Split the Difference</em> by Chris Voss with Tahl Raz. The ransom phone call and the question how am I supposed to do that are as reported in the book. The steering wheel, puzzle, gears and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 8.9], [8.9, 21.9], [21.9, 36.8], [36.8, 47.6], [47.6, 63.1], [63.1, 77.4], [77.4, 93.7], [93.7, 110.0], [110.0, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Who Is In Control?", "The Illusion of Control", "Start With How or What", "Skip the Why", "The Ransom Demand", "Their Problem Now", "Everyday Versions", "Stay Calm and Curious", "Your Turn"];
+const TM={"steering": 0.0, "two_people": 9.2, "crown": 13.6, "question_mark": 17.24, "how_what": 22.24, "yes_no_box": 25.68, "thought_cloud": 28.8, "why_finger": 37.12, "defensive_man": 44.16, "kidnapper": 47.92, "angry_face": 51.76, "phone": 58.12, "puzzle": 63.44, "gears": 66.88, "lightbulb": 73.36, "boss": 77.68, "speech_bubble": 82.08, "compass": 88.88, "calm_face": 94.0, "clock": 98.88, "your_turn": 110.32};
+const fig=(g,x,y,r,cls)=>{const q=mk('g',{class:cls},g);mk('circle',{cx:x,cy:y,r:r},q);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},q);return q};
+const tx=(g,x,y,s,txt,a)=>{const e=mk('text',{x:x,y:y,'font-size':s,class:'m','text-anchor':a||'start'},g);e.textContent=txt;return e};
+const rv=(id,u,a,d)=>rise(typeof id==='string'?$(id):id,p(u,a,a+(d||.5)));
+fig($('pp'),420,480,40,'ink');const pR=fig($('pp'),1060,480,40,'loss');tx($('pp'),420,720,22,'YOU','middle');
+fig($('tc'),1210,510,34,'ink');
+const cards=[];for(let i=0;i<6;i++){const g=mk('g',{},$('cards'));mk('rect',{width:100,height:60,rx:10,class:'gain'},g);tx(g,50,37,18,'INFO','middle').style.fill='var(--on-gain)';cards.push(g)}
+const dmP=fig($('dm'),1200,420,44,'ink');
+fig($('kid'),260,420,40,'loss');fig($('vos'),1200,530,36,'gain');fig($('kid2'),800,560,40,'ink');
+const G=[[740,400,46,10],[812,350,32,7]].map(([x,y,r,n])=>{const g=mk('g',{},$('gears'));let d='';for(let i=0;i<n*4;i++){const a=i*Math.PI/(n*2),R=i%4<2?r+10:r;d+=(i?'L':'M')+(x+R*Math.cos(a)).toFixed(1)+' '+(y+R*Math.sin(a)).toFixed(1)}mk('path',{d:d+'z',class:'ink'},g);mk('circle',{cx:x,cy:y,r:r*.35,fill:'var(--stage)'},g);return g});
+for(let i=0;i<5;i++){const a=Math.PI+i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('line',{x1:1200+88*c,y1:390+88*s,x2:1200+112*c,y2:390+112*s,class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+const trio=['BOSS','CLIENT','LANDLORD'].map((s,i)=>{const x=300+i*400,g=mk('g',{},$('trio'));fig(g,x,270,28,'ink');tx(g,x,425,22,s,'middle');return g});
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('line',{x1:800+98*c,y1:450+98*s,x2:800+110*c,y2:450+110*s,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('ticks'))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('wheel').setAttribute('transform','rotate('+(18*Math.sin(t*.8)).toFixed(2)+' 1290 380)');
+rv('wheelg',u,TM.steering,.6);rv('hands',u,TM.steering+1.2);rv('feel',u,TM.steering+6.6);
+
+rv('pp',u,TM.two_people);
+const off=1-p(u,TM.crown,TM.crown+.6);
+$('push').setAttribute('opacity',(p(u,TM.two_people+.8,TM.two_people+1.3)*off).toFixed(3));
+$('wall').setAttribute('opacity',(p(u,TM.two_people,TM.two_people+.5)*off).toFixed(3));
+pR.setAttribute('class',u>=TM.crown?'gain':'loss');
+rv('crown',u,TM.crown);rv('qm',u,TM.question_mark);
+
+rv('hw',u,TM.how_what);rv('yn',u,TM.yes_no_box);
+const yk=p(u,TM.yes_no_box+.8,TM.yes_no_box+1.4);$('ynx').setAttribute('x2',530+360*yk);$('ynx').setAttribute('y2',370-140*yk);
+rv('cloud',u,TM.thought_cloud);rv('tc',u,TM.thought_cloud);
+for(let i=0;i<3;i++)$('td'+i).setAttribute('opacity',(.3+.7*Math.abs(Math.sin(t*3-i*.6))).toFixed(2));
+// INFO chips emerge beside the thinker (clear of the cloud) and travel left into a row
+cards.forEach((c,i)=>{const a=TM.thought_cloud+4.1+i*.45,k=p(u,a,a+.6);c.setAttribute('transform','translate('+(1040+(120+i*130-1040)*k).toFixed(1)+' '+(540+100*k).toFixed(1)+')');c.setAttribute('opacity',cl(lin(u,a,a+.15)))});
+rv('info',u,TM.thought_cloud+4.1);
+
+rv('why',u,TM.why_finger);rv('dm',u,TM.why_finger+.4);rv('acc',u,TM.why_finger+3.8);
+dmP.setAttribute('class',u>=TM.defensive_man?'loss':'ink');rv('def',u,TM.defensive_man);
+
+rv('kgrp',u,TM.kidnapper);rv('nocard',u,TM.angry_face);
+$('af').setAttribute('transform','translate('+(u>=TM.angry_face?3*Math.sin(t*20):0).toFixed(1)+' 0)');
+rv('yescard',u,TM.angry_face+2.6);for(let i=0;i<3;i++)rv('bar'+i,u,TM.angry_face+3+i*.4,.3);
+rv('reply',u,TM.phone);
+
+rv('kid2',u,TM.puzzle,.4);rv('pc',u,TM.puzzle,.4);
+const pk=p(u,TM.puzzle+.6,TM.puzzle+2);$('piece').setAttribute('transform','translate('+(300+320*pk).toFixed(1)+' '+(540+20*pk).toFixed(1)+')');
+rv('gears',u,TM.gears);
+G[0].setAttribute('transform','rotate('+(t*40%360).toFixed(1)+' 740 400)');G[1].setAttribute('transform','rotate('+(-t*400/7%360).toFixed(1)+' 812 350)');
+rv('emp',u,TM.gears+4.6);rv('bulb',u,TM.lightbulb,.4);
+$('rays').setAttribute('opacity',(.6+.4*Math.sin(t*4)).toFixed(2));rv('own',u,TM.lightbulb+.5,.6);
+
+trio.forEach((g,i)=>rv(g,u,TM.boss+i*.8));
+rv('sb0',u,TM.speech_bubble);rv('sb1',u,TM.speech_bubble+3.8);rv('comp',u,TM.compass);
+const nk=p(u,TM.compass,TM.compass+2),na=(1-nk)*(-60+25*Math.sin(t*3))+nk*45;
+$('needle').setAttribute('transform','rotate('+na.toFixed(1)+' 1260 620)');
+
+rv('face',u,TM.calm_face);rv('clk',u,TM.clock);
+$('hand').setAttribute('transform','rotate('+(360*p(u,TM.clock,TM.clock+4)).toFixed(1)+' 800 450)');
+rv('room',u,TM.clock+4.2);for(let i=0;i<3;i++)$('rd'+i).setAttribute('opacity',p(u,TM.clock+4.6+i*.4,TM.clock+4.9+i*.4));
+rv('guide',u,TM.clock+6.8,.6);
+
+rv('qcirc',u,TM.your_turn);rv('qa',u,TM.your_turn);rv('qb',u,TM.your_turn+.4);rv('qc',u,TM.your_turn+.8);rv('listen',u,TM.your_turn+5.8,.6);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.92;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

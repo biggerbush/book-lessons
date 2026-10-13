@@ -1,0 +1,323 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Never Split the Difference Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Never Split the Difference: Every tool in the book serves one purpose: uncovering the surprising unknown facts that can transform a deal, instead of settling for splitting the difference. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">NEVER SPLIT THE DIFFERENCE · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Hunt for the hidden</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">black swans.</text>
+<text class="b" x="120" y="600" font-size="32">The hidden facts that can quietly flip any deal.</text>
+<g id="wsw"></g>
+<circle id="ring0" class="s-gain" cx="1375" cy="515" r="112" fill="none" stroke-width="5" stroke-dasharray="10 12" opacity="0"/>
+<g id="bsw"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Don’t split the difference.</text>
+<text class="b" x="120" y="176" font-size="32">One partner wants black shoes, the other wants brown.</text>
+<g id="ppl1"></g>
+<g id="sh0"><text class="m" x="312" y="670" font-size="20" text-anchor="middle">WANTS BLACK</text></g>
+<g id="sh1"><text class="m" x="1302" y="670" font-size="20" text-anchor="middle">WANTS BROWN</text></g>
+<g id="odd"><path class="s-loss" d="M450 585H660M640 570l20 15-20 15M1160 585H955M975 570l-20 15 20 15" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 0"/><text class="m" x="812" y="670" font-size="20" text-anchor="middle" style="fill:var(--loss)">SPLIT: ONE OF EACH</text></g>
+<g id="fr1"><text class="m" x="800" y="380" font-size="22" text-anchor="middle" style="fill:var(--loss)">NEITHER IS HAPPY</text><text class="m" x="800" y="414" font-size="22" text-anchor="middle" style="fill:var(--loss)">PROBLEM UNSOLVED</text></g>
+<g id="lazy"><text class="d" x="120" y="790" font-size="46">Lazy compromise leaves both sides worse off.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Three kinds of facts.</text>
+<text class="b" x="120" y="176" font-size="32">What you know, and what you don’t.</text>
+<g id="bx0"><rect class="s-line" x="120" y="230" width="414" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="280" font-size="20">KNOWN KNOWNS</text>
+<path class="s-ink" d="M247 380h100l40 50-40 50h-100z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><circle class="ink" cx="360" cy="430" r="9"/><text class="d" x="300" y="450" font-size="52" text-anchor="middle">$</text>
+<text class="d5" x="150" y="600" font-size="36">The asking price</text><text class="m" x="150" y="650" font-size="20">YOU KNOW YOU KNOW</text></g>
+<g id="bx1"><rect class="s-line" x="593" y="230" width="414" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="623" y="280" font-size="20">KNOWN UNKNOWNS</text>
+<text class="d" x="800" y="490" font-size="170" text-anchor="middle" style="fill:var(--muted)">?</text>
+<text class="d5" x="623" y="600" font-size="36">Their budget</text><text class="m" x="623" y="650" font-size="20">YOU KNOW YOU DON’T KNOW</text></g>
+<g id="bx2"><rect x="1066" y="230" width="414" height="480" rx="18" fill="var(--loss)" fill-opacity=".16" stroke="var(--loss)" stroke-width="3"/><text class="m" x="1096" y="280" font-size="20">UNKNOWN UNKNOWNS</text>
+<text class="d5" x="1096" y="600" font-size="36">What you don’t</text><text class="d5" x="1096" y="644" font-size="36">know to ask</text></g>
+<g id="sw2"></g>
+<g id="blk2"><text class="d" x="120" y="800" font-size="46">Those hidden unknowns are the <tspan style="fill:var(--gain)">black swans.</tspan></text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Small facts, big lever.</text>
+<text class="b" x="120" y="176" font-size="32">One black swan can tip a whole negotiation.</text>
+<g id="lev">
+<path class="ink" d="M800 640L748 740H852Z"/>
+<path class="s-ink" d="M680 744h240" stroke-width="6" stroke-linecap="round"/>
+<line id="beam" class="s-ink" stroke-width="12" stroke-linecap="round"/>
+<g id="lb"><g id="lbb"><rect class="ink" x="-100" y="-116" width="200" height="110" rx="10"/><text class="d" x="0" y="-40" font-size="56" text-anchor="middle" style="fill:var(--stage)">$$$</text></g><text class="m" x="0" y="-146" font-size="22" text-anchor="middle">AN EXTRA FEW THOUSAND</text></g>
+<g id="seller"></g><text class="m" x="1420" y="406" font-size="22" text-anchor="middle">SELLER</text>
+</g>
+<g id="rcw"><g id="rc"><g id="rcb"><rect class="s-ink" x="-65" y="-126" width="130" height="120" rx="10" fill="var(--stage)" stroke-width="5"/><rect class="gain" x="-65" y="-126" width="130" height="34" rx="8"/><text class="d" x="0" y="-26" font-size="44" text-anchor="middle">FRI</text></g><text class="m" x="0" y="-158" font-size="22" text-anchor="middle" style="fill:var(--gain)">MUST MOVE BY FRIDAY</text></g></g>
+<g id="t3a"><text class="d" x="120" y="810" font-size="44">A fast closing beats a few thousand more.</text></g>
+<g id="t3b"><text class="m" x="120" y="856" font-size="22">YOU’D NEVER LEARN THAT BY HAGGLING HARDER</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A costly miss.</text>
+<text class="b" x="120" y="176" font-size="32">The 1993 siege at Waco, Texas.</text>
+<path class="s-line" d="M120 700H1480" stroke-width="5"/>
+<g id="cmpg"><path class="s-ink" d="M160 700V520h130v-90h80v90h190v180z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/><path class="s-ink" d="M200 600h40M300 600h40M420 600h40M500 600h40" stroke-width="10"/><path id="cmpx" class="loss" d="M160 700V520h130v-90h80v90h190v180z" opacity="0"/><text class="m" x="360" y="745" font-size="20" text-anchor="middle">DAVID KORESH</text></g>
+<g id="bub4"></g>
+<g id="fbi"><text class="m" x="1320" y="745" font-size="20" text-anchor="middle">FBI</text></g>
+<g id="noise"><text class="m" x="875" y="360" font-size="22" text-anchor="middle" style="fill:var(--loss)">RELIGIOUS TALK TREATED AS NOISE</text></g>
+<g id="key"><text class="m" x="875" y="360" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE KEY TO HIS WHOLE WORLD</text></g>
+<g id="trag"><text class="d" x="120" y="810" font-size="44">Missing it helped turn a standoff into a tragedy.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Nobody is crazy.</text>
+<text class="b" x="120" y="176" font-size="32">When someone seems irrational, assume they aren’t.</text>
+<g id="conf"><text class="d" x="280" y="345" font-size="80" text-anchor="middle" style="fill:var(--loss)">?!</text><text class="m" x="280" y="650" font-size="20" text-anchor="middle">SEEMS IRRATIONAL</text></g>
+<g id="arr5"><path class="s-muted" d="M380 470H530M512 454l18 16-18 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="doors"></g>
+<g id="cur"><text class="d" x="120" y="800" font-size="50">Curiosity beats judgment every time.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Listen when guards drop.</text>
+<text class="b" x="120" y="176" font-size="32">Black swans rarely show up in emails.</text>
+<g id="env"><rect class="s-ink" x="140" y="260" width="260" height="170" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M146 268l124 92 124-92" fill="none" stroke-width="6" stroke-linejoin="round"/><text class="m" x="270" y="480" font-size="22" text-anchor="middle">EMAIL</text></g>
+<g id="envx"><path class="s-loss" d="M160 250l220 190M380 250L160 440" stroke-width="10" stroke-linecap="round"/></g>
+<g id="ft"><path class="s-ink" d="M560 500H1040" stroke-width="6" stroke-linecap="round"/><text class="m" x="800" y="548" font-size="22" text-anchor="middle">FACE TIME</text></g>
+<g id="tl"><path class="s-line" d="M560 660H1460" stroke-width="10" stroke-linecap="round"/><rect class="gain" x="560" y="650" width="200" height="20" rx="10"/><rect class="gain" x="1260" y="650" width="200" height="20" rx="10"/>
+<text class="m" x="660" y="626" font-size="22" text-anchor="middle">START</text><text class="m" x="1360" y="626" font-size="22" text-anchor="middle">END</text><text class="m" x="1010" y="626" font-size="22" text-anchor="middle">THE MEETING</text>
+<text class="m" x="660" y="712" font-size="22" text-anchor="middle" style="fill:var(--gain)">UNGUARDED</text><text class="m" x="1360" y="712" font-size="22" text-anchor="middle" style="fill:var(--gain)">UNGUARDED</text></g>
+<g id="btw"><rect class="s-gain" x="120" y="560" width="360" height="110" rx="20" fill="var(--stage)" stroke-width="5"/><path class="s-gain" d="M180 672l-8 32 40-32" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><text class="d5" x="300" y="630" font-size="40" text-anchor="middle">“By the way…”</text></g>
+<g id="spk"></g>
+<g id="gold"><text class="d" x="120" y="800" font-size="44">Those slips are often where the gold hides.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every tool serves one goal.</text>
+<text class="b" x="120" y="176" font-size="32">Keep them talking until the hidden fact slips out.</text>
+<g id="cards"></g>
+<g id="wires"></g>
+<polygon id="beam7" class="gain" points="460,480 1100,390 1100,650 460,560" opacity="0"/>
+<g id="sw7"></g>
+<g id="fl"><rect class="ink" x="200" y="490" width="200" height="70" rx="12"/><path class="ink" d="M400 500L460 472V578L400 550Z"/><rect class="gain" x="250" y="508" width="40" height="34" rx="6"/><text class="m" x="320" y="612" font-size="20" text-anchor="middle">KEEP THEM TALKING</text></g>
+<g id="bars"><text class="m" x="1180" y="452" font-size="20">LISTENING</text><rect id="barL" class="gain" x="1180" y="466" width="0" height="40" rx="8"/><text class="m" x="1180" y="562" font-size="20">TALKING</text><rect id="barT" class="ink" x="1180" y="576" width="0" height="40" rx="8"/></g>
+<g id="lis"><text class="d" x="120" y="790" font-size="46">Listen far more than you talk.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d5" x="136" y="300" font-size="56">Stuck? Ask yourself:</text></g>
+<g id="qb"><text class="d" x="132" y="430" font-size="96" letter-spacing="-2">What don’t I</text></g>
+<g id="qc"><text class="d" x="132" y="540" font-size="96" letter-spacing="-2" style="fill:var(--gain)">know yet?</text></g>
+<g id="hunt"><text class="m" x="140" y="700" font-size="26">THEN GO HUNTING BEFORE YOU SPLIT ANYTHING</text></g>
+<g id="mag"><g id="magi"><circle class="s-ink" cx="1260" cy="450" r="120" fill="var(--stage)" stroke-width="16"/><g id="sw8"></g><path class="s-ink" d="M1346 536l100 100" stroke-width="28" stroke-linecap="round"/></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Hunt for the Hidden Black Swans&rdquo;, from <em>Never Split the Difference</em> by Chris Voss with Tahl Raz. The Waco siege lesson and the black and brown shoes compromise are as reported in the book. The Friday moving deadline is an illustration, not a case from the book. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 10.0], [10.0, 26.5], [26.5, 40.5], [40.5, 54.5], [54.5, 73.8], [73.8, 90.3], [90.3, 104.2], [104.2, 118.8], [118.8, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Black Swan", "Don't Split It", "Three Kinds of Facts", "Small Facts, Big Lever", "A Costly Miss", "Nobody Is Crazy", "Listen When Guards Drop", "Your Toolkit's Purpose", "Your Challenge"];
+const TM={"swan_white": 0.0, "swan_black": 4.44, "shoes": 10.28, "odd_pair": 14.72, "frown": 17.68, "box_known": 26.8, "box_question": 30.6, "box_dark": 34.12, "lever": 40.8, "calendar": 44.08, "smile": 51.4, "compound": 54.84, "bible": 60.59, "confused": 74.08, "three_doors": 78.48, "face_face": 90.64, "coffee": 93.44, "by_the_way": 98.0, "toolbox": 104.48, "flashlight": 110.72, "magnifier": 123.92};
+const md=(x,y,r,k)=>'M'+(x-r*.42).toFixed(1)+' '+(y+r*(.32-.1*k)).toFixed(1)+'q'+(r*.42).toFixed(1)+' '+(r*.36*k).toFixed(1)+' '+(r*.84).toFixed(1)+' 0';
+const guy=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return mk('path',{d:md(x,y,r,1),fill:'none',stroke:'var(--stage)','stroke-width':Math.max(3,r*.14),'stroke-linecap':'round'},g)};
+const swan=(g,x,y,s,dark)=>{const w=mk('g',{transform:'translate('+x+' '+y+') scale('+s+')'},g),N='M26 -8C52 -40 18 -70 40 -92',F=dark?'var(--ink)':'var(--stage)';
+  mk('path',{d:N,fill:'none',stroke:'var(--ink)','stroke-width':16,'stroke-linecap':'round'},w);
+  if(!dark)mk('path',{d:N,fill:'none',stroke:'var(--stage)','stroke-width':7,'stroke-linecap':'round'},w);
+  mk('path',{d:'M-56 -14q20 4 30 -2q40 -14 78 6q6 26-30 34h-50q-28-6-28-38z',fill:F,stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},w);
+  mk('circle',{cx:44,cy:-94,r:12,fill:F,stroke:'var(--ink)','stroke-width':5},w);
+  mk('path',{d:'M54 -100l20 7-20 5z',fill:'var(--gain)'},w);return w};
+const wave=(g,x,y,w)=>mk('path',{d:'M'+x+' '+y+'h'+w,class:'s-line','stroke-width':5,'stroke-linecap':'round'},g);
+const WS=[[1170,330],[1380,330],[1170,520]].map(q=>{const g=mk('g',{},$('wsw'));wave(g,q[0]-70,q[1]+38,150);swan(g,q[0],q[1],1,0);return g});
+wave($('bsw'),1280,606,190);swan($('bsw'),1370,560,1.3,1);
+const mA=guy($('ppl1'),300,330,40,'ink'),mB=guy($('ppl1'),1300,330,40,'ink');
+const shoe=(g,x,y,f)=>mk('path',{d:'M'+x+' '+y+'v-44h32l22 24h36q24 0 24 20v10h-114z',fill:f,stroke:'var(--ink)','stroke-width':4,'stroke-linejoin':'round'},g);
+[[$('sh0'),190,'var(--ink)','var(--ink)'],[$('sh1'),1180,'var(--muted)','var(--muted)'],[$('odd'),690,'var(--ink)','var(--muted)']].forEach(a=>{shoe(a[0],a[1],610,a[2]);shoe(a[0],a[1]+130,610,a[3])});
+swan($('sw2'),1270,480,1.3,1);
+const mS=guy($('seller'),1420,250,28,'ink');
+const BB=[620,800,980].map(x=>{const g=mk('g',{},$('bub4'));const r=mk('rect',{x:x,y:400,width:150,height:80,rx:18,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);
+  const ln=mk('path',{d:'M'+(x+24)+' 428h102M'+(x+24)+' 452h70',stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round'},g);
+  const xx=mk('path',{d:'M'+(x+10)+' 470L'+(x+140)+' 410',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},g);return [g,r,xx,ln]});
+const mF=guy($('fbi'),1320,520,34,'ink');mF.setAttribute('d',md(1320,520,34,0));
+const mC=guy($('conf'),280,420,44,'ink');mC.setAttribute('d',md(280,420,44,-.7));
+const DR=[560,870,1180].map((x,i)=>{const g=mk('g',{},$('doors'));mk('rect',{x:x,y:300,width:240,height:340,class:'gain'},g);
+  const lf=mk('rect',{x:x,y:300,width:240,height:340,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);
+  const kn=mk('circle',{cx:x+200,cy:480,r:10,class:'ink'},g);
+  mk('rect',{x:x,y:300,width:240,height:340,fill:'none',stroke:'var(--ink)','stroke-width':8},g);
+  const tx=mk('text',{x:x+120,y:690,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=['MISSING INFORMATION','HIDDEN CONSTRAINTS','HIDDEN INTERESTS'][i];return [g,lf,kn,x]});
+guy($('ft'),640,320,40,'ink');guy($('ft'),960,320,40,'ink');
+const CX=[712,830],ST=CX.map(x=>{mk('rect',{x:x,y:455,width:40,height:45,rx:6,class:'ink'},$('ft'));mk('path',{d:'M'+(x+40)+' 466h8a10 10 0 0 1 0 20h-8',fill:'none',stroke:'var(--ink)','stroke-width':5},$('ft'));return mk('path',{fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round'},$('ft'))});
+const SPK=[[470,545],[140,548],[492,684]].map(q=>mk('path',{d:'M'+q[0]+' '+(q[1]-16)+'l5 11 11 5-11 5-5 11-5-11-11-5 11-5z',class:'gain'},$('spk')));
+const WR=[],CD=['Mirrors','Labels','Inviting a no','How questions'].map((s,i)=>{const x=120+i*345,g=mk('g',{},$('cards'));
+  mk('rect',{x:x,y:220,width:320,height:110,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const tx=mk('text',{x:x+160,y:288,'font-size':36,'text-anchor':'middle',class:'d5'},g);tx.textContent=s;
+  WR.push(mk('path',{d:'M'+(x+160)+' 334L300 486',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8',fill:'none'},$('wires')));return g});
+swan($('sw7'),960,570,1,1);
+swan($('sw8'),1250,490,.95,1);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+WS.forEach((g,i)=>{const a=TM.swan_white+i*.4;rise(g,p(u,a,a+.5))});
+$('wsw').setAttribute('opacity',(1-.55*p(u,TM.swan_black+1,TM.swan_black+2)).toFixed(2));
+rise($('bsw'),p(u,TM.swan_black,TM.swan_black+.6));
+$('ring0').setAttribute('opacity',(p(u,TM.swan_black+.5,TM.swan_black+1)*(.55+.45*Math.sin(t*3))).toFixed(2));
+
+rise($('ppl1'),p(u,TM.shoes,TM.shoes+.5));rise($('sh0'),p(u,TM.shoes+.8,TM.shoes+1.3));rise($('sh1'),p(u,TM.shoes+2.2,TM.shoes+2.7));
+rise($('odd'),p(u,TM.odd_pair,TM.odd_pair+.6));
+const fk=1-2*p(u,TM.frown,TM.frown+.6);mA.setAttribute('d',md(300,330,40,fk));mB.setAttribute('d',md(1300,330,40,fk));
+rise($('fr1'),p(u,TM.frown+.3,TM.frown+.8));rise($('lazy'),p(u,TM.frown+4.2,TM.frown+4.8));
+
+[TM.box_known,TM.box_question,TM.box_dark].forEach((a,i)=>rise($('bx'+i),p(u,a,a+.5)));
+rise($('sw2'),p(u,TM.box_dark+4.2,TM.box_dark+4.8));rise($('blk2'),p(u,TM.box_dark+4.4,TM.box_dark+5));
+
+rise($('lev'),p(u,TM.lever,TM.lever+.5));
+const ck=p(u,TM.calendar,TM.calendar+.6),adeg=10-20*p(u,TM.calendar+.5,TM.calendar+1.5),ang=adeg*Math.PI/180,bx=450*Math.cos(ang),by=450*Math.sin(ang);
+const lx=800-bx,ly=640+by,rx=800+bx,ry=640-by;
+$('beam').setAttribute('x1',lx.toFixed(1));$('beam').setAttribute('y1',ly.toFixed(1));$('beam').setAttribute('x2',rx.toFixed(1));$('beam').setAttribute('y2',ry.toFixed(1));
+$('lb').setAttribute('transform','translate('+lx.toFixed(1)+' '+ly.toFixed(1)+')');$('lbb').setAttribute('transform','rotate('+(-adeg).toFixed(2)+')');
+$('rc').setAttribute('transform','translate('+rx.toFixed(1)+' '+(ry-140*(1-ck)).toFixed(1)+')');$('rcb').setAttribute('transform','rotate('+(-adeg).toFixed(2)+')');rise($('rcw'),ck);
+mS.setAttribute('d',md(1420,250,28,-1+2*p(u,TM.smile,TM.smile+.6)));
+rise($('t3a'),p(u,TM.calendar+3.8,TM.calendar+4.4));rise($('t3b'),p(u,TM.smile,TM.smile+.5));
+
+rise($('cmpg'),p(u,TM.compound,TM.compound+.5));rise($('fbi'),p(u,TM.compound+1,TM.compound+1.5));
+const ky=p(u,TM.bible+5,TM.bible+5.8),nz=p(u,TM.bible+1,TM.bible+1.5)*(1-ky);
+BB.forEach((b,i)=>{const a=TM.bible+i*.5;rise(b[0],p(u,a,a+.4)*(1-.45*nz));b[1].setAttribute('stroke',ky>.5?'var(--gain)':'var(--loss)');b[2].setAttribute('opacity',(1-ky).toFixed(2));b[3].setAttribute('stroke',ky>.5?'var(--ink)':'var(--muted)')});
+rise($('noise'),nz);rise($('key'),ky);
+const tr=p(u,TM.bible+10,TM.bible+10.8);$('cmpx').setAttribute('opacity',(tr*.45).toFixed(2));rise($('trag'),tr);
+mF.setAttribute('d',md(1320,520,34,-.3-.7*Math.max(nz,tr)));
+
+rise($('conf'),p(u,TM.confused,TM.confused+.5));rise($('arr5'),p(u,TM.three_doors,TM.three_doors+.5));
+DR.forEach((d,i)=>{const a=TM.three_doors+i*1.6;rise(d[0],p(u,a,a+.5));const o=p(u,TM.three_doors+5.8+i*.7,TM.three_doors+6.4+i*.7),w=240-170*o;
+  d[1].setAttribute('width',w.toFixed(1));d[2].setAttribute('cx',(d[3]+w-40).toFixed(1))});
+rise($('cur'),p(u,TM.three_doors+8.7,TM.three_doors+9.3));
+
+rise($('env'),p(u,TM.face_face,TM.face_face+.5));rise($('envx'),p(u,TM.face_face+1,TM.face_face+1.4));
+rise($('ft'),p(u,TM.coffee,TM.coffee+.5));rise($('tl'),p(u,TM.coffee+2,TM.coffee+2.6));
+ST.forEach((s,i)=>{const w=(8*Math.sin(t*3+i*2)).toFixed(1);s.setAttribute('d','M'+(CX[i]+20)+' 448q'+w+' -13 0 -26q'+(-w)+' -13 0 -26')});
+rise($('btw'),p(u,TM.by_the_way,TM.by_the_way+.5));
+const gd=p(u,TM.by_the_way+3.8,TM.by_the_way+4.3);SPK.forEach((s,i)=>s.setAttribute('opacity',(gd*(.5+.5*Math.sin(t*4+i*2))).toFixed(2)));rise($('gold'),gd);
+
+CD.forEach((c,i)=>{const a=TM.toolbox+i*.7;rise(c,p(u,a,a+.4));WR[i].setAttribute('opacity',p(u,a+.3,a+.7).toFixed(2))});
+rise($('fl'),p(u,TM.toolbox+3,TM.toolbox+3.5));
+$('beam7').setAttribute('opacity',(.3*p(u,TM.flashlight,TM.flashlight+.8)).toFixed(2));rise($('sw7'),p(u,TM.flashlight+2,TM.flashlight+2.6));
+const lk=p(u,TM.flashlight+5,TM.flashlight+6.2);rise($('bars'),p(u,TM.flashlight+5,TM.flashlight+5.4));
+$('barL').setAttribute('width',(300*lk).toFixed(1));$('barT').setAttribute('width',(60*lk).toFixed(1));rise($('lis'),p(u,TM.flashlight+5.4,TM.flashlight+6));
+
+const s8=SC[8][0]/K;
+rise($('qa'),p(u,s8+.3,s8+.8));rise($('qb'),p(u,s8+.7,s8+1.2));rise($('qc'),p(u,s8+1.1,s8+1.6));rise($('mag'),p(u,s8+.5,s8+1.1));
+$('magi').setAttribute('transform','translate('+(12*Math.sin(t*.9)).toFixed(1)+' '+(10*Math.sin(t*1.3)).toFixed(1)+')');
+rise($('sw8'),p(u,TM.magnifier,TM.magnifier+.6));rise($('hunt'),p(u,TM.magnifier+.3,TM.magnifier+.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.48;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

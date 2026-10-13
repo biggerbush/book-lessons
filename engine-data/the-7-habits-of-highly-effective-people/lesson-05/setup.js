@@ -1,0 +1,18 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+fig($('duo'),1140,270,40,'ink');fig($('duo'),1420,270,40,'ink');
+fig($('pp1'),220,420,36,'ink');fig($('pp1'),520,420,36,'ink');
+const C1=[0,1,2,3,4].map(i=>mk('circle',{cx:820+i*30,cy:230,r:20,class:'gain'},$('coins1')));
+['KEEP PROMISES','SMALL COURTESIES','CLEAR EXPECTATIONS','LOYAL TO THE ABSENT'].forEach((s,i)=>{const g=$('k'+i),x=120+i*350;g.insertBefore(mk('rect',{x:x,y:230,width:310,height:340,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g),g.firstChild);const tx=mk('text',{x:x+155,y:530,'font-size':18,'text-anchor':'middle',class:'m'},g);tx.textContent=s;mk('circle',{cx:x+280,cy:262,r:18,class:'gain'},g)});
+const P3=[[160,320],[260,320],[290,420],[330,420],[360,520],[400,520],[430,620],[480,620],[520,480],[580,480],[610,600],[650,560],[690,640],[730,620],[780,670],[830,660],[880,700],[1000,700]];
+const seg3=X=>{let d='';for(let i=0;i<P3.length;i++){const q=P3[i];if(q[0]<=X)d+=(i?'L':'M')+q[0]+' '+q[1];else{const a=P3[i-1],k=(X-a[0])/(q[0]-a[0]);d+='L'+(a[0]+k*(q[0]-a[0])).toFixed(1)+' '+(a[1]+k*(q[1]-a[1])).toFixed(1);break}}return d};
+const D4=[['Win-Lose',['I beat you.'],1,0],['Lose-Win',['I give in just to','keep the peace.'],0,1],['Lose-Lose',['We both end up','worse off.'],0,0],['Win-Win',['We keep looking until','it works for both.'],1,1]];
+const C4=D4.map((d,i)=>{const x=120+(i%2)*690,y=220+Math.floor(i/2)*300,w=i==3;mk('rect',{x:x,y:y,width:670,height:270,rx:18,fill:'var(--stage)',stroke:w?'var(--gain)':'var(--line)','stroke-width':w?6:3},$('fr4'));const g=mk('g',{},$('in4'));let tx=mk('text',{x:x+40,y:y+84,'font-size':48,class:'d'},g);if(w)tx.style.fill='var(--gain)';tx.textContent=d[0];
+  d[1].forEach((s,j)=>{tx=mk('text',{x:x+40,y:y+134+j*36,'font-size':26,class:'b'},g);tx.textContent=s});
+  [d[2],d[3]].forEach((up,j)=>{const cx=x+500+j*100;fig(g,cx,y+130,22,w?'gain':'ink');mk('path',{d:up?`M${cx} ${y+96}V${y+44}M${cx-16} ${y+60}L${cx} ${y+44}L${cx+16} ${y+60}`:`M${cx} ${y+44}V${y+96}M${cx-16} ${y+80}L${cx} ${y+96}L${cx+16} ${y+80}`,fill:'none',stroke:up?'var(--gain)':'var(--loss)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);tx=mk('text',{x:cx,y:y+258,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=j?'YOU':'ME'});return g});
+[[330,380],[330,600],[1270,380],[1270,600]].forEach(q=>fig($('eat5'),q[0],q[1],26,'ink'));
+const W5=[0,1,2,3].map(i=>mk('path',{fill:i%2?'var(--ink)':'var(--gain)',stroke:'var(--stage)','stroke-width':8},$('pie5')));
+fig($('pres6'),220,440,40,'ink');
+for(let i=1;i<4;i++)mk('path',{d:'M400 '+(290+i*100)+'H1260',class:'s-line','stroke-width':3},$('lanes6'));
+const H6=[0,1,2,3].map(i=>{const g=mk('g',{},$('lanes6'));mk('rect',{x:-52,y:-22,width:104,height:44,rx:18,class:'ink'},g);mk('circle',{cx:62,cy:-30,r:18,class:'ink'},g);mk('path',{d:'M-36 22v20M36 22v20M52-12l10-18',class:'s-ink',fill:'none','stroke-width':8,'stroke-linecap':'round'},g);const tx=mk('text',{x:0,y:8,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--stage)'},g);tx.textContent='M'+(i+1);return g});
+const P7=[0,1].map(()=>{const g=mk('g',{},$('part7'));fig(g,0,720,20,'ink');return g});
+const D8=[0,1,2].map(i=>mk('circle',{cx:1290+i*60,cy:350,r:22,class:'gain'},$('dep8')));

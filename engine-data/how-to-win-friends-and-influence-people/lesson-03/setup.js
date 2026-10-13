@@ -1,0 +1,10 @@
+const fig=(g,x,y,r,c)=>[mk('circle',{cx:x,cy:y,r:r,class:c},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)];
+fig($('pA'),400,560,40,'ink');fig($('pB'),1180,560,40,'ink');
+fig($('sonG'),420,590,30,'ink');fig($('emG'),980,590,30,'ink');fig($('maidF'),880,598,28,'gain');
+fig($('nph'),1150,320,32,'ink');fig($('nph'),1350,320,32,'ink');
+const LGX=[580,610,680,710];
+const CAL=[...'MTWTFSS'].map((d,i)=>{const x=240+i*160,r=mk('rect',{x:x,y:540,width:140,height:120,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('cal'));const tx=mk('text',{x:x+70,y:614,'font-size':36,'text-anchor':'middle',class:'d'},$('cal'));tx.textContent=d;return [r,tx]});
+const HA=fig($('hA'),560,330,40,'ink'),HB=fig($('hB'),1040,330,40,'ink');
+const MO=['hA','hB'].map(i=>mk('path',{fill:'none',stroke:'var(--stage)','stroke-width':5,'stroke-linecap':'round'},$(i)));
+const mouth=(el,x,y,s)=>el.setAttribute('d','M'+(x-14)+' '+(y+12)+'q14 '+(s*12)+' 28 0');
+const CO=[['panA','YOU'],['panB','THEM']].map(([id,l])=>{const g=$(id);mk('path',{d:'M0 0V90',stroke:'var(--ink)','stroke-width':4},g);const c=mk('g',{},g);[-30,0,30].forEach(x=>mk('circle',{cx:x,cy:74,r:14,class:'gain'},c));mk('path',{d:'M-70 90a70 30 0 0 0 140 0z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:0,y:150,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=l;return c});

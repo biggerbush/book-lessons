@@ -70,9 +70,13 @@ jobs:
 
       - name: Install
         run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
           pip install -r engine/requirements.txt
           python -m playwright install --with-deps chromium
           ffmpeg -version | head -1
+          ffprobe -version | head -1
+          command -v ffmpeg ffprobe
 
       - name: Run the engine
         env:

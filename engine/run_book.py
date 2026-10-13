@@ -174,6 +174,8 @@ def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: 
     state = publish.load_state(slug) or {"slug": slug, "title": title, "author": author, "dry": dry, "status": "planning",
                                          "usage": new_usage(), "lessons": [], "created": publish.now()}
     state.update(dry=dry)
+    if state.get("status") == "failed":                  # retrying a failed run: any new failure must be recorded again
+        state.update(status="working", message="")
     notes_file = DATA / slug / "source-notes.txt"
     if notes:
         notes_file.parent.mkdir(parents=True, exist_ok=True)
@@ -232,7 +234,7 @@ def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: 
         return 0
     except Exception as exc:
         log(f"FAILED: {type(exc).__name__}: {exc}")
-        if state.get("status") not in ("failed", "needs_source"):     # early failure (e.g. the planning call): record it for the admin page
+        if state.get("status") != "needs_source" and not any(L.get("error") for L in state.get("lessons", [])):     # early failure (e.g. the planning call): record it for the admin page
             state.update(status="failed", message=f"{type(exc).__name__}: {str(exc)[:300]}")
             try:
                 checkpoint(f"Draft '{title}': failed")

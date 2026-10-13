@@ -31,3 +31,10 @@ In Claude Code you can also use `/books Atomic Habits, Deep Work`, then reply "a
 - `site_content/catalog.json`: list of published books
 - `site_content/books/<slug>/book.json`: brief and lessons (script, takeaways, action step, `audio_url`, duration)
 - `site_content/books/<slug>/lesson-NN.mp3`: audio files (when not using R2)
+
+## The website (`site/`)
+`site/index.html` is the VisualGrowth player site: Library → Book → Player (Previous / Next, Autoplay).
+Lessons are hand-built animated HTML files, one folder per book: `site/<book>/lesson-NN.html` plus `thumb-NN.jpg`
+(cover frame at t = 3 s, made with `python3 tools/make_thumbs.py site/<book>`). To add a lesson, drop the two files in
+the book's folder and add its row to the `BOOKS` data at the top of the script in `index.html`.
+Preview locally with `cd site && python3 -m http.server` (lessons run in a same-origin iframe, so `file://` won't do).

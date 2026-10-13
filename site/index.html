@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>VisualGrowth · Big ideas, drawn as you listen</title>
+<meta name="description" content="Short narrated, animated lessons from great books. One lesson per chapter, about two minutes each.">
+<meta name="theme-color" content="#0B1524">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#0B1524; --panel:#101E33; --panel2:#142540; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --on-gain:#101E33;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);min-height:100vh;
+  background-image:radial-gradient(var(--line) 1.4px,transparent 1.6px);background-size:40px 40px;background-position:20px 20px}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gain);outline-offset:3px;border-radius:4px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:rgba(11,21,36,.88);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1120px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:14px}
+.brand{font:800 22px/1 var(--display);letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--gain);display:inline-block}
+.crumb{font:400 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.crumb a{text-decoration:none}.crumb a:hover{color:var(--ink)}
+
+main{max-width:1120px;margin:0 auto;padding:0 16px 120px}
+.eyebrow{font:400 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* library */
+.hero{padding:56px 0 34px}
+.hero h1{font:800 clamp(38px,7.4vw,76px)/1.02 var(--display);letter-spacing:-.035em;margin:12px 0 16px;max-width:16ch;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--gain)}
+.hero p{color:var(--muted);font-size:18px;max-width:46ch;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{position:relative;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;text-align:left;padding:0;text-decoration:none;transition:border-color .15s,transform .15s}
+a.card:hover{border-color:var(--gain);transform:translateY(-2px)}
+.cover{aspect-ratio:16/9;background:var(--panel2);position:relative;overflow:hidden}
+.cover img{display:block;width:100%;height:100%;object-fit:cover}
+.cmeta{margin-top:12px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gain)}
+.card-b{padding:16px 18px 20px}
+.card h3{font:800 24px/1.15 var(--display);letter-spacing:-.02em;margin:0 0 4px}
+.card .by{color:var(--muted);font-size:15px}
+.card.locked{border-style:dashed;background:transparent}
+.card.locked .cover{background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(42,59,85,.35) 10px 11px);display:grid;place-items:center}
+.card.locked .cover svg{width:34px;height:34px;color:var(--muted)}
+.card.locked h3,.card.locked .by{opacity:.78}
+.soon{display:inline-block;margin-top:12px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--loss);border:1px solid var(--loss);border-radius:4px;padding:4px 8px}
+.section-h{margin:46px 0 16px}
+
+/* book */
+.back{display:inline-flex;align-items:center;gap:6px;margin:22px 0 16px;background:none;border:0;padding:6px 0;color:var(--muted);font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+.back:hover{color:var(--ink)}
+.bhero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.bhero .cover{aspect-ratio:auto;min-height:260px;background:#F6F8FA;display:flex;align-items:center}
+.bhero .cover img{object-fit:contain;height:auto}
+.bhero-b{padding:28px 28px 30px;display:flex;flex-direction:column;gap:14px}
+.bhero h1{font:800 clamp(32px,5vw,48px)/1.05 var(--display);letter-spacing:-.03em;margin:0}
+.bhero .by{color:var(--muted);font-size:17px;margin-top:-6px}
+.bhero p.blurb{margin:0;color:var(--ink);opacity:.86;max-width:46ch}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;margin:2px 0}
+.stat b{display:block;font:800 26px/1 var(--display);letter-spacing:-.02em;color:var(--gain)}
+.stat span{font:400 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+a.btn,a.row{text-decoration:none;color:inherit}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:6px;padding:12px 18px;font-weight:600;border:1px solid var(--line);background:transparent;min-height:46px}
+.btn:hover{border-color:var(--ink)}
+a.btn.primary,.btn.primary{background:var(--gain);color:var(--on-gain);border-color:var(--gain)}
+.btn.primary:hover{filter:brightness(1.06)}
+.btn svg{width:16px;height:16px}
+.lessons{list-style:none;margin:26px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.row{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px 10px 10px;width:100%;text-align:left}
+.row:hover{border-color:var(--gain)}
+.row[aria-current="true"]{border-color:var(--gain);background:var(--panel2)}
+.num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:800 17px var(--display);background:var(--bg);border:1px solid var(--line)}
+.row[aria-current="true"] .num{background:var(--gain);color:var(--on-gain);border-color:var(--gain)}
+.rthumb{width:104px;aspect-ratio:16/9;border-radius:5px;overflow:hidden;background:var(--panel2);border:1px solid var(--line)}
+.rthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.rt{min-width:0}
+.rt h4{font:800 18px/1.2 var(--display);letter-spacing:-.01em;margin:0}
+.rt p{margin:2px 0 0;color:var(--muted);font-size:14px;line-height:1.4}
+.rmeta{display:flex;align-items:center;gap:12px;font:400 13px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.pl{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);color:var(--ink)}
+.pl svg{width:14px;height:14px;margin-left:2px}
+.row:hover .pl{background:var(--gain);color:var(--on-gain);border-color:var(--gain)}
+.tag{font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--loss);border:1px solid var(--loss);border-radius:3px;padding:2px 5px;margin-left:8px;vertical-align:2px;white-space:nowrap}
+
+/* player */
+.ptitle{margin:6px 0 16px}
+.ptitle h2{font:800 clamp(24px,4vw,36px)/1.1 var(--display);letter-spacing:-.025em;margin:6px 0 0}
+.frame{margin:0 -16px;overflow:hidden}
+.frame iframe{display:block;width:100%;border:0;height:760px;background:transparent}
+.pbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(11,21,36,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.pbar-in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px}
+.pbar .btn{padding:10px 16px;min-height:44px}
+.pbar .btn[disabled]{opacity:.35;cursor:default;pointer-events:none}
+.pbar .pv{justify-self:start}.pbar .nx{justify-self:end}
+.auto{display:flex;align-items:center;gap:10px;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;background:none;border:0;padding:6px 4px;color:var(--muted)}
+.sw{width:44px;height:26px;border-radius:13px;background:var(--line);position:relative;transition:background .15s;flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--ink);transition:transform .15s}
+.auto[aria-checked="true"] .sw{background:var(--gain)}
+.auto[aria-checked="true"] .sw::after{transform:translateX(18px);background:var(--on-gain)}
+.auto[aria-checked="true"]{color:var(--ink)}
+.pos{display:none}
+.all-h{margin:36px 0 14px}
+footer{max-width:1120px;margin:0 auto;padding:10px 16px 60px;color:var(--muted);font-size:13px;line-height:1.5}
+footer p{max-width:70ch;margin:0}
+
+@media (max-width:760px){
+  .bhero{grid-template-columns:1fr}
+  .bhero .cover{aspect-ratio:16/9;min-height:0}
+  .bhero-b{padding:22px 18px 24px}
+  .hero{padding:36px 0 26px}
+  .crumb{display:none}
+}
+@media (max-width:560px){
+  .card.locked .cover{aspect-ratio:3/1}
+  .row{grid-template-columns:auto minmax(0,1fr) auto;gap:12px}
+  .rthumb{display:none}
+  .rmeta .d{display:none}
+  .pbar .btn span{display:none}
+  .pbar .btn{padding:10px 14px}
+  .auto{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a class="brand" href="#/"><i></i>VisualGrowth</a>
+  <nav class="crumb" id="crumb" aria-label="Breadcrumb"></nav>
+</div></header>
+<main id="app"></main>
+<footer><p>Each lesson is a paraphrased summary made for learning, not a substitute for the book. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs. VisualGrowth is independent and is not affiliated with the authors or publishers.</p></footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ------------------------------------------------------------------ data
+   One folder per book (dir). To publish a new lesson: drop lesson-NN.html and
+   thumb-NN.jpg in the folder and add a row here. A book with no lessons shows as "Coming soon". */
+const BOOKS=[
+ {id:"atomic-habits",dir:"atomic-habits",title:"Atomic Habits",author:"James Clear",
+  blurb:"Tiny changes, remarkable results: how habits form, how identity drives them, and how to build good ones and break bad ones.",
+  planned:10,
+  lessons:[
+   {t:"1% better, every day",b:"Small improvements compound into large results.",d:87},
+   {t:"Habits and identity",b:"Lasting habits come from changing who you are, not chasing outcomes.",d:82},
+   {t:"Four steps, four laws",b:"How habits form, and how to build them.",d:85},
+   {t:"You can’t change what you can’t see",b:"Before you change a habit, you have to notice it.",d:79},
+   {t:"The best way to start a new habit",b:"Give every habit a time and a place.",d:73},
+   {t:"Environment beats motivation",b:"Change what you see, and you change what you do.",d:162},
+   {t:"The secret to self-control",b:"The most self-controlled people are the least tempted.",d:131},
+   {t:"How to make a habit irresistible",b:"The second law: make it attractive.",d:134},
+   {t:"How family and friends shape your habits",b:"We copy the habits of the people around us.",d:134,silent:true},
+   {t:"Find and fix the causes of your bad habits",b:"Every craving hides a deeper motive.",d:129}
+  ]},
+ {id:"rich-dad-poor-dad",dir:"rich-dad-poor-dad",title:"Rich Dad Poor Dad",author:"Robert Kiyosaki",planned:10,lessons:[]},
+ {id:"never-split-the-difference",dir:"never-split-the-difference",title:"Never Split the Difference",author:"Chris Voss",planned:10,lessons:[]},
+ {id:"4-disciplines-of-execution",dir:"4-disciplines-of-execution",title:"The 4 Disciplines of Execution",author:"McChesney, Covey & Huling",planned:10,lessons:[]},
+ {id:"your-next-move",dir:"your-next-move",title:"Your Next Move",author:"Michael Watkins",planned:10,lessons:[]}
+];
+
+/* ------------------------------------------------------------------ helpers */
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad=n=>String(n).padStart(2,"0");
+const mmss=s=>Math.floor(s/60)+":"+pad(Math.round(s%60));
+const mins=s=>Math.round(s/60);
+const ready=b=>b.lessons.length>0;
+const bookById=id=>BOOKS.find(b=>b.id===id);
+const lessonUrl=(b,n)=>b.dir+"/lesson-"+pad(n)+".html";
+const thumbUrl=(b,n)=>b.dir+"/thumb-"+pad(n)+".jpg";
+const store={
+  get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+};
+const ICON={
+  play:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5v13l11-6.5z" fill="currentColor"/></svg>',
+  lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>',
+  prev:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 2 4 8l6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  next:'<svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 2 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+const app=$("#app"), crumb=$("#crumb");
+let autoplay=store.get("vg:autoplay",false);
+let wantPlay=false;      // true when the person asked for playback (a click), so a freshly loaded lesson starts itself
+let watcher=null;
+
+function setCrumb(parts){
+  crumb.innerHTML=parts.map(p=>p.href?'<a href="'+p.href+'">'+esc(p.label)+'</a>':esc(p.label)).join(" / ");
+}
+function stopWatcher(){if(watcher){clearInterval(watcher);watcher=null}}
+
+/* ------------------------------------------------------------------ views */
+function libraryView(){
+  stopWatcher();
+  document.title="VisualGrowth · Big ideas, drawn as you listen";
+  setCrumb([]);
+  const rdy=BOOKS.filter(ready), soon=BOOKS.filter(b=>!ready(b));
+  const total=rdy.reduce((a,b)=>a+b.lessons.length,0);
+  app.innerHTML=
+   '<section class="hero"><div class="eyebrow">Narrated, animated book lessons</div>'+
+   '<h1>Big ideas, <em>drawn</em> as you listen.</h1>'+
+   '<p>One short lesson per chapter, about two minutes each. '+total+' lesson'+(total===1?"":"s")+' ready to play.</p></section>'+
+   '<div class="grid">'+rdy.map(b=>{
+      const run=b.lessons.reduce((a,l)=>a+l.d,0);
+      return '<a class="card" href="#/'+b.id+'"><div class="cover"><img src="'+thumbUrl(b,1)+'" alt="" loading="lazy" decoding="async">'+
+        '</div>'+
+        '<div class="card-b"><h3>'+esc(b.title)+'</h3><div class="by">'+esc(b.author)+'</div>'+
+        '<div class="cmeta">'+b.lessons.length+' lessons · '+mins(run)+' min</div></div></a>';
+   }).join("")+'</div>'+
+   (soon.length?'<div class="section-h eyebrow">On the way</div><div class="grid">'+soon.map(b=>
+      '<div class="card locked" aria-label="'+esc(b.title)+', coming soon"><div class="cover">'+ICON.lock+'</div>'+
+      '<div class="card-b"><h3>'+esc(b.title)+'</h3><div class="by">'+esc(b.author)+'</div><span class="soon">Coming soon</span></div></div>'
+   ).join("")+'</div>':"");
+  window.scrollTo(0,0);
+}
+
+function bookView(b){
+  stopWatcher();
+  document.title=b.title+" · VisualGrowth";
+  setCrumb([{label:"Library",href:"#/"},{label:b.title}]);
+  const run=b.lessons.reduce((a,l)=>a+l.d,0);
+  const last=store.get("vg:last",null);
+  const cont=last&&last.book===b.id&&last.n>1&&last.n<=b.lessons.length?last.n:0;
+  app.innerHTML=
+   '<a class="back" href="#/">'+ICON.prev.replace('<svg','<svg width="12" height="12"')+' Library</a>'+
+   '<section class="bhero"><div class="cover"><img src="'+thumbUrl(b,1)+'" alt=""></div><div class="bhero-b">'+
+     '<div class="eyebrow">Book</div><h1>'+esc(b.title)+'</h1><div class="by">'+esc(b.author)+'</div>'+
+     '<p class="blurb">'+esc(b.blurb||"")+'</p>'+
+     '<div class="stats"><div class="stat"><b>'+b.lessons.length+'</b><span>Lessons</span></div>'+
+       '<div class="stat"><b>'+mins(run)+' min</b><span>Total</span></div>'+
+       '<div class="stat"><b>'+(run/b.lessons.length/60).toFixed(1)+'</b><span>Min each</span></div></div>'+
+     '<div class="btns"><a class="btn primary" href="#/'+b.id+'/1" data-play="1">'+ICON.play+' Play from lesson 1</a>'+
+       (cont?'<a class="btn" href="#/'+b.id+'/'+cont+'" data-play="1">Continue lesson '+cont+'</a>':"")+'</div>'+
+   '</div></section>'+
+   '<ol class="lessons" aria-label="Lessons">'+b.lessons.map((l,i)=>rowHtml(b,l,i+1,false)).join("")+'</ol>';
+  app.querySelectorAll("[data-play]").forEach(a=>a.addEventListener("click",()=>{wantPlay=true}));
+  app.querySelectorAll(".row").forEach(a=>a.addEventListener("click",()=>{wantPlay=true}));
+  window.scrollTo(0,0);
+}
+
+function rowHtml(b,l,n,current){
+  return '<li><a class="row" href="#/'+b.id+'/'+n+'"'+(current?' aria-current="true"':"")+'>'+
+    '<span class="num">'+n+'</span>'+
+    '<span class="rthumb"><img src="'+thumbUrl(b,n)+'" alt="" loading="lazy" decoding="async"></span>'+
+    '<span class="rt"><h4>'+esc(l.t)+(l.silent?'<span class="tag">Narration soon</span>':"")+'</h4><p>'+esc(l.b)+'</p></span>'+
+    '<span class="rmeta"><span class="d">'+mmss(l.d)+'</span><span class="pl" aria-hidden="true">'+ICON.play+'</span></span></a></li>';
+}
+
+function playerView(b,n){
+  stopWatcher();
+  const l=b.lessons[n-1];
+  document.title=l.t+" · "+b.title+" · VisualGrowth";
+  setCrumb([{label:"Library",href:"#/"},{label:b.title,href:"#/"+b.id},{label:"Lesson "+n}]);
+  store.set("vg:last",{book:b.id,n:n});
+  app.innerHTML=
+   '<a class="back" href="#/'+b.id+'">'+ICON.prev.replace('<svg','<svg width="12" height="12"')+' '+esc(b.title)+'</a>'+
+   '<div class="ptitle"><div class="eyebrow">'+esc(b.title)+' · Lesson '+n+' of '+b.lessons.length+'</div><h2>'+esc(l.t)+'</h2></div>'+
+   '<div class="frame"><iframe id="lf" title="'+esc(b.title+", lesson "+n+": "+l.t)+'" allow="autoplay; fullscreen" allowfullscreen></iframe></div>'+
+   '<div class="eyebrow all-h">All lessons</div>'+
+   '<ol class="lessons" style="margin-top:0">'+b.lessons.map((x,i)=>rowHtml(b,x,i+1,i+1===n)).join("")+'</ol>';
+  app.querySelectorAll(".row").forEach(a=>a.addEventListener("click",()=>{wantPlay=true}));
+
+  /* sticky bar */
+  let bar=$("#pbar"); if(!bar){bar=document.createElement("div");bar.id="pbar";bar.className="pbar";document.body.appendChild(bar)}
+  const hasP=n>1, hasN=n<b.lessons.length;
+  bar.innerHTML='<div class="pbar-in">'+
+    '<a class="btn pv" '+(hasP?'href="#/'+b.id+'/'+(n-1)+'"':'aria-disabled="true" disabled')+'>'+ICON.prev+'<span>Previous</span></a>'+
+    '<button class="auto" id="auto" type="button" role="switch" aria-checked="'+autoplay+'"><span class="sw"></span>Autoplay</button>'+
+    '<a class="btn nx" '+(hasN?'href="#/'+b.id+'/'+(n+1)+'"':'aria-disabled="true" disabled')+'><span>Next</span>'+ICON.next+'</a></div>';
+  bar.querySelectorAll("a.btn:not([disabled])").forEach(a=>a.addEventListener("click",()=>{wantPlay=true}));
+  $("#auto",bar).addEventListener("click",e=>{
+    autoplay=!autoplay;store.set("vg:autoplay",autoplay);e.currentTarget.setAttribute("aria-checked",autoplay);
+  });
+
+  const f=$("#lf");
+  f.addEventListener("load",()=>onFrameLoad(f,b,n),{once:true});
+  f.src=lessonUrl(b,n);
+  window.scrollTo(0,0);
+}
+
+/* the lesson is same-origin: size the frame to its content, optionally press Play, and watch for the end */
+function onFrameLoad(f,b,n){
+  let doc; try{doc=f.contentDocument}catch(e){doc=null}
+  if(!doc)return;
+  const fit=()=>{try{f.style.height=Math.ceil(doc.documentElement.scrollHeight)+"px"}catch(e){}};
+  fit();
+  try{new f.contentWindow.ResizeObserver(fit).observe(doc.documentElement)}catch(e){window.addEventListener("resize",fit)}
+  if(wantPlay){
+    wantPlay=false;
+    try{const p=doc.getElementById("play"); if(p&&p.textContent.trim()==="Play")p.click()}catch(e){}
+  }
+  let sawPlaying=false, fired=false;
+  stopWatcher();
+  watcher=setInterval(()=>{
+    let label=""; try{label=(doc.getElementById("play")||{}).textContent.trim()}catch(e){return}
+    if(label==="Pause")sawPlaying=true;
+    if(label==="Replay"&&sawPlaying&&!fired){
+      fired=true;
+      if(autoplay&&n<b.lessons.length){wantPlay=true;location.hash="#/"+b.id+"/"+(n+1)}
+    }
+  },500);
+}
+
+/* ------------------------------------------------------------------ router */
+function removeBar(){const bar=$("#pbar");if(bar)bar.remove()}
+function route(){
+  const parts=(location.hash.replace(/^#\/?/,"")||"").split("/").filter(Boolean);
+  const b=parts[0]?bookById(parts[0]):null;
+  if(!b||!ready(b)){removeBar();libraryView();return}
+  const n=parseInt(parts[1],10);
+  if(n>=1&&n<=b.lessons.length){playerView(b,n);return}
+  removeBar();bookView(b);
+}
+window.addEventListener("hashchange",route);
+route();
+})();
+</script>
+</body>
+</html>

@@ -38,3 +38,24 @@ Lessons are hand-built animated HTML files, one folder per book: `site/<book>/le
 (cover frame at t = 3 s, made with `python3 tools/make_thumbs.py site/<book>`). To add a lesson, drop the two files in
 the book's folder and add its row to the `BOOKS` data at the top of the script in `index.html`.
 Preview locally with `cd site && python3 -m http.server` (lessons run in a same-origin iframe, so `file://` won't do).
+
+## Book creation engine
+
+Type a book title in the admin page; GitHub Actions writes the lessons, designs the animated scenes, records the
+voice-over (one ElevenLabs generation per lesson) and builds a **draft**. Nothing is public until you approve it.
+
+**One-time setup**
+1. Repo → Settings → Secrets and variables → Actions → add `ANTHROPIC_API_KEY` and `ELEVENLABS_API_KEY`.
+2. Create a fine-grained token at github.com/settings/personal-access-tokens/new: only this repository,
+   permission *Actions: Read and write*. Paste it into the admin page (stored only in your browser).
+3. Open `https://biggerbush.github.io/book-lessons/admin/`.
+
+**Use**
+- *Dry run* first: free, uses filler content, proves the plumbing. Dry drafts can't be published.
+- *Real* run: Claude plans the book, writes each script, designs scenes, checks them in a headless browser (and fixes
+  problems) **before** paying for voice-over. Cost is capped by `BOOK_MAX_COST` (default $30).
+- Drafts appear in the admin page. *Preview* opens the real player; *Approve & publish* moves it into the library;
+  *Reject* deletes it. A stopped run can be resumed from the draft card.
+
+**Layout**: `engine/` (pipeline), `engine-data/<slug>/` (scripts, scene code, MP3s, state), `site/drafts/` (drafts),
+`.github/workflows/create-book.yml` and `review-book.yml`, `tests/` (offline tests: `python -m tests.test_timing` etc.).

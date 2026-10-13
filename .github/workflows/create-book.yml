@@ -1,0 +1,97 @@
+name: Create book
+run-name: "Create book: ${{ inputs.title }}${{ inputs.mode == 'dry' && ' (dry run)' || '' }}"
+
+# Started from the admin page (or the Actions tab). Writes the lessons, draws them, voices them, and saves a DRAFT.
+# Nothing goes public until the draft is approved (workflow "Review book").
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: Book title
+        required: true
+        type: string
+      author:
+        description: Author (optional)
+        required: false
+        type: string
+        default: ""
+      lessons:
+        description: Number of lessons (1-12)
+        required: false
+        type: string
+        default: "10"
+      notes:
+        description: Source notes (optional; needed if Claude does not know the book well)
+        required: false
+        type: string
+        default: ""
+      mode:
+        description: "real = uses Claude + ElevenLabs credits. dry = free pipeline test with filler content."
+        required: false
+        type: choice
+        options: [real, dry]
+        default: real
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: book-engine
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check API keys (real mode)
+        if: ${{ inputs.mode == 'real' }}
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          missing=""
+          [ -z "$ANTHROPIC_API_KEY" ] && missing="$missing ANTHROPIC_API_KEY"
+          [ -z "$ELEVENLABS_API_KEY" ] && missing="$missing ELEVENLABS_API_KEY"
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository secret(s):$missing. Add them in Settings > Secrets and variables > Actions, or run in dry mode."
+            exit 1
+          fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: engine/requirements.txt
+
+      - name: Install
+        run: |
+          pip install -r engine/requirements.txt
+          python -m playwright install --with-deps chromium
+          ffmpeg -version | head -1
+
+      - name: Run the engine
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          BOOK_TITLE: ${{ inputs.title }}
+          BOOK_AUTHOR: ${{ inputs.author }}
+          BOOK_LESSONS: ${{ inputs.lessons }}
+          BOOK_NOTES: ${{ inputs.notes }}
+          BOOK_MODE: ${{ inputs.mode }}
+        run: |
+          args=(--title "$BOOK_TITLE" --lessons "${BOOK_LESSONS:-10}" --commit)
+          [ -n "$BOOK_AUTHOR" ] && args+=(--author "$BOOK_AUTHOR")
+          [ -n "$BOOK_NOTES" ] && args+=(--notes "$BOOK_NOTES")
+          [ "$BOOK_MODE" = "dry" ] && args+=(--dry-run)
+          python -m engine.run_book "${args[@]}"
+
+      - name: Publish the draft preview to the site
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main

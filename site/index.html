@@ -95,6 +95,8 @@ a.btn.primary,.btn.primary{background:var(--gain);color:var(--on-gain);border-co
 .tag{font:500 10px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--loss);border:1px solid var(--loss);border-radius:3px;padding:2px 5px;margin-left:8px;vertical-align:2px;white-space:nowrap}
 
 /* player */
+.draftbar{margin:16px 0 0;padding:10px 14px;border:1px dashed var(--loss);border-radius:8px;color:var(--loss);font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.draftbar a{color:var(--ink)}
 .ptitle{margin:6px 0 16px}
 .ptitle h2{font:800 clamp(24px,4vw,36px)/1.1 var(--display);letter-spacing:-.025em;margin:6px 0 0}
 .frame{margin:0 -16px;overflow:hidden}
@@ -147,29 +149,10 @@ footer p{max-width:70ch;margin:0}
 "use strict";
 
 /* ------------------------------------------------------------------ data
-   One folder per book (dir). To publish a new lesson: drop lesson-NN.html and
-   thumb-NN.jpg in the folder and add a row here. A book with no lessons shows as "Coming soon". */
-const BOOKS=[
- {id:"atomic-habits",dir:"atomic-habits",title:"Atomic Habits",author:"James Clear",
-  blurb:"Tiny changes, remarkable results: how habits form, how identity drives them, and how to build good ones and break bad ones.",
-  planned:10,
-  lessons:[
-   {t:"1% better, every day",b:"Small improvements compound into large results.",d:87},
-   {t:"Habits and identity",b:"Lasting habits come from changing who you are, not chasing outcomes.",d:82},
-   {t:"Four steps, four laws",b:"How habits form, and how to build them.",d:85},
-   {t:"You can’t change what you can’t see",b:"Before you change a habit, you have to notice it.",d:79},
-   {t:"The best way to start a new habit",b:"Give every habit a time and a place.",d:73},
-   {t:"Environment beats motivation",b:"Change what you see, and you change what you do.",d:162},
-   {t:"The secret to self-control",b:"The most self-controlled people are the least tempted.",d:131},
-   {t:"How to make a habit irresistible",b:"The second law: make it attractive.",d:134},
-   {t:"How family and friends shape your habits",b:"We copy the habits of the people around us.",d:134,silent:true},
-   {t:"Find and fix the causes of your bad habits",b:"Every craving hides a deeper motive.",d:129}
-  ]},
- {id:"rich-dad-poor-dad",dir:"rich-dad-poor-dad",title:"Rich Dad Poor Dad",author:"Robert Kiyosaki",planned:10,lessons:[]},
- {id:"never-split-the-difference",dir:"never-split-the-difference",title:"Never Split the Difference",author:"Chris Voss",planned:10,lessons:[]},
- {id:"4-disciplines-of-execution",dir:"4-disciplines-of-execution",title:"The 4 Disciplines of Execution",author:"McChesney, Covey & Huling",planned:10,lessons:[]},
- {id:"your-next-move",dir:"your-next-move",title:"Your Next Move",author:"Michael Watkins",planned:10,lessons:[]}
-];
+   Books come from books.json (one folder per book: <dir>/lesson-NN.html + thumb-NN.jpg). The book engine
+   (engine/) edits that file when a draft is approved. A book with no lessons shows as "Coming soon".
+   Drafts are previewed at #/preview/<slug> from drafts/<slug>/book.json and are not listed publicly. */
+let BOOKS=[];   // loaded from books.json (the engine edits that file; see engine/)
 
 /* ------------------------------------------------------------------ helpers */
 const $=(s,r=document)=>r.querySelector(s);
@@ -234,7 +217,7 @@ function bookView(b){
   const run=b.lessons.reduce((a,l)=>a+l.d,0);
   const last=store.get("vg:last",null);
   const cont=last&&last.book===b.id&&last.n>1&&last.n<=b.lessons.length?last.n:0;
-  app.innerHTML=
+  app.innerHTML=draftBanner(b)+
    '<a class="back" href="#/">'+ICON.prev.replace('<svg','<svg width="12" height="12"')+' Library</a>'+
    '<section class="bhero"><div class="cover"><img src="'+thumbUrl(b,1)+'" alt=""></div><div class="bhero-b">'+
      '<div class="eyebrow">Book</div><h1>'+esc(b.title)+'</h1><div class="by">'+esc(b.author)+'</div>'+
@@ -251,6 +234,10 @@ function bookView(b){
   window.scrollTo(0,0);
 }
 
+function draftBanner(b){
+  return b.draft?'<div class="draftbar"><b>Draft preview</b> · not public yet'+(b.dry?' · dry-run test content':'')+' · <a href="admin/">Back to admin</a></div>':"";
+}
+
 function rowHtml(b,l,n,current){
   return '<li><a class="row" href="#/'+b.id+'/'+n+'"'+(current?' aria-current="true"':"")+'>'+
     '<span class="num">'+n+'</span>'+
@@ -265,7 +252,7 @@ function playerView(b,n){
   document.title=l.t+" · "+b.title+" · VisualGrowth";
   setCrumb([{label:"Library",href:"#/"},{label:b.title,href:"#/"+b.id},{label:"Lesson "+n}]);
   store.set("vg:last",{book:b.id,n:n});
-  app.innerHTML=
+  app.innerHTML=draftBanner(b)+
    '<a class="back" href="#/'+b.id+'">'+ICON.prev.replace('<svg','<svg width="12" height="12"')+' '+esc(b.title)+'</a>'+
    '<div class="ptitle"><div class="eyebrow">'+esc(b.title)+' · Lesson '+n+' of '+b.lessons.length+'</div><h2>'+esc(l.t)+'</h2></div>'+
    '<div class="frame"><iframe id="lf" title="'+esc(b.title+", lesson "+n+": "+l.t)+'" allow="autoplay; fullscreen" allowfullscreen></iframe></div>'+
@@ -316,16 +303,31 @@ function onFrameLoad(f,b,n){
 
 /* ------------------------------------------------------------------ router */
 function removeBar(){const bar=$("#pbar");if(bar)bar.remove()}
-function route(){
+let routeToken=0;
+async function loadDraft(slug){
+  try{
+    const r=await fetch("drafts/"+encodeURIComponent(slug)+"/book.json",{cache:"no-store"});
+    if(!r.ok)return null;
+    const j=await r.json();
+    return Object.assign({},j,{id:"preview/"+slug,dir:"drafts/"+slug,draft:true});
+  }catch(e){return null}
+}
+async function route(){
+  const my=++routeToken;
   const parts=(location.hash.replace(/^#\/?/,"")||"").split("/").filter(Boolean);
-  const b=parts[0]?bookById(parts[0]):null;
+  let b=null,n=NaN;
+  if(parts[0]==="preview"&&parts[1]){b=await loadDraft(parts[1]);n=parseInt(parts[2],10)}
+  else{b=parts[0]?bookById(parts[0]):null;n=parseInt(parts[1],10)}
+  if(my!==routeToken)return;
   if(!b||!ready(b)){removeBar();libraryView();return}
-  const n=parseInt(parts[1],10);
   if(n>=1&&n<=b.lessons.length){playerView(b,n);return}
   removeBar();bookView(b);
 }
 window.addEventListener("hashchange",route);
-route();
+fetch("books.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{BOOKS=j.books||[]}).catch(()=>{
+  app.innerHTML='<section class="hero"><h1>Library unavailable</h1><p>Could not load books.json. Open this site through a web server, not as a local file.</p></section>';
+  BOOKS=null;
+}).then(()=>{if(BOOKS)route()});
 })();
 </script>
 </body>

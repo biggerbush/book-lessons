@@ -1,0 +1,43 @@
+name: Review book
+run-name: "${{ inputs.action == 'approve' && 'Publish' || 'Reject' }} book: ${{ inputs.slug }}"
+
+# Started from the admin page. Approve moves a finished draft into the public library; reject deletes the draft.
+
+on:
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: Draft folder name (e.g. rich-dad-poor-dad)
+        required: true
+        type: string
+      action:
+        description: approve or reject
+        required: true
+        type: choice
+        options: [approve, reject]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: book-engine
+  cancel-in-progress: false
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply
+        env:
+          SLUG: ${{ inputs.slug }}
+          ACTION: ${{ inputs.action }}
+        run: python -m engine.publish "$ACTION" "$SLUG" --commit
+      - name: Redeploy the site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main

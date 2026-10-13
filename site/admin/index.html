@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0B1524">
+<title>Book engine · VisualGrowth</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#0B1524;--panel:#101E33;--panel2:#142540;--ink:#EAF0F7;--muted:#93A3B8;--line:#2A3B55;--gain:#FFC233;--loss:#9AA5FF;--ok:#7FD6A4;--bad:#FF8A80;--on-gain:#101E33;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;--body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);min-height:100vh;background-image:radial-gradient(var(--line) 1.4px,transparent 1.6px);background-size:40px 40px;background-position:20px 20px}
+button,input,textarea,select{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gain);outline-offset:3px;border-radius:4px}
+.top{background:rgba(11,21,36,.9);border-bottom:1px solid var(--line)}
+.top-in{max-width:880px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:14px}
+.brand{font:800 22px/1 var(--display);letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--gain)}
+.top-in .sp{margin-left:auto;font:400 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+main{max-width:880px;margin:0 auto;padding:28px 16px 80px;display:flex;flex-direction:column;gap:22px}
+h1{font:800 clamp(30px,6vw,46px)/1.05 var(--display);letter-spacing:-.03em;margin:0}
+.lede{color:var(--muted);margin:8px 0 0;max-width:56ch}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.card h2{font:800 20px/1.2 var(--display);letter-spacing:-.01em;margin:0 0 4px}
+.eyebrow{font:400 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 0}
+label{display:block;font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+input[type=text],input[type=password],input[type=number],textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:11px 12px;min-height:46px}
+textarea{min-height:90px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 130px;gap:12px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg label{margin:0;text-transform:none;letter-spacing:0;font:600 14px var(--body);color:var(--ink);display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;flex:1 1 200px}
+.seg input{accent-color:var(--gain)}
+.seg label:has(input:checked){border-color:var(--gain);background:var(--panel2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;padding:11px 18px;min-height:46px;font-weight:600;border:1px solid var(--line);background:transparent;cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--gain);color:var(--on-gain);border-color:var(--gain)}
+.btn.danger{color:var(--bad);border-color:rgba(255,138,128,.45)}
+.btn[disabled]{opacity:.4;cursor:default;pointer-events:none}
+.btn.sm{min-height:38px;padding:7px 12px;font-size:14px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.badge{display:inline-block;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:4px;padding:3px 7px;color:var(--muted);white-space:nowrap}
+.badge.ok{color:var(--ok);border-color:rgba(127,214,164,.5)}.badge.bad{color:var(--bad);border-color:rgba(255,138,128,.5)}
+.badge.run{color:var(--gain);border-color:rgba(255,194,51,.5)}.badge.warn{color:var(--loss);border-color:rgba(154,165,255,.5)}
+.item{display:flex;flex-direction:column;gap:6px;padding:14px 0;border-top:1px solid var(--line)}
+.item:first-child{border-top:0;padding-top:4px}
+.item .t{font:800 18px/1.2 var(--display);letter-spacing:-.01em;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.item .m{color:var(--muted);font-size:14px}
+.msg{font-size:14px;margin:6px 0 0;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg)}
+.msg.err{border-color:rgba(255,138,128,.5);color:var(--bad)}.msg.good{border-color:rgba(127,214,164,.5);color:var(--ok)}
+.empty{color:var(--muted);font-size:15px;padding:6px 0}
+.steps{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:14px}.steps li{margin:4px 0}
+.steps b{color:var(--ink)}
+.flag{color:var(--loss);font-size:13px}
+.links{display:flex;gap:14px;flex-wrap:wrap;font-size:14px}
+.chead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in"><a class="brand" href="../"><i></i>VisualGrowth</a><span class="sp">Admin</span></div></header>
+<main>
+  <div><div class="eyebrow">Book engine</div><h1>Type a title. Get a lesson set.</h1>
+  <p class="lede">The engine writes the lessons, draws the motion graphics, records the voiceover and builds a draft. Nothing goes public until you approve it.</p></div>
+
+  <section class="card" id="connect"></section>
+
+  <section class="card" id="newbook" hidden>
+    <h2>New book</h2>
+    <form id="form" autocomplete="off">
+      <label for="title">Book title</label>
+      <input id="title" type="text" required maxlength="120" placeholder="e.g. Rich Dad Poor Dad">
+      <div class="row2">
+        <div><label for="author">Author (optional)</label><input id="author" type="text" maxlength="120" placeholder="e.g. Robert Kiyosaki"></div>
+        <div><label for="lessons">Lessons</label><input id="lessons" type="number" min="1" max="12" value="10"></div>
+      </div>
+      <label for="notes">Source notes (optional)</label>
+      <textarea id="notes" maxlength="12000" placeholder="Only needed if the engine says it doesn't know the book well: paste chapter summaries or key points."></textarea>
+      <label>Mode</label>
+      <div class="seg">
+        <label><input type="radio" name="mode" value="real" checked> Real: uses Claude and ElevenLabs credits</label>
+        <label><input type="radio" name="mode" value="dry"> Dry run: free pipeline test, filler content</label>
+      </div>
+      <p class="hint" id="modehint">A full book can take an hour or more. You can close this page; the work runs on GitHub.</p>
+      <div class="btns"><button class="btn primary" id="go" type="submit">Create book</button></div>
+      <div id="formmsg"></div>
+    </form>
+  </section>
+
+  <section class="card" id="drafts" hidden>
+    <div class="chead"><h2>Drafts</h2><button class="btn sm" id="refresh" type="button">Refresh</button></div>
+    <div id="draftlist"><p class="empty">Loading…</p></div>
+  </section>
+
+  <section class="card" id="activity" hidden>
+    <h2>Activity</h2>
+    <div id="runlist"><p class="empty">Loading…</p></div>
+  </section>
+
+  <section class="card" id="published" hidden>
+    <h2>Published</h2>
+    <div id="publist"></div>
+  </section>
+</main>
+
+<script>
+(function(){
+"use strict";
+/* The repo is derived from the address (owner.github.io/repo/admin/), with a fallback for local testing. */
+const OWNER=location.hostname.endsWith(".github.io")?location.hostname.split(".")[0]:"biggerbush";
+const REPO=location.hostname.endsWith(".github.io")?location.pathname.split("/").filter(Boolean)[0]:"book-lessons";
+const API="https://api.github.com/repos/"+OWNER+"/"+REPO;
+const RAW="https://raw.githubusercontent.com/"+OWNER+"/"+REPO+"/main/site/";
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}},del(k){try{localStorage.removeItem(k)}catch(e){}}};
+let token=store.get("vg:admin-token")||"";
+let timer=null;
+
+function gh(path,opt){
+  opt=opt||{};
+  const h={"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"};
+  if(token)h.Authorization="Bearer "+token;
+  if(opt.body)h["Content-Type"]="application/json";
+  return fetch(API+path,{method:opt.method||"GET",headers:h,body:opt.body?JSON.stringify(opt.body):undefined,cache:"no-store"});
+}
+async function dispatch(workflow,inputs){
+  const r=await gh("/actions/workflows/"+workflow+"/dispatches",{method:"POST",body:{ref:"main",inputs:inputs}});
+  if(r.status===204)return;
+  let m="";try{m=(await r.json()).message}catch(e){}
+  if(r.status===401||r.status===403||r.status===404)throw new Error("GitHub refused this ("+r.status+"). Check that your token is for this repository and has Actions: Read and write. "+m);
+  throw new Error("GitHub error "+r.status+". "+m);
+}
+function ago(iso){const s=Math.max(0,(Date.now()-new Date(iso))/1000);
+  if(s<90)return "just now";if(s<3600)return Math.round(s/60)+" min ago";if(s<86400)return Math.round(s/3600)+" h ago";return Math.round(s/86400)+" d ago"}
+function say(el,text,kind){el.innerHTML='<p class="msg '+(kind||"")+'">'+esc(text)+'</p>'}
+
+/* ---------------------------------------------------------------- connect */
+function renderConnect(){
+  const c=$("#connect");
+  if(token){
+    c.innerHTML='<div class="chead"><div><h2>Connected</h2><p class="hint">Your token is stored only in this browser.</p></div><button class="btn sm" id="disc" type="button">Disconnect</button></div>';
+    $("#disc").onclick=()=>{store.del("vg:admin-token");token="";location.reload()};
+    ["newbook","drafts","activity","published"].forEach(i=>$("#"+i).hidden=false);
+    return;
+  }
+  c.innerHTML='<h2>Connect to GitHub</h2>'+
+   '<p class="hint">The page needs a GitHub token to start jobs in your repository. It stays in this browser and is only sent to GitHub.</p>'+
+   '<ol class="steps"><li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener"><b>github.com/settings/personal-access-tokens/new</b></a>.</li>'+
+   '<li><b>Repository access:</b> Only select repositories, then <b>'+esc(OWNER+"/"+REPO)+'</b>.</li>'+
+   '<li><b>Permissions → Repository → Actions:</b> Read and write. Nothing else.</li>'+
+   '<li>Generate the token, copy it, paste it below.</li></ol>'+
+   '<label for="tok">GitHub token</label><input id="tok" type="password" autocomplete="off" placeholder="github_pat_…">'+
+   '<div class="btns"><button class="btn primary" id="save" type="button">Connect</button></div><div id="cmsg"></div>';
+  $("#save").onclick=async()=>{
+    const v=$("#tok").value.trim(); if(!v)return;
+    token=v;
+    const r=await gh("/actions/workflows").catch(()=>null);
+    if(!r||!r.ok){token="";say($("#cmsg"),"That token didn't work for this repository"+(r?" (GitHub said "+r.status+")":"")+". Check the repository and the Actions permission.","err");return}
+    store.set("vg:admin-token",v);renderConnect();loadAll();
+  };
+}
+
+/* ---------------------------------------------------------------- new book */
+function wireForm(){
+  const hint=$("#modehint");
+  document.querySelectorAll('input[name=mode]').forEach(r=>r.addEventListener("change",()=>{
+    hint.textContent=r.value==="dry"&&r.checked?"A dry run takes a couple of minutes and costs nothing. It checks the whole pipeline with filler content; the draft can't be published.":
+      r.checked?"A full book can take an hour or more. You can close this page; the work runs on GitHub.":hint.textContent}));
+  $("#form").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const mode=document.querySelector('input[name=mode]:checked').value;
+    const title=$("#title").value.trim(), n=Math.min(12,Math.max(1,parseInt($("#lessons").value,10)||10));
+    if(!title)return;
+    if(mode==="real"&&!confirm('Create "'+title+'" with '+n+' lessons?\n\nThis uses your Claude and ElevenLabs credits.'))return;
+    const btn=$("#go");btn.disabled=true;
+    try{
+      await dispatch("create-book.yml",{title:title,author:$("#author").value.trim(),lessons:String(n),notes:$("#notes").value.trim(),mode:mode});
+      say($("#formmsg"),'Started "'+title+'"'+(mode==="dry"?" (dry run)":"")+". It appears under Activity in a few seconds.","good");
+      $("#form").reset();setTimeout(loadRuns,4000);
+    }catch(err){say($("#formmsg"),err.message,"err")}
+    btn.disabled=false;
+  });
+}
+
+/* ---------------------------------------------------------------- drafts */
+async function fetchJson(urls){
+  for(const u of urls){try{const r=await fetch(u+(u.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});if(r.ok)return await r.json()}catch(e){}}
+  return null;
+}
+const SB={ready:["ok","Ready to review"],working:["run","Working"],planning:["run","Planning"],failed:["bad","Failed"],needs_source:["warn","Needs source notes"]};
+async function loadDrafts(){
+  const el=$("#draftlist");
+  const j=await fetchJson([RAW+"drafts/index.json","../drafts/index.json"]);
+  const list=j&&j.drafts||[];
+  if(!list.length){el.innerHTML='<p class="empty">No drafts. Create a book above and it will appear here when it is ready for review.</p>';return}
+  el.innerHTML=list.map(d=>{
+    const sb=SB[d.status]||["", d.status];
+    const can=d.status==="ready"&&!d.dry;
+    return '<div class="item"><div class="t">'+esc(d.title)+' <span class="badge '+sb[0]+'">'+esc(sb[1])+'</span>'+(d.dry?' <span class="badge">Dry run</span>':"")+'</div>'+
+      '<div class="m">'+(d.author?esc(d.author)+" · ":"")+d.lessons+" of "+d.planned+" lessons built · est. cost $"+Number(d.cost_usd||0).toFixed(2)+" · updated "+esc(ago(d.updated))+'</div>'+
+      (d.message?'<div class="msg '+(d.status==="failed"?"err":"")+'">'+esc(d.message)+'</div>':"")+
+      (d.flagged?'<div class="flag">'+d.flagged+' lesson'+(d.flagged>1?"s have":" has")+' automatic-check notes: look closely at the preview.</div>':"")+
+      '<div class="btns" style="margin-top:8px">'+
+        (d.lessons?'<a class="btn sm" href="../#/preview/'+encodeURIComponent(d.slug)+'" target="_blank" rel="noopener">Preview</a>':"")+
+        (can?'<button class="btn sm primary" data-act="approve" data-slug="'+esc(d.slug)+'" data-title="'+esc(d.title)+'">Approve &amp; publish</button>':"")+
+        (d.status==="failed"?'<button class="btn sm" data-act="resume" data-slug="'+esc(d.slug)+'" data-title="'+esc(d.input_title||d.title)+'" data-n="'+d.planned+'" data-dry="'+(d.dry?1:0)+'">Resume</button>':"")+
+        '<button class="btn sm danger" data-act="reject" data-slug="'+esc(d.slug)+'" data-title="'+esc(d.title)+'">Reject</button>'+
+      '</div></div>';
+  }).join("");
+  el.querySelectorAll("button[data-act]").forEach(b=>b.onclick=()=>draftAction(b));
+}
+async function draftAction(b){
+  const act=b.dataset.act, slug=b.dataset.slug, title=b.dataset.title;
+  try{
+    if(act==="approve"){
+      if(!confirm('Publish "'+title+'" to the public library?'))return;
+      b.disabled=true;await dispatch("review-book.yml",{slug:slug,action:"approve"});
+    }else if(act==="reject"){
+      if(!confirm('Reject and delete the draft "'+title+'"?'))return;
+      b.disabled=true;await dispatch("review-book.yml",{slug:slug,action:"reject"});
+    }else{
+      b.disabled=true;await dispatch("create-book.yml",{title:title,author:"",lessons:b.dataset.n,notes:"",mode:b.dataset.dry==="1"?"dry":"real"});
+    }
+    setTimeout(loadRuns,4000);
+    b.textContent=act==="resume"?"Resuming…":"Started…";
+  }catch(err){alert(err.message);b.disabled=false}
+}
+
+/* ---------------------------------------------------------------- activity */
+const RB=r=>r.status==="completed"?(r.conclusion==="success"?["ok","Done"]:r.conclusion==="cancelled"?["","Cancelled"]:["bad","Failed"]):r.status==="in_progress"?["run","Running"]:["run","Queued"];
+async function loadRuns(){
+  const el=$("#runlist");
+  try{
+    const r=await gh("/actions/runs?per_page=30&event=workflow_dispatch");
+    if(!r.ok)throw new Error(r.status);
+    const runs=(await r.json()).workflow_runs.filter(x=>/^(Create|Review) book/.test(x.name||"")).slice(0,8);
+    if(!runs.length){el.innerHTML='<p class="empty">Nothing has run yet.</p>'}
+    else el.innerHTML=runs.map(x=>{const b=RB(x);return '<div class="item"><div class="t">'+esc(x.display_title||x.name)+' <span class="badge '+b[0]+'">'+b[1]+'</span></div>'+
+      '<div class="m">Started '+esc(ago(x.created_at))+' · <a href="'+esc(x.html_url)+'" target="_blank" rel="noopener">View log on GitHub</a></div></div>'}).join("");
+    const live=runs.some(x=>x.status!=="completed");
+    clearTimeout(timer);timer=setTimeout(()=>{loadRuns();loadDrafts()},live?20000:90000);
+  }catch(e){el.innerHTML='<p class="empty">Could not load activity.</p>'}
+}
+
+/* ---------------------------------------------------------------- published */
+async function loadPublished(){
+  const j=await fetchJson(["../books.json"]);
+  const rows=(j&&j.books||[]).filter(b=>b.lessons&&b.lessons.length);
+  $("#publist").innerHTML=rows.length?rows.map(b=>'<div class="item"><div class="t"><a href="../#/'+esc(b.id)+'" style="text-decoration:none">'+esc(b.title)+'</a></div><div class="m">'+esc(b.author)+" · "+b.lessons.length+" lessons</div></div>").join(""):'<p class="empty">Nothing published yet.</p>';
+}
+
+function loadAll(){loadDrafts();loadRuns();loadPublished()}
+renderConnect();wireForm();
+$("#refresh").onclick=loadAll;
+if(token)loadAll();
+})();
+</script>
+</body>
+</html>

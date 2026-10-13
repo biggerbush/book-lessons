@@ -139,7 +139,10 @@ def git_commit_push(message: str) -> None:
     if _git("diff", "--cached", "--quiet", check=False).returncode == 0:
         return
     _git("commit", "-m", message)
-    for attempt in range(4):
+    import random, time
+    for attempt in range(8):                                    # several books may be pushing at once
+        if attempt:
+            time.sleep(random.uniform(2, 8))
         _git("pull", "--rebase", "origin", "main", check=False)
         r = _git("push", "origin", "HEAD:main", check=False)
         if r.returncode == 0:

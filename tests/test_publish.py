@@ -5,6 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tests"))
+import _sandbox  # noqa: F401  (redirects all engine paths to a temp copy)
 import test_engine_fake as T
 from engine import config, mock, publish, run_book, tts
 from engine.brain import RealBrain

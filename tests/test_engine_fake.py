@@ -7,6 +7,8 @@ import json, shutil, sys
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tests"))
+import _sandbox  # noqa: F401  (redirects all engine paths to a temp copy)
 from engine import config, mock, publish, run_book, timing, tts
 from engine.brain import RealBrain
 from engine.llm import new_usage

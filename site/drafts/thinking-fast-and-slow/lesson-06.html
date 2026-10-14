@@ -1,0 +1,292 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thinking, Fast and Slow Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Thinking, Fast and Slow: We remember experiences by their peak moment and their ending, not their total duration, so the self that makes choices is guided by memories that distort what we actually lived through. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THINKING, FAST AND SLOW · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The experiencing and</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">remembering selves.</text>
+<text class="b" x="120" y="600" font-size="32">Why your memories, not your moments, make your decisions.</text>
+<g id="clk"><circle class="s-ink" cx="1300" cy="320" r="110" fill="var(--stage)" stroke-width="8"/><g id="ticks"></g><line id="hh" class="s-ink" x1="1300" y1="320" x2="1300" y2="262" stroke-width="9" stroke-linecap="round"/><line id="mh" class="s-gain" x1="1300" y1="320" x2="1300" y2="236" stroke-width="6" stroke-linecap="round"/><circle class="ink" cx="1300" cy="320" r="10"/></g>
+<g id="t0p"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two selves, one life.</text>
+<text class="b" x="120" y="176" font-size="32">One lives each moment. One looks back and keeps score.</text>
+<g id="pa1"><rect class="s-line" x="120" y="220" width="620" height="560" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="268" font-size="22">EXPERIENCING SELF</text><text class="m" x="150" y="750" font-size="20">LIVES EVERY MOMENT AS IT HAPPENS</text></g>
+<g id="pb1"><rect class="s-line" x="860" y="220" width="620" height="560" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="890" y="268" font-size="22" style="fill:var(--gain)">REMEMBERING SELF</text><text class="m" x="890" y="750" font-size="20">LOOKS BACK AND KEEPS SCORE</text></g>
+<path id="spl" class="s-ink" d="M800 220V780" stroke-width="5" stroke-dasharray="12 12"/>
+<g id="bb0"><path class="s-ink" d="M428 372L378 396" stroke-width="5" stroke-linecap="round"/><rect class="s-ink" x="420" y="320" width="160" height="70" rx="35" fill="var(--stage)" stroke-width="5"/><text class="d" x="500" y="367" font-size="32" text-anchor="middle" style="fill:var(--gain)">GOOD</text></g>
+<g id="bb1"><path class="s-ink" d="M1188 372L1138 396" stroke-width="5" stroke-linecap="round"/><rect class="s-ink" x="1180" y="320" width="160" height="70" rx="35" fill="var(--stage)" stroke-width="5"/><text class="d" x="1260" y="367" font-size="32" text-anchor="middle" style="fill:var(--loss)">BAD</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The colonoscopy study.</text>
+<text class="b" x="120" y="176" font-size="32">Patients rated their pain every minute.</text>
+<g id="la"><text class="d" x="130" y="400" font-size="56">A</text><text class="m" x="130" y="444" font-size="22">8 MIN</text><path class="s-line" d="M250 422H1460" stroke-width="4"/></g>
+<g id="ba"></g>
+<g id="lb"><text class="d" x="130" y="680" font-size="56">B</text><text class="m" x="130" y="724" font-size="22">24 MIN</text><path class="s-line" d="M250 702H1460" stroke-width="4"/></g>
+<g id="bb"></g>
+<g id="tot"><text class="m" x="260" y="780" font-size="24" style="fill:var(--loss)">B: MORE TOTAL PAIN</text></g>
+<g id="rem"><path class="s-loss" d="M666 300h80m-18-16 18 16-18 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-loss" x="760" y="260" width="520" height="80" rx="40" fill="var(--stage)" stroke-width="5"/><text class="m" x="1020" y="309" font-size="26" text-anchor="middle" style="fill:var(--loss)">A: REMEMBERED AS WORSE</text><text class="m" x="790" y="384" font-size="20">IT ENDED AT A PAINFUL MOMENT</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Memory keeps two moments.</text>
+<text class="b" x="120" y="176" font-size="32">It does not add up every minute.</text>
+<path class="s-line" d="M200 720H1300" stroke-width="4"/>
+<text class="m" x="1300" y="756" font-size="20" text-anchor="end">TIME</text>
+<path id="pf" class="loss" opacity="0"/>
+<path id="pc" class="s-ink" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="pk"><circle class="loss" cx="500" cy="337" r="16"/><text class="m" x="500" y="308" font-size="22" text-anchor="middle" style="fill:var(--loss)">PEAK</text></g>
+<g id="eng"><circle id="en" class="ink" cx="1300" cy="450" r="16"/><text id="enl" class="m" x="1300" y="420" font-size="22" text-anchor="middle">END</text></g>
+<g id="mem3"><line id="ml" class="s-gain" x1="200" x2="1300" stroke-width="5" stroke-dasharray="14 10"/><text id="mlt" class="m" x="1320" font-size="22" style="fill:var(--gain)">MEMORY</text></g>
+<g id="frm"><text class="m" x="124" y="774" font-size="24" style="fill:var(--gain)">THE PEAK-END RULE</text><text class="d" x="120" y="834" font-size="48">Memory ≈ (peak + end) ÷ 2</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Length barely mattered.</text>
+<text class="b" x="120" y="176" font-size="32">Many extra minutes of pain, almost the same memory.</text>
+<g id="sw4"><rect class="ink" x="310" y="298" width="40" height="30" rx="6"/><circle class="s-ink" cx="330" cy="480" r="150" fill="var(--stage)" stroke-width="10"/><g id="swt"></g><line id="swh" class="s-loss" x1="330" y1="480" x2="330" y2="362" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="330" cy="480" r="12"/></g>
+<g id="bars4"><text class="m" x="620" y="340" font-size="22">LENGTH OF THE EXPERIENCE</text><rect id="db" class="loss" x="620" y="360" width="200" height="60" rx="8"/><text class="m" x="620" y="540" font-size="22">HOW BAD IT WAS REMEMBERED</text><rect id="mb" class="loss" x="620" y="560" width="380" height="60" rx="8"/></g>
+<g id="lx"><text class="m" x="620" y="460" font-size="20">+ MANY EXTRA MINUTES</text></g>
+<g id="lm"><text class="m" x="1040" y="600" font-size="22">BARELY MOVES</text></g>
+<g id="dn"><text class="d" x="620" y="770" font-size="64">Duration neglect.</text><text class="m" x="620" y="820" font-size="22" style="fill:var(--gain)">THE LENGTH IS ALMOST IGNORED</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The cold water test.</text>
+<text class="b" x="120" y="176" font-size="32">Two trials. Which one would you repeat?</text>
+<g id="cw0"><rect class="s-line" x="120" y="220" width="620" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="262" font-size="22">TRIAL 1</text></g>
+<g id="cw1"><rect id="cwr" x="860" y="220" width="620" height="520" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="3"/><text class="m" x="890" y="262" font-size="22">TRIAL 2</text></g>
+<g id="t1a"><rect class="loss" x="150" y="610" width="360" height="30" rx="6"/><text class="m" x="150" y="680" font-size="20">60 SECONDS</text></g>
+<g id="t2a"><rect class="loss" x="890" y="610" width="360" height="30" rx="6"/><text class="m" x="890" y="680" font-size="20">60 SECONDS</text></g>
+<g id="t2b"><rect class="loss" x="1250" y="610" width="180" height="30" rx="6" fill-opacity=".45"/><text class="m" x="1256" y="680" font-size="20">+30 WARMER</text></g>
+<g id="wrs"><text class="d" x="120" y="800" font-size="40">Same pain, plus extra: strictly worse.</text></g>
+<g id="chs"><circle class="gain" cx="1424" cy="264" r="26"/><path d="M1411 264l9 9 17-18" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="120" y="850" font-size="24" style="fill:var(--gain)">YET MOST PEOPLE CHOSE TO REPEAT THE LONGER ONE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A spoiled ending.</text>
+<text class="b" x="120" y="176" font-size="32">A long symphony recording, and one screech near the end.</text>
+<g id="lis"><path class="s-ink" d="M158 384a32 32 0 0 1 64 0" fill="none" stroke-width="7" stroke-linecap="round"/></g>
+<g id="wave6"></g>
+<g id="scr"><path class="s-loss" d="M1340 380l12-70 12 130 12-110 12 90 12-120 12 100 12-60 12 40" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><text class="m" x="1392" y="522" font-size="22" text-anchor="middle" style="fill:var(--loss)">SCREECH</text></g>
+<g id="brk"><path class="s-gain" d="M300 498v16h1020v-16" fill="none" stroke-width="5" stroke-linejoin="round"/><text class="m" x="300" y="560" font-size="22" style="fill:var(--gain)">WONDERFUL FOR MOST OF THE TIME</text></g>
+<g id="rw0"><text class="m" x="120" y="680" font-size="22">EXPERIENCE</text><rect class="gain" x="400" y="650" width="940" height="44" rx="6"/><rect class="loss" x="1340" y="650" width="100" height="44" rx="6"/></g>
+<g id="rw1"><text class="m" x="120" y="770" font-size="22">MEMORY</text><rect class="gain" x="400" y="740" width="1040" height="44" rx="6"/><rect id="spo" class="loss" x="1440" y="740" width="0" height="44" rx="6"/></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Who makes the choices?</text>
+<text class="b" x="120" y="176" font-size="32">The remembering self decides, based on stories.</text>
+<g id="dsk"><g id="dskp"></g><rect class="ink" x="200" y="560" width="520" height="22" rx="4"/><rect class="ink" x="230" y="582" width="18" height="160"/><rect class="ink" x="672" y="582" width="18" height="160"/><text class="m" x="200" y="790" font-size="22" style="fill:var(--gain)">THE REMEMBERING SELF</text></g>
+<g id="cd0"><rect class="s-ink" x="200" y="230" width="240" height="64" rx="12" fill="var(--stage)" stroke-width="4"/><text class="m" x="320" y="270" font-size="22" text-anchor="middle">NEXT HOLIDAY</text></g>
+<g id="cd1"><rect class="s-ink" x="480" y="230" width="240" height="64" rx="12" fill="var(--stage)" stroke-width="4"/><text class="m" x="600" y="270" font-size="22" text-anchor="middle">NEXT DOCTOR</text></g>
+<g id="qt"><rect class="s-gain" x="820" y="230" width="660" height="290" rx="18" fill="var(--stage)" stroke-width="6"/><text class="d" x="860" y="350" font-size="56">“I am my</text><text class="d" x="860" y="420" font-size="56" style="fill:var(--gain)">remembering self.”</text><text class="m" x="860" y="482" font-size="20">DANIEL KAHNEMAN</text></g>
+<g id="strg" opacity=".45"></g>
+<g id="strl"><text class="m" x="960" y="640" font-size="22">THE EXPERIENCING SELF</text><text class="m" x="960" y="676" font-size="20">LIVES THE HOURS, GETS LITTLE SAY</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Am I choosing for the</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">memory, or for the</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">moments?</text></g>
+<path id="gc" class="s-ink" d="M1080 700C1160 560 1240 600 1300 640S1420 740 1460 750" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<circle id="gdot" class="gain" cx="1460" cy="750" r="16"/>
+<g id="gnd"><text class="m" x="143" y="700" font-size="26">GIVE GOOD EXPERIENCES A GENTLE ENDING</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Experiencing and Remembering Selves&rdquo;, from <em>Thinking, Fast and Slow</em> by Daniel Kahneman. The colonoscopy study, the cold water experiment and the symphony story are as reported in the book. Pain graphs, timelines and scenes are illustrations, not actual data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 5.1], [5.1, 21.9], [21.9, 42.7], [42.7, 56.4], [56.4, 67.4], [67.4, 88.7], [88.7, 105.1], [105.1, 122.5], [122.5, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Two Ways to Live", "Two Selves", "The Colonoscopy Study", "The Peak and the End", "Duration Neglect", "The Cold Water Test", "A Spoiled Ending", "Who Makes Choices", "Your Challenge"];
+const TM={"hook_clock": 0.0, "self_now": 5.36, "self_memory": 11.36, "split_line": 17.28, "patient_a": 22.16, "patient_b": 28.4, "pain_graph": 33.76, "peak_spike": 43.04, "end_marker": 50.8, "stopwatch": 56.72, "faded_bar": 64.4, "cold_bowl": 67.68, "longer_trial": 73.44, "choice_arrow": 84.72, "concert_hall": 89.04, "scratch_mark": 92.96, "decision_desk": 105.36, "quote_card": 113.52, "stranger": 117.52};
+const man=(g,x,y,r,c)=>{const e=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:c},e);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+r*1.5+' '+r*1.5+' 0 0 1 '+r*3+' 0v'+r*1.3+'z',class:c},e);return e};
+const lab=(g,x,y,s,st)=>{const e=mk('text',{x:x,y:y,'font-size':20,class:'m','text-anchor':'middle'},g);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const dial=(g,cx,cy,r1,r2)=>{for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('line',{x1:cx+r1*Math.sin(a),y1:cy-r1*Math.cos(a),x2:cx+r2*Math.sin(a),y2:cy-r2*Math.cos(a),class:'s-ink','stroke-width':5,'stroke-linecap':'round'},g)}};
+dial($('ticks'),1300,320,88,100);dial($('swt'),330,480,118,136);
+const t0a=man($('t0p'),1230,500,24,'ink'),t0b=man($('t0p'),1370,500,24,'gain');
+lab(t0a,1230,640,'LIVES');lab(t0b,1370,640,'DECIDES','fill:var(--gain)');
+man($('pa1'),330,400,36,'ink');man($('pb1'),1090,400,36,'gain');
+const FL=[];for(let i=0;i<5;i++){FL.push(mk('rect',{x:160+i*112,y:610,width:96,height:72,rx:8,stroke:'var(--ink)','stroke-width':4},$('pa1')));const k=i===2||i===4;mk('rect',{x:900+i*112,y:610,width:96,height:72,rx:8,fill:k?'var(--gain)':'none',stroke:k?'var(--gain)':'var(--line)','stroke-width':4,'stroke-dasharray':k?'none':'8 8'},$('pb1'))}
+const PA=[2,3,5,6,5,7,8,8],PB=[2,3,5,6,5,7,8,7,6,7,5,6,5,4,5,4,3,3,2,2,1,1,1,1];
+const bars=(A,g,y0)=>A.map((v,i)=>mk('rect',{x:260+i*50,y:y0-v*18,width:40,height:v*18,rx:4,class:'ink'},$(g)));
+const BA=bars(PA,'ba',420),BB=bars(PB,'bb',700);
+// bowls: cold water = light indigo tint; trial 2 warms to a pale amber tint
+const HD=[];let WM;[0,1].forEach(k=>{const g=$('cw'+k),d=k*740,w=`M${262+d} 460h336l-29 108h-278z`;
+  HD.push(mk('rect',{x:398+d,y:240,width:64,height:200,rx:32,class:'ink'},g));
+  mk('path',{d:w,fill:'var(--loss)','fill-opacity':.2},g);
+  if(k){WM=mk('g',{opacity:0},g);mk('path',{d:w,fill:'var(--stage)','fill-opacity':.85},WM);mk('path',{d:w,fill:'var(--gain)','fill-opacity':.3},WM)}
+  mk('path',{d:`M${250+d} 420h360l-40 150h-280z`,class:'s-ink',fill:'none','stroke-width':6,'stroke-linejoin':'round'},g)});
+man($('lis'),190,380,28,'ink');
+const WV=[];for(let i=0;i<52;i++)WV.push(mk('line',{x1:300+i*20,x2:300+i*20,class:'s-gain','stroke-width':8,'stroke-linecap':'round'},$('wave6')));
+man($('dskp'),460,400,40,'gain');man($('strg'),900,600,24,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+$('hh').setAttribute('transform',`rotate(${(t*8).toFixed(1)} 1300 320)`);$('mh').setAttribute('transform',`rotate(${(t*96).toFixed(1)} 1300 320)`);
+R('clk',TM.hook_clock,.6);rise(t0a,p(u,TM.hook_clock+1.5,TM.hook_clock+2));rise(t0b,p(u,TM.hook_clock+3,TM.hook_clock+3.5));
+
+R('pa1',TM.self_now);R('pb1',TM.self_memory);
+const nf=Math.floor(t*1.2)%5;FL.forEach((f,i)=>f.setAttribute('fill',i===nf?'var(--gain)':'var(--stage)'));
+$('spl').setAttribute('opacity',p(u,TM.split_line,TM.split_line+.5));R('bb0',TM.split_line+.8);R('bb1',TM.split_line+1.4);
+
+R('la',TM.patient_a);R('lb',TM.patient_b);
+BA.forEach((b,i)=>{const a=TM.patient_a+1+i*.25;b.setAttribute('opacity',p(u,a,a+.3));b.setAttribute('class',i===7&&u>=TM.pain_graph+3.4?'loss':'ink')});
+BB.forEach((b,i)=>{const a=TM.patient_b+.8+i*.1;b.setAttribute('opacity',p(u,a,a+.3));b.setAttribute('class',u>=TM.pain_graph?'loss':'ink')});
+R('tot',TM.pain_graph);R('rem',TM.pain_graph+3.4);
+
+const ev=6-4*p(u,TM.end_marker+3,TM.end_marker+4.5),V=[1,3,5,8.5,6,5,4.5,5,4,4,ev,ev];
+let pd='';V.forEach((v,i)=>pd+=(i?'L':'M')+(200+i*100)+' '+(720-45*v).toFixed(1));
+$('pc').setAttribute('d',pd);$('pc').setAttribute('stroke-dashoffset',1-p(u,TM.peak_spike,TM.peak_spike+2));
+$('pf').setAttribute('d',pd+'L1300 720L200 720Z');$('pf').setAttribute('opacity',.25*p(u,TM.peak_spike+.5,TM.peak_spike+1.5)*(1-p(u,TM.peak_spike+3,TM.peak_spike+4)));
+const ey=720-45*ev,my=720-45*(8.5+ev)/2;
+$('en').setAttribute('cy',ey.toFixed(1));$('enl').setAttribute('y',(ey-30).toFixed(1));
+$('ml').setAttribute('y1',my.toFixed(1));$('ml').setAttribute('y2',my.toFixed(1));$('mlt').setAttribute('y',(my+8).toFixed(1));
+R('pk',TM.peak_spike+3);R('eng',TM.peak_spike+4);R('mem3',TM.end_marker);R('frm',TM.end_marker+.4);
+
+R('sw4',TM.stopwatch);R('bars4',TM.stopwatch+.3);
+$('swh').setAttribute('transform',`rotate(${(1080*p(u,TM.stopwatch,TM.stopwatch+8)).toFixed(1)} 330 480)`);
+const gr=p(u,TM.stopwatch+.5,TM.stopwatch+6);$('db').setAttribute('width',(200+640*gr).toFixed(1));$('mb').setAttribute('width',(380+24*gr).toFixed(1));
+R('lx',TM.stopwatch+3.7);R('lm',TM.stopwatch+5);$('db').setAttribute('opacity',1-.7*p(u,TM.faded_bar,TM.faded_bar+1));R('dn',TM.faded_bar);
+
+R('cw0',TM.cold_bowl);R('cw1',TM.longer_trial);
+HD[0].setAttribute('transform',`translate(0 ${(90*p(u,TM.cold_bowl+.6,TM.cold_bowl+1.6)).toFixed(1)})`);
+HD[1].setAttribute('transform',`translate(0 ${(90*p(u,TM.longer_trial+.6,TM.longer_trial+1.6)).toFixed(1)})`);
+WM.setAttribute('opacity',p(u,TM.longer_trial+3,TM.longer_trial+6).toFixed(3));
+R('t1a',TM.cold_bowl+3);R('t2a',TM.longer_trial+2);R('t2b',TM.longer_trial+4);R('wrs',TM.longer_trial+7.4);
+R('chs',TM.choice_arrow);const ch=u>=TM.choice_arrow;$('cwr').setAttribute('stroke',ch?'var(--gain)':'var(--line)');$('cwr').setAttribute('stroke-width',ch?6:3);
+
+R('lis',TM.concert_hall);
+WV.forEach((l,i)=>{const h=(20+50*Math.abs(Math.sin(i*.9)))*(.75+.25*Math.sin(t*4+i)),a=TM.concert_hall+i*.06;l.setAttribute('y1',(380-h).toFixed(1));l.setAttribute('y2',(380+h).toFixed(1));l.setAttribute('opacity',p(u,a,a+.2))});
+R('scr',TM.scratch_mark);R('brk',TM.scratch_mark+5.4);R('rw0',TM.scratch_mark+5.4);R('rw1',TM.scratch_mark+9.6);
+const sp=1040*p(u,TM.scratch_mark+10.2,TM.scratch_mark+12);$('spo').setAttribute('width',sp.toFixed(1));$('spo').setAttribute('x',(1440-sp).toFixed(1));
+
+R('dsk',TM.decision_desk);R('cd0',TM.decision_desk+4.2);R('cd1',TM.decision_desk+4.8);R('qt',TM.quote_card);
+$('strg').setAttribute('opacity',.45*p(u,TM.stranger,TM.stranger+.6));R('strl',TM.stranger+.4);
+
+const q0=SC[8][0]/K;R('qa',q0+.3);R('qb',q0+.8);R('qc',q0+1.3);
+$('gc').setAttribute('stroke-dashoffset',1-p(u,q0+6.5,q0+8));R('gnd',q0+6.5);R('gdot',q0+7.8);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.21;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

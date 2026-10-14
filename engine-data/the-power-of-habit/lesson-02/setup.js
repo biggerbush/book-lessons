@@ -1,0 +1,23 @@
+const rat=par=>{const g=mk('g',{},par);mk('path',{d:'M0 22q8 30-14 48',fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round'},g);mk('ellipse',{cx:0,cy:0,rx:16,ry:26,class:'ink'},g);[[-10,-38,6],[10,-38,6],[0,-28,12]].forEach(c=>mk('circle',{cx:c[0],cy:c[1],r:c[2],class:'ink'},g));return g};
+const put=(g,x,y,r)=>g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+(r||0).toFixed(1)+')');
+const choc=(par,x,y)=>{const g=mk('g',{},par);mk('rect',{x:x-28,y:y-20,width:56,height:40,rx:5,class:'gain'},g);mk('path',{d:'M'+x+' '+(y-20)+'v40M'+(x-28)+' '+y+'h56',stroke:'var(--on-gain)','stroke-width':3},g);return g};
+const maze=par=>mk('path',{d:'M300 300H1100V400H750V780H650V400H300Z',class:'s-ink',fill:'var(--stage)','stroke-width':8,'stroke-linejoin':'round'},par);
+const brain=(par,cx,cy,s)=>{const g=mk('g',{transform:'translate('+cx+' '+cy+') scale('+s+') translate(-1325 -385)'},par);mk('path',{d:'M1210 420c-30-10-30-60 0-70c0-40 50-60 80-40c20-30 80-30 100 0c40-10 70 30 50 60c30 20 20 70-20 70c-10 30-60 40-80 20c-30 20-80 10-90-20c-30 0-50-10-40-20z',class:'s-ink',fill:'var(--stage)','stroke-width':7,'stroke-linejoin':'round'},g);mk('path',{d:'M1325 330v110M1260 360q30 20 0 50M1390 360q-30 20 0 50',class:'s-ink',fill:'none','stroke-width':6,'stroke-linecap':'round'},g);return g};
+brain($('br0'),1325,385,.8);
+const D0=['ink','ink','gain'].map(c=>mk('circle',{r:16,class:c},$('dots0')));
+maze($('mz1'));const R1=rat($('rt1'));put(R1,700,720);choc($('ch1'),360,350);
+[2,3].forEach(i=>{maze($('mz'+i));choc($('ch'+i),360,350)});
+const R2=rat($('rt2')),R3=rat($('rt3'));
+const mp=P=>{const L=[0];for(let i=1;i<P.length;i++)L.push(L[i-1]+Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]));return{P,L,T:L[L.length-1]}};
+const at=(o,k)=>{const d=k*o.T;let i=1;while(i<o.P.length-1&&o.L[i]<d)i++;const a=o.P[i-1],b=o.P[i],f=cl((d-o.L[i-1])/((o.L[i]-o.L[i-1])||1));const x=a[0]+(b[0]-a[0])*f,y=a[1]+(b[1]-a[1])*f;let s='';for(let j=0;j<i;j++)s+=o.P[j]+' ';return{x,y,r:Math.atan2(b[1]-a[1],b[0]-a[0])*57.3+90,s:s+x.toFixed(1)+','+y.toFixed(1)}};
+const W2=mp([[700,720],[680,640],[720,560],[675,480],[715,420],[800,360],[950,340],[1050,370],[980,350],[850,330],[700,370],[560,340],[440,360],[390,350]]),W3=mp([[700,720],[700,350],[390,350]]);
+const ny=i=>340+28*Math.sin(i*1.3)+18*Math.sin(i*2.9+1);
+const line=(k,f)=>{let s='';for(let x=840;x<=840+620*k;x+=6)s+=x+','+f(x).toFixed(1)+' ';return s};
+$('gh3').setAttribute('points',line(1,x=>ny(x/6)));
+const ST=[];for(let i=0;i<6;i++){const g=mk('g',{},$('st4'));const r=mk('rect',{y:260,width:120,height:100,rx:14,class:'s-ink',fill:'var(--stage)','stroke-width':5},g);const tx=mk('text',{y:326,'font-size':40,'text-anchor':'middle',class:'d'},g);tx.textContent=i+1;ST.push([g,r,tx])}
+brain($('br4'),440,640,1.4);brain($('br5'),800,520,.55);
+[210,330,90].forEach(a=>{const r=a*Math.PI/180;mk('path',{d:'M-16 -14L16 0L-16 14Z',class:'ink',transform:'translate('+(800+230*Math.cos(r)).toFixed(1)+' '+(520+230*Math.sin(r)).toFixed(1)+') rotate('+(a+90)+')'},$('ah5'))});
+const C7=[['CUE',['Boredom, or','a buzz']],['ROUTINE',['Scrolling']],['REWARD',['Novelty or','connection']]].map((c,i)=>{const x=480+i*340,g=mk('g',{},$('cd7'));mk('rect',{x:x,y:300,width:300,height:260,rx:18,fill:'var(--stage)',stroke:i==2?'var(--gain)':'var(--ink)','stroke-width':5},g);const l=mk('text',{x:x+30,y:345,'font-size':22,class:'m'},g);l.textContent=c[0];c[1].forEach((s,j)=>{const tx=mk('text',{x:x+30,y:500+j*38,'font-size':32,class:'d5'},g);tx.textContent=s});if(i<2)mk('path',{d:'M'+(x+306)+' 430h28m-10-10 10 10-10 10',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+mk('rect',{x:615,y:380,width:30,height:56,rx:6,class:'s-ink',fill:'none','stroke-width':4},C7[0]);mk('path',{d:'M600 395q-10 13 0 26M660 395q10 13 0 26',class:'s-loss',fill:'none','stroke-width':4,'stroke-linecap':'round'},C7[0]);
+const SB=[0,1,2].map(()=>mk('rect',{x:920,y:380,width:100,height:12,rx:6,class:'ink'},C7[1]));
+mk('circle',{cx:1310,cy:410,r:34,class:'gain'},C7[2]);[1298,1322].forEach(x=>mk('circle',{cx:x,cy:400,r:4,fill:'var(--on-gain)'},C7[2]));mk('path',{d:'M1294 418q16 14 32 0',fill:'none',stroke:'var(--on-gain)','stroke-width':4,'stroke-linecap':'round'},C7[2]);

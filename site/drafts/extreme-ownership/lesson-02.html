@@ -1,0 +1,331 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Extreme Ownership Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Extreme Ownership: In SEAL training, swapping the leaders of the best and worst boat crews flipped the results, proving that leadership determines a team&#x27;s performance. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">EXTREME OWNERSHIP · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">No bad teams,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">only bad leaders.</text>
+<text class="b" x="120" y="600" font-size="32">Same team, new leader, completely different results.</text>
+<g id="tcrew"><g id="tb0"></g><g id="tb1"></g></g>
+<g id="tlab"><text class="m" x="1080" y="300" font-size="20" style="fill:var(--gain)">KEEPS WINNING</text><text class="m" x="1080" y="490" font-size="20" style="fill:var(--loss)">KEEPS LOSING</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hell Week.</text>
+<text class="b" x="120" y="176" font-size="32">SEAL training, on a cold beach.</text>
+<g id="beachg"><rect x="120" y="690" width="1360" height="60" fill="var(--line)"/><path id="sea" class="loss" fill-opacity=".2"/></g>
+<g id="c7lab"><text class="m" x="180" y="500" font-size="22">ONE BOAT CREW · ABOUT SEVEN MEN</text></g>
+<g id="march"><g id="crew1"></g><g id="hboat"><rect class="ink" x="180" y="545" width="530" height="36" rx="18"/><text class="m" x="445" y="570" font-size="18" text-anchor="middle" style="fill:var(--stage)">HEAVY RUBBER BOAT</text></g></g>
+<g id="rankg"><text class="m" x="1000" y="220" font-size="22">EVERY RACE RANKED</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Best crew, worst crew.</text>
+<text class="b" x="120" y="176" font-size="32">Finishing place, race after race (illustration).</text>
+<path class="s-line" d="M260 250V640H1000" fill="none" stroke-width="4"/>
+<text class="m" x="120" y="300" font-size="20">FIRST</text><text class="m" x="120" y="610" font-size="20">LAST</text>
+<text class="m" x="1000" y="680" font-size="20" text-anchor="end">RACE AFTER RACE</text>
+<polyline id="l2" class="s-gain" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline id="l6" class="s-loss" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="lab2"><text class="d5" x="300" y="250" font-size="30" style="fill:var(--gain)">Boat Crew Two</text></g>
+<g id="lab6"><text class="d5" x="300" y="540" font-size="30" style="fill:var(--loss)">Boat Crew Six</text></g>
+<g id="rest"><rect class="s-line" x="1080" y="240" width="400" height="400" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1110" y="290" font-size="22">WINNERS EARN A REST</text>
+<text id="zz" class="d" x="1240" y="410" font-size="40" style="fill:var(--gain)">z z z</text>
+<circle class="gain" cx="1180" cy="455" r="22"/><rect class="gain" x="1210" y="445" width="190" height="35" rx="17"/>
+<rect class="ink" x="1140" y="480" width="280" height="24" rx="6"/>
+<path class="s-ink" d="M1150 504v50M1410 504v50" stroke-width="8" stroke-linecap="round"/>
+<text class="d5" x="1110" y="610" font-size="36">A short rest.</text></g>
+<g id="hurt"><text class="d" x="120" y="800" font-size="48">So losing hurt even more.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two leaders.</text>
+<text class="b" x="120" y="176" font-size="32">Same training, very different attitudes.</text>
+<g id="ld2"><rect class="s-line" x="120" y="230" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">CREW TWO’S LEADER</text>
+<path class="s-gain" d="M200 580H660M640 564l20 16-20 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-ink" d="M690 600V310" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M690 310l50 22-50 22z"/>
+<g id="ld2f"></g>
+<text class="d5" x="150" y="690" font-size="36">Works with his men.</text></g>
+<g id="ld6"><rect class="s-line" x="840" y="230" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="280" font-size="22">CREW SIX’S LEADER</text>
+<g id="blame"></g><g id="ld6f"></g>
+<text class="d5" x="870" y="690" font-size="36">Blames his men.</text></g>
+<g id="bub6"><rect x="1240" y="250" width="220" height="60" rx="14" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="1350" y="287" font-size="20" text-anchor="middle" style="fill:var(--loss)">“A BAD CREW.”</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The swap.</text>
+<text class="b" x="120" y="176" font-size="32">Swap the two leaders. Change nothing else.</text>
+<g id="sw0"></g><g id="sw1"></g>
+<text class="m" x="420" y="690" font-size="20" text-anchor="middle">BOAT CREW TWO</text>
+<text class="m" x="1180" y="690" font-size="20" text-anchor="middle">BOAT CREW SIX</text>
+<g id="inst"><text class="m" x="800" y="700" font-size="20" text-anchor="middle">INSTRUCTORS</text></g>
+<g id="arrs"><path class="s-muted" d="M440 320Q800 120 1160 320M1128 296l32 24-40 6M1140 360H460M482 342l-22 18 22 18" fill="none" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/></g>
+<g id="lds"></g>
+<g id="same"><text class="d" x="120" y="780" font-size="44">Same men, same boats, same brutal races.</text></g>
+<g id="stay"><text class="m" x="120" y="845" font-size="24" style="fill:var(--loss)">WOULD THE LOSING CREW STAY LOSERS?</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The very next race.</text>
+<text class="b" x="120" y="176" font-size="32">The losing crew came in first.</text>
+<polygon id="spot" class="gain" fill-opacity=".2" points="680,200 740,200 880,760 540,760"/>
+<g id="pod1"><rect class="ink" x="560" y="480" width="300" height="280"/>
+<text class="d" x="710" y="650" font-size="120" text-anchor="middle" style="fill:var(--stage)">1</text>
+<text class="m" x="710" y="725" font-size="22" text-anchor="middle" style="fill:var(--stage)">CREW SIX</text>
+<g id="cr6"></g>
+<g id="cup"><path class="gain" d="M670 270h80v30a40 40 0 0 1-80 0z"/><rect class="gain" x="702" y="336" width="16" height="24"/><rect class="gain" x="685" y="358" width="50" height="12" rx="4"/></g></g>
+<g id="pod2"><rect class="ink" x="260" y="580" width="300" height="180"/>
+<text class="d" x="410" y="700" font-size="96" text-anchor="middle" style="fill:var(--stage)">2</text>
+<text class="m" x="410" y="745" font-size="20" text-anchor="middle" style="fill:var(--stage)">CREW TWO</text>
+<g id="cr2"></g></g>
+<g id="sec2"><text class="m" x="120" y="820" font-size="20">CREW TWO: A CLOSE SECOND. ITS OLD LEADER’S HABITS STAYED.</text></g>
+<g id="same6"><text class="m" x="960" y="360" font-size="22">THE MEN OF CREW SIX</text><text class="d" x="960" y="450" font-size="56">Same people.</text></g>
+<g id="onlyl"><text class="d" x="960" y="540" font-size="56">Only the leader</text><text class="d" x="960" y="610" font-size="56" style="fill:var(--gain)">changed.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Leaders set the standard.</text>
+<text class="b" x="120" y="176" font-size="32">The team lives up to it, or down to it.</text>
+<path class="s-ink" d="M200 260V720M760 260V720M160 720H800" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="ropes"></g><g id="team"></g>
+<g id="sbarg"><rect id="sbar" class="ink" x="200" y="320" width="560" height="16" rx="8"/><text id="sbl" class="m" x="480" y="304" font-size="20" text-anchor="middle">THE STANDARD</text></g>
+<g id="quote"><rect class="s-line" x="880" y="240" width="600" height="260" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="910" y="300" font-size="22">AS THE BOOK PUTS IT</text>
+<text class="d5" x="910" y="380" font-size="40">“It’s not what you preach,</text>
+<text class="d5" x="910" y="440" font-size="40">it’s what you <tspan style="fill:var(--loss)">tolerate</tspan>.”</text></g>
+<g id="lowc"><text class="m" x="880" y="600" font-size="22" style="fill:var(--loss)">ACCEPT POOR PERFORMANCE = NEW NORMAL</text></g>
+<g id="pullc"><text class="m" x="880" y="660" font-size="22" style="fill:var(--gain)">REFUSE TO LOSE = TEAM PULLS TOGETHER</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Raise the bar.</text>
+<text class="b" x="120" y="176" font-size="32">When your team struggles, look at the leader first.</text>
+<g id="mir"><ellipse class="s-ink" cx="300" cy="450" rx="150" ry="200" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M300 650v30M250 680h100" stroke-width="8" stroke-linecap="round"/>
+<g id="mirp"></g>
+<text class="m" x="300" y="720" font-size="20" text-anchor="middle" style="fill:var(--gain)">THAT MAY MEAN YOU</text></g>
+<g id="clip"><rect class="s-ink" x="600" y="290" width="300" height="400" rx="14" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="690" y="270" width="120" height="40" rx="8"/>
+<text class="m" x="750" y="360" font-size="20" text-anchor="middle">STANDARD I ACCEPT</text>
+<g id="rows"></g>
+<text class="d" x="750" y="660" font-size="80" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="stp"><path class="s-ink" d="M980 720V600H1140V480H1300V360H1460V720Z" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/></g>
+<g id="st0"><text class="m" x="1060" y="650" font-size="18" text-anchor="middle">RAISE IT</text></g>
+<g id="st1"><text class="m" x="1220" y="530" font-size="18" text-anchor="middle">EXPLAIN WHY</text></g>
+<g id="st2"><text class="m" x="1380" y="410" font-size="18" text-anchor="middle">HOLD DAILY</text></g>
+<circle id="clm" class="gain" r="20"/>
+<g id="askq"><text class="d5" x="120" y="810" font-size="38">What standard have you quietly been accepting?</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qt"><text class="m" x="143" y="230" font-size="26">ONE AREA WHERE YOUR TEAM KEEPS FALLING SHORT</text></g>
+<g id="qm"><path class="s-ink" d="M1340 300V640M1460 300V640" stroke-width="8" stroke-linecap="round"/><rect id="qbar" class="gain" x="1330" y="600" width="140" height="14" rx="7"/></g>
+<g id="qa"><text class="d" x="136" y="360" font-size="88" letter-spacing="-2">What are you tolerating,</text></g>
+<g id="qb"><text class="d" x="136" y="470" font-size="88" letter-spacing="-2">and what will you stop</text></g>
+<g id="qc"><text class="d" x="136" y="580" font-size="88" letter-spacing="-2">accepting <tspan style="fill:var(--gain)">this week?</tspan></text></g>
+<text class="m" x="143" y="700" font-size="26">NO BAD TEAMS, ONLY BAD LEADERS</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;No Bad Teams, Only Bad Leaders&rdquo;, from <em>Extreme Ownership</em> by Jocko Willink and Leif Babin. The Hell Week boat crew experiment is as reported in the book. Drawings of the beach, boats, trophy and standard bar are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 10.7], [10.7, 28.3], [28.3, 41.5], [41.5, 54.2], [54.2, 67.2], [67.2, 85.3], [85.3, 104.3], [104.3, 118.3], [118.3, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["No Bad Teams", "Hell Week", "Best and Worst", "Two Leaders", "The Swap", "The Result", "Why It Works", "Raise the Bar", "Your Challenge"];
+const TM={"title_crew": 0.0, "beach": 11.0, "boat_crews": 14.8, "heavy_boat": 18.64, "ranking": 24.96, "crew_two": 28.56, "crew_six": 32.8, "reward": 37.28, "leader_two": 41.8, "leader_six": 46.4, "instructors": 54.48, "swap_arrows": 57.12, "trophy": 67.52, "second_place": 72.72, "spotlight": 78.96, "standard_bar": 85.64, "tolerate_sign": 90.16, "low_bar": 94.68, "team_pull": 99.52, "mirror": 104.64, "clipboard": 110.08, "steps_up": 113.63, "question_mark": 118.64};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+[340,530].forEach((y,k)=>{const g=$('tb'+k);for(let i=0;i<4;i++)person(g,1130+i*85,y,16,'ink');mk('rect',{x:1080,y:y+40,width:360,height:40,rx:20,class:k?'loss':'gain'},g)});
+for(let i=0;i<7;i++)person($('crew1'),220+i*72,600,18,'ink');
+const RW=[360,300,240,180,120],RB=['1ST','2ND','3RD','4TH','LAST'].map((s,i)=>{const y=280+i*80;mk('text',{x:1000,y:y,'font-size':22,class:'m'},$('rankg')).textContent=s;return mk('rect',{x:1080,y:y-28,width:0,height:36,rx:8,fill:i?(i==4?'var(--loss)':'var(--line)'):'var(--gain)'},$('rankg'))});
+const XS=[0,1,2,3,4,5,6,7].map(i=>300+i*100),Y2=[300,290,330,290,290,300,290,290],Y6=[580,600,560,610,600,590,610,600];
+function trace(el,Y,f){let s='';for(let i=0;i<8;i++){if(i<=f)s+=XS[i]+','+Y[i]+' ';else{const k=f-(i-1);if(k>0)s+=(XS[i-1]+100*k).toFixed(1)+','+(Y[i-1]+(Y[i]-Y[i-1])*k).toFixed(1)+' ';break}}el.setAttribute('points',s)}
+for(let i=0;i<4;i++)person($('ld2f'),220+i*80,430,18,'ink');
+person($('ld2f'),560,400,26,'gain');
+[940,1040,1300,1400].forEach(x=>{mk('path',{d:'M1180 420L'+x+' 515',class:'s-loss','stroke-width':4,'stroke-dasharray':'8 8',fill:'none'},$('blame'));person($('ld6f'),x,540,18,'ink')});
+person($('ld6f'),1180,330,26,'loss');
+[420,1180].forEach((c,k)=>{const g=$('sw'+k);for(let i=0;i<5;i++)person(g,c-140+i*70,560,16,'ink');mk('rect',{x:c-260,y:600,width:520,height:40,rx:20,class:'ink'},g)});
+person($('inst'),800,560,22,'ink');mk('path',{d:'M774 552a26 26 0 0 1 52 0z',class:'loss'},$('inst'));
+const L2=mk('g',{},$('lds')),L6=mk('g',{},$('lds'));person(L2,0,0,22,'gain');person(L6,0,0,22,'loss');
+for(let i=0;i<5;i++){person($('cr6'),600+i*55,410,16,i==2?'gain':'ink');person($('cr2'),300+i*55,510,16,'ink')}
+const ROPE=[];for(let i=0;i<5;i++){const x=280+i*100;ROPE.push(mk('line',{x1:x,x2:x,y1:620,y2:620,class:'s-gain','stroke-width':4,'stroke-linecap':'round'},$('ropes')));person($('team'),x,640,18,'ink')}
+person($('mirp'),300,400,34,'gain');
+for(let i=0;i<3;i++){const y=420+i*60;mk('rect',{x:630,y:y-24,width:28,height:28,rx:4,fill:'none',class:'s-ink','stroke-width':4},$('rows'));mk('path',{d:'M680 '+(y-10)+'H860',class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('rows'))}
+const CP=[[940,698],[1060,578],[1220,458],[1380,338]];
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('tcrew'),p(u,TM.title_crew,TM.title_crew+.6));
+  [0,1].forEach(k=>$('tb'+k).setAttribute('transform','translate(0 '+(5*Math.sin(t*2+k*2)).toFixed(1)+')'));
+  rise($('tlab'),p(u,TM.title_crew+5.8,TM.title_crew+6.4));
+
+  let w='M120 860V770';for(let x=120;x<=1480;x+=40)w+='L'+x+' '+(775+8*Math.sin(x/50+t*2)).toFixed(1);$('sea').setAttribute('d',w+'L1480 860Z');
+  rise($('beachg'),p(u,TM.beach,TM.beach+.6));
+  rise($('crew1'),p(u,TM.boat_crews,TM.boat_crews+.5));rise($('c7lab'),p(u,TM.boat_crews,TM.boat_crews+.5));
+  rise($('hboat'),p(u,TM.heavy_boat,TM.heavy_boat+.5));
+  const mv=u>=TM.heavy_boat?6*Math.sin(t*4):0;
+  $('march').setAttribute('transform','translate('+(260*p(u,TM.heavy_boat+.5,TM.ranking)).toFixed(1)+' '+mv.toFixed(1)+')');
+  rise($('rankg'),p(u,TM.ranking,TM.ranking+.5));
+  RB.forEach((r,i)=>r.setAttribute('width',(RW[i]*p(u,TM.ranking+.3+i*.2,TM.ranking+.9+i*.2)).toFixed(1)));
+
+  trace($('l2'),Y2,7*p(u,TM.crew_two,TM.crew_two+3));trace($('l6'),Y6,7*p(u,TM.crew_six,TM.crew_six+3));
+  rise($('lab2'),p(u,TM.crew_two,TM.crew_two+.5));rise($('lab6'),p(u,TM.crew_six,TM.crew_six+.5));
+  rise($('rest'),p(u,TM.reward,TM.reward+.5));$('zz').setAttribute('opacity',(.55+.45*Math.sin(t*3)).toFixed(2));
+  rise($('hurt'),p(u,TM.reward+1.5,TM.reward+2.1));
+
+  rise($('ld2'),p(u,TM.leader_two,TM.leader_two+.5));rise($('ld6'),p(u,TM.leader_six,TM.leader_six+.5));
+  $('blame').setAttribute('opacity',p(u,TM.leader_six+1,TM.leader_six+1.6));
+  rise($('bub6'),p(u,TM.leader_six+5,TM.leader_six+5.5));
+
+  rise($('inst'),p(u,TM.instructors,TM.instructors+.5));rise($('arrs'),p(u,TM.swap_arrows,TM.swap_arrows+.5));
+  const s=p(u,TM.swap_arrows+.8,TM.swap_arrows+3);
+  L2.setAttribute('transform','translate('+(420+760*s).toFixed(1)+' '+(380-480*s*(1-s)).toFixed(1)+')');
+  L6.setAttribute('transform','translate('+(1180-760*s).toFixed(1)+' 380)');
+  rise($('same'),p(u,TM.swap_arrows+4.6,TM.swap_arrows+5.2));rise($('stay'),p(u,TM.swap_arrows+7.6,TM.swap_arrows+8.2));
+
+  rise($('pod1'),p(u,TM.trophy,TM.trophy+.6));
+  $('cup').setAttribute('transform','translate(0 '+(u>=TM.trophy?-6*Math.abs(Math.sin(t*3)):0).toFixed(1)+')');
+  rise($('pod2'),p(u,TM.second_place,TM.second_place+.6));rise($('sec2'),p(u,TM.second_place+.5,TM.second_place+1.1));
+  $('spot').setAttribute('opacity',p(u,TM.spotlight,TM.spotlight+.8));
+  rise($('same6'),p(u,TM.spotlight,TM.spotlight+.5));rise($('onlyl'),p(u,TM.spotlight+5,TM.spotlight+5.6));
+
+  const b1=p(u,TM.low_bar,TM.low_bar+1.2),b2=p(u,TM.team_pull+.5,TM.team_pull+2.5),by=320+260*b1-290*b2;
+  rise($('sbarg'),p(u,TM.standard_bar,TM.standard_bar+.5));
+  $('sbar').setAttribute('y',by.toFixed(1));$('sbar').setAttribute('class',b2>0?'gain':b1>0?'loss':'ink');
+  $('sbl').setAttribute('y',(by-16).toFixed(1));$('sbl').textContent=b2>0?'HIGHER STANDARD':b1>0?'NEW NORMAL':'THE STANDARD';
+  const ro=p(u,TM.team_pull,TM.team_pull+.5);ROPE.forEach(r=>{r.setAttribute('y2',(by+16).toFixed(1));r.setAttribute('opacity',ro)});
+  rise($('quote'),p(u,TM.tolerate_sign,TM.tolerate_sign+.6));
+  rise($('lowc'),p(u,TM.low_bar,TM.low_bar+.5));rise($('pullc'),p(u,TM.team_pull,TM.team_pull+.5));
+
+  rise($('mir'),p(u,TM.mirror,TM.mirror+.6));
+  rise($('clip'),p(u,TM.clipboard,TM.clipboard+.5));rise($('askq'),p(u,TM.clipboard+.6,TM.clipboard+1.2));
+  rise($('stp'),p(u,TM.steps_up,TM.steps_up+.5));
+  [0,1,2].forEach(i=>rise($('st'+i),p(u,TM.steps_up+.4+i*1.2,TM.steps_up+.9+i*1.2)));
+  const cs=3*p(u,TM.steps_up+.4,TM.steps_up+4),ci=Math.min(2,Math.floor(cs)),cf=cs-ci,A=CP[ci],B=CP[ci+1];
+  $('clm').setAttribute('cx',(A[0]+(B[0]-A[0])*cf).toFixed(1));$('clm').setAttribute('cy',(A[1]+(B[1]-A[1])*cf-40*Math.sin(Math.PI*cf)).toFixed(1));
+  $('clm').setAttribute('opacity',p(u,TM.steps_up,TM.steps_up+.5));
+
+  rise($('qt'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qm'),p(u,TM.question_mark,TM.question_mark+.5));
+  $('qbar').setAttribute('y',(600-260*p(u,TM.question_mark+.5,TM.question_mark+2.5)+4*Math.sin(t*2)).toFixed(1));
+  rise($('qa'),p(u,TM.question_mark+4,TM.question_mark+4.5));rise($('qb'),p(u,TM.question_mark+4.4,TM.question_mark+4.9));rise($('qc'),p(u,TM.question_mark+4.8,TM.question_mark+5.3));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.28;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,338 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grit Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Grit: Effort turns talent into skill and then turns skill into achievement, so it matters twice as much as talent alone. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GRIT · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Effort counts</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2" style="fill:var(--gain)">twice.</text>
+<text class="b" x="120" y="600" font-size="32">Why effort matters twice as much as talent alone.</text>
+<g id="kid"><polygon id="kstar" class="gain"/></g>
+<g id="x2"><text class="d" x="1300" y="700" font-size="120" text-anchor="middle" style="fill:var(--gain)">×2</text><text class="m" x="1300" y="760" font-size="26" text-anchor="middle">EFFORT</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The myth of the natural.</text>
+<text class="b" x="120" y="176" font-size="32">We assume brilliant performers were simply born that way.</text>
+<g id="spot">
+<polygon class="gain" points="430,250 470,250 640,700 260,700" fill-opacity=".18"/>
+<rect class="ink" x="420" y="220" width="60" height="34" rx="6"/>
+<path class="s-ink" d="M240 700H660" stroke-width="8" stroke-linecap="round"/>
+<g id="perf"></g>
+<text class="m" x="450" y="745" font-size="22" text-anchor="middle">BORN THAT WAY?</text>
+</g>
+<g id="comf"><text class="m" x="450" y="777" font-size="22" text-anchor="middle" style="fill:var(--gain)">A COMFORTING BELIEF</text></g>
+<g id="couchg">
+<rect x="930" y="520" width="420" height="100" rx="24" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<g id="sitter"></g>
+<rect x="900" y="610" width="480" height="70" rx="18" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<rect class="ink" x="880" y="570" width="50" height="120" rx="18"/><rect class="ink" x="1350" y="570" width="50" height="120" rx="18"/>
+<text class="m" x="1140" y="745" font-size="22" text-anchor="middle">NOBODY EXPECTS US TO CHASE IT</text>
+</g>
+<g id="hides"><text class="d" x="120" y="832" font-size="40">But it hides how excellence actually happens.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two simple equations.</text>
+<text class="b" x="120" y="176" font-size="32">Duckworth’s math of achievement.</text>
+<g id="eq0"></g>
+<g id="eq1"></g>
+<path id="lnk" d="M1240 380C1240 430 320 410 320 460" fill="none" class="s-gain" stroke-width="5" stroke-dasharray="10 10"/>
+<g id="cnt1"><text class="d" x="320" y="720" font-size="52" text-anchor="middle" style="fill:var(--muted)">Talent: once</text></g>
+<g id="cnt2"><text class="d" x="780" y="720" font-size="52" text-anchor="middle" style="fill:var(--gain)">Effort: twice</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What talent really is.</text>
+<text class="b" x="120" y="176" font-size="32">Talent is speed. Achievement is where you get to.</text>
+<g id="dialg">
+<path class="s-line" d="M200 520A160 160 0 0 1 520 520" fill="none" stroke-width="14" stroke-linecap="round"/>
+<g id="dticks"></g>
+<line id="ndl" class="s-ink" x1="360" y1="520" x2="360" y2="390" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="360" cy="520" r="16"/>
+<text class="d" x="360" y="600" font-size="44" text-anchor="middle">Talent</text>
+<text class="m" x="360" y="640" font-size="20" text-anchor="middle">HOW FAST SKILLS IMPROVE</text>
+</g>
+<g id="roadg">
+<path class="s-ink" d="M640 520H1440" stroke-width="8" stroke-linecap="round"/>
+<path class="s-line" d="M700 540H1400" stroke-width="4" stroke-dasharray="20 24"/>
+<path class="s-ink" d="M1420 520V380" stroke-width="6" stroke-linecap="round"/>
+<polygon class="gain" points="1420,380 1330,405 1420,430"/>
+<circle id="trav" class="gain" cx="660" cy="494" r="22"/>
+<text class="d" x="1040" y="600" font-size="44" text-anchor="middle">Achievement</text>
+<text class="m" x="1040" y="640" font-size="20" text-anchor="middle">WHAT YOU PRODUCE BY USING SKILLS</text>
+</g>
+<g id="far"><text class="d" x="120" y="790" font-size="44">Talent sets the speed. Effort sets the distance.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The potter’s wheel.</text>
+<text class="b" x="120" y="176" font-size="32">Warren MacKenzie worked at his wheel for a lifetime.</text>
+<g id="wheel">
+<g id="potter"></g>
+<path class="s-ink" d="M262 480L345 530" stroke-width="10" stroke-linecap="round"/>
+<ellipse class="ink" cx="400" cy="590" rx="110" ry="22"/>
+<rect class="ink" x="390" y="610" width="20" height="80"/><rect class="ink" x="320" y="690" width="160" height="14" rx="7"/>
+<path d="M352 576C336 540 362 520 378 500V474h44v26c16 20 42 40 26 76z" fill="var(--stage)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+<path id="pg" class="s-muted" d="M400 525V570" stroke-width="3" stroke-linecap="round"/>
+</g>
+<g id="quote"><text class="d" x="120" y="775" font-size="40">“The first 10,000 pots are hard,</text><text class="d" x="120" y="828" font-size="40">and then it gets slightly easier.”</text></g>
+<text class="m" x="800" y="300" font-size="20">EACH POT: MORE SKILL, ONE MORE ACHIEVEMENT</text>
+<path class="s-ink" d="M800 420H1460M800 560H1460M800 700H1460" stroke-width="6" stroke-linecap="round"/>
+<g id="pots"></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two imaginary people.</text>
+<text class="b" x="120" y="176" font-size="32">Fast talent with half the effort, or average talent every day.</text>
+<g id="cf"><rect class="s-line" x="120" y="240" width="440" height="230" rx="18" fill="var(--stage)" stroke-width="3"/><g id="pf"></g>
+<text class="d5" x="260" y="320" font-size="36">Fast learner</text><text class="m" x="260" y="370" font-size="20">2× TALENT</text><text class="m" x="260" y="404" font-size="20" style="fill:var(--loss)">HALF THE EFFORT</text></g>
+<g id="cs"><rect class="s-line" x="120" y="500" width="440" height="230" rx="18" fill="var(--stage)" stroke-width="3"/><g id="ps"></g>
+<text class="d5" x="260" y="580" font-size="36">Steady one</text><text class="m" x="260" y="630" font-size="20">AVERAGE TALENT</text><text class="m" x="260" y="664" font-size="20" style="fill:var(--gain)">SHOWS UP DAILY</text></g>
+<g id="chart"><path class="s-ink" d="M640 260V760H1440" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="656" y="280" font-size="20">ACHIEVEMENT</text><text class="m" x="1440" y="800" font-size="20" text-anchor="end">YEARS</text></g>
+<path id="lf" class="s-loss" d="M660 740C720 520 820 560 1420 590" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="ls" class="s-gain" d="M660 740L1420 300" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="farm"><text class="m" x="1420" y="270" font-size="22" text-anchor="end" style="fill:var(--gain)">ACHIEVES FAR MORE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why quitting costs twice.</text>
+<text class="m" x="160" y="300" font-size="20">SKILL</text>
+<path class="s-line" d="M160 320V700H740" fill="none" stroke-width="4"/>
+<path id="grow" class="s-gain" d="M160 700C260 640 360 520 440 450" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="brk"><path class="s-loss" d="M460 450H720" stroke-width="6" stroke-dasharray="10 10"/><circle class="loss" cx="440" cy="450" r="12"/><text class="m" x="460" y="492" font-size="20" style="fill:var(--loss)">STOPS</text></g>
+<g id="nothing"><text class="m" x="740" y="420" font-size="20" text-anchor="end" style="fill:var(--loss)">UNUSED SKILLS PRODUCE NOTHING</text></g>
+<text class="m" x="860" y="270" font-size="20">BOTH EQUATIONS</text>
+<g id="qq0"></g>
+<g id="qq1"></g>
+<g id="stay"><text class="d" x="120" y="810" font-size="48">Quitting cancels effort twice. Stay with it.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Talent still counts.</text>
+<text class="b" x="120" y="176" font-size="32">But only one side of the scale is yours to load.</text>
+<path class="s-ink" d="M520 300V700" stroke-width="8" stroke-linecap="round"/>
+<rect class="ink" x="420" y="700" width="200" height="16" rx="8"/>
+<g id="beam"><path class="s-ink" d="M300 300H740" stroke-width="10" stroke-linecap="round"/></g>
+<circle class="gain" cx="520" cy="300" r="14"/>
+<g id="panL"><path class="s-ink" d="M0 0L-78 120M0 0L78 120" fill="none" stroke-width="4"/><path class="ink" d="M-80 120A80 28 0 0 0 80 120Z"/>
+<g id="wT"><rect x="-34" y="70" width="68" height="50" rx="8" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/></g>
+<text class="m" y="190" font-size="22" text-anchor="middle">TALENT</text>
+<g id="fast"><text class="m" y="222" font-size="20" text-anchor="middle">HELPS YOU LEARN FASTER</text></g></g>
+<g id="panR"><path class="s-ink" d="M0 0L-78 120M0 0L78 120" fill="none" stroke-width="4"/><path class="ink" d="M-80 120A80 28 0 0 0 80 120Z"/>
+<g id="wE"><rect class="gain" x="-72" y="70" width="68" height="50" rx="8"/><rect class="gain" x="4" y="70" width="68" height="50" rx="8"/></g>
+<text class="m" y="190" font-size="22" text-anchor="middle" style="fill:var(--gain)">EFFORT ×2</text></g>
+<g id="dial"><g id="kt"></g>
+<circle cx="1220" cy="460" r="120" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/>
+<circle class="gain" cx="1220" cy="460" r="70"/>
+<line id="ptr" class="s-ink" x1="1220" y1="460" x2="1220" y2="360" stroke-width="10" stroke-linecap="round"/>
+<text class="d" x="1220" y="670" font-size="48" text-anchor="middle">Effort</text>
+<text class="m" x="1220" y="710" font-size="22" text-anchor="middle">YOU CHOOSE IT EVERY DAY</text></g>
+<g id="bet"><text class="d" x="120" y="820" font-size="48">Spend your energy where it counts twice.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="tm">
+<circle class="s-line" cx="1340" cy="560" r="100" fill="none" stroke-width="18"/>
+<circle id="tprog" class="s-gain" cx="1340" cy="560" r="100" fill="none" stroke-width="18" transform="rotate(-90 1340 560)" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path class="s-ink" d="M1320 436h40M1340 436v14" stroke-width="8" stroke-linecap="round"/>
+<text class="d" x="1340" y="586" font-size="72" text-anchor="middle">20</text>
+<text class="m" x="1340" y="722" font-size="28" text-anchor="middle">MINUTES</text>
+<text class="m" x="143" y="700" font-size="26">PICK ONE SKILL · 20 MINUTES THIS WEEK</text>
+</g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Where else could your</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">effort start counting</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">twice?</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Effort Counts Twice&rdquo;, from <em>Grit</em> by Angela Duckworth. Duckworth&#x27;s two equations and the potter Warren MacKenzie are as reported in the book. The two imaginary people and the bar drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 10.0], [10.0, 27.9], [27.9, 43.1], [43.1, 57.7], [57.7, 75.7], [75.7, 90.6], [90.6, 104.4], [104.4, 118.0], [118.0, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Effort Counts Twice", "The Myth of the Natural", "Two Simple Equations", "What Talent Really Is", "The Potter's Wheel", "Two Imaginary People", "Why Quitting Costs Twice", "Talent Still Counts", "Your Effort Challenge"];
+const TM={"gifted_kid": 0.0, "spotlight": 10.32, "couch": 18.88, "equation_one": 28.2, "equation_two": 32.88, "speed_dial": 43.4, "finish_flag": 48.56, "potter": 57.97, "pot_shelf": 69.68, "runner_fast": 75.96, "runner_steady": 80.12, "broken_line": 90.88, "two_bars": 98.32, "scale": 104.72, "hand_dial": 109.76, "timer": 118.28};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const drw=(el,k)=>{el.style.strokeDashoffset=1-k};
+const star=(cx,cy,R,r)=>{let s='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r:R;s+=(cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1)+' '}return s};
+const box=(g,x,y,w,h,s,fs,cls)=>{const r=mk('rect',{x:x,y:y,width:w,height:h,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:x+w/2,y:y+h/2+fs*.36,'font-size':fs,'text-anchor':'middle',class:cls},g);tx.textContent=s;return [r,tx]};
+const row=(g,xs,ws,y,h,L,fs,cls)=>{const o=L.map((s,i)=>box(g,xs[i],y,ws[i],h,s,fs,cls));['×','='].forEach((q,i)=>{const tx=mk('text',{x:(xs[i]+ws[i]+xs[i+1])/2,y:y+h/2+fs*.42,'font-size':Math.max(24,fs*1.2),'text-anchor':'middle',class:'d',style:'fill:var(--muted)'},g);tx.textContent=q});return o};
+const EQ=[['TALENT','EFFORT','SKILL'],['SKILL','EFFORT','ACHIEVEMENT']];
+const R2=[0,1].map(r=>row($('eq'+r),[120,580,1040],[400,400,400],260+r*200,120,EQ[r],44,'d'));
+const R6=[0,1].map(r=>row($('qq'+r),[860,1070,1280],[170,170,200],300+r*160,70,EQ[r],20,'m'));
+$('kstar').setAttribute('points',star(1300,220,40,17));
+fig($('kid'),1300,330,42,'ink');
+fig($('perf'),450,520,30,'ink');
+fig($('sitter'),1140,450,34,'ink');
+fig($('potter'),220,390,34,'ink');
+fig($('pf'),190,300,26,'loss');
+fig($('ps'),190,560,26,'gain');
+for(let i=0;i<9;i++){const a=Math.PI+i*Math.PI/8,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(360+125*c).toFixed(1)+' '+(520+125*s).toFixed(1)+'L'+(360+142*c).toFixed(1)+' '+(520+142*s).toFixed(1),stroke:i>5?'var(--gain)':'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('dticks'))}
+for(let i=0;i<9;i++){const a=(-210+i*30)*Math.PI/180,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1220+135*c).toFixed(1)+' '+(460+135*s).toFixed(1)+'L'+(1220+150*c).toFixed(1)+' '+(460+150*s).toFixed(1),stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('kt'))}
+const POTS=[];for(let s=0;s<3;s++)for(let i=0;i<7;i++){const x=840+i*90,y=417+s*140;POTS.push(mk('path',{d:'M'+(x-24)+' '+y+'C'+(x-32)+' '+(y-30)+' '+(x-12)+' '+(y-44)+' '+(x-10)+' '+(y-60)+'h20C'+(x+12)+' '+(y-44)+' '+(x+32)+' '+(y-30)+' '+(x+24)+' '+y+'z',class:'gain'},$('pots')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+$('kstar').setAttribute('transform','rotate('+(t*25%360).toFixed(1)+' 1300 220)');
+R('kid',TM.gifted_kid,.6); R('x2',TM.gifted_kid+6.2,.6);
+
+R('spot',TM.spotlight,.6); R('comf',TM.spotlight+6.2); R('couchg',TM.couch,.6); R('hides',TM.couch+5.3,.6);
+
+R('eq0',TM.equation_one); R('eq1',TM.equation_two);
+$('lnk').setAttribute('opacity',p(u,TM.equation_two+.5,TM.equation_two+1.2));
+const both=u>=TM.equation_two+3.7;
+R2.forEach(r=>{r[1][0].setAttribute('fill',both?'var(--gain)':'var(--stage)');r[1][0].setAttribute('stroke',both?'var(--gain)':'var(--ink)');r[1][1].style.fill=both?'var(--on-gain)':''});
+R2[0][0][0].setAttribute('stroke-dasharray',u>=TM.equation_two+6.7?'12 10':'none');
+R('cnt2',TM.equation_two+3.7); R('cnt1',TM.equation_two+6.7);
+
+R('dialg',TM.speed_dial,.6);
+$('ndl').setAttribute('transform','rotate('+(-80+140*p(u,TM.speed_dial+.5,TM.speed_dial+2)+4*Math.sin(t*3)).toFixed(1)+' 360 520)');
+R('roadg',TM.finish_flag,.6);
+$('trav').setAttribute('cx',(660+700*p(u,TM.finish_flag+5.4,TM.finish_flag+8.4)).toFixed(1));
+R('far',TM.finish_flag+5.4,.6);
+
+R('wheel',TM.potter,.6);
+$('pg').setAttribute('transform','translate('+(25*Math.sin(t*6)).toFixed(1)+' 0)');
+R('quote',TM.potter+6.2,.6);
+POTS.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.pot_shelf+i*.2,TM.pot_shelf+i*.2+.3)));
+
+R('cf',TM.runner_fast); R('chart',TM.runner_fast); R('cs',TM.runner_steady);
+drw($('lf'),p(u,TM.runner_steady+5,TM.runner_steady+9)); drw($('ls'),p(u,TM.runner_steady+5,TM.runner_steady+10));
+R('farm',TM.runner_steady+9.5);
+
+drw($('grow'),p(u,TM.broken_line,TM.broken_line+1.5)); R('brk',TM.broken_line+1.5); R('nothing',TM.broken_line+4.2,.6);
+R('qq0',TM.two_bars); R('qq1',TM.two_bars+.3);
+const cx=u>=TM.two_bars+1.5;
+R6.forEach(r=>{r[1][0].setAttribute('stroke',cx?'var(--loss)':'var(--ink)');r[1][1].textContent=cx?'0':'EFFORT';r[1][1].style.fill=cx?'var(--loss)':'';r[2][0].setAttribute('opacity',cx?.3:1);r[2][1].setAttribute('opacity',cx?.3:1)});
+R('stay',TM.two_bars+3,.6);
+
+const k1=p(u,TM.scale,TM.scale+1),k2=p(u,TM.hand_dial,TM.hand_dial+1.5),ang=(-8*k1+22*k2)*Math.PI/180,ca=220*Math.cos(ang),sa=220*Math.sin(ang);
+$('beam').setAttribute('transform','rotate('+(ang*180/Math.PI).toFixed(2)+' 520 300)');
+$('panL').setAttribute('transform','translate('+(520-ca).toFixed(1)+' '+(300-sa).toFixed(1)+')');
+$('panR').setAttribute('transform','translate('+(520+ca).toFixed(1)+' '+(300+sa).toFixed(1)+')');
+rise($('wT'),k1); R('fast',TM.scale+3); R('wE',TM.hand_dial); R('dial',TM.hand_dial,.6);
+$('ptr').setAttribute('transform','rotate('+(-120+240*p(u,TM.hand_dial+.5,TM.hand_dial+2.5)).toFixed(1)+' 1220 460)');
+R('bet',TM.hand_dial+5,.6);
+
+R('tm',TM.timer,.6); drw($('tprog'),p(u,TM.timer+.6,TM.timer+7));
+R('qa',TM.timer+8.2); R('qb',TM.timer+8.6); R('qc',TM.timer+9);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.84;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

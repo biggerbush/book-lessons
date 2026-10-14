@@ -1,0 +1,317 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thinking, Fast and Slow Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Thinking, Fast and Slow: Prospect theory shows that we judge outcomes as gains or losses from a reference point, and a loss feels roughly twice as painful as an equal gain feels good. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THINKING, FAST AND SLOW · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Losses hurt more</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">than gains.</text>
+<text class="b" x="120" y="600" font-size="32">Why losing 100 dollars stings more than winning 100 delights.</text>
+<g id="coinW"><g id="coin"><circle class="gain" r="100"/><circle r="78" fill="none" stroke="var(--on-gain)" stroke-width="6"/><text id="cointx" class="d" y="30" font-size="88" text-anchor="middle" style="fill:var(--on-gain)">$</text></g></g>
+<g id="cT"><rect x="1200" y="500" width="280" height="70" rx="14" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/><text class="m" x="1224" y="543" font-size="20">TAILS</text><text class="d" x="1458" y="548" font-size="36" text-anchor="end" style="fill:var(--loss)">−$100</text></g>
+<g id="cH"><rect x="1200" y="600" width="280" height="70" rx="14" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/><text class="m" x="1224" y="643" font-size="20">HEADS</text><text class="d" x="1458" y="648" font-size="36" text-anchor="end" style="fill:var(--gain)">+$150</text></g>
+<g id="bet"><text class="d" x="1340" y="760" font-size="40" text-anchor="middle">Take the bet?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most people refuse.</text>
+<text class="b" x="120" y="176" font-size="32">Even though the odds favor them.</text>
+<g id="crowd"></g>
+<g id="crl"><text class="m" x="120" y="640" font-size="22">MOST PEOPLE SAY NO</text></g>
+<g id="qm"><text class="m" x="1100" y="225" font-size="22" text-anchor="middle" style="fill:var(--gain)">WHAT WIN WOULD BALANCE IT?</text></g>
+<g id="sc">
+<path class="s-ink" d="M1100 320V760M1000 760H1200" stroke-width="8" stroke-linecap="round"/>
+<g id="beam"><path class="s-ink" d="M-230 0H230" stroke-width="10" stroke-linecap="round"/></g>
+<circle class="ink" cx="1100" cy="320" r="14"/>
+<g id="panL"><path class="s-ink" d="M0 0L-100 140M0 0L100 140" stroke-width="3"/><path class="ink" d="M-100 140h200l-30 26h-140z"/><rect class="loss" x="-70" y="70" width="140" height="70" rx="10"/><text class="d" y="118" font-size="32" text-anchor="middle" style="fill:var(--on-gain)">−$100</text></g>
+<g id="panR"><path class="s-ink" d="M0 0L-100 140M0 0L100 140" stroke-width="3"/><path class="ink" d="M-100 140h200l-30 26h-140z"/><rect class="gain" x="-70" y="70" width="140" height="70" rx="10"/><text id="wtR" class="d" y="118" font-size="32" text-anchor="middle" style="fill:var(--on-gain)">+$150</text></g>
+</g>
+<g id="cap1"><text class="d" x="120" y="830" font-size="44">About $200: roughly double the loss.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Loss aversion.</text>
+<text class="b" x="120" y="176" font-size="32">A loss feels about twice as painful as an equal gain feels good.</text>
+<g id="f0"><circle cx="200" cy="320" r="60" fill="none" class="s-gain" stroke-width="7"/><circle class="gain" cx="180" cy="305" r="7"/><circle class="gain" cx="220" cy="305" r="7"/><path class="s-gain" d="M172 336q28 26 56 0" fill="none" stroke-width="7" stroke-linecap="round"/><text class="m" x="300" y="280" font-size="20">A GAIN</text><rect id="bg" class="gain" x="300" y="295" width="0" height="50" rx="10"/><text id="xg" class="d" x="320" y="336" font-size="40" style="fill:var(--gain)">1×</text></g>
+<g id="f1"><circle cx="200" cy="470" r="60" fill="none" class="s-loss" stroke-width="7"/><circle class="loss" cx="180" cy="455" r="7"/><circle class="loss" cx="220" cy="455" r="7"/><path class="s-loss" d="M172 502q28-26 56 0" fill="none" stroke-width="7" stroke-linecap="round"/><text class="m" x="300" y="430" font-size="20">AN EQUAL LOSS</text><rect id="bl" class="loss" x="300" y="445" width="0" height="50" rx="10"/><text id="xl" class="d" x="320" y="486" font-size="40" style="fill:var(--loss)">≈2×</text></g>
+<g id="quote"><rect class="s-line" x="120" y="600" width="1360" height="180" rx="18" fill="var(--stage)" stroke-width="3"/><rect class="gain" x="120" y="600" width="14" height="180"/><text class="d" x="170" y="695" font-size="56">“Losses loom larger than gains.”</text><text class="m" x="172" y="748" font-size="20">DANIEL KAHNEMAN</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Jack and Jill.</text>
+<text class="b" x="120" y="176" font-size="32">Two people from the book.</text>
+<path class="s-ink" d="M330 720H690M1050 720H1410" stroke-width="5" stroke-linecap="round"/>
+<g id="jk"><g id="jkp"></g><text class="d5" x="220" y="790" font-size="44" text-anchor="middle">Jack</text></g>
+<g id="jl"><g id="jlp"></g><text class="d5" x="940" y="790" font-size="44" text-anchor="middle">Jill</text></g>
+<g id="td"><rect class="ink" x="540" y="520" width="120" height="200"/><text class="d" x="600" y="505" font-size="32" text-anchor="middle">$5M</text><text class="m" x="600" y="760" font-size="20" text-anchor="middle">TODAY</text>
+<rect class="ink" x="1260" y="520" width="120" height="200"/><text class="d" x="1320" y="505" font-size="32" text-anchor="middle">$5M</text><text class="m" x="1320" y="760" font-size="20" text-anchor="middle">TODAY</text></g>
+<g id="yd"><rect x="360" y="680" width="120" height="40" fill="var(--muted)" fill-opacity=".5"/><text class="d" x="420" y="665" font-size="32" text-anchor="middle">$1M</text><text class="m" x="420" y="760" font-size="20" text-anchor="middle">YESTERDAY</text>
+<rect x="1080" y="360" width="120" height="360" fill="var(--muted)" fill-opacity=".5"/><text class="d" x="1140" y="345" font-size="32" text-anchor="middle">$9M</text><text class="m" x="1140" y="760" font-size="20" text-anchor="middle">YESTERDAY</text></g>
+<text id="eq" class="d" x="800" y="560" font-size="80" text-anchor="middle" style="fill:var(--muted)">=?</text>
+<g id="fk"><text class="d" x="220" y="480" font-size="48" text-anchor="middle" style="fill:var(--gain)">Lucky</text></g>
+<g id="fl"><text class="d" x="940" y="480" font-size="48" text-anchor="middle" style="fill:var(--loss)">Crushed</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The reference point.</text>
+<text class="b" x="120" y="176" font-size="32">Prospect theory, by Kahneman and Amos Tversky.</text>
+<g id="end"><path class="s-muted" d="M800 380V536M800 590V680" stroke-width="4" stroke-dasharray="10 10"/><text class="m" x="800" y="360" font-size="20" text-anchor="middle">WHERE WE END UP</text></g>
+<g id="nl"><path class="s-ink" d="M200 520H1400" stroke-width="6" stroke-linecap="round"/><g id="ticks"></g>
+<text class="m" x="320" y="565" font-size="20" text-anchor="middle">$1M</text><text class="m" x="800" y="572" font-size="20" text-anchor="middle">$5M</text><text class="m" x="1280" y="565" font-size="20" text-anchor="middle">$9M</text><text class="m" x="1400" y="495" font-size="20" text-anchor="end">WEALTH</text></g>
+<g id="arr">
+<circle class="gain" cx="320" cy="440" r="12"/><line id="aJ" class="s-gain" x1="320" y1="440" x2="320" y2="440" stroke-width="8" stroke-linecap="round"/><path id="hJ" class="s-gain" d="M-18-14L0 0L-18 14" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="loss" cx="1280" cy="610" r="12"/><line id="aL" class="s-loss" x1="1280" y1="610" x2="1280" y2="610" stroke-width="8" stroke-linecap="round"/><path id="hL" class="s-loss" d="M-18-14L0 0L-18 14" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="320" y="410" font-size="20" text-anchor="middle">REFERENCE POINT</text><text class="m" x="1280" y="655" font-size="20" text-anchor="middle">REFERENCE POINT</text>
+</g>
+<g id="albl"><text class="m" x="560" y="410" font-size="22" text-anchor="middle" style="fill:var(--gain)">JACK · GAIN</text><text class="m" x="1045" y="660" font-size="22" text-anchor="middle" style="fill:var(--loss)">JILL · LOSS</text></g>
+<g id="same"><text class="d" x="120" y="790" font-size="52">Same 5 million, opposite feelings.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Feelings flatten out.</text>
+<text class="b" x="120" y="176" font-size="32">The same 100 dollars feels smaller as amounts grow.</text>
+<g id="st1"><text class="d5" x="120" y="320" font-size="44">$100 → $200</text><rect id="b1" class="gain" x="120" y="350" width="0" height="40" rx="10"/><text class="m" x="120" y="430" font-size="20">FEELS LIKE A BIG JUMP</text></g>
+<g id="st2"><text class="d5" x="120" y="540" font-size="44">$900 → $1000</text><rect id="b2" class="gain" x="120" y="570" width="0" height="40" rx="10"/><text class="m" x="120" y="650" font-size="20">SAME $100, FEELS SMALLER</text></g>
+<g id="axes"><path class="s-muted" d="M820 520H1460M1140 260V780" stroke-width="4"/>
+<text class="m" x="1460" y="556" font-size="20" text-anchor="end">GAINS</text><text class="m" x="820" y="500" font-size="20">LOSSES</text><text class="m" x="1156" y="280" font-size="20">GOOD</text><text class="m" x="1156" y="776" font-size="20">BAD</text></g>
+<path id="curveP" class="s-ink" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/>
+<g id="cap5"><text class="d" x="120" y="760" font-size="34">Feelings flatten as amounts grow.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it holds us back.</text>
+<text class="b" x="120" y="176" font-size="32">Once it kept us alive. Today it can keep us stuck.</text>
+<path class="s-line" d="M760 240V760" stroke-width="3"/>
+<g id="then"><text class="m" x="120" y="260" font-size="22">THEN</text>
+<path class="gain" d="M430 300L560 340V450Q560 570 430 630Q300 570 300 450V340Z"/><g id="shp"></g>
+<g id="thr"><path class="s-loss" d="M140 400h110m-20-16 20 16-20 16M140 460h110m-20-16 20 16-20 16M140 520h110m-20-16 20 16-20 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text class="m" x="120" y="700" font-size="20">TREATING THREATS AS URGENT</text><text class="m" x="120" y="735" font-size="20">HELPED CREATURES SURVIVE</text></g>
+<g id="now"><text class="m" x="800" y="260" font-size="22">NOW</text>
+<circle id="ring" class="s-loss" cx="980" cy="460" r="100" fill="none" stroke-width="6" stroke-dasharray="14 10"/><g id="stp"></g>
+<text class="m" x="980" y="600" font-size="22" text-anchor="middle" style="fill:var(--loss)">STUCK</text></g>
+<g id="chips"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Think in bundles.</text>
+<text class="b" x="120" y="176" font-size="32">See each risk as one of many.</text>
+<g id="coins"></g>
+<g id="chart"><path class="s-muted" d="M720 560H1480" stroke-width="3" stroke-dasharray="8 8"/><text class="m" x="720" y="595" font-size="20">BREAK EVEN</text>
+<path id="cum" class="s-gain" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/></g>
+<g id="ahead"><text class="m" x="1480" y="250" font-size="22" text-anchor="end" style="fill:var(--gain)">ALMOST SURELY AHEAD</text></g>
+<g id="mantra"><text class="d" x="120" y="820" font-size="52">You win a few, you lose a few.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="ya"><text class="d5" x="136" y="250" font-size="52">One small, favorable risk you avoided…</text></g>
+<g id="qa"><text class="d" x="136" y="390" font-size="88" letter-spacing="-2">Would you take it</text></g>
+<g id="qb"><text class="d" x="136" y="490" font-size="88" letter-spacing="-2">if it were one</text></g>
+<g id="qc"><text class="d" x="136" y="590" font-size="88" letter-spacing="-2">of a <tspan style="fill:var(--gain)">hundred?</tspan></text></g>
+<g id="dgrid"><rect class="s-line" x="1080" y="290" width="400" height="400" rx="18" fill="var(--stage)" stroke-width="3"/><g id="dots"></g></g>
+<g id="g100"><text class="m" x="1280" y="730" font-size="22" text-anchor="middle"><tspan style="fill:var(--gain)">1</tspan> OF 100 BETS</text></g>
+<text class="m" x="140" y="820" font-size="26">YOU WIN A FEW, YOU LOSE A FEW</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="126" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:06</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Losses Hurt More Than Gains&rdquo;, from <em>Thinking, Fast and Slow</em> by Daniel Kahneman. The coin flip bet, the Jack and Jill example and the 100 to 200 versus 900 to 1000 comparison are as reported in the book. The scale, curve and stacks of coins are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=126, SC=[[0.0, 7.5], [7.5, 26.0], [26.0, 37.1], [37.1, 54.4], [54.4, 70.7], [70.7, 87.6], [87.6, 101.8], [101.8, 115.2], [115.2, 126.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Coin Flip", "Most People Refuse", "Loss Aversion", "Jack and Jill", "The Reference Point", "Feelings Flatten Out", "Why It Holds Us Back", "Think in Bundles", "Your Turn"];
+const TM={"coin": 0.0, "crowd": 7.76, "scale": 11.28, "question_mark": 16.32, "two_faces": 26.32, "quote_card": 32.96, "jack": 37.36, "jill": 40.8, "yesterday": 43.92, "ref_line": 54.72, "arrows": 62.4, "small_step": 71.04, "big_step": 77.44, "curve": 82.88, "shield": 87.92, "stuck": 94.08, "stack": 102.08, "many_coins": 105.68, "mantra": 110.72, "your_risk": 115.52};
+const fig=(g,x,y,r,f)=>[mk('circle',{cx:x,cy:y,r:r,fill:f},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',fill:f},g)];
+const CR=[];for(let i=0;i<10;i++){const g=mk('g',{},$('crowd'));fig(g,170+(i%5)*100,330+Math.floor(i/5)*150,22,(i===3||i===6)?'var(--gain)':'var(--ink)');CR.push(g)}
+const JK=fig($('jkp'),220,560,30,'var(--ink)'),JL=fig($('jlp'),940,560,30,'var(--ink)');
+for(let i=0;i<=10;i++)mk('path',{d:'M'+(200+i*120)+' 508v24',class:'s-ink','stroke-width':4},$('ticks'));
+let cd='';for(let x=-300;x<=300;x+=10){const y=x>=0?-4.9*Math.pow(x,.6):8.33*Math.pow(-x,.6);cd+=(x===-300?'M':'L')+(1140+x)+' '+(520+y).toFixed(1)}
+$('curveP').setAttribute('d',cd);
+fig($('shp'),430,420,24,'var(--stage)');fig($('stp'),980,420,24,'var(--loss)');
+const CK=['✕ TURN DOWN GOOD BETS','✕ CLING TO WHAT WE HAVE','✕ AVOID HELPFUL CHANGES'].map((s,i)=>{const g=mk('g',{},$('chips')),y=300+i*120;
+mk('rect',{x:1110,y:y,width:370,height:80,rx:40,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+const tx=mk('text',{x:1135,y:y+47,'font-size':20,class:'m'},g);tx.textContent=s;return g});
+const CO=[],CUM=[0];for(let i=0;i<100;i++){const w=((i*7+3+Math.floor(i/10)*3)%10)<5;CUM.push(CUM[i]+(w?1.5:-1));
+CO.push([mk('circle',{cx:140+(i%10)*48,cy:260+Math.floor(i/10)*48,r:18,'stroke-width':3},$('coins')),w])}
+// closing: 10x10 grid of muted dots inside a card, one highlighted in amber (one of a hundred)
+const HI=44,DX=1100,DY=310,DS=40;
+const DT=[];for(let i=0;i<100;i++){const x=DX+20+(i%10)*DS,y=DY+20+Math.floor(i/10)*DS;
+DT.push(mk('circle',{cx:x,cy:y,r:14,fill:i===HI?'var(--gain)':'var(--muted)','fill-opacity':i===HI?1:.5},$('dots')))}
+const HIR=mk('circle',{cx:DX+20+(HI%10)*DS,cy:DY+20+Math.floor(HI/10)*DS,r:20,fill:'none',stroke:'var(--gain)','stroke-width':4},$('dots'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const c0=TM.coin,bet=u>=c0+5.7;
+rise($('coinW'),p(u,c0,c0+.4));
+$('coin').setAttribute('transform','translate(1340 340) scale('+(bet?1:Math.cos(t*5)).toFixed(3)+' 1)');
+$('cointx').textContent=bet?'?':'$';
+rise($('cT'),p(u,c0+1.8,c0+2.3));rise($('cH'),p(u,c0+4,c0+4.5));rise($('bet'),p(u,c0+5.7,c0+6.2));
+
+CR.forEach((g,i)=>rise(g,p(u,TM.crowd+i*.12,TM.crowd+i*.12+.4)));rise($('crl'),p(u,TM.crowd+1,TM.crowd+1.5));
+rise($('sc'),p(u,TM.scale,TM.scale+.5));
+const q=TM.question_mark,lv=p(u,q+5.8,q+6.8),th=-12*p(u,TM.scale+.5,TM.scale+1.5)*(1-lv),an=th*Math.PI/180,bx=Math.cos(an)*230,by=Math.sin(an)*230;
+$('beam').setAttribute('transform','translate(1100 320) rotate('+th.toFixed(2)+')');
+$('panL').setAttribute('transform','translate('+(1100-bx).toFixed(1)+' '+(320-by).toFixed(1)+')');
+$('panR').setAttribute('transform','translate('+(1100+bx).toFixed(1)+' '+(320+by).toFixed(1)+')');
+$('wtR').textContent=u<q?'+$150':u<q+5.8?'+$?':'+$'+Math.round(150+50*lv);
+rise($('qm'),p(u,q,q+.5));rise($('cap1'),p(u,q+5.8,q+6.4));
+
+const tf=TM.two_faces,g1=p(u,tf+1.8,tf+2.8),g2=p(u,tf+2.6,tf+4.2);
+rise($('f0'),p(u,tf,tf+.4));rise($('f1'),p(u,tf+.4,tf+.8));
+$('bg').setAttribute('width',(420*g1).toFixed(1));$('xg').setAttribute('x',(320+420*g1).toFixed(1));$('xg').setAttribute('opacity',g1);
+$('bl').setAttribute('width',(840*g2).toFixed(1));$('xl').setAttribute('x',(320+840*g2).toFixed(1));$('xl').setAttribute('opacity',g2);
+rise($('quote'),p(u,TM.quote_card,TM.quote_card+.6));
+
+const yd=TM.yesterday,fe=u>=yd+7.7;
+rise($('jk'),p(u,TM.jack,TM.jack+.5));rise($('jl'),p(u,TM.jack+1.5,TM.jack+2));
+rise($('td'),p(u,TM.jill,TM.jill+.6));rise($('yd'),p(u,yd,yd+.6));
+rise($('eq'),p(u,yd+4.6,yd+5.1));$('eq').textContent=u>=yd+6.3?'≠':'=?';
+rise($('fk'),p(u,yd+7.7,yd+8.2));rise($('fl'),p(u,yd+8.3,yd+8.8));
+JK.forEach(e=>e.setAttribute('fill',fe?'var(--gain)':'var(--ink)'));JL.forEach(e=>e.setAttribute('fill',fe?'var(--loss)':'var(--ink)'));
+
+const rl=TM.ref_line,ar=p(u,TM.arrows,TM.arrows+1.2);
+rise($('nl'),p(u,rl,rl+.6));rise($('end'),p(u,rl+5.3,rl+5.9));rise($('arr'),p(u,TM.arrows,TM.arrows+.4));
+$('aJ').setAttribute('x2',(320+470*ar).toFixed(1));$('hJ').setAttribute('transform','translate('+(320+480*ar).toFixed(1)+' 440)');
+$('aL').setAttribute('x2',(1280-470*ar).toFixed(1));$('hL').setAttribute('transform','translate('+(1280-480*ar).toFixed(1)+' 610) scale(-1 1)');
+rise($('albl'),p(u,TM.arrows+1.2,TM.arrows+1.7));rise($('same'),p(u,TM.arrows+6.2,TM.arrows+6.8));
+
+const ss=TM.small_step,bs=TM.big_step,cv=p(u,TM.curve+.3,TM.curve+2.3);
+rise($('st1'),p(u,ss+2.6,ss+3.1));$('b1').setAttribute('width',(440*p(u,ss+3,ss+4)).toFixed(1));
+rise($('st2'),p(u,bs,bs+.5));$('b2').setAttribute('width',(140*p(u,bs+.8,bs+1.8)).toFixed(1));
+rise($('axes'),p(u,TM.curve,TM.curve+.5));$('curveP').setAttribute('stroke-dasharray',cv.toFixed(3)+' 1');$('curveP').setAttribute('opacity',cv>0?1:0);
+rise($('cap5'),p(u,TM.curve+1.5,TM.curve+2.1));
+
+rise($('then'),p(u,TM.shield,TM.shield+.6));$('thr').setAttribute('transform','translate('+(8*Math.sin(t*4)).toFixed(1)+' 0)');
+rise($('now'),p(u,TM.stuck,TM.stuck+.6));$('ring').setAttribute('stroke-dashoffset',(t*20).toFixed(1));
+CK.forEach((g,i)=>rise(g,p(u,TM.stuck+3+i*.8,TM.stuck+3.4+i*.8)));
+
+const n=Math.floor(100*p(u,TM.many_coins,TM.many_coins+5));
+rise($('coins'),p(u,TM.stack,TM.stack+.6));
+CO.forEach((c,i)=>{const on=i<n;c[0].setAttribute('fill',on?(c[1]?'var(--gain)':'var(--loss)'):'var(--stage)');c[0].setAttribute('stroke',on?'none':(i===0&&u>=TM.stack?'var(--gain)':'var(--line)'))});
+let cp='M720 560';for(let i=1;i<=n;i++)cp+='L'+(720+i*7.6).toFixed(1)+' '+(560-CUM[i]*9.3).toFixed(1);
+$('cum').setAttribute('d',cp);rise($('chart'),p(u,TM.many_coins,TM.many_coins+.5));
+rise($('ahead'),p(u,TM.many_coins+5,TM.many_coins+5.5));rise($('mantra'),p(u,TM.mantra,TM.mantra+.6));
+
+const yr=TM.your_risk;
+rise($('ya'),p(u,yr,yr+.6));rise($('qa'),p(u,yr+1.6,yr+2.1));rise($('qb'),p(u,yr+2,yr+2.5));rise($('qc'),p(u,yr+2.4,yr+2.9));
+// grid card appears with the single amber risk, then the other 99 fill in around it
+rise($('dgrid'),p(u,yr+.3,yr+.8));
+DT.forEach((d,i)=>{const a=i===HI?yr+.4:yr+1+i*.015;d.setAttribute('opacity',p(u,a,a+.3).toFixed(3))});
+HIR.setAttribute('opacity',p(u,yr+.4,yr+.8).toFixed(3));HIR.setAttribute('r',(20+4*Math.abs(Math.sin(t*2.5))).toFixed(1));
+rise($('g100'),p(u,yr+2.8,yr+3.3));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:122.83;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

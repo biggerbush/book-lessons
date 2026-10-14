@@ -1,0 +1,24 @@
+const fig=(g,x,y,r,a)=>{mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)};
+const drw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+[200,160,210,130,190,170,120].forEach((w,i)=>mk('path',{d:'M1190 '+(270+i*40)+'h'+w,class:'s-line','stroke-width':8,'stroke-linecap':'round'},$('tLines')));
+const TMK=[[1250,270],[1330,350],[1240,470]].map(q=>mk('ellipse',{cx:q[0],cy:q[1],rx:46,ry:22,fill:'none',class:'s-loss','stroke-width':5},$('tMarks')));
+[330,280,340,250,320,300,260,330].forEach((w,i)=>mk('path',{d:'M1040 '+(290+i*48)+'h'+w,class:'s-line','stroke-width':10,'stroke-linecap':'round'},$('pLines')));
+const PMK=[[1110,290],[1290,386],[1160,434],[1240,530],[1100,626]].map(q=>mk('ellipse',{cx:q[0],cy:q[1],rx:44,ry:22,fill:'none',class:'s-loss','stroke-width':5},$('pMarks')));
+const BR=[['b0',400],['b1',220],['b2',260],['b3',260]];
+[['FIRST','Obsess over','tiny details'],['SECOND','Avoid hard','challenges'],['THIRD','Punish','mistakes']].forEach((q,i)=>{const g=$('k'+i),x=120+i*473;
+  g.insertBefore(mk('rect',{x:x,y:230,width:414,height:450,rx:18,fill:'var(--stage)',class:'s-line','stroke-width':3},g),g.firstChild);
+  mk('text',{x:x+36,y:280,'font-size':22,class:'m'},g).textContent=q[0];
+  [q[1],q[2]].forEach((s,j)=>{mk('text',{x:x+207,y:580+j*48,'font-size':38,class:'d5','text-anchor':'middle'},g).textContent=s})});
+const ST=['FINISH','SHARE','IMPROVE'].map((s,i)=>{const g=mk('g',{},$('steps')),x=140+i*240,y=560-i*110;
+  mk('rect',{x:x,y:y,width:220,height:700-y,rx:12,class:i==2?'gain':'ink'},g);
+  mk('text',{x:x+110,y:y+50,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var('+(i==2?'--on-gain':'--stage')+')'},g).textContent=s;return g});
+const KEY=[1,4],RG=[],CB=[],TG=[],EB=[];
+[300,240,330,200,280,260].forEach((w,i)=>{const y=280+i*84,g=mk('g',{},$('rows')),k=KEY.includes(i);RG.push(g);
+  CB.push(mk('rect',{x:120,y:y-18,width:36,height:36,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g));
+  mk('path',{d:'M180 '+y+'h'+w,class:'s-line','stroke-width':14,'stroke-linecap':'round'},g);
+  const tg=mk('text',{x:560,y:y+8,'font-size':20,class:'m'},g);if(k)tg.style.fill='var(--gain)';tg.textContent=k?'POLISH':'GOOD ENOUGH';TG.push(tg);
+  EB.push(mk('rect',{x:760,y:y-18,height:36,rx:18,width:220},g))});
+let sp='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?26:60;sp+=(i?'L':'M')+(1360+r*Math.cos(a)).toFixed(0)+' '+(250+r*Math.sin(a)).toFixed(0)}
+mk('path',{d:sp+'Z',fill:'none',class:'s-muted','stroke-width':6,'stroke-dasharray':'10 8','stroke-linejoin':'round'},$('ideal'));
+fig($('now'),1120,380,30,{class:'gain'});fig($('past'),220,620,26,{fill:'var(--muted)'});
+const DT=[];for(let i=0;i<8;i++)DT.push(mk('circle',{cx:300+i*100,cy:690-i*30,r:12,class:'gain'},$('dots')));

@@ -1,0 +1,336 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Power of Habit Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of The Power of Habit: Because habits can be understood, they can be changed, and you can do it yourself by identifying the routine, experimenting with rewards, isolating the cue, and making a plan. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE POWER OF HABIT · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Rewire your own</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">habits.</text>
+<text class="b" x="120" y="600" font-size="32">A four-step method for taking apart any habit you want to change</text>
+<g id="pz"></g>
+<text id="pzl" class="m" x="1240" y="558" font-size="22" text-anchor="middle">THE AFTERNOON COOKIE</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The cookie problem.</text>
+<text class="b" x="120" y="176" font-size="32">Duhigg’s afternoon habit.</text>
+<path id="trip" class="s-muted" d="M240 450Q710 270 1180 450" fill="none" stroke-width="4" stroke-dasharray="10 12"/>
+<g id="walker"></g>
+<rect class="ink" x="160" y="540" width="300" height="16" rx="4"/>
+<path class="s-ink" d="M180 556v120M440 556v120M380 520v20" stroke-width="8" stroke-linecap="round"/>
+<rect class="s-ink" x="330" y="450" width="100" height="70" rx="6" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="310" y="715" font-size="20" text-anchor="middle">DESK</text>
+<g id="caf"><rect class="s-ink" x="1040" y="600" width="420" height="80" rx="8" fill="var(--stage)" stroke-width="6"/><g id="cols"></g><text class="m" x="1250" y="715" font-size="20" text-anchor="middle">CAFETERIA</text></g>
+<g id="ck1"></g>
+<g id="chat"><rect class="s-ink" x="1260" y="360" width="80" height="44" rx="22" fill="var(--stage)" stroke-width="4"/><rect class="s-ink" x="1360" y="360" width="80" height="44" rx="22" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M1284 382h0M1300 382h0M1316 382h0M1384 382h0M1400 382h0M1416 382h0" stroke-width="8" stroke-linecap="round"/></g>
+<g id="scl"><rect class="s-ink" x="120" y="750" width="200" height="96" rx="18" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="220" cy="790" r="28" fill="none" stroke-width="5"/><line id="ndl" class="s-loss" x1="220" y1="790" x2="220" y2="768" stroke-width="5" stroke-linecap="round"/>
+<text class="d" x="360" y="814" font-size="44">Weight up. Willpower <tspan style="fill:var(--loss)">losing.</tspan></text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step 1: Name the routine.</text>
+<text class="b" x="120" y="176" font-size="32">Treat the habit like a detective case.</text>
+<g id="steps"></g>
+<g id="brk"><path class="s-muted" d="M120 480v20h1340v-20" fill="none" stroke-width="4"/><text class="m" x="790" y="545" font-size="22" text-anchor="middle">THE ROUTINE</text></g>
+<g id="lens2"><g id="lens2i"><circle class="s-ink" cx="0" cy="0" r="34" fill="var(--stage)" fill-opacity=".6" stroke-width="9"/><path class="s-ink" d="M25 25l28 28" stroke-width="14" stroke-linecap="round"/></g></g>
+<g id="qq">
+<rect class="s-loss" x="120" y="620" width="420" height="150" rx="16" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<text class="d" x="150" y="690" font-size="52" style="fill:var(--loss)">Cue ?</text><text class="m" x="150" y="742" font-size="22">WHAT STARTED IT?</text>
+<rect class="s-loss" x="1060" y="620" width="420" height="150" rx="16" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<text class="d" x="1090" y="690" font-size="52" style="fill:var(--loss)">Reward ?</text><text class="m" x="1090" y="742" font-size="22">WHAT DID HE REALLY WANT?</text>
+<text id="bigq" class="d" x="800" y="760" font-size="150" text-anchor="middle" style="fill:var(--loss)">?</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step 2: Experiment with rewards.</text>
+<text class="b" x="120" y="176" font-size="32">Swap the reward, then check the craving.</text>
+<text id="rh" class="m" x="120" y="252" font-size="20">REWARD EXPERIMENTS</text>
+<g id="slots"></g>
+<g id="c0"><rect class="s-ink" x="120" y="280" width="250" height="300" rx="16" fill="var(--stage)" stroke-width="5"/><circle class="ink" cx="245" cy="350" r="22"/><path class="s-ink" d="M245 375L235 440M240 395L205 420M240 395L280 410M235 440L205 490M235 440L270 490" fill="none" stroke-width="8" stroke-linecap="round"/><path class="s-line" d="M160 500h170" stroke-width="4"/><text class="m" x="245" y="555" font-size="20" text-anchor="middle">WALK OUTSIDE</text></g>
+<g id="c1"><rect class="s-ink" x="400" y="280" width="250" height="300" rx="16" fill="var(--stage)" stroke-width="5"/><circle class="gain" cx="525" cy="430" r="60"/><path class="s-ink" d="M525 372v-24" stroke-width="6" stroke-linecap="round"/><path class="ink" d="M530 360q30-30 50-10q-25 25-50 10z"/><text class="m" x="525" y="555" font-size="20" text-anchor="middle">EAT AN APPLE</text></g>
+<g id="c2"><rect class="s-ink" x="680" y="280" width="250" height="300" rx="16" fill="var(--stage)" stroke-width="5"/><text class="d" x="805" y="470" font-size="120" text-anchor="middle" style="fill:var(--muted)">?</text><text class="m" x="805" y="555" font-size="20" text-anchor="middle">NEXT TEST</text></g>
+<g id="pad"><rect class="s-ink" x="1000" y="280" width="220" height="300" rx="10" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M1000 312h220" stroke-width="5"/><g id="pw"></g><text class="m" x="1110" y="555" font-size="20" text-anchor="middle">3 WORDS</text></g>
+<g id="alm"><circle class="ink" cx="1300" cy="345" r="22"/><circle class="ink" cx="1420" cy="345" r="22"/><path class="s-ink" d="M1310 490l-20 26M1410 490l20 26" stroke-width="7" stroke-linecap="round"/><circle class="s-ink" cx="1360" cy="420" r="80" fill="var(--stage)" stroke-width="8"/><path class="s-ink" d="M1360 420h28" stroke-width="7" stroke-linecap="round"/><line id="mh2" class="s-gain" x1="1360" y1="420" x2="1360" y2="364" stroke-width="6" stroke-linecap="round"/><text id="mins" class="m" x="1360" y="555" font-size="22" text-anchor="middle">0 MIN</text></g>
+<g id="still"><g id="ck3"></g><text class="d" x="210" y="722" font-size="56">Still want the cookie?</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The real craving.</text>
+<text class="b" x="120" y="176" font-size="32">He walked to a friend’s desk and talked for a while.</text>
+<g id="pals"><g id="palf"></g><rect class="s-line" x="200" y="600" width="360" height="18" rx="9" fill="var(--line)"/><rect id="tbar" class="gain" x="200" y="600" width="0" height="18" rx="9"/><text id="tmin" class="m" x="200" y="660" font-size="22">0 MIN</text></g>
+<g id="talk"><rect class="s-ink" x="190" y="236" width="120" height="60" rx="30" fill="var(--stage)" stroke-width="4"/><rect class="s-ink" x="420" y="236" width="120" height="60" rx="30" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M230 266h0M250 266h0M270 266h0M460 266h0M480 266h0M500 266h0" stroke-width="9" stroke-linecap="round"/></g>
+<g id="ckw"><g id="ck4"></g><text class="m" x="850" y="580" font-size="22" text-anchor="middle">THE URGE</text></g>
+<g id="xx"><path class="s-loss" d="M780 360l140 140M920 360l-140 140" stroke-width="12" stroke-linecap="round"/></g>
+<g id="rr0"><text class="m" x="1080" y="300" font-size="22">THE REAL REWARD</text><text class="d5" x="1080" y="390" font-size="56" fill-opacity=".55">Sugar</text></g>
+<line id="sk" class="s-ink" x1="1072" y1="372" x2="1072" y2="372" stroke-width="6" stroke-linecap="round"/>
+<g id="rr1"><text class="d" x="1080" y="490" font-size="60" style="fill:var(--gain)">A break</text><text class="d" x="1080" y="570" font-size="54" style="fill:var(--gain)">and company.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step 3: Isolate the cue.</text>
+<text class="b" x="120" y="176" font-size="32">Five checks, every time the urge hit.</text>
+<g id="cuesl"></g>
+<g id="cues"></g>
+<g id="tl"></g>
+<g id="dots"></g>
+<g id="t330">
+<path class="s-gain" d="M900 704v32" stroke-width="7" stroke-linecap="round"/>
+<path class="gain" d="M900 744l-13 20h26z"/>
+<text class="d" x="900" y="830" font-size="52" text-anchor="middle" style="fill:var(--gain)">3:30 PM</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step 4: Make a plan.</text>
+<text class="b" x="120" y="176" font-size="32">Same cue, same reward, a new routine.</text>
+<g id="card"><rect class="s-ink" x="120" y="240" width="620" height="340" rx="16" fill="var(--stage)" stroke-width="6"/><text class="m" x="150" y="295" font-size="22">MY PLAN</text><path class="gain" d="M656 318h48l-8-10v-22a16 16 0 0 0-32 0v22z"/><circle class="gain" cx="680" cy="326" r="6"/></g>
+<g id="pl0"><text class="d5" x="150" y="380" font-size="38">At <tspan style="fill:var(--gain)">3:30</tspan> every day,</text></g>
+<g id="pl1"><text class="d5" x="150" y="450" font-size="38">walk to a friend’s desk</text></g>
+<g id="pl2"><text class="d5" x="150" y="520" font-size="38">and talk for <tspan style="fill:var(--gain)">10 minutes</tspan>.</text></g>
+<g id="lp"><circle class="s-line" cx="1140" cy="450" r="170" fill="none" stroke-width="8"/><circle id="pulse" class="gain" r="14"/><g id="nodes"></g></g>
+<g id="auto"><text class="d" x="120" y="700" font-size="48">Within weeks, it was automatic.</text><text class="m" x="120" y="760" font-size="22">HE RARELY THOUGHT ABOUT THE COOKIE</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your toolkit.</text>
+<text class="b" x="120" y="176" font-size="32">The method works on almost any habit.</text>
+<g id="tbx"><path class="s-ink" d="M250 420v-40a20 20 0 0 1 20-20h80a20 20 0 0 1 20 20v40" fill="none" stroke-width="8"/><rect class="s-ink" x="140" y="420" width="340" height="220" rx="16" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M140 490h340" stroke-width="6"/><rect class="gain" x="280" y="470" width="60" height="40" rx="6"/></g>
+<g id="rows"></g>
+<g id="fin"><text class="d" x="120" y="810" font-size="40">Every habit you understand is a habit you can change.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pick one habit</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">that <tspan style="fill:var(--gain)">bugs you</tspan>.</text></g>
+<g id="qc"><text class="m" x="143" y="560" font-size="26">THIS WEEK, WHEN THE URGE HITS, NOTE:</text></g>
+<g id="chk"></g>
+<g id="mir"><ellipse class="s-ink" cx="1300" cy="420" rx="120" ry="170" fill="var(--stage)" stroke-width="10"/><g id="mirf"></g><path class="s-line" d="M1220 360q10-70 60-100" fill="none" stroke-width="6" stroke-linecap="round"/><path class="s-ink" d="M1300 590v60M1230 660h140" stroke-width="10" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Rewire Your Own Habits&rdquo;, from <em>The Power of Habit</em> by Charles Duhigg. The example is Charles Duhigg&#x27;s own afternoon cookie habit, as reported in the book&#x27;s appendix. The clocks, icons, scale and alarm drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 8.1], [8.1, 23.0], [23.0, 38.3], [38.3, 57.1], [57.1, 70.0], [70.0, 87.3], [87.3, 99.9], [99.9, 115.1], [115.1, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Rewire Your Habits", "The Cookie Problem", "Step 1: The Routine", "Step 2: Test Rewards", "The Real Craving", "Step 3: Find the Cue", "Step 4: Make a Plan", "Your Toolkit", "Your Turn"];
+const TM={"cookie": 0.0, "writer_desk": 8.4, "choc_cookie": 14.16, "scale": 18.8, "magnifier": 23.28, "routine_path": 26.72, "question_mark": 33.68, "reward_menu": 38.64, "apple": 42.4, "notepad": 47.68, "alarm_clock": 51.6, "friends_chat": 57.36, "cookie_fade": 61.52, "five_icons": 70.32, "clock_face": 75.76, "time_330": 82.0, "plan_card": 87.6, "daily_alarm": 90.16, "new_loop": 95.52, "toolbox": 100.24, "mirror": 115.36};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const CK=[[-.45,-.3],[.3,-.5],[.05,.05],[-.3,.45],[.45,.3]];
+const cookie=(g,x,y,r)=>{mk('circle',{cx:x,cy:y,r:r,class:'gain'},g);CK.forEach(c=>mk('circle',{cx:x+c[0]*r,cy:y+c[1]*r,r:r*.11,class:'ink'},g));return g};
+const txt=(g,x,y,s,fs,cls,anc,sty)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:cls,'text-anchor':anc||'start'},g);if(sty)e.setAttribute('style',sty);e.textContent=s;return e};
+const PZ=[0,1,2,3].map(k=>{const a0=k*Math.PI/2,a1=a0+Math.PI/2,am=a0+Math.PI/4,cx=1240,cy=370,R=150,g=mk('g',{},$('pz'));
+  mk('path',{d:'M'+cx+' '+cy+'L'+(cx+R*Math.cos(a0)).toFixed(1)+' '+(cy+R*Math.sin(a0)).toFixed(1)+'A'+R+' '+R+' 0 0 1 '+(cx+R*Math.cos(a1)).toFixed(1)+' '+(cy+R*Math.sin(a1)).toFixed(1)+'Z',class:'gain',stroke:'var(--stage)','stroke-width':8,'stroke-linejoin':'round'},g);
+  [[115,am-.4],[115,am+.4],[42,am]].forEach(c=>mk('circle',{cx:cx+c[0]*Math.cos(c[1]),cy:cy+c[0]*Math.sin(c[1]),r:11,class:'ink'},g));
+  txt(g,cx+85*Math.cos(am),cy+85*Math.sin(am)+14,String([3,4,1,2][k]),40,'d','middle','fill:var(--on-gain)');
+  return [g,Math.cos(am),Math.sin(am)]});
+const WK=mk('g',{},$('walker'));fig(WK,0,0,24,'gain');
+[1300,1400].forEach(x=>fig($('cols'),x,450,24,'ink'));
+cookie($('ck1'),1080,562,36);
+const ST=['Get up','Walk over','Buy cookie','Chat'].map((s,i)=>{const x=120+i*350,g=mk('g',{},$('steps'));
+  mk('rect',{x:x,y:330,width:290,height:120,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);txt(g,x+145,402,s,34,'d5','middle');
+  if(i<3)mk('path',{d:'M'+(x+300)+' 390h40m-14-14 14 14-14 14',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+for(let i=0;i<3;i++)mk('rect',{x:120+i*280,y:280,width:250,height:300,rx:16,fill:'none',stroke:'var(--line)','stroke-width':4,'stroke-dasharray':'10 10'},$('slots'));
+const PW=[0,1,2].map(i=>{const y=370+i*65,g=mk('g',{},$('pw'));txt(g,1025,y,(i+1)+'.',22,'m');mk('path',{d:'M1060 '+y+'h130',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},g);return g});
+cookie($('ck3'),150,705,32);
+fig($('palf'),260,360,34,'gain');fig($('palf'),480,360,34,'ink');
+cookie($('ck4'),850,430,90);
+const CX=[200,500,800,1100,1400],LB=['WHERE?','WHEN?','MOOD?','WHO?','JUST DID?'];let HH,MH;
+const sk=(g,d)=>mk('path',{d:d,fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+const CU=CX.map((x,i)=>{mk('circle',{cx:x,cy:380,r:80,fill:'none',stroke:'var(--line)','stroke-width':4,'stroke-dasharray':'10 10'},$('cuesl'));
+  const g=mk('g',{},$('cues')),ring=mk('circle',{cx:x,cy:380,r:80,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  if(i===0){mk('path',{d:'M'+x+' 425c-34-40-40-58-40-74a40 40 0 0 1 80 0c0 16-6 34-40 74z',class:'ink'},g);mk('circle',{cx:x,cy:350,r:13,fill:'var(--stage)'},g)}
+  if(i===1){mk('circle',{cx:x,cy:380,r:46,fill:'none',stroke:'var(--ink)','stroke-width':6},g);HH=sk(g,'M'+x+' 380v-24');MH=sk(g,'M'+x+' 380v-36')}
+  if(i===2){mk('circle',{cx:x,cy:380,r:46,fill:'none',stroke:'var(--ink)','stroke-width':6},g);mk('circle',{cx:x-16,cy:368,r:6,class:'ink'},g);mk('circle',{cx:x+16,cy:368,r:6,class:'ink'},g);sk(g,'M'+(x-18)+' 398h36')}
+  if(i===3){fig(g,x-24,350,13,'ink');fig(g,x+24,350,13,'ink')}
+  if(i===4)sk(g,'M'+(x+36)+' 410V375a20 20 0 0 0-20-20H'+(x-36)+'m18-18-18 18 18 18');
+  txt(g,x,510,LB[i],22,'m','middle');return [g,ring]});
+mk('path',{d:'M200 720H1400',stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},$('tl'));
+['12PM','1PM','2PM','3PM','4PM','5PM','6PM'].forEach((s,i)=>{mk('path',{d:'M'+(200+i*200)+' 712v16',stroke:'var(--ink)','stroke-width':4},$('tl'));txt($('tl'),200+i*200,760,s,20,'m','middle')});
+const DT=[892,906,896,908,900].map((x,i)=>mk('circle',{cx:x,cy:684-i*32,r:13,class:'gain'},$('dots')));
+[[1140,280,'CUE','3:30'],[1287,535,'ROUTINE','TALK'],[993,535,'REWARD','BREAK']].forEach(n=>{mk('circle',{cx:n[0],cy:n[1],r:64,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':6},$('nodes'));txt($('nodes'),n[0],n[1]-6,n[2],18,'m','middle');txt($('nodes'),n[0],n[1]+28,n[3],28,'d','middle')});
+const RW=['Name the routine.','Test rewards to find the craving.','Spot the cue.','Plan your new response.'].map((s,i)=>{const y=300+i*120,g=mk('g',{},$('rows'));
+  mk('path',{d:'M480 530L568 '+(y-14),fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},g);
+  mk('circle',{cx:600,cy:y-14,r:32,class:'gain'},g);txt(g,600,y-2,String(i+1),34,'d','middle','fill:var(--on-gain)');txt(g,660,y,s,40,'d');return g});
+fig($('mirf'),1300,380,36,'gain');
+let cxp=143;const CHP=['PLACE','TIME','MOOD','PEOPLE','WHAT JUST HAPPENED'].map(s=>{const w=s.length*15+40,g=mk('g',{},$('chk'));
+  const r=mk('rect',{x:cxp,y:600,width:w,height:56,rx:28,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);const tx=txt(g,cxp+w/2,635,s,20,'m','middle');cxp+=w+20;return [g,r,tx]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const pk=p(u,TM.cookie,TM.cookie+1.6);
+PZ.forEach(q=>q[0].setAttribute('transform','translate('+(q[1]*80*(1-pk)).toFixed(1)+' '+(q[2]*80*(1-pk)).toFixed(1)+')'));
+rise($('pzl'),p(u,TM.cookie+6.4,TM.cookie+7));
+
+const wk=p(u,TM.writer_desk+1,TM.writer_desk+4),w1=1-wk;
+WK.setAttribute('transform','translate('+(w1*w1*240+2*w1*wk*710+wk*wk*1180).toFixed(1)+' '+(w1*w1*450+2*w1*wk*270+wk*wk*450).toFixed(1)+')');
+$('trip').setAttribute('opacity',p(u,TM.writer_desk,TM.writer_desk+.5));
+rise($('caf'),p(u,TM.writer_desk+.6,TM.writer_desk+1.1));
+rise($('ck1'),p(u,TM.choc_cookie,TM.choc_cookie+.5)); rise($('chat'),p(u,TM.choc_cookie+1.5,TM.choc_cookie+2));
+rise($('scl'),p(u,TM.scale,TM.scale+.5));
+$('ndl').setAttribute('transform','rotate('+(-60+120*p(u,TM.scale+.4,TM.scale+1.6)+(u>=TM.scale+1.6?4*Math.sin(t*7):0)).toFixed(1)+' 220 790)');
+
+rise($('lens2'),p(u,TM.magnifier,TM.magnifier+.5));
+$('lens2i').setAttribute('transform','translate('+(790-525*Math.cos(t*.6)).toFixed(1)+' '+(262+4*Math.sin(t*2)).toFixed(1)+')');
+ST.forEach((g,i)=>{const a=TM.routine_path+.8+i*1.3;rise(g,p(u,a,a+.5))});
+rise($('brk'),p(u,TM.routine_path+5.4,TM.routine_path+6));
+rise($('qq'),p(u,TM.question_mark,TM.question_mark+.6)); $('bigq').setAttribute('opacity',(.6+.4*Math.sin(t*3)).toFixed(2));
+
+rise($('rh'),p(u,TM.reward_menu,TM.reward_menu+.5)); $('slots').setAttribute('opacity',p(u,TM.reward_menu,TM.reward_menu+.5));
+[TM.apple,TM.apple+3.4,TM.reward_menu+1.2].forEach((a,i)=>rise($('c'+i),p(u,a,a+.5)));
+rise($('pad'),p(u,TM.notepad,TM.notepad+.5)); PW.forEach((g,i)=>g.setAttribute('opacity',p(u,TM.notepad+.8+i*.5,TM.notepad+1.2+i*.5)));
+rise($('alm'),p(u,TM.alarm_clock,TM.alarm_clock+.5));
+const am=p(u,TM.alarm_clock+.5,TM.alarm_clock+3);
+$('mh2').setAttribute('transform','rotate('+(360*am).toFixed(1)+' 1360 420)'); $('mins').textContent=Math.round(15*am)+' MIN';
+rise($('still'),p(u,TM.alarm_clock+3.5,TM.alarm_clock+4.1));
+
+rise($('pals'),p(u,TM.friends_chat,TM.friends_chat+.5)); rise($('talk'),p(u,TM.friends_chat+.8,TM.friends_chat+1.3));
+const tb=p(u,TM.friends_chat+.5,TM.cookie_fade); $('tbar').setAttribute('width',(360*tb).toFixed(1)); $('tmin').textContent=Math.round(15*tb)+' MIN';
+rise($('ckw'),p(u,TM.friends_chat-.6,TM.friends_chat));
+$('ck4').setAttribute('opacity',(1-.75*p(u,TM.cookie_fade,TM.cookie_fade+1)).toFixed(2));
+rise($('xx'),p(u,TM.cookie_fade+.4,TM.cookie_fade+.9));
+rise($('rr0'),p(u,TM.cookie_fade+4.2,TM.cookie_fade+4.7));
+$('sk').setAttribute('x2',(1072+175*p(u,TM.cookie_fade+5,TM.cookie_fade+5.6)).toFixed(1));
+rise($('rr1'),p(u,TM.cookie_fade+7.2,TM.cookie_fade+7.8));
+
+$('cuesl').setAttribute('opacity',p(u,TM.five_icons,TM.five_icons+.6));
+[TM.five_icons+5,TM.clock_face,TM.clock_face+1.8,TM.clock_face+3.5,TM.clock_face+4.9].forEach((a,i)=>rise(CU[i][0],p(u,a,a+.4)));
+const on=u>=TM.time_330;
+HH.setAttribute('transform','rotate('+(on?105:t*30).toFixed(1)+' 500 380)'); MH.setAttribute('transform','rotate('+(on?180:t*120).toFixed(1)+' 500 380)');
+CU[1][1].setAttribute('stroke',on?'var(--gain)':'var(--ink)');
+rise($('tl'),p(u,TM.time_330,TM.time_330+.5));
+DT.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.time_330+.5+i*.3,TM.time_330+.8+i*.3)));
+rise($('t330'),p(u,TM.time_330+2,TM.time_330+2.5));
+
+rise($('card'),p(u,TM.plan_card,TM.plan_card+.5));
+[0,1,2].forEach(i=>rise($('pl'+i),p(u,TM.daily_alarm+i*1.6,TM.daily_alarm+i*1.6+.5)));
+rise($('lp'),p(u,TM.daily_alarm+4.8,TM.daily_alarm+5.4));
+const e=Math.max(0,u-TM.new_loop),ang=-Math.PI/2+e*(1.2+e*.35);
+$('pulse').setAttribute('cx',(1140+170*Math.cos(ang)).toFixed(1)); $('pulse').setAttribute('cy',(450+170*Math.sin(ang)).toFixed(1)); $('pulse').setAttribute('opacity',u>=TM.new_loop?1:0);
+rise($('auto'),p(u,TM.new_loop+1.5,TM.new_loop+2.1));
+
+rise($('tbx'),p(u,TM.toolbox,TM.toolbox+.5));
+[3,4.4,7.4,8.7].forEach((d,i)=>rise(RW[i],p(u,TM.toolbox+d,TM.toolbox+d+.5)));
+rise($('fin'),p(u,TM.toolbox+10.9,TM.toolbox+11.5));
+
+rise($('mir'),p(u,TM.mirror,TM.mirror+.6)); rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9));
+rise($('qc'),p(u,TM.mirror+2.6,TM.mirror+3.1));
+CHP.forEach((c,i)=>{const a=TM.mirror+3.2+i*1.1,f=u>=a+.5;rise(c[0],p(u,a,a+.4));c[1].setAttribute('fill',f?'var(--gain)':'var(--stage)');c[2].setAttribute('style',f?'fill:var(--on-gain)':'')});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.53;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

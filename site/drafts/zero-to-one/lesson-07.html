@@ -1,0 +1,335 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zero to One Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Zero to One: Thiel ties the book together with seven tests covering engineering, timing, monopoly, people, distribution, durability, and secrets, and he uses failed clean energy companies to show what happens when businesses fail them. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">ZERO TO ONE · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Seven questions every</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">startup must answer.</text>
+<text class="b" x="120" y="600" font-size="32">Seven tough tests that separate lasting companies from expensive failures.</text>
+<rect class="s-ink" x="1200" y="220" width="260" height="340" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1290" y="204" width="80" height="32" rx="8"/>
+<g id="cl"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The clean energy rush.</text>
+<text class="b" x="120" y="176" font-size="32">In the mid 2000s, it looked like the next big thing.</text>
+<g id="sol"><circle class="gain" cx="530" cy="262" r="34"/>
+<rect class="s-ink" x="160" y="320" width="320" height="200" fill="var(--ice)" stroke-width="6"/>
+<path class="s-ink" d="M240 320v200M320 320v200M400 320v200M160 387h320M160 453h320" stroke-width="3"/>
+<path class="s-ink" d="M260 520v80M380 520v80M140 600h420" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="160" y="650" font-size="20">SOLAR · WIND · BATTERIES</text></g>
+<g id="money"></g>
+<g id="mlab"><text class="m" x="640" y="650" font-size="20">INVESTORS + GOVERNMENTS</text></g>
+<g id="chart"><path class="s-ink" d="M1000 260V600H1460" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path id="cline" class="s-loss" d="M1020 560L1100 500L1180 420L1260 320L1300 300L1360 580L1440 590" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<text class="m" x="1360" y="640" font-size="20" text-anchor="middle">AROUND 2011</text></g>
+<g id="ign"><text class="d" x="120" y="790" font-size="48">They ignored basic business questions.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Engineering. 2. Timing.</text>
+<g id="q1"><rect class="s-line" x="120" y="220" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="270" font-size="22">QUESTION 1 · ENGINEERING</text>
+<g id="gearR"></g><circle cx="260" cy="410" r="24" fill="var(--stage)"/>
+<text class="d5" x="370" y="420" font-size="32">A real breakthrough?</text>
+<text class="m" x="150" y="530" font-size="20">WHAT EXISTS</text><rect class="ink" x="150" y="545" width="50" height="30" rx="4"/>
+<g id="tenx"><text class="m" x="150" y="620" font-size="20" style="fill:var(--gain)">AIM FOR ABOUT 10× BETTER</text><rect id="b10" class="gain" x="150" y="635" width="50" height="30" rx="4"/></g></g>
+<g id="q2"><rect class="s-line" x="840" y="220" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="270" font-size="22">QUESTION 2 · TIMING</text>
+<circle class="s-ink" cx="1000" cy="410" r="80" fill="var(--stage)" stroke-width="7"/><g id="ctk"></g>
+<line id="hh" class="s-ink" x1="1000" y1="410" x2="1000" y2="365" stroke-width="8" stroke-linecap="round"/>
+<line id="hm" class="s-ink" x1="1000" y1="410" x2="1000" y2="346" stroke-width="5" stroke-linecap="round"/>
+<text class="d5" x="1110" y="420" font-size="32">The right moment?</text></g>
+<g id="rush"><g id="rushIn"></g><text class="m" x="870" y="690" font-size="20" style="fill:var(--loss)">RUSHING IN BECAUSE EVERYONE ELSE WAS</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Monopoly. 4. People.</text>
+<g id="q3"><text class="m" x="120" y="260" font-size="22">QUESTION 3 · MONOPOLY</text>
+<circle cx="400" cy="470" r="130" fill="var(--stage)"/><path id="wedge" class="gain"/>
+<circle class="s-ink" cx="400" cy="470" r="130" fill="none" stroke-width="6"/></g>
+<g id="share"><text class="d5" x="400" y="670" font-size="40" text-anchor="middle" style="fill:var(--gain)">Big share</text>
+<text class="m" x="400" y="710" font-size="22" text-anchor="middle">OF A SMALL MARKET</text></g>
+<g id="q4"><text class="m" x="800" y="260" font-size="22">QUESTION 4 · THE RIGHT TEAM?</text><g id="crew"></g></g>
+<g id="ties"></g>
+<g id="tlab"><text class="m" x="800" y="610" font-size="22" style="fill:var(--loss)">POLISHED SALESPEOPLE IN SUITS,</text>
+<text class="m" x="800" y="646" font-size="22" style="fill:var(--loss)">NOT TECHNICAL BUILDERS</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">5. Distribution.</text>
+<text class="b" x="120" y="176" font-size="32">Can you actually get your product to customers?</text>
+<g id="prod"><path class="s-line" d="M140 620H1460" stroke-width="6" stroke-dasharray="20 14"/>
+<rect class="gain" x="160" y="460" width="120" height="120" rx="10"/><path d="M160 500h120M220 460v40" stroke="var(--on-gain)" stroke-width="4"/>
+<text class="m" x="220" y="670" font-size="20" text-anchor="middle">PRODUCT</text></g>
+<g id="vanW"><g id="van"><rect class="gain" x="0" y="500" width="140" height="84" rx="8"/><rect class="ink" x="144" y="526" width="60" height="58" rx="10"/>
+<circle class="ink" cx="40" cy="596" r="18"/><circle class="ink" cx="164" cy="596" r="18"/></g></g>
+<g id="cust"><text class="m" x="1330" y="670" font-size="20" text-anchor="middle">CUSTOMERS</text></g>
+<g id="sell"><text class="d" x="120" y="330" font-size="48">Great products do not sell themselves.</text></g>
+<g id="nox"><path class="s-loss" d="M720 560l60 60M780 560l-60 60" stroke-width="9" stroke-linecap="round"/></g>
+<g id="shelf"><path class="s-ink" d="M140 820H560M150 820V720M550 820V720" stroke-width="6" stroke-linecap="round"/>
+<rect class="gain" x="180" y="740" width="90" height="80" rx="6"/><rect class="gain" x="290" y="740" width="90" height="80" rx="6"/><rect class="gain" x="400" y="740" width="90" height="80" rx="6"/>
+<path class="s-muted" d="M200 724h40M320 716h50M420 724h40" stroke-width="3" stroke-dasharray="4 6"/>
+<text class="m" x="620" y="776" font-size="22">EVEN A CLEVER INVENTION</text>
+<text class="m" x="620" y="812" font-size="22" style="fill:var(--loss)">JUST SITS ON A SHELF</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">6. Durability. 7. Secrets.</text>
+<g id="q6"><text class="m" x="120" y="260" font-size="22">QUESTION 6 · STILL DEFENSIBLE?</text>
+<path class="s-muted" d="M150 560H720m-16-14 16 14-16 14" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="cards"></g>
+<g id="q7"><text class="m" x="860" y="260" font-size="22">QUESTION 7 · THE SECRET</text>
+<rect class="s-ink" x="880" y="290" width="260" height="330" rx="8" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="1010" cy="420" r="30"/><path class="ink" d="M995 440l-12 60h54l-12-60z"/>
+<polygon id="beam" class="gain" points="1030,430 1460,330 1460,530" fill-opacity=".3"/>
+<path class="gain" d="M1390 400l9 20 22 2-17 14 5 22-19-12-19 12 5-22-17-14 22-2z"/>
+<text class="m" x="860" y="670" font-size="22">AN OPPORTUNITY OTHERS DON’T SEE</text></g>
+<g id="obv"><text class="d5" x="120" y="770" font-size="42" fill-opacity=".6">“The world needs green power.”</text>
+<text class="m" x="120" y="830" font-size="22" style="fill:var(--loss)">THE OBVIOUS IDEA, NOT A SECRET</text></g>
+<line id="ostk" class="s-ink" x1="112" y1="756" x2="112" y2="756" stroke-width="5" stroke-linecap="round"/>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Solyndra’s fall.</text>
+<text class="b" x="120" y="176" font-size="32">A solar company with unusual tube-shaped panels.</text>
+<g id="tubes"><rect class="s-ink" x="140" y="250" width="420" height="180" rx="10" fill="none" stroke-width="6"/>
+<text class="m" x="140" y="470" font-size="20">TUBE-SHAPED PANELS</text></g>
+<g id="gov"><path class="ink" d="M640 300L800 250L960 300z"/>
+<rect class="ink" x="670" y="310" width="24" height="100"/><rect class="ink" x="750" y="310" width="24" height="100"/><rect class="ink" x="830" y="310" width="24" height="100"/><rect class="ink" x="906" y="310" width="24" height="100"/>
+<rect class="ink" x="640" y="415" width="320" height="18"/>
+<text class="m" x="640" y="470" font-size="20">GOVERNMENT LOAN GUARANTEE</text>
+<text class="m" x="640" y="500" font-size="20" style="fill:var(--gain)">+ PUBLIC PRAISE</text></g>
+<g id="comp"><text class="m" x="1080" y="280" font-size="20">SOLYNDRA</text><rect class="ink" x="1080" y="295" width="340" height="34" rx="4"/>
+<text class="m" x="1080" y="370" font-size="20">RIVALS</text><rect class="ink" x="1080" y="385" width="330" height="34" rx="4" fill-opacity=".5"/>
+<text class="m" x="1080" y="460" font-size="20" style="fill:var(--loss)">NOT DRAMATICALLY BETTER</text>
+<text class="m" x="1080" y="490" font-size="20" style="fill:var(--loss)">OR CHEAPER</text></g>
+<g id="bkW"><g transform="rotate(-4 1270 600)"><rect class="s-loss" x="1080" y="530" width="380" height="140" rx="10" fill="none" stroke-width="8"/>
+<text class="d" x="1270" y="588" font-size="44" text-anchor="middle" style="fill:var(--loss)">BANKRUPT</text>
+<text class="m" x="1270" y="646" font-size="24" text-anchor="middle" style="fill:var(--loss)">2011</text></g></g>
+<g id="score"></g>
+<g id="fail"><text class="d" x="120" y="730" font-size="44">It failed nearly every one of the seven.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Tesla’s answer.</text>
+<text class="b" x="120" y="176" font-size="32">One green company stood out.</text>
+<g id="carW"><g id="car"><path class="gain" d="M140 440h500v-50q-20-30-80-40l-80-60h-160q-60 0-120 60q-50 10-60 40z"/>
+<path d="M330 300h130l60 50h-190z" fill="var(--stage)"/>
+<circle class="ink" cx="240" cy="440" r="36"/><circle cx="240" cy="440" r="14" fill="var(--stage)"/>
+<circle class="ink" cx="540" cy="440" r="36"/><circle cx="540" cy="440" r="14" fill="var(--stage)"/></g></g>
+<g id="tk"><text class="m" x="760" y="440" font-size="22" style="fill:var(--gain)">CAN ANSWER ALL SEVEN WELL</text></g>
+<g id="small"><circle class="s-ink" cx="280" cy="670" r="120" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="440" y="620" font-size="22" style="fill:var(--gain)">STARTED SMALL</text>
+<text class="m" x="440" y="660" font-size="22">A PRICEY ELECTRIC SPORTS CAR</text>
+<text class="m" x="440" y="700" font-size="22">FOR A NARROW GROUP OF BUYERS</text></g>
+<g id="store"><rect class="s-ink" x="920" y="560" width="240" height="180" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="910" y="530" width="260" height="40" rx="6"/>
+<text class="m" x="1040" y="557" font-size="20" text-anchor="middle" style="fill:var(--stage)">OWN STORE</text>
+<path class="gain" d="M990 670l25-26h70l25 26z"/><rect class="gain" x="960" y="670" width="160" height="36" rx="14"/>
+<circle class="ink" cx="995" cy="710" r="12"/><circle class="ink" cx="1085" cy="710" r="12"/>
+<path class="s-gain" d="M1180 650h100m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="920" y="800" font-size="22">ITS OWN STORES · ITS OWN DISTRIBUTION</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which question can you</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">not answer yet, and what</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">will you <tspan style="fill:var(--gain)">do about it?</tspan></text></g>
+<g id="flab"><text class="m" x="143" y="700" font-size="26">PICK ONE PROJECT · TEST IT AGAINST ALL SEVEN</text></g>
+<g id="fin"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="147" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:27</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Seven Questions Every Startup Must Answer&rdquo;, from <em>Zero to One</em> by Peter Thiel with Blake Masters. The clean energy bust, Solyndra and Tesla are examples as reported in the book. The checklist, crash chart and tick marks are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=147, SC=[[0.0, 9.6], [9.6, 28.1], [28.1, 49.7], [49.7, 65.5], [65.5, 79.4], [79.4, 97.5], [97.5, 118.3], [118.3, 135.1], [135.1, 147.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Seven Questions", "The Clean Energy Rush", "Engineering and Timing", "Monopoly and People", "Distribution", "Durability and Secrets", "Solyndra's Fall", "Tesla's Answer", "Your Turn"];
+const TM={"checklist": 0.0, "solar_panel": 9.92, "money_pile": 14.24, "crash_chart": 19.6, "gear": 28.4, "clock": 39.92, "small_circle": 49.96, "team": 55.28, "delivery_van": 65.8, "warehouse": 74.4, "calendar": 79.72, "keyhole": 86.36, "solyndra": 97.76, "gov_loan": 102.96, "bankruptcy": 111.04, "tesla_car": 118.64, "seven_ticks": 121.72, "showroom": 130.64};
+const man=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const drw=(e,k)=>e.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const tick=(par,d,w)=>mk('path',{d:d,fill:'none',stroke:'var(--gain)','stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1},par);
+const wedge=(cx,cy,r,a)=>{if(a<.01)return'M0 0';const x=cx+r*Math.sin(a),y=cy-r*Math.cos(a);return'M'+cx+' '+cy+'L'+cx+' '+(cy-r)+'A'+r+' '+r+' 0 '+(a>Math.PI?1:0)+' 1 '+x.toFixed(1)+' '+y.toFixed(1)+'Z'};
+const T0=[];for(let i=0;i<7;i++){const y=270+i*40;mk('rect',{x:1225,y:y-14,width:24,height:24,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':4},$('cl'));mk('path',{d:'M1268 '+y+'h'+(150-(i%3)*30),stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round'},$('cl'));T0.push(tick($('cl'),'M1229 '+(y-1)+'l7 8 14-18',6))}
+const M=[];for(let i=0;i<6;i++){const g=mk('g',{},$('money')),y=560-i*38;mk('rect',{x:640,y:y,width:240,height:30,rx:6,class:'gain',stroke:'var(--ink)','stroke-width':3},g);mk('circle',{cx:760,cy:y+15,r:9,fill:'none',stroke:'var(--on-gain)','stroke-width':3},g);M.push(g)}
+let gp='';for(let i=0;i<48;i++){const a=i/48*2*Math.PI,r=Math.floor(i/3)%2?70:88;gp+=(260+r*Math.cos(a)).toFixed(1)+','+(410+r*Math.sin(a)).toFixed(1)+' '}mk('polygon',{points:gp,class:'ink'},$('gearR'));
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1000+64*c).toFixed(1)+' '+(410+64*s).toFixed(1)+'L'+(1000+74*c).toFixed(1)+' '+(410+74*s).toFixed(1),stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},$('ctk'))}
+for(let i=0;i<5;i++)man($('rushIn'),900+i*80,570,14,'loss');
+const CR=[900,1060,1220,1380].map(x=>{const g=mk('g',{},$('crew'));man(g,x,380,36,'ink');mk('path',{d:'M'+x+' 444l-12 14 12 50 12-50z',class:'loss'},$('ties'));return g});
+// customers shifted right; first figure's left edge at x=1204, truck stops at x=1104
+[1240,1330,1420].forEach(x=>man($('cust'),x,470,24,'ink'));
+const CD=['NOW','10 YEARS','20 YEARS'].map((s,i)=>{const x=150+i*210,c=x+80,g=mk('g',{},$('cards'));mk('rect',{x:x,y:300,width:160,height:170,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('rect',{x:x,y:300,width:160,height:36,rx:6,class:'ink'},g);mk('path',{d:'M'+(c-30)+' 372h60v28q0 36-30 52q-30-16-30-52z',class:'gain'},g);const tx=mk('text',{x:c,y:520,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+for(let i=0;i<8;i++)mk('rect',{x:160+i*50,y:265,width:30,height:150,rx:15,fill:'var(--ice)',stroke:'var(--ink)','stroke-width':4},$('tubes'));
+const SB=[];for(let i=0;i<7;i++){const x=120+i*110,g=mk('g',{},$('score'));mk('rect',{x:x,y:540,width:84,height:84,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:i<6?'M'+(x+24)+' 564l36 36M'+(x+60)+' 564l-36 36':'M'+(x+26)+' 582h32',stroke:i<6?'var(--loss)':'var(--muted)','stroke-width':7,'stroke-linecap':'round'},g);SB.push(g)}
+const TK=[];for(let i=0;i<7;i++){const x=790+i*100;mk('circle',{cx:x,cy:350,r:34,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},$('tk'));TK.push(tick($('tk'),'M'+(x-14)+' 352l10 11 20-24',7))}
+[220,280,340].forEach(x=>man($('small'),x,630,16,'gain'));
+man($('store'),1360,610,24,'ink');
+const FB=[];for(let i=0;i<7;i++){const x=143+i*64;mk('rect',{x:x,y:740,width:44,height:44,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},$('fin'));if(i<6)FB.push(tick($('fin'),'M'+(x+10)+' 762l8 9 16-20',6));else{const q=mk('text',{x:x+22,y:775,'font-size':34,'text-anchor':'middle',class:'d',style:'fill:var(--gain)'},$('fin'));q.textContent='?';FB.push(q)}}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+T0.forEach((e,i)=>{const a=TM.checklist+.6+i*.35;drw(e,p(u,a,a+.3))});
+
+rise($('sol'),p(u,TM.solar_panel,TM.solar_panel+.5));
+M.forEach((g,i)=>{const a=TM.money_pile+i*.3;rise(g,p(u,a,a+.3))});
+rise($('mlab'),p(u,TM.money_pile,TM.money_pile+.5));
+rise($('chart'),p(u,TM.crash_chart,TM.crash_chart+.4)); drw($('cline'),p(u,TM.crash_chart+.2,TM.crash_chart+1.8));
+rise($('ign'),p(u,TM.crash_chart+3.3,TM.crash_chart+3.9));
+
+rise($('q1'),p(u,TM.gear,TM.gear+.5)); $('gearR').setAttribute('transform','rotate('+((t*30)%360).toFixed(1)+' 260 410)');
+rise($('tenx'),p(u,TM.gear+6.2,TM.gear+6.7)); $('b10').setAttribute('width',(50+450*p(u,TM.gear+6.4,TM.gear+7.6)).toFixed(1));
+rise($('q2'),p(u,TM.clock,TM.clock+.5));
+$('hm').setAttribute('transform','rotate('+((t*90)%360).toFixed(1)+' 1000 410)'); $('hh').setAttribute('transform','rotate('+((t*8)%360).toFixed(1)+' 1000 410)');
+rise($('rush'),p(u,TM.clock+5,TM.clock+5.5)); $('rushIn').setAttribute('transform','translate('+(100*p(u,TM.clock+5.3,TM.clock+7)).toFixed(1)+' 0)');
+
+rise($('q3'),p(u,TM.small_circle,TM.small_circle+.5));
+$('wedge').setAttribute('d',wedge(400,470,130,.8*2*Math.PI*p(u,TM.small_circle+.6,TM.small_circle+2)));
+rise($('share'),p(u,TM.small_circle+1.4,TM.small_circle+2));
+rise($('q4'),p(u,TM.team,TM.team+.4)); CR.forEach((g,i)=>{const a=TM.team+.2+i*.25;rise(g,p(u,a,a+.4))});
+rise($('ties'),p(u,TM.team+4.2,TM.team+4.7)); rise($('tlab'),p(u,TM.team+4.4,TM.team+5));
+
+const wh=p(u,TM.warehouse,TM.warehouse+.6);
+rise($('prod'),p(u,TM.delivery_van,TM.delivery_van+.5)); rise($('cust'),p(u,TM.delivery_van+.3,TM.delivery_van+.8));
+$('vanW').setAttribute('opacity',(p(u,TM.delivery_van,TM.delivery_van+.4)*(1-.8*wh)).toFixed(2));
+// truck drives from x=320 to x=900 (spans 900..1104), stopping 100px before the first customer
+$('van').setAttribute('transform','translate('+(320+580*p(u,TM.delivery_van+.6,TM.delivery_van+3.2)).toFixed(1)+' 0)');
+rise($('sell'),p(u,TM.delivery_van+5,TM.delivery_van+5.6));
+rise($('shelf'),wh); rise($('nox'),p(u,TM.warehouse+.4,TM.warehouse+.9));
+
+rise($('q6'),p(u,TM.calendar,TM.calendar+.5)); CD.forEach((g,i)=>{const a=TM.calendar+.4+i*.7;rise(g,p(u,a,a+.4))});
+rise($('q7'),p(u,TM.keyhole,TM.keyhole+.5)); $('beam').setAttribute('opacity',(p(u,TM.keyhole+.6,TM.keyhole+1.4)*(.8+.2*Math.sin(t*3))).toFixed(2));
+rise($('obv'),p(u,TM.keyhole+6.2,TM.keyhole+6.7)); $('ostk').setAttribute('x2',(112+690*p(u,TM.keyhole+7,TM.keyhole+7.6)).toFixed(1));
+
+rise($('tubes'),p(u,TM.solyndra,TM.solyndra+.5)); rise($('gov'),p(u,TM.gov_loan,TM.gov_loan+.5));
+rise($('comp'),p(u,TM.gov_loan+5,TM.gov_loan+5.6)); rise($('bkW'),p(u,TM.bankruptcy,TM.bankruptcy+.3));
+SB.forEach((g,i)=>{const a=TM.bankruptcy+2.1+i*.25;rise(g,p(u,a,a+.3))}); rise($('fail'),p(u,TM.bankruptcy+3.2,TM.bankruptcy+3.8));
+
+rise($('carW'),p(u,TM.tesla_car,TM.tesla_car+.5)); $('car').setAttribute('transform','translate('+(-160*(1-p(u,TM.tesla_car,TM.tesla_car+1))).toFixed(1)+' 0)');
+rise($('tk'),p(u,TM.seven_ticks,TM.seven_ticks+.4)); TK.forEach((e,i)=>{const a=TM.seven_ticks+.4+i*.3;drw(e,p(u,a,a+.3))});
+rise($('small'),p(u,TM.seven_ticks+3.7,TM.seven_ticks+4.3)); rise($('store'),p(u,TM.showroom,TM.showroom+.6));
+
+const s8=SC[8][0]/K;
+rise($('flab'),p(u,s8+.3,s8+.8));
+FB.forEach((e,i)=>{const a=s8+1+i*.35,k=p(u,a,a+.3);if(i<6)drw(e,k);else rise(e,k)});
+rise($('qa'),p(u,s8+5.2,s8+5.7)); rise($('qb'),p(u,s8+5.6,s8+6.1)); rise($('qc'),p(u,s8+6,s8+6.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:143.8;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

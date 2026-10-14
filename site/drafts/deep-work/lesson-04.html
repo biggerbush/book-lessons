@@ -1,0 +1,303 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deep Work Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Deep Work: Concentration is a skill you weaken every time you reach for distraction, so you must practice resisting it, even in idle moments. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DEEP WORK · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Train your brain to</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">embrace boredom.</text>
+<text class="b" x="120" y="600" font-size="32">Why resisting your phone in idle moments sharpens your focus.</text>
+<g id="t0fig"></g>
+<path id="t0arm" class="s-ink" fill="none" stroke-width="16" stroke-linecap="round"/>
+<rect id="t0ph" x="1398" y="600" width="44" height="76" rx="8" class="ink"/>
+<circle id="t0glow" class="s-loss" cx="1420" cy="638" r="60" fill="none" stroke-width="4" opacity="0"/>
+<rect class="ink" x="1150" y="700" width="330" height="8" rx="4"/>
+<text class="m" x="1150" y="740" font-size="20">CHECKOUT LINE</text>
+<g id="t0foc"><text class="m" x="1180" y="232" font-size="20">FOCUS</text><rect x="1180" y="250" width="300" height="24" rx="12" fill="none" class="s-ink" stroke-width="4"/><rect id="t0bar" class="gain" x="1180" y="250" width="300" height="24" rx="12"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Focus is a skill, not a trait.</text>
+<text class="b" x="120" y="176" font-size="32">It grows with practice and fades with neglect.</text>
+<g id="b1brain"></g>
+<g id="b1trait"><text class="m" x="300" y="650" font-size="24" text-anchor="middle">A FIXED TRAIT?</text></g>
+<line id="b1strike" class="s-loss" x1="180" y1="642" x2="180" y2="642" stroke-width="5" stroke-linecap="round"/>
+<g id="b1db"><path class="s-ink" d="M220 740H380" stroke-width="10" stroke-linecap="round"/><rect class="gain" x="200" y="705" width="20" height="70" rx="4"/><rect class="gain" x="380" y="705" width="20" height="70" rx="4"/><rect class="ink" x="186" y="718" width="14" height="44" rx="4"/><rect class="ink" x="400" y="718" width="14" height="44" rx="4"/><text class="d5" x="300" y="830" font-size="34" text-anchor="middle">It’s a skill.</text></g>
+<g id="b1paths"><path class="s-gain" d="M490 450H700L1120 300" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="s-loss" d="M700 450L1120 600" fill="none" stroke-width="6" stroke-linecap="round"/><rect class="gain" x="1140" y="260" width="340" height="80" rx="40"/><text class="d5" x="1310" y="313" font-size="36" text-anchor="middle" style="fill:var(--on-gain)">Focus</text><rect x="1140" y="560" width="340" height="80" rx="40" fill="var(--stage)" class="s-loss" stroke-width="5"/><text class="d5" x="1310" y="613" font-size="36" text-anchor="middle" style="fill:var(--loss)">Distraction</text><text class="m" x="1310" y="690" font-size="20" text-anchor="middle" style="fill:var(--loss)">THE WRONG DIRECTION</text><circle id="b1dot" class="loss" r="14"/></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Nass findings.</text>
+<text class="b" x="120" y="176" font-size="32">Stanford researcher Clifford Nass studied constant multitaskers.</text>
+<g id="n2res"><g id="n2fig"></g><rect class="s-ink" x="300" y="400" width="70" height="90" rx="6" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M315 425h40M315 445h40M315 465h26" stroke-width="5" stroke-linecap="round"/><text class="m" x="120" y="560" font-size="20">CLIFFORD NASS · STANFORD</text><text class="m" x="120" y="592" font-size="20">CONSTANT MULTITASKERS</text></g>
+<g id="n2fun"><g id="n2dots"></g><path class="s-ink" d="M560 420H960L800 560V620M560 420L720 560V620" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><text class="m" x="760" y="830" font-size="20" text-anchor="middle">CAN’T FILTER OUT THE IRRELEVANT</text></g>
+<g id="n2brain"><g id="n2b"></g><g id="n2spk"></g><text class="d5" x="1250" y="660" font-size="34" text-anchor="middle">Hard to calm.</text><text class="m" x="1250" y="700" font-size="20" text-anchor="middle">WIRED FOR CONSTANT NOVELTY</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every idle moment, filled.</text>
+<text class="b" x="120" y="176" font-size="32">Your brain learns that boredom is never allowed.</text>
+<g id="i3clock"><circle cx="260" cy="380" r="100" fill="var(--stage)" class="s-ink" stroke-width="7"/><g id="i3ticks"></g><line id="i3hand" x1="260" y1="380" x2="260" y2="300" class="s-loss" stroke-width="7" stroke-linecap="round"/><line x1="260" y1="380" x2="310" y2="380" class="s-ink" stroke-width="7" stroke-linecap="round"/><circle cx="260" cy="380" r="9" class="ink"/></g>
+<g id="i3slots"><text class="m" x="470" y="300" font-size="20">IDLE MOMENTS EACH DAY</text><g id="i3sl"></g></g>
+<g id="i3glow"><text class="m" x="470" y="480" font-size="20" style="fill:var(--loss)">EVERY GAP FILLED WITH A SCREEN</text></g>
+<g id="i3door"><text class="d5" x="120" y="640" font-size="38">Hard task ahead?</text><text class="d5" x="120" y="690" font-size="38">Your mind looks for escape.</text><rect x="900" y="520" width="160" height="300" rx="6" fill="var(--stage)" class="s-ink" stroke-width="6"/><text class="m" x="980" y="570" font-size="18" text-anchor="middle">HARD TASK</text><path class="s-ink" d="M1012 662v-14a13 13 0 0 1 26 0v14" fill="none" stroke-width="5"/><rect class="loss" x="1004" y="660" width="42" height="36" rx="6"/><g id="i3mind"></g><path id="i3hit" class="s-loss" d="M884 548l-22-18M880 572h-28" stroke-width="5" stroke-linecap="round"/></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Flip the breaks.</text>
+<text class="b" x="120" y="176" font-size="32">Take breaks from focus, not breaks from distraction.</text>
+<g id="f4top"><text class="m" x="120" y="270" font-size="22">DON’T: BREAKS FROM DISTRACTION TO FOCUS</text><rect class="loss" x="120" y="300" width="1360" height="80" rx="16"/><rect class="gain" x="400" y="300" width="80" height="80"/><rect class="gain" x="800" y="300" width="80" height="80"/><rect class="gain" x="1200" y="300" width="80" height="80"/></g>
+<line id="f4x" class="s-ink" x1="110" y1="340" x2="110" y2="340" stroke-width="8" stroke-linecap="round"/>
+<g id="f4bot"><text class="m" x="120" y="480" font-size="22" style="fill:var(--gain)">DO: BREAKS FROM FOCUS TO USE DISTRACTION</text><rect class="gain" x="120" y="510" width="1360" height="80" rx="16"/><g id="f4blk"></g></g>
+<g id="f4cal"><g id="f4tk"></g><text class="m" x="490" y="645" font-size="18" text-anchor="middle" style="fill:var(--loss)">ONLINE</text><text class="m" x="930" y="645" font-size="18" text-anchor="middle" style="fill:var(--loss)">ONLINE</text><text class="m" x="1330" y="645" font-size="18" text-anchor="middle" style="fill:var(--loss)">ONLINE</text><text class="d5" x="120" y="730" font-size="40">Schedule internet time in advance.</text><text class="m" x="120" y="780" font-size="22">STAY OFFLINE OUTSIDE THOSE BLOCKS</text><rect x="1000" y="670" width="160" height="150" rx="10" fill="var(--stage)" class="s-ink" stroke-width="6"/><rect class="ink" x="1000" y="670" width="160" height="32" rx="8"/><g id="f4cells"></g></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The notepad rule.</text>
+<text class="b" x="120" y="176" font-size="32">Write down when your next internet block begins.</text>
+<g id="n5pad"><rect x="140" y="250" width="360" height="470" rx="14" fill="var(--stage)" class="s-ink" stroke-width="6"/><rect class="gain" x="143" y="253" width="354" height="38" rx="11"/><text class="m" x="170" y="340" font-size="20">NEXT INTERNET BLOCK</text><circle cx="220" cy="410" r="36" fill="none" class="s-ink" stroke-width="5"/><path class="s-ink" d="M220 410v-22M220 410h16" stroke-width="5" stroke-linecap="round"/><path class="s-gain" d="M280 425h190" stroke-width="5" stroke-linecap="round"/></g>
+<g id="n5list"><text class="m" x="170" y="510" font-size="20">LOOK IT UP LATER</text><path id="n5l0" class="s-ink" d="M170 560h250" stroke-width="5" stroke-linecap="round"/><path id="n5l1" class="s-ink" d="M170 610h200" stroke-width="5" stroke-linecap="round"/><path id="n5l2" class="s-ink" d="M170 660h230" stroke-width="5" stroke-linecap="round"/></g>
+<g id="n5hg"><polygon id="n5st" class="gain"/><polygon id="n5sb" class="gain"/><line id="n5sr" class="s-gain" x1="740" y1="450" x2="740" y2="610" stroke-width="4"/><path class="s-ink" d="M670 290L810 290L750 450L810 610L670 610L730 450Z" fill="none" stroke-width="6" stroke-linejoin="round"/><rect class="ink" x="650" y="276" width="180" height="14" rx="5"/><rect class="ink" x="650" y="610" width="180" height="14" rx="5"/><text class="d5" x="740" y="700" font-size="34" text-anchor="middle">Need to look it up? Wait.</text><text class="m" x="740" y="745" font-size="20" text-anchor="middle">UNTIL YOUR NEXT BLOCK</text></g>
+<g id="n5home"><path d="M1040 470L1240 310L1440 470V720H1040Z" fill="var(--stage)" class="s-ink" stroke-width="6" stroke-linejoin="round"/><rect x="1300" y="480" width="90" height="64" fill="none" class="s-ink" stroke-width="5"/><circle cx="1345" cy="512" r="18" class="gain"/><circle cx="1355" cy="505" r="15" fill="var(--stage)"/><rect class="gain" x="1100" y="560" width="200" height="50" rx="12"/><rect class="gain" x="1080" y="600" width="240" height="70" rx="14"/><g id="n5fig"></g><text class="m" x="1240" y="780" font-size="20" text-anchor="middle">AT HOME, IN THE EVENINGS TOO</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Productive meditation.</text>
+<text class="b" x="120" y="176" font-size="32">Think about one problem while you move.</text>
+<g id="w6path"><path d="M120 760C500 640 900 820 1480 700" fill="none" class="s-line" stroke-width="6" stroke-dasharray="14 12" stroke-linecap="round"/><g id="w6walk"></g></g>
+<g id="w6l0"><text class="m" x="120" y="300" font-size="22">A WALK</text></g>
+<g id="w6l1"><text class="m" x="120" y="340" font-size="22">A JOG</text></g>
+<g id="w6l2"><text class="m" x="120" y="380" font-size="22">A COMMUTE</text></g>
+<g id="w6bulb"><path class="s-gain" d="M800 250v-40M720 290l-28-22M880 290l28-22M690 370h-36M910 370h36" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="800" cy="350" r="70"/><rect class="ink" x="772" y="424" width="56" height="18" rx="4"/><rect class="ink" x="780" y="446" width="40" height="14" rx="4"/><text class="m" x="800" y="510" font-size="22" text-anchor="middle">ONE WELL-DEFINED PROBLEM</text></g>
+<g id="w6back"><path class="s-gain" d="M1160 290Q1060 420 890 370" fill="none" stroke-width="5" stroke-dasharray="10 8"/><path class="s-gain" d="M914 350l-24 20 28 8" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1180" y="470" font-size="20">MENTAL REPS</text><g id="w6reps"></g></g>
+<circle id="w6dot" class="loss" r="14"/>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Roosevelt dash.</text>
+<text class="b" x="120" y="176" font-size="32">Short, fiercely focused bursts of work.</text>
+<g id="r7ted"><g id="r7fig"></g><rect class="gain" x="220" y="420" width="80" height="50" rx="5"/><path d="M260 420v50" stroke="var(--stage)" stroke-width="4"/><text class="m" x="120" y="550" font-size="20">T. ROOSEVELT · HARVARD</text><g id="r7bursts"></g><text class="m" x="120" y="720" font-size="20">SHORT, FIERCE BURSTS</text></g>
+<g id="r7sw"><rect class="ink" x="780" y="262" width="40" height="20" rx="4"/><rect class="ink" x="792" y="280" width="16" height="12"/><circle cx="800" cy="430" r="140" fill="var(--stage)"/><path class="gain" fill-opacity=".35" d="M800 430V300A130 130 0 0 1 930 430Z"/><circle cx="800" cy="430" r="140" fill="none" class="s-ink" stroke-width="8"/><line id="r7hand" x1="800" y1="430" x2="800" y2="315" class="s-loss" stroke-width="8" stroke-linecap="round"/><circle cx="800" cy="430" r="10" class="ink"/><text class="m" x="800" y="620" font-size="20" text-anchor="middle">SET A TIGHT DEADLINE</text></g>
+<g id="r7race"><path class="s-line" d="M1000 470H1400" stroke-width="5" stroke-dasharray="12 10"/><circle id="r7run" class="gain" cx="1010" cy="450" r="16"/><text class="d5" x="1200" y="540" font-size="36" text-anchor="middle">Race it.</text></g>
+<g id="r7flag"><path class="s-ink" d="M1400 470V290" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1400 290h70v50h-70z"/></g>
+<g id="r7end"><text class="d" x="120" y="800" font-size="44">Each dash makes your focus stronger.</text><rect id="r7bar" class="gain" x="124" y="822" width="0" height="12" rx="6"/></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Next time you wait</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">in line, leave your</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">phone</tspan> in your pocket.</text></g>
+<rect id="c8ph" class="ink" x="1300" y="220" width="80" height="140" rx="12"/>
+<path d="M1230 410h220v130q-110 80-220 0z" fill="var(--stage)" class="s-ink" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-gain" d="M1244 430h192" stroke-width="4" stroke-dasharray="10 8"/>
+<g id="c8tag"><text class="m" x="143" y="700" font-size="26">STAND THERE, A LITTLE BORED. LET FOCUS GROW.</text><rect id="c8bar" class="gain" x="143" y="730" width="0" height="14" rx="7"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="122" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:02</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Train Your Brain to Embrace Boredom&rdquo;, from <em>Deep Work</em> by Cal Newport. The Clifford Nass multitasking research and the Theodore Roosevelt example are as reported in the book. Drawings such as the dumbbell, locked door and stopwatch are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=122, SC=[[0.0, 9.6], [9.6, 22.7], [22.7, 37.3], [37.3, 52.7], [52.7, 67.9], [67.9, 78.5], [78.5, 92.2], [92.2, 110.2], [110.2, 122.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Bored in Line", "Focus Is a Skill", "The Nass Findings", "Idle Moments", "Flip the Breaks", "The Notepad Rule", "Productive Meditation", "The Roosevelt Dash", "Your Challenge"];
+const TM={"phone_line": 0.0, "brain_gym": 9.92, "dumbbell": 13.92, "two_paths": 18.16, "researcher": 22.96, "cluttered_desk": 29.0, "faded_spot": 32.72, "clock_tick": 37.6, "phone_glow": 40.8, "locked_door": 46.96, "split_screen": 53.04, "pause_sign": 59.04, "calendar": 63.36, "notepad": 68.16, "hourglass": 71.72, "home_couch": 75.28, "walking_path": 78.8, "light_bulb": 81.84, "arrow_back": 88.36, "roosevelt": 92.48, "stopwatch": 99.76, "finish_flag": 106.16, "pocket": 110.48};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const brainG=(g,cx,cy,rx,ry)=>{mk('ellipse',{cx:cx,cy:cy,rx:rx,ry:ry,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':7},g);mk('path',{d:`M${cx} ${cy-ry+10}V${cy+ry-10}`,stroke:'var(--ink)','stroke-width':5},g);
+  [-1,1].forEach(s=>mk('path',{d:`M${cx+s*rx*.2} ${cy-ry*.4}q${s*rx*.3} ${-ry*.3} ${s*rx*.55} 0M${cx+s*rx*.15} ${cy+ry*.1}q${s*rx*.3} ${ry*.35} ${s*rx*.6} 0M${cx+s*rx*.25} ${cy+ry*.55}q${s*rx*.2} ${-ry*.25} ${s*rx*.45} 0`,fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},g))};
+const bz=(s,a,b,c,d)=>(1-s)**3*a+3*(1-s)**2*s*b+3*(1-s)*s*s*c+s**3*d;
+fig($('t0fig'),1290,360,50,'ink');
+const b1in=mk('g',{},$('b1brain'));brainG(b1in,300,450,160,120);
+fig($('n2fig'),260,320,40,'ink');brainG($('n2b'),1250,450,140,110);
+const ND=[];for(let i=0;i<14;i++)ND.push([mk('circle',{r:10,class:i%5===0?'gain':'loss'},$('n2dots')),590+((i*137)%340)]);
+const SPK=[];for(let i=0;i<10;i++)SPK.push(mk('line',{stroke:'var(--loss)','stroke-width':5,'stroke-linecap':'round'},$('n2spk')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('line',{x1:260+82*c,y1:380+82*s,x2:260+94*c,y2:380+94*s,stroke:'var(--ink)','stroke-width':4},$('i3ticks'))}
+const SL=[];for(let i=0;i<10;i++){const x=470+i*100;mk('rect',{x:x,y:330,width:70,height:100,rx:12,fill:'none',stroke:'var(--line)','stroke-width':4},$('i3sl'));SL.push(mk('rect',{x:x+15,y:345,width:40,height:70,rx:6,class:'loss'},$('i3sl')))}
+fig($('i3mind'),0,620,30,'loss');
+[420,860,1260].forEach(x=>{mk('rect',{x:x,y:510,width:140,height:80,class:'loss'},$('f4blk'));[50,78].forEach(o=>mk('rect',{x:x+o,y:530,width:12,height:40,rx:3,fill:'var(--stage)'},$('f4blk')))});
+for(let i=0;i<15;i++)mk('path',{d:'M'+(120+i*97.1).toFixed(1)+' 600v16',stroke:'var(--muted)','stroke-width':4},$('f4tk'));
+for(let r=0;r<3;r++)for(let c=0;c<4;c++)mk('rect',{x:1016+c*36,y:716+r*34,width:24,height:22,rx:4,fill:(r*4+c)%5===1?'var(--loss)':'var(--line)'},$('f4cells'));
+fig($('n5fig'),1200,520,22,'ink');
+const wk=mk('g',{},$('w6walk'));fig(wk,0,-75,16,'ink');
+const RP=[];for(let i=0;i<5;i++)RP.push(mk('circle',{cx:1200+i*56,cy:510,r:16},$('w6reps')));
+fig($('r7fig'),260,330,36,'ink');
+const BR=[];for(let i=0;i<4;i++)BR.push(mk('rect',{x:140+i*80,y:600,width:50,height:80,rx:8,class:'gain'},$('r7bursts')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const ph=p(u,TM.phone_line,TM.phone_line+1.6),py=600-200*ph;
+$('t0ph').setAttribute('y',py.toFixed(1));$('t0ph').setAttribute('class',ph>.95?'loss':'ink');
+$('t0arm').setAttribute('d','M1350 480L1412 '+(py+50).toFixed(1));
+$('t0glow').setAttribute('cy',(py+38).toFixed(1));$('t0glow').setAttribute('r',(56+6*Math.sin(t*4)).toFixed(1));$('t0glow').setAttribute('opacity',(p(u,TM.phone_line+1.4,TM.phone_line+2)*(.5+.4*Math.sin(t*4))).toFixed(2));
+rise($('t0foc'),p(u,TM.phone_line+6,TM.phone_line+6.5));$('t0bar').setAttribute('width',(300*(1-.8*p(u,TM.phone_line+6.5,TM.phone_line+9))).toFixed(1));
+
+rise($('b1brain'),p(u,TM.brain_gym,TM.brain_gym+.5));rise($('b1trait'),p(u,TM.brain_gym+.6,TM.brain_gym+1.1));
+$('b1strike').setAttribute('x2',(180+240*p(u,TM.brain_gym+2,TM.brain_gym+2.6)).toFixed(1));
+rise($('b1db'),p(u,TM.dumbbell,TM.dumbbell+.5));
+const gr=1+.1*p(u,TM.dumbbell+.5,TM.dumbbell+2)+(u>TM.dumbbell?.02*Math.sin(t*3):0);
+b1in.setAttribute('transform','translate(300 450) scale('+gr.toFixed(3)+') translate(-300 -450)');
+rise($('b1paths'),p(u,TM.two_paths,TM.two_paths+.5));
+const dd=((t*.45)%1)*656;let bx,by;if(dd<210){bx=490+dd;by=450}else{const k=(dd-210)/446;bx=700+420*k;by=450+150*k}
+$('b1dot').setAttribute('cx',bx.toFixed(1));$('b1dot').setAttribute('cy',by.toFixed(1));
+
+rise($('n2res'),p(u,TM.researcher,TM.researcher+.5));rise($('n2fun'),p(u,TM.cluttered_desk,TM.cluttered_desk+.5));
+ND.forEach(([e,x0],i)=>{const c=(t*.25+i/14)%1,y=230+560*c,xe=760+(x0-760)*.06,x=y<420?x0:y<560?x0+(xe-x0)*(y-420)/140:xe;e.setAttribute('cx',x.toFixed(1));e.setAttribute('cy',y.toFixed(1))});
+rise($('n2brain'),p(u,TM.faded_spot,TM.faded_spot+.5));
+SPK.forEach((e,i)=>{const a=i*.628,l=20+20*Math.abs(Math.sin(t*7+i*1.7)),c=Math.cos(a),s=Math.sin(a);e.setAttribute('x1',(1250+c*160).toFixed(1));e.setAttribute('y1',(450+s*130).toFixed(1));e.setAttribute('x2',(1250+c*(160+l)).toFixed(1));e.setAttribute('y2',(450+s*(130+l)).toFixed(1))});
+
+rise($('i3clock'),p(u,TM.clock_tick,TM.clock_tick+.5));$('i3hand').setAttribute('transform','rotate('+(Math.floor(t)*30%360)+' 260 380)');
+rise($('i3slots'),p(u,TM.clock_tick+.8,TM.clock_tick+1.3));
+SL.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.phone_glow+i*.3,TM.phone_glow+i*.3+.3)));
+rise($('i3glow'),p(u,TM.phone_glow+3.5,TM.phone_glow+4));
+rise($('i3door'),p(u,TM.locked_door,TM.locked_door+.5));
+const bang=u>TM.locked_door+.8?Math.abs(Math.sin(t*4)):1;
+$('i3mind').setAttribute('transform','translate('+(855-60*bang).toFixed(1)+' 0)');$('i3hit').setAttribute('opacity',bang<.25?1:0);
+
+rise($('f4top'),p(u,TM.split_screen,TM.split_screen+.5));
+$('f4x').setAttribute('x2',(110+1380*p(u,TM.split_screen+2.2,TM.split_screen+3)).toFixed(1));
+rise($('f4bot'),p(u,TM.pause_sign,TM.pause_sign+.5));rise($('f4cal'),p(u,TM.calendar,TM.calendar+.5));
+
+rise($('n5pad'),p(u,TM.notepad,TM.notepad+.5));rise($('n5list'),p(u,TM.hourglass,TM.hourglass+.5));
+[0,1,2].forEach(i=>rise($('n5l'+i),p(u,TM.hourglass+.6+i*.6,TM.hourglass+1+i*.6)));
+rise($('n5hg'),p(u,TM.hourglass,TM.hourglass+.5));
+const sk=p(u,TM.hourglass+.5,TM.hourglass+4.5),yt=330+120*sk,ht=70-60*(yt-290)/160,yb=610-110*sk,hb=10+60*(yb-450)/160;
+$('n5st').setAttribute('points',(740-ht)+','+yt+' '+(740+ht)+','+yt+' 750,450 730,450');
+$('n5sb').setAttribute('points','672,608 808,608 '+(740+hb)+','+yb+' '+(740-hb)+','+yb);
+$('n5sr').setAttribute('y2',yb.toFixed(1));$('n5sr').setAttribute('opacity',sk>0&&sk<1?1:0);
+rise($('n5home'),p(u,TM.home_couch,TM.home_couch+.5));
+
+rise($('w6path'),p(u,TM.walking_path,TM.walking_path+.5));
+const ws=.04+.88*lin(u,TM.walking_path,SC[6][1]/K);
+wk.setAttribute('transform','translate('+bz(ws,120,500,900,1480).toFixed(1)+' '+(bz(ws,760,640,820,700)-4*Math.abs(Math.sin(t*5))).toFixed(1)+')');
+rise($('w6bulb'),p(u,TM.light_bulb,TM.light_bulb+.5));[0,1,2].forEach(i=>rise($('w6l'+i),p(u,TM.light_bulb+1+i*.5,TM.light_bulb+1.4+i*.5)));
+rise($('w6back'),p(u,TM.arrow_back,TM.arrow_back+.5));
+const we=u-TM.arrow_back,wc=((we%2.5)+2.5)%2.5/2.5,wd=wc<.5?ease(wc/.5):1-ease((wc-.5)/.5);
+$('w6dot').setAttribute('cx',(870+280*wd).toFixed(1));$('w6dot').setAttribute('cy',(330-60*wd).toFixed(1));$('w6dot').setAttribute('opacity',we>0?1:0);
+const nr=Math.min(5,Math.floor(Math.max(0,we)/2.5));RP.forEach((e,i)=>e.setAttribute('fill',i<nr?'var(--gain)':'var(--line)'));
+
+rise($('r7ted'),p(u,TM.roosevelt,TM.roosevelt+.5));BR.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.roosevelt+2+i*.4,TM.roosevelt+2.4+i*.4)));
+rise($('r7sw'),p(u,TM.stopwatch,TM.stopwatch+.5));
+const ha=u>TM.stopwatch+1?90*((((u-TM.stopwatch-1)%3)+3)%3)/3:0;$('r7hand').setAttribute('transform','rotate('+ha.toFixed(1)+' 800 430)');
+rise($('r7race'),p(u,TM.stopwatch+4,TM.stopwatch+4.5));$('r7run').setAttribute('cx',(1010+370*((t*.4)%1)).toFixed(1));
+rise($('r7flag'),p(u,TM.finish_flag,TM.finish_flag+.5));rise($('r7end'),p(u,TM.finish_flag+.3,TM.finish_flag+.8));
+$('r7bar').setAttribute('width',(860*p(u,TM.finish_flag+.8,TM.finish_flag+2.5)).toFixed(1));
+
+rise($('qa'),p(u,TM.pocket,TM.pocket+.5));rise($('qb'),p(u,TM.pocket+.4,TM.pocket+.9));rise($('qc'),p(u,TM.pocket+.8,TM.pocket+1.3));
+$('c8ph').setAttribute('y',(220+160*p(u,TM.pocket+1.4,TM.pocket+2.6)).toFixed(1));
+rise($('c8tag'),p(u,TM.pocket+5.4,TM.pocket+6));$('c8bar').setAttribute('width',(600*p(u,TM.pocket+5.8,TM.pocket+9)).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:118.05;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,365 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Lean Startup Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of The Lean Startup: The true measure of a startup&#x27;s progress is what it has proven about customers through real experiments, not how much it has built. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE LEAN STARTUP · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Validated learning</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">is real progress.</text>
+<text class="b" x="120" y="600" font-size="32">Measure progress by what you prove, not what you build.</text>
+<g id="team"></g>
+<rect class="ink" x="1100" y="556" width="240" height="14" rx="4"/>
+<g id="feat"></g>
+<text class="m" x="1420" y="600" font-size="20" text-anchor="middle">FEATURES</text>
+<g id="qm"><text class="d" x="1220" y="410" font-size="110" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A different yardstick.</text>
+<text class="b" x="120" y="176" font-size="32">Startups need a different way to measure progress.</text>
+<g id="ruler"><rect x="120" y="210" width="1360" height="44" rx="6" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><g id="ticks"></g></g>
+<g id="fac">
+<rect class="s-line" x="120" y="290" width="640" height="430" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="336" font-size="22">FACTORY</text>
+<rect class="ink" x="165" y="420" width="24" height="70"/>
+<path class="ink" d="M160 640V470l60 40v-40l60 40v-40l60 40V640z"/>
+<path class="s-ink" d="M360 642H730" stroke-width="6" stroke-linecap="round"/>
+<g id="fbox"></g>
+<text class="m" x="150" y="690" font-size="20">MORE PRODUCTS = MORE PROGRESS</text>
+</g>
+<g id="stu">
+<rect class="s-line" x="840" y="290" width="640" height="430" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="336" font-size="22">STARTUP</text>
+<g id="cust1"></g>
+<text class="d" x="1210" y="420" font-size="64" style="fill:var(--loss)">?</text>
+<path class="s-ink" d="M880 600H1270" stroke-width="6" stroke-linecap="round"/>
+<g id="sbox"></g>
+<rect class="s-loss" x="1330" y="520" width="120" height="100" rx="8" fill="none" stroke-width="5"/>
+<rect x="1360" y="550" width="60" height="44" rx="6" fill="var(--line)"/>
+<text class="m" x="1390" y="654" font-size="20" text-anchor="middle" style="fill:var(--loss)">WASTE</text>
+<text class="m" x="870" y="700" font-size="20">NOBODY KNOWS WHAT CUSTOMERS WANT</text>
+</g>
+<g id="waste1"><text class="d5" x="120" y="800" font-size="40">In a startup, building more can mean wasting more.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The IMVU bet.</text>
+<text class="b" x="120" y="176" font-size="32">Ries cofounded IMVU: 3D avatars for online chat.</text>
+<g id="riesg"><g id="riesP"></g><text class="m" x="280" y="620" font-size="20" text-anchor="middle">ERIC RIES · IMVU</text></g>
+<g id="chat">
+<rect class="s-ink" x="480" y="250" width="560" height="400" rx="16" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M480 300H1040" stroke-width="5"/>
+<text class="m" x="505" y="284" font-size="20">INSTANT MESSENGER</text>
+<rect x="510" y="320" width="280" height="50" rx="25" fill="var(--line)"/>
+<rect class="s-ink" x="740" y="400" width="270" height="50" rx="25" fill="none" stroke-width="4"/>
+<g id="avP"></g>
+<g id="addon"><rect class="gain" x="620" y="530" width="150" height="50" rx="12"/><text class="m" x="695" y="563" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">ADD-ON</text></g>
+</g>
+<g id="sheets"></g>
+<g id="codeL"><text class="m" x="1290" y="690" font-size="20" text-anchor="middle">MONTHS OF CODE</text><text class="m" x="1290" y="720" font-size="18" text-anchor="middle">FOR MANY CHAT NETWORKS</text></g>
+<g id="bet"><text class="d5" x="120" y="800" font-size="36">The bet: people want an add-on for chats they already use.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Nobody came.</text>
+<text class="b" x="120" y="176" font-size="32">Launch day: almost nobody downloaded it.</text>
+<g id="dl">
+<path class="s-ink" d="M170 270V620H640" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-loss" d="M175 604L300 602L420 599L540 601L630 597" fill="none" stroke-width="7" stroke-linecap="round"/>
+<text class="m" x="405" y="560" font-size="20" text-anchor="middle" style="fill:var(--loss)">ALMOST NOBODY</text>
+<text class="m" x="170" y="664" font-size="20">DOWNLOADS AFTER LAUNCH</text>
+</g>
+<g id="intv">
+<g id="teamP"></g>
+<g id="custP"></g>
+<rect class="ink" x="760" y="556" width="320" height="14" rx="4"/>
+<rect class="s-ink" x="700" y="290" width="220" height="64" rx="14" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="810" y="330" font-size="22" text-anchor="middle">INSTALL IT?</text>
+<g id="nox"><rect class="s-loss" x="960" y="290" width="130" height="64" rx="14" fill="var(--stage)" stroke-width="4"/><path class="s-loss" d="M1005 302l40 40M1045 302l-40 40" stroke-width="7" stroke-linecap="round"/></g>
+</g>
+<g id="frd">
+<g id="frdP"></g>
+<path class="s-muted" d="M1090 470H1240m-16-14 16 14-16 14" fill="none" stroke-width="5" stroke-dasharray="10 8" stroke-linecap="round"/>
+<path class="s-loss" d="M1152 452l36 36M1188 452l-36 36" stroke-width="7" stroke-linecap="round"/>
+<text class="m" x="1360" y="590" font-size="20" text-anchor="middle">THEIR FRIENDS</text>
+<text class="d5" x="120" y="790" font-size="36">They wouldn’t bring friends into something untried.</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A painful lesson.</text>
+<text class="b" x="120" y="176" font-size="32">Months of careful code, thrown away.</text>
+<g id="trash">
+<g id="fall"></g>
+<path class="s-ink" d="M220 430h200l-22 250h-156z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-line" d="M270 470v180M320 470v180M370 470v180" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M290 400v-14h60v14" fill="none" stroke-width="6"/>
+<rect class="ink" x="200" y="400" width="240" height="22" rx="6"/>
+</g>
+<g id="wfor"><text class="m" x="320" y="740" font-size="22" text-anchor="middle" style="fill:var(--loss)">WHAT WAS IT ALL FOR?</text></g>
+<g id="bulb">
+<g id="rays"></g>
+<circle id="bulbC" class="gain" cx="740" cy="400" r="80"/>
+<rect class="ink" x="712" y="476" width="56" height="44" rx="6"/>
+<g id="net"></g>
+<text class="d" x="920" y="620" font-size="44" style="fill:var(--gain)">The real learning:</text>
+<text class="d" x="920" y="680" font-size="44">a standalone network</text>
+<text class="d" x="920" y="740" font-size="44">to meet new people.</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Could it be cheaper?</text>
+<text class="b" x="120" y="176" font-size="32">Learn the same thing with far less effort.</text>
+<g id="hg">
+<polygon id="sandT" class="gain"/><polygon id="sandB" class="gain"/>
+<path id="sandS" class="s-gain" d="M260 458V612" stroke-width="3"/>
+<path class="s-ink" d="M195 304L325 304L272 460L325 616L195 616L248 460Z" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<rect class="ink" x="175" y="290" width="170" height="14" rx="4"/><rect class="ink" x="175" y="616" width="170" height="14" rx="4"/>
+</g>
+<g id="row1"><text class="m" x="460" y="285" font-size="20">BUILD FIRST: MONTHS OF CODE</text><rect id="bar1" class="loss" x="460" y="300" height="64" rx="8"/></g>
+<g id="row2"><text class="m" x="460" y="440" font-size="20">TEST FIRST WITH REAL CUSTOMERS</text><rect id="bar2" class="gain" x="460" y="455" height="64" rx="8"/>
+<rect class="s-ink" x="700" y="470" width="240" height="160" rx="10" fill="var(--stage)" stroke-width="4" stroke-dasharray="12 8"/>
+<rect class="s-line" x="725" y="492" width="190" height="40" fill="none" stroke-width="4"/>
+<path class="s-line" d="M725 562h150M725 596h110" stroke-width="5" stroke-linecap="round"/>
+<g id="custS"></g>
+<path id="chk" class="s-gain" d="M1100 470l25 25l50-60" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="better"><text class="d5" x="120" y="760" font-size="40">Those months could have gone somewhere better.</text><rect class="gain" x="122" y="782" width="140" height="10"/></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What “validated” means.</text>
+<text class="b" x="120" y="176" font-size="32">Proving something true about customers, with real evidence.</text>
+<g id="stamp"><rect class="s-gain" x="-150" y="-36" width="300" height="72" rx="10" fill="none" stroke-width="6"/><text class="d" x="0" y="14" font-size="40" text-anchor="middle" style="fill:var(--gain)">VALIDATED</text></g>
+<g id="ev"><path class="s-ink" d="M170 360V640H720" fill="none" stroke-width="5" stroke-linejoin="round"/><g id="evb"></g>
+<text class="m" x="170" y="680" font-size="20">WHAT CUSTOMERS ACTUALLY DO</text></g>
+<path class="s-line" d="M800 240V700" stroke-width="3" stroke-dasharray="8 10"/>
+<g id="exc"><g id="shrug"></g>
+<path class="s-ink" d="M915 500l-30-30-10-30M1005 500l30-30 10-30" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-loss" x="1040" y="280" width="420" height="90" rx="20" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="1070" y="338" font-size="34">“We learned a lot!”</text>
+<rect class="s-muted" x="1090" y="450" width="360" height="170" rx="12" fill="none" stroke-width="4" stroke-dasharray="12 10"/>
+<text class="m" x="1270" y="545" font-size="20" text-anchor="middle">NOTHING TO SHOW</text>
+<text class="m" x="870" y="680" font-size="20" style="fill:var(--loss)">NO EVIDENCE</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The new scorecard.</text>
+<g id="card">
+<rect class="s-line" x="120" y="230" width="700" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="160" y="290" font-size="22">SCORECARD</text>
+<path class="s-line" d="M160 320H780" stroke-width="3"/>
+<text class="d5" x="160" y="400" font-size="40" fill-opacity=".6">How much did we build?</text>
+<line id="stk" class="s-ink" x1="150" y1="388" x2="150" y2="388" stroke-width="6" stroke-linecap="round"/>
+<g id="l2"><text class="d" x="160" y="530" font-size="52" style="fill:var(--gain)">What did we prove?</text></g>
+</g>
+<g id="itA"><rect class="ink" x="900" y="250" width="160" height="140" rx="12"/>
+<path class="s-gain" d="M1050 238v30M1035 253h30M912 372v20M902 382h20" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="1090" y="300" font-size="22">POLISHED FEATURE</text><text class="m" x="1090" y="332" font-size="22">TEACHES NOTHING</text>
+<g id="wstamp"><rect class="s-loss" x="1090" y="350" width="180" height="56" rx="8" fill="none" stroke-width="5"/><text class="d" x="1180" y="391" font-size="36" text-anchor="middle" style="fill:var(--loss)">WASTE</text></g></g>
+<g id="itB"><rect class="s-ink" x="900" y="480" width="160" height="140" rx="12" fill="none" stroke-width="5" stroke-dasharray="12 8"/>
+<path class="s-gain" d="M930 550l35 35l70-80" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1090" y="540" font-size="22">ROUGH TEST</text><text class="m" x="1090" y="572" font-size="22" style="fill:var(--gain)">PROVES SOMETHING</text></g>
+<g id="wst"><text class="d5" x="120" y="790" font-size="40">If it teaches nothing about customers, it’s waste.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="ca"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What did you prove</text></g>
+<g id="cb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">about customers</text></g>
+<g id="cc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">last <tspan style="fill:var(--gain)">month?</tspan></text></g>
+<g id="pad"><rect class="s-ink" x="1200" y="250" width="240" height="300" rx="14" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="1250" cy="250" r="10"/><circle class="ink" cx="1320" cy="250" r="10"/><circle class="ink" cx="1390" cy="250" r="10"/>
+<path class="s-line" d="M1230 340h180M1230 400h180M1230 460h180M1230 520h180" stroke-width="4"/>
+<path id="penl" class="s-gain" d="M1230 332h180" stroke-width="9" stroke-linecap="round" stroke-dasharray="180"/></g>
+<g id="ctag"><text class="m" x="143" y="700" font-size="26">WRITE ONE DOWN · OR PLAN YOUR NEXT EXPERIMENT</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Validated Learning Is Real Progress&rdquo;, from <em>The Lean Startup</em> by Eric Ries. The IMVU instant messaging add-on story is drawn from Eric Ries&#x27;s own account, as reported in the book. The factory, chart and scorecard drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 7.2], [7.2, 23.0], [23.0, 40.1], [40.1, 53.7], [53.7, 69.6], [69.6, 83.5], [83.5, 98.4], [98.4, 111.2], [111.2, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Busy Is Not Progress", "A Different Yardstick", "The IMVU Bet", "Nobody Came", "A Painful Lesson", "Could It Be Cheaper?", "What Validated Means", "The New Scorecard", "Your Challenge"];
+const TM={"busy_team": 0.0, "ruler": 7.52, "factory": 11.88, "question": 16.12, "ries": 23.28, "chat_window": 29.44, "code_pile": 35.16, "launch": 40.4, "interview": 43.92, "friends": 49.28, "trash_can": 54.0, "lightbulb": 63.2, "hourglass": 69.92, "sketch": 75.36, "label": 83.84, "chart": 86.56, "excuse": 92.48, "scorecard": 98.72, "checkmark": 105.92};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+fig($('team'),1160,470,22,'ink');fig($('team'),1280,470,22,'ink');
+const F0=[];for(let i=0;i<6;i++)F0.push(mk('rect',{x:1370,y:514-i*46,width:100,height:40,rx:6,class:i%2?'ink':'gain'},$('feat')));
+let td='';for(let i=0;i<=33;i++){td+='M'+(140+i*40)+' 210v'+(i%5?14:26)}mk('path',{d:td,class:'s-ink','stroke-width':3},$('ticks'));
+const FB=[],SB=[];for(let i=0;i<4;i++){FB.push(mk('rect',{x:360,y:590,width:50,height:50,rx:6,class:'ink'},$('fbox')));SB.push(mk('rect',{x:880,y:548,width:50,height:50,rx:6,class:'ink'},$('sbox')))}
+fig($('cust1'),1150,420,22,'ink');fig($('riesP'),280,400,40,'ink');fig($('avP'),560,500,20,'gain');
+const SH=[];for(let i=0;i<7;i++){const g=mk('g',{},$('sheets')),y=600-i*44;mk('rect',{x:1150,y:y,width:280,height:36,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M1170 '+(y+18)+'h'+(60+(i*37)%120),stroke:i%3?'var(--muted)':'var(--gain)','stroke-width':6,'stroke-linecap':'round'},g);SH.push(g)}
+fig($('teamP'),820,450,26,'ink');fig($('custP'),1020,450,26,'ink');
+[[1320,430],[1400,430],[1290,500],[1360,510],[1430,500]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:22,fill:'var(--muted)','fill-opacity':.5},$('frdP')));
+const FL=[];for(let i=0;i<4;i++){const g=mk('g',{},$('fall'));mk('rect',{x:-55,y:-15,width:110,height:30,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M-38 0h50',stroke:'var(--muted)','stroke-width':5},g);FL.push(g)}
+for(let i=0;i<7;i++){const a=Math.PI*(1+i/6),c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(740+100*c).toFixed(0)+' '+(400+100*s).toFixed(0)+'L'+(740+128*c).toFixed(0)+' '+(400+128*s).toFixed(0),class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+const NP=[];for(let i=0;i<6;i++){const a=i*Math.PI/3-Math.PI/2;NP.push([1200+100*Math.cos(a),400+100*Math.sin(a)])}
+NP.forEach((a,i)=>NP.forEach((b,j)=>{if(j>i)mk('path',{d:'M'+a[0].toFixed(0)+' '+a[1].toFixed(0)+'L'+b[0].toFixed(0)+' '+b[1].toFixed(0),class:'s-line','stroke-width':3},$('net'))}));
+NP.forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:18,class:'gain'},$('net')));
+fig($('custS'),1040,480,24,'ink');fig($('shrug'),960,430,30,'ink');
+const EH=[70,130,190,250],EB=EH.map((h,i)=>mk('rect',{x:220+i*120,y:640,width:70,height:0,class:'gain'},$('evb')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('team').setAttribute('transform','translate(0 '+(3*Math.sin(t*6)).toFixed(1)+')');
+F0.forEach((b,i)=>rise(b,p(u,TM.busy_team+.4+i*.5,TM.busy_team+.8+i*.5)));
+rise($('qm'),p(u,TM.busy_team+4.6,TM.busy_team+5.1));
+
+rise($('ruler'),p(u,TM.ruler,TM.ruler+.5));rise($('fac'),p(u,TM.factory,TM.factory+.5));rise($('stu'),p(u,TM.question,TM.question+.5));
+rise($('waste1'),p(u,TM.question+2,TM.question+2.6));
+FB.forEach((b,i)=>{const ph=(t*.2+i/4)%1;b.setAttribute('x',(360+320*ph).toFixed(1))});
+SB.forEach((b,i)=>{const ph=(t*.2+i/4)%1,mv=Math.min(ph/.85,1),fo=cl((ph-.85)/.15),fi=cl(ph/.06);b.setAttribute('x',(880+330*mv).toFixed(1));b.setAttribute('opacity',(Math.min(fi,1-fo)).toFixed(2))});
+
+rise($('riesg'),p(u,TM.ries,TM.ries+.5));rise($('chat'),p(u,TM.chat_window,TM.chat_window+.5));
+rise($('addon'),p(u,TM.chat_window+1,TM.chat_window+1.5));rise($('bet'),p(u,TM.chat_window+2.2,TM.chat_window+2.8));
+SH.forEach((g,i)=>rise(g,p(u,TM.code_pile+i*.45,TM.code_pile+i*.45+.4)));rise($('codeL'),p(u,TM.code_pile+1,TM.code_pile+1.5));
+
+rise($('dl'),p(u,TM.launch,TM.launch+.5));rise($('intv'),p(u,TM.interview,TM.interview+.5));
+rise($('nox'),p(u,TM.interview+1.8,TM.interview+2.3));rise($('frd'),p(u,TM.friends,TM.friends+.6));
+
+rise($('trash'),p(u,TM.trash_can,TM.trash_can+.5));
+FL.forEach((g,i)=>{const a=TM.trash_can+.5+i*.5,k=p(u,a,a+.9);g.setAttribute('transform','translate('+(300+(i%2?40:-20))+' '+(210+230*k).toFixed(1)+') rotate('+((i%2?1:-1)*(10+40*k)).toFixed(1)+')');g.setAttribute('opacity',u<a?0:(1-cl((k-.8)/.2)).toFixed(2))});
+rise($('wfor'),p(u,TM.trash_can+4.2,TM.trash_can+4.8));
+rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.6));$('bulbC').setAttribute('r',(80+4*Math.sin(t*3)).toFixed(1));
+
+rise($('hg'),p(u,TM.hourglass,TM.hourglass+.5));
+const k=(t*.12)%1,ys=320+130*k,w=(65-(ys-304)*.34)*.9;
+$('sandT').setAttribute('points',(260-w).toFixed(1)+','+ys.toFixed(1)+' '+(260+w).toFixed(1)+','+ys.toFixed(1)+' 260,455');
+$('sandB').setAttribute('points','210,612 310,612 260,'+(612-100*k).toFixed(1));
+rise($('row1'),p(u,TM.hourglass+2.1,TM.hourglass+2.6));$('bar1').setAttribute('width',(960*p(u,TM.hourglass+2.3,TM.hourglass+4)).toFixed(1));
+rise($('row2'),p(u,TM.sketch,TM.sketch+.5));$('bar2').setAttribute('width',(180*p(u,TM.sketch+.2,TM.sketch+.8)).toFixed(1));
+$('chk').setAttribute('opacity',p(u,TM.sketch+1.5,TM.sketch+2));
+rise($('better'),p(u,TM.sketch+5.4,TM.sketch+6));
+
+const sk=p(u,TM.label,TM.label+.4);$('stamp').setAttribute('transform','translate(310 285) rotate(-4) scale('+(1.5-.5*sk).toFixed(3)+')');$('stamp').setAttribute('opacity',sk);
+rise($('ev'),p(u,TM.chart,TM.chart+.5));
+EB.forEach((b,i)=>{const h=EH[i]*p(u,TM.chart+.4+i*.35,TM.chart+1+i*.35);b.setAttribute('height',h.toFixed(1));b.setAttribute('y',(640-h).toFixed(1))});
+rise($('exc'),p(u,TM.excuse,TM.excuse+.6));
+
+rise($('card'),p(u,TM.scorecard,TM.scorecard+.5));
+$('stk').setAttribute('x2',(150+470*p(u,TM.scorecard+1.8,TM.scorecard+2.4)).toFixed(1));
+rise($('l2'),p(u,TM.scorecard+2.4,TM.scorecard+3));
+rise($('itA'),p(u,TM.checkmark,TM.checkmark+.5));rise($('wstamp'),p(u,TM.checkmark+1,TM.checkmark+1.4));
+rise($('itB'),p(u,TM.checkmark+1.6,TM.checkmark+2.1));rise($('wst'),p(u,TM.checkmark+2.2,TM.checkmark+2.8));
+
+const s8=SC[8][0]/K;
+rise($('ca'),p(u,s8+.3,s8+.8));rise($('cb'),p(u,s8+.7,s8+1.2));rise($('cc'),p(u,s8+1.1,s8+1.6));
+rise($('pad'),p(u,s8+3.4,s8+3.9));$('penl').setAttribute('stroke-dashoffset',(180*(1-p(u,s8+4,s8+5.6))).toFixed(1));
+rise($('ctag'),p(u,s8+4.4,s8+5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.27;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

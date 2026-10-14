@@ -1,0 +1,335 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Extreme Ownership Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Extreme Ownership: Leaders should explain the intent behind the mission so that small teams and frontline leaders can make good decisions on their own. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">EXTREME OWNERSHIP · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Decentralized</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Command.</text>
+<text class="b" x="120" y="600" font-size="32">Explain the why, then let your frontline leaders decide.</text>
+<g id="boss"></g>
+<g id="phone"><rect class="ink" x="1384" y="330" width="34" height="62" rx="8"/></g>
+<path id="rg" class="s-loss" d="M1432 340a30 30 0 0 1 0 42M1446 326a50 50 0 0 1 0 70" fill="none" stroke-width="5" stroke-linecap="round"/>
+<g id="asks"></g>
+<g id="calm"><text class="m" x="1480" y="790" font-size="22" text-anchor="end" style="fill:var(--gain)">EXPLAIN MORE · DECIDE LESS</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One leader, too many.</text>
+<text class="b" x="120" y="176" font-size="32">No single person can directly lead a large crowd.</text>
+<g id="wires"></g>
+<g id="crd"><text class="m" x="760" y="232" font-size="20">A LARGE CROWD</text></g>
+<g id="ring1"><circle class="s-gain" cx="360" cy="520" r="190" fill="none" stroke-width="5" stroke-dasharray="12 10"/><text class="m" x="360" y="770" font-size="22" text-anchor="middle" style="fill:var(--gain)">ABOUT 6–10 PEOPLE</text></g>
+<g id="inner"></g>
+<circle class="gain" cx="360" cy="520" r="48"/>
+<text class="m" x="360" y="528" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">YOU</text>
+<g id="bneck"><text class="d" x="740" y="800" font-size="44" style="fill:var(--loss)">You become the bottleneck.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Small teams.</text>
+<text class="b" x="120" y="176" font-size="32">SEAL units are broken down into small groups.</text>
+<g id="pltn"><rect class="s-ink" x="630" y="238" width="340" height="90" rx="14" fill="var(--stage)" stroke-width="5"/><text class="m" x="990" y="292" font-size="22">PLATOON</text></g>
+<path id="tree" class="s-muted" d="M800 328L480 420M800 328L1120 420M480 490L320 558M480 490L640 558M1120 490L960 558M1120 490L1280 558" fill="none" stroke-width="4" stroke-linecap="round"/>
+<g id="sq">
+<rect class="s-ink" x="360" y="420" width="240" height="70" rx="12" fill="var(--stage)" stroke-width="5"/><text class="m" x="480" y="463" font-size="22" text-anchor="middle">SQUAD</text>
+<rect class="s-ink" x="1000" y="420" width="240" height="70" rx="12" fill="var(--stage)" stroke-width="5"/><text class="m" x="1120" y="463" font-size="22" text-anchor="middle">SQUAD</text>
+</g>
+<g id="ft"></g>
+<g id="mem"></g>
+<circle id="pl" class="gain" cx="800" cy="283" r="18"/>
+<g id="jr"><text class="m" x="120" y="772" font-size="22" style="fill:var(--gain)">EACH TEAM HAS ITS OWN LEADER, OFTEN QUITE JUNIOR</text></g>
+<g id="rep"><text class="d" x="120" y="836" font-size="40">Each leader reports up to the next level.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ramadi: chaos in the streets.</text>
+<text class="b" x="120" y="176" font-size="32">Task Unit Bruiser, fighting street by street.</text>
+<g id="map"></g>
+<circle id="view" class="gain" cx="420" cy="490" r="0" fill-opacity=".16"/>
+<g id="foes"></g>
+<circle id="team" class="gain" cx="420" cy="490" r="18"/>
+<g id="hq"><rect class="s-ink" x="1220" y="240" width="240" height="100" rx="14" fill="var(--stage)" stroke-width="5"/><text class="d" x="1340" y="306" font-size="44" text-anchor="middle">HQ</text></g>
+<polyline id="zz" class="s-loss" fill="none" stroke-width="4" stroke-dasharray="10 6"/>
+<g id="xx"><path class="s-loss" d="M970 360l50 50M1020 360l-50 50" stroke-width="9" stroke-linecap="round"/></g>
+<g id="sda"></g>
+<g id="eyeg"><path class="s-ink" d="M800 730q40-36 80 0q-40 36-80 0z" fill="var(--stage)" stroke-width="5"/><circle class="gain" cx="840" cy="730" r="12"/><text class="d" x="900" y="744" font-size="38">They saw what HQ never could.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Know the why.</text>
+<text class="b" x="120" y="176" font-size="32">Commander’s intent: the purpose behind the plan.</text>
+<g id="kp" fill="var(--ink)"></g>
+<text id="qm" class="d" x="220" y="540" font-size="110" text-anchor="middle">?</text>
+<g id="plang"><path class="s-ink" d="M280 600L1150 540" stroke-width="5" stroke-dasharray="14 10" stroke-linecap="round"/></g>
+<g id="planl"><text class="m" x="480" y="630" font-size="22" style="fill:var(--muted)">THE PLAN</text></g>
+<g id="tgt"><circle class="s-ink" cx="1280" cy="520" r="120" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="1280" cy="520" r="80" fill="none" stroke-width="6"/><circle class="gain" cx="1280" cy="520" r="40"/><text class="m" x="1280" y="690" font-size="22" text-anchor="middle">COMMANDER’S INTENT</text></g>
+<g id="wall"><rect class="loss" x="690" y="500" width="36" height="150" rx="6"/><text class="m" x="708" y="690" font-size="20" text-anchor="middle" style="fill:var(--loss)">PLAN BREAKS</text></g>
+<path id="adp" class="s-gain" d="M280 590Q700 260 1160 510" fill="none" stroke-width="7" stroke-linecap="round"/>
+<g id="adl"><text class="m" x="700" y="370" font-size="22" text-anchor="middle" style="fill:var(--gain)">ADAPT</text></g>
+<g id="kg"><text class="d" x="120" y="800" font-size="44">Know the goal, adapt when the plan breaks.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Freedom has edges.</text>
+<text class="b" x="120" y="176" font-size="32">Senior leaders set clear limits on what juniors can decide alone.</text>
+<rect id="fld" class="gain" x="320" y="250" width="960" height="450" opacity="0"/>
+<g id="fen"><rect class="s-ink" x="320" y="250" width="960" height="450" fill="none" stroke-width="6"/><g id="posts"></g>
+<path class="s-ink" d="M800 520V420" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M800 420l70 22-70 22z"/><text class="m" x="800" y="550" font-size="20" text-anchor="middle">MISSION</text></g>
+<g id="fdots"></g>
+<circle id="wnd" cx="1000" cy="470" r="18"/>
+<circle id="hit" class="s-loss" cx="1280" cy="470" r="34" fill="none" stroke-width="5"/>
+<g id="fl1"><text class="m" x="320" y="760" font-size="22">LIMITS SET BY SENIOR LEADERS</text></g>
+<g id="fl2"><text class="m" x="1280" y="760" font-size="22" text-anchor="end" style="fill:var(--loss)">KEEPS TEAMS ON MISSION</text></g>
+<g id="ftx"><text class="d" x="320" y="830" font-size="44">Inside the limits, juniors make the call.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Trust both ways.</text>
+<text class="b" x="120" y="176" font-size="32">Seniors let go. Juniors ask until they understand.</text>
+<g id="snr" fill="var(--ink)"><text class="m" x="300" y="660" font-size="20" text-anchor="middle">SENIOR</text></g>
+<g id="jnr" fill="var(--ink)"><text class="m" x="900" y="660" font-size="20" text-anchor="middle">JUNIOR</text></g>
+<g id="a1"><path class="s-gain" d="M390 440H800m-20-18 20 18-20 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="595" y="410" font-size="20" text-anchor="middle">STOP HOVERING, LET THEM LEAD</text></g>
+<g id="a2"><path class="s-ink" d="M810 580H400m20-18-20 18 20 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="605" y="625" font-size="20" text-anchor="middle">ASK UNTIL YOU KNOW THE INTENT</text></g>
+<g id="arm"><path class="s-ink" d="M940 545L980 410" stroke-width="14" stroke-linecap="round"/><circle class="gain" cx="982" cy="398" r="14"/></g>
+<g id="bino"><circle class="gain" cx="338" cy="452" r="14"/><circle class="gain" cx="366" cy="452" r="14"/></g>
+<g id="bp"><rect class="s-line" x="1100" y="260" width="380" height="400" rx="18" fill="var(--stage)" stroke-width="3"/><g id="bpc"></g><text class="m" x="1290" y="700" font-size="22" text-anchor="middle">THE BIGGER PICTURE</text></g>
+<g id="nt"><text class="d" x="120" y="770" font-size="40" style="fill:var(--loss)">Without trust, it falls apart.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Same rule, any company.</text>
+<text class="b" x="120" y="176" font-size="32">Hand off the purpose and the limits, not just the task.</text>
+<g id="ofc"><path class="s-line" d="M120 600H1480" stroke-width="4"/><g id="ofp" fill="var(--ink)"></g>
+<rect class="ink" x="220" y="540" width="200" height="26" rx="6"/><rect class="ink" x="960" y="540" width="200" height="26" rx="6"/>
+<text class="m" x="320" y="640" font-size="20" text-anchor="middle">BOSS</text><text class="m" x="1060" y="640" font-size="20" text-anchor="middle">FRONTLINE</text></g>
+<g id="card"><rect class="s-ink" width="160" height="100" rx="10" fill="var(--stage)" stroke-width="5"/><text class="m" x="20" y="40" font-size="18" style="fill:var(--gain)">PURPOSE</text><text class="m" x="20" y="76" font-size="18">LIMITS</text></g>
+<g id="tl"><rect class="ink" x="1200" y="300" width="60" height="140" rx="14"/><circle cx="1230" cy="335" r="20" fill="var(--line)"/><circle id="lmp" cx="1230" cy="405" r="20"/></g>
+<g id="cust" fill="var(--ink)"><text class="d" x="1390" y="360" font-size="50" text-anchor="middle" style="fill:var(--loss)">!</text></g>
+<g id="spot"><text class="d" x="1060" y="372" font-size="44" text-anchor="middle" style="fill:var(--gain)">!</text></g>
+<g id="cl"><text class="d" x="120" y="760" font-size="40">The person closest to the problem decides.</text></g>
+<g id="fd"><text class="m" x="120" y="830" font-size="22">FRONTLINE STAFF OFTEN SPOT PROBLEMS BEFORE THE BOSS</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">Pick one decision</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">you usually make,</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">explain <tspan style="fill:var(--gain)">the why</tspan>,</text></g>
+<g id="qd"><text class="d" x="136" y="600" font-size="80" letter-spacing="-2">and let them make it.</text></g>
+<g id="cal"><rect class="s-ink" x="1180" y="240" width="260" height="260" rx="14" fill="var(--stage)" stroke-width="6"/><rect class="gain" x="1183" y="243" width="254" height="57" rx="11"/><g id="days"></g><circle id="day" class="s-gain" cx="1311" cy="375" r="28" fill="none" stroke-width="6"/></g>
+<g id="q8l"><text class="m" x="143" y="720" font-size="26">THIS WEEK · EXPLAIN THE WHY, THEN LET GO</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Decentralized Command&rdquo;, from <em>Extreme Ownership</em> by Jocko Willink and Leif Babin. The SEAL team structure and Task Unit Bruiser&#x27;s experience in Ramadi are as reported in the book. Drawings of teams, maps and boundaries are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 10.6], [10.6, 27.8], [27.8, 45.3], [45.3, 62.6], [62.6, 76.6], [76.6, 91.8], [91.8, 109.6], [109.6, 124.5], [124.5, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Decentralized Command", "One Leader, Too Many", "Small Teams", "Ramadi Streets", "Know the Why", "Clear Boundaries", "Trust Both Ways", "Your Version", "Your Challenge"];
+const TM={"boss_phone": 0.0, "crowd": 10.88, "small_circle": 16.16, "platoon": 28.08, "fire_teams": 31.6, "team_leader": 37.28, "tree_chart": 41.2, "city_map": 45.6, "radio_static": 50.32, "arrow_fast": 54.56, "eye": 58.16, "question_mark": 62.88, "target": 67.44, "fence": 76.88, "open_field": 87.84, "handshake": 92.08, "hand_raised": 96.16, "binoculars": 105.12, "office": 109.92, "briefing": 112.64, "green_light": 116.8, "front_desk": 120.4, "calendar": 124.76};
+const P=(g,x,y,r,cls)=>{const a=cls?{class:cls}:{};mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g);return g};
+const T=(g,x,y,s,fs,cls,st)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:cls,'text-anchor':'middle'},g);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+P($('boss'),1320,380,40,'ink');
+const ASK=[1200,1320,1440].map(x=>{const g=mk('g',{fill:'var(--ink)'},$('asks'));P(g,x,640,18);return [g,T($('asks'),x,600,'?',40,'d','fill:var(--loss)')]});
+// crowd: compact grid (y 260-680), wires start just outside the dashed 6-10 ring
+const CW=[],CD=[];for(let i=0;i<48;i++){const x=760+(i%8)*88,y=260+Math.floor(i/8)*84,a=Math.atan2(y-520,x-360),sx=360+210*Math.cos(a),sy=520+210*Math.sin(a);
+  CW.push(mk('path',{d:'M'+sx.toFixed(0)+' '+sy.toFixed(0)+'L'+(x-14*Math.cos(a)).toFixed(0)+' '+(y-14*Math.sin(a)).toFixed(0),class:'s-line','stroke-width':2,'stroke-linecap':'round'},$('wires')));
+  CD.push(mk('circle',{cx:x,cy:y,r:14,class:'ink'},$('crd')))}
+for(let k=0;k<8;k++){const a=k*Math.PI/4,x=360+120*Math.cos(a),y=520+120*Math.sin(a);mk('path',{d:'M360 520L'+x.toFixed(0)+' '+y.toFixed(0),class:'s-gain','stroke-width':3},$('inner'));mk('circle',{cx:x,cy:y,r:16,class:'ink'},$('inner'))}
+const OF=[[0,-28],[-28,8],[28,8],[0,36]],MB=[];
+for(let i=0;i<4;i++){const x=320+320*i;mk('circle',{cx:x,cy:620,r:62,class:'s-line',fill:'none','stroke-width':4,'stroke-dasharray':'8 8'},$('ft'));T($('ft'),x,716,'FIRE TEAM',20,'m')}
+for(let i=0;i<16;i++)MB.push(mk('circle',{r:14,class:'ink'},$('mem')));
+for(let i=0;i<4;i++)for(let j=0;j<4;j++)mk('rect',{x:120+i*160,y:230+j*140,width:120,height:100,rx:6,fill:'var(--line)'},$('map'));
+const FO=[[580,350],[260,630],[580,630],[260,350],[260,490]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:10,class:'loss'},$('foes')));
+const SDA=['SEE','DECIDE','ACT'].map((s,i)=>{const x=800+i*240,g=mk('g',{},$('sda'));mk('rect',{x:x,y:560,width:190,height:80,rx:40,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);T(g,x+95,610,s,26,'m','fill:var(--ink)');
+  if(i<2)mk('path',{d:'M'+(x+198)+' 600h34m-12-12 12 12-12 12',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+P($('kp'),220,600,22);
+const AL=$('adp').getTotalLength();$('adp').setAttribute('stroke-dasharray',AL);
+for(let x=320;x<=1280;x+=96){mk('circle',{cx:x,cy:250,r:9,class:'ink'},$('posts'));mk('circle',{cx:x,cy:700,r:9,class:'ink'},$('posts'))}
+for(let y=340;y<700;y+=90){mk('circle',{cx:320,cy:y,r:9,class:'ink'},$('posts'));mk('circle',{cx:1280,cy:y,r:9,class:'ink'},$('posts'))}
+const FD=[[560,370],[1040,370],[520,610],[1060,610],[660,470]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:18},$('fdots')));
+P($('snr'),300,460,36);P($('jnr'),900,460,36);
+[[1180,360],[1400,360],[1180,560],[1400,560]].forEach(q=>{for(let k=0;k<3;k++)mk('circle',{cx:q[0]+(k-1)*30,cy:q[1]+(k%2)*20,r:12,class:'ink'},$('bpc'))});
+mk('path',{d:'M1290 490V420',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('bpc'));mk('path',{d:'M1290 420l44 14-44 14z',class:'gain'},$('bpc'));
+P($('ofp'),320,420,30);P($('ofp'),1060,420,30);P($('cust'),1390,420,30);
+for(let r=0;r<4;r++)for(let c=0;c<5;c++)mk('rect',{x:1200+c*48,y:320+r*42,width:30,height:26,rx:4,fill:(r===1&&c===2)?'var(--gain)':'var(--line)'},$('days'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const ring=u<TM.boss_phone+5.8,fx=p(u,TM.boss_phone+5.8,TM.boss_phone+6.6);
+  $('rg').setAttribute('opacity',ring?(.4+.6*Math.abs(Math.sin(t*6))).toFixed(2):0);
+  $('phone').setAttribute('transform',ring?'rotate('+(6*Math.sin(t*30)).toFixed(1)+' 1401 361)':'rotate(0)');
+  ASK.forEach((a,i)=>{const k=p(u,TM.boss_phone+.3+i*.4,TM.boss_phone+.8+i*.4);rise(a[0],k);a[1].setAttribute('opacity',(k*(1-fx)).toFixed(2));a[0].setAttribute('fill',fx>.5?'var(--gain)':'var(--ink)')});
+  rise($('calm'),fx);
+
+  rise($('crd'),p(u,TM.crowd,TM.crowd+.6)); $('wires').setAttribute('opacity',(.5*p(u,TM.crowd+.3,TM.crowd+1)).toFixed(2));
+  rise($('inner'),p(u,TM.small_circle,TM.small_circle+.5)); rise($('ring1'),p(u,TM.small_circle+.3,TM.small_circle+.9));
+  const ck=p(u,TM.small_circle+5.4,TM.small_circle+7);
+  CD.forEach((d,i)=>{d.setAttribute('transform','translate(0 '+(ck*(8+(i*13)%34)).toFixed(1)+')');d.setAttribute('opacity',(1-.65*ck).toFixed(2))});
+  CW.forEach(w=>{w.setAttribute('stroke-dasharray',ck>0?'6 10':'none');w.style.stroke=ck>0?'var(--loss)':''});
+  rise($('bneck'),p(u,TM.small_circle+8.7,TM.small_circle+9.3));
+
+  rise($('pltn'),p(u,TM.platoon,TM.platoon+.5)); rise($('sq'),p(u,TM.fire_teams,TM.fire_teams+.5)); rise($('ft'),p(u,TM.fire_teams+.6,TM.fire_teams+1.2));
+  const sp=p(u,TM.fire_teams,TM.fire_teams+1.4),ld=u>=TM.team_leader;
+  MB.forEach((m,i)=>{const o=OF[i%4],x0=660+(i%8)*40,y0=265+Math.floor(i/8)*36,x1=320+320*Math.floor(i/4)+o[0],y1=620+o[1],L=i%4===0&&ld;
+    m.setAttribute('cx',(x0+(x1-x0)*sp).toFixed(1));m.setAttribute('cy',(y0+(y1-y0)*sp).toFixed(1));m.setAttribute('opacity',p(u,TM.platoon+i*.03,TM.platoon+.4+i*.03));m.setAttribute('class',L?'gain':'ink');m.setAttribute('r',L?18:14)});
+  rise($('jr'),p(u,TM.team_leader,TM.team_leader+.5)); $('tree').setAttribute('opacity',p(u,TM.tree_chart,TM.tree_chart+.6));
+  rise($('pl'),p(u,TM.tree_chart+.2,TM.tree_chart+.7)); rise($('rep'),p(u,TM.tree_chart+.4,TM.tree_chart+1));
+
+  rise($('map'),p(u,TM.city_map,TM.city_map+.6)); rise($('team'),p(u,TM.city_map+.5,TM.city_map+1));
+  FO.forEach((f,i)=>f.setAttribute('opacity',u>=TM.city_map+1?(.3+.7*Math.abs(Math.sin(t*3+i*1.7))).toFixed(2):0));
+  const rk=p(u,TM.radio_static,TM.radio_static+.6); let zp='';
+  for(let i=0;i<=20;i++){const f=i/20;zp+=(1210-430*f).toFixed(1)+','+(300+170*f+(i%2?1:-1)*(8+6*Math.sin(t*20+i))).toFixed(1)+' '}
+  $('zz').setAttribute('points',zp); $('zz').setAttribute('opacity',rk); rise($('hq'),rk); rise($('xx'),p(u,TM.radio_static+1,TM.radio_static+1.4));
+  SDA.forEach((g,i)=>rise(g,p(u,TM.arrow_fast+i*.4,TM.arrow_fast+i*.4+.4)));
+  $('view').setAttribute('r',(170*p(u,TM.eye,TM.eye+1.2)).toFixed(1)); rise($('eyeg'),p(u,TM.eye+.4,TM.eye+1));
+
+  const qk=u>=TM.target; rise($('kp'),p(u,TM.question_mark-.3,TM.question_mark+.2)); rise($('qm'),p(u,TM.question_mark,TM.question_mark+.5));
+  $('qm').textContent=qk?'!':'?'; $('qm').style.fill=qk?'var(--gain)':'var(--loss)';
+  const ak=p(u,TM.target+5,TM.target+5.5),pk=p(u,TM.question_mark+1,TM.question_mark+1.6);
+  $('plang').setAttribute('opacity',(pk*(1-.6*ak)).toFixed(2)); rise($('planl'),pk);
+  rise($('tgt'),p(u,TM.target,TM.target+.6)); rise($('wall'),ak);
+  $('adp').setAttribute('stroke-dashoffset',(AL*(1-p(u,TM.target+5.4,TM.target+6.8))).toFixed(1));
+  rise($('adl'),p(u,TM.target+6,TM.target+6.5)); rise($('kg'),p(u,TM.target+6.4,TM.target+7));
+
+  const of=u>=TM.open_field;
+  rise($('fen'),p(u,TM.fence,TM.fence+.6)); rise($('fdots'),p(u,TM.fence+.4,TM.fence+1));
+  rise($('fl1'),p(u,TM.fence+1.8,TM.fence+2.3)); rise($('fl2'),p(u,TM.fence+6.8,TM.fence+7.3));
+  $('fld').setAttribute('opacity',(.14*p(u,TM.open_field,TM.open_field+.8)).toFixed(3)); rise($('ftx'),p(u,TM.open_field+.3,TM.open_field+.9));
+  FD.forEach((d,i)=>{d.setAttribute('transform','translate('+(22*Math.sin(t*.9+i*2)).toFixed(1)+' '+(16*Math.cos(t*1.1+i)).toFixed(1)+')');d.setAttribute('fill',of?'var(--gain)':'var(--ink)')});
+  const wv=u>=TM.fence+6.8,ws=Math.max(0,Math.sin(t*1.6));
+  $('wnd').setAttribute('cx',(1000+244*ws).toFixed(1)); $('wnd').setAttribute('opacity',wv?1:0); $('wnd').setAttribute('fill',of?'var(--gain)':'var(--ink)');
+  $('hit').setAttribute('opacity',wv&&ws>.93?1:0);
+
+  rise($('snr'),p(u,TM.handshake-.6,TM.handshake-.1)); rise($('jnr'),p(u,TM.handshake-.4,TM.handshake+.1));
+  rise($('a1'),p(u,TM.handshake,TM.handshake+.5)); rise($('arm'),p(u,TM.hand_raised,TM.hand_raised+.4)); rise($('a2'),p(u,TM.hand_raised+.4,TM.hand_raised+.9));
+  rise($('nt'),p(u,TM.hand_raised+4.5,TM.hand_raised+5)); rise($('bino'),p(u,TM.binoculars,TM.binoculars+.4)); rise($('bp'),p(u,TM.binoculars+.3,TM.binoculars+.9));
+
+  rise($('ofc'),p(u,TM.office,TM.office+.6)); rise($('tl'),p(u,TM.office+.4,TM.office+1));
+  $('card').setAttribute('transform','translate('+(400+440*p(u,TM.briefing+.5,TM.briefing+2)).toFixed(1)+' 300)'); $('card').setAttribute('opacity',p(u,TM.briefing,TM.briefing+.4));
+  const gl=u>=TM.green_light; $('lmp').setAttribute('fill',gl?'var(--gain)':'var(--line)'); $('lmp').setAttribute('r',gl?(20+3*Math.abs(Math.sin(t*3))).toFixed(1):20);
+  rise($('cl'),p(u,TM.green_light+.3,TM.green_light+.9)); rise($('cust'),p(u,TM.front_desk,TM.front_desk+.5));
+  rise($('spot'),p(u,TM.front_desk+.6,TM.front_desk+1)); rise($('fd'),p(u,TM.front_desk+1,TM.front_desk+1.5));
+
+  rise($('cal'),p(u,TM.calendar-.3,TM.calendar+.3)); $('day').setAttribute('opacity',p(u,TM.calendar+.8,TM.calendar+1.2));
+  $('day').setAttribute('r',(28+3*Math.sin(t*3)).toFixed(1));
+  rise($('qa'),p(u,TM.calendar,TM.calendar+.5)); rise($('qb'),p(u,TM.calendar+.4,TM.calendar+.9));
+  rise($('qc'),p(u,TM.calendar+3.8,TM.calendar+4.3)); rise($('qd'),p(u,TM.calendar+4.2,TM.calendar+4.7)); rise($('q8l'),p(u,TM.calendar+4.8,TM.calendar+5.3));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.87;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

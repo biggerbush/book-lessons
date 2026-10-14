@@ -1,0 +1,363 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Power of Habit Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of The Power of Habit: Habits become powerful when we start to crave the reward in advance, which is how Febreze only took off once people anticipated a fresh-smelling finish to cleaning. 8 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE POWER OF HABIT · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Craving is</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the <tspan style="fill:var(--gain)">engine.</tspan></text>
+<text class="b" x="120" y="600" font-size="32">Why habits stick once your brain starts wanting the reward</text>
+<g id="tbot"></g><g id="tmist"></g>
+<g id="tgear"><g id="tgr"><circle class="s-gain" cx="1400" cy="700" r="40" fill="none" stroke-width="18" stroke-dasharray="10 11"/><circle class="s-gain" cx="1400" cy="700" r="26" fill="none" stroke-width="8"/></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A product that flopped.</text>
+<text class="b" x="120" y="176" font-size="32">Procter &amp; Gamble’s spray that removes odors from fabric.</text>
+<g id="p1a"><rect class="s-line" x="120" y="230" width="440" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path d="M268 480h144l38 80h-220z" fill="var(--loss)" fill-opacity=".18"/>
+<path class="s-ink" d="M310 300v90l-80 170h220l-80-170v-90zM296 300h88" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="340" y="690" font-size="20" text-anchor="middle">A CLEAR SPRAY: FEBREZE</text></g>
+<g id="p1b"><rect class="s-line" x="580" y="230" width="440" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect x="660" y="420" width="280" height="100" rx="22" fill="var(--line)"/>
+<rect class="ink" x="640" y="500" width="320" height="70" rx="18"/>
+<rect class="ink" x="620" y="470" width="50" height="100" rx="18"/><rect class="ink" x="930" y="470" width="50" height="100" rx="18"/>
+<path class="s-ink" d="M650 570v30M950 570v30" stroke-width="8" stroke-linecap="round"/>
+<ellipse cx="830" cy="485" rx="60" ry="24" fill="var(--muted)"/><circle cx="885" cy="465" r="22" fill="var(--muted)"/>
+<g id="stk1"></g>
+<text class="m" x="800" y="690" font-size="20" text-anchor="middle">PROMISE: KILLS BAD SMELLS</text></g>
+<g id="p1c"><rect class="s-line" x="1040" y="230" width="440" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M1080 260V640H1460" fill="none" stroke-width="5"/>
+<g id="ch1"></g>
+<text class="m" x="1260" y="690" font-size="20" text-anchor="middle">SALES</text></g>
+<g id="dis"><text class="d" x="120" y="820" font-size="52">Sales were dismal.</text><rect class="loss" x="124" y="842" width="140" height="10"/></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The nose goes blind.</text>
+<text class="b" x="120" y="176" font-size="32">Live with an odor every day and you stop noticing it.</text>
+<g id="hs"><rect class="s-ink" x="180" y="420" width="440" height="300" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M150 430L400 250L650 430" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="stk2"></g></g>
+<g id="cats"></g>
+<g id="wom"><path class="s-ink" d="M762 548l-46-22-8-26M838 548l46-22 8-26" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="bub2"><rect class="s-ink" x="690" y="310" width="220" height="76" rx="38" fill="var(--stage)" stroke-width="5"/><text class="d5" x="800" y="358" font-size="30" text-anchor="middle">What smell?</text></g>
+<g id="nose"><path class="s-ink" d="M1060 320C1050 420 1010 470 1030 520C1050 556 1110 556 1130 530" fill="none" stroke-width="10" stroke-linecap="round"/>
+<g id="nw"><path class="s-loss" d="M930 450q15-12 30 0t30 0M930 500q15-12 30 0t30 0" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+<text class="m" x="1200" y="330" font-size="20">SMELL NOTICED</text>
+<rect class="s-ink" x="1200" y="350" width="260" height="44" rx="10" fill="none" stroke-width="4"/>
+<rect id="mfill" class="loss" x="1206" y="356" width="248" height="32" rx="6"/>
+<text class="m" x="1200" y="440" font-size="20">EVERY DAY, A LITTLE LESS</text></g>
+<g id="tuned"><text class="d" x="1200" y="530" font-size="44" style="fill:var(--muted)">Tuned out.</text></g>
+<g id="nocue"><text class="d" x="120" y="820" font-size="40">The people who needed it most never felt the cue.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A finishing touch.</text>
+<text class="b" x="120" y="176" font-size="32">One woman sprayed it after she had already cleaned.</text>
+<g id="w3"></g>
+<g id="b0"><rect class="s-line" x="340" y="260" width="280" height="260" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="480" y="300" font-size="20" text-anchor="middle">1 · VACUUM</text>
+<rect class="ink" x="390" y="420" width="90" height="60" rx="20"/>
+<path class="s-ink" d="M480 445q40-5 55-40l15-50M560 350l-20 130" fill="none" stroke-width="7" stroke-linecap="round"/>
+<rect class="ink" x="512" y="476" width="64" height="14" rx="6"/></g>
+<g id="b1"><path class="s-muted" d="M632 390h100m-18-18 18 18-18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-line" x="760" y="260" width="280" height="260" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="900" y="300" font-size="20" text-anchor="middle">2 · MAKE THE BED</text>
+<rect class="ink" x="790" y="360" width="16" height="130"/><rect class="ink" x="790" y="440" width="220" height="40" rx="8"/>
+<rect class="gain" x="860" y="425" width="150" height="30" rx="8"/><rect x="812" y="420" width="50" height="22" rx="10" fill="var(--line)"/>
+<path class="s-ink" d="M1000 480v20" stroke-width="8" stroke-linecap="round"/></g>
+<g id="b2"><path class="s-muted" d="M1052 390h100m-18-18 18 18-18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-gain" x="1180" y="260" width="280" height="260" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="1320" y="300" font-size="20" text-anchor="middle" style="fill:var(--gain)">3 · A FEW SPRAYS</text>
+<g id="b3b"></g><g id="m3"></g><g id="spk3"></g></g>
+<g id="cel1"><text class="d5" x="120" y="640" font-size="40" style="fill:var(--muted)">Not about bad smells.</text></g>
+<g id="cel2"><text class="d" x="120" y="730" font-size="52">A <tspan style="fill:var(--gain)">celebration</tspan> of a finished job.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The relaunch.</text>
+<text class="b" x="120" y="176" font-size="32">More perfume, and a new story: the fresh finish.</text>
+<g id="pd"><g id="bot4"></g><path id="drop" class="gain" d="M0 -20C9 -6 14 3 14 10A14 14 0 0 1 -14 10C-14 3 -9 -6 0 -20Z"/>
+<text class="m" x="260" y="690" font-size="20" text-anchor="middle">MORE PERFUME</text></g>
+<g id="ad"><rect class="s-ink" x="480" y="240" width="540" height="420" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="510" y="284" font-size="20">NEW ADS</text>
+<rect x="630" y="320" width="100" height="200" fill="var(--line)" fill-opacity=".5"/>
+<rect class="s-ink" x="530" y="320" width="200" height="200" fill="none" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-ink" d="M630 320V520M530 420H630" stroke-width="6" stroke-linecap="round"/>
+<path class="s-ink" d="M730 320L782 338V502L730 520Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-ink" d="M730 420L782 420" stroke-width="4" stroke-linecap="round"/>
+<rect class="ink" x="516" y="520" width="228" height="12" rx="4"/>
+<g id="air"><path class="s-gain" d="M650 370q20-14 40 0t40 0t40 0t40 0t40 0M650 470q20-14 40 0t40 0t40 0t40 0t40 0" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 10"/></g>
+<rect class="ink" x="540" y="550" width="14" height="50" rx="4"/>
+<rect class="ink" x="540" y="572" width="220" height="22" rx="8"/>
+<rect x="562" y="558" width="48" height="16" rx="8" fill="var(--line)"/>
+<rect class="gain" x="616" y="562" width="144" height="14" rx="6"/>
+<path class="s-line" d="M510 600h480" stroke-width="4"/>
+<text class="m" x="750" y="640" font-size="18" text-anchor="middle">CLEAN ROOM · OPEN WINDOW</text></g>
+<g id="rc"><path class="s-ink" d="M1100 260V620H1460" fill="none" stroke-width="5"/><g id="ch4"></g>
+<text class="m" x="1280" y="670" font-size="20" text-anchor="middle">SALES</text></g>
+<g id="succ"><text class="d" x="120" y="800" font-size="48" style="fill:var(--gain)">Febreze became a huge success.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Wanting before getting.</text>
+<text class="b" x="120" y="176" font-size="32">A lab monkey, a shape, a lever, and a drop of juice.</text>
+<g id="mk5"><circle class="ink" cx="182" cy="410" r="20"/><circle class="ink" cx="278" cy="410" r="20"/><circle class="ink" cx="230" cy="430" r="48"/>
+<ellipse cx="230" cy="445" rx="32" ry="28" fill="var(--stage)"/><circle class="ink" cx="218" cy="438" r="5"/><circle class="ink" cx="242" cy="438" r="5"/>
+<path class="ink" d="M162 590v-36a68 68 0 0 1 136 0v36z"/></g>
+<g id="st0"><rect class="s-ink" x="540" y="370" width="160" height="120" rx="10" fill="var(--stage)" stroke-width="6"/>
+<polygon id="tri" class="gain" points="620,395 655,460 585,460"/>
+<path class="s-ink" d="M620 490v30M590 520h60" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="620" y="570" font-size="20" text-anchor="middle">SHAPE APPEARS</text></g>
+<g id="st1"><path class="s-muted" d="M715 440h150m-16-16 16 16-16 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="ink" x="920" y="500" width="80" height="20" rx="6"/>
+<g id="lev"><path class="s-ink" d="M960 505V400" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="960" cy="395" r="14"/></g>
+<text class="m" x="960" y="570" font-size="20" text-anchor="middle">PULLS LEVER</text></g>
+<g id="st2"><path class="s-muted" d="M1030 440h170m-16-16 16 16-16 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="ink" x="1285" y="360" width="30" height="50"/>
+<path id="jdrop" class="gain" d="M0 -20C9 -6 14 3 14 10A14 14 0 0 1 -14 10C-14 3 -9 -6 0 -20Z"/>
+<path class="s-ink" d="M1260 500h80l-10 50h-60z" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="1300" y="590" font-size="20" text-anchor="middle">A DROP OF JUICE</text></g>
+<g id="spk5"><circle class="gain" r="22"/><text class="m" y="-66" font-size="18" text-anchor="middle" style="fill:var(--gain)">BRAIN LIGHTS UP</text></g>
+<g id="ant1"><text class="m" x="120" y="670" font-size="20">BEFORE ANY JUICE ARRIVES, THE BRAIN IS ALREADY WANTING IT</text></g>
+<g id="ant2"><text class="d" x="120" y="790" font-size="56">That anticipation is <tspan style="fill:var(--gain)">craving</tspan>.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Build your own craving.</text>
+<text class="b" x="120" y="176" font-size="32">Pair a new habit with a reward you can look forward to.</text>
+<g id="c0"><text class="m" x="360" y="290" font-size="20" text-anchor="middle">CUE</text>
+<circle class="s-ink" cx="360" cy="420" r="110" fill="var(--stage)" stroke-width="6"/>
+<path class="ink" d="M285 460V405q0-12 12-12h28l16 26q46 6 68 22q12 9 12 19z"/><rect class="gain" x="280" y="460" width="142" height="14" rx="7"/></g>
+<g id="c1"><path class="s-muted" d="M480 420h180m-18-18 18 18-18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="800" y="290" font-size="20" text-anchor="middle">ROUTINE: RUN</text>
+<circle class="s-ink" cx="800" cy="420" r="110" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="812" cy="360" r="16"/>
+<path class="s-ink" d="M806 382l-14 52M792 434l-30 44M792 434l34 22-6 38M774 400l34 4 20 20M802 404l-32 18" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="c2"><path class="s-muted" d="M920 420h180m-18-18 18 18-18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1240" y="290" font-size="20" text-anchor="middle" style="fill:var(--gain)">REWARD: TREAT OR PRIDE</text>
+<circle class="s-gain" cx="1240" cy="420" r="110" fill="var(--stage)" stroke-width="6"/>
+<polygon id="st6" class="gain"/></g>
+<g id="arc6"><path class="s-gain" d="M1240 540Q800 780 360 540" fill="none" stroke-width="6" stroke-dasharray="14 12"/>
+<path class="s-gain" d="M398 548l-38-8 20-32" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="800" y="720" font-size="22" text-anchor="middle" style="fill:var(--gain)">CRAVING PULLS YOU BACK TO THE CUE</text></g>
+<circle id="dot6" class="gain" r="14"/>
+<g id="exp6"><text class="d" x="120" y="830" font-size="40">Your brain starts expecting the good feeling.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<g id="q7m"><text class="m" x="143" y="220" font-size="26">THINK OF ONE HABIT YOU WANT TO BUILD</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What reward could you</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">learn to crave, to carry</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">you <tspan style="fill:var(--gain)">there?</tspan></text></g>
+<polygon id="q7s" class="gain"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="115" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:55</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Craving Is the Engine&rdquo;, from <em>The Power of Habit</em> by Charles Duhigg. The Febreze story and the juice-rewarded lab monkey are as reported in the book. The rooms, people, brain sparks and sales charts are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=115, SC=[[0.0, 9.2], [9.2, 23.1], [23.1, 41.5], [41.5, 55.8], [55.8, 70.6], [70.6, 89.9], [89.9, 105.5], [105.5, 115.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Smells Like Success", "A Product That Flopped", "The Nose Goes Blind", "A Finishing Touch", "The Relaunch", "Wanting Before Getting", "Build Your Own Craving", "Your Turn"];
+const TM={"spray_bottle": 0.0, "pg_lab": 9.52, "smelly_couch": 15.52, "falling_chart": 21.12, "cat_house": 23.36, "shrug_woman": 26.96, "blind_nose": 32.64, "clean_room": 41.8, "made_bed": 45.2, "sparkle": 49.92, "perfume_drop": 56.08, "new_ad": 60.88, "rising_chart": 66.72, "monkey": 70.88, "juice_drop": 76.48, "brain_spark": 79.04, "sneakers": 90.16, "treat": 95.44, "anticipation": 100.08};
+const ps=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const bot=(g,x,y,s)=>{mk('rect',{x:x-14*s,y:y-26*s,width:28*s,height:26*s,class:'ink'},g);mk('rect',{x:x-26*s,y:y-56*s,width:66*s,height:32*s,rx:6*s,class:'ink'},g);mk('rect',{x:x+40*s,y:y-50*s,width:14*s,height:12*s,class:'ink'},g);
+  mk('path',{d:`M${x+12*s} ${y-24*s}l${14*s} ${28*s}`,class:'s-ink','stroke-width':6*s,'stroke-linecap':'round'},g);
+  mk('rect',{x:x-40*s,y:y,width:80*s,height:140*s,rx:16*s,class:'gain'},g);mk('rect',{x:x-28*s,y:y+40*s,width:56*s,height:44*s,rx:6*s,fill:'var(--stage)'},g)};
+const mist=(g,x,y,s,n)=>Array.from({length:n},(_,i)=>({c:mk('circle',{r:5*s,fill:'var(--muted)'},g),x,y,s,i,n}));
+const fog=(a,k)=>a.forEach(d=>{const h=(t*.7+d.i/d.n)%1;d.c.setAttribute('cx',(d.x+130*d.s*h).toFixed(1));d.c.setAttribute('cy',(d.y+((d.i%3)-1)*26*d.s*h).toFixed(1));d.c.setAttribute('opacity',(k*(1-h)).toFixed(2))});
+const wav=(g,x,y)=>mk('path',{d:`M${x} ${y}q-14-15 0-30t0-30t0-30`,class:'s-loss','stroke-width':6,fill:'none','stroke-linecap':'round'},g);
+const chart=(g,x,y,w,h,v,col)=>({pl:mk('polyline',{fill:'none',stroke:col,'stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round'},g),pts:v.map((q,i)=>[x+i*w/(v.length-1),y+h-q*h])});
+const draw=(c,k)=>{const n=c.pts.length-1,f=k*n,i=Math.min(n,Math.floor(f));const s=c.pts.slice(0,i+1).map(q=>q.join(','));if(i<n){const a=c.pts[i],b=c.pts[i+1],r=f-i;s.push((a[0]+(b[0]-a[0])*r).toFixed(1)+','+(a[1]+(b[1]-a[1])*r).toFixed(1))}c.pl.setAttribute('points',s.join(' '))};
+const starP=(cx,cy,R,r)=>Array.from({length:10},(_,i)=>{const a=-Math.PI/2+i*Math.PI/5,q=i%2?r:R;return (cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1)}).join(' ');
+const cat=(g,x,y)=>{mk('ellipse',{cx:x,cy:y,rx:30,ry:18,class:'ink'},g);mk('circle',{cx:x+28,cy:y-18,r:15,class:'ink'},g);mk('path',{d:`M${x+16} ${y-26}l2-18 10 10zM${x+40} ${y-26}l-2-18-10 10z`,class:'ink'},g);mk('path',{d:`M${x-28} ${y}q-22-4-18-30`,class:'s-ink','stroke-width':6,fill:'none','stroke-linecap':'round'},g)};
+
+bot($('tbot'),1240,330,1.6); const M0=mist($('tmist'),1326,260,1.1,9);
+[720,800,880].forEach(x=>wav($('stk1'),x,400));
+const C1=chart($('ch1'),1100,280,340,340,[.85,.7,.72,.5,.42,.25,.18],'var(--loss)');
+[230,420,590].forEach(x=>wav($('stk2'),x,540));
+const CG=[[260,690],[360,690],[460,690],[560,690],[310,580],[510,580]].map(([x,y])=>{const g=mk('g',{},$('cats'));cat(g,x,y);return g});
+ps($('wom'),800,470,30,'ink');
+ps($('w3'),200,390,30,'ink');
+bot($('b3b'),1300,360,.8); const M3=mist($('m3'),1343,325,.7,7);
+const SK=[[1405,420,18],[1432,480,12],[1225,470,14],[1215,380,10]].map(([x,y,r])=>mk('path',{d:`M${x} ${y-r}Q${x} ${y} ${x+r} ${y}Q${x} ${y} ${x} ${y+r}Q${x} ${y} ${x-r} ${y}Q${x} ${y} ${x} ${y-r}z`,class:'gain'},$('spk3')));
+bot($('bot4'),260,440,1.3);
+ps($('ad'),920,400,26,'ink');
+const C4=chart($('ch4'),1120,280,320,330,[.08,.15,.22,.38,.55,.78,.98],'var(--gain)');
+for(let i=0;i<8;i++){const a=i*Math.PI/4;mk('path',{d:`M${(30*Math.cos(a)).toFixed(1)} ${(30*Math.sin(a)).toFixed(1)}L${(44*Math.cos(a)).toFixed(1)} ${(44*Math.sin(a)).toFixed(1)}`,class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('spk5'))}
+$('st6').setAttribute('points',starP(1240,420,70,30)); $('q7s').setAttribute('points',starP(0,0,80,34));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const sb=TM.spray_bottle;
+rise($('tbot'),p(u,sb,sb+.5)); fog(M0,p(u,sb+.5,sb+1));
+rise($('tgear'),p(u,sb+6.2,sb+6.7)); $('tgr').setAttribute('transform','rotate('+((t*40)%360).toFixed(1)+' 1400 700)');
+
+rise($('p1a'),p(u,TM.pg_lab,TM.pg_lab+.5)); rise($('p1b'),p(u,TM.smelly_couch,TM.smelly_couch+.5));
+$('stk1').setAttribute('transform','translate(0 '+(6*Math.sin(t*3)).toFixed(1)+')');
+const e1=SC[1][1]/K, fc=Math.min(TM.falling_chart,e1-2.6);
+rise($('p1c'),p(u,fc-.6,fc-.1)); draw(C1,p(u,fc,fc+1.2));
+const dA=Math.min(TM.falling_chart+.4,e1-1.6);
+rise($('dis'),p(u,dA,dA+.4));
+
+rise($('hs'),p(u,TM.cat_house,TM.cat_house+.5));
+CG.forEach((g,i)=>rise(g,p(u,TM.cat_house+.4+i*.25,TM.cat_house+.8+i*.25)));
+$('stk2').setAttribute('transform','translate(0 '+(6*Math.sin(t*3)).toFixed(1)+')');
+rise($('wom'),p(u,TM.shrug_woman,TM.shrug_woman+.5)); rise($('bub2'),p(u,TM.shrug_woman+.8,TM.shrug_woman+1.3));
+rise($('nose'),p(u,TM.blind_nose,TM.blind_nose+.5));
+const bn=1-p(u,TM.blind_nose+.5,TM.blind_nose+4);
+$('mfill').setAttribute('width',(248*bn).toFixed(1)); $('nw').setAttribute('opacity',bn.toFixed(2));
+rise($('tuned'),p(u,TM.blind_nose+3.5,TM.blind_nose+4)); rise($('nocue'),p(u,TM.blind_nose+5.3,TM.blind_nose+5.9));
+
+rise($('w3'),p(u,TM.clean_room,TM.clean_room+.5)); rise($('b0'),p(u,TM.clean_room+.6,TM.clean_room+1.1));
+rise($('b1'),p(u,TM.made_bed,TM.made_bed+.5)); rise($('b2'),p(u,TM.made_bed+1.5,TM.made_bed+2));
+fog(M3,p(u,TM.made_bed+2,TM.made_bed+2.5));
+const sp=p(u,TM.sparkle,TM.sparkle+.5); SK.forEach((s,i)=>s.setAttribute('opacity',(sp*(.3+.7*Math.abs(Math.sin(t*3+i)))).toFixed(2)));
+rise($('cel1'),p(u,TM.sparkle,TM.sparkle+.5)); rise($('cel2'),p(u,TM.sparkle+1.5,TM.sparkle+2));
+
+rise($('pd'),p(u,TM.perfume_drop,TM.perfume_drop+.5));
+const dk=(t%1.6)/1.6; $('drop').setAttribute('transform','translate(260 '+(240+105*dk).toFixed(1)+')');
+$('drop').setAttribute('opacity',(p(u,TM.perfume_drop+.5,TM.perfume_drop+.9)*(dk<.8?1:(1-dk)/.2)).toFixed(2));
+rise($('ad'),p(u,TM.new_ad,TM.new_ad+.5)); $('air').setAttribute('stroke-dashoffset',(-t*30%20).toFixed(1));
+rise($('rc'),p(u,TM.rising_chart-.4,TM.rising_chart)); draw(C4,p(u,TM.rising_chart,TM.rising_chart+1.5));
+rise($('succ'),p(u,TM.rising_chart+.8,TM.rising_chart+1.3));
+
+rise($('mk5'),p(u,TM.monkey,TM.monkey+.5)); rise($('st0'),p(u,TM.monkey+1,TM.monkey+1.5)); rise($('st1'),p(u,TM.monkey+2.5,TM.monkey+3));
+$('tri').setAttribute('opacity',(.35+.65*Math.abs(Math.sin(t*2))).toFixed(2));
+$('lev').setAttribute('transform','rotate('+(-30*Math.max(0,Math.sin(t*3))).toFixed(1)+' 960 505)');
+rise($('st2'),p(u,TM.juice_drop,TM.juice_drop+.5));
+$('jdrop').setAttribute('transform','translate(1300 '+(420+75*((t%1.4)/1.4)).toFixed(1)+')');
+const bx=1300-680*p(u,TM.brain_spark,TM.brain_spark+1.5), pl=1+.12*Math.abs(Math.sin(t*4));
+$('spk5').setAttribute('transform','translate('+bx.toFixed(1)+' 290) scale('+pl.toFixed(3)+')');
+$('spk5').setAttribute('opacity',p(u,TM.juice_drop+.6,TM.juice_drop+1.1).toFixed(2));
+rise($('ant1'),p(u,TM.brain_spark+1.5,TM.brain_spark+2)); rise($('ant2'),p(u,TM.brain_spark+6.2,TM.brain_spark+6.8));
+
+rise($('c0'),p(u,TM.sneakers,TM.sneakers+.5)); rise($('c1'),p(u,TM.sneakers+1.2,TM.sneakers+1.7)); rise($('c2'),p(u,TM.treat,TM.treat+.5));
+rise($('arc6'),p(u,TM.anticipation,TM.anticipation+.6));
+const k6=(t%2.5)/2.5, q6=1-k6; $('dot6').setAttribute('cx',(q6*q6*1240+2*q6*k6*800+k6*k6*360).toFixed(1)); $('dot6').setAttribute('cy',(q6*q6*540+2*q6*k6*780+k6*k6*540).toFixed(1));
+$('dot6').setAttribute('opacity',p(u,TM.anticipation+.6,TM.anticipation+1).toFixed(2));
+rise($('exp6'),p(u,TM.anticipation+1,TM.anticipation+1.6));
+
+const s7=SC[7][0]/K;
+rise($('q7m'),p(u,s7+.3,s7+.8)); rise($('qa'),p(u,s7+3.4,s7+3.9)); rise($('qb'),p(u,s7+3.8,s7+4.3)); rise($('qc'),p(u,s7+4.2,s7+4.7));
+$('q7s').setAttribute('transform','translate(1320 600) scale('+(1+.06*Math.sin(t*3)).toFixed(3)+') rotate('+((t*10)%360).toFixed(1)+')');
+$('q7s').setAttribute('opacity',p(u,s7+4.6,s7+5.2).toFixed(2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:111.15;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

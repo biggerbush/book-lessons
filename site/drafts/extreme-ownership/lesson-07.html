@@ -1,0 +1,365 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Extreme Ownership Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Extreme Ownership: Ownership and the Laws of Combat work only with daily discipline and balance, because a disciplined leader gains more freedom to adapt and lead well. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">EXTREME OWNERSHIP · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Discipline equals</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2"><tspan style="fill:var(--gain)">freedom</tspan>.</text>
+<text class="b" x="120" y="600" font-size="32">Why strict daily habits give leaders more room to adapt.</text>
+<g id="clk">
+<path class="ink" d="M-128 -62a62 62 0 0 1 66 -66zM128 -62a62 62 0 0 0 -66 -66z"/>
+<path class="s-ink" d="M-70 110l-30 40M70 110l30 40" stroke-width="10" stroke-linecap="round"/>
+<circle class="s-ink" r="120" fill="var(--stage)" stroke-width="10"/>
+<path class="s-ink" d="M0 0L-42 -30" stroke-width="9" stroke-linecap="round"/>
+<path id="clkh" class="s-gain" d="M0 0V-85" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" r="10"/>
+<path id="rings" class="s-gain" d="M-160 -40l-35 -10M-158 10h-37M160 -40l35 -10M158 10h37" stroke-width="7" stroke-linecap="round"/>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The paradox.</text>
+<text class="b" x="120" y="176" font-size="32">Jocko Willink’s final lesson, in three short words.</text>
+<g id="jk"></g>
+<g id="qc">
+<polygon class="s-ink" points="540,370 372,402 540,420" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<rect class="s-ink" x="520" y="250" width="960" height="180" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="560" y="366" font-size="72">Discipline <tspan style="fill:var(--muted)">=</tspan> <tspan style="fill:var(--gain)">freedom</tspan></text>
+</g>
+<g id="walker"></g>
+<g id="cage">
+<rect class="s-ink" x="560" y="500" width="300" height="260" rx="8" fill="none" stroke-width="6"/>
+<path class="s-ink" d="M560 500H860M560 760H860" stroke-width="10" stroke-linecap="round"/>
+</g>
+<path id="cbars" class="s-ink" d="M610 504v252M660 504v252M710 504v252M760 504v252M810 504v252" stroke-width="6" stroke-linecap="round"/>
+<g id="lb1"><text class="m" x="1000" y="600" font-size="22">RULES FEEL LIKE A CAGE</text></g>
+<g id="lb2"><text class="m" x="1000" y="660" font-size="22" style="fill:var(--gain)">IN COMBAT: THE OPPOSITE</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Raids in Iraq.</text>
+<text class="b" x="120" y="176" font-size="32">Each raid had many moving parts.</text>
+<path class="s-line" d="M120 720H1480" stroke-width="5"/>
+<g id="hv">
+<path class="ink" d="M200 600l30-60h150l40 60z"/>
+<rect class="ink" x="140" y="600" width="320" height="80" rx="10"/>
+<rect x="250" y="555" width="55" height="35" rx="4" fill="var(--stage)"/>
+<circle class="s-ink" cx="210" cy="690" r="28" fill="var(--stage)" stroke-width="10"/>
+<circle class="s-ink" cx="390" cy="690" r="28" fill="var(--stage)" stroke-width="10"/>
+</g>
+<g id="bld">
+<rect class="s-ink" x="760" y="300" width="480" height="420" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="960" y="600" width="80" height="120"/>
+</g>
+<path id="route" class="s-gain" d="M470 640C640 600 820 600 960 660" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<g id="steps"></g>
+<path id="chaos" class="s-loss" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<g id="czt"><text class="d" x="120" y="820" font-size="44" style="fill:var(--loss)">Done loosely, confusion gets people hurt.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Strict standard procedures.</text>
+<text class="b" x="120" y="176" font-size="32">A set way for every routine step of a raid.</text>
+<g id="p0">
+<rect class="s-line" x="120" y="230" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="330" y="290" font-size="20" text-anchor="middle">STANDARD PROCEDURES</text>
+<rect class="s-ink" x="230" y="330" width="200" height="280" rx="12" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="290" y="316" width="80" height="30" rx="8"/>
+</g>
+<g id="p1">
+<rect class="s-line" x="590" y="230" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="800" y="290" font-size="20" text-anchor="middle">COUNT EVERY PERSON</text>
+</g>
+<g id="p2">
+<rect class="s-line" x="1060" y="230" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1270" y="290" font-size="20" text-anchor="middle">DRILLED UNTIL AUTOMATIC</text>
+<rect class="ink" x="1255" y="336" width="30" height="22" rx="4"/>
+<circle class="s-ink" cx="1270" cy="470" r="110" fill="var(--stage)" stroke-width="8"/>
+<path id="sw" class="s-gain" d="M1270 470V385" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1270" cy="470" r="10"/>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Discipline made them faster.</text>
+<text class="b" x="120" y="176" font-size="32">The basics took no thought, so there was room to adapt.</text>
+<g id="a0"><text class="m" x="120" y="280" font-size="22">EXPECTED</text><path id="ar0" class="s-loss" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="560" y="338" font-size="22" style="fill:var(--loss)">LOOKS SLOWER?</text></g>
+<g id="a1"><text class="m" x="120" y="400" font-size="22" style="fill:var(--gain)">ACTUAL</text><path id="ar1" class="s-gain" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="120" y="505" font-size="22" style="fill:var(--gain)">FASTER, MORE CONFIDENT</text></g>
+<g id="bar">
+<text class="m" x="120" y="580" font-size="22">ATTENTION</text>
+<rect id="bk" class="ink" x="120" y="600" width="1360" height="110"/>
+<rect id="fr" class="gain" x="1480" y="600" width="0" height="110"/>
+<rect class="s-line" x="120" y="600" width="1360" height="110" fill="none" stroke-width="4"/>
+<text id="bkt" class="m" x="800" y="664" font-size="24" text-anchor="middle" style="fill:var(--stage)">BASICS</text>
+<text id="frt" class="m" x="1000" y="664" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">ROOM TO ADAPT</text>
+</g>
+<g id="fd"><text class="d" x="120" y="810" font-size="44">Freedom came directly from the discipline.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">It starts each morning.</text>
+<text class="b" x="120" y="176" font-size="32">When the alarm goes off: do you get up, or hit snooze?</text>
+<clipPath id="skyclip"><rect x="120" y="200" width="580" height="360"/></clipPath>
+<g id="sky">
+<circle id="sun" class="gain" cx="450" cy="640" r="70" clip-path="url(#skyclip)"/>
+<path class="s-ink" d="M120 560H700" stroke-width="6" stroke-linecap="round"/>
+<path class="ink" d="M180 294a30 30 0 0 1 30 -30zM280 294a30 30 0 0 0 -30 -30z"/>
+<circle class="s-ink" cx="230" cy="320" r="50" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M230 320V286M230 320h24" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="ch">
+<rect class="gain" x="120" y="620" width="270" height="80" rx="40"/>
+<text class="m" x="255" y="668" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">GET UP</text>
+<g id="snz"><rect class="s-loss" x="430" y="620" width="270" height="80" rx="40" fill="none" stroke-width="5"/>
+<text class="m" x="565" y="668" font-size="24" text-anchor="middle" style="fill:var(--loss)">SNOOZE</text></g>
+</g>
+<g id="db"><g id="dbi">
+<path class="s-ink" d="M1000 330H1300" stroke-width="12" stroke-linecap="round"/>
+<rect class="ink" x="1010" y="280" width="30" height="100" rx="6"/><rect class="ink" x="1050" y="295" width="24" height="70" rx="6"/>
+<rect class="ink" x="1260" y="280" width="30" height="100" rx="6"/><rect class="ink" x="1226" y="295" width="24" height="70" rx="6"/>
+</g></g>
+<g id="brk"></g>
+<g id="lbB"><text class="m" x="840" y="750" font-size="20">SMALL DAILY CHOICES BUILD HABITS THAT HOLD</text>
+<text class="m" x="840" y="782" font-size="20" style="fill:var(--gain)">UNDER PRESSURE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Discipline, not rigidity.</text>
+<text class="b" x="120" y="176" font-size="32">Leadership is full of opposing forces.</text>
+<g id="pairs"></g>
+<g id="fulc"><polygon class="ink" points="800,530 740,640 860,640"/><path class="s-ink" d="M640 640H960" stroke-width="6" stroke-linecap="round"/></g>
+<g id="beam">
+<path class="s-ink" d="M360 520H1240" stroke-width="10" stroke-linecap="round"/>
+<circle class="gain" cx="360" cy="520" r="16"/><circle class="gain" cx="1240" cy="520" r="16"/>
+<path id="frc" class="s-muted" d="M330 520H180m24-24l-24 24 24 24M1270 520H1420m-24-24l24 24-24 24" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="frl"><text class="m" x="800" y="700" font-size="22" text-anchor="middle">OPPOSING FORCES</text></g>
+<g id="bal"><text class="d" x="120" y="800" font-size="44">Balance keeps structure from becoming a cage.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make it daily.</text>
+<text class="b" x="120" y="176" font-size="32">Every principle depends on discipline.</text>
+<g id="tiles"></g>
+<g id="fdl"><text class="m" x="120" y="365" font-size="20" style="fill:var(--loss)">WITHOUT DAILY DISCIPLINE, THEY FADE UNDER PRESSURE</text></g>
+<g id="cal"><text class="m" x="120" y="680" font-size="20">EVERY DAY</text></g>
+<g id="tb">
+<path class="s-gain" d="M1060 500v-50h120v50" fill="none" stroke-width="12" stroke-linejoin="round"/>
+<rect class="ink" x="890" y="430" width="34" height="80" rx="6"/><rect class="ink" x="950" y="450" width="34" height="60" rx="6"/>
+<rect class="ink" x="1260" y="440" width="34" height="70" rx="6"/><rect class="ink" x="1320" y="430" width="34" height="80" rx="6"/>
+<rect class="gain" x="860" y="500" width="520" height="200" rx="16"/>
+<path d="M860 560H1380" stroke="var(--on-gain)" stroke-width="4"/>
+<text class="m" x="1120" y="640" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">RELIABLE TOOLS</text>
+</g>
+<g id="ev"><text class="d" x="120" y="810" font-size="44">Discipline turns good ideas into everyday habits.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="nt"><g transform="rotate(4 1350 265)">
+<rect class="gain" x="1250" y="170" width="200" height="190" rx="6"/>
+<path d="M1280 220h140M1280 260h140M1280 300h90" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round"/>
+</g></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pick one routine your</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">team keeps improvising.</text></g>
+<g id="qc2"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">Make it a <tspan style="fill:var(--gain)">standard</tspan>.</text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">THIS WEEK. THEN NOTICE THE FREEDOM IT GIVES YOU.</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="134" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:14</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Discipline Equals Freedom&rdquo;, from <em>Extreme Ownership</em> by Jocko Willink and Leif Babin. The SEAL raid procedures in Iraq and the morning alarm example are as reported in the book. Drawings such as the chaos cloud, speed arrow and seesaw are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=134, SC=[[0.0, 4.7], [4.7, 19.8], [19.8, 36.3], [36.3, 49.9], [49.9, 67.1], [67.1, 79.2], [79.2, 101.6], [101.6, 121.5], [121.5, 134.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Discipline Is Freedom", "The Paradox", "Raids in Iraq", "Strict Routines", "Speed and Freedom", "It Starts With You", "Balance the Pull", "Make It Daily", "Your Challenge"];
+const TM={"alarm_clock": 0.0, "jocko": 4.96, "quote_card": 9.28, "humvee": 20.08, "building": 24.24, "chaos_cloud": 30.2, "checklist": 36.56, "headcount": 41.12, "stopwatch": 44.92, "speed_arrow": 54.32, "open_door": 58.56, "sunrise": 67.44, "dumbbell": 74.88, "scale": 79.52, "seesaw": 86.48, "follower": 91.64, "calendar": 108.8, "toolbox": 113.44, "sticky_note": 121.84};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:cls},g)};
+const lab=(g,x,y,s,fs,a,st)=>{const e=mk('text',{x:x,y:y,'font-size':fs,'text-anchor':a||'start',class:'m'},g);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const tr=(e,x,y,s)=>e.setAttribute('transform',`translate(${x} ${y})`+(s||''));
+fig($('jk'),300,400,40,'ink');lab($('jk'),300,610,'JOCKO WILLINK',22,'middle');
+fig($('walker'),0,0,26,'ink');const WK=[...$('walker').children];
+const WN=[];for(let j=0;j<2;j++)for(let i=0;i<3;i++)WN.push(mk('rect',{x:810+i*150,y:340+j*120,width:80,height:80,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('bld')));
+const ST=['ENTER','SEARCH ROOMS','GET OUT SAFE'].map((s,i)=>{const g=mk('g',{},$('steps'));mk('circle',{cx:1278,cy:374+i*70,r:9,class:'gain'},g);lab(g,1296,382+i*70,s,20);return g});
+const CK=[0,1,2,3].map(i=>{const y=400+i*55,g=$('p0');mk('rect',{x:255,y:y-22,width:28,height:28,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:`M300 ${y-8}H405`,stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},g);return mk('path',{d:`M259 ${y-10}l8 9 16-20`,fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g)});
+const BG=[];for(let i=0;i<6;i++){const x=680+(i%3)*120,y=380+Math.floor(i/3)*170;fig($('p1'),x,y,22,'ink');BG.push(mk('circle',{cx:x+30,cy:y-22,r:12,class:'gain'},$('p1')))}
+const SWC=['SEARCH','LOAD','MOVE'].map((s,i)=>{const g=mk('g',{},$('p2'));const r=mk('rect',{x:1090+i*130,y:640,width:120,height:50,rx:25,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);lab(g,1150+i*130,672,s,18,'middle','fill:var(--ink)');return[g,r]});
+const BR=[];for(let r=0;r<4;r++)for(let c=0;c<(r%2?5:6);c++)BR.push(mk('rect',{x:840+c*104+(r%2?52:0),y:640-r*58,width:96,height:50,rx:6,class:'gain'},$('brk')));
+const PR=[['CONFIDENT','NOT COCKY'],['AGGRESSIVE','NOT RECKLESS'],['LEAD','FOLLOW']].map((q,i)=>{const g=mk('g',{},$('pairs'));mk('path',{d:`M540 ${260+i*80}H1060`,stroke:'var(--line)','stroke-width':3,'stroke-dasharray':'6 8'},g);q.forEach((s,k)=>{const x=k?1060:180;mk('rect',{x:x,y:230+i*80,width:360,height:60,rx:30,fill:'var(--stage)',stroke:k?'var(--ink)':'var(--gain)','stroke-width':4},g);lab(g,x+180,268+i*80,s,22,'middle','fill:var(--ink)')});return g});
+const TL=['OWNERSHIP','SIMPLE PLANS','CLEAR PRIORITIES','TRUST FRONTLINE'].map((s,i)=>{const g=mk('g',{},$('tiles'));const r=mk('rect',{x:120+i*347,y:230,width:320,height:80,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);lab(g,280+i*347,278,s,20,'middle','fill:var(--ink)');return[g,r]});
+const DY=[];for(let i=0;i<21;i++)DY.push(mk('rect',{x:120+(i%7)*88,y:400+Math.floor(i/7)*78,width:80,height:70,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},$('cal')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const a0=TM.alarm_clock,ph=t%4,sh=ph<1.2?Math.sin(t*40)*5*(1-ph/1.2):0;
+  $('clk').setAttribute('opacity',p(u,a0,a0+.6));tr($('clk'),1280,400,` rotate(${sh.toFixed(2)})`);
+  $('rings').setAttribute('opacity',ph<1.2?1:0);$('clkh').setAttribute('transform',`rotate(${((t*30)%360).toFixed(1)})`);
+
+  const q=TM.quote_card,cg=p(u,q+2.2,q+2.7),op=p(u,q+6.4,q+7.4);
+  rise($('jk'),p(u,TM.jocko,TM.jocko+.5));rise($('qc'),p(u,q,q+.5));rise($('cage'),cg);rise($('lb1'),cg);
+  $('cbars').setAttribute('opacity',(cg*(1-.6*op)).toFixed(2));$('cbars').style.stroke=op>.5?'var(--gain)':'var(--ink)';
+  $('walker').setAttribute('opacity',cg);
+  const bob=op>.5?-8*Math.abs(Math.sin(t*3)):0;
+  tr($('walker'),710,(580+bob).toFixed(1));WK.forEach(e=>e.setAttribute('class',op>.5?'gain':'ink'));
+  rise($('lb2'),p(u,q+6.6,q+7.1));
+
+  const hm=p(u,TM.humvee,TM.humvee+1.4),b=TM.building,cz=p(u,TM.chaos_cloud,TM.chaos_cloud+.8);
+  $('hv').setAttribute('opacity',p(u,TM.humvee,TM.humvee+.4));tr($('hv'),(-300*(1-hm)).toFixed(1),0);
+  rise($('bld'),p(u,b,b+.5));$('route').setAttribute('opacity',p(u,b+.5,b+1));
+  WN.forEach((w,i)=>{w.setAttribute('fill',u>=b+.6+i*.3?'var(--gain)':'var(--stage)');w.setAttribute('stroke',cz>.5?'var(--loss)':'var(--ink)')});
+  ST.forEach((g,i)=>rise(g,p(u,b+1+i*.8,b+1.4+i*.8)));
+  let cd='';for(let a=0;a<=60;a++){const th=a*.55,rr=1+.25*Math.sin(a*1.7+t*3);cd+=(a?'L':'M')+(1000+210*rr*Math.cos(th)).toFixed(0)+' '+(470+170*rr*Math.sin(th*1.3)).toFixed(0)}
+  $('chaos').setAttribute('d',cd);$('chaos').setAttribute('opacity',cz);rise($('czt'),p(u,TM.chaos_cloud+1,TM.chaos_cloud+1.6));
+
+  const k=TM.checklist,h=TM.headcount,sw=TM.stopwatch;
+  rise($('p0'),p(u,k,k+.5));CK.forEach((c,i)=>c.setAttribute('opacity',p(u,k+.6+i*.4,k+.9+i*.4)));
+  rise($('p1'),p(u,h,h+.5));BG.forEach((c,i)=>c.setAttribute('opacity',p(u,h+.6+i*.3,h+.8+i*.3)));
+  rise($('p2'),p(u,sw,sw+.5));$('sw').setAttribute('transform',`rotate(${((u*240)%360).toFixed(1)} 1270 470)`);
+  SWC.forEach((c,i)=>{rise(c[0],p(u,sw+.6+i*.5,sw+1+i*.5));c[1].setAttribute('stroke',u>=sw+3?'var(--gain)':'var(--ink)')});
+
+  const s4=SC[4][0]/K,e0=p(u,s4+.6,s4+1.6),e1=p(u,TM.speed_arrow,TM.speed_arrow+1.2),od=TM.open_door;
+  rise($('a0'),p(u,s4+.4,s4+.8));$('ar0').setAttribute('d',`M120 330H${(144+376*e0).toFixed(1)}m-24-24l24 24-24 24`);
+  rise($('a1'),p(u,TM.speed_arrow,TM.speed_arrow+.4));$('ar1').setAttribute('d',`M120 450H${(144+1296*e1).toFixed(1)}m-24-24l24 24-24 24`);
+  rise($('bar'),p(u,s4+.6,s4+1.1));const w=1360-980*p(u,od,od+1.5);
+  $('bk').setAttribute('width',w.toFixed(1));$('bkt').setAttribute('x',(120+w/2).toFixed(1));
+  $('fr').setAttribute('x',(120+w).toFixed(1));$('fr').setAttribute('width',(1360-w).toFixed(1));
+  $('frt').setAttribute('x',(120+w+(1360-w)/2).toFixed(1));$('frt').setAttribute('opacity',p(u,od+1,od+1.6));
+  rise($('fd'),p(u,od+6.2,od+6.8));
+
+  const sr=TM.sunrise,dbt=TM.dumbbell;
+  rise($('sky'),p(u,sr,sr+.5));$('sun').setAttribute('cy',(640-180*p(u,sr,sr+2.5)).toFixed(1));
+  rise($('ch'),p(u,sr+5,sr+5.5));$('snz').setAttribute('opacity',1-.6*p(u,sr+6.5,sr+7));
+  rise($('db'),p(u,dbt,dbt+.5));tr($('dbi'),0,(-20*Math.abs(Math.sin(t*2))).toFixed(1));
+  BR.forEach((r,i)=>r.setAttribute('opacity',p(u,dbt+.3+i*.12,dbt+.5+i*.12)));rise($('lbB'),p(u,dbt+2.6,dbt+3.1));
+
+  const sc=TM.scale,amp=7*(1-p(u,TM.seesaw,TM.follower+1.5));
+  rise($('fulc'),p(u,sc,sc+.5));$('beam').setAttribute('opacity',p(u,sc,sc+.5));
+  $('beam').setAttribute('transform',`rotate(${(amp*Math.sin(t*1.4)).toFixed(2)} 800 520)`);
+  $('frc').setAttribute('opacity',p(u,sc+3.4,sc+4));rise($('frl'),p(u,sc+3.4,sc+3.9));
+  [TM.seesaw,TM.seesaw+2,TM.follower].forEach((a,i)=>rise(PR[i],p(u,a,a+.5)));rise($('bal'),p(u,TM.follower+5.8,TM.follower+6.4));
+
+  const s7=SC[7][0]/K,ca=TM.calendar,tb=TM.toolbox,fdv=p(u,ca+.5,ca+1.5)*(1-p(u,tb,tb+1));
+  TL.forEach((c,i)=>{rise(c[0],p(u,s7+.5+i*.4,s7+.9+i*.4));c[1].setAttribute('stroke',u>=tb?'var(--gain)':'var(--ink)')});
+  $('tiles').setAttribute('opacity',(1-.7*fdv).toFixed(2));rise($('fdl'),p(u,ca+.5,ca+1)*(1-p(u,tb,tb+.5)));
+  rise($('cal'),p(u,ca,ca+.5));DY.forEach((d,i)=>d.setAttribute('fill',u>=tb+i*.08?'var(--gain)':'var(--stage)'));
+  rise($('tb'),p(u,tb+.3,tb+.9));rise($('ev'),p(u,tb+4.5,tb+5.1));
+
+  const sn=TM.sticky_note;
+  rise($('nt'),p(u,sn,sn+.5));rise($('qa'),p(u,sn,sn+.5));rise($('qb'),p(u,sn+.4,sn+.9));rise($('qc2'),p(u,sn+.8,sn+1.3));rise($('qd'),p(u,sn+6.5,sn+7));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:130.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

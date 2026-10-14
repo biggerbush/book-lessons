@@ -1,0 +1,14 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:cls},g)};
+const lab=(g,x,y,s,fs,a,st)=>{const e=mk('text',{x:x,y:y,'font-size':fs,'text-anchor':a||'start',class:'m'},g);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const tr=(e,x,y,s)=>e.setAttribute('transform',`translate(${x} ${y})`+(s||''));
+fig($('jk'),300,400,40,'ink');lab($('jk'),300,610,'JOCKO WILLINK',22,'middle');
+fig($('walker'),0,0,26,'ink');const WK=[...$('walker').children];
+const WN=[];for(let j=0;j<2;j++)for(let i=0;i<3;i++)WN.push(mk('rect',{x:810+i*150,y:340+j*120,width:80,height:80,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('bld')));
+const ST=['ENTER','SEARCH ROOMS','GET OUT SAFE'].map((s,i)=>{const g=mk('g',{},$('steps'));mk('circle',{cx:1278,cy:374+i*70,r:9,class:'gain'},g);lab(g,1296,382+i*70,s,20);return g});
+const CK=[0,1,2,3].map(i=>{const y=400+i*55,g=$('p0');mk('rect',{x:255,y:y-22,width:28,height:28,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:`M300 ${y-8}H405`,stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},g);return mk('path',{d:`M259 ${y-10}l8 9 16-20`,fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g)});
+const BG=[];for(let i=0;i<6;i++){const x=680+(i%3)*120,y=380+Math.floor(i/3)*170;fig($('p1'),x,y,22,'ink');BG.push(mk('circle',{cx:x+30,cy:y-22,r:12,class:'gain'},$('p1')))}
+const SWC=['SEARCH','LOAD','MOVE'].map((s,i)=>{const g=mk('g',{},$('p2'));const r=mk('rect',{x:1090+i*130,y:640,width:120,height:50,rx:25,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);lab(g,1150+i*130,672,s,18,'middle','fill:var(--ink)');return[g,r]});
+const BR=[];for(let r=0;r<4;r++)for(let c=0;c<(r%2?5:6);c++)BR.push(mk('rect',{x:840+c*104+(r%2?52:0),y:640-r*58,width:96,height:50,rx:6,class:'gain'},$('brk')));
+const PR=[['CONFIDENT','NOT COCKY'],['AGGRESSIVE','NOT RECKLESS'],['LEAD','FOLLOW']].map((q,i)=>{const g=mk('g',{},$('pairs'));mk('path',{d:`M540 ${260+i*80}H1060`,stroke:'var(--line)','stroke-width':3,'stroke-dasharray':'6 8'},g);q.forEach((s,k)=>{const x=k?1060:180;mk('rect',{x:x,y:230+i*80,width:360,height:60,rx:30,fill:'var(--stage)',stroke:k?'var(--ink)':'var(--gain)','stroke-width':4},g);lab(g,x+180,268+i*80,s,22,'middle','fill:var(--ink)')});return g});
+const TL=['OWNERSHIP','SIMPLE PLANS','CLEAR PRIORITIES','TRUST FRONTLINE'].map((s,i)=>{const g=mk('g',{},$('tiles'));const r=mk('rect',{x:120+i*347,y:230,width:320,height:80,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);lab(g,280+i*347,278,s,20,'middle','fill:var(--ink)');return[g,r]});
+const DY=[];for(let i=0;i<21;i++)DY.push(mk('rect',{x:120+(i%7)*88,y:400+Math.floor(i/7)*78,width:80,height:70,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},$('cal')));

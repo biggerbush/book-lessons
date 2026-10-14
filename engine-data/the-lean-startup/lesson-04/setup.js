@@ -1,0 +1,28 @@
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:cls},g)};
+const shoe=(g,x,y,s,cls)=>mk('path',{d:'M0 0v60h140q0-30-36-36l-50-24q-20 14-38 0z',transform:`translate(${x} ${y}) scale(${s})`,class:cls},g);
+const SPK=[[240,430],[440,440],[430,570],[250,575]].map(([x,y])=>{const s=14;return mk('path',{d:`M${x} ${y-s}L${x+s*.3} ${y-s*.3}L${x+s} ${y}L${x+s*.3} ${y+s*.3}L${x} ${y+s}L${x-s*.3} ${y+s*.3}L${x-s} ${y}L${x-s*.3} ${y-s*.3}Z`,class:'gain'},$('spk'))});
+const TL=[];for(let i=0;i<8;i++)TL.push(mk('path',{d:`M${190+i*40} 610v40`,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('tally')));
+const WK=[0,1,2,3].map(()=>{const g=mk('g',{},$('walk'));person(g,0,724,20,'ink');return g});
+[630,700,770].forEach(x=>person($('cust'),x,320,20,'ink'));
+const ND=[[1010,'EFFORT','ink'],[1320,'LEARNING','gain']].map(([cx,l,c])=>{const g=$('gg');
+  mk('path',{d:`M${cx-120} 480A120 120 0 0 1 ${cx+120} 480`,fill:'none',stroke:'var(--line)','stroke-width':14,'stroke-linecap':'round'},g);
+  [[cx,540,l,20],[cx-120,512,'LOW',18],[cx+120,512,'HIGH',18]].forEach(([x,y,s,f])=>{mk('text',{x:x,y:y,'font-size':f,'text-anchor':'middle',class:'m'},g).textContent=s});
+  const n=mk('line',{x1:cx,y1:480,x2:cx,y2:380,stroke:`var(--${c})`,'stroke-width':8,'stroke-linecap':'round'},g);
+  mk('circle',{cx:cx,cy:480,r:12,class:'ink'},g);return [n,cx]});
+person($('nkp'),260,470,40,'ink');
+shoe($('tbs'),470,290,1,'ink');
+const TI=[];for(let i=0;i<4;i++){const x=660+(i%2)*150,y=372+Math.floor(i/2)*94,g=mk('g',{},$('tiles'));
+  mk('rect',{x:x,y:y,width:130,height:78,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);shoe(g,x+26,y+22,.55,i==1?'gain':'ink');TI.push(g)}
+person($('cup'),700,440,36,'ink');
+const TK=['Demand','Payment','Refunds','Returns'].map((s,i)=>{const y=370+i*90,g=mk('g',{},$('ck'));
+  mk('rect',{x:980,y:y-38,width:48,height:48,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('text',{x:1060,y:y,'font-size':40,class:'d5'},g).textContent=s;
+  const k=mk('path',{d:`M990 ${y-14}l12 12 24-26`,fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g);return [g,k]});
+[200,600].forEach(x=>mk('path',{d:`M${x} 360h50l14 16h76v90h-140z`,class:'ink'},$('fold')));
+const pan=(id,lab,w)=>{const g=$(id);mk('path',{d:'M0 0V90',class:'s-ink','stroke-width':4},g);
+  mk('path',{d:'M-80 90h160a80 36 0 0 1-160 0z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('rect',w,g);
+  mk('text',{x:0,y:170,'font-size':20,'text-anchor':'middle',class:'m'},g).textContent=lab};
+pan('pL','POLISH',{x:-22,y:66,width:44,height:24,rx:4,fill:'var(--muted)'});
+pan('pR','SOLVES THEIR PROBLEM',{x:-48,y:40,width:96,height:50,rx:6,fill:'var(--gain)'});
+person($('eup'),1300,420,36,'ink');
+const SQ=[[1240,690],[1340,690],[1340,790],[1240,790],[1240,690]];

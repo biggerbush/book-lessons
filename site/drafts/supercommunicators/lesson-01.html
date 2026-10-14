@@ -1,0 +1,299 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Supercommunicators Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Supercommunicators: Most conversations mix three kinds at once, practical, emotional and social, and miscommunication happens when people are having different kinds without realising it. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SUPERCOMMUNICATORS · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Every conversation</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">is really three.</text>
+<text class="b" x="120" y="600" font-size="32">Why we talk past each other, even when we agree.</text>
+<g id="pp"></g>
+<g id="bb0"><path class="s-ink" d="M1100 300H1220Q1240 300 1240 320V370Q1240 390 1220 390H1180L1160 420L1150 390H1100Q1080 390 1080 370V320Q1080 300 1100 300Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><path class="s-gain" d="M1130 345l20 20l35-40" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="bb1"><g transform="translate(240 0)"><path class="s-ink" d="M1100 300H1220Q1240 300 1240 320V370Q1240 390 1220 390H1180L1160 420L1150 390H1100Q1080 390 1080 370V320Q1080 300 1100 300Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><path class="s-gain" d="M1130 345l20 20l35-40" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<g id="gap0"><path class="s-loss" d="M1214 530h30M1316 530h30" stroke-width="5" stroke-linecap="round"/><text id="gapq" class="d" x="1280" y="556" font-size="64" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One talk. Three conversations.</text>
+<text class="b" x="120" y="176" font-size="32">Most discussions are not just one conversation.</text>
+<g id="bub1"><path class="s-ink" d="M150 260H530Q560 260 560 290V530Q560 560 530 560H260L180 630L200 560H150Q120 560 120 530V290Q120 260 150 260Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/></g>
+<g id="ln1"></g><g id="cn1"></g><g id="strips"></g>
+<g id="note1"><text class="d" x="120" y="770" font-size="44">We rarely stop to notice which one we’re in.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Practical.</text>
+<text class="b" x="120" y="176" font-size="32">Plans, problems and what to do next.</text>
+<g id="clip2"><rect class="s-ink" x="160" y="260" width="360" height="470" rx="16" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="270" y="236" width="140" height="50" rx="10"/></g>
+<g id="rows2"></g>
+<g id="hq2"><text class="m" x="640" y="300" font-size="22">HIDDEN QUESTION</text><text class="d" x="640" y="380" font-size="56">What is this</text><text class="d" x="640" y="450" font-size="56">really about?</text><circle class="gain" cx="1330" cy="390" r="70"/><text class="d" x="1330" y="422" font-size="90" text-anchor="middle" style="fill:var(--on-gain)">?</text></g>
+<g id="tag2"><path class="s-ink" d="M640 590h220l50 50l-50 50h-220z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><circle class="s-ink" cx="866" cy="640" r="10" fill="var(--stage)" stroke-width="4"/><text class="m" x="680" y="650" font-size="26">PRICE</text><text class="m" x="640" y="790" font-size="20">AGREEING ON A PRICE</text></g>
+<g id="cal2"><rect class="s-ink" x="1000" y="560" width="280" height="190" rx="12" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="1000" y="560" width="280" height="44" rx="10"/><rect class="gain" x="1030" y="628" width="100" height="96" rx="10"/><rect class="gain" x="1150" y="628" width="100" height="96" rx="10"/><text class="m" x="1080" y="686" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">SAT</text><text class="m" x="1200" y="686" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">SUN</text><text class="m" x="1000" y="790" font-size="20">PLANNING A WEEKEND</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Emotional.</text>
+<text class="b" x="120" y="176" font-size="32">Worries, joys and frustrations that want to be acknowledged.</text>
+<g id="hrtW"><g id="hrt" transform="translate(330 460)"><path class="loss" d="M0 120C-150 20-160-90-75-110C-35-120-8-92 0-70C8-92 35-120 75-110C160-90 150 20 0 120Z"/></g></g>
+<g id="hq3"><text class="m" x="640" y="290" font-size="22">HIDDEN QUESTION</text><text class="d" x="640" y="360" font-size="56">How do we feel?</text></g>
+<g id="faces3"></g>
+<g id="und3"><text class="d" x="120" y="770" font-size="50"><tspan style="fill:var(--gain)">Understood</tspan>, more than corrected.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Social.</text>
+<text class="b" x="120" y="176" font-size="32">Ourselves, our relationships and our groups.</text>
+<g id="ringc"><circle class="s-line" cx="400" cy="500" r="230" fill="none" stroke-width="4" stroke-dasharray="10 10"/></g>
+<g id="ring4"></g>
+<g id="you4"><circle class="gain" cx="400" cy="500" r="60"/><text class="d" x="400" y="509" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">YOU</text></g>
+<g id="hq4"><text class="m" x="760" y="260" font-size="22">HIDDEN QUESTION</text><text class="d" x="760" y="330" font-size="56">Who are we?</text></g>
+<g id="badges4"></g>
+<g id="pride4"><text class="d5" x="760" y="710" font-size="34" style="fill:var(--gain)">Pride · belonging · how others see us</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A kitchen mismatch.</text>
+<text class="b" x="120" y="176" font-size="32">Duhigg comes home and complains about his job.</text>
+<path class="s-line" d="M120 760H1480" stroke-width="4"/>
+<rect class="ink" x="600" y="600" width="400" height="14" rx="6"/><path class="s-ink" d="M640 614V760M960 614V760" stroke-width="8" stroke-linecap="round"/>
+<g id="auth5"></g>
+<g id="ab5"><path class="s-ink" d="M570 260H760Q780 260 780 280V340Q780 360 760 360H620L500 430L580 360H570Q550 360 550 340V280Q550 260 570 260Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><path class="s-loss" d="M585 318l16-24l16 32l16-32l16 32l16-32l16 32l16-32l16 32l16-24" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></g>
+<g id="sp5"></g>
+<g id="sb5"><path class="s-ink" d="M850 260H1060Q1080 260 1080 280V340Q1080 360 1060 360H1030L1110 430L990 360H850Q830 360 830 340V280Q830 260 850 260Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><circle class="gain" cx="862" cy="285" r="7"/><circle class="gain" cx="862" cy="310" r="7"/><circle class="gain" cx="862" cy="335" r="7"/><path class="s-ink" d="M882 285h170M882 310h150M882 335h160" stroke-width="5" stroke-linecap="round"/></g>
+<g id="cloud5"><g id="cloudIn"><circle class="loss" cx="380" cy="350" r="36"/><circle class="loss" cx="430" cy="330" r="46"/><circle class="loss" cx="480" cy="352" r="34"/><rect class="loss" x="380" y="350" width="100" height="36"/><path class="s-loss" d="M440 390l-14 20h18l-12 22" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<g id="tens5"><text class="d" x="800" y="540" font-size="90" text-anchor="middle" style="fill:var(--muted)">?</text><text class="m" x="800" y="830" font-size="22" text-anchor="middle">NEITHER COULD QUITE EXPLAIN THE TENSION</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it went wrong.</text>
+<text class="b" x="120" y="176" font-size="32">Two conversations, running on two different tracks.</text>
+<g id="tA"><text class="m" x="120" y="262" font-size="22">SHE</text><text class="d" x="120" y="318" font-size="44">Practical</text><g id="trA"></g>
+<g id="cAi"><rect class="ink" x="0" y="240" width="120" height="56" rx="10"/><circle class="ink" cx="25" cy="300" r="9"/><circle class="ink" cx="95" cy="300" r="9"/><text class="m" x="60" y="275" font-size="20" text-anchor="middle" style="fill:var(--stage)">FIX IT</text></g></g>
+<g id="tB"><text class="m" x="120" y="482" font-size="22">HE</text><text class="d" x="120" y="538" font-size="44" style="fill:var(--loss)">Emotional</text><g id="trB"></g>
+<g id="cBi"><rect class="loss" x="0" y="460" width="120" height="56" rx="10"/><circle class="loss" cx="25" cy="520" r="9"/><circle class="loss" cx="95" cy="520" r="9"/><text class="m" x="60" y="495" font-size="20" text-anchor="middle" style="fill:var(--stage)">HEAR ME</text></g></g>
+<g id="nomeet6"><text class="m" x="1480" y="420" font-size="22" text-anchor="end" style="fill:var(--gain)">BOTH MEANT WELL · DIFFERENT TRACKS</text></g>
+<g id="bot6"><text class="d" x="120" y="680" font-size="52">The advice wasn’t the problem.</text><text class="d" x="120" y="760" font-size="52" style="fill:var(--gain)">The mismatch was.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">It happens everywhere.</text>
+<text class="b" x="120" y="176" font-size="32">A work meeting about a deadline.</text>
+<g id="meet7"><g id="ppl7"></g><rect class="ink" x="400" y="560" width="800" height="18" rx="9"/>
+<circle class="s-ink" cx="1340" cy="420" r="56" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M1340 420V384" stroke-width="6" stroke-linecap="round"/><path id="hand7" class="s-loss" d="M1340 420h28" stroke-width="6" stroke-linecap="round"/><text class="m" x="1340" y="510" font-size="20" text-anchor="middle">DEADLINE</text></g>
+<g id="bub7"></g>
+<g id="tangle7"></g>
+<g id="bot7"><text class="d" x="120" y="820" font-size="44">Not real disagreement. A mismatch of kinds.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<text class="m" x="143" y="230" font-size="26">IN YOUR NEXT TENSE CHAT, QUIETLY ASK</text>
+<g id="qa8"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which kind of</text></g>
+<g id="qb8"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">conversation is the</text></g>
+<g id="qc8"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">other person having?</text></g>
+<g id="ear8"><path class="s-ink" d="M1300 300C1400 270 1460 360 1420 440C1400 480 1370 490 1370 530C1370 590 1300 600 1280 560" fill="none" stroke-width="16" stroke-linecap="round"/><path class="s-ink" d="M1330 370C1370 360 1390 410 1360 440" fill="none" stroke-width="12" stroke-linecap="round"/></g>
+<path id="wav8" class="s-gain" d="M1240 380q-20 40 0 80M1205 360q-34 60 0 120" fill="none" stroke-width="7" stroke-linecap="round"/>
+<g id="chips8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Every Conversation Is Really Three&rdquo;, from <em>Supercommunicators</em> by Charles Duhigg. Charles Duhigg&#x27;s story of complaining about work to his wife is as reported in the book. The work meeting scene and all layered diagrams are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 8.7], [8.7, 25.5], [25.5, 39.3], [39.3, 54.7], [54.7, 69.2], [69.2, 84.5], [84.5, 100.4], [100.4, 119.6], [119.6, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Talking Past Each Other", "Three at Once", "The Practical Kind", "The Emotional Kind", "The Social Kind", "A Kitchen Mismatch", "Why It Went Wrong", "It Happens Everywhere", "Your Challenge"];
+const TM={"two_people": 0.0, "speech_bubble": 9.04, "three_layers": 14.0, "clipboard": 25.84, "question_mark": 28.12, "price_tag": 36.24, "heart": 39.6, "feelings_face": 41.92, "group_circle": 55.04, "id_badges": 57.12, "tired_author": 69.52, "spouse_advice": 73.28, "storm_cloud": 76.8, "two_tracks": 84.76, "sad_heart": 88.8, "meeting_table": 100.69, "tangled_lines": 109.28, "ear_icon": 119.92};
+const COL=['var(--ink)','var(--loss)','var(--gain)'];
+const fig=(g,x,y,r,cls)=>{const h=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:cls},h);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},h);return h};
+const tx=(g,x,y,s,cls,fs,ex)=>{const e=mk('text',Object.assign({x:x,y:y,class:cls,'font-size':fs},ex||{}),g);e.textContent=s;return e};
+fig($('pp'),1160,470,30,'ink');fig($('pp'),1400,470,30,'ink');
+const ST=['PRACTICAL','EMOTIONAL','SOCIAL'].map((s,i)=>{const y=250+i*140,yb=340+i*70,g=mk('g',{},$('strips'));
+  mk('rect',{x:700,y:y,width:780,height:110,rx:16,fill:'var(--stage)',stroke:COL[i],'stroke-width':5},g);mk('rect',{x:700,y:y,width:18,height:110,rx:6,fill:COL[i]},g);tx(g,740,y+42,s,'m',22);
+  const q=mk('g',{},g);tx(q,740,y+90,['What is this really about?','How do we feel?','Who are we?'][i],'d5',34);
+  const c=mk('path',{d:'M560 '+yb+'C630 '+yb+' 630 '+(y+55)+' 700 '+(y+55),fill:'none',stroke:COL[i],'stroke-width':5,'stroke-dasharray':'8 8'},$('cn1'));
+  const l=mk('path',{d:'M180 '+yb+'H500',stroke:COL[i],'stroke-width':12,'stroke-linecap':'round'},$('ln1'));return [g,c,q,l]});
+const RW=['Make plans','Solve problems','Next steps'].map((s,i)=>{const y=370+i*100,g=mk('g',{},$('rows2'));
+  mk('rect',{x:200,y:y-34,width:40,height:40,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':5},g);
+  mk('path',{d:'M206 '+(y-16)+'l10 12l22-28',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g);tx(g,262,y,s,'d5',30);return g});
+const FC=['WORRIES','JOYS','FRUSTRATIONS'].map((s,i)=>{const x=720+i*240,y=470,g=mk('g',{},$('faces3'));
+  mk('circle',{cx:x,cy:y,r:60,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);[-20,20].forEach(d=>mk('circle',{cx:x+d,cy:y-12,r:6,class:'ink'},g));
+  mk('path',{d:['M'+(x-24)+' '+(y+30)+'q24-22 48 0','M'+(x-28)+' '+(y+14)+'q28 30 56 0','M'+(x-24)+' '+(y+26)+'h48M'+(x-34)+' '+(y-36)+'l22 10M'+(x+34)+' '+(y-36)+'l-22 10'][i],fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},g);
+  tx(g,x,y+100,s,'m',20,{'text-anchor':'middle'});return g});
+const RG=[];for(let i=0;i<6;i++){const a=-Math.PI/2+i*Math.PI/3;RG.push(fig($('ring4'),400+150*Math.cos(a),470+150*Math.sin(a),16,'ink'))}
+const BG=['MYSELF','OUR BONDS','OUR GROUPS'].map((s,i)=>{const x=760+i*240,g=mk('g',{},$('badges4'));
+  mk('rect',{x:x,y:390,width:210,height:230,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('rect',{x:x+85,y:376,width:40,height:26,rx:6,class:'ink'},g);
+  fig(g,x+105,446,22,i===2?'gain':'ink');tx(g,x+105,592,s,'m',20,{'text-anchor':'middle'});return g});
+const AU=fig($('auth5'),420,480,40,'ink');fig($('sp5'),1180,480,40,'ink');
+[[300,336,'trA'],[520,556,'trB']].forEach(([a,b,id])=>{for(let x=440;x<=1470;x+=40)mk('path',{d:'M'+x+' '+a+'V'+b,stroke:'var(--line)','stroke-width':6},$(id));[a+6,b-6].forEach(y=>mk('path',{d:'M430 '+y+'H1480',stroke:'var(--ink)','stroke-width':5},$(id)))});
+const BB=['WANTS A PLAN','WANTS TO VENT','LOOKING BAD?'].map((s,i)=>{const x=520+i*280;fig($('ppl7'),x,410,34,'ink');const g=mk('g',{},$('bub7'));
+  mk('rect',{x:x-110,y:220,width:220,height:70,rx:35,fill:'var(--stage)',stroke:COL[i],'stroke-width':5},g);mk('path',{d:'M'+(x-10)+' 290l10 24l10-24',fill:COL[i]},g);
+  tx(g,x,264,s,'m',22,{'text-anchor':'middle'});return g});
+const TG=[520,800,1080].map((x0,k)=>{let d='M'+x0+' 590';for(let i=1;i<=40;i++){const s=i/40,e=Math.sin(s*Math.PI);d+='L'+(x0+(800-x0)*s+70*Math.sin(s*9+k*2)*e).toFixed(0)+' '+(590+110*s+40*Math.sin(s*13+k)*e).toFixed(0)}
+  return mk('path',{d:d,fill:'none',stroke:COL[k],'stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':1,'stroke-dashoffset':1},$('tangle7'))});
+const CP=['PRACTICAL','EMOTIONAL','SOCIAL'].map((s,i)=>{const x=136+i*300,g=mk('g',{},$('chips8'));
+  mk('rect',{x:x,y:660,width:270,height:70,rx:35,fill:'var(--stage)',stroke:COL[i],'stroke-width':5},g);tx(g,x+135,704,s,'m',24,{'text-anchor':'middle'});return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('pp'),p(u,TM.two_people,TM.two_people+.5));
+rise($('bb0'),p(u,TM.two_people+.8,TM.two_people+1.3)); rise($('bb1'),p(u,TM.two_people+1.6,TM.two_people+2.1));
+rise($('gap0'),p(u,TM.two_people+5,TM.two_people+5.5)); $('gapq').setAttribute('font-size',(64+6*Math.sin(t*3)).toFixed(1));
+
+rise($('bub1'),p(u,TM.speech_bubble,TM.speech_bubble+.5));
+ST.forEach((s,i)=>{const a=TM.three_layers+i*.5,k=p(u,a,a+.5);rise(s[0],k);s[1].setAttribute('opacity',k);s[3].setAttribute('opacity',k);const b=TM.three_layers+5+i*.5;rise(s[2],p(u,b,b+.5))});
+rise($('note1'),p(u,TM.three_layers+7.9,TM.three_layers+8.5));
+
+rise($('clip2'),p(u,TM.clipboard,TM.clipboard+.5));
+RW.forEach((g,i)=>{const a=TM.clipboard+5.9+i*.7;rise(g,p(u,a,a+.4))});
+rise($('hq2'),p(u,TM.question_mark,TM.question_mark+.5));
+rise($('tag2'),p(u,TM.price_tag,TM.price_tag+.5)); rise($('cal2'),p(u,TM.price_tag+.7,TM.price_tag+1.2));
+
+const bt=1+.06*Math.pow(Math.abs(Math.sin(t*3)),6); $('hrt').setAttribute('transform','translate(330 460) scale('+bt.toFixed(3)+')');
+rise($('hrtW'),p(u,TM.heart,TM.heart+.5)); rise($('hq3'),p(u,TM.feelings_face,TM.feelings_face+.5));
+FC.forEach((g,i)=>{const a=TM.feelings_face+3.4+i*.5;rise(g,p(u,a,a+.4))});
+rise($('und3'),p(u,TM.feelings_face+8.4,TM.feelings_face+9));
+
+rise($('ringc'),p(u,TM.group_circle,TM.group_circle+.5));
+RG.forEach((g,i)=>{const a=TM.group_circle+.2+i*.15;rise(g,p(u,a,a+.4))});
+rise($('you4'),p(u,TM.group_circle+1.2,TM.group_circle+1.7));
+rise($('hq4'),p(u,TM.id_badges,TM.id_badges+.5));
+BG.forEach((g,i)=>{const a=TM.id_badges+3+i*.6;rise(g,p(u,a,a+.4))});
+rise($('pride4'),p(u,TM.id_badges+9.6,TM.id_badges+10.2));
+
+rise($('auth5'),p(u,TM.tired_author,TM.tired_author+.5)); rise($('ab5'),p(u,TM.tired_author+.6,TM.tired_author+1.1));
+rise($('sp5'),p(u,TM.spouse_advice,TM.spouse_advice+.5)); rise($('sb5'),p(u,TM.spouse_advice+.4,TM.spouse_advice+.9));
+const sour=u>=TM.storm_cloud; Array.from(AU.children).forEach(e=>e.setAttribute('class',sour?'loss':'ink'));
+rise($('cloud5'),p(u,TM.storm_cloud,TM.storm_cloud+.5)); $('cloudIn').setAttribute('transform','translate('+(6*Math.sin(t*1.5)).toFixed(1)+' 0)');
+rise($('tens5'),p(u,TM.storm_cloud+5.3,TM.storm_cloud+5.9));
+
+rise($('tA'),p(u,TM.two_tracks,TM.two_tracks+.5)); rise($('tB'),p(u,TM.sad_heart,TM.sad_heart+.5));
+$('cAi').setAttribute('transform','translate('+(440+760*p(u,TM.two_tracks,TM.two_tracks+12)).toFixed(1)+' 0)');
+$('cBi').setAttribute('transform','translate('+(440+760*p(u,TM.sad_heart,TM.sad_heart+12)).toFixed(1)+' 0)');
+rise($('nomeet6'),p(u,TM.sad_heart+4.2,TM.sad_heart+4.8)); rise($('bot6'),p(u,TM.sad_heart+9.2,TM.sad_heart+9.8));
+
+rise($('meet7'),p(u,TM.meeting_table,TM.meeting_table+.5));
+$('hand7').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 1340 420)');
+BB.forEach((g,i)=>{const a=TM.meeting_table+3+i*1.5;rise(g,p(u,a,a+.4))});
+TG.forEach((e,i)=>e.setAttribute('stroke-dashoffset',(1-p(u,TM.tangled_lines+i*.3,TM.tangled_lines+i*.3+1.6)).toFixed(3)));
+rise($('bot7'),p(u,TM.tangled_lines+4.6,TM.tangled_lines+5.2));
+
+rise($('qa8'),p(u,TM.ear_icon,TM.ear_icon+.5)); rise($('qb8'),p(u,TM.ear_icon+.4,TM.ear_icon+.9)); rise($('qc8'),p(u,TM.ear_icon+.8,TM.ear_icon+1.3));
+rise($('ear8'),p(u,TM.ear_icon+1.2,TM.ear_icon+1.7)); $('wav8').setAttribute('opacity',(p(u,TM.ear_icon+1.5,TM.ear_icon+2)*(.55+.45*Math.sin(t*3))).toFixed(2));
+CP.forEach((g,i)=>{const a=TM.ear_icon+7+i*.5;rise(g,p(u,a,a+.4))});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.91;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

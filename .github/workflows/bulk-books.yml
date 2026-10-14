@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       books:
-        description: "One book per line: Title | Author"
+        description: "One book per line: Title | Author | lessons (lessons optional)"
         required: true
         type: string
       lessons:
@@ -51,10 +51,12 @@ jobs:
               line = line.strip()
               if not line or line.startswith("#"):
                   continue
-              title, _, author = (x.strip() for x in line.partition("|"))
+              bits = [x.strip() for x in line.split("|")]           # Title | Author | lessons (optional)
+              title, author = bits[0], (bits[1] if len(bits) > 1 else "")
+              n = bits[2] if len(bits) > 2 and bits[2].isdigit() else ""
               if title and title.lower() not in seen:
                   seen.add(title.lower())
-                  rows.append({"title": title[:120], "author": author[:120]})
+                  rows.append({"title": title[:120], "author": author[:120], "lessons": n})
           if not rows:
               raise SystemExit("No books found. Use one line per book: Title | Author")
           if len(rows) > 40:
@@ -81,5 +83,5 @@ jobs:
     with:
       title: ${{ matrix.book.title }}
       author: ${{ matrix.book.author }}
-      lessons: ${{ inputs.lessons }}
+      lessons: ${{ matrix.book.lessons || inputs.lessons }}
       mode: ${{ inputs.mode }}

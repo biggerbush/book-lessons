@@ -130,7 +130,7 @@ The 48 Laws of Power | Robert Greene</textarea>
   </section>
 
   <section class="card" id="drafts" hidden>
-    <div class="chead"><h2>Drafts</h2><span style="display:flex;gap:8px"><button class="btn sm primary" id="approveall" type="button">Approve all finished</button><button class="btn sm" id="refresh" type="button">Refresh</button></span></div>
+    <div class="chead"><h2>Drafts</h2><span style="display:flex;gap:8px"><button class="btn sm" id="resumeall" type="button">Resume unfinished</button><button class="btn sm primary" id="approveall" type="button">Approve all finished</button><button class="btn sm" id="refresh" type="button">Refresh</button></span></div>
     <div id="draftlist"><p class="empty">Loading…</p></div>
   </section>
 
@@ -252,6 +252,19 @@ function wireBulk(){
       setTimeout(loadRuns,5000);
     }catch(err){say($("#bmsg"),err.message,"err")}
     btn.disabled=false;
+  });
+  $("#resumeall").addEventListener("click",async e=>{
+    const b=e.currentTarget;
+    const j=await fetchJson([RAW+"drafts/index.json","../drafts/index.json"]);
+    const stale=d=>d.status==="working"&&(Date.now()-new Date(d.updated))>45*60*1000;
+    const todo=((j&&j.drafts)||[]).filter(d=>!d.dry&&(d.status==="failed"||stale(d)));
+    if(!todo.length)return alert("Nothing to resume: no failed or stalled drafts.");
+    if(!confirm("Resume these "+todo.length+" book"+(todo.length>1?"s":"")+"?\n\n"+todo.map(d=>"• "+d.title+" ("+d.lessons+" of "+d.planned+" lessons built)").join("\n")+"\n\nLessons already built are kept; only the missing ones are made."))return;
+    b.disabled=true;
+    try{
+      await dispatch("bulk-books.yml",{books:todo.map(d=>(d.input_title||d.title)+" | "+(d.author||"").replace(/\|/g," ")+" | "+d.planned).join("\n"),lessons:"10",parallel:"3",mode:"real"});
+      b.textContent="Started…";setTimeout(loadRuns,5000);
+    }catch(err){alert(err.message);b.disabled=false}
   });
   $("#approveall").addEventListener("click",async e=>{
     if(!confirm("Publish every finished draft to the public library?\n\nDry runs and unfinished drafts are left alone."))return;

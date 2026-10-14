@@ -1,0 +1,342 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deep Work Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Deep Work: Plan your day in blocks, set a fixed end time, and make yourself harder to reach so that shallow tasks shrink to fit. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DEEP WORK · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Drain the</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">shallows.</text>
+<text class="b" x="120" y="600" font-size="32">Shrink busywork on purpose so deep work has room.</text>
+<path class="s-ink" d="M1310 700v50" stroke-width="10" stroke-linecap="round"/>
+<rect id="w0" x="1184" y="600" width="252" height="96" rx="16" fill="var(--loss)" fill-opacity=".3"/>
+<g id="flo"></g>
+<rect class="s-ink" x="1180" y="260" width="260" height="440" rx="20" fill="none" stroke-width="7"/>
+<circle id="drop" class="gain" cx="1310" cy="750" r="12"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The shallow flood.</text>
+<text class="b" x="120" y="176" font-size="32">A few deep spots. Wide shallow edges.</text>
+<g id="pond1">
+<ellipse class="s-loss" cx="800" cy="510" rx="520" ry="250" fill="var(--loss)" fill-opacity=".16" stroke-width="5"/>
+<ellipse id="deep" class="gain" cx="800" cy="510" rx="300" ry="140"/>
+<text id="dl" class="m" x="800" y="518" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">DEEP</text>
+<text class="m" x="1340" y="518" font-size="22">SHALLOW</text>
+</g>
+<g id="ics"></g>
+<g id="rule"><text class="d" x="120" y="830" font-size="44">Newport’s rule: shrink the shallow work on purpose.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Block every minute.</text>
+<text class="b" x="120" y="176" font-size="32">Give every minute a job, grouped into blocks.</text>
+<g id="nb"><rect class="s-ink" x="120" y="210" width="760" height="620" rx="14" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M210 210v620" stroke-width="3"/></g>
+<g id="hrs"></g><g id="blkA"></g><g id="blkB"></g>
+<g id="ers"><rect class="loss" x="-44" y="-24" width="88" height="48" rx="10"/><rect class="ink" x="-44" y="-24" width="30" height="48" rx="10"/></g>
+<g id="intr"><path class="loss" d="M960 450l-40 70h34l-24 70 66-90h-36l26-50z"/><text class="m" x="1010" y="530" font-size="22">INTERRUPTION</text></g>
+<g id="dec"><text class="d" x="960" y="690" font-size="44">You decide the day,</text><text class="d" x="960" y="750" font-size="44" style="fill:var(--gain)">not the inbox.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Measure the depth.</text>
+<text id="tst" class="b" x="120" y="176" font-size="32">Newport’s test: how long to train a smart recent graduate?</text>
+<g id="qm"><text class="d" x="140" y="560" font-size="260" style="fill:var(--loss)">?</text></g>
+<g id="grad"><circle class="ink" cx="380" cy="430" r="34"/><path class="ink" d="M329 573v-44a51 51 0 0 1 102 0v44z"/><polygon class="ink" points="380,370 444,390 380,410 316,390"/><path class="s-gain" d="M430 394v34" stroke-width="5" stroke-linecap="round"/><text class="m" x="380" y="620" font-size="20" text-anchor="middle">SMART RECENT GRAD</text></g>
+<g id="dep">
+<text class="m" x="600" y="262" font-size="20">MONTHS TO TRAIN →</text>
+<polygon points="600,300 1440,300 1440,760 600,360" fill="var(--loss)" fill-opacity=".14"/>
+<path class="s-ink" d="M600 300H1440" stroke-width="5"/>
+<path class="s-ink" d="M600 360L1440 760" stroke-width="6" stroke-linecap="round"/>
+</g>
+<circle id="c1" class="loss" cx="720" cy="270" r="22"/>
+<circle id="c2" class="gain" cx="1300" cy="270" r="22"/>
+<g id="l1"><text class="m" x="610" y="545" font-size="22" style="fill:var(--loss)">FEW MONTHS = SHALLOW</text></g>
+<g id="l2"><text class="m" x="1440" y="810" font-size="22" text-anchor="end" style="fill:var(--gain)">MANY MONTHS = DEEP</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Set a shallow budget.</text>
+<text class="b" x="120" y="176" font-size="32">Ask: what share of my time should go to shallow work?</text>
+<g id="boss"><circle class="ink" cx="260" cy="450" r="32"/><path class="ink" d="M212 584v-42a48 48 0 0 1 96 0v42z"/><text class="m" x="260" y="640" font-size="20" text-anchor="middle">MANAGER</text></g>
+<g id="you4"><circle class="gain" cx="470" cy="450" r="32"/><path class="gain" d="M422 584v-42a48 48 0 0 1 96 0v42z"/><text class="m" x="470" y="640" font-size="20" text-anchor="middle">YOU</text>
+<rect class="s-ink" x="400" y="300" width="140" height="90" rx="18" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M450 388l8 20 14-18" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text id="bq" class="d" x="470" y="364" font-size="52" text-anchor="middle">?</text></g>
+<g id="pie">
+<circle cx="900" cy="500" r="220" fill="var(--stage)"/>
+<path id="rest" class="gain"/>
+<path id="w2" fill="var(--loss)" fill-opacity=".3" stroke="var(--loss)" stroke-width="4" stroke-dasharray="10 8"/>
+<path id="w1" class="loss"/>
+<circle class="s-ink" cx="900" cy="500" r="220" fill="none" stroke-width="6"/>
+<text id="sl" class="m" x="1000" y="430" font-size="20" text-anchor="middle" style="fill:var(--stage)">SHALLOW</text>
+</g>
+<g id="pl"><text class="m" x="1170" y="400" font-size="22">SHALLOW SHARE</text><text id="pv" class="d" x="1166" y="490" font-size="80" style="fill:var(--loss)">30–50%</text><text class="m" x="1170" y="540" font-size="20">MOST PEOPLE, SAYS NEWPORT</text></g>
+<g id="pr"><text class="m" x="780" y="510" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">DEEP</text><text class="m" x="1170" y="640" font-size="24" style="fill:var(--gain)">PROTECT THE REST</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A fixed end time.</text>
+<g id="clk"><circle class="s-ink" cx="360" cy="470" r="170" fill="var(--stage)" stroke-width="8"/><g id="tks"></g>
+<line id="hh" class="s-ink" x1="360" y1="470" x2="360" y2="380" stroke-width="10" stroke-linecap="round"/>
+<line id="mh" class="s-gain" x1="360" y1="470" x2="360" y2="335" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="360" cy="470" r="12"/>
+<text class="d" x="360" y="730" font-size="64" text-anchor="middle">5:30 PM</text></g>
+<g id="fsp"><text class="m" x="360" y="790" font-size="22" text-anchor="middle">FIXED-SCHEDULE PRODUCTIVITY</text></g>
+<g id="day5"><text class="m" x="700" y="285" font-size="20">WORKDAY</text><rect class="s-line" x="700" y="300" width="600" height="100" rx="12" fill="none" stroke-width="4"/><path class="s-ink" d="M1300 260v180" stroke-width="12" stroke-linecap="round"/><text class="m" x="1300" y="245" font-size="20" text-anchor="middle">HARD STOP</text></g>
+<g id="bin"><path class="s-ink" d="M1256 580h88l-10 110h-68z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><path class="s-ink" d="M1244 566h112M1284 554h32" stroke-width="7" stroke-linecap="round"/><text class="m" x="1300" y="730" font-size="20" text-anchor="middle">DROPPED</text></g>
+<g id="tk"></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make senders do more work.</text>
+<text class="b" x="120" y="176" font-size="32">Set expectations before anyone writes.</text>
+<g id="web"><rect class="s-ink" x="120" y="230" width="640" height="530" rx="16" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M120 290H760" stroke-width="4"/>
+<circle class="s-line" cx="156" cy="260" r="8" fill="none" stroke-width="4"/><circle class="s-line" cx="184" cy="260" r="8" fill="none" stroke-width="4"/><circle class="s-line" cx="212" cy="260" r="8" fill="none" stroke-width="4"/>
+<text class="d5" x="160" y="360" font-size="40">Contact</text><text class="m" x="160" y="420" font-size="22">OPEN INBOX</text><path class="s-loss" d="M152 412h178" stroke-width="5" stroke-linecap="round"/></g>
+<g id="rul"><text class="m" x="160" y="490" font-size="22">MESSAGES I WELCOME:</text><g id="rows"></g><text class="m" x="160" y="720" font-size="22" style="fill:var(--gain)">I REPLY ONLY IF INTERESTED</text></g>
+<g id="fun"><path class="s-ink" d="M900 300H1340L1160 470V560H1080V470Z" fill="none" stroke-width="6" stroke-linejoin="round"/><text class="m" x="1120" y="740" font-size="20" text-anchor="middle">SOME GET A REPLY</text></g>
+<g id="fl6"></g>
+<g id="rude"><text class="d" x="120" y="840" font-size="44">Ignoring a message no longer feels rude.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Close the loop.</text>
+<text class="b" x="120" y="176" font-size="32">One thoughtful reply instead of a long thread.</text>
+<g id="ask"><rect class="s-ink" x="120" y="230" width="420" height="70" rx="20" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M150 252h30v18a15 15 0 0 1-30 0zM180 258h6a7 7 0 0 1 0 14h-6" fill="none" stroke-width="4" stroke-linejoin="round"/><text class="m" x="204" y="273" font-size="22">COFFEE SOMETIME?</text></g>
+<g id="thr"></g>
+<g id="lng"><text class="m" x="120" y="800" font-size="20" style="fill:var(--loss)">LONG BACK AND FORTH</text></g>
+<path class="s-line" d="M800 230V800" stroke-width="3" stroke-dasharray="8 10"/>
+<g id="card"><rect class="s-ink" x="860" y="230" width="620" height="400" rx="18" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="900" y="290" width="160" height="150" rx="10" fill="var(--stage)" stroke-width="5"/><rect class="gain" x="900" y="290" width="160" height="40" rx="10"/><g id="cal"></g>
+<text class="d5" x="1100" y="340" font-size="34">Specific time</text><text class="d5" x="1100" y="400" font-size="34">Specific place</text>
+<text class="m" x="890" y="600" font-size="20">ONE REPLY</text></g>
+<g id="cf"><text class="m" x="1100" y="460" font-size="20" style="fill:var(--gain)">CONFIRMED IF YOU AGREE</text></g>
+<g id="chk"><circle class="gain" cx="960" cy="720" r="56"/><path d="M932 722l20 20 36-40" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1040" y="728" font-size="22">CONVERSATION CLOSED</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Block tomorrow on paper</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">before opening email.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">Pick a stop time. Keep it.</text></g>
+<text class="m" x="143" y="700" font-size="26">YOUR CHALLENGE</text>
+<g id="mini"></g>
+<g id="wall8"><path class="s-ink" d="M1430 640v120" stroke-width="10" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="139" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:19</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Drain the Shallows&rdquo;, from <em>Deep Work</em> by Cal Newport. Examples, including the graduate training test, the shallow-work budget, Newport&#x27;s fixed end time, his website contact filter and the coffee email, are as reported in the book. The pond, pie chart and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=139, SC=[[0.0, 5.1], [5.1, 26.4], [26.4, 43.2], [43.2, 58.0], [58.0, 73.2], [73.2, 92.3], [92.3, 108.7], [108.7, 127.6], [127.6, 139.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Drain the Shallows", "The Shallow Flood", "Block Every Minute", "Measure the Depth", "Set a Budget", "A Fixed End Time", "Make Senders Work", "Close the Loop", "Your Challenge"];
+const TM={"inbox_flood": 0.0, "pond": 5.44, "email_icons": 11.12, "notebook": 26.72, "time_blocks": 31.04, "eraser": 35.68, "question_mark": 43.52, "graduate": 47.52, "boss": 58.32, "pie_chart": 61.76, "clock": 73.48, "deadline": 82.0, "trash_can": 87.2, "website": 92.64, "filter": 96.96, "envelope": 103.6, "coffee_cup": 108.96, "calendar": 117.36, "check_mark": 123.04};
+const env=(g,w,f,s)=>{const h=w*.68;mk('rect',{x:-w/2,y:-h/2,width:w,height:h,rx:4,fill:f,stroke:s,'stroke-width':4},g);mk('path',{d:'M'+(-w/2)+' '+(-h/2)+'L0 '+(h*.1)+'L'+(w/2)+' '+(-h/2),fill:'none',stroke:s,'stroke-width':4,'stroke-linejoin':'round'},g)};
+const tx=(g,x,y,s,o)=>{const e=mk('text',Object.assign({x:x,y:y},o),g);e.textContent=s;return e};
+const tr=(e,x,y,s)=>e.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')'+(s==null?'':' scale('+s.toFixed(3)+')'));
+const op=(e,v)=>e.setAttribute('opacity',cl(v).toFixed(3));
+const FL=[0,1,2,3,4].map(()=>{const g=mk('g',{},$('flo'));env(g,40,'var(--stage)','var(--loss)');return g});
+const IC=[];for(let i=0;i<12;i++){const g=mk('g',{},$('ics')),k=i%3;
+  if(k==0)env(g,44,'var(--stage)','var(--loss)');
+  else if(k==1)[-12,12].forEach(d=>{mk('circle',{cx:d,cy:-8,r:9,fill:'var(--loss)'},g);mk('path',{d:'M'+(d-13)+' 18a13 13 0 0 1 26 0z',fill:'var(--loss)'},g)});
+  else mk('path',{d:'M-22 -16h44v26h-26l-10 10v-10h-8z',fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4,'stroke-linejoin':'round'},g);
+  IC.push(g)}
+// hour labels and gridlines (drawn first, behind all blocks)
+const HR=[];for(let r=0;r<9;r++){const g=mk('g',{},$('hrs'));tx(g,165,280+r*64,''+(9+r),{class:'m','font-size':20,'text-anchor':'middle'});if(r)mk('path',{d:'M210 '+(240+r*64)+'H880',class:'s-line','stroke-width':2},g);HR.push(g)}
+// each block gets an opaque stage-coloured underlay so no gridline shows through a block or its label
+const blk=(g,[r,n,s,c])=>{const e=mk('g',{},g),y=245+r*64,h=n*64-10;
+  mk('rect',{x:228,y:y,width:632,height:h,rx:10,fill:'var(--stage)'},e);
+  mk('rect',{x:228,y:y,width:632,height:h,rx:10,fill:c=='g'?'var(--gain)':c=='l'?'var(--loss)':'var(--line)','fill-opacity':c=='l'?.3:1},e);
+  tx(e,252,247+r*64+n*32,s,{class:'m','font-size':20,style:'fill:var(--'+(c=='g'?'on-gain':'ink')+')'});return e};
+const DA=[[0,2,'DEEP WORK','g'],[2,1,'EMAIL','l'],[3,1,'LUNCH','n'],[4,2,'DEEP WORK','g'],[6,1,'MEETINGS','l'],[7,2,'SHALLOW TASKS','l']];
+const BLA=DA.map(b=>blk($('blkA'),b)), BLB=[[4,1,'INTERRUPTION','l'],[5,2,'DEEP WORK','g'],[7,2,'EMAIL + ADMIN','l']].map(b=>blk($('blkB'),b));
+const wed=(a,b)=>{const P=f=>(900+220*Math.sin(f*6.2832)).toFixed(1)+' '+(500-220*Math.cos(f*6.2832)).toFixed(1);return 'M900 500L'+P(a)+'A220 220 0 '+(b-a>.5?1:0)+' 1 '+P(b)+'Z'};
+for(let i=0;i<12;i++){const a=i*Math.PI/6,s=Math.sin(a),c=Math.cos(a);mk('path',{d:'M'+(360+148*s).toFixed(1)+' '+(470-148*c).toFixed(1)+'L'+(360+164*s).toFixed(1)+' '+(470-164*c).toFixed(1),class:'s-ink','stroke-width':i%3?4:8,'stroke-linecap':'round'},$('tks'))}
+const TK=[[220,700,480,712,312,'DEEP WORK',1],[160,940,480,944,312,'KEY TASK',1],[160,1120,480,1116,312,'KEY TASK',1],[110,700,600,0,0,'LOW',0],[110,830,600,0,0,'LOW',0],[110,960,600,0,0,'LOW',0]].map(q=>{const g=mk('g',{},$('tk'));
+  mk('rect',{x:0,y:0,width:q[0],height:76,rx:10,fill:q[6]?'var(--gain)':'var(--loss)','fill-opacity':q[6]?1:.35},g);
+  tx(g,q[0]/2,46,q[5],{class:'m','font-size':20,'text-anchor':'middle',style:'fill:var(--'+(q[6]?'on-gain':'ink')+')'});return [g,q]});
+for(let k=0;k<3;k++){const y=540+k*50;mk('path',{d:'M168 '+y+'l10 10 20-22',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('rows'));mk('rect',{x:216,y:y-7,width:360-k*60,height:14,rx:7,fill:'var(--line)'},$('rows'))}
+const FE=[];for(let i=0;i<6;i++){const g=mk('g',{},$('fl6'));env(g,40,i%3==0?'var(--gain)':'var(--stage)',i%3==0?'var(--ink)':'var(--muted)');FE.push(g)}
+const BB=[];for(let i=0;i<8;i++){const g=mk('g',{},$('thr')),x=i%2==0?460:120,y=320+i*54;
+  mk('rect',{x:x,y:y,width:300,height:40,rx:16,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  if(i==0)tx(g,480,347,'SURE, WHEN WORKS?',{class:'m','font-size':18});else mk('path',{d:'M'+(x+24)+' '+(y+20)+'h'+(150+(i*37)%90),class:'s-line','stroke-width':6,'stroke-linecap':'round'},g);BB.push(g)}
+for(let r=0;r<2;r++)for(let c=0;c<3;c++)mk('circle',{cx:935+c*45,cy:370+r*40,r:10,fill:r==1&&c==1?'var(--gain)':'var(--line)'},$('cal'));
+const MB=[];for(let i=0;i<5;i++)MB.push(mk('rect',{x:1180+i*46,y:670,width:38,height:60,rx:6,fill:i%2?'var(--line)':'var(--gain)'},$('mini')));
+$('rest').setAttribute('d',wed(.5,1));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const fl=TM.inbox_flood, lv=.15+.75*p(t,fl,fl+1.5)-.6*p(t,fl+2.5,fl+5), wt=696-436*lv;
+$('w0').setAttribute('y',wt.toFixed(1)); $('w0').setAttribute('height',(436*lv).toFixed(1));
+FL.forEach((e,i)=>{tr(e,1220+i*45,wt+26+(i%2)*34+4*Math.sin(t*2+i)); op(e,(lv-.25-i*.08)*8)});
+const dr=(t*1.5)%1; $('drop').setAttribute('cy',(745+dr*60).toFixed(1)); op($('drop'),p(t,fl+2.5,fl+3)*(1-dr));
+
+rise($('pond1'),p(u,TM.pond,TM.pond+.6));
+const ei=TM.email_icons, cr=p(u,ei+3.8,ei+6.5), rl=p(u,ei+8.8,ei+10.3), dk=1-.75*cr+.75*rl, fr=1-.55*cr+.55*rl;
+$('deep').setAttribute('rx',(300*dk).toFixed(1)); $('deep').setAttribute('ry',(140*dk).toFixed(1)); op($('dl'),(dk-.5)*4);
+IC.forEach((e,i)=>{const a=i*Math.PI/6+.2; tr(e,800+430*fr*Math.cos(a),510+185*fr*Math.sin(a)); op(e,p(u,ei+i*.2,ei+i*.2+.4)*(1-(i%2)*.8*rl))});
+rise($('rule'),p(u,ei+8.8,ei+9.4));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));
+HR.forEach((g,r)=>rise(g,p(u,TM.notebook+.6+r*.2,TM.notebook+1+r*.2)));
+const er=p(u,TM.eraser+.3,TM.eraser+1.2);
+BLA.forEach((e,i)=>rise(e,p(u,TM.time_blocks+i*.35,TM.time_blocks+i*.35+.4)*(DA[i][0]>=4?1-er:1)));
+BLB.forEach((e,i)=>rise(e,p(u,TM.eraser+1.3+i*.3,TM.eraser+1.7+i*.3)));
+const ee=p(u,TM.eraser+.2,TM.eraser+1.3);
+$('ers').setAttribute('transform','translate('+(540+260*Math.sin(ee*Math.PI*6)).toFixed(1)+' '+(520+260*ee).toFixed(1)+') rotate(-20)'); op($('ers'),ee>0&&ee<1?1:0);
+rise($('intr'),p(u,TM.eraser,TM.eraser+.4)); rise($('dec'),p(u,TM.eraser+4.1,TM.eraser+4.7));
+
+rise($('qm'),p(u,TM.question_mark,TM.question_mark+.5)); rise($('tst'),p(u,TM.question_mark+2.9,TM.question_mark+3.4));
+rise($('grad'),p(u,TM.graduate,TM.graduate+.5)); rise($('dep'),p(u,TM.graduate+1,TM.graduate+1.6));
+const m1=p(u,TM.graduate+6.6,TM.graduate+7.6), m2=p(u,TM.graduate+10.4,TM.graduate+11.8);
+$('c1').setAttribute('cy',(270+125*m1).toFixed(1)); op($('c1'),m1*5); rise($('l1'),p(u,TM.graduate+7,TM.graduate+7.5));
+$('c2').setAttribute('cy',(270+400*m2).toFixed(1)); op($('c2'),m2*5); rise($('l2'),p(u,TM.graduate+11,TM.graduate+11.5));
+
+rise($('boss'),p(u,TM.boss,TM.boss+.5)); rise($('you4'),p(u,TM.boss+.6,TM.boss+1.1)); $('bq').textContent=u>=TM.pie_chart?'%?':'?';
+rise($('pie'),p(u,TM.pie_chart,TM.pie_chart+.5));
+const q1=p(u,TM.pie_chart+4.2,TM.pie_chart+5.4), q2=p(u,TM.pie_chart+5,TM.pie_chart+6.4);
+$('w1').setAttribute('d',wed(0,Math.max(.001,.3*q1))); $('w2').setAttribute('d',wed(.3,.3+Math.max(.001,.2*q2)));
+op($('w1'),q1*5); op($('w2'),q2*5); op($('sl'),(q1-.6)*3);
+rise($('pl'),q1); $('pv').textContent='30–'+Math.round(30+20*q2)+'%';
+const pr=p(u,TM.pie_chart+8.8,TM.pie_chart+9.4); op($('rest'),pr); rise($('pr'),pr);
+
+rise($('clk'),p(u,TM.clock,TM.clock+.5));
+const h5=5.5*p(u,TM.clock+.3,TM.clock+2.5), ha=h5*Math.PI/6, ma=h5*2*Math.PI;
+$('hh').setAttribute('x2',(360+90*Math.sin(ha)).toFixed(1)); $('hh').setAttribute('y2',(470-90*Math.cos(ha)).toFixed(1));
+$('mh').setAttribute('x2',(360+135*Math.sin(ma)).toFixed(1)); $('mh').setAttribute('y2',(470-135*Math.cos(ma)).toFixed(1));
+rise($('fsp'),p(u,TM.clock+5.4,TM.clock+6)); rise($('day5'),p(u,TM.deadline,TM.deadline+.5)); rise($('bin'),p(u,TM.trash_can,TM.trash_can+.4));
+TK.forEach(([g,q],i)=>{const a=p(u,TM.deadline+.3+i*.25,TM.deadline+.7+i*.25);
+  if(q[6]){const m=p(u,TM.deadline+2+i*.4,TM.deadline+2.8+i*.4); tr(g,q[1]+(q[3]-q[1])*m,q[2]+(q[4]-q[2])*m); op(g,a)}
+  else{const m=p(u,TM.trash_can+.4+i*.3,TM.trash_can+1.3+i*.3), s=1-.6*m; tr(g,q[1]+(1300-q[0]*s/2-q[1])*m,q[2]+(600-38*s-q[2])*m,s); op(g,a*(1-cl((m-.7)/.3)))}});
+
+rise($('web'),p(u,TM.website,TM.website+.5)); rise($('rul'),p(u,TM.filter,TM.filter+.5)); rise($('fun'),p(u,TM.filter+.4,TM.filter+.9));
+const fo=p(u,TM.filter+.8,TM.filter+1.4);
+FE.forEach((e,i)=>{const c=(t*.35+i/6)%1, x0=940+i*72, ok=i%3==0; let x=1120,y,o=1;
+  if(c<.5){const k2=c/.5; x=x0+(1120-x0)*k2; y=240+230*k2} else {y=470+210*(c-.5)/.5; if(!ok)o=1-cl((c-.5)/.08)}
+  tr(e,x,y); op(e,fo*o*cl(c/.08)*(ok?1-cl((c-.9)/.1):1))});
+rise($('rude'),p(u,TM.envelope,TM.envelope+.6));
+
+rise($('ask'),p(u,TM.coffee_cup,TM.coffee_cup+.5));
+BB.forEach((g,i)=>rise(g,p(u,TM.coffee_cup+3.3+i*.4,TM.coffee_cup+3.6+i*.4)));
+rise($('lng'),p(u,TM.coffee_cup+6,TM.coffee_cup+6.5));
+rise($('card'),p(u,TM.calendar,TM.calendar+.5)); rise($('cf'),p(u,TM.calendar+3,TM.calendar+3.5)); rise($('chk'),p(u,TM.check_mark,TM.check_mark+.5));
+
+const S8=SC[8][0]/K;
+rise($('qa'),p(u,S8+.3,S8+.8)); rise($('qb'),p(u,S8+.8,S8+1.3)); rise($('qc'),p(u,S8+5,S8+5.5));
+MB.forEach((e,i)=>rise(e,p(u,S8+1.2+i*.3,S8+1.5+i*.3))); rise($('wall8'),p(u,S8+5.4,S8+5.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:135.55;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

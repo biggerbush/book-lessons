@@ -1,0 +1,360 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thinking, Fast and Slow Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Thinking, Fast and Slow: Your thinking runs on a fast, intuitive System 1 and a slow, effortful System 2, and the lazy System 2 often accepts System 1&#x27;s quick answers without checking them. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THINKING, FAST AND SLOW · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Meet your</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">two minds.</text>
+<text class="b" x="120" y="600" font-size="32">Meet the fast, intuitive mind and the slow, lazy one.</text>
+<path class="s-ink" d="M1150 720v-30a140 140 0 0 1 280 0v30z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<circle class="s-ink" cx="1290" cy="400" r="150" fill="var(--stage)" stroke-width="7"/>
+<path id="split" class="s-line" d="M1290 262V538" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<g id="h1"><polygon class="gain" points="1250,300 1190,410 1228,410 1200,500 1272,385 1234,385 1262,300"/><text class="m" x="1215" y="225" font-size="22" text-anchor="middle" style="fill:var(--gain)">FAST</text></g>
+<g id="h2"><text id="zz" class="d" x="1316" y="430" font-size="72" style="fill:var(--loss)">Zz</text><text class="m" x="1365" y="225" font-size="22" text-anchor="middle">SLOW</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">System 1: fast and automatic.</text>
+<text class="b" x="120" y="176" font-size="32">You know before you decide.</text>
+<g id="face">
+<rect class="s-line" x="120" y="230" width="420" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="275" font-size="20">PHOTO</text>
+<circle class="s-ink" cx="330" cy="480" r="140" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M255 430l55 25M405 430l-55 25M270 570q60-45 120 0" fill="none" stroke-width="9" stroke-linecap="round"/>
+<circle class="ink" cx="295" cy="478" r="11"/><circle class="ink" cx="365" cy="478" r="11"/>
+</g>
+<polygon id="lt" class="gain" points="700,370 620,470 675,470 645,560 745,440 690,440 725,370"/>
+<g id="kn">
+<rect class="s-ink" x="820" y="240" width="660" height="300" rx="24" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="860" y="290" font-size="20">YOU ALREADY KNOW</text>
+<text class="d" x="860" y="380" font-size="56">She’s upset.</text>
+<text class="d5" x="860" y="450" font-size="38">She’s about to say</text>
+<text class="d5" x="860" y="500" font-size="38">something harsh.</text>
+</g>
+<g id="s1tag"><rect class="gain" x="820" y="590" width="320" height="84" rx="42"/><text class="d" x="980" y="646" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">SYSTEM 1</text></g>
+<g id="sw"><rect class="gain" x="1190" y="590" width="170" height="84" rx="42"/><circle cx="1318" cy="632" r="30" fill="var(--stage)"/><text class="m" x="1190" y="712" font-size="20">CAN’T SWITCH IT OFF</text></g>
+<g id="auto"><text class="d" x="120" y="800" font-size="46">Instant. Effortless. Automatic.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">System 2: slow and effortful.</text>
+<text class="b" x="120" y="176" font-size="32">Multiply 17 by 24 and feel the work.</text>
+<rect class="s-line" x="120" y="220" width="620" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="mp"><text class="d" x="160" y="330" font-size="96">17 × 24</text></g>
+<g id="st0"><text class="d5" x="160" y="440" font-size="44">17 × 20 = 340</text></g>
+<g id="st1"><text class="d5" x="160" y="510" font-size="44">17 × 4 = 68</text><path class="s-ink" d="M160 545h400" stroke-width="4"/></g>
+<g id="st2"><text class="d" x="160" y="620" font-size="52">340 + 68 = <tspan style="fill:var(--gain)">408</tspan></text></g>
+<g id="mem"><text class="m" x="160" y="730" font-size="20">HOLDING NUMBERS IN MEMORY</text></g>
+<g id="gr">
+<path id="gA" class="s-ink" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path id="gB" class="s-ink" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<circle class="ink" cx="980" cy="420" r="26"/><circle class="ink" cx="1190" cy="515" r="18"/>
+</g>
+<g id="s2tag"><rect class="loss" x="860" y="700" width="300" height="84" rx="42"/><text class="d" x="1010" y="756" font-size="40" text-anchor="middle" style="fill:var(--stage)">SYSTEM 2</text><text class="m" x="860" y="830" font-size="20">SLOW · DELIBERATE · EFFORTFUL</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Effort has a cost.</text>
+<text class="b" x="120" y="176" font-size="32">System 2 runs on a limited budget of attention.</text>
+<g id="bat">
+<rect class="s-ink" x="120" y="250" width="280" height="140" rx="14" fill="none" stroke-width="7"/>
+<rect class="ink" x="400" y="290" width="22" height="60" rx="4"/>
+<rect id="batf" x="136" y="266" width="248" height="108" rx="6"/>
+<text class="m" x="120" y="430" font-size="20">ATTENTION BUDGET</text>
+</g>
+<g id="wkp">
+<path class="s-line" d="M520 600h480" stroke-width="5" stroke-linecap="round"/>
+<g id="wk"><circle class="ink" cx="0" cy="-170" r="26"/><rect class="ink" x="-30" y="-138" width="60" height="84" rx="26"/><path id="lg" class="s-ink" fill="none" stroke-width="12" stroke-linecap="round"/></g>
+<text class="m" x="520" y="640" font-size="20">STOPS IN THEIR TRACKS</text>
+</g>
+<g id="thk"><rect class="s-ink" x="700" y="250" width="260" height="90" rx="45" fill="var(--stage)" stroke-width="5"/><text class="d" x="830" y="310" font-size="40" text-anchor="middle">17 × 24?</text><circle class="ink" cx="812" cy="368" r="10"/><circle class="ink" cx="800" cy="394" r="6"/></g>
+<g id="couch">
+<rect x="1080" y="430" width="380" height="100" rx="22" fill="var(--line)"/>
+<circle class="loss" cx="1160" cy="488" r="28"/><rect class="loss" x="1190" y="470" width="220" height="46" rx="23"/>
+<rect class="ink" x="1080" y="520" width="380" height="70" rx="14"/>
+<rect class="ink" x="1060" y="470" width="50" height="120" rx="20"/><rect class="ink" x="1430" y="470" width="50" height="120" rx="20"/>
+<text id="zz2" class="d" x="1200" y="410" font-size="44" style="fill:var(--loss)">Zz</text>
+<text class="m" x="1270" y="640" font-size="20" text-anchor="middle">LAZY SYSTEM 2</text>
+</g>
+<g id="cost"><text class="d" x="120" y="780" font-size="44">Hard thinking feels costly, so the mind avoids it.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The bat and the ball.</text>
+<text class="b" x="120" y="176" font-size="32">A famous puzzle from the book.</text>
+<g id="bb">
+<path class="s-ink" d="M210 600L470 320" stroke-width="44" stroke-linecap="round"/>
+<path class="s-ink" d="M150 665L215 595" stroke-width="16" stroke-linecap="round"/>
+<circle class="s-ink" cx="620" cy="600" r="52" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M585 565q35 35 0 70M655 565q-35 35 0 70" fill="none" stroke-width="4"/>
+</g>
+<g id="tot"><path class="s-ink" d="M150 700v24h530v-24" fill="none" stroke-width="5" stroke-linejoin="round"/><text class="d" x="415" y="800" font-size="52" text-anchor="middle">$1.10 together</text></g>
+<g id="tag"><path class="s-ink" d="M820 260h580l60 70-60 70h-580z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><circle class="s-ink" cx="1400" cy="330" r="12" fill="none" stroke-width="4"/><text class="d" x="860" y="348" font-size="48">Bat = Ball + $1.00</text></g>
+<g id="q4"><text class="d" x="860" y="520" font-size="80">Ball = ?</text></g>
+<g id="ten"><polygon class="gain" points="905,600 860,670 890,670 872,730 935,650 905,650 925,600"/><text class="d" x="960" y="720" font-size="120" style="fill:var(--loss)">10¢</text><text class="m" x="860" y="790" font-size="20">SYSTEM 1’S INSTANT ANSWER</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">But check it.</text>
+<text class="b" x="120" y="176" font-size="32">The fast answer doesn’t add up.</text>
+<g id="w0"><rect class="s-line" x="120" y="220" width="620" height="400" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="270" font-size="22" style="fill:var(--loss)">IF THE BALL = 10¢</text></g>
+<g id="r0"><text class="d5" x="150" y="350" font-size="40">Ball</text><text class="d" x="710" y="350" font-size="40" text-anchor="end">10¢</text></g>
+<g id="r1"><text class="d5" x="150" y="420" font-size="40">Bat</text><text class="d" x="710" y="420" font-size="40" text-anchor="end">$1.10</text></g>
+<g id="r2"><path class="s-ink" d="M150 450h560" stroke-width="4"/><text class="d5" x="150" y="520" font-size="40">Total</text><text class="d" x="710" y="520" font-size="40" text-anchor="end" style="fill:var(--loss)">$1.20</text><text class="m" x="150" y="585" font-size="20" style="fill:var(--loss)">SHOULD BE $1.10</text></g>
+<g id="w1">
+<rect class="s-line" x="860" y="220" width="620" height="400" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="890" y="270" font-size="22" style="fill:var(--gain)">THE BALL = 5¢</text>
+<text class="d5" x="890" y="350" font-size="40">Ball</text><text class="d" x="1450" y="350" font-size="40" text-anchor="end" style="fill:var(--gain)">5¢</text>
+<text class="d5" x="890" y="420" font-size="40">Bat</text><text class="d" x="1450" y="420" font-size="40" text-anchor="end">$1.05</text>
+<path class="s-ink" d="M890 450h560" stroke-width="4"/>
+<text class="d5" x="890" y="520" font-size="40">Total</text><text class="d" x="1450" y="520" font-size="40" text-anchor="end" style="fill:var(--gain)">$1.10</text>
+<text class="m" x="890" y="585" font-size="20" style="fill:var(--gain)">IT ADDS UP</text>
+</g>
+<g id="stu"></g>
+<g id="stl"><text class="m" x="120" y="820" font-size="20">MANY STUDENTS AT TOP UNIVERSITIES STILL GOT IT WRONG</text></g>
+<g id="cb0"><text class="d5" x="860" y="730" font-size="34">System 2 could have caught it.</text></g>
+<g id="cb1"><text class="d" x="860" y="800" font-size="44" style="fill:var(--loss)">It just didn’t bother.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Who is really in charge?</text>
+<text class="b" x="120" y="176" font-size="32">We picture ourselves as the careful, reasoning System 2.</text>
+<g id="boss">
+<circle class="loss" cx="1380" cy="420" r="38"/><path class="loss" d="M1320 560v-30a60 60 0 0 1 120 0v30z"/>
+<rect class="ink" x="900" y="560" width="560" height="24" rx="4"/>
+<rect class="ink" x="920" y="584" width="20" height="140"/><rect class="ink" x="1420" y="584" width="20" height="140"/>
+<rect class="s-ink" x="1200" y="596" width="200" height="48" rx="6" fill="var(--stage)" stroke-width="4"/><text class="m" x="1300" y="628" font-size="20" text-anchor="middle">SYSTEM 2</text>
+<rect class="s-ink" x="1000" y="550" width="80" height="10" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="1004" y="540" width="72" height="10" fill="var(--stage)" stroke-width="3"/>
+</g>
+<g id="adv"><circle class="gain" cx="220" cy="420" r="34"/><path class="gain" d="M160 540v-30a60 60 0 0 1 120 0v30z"/><text class="m" x="220" y="580" font-size="20" text-anchor="middle" style="fill:var(--gain)">SYSTEM 1</text><text class="m" x="220" y="612" font-size="20" text-anchor="middle">QUICK SUGGESTIONS</text></g>
+<g id="trail">
+<path class="s-muted" d="M300 470H985" fill="none" stroke-width="4" stroke-dasharray="8 10" stroke-linecap="round"/>
+<path class="s-muted" d="M971 456l14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="flow" class="gain" cx="300" cy="470" r="7"/>
+</g>
+<g id="cards"></g>
+<g id="lc"><rect x="0" y="0" width="60" height="40" rx="4" fill="var(--stage)" stroke="var(--gain)" stroke-width="4"/><path d="M12 14h36M12 26h24" stroke="var(--gain)" stroke-width="4" stroke-linecap="round"/></g>
+<g id="stp"><g id="stpi"><circle class="ink" cx="0" cy="-90" r="20"/><rect class="ink" x="-12" y="-74" width="24" height="40"/><rect class="loss" x="-40" y="-36" width="80" height="36" rx="6"/></g></g>
+<g id="apv"><g transform="rotate(-8 1250 275)"><rect x="1100" y="230" width="300" height="90" rx="8" fill="none" stroke="var(--gain)" stroke-width="6"/><text class="d" x="1250" y="292" font-size="44" text-anchor="middle" style="fill:var(--gain)">APPROVED</text></g><text class="m" x="1110" y="374" font-size="20">WITHOUT CHECKING</text></g>
+<g id="fine6"><text class="d" x="120" y="800" font-size="44">Often that works: many intuitions are good.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Pause when it’s fast and easy.</text>
+<text class="b" x="120" y="176" font-size="32">Not every hunch. Just the important ones.</text>
+<path class="s-line" d="M120 540h760" stroke-width="5" stroke-linecap="round"/>
+<g id="hn"></g>
+<g id="hl"><text class="m" x="120" y="600" font-size="20">MOST HUNCHES PASS</text></g>
+<g id="stp7"><path class="s-ink" d="M960 450V640" stroke-width="8" stroke-linecap="round"/><polygon class="loss" points="1034,349 1034,411 991,454 929,454 886,411 886,349 929,306 991,306"/><text class="d" x="960" y="393" font-size="36" text-anchor="middle" style="fill:var(--stage)">STOP</text></g>
+<g id="imp"><path class="s-muted" d="M-20 -15h-50M-20 15h-70" stroke-width="5" stroke-linecap="round"/><rect x="0" y="-40" width="170" height="80" rx="14" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/><text class="m" x="85" y="7" font-size="18" text-anchor="middle">IMPORTANT</text></g>
+<g id="il"><text class="m" x="120" y="640" font-size="20" style="fill:var(--loss)">FAST, EASY AND IMPORTANT? STOP.</text></g>
+<g id="sw7">
+<rect class="ink" x="1235" y="290" width="50" height="30" rx="6"/>
+<circle class="s-ink" cx="1260" cy="470" r="150" fill="var(--stage)" stroke-width="8"/>
+<path id="arc" class="s-gain" fill="none" stroke-width="16" stroke-linecap="round"/>
+<line id="hand" class="s-ink" x1="1260" y1="470" x2="1260" y2="360" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1260" cy="470" r="14"/>
+<text id="cnt" class="d" x="1260" y="720" font-size="72" text-anchor="middle">0 s</text>
+</g>
+<g id="ver"><text class="d" x="120" y="800" font-size="44">Ask your slow mind to verify it.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="mg"><circle class="s-ink" cx="1360" cy="370" r="70" fill="var(--stage)" stroke-width="12"/><path class="s-ink" d="M1410 420l50 50" stroke-width="20" stroke-linecap="round"/><text class="d" x="1360" y="384" font-size="40" text-anchor="middle" style="fill:var(--loss)">10¢?</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Catch one quick answer</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">today, and check it.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">Did <tspan style="fill:var(--gain)">System 1</tspan> get it right?</text></g>
+<g id="qm"><text class="m" x="143" y="700" font-size="26">LET YOUR SLOW MIND VERIFY IT</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Meet Your Two Minds&rdquo;, from <em>Thinking, Fast and Slow</em> by Daniel Kahneman. Examples as reported in the book: the angry face photo, multiplying 17 by 24, the walking friend, and the bat and ball puzzle. The brain, battery, desk and stamp drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 6.9], [6.9, 25.3], [25.3, 37.3], [37.3, 56.3], [56.3, 71.5], [71.5, 91.9], [91.9, 107.9], [107.9, 121.6], [121.6, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Two Minds", "System 1", "System 2", "Effort Has a Cost", "The Bat and Ball", "The Lazy Checker", "Who Is in Charge", "Pause and Check", "Your Challenge"];
+const TM={"brain_split": 0.0, "angry_face": 7.2, "lightning": 16.28, "math_problem": 25.6, "gears": 29.04, "battery": 37.6, "walker": 40.96, "lazy_couch": 52.08, "bat_ball": 56.64, "price_tag": 62.96, "ten_cents": 68.24, "check_math": 71.76, "five_cents": 79.2, "students": 82.0, "boss_desk": 92.24, "advisor": 96.72, "stamp": 101.16, "stop_sign": 108.16, "stopwatch": 116.32, "magnifier": 121.92};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const gearD=(r,n)=>{let d='';const N=n*4;for(let i=0;i<N;i++){const a=i*2*Math.PI/N,R=(i%4<2)?r+20:r;d+=(i?'L':'M')+(R*Math.cos(a)).toFixed(1)+' '+(R*Math.sin(a)).toFixed(1)}return d+'Z'};
+$('gA').setAttribute('d',gearD(120,12));$('gB').setAttribute('d',gearD(80,8));
+const WR=[1,0,1,1,0,1,1,1,0,1,0,1];
+const ST=WR.map((w,i)=>{const x=140+i*52,g=mk('g',{},$('stu'));const f=fig(g,x,690,16,'ink');mk('path',{d:'M'+(x-24)+' 676l24-10 24 10-24 10z',class:'ink'},g);return f});
+// suggestion cards lined up along the trail from System 1 to the desk
+const CD=[340,460,580,700].map(x=>{const g=mk('g',{},$('cards'));
+  mk('rect',{x:x,y:450,width:60,height:40,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  mk('path',{d:'M'+(x+12)+' 464h36M'+(x+12)+' 476h24',stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},g);
+  mk('path',{d:'M'+(x+82)+' 460l10 10-10 10',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  return g});
+const HN=[0,1,2,3,4].map(()=>mk('circle',{cy:515,r:22,class:'gain'},$('hn')));
+const R=(id,a,u)=>rise($(id),p(u,a,a+.5));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+R('split',TM.brain_split,u); R('h1',TM.brain_split+.4,u); R('h2',TM.brain_split+4.2,u);
+$('zz').setAttribute('transform','translate(0 '+(6*Math.sin(t*2)).toFixed(1)+')');
+
+R('face',TM.angry_face,u); R('kn',TM.angry_face+4.2,u); R('lt',TM.lightning,u); R('s1tag',TM.lightning+.4,u); R('sw',TM.lightning+4.1,u); R('auto',TM.lightning+4.4,u);
+
+R('mp',TM.math_problem,u); R('gr',TM.gears,u); R('st0',TM.gears+.4,u); R('st1',TM.gears+1.8,u); R('mem',TM.gears+2.8,u); R('st2',TM.gears+4.5,u); R('s2tag',TM.gears+4.8,u);
+const ga=30*Math.max(0,u-TM.gears);
+$('gA').setAttribute('transform','translate(980 420) rotate('+ga.toFixed(1)+')'); $('gB').setAttribute('transform','translate(1190 515) rotate('+(-ga*1.5+11).toFixed(1)+')');
+
+R('bat',TM.battery,u);
+const lv=1-.7*p(u,TM.walker,TM.walker+7); $('batf').setAttribute('width',(248*lv).toFixed(1)); $('batf').style.fill=lv>.5?'var(--gain)':'var(--loss)';
+R('wkp',TM.walker,u);
+const wkk=cl(lin(u,TM.walker+.3,TM.walker+3.3)), sg=(wkk>0&&wkk<1)?20*Math.sin(t*9):0;
+$('wk').setAttribute('transform','translate('+(560+240*wkk).toFixed(1)+' 600)');
+$('lg').setAttribute('d','M-12 -56L'+(-12+sg).toFixed(1)+' 0M12 -56L'+(12-sg).toFixed(1)+' 0');
+R('thk',TM.walker+3.5,u); R('cost',TM.walker+7.3,u); R('couch',TM.lazy_couch,u);
+$('zz2').setAttribute('transform','translate('+(4*Math.sin(t*1.5)).toFixed(1)+' '+(6*Math.sin(t*2)).toFixed(1)+')');
+
+R('bb',TM.bat_ball,u); R('tot',TM.bat_ball+3.4,u); R('tag',TM.price_tag,u); R('q4',TM.price_tag+3.8,u); R('ten',TM.ten_cents,u);
+
+R('w0',TM.check_math,u); R('r0',TM.check_math+1.4,u); R('r1',TM.check_math+3.5,u); R('r2',TM.check_math+6.5,u); R('w1',TM.five_cents,u);
+R('stu',TM.students,u); R('stl',TM.students+.4,u);
+ST.forEach((s,i)=>{const c=WR[i]&&u>=TM.students+.8+i*.12?'var(--loss)':'var(--ink)';s.forEach(e=>e.style.fill=c)});
+R('cb0',TM.students+5.4,u); R('cb1',TM.students+9.2,u);
+
+// who is in charge: suggestions travel from System 1 to the desk and get stamped
+R('boss',TM.boss_desk,u); R('adv',TM.advisor,u); R('trail',TM.advisor+.2,u);
+CD.forEach((g,i)=>{const a=TM.advisor+.4+i*.35; rise(g,p(u,a,a+.4))});
+$('flow').setAttribute('cx',(300+((t*140)%660)).toFixed(1));
+rise($('lc'),p(u,TM.advisor+1.8,TM.advisor+2.2));
+const lk=p(u,TM.stamp-.8,TM.stamp);
+$('lc').setAttribute('transform','translate('+(820+190*lk).toFixed(1)+' '+(450+50*lk-40*Math.sin(Math.PI*lk)).toFixed(1)+')');
+R('stp',TM.stamp,u); $('stpi').setAttribute('transform','translate(1040 '+(500-80*Math.abs(Math.sin(t*3))).toFixed(1)+')');
+R('apv',TM.stamp+.6,u); R('fine6',TM.stamp+3.4,u);
+
+const ho=p(u,TM.stop_sign,TM.stop_sign+.5)*(1-p(u,TM.stop_sign+3.4,TM.stop_sign+3.9));
+HN.forEach((c,i)=>{const x=140+((t*140+i*150)%750);c.setAttribute('cx',x.toFixed(1));c.setAttribute('opacity',(ho*(x>820?cl((890-x)/70):1)).toFixed(2))});
+R('hl',TM.stop_sign,u); R('stp7',TM.stop_sign+.3,u);
+const ik=p(u,TM.stop_sign+3.4,TM.stop_sign+4.2); $('imp').setAttribute('transform','translate('+(120+570*ik).toFixed(1)+' 500)'); $('imp').setAttribute('opacity',cl(ik*3).toFixed(2));
+R('il',TM.stop_sign+4.2,u);
+R('sw7',TM.stopwatch,u);
+const sc=cl(lin(u,TM.stopwatch+.5,TM.stopwatch+4.5)), sa=sc*2*Math.PI;
+$('cnt').textContent=Math.round(10*sc)+' s';
+$('hand').setAttribute('x2',(1260+110*Math.sin(sa)).toFixed(1)); $('hand').setAttribute('y2',(470-110*Math.cos(sa)).toFixed(1));
+const ea=Math.min(sa,2*Math.PI-.01); $('arc').setAttribute('d',sc>.001?'M1260 342A128 128 0 '+(ea>Math.PI?1:0)+' 1 '+(1260+128*Math.sin(ea)).toFixed(1)+' '+(470-128*Math.cos(ea)).toFixed(1):'');
+R('ver',TM.stopwatch+.6,u);
+
+R('mg',TM.magnifier,u); R('qa',TM.magnifier,u); R('qb',TM.magnifier+.4,u); R('qc',TM.magnifier+4.2,u); R('qm',TM.magnifier+4.6,u);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.48;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

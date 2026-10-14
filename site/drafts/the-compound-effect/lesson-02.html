@@ -1,0 +1,333 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Compound Effect Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of The Compound Effect: Your life is the sum of your choices, so taking complete ownership of your results is the first step to changing them. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMPOUND EFFECT · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">You are fully</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">responsible.</text>
+<text class="b" x="120" y="600" font-size="32">Your results begin and end with the choices you own.</text>
+<path class="s-ink" d="M1300 570V700M1210 700h180" stroke-width="8" stroke-linecap="round" fill="none"/>
+<ellipse class="s-ink" cx="1300" cy="400" rx="120" ry="170" fill="var(--stage)" stroke-width="8"/>
+<path class="s-line" d="M1220 330l50-50M1230 370l70-70" stroke-width="6" stroke-linecap="round"/>
+<g id="mq"><text class="d" x="1300" y="445" font-size="130" text-anchor="middle" style="fill:var(--muted)">?</text></g>
+<g id="mp"></g>
+<g id="myou"><text class="m" x="1300" y="750" font-size="22" text-anchor="middle" style="fill:var(--gain)">THAT’S YOU</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The blame game.</text>
+<text class="b" x="120" y="176" font-size="32">It is easy to point at everything else.</text>
+<g id="bc0"><rect class="s-line" x="120" y="240" width="380" height="210" rx="18" fill="var(--stage)" stroke-width="3"/><g id="cars"></g><text class="m" x="310" y="428" font-size="20" text-anchor="middle">TRAFFIC</text></g>
+<g id="bc1"><rect class="s-line" x="610" y="240" width="380" height="210" rx="18" fill="var(--stage)" stroke-width="3"/><polyline class="s-loss" points="650,290 720,330 780,310 860,370 950,390" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><text class="m" x="800" y="428" font-size="20" text-anchor="middle">THE ECONOMY</text></g>
+<g id="bc2"><rect class="s-line" x="1100" y="240" width="380" height="210" rx="18" fill="var(--stage)" stroke-width="3"/><g id="boss"></g><text class="m" x="1290" y="428" font-size="20" text-anchor="middle">A DIFFICULT BOSS</text></g>
+<g id="blm"></g>
+<g id="man"></g>
+<g id="arms"><path class="s-ink" d="M756 660L712 626L704 592M844 660L888 626L896 592" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="cap0"><text class="d5" x="120" y="790" font-size="38">Blame feels comfortable: nothing is our fault.</text></g>
+<g id="cap1"><text class="d" x="120" y="850" font-size="38" style="fill:var(--loss)">But nothing is in our power, either.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Life is the sum of your choices.</text>
+<text class="b" x="120" y="176" font-size="32">Every small decision adds up to where you are now.</text>
+<g id="fork">
+<text class="m" x="300" y="280" font-size="20" text-anchor="middle">CHOICES</text>
+<path class="s-line" d="M300 760V600L180 460L130 320M180 460L240 320M300 600L420 460L470 320M420 460L360 320" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="route" class="s-gain" d="M300 760V600L420 460L360 320" pathLength="100" stroke-dasharray="100" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="ink" cx="300" cy="600" r="12"/><circle class="ink" cx="180" cy="460" r="12"/><circle class="ink" cx="420" cy="460" r="12"/>
+</g>
+<g id="calg"><text class="m" x="560" y="270" font-size="20">EVERY DAY COUNTS</text><g id="cal"></g></g>
+<g id="cl0"><text class="m" x="560" y="660" font-size="20">WHAT YOU ATE</text></g>
+<g id="cl1"><text class="m" x="560" y="694" font-size="20">WHAT YOU SAID</text></g>
+<g id="cl2"><text class="m" x="560" y="728" font-size="20">HOW YOU SPENT EACH EVENING</text></g>
+<g id="stl"><text class="m" x="1280" y="280" font-size="22" text-anchor="middle" style="fill:var(--gain)">YOUR RESULTS TODAY</text><path class="s-ink" d="M1120 762h320" stroke-width="6" stroke-linecap="round"/></g>
+<g id="stk"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One hundred percent.</text>
+<text class="b" x="120" y="176" font-size="32">Responsibility is not a fifty-fifty deal.</text>
+<g id="scl">
+<path class="s-ink" d="M410 300V660M300 660h220M210 320h400" fill="none" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="410" cy="300" r="14"/>
+<path class="s-line" d="M210 320L150 470M210 320L270 470M610 320L550 470M610 320L670 470" stroke-width="4"/>
+<path class="ink" d="M140 470h140q-70 50-140 0z"/>
+<text class="m" x="210" y="560" font-size="22" text-anchor="middle">YOU</text>
+<text class="d" x="210" y="620" font-size="44" text-anchor="middle">50%</text>
+<g id="oth"><path class="ink" d="M540 470h140q-70 50-140 0z"/><text class="m" x="610" y="560" font-size="22" text-anchor="middle">OTHERS</text><text class="d" x="610" y="620" font-size="44" text-anchor="middle">50%</text></g>
+</g>
+<g id="rp">
+<text class="m" x="800" y="360" font-size="22">YOUR SHARE</text>
+<rect id="barf" class="gain" x="800" y="390" width="340" height="80" rx="40"/>
+<rect class="s-ink" x="800" y="390" width="680" height="80" rx="40" fill="none" stroke-width="5"/>
+<text id="pct" class="d" x="800" y="610" font-size="140" letter-spacing="-4">50%</text>
+</g>
+<g id="resp"><text class="d" x="120" y="780" font-size="52">Your response is still yours.</text><text class="m" x="120" y="830" font-size="22">EVEN WHEN SOMEONE ELSE IS PARTLY TO BLAME</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A marriage experiment.</text>
+<text class="b" x="120" y="176" font-size="32">Hardy tried the idea in his own home.</text>
+<g id="him"><text class="m" x="260" y="610" font-size="20" text-anchor="middle">HARDY</text></g>
+<g id="her"><text class="m" x="440" y="610" font-size="20" text-anchor="middle">HIS WIFE</text></g>
+<g id="book">
+<text class="m" x="1000" y="245" font-size="22" text-anchor="middle">HIS JOURNAL ABOUT HER</text>
+<rect class="s-ink" x="700" y="270" width="290" height="350" rx="8" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="1010" y="270" width="290" height="350" rx="8" fill="var(--stage)" stroke-width="5"/>
+</g>
+<g id="jl"></g>
+<g id="pen"><path class="gain" d="M0 0l8-26 70-70 18 18-70 70z"/></g>
+<g id="mol"><g id="mo"></g><text class="m" x="700" y="760" font-size="20">EVERY DAY FOR A YEAR: ONE THING HE APPRECIATED</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What changed?</text>
+<text class="b" x="120" y="176" font-size="32">A year of looking for the good.</text>
+<g id="k0"><rect class="s-line" x="120" y="250" width="400" height="390" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="mag"><g id="stars"></g><circle class="s-ink" cx="320" cy="410" r="70" fill="none" stroke-width="12"/><path class="s-ink" d="M370 460l60 60" stroke-width="18" stroke-linecap="round"/></g>
+<text class="m" x="320" y="612" font-size="20" text-anchor="middle">NOTICING THE GOOD</text></g>
+<g id="a0"><path class="s-muted" d="M530 445h50m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="k1"><rect class="s-line" x="600" y="250" width="400" height="390" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="hrt" transform="translate(800 420)"><path class="gain" d="M0 90C-120 10-120-80-60-90C-30-95-5-75 0-55C5-75 30-95 60-90C120-80 120 10 0 90Z"/></g>
+<text class="m" x="800" y="612" font-size="20" text-anchor="middle">MORE WARMTH</text></g>
+<g id="a1"><path class="s-muted" d="M1010 445h50m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="k2"><rect class="s-line" x="1080" y="250" width="400" height="390" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="1180" y="420" width="200" height="140"/><rect class="ink" x="1268" y="420" width="24" height="140"/>
+<g id="lid"><rect class="gain" x="1165" y="372" width="230" height="48"/><rect class="ink" x="1268" y="372" width="24" height="48"/><circle class="s-ink" cx="1258" cy="352" r="18" fill="none" stroke-width="7"/><circle class="s-ink" cx="1302" cy="352" r="18" fill="none" stroke-width="7"/></g>
+<text class="m" x="1280" y="612" font-size="20" text-anchor="middle">THE FINISHED JOURNAL</text></g>
+<g id="own"><text class="d" x="120" y="760" font-size="48">He changed only his own part.</text><text class="m" x="120" y="815" font-size="22" style="fill:var(--gain)">AND THE WHOLE RELATIONSHIP CHANGED</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make your own luck.</text>
+<text class="b" x="120" y="176" font-size="32">Success is not simply luck.</text>
+<g id="clv"><path class="s-muted" d="M1340 300q10 60 40 90" fill="none" stroke-width="7" stroke-linecap="round"/><g id="leaves"></g></g>
+<line id="cst" class="s-loss" x1="1250" y1="390" x2="1250" y2="390" stroke-width="9" stroke-linecap="round"/>
+<g id="eq"></g>
+<g id="luck"><text class="d" x="1220" y="530" font-size="60" style="fill:var(--gain)">= Luck</text></g>
+<g id="three"><text class="d" x="120" y="770" font-size="48">Three of the four pieces are your choices.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Take it back.</text>
+<text class="b" x="120" y="176" font-size="32">Three honest steps.</text>
+<g id="n0"><rect class="s-ink" x="170" y="250" width="240" height="320" rx="12" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M200 300h180M200 340h120" stroke-width="6" stroke-linecap="round"/>
+<polyline class="s-loss" points="200,410 260,450 320,440 380,530" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="290" y="630" font-size="20" text-anchor="middle">1 · AN UNHAPPY RESULT</text></g>
+<g id="n1"><g id="me"></g>
+<path id="parr" class="s-gain" d="M1010 280Q1010 420 880 440" pathLength="100" stroke-dasharray="100" fill="none" stroke-width="8" stroke-linecap="round"/>
+<path class="s-gain" d="M880 440l28-22M880 440l30 12" fill="none" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="800" y="630" font-size="20" text-anchor="middle">2 · YOUR PART IN IT</text></g>
+<g id="n2"><g id="ky"><circle class="s-gain" cx="1180" cy="400" r="50" fill="none" stroke-width="16"/><path class="s-gain" d="M1230 400h200M1390 400v40M1430 400v30" fill="none" stroke-width="16" stroke-linecap="round"/></g>
+<text class="m" x="1290" y="630" font-size="20" text-anchor="middle">3 · ONE NEW CHOICE</text></g>
+<g id="tdy"><text class="d" x="120" y="790" font-size="46">Name one choice you can make differently today.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="ex"><text class="m" x="143" y="290" font-size="26">FOR THE NEXT WEEK, CATCH EVERY EXCUSE</text><text class="d5" x="136" y="380" font-size="40" fill-opacity=".55">“It’s not my fault.”</text></g>
+<line id="exs" class="s-loss" x1="136" y1="366" x2="136" y2="366" stroke-width="6" stroke-linecap="round"/>
+<g id="qa"><text class="d" x="136" y="500" font-size="88" letter-spacing="-2">What can I</text></g>
+<g id="qb"><text class="d" x="136" y="610" font-size="88" letter-spacing="-2" style="fill:var(--gain)">do about this?</text></g>
+<g id="qm"><text class="m" x="143" y="720" font-size="26">REPLACE EVERY EXCUSE WITH ONE QUESTION</text></g>
+<g id="rays"></g>
+<g id="sun"><path class="gain" d="M1150 640a110 110 0 0 1 220 0z"/></g>
+<path class="s-ink" d="M1050 640h420" stroke-width="7" stroke-linecap="round"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="123" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:03</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;You Are Fully Responsible&rdquo;, from <em>The Compound Effect</em> by Darren Hardy. The appreciation journal Hardy kept for his wife and his formula for luck are as reported in the book. The scale, bars and equation drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=123, SC=[[0.0, 7.5], [7.5, 20.4], [20.4, 35.4], [35.4, 52.7], [52.7, 64.9], [64.9, 82.0], [82.0, 98.7], [98.7, 110.2], [110.2, 123.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Who Is in Charge", "The Blame Game", "Sum of Your Choices", "One Hundred Percent", "A Marriage Experiment", "What Changed", "Making Your Own Luck", "Take It Back", "Your Challenge"];
+const TM={"mirror": 0.0, "traffic_jam": 7.76, "shrug": 12.4, "fork_road": 20.68, "calendar": 25.76, "stack": 30.96, "scale": 35.72, "full_bar": 40.92, "couple": 52.96, "journal": 55.92, "pen": 60.32, "magnifier": 65.2, "heart": 69.44, "gift_box": 73.63, "clover": 82.32, "equation": 86.8, "gears": 93.12, "notepad": 99.04, "pointing": 102.4, "key": 106.72, "sunrise": 110.51};
+const per=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+per($('mp'),1300,370,40,'gain');per($('man'),800,580,32,'ink');per($('boss'),1290,290,24,'ink');
+per($('him'),260,400,40,'ink');per($('her'),440,400,40,'ink');per($('me'),800,380,40,'ink');
+for(let i=0;i<3;i++){const x=150+i*115;mk('rect',{x:x,y:330,width:95,height:40,rx:10,class:'ink'},$('cars'));[x+22,x+73].forEach(c=>mk('circle',{cx:c,cy:374,r:11,class:'s-ink',fill:'var(--stage)','stroke-width':5},$('cars')))}
+const BA=[[310,455],[800,455],[1290,455]].map(([x,y])=>{const g=mk('g',{},$('blm')),a=Math.atan2(y-540,x-800),h=b=>(-24*Math.cos(b)).toFixed(1)+' '+(-24*Math.sin(b)).toFixed(1);
+  mk('path',{d:'M800 540L'+x+' '+y,class:'s-loss','stroke-width':5,'stroke-dasharray':'10 10',fill:'none'},g);
+  mk('path',{d:'M'+x+' '+y+'l'+h(a-.5)+'M'+x+' '+y+'l'+h(a+.5),class:'s-loss','stroke-width':5,'stroke-linecap':'round',fill:'none'},g);return g});
+const CAL=[];for(let i=0;i<35;i++)CAL.push(mk('rect',{x:560+(i%7)*62,y:300+Math.floor(i/7)*62,width:50,height:50,rx:8,fill:'var(--line)'},$('cal')));
+const STK=[];for(let i=0;i<12;i++)STK.push(mk('rect',{x:1140,y:724-i*38,width:280,height:32,rx:6,fill:i%2?'var(--gain)':'var(--ink)'},$('stk')));
+const JL=[];for(let i=0;i<18;i++){const x=i<9?730:1040,y=320+(i%9)*32;JL.push([mk('path',{class:'s-line','stroke-width':5,'stroke-linecap':'round',fill:'none'},$('jl')),x,y])}
+const MO=[];for(let i=0;i<12;i++)MO.push(mk('circle',{cx:730+i*49,cy:700,r:14,fill:'var(--line)'},$('mo')));
+const ST=[[285,380],[350,385],[300,440],[355,440],[320,410]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:9,class:'gain',opacity:0},$('stars')));
+[[0,-34],[34,0],[0,34],[-34,0]].forEach(q=>mk('circle',{cx:1340+q[0],cy:270+q[1],r:32,fill:'var(--muted)'},$('leaves')));
+const EQ=['PREPARATION','ATTITUDE','OPPORTUNITY','ACTION'].map((s,i)=>{const x=120+i*280,g=mk('g',{},$('eq'));
+  const r=mk('rect',{x:x,y:440,width:230,height:100,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const tx=mk('text',{x:x+115,y:498,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;
+  if(i<3){const pl=mk('text',{x:x+255,y:508,'font-size':48,'text-anchor':'middle',class:'d',style:'fill:var(--muted)'},g);pl.textContent='+'}
+  const lb=mk('text',{x:x+115,y:590,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var('+(i===2?'--loss':'--gain')+')'},$('eq'));lb.textContent=i===2?'FROM OUTSIDE':'YOUR CHOICE';
+  return [g,r,tx,lb]});
+const RY=[];for(let i=0;i<7;i++){const a=Math.PI*(i+1)/8,c=Math.cos(a),s=Math.sin(a);RY.push(mk('path',{d:'M'+(1260-140*c).toFixed(1)+' '+(640-140*s).toFixed(1)+'L'+(1260-190*c).toFixed(1)+' '+(640-190*s).toFixed(1),class:'s-gain','stroke-width':8,'stroke-linecap':'round'},$('rays')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  rise($('mq'),p(u,TM.mirror,TM.mirror+.5)*(1-p(u,TM.mirror+4.2,TM.mirror+4.6)));
+  R('mp',TM.mirror+4.6); R('myou',TM.mirror+5);
+  $('mp').setAttribute('transform','translate(0 '+(4*Math.sin(t*1.6)).toFixed(1)+')');
+
+  BA.forEach((g,i)=>{const a=TM.traffic_jam+i*1.3; rise($('bc'+i),p(u,a,a+.5)); rise(g,p(u,a+.3,a+.8))});
+  R('arms',TM.shrug); $('arms').setAttribute('opacity',u>=TM.shrug?1:0); R('cap0',TM.shrug+.3); R('cap1',TM.shrug+4.2);
+
+  R('fork',TM.fork_road); $('route').setAttribute('stroke-dashoffset',(100*(1-p(u,TM.fork_road+1,TM.fork_road+3))).toFixed(1));
+  R('calg',TM.calendar); CAL.forEach((c,i)=>c.setAttribute('fill',u>=TM.calendar+.5+i*.14?'var(--gain)':'var(--line)'));
+  [0,1.6,3.4].forEach((d,i)=>R('cl'+i,TM.calendar+d));
+  R('stl',TM.stack); STK.forEach((b,i)=>rise(b,p(u,TM.stack+i*.3,TM.stack+i*.3+.3)));
+
+  R('scl',TM.scale); R('rp',TM.scale+1.2);
+  const f=p(u,TM.full_bar+2.5,TM.full_bar+4); $('barf').setAttribute('width',(340+340*f).toFixed(1));
+  $('pct').textContent=Math.round(50+50*f)+'%'; $('pct').style.fill=f>0?'var(--gain)':'var(--ink)';
+  $('oth').setAttribute('opacity',(1-.7*f).toFixed(2)); R('resp',TM.full_bar+6.3);
+
+  R('him',TM.couple); R('her',TM.couple+.4); R('book',TM.journal);
+  const w=p(u,TM.pen,TM.pen+5.5)*18;
+  JL.forEach(([e,x,y],i)=>{const k=cl(w-i); e.setAttribute('d','M'+x+' '+y+'h'+(230*k).toFixed(1)); e.setAttribute('opacity',k>0?1:0)});
+  const ix=Math.min(17,Math.floor(w)), jk=cl(w-ix);
+  $('pen').setAttribute('transform','translate('+(JL[ix][1]+230*jk).toFixed(1)+' '+(JL[ix][2]-6)+')'); $('pen').setAttribute('opacity',p(u,TM.pen,TM.pen+.4));
+  MO.forEach((c,i)=>c.setAttribute('fill',w>=(i+1)*1.5?'var(--gain)':'var(--line)')); R('mol',TM.pen+.3);
+
+  R('k0',TM.magnifier); ST.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.magnifier+1+i*.4,TM.magnifier+1.3+i*.4)));
+  $('mag').setAttribute('transform','translate('+(10*Math.sin(t*1.5)).toFixed(1)+' '+(8*Math.cos(t*1.2)).toFixed(1)+')');
+  R('a0',TM.heart-.3); R('k1',TM.heart);
+  $('hrt').setAttribute('transform','translate(800 420) scale('+(1+.07*Math.pow(Math.abs(Math.sin(t*3)),6)).toFixed(3)+')');
+  R('a1',TM.gift_box-.3); R('k2',TM.gift_box);
+  $('lid').setAttribute('transform','translate(0 '+(-30*p(u,TM.gift_box+1,TM.gift_box+2)).toFixed(1)+')'); R('own',TM.gift_box+5);
+
+  R('clv',TM.clover); const cs=p(u,TM.clover+2.5,TM.clover+3.1);
+  $('cst').setAttribute('x2',(1250+180*cs).toFixed(1)); $('cst').setAttribute('y2',(390-180*cs).toFixed(1));
+  const out=u>=TM.gears, mine=u>=TM.gears+2.6;
+  EQ.forEach(([g,r,tx,lb],i)=>{rise(g,p(u,TM.equation+i*.8,TM.equation+i*.8+.4));
+    if(i===2){r.setAttribute('stroke-dasharray',out?'10 10':'none'); r.setAttribute('stroke',out?'var(--loss)':'var(--ink)'); rise(lb,p(u,TM.gears,TM.gears+.5))}
+    else{r.setAttribute('fill',mine?'var(--gain)':'var(--stage)'); r.setAttribute('stroke',mine?'var(--gain)':'var(--ink)'); tx.style.fill=mine?'var(--on-gain)':'var(--ink)'; rise(lb,p(u,TM.gears+2.6,TM.gears+3.1))}});
+  R('luck',TM.equation+3.2); R('three',TM.gears+3);
+
+  R('n0',TM.notepad); R('n1',TM.pointing); $('parr').setAttribute('stroke-dashoffset',(100*(1-p(u,TM.pointing+.4,TM.pointing+1.4))).toFixed(1));
+  R('n2',TM.key); $('ky').setAttribute('transform','rotate('+(8*Math.sin(t*2)).toFixed(1)+' 1180 400)'); R('tdy',TM.key+.8);
+
+  R('ex',TM.sunrise); $('exs').setAttribute('x2',(136+430*p(u,TM.sunrise+2,TM.sunrise+2.6)).toFixed(1));
+  const sk=p(u,TM.sunrise,TM.sunrise+2); $('sun').setAttribute('transform','translate(1260 640) scale('+sk.toFixed(3)+') translate(-1260 -640)');
+  RY.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.sunrise+1.5+i*.15,TM.sunrise+1.8+i*.15)*(.6+.4*Math.sin(t*2+i))));
+  R('qa',TM.sunrise+5); R('qb',TM.sunrise+5.4); R('qm',TM.sunrise+6);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:119.17;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

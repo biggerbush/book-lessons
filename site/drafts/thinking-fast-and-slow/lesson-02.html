@@ -1,0 +1,409 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Thinking, Fast and Slow Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Thinking, Fast and Slow: System 1 builds a confident story from whatever information is in front of it and ignores what is missing, so we jump to conclusions from too little evidence. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THINKING, FAST AND SLOW · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">What you see</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">is all there is.</text>
+<text class="b" x="120" y="600" font-size="32">Why your mind fills the gaps with confidence it hasn’t earned.</text>
+<g id="card">
+<rect class="s-ink" x="1060" y="210" width="380" height="300" rx="20" fill="var(--stage)" stroke-width="6"/>
+<g id="cardp"></g>
+<text class="m" x="1190" y="290" font-size="22">CANDIDATE</text>
+<text class="d5" x="1190" y="334" font-size="40">Mindik</text>
+<path class="s-line" d="M1100 380h300" stroke-width="3"/>
+<text class="d5" x="1100" y="428" font-size="32">intelligent</text>
+<text class="d5" x="1100" y="476" font-size="32">strong</text>
+<path class="s-muted" d="M1230 468h170" stroke-width="4" stroke-dasharray="10 10"/>
+</g>
+<g id="yes"><circle class="gain" cx="1410" cy="520" r="56"/><text class="d" x="1410" y="534" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">YES</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What came next?</text>
+<text class="b" x="120" y="176" font-size="32">Notice what you never asked.</text>
+<g id="tiles"></g>
+<g id="lead">
+<g id="leadp"></g>
+<text class="m" x="330" y="720" font-size="22" text-anchor="middle">THE LEADER</text>
+<text class="d" x="640" y="560" font-size="80">inspiring</text>
+</g>
+<line id="istk" class="s-ink" x1="632" y1="534" x2="632" y2="534" stroke-width="8" stroke-linecap="round"/>
+<g id="fright"><text class="d" x="640" y="690" font-size="80" style="fill:var(--loss)">frightening</text></g>
+<g id="thumb">
+<circle class="loss" cx="1340" cy="570" r="96"/>
+<circle cx="1306" cy="540" r="12" fill="var(--stage)"/>
+<circle cx="1374" cy="540" r="12" fill="var(--stage)"/>
+<path d="M1290 520l30 8M1390 520l-30 8" fill="none" stroke="var(--stage)" stroke-width="7" stroke-linecap="round"/>
+<path d="M1296 622q44-40 88 0" fill="none" stroke="var(--stage)" stroke-width="9" stroke-linecap="round"/>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">System 1 jumps to conclusions.</text>
+<text class="b" x="120" y="176" font-size="32">It stitches whatever scraps it has into a story.</text>
+<g id="scraps"></g>
+<g id="mach">
+<rect class="s-ink" x="640" y="270" width="300" height="220" rx="20" fill="var(--stage)" stroke-width="7"/>
+<circle id="gear" class="s-gain" cx="790" cy="360" r="50" fill="none" stroke-width="18" stroke-dasharray="20 12"/>
+<text class="m" x="790" y="460" font-size="22" text-anchor="middle">SYSTEM 1</text>
+<text class="m" x="160" y="530" font-size="22">SCRAPS OF INFORMATION</text>
+</g>
+<g id="story">
+<path class="s-muted" d="M960 380h70m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-ink" x="1050" y="270" width="300" height="220" rx="16" fill="var(--stage)" stroke-width="7"/>
+<g id="slines"></g>
+<text class="m" x="1200" y="530" font-size="22" text-anchor="middle" style="fill:var(--gain)">A CONFIDENT STORY</text>
+</g>
+<g id="puzg"><g id="puz"></g></g>
+<g id="pz1"><text class="d5" x="660" y="680" font-size="40">Missing pieces? Not counted.</text></g>
+<g id="pz2"><text class="d" x="660" y="770" font-size="44" style="fill:var(--gain)">Do these pieces fit? Yes.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Kahneman’s name for it.</text>
+<g id="bub">
+<rect class="gain" x="120" y="190" width="1040" height="110" rx="55"/>
+<path class="gain" d="M240 290l-20 36 90-36z"/>
+<text class="d" x="170" y="263" font-size="52" style="fill:var(--on-gain)">What you see is all there is.</text>
+</g>
+<g id="dark">
+<rect class="loss" x="120" y="340" width="1360" height="430" rx="20" fill-opacity=".14"/>
+<g id="ditems"></g>
+<text class="m" x="340" y="808" font-size="20" text-anchor="middle">NEVER ENTERS THE STORY</text>
+<text class="m" x="1260" y="808" font-size="20" text-anchor="middle">NEVER ENTERS THE STORY</text>
+</g>
+<g id="spot">
+<polygon class="gain" points="780,380 820,380 990,750 610,750" fill-opacity=".28"/>
+<rect class="ink" x="765" y="345" width="70" height="40" rx="8"/>
+<ellipse class="gain" cx="800" cy="750" rx="190" ry="20" fill-opacity=".5"/>
+<rect class="ink" x="712" y="620" width="80" height="110" rx="8"/>
+<rect class="ink" x="808" y="620" width="80" height="110" rx="8"/>
+<text class="m" x="800" y="808" font-size="20" text-anchor="middle" style="fill:var(--gain)">SHAPES THE JUDGMENT</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Smooth feels true.</text>
+<text class="b" x="120" y="176" font-size="32">A few facts make a smoother story than many facts.</text>
+<g id="top">
+<path id="road1" class="s-ink" fill="none" stroke-width="10" stroke-linecap="round"/>
+<text class="d" x="1480" y="300" font-size="40" text-anchor="end" style="fill:var(--gain)">Feels true</text>
+<circle id="ball1" class="ink" r="22"/>
+</g>
+<g id="few"><text class="m" x="120" y="300" font-size="22">FEW FACTS</text><g id="fdots"></g></g>
+<g id="bot">
+<path id="road2" class="s-ink" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="mdots"></g>
+<text class="m" x="120" y="580" font-size="22">MANY FACTS, SOME CONTRADICT</text>
+<text class="d" x="1480" y="580" font-size="40" text-anchor="end" style="fill:var(--loss)">Feels bumpy</text>
+<circle id="ball2" class="ink" r="22"/>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One side of the case.</text>
+<text class="b" x="120" y="176" font-size="32">A study: people read about a legal dispute.</text>
+<g id="ct">
+<rect class="s-line" x="120" y="220" width="640" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-line" x="840" y="220" width="640" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="160" y="270" font-size="22">HEARD ONE SIDE</text>
+<text class="m" x="880" y="270" font-size="22">HEARD BOTH SIDES</text>
+<g id="lis1"></g><g id="lis2"></g>
+</g>
+<g id="l1"></g>
+<g id="l2"></g>
+<g id="ghost"><g id="ghostp"></g><text class="m" x="660" y="584" font-size="18" text-anchor="middle">UNHEARD</text></g>
+<g id="gv">
+<text class="m" x="160" y="600" font-size="20">CONFIDENCE</text>
+<text class="m" x="880" y="600" font-size="20">CONFIDENCE</text>
+<rect id="bar1" class="gain" x="160" y="614" height="36" rx="8" width="0"/>
+<rect id="bar2" class="ink" x="880" y="614" height="36" rx="8" width="0" fill-opacity=".5"/>
+<g id="gvh" transform="translate(700 290) rotate(-30)"><rect class="ink" x="-40" y="-20" width="80" height="40" rx="8"/><rect class="ink" x="-6" y="20" width="12" height="60" rx="4"/></g>
+</g>
+<g id="fin"><text class="d" x="120" y="790" font-size="46">The half story still won them over.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Useful, but risky.</text>
+<text class="b" x="120" y="176" font-size="32">A shortcut that lets us act quickly in a busy world.</text>
+<g id="run">
+<path class="s-line" d="M180 330h90M150 380h110M190 430h80" stroke-width="6" stroke-linecap="round"/>
+<path class="s-line" d="M140 540h480" stroke-width="5"/>
+<circle class="ink" cx="380" cy="300" r="28"/>
+<g class="s-ink" stroke-width="10" stroke-linecap="round">
+<line x1="375" y1="330" x2="355" y2="430"/>
+<line id="lg1" x1="355" y1="430" x2="355" y2="530"/><line id="lg2" x1="355" y1="430" x2="355" y2="530"/>
+<line id="ar1" x1="370" y1="355" x2="370" y2="410"/><line id="ar2" x1="370" y1="355" x2="370" y2="410"/>
+</g>
+</g>
+<g id="runl"><text class="m" x="120" y="586" font-size="22" style="fill:var(--gain)">ACT QUICKLY</text></g>
+<g id="stop">
+<polygon id="oct" class="loss"/>
+<text class="d" x="980" y="418" font-size="50" text-anchor="middle" style="fill:var(--stage)">STOP</text>
+<text class="m" x="1130" y="384" font-size="20">WE RARELY ASK:</text>
+<text class="m" x="1130" y="418" font-size="20">WHAT HAVEN’T I BEEN TOLD?</text>
+</g>
+<g id="cards"></g>
+<g id="verd">
+<path class="s-muted" d="M1010 715h70m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-loss" x="1110" y="640" width="370" height="150" rx="14" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="1295" y="735" font-size="56" text-anchor="middle" style="fill:var(--loss)">VERDICT</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask what is missing.</text>
+<text class="b" x="120" y="176" font-size="32">One question before any important judgment.</text>
+<g id="pad">
+<rect class="s-ink" x="120" y="220" width="560" height="560" rx="18" fill="var(--stage)" stroke-width="6"/>
+<g id="rings"></g>
+<text class="m" x="160" y="290" font-size="22">BEFORE YOU JUDGE</text>
+</g>
+<g id="qq">
+<text class="d5" x="160" y="380" font-size="32">What would I need to know</text>
+<text class="d5" x="160" y="425" font-size="32">that I do not know yet?</text>
+</g>
+<g id="blank"><path class="s-muted" d="M160 520h480M160 590h480M160 660h480M160 730h480" stroke-width="3" stroke-dasharray="10 10"/></g>
+<g id="scl">
+<path class="s-ink" d="M1120 360V760" stroke-width="10" stroke-linecap="round"/>
+<rect class="ink" x="1020" y="756" width="200" height="24" rx="8"/>
+<path id="beam" class="s-ink" d="M870 360H1370" stroke-width="10" stroke-linecap="round"/>
+<circle class="ink" cx="1120" cy="360" r="16"/>
+<g id="pA"><path class="s-muted" d="M0 0L-80 120M0 0L80 120" stroke-width="3"/><path class="ink" d="M-100 120q100 50 200 0z"/><rect class="ink" x="-45" y="64" width="90" height="56" rx="8"/><text class="d" x="0" y="106" font-size="36" text-anchor="middle" style="fill:var(--stage)">A</text></g>
+<g id="pB"><path class="s-muted" d="M0 0L-80 120M0 0L80 120" stroke-width="3"/><path class="ink" d="M-100 120q100 50 200 0z"/><g id="wB"><rect class="gain" x="-45" y="64" width="90" height="56" rx="8"/><text class="d" x="0" y="106" font-size="36" text-anchor="middle" style="fill:var(--on-gain)">B</text></g></g>
+</g>
+<g id="fair"><text class="m" x="1120" y="816" font-size="20" text-anchor="middle" style="fill:var(--gain)">HEAR THE OTHER SIDE, LIKE A FAIR JUDGE</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="lbl8"><text class="m" x="143" y="220" font-size="26">THINK OF A RECENT SNAP JUDGMENT</text></g>
+<g id="mir">
+<ellipse class="s-ink" cx="1360" cy="450" rx="90" ry="130" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M1360 580v80M1300 660h120" stroke-width="8" stroke-linecap="round"/>
+<circle class="gain" cx="1350" cy="430" r="26"/>
+<path class="gain" d="M1310 520a40 40 0 0 1 80 0z"/>
+<text class="d" x="1410" y="390" font-size="44" text-anchor="middle" style="fill:var(--muted)">?</text>
+</g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What was missing from</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">the story you told</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">yourself?</text></g>
+<g id="lbl9"><text class="m" x="143" y="700" font-size="26">ASK WHAT YOU HAVE NOT BEEN TOLD</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;What You See Is All There Is&rdquo;, from <em>Thinking, Fast and Slow</em> by Daniel Kahneman. The Mindik leader example and the one-sided legal evidence study are as reported in the book. The spotlight, puzzle pieces, road and headline drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 9.3], [9.3, 23.5], [23.5, 39.5], [39.5, 53.4], [53.4, 66.0], [66.0, 84.1], [84.1, 98.8], [98.8, 110.4], [110.4, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Jumping to Conclusions", "The Missing Words", "The Story Machine", "Naming the Habit", "Smooth Feels True", "One Side of the Case", "Useful but Risky", "Ask What Is Missing", "Your Turn"];
+const TM={"mindik_card": 0.0, "question_mark": 9.6, "adjectives": 14.24, "thumbs_down": 18.64, "story_engine": 23.76, "puzzle_pieces": 32.96, "speech_bubble": 39.76, "spotlight": 45.28, "dark_stage": 48.48, "smooth_road": 53.68, "few_facts": 56.92, "bumpy_road": 61.36, "courtroom": 66.32, "one_lawyer": 70.56, "two_lawyers": 73.04, "gavel": 74.88, "runner": 84.4, "stop_sign": 88.8, "headline": 93.68, "notepad": 99.12, "blank_page": 103.12, "second_view": 106.88, "mirror": 110.72};
+const P=(g,x,y,r,a)=>{a=a||{};mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)};
+P($('cardp'),1130,262,22,{class:'ink'});
+const TL=['intelligent','strong','?','?'].map((w,i)=>{const x=120+i*340,g=mk('g',{},$('tiles'));
+  const r=mk('rect',{x:x,y:240,width:300,height:110,rx:16,fill:'var(--stage)',stroke:i<2?'var(--ink)':'var(--muted)','stroke-width':5,'stroke-dasharray':i<2?'none':'12 10'},g);
+  const tx=mk('text',{x:x+150,y:310,'font-size':40,'text-anchor':'middle',class:'d5'},g);tx.textContent=w;return [g,r,tx]});
+P($('leadp'),330,470,44);
+const SCR=[];for(let i=0;i<6;i++)SCR.push(mk('rect',{width:56,height:36,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('scraps')));
+const SL=[240,200,240,140].map((w,i)=>mk('path',{d:'M1080 '+(320+i*42)+'h'+w,stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('slines')));
+const PZ=[];for(let i=0;i<8;i++){const on=[0,1,5].includes(i);const e=mk('rect',{x:120+(i%4)*110,y:590+(i>>2)*110,width:100,height:100,rx:10,fill:on?'var(--ink)':'none',stroke:on?'none':'var(--muted)','stroke-width':4,'stroke-dasharray':'10 8'},$('puz'));if(on)PZ.push(e)}
+[210,390,1130,1310].forEach(x=>{mk('rect',{x:x,y:620,width:80,height:110,rx:8,fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'10 8'},$('ditems'));const q=mk('text',{x:x+40,y:688,'font-size':36,'text-anchor':'middle',class:'m'},$('ditems'));q.textContent='?'});
+const F1=x=>420+18*Math.sin((x-120)/200),F2=x=>720-44*Math.abs(Math.sin((x-120)/80));
+const pth=f=>{let d='';for(let x=120;x<=1380;x+=10)d+=(x==120?'M':'L')+x+' '+f(x).toFixed(1);return d};
+$('road1').setAttribute('d',pth(F1));$('road2').setAttribute('d',pth(F2));
+[400,760,1120].forEach(x=>mk('circle',{cx:x,cy:F1(x),r:14,class:'gain'},$('fdots')));
+for(let i=0;i<9;i++){const x=200+i*130;mk('circle',{cx:x,cy:F2(x),r:12,class:i%2?'loss':'ink'},$('mdots'))}
+P($('lis1'),260,420,30,{class:'gain'});P($('lis2'),980,420,30,{class:'gain'});
+P($('l1'),520,420,30,{class:'ink'});P($('l2'),1240,420,30,{class:'ink'});P($('l2'),1380,420,30,{class:'ink'});
+P($('ghostp'),660,420,30,{fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'8 6'});
+let oc='';for(let k=0;k<8;k++){const a=Math.PI/8+k*Math.PI/4;oc+=(980+110*Math.cos(a)).toFixed(1)+','+(400+110*Math.sin(a)).toFixed(1)+' '}$('oct').setAttribute('points',oc);
+const CD=['ONE HEADLINE','ONE REVIEW','FIRST IMPRESSION'].map((s,i)=>{const x=120+i*300,g=mk('g',{},$('cards'));
+  mk('rect',{x:x,y:640,width:260,height:150,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('path',{d:'M'+(x+24)+' 680h212M'+(x+24)+' 712h150',stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round'},g);
+  const tx=mk('text',{x:x+24,y:766,'font-size':20,class:'m'},g);tx.textContent=s;return g});
+for(let i=0;i<6;i++)mk('circle',{cx:180+i*88,cy:220,r:10,class:'ink'},$('rings'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('card'),p(u,TM.mindik_card,TM.mindik_card+.6));
+rise($('yes'),p(u,TM.mindik_card+4.6,TM.mindik_card+5));
+
+const q2=u>=TM.question_mark+2.2;
+TL.forEach((c,i)=>{if(i<2)return;rise(c[0],p(u,TM.question_mark,TM.question_mark+.5));const ad=u>=TM.adjectives+(i-2)*.6;
+  c[2].textContent=ad?['corrupt','cruel'][i-2]:'?';c[2].style.fill=ad?'var(--loss)':q2?'var(--gain)':'var(--ink)';
+  c[1].setAttribute('stroke',ad?'var(--loss)':q2?'var(--gain)':'var(--muted)');c[1].setAttribute('stroke-dasharray',ad?'none':'12 10')});
+rise($('lead'),p(u,TM.question_mark+.4,TM.question_mark+1));
+const thd=u>=TM.thumbs_down;$('leadp').style.fill=thd?'var(--loss)':'var(--gain)';
+const sk=p(u,TM.thumbs_down,TM.thumbs_down+.5);$('istk').setAttribute('x2',(632+420*sk).toFixed(1));$('istk').setAttribute('opacity',sk>0?1:0);
+rise($('fright'),p(u,TM.thumbs_down+.3,TM.thumbs_down+.8));rise($('thumb'),p(u,TM.thumbs_down,TM.thumbs_down+.5));
+
+const se=p(u,TM.story_engine,TM.story_engine+.6);rise($('mach'),se);
+SCR.forEach((r,i)=>{const f=(t*.25+i/6)%1,y0=290+(i*53)%160;r.setAttribute('x',(160+f*500).toFixed(1));r.setAttribute('y',(y0+(362-y0)*f).toFixed(1));r.setAttribute('opacity',(se*(f>.85?(1-f)/.15:1)).toFixed(2))});
+$('gear').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 790 360)');
+rise($('story'),p(u,TM.story_engine+4.6,TM.story_engine+5.1));
+SL.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.story_engine+5+i*.4,TM.story_engine+5.3+i*.4)));
+rise($('puzg'),p(u,TM.puzzle_pieces,TM.puzzle_pieces+.5));rise($('pz1'),p(u,TM.puzzle_pieces+.8,TM.puzzle_pieces+1.3));
+const fit=p(u,TM.puzzle_pieces+3.8,TM.puzzle_pieces+4.3);PZ.forEach(e=>e.setAttribute('fill',fit>0?'var(--gain)':'var(--ink)'));rise($('pz2'),fit);
+
+rise($('bub'),p(u,TM.speech_bubble,TM.speech_bubble+.6));
+rise($('spot'),p(u,TM.spotlight,TM.spotlight+.6));
+rise($('dark'),p(u,TM.dark_stage,TM.dark_stage+.6));
+
+rise($('top'),p(u,TM.smooth_road,TM.smooth_road+.6));
+rise($('few'),p(u,TM.few_facts,TM.few_facts+.6));
+rise($('bot'),p(u,TM.bumpy_road,TM.bumpy_road+.6));
+const bx=120+((t*.2)%1)*1260;
+$('ball1').setAttribute('cx',bx.toFixed(1));$('ball1').setAttribute('cy',(F1(bx)-46).toFixed(1));
+$('ball2').setAttribute('cx',bx.toFixed(1));$('ball2').setAttribute('cy',(F2(bx)-44).toFixed(1));
+
+rise($('ct'),p(u,TM.courtroom,TM.courtroom+.6));
+rise($('l1'),p(u,TM.one_lawyer,TM.one_lawyer+.5));
+rise($('l2'),p(u,TM.two_lawyers,TM.two_lawyers+.5));
+rise($('gv'),p(u,TM.gavel,TM.gavel+.4));
+const gk=p(u,TM.gavel+.3,TM.gavel+1.5);$('bar1').setAttribute('width',(520*gk).toFixed(1));$('bar2').setAttribute('width',(300*gk).toFixed(1));
+$('gvh').setAttribute('transform','translate(700 290) rotate('+(-40+40*p(u,TM.gavel+.2,TM.gavel+.5)).toFixed(1)+')');
+rise($('ghost'),p(u,TM.gavel+4.9,TM.gavel+5.4));rise($('fin'),p(u,TM.gavel+5.4,TM.gavel+6));
+
+rise($('run'),p(u,TM.runner,TM.runner+.5));
+const sw=Math.sin(t*9);
+$('lg1').setAttribute('x2',(355+60*sw).toFixed(1));$('lg2').setAttribute('x2',(355-60*sw).toFixed(1));
+$('ar1').setAttribute('x2',(370-50*sw).toFixed(1));$('ar2').setAttribute('x2',(370+50*sw).toFixed(1));
+rise($('runl'),p(u,TM.runner+2.2,TM.runner+2.7));
+rise($('stop'),p(u,TM.stop_sign,TM.stop_sign+.5));
+CD.forEach((g,i)=>rise(g,p(u,TM.headline+i*.5,TM.headline+i*.5+.4)));
+rise($('verd'),p(u,TM.headline+1.8,TM.headline+2.3));
+
+rise($('pad'),p(u,TM.notepad,TM.notepad+.5));
+rise($('scl'),p(u,TM.notepad+1,TM.notepad+1.6));
+rise($('qq'),p(u,TM.blank_page,TM.blank_page+.5));
+rise($('blank'),p(u,TM.blank_page+1,TM.blank_page+1.5));
+const kB=p(u,TM.second_view+.3,TM.second_view+1.3),an=-10*(1-kB),ra=an*Math.PI/180;
+$('beam').setAttribute('transform','rotate('+an.toFixed(2)+' 1120 360)');
+$('pA').setAttribute('transform','translate('+(1120-250*Math.cos(ra)).toFixed(1)+' '+(360-250*Math.sin(ra)).toFixed(1)+')');
+$('pB').setAttribute('transform','translate('+(1120+250*Math.cos(ra)).toFixed(1)+' '+(360+250*Math.sin(ra)).toFixed(1)+')');
+$('wB').setAttribute('opacity',p(u,TM.second_view,TM.second_view+.3));
+$('wB').setAttribute('transform','translate(0 '+(-140*(1-p(u,TM.second_view,TM.second_view+.6))).toFixed(1)+')');
+rise($('fair'),p(u,TM.second_view+1,TM.second_view+1.6));
+
+rise($('lbl8'),p(u,TM.mirror,TM.mirror+.5));rise($('mir'),p(u,TM.mirror+.3,TM.mirror+.9));
+rise($('qa'),p(u,TM.mirror+5,TM.mirror+5.5));rise($('qb'),p(u,TM.mirror+5.4,TM.mirror+5.9));rise($('qc'),p(u,TM.mirror+5.8,TM.mirror+6.3));
+rise($('lbl9'),p(u,TM.mirror+6.6,TM.mirror+7.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.08;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

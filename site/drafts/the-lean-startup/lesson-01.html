@@ -1,0 +1,327 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Lean Startup Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Lean Startup: A startup is any team creating something new under extreme uncertainty, so following a detailed plan often means perfectly building something nobody wants. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE LEAN STARTUP · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Why great plans build</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">unwanted products.</text>
+<text class="b" x="120" y="600" font-size="32">Why following the plan perfectly can still lead to failure.</text>
+<rect class="ink" x="1180" y="240" width="300" height="46" rx="6"/>
+<rect class="s-ink" x="1200" y="286" width="260" height="280" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1220 510H1440" stroke-width="6" stroke-linecap="round"/>
+<g id="tbox"><rect class="gain" x="1290" y="440" width="80" height="70" rx="6"/><path d="M1312 476l12 12 24-26" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="ghosts"></g>
+<g id="tnone"><text class="m" x="1330" y="740" font-size="20" text-anchor="middle" style="fill:var(--loss)">NOBODY WANTS IT</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What is a startup?</text>
+<text class="b" x="120" y="176" font-size="32">Eric Ries’s definition: something new, an unclear outcome.</text>
+<g id="ries"><text class="m" x="260" y="540" font-size="20" text-anchor="middle">ERIC RIES</text></g>
+<path id="rarc" class="s-muted" d="M340 400Q460 340 580 420" fill="none" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>
+<g id="team"><rect class="gain" x="740" y="430" width="120" height="90" rx="12"/><text class="m" x="800" y="484" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">NEW</text><text class="m" x="800" y="720" font-size="20" text-anchor="middle">ANY TEAM MAKING SOMETHING NEW</text></g>
+<g id="qms"></g>
+<g id="quote"><text class="d" x="120" y="800" font-size="46">“Conditions of extreme uncertainty.”</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not just garages.</text>
+<text class="b" x="120" y="176" font-size="32">Two founders, or a small team inside a giant company.</text>
+<g id="gar"><path class="s-ink" d="M160 470L360 330L560 470" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/><rect class="s-ink" x="190" y="470" width="340" height="290" fill="var(--stage)" stroke-width="6"/><rect class="s-ink" x="230" y="540" width="260" height="220" fill="none" stroke-width="5"/><path class="s-line" d="M230 570h260M230 710h260" stroke-width="3"/><text class="m" x="360" y="800" font-size="20" text-anchor="middle">TWO FOUNDERS IN A GARAGE</text></g>
+<g id="tow"><rect class="s-ink" x="1000" y="230" width="300" height="530" fill="var(--stage)" stroke-width="6"/><g id="tw"></g><text class="m" x="1150" y="800" font-size="20" text-anchor="middle">A TEAM IN A GIANT COMPANY</text></g>
+<g id="floor"><rect class="gain" x="1015" y="580" width="270" height="50" rx="8"/><circle cx="1110" cy="605" r="12" fill="var(--on-gain)"/><circle cx="1150" cy="605" r="12" fill="var(--on-gain)"/><circle cx="1190" cy="605" r="12" fill="var(--on-gain)"/></g>
+<g id="notsize"><text class="d" x="360" y="300" font-size="56" text-anchor="middle" style="fill:var(--loss)">?</text><text class="d" x="780" y="520" font-size="120" text-anchor="middle" style="fill:var(--loss)">?</text><text class="d" x="1400" y="300" font-size="56" text-anchor="middle" style="fill:var(--loss)">?</text><text class="d" x="120" y="852" font-size="40">Not size: how little anyone knows.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why plans feel safe.</text>
+<text class="b" x="120" y="176" font-size="32">Forecasts work when there’s history to predict from.</text>
+<g id="pp0"><rect class="s-line" x="120" y="230" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><rect class="s-ink" x="230" y="270" width="200" height="260" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M260 310h140M260 340h100" stroke-width="6" stroke-linecap="round"/><path class="s-ink" d="M260 380V500H400" fill="none" stroke-width="4"/><polyline class="s-gain" points="270,490 310,470 350,430 395,390" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="330" y="640" font-size="20" text-anchor="middle">PLANS &amp; FORECASTS</text></g>
+<g id="pp1"><rect class="s-line" x="590" y="230" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><path class="ink" d="M640 520V420l70-40v40l70-40v40l70-40v40h30V320h40V520Z"/><g id="hist"></g><text class="m" x="800" y="640" font-size="20" text-anchor="middle">STEADY BUSINESS</text><text class="m" x="800" y="672" font-size="20" text-anchor="middle">YEARS OF HISTORY</text></g>
+<g id="pp2"><rect class="s-line" x="1060" y="230" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><path class="ink" d="M1200 560L1220 520H1320L1340 560Z"/><circle class="s-ink" cx="1270" cy="420" r="110" fill="var(--stage)" stroke-width="6"/><text id="ballq" class="d" x="1270" y="466" font-size="130" text-anchor="middle" style="fill:var(--loss)">?</text><text class="m" x="1270" y="640" font-size="20" text-anchor="middle">NO HISTORY</text><text class="m" x="1270" y="672" font-size="20" text-anchor="middle">GUESSES DRESSED AS FACTS</text></g>
+<g id="fbot"><text class="d" x="120" y="800" font-size="44">Startup forecasts are mostly guesses.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Achieving failure.</text>
+<text class="b" x="120" y="176" font-size="32">Executing perfectly on a plan that was wrong from the start.</text>
+<g id="chk"><rect class="s-line" x="120" y="230" width="440" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="280" font-size="22">THE PLAN</text></g>
+<g id="plant"><text class="m" x="950" y="670" font-size="20" text-anchor="middle">THE PLAN’S TARGET</text></g>
+<g id="realt"><text class="m" x="1340" y="430" font-size="20" text-anchor="middle" style="fill:var(--gain)">WHAT CUSTOMERS WANT</text></g>
+<g id="arrow"><path class="s-ink" d="M-170 0H-14M-170 0l-20-14M-170 0l-20 14" fill="none" stroke-width="7" stroke-linecap="round"/><path class="ink" d="M0 0l-28-13v26z"/></g>
+<g id="achv"><text class="d" x="120" y="800" font-size="56" style="fill:var(--loss)">“Achieving failure.”</text><text class="m" x="120" y="848" font-size="20">PERFECT EXECUTION · WRONG PLAN</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The IMVU add-on.</text>
+<text class="b" x="120" y="176" font-size="32">Chat with 3D avatars, plugged into messengers people already used.</text>
+<g id="wires"></g>
+<g id="win"><rect class="s-ink" x="600" y="280" width="400" height="330" rx="16" fill="var(--stage)" stroke-width="6"/><path class="ink" d="M616 280h368a16 16 0 0 1 16 16v28H600v-28a16 16 0 0 1 16-16z"/><text class="m" x="630" y="312" font-size="22" style="fill:var(--stage)">IMVU</text><text class="m" x="800" y="584" font-size="20" text-anchor="middle">3D AVATARS</text></g>
+<g id="nets"></g>
+<g id="code"><rect class="s-line" x="600" y="650" width="400" height="112" rx="12" fill="none" stroke-width="3"/><text class="m" x="580" y="712" font-size="20" text-anchor="end">ADD-ON CODE</text></g>
+<g id="codel"><text class="d" x="120" y="840" font-size="40">Hard work to connect every network.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Customers said no.</text>
+<text class="b" x="120" y="176" font-size="32">Real customers didn’t want to bring their friends along.</text>
+<g id="cust"><text class="m" x="260" y="570" font-size="20" text-anchor="middle">REAL CUSTOMERS</text></g>
+<g id="card"><text class="m" x="560" y="282" font-size="22" text-anchor="middle">INVITE FRIENDS?</text><rect class="s-ink" x="400" y="300" width="320" height="120" rx="14" fill="var(--stage)" stroke-width="5"/><g id="cfr"></g></g>
+<g id="xno"><path class="s-loss" d="M470 322L650 404M650 322L470 404" stroke-width="5" stroke-linecap="round"/><text class="m" x="560" y="460" font-size="22" text-anchor="middle" style="fill:var(--loss)">NO THANKS</text></g>
+<g id="code6"><rect class="s-line" x="1220" y="240" width="250" height="160" rx="12" fill="var(--stage)" stroke-width="3"/><text class="m" x="1240" y="274" font-size="20">ADD-ON CODE</text></g>
+<g id="bin"><path class="s-ink" d="M920 450L950 680H1130L1160 450Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><text class="m" x="1040" y="716" font-size="20" text-anchor="middle">MUCH OF THE CODE</text></g>
+<g id="pile"></g>
+<g id="lid"><g id="lidr"><rect class="ink" x="900" y="420" width="280" height="22" rx="6"/><rect class="ink" x="1010" y="406" width="60" height="16" rx="6"/></g></g>
+<g id="ok1"><path class="s-gain" d="M128 764l12 12 24-28" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text class="d" x="180" y="780" font-size="40">The plan was followed carefully.</text></g>
+<g id="ok2"><path class="s-loss" d="M130 816l28 28M158 816l-28 28" stroke-width="7" stroke-linecap="round"/><text class="d" x="180" y="845" font-size="40" style="fill:var(--loss)">It was aimed at the wrong target.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Treat plans as guesses.</text>
+<text class="b" x="120" y="176" font-size="32">Keep planning, but check each guess with real people.</text>
+<g id="bulb"><g id="rays"></g><circle class="gain" cx="240" cy="360" r="70"/><rect class="ink" x="210" y="435" width="60" height="40" rx="6"/><text class="m" x="240" y="540" font-size="20" text-anchor="middle">KEEP PLANNING</text></g>
+<g id="plan"><rect class="s-line" x="440" y="240" width="460" height="460" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="470" y="290" font-size="22">YOUR PLAN</text></g>
+<path id="arw2" class="s-gain" d="M920 470H1060m-20-18 20 18-20 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="ppl"><text class="m" x="1260" y="610" font-size="20" text-anchor="middle">REAL PEOPLE</text></g>
+<g id="checks"></g>
+<g id="tbot"><text class="d" x="120" y="800" font-size="44">Test guesses before months of building.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">How could you check</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">one assumption with a</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">real person</tspan> this week?</text></g>
+<g id="lbl8"><text class="m" x="143" y="700" font-size="26">WRITE DOWN ONE THING YOU ASSUME CUSTOMERS WANT</text></g>
+<g id="sticky" transform="rotate(-4 1330 710)"><rect class="gain" x="1230" y="610" width="200" height="200" rx="6"/><text class="m" x="1250" y="650" font-size="20" style="fill:var(--on-gain)">I ASSUME…</text><g id="slines"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Why Great Plans Build Unwanted Products&rdquo;, from <em>The Lean Startup</em> by Eric Ries. The IMVU instant messaging add-on story is as reported in the book. The garage, office tower, crystal ball and target drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 8.5], [8.5, 24.3], [24.3, 37.2], [37.2, 52.7], [52.7, 66.3], [66.3, 84.6], [84.6, 102.6], [102.6, 115.6], [115.6, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Perfect Failure", "What Is a Startup", "Not Just Garages", "Why Plans Feel Safe", "Achieving Failure", "The IMVU Add-On", "Customers Said No", "Treat Plans as Guesses", "Your Turn"];
+const TM={"perfect_ship": 0.0, "empty_store": 5.48, "eric_ries": 8.8, "team_huddle": 13.28, "uncertainty": 19.68, "garage": 24.56, "office_tower": 27.44, "business_plan": 37.52, "factory": 41.6, "crystal_ball": 46.48, "checklist": 53.04, "bullseye_miss": 59.16, "imvu_logo": 66.64, "im_networks": 73.2, "code_hours": 80.32, "user_test": 84.88, "friends_no": 87.6, "trash_bin": 92.92, "lightbulb": 102.88, "question_mark": 105.36, "real_people": 110.8, "sticky_note": 115.87};
+const hum=(g,x,y,r,a)=>{mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)};
+const DASH={fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'6 6'};
+const gh=[1240,1330,1420].map(x=>{const g=mk('g',{},$('ghosts'));hum(g,x,610,18,DASH);return g});
+hum($('ries'),260,330,40,{class:'ink'});
+[[640,400],[960,400],[700,560],[900,560]].forEach(q=>hum($('team'),q[0],q[1],26,{class:'ink'}));
+const qms=[[560,300],[1080,320],[1130,620],[520,660],[820,330],[1180,460]].map(q=>{const e=mk('text',{x:q[0],y:q[1],'font-size':64,class:'d','text-anchor':'middle',style:'fill:var(--loss)'},$('qms'));e.textContent='?';return e});
+hum($('gar'),310,600,22,{class:'gain'});hum($('gar'),410,600,22,{class:'gain'});
+for(let r=0;r<9;r++)for(let c=0;c<5;c++)if(r!==6)mk('rect',{x:1025+c*55,y:260+r*55,width:30,height:30,fill:'var(--line)'},$('tw'));
+let hp='';for(let i=0;i<16;i++){const x=640+i*20,y=578-i*2+(i%2?4:-4);hp+=x+','+y+' ';mk('circle',{cx:x,cy:y,r:5,class:'ink'},$('hist'))}
+mk('polyline',{points:hp,fill:'none',class:'s-ink','stroke-width':3},$('hist'));
+const ticks=[];for(let i=0;i<5;i++){const y=340+i*76;mk('rect',{x:150,y:y-30,width:40,height:40,rx:6,fill:'none',class:'s-ink','stroke-width':4},$('chk'));
+  const tx=mk('text',{x:212,y:y-2,'font-size':22,class:'m'},$('chk'));tx.textContent='MILESTONE '+(i+1);
+  ticks.push(mk('path',{d:'M156 '+(y-12)+'l12 12 22-26',fill:'none',class:'s-gain','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('chk')))}
+[150,100,50].forEach(r=>mk('circle',{cx:950,cy:470,r:r,fill:'none',class:'s-ink','stroke-width':6},$('plant')));
+mk('circle',{cx:950,cy:470,r:14,class:'ink'},$('plant'));
+[90,58].forEach(r=>mk('circle',{cx:1340,cy:300,r:r,fill:'none',class:'s-gain','stroke-width':6},$('realt')));
+const core=mk('circle',{cx:1340,cy:300,r:24,class:'gain'},$('realt'));
+hum($('win'),730,410,28,{class:'gain'});hum($('win'),870,410,28,{class:'ink'});
+const NB=[[160,280,600,380],[160,500,600,520],[1220,280,1000,380],[1220,500,1000,520]];
+const nets=NB.map(q=>{const g=mk('g',{},$('nets'));mk('rect',{x:q[0],y:q[1],width:220,height:90,rx:14,fill:'var(--stage)',class:'s-ink','stroke-width':5},g);
+  const tx=mk('text',{x:q[0]+110,y:q[1]+52,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent='IM NETWORK';return g});
+const wires=NB.map(q=>mk('path',{d:'M'+(q[0]<600?380:1220)+' '+(q[1]+45)+'L'+q[2]+' '+q[3],fill:'none','stroke-width':5,'stroke-dasharray':'10 8','stroke-linecap':'round'},$('wires')));
+const segs=[];[[120,80,140],[60,170,90],[150,100,60],[90,130,110]].forEach((ws,r)=>{let x=630;ws.forEach(w=>{segs.push(mk('rect',{x:x,y:668+r*22,width:w,height:12,rx:6,fill:(segs.length%4===1)?'var(--gain)':'var(--ink)'},$('code')));x+=w+16})});
+// scene 6: customer, friends on invite card, add-on code lines that drop into the bin
+hum($('cust'),260,360,40,{class:'ink'});
+[500,560,620].forEach(x=>hum($('cfr'),x,335,14,{class:'ink'}));
+const pile=[];[[80,60,50],[50,100],[90,70],[60,80,40]].forEach((ws,r)=>{let x=1240;ws.forEach(w=>{const k=pile.length,g=mk('g',{},$('pile'));
+  mk('rect',{x:-w/2,y:-6,width:w,height:12,rx:6,fill:k%4===1?'var(--gain)':'var(--ink)'},g);
+  pile.push({g:g,sx:x+w/2,sy:300+r*24,ex:1040+((k%3)-1)*40,ey:662-Math.floor(k/3)*18,rt:(k%2?1:-1)*(6+(k%3)*4)});x+=w+12})});
+for(let i=0;i<8;i++){const a=i*Math.PI/4;mk('path',{d:'M'+(240+90*Math.cos(a)).toFixed(0)+' '+(360+90*Math.sin(a)).toFixed(0)+'L'+(240+115*Math.cos(a)).toFixed(0)+' '+(360+115*Math.sin(a)).toFixed(0),class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('rays'))}
+const tags=[];for(let i=0;i<4;i++){const y=360+i*90;mk('path',{d:'M480 '+(y-6)+'H'+(720-i*30),class:'s-line','stroke-width':10,'stroke-linecap':'round'},$('plan'));
+  const r=mk('rect',{x:760,y:y-28,width:110,height:44,rx:22,'stroke-width':4},$('plan'));
+  const tx=mk('text',{x:815,y:y+1,'font-size':20,'text-anchor':'middle',class:'m'},$('plan'));tags.push([r,tx])}
+const chks=[1130,1260,1390].map(x=>{hum($('ppl'),x,420,30,{class:'ink'});return mk('path',{d:'M'+(x-16)+' 345l10 10 22-26',fill:'none',class:'s-gain','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('checks'))});
+const sl=[150,120,140].map((w,i)=>mk('path',{d:'M1250 '+(690+i*40)+'h'+w,stroke:'var(--on-gain)','stroke-width':6,'stroke-linecap':'round'},$('slines')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('tbox'),p(u,TM.perfect_ship,TM.perfect_ship+.6));
+gh.forEach((g,i)=>{const a=TM.empty_store+i*.3;rise(g,p(u,a,a+.5))});
+rise($('tnone'),p(u,TM.empty_store+1,TM.empty_store+1.5));
+
+rise($('ries'),p(u,TM.eric_ries,TM.eric_ries+.5));
+$('rarc').setAttribute('opacity',p(u,TM.team_huddle,TM.team_huddle+.5));
+rise($('team'),p(u,TM.team_huddle,TM.team_huddle+.6));
+qms.forEach((e,i)=>{const a=TM.uncertainty+i*.25;e.setAttribute('opacity',p(u,a,a+.4));e.setAttribute('transform','translate(0 '+(6*Math.sin(t*1.5+i)).toFixed(1)+')')});
+rise($('quote'),p(u,TM.uncertainty+1,TM.uncertainty+1.6));
+
+rise($('gar'),p(u,TM.garage,TM.garage+.6));
+rise($('tow'),p(u,TM.office_tower,TM.office_tower+.6));
+$('floor').setAttribute('opacity',(p(u,TM.office_tower+.8,TM.office_tower+1.3)*(.75+.25*Math.sin(t*3))).toFixed(2));
+rise($('notsize'),p(u,TM.office_tower+4.6,TM.office_tower+5.2));
+
+[TM.business_plan,TM.factory,TM.crystal_ball].forEach((a,i)=>rise($('pp'+i),p(u,a,a+.6)));
+$('ballq').setAttribute('fill-opacity',(.55+.45*Math.sin(t*2)).toFixed(2));
+rise($('fbot'),p(u,TM.crystal_ball+1.5,TM.crystal_ball+2.1));
+
+rise($('chk'),p(u,TM.checklist,TM.checklist+.5));
+ticks.forEach((k,i)=>{const a=TM.checklist+1.8+i*.6;k.setAttribute('opacity',p(u,a,a+.3))});
+rise($('plant'),p(u,TM.checklist+.5,TM.checklist+1));
+const ak=p(u,TM.bullseye_miss,TM.bullseye_miss+.7);
+$('arrow').setAttribute('transform','translate('+(780+170*ak).toFixed(1)+' 470)');$('arrow').setAttribute('opacity',u>=TM.bullseye_miss?1:0);
+rise($('realt'),p(u,TM.bullseye_miss+1.2,TM.bullseye_miss+1.8));
+core.setAttribute('r',(24+4*Math.sin(t*3)).toFixed(1));
+rise($('achv'),p(u,TM.bullseye_miss+2,TM.bullseye_miss+2.6));
+
+rise($('win'),p(u,TM.imvu_logo,TM.imvu_logo+.6));
+nets.forEach((g,i)=>{const a=TM.im_networks+i*.4;rise(g,p(u,a,a+.4));wires[i].setAttribute('opacity',p(u,a,a+.4));wires[i].setAttribute('stroke',u>=TM.code_hours+i*.8?'var(--gain)':'var(--line)')});
+rise($('code'),p(u,TM.code_hours,TM.code_hours+.4));
+segs.forEach((s,i)=>{const a=TM.code_hours+.3+i*.3;s.setAttribute('opacity',p(u,a,a+.25))});
+rise($('codel'),p(u,TM.code_hours+1,TM.code_hours+1.6));
+
+// scene 6
+rise($('cust'),p(u,TM.user_test,TM.user_test+.5));
+rise($('card'),p(u,TM.user_test+.8,TM.user_test+1.3));
+$('xno').setAttribute('opacity',p(u,TM.friends_no+.5,TM.friends_no+.9));
+const c6=p(u,TM.trash_bin-.6,TM.trash_bin-.1);
+const lastDrop=TM.trash_bin+.5+(pile.length-1)*.3+.7;
+// the emptied ADD-ON CODE box fades away once its last line lands in the bin
+rise($('code6'),c6*(1-p(u,lastDrop-.2,lastDrop+.4)));
+rise($('bin'),p(u,TM.trash_bin-.3,TM.trash_bin+.2));
+rise($('lid'),p(u,TM.trash_bin-.3,TM.trash_bin+.2));
+const lidA=32*(p(u,TM.trash_bin+.2,TM.trash_bin+.6)-p(u,lastDrop,lastDrop+.4));
+$('lidr').setAttribute('transform','rotate('+(-lidA).toFixed(1)+' 900 431)');
+pile.forEach((q,i)=>{const a=TM.trash_bin+.5+i*.3,k=p(u,a,a+.7);
+  const x=q.sx+(q.ex-q.sx)*k,y=q.sy+(q.ey-q.sy)*k-120*Math.sin(Math.PI*k);
+  q.g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+(q.rt*k).toFixed(1)+')');
+  q.g.setAttribute('opacity',c6.toFixed(2))});
+rise($('ok1'),p(u,TM.trash_bin+6.6,TM.trash_bin+7.2));
+rise($('ok2'),p(u,TM.trash_bin+9.2,TM.trash_bin+9.8));
+
+rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.6));
+$('rays').setAttribute('opacity',(.6+.4*Math.sin(t*3)).toFixed(2));
+rise($('plan'),p(u,TM.question_mark,TM.question_mark+.5));
+tags.forEach((g,i)=>{const on=u>=TM.question_mark+1+i*.5;g[0].setAttribute('fill',on?'var(--gain)':'var(--stage)');g[0].setAttribute('stroke',on?'var(--gain)':'var(--loss)');g[1].textContent=on?'GUESS?':'ORDER';g[1].style.fill=on?'var(--on-gain)':'var(--loss)'});
+$('arw2').setAttribute('opacity',p(u,TM.real_people+.3,TM.real_people+.7));
+rise($('ppl'),p(u,TM.real_people,TM.real_people+.5));
+chks.forEach((c,i)=>{const a=TM.real_people+1+i*.4;c.setAttribute('opacity',p(u,a,a+.3))});
+rise($('tbot'),p(u,TM.real_people+2,TM.real_people+2.6));
+
+$('sticky').setAttribute('opacity',p(u,TM.sticky_note,TM.sticky_note+.5));
+sl.forEach((l,i)=>{const a=TM.sticky_note+1+i*.8;l.setAttribute('opacity',p(u,a,a+.4))});
+rise($('lbl8'),p(u,TM.sticky_note+.4,TM.sticky_note+1));
+rise($('qa'),p(u,TM.sticky_note+6.2,TM.sticky_note+6.7));rise($('qb'),p(u,TM.sticky_note+6.6,TM.sticky_note+7.1));rise($('qc'),p(u,TM.sticky_note+7,TM.sticky_note+7.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.64;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

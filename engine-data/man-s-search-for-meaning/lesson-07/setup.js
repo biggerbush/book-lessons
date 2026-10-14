@@ -1,0 +1,31 @@
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const setC=(a,c)=>a.forEach(e=>e.setAttribute('class',c));
+fig($('tMe'),1290,560,26,'ink');
+const wMe=fig($('wMe'),300,400,44,'ink');
+[[390,330,10],[430,295,14],[480,262,18]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],class:'ink'},$('wMe')));
+const WI=['Comfort','Success','Happiness'].map((s,i)=>{const y=390+i*100,g=mk('g',{},$('wItems'));
+  mk('rect',{x:560,y:y-34,width:36,height:36,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:620,y:y,'font-size':46,class:'d5'},g);tx.textContent=s;
+  const ln=mk('line',{x1:612,y1:y-16,x2:612,y2:y-16,stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},g);return [g,ln,[200,200,260][i]]});
+for(let i=0;i<6;i++)mk('line',{x1:1170+i*48,y1:440,x2:1160+i*48,y2:470,class:'s-loss','stroke-width':5,'stroke-linecap':'round'},$('rain'));
+const aMe=fig($('aMe'),380,420,48,'ink');
+const FS=[];for(let i=0;i<10;i++)FS.push(mk('ellipse',{cx:600+i*90,cy:i%2?424:376,rx:14,ry:22,class:'gain'},$('cSteps')));
+const SI=[];for(let i=0;i<6;i++){const g=mk('g',{},$('cRow')),x=200+i*240;
+  mk('circle',{cx:x,cy:730,r:36,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('path',{d:'M'+(x-16)+' 730l11 12 22-24',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g);SI.push(g)}
+for(let r=0;r<8;r++)for(let c=0;c<8;c++)mk('rect',{x:160+c*45,y:250+r*45,width:45,height:45,fill:(r+c)%2?'var(--line)':'var(--stage)'},$('bBoard'));
+mk('rect',{x:160,y:250,width:360,height:360,fill:'none',stroke:'var(--ink)','stroke-width':6},$('bBoard'));
+[[2,5,'gain'],[5,2,'ink'],[6,6,'ink'],[3,1,'ink'],[1,3,'gain']].forEach(q=>mk('circle',{cx:182.5+q[0]*45,cy:272.5+q[1]*45,r:15,fill:'var(--'+q[2]+')',stroke:'var(--stage)','stroke-width':3},$('bBoard')));
+fig($('bChampP'),800,370,40,'gain');
+const TG=['THIS GAME','THIS BOARD','THIS OPPONENT'].map((s,i)=>{const g=mk('g',{},$('bTags'));
+  mk('rect',{x:1040,y:290+i*110,width:420,height:80,rx:40,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);
+  const tx=mk('text',{x:1250,y:340+i*110,'font-size':26,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;return g});
+for(let i=0;i<12;i++){const a=i*Math.PI/6,s=Math.sin(a),c=Math.cos(a);mk('path',{d:'M'+(340+128*s).toFixed(1)+' '+(470-128*c).toFixed(1)+'L'+(340+142*s).toFixed(1)+' '+(470-142*c).toFixed(1),class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('kTicks'))}
+fig($('kPpl'),760,390,36,'ink');fig($('kPpl'),960,390,36,'ink');
+fig($('gDoc'),360,400,46,'ink');
+fig($('gWife'),1210,360,50,'gain');
+fig($('hWife'),260,400,34,'gain');
+fig($('hFr'),960,375,18,'gain');
+fig($('hDocP'),1140,375,18,'ink');
+const DR=[360,420,480,540].map(y=>mk('circle',{cx:760,cy:y,r:12,class:'loss'},$('hDrops')));
+const hand=(id,a,b,k)=>$(id).setAttribute('d','M340 470L'+(340+a*Math.sin(k)).toFixed(1)+' '+(470-a*Math.cos(k)).toFixed(1));

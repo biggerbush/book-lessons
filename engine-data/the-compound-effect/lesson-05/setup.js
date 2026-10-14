@@ -1,0 +1,19 @@
+const pr=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.3} ${y+r*3.6}v-${r*1.1}a${r*1.3} ${r*1.3} 0 0 1 ${r*2.6} 0v${r*1.1}z`,class:c},g)};
+const pusher=(g,x,y,c)=>{mk('circle',{cx:x,cy:y,r:20,class:c},g);mk('path',{d:`M${x-4} ${y+22}L${x-24} ${y+80}L${x-48} ${y+125}M${x-24} ${y+80}L${x} ${y+125}M${x-8} ${y+34}L${x+50} ${y+28}`,stroke:`var(--${c})`,fill:'none','stroke-width':9,'stroke-linecap':'round','stroke-linejoin':'round'},g)};
+const mgr=g=>{mk('ellipse',{cx:680,cy:575,rx:320,ry:90,class:'ink'},g);mk('ellipse',{cx:680,cy:540,rx:320,ry:90,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);
+  const bars=[0,1,2,3].map(()=>mk('line',{x1:680,y1:540,x2:680,y2:540,class:'s-ink','stroke-width':8,'stroke-linecap':'round'},g));
+  mk('rect',{x:672,y:450,width:16,height:90,class:'ink'},g);mk('circle',{cx:680,cy:450,r:16,class:'gain'},g);
+  const rd=[0,1,2,3,4].map(i=>{const q=mk('g',{},g);pr(q,0,-50,15,i<4?'ink':'gain');return q});
+  const kid=mk('g',{},g);mk('path',{d:'M220 645h110',class:'s-line','stroke-width':5},kid);pusher(kid,300,520,'gain');return{bars,rd,kid}};
+const setM=(G,a)=>{G.bars.forEach((b,i)=>{const k=a+i*Math.PI/2;b.setAttribute('x2',(680+290*Math.cos(k)).toFixed(1));b.setAttribute('y2',(540+82*Math.sin(k)).toFixed(1))});
+  G.rd.forEach((r,i)=>{const k=a+.8+(i<4?i*Math.PI/2:Math.PI/4);r.setAttribute('transform',`translate(${(680+190*Math.cos(k)).toFixed(1)} ${(540+56*Math.sin(k)).toFixed(1)})`)})};
+const meters=g=>['EFFORT','SPEED'].map((s,i)=>{const y=300+i*120;mk('text',{x:1150,y:y,class:'m','font-size':22},g).textContent=s;mk('rect',{x:1150,y:y+20,width:330,height:36,rx:18,fill:'none',class:'s-line','stroke-width':3},g);return mk('rect',{x:1150,y:y+20,width:36,height:36,rx:18,class:i?'gain':'loss'},g)});
+const G2=mgr($('mg2')),G3=mgr($('mg3')),E2=meters($('mt2')),E3=meters($('mt3'));
+pusher($('pushr'),1250,595,'ink');
+const PD=[0,1,2,3,4].map(i=>mk('circle',{cx:1172+i*68,cy:560,r:22,class:'s-loss',fill:'var(--stage)','stroke-width':4},$('pd')));
+const ROWS=['MON','TUE','WED','THU','FRI'].map((s,i)=>{const y=490+i*55,g=mk('g',{},$('rows'));mk('text',{x:120,y:y+7,class:'m','font-size':20},g).textContent=s;mk('path',{d:`M280 ${y}H1320`,class:'s-line','stroke-width':3},g);[370,1230].forEach(x=>mk('circle',{cx:x,cy:y,r:14,class:'gain'},g));return g});
+const CP=[0,1,2,3].map(i=>{const x=120+i*190,g=mk('g',{},$('steps'));const r=mk('rect',{x:x,y:600,width:160,height:60,rx:30,stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:x+80,y:637,class:'m','font-size':20,'text-anchor':'middle'},g);tx.textContent='STEP '+(i+1);
+  if(i<3)mk('path',{d:`M${x+166} 630h18m-8-8 8 8-8 8`,fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round'},g);return[g,r,tx]});
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('line',{x1:(1220+122*c).toFixed(1),y1:(450+122*s).toFixed(1),x2:(1220+138*c).toFixed(1),y2:(450+138*s).toFixed(1),class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('ticks'))}
+for(let i=0;i<14;i++){mk('rect',{x:680+i*56,y:330,width:36,height:50,rx:4,class:'gain'},$('bars1'));mk('rect',i?{x:680+i*56,y:556,width:36,height:4,fill:'var(--line)'}:{x:680,y:400,width:36,height:160,rx:4,class:'loss'},$('bars2'))}
+const CK=[];for(let i=0;i<14;i++){const x=120+(i%7)*66,y=620+Math.floor(i/7)*66;mk('rect',{x:x,y:y,width:56,height:56,rx:8,fill:'var(--stage)',class:'s-line','stroke-width':3},$('cal'));CK.push(mk('path',{d:`M${x+14} ${y+30}l10 10l18-20`,fill:'none',class:'s-gain','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('cal')))}

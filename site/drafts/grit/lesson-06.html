@@ -1,0 +1,375 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grit Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Grit: Gritty people expect their own efforts can improve their future, so they treat setbacks as temporary and fixable rather than proof they lack ability. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GRIT · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Hope keeps you</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">getting back up.</text>
+<text class="b" x="120" y="600" font-size="32">Why believing your effort matters keeps you going after failure</text>
+<path class="s-line" d="M990 560H1470" stroke-width="5" stroke-linecap="round"/>
+<g id="rnrW"><g id="rnr"><circle class="ink" cx="0" cy="-180" r="32"/><path class="ink" d="M-50 0v-90a50 50 0 0 1 100 0v90z"/></g></g>
+<g id="hopeA"><path class="s-gain" d="M1290 520C1350 470 1380 390 1400 300" fill="none" stroke-width="8" stroke-linecap="round"/><path class="s-gain" d="M1374 316L1400 300L1414 328" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1480" y="260" font-size="20" text-anchor="end" style="fill:var(--gain)">BELIEF ABOUT THE FUTURE</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hope that does the work.</text>
+<text class="b" x="120" y="176" font-size="32">Not just wishing, but expecting your effort to help.</text>
+<g id="wishP">
+<rect class="s-line" x="120" y="220" width="640" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="270" font-size="22">WISHING</text>
+<path class="s-line" d="M160 600H720" stroke-width="4"/>
+<g id="wishFig"></g>
+<circle class="ink" cx="360" cy="440" r="6" opacity=".5"/><circle class="ink" cx="420" cy="410" r="8" opacity=".5"/><circle class="ink" cx="480" cy="380" r="10" opacity=".5"/>
+<path id="star" class="s-muted" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="d5" x="120" y="700" font-size="34">Wishing things turn out fine.</text>
+</g>
+<g id="expP">
+<rect class="s-line" x="840" y="220" width="640" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="270" font-size="22" style="fill:var(--gain)">EXPECTING</text>
+<polygon class="s-ink" points="880,600 1200,320 1440,600" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M1200 320V262" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1200 262h40l-10 12 10 12h-40z"/>
+<g id="clm"></g>
+<text class="d5" x="840" y="700" font-size="34">Expecting effort to make</text>
+<text class="d5" x="840" y="744" font-size="34">tomorrow better.</text>
+</g>
+<g id="gritH"><text class="d" x="120" y="830" font-size="46">Gritty people carry this kind of hope.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two dogs, the same shocks.</text>
+<text class="b" x="120" y="176" font-size="32">Martin Seligman and Steven Maier’s experiment, the 1960s.</text>
+<g id="pens">
+<rect class="s-line" x="160" y="260" width="580" height="380" rx="18" fill="var(--stage)" stroke-width="4"/>
+<rect class="s-line" x="860" y="260" width="580" height="380" rx="18" fill="var(--stage)" stroke-width="4"/>
+<path class="s-line" d="M190 600H710M890 600H1410" stroke-width="4"/>
+<text class="m" x="190" y="305" font-size="22">DOG A</text><text class="m" x="890" y="305" font-size="22">DOG B</text>
+</g>
+<rect id="panel" class="gain" x="650" y="470" width="30" height="70" rx="6"/>
+<g id="dogs"><g id="dA"></g><g id="dB"></g></g>
+<path id="bA" class="loss" transform="translate(420 320)" d="M0 0l-24 56h22l-18 56 48-76h-24l20-36z"/>
+<path id="bB" class="loss" transform="translate(1120 320)" d="M0 0l-24 56h22l-18 56 48-76h-24l20-36z"/>
+<g id="lA"><text class="m" x="450" y="700" font-size="24" text-anchor="middle" style="fill:var(--gain)">PRESSES A PANEL, SHOCKS STOP</text></g>
+<g id="lB"><text class="m" x="1150" y="700" font-size="24" text-anchor="middle" style="fill:var(--loss)">SAME SHOCKS, NO WAY TO STOP</text></g>
+<g id="ctl"><text class="d" x="120" y="810" font-size="48">Same pain. Different control.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Later: an easy escape.</text>
+<text class="b" x="120" y="176" font-size="32">Each dog went in a box with a low wall it could easily jump.</text>
+<g id="boxes"></g>
+<path id="bj1" class="loss" transform="translate(620 280)" d="M0 0l-24 56h22l-18 56 48-76h-24l20-36z"/>
+<path id="bj2" class="loss" transform="translate(620 580)" d="M0 0l-24 56h22l-18 56 48-76h-24l20-36z"/>
+<g id="jA"></g><g id="jB"></g>
+<g id="zz"></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why did they give up?</text>
+<text class="b" x="120" y="176" font-size="32">Not the pain itself.</text>
+<g id="ar">
+<rect class="s-ink" x="160" y="260" width="300" height="120" rx="16" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="310" y="330" font-size="26" text-anchor="middle">MY ACTION</text>
+<rect class="s-ink" x="1140" y="260" width="300" height="120" rx="16" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="1290" y="330" font-size="26" text-anchor="middle">THE RESULT</text>
+<g id="lkL"></g><g id="lkR"></g>
+</g>
+<g id="nod"><text class="m" x="800" y="460" font-size="24" text-anchor="middle" style="fill:var(--loss)">NOTHING I DO MAKES A DIFFERENCE</text></g>
+<g id="lh">
+<g id="lhC"></g><g id="rain"></g><g id="lhF"></g>
+<text class="m" x="640" y="600" font-size="22">SELIGMAN’S NAME FOR IT</text>
+<text class="d" x="640" y="690" font-size="76">Learned</text>
+<text class="d" x="640" y="780" font-size="76" style="fill:var(--loss)">helplessness.</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">How you explain it.</text>
+<text class="b" x="120" y="176" font-size="32">People show a version of this in how they explain bad events.</text>
+<g id="hd"></g>
+<g id="wall">
+<circle class="ink" cx="372" cy="348" r="7"/><circle class="ink" cx="398" cy="330" r="10"/>
+<g id="bricks"></g>
+<text class="m" x="160" y="730" font-size="24" style="fill:var(--loss)">PESSIMIST</text>
+<text class="d5" x="160" y="778" font-size="36">Permanent. All-encompassing.</text>
+</g>
+<g id="door">
+<circle class="ink" cx="1092" cy="348" r="7"/><circle class="ink" cx="1118" cy="330" r="10"/>
+<rect class="gain" x="1180" y="300" width="180" height="260"/>
+<rect class="s-ink" x="1180" y="300" width="180" height="260" fill="none" stroke-width="6"/>
+<polygon id="dp" class="s-ink" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="880" y="730" font-size="24" style="fill:var(--gain)">OPTIMIST</text>
+<text class="d5" x="880" y="778" font-size="36">Temporary. Specific. Fixable.</text>
+</g>
+<g id="gr"><rect class="s-gain" x="840" y="230" width="640" height="575" rx="22" fill="none" stroke-width="5"/><text class="m" x="870" y="275" font-size="22" style="fill:var(--gain)">GRITTY PEOPLE TEND TO BE HERE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Same setback. Two stories.</text>
+<text class="b" x="120" y="176" font-size="32">Picture two students who both fail a test.</text>
+<g id="ex">
+<rect class="s-ink" x="720" y="210" width="160" height="210" rx="8" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M745 250h80M745 275h110" stroke-width="5" stroke-linecap="round"/>
+<text class="d" x="800" y="400" font-size="110" text-anchor="middle" style="fill:var(--loss)">F</text>
+<g id="exF"></g>
+</g>
+<g id="sL">
+<rect x="120" y="450" width="600" height="160" rx="30" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/>
+<circle cx="430" cy="621" r="6" fill="var(--loss)"/>
+<g id="sLc"></g>
+<path class="loss" d="M205 548l-10 24h10l-8 24 22-32h-10l8-16z"/>
+<text class="d5" x="290" y="520" font-size="30">“I’m stupid.</text>
+<text class="d5" x="290" y="568" font-size="30">I’ll never get this.”</text>
+</g>
+<g id="sR">
+<rect x="880" y="450" width="600" height="160" rx="30" fill="var(--stage)" stroke="var(--gain)" stroke-width="4"/>
+<circle cx="1170" cy="621" r="6" fill="var(--gain)"/>
+<rect class="s-ink" x="930" y="480" width="70" height="100" rx="6" fill="var(--stage)" stroke-width="4"/>
+<path class="s-gain" d="M944 506l8 8 14-14M944 536l8 8 14-14M944 566l8 8 14-14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d5" x="1040" y="520" font-size="30">“Wrong material.</text>
+<text class="d5" x="1040" y="568" font-size="30">I’ll prepare differently.”</text>
+</g>
+<g id="tryA">
+<path class="s-gain" d="M1240 750C1290 740 1330 705 1340 660" fill="none" stroke-width="7" stroke-linecap="round"/>
+<path class="s-gain" d="M1322 676L1340 660L1354 680" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1180" y="802" font-size="22" text-anchor="middle" style="fill:var(--gain)">A REASON TO TRY AGAIN</text>
+<text class="m" x="420" y="802" font-size="22" text-anchor="middle">NO REASON TO TRY</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Belief builds grit.</text>
+<text class="b" x="120" y="176" font-size="32">Carol Dweck’s growth mindset: abilities can improve with effort.</text>
+<g id="br">
+<circle class="s-ink" cx="300" cy="540" r="80" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M250 545q25-40 50 0t50 0" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path id="stem" class="s-gain" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="lvs"><path class="gain" d="M300 360c-40 0-60-20-64-50 34 0 60 14 64 50z"/><path class="gain" d="M300 330c40 0 60-20 64-50-34 0-60 14-64 50z"/></g>
+<text class="m" x="300" y="680" font-size="20" text-anchor="middle">ABILITIES GROW WITH EFFORT</text>
+</g>
+<g id="st">
+<path d="M560 760V700H860V590H1160V480H1460V760z" fill="var(--line)"/>
+<path class="s-ink" d="M560 700H860V590H1160V480H1460" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="710" y="740" font-size="20" text-anchor="middle">BELIEF</text>
+<text class="m" x="1010" y="640" font-size="20" text-anchor="middle">OPTIMISTIC SELF-TALK</text>
+<text class="m" x="1310" y="530" font-size="20" text-anchor="middle">PERSEVERANCE</text>
+<g id="cl7"></g>
+</g>
+<g id="prv"><text class="d" x="120" y="840" font-size="60">“Fall seven, rise eight.”</text><text class="m" x="1010" y="836" font-size="20">A JAPANESE PROVERB</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="84" letter-spacing="-2">What story do you tell</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="84" letter-spacing="-2">yourself when things</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="84" letter-spacing="-2" style="fill:var(--gain)">go wrong?</text></g>
+<g id="nb">
+<rect class="s-ink" x="1160" y="560" width="280" height="270" rx="14" fill="var(--stage)" stroke-width="6"/>
+<g id="nbS"></g>
+<text class="m" x="1190" y="630" font-size="20">I ALWAYS FAIL</text>
+<line id="nbX" x1="1186" y1="623" x2="1186" y2="623" stroke="var(--loss)" stroke-width="5" stroke-linecap="round"/>
+<g id="nbG"><text class="m" x="1190" y="690" font-size="20" style="fill:var(--gain)">WRONG METHOD.</text><text class="m" x="1190" y="735" font-size="20" style="fill:var(--gain)">FIXABLE.</text><text class="m" x="1190" y="790" font-size="20" style="fill:var(--ink)">NEXT: NEW PLAN</text></g>
+</g>
+<g id="ml"><text class="m" x="143" y="650" font-size="26">CATCH IT · REWRITE IT AS TEMPORARY AND FIXABLE</text><text class="m" x="143" y="700" font-size="26" style="fill:var(--gain)">NAME ONE THING YOU WILL DO DIFFERENTLY</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Hope Keeps You Getting Back Up&rdquo;, from <em>Grit</em> by Angela Duckworth. The Seligman and Maier dog experiment, Carol Dweck&#x27;s growth mindset research and the link between grit and optimism are as reported in the book. The fallen runner and the two students failing a test are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 8.5], [8.5, 22.9], [22.9, 42.4], [42.4, 58.0], [58.0, 68.3], [68.3, 86.3], [86.3, 101.9], [101.9, 121.6], [121.6, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Getting Back Up", "A Sturdier Hope", "Two Dogs", "The Next Day", "Learned Helplessness", "How You Explain It", "Same Setback", "Belief Builds Grit", "Your Next Setback"];
+const TM={"fallen_runner": 0.0, "wishing_star": 8.8, "climber": 15.68, "lab_door": 23.2, "dog_pair": 27.36, "nose_panel": 34.0, "shuttle_box": 42.72, "jumping_dog": 48.4, "lying_dog": 53.04, "broken_link": 58.32, "sad_cloud": 64.96, "two_heads": 68.56, "stone_wall": 72.4, "open_door": 76.64, "failed_exam": 86.64, "storm_cloud": 89.44, "study_plan": 93.4, "growing_brain": 102.16, "staircase": 109.76, "notebook": 121.88};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const dog=(par,c)=>{const g=mk('g',{},par);mk('rect',{x:-70,y:-40,width:124,height:40,rx:20,fill:c},g);mk('circle',{cx:62,cy:-52,r:26,fill:c},g);mk('path',{d:'M50 -70l-16 -20l-6 28z',fill:c},g);mk('path',{d:'M-66 -30q-26 -16 -22 -44',fill:'none',stroke:c,'stroke-width':9,'stroke-linecap':'round'},g);const L=mk('path',{d:'M-52 -4v44M-30 -4v44M20 -4v44M40 -4v44',stroke:c,'stroke-width':10,'stroke-linecap':'round'},g);return [g,L]};
+const cloud=(g,cx,cy,s,cls)=>{[[-50,10,34],[0,-10,44],[52,12,32]].forEach(c=>mk('circle',{cx:cx+c[0]*s,cy:cy+c[1]*s,r:c[2]*s,class:cls},g));mk('rect',{x:cx-50*s,y:cy+10*s,width:102*s,height:34*s,class:cls},g)};
+let sp='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?20:48;sp+=(i?'L':'M')+(580+q*Math.cos(a)).toFixed(1)+' '+(340+q*Math.sin(a)).toFixed(1)}$('star').setAttribute('d',sp+'Z');
+fig($('wishFig'),280,491,26,'ink');
+const CLM=mk('g',{},$('clm'));fig(CLM,0,-59,14,'gain');
+const DA=dog($('dA'),'var(--gain)'),DB=dog($('dB'),'var(--ink)');DB[0].setAttribute('transform','translate(1100 560)');
+[[230,'HAD CONTROL BEFORE','gain'],[530,'HAD NO CONTROL','loss']].forEach(([y,s,c])=>{const g=$('boxes');mk('rect',{x:120,y:y,width:1360,height:260,rx:18,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('rect',{x:130,y:y+8,width:650,height:244,class:'loss','fill-opacity':.12},g);mk('rect',{x:780,y:y+190,width:30,height:70,class:'ink'},g);const a=mk('text',{x:150,y:y+42,'font-size':22,class:'m',style:'fill:var(--'+c+')'},g);a.textContent=s;const b=mk('text',{x:1450,y:y+42,'font-size':22,class:'m','text-anchor':'end'},g);b.textContent='SAFE SIDE'});
+const JA=dog($('jA'),'var(--gain)'),JB=dog($('jB'),'var(--ink)');
+const ZZ=[[500,700,5],[522,686,6],[546,670,7]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],class:'ink'},$('zz')));
+const LKS=[];[[540,640,740,'lkL'],[860,960,1060,'lkR']].forEach(a=>{for(let i=0;i<3;i++)LKS.push(mk('ellipse',{cx:a[i],cy:320,rx:56,ry:24,fill:'none',stroke:'var(--ink)','stroke-width':8},$(a[3])))});
+cloud($('lhC'),400,570,1,'loss');fig($('lhF'),400,680,22,'ink');
+const RN=[360,390,420,450].map(x=>[x,mk('path',{stroke:'var(--loss)','stroke-width':5,'stroke-linecap':'round'},$('rain'))]);
+fig($('hd'),280,420,60,'ink');fig($('hd'),1000,420,60,'ink');
+for(let r=0;r<5;r++)for(let c=0;c<4;c++)mk('rect',{x:430+c*70+(r%2)*35,y:300+r*40,width:70,height:40,class:'loss','fill-opacity':.3,stroke:'var(--ink)','stroke-width':4},$('bricks'));
+fig($('exF'),420,660,26,'ink');fig($('exF'),1180,660,26,'ink');
+cloud($('sLc'),205,505,.6,'loss');
+const C7=mk('g',{},$('cl7'));fig(C7,0,-76,18,'gain');
+for(let i=0;i<6;i++)mk('circle',{cx:1200+i*40,cy:560,r:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nbS'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d)), fl=.4+.6*Math.abs(Math.sin(t*9));
+
+R('rnrW',TM.fallen_runner);
+const gk=p(u,TM.fallen_runner+2.2,TM.fallen_runner+4);
+$('rnr').setAttribute('transform','translate(1200 '+(560-50*(1-gk)).toFixed(1)+') rotate('+(-90*(1-gk)).toFixed(1)+')');
+R('hopeA',TM.fallen_runner+3.5);
+
+R('wishP',TM.wishing_star); $('star').setAttribute('opacity',(.55+.45*Math.sin(t*3)).toFixed(2));
+R('expP',TM.climber-2.2);
+const ck=p(u,TM.climber,TM.climber+3), cx=900+270*ck;
+CLM.setAttribute('transform','translate('+cx.toFixed(1)+' '+(600-(cx-880)*.875).toFixed(1)+')');
+R('gritH',TM.climber+5,.6);
+
+R('pens',TM.lab_door); R('dogs',TM.dog_pair); R('panel',TM.nose_panel);
+const on=u>=TM.dog_pair;
+$('bA').setAttribute('opacity',on&&u<TM.nose_panel+1.4?fl:0); $('bB').setAttribute('opacity',on?fl:0);
+DA[0].setAttribute('transform','translate('+(380+178*(p(u,TM.nose_panel+.6,TM.nose_panel+1.4)-p(u,TM.nose_panel+2.2,TM.nose_panel+3))).toFixed(1)+' 560)');
+R('lA',TM.nose_panel+1.4); R('lB',TM.nose_panel+5.4); R('ctl',TM.nose_panel+7,.6);
+
+R('boxes',TM.shuttle_box); R('jA',TM.shuttle_box); R('jB',TM.shuttle_box);
+const jk=p(u,TM.jumping_dog+.4,TM.jumping_dog+1.8);
+JA[0].setAttribute('transform','translate('+(400+750*jk).toFixed(1)+' '+(458-110*Math.sin(Math.PI*jk)).toFixed(1)+') scale(.8)');
+const lk=p(u,TM.lying_dog+.4,TM.lying_dog+1.2);
+JB[0].setAttribute('transform','translate(400 '+(758+32*lk).toFixed(1)+') scale(.8)'); JB[1].setAttribute('opacity',1-lk);
+const sh=u>=TM.shuttle_box+1;
+$('bj1').setAttribute('opacity',sh&&jk<.05?fl:0); $('bj2').setAttribute('opacity',sh?fl:0);
+ZZ.forEach((z,i)=>z.setAttribute('opacity',lk>=1&&(Math.floor(t*2)%4)>i?.6:0));
+
+R('ar',TM.broken_link);
+const bk=p(u,TM.broken_link+5,TM.broken_link+5.6);
+$('lkL').setAttribute('transform','translate('+(-40*bk).toFixed(1)+' '+(10*bk).toFixed(1)+') rotate('+(-6*bk).toFixed(2)+' 740 320)');
+$('lkR').setAttribute('transform','translate('+(40*bk).toFixed(1)+' '+(10*bk).toFixed(1)+') rotate('+(6*bk).toFixed(2)+' 860 320)');
+LKS.forEach(e=>e.setAttribute('stroke',bk>0?'var(--loss)':'var(--ink)'));
+R('nod',TM.broken_link+5.4,.6); R('lh',TM.sad_cloud);
+RN.forEach(([x,e],i)=>{const o=(t*40+i*7)%20;e.setAttribute('d','M'+x+' '+(622+o).toFixed(1)+'v12')});
+
+R('hd',TM.two_heads); R('wall',TM.stone_wall); R('door',TM.open_door);
+const dk=p(u,TM.open_door+.3,TM.open_door+1.3), dx=(1360-110*dk).toFixed(1);
+$('dp').setAttribute('points','1180,300 '+dx+','+(300+30*dk).toFixed(1)+' '+dx+','+(560-20*dk).toFixed(1)+' 1180,560');
+R('gr',TM.open_door+5,.6);
+
+R('ex',TM.failed_exam); R('sL',TM.storm_cloud); R('sR',TM.study_plan); R('tryA',TM.study_plan+5.3,.6);
+
+R('br',TM.growing_brain);
+$('stem').setAttribute('d','M300 460V'+(460-160*p(u,TM.growing_brain+.6,TM.growing_brain+3)).toFixed(1));
+$('lvs').setAttribute('opacity',p(u,TM.growing_brain+2,TM.growing_brain+3));
+R('st',TM.staircase);
+const a0=p(u,TM.staircase+1,TM.staircase+1.8), a1=p(u,TM.staircase+2,TM.staircase+2.8), sk=a0+a1;
+C7.setAttribute('transform','translate('+(710+300*sk).toFixed(1)+' '+(700-110*sk-30*(Math.sin(Math.PI*a0)+Math.sin(Math.PI*a1))).toFixed(1)+')');
+R('prv',TM.staircase+5,.6);
+
+R('qa',TM.notebook); R('qb',TM.notebook+.4); R('qc',TM.notebook+.8); R('nb',TM.notebook+1.2);
+$('nbX').setAttribute('x2',(1186+170*p(u,TM.notebook+2,TM.notebook+2.6)).toFixed(1));
+R('nbG',TM.notebook+2.8); R('ml',TM.notebook+4.9,.6);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.32;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Supercommunicators Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Supercommunicators: In conflict, repeating back what you heard in your own words and checking you got it right shows people they are understood, which lowers defences. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SUPERCOMMUNICATORS · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Prove you’re listening</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">by looping.</text>
+<text class="b" x="120" y="600" font-size="32">Show people you understand them, and watch their defences drop.</text>
+<path id="tEar" class="s-ink" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="tRing"><path id="tLoop" class="s-gain" d="M1340 270A130 130 0 1 1 1210 400" pathLength="1" stroke-dasharray="1 1" fill="none" stroke-width="10" stroke-linecap="round"/>
+<path id="tHead" class="s-gain" d="M1190 420l20-26 20 26" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+<circle id="td0" class="gain" cx="1300" cy="580" r="10"/><circle id="td1" class="gain" cx="1340" cy="580" r="10"/><circle id="td2" class="gain" cx="1380" cy="580" r="10"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why listening fails.</text>
+<text class="b" x="120" y="176" font-size="32">Both sides are busy preparing their next point.</text>
+<g id="p1L"></g><g id="p1R"></g>
+<g id="b1L"><rect x="290" y="250" width="260" height="90" rx="45" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/><text class="m" x="420" y="303" font-size="22" text-anchor="middle">NEXT POINT…</text><circle class="s-line" cx="420" cy="368" r="9" fill="none" stroke-width="4"/></g>
+<g id="b1R"><rect x="1050" y="250" width="260" height="90" rx="45" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/><text class="m" x="1180" y="303" font-size="22" text-anchor="middle">NEXT POINT…</text><circle class="s-line" cx="1180" cy="368" r="9" fill="none" stroke-width="4"/></g>
+<g id="g1"><rect class="gain" x="290" y="250" width="260" height="90" rx="45"/><text class="m" x="420" y="303" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">I’M LISTENING</text><circle class="gain" cx="420" cy="368" r="9"/></g>
+<text id="q1" class="d" x="1260" y="470" font-size="96" style="fill:var(--loss)">?</text>
+<path id="sh1" class="loss" d="M1010 440l80 30v80c0 60-40 90-80 110c-40-20-80-50-80-110v-80z"/>
+<g id="c1"><text class="d" x="120" y="800" font-size="46">So they assume you’re not listening.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The gun debate.</text>
+<text class="b" x="120" y="176" font-size="32">Getting people on opposite sides to really talk.</text>
+<g id="sd0"><text class="m" x="520" y="680" font-size="22" text-anchor="middle">ONE SIDE</text></g>
+<g id="sd1"><text class="m" x="1080" y="680" font-size="22" text-anchor="middle">THE OTHER SIDE</text></g>
+<g id="tb2"><rect class="ink" x="300" y="586" width="1000" height="24" rx="8"/></g>
+<g id="spl"><path class="s-loss" d="M800 310V640" stroke-width="5" stroke-dasharray="12 10"/>
+<path class="s-loss" d="M770 420h-70m20-20-20 20 20 20M830 420h70m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="800" y="290" font-size="20" text-anchor="middle" style="fill:var(--loss)">EXPECTING ATTACK</text></g>
+<ellipse id="lp2" class="s-gain" cx="800" cy="360" rx="330" ry="70" fill="none" stroke-width="7" pathLength="1" stroke-dasharray="1 1"/>
+<circle id="dot2" class="gain" r="13"/>
+<g id="c2"><text class="d5" x="120" y="770" font-size="44">Not better arguments, but a listening habit:</text>
+<text class="m" x="120" y="830" font-size="24" style="fill:var(--gain)">LOOPING FOR UNDERSTANDING</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step 1: Ask.</text>
+<text class="b" x="120" y="176" font-size="32">A question about what they think or feel.</text>
+<g id="st0"><circle cx="340" cy="450" r="130" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/><text class="d" x="340" y="515" font-size="190" text-anchor="middle" style="fill:var(--gain)">?</text>
+<text class="d5" x="340" y="660" font-size="40" text-anchor="middle">Ask a question</text><text class="m" x="340" y="705" font-size="20" text-anchor="middle">WHAT DO THEY THINK OR FEEL?</text></g>
+<path id="ar3a" class="s-muted" d="M495 450h130m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="st1"><circle cx="800" cy="450" r="130" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/><rect class="s-ink" x="760" y="370" width="100" height="160" fill="none" stroke-width="6"/><polygon class="gain" points="760,370 712,392 712,552 760,530"/><circle class="ink" cx="722" cy="470" r="6"/>
+<text class="d5" x="800" y="660" font-size="40" text-anchor="middle">With curiosity</text><text class="m" x="800" y="705" font-size="20" text-anchor="middle">THEIR ANSWER MIGHT TEACH YOU</text></g>
+<path id="ar3b" class="s-muted" d="M955 450h130m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="st2"><circle cx="1260" cy="450" r="130" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/><path id="ear3" class="s-ink" fill="none" stroke-width="9" stroke-linecap="round"/>
+<path id="wav3" class="s-gain" d="M1345 395q22 45 0 90M1370 375q34 65 0 130" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="d5" x="1260" y="660" font-size="40" text-anchor="middle">Listen fully</text><text class="m" x="1260" y="705" font-size="20" text-anchor="middle">DON’T PLAN YOUR REPLY</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step 2: Repeat it back.</text>
+<text class="b" x="120" y="176" font-size="32">What you heard, in your own words.</text>
+<g id="p4L"></g><g id="p4R"></g>
+<g id="b4L"><rect x="300" y="260" width="400" height="180" rx="30" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path class="s-ink" d="M340 305h320M340 340h290M340 375h320M340 410h220" stroke-width="8" stroke-linecap="round"/><text class="m" x="500" y="480" font-size="20" text-anchor="middle">WHAT THEY SAID</text></g>
+<path id="mir4" class="s-muted" d="M800 240V640" stroke-width="4" stroke-dasharray="10 10"/>
+<g id="b4R"><rect x="900" y="260" width="400" height="180" rx="30" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/>
+<path id="cp4" class="s-muted" d="M940 305h320M940 340h290M940 375h320M940 410h220" stroke-width="8" stroke-linecap="round"/>
+<path id="sm4" class="s-gain" d="M940 320h200M940 380h160" stroke-width="10" stroke-linecap="round"/>
+<path id="ht4" class="gain" d="M1225 385c-42-26-46-58-23-64c11-3 19 4 23 13c4-9 12-16 23-13c23 6 19 38-23 64z"/>
+<text class="m" x="1100" y="480" font-size="20" text-anchor="middle">WHAT YOU HEARD</text></g>
+<g id="c4a"><text class="d" x="120" y="770" font-size="44">Not a parrot copy: your best summary.</text></g>
+<g id="c4b"><text class="m" x="120" y="830" font-size="22" style="fill:var(--gain)">INCLUDE THE FEELING, NOT JUST THE FACTS</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step 3: Check.</text>
+<text class="b" x="120" y="176" font-size="32">Ask if you got it right, and keep going until they say yes.</text>
+<circle id="ring5" cx="560" cy="500" r="210" fill="none" stroke="var(--muted)" stroke-width="8" transform="rotate(-90 560 500)" pathLength="1" stroke-dasharray="1 1"/>
+<circle id="dot5" class="gain" r="14"/>
+<g id="nodes5"></g>
+<g id="gift5"><rect class="gain" x="510" y="475" width="100" height="80"/><rect class="gain" x="500" y="450" width="120" height="25"/><path d="M560 450v105" stroke="var(--stage)" stroke-width="8"/><path class="s-gain" d="M560 448c-30-30-50-10-30 0M560 448c30-30 50-10 30 0" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="chk5"><path class="s-gain" d="M900 340l18 20 34-40" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><text class="d" x="970" y="360" font-size="42">Did I get that right?</text></g>
+<g id="lp5"><text class="m" x="900" y="440" font-size="22">NO? TAKE IT IN AND TRY AGAIN</text><text class="m" x="900" y="480" font-size="22" style="fill:var(--gain)">UNTIL THEY SAY YES</text></g>
+<g id="gf5"><text class="d5" x="900" y="590" font-size="34">Each correction is a gift:</text><text class="d5" x="900" y="636" font-size="34">it shows what matters to them.</text></g>
+<g id="end5"><text class="d" x="900" y="770" font-size="52" style="fill:var(--gain)">That’s the loop.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Understanding isn’t agreeing.</text>
+<text class="b" x="120" y="176" font-size="32">Looping proves you understand. You don’t have to agree.</text>
+<path class="s-ink" d="M800 330V700M700 700h200" stroke-width="10" stroke-linecap="round"/>
+<g id="bm6"><path class="s-ink" d="M440 330H1160" stroke-width="10" stroke-linecap="round"/></g>
+<circle class="ink" cx="800" cy="330" r="14"/>
+<g id="pan0"><path class="s-ink" d="M0 0v110" stroke-width="4"/><path class="ink" d="M-100 110a100 40 0 0 0 200 0z"/><path class="s-ink" d="M-70 100h30l40-30 40 30h30" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="x6" class="s-loss" d="M-40 50l80 60M40 50l-80 60" stroke-width="8" stroke-linecap="round"/><text class="m" x="0" y="190" font-size="22" text-anchor="middle">AGREE</text></g>
+<g id="pan1"><path class="s-ink" d="M0 0v110" stroke-width="4"/><path class="ink" d="M-100 110a100 40 0 0 0 200 0z"/><path class="s-gain" d="M-30 80l22 22 40-46" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="0" y="190" font-size="22" text-anchor="middle" style="fill:var(--gain)">UNDERSTAND</text></g>
+<g id="eye6"><path class="s-ink" d="M740 250q60-50 120 0q-60 50-120 0z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><circle class="gain" cx="800" cy="250" r="15"/><text class="m" x="880" y="258" font-size="20">SHOW IT, DON’T JUST FEEL IT</text></g>
+<g id="c6"><text class="d" x="120" y="800" font-size="44">Feel understood. Relax. Listen back.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it out.</text>
+<text class="b" x="120" y="176" font-size="32">One loop, as an illustration.</text>
+<g id="p7a"></g><g id="p7b"></g>
+<g id="bb7a"><rect x="320" y="270" width="660" height="100" rx="30" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><text class="d5" x="350" y="332" font-size="34">“I need to protect my family.”</text></g>
+<g id="ar7"><path class="s-gain" d="M1000 320c90 0 90 110 20 110M1038 414l-18 16 18 14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="bb7b"><rect x="320" y="450" width="860" height="200" rx="30" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/>
+<text class="d5" x="360" y="510" font-size="34">“So safety for the people you love</text><text class="d5" x="360" y="560" font-size="34">matters most to you,</text><text class="d5" x="360" y="610" font-size="34" style="fill:var(--gain)">is that right?”</text></g>
+<g id="th7"><rect x="1310" y="280" width="60" height="420" rx="30" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><rect id="thf" x="1324" width="32" rx="10"/><circle cx="1340" cy="730" r="46" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><circle id="thb" cx="1340" cy="730" r="32"/>
+<text class="m" x="1400" y="310" font-size="20">HOT</text><text class="m" x="1400" y="690" font-size="20">CALM</text></g>
+<g id="c7"><text class="d" x="120" y="810" font-size="40">You argued nothing. The room cools.</text></g>
+<g id="ill7"><text class="m" x="120" y="852" font-size="20">AN ILLUSTRATION OF THE SHAPE OF A LOOP</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">In your next disagreement,</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">loop once before you</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">make <tspan style="fill:var(--gain)">your own point.</tspan></text></g>
+<g id="tg8"><circle cx="1320" cy="560" r="110" fill="var(--stage)" stroke="var(--ink)" stroke-width="8"/><circle class="s-ink" cx="1320" cy="560" r="72" fill="none" stroke-width="8"/><circle class="gain" cx="1320" cy="560" r="36"/></g>
+<g id="ar8"><path class="s-ink" d="M0 0l90-90M70-90h20v-20M90-70h20v-20" fill="none" stroke-width="8" stroke-linecap="round"/></g>
+<g id="n8"><text class="m" x="143" y="700" font-size="26">THEN NOTICE HOW THEIR TONE CHANGES</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="120" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:00</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Prove You&#x27;re Listening by Looping&rdquo;, from <em>Supercommunicators</em> by Charles Duhigg. As reported in the book, Duhigg describes efforts to get people on opposite sides of the gun debate talking, and the listening technique called looping for understanding. The gun owner dialogue and all drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=120, SC=[[0.0, 7.7], [7.7, 20.8], [20.8, 37.0], [37.0, 49.5], [49.5, 60.6], [60.6, 75.2], [75.2, 91.5], [91.5, 108.9], [108.9, 120.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Why Listening Fails", "The Gun Debate", "Step One: Ask", "Step Two: Repeat", "Step Three: Check", "Agree vs Understand", "Try It Out", "Your Challenge"];
+const TM={"hook_ear": 0.0, "two_people": 8.04, "thought_bubble": 12.96, "shield": 17.04, "gun_debate": 21.08, "split_table": 26.64, "question_mark": 37.28, "open_door": 41.92, "ear": 46.36, "mirror": 49.76, "heart_icon": 57.68, "checkmark": 60.88, "loop_arrow": 63.52, "gift_box": 68.48, "handshake": 75.52, "scale": 77.76, "eye_icon": 82.24, "gun_owner": 91.79, "speech_loop": 95.52, "thermometer": 101.28, "target": 109.24};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const earD=(cx,cy,s)=>'M'+(cx-30*s)+' '+(cy-20*s)+'a'+50*s+' '+60*s+' 0 1 1 '+90*s+' '+36*s+'c'+(-18*s)+' '+22*s+' '+(-30*s)+' '+30*s+' '+(-30*s)+' '+60*s+'a'+26*s+' '+26*s+' 0 0 1 '+(-52*s)+' 0M'+(cx-10*s)+' '+(cy-12*s)+'a'+26*s+' '+28*s+' 0 1 1 '+46*s+' '+16*s;
+const draw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+$('tEar').setAttribute('d',earD(1310,390,1.3));
+$('ear3').setAttribute('d',earD(1240,420,1.1));
+fig($('p1L'),420,480,44,'ink');fig($('p1R'),1180,480,44,'ink');
+[400,520,640].forEach(x=>fig($('sd0'),x,460,30,'ink'));
+[960,1080,1200].forEach(x=>fig($('sd1'),x,460,30,'ink'));
+fig($('p4L'),220,500,36,'ink');fig($('p4R'),1380,500,36,'gain');
+fig($('p7a'),220,330,30,'ink');fig($('p7b'),220,530,30,'gain');
+const ND=[['ASK',-90],['REPEAT',30],['CHECK',150]].map(([s,a])=>{const x=560+210*Math.cos(a*Math.PI/180),y=500+210*Math.sin(a*Math.PI/180),g=mk('g',{},$('nodes5'));
+  const r=mk('rect',{x:x-90,y:y-30,width:180,height:60,rx:30,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:x,y:y+8,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return [g,r]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  R('tEar',TM.hook_ear); draw($('tLoop'),p(u,TM.hook_ear+.3,TM.hook_ear+2));
+  $('tHead').setAttribute('opacity',p(u,TM.hook_ear+1.8,TM.hook_ear+2.1));
+  $('tRing').setAttribute('transform','rotate('+(8*Math.sin(t*.9)).toFixed(2)+' 1340 400)');
+  [0,1,2].forEach(i=>R('td'+i,TM.hook_ear+4.2+i*.3,.3));
+
+  R('p1L',TM.two_people); R('p1R',TM.two_people+.3);
+  const kb=p(u,TM.two_people+.6,TM.two_people+1.1);
+  rise($('b1L'),kb*(1-p(u,TM.thought_bubble,TM.thought_bubble+.4))); rise($('b1R'),kb);
+  R('g1',TM.thought_bubble+.2); R('q1',TM.thought_bubble+1.5); R('sh1',TM.shield); R('c1',TM.shield+.4);
+
+  R('sd0',TM.gun_debate); R('sd1',TM.gun_debate+.4); R('tb2',TM.gun_debate);
+  const L2=TM.split_table+4.6;
+  rise($('spl'),p(u,TM.split_table,TM.split_table+.5)*(1-p(u,L2,L2+.4)));
+  draw($('lp2'),p(u,L2,L2+1.5));
+  const a2=t*1.2; $('dot2').setAttribute('cx',(800+330*Math.cos(a2)).toFixed(1)); $('dot2').setAttribute('cy',(360+70*Math.sin(a2)).toFixed(1));
+  $('dot2').setAttribute('opacity',p(u,L2+1.5,L2+1.8)); R('c2',L2+.4);
+
+  R('st0',TM.question_mark); R('ar3a',TM.open_door-.3); R('st1',TM.open_door); R('ar3b',TM.ear-.3); R('st2',TM.ear);
+  $('wav3').setAttribute('opacity',(.3+.7*Math.abs(Math.sin(t*2.5))).toFixed(2));
+
+  R('p4L',TM.mirror); R('b4L',TM.mirror+.3); R('mir4',TM.mirror+.6); R('p4R',TM.mirror+.9); R('b4R',TM.mirror+1.2);
+  const S4=TM.mirror+4.2;
+  $('cp4').setAttribute('opacity',1-p(u,S4,S4+.5)); R('sm4',S4+.3); R('c4a',S4); R('ht4',TM.heart_icon); R('c4b',TM.heart_icon+.3);
+
+  const s5=SC[5][0]/K+.3; rise(ND[0][0],p(u,s5,s5+.5)); rise(ND[1][0],p(u,s5+.3,s5+.8)); rise(ND[2][0],p(u,TM.checkmark,TM.checkmark+.5));
+  ND[2][1].setAttribute('stroke',u>=TM.checkmark?'var(--gain)':'var(--ink)');
+  R('chk5',TM.checkmark+.3); draw($('ring5'),p(u,TM.loop_arrow,TM.loop_arrow+1.5)); R('lp5',TM.loop_arrow+.4);
+  const a5=-Math.PI/2+t*1.1; $('dot5').setAttribute('cx',(560+210*Math.cos(a5)).toFixed(1)); $('dot5').setAttribute('cy',(500+210*Math.sin(a5)).toFixed(1));
+  $('dot5').setAttribute('opacity',p(u,TM.loop_arrow+1.5,TM.loop_arrow+1.8));
+  R('gift5',TM.gift_box); R('gf5',TM.gift_box+.3);
+  const E5=TM.gift_box+5.8; $('ring5').setAttribute('stroke',u>=E5?'var(--gain)':'var(--muted)'); R('end5',E5);
+
+  const a6=-10+20*p(u,TM.scale+.3,TM.scale+1.3)+.8*Math.sin(t*1.5), r6=a6*Math.PI/180, cx6=360*Math.cos(r6), sy6=360*Math.sin(r6);
+  $('bm6').setAttribute('transform','rotate('+a6.toFixed(2)+' 800 330)');
+  $('pan0').setAttribute('transform','translate('+(800-cx6).toFixed(1)+' '+(330-sy6).toFixed(1)+')'); $('pan0').setAttribute('opacity',p(u,TM.handshake,TM.handshake+.5));
+  $('pan1').setAttribute('transform','translate('+(800+cx6).toFixed(1)+' '+(330+sy6).toFixed(1)+')'); $('pan1').setAttribute('opacity',p(u,TM.scale,TM.scale+.5));
+  R('x6',TM.handshake+1); R('eye6',TM.eye_icon); R('c6',TM.eye_icon+5);
+
+  R('p7a',TM.gun_owner); R('bb7a',TM.gun_owner+.3); R('th7',TM.gun_owner+.5);
+  R('p7b',TM.speech_loop); R('ar7',TM.speech_loop+.2); R('bb7b',TM.speech_loop+.5);
+  const h7=380-300*p(u,TM.thermometer,TM.thermometer+2), col7=u>=TM.thermometer+1?'var(--gain)':'var(--loss)';
+  $('thf').setAttribute('y',(720-h7).toFixed(1)); $('thf').setAttribute('height',h7.toFixed(1)); $('thf').style.fill=col7; $('thb').style.fill=col7;
+  R('c7',TM.thermometer+.3); R('ill7',TM.thermometer+4.6);
+
+  R('qa',TM.target); R('qb',TM.target+.4); R('qc',TM.target+.8); R('tg8',TM.target+1);
+  const k8=p(u,TM.target+1.4,TM.target+2.2);
+  $('ar8').setAttribute('transform','translate('+(1390-70*k8).toFixed(1)+' '+(450+110*k8).toFixed(1)+')'); $('ar8').setAttribute('opacity',p(u,TM.target+1.3,TM.target+1.5));
+  R('n8',TM.target+5);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:116.69;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

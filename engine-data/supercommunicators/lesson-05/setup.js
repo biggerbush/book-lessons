@@ -1,0 +1,13 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const earD=(cx,cy,s)=>'M'+(cx-30*s)+' '+(cy-20*s)+'a'+50*s+' '+60*s+' 0 1 1 '+90*s+' '+36*s+'c'+(-18*s)+' '+22*s+' '+(-30*s)+' '+30*s+' '+(-30*s)+' '+60*s+'a'+26*s+' '+26*s+' 0 0 1 '+(-52*s)+' 0M'+(cx-10*s)+' '+(cy-12*s)+'a'+26*s+' '+28*s+' 0 1 1 '+46*s+' '+16*s;
+const draw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+$('tEar').setAttribute('d',earD(1310,390,1.3));
+$('ear3').setAttribute('d',earD(1240,420,1.1));
+fig($('p1L'),420,480,44,'ink');fig($('p1R'),1180,480,44,'ink');
+[400,520,640].forEach(x=>fig($('sd0'),x,460,30,'ink'));
+[960,1080,1200].forEach(x=>fig($('sd1'),x,460,30,'ink'));
+fig($('p4L'),220,500,36,'ink');fig($('p4R'),1380,500,36,'gain');
+fig($('p7a'),220,330,30,'ink');fig($('p7b'),220,530,30,'gain');
+const ND=[['ASK',-90],['REPEAT',30],['CHECK',150]].map(([s,a])=>{const x=560+210*Math.cos(a*Math.PI/180),y=500+210*Math.sin(a*Math.PI/180),g=mk('g',{},$('nodes5'));
+  const r=mk('rect',{x:x-90,y:y-30,width:180,height:60,rx:30,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:x,y:y+8,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return [g,r]});

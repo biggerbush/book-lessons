@@ -1,0 +1,409 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Essentialism Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Essentialism: Discerning what is essential requires deliberately protecting time to think, rest, sleep and play, because a tired, crowded mind cannot see clearly. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">ESSENTIALISM · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Create space</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">to think.</text>
+<text class="b" x="120" y="600" font-size="32">Why clear priorities need empty time, real rest and play.</text>
+<circle class="s-ink" cx="1320" cy="400" r="130" fill="var(--stage)" stroke-width="8"/>
+<path class="ink" d="M1160 760v-50a160 160 0 0 1 320 0v50z"/>
+<g id="l4buzz"></g>
+<circle id="l4calm" class="gain" cx="1320" cy="400" r="0"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A crowded mind can’t see.</text>
+<text class="b" x="120" y="176" font-size="32">Space to see clearly rarely appears by accident.</text>
+<g id="l4desk"><text class="m" x="140" y="250" font-size="20">PAPERS · ALERTS · HALF-FINISHED TASKS</text><path class="s-ink" d="M140 630h560M180 630v110M660 630v110" stroke-width="8" stroke-linecap="round"/></g>
+<g id="l4papers"></g>
+<g id="l4win">
+<rect class="s-ink" x="900" y="260" width="480" height="400" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M1010 600l90-130 70 80 50-60 120 110" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle class="gain" cx="1260" cy="360" r="40"/>
+<g id="l4fog"></g>
+<path class="s-ink" d="M1140 260v400M900 460h480" stroke-width="8"/>
+<rect class="s-ink" x="900" y="260" width="480" height="400" fill="none" stroke-width="8"/>
+<text id="l4wl" class="m" x="1140" y="710" font-size="22" text-anchor="middle">FOGGY</text>
+</g>
+<g id="l4clr"><text class="d" x="120" y="820" font-size="46">Seeing clearly needs space.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Block out blank time.</text>
+<text class="b" x="120" y="176" font-size="32">Jeff Weiner, while running LinkedIn, as reported in the book.</text>
+<g id="l4cal"><g id="l4days"></g><g id="l4slots"></g></g>
+<g id="l4rule"><text class="m" x="960" y="260" font-size="20" style="fill:var(--gain)">UP TO 2 HOURS A DAY</text><text class="m" x="960" y="292" font-size="20">IN 30-MINUTE CHUNKS</text></g>
+<g id="l4wm"></g>
+<g id="l4thk">
+<circle class="s-ink" cx="1170" cy="610" r="10" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-ink" cx="1195" cy="577" r="15" fill="var(--stage)" stroke-width="4"/>
+<ellipse class="s-ink" cx="1230" cy="450" rx="200" ry="100" fill="var(--stage)" stroke-width="6"/>
+<path class="s-gain" d="M1150 445L1300 385M1300 385l-34 0M1300 385l-14 30" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1230" y="490" font-size="20" text-anchor="middle">THE COMPANY’S DIRECTION</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Think Week, twice a year.</text>
+<text class="b" x="120" y="176" font-size="32">Bill Gates stepped away just to read and think.</text>
+<g id="l4year"><text class="m" x="1480" y="316" font-size="20" text-anchor="end">ONE YEAR · TWO THINK WEEKS</text></g>
+<g id="l4cab">
+<path class="s-line" d="M120 720H1040" stroke-width="5" stroke-linecap="round"/>
+<rect class="s-ink" x="200" y="520" width="300" height="200" fill="var(--stage)" stroke-width="7"/>
+<path class="ink" d="M170 530L350 400L530 530z"/>
+<rect class="gain" x="320" y="620" width="60" height="100"/>
+<rect class="s-ink" x="230" y="560" width="60" height="50" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M600 720v-40" stroke-width="8"/><path class="ink" d="M550 690L600 570L650 690z"/>
+</g>
+<g id="l4bks"></g>
+<g id="l4pic">
+<rect class="s-ink" x="1080" y="380" width="380" height="300" fill="var(--stage)" stroke-width="7"/>
+<g id="l4foc"><path class="s-ink" d="M1110 640L1200 500L1260 570L1320 470L1430 640" fill="none" stroke-width="6" stroke-linejoin="round"/><circle class="gain" cx="1160" cy="450" r="30"/></g>
+<text class="m" x="1270" y="730" font-size="22" text-anchor="middle">THE BIG PICTURE</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Protect the asset: you.</text>
+<text class="b" x="120" y="176" font-size="32">Clear thinking depends on something simpler: sleep.</text>
+<g id="l4bat"><rect class="s-ink" x="160" y="300" width="340" height="160" rx="20" fill="none" stroke-width="8"/><rect class="ink" x="500" y="345" width="24" height="70" rx="6"/><g id="l4cells"></g></g>
+<g id="l4asset"><text class="m" x="160" y="520" font-size="22" style="fill:var(--gain)">THE ASSET IS YOU</text><g id="l4me"></g></g>
+<g id="l4badge">
+<path class="loss" d="M770 480L740 600L775 580L800 610zM830 480L860 600L825 580L800 610z"/>
+<circle class="loss" cx="800" cy="420" r="90"/>
+<circle cx="800" cy="420" r="45" fill="var(--stage)"/><circle class="loss" cx="822" cy="405" r="40"/>
+<text class="m" x="800" y="660" font-size="22" text-anchor="middle">A BADGE OF COMMITMENT?</text>
+</g>
+<g id="l4face">
+<circle class="s-ink" cx="1220" cy="420" r="110" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M1165 410q20 14 40 0M1235 410q20 14 40 0M1195 475h50" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="l4zz"><text class="d" x="1340" y="310" font-size="44" style="fill:var(--muted)">z</text><text class="d" x="1372" y="270" font-size="32" style="fill:var(--muted)">z</text></g>
+</g>
+<g id="l4opts"></g>
+<g id="l4tired"><text class="d" x="120" y="800" font-size="44">A tired brain can’t sort vital from trivial.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The best violinists slept more.</text>
+<text class="b" x="120" y="176" font-size="32">Research on young violinists by psychologist Anders Ericsson.</text>
+<g id="l4vio">
+<rect class="ink" x="232" y="250" width="16" height="100" rx="4"/>
+<circle class="s-ink" cx="240" cy="242" r="14" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M240 340C290 340 312 360 312 400C312 440 285 455 285 490C285 525 325 540 325 590C325 645 285 670 240 670C195 670 155 645 155 590C155 540 195 525 195 490C195 455 168 440 168 400C168 360 190 340 240 340Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="ink" x="230" y="336" width="20" height="170" rx="4"/>
+<path class="s-ink" d="M205 515c-10 12 10 30 0 50M275 515c10 12-10 30 0 50" fill="none" stroke-width="4" stroke-linecap="round"/>
+<path class="s-ink" d="M218 560h44" stroke-width="6" stroke-linecap="round"/>
+<path class="ink" d="M228 590h24l-4 50h-16z"/>
+<path class="s-muted" d="M236 340V600M244 340V600" stroke-width="2"/>
+<path class="s-gain" d="M348 646L428 322" stroke-width="6" stroke-linecap="round"/>
+<path class="s-line" d="M360 632L432 340" stroke-width="2"/>
+<rect class="gain" x="336" y="626" width="22" height="30" rx="4" transform="rotate(14 347 641)"/>
+<path class="s-gain" d="M428 322l8 22" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="l4bars">
+<rect class="ink" x="460" y="312" width="18" height="18"/><text class="m" x="488" y="330" font-size="18">WORK</text>
+<rect class="gain" x="600" y="312" width="18" height="18"/><text class="m" x="628" y="330" font-size="18">SLEEP</text>
+<rect id="l4b0" class="ink" x="460" y="700" width="60" height="0"/><rect id="l4b1" class="gain" x="530" y="700" width="60" height="0"/>
+<rect id="l4b2" class="ink" x="680" y="700" width="60" height="0"/><rect id="l4b3" class="gain" x="750" y="700" width="60" height="0"/>
+<path class="s-ink" d="M440 700h390" stroke-width="5"/>
+<text class="m" x="525" y="740" font-size="20" text-anchor="middle" style="fill:var(--gain)">BEST</text>
+<text class="m" x="745" y="740" font-size="20" text-anchor="middle">OTHERS</text>
+<text class="m" x="440" y="784" font-size="20">SCHEMATIC, NOT TO SCALE</text>
+</g>
+<g id="l4clock">
+<circle class="s-line" cx="1230" cy="480" r="170" fill="none" stroke-width="24"/>
+<g id="l4ticks"></g>
+<path id="l4arc" class="s-gain" d="M1230 310" fill="none" stroke-width="24" stroke-linecap="round"/>
+<text id="l4hrs" class="d" x="1230" y="505" font-size="96" text-anchor="middle">8.6</text>
+<text class="m" x="1230" y="550" font-size="22" text-anchor="middle">HOURS</text>
+<text class="m" x="1230" y="730" font-size="20" text-anchor="middle">IN EVERY 24, INCLUDING NAPS</text>
+</g>
+<g id="l4exc"><text class="d" x="120" y="846" font-size="46">Their rest was part of their excellence.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Play feeds serious work.</text>
+<text class="b" x="120" y="176" font-size="32">Play researcher Stuart Brown links play with creativity.</text>
+<g id="l4kite"><g id="l4kiteM">
+<path class="s-ink" d="M440 430Q340 520 285 630" fill="none" stroke-width="3"/>
+<path class="s-gain" d="M440 430q-30 40-70 30t-50 40" fill="none" stroke-width="4" stroke-linecap="round"/>
+<path class="gain" d="M440 250L500 330L440 430L380 330z"/>
+<path d="M440 250V430M380 330H500" stroke="var(--stage)" stroke-width="4"/>
+</g><g id="l4kid"></g></g>
+<g id="l4brain">
+<ellipse class="s-ink" cx="800" cy="470" rx="180" ry="140" fill="var(--stage)" stroke-width="7"/>
+<path class="s-line" d="M800 335q-24 68 0 135t0 135" fill="none" stroke-width="5"/>
+<g id="l4net"></g>
+<text class="m" x="800" y="670" font-size="20" text-anchor="middle">CREATIVITY · FLEXIBLE THINKING</text>
+</g>
+<g id="l4bulb">
+<g id="l4rays"></g>
+<circle class="gain" cx="1260" cy="410" r="85"/>
+<rect class="ink" x="1220" y="500" width="80" height="22" rx="6"/><rect class="ink" x="1230" y="528" width="60" height="18" rx="6"/>
+<text class="m" x="1260" y="640" font-size="20" text-anchor="middle">FRESH POSSIBILITIES</text>
+</g>
+<g id="l4feeds"><text class="d" x="120" y="810" font-size="44">Play is not a distraction. It feeds the work.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your move this week.</text>
+<text class="b" x="120" y="176" font-size="32">Three small steps toward room to think.</text>
+<g id="l4c0">
+<rect class="s-line" x="120" y="240" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="290" font-size="22">1 · BLOCK 20 MINUTES</text>
+<rect class="s-ink" x="170" y="320" width="320" height="230" rx="10" fill="none" stroke-width="5"/>
+<rect class="ink" x="170" y="320" width="320" height="40"/>
+<rect id="l4slot" class="gain" x="200" y="420" width="260" height="70" rx="10"/>
+<text id="l4slt" class="d" x="330" y="468" font-size="36" text-anchor="middle" style="fill:var(--on-gain)">20 MIN</text>
+<text class="d5" x="150" y="630" font-size="32">No meetings, phone</text><text class="d5" x="150" y="672" font-size="32">or inbox.</text>
+</g>
+<g id="l4c1">
+<rect class="s-line" x="590" y="240" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="620" y="290" font-size="22">2 · BRING ONE QUESTION</text>
+<rect class="s-ink" x="680" y="330" width="240" height="230" rx="10" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M710 400h180M710 450h120M710 500h150" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M710 330v-18M760 330v-18M810 330v-18M860 330v-18" stroke-width="6" stroke-linecap="round"/>
+<text class="d" x="880" y="540" font-size="90" text-anchor="middle" style="fill:var(--gain)">?</text>
+<text class="d5" x="620" y="630" font-size="32">What matters most</text><text class="d5" x="620" y="672" font-size="32">right now?</text>
+</g>
+<g id="l4c2">
+<rect class="s-line" x="1060" y="240" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1090" y="290" font-size="22">3 · GUARD YOUR SLEEP</text>
+<path class="gain" d="M1390 330a50 50 0 1 0 40 80a40 40 0 1 1 -40 -80z"/>
+<rect class="s-ink" x="1120" y="420" width="280" height="120" rx="50" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="1150" y="400" font-size="40" style="fill:var(--muted)">Zz</text>
+<text class="d5" x="1090" y="630" font-size="32">Treat it like any</text><text class="d5" x="1090" y="672" font-size="32">appointment.</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="l4qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What could you see</text></g>
+<g id="l4qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">if your mind finally</text></g>
+<g id="l4qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">had <tspan style="fill:var(--gain)">room to think</tspan>?</text></g>
+<g id="l4qm"><text class="m" x="143" y="700" font-size="26">BOOK YOUR FIRST BLANK SLOT TODAY</text>
+<rect id="l4bk" x="1180" y="640" width="300" height="110" rx="16" fill="var(--stage)" stroke="var(--gain)" stroke-width="5" stroke-dasharray="12 8"/>
+<text id="l4bkt" class="m" x="1330" y="703" font-size="22" text-anchor="middle" style="fill:var(--gain)">BLANK SLOT</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Create Space to Think&rdquo;, from <em>Essentialism</em> by Greg McKeown. Examples as reported in the book: Jeff Weiner&#x27;s blank calendar time at LinkedIn, Bill Gates&#x27;s Think Weeks, Anders Ericsson&#x27;s research on violinists, and Stuart Brown&#x27;s work on play. Drawings of windows, batteries, kites and brains are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 7.5], [7.5, 24.1], [24.1, 40.3], [40.3, 55.9], [55.9, 73.9], [73.9, 92.7], [92.7, 111.1], [111.1, 125.8], [125.8, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Room to Think", "The Crowded Mind", "Blank Time", "Think Week", "Protect the Asset", "The Violinists", "Room to Play", "Your Move", "Your Challenge"];
+const TM={"busy_head": 0.0, "full_desk": 7.84, "foggy_window": 12.88, "clear_window": 17.84, "ceo_calendar": 24.4, "empty_blocks": 30.88, "think_bubble": 36.48, "cabin": 40.64, "book_stack": 47.2, "battery": 56.16, "late_night": 65.76, "sleepy_face": 69.6, "violin": 74.24, "top_players": 79.52, "sleep_clock": 84.56, "kite": 92.96, "playful_brain": 94.8, "new_idea": 101.44, "calendar_slot": 111.44, "notebook": 116.48, "pillow": 122.0};
+const NUL=document.createElementNS('http://www.w3.org/2000/svg','g');
+const Q=id=>$(id)||NUL;
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const tx=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+// title: buzzing thoughts
+const DOT=[];for(let i=0;i<16;i++){const a=i*2.4,r=20+(i*37%70);DOT.push([1320+r*Math.cos(a),400+r*Math.sin(a),mk('circle',{r:9,class:'loss'},Q('l4buzz'))])}
+// crowded desk
+const PP=[];for(let i=0;i<9;i++){const x=180+(i%3)*165,y=530-Math.floor(i/3)*75,g=mk('g',{transform:'rotate('+((i*17%21)-10)+' '+(x+70)+' '+(y+45)+')'},Q('l4papers'));
+  mk('rect',{x:x,y:y,width:140,height:90,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  mk('path',{d:'M'+(x+18)+' '+(y+30)+'h90M'+(x+18)+' '+(y+55)+'h60',stroke:'var(--line)','stroke-width':5,'stroke-linecap':'round'},g);PP.push(g)}
+[[260,320],[470,310],[650,340]].forEach(q=>{const g=mk('g',{},Q('l4papers'));mk('circle',{cx:q[0],cy:q[1],r:20,class:'loss'},g);tx(g,q[0],q[1]+10,'!',{class:'d','font-size':28,'text-anchor':'middle',style:'fill:var(--stage)'});PP.push(g)});
+// fog bands inside the window (no clipping needed)
+const FOG=[];for(let i=0;i<8;i++)FOG.push(mk('rect',{x:905,y:266+i*49,width:470,height:44,rx:22,fill:'var(--line)','fill-opacity':.9},Q('l4fog')));
+// calendar
+['MON','TUE','WED','THU','FRI'].forEach((d,i)=>tx(Q('l4days'),220+i*150,262,d,{class:'m','font-size':20,'text-anchor':'middle'}));
+const SLT=[];for(let i=0;i<5;i++)for(let j=0;j<10;j++){const x=150+i*150,y=280+j*50,bl=(j*7+i*3)%10<4;
+  const r=mk('rect',{x:x,y:y,width:140,height:46,rx:8,'stroke-width':4,'stroke-dasharray':'8 6'},Q('l4slots'));
+  SLT.push([r,bl?tx(Q('l4slots'),x+70,y+30,'FREE',{class:'m','font-size':18,'text-anchor':'middle',style:'fill:var(--gain)'}):null,bl,i*10+j])}
+fig(Q('l4wm'),1150,680,34,'ink');
+// think week
+for(let i=0;i<52;i++)mk('rect',{x:120+i*26.2,y:236,width:20,height:36,rx:4,fill:(i===12||i===38)?'var(--gain)':'var(--line)'},Q('l4year'));
+const BK=[];for(let i=0;i<6;i++){const w=220-(i*23%50);BK.push(mk('rect',{x:860-w/2,y:686-i*38,width:w,height:34,rx:4,fill:['var(--ink)','var(--gain)','var(--stage)'][i%3],stroke:'var(--ink)','stroke-width':4},Q('l4bks')))}
+// sleep battery
+const CEL=[];for(let i=0;i<4;i++)CEL.push(mk('rect',{x:180+i*80,y:320,width:66,height:120,rx:8,class:'gain'},Q('l4cells')));
+fig(Q('l4me'),330,600,26,'ink');
+[1120,1220,1320].forEach(x=>{mk('circle',{cx:x,cy:620,r:32,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},Q('l4opts'));tx(Q('l4opts'),x,632,'?',{class:'d','font-size':34,'text-anchor':'middle',style:'fill:var(--loss)'})});
+// clock ticks
+for(let i=0;i<24;i++){const a=i*Math.PI/12,s=Math.sin(a),c=Math.cos(a);mk('path',{d:'M'+(1230+192*s).toFixed(1)+' '+(480-192*c).toFixed(1)+'L'+(1230+206*s).toFixed(1)+' '+(480-206*c).toFixed(1),stroke:'var(--muted)','stroke-width':i%6?3:6,'stroke-linecap':'round'},Q('l4ticks'))}
+// play
+fig(Q('l4kid'),260,580,30,'ink');
+const ND=[[700,410],[760,370],[860,390],[910,460],[870,540],[780,560],[700,520],[800,460]],ED=[];
+for(let i=0;i<7;i++){ED.push(mk('path',{d:'M'+ND[i][0]+' '+ND[i][1]+'L'+ND[(i+1)%7][0]+' '+ND[(i+1)%7][1]+'M'+ND[i][0]+' '+ND[i][1]+'L800 460',stroke:'var(--gain)','stroke-width':4},Q('l4net')))}
+const NC=ND.map(q=>mk('circle',{cx:q[0],cy:q[1],r:16},Q('l4net')));
+for(let i=0;i<8;i++){const a=i*Math.PI/4,s=Math.sin(a),c=Math.cos(a);mk('path',{d:'M'+(1260+105*s).toFixed(1)+' '+(410-105*c).toFixed(1)+'L'+(1260+135*s).toFixed(1)+' '+(410-135*c).toFixed(1),stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},Q('l4rays'))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const cb=p(u,TM.busy_head+5,TM.busy_head+7.5);
+  DOT.forEach((d,i)=>{const a=p(u,TM.busy_head+i*.08,TM.busy_head+i*.08+.4),s=1+.6*cb;
+    d[2].setAttribute('cx',(1320+(d[0]-1320)*s+6*Math.sin(t*5+i)).toFixed(1));d[2].setAttribute('cy',(400+(d[1]-400)*s+6*Math.cos(t*4+i*2)).toFixed(1));d[2].setAttribute('opacity',(a*(1-cb)).toFixed(2))});
+  Q('l4calm').setAttribute('r',Math.max(0,44*cb+3*cb*Math.sin(t*2)).toFixed(1));
+
+  rise(Q('l4desk'),p(u,TM.full_desk,TM.full_desk+.5));
+  PP.forEach((g,i)=>rise(g,p(u,TM.full_desk+.3+i*.15,TM.full_desk+.6+i*.15)));
+  rise(Q('l4win'),p(u,TM.foggy_window,TM.foggy_window+.5));
+  const cw=p(u,TM.clear_window,TM.clear_window+2);
+  FOG.forEach((f,i)=>{const k=cl(cw*1.6-i*.08);f.setAttribute('x',(905+470*k).toFixed(1));f.setAttribute('width',(470*(1-k)).toFixed(1))});
+  Q('l4fog').setAttribute('opacity',(1-.3*cw).toFixed(2));
+  Q('l4wl').textContent=cw>.5?'CLEAR':'FOGGY';Q('l4wl').style.fill=cw>.5?'var(--gain)':'var(--muted)';
+  rise(Q('l4clr'),p(u,TM.clear_window+1,TM.clear_window+1.6));
+
+  rise(Q('l4cal'),p(u,TM.ceo_calendar,TM.ceo_calendar+.5));rise(Q('l4wm'),p(u,TM.ceo_calendar+1,TM.ceo_calendar+1.5));
+  SLT.forEach(([r,f,bl,k])=>{r.setAttribute('opacity',p(u,TM.ceo_calendar+k*.03,TM.ceo_calendar+k*.03+.3).toFixed(2));
+    const e=bl&&u>=TM.empty_blocks+(k%10)*.15;r.setAttribute('fill',e?'var(--stage)':'var(--line)');r.setAttribute('stroke',e?'var(--gain)':'none');if(f)f.setAttribute('opacity',e?1:0)});
+  rise(Q('l4rule'),p(u,TM.empty_blocks,TM.empty_blocks+.5));rise(Q('l4thk'),p(u,TM.think_bubble,TM.think_bubble+.6));
+
+  rise(Q('l4year'),p(u,TM.cabin,TM.cabin+.5));rise(Q('l4cab'),p(u,TM.cabin+.4,TM.cabin+.9));
+  BK.forEach((b,i)=>rise(b,p(u,TM.book_stack+i*.25,TM.book_stack+i*.25+.4)));
+  rise(Q('l4pic'),p(u,TM.book_stack+4.8,TM.book_stack+5.3));
+  const fc=p(u,TM.book_stack+5.8,TM.book_stack+7.5);
+  Q('l4foc').setAttribute('opacity',(.2+.8*fc).toFixed(2));Q('l4foc').setAttribute('transform','translate('+(8*(1-fc)*Math.sin(t*9)).toFixed(1)+' 0)');
+
+  rise(Q('l4bat'),p(u,TM.battery,TM.battery+.5));
+  const chg=p(u,TM.battery+.3,TM.battery+1.8)*(1-.75*p(u,TM.late_night,TM.late_night+2));
+  CEL.forEach((c,i)=>c.setAttribute('opacity',cl(chg*4-i).toFixed(2)));
+  rise(Q('l4asset'),p(u,TM.battery+3.4,TM.battery+4));rise(Q('l4badge'),p(u,TM.late_night,TM.late_night+.6));
+  rise(Q('l4face'),p(u,TM.sleepy_face,TM.sleepy_face+.5));Q('l4zz').setAttribute('transform','translate(0 '+(6*Math.sin(t*2)).toFixed(1)+')');
+  rise(Q('l4opts'),p(u,TM.sleepy_face+1,TM.sleepy_face+1.5));rise(Q('l4tired'),p(u,TM.sleepy_face+1.6,TM.sleepy_face+2.2));
+
+  rise(Q('l4vio'),p(u,TM.violin,TM.violin+.6));rise(Q('l4bars'),p(u,TM.top_players,TM.top_players+.5));
+  const bh=p(u,TM.top_players+.3,TM.top_players+1.8),sh=p(u,TM.top_players+1.5,TM.top_players+3);
+  [300,260,220,190].forEach((h,i)=>{const e=Q('l4b'+i),k=h*(i%2?sh:bh);e.setAttribute('y',(700-k).toFixed(1));e.setAttribute('height',k.toFixed(1))});
+  rise(Q('l4clock'),p(u,TM.sleep_clock,TM.sleep_clock+.5));
+  const ck=p(u,TM.sleep_clock+.4,TM.sleep_clock+2.2),A=2*Math.PI*8.6/24*ck;
+  Q('l4arc').setAttribute('d','M1230 310A170 170 0 '+(A>Math.PI?1:0)+' 1 '+(1230+170*Math.sin(A)).toFixed(1)+' '+(480-170*Math.cos(A)).toFixed(1));
+  Q('l4arc').setAttribute('opacity',ck>0?1:0);Q('l4hrs').textContent=(8.6*ck).toFixed(1);
+  rise(Q('l4exc'),p(u,TM.sleep_clock+5,TM.sleep_clock+5.6));
+
+  rise(Q('l4kite'),p(u,TM.kite,TM.kite+.5));
+  Q('l4kiteM').setAttribute('transform','rotate('+(4*Math.sin(t*1.3)).toFixed(2)+' 285 630)');
+  rise(Q('l4brain'),p(u,TM.playful_brain,TM.playful_brain+.5));
+  NC.forEach((c,i)=>c.setAttribute('fill',u>=TM.playful_brain+.6+i*.35?'var(--gain)':'var(--line)'));
+  ED.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.playful_brain+.8+i*.35,TM.playful_brain+1.1+i*.35).toFixed(2)));
+  rise(Q('l4bulb'),p(u,TM.new_idea,TM.new_idea+.5));
+  Q('l4rays').setAttribute('opacity',(p(u,TM.new_idea+.4,TM.new_idea+1)*(.6+.4*Math.sin(t*4))).toFixed(2));
+  rise(Q('l4feeds'),p(u,TM.new_idea+4.6,TM.new_idea+5.2));
+
+  rise(Q('l4c0'),p(u,TM.calendar_slot,TM.calendar_slot+.5));
+  const sw=p(u,TM.calendar_slot+.4,TM.calendar_slot+1.4);Q('l4slot').setAttribute('width',(260*sw).toFixed(1));Q('l4slt').setAttribute('opacity',p(u,TM.calendar_slot+1.2,TM.calendar_slot+1.6).toFixed(2));
+  rise(Q('l4c1'),p(u,TM.notebook,TM.notebook+.5));rise(Q('l4c2'),p(u,TM.pillow,TM.pillow+.5));
+
+  const q8=SC[8][0]/K;
+  rise(Q('l4qa'),p(u,q8+.3,q8+.8));rise(Q('l4qb'),p(u,q8+.7,q8+1.2));rise(Q('l4qc'),p(u,q8+1.1,q8+1.6));
+  rise(Q('l4qm'),p(u,q8+4.8,q8+5.3));const bkd=u>=q8+6;
+  Q('l4bk').setAttribute('fill',bkd?'var(--gain)':'var(--stage)');Q('l4bkt').textContent=bkd?'BOOKED':'BLANK SLOT';Q('l4bkt').style.fill=bkd?'var(--on-gain)':'var(--gain)';
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.91;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

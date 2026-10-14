@@ -1,0 +1,291 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Extreme Ownership Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Extreme Ownership: Teams and departments win only when they support each other toward the shared mission rather than competing or working in isolation. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">EXTREME OWNERSHIP · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Cover and move.</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Win as one team.</text>
+<text class="b" x="120" y="600" font-size="32">Why teams that support each other beat teams that compete</text>
+<path class="s-line" d="M1100 610h360" stroke-width="5" stroke-linecap="round"/>
+<path id="tArc" class="s-gain" d="M1180 440Q1280 330 1380 440" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/>
+<g id="tA"></g><g id="tB"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two soldiers, open ground.</text>
+<text class="b" x="120" y="176" font-size="32">One covers while the other moves. Then they switch.</text>
+<rect class="s-line" x="120" y="300" width="1360" height="440" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-gain" x="1250" y="320" width="210" height="400" rx="14" fill="none" stroke-width="5" stroke-dasharray="14 10"/>
+<text class="m" x="1355" y="775" font-size="22" text-anchor="middle" style="fill:var(--gain)">SAFE</text>
+<path id="cone" d="M0 0L320 -70V70Z" fill="var(--gain)" fill-opacity=".15" stroke="var(--gain)" stroke-width="3" stroke-dasharray="8 8"/>
+<g id="sold"></g>
+<text id="lA" class="m" y="352" font-size="20" text-anchor="middle"></text>
+<text id="lB" class="m" y="552" font-size="20" text-anchor="middle"></text>
+<g id="tac"><text class="d" x="120" y="835" font-size="46">The SEALs call it cover and move.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ramadi: two squads head home.</text>
+<text class="b" x="120" y="176" font-size="32">After an overwatch mission, Leif Babin’s unit splits up.</text>
+<g id="blocks"></g>
+<g id="op"><rect class="s-ink" x="150" y="420" width="80" height="120" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M140 420h100" stroke-width="8" stroke-linecap="round"/><text class="m" x="190" y="398" font-size="18" text-anchor="middle">OVERWATCH</text></g>
+<g id="base"><rect class="s-gain" x="1260" y="420" width="140" height="120" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M1330 420v-80" stroke-width="5"/><path class="gain" d="M1330 340h50l-12 16 12 16h-50z"/><text class="m" x="1330" y="580" font-size="20" text-anchor="middle">BASE</text></g>
+<g id="routes"></g><g id="squads"></g>
+<g id="own"><text class="m" x="120" y="820" font-size="24">OWN ROUTE · OWN PROBLEMS · OWN PACE</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The gap.</text>
+<text class="b" x="120" y="176" font-size="32">The squads drifted out of reach of each other.</text>
+<circle id="rg0" cx="640" cy="480" r="180" fill="none" stroke="var(--line)" stroke-width="5" stroke-dasharray="12 10"/>
+<circle id="rg1" cx="960" cy="480" r="180" fill="none" stroke="var(--line)" stroke-width="5" stroke-dasharray="12 10"/>
+<g id="q0"></g><g id="q1"></g>
+<g id="gapL"><path class="s-muted" d="M560 560h480M560 560l18-14M560 560l18 14M1040 560l-18-14M1040 560l-18 14" fill="none" stroke-width="4" stroke-linecap="round"/><text class="m" x="800" y="540" font-size="22" text-anchor="middle">OUT OF REACH</text></g>
+<g id="forgot"><text class="d5" x="120" y="765" font-size="38">Leif realized: they forgot the tactic they trained on endlessly.</text></g>
+<g id="fix"><text class="d" x="120" y="835" font-size="40" style="fill:var(--gain)">The fix: reconnect, and cover each other again.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Tunnel vision.</text>
+<text class="b" x="120" y="176" font-size="32">Under stress, every team zooms in on its own task.</text>
+<g id="mag"><g id="magm"><circle class="s-ink" cx="270" cy="430" r="90" fill="var(--stage)" stroke-width="14"/><rect class="gain" x="250" y="410" width="40" height="40" rx="6"/><path class="s-ink" d="M335 495l65 65" stroke-width="24" stroke-linecap="round"/></g><text class="m" x="270" y="640" font-size="20" text-anchor="middle">ZOOMED IN</text></g>
+<g id="big"><rect class="s-muted" x="490" y="230" width="940" height="500" rx="24" fill="none" stroke-width="4" stroke-dasharray="14 12"/><text class="m" x="960" y="780" font-size="22" text-anchor="middle">PART OF SOMETHING BIGGER</text></g>
+<g id="silos"></g>
+<g id="obst"></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The same pattern, in an office.</text>
+<text class="b" x="120" y="176" font-size="32">A company the authors advised.</text>
+<g id="goal"><path class="s-gain" d="M530 340L770 270M1070 340L830 270" fill="none" stroke-width="4" stroke-dasharray="8 8"/><circle class="s-gain" cx="800" cy="265" r="40" fill="var(--stage)" stroke-width="6"/><circle class="gain" cx="800" cy="265" r="16"/><text class="m" x="860" y="250" font-size="22" style="fill:var(--gain)">SAME MISSION</text></g>
+<g id="bld"><rect class="s-ink" x="260" y="340" width="1080" height="420" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/><path id="wall5" class="s-ink" d="M800 340v420" stroke-width="10"/><text class="m" x="290" y="385" font-size="20">DEPT A</text><text class="m" x="830" y="385" font-size="20">DEPT B</text></g>
+<g id="ppl"></g>
+<g id="bub"><rect class="s-loss" x="460" y="415" width="280" height="70" rx="14" fill="var(--stage)" stroke-width="5"/><text class="m" x="600" y="460" font-size="24" text-anchor="middle" style="fill:var(--loss)">THEIR FAULT!</text><path class="s-loss" d="M745 450h130m-18-16 18 16-18 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="same5"><text class="d" x="120" y="825" font-size="44">Both groups served the same mission.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One mission.</text>
+<text class="b" x="120" y="176" font-size="32">The real competition is outside the building, not down the hall.</text>
+<g id="co"><rect class="s-ink" x="160" y="250" width="820" height="470" fill="var(--stage)" stroke-width="7"/><text class="m" x="190" y="295" font-size="20">YOUR COMPANY</text><g id="teams6"></g></g>
+<g id="walls"><path class="s-ink" d="M435 270v430M705 270v430" stroke-width="10"/></g>
+<g id="brg"><rect class="gain" x="400" y="508" width="70" height="24"/><rect class="gain" x="670" y="508" width="70" height="24"/></g>
+<g id="help"><path class="s-gain" d="M300 430Q435 330 570 430M570 430Q705 330 840 430" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="foe"><path class="s-gain" d="M1000 480h170m-20-18 20 18-20 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1085" y="455" font-size="18" text-anchor="middle">FACE OUT</text><circle class="loss" cx="1270" cy="400" r="36"/><path class="loss" d="M1216 551v-46.8a54 54 0 0 1 108 0v46.8z"/><text class="m" x="1270" y="610" font-size="20" text-anchor="middle">THE REAL COMPETITION</text></g>
+<g id="alone"><text class="d" x="120" y="800" font-size="52">No team succeeds alone.</text><text class="m" x="120" y="850" font-size="22">IN A FIREFIGHT OR IN A BOARDROOM</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make it real.</text>
+<text class="b" x="120" y="176" font-size="32">Start with the team you usually complain about.</text>
+<g id="k0"><g transform="translate(120 240)"><rect class="s-line" width="325" height="420" rx="18" fill="var(--stage)" stroke-width="3"/><rect class="s-ink" x="122" y="80" width="80" height="140" rx="16" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M147 195h30" stroke-width="6" stroke-linecap="round"/><path id="wav" class="s-gain" d="M222 120a40 40 0 0 1 0 60M240 100a66 66 0 0 1 0 100" fill="none" stroke-width="6" stroke-linecap="round"/><text class="d5" x="162" y="320" font-size="30" text-anchor="middle">Call them</text><text class="m" x="162" y="370" font-size="18" text-anchor="middle">THE TEAM YOU BLAME</text></g></g>
+<g id="k1"><g transform="translate(465 240)"><rect class="s-line" width="325" height="420" rx="18" fill="var(--stage)" stroke-width="3"/><circle class="s-ink" cx="162" cy="150" r="70" fill="var(--stage)" stroke-width="7"/><text class="d" x="162" y="185" font-size="100" text-anchor="middle" style="fill:var(--gain)">?</text><text class="d5" x="162" y="320" font-size="30" text-anchor="middle">Ask what they need</text><text class="m" x="162" y="370" font-size="18" text-anchor="middle">TO SUCCEED</text></g></g>
+<g id="k2"><g transform="translate(810 240)"><rect class="s-line" width="325" height="420" rx="18" fill="var(--stage)" stroke-width="3"/><rect class="gain" x="102" y="120" width="120" height="90" rx="6"/><rect class="gain" x="92" y="92" width="140" height="26" rx="6"/><path d="M162 92v118" stroke="var(--stage)" stroke-width="10"/><text class="d5" x="162" y="320" font-size="30" text-anchor="middle">Help them get it</text><text class="m" x="162" y="370" font-size="18" text-anchor="middle">BEFORE THEY ASK</text></g></g>
+<g id="k3"><g transform="translate(1155 240)"><rect class="s-line" width="325" height="420" rx="18" fill="var(--stage)" stroke-width="3"/><polygon class="gain" points="162,70 172,96.2 200,97.6 178.2,115.3 185.5,142.4 162,127 138.5,142.4 145.8,115.3 124,97.6 152,96.2"/><circle class="ink" cx="92" cy="170" r="16"/><path class="ink" d="M68 237v-21a24 24 0 0 1 48 0v21z"/><circle class="ink" cx="232" cy="170" r="16"/><path class="ink" d="M208 237v-21a24 24 0 0 1 48 0v21z"/><text class="d5" x="162" y="320" font-size="30" text-anchor="middle">Share the credit</text><text class="m" x="162" y="370" font-size="18" text-anchor="middle">WHEN IT WORKS</text></g></g>
+<rect class="s-line" x="120" y="720" width="1360" height="12" rx="6" fill="var(--line)"/>
+<rect id="prog" class="gain" x="120" y="720" width="0" height="12" rx="6"/>
+<g id="credit"><text class="d" x="120" y="825" font-size="44">Share credit freely when the joint effort works.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="320" font-size="88" letter-spacing="-2">Which team in your world</text></g>
+<g id="qb"><text class="d" x="136" y="430" font-size="88" letter-spacing="-2">are you treating</text></g>
+<g id="qc"><text class="d" x="136" y="540" font-size="88" letter-spacing="-2">like a <tspan style="fill:var(--loss)">rival</tspan>?</text></g>
+<g id="qd"><text class="m" x="143" y="660" font-size="26">THIS WEEK, COVER THEM, AND WATCH HOW FAST YOU BOTH MOVE</text></g>
+<path class="s-line" d="M1000 780h460" stroke-width="5" stroke-linecap="round"/>
+<circle id="fa" class="gain" cy="750" r="22"/><circle id="fb" class="ink" cy="750" r="22"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Cover and Move&rdquo;, from <em>Extreme Ownership</em> by Jocko Willink and Leif Babin. The Ramadi squad story and the business case of the manager blaming another department are as reported in the book. Drawings of soldiers leapfrogging, offices and handshakes are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 6.1], [6.1, 22.3], [22.3, 35.5], [35.5, 51.5], [51.5, 65.5], [65.5, 77.9], [77.9, 96.5], [96.5, 109.4], [109.4, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Same Side, Still Losing", "The Basic Tactic", "Ramadi Streets", "The Gap", "Tunnel Vision", "The Office Version", "One Mission", "Make It Real", "Your Challenge"];
+const TM={"two_soldiers": 6.44, "cover_fire": 9.4, "leapfrog": 13.36, "ramadi_city": 22.64, "two_squads": 27.84, "open_gap": 35.76, "exposed_icon": 38.88, "magnifier": 51.76, "desk_silos": 55.12, "office_build": 65.8, "angry_manager": 69.47, "shared_goal": 73.88, "real_enemy": 78.19, "handshake": 82.64, "bridge": 87.36, "phone_call": 96.8, "question_mark": 100.24};
+const P=(par,x,y,r,cls)=>{const g=mk('g',cls?{class:cls}:{},par);mk('circle',{cx:x,cy:y,r},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`},g);return g};
+const along=(R,k)=>{const sg=[];let tot=0;for(let i=1;i<R.length;i++){const d=Math.hypot(R[i][0]-R[i-1][0],R[i][1]-R[i-1][1]);sg.push(d);tot+=d}let s=k*tot;for(let i=0;i<sg.length;i++){if(s<=sg[i]||i===sg.length-1){const f=cl(s/sg[i]);return[R[i][0]+(R[i+1][0]-R[i][0])*f,R[i][1]+(R[i+1][1]-R[i][1])*f]}s-=sg[i]}};
+P($('tA'),0,0,26,'gain');P($('tB'),0,0,26,'ink');
+const SA=P($('sold'),0,0,22,'ink'),SB=P($('sold'),0,0,22,'ink');
+const BL=[];for(let r=0;r<4;r++)for(let c=0;c<6;c++)BL.push(mk('rect',{x:320+c*150,y:250+r*125,width:110,height:85,rx:6,fill:'var(--line)'},$('blocks')));
+const RA=[[250,455],[290,355],[1215,355],[1255,455]],RB=[[250,505],[290,730],[900,730],[900,605],[1215,605],[1255,505]];
+[RA,RB].forEach(R=>mk('path',{d:'M'+R.join('L'),fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'4 10','stroke-linecap':'round'},$('routes')));
+const SQD=[0,1].map(()=>{const g=mk('g',{},$('squads'));[[-14,-10],[14,-10],[0,12]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:10,class:'ink'},g));return g});
+const SQ=[0,1].map(i=>{const g=$('q'+i),ps=[-40,0,40].map(dx=>P(g,dx,-20,16,'ink')),w=mk('g',{},g);mk('path',{d:'M0 -120L28 -70H-28Z',class:'loss'},w);mk('path',{d:'M0 -108v18M0 -80v1',stroke:'var(--stage)','stroke-width':6,'stroke-linecap':'round'},w);return{ps,w}});
+const SI=[520,830,1140].map(x=>{const g=mk('g',{},$('silos')),c=x+130;mk('rect',{x,y:260,width:260,height:440,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);mk('rect',{x:c-30,y:320,width:60,height:60,rx:8,class:'gain'},g);[-60,0,60].forEach(d=>{mk('path',{d:`M${c+d} 600L${c} 385`,stroke:'var(--gain)','stroke-width':2,'stroke-dasharray':'4 6'},g);mk('circle',{cx:c+d,cy:620,r:18,class:'ink'},g)});const tx=mk('text',{x:c,y:678,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent='OWN TASK';return g});
+[805,1115].forEach(x=>mk('path',{d:`M${x-18} 462l36 36m0-36l-36 36`,stroke:'var(--loss)','stroke-width':8,'stroke-linecap':'round'},$('obst')));
+const MG=P($('ppl'),390,520,26,'ink');[560,680].forEach(x=>P($('ppl'),x,570,20,'ink'));[960,1080,1200].forEach(x=>P($('ppl'),x,570,20,'ink'));
+[200,470,740].forEach(x=>{mk('rect',{x,y:440,width:200,height:160,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('teams6'));[-50,0,50].forEach(d=>mk('circle',{cx:x+100+d,cy:520,r:16,class:'ink'},$('teams6')))});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const h0=SC[0][1]/K*.55,dr=40*p(u,h0,h0+1.5);
+$('tA').setAttribute('transform',`translate(${1180-dr} 480)`);$('tB').setAttribute('transform',`translate(${1380+dr} 480)`);$('tArc').setAttribute('opacity',1-p(u,h0,h0+1.2));
+
+const T=TM.cover_fire,L=TM.leapfrog;
+const aX=200+320*p(u,T+.8,T+2.8)+840*p(u,L+1.4,L+2.8),bX=200+620*p(u,L,L+1.4)+540*p(u,L+2.8,L+4.2);
+let cv=-1;if(u>=T&&u<L)cv=1;else if(u>=L&&u<L+1.4)cv=0;else if(u>=L+1.4&&u<L+2.8)cv=1;else if(u>=L+2.8&&u<L+4.2)cv=0;
+const hop=8*Math.abs(Math.sin(t*9));
+SA.setAttribute('transform',`translate(${aX.toFixed(1)} ${(400-(cv===1?hop:0)).toFixed(1)})`);SA.setAttribute('class',cv===1?'gain':'ink');
+SB.setAttribute('transform',`translate(${bX.toFixed(1)} ${(600-(cv===0?hop:0)).toFixed(1)})`);SB.setAttribute('class',cv===0?'gain':'ink');
+$('lA').setAttribute('x',aX.toFixed(1));$('lA').textContent=cv===0?'COVER':cv===1?'MOVE':'';
+$('lB').setAttribute('x',bX.toFixed(1));$('lB').textContent=cv===1?'COVER':cv===0?'MOVE':'';
+const cx=(cv===1?bX:aX)+40,cy=cv===1?600:400;
+$('cone').setAttribute('transform',`translate(${cx.toFixed(1)} ${cy}) scale(${cl((1470-cx)/320,0,1).toFixed(3)} 1)`);$('cone').setAttribute('opacity',cv<0?0:1);
+rise($('sold'),p(u,TM.two_soldiers,TM.two_soldiers+.5));rise($('tac'),p(u,L+3.3,L+3.9));
+
+BL.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.ramadi_city+i*.03,TM.ramadi_city+i*.03+.4)));
+rise($('op'),p(u,TM.ramadi_city,TM.ramadi_city+.5));rise($('base'),p(u,TM.ramadi_city+.6,TM.ramadi_city+1.1));
+rise($('routes'),p(u,TM.two_squads,TM.two_squads+.5));rise($('squads'),p(u,TM.two_squads,TM.two_squads+.5));
+const S2=TM.two_squads+3.7,k2=p(u,S2,S2+5.5);
+[[RA,.62*k2],[RB,.3*k2]].forEach(([R,k],i)=>{const q=along(R,k);SQD[i].setAttribute('transform',`translate(${q[0].toFixed(1)} ${q[1].toFixed(1)})`)});
+rise($('own'),p(u,S2,S2+.5));
+
+const E=TM.exposed_icon,F=E+11.3,dg=300*p(u,TM.open_gap,TM.open_gap+2.5)*(1-p(u,F,F+1.5)),ex=u>=E&&u<F;
+[640-dg,960+dg].forEach((x,i)=>{$('q'+i).setAttribute('transform',`translate(${x.toFixed(1)} 470)`);$('rg'+i).setAttribute('cx',x.toFixed(1));$('rg'+i).style.stroke=u>=F?'var(--gain)':ex?'var(--loss)':'var(--line)';SQ[i].w.setAttribute('opacity',ex?p(u,E,E+.4):0);SQ[i].ps.forEach(g=>g.setAttribute('class',ex?'loss':'ink'))});
+$('gapL').setAttribute('opacity',p(u,TM.open_gap+1.5,TM.open_gap+2.5)*(1-p(u,F,F+.6)));
+rise($('forgot'),p(u,E+4.1,E+4.7));rise($('fix'),p(u,E+9.3,E+9.9));
+
+rise($('mag'),p(u,TM.magnifier,TM.magnifier+.5));$('magm').setAttribute('transform',`translate(${(8*Math.sin(t*1.5)).toFixed(1)} ${(6*Math.cos(t*1.2)).toFixed(1)})`);
+SI.forEach((g,i)=>rise(g,p(u,TM.desk_silos+i*.4,TM.desk_silos+i*.4+.5)));
+rise($('obst'),p(u,TM.desk_silos+4.2,TM.desk_silos+4.7));rise($('big'),p(u,TM.desk_silos+8.4,TM.desk_silos+9));
+
+const AM=TM.angry_manager,SG=TM.shared_goal;
+rise($('bld'),p(u,TM.office_build,TM.office_build+.5));rise($('ppl'),p(u,TM.office_build+.6,TM.office_build+1.1));
+MG.setAttribute('class',u>=AM&&u<SG+1?'loss':'ink');
+$('bub').setAttribute('opacity',p(u,AM+.3,AM+.8)*(1-p(u,SG+1,SG+1.5)));
+rise($('goal'),p(u,SG,SG+.6));rise($('same5'),p(u,SG+1,SG+1.6));
+$('wall5').setAttribute('stroke-dasharray',u>=SG+1?'14 14':'none');
+
+const co=p(u,TM.real_enemy-.6,TM.real_enemy-.1);
+rise($('co'),co);$('walls').setAttribute('opacity',co*(1-.85*p(u,TM.bridge,TM.bridge+1)));
+rise($('foe'),p(u,TM.real_enemy+.4,TM.real_enemy+.9));rise($('help'),p(u,TM.handshake,TM.handshake+.6));
+rise($('brg'),p(u,TM.bridge+.5,TM.bridge+1));rise($('alone'),p(u,TM.bridge+4.2,TM.bridge+5));
+
+const C7=[TM.phone_call,TM.question_mark,TM.question_mark+3.4,TM.question_mark+7.2];
+let pg=0;C7.forEach((a,i)=>{rise($('k'+i),p(u,a,a+.5));pg+=340*p(u,a,a+.8)});
+$('prog').setAttribute('width',pg.toFixed(1));$('wav').setAttribute('opacity',(.4+.6*Math.abs(Math.sin(t*3))).toFixed(2));
+rise($('credit'),p(u,C7[3]+.6,C7[3]+1.2));
+
+const Q=SC[8][0]/K;
+rise($('qa'),p(u,Q+.3,Q+.8));rise($('qb'),p(u,Q+.7,Q+1.2));rise($('qc'),p(u,Q+1.1,Q+1.6));rise($('qd'),p(u,Q+4.6,Q+5.2));
+const c8=(t%4)/4;$('fa').setAttribute('cx',(1060+200*ease(cl(c8*2))).toFixed(1));$('fb').setAttribute('cx',(1160+200*ease(cl(c8*2-1))).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.0;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

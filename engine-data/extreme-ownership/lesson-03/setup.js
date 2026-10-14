@@ -1,0 +1,13 @@
+const P=(par,x,y,r,cls)=>{const g=mk('g',cls?{class:cls}:{},par);mk('circle',{cx:x,cy:y,r},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`},g);return g};
+const along=(R,k)=>{const sg=[];let tot=0;for(let i=1;i<R.length;i++){const d=Math.hypot(R[i][0]-R[i-1][0],R[i][1]-R[i-1][1]);sg.push(d);tot+=d}let s=k*tot;for(let i=0;i<sg.length;i++){if(s<=sg[i]||i===sg.length-1){const f=cl(s/sg[i]);return[R[i][0]+(R[i+1][0]-R[i][0])*f,R[i][1]+(R[i+1][1]-R[i][1])*f]}s-=sg[i]}};
+P($('tA'),0,0,26,'gain');P($('tB'),0,0,26,'ink');
+const SA=P($('sold'),0,0,22,'ink'),SB=P($('sold'),0,0,22,'ink');
+const BL=[];for(let r=0;r<4;r++)for(let c=0;c<6;c++)BL.push(mk('rect',{x:320+c*150,y:250+r*125,width:110,height:85,rx:6,fill:'var(--line)'},$('blocks')));
+const RA=[[250,455],[290,355],[1215,355],[1255,455]],RB=[[250,505],[290,730],[900,730],[900,605],[1215,605],[1255,505]];
+[RA,RB].forEach(R=>mk('path',{d:'M'+R.join('L'),fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'4 10','stroke-linecap':'round'},$('routes')));
+const SQD=[0,1].map(()=>{const g=mk('g',{},$('squads'));[[-14,-10],[14,-10],[0,12]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:10,class:'ink'},g));return g});
+const SQ=[0,1].map(i=>{const g=$('q'+i),ps=[-40,0,40].map(dx=>P(g,dx,-20,16,'ink')),w=mk('g',{},g);mk('path',{d:'M0 -120L28 -70H-28Z',class:'loss'},w);mk('path',{d:'M0 -108v18M0 -80v1',stroke:'var(--stage)','stroke-width':6,'stroke-linecap':'round'},w);return{ps,w}});
+const SI=[520,830,1140].map(x=>{const g=mk('g',{},$('silos')),c=x+130;mk('rect',{x,y:260,width:260,height:440,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);mk('rect',{x:c-30,y:320,width:60,height:60,rx:8,class:'gain'},g);[-60,0,60].forEach(d=>{mk('path',{d:`M${c+d} 600L${c} 385`,stroke:'var(--gain)','stroke-width':2,'stroke-dasharray':'4 6'},g);mk('circle',{cx:c+d,cy:620,r:18,class:'ink'},g)});const tx=mk('text',{x:c,y:678,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent='OWN TASK';return g});
+[805,1115].forEach(x=>mk('path',{d:`M${x-18} 462l36 36m0-36l-36 36`,stroke:'var(--loss)','stroke-width':8,'stroke-linecap':'round'},$('obst')));
+const MG=P($('ppl'),390,520,26,'ink');[560,680].forEach(x=>P($('ppl'),x,570,20,'ink'));[960,1080,1200].forEach(x=>P($('ppl'),x,570,20,'ink'));
+[200,470,740].forEach(x=>{mk('rect',{x,y:440,width:200,height:160,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('teams6'));[-50,0,50].forEach(d=>mk('circle',{cx:x+100+d,cy:520,r:16,class:'ink'},$('teams6')))});

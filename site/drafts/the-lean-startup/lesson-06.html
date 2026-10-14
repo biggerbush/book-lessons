@@ -1,0 +1,374 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Lean Startup Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of The Lean Startup: When experiments show your strategy isn&#x27;t working, change course while keeping what you&#x27;ve learned, rather than pushing on or giving up. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE LEAN STARTUP · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Pivot or</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">persevere?</text>
+<text class="b" x="120" y="600" font-size="32">When the plan stalls, turn on one foot instead of quitting.</text>
+<path class="s-line" d="M1120 400V720H1480" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline id="tline" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse id="tarc" cx="1300" cy="640" rx="80" ry="20" fill="none" class="s-gain" stroke-width="5" stroke-dasharray="18 12"/>
+<g id="tman"></g>
+<g id="tlab"><text class="m" x="1120" y="770" font-size="20">NOT DYING · NOT GROWING</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The land of the living dead.</text>
+<text class="b" x="120" y="176" font-size="32">Not dying. Not growing. Just stuck.</text>
+<g id="ax1"><path class="s-ink" d="M160 260V760H960" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="172" y="248" font-size="20">CUSTOMERS</text><text class="m" x="960" y="796" font-size="20" text-anchor="end">TIME</text></g>
+<path id="hope" class="s-loss" d="M180 720C700 710 860 520 940 300" fill="none" stroke-width="5" stroke-dasharray="12 12"/>
+<polyline id="zl" class="s-ink" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="team"></g><g id="chips"></g>
+<g id="teaml"><text class="m" x="1100" y="760" font-size="22">THE TEAM KEEPS BUILDING</text></g>
+<g id="hopet"><text class="d" x="120" y="848" font-size="52"><tspan style="fill:var(--loss)">Hope</tspan> is not a strategy.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two bad reflexes.</text>
+<text class="b" x="120" y="176" font-size="32">When results disappoint, founders push on or give up.</text>
+<g id="org"></g>
+<g id="learnl"><text class="m" x="500" y="494" font-size="22" text-anchor="middle" style="fill:var(--gain)">WHAT YOU LEARNED</text></g>
+<g id="pushg"><path class="s-ink" d="M300 480L890 312" stroke-width="7" stroke-linecap="round"/><rect class="loss" x="900" y="220" width="30" height="180" rx="6"/>
+<text class="m" x="960" y="300" font-size="26">PUSH ON</text><text class="m" x="960" y="338" font-size="22">SAME PLAN</text></g>
+<g id="giveg"><path class="s-ink" d="M300 560L860 700" stroke-width="7" stroke-linecap="round"/>
+<path class="s-ink" d="M870 670h110M880 680h90l-10 100h-70z" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="1000" y="720" font-size="26">GIVE UP</text><text class="m" x="1000" y="756" font-size="22">THROW IT ALL AWAY</text></g>
+<g id="bdots"></g>
+<g id="pivg"><path class="s-gain" d="M300 520H780Q860 520 920 490L1160 400" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="gain" cx="1164" cy="398" r="13"/><circle class="gain" cx="400" cy="520" r="12"/><circle class="gain" cx="500" cy="520" r="12"/><circle class="gain" cx="600" cy="520" r="12"/>
+<text class="d" x="1200" y="420" font-size="56" style="fill:var(--gain)">PIVOT</text></g>
+<g id="third"><text class="d" x="120" y="840" font-size="44">Ries offers a third path between the extremes.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What a pivot is.</text>
+<text class="b" x="120" y="176" font-size="32">Keep one foot planted. Turn to find a new direction.</text>
+<g id="plyr">
+<ellipse class="s-muted" cx="440" cy="720" rx="150" ry="46" fill="none" stroke-width="3" stroke-dasharray="8 10"/>
+<line class="s-ink" x1="425" y1="573" x2="440" y2="720" stroke-width="10" stroke-linecap="round"/>
+<line id="fleg" class="s-ink" x1="455" y1="573" x2="590" y2="720" stroke-width="10" stroke-linecap="round"/>
+<g id="pbody"></g>
+<line class="s-ink" x1="480" y1="520" x2="518" y2="522" stroke-width="10" stroke-linecap="round"/>
+<circle class="gain" cx="540" cy="520" r="26"/><path d="M514 520h52M540 494v52" stroke="var(--on-gain)" stroke-width="3"/>
+<circle id="ffoot" class="ink" r="18"/>
+<circle class="gain" cx="440" cy="720" r="22"/>
+<text class="m" x="440" y="822" font-size="24" text-anchor="middle">PIVOT FOOT</text>
+</g>
+<g id="pivl"><text class="d" x="640" y="470" font-size="56" style="fill:var(--gain)">PIVOT</text></g>
+<g id="strat"><text class="m" x="880" y="290" font-size="22">YOUR STRATEGY</text><g id="blocks"></g></g>
+<g id="paid"><text class="m" x="880" y="762" font-size="24">KEEP THE LESSONS</text><text class="m" x="880" y="796" font-size="24">YOU ALREADY PAID FOR</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Votizen: a network for voters.</text>
+<text class="b" x="120" y="176" font-size="32">Founded by David Binder.</text>
+<g id="net"><g id="nlines"></g>
+<rect class="s-ink" x="410" y="490" width="80" height="64" rx="8" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M430 506h40" stroke-width="6" stroke-linecap="round"/>
+<g id="nodes"></g>
+<text class="m" x="450" y="800" font-size="20" text-anchor="middle">VERIFIED VOTERS</text></g>
+<g id="badges"></g>
+<g id="civ"><text class="m" x="450" y="836" font-size="20" text-anchor="middle">BUILT TO BOOST CIVIC ENGAGEMENT</text></g>
+<g id="bars"><text class="m" x="960" y="300" font-size="22">EARLY TESTS</text>
+<path class="s-ink" d="M960 690H1440" stroke-width="5" stroke-linecap="round"/>
+<rect id="bar1" class="ink" x="1000" width="160" rx="6"/><rect id="bar2" class="loss" x="1240" width="160" rx="6"/>
+<text class="m" x="1080" y="726" font-size="20" text-anchor="middle">SIGNED UP</text><text class="m" x="1320" y="726" font-size="20" text-anchor="middle">CAME BACK</text></g>
+<g id="few"><text class="d" x="960" y="790" font-size="40">Too few came back.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A series of pivots.</text>
+<text class="b" x="120" y="176" font-size="32">Instead of quitting, Votizen kept testing new ideas.</text>
+<circle class="gain" cx="200" cy="660" r="18"/><text class="m" x="200" y="712" font-size="24" text-anchor="middle">VOTIZEN</text>
+<polyline id="vp" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline id="vg" class="s-gain" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="vnodes"></g>
+<circle id="bead" class="gain" r="14"/>
+<g id="env"><rect x="1260" y="300" width="200" height="130" rx="10" fill="var(--stage)" class="s-gain" stroke-width="6"/>
+<path class="s-gain" d="M1260 300L1360 375L1460 300" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<text class="d" x="1360" y="510" font-size="64" text-anchor="middle" style="fill:var(--gain)">2gov</text>
+<text class="m" x="1350" y="552" font-size="22" text-anchor="middle">CONTACT YOUR</text><text class="m" x="1350" y="584" font-size="22" text-anchor="middle">ELECTED OFFICIALS</text></g>
+<g id="reuse"><text class="d" x="120" y="820" font-size="44">Each turn reused what came before.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet on a schedule.</text>
+<text class="b" x="120" y="176" font-size="32">Hold a regular pivot-or-persevere meeting.</text>
+<g id="cal"><rect class="s-ink" x="140" y="260" width="360" height="330" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="140" y="260" width="360" height="64" rx="16"/>
+<path class="s-ink" d="M220 244v32M420 244v32" stroke-width="8" stroke-linecap="round"/><g id="cells"></g>
+<text class="m" x="140" y="634" font-size="24">EVERY FEW WEEKS</text><text class="m" x="140" y="668" font-size="24">OR MONTHS</text></g>
+<g id="tbl"><ellipse cx="790" cy="470" rx="140" ry="80" fill="var(--line)"/>
+<rect x="716" y="440" width="44" height="54" rx="4" fill="var(--stage)"/><rect x="772" y="430" width="44" height="54" rx="4" fill="var(--stage)"/><rect x="828" y="440" width="44" height="54" rx="4" fill="var(--stage)"/>
+<path class="s-gain" d="M726 484v-14M738 484v-22M750 484v-30M782 474v-10M794 474v-20M806 474v-28M838 484v-26M850 484v-16M862 484v-8" stroke-width="5"/>
+<g id="heads"></g>
+<text class="m" x="790" y="694" font-size="24" text-anchor="middle">LOOK AT THE EVIDENCE</text></g>
+<g id="fork"><path d="M1270 740V540L1130 330M1270 540L1410 330" fill="none" stroke="var(--line)" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/></g>
+<circle id="walker" class="ink" cx="1270" r="16"/>
+<g id="signs"><text class="d" x="1130" y="300" font-size="36" text-anchor="middle">STAY</text><text class="d" x="1410" y="300" font-size="36" text-anchor="middle" style="fill:var(--gain)">PIVOT</text></g>
+<g id="choice"><text class="d" x="120" y="820" font-size="40">Stay the course, or change one key assumption.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Many kinds of pivot.</text>
+<text class="b" x="120" y="176" font-size="32">Change one part of the strategy at a time.</text>
+<g id="zp"><rect class="s-line" x="120" y="230" width="640" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">ZOOM IN</text>
+<rect class="s-ink" x="260" y="320" width="360" height="280" rx="12" fill="none" stroke-width="5"/>
+<g id="tiles"></g>
+<rect id="grow" rx="10" fill="var(--gain)" fill-opacity=".3" stroke="var(--gain)" stroke-width="6"/>
+<path id="zarr" class="s-gain" d="M350 420L570 560M570 560h-34M570 560v-34" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="wp"><text class="d" x="440" y="474" font-size="40" text-anchor="middle">WHOLE PRODUCT</text></g>
+<g id="zc1"><text class="m" x="150" y="652" font-size="22" style="fill:var(--ink)">ONE FEATURE</text></g>
+<g id="zc2"><text class="m" x="150" y="690" font-size="22" style="fill:var(--ink)">GROWS INTO THE WHOLE PRODUCT</text></g>
+<g id="lens"><circle class="s-ink" r="56" fill="none" stroke-width="8"/><path class="s-ink" d="M40 40L90 90" stroke-width="14" stroke-linecap="round"/></g></g>
+<g id="sp"><rect class="s-line" x="840" y="230" width="640" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="280" font-size="22">NEW CUSTOMER SEGMENT</text>
+<rect class="ink" x="1100" y="420" width="120" height="120" rx="12"/>
+<text class="m" x="1160" y="582" font-size="22" text-anchor="middle">SAME PRODUCT</text>
+<g id="oldc"><path class="s-muted" d="M1092 480H1030" stroke-width="5" stroke-linecap="round"/></g>
+<text class="m" x="960" y="624" font-size="22" text-anchor="middle" style="fill:var(--muted)">OLD</text>
+<g id="newc"><path class="s-gain" d="M1228 480h62m-16-16 16 16-16 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1360" y="624" font-size="22" text-anchor="middle" style="fill:var(--gain)">NEW</text></g></g>
+<g id="fresh"><text class="d" x="120" y="810" font-size="44">A fresh hypothesis to test, not a wild guess.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">When will you hold your</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">pivot</tspan> or persevere</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">meeting?</text></g>
+<g id="ql"><text class="m" x="143" y="700" font-size="26">BRING THE EVIDENCE · DECIDE HONESTLY</text></g>
+<rect class="s-ink" x="1300" y="600" width="160" height="160" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="1300" y="600" width="160" height="40" rx="14"/>
+<g id="qcells"></g>
+<circle id="ring" class="s-gain" cx="1380" cy="700" r="32" fill="none" stroke-width="6" stroke-dasharray="202" stroke-linecap="round"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="126" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:06</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Pivot or Persevere&rdquo;, from <em>The Lean Startup</em> by Eric Ries. The Votizen example, the living dead trap, the pivot meeting and the pivot types are as reported in the book. The basketball player, flat line chart and signup drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=126, SC=[[0.0, 7.1], [7.1, 25.1], [25.1, 40.1], [40.1, 53.3], [53.3, 68.2], [68.2, 84.6], [84.6, 99.9], [99.9, 115.1], [115.1, 126.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Pivot or Persevere", "The Living Dead", "Two Bad Reflexes", "What a Pivot Is", "Votizen Begins", "Votizen Pivots", "Meet on a Schedule", "Many Kinds of Pivot", "Your Move"];
+const TM={"stuck_founder": 0.0, "zombie_co": 7.36, "flat_line": 11.76, "push_on": 25.36, "give_up": 30.32, "basketball": 40.44, "new_hypo": 47.84, "voter_net": 53.6, "low_signups": 63.68, "tool_screen": 68.48, "mail_icon": 74.0, "calendar": 84.88, "team_table": 91.12, "fork_road": 94.56, "zoom_lens": 100.24, "new_crowd": 106.8, "your_calendar": 115.36};
+const fig=(g,x,y,r,cls)=>{const e=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:cls},e);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},e);return e};
+const pt=(P,k)=>{const n=P.length-1,f=cl(k)*n,i=Math.min(Math.floor(f),n-1),r=f-i,a=P[i],b=P[i+1];return [a[0]+(b[0]-a[0])*r,a[1]+(b[1]-a[1])*r]};
+const part=(P,k)=>{const n=P.length-1,f=cl(k)*n,i=Math.floor(f);let s=P.slice(0,i+1).map(q=>q.join(',')).join(' ');if(i<n){const q=pt(P,k);s+=' '+q[0].toFixed(1)+','+q[1].toFixed(1)}return s};
+const mtext=(g,x,y,fs,s,o)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':fs,class:'m'},o||{}),g);e.textContent=s;return e};
+
+fig($('tman'),1300,540,24,'gain');
+const TL=[];for(let x=1140;x<=1460;x+=20)TL.push([x,+(640+4*Math.sin(x/23)).toFixed(1)]);
+
+const ZL=[];for(let x=180;x<=940;x+=40)ZL.push([x,+(720-(x-180)*.08+8*Math.sin(x/37)).toFixed(1)]);
+[1120,1240,1360].forEach(x=>fig($('team'),x,600,24,'ink'));
+const CP=[0,1,2,3].map(i=>{const g=mk('g',{},$('chips')),y=500-i*60;mk('rect',{x:1100,y:y,width:280,height:46,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mtext(g,1240,y+31,20,'+ NEW FEATURE',{'text-anchor':'middle'});return g});
+
+fig($('org'),230,450,26,'ink');
+const BD=[[400,451],[500,423],[600,395],[400,585],[500,610],[600,635]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:12,class:'gain'},$('bdots')));
+
+fig($('pbody'),440,430,34,'ink');
+const BK=['CUSTOMER','PROBLEM','SOLUTION','CHANNEL'].map((s,i)=>{const g=mk('g',{},$('blocks')),y=320+i*100;
+  const r=mk('rect',{x:880,y:y,width:560,height:80,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const tx=mtext(g,910,y+50,24,s);const k=mtext(g,1410,y+50,22,i===2?'':'✓ KEPT',{'text-anchor':'end',style:'fill:var(--gain)'});return [g,r,tx,k]});
+
+const NP=[0,1,2,3,4,5].map(i=>{const a=(i*60+30)*Math.PI/180;return [450+200*Math.cos(a),520+200*Math.sin(a)]});
+NP.forEach((q,i)=>{const n=NP[(i+1)%6];mk('path',{d:'M450 520L'+q[0].toFixed(0)+' '+q[1].toFixed(0)+'L'+n[0].toFixed(0)+' '+n[1].toFixed(0),class:'s-line','stroke-width':4,fill:'none'},$('nlines'))});
+const ND=NP.map(q=>mk('circle',{cx:q[0],cy:q[1],r:28,class:'ink'},$('nodes')));
+NP.forEach(q=>{const x=q[0]+22,y=q[1]-22;mk('circle',{cx:x,cy:y,r:13,class:'gain'},$('badges'));mk('path',{d:'M'+(x-6)+' '+y+'l4 5 8-9',fill:'none',stroke:'var(--on-gain)','stroke-width':3,'stroke-linecap':'round'},$('badges'))});
+
+const P=[[200,660],[440,660],[540,440],[760,440],[860,660],[1080,660],[1220,390]];
+const VN=P.slice(1,6).map(q=>{const g=mk('g',{},$('vnodes'));mk('circle',{cx:q[0],cy:q[1],r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mtext(g,q[0],q[1]>500?712:404,22,'NEW TEST',{'text-anchor':'middle'});return g});
+
+const MK=[];for(let i=0;i<20;i++){const c=mk('rect',{x:168+(i%5)*62,y:350+Math.floor(i/5)*54,width:52,height:44,rx:6,stroke:'var(--line)','stroke-width':3,fill:'var(--stage)'},$('cells'));if(i===2||i===17)MK.push(c)}
+const HD=[0,1,2,3,4,5].map(i=>{const a=(i*60+30)*Math.PI/180;return mk('circle',{cx:790+210*Math.cos(a),cy:470+140*Math.sin(a),r:26,class:'ink'},$('heads'))});
+
+// zoom-in: product made of six feature tiles
+const TI=[];for(let i=0;i<6;i++)TI.push(mk('rect',{x:280+(i%3)*112,y:340+Math.floor(i/3)*130,width:96,height:110,rx:10,fill:'var(--line)'},$('tiles')));
+[[930,420],[990,420],[930,520],[990,520]].forEach(q=>fig($('oldc'),q[0],q[1],14,'ink'));
+[[1330,420],[1390,420],[1330,520],[1390,520]].forEach(q=>fig($('newc'),q[0],q[1],14,'gain'));
+
+for(let i=0;i<6;i++)mk('rect',{x:1322+(i%3)*44,y:662+Math.floor(i/3)*48,width:28,height:28,rx:5,fill:'var(--line)'},$('qcells'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const T0=TM.stuck_founder,L=$('tline');
+  L.setAttribute('points',part(TL,p(u,T0,T0+1.6))); L.style.stroke=u>=T0+3.8?'var(--loss)':'var(--ink)';
+  rise($('tman'),p(u,T0+.6,T0+1.1)); $('tarc').setAttribute('opacity',p(u,T0+1.2,T0+1.8)); $('tarc').style.strokeDashoffset=(-t*30).toFixed(1);
+  rise($('tlab'),p(u,T0+3.8,T0+4.3));
+
+  rise($('ax1'),p(u,TM.zombie_co,TM.zombie_co+.5)); $('zl').setAttribute('points',part(ZL,p(u,TM.flat_line,TM.flat_line+3)));
+  const f1=TM.flat_line+5.4; rise($('team'),p(u,f1,f1+.5)); rise($('teaml'),p(u,f1,f1+.5));
+  CP.forEach((c,i)=>rise(c,p(u,f1+.6+i*.6,f1+1+i*.6)));
+  const h1=TM.flat_line+10.8; $('hope').setAttribute('opacity',p(u,h1,h1+.6)); rise($('hopet'),p(u,h1,h1+.6));
+
+  rise($('pushg'),p(u,TM.push_on,TM.push_on+.5)); rise($('giveg'),p(u,TM.give_up,TM.give_up+.5));
+  const w2=TM.give_up+3.3,k2=p(u,w2,w2+.8);
+  rise($('learnl'),p(u,TM.push_on+.4,TM.push_on+.9));
+  // lost lessons drift AWAY from the label: upper dots up, lower dots down
+  BD.forEach((d,i)=>{const a=i<3?TM.push_on:TM.give_up; d.setAttribute('opacity',(p(u,a+.3,a+.7)*(1-.75*k2)).toFixed(2)); d.setAttribute('transform','translate(0 '+((i<3?-40:40)*k2).toFixed(1)+')'); d.setAttribute('class',k2>0?'loss':'gain')});
+  rise($('pivg'),p(u,TM.give_up+6.7,TM.give_up+7.2)); rise($('third'),p(u,TM.give_up+7,TM.give_up+7.6));
+
+  rise($('plyr'),p(u,TM.basketball,TM.basketball+.5));
+  const a3=1.55+1.35*Math.sin(t*1.4),fx=(440+150*Math.cos(a3)).toFixed(1),fy=(720+46*Math.sin(a3)).toFixed(1);
+  $('fleg').setAttribute('x2',fx); $('fleg').setAttribute('y2',fy); $('ffoot').setAttribute('cx',fx); $('ffoot').setAttribute('cy',fy);
+  rise($('pivl'),p(u,TM.basketball+6.5,TM.basketball+7));
+  rise($('strat'),p(u,TM.new_hypo,TM.new_hypo+.5));
+  const s3=p(u,TM.new_hypo+1.2,TM.new_hypo+2.2),sw=s3>=.5;
+  BK[2][0].setAttribute('transform','translate('+(30*Math.sin(Math.PI*s3)).toFixed(1)+' 0)');
+  BK[2][1].setAttribute('fill',sw?'var(--gain)':'var(--stage)'); BK[2][1].setAttribute('stroke',sw?'var(--gain)':'var(--ink)');
+  BK[2][2].textContent=sw?'NEW HYPOTHESIS':'SOLUTION'; BK[2][2].style.fill=sw?'var(--on-gain)':'';
+  BK.forEach((b,i)=>b[3].setAttribute('opacity',p(u,TM.new_hypo+2.4+i*.2,TM.new_hypo+2.8+i*.2)));
+  rise($('paid'),p(u,TM.new_hypo+3,TM.new_hypo+3.6));
+
+  rise($('net'),p(u,TM.voter_net,TM.voter_net+.6)); rise($('badges'),p(u,TM.voter_net+4.6,TM.voter_net+5.1)); rise($('civ'),p(u,TM.voter_net+4.6,TM.voter_net+5.1));
+  const fd=p(u,TM.low_signups+1.5,TM.low_signups+2.3); ND.forEach((n,i)=>n.setAttribute('opacity',[0,2,3,5].includes(i)?1-.75*fd:1));
+  rise($('bars'),p(u,TM.low_signups,TM.low_signups+.4));
+  const b1=330*p(u,TM.low_signups,TM.low_signups+1),b2=56*p(u,TM.low_signups+.8,TM.low_signups+1.6);
+  $('bar1').setAttribute('y',690-b1); $('bar1').setAttribute('height',b1); $('bar2').setAttribute('y',690-b2); $('bar2').setAttribute('height',b2);
+  rise($('few'),p(u,TM.low_signups+1.6,TM.low_signups+2.2));
+
+  const kp=p(u,TM.tool_screen,TM.mail_icon),bq=pt(P,kp); $('vp').setAttribute('points',part(P,kp));
+  VN.forEach((n,i)=>rise(n,cl((kp*6-i-.7)/.3)));
+  $('bead').setAttribute('cx',bq[0].toFixed(1)); $('bead').setAttribute('cy',bq[1].toFixed(1)); $('bead').setAttribute('opacity',u>=TM.tool_screen?1:0);
+  rise($('env'),p(u,TM.mail_icon,TM.mail_icon+.6));
+  const g5=TM.mail_icon+6.6; $('vg').setAttribute('points',part(P,p(u,g5,g5+1.5))); rise($('reuse'),p(u,g5,g5+.6));
+
+  rise($('cal'),p(u,TM.calendar,TM.calendar+.5)); MK.forEach((c,i)=>c.setAttribute('fill',u>=TM.calendar+1+i*.6?'var(--gain)':'var(--stage)'));
+  rise($('tbl'),p(u,TM.team_table,TM.team_table+.5)); HD.forEach((h,i)=>rise(h,p(u,TM.team_table+.3+i*.15,TM.team_table+.7+i*.15)));
+  rise($('fork'),p(u,TM.fork_road,TM.fork_road+.5));
+  $('walker').setAttribute('cy',(740-200*p(u,TM.fork_road+.5,TM.fork_road+2)).toFixed(1)); $('walker').setAttribute('opacity',u>=TM.fork_road+.3?1:0);
+  rise($('signs'),p(u,TM.fork_road+2,TM.fork_road+2.5)); rise($('choice'),p(u,TM.fork_road+2.5,TM.fork_road+3.1));
+
+  const z=TM.zoom_lens; rise($('zp'),p(u,z,z+.5));
+  const lk=p(u,z+.6,z+2),e=p(u,z+2.6,z+3.6);
+  $('lens').setAttribute('transform','translate('+(640-312*lk).toFixed(1)+' '+(610-215*lk).toFixed(1)+')'); $('lens').setAttribute('opacity',1-p(u,z+2.4,z+2.9));
+  TI.forEach((r,i)=>{r.setAttribute('fill',i===0&&lk>=1?'var(--gain)':'var(--line)'); r.setAttribute('opacity',(1-e).toFixed(2))});
+  const G=$('grow'); G.setAttribute('x',(280-20*e).toFixed(1)); G.setAttribute('y',(340-20*e).toFixed(1));
+  G.setAttribute('width',(96+264*e).toFixed(1)); G.setAttribute('height',(110+170*e).toFixed(1)); G.setAttribute('opacity',e>0?1:0);
+  $('zarr').setAttribute('opacity',Math.sin(Math.PI*e).toFixed(2));
+  rise($('wp'),p(u,z+3.4,z+3.9)); rise($('zc1'),p(u,z+2,z+2.4)); rise($('zc2'),p(u,z+3.4,z+3.9));
+  rise($('sp'),p(u,TM.new_crowd,TM.new_crowd+.5));
+  const nc=p(u,TM.new_crowd+1.2,TM.new_crowd+1.7); rise($('newc'),nc); $('oldc').setAttribute('opacity',(1-.55*nc).toFixed(2));
+  rise($('fresh'),p(u,TM.new_crowd+5,TM.new_crowd+5.6));
+
+  const q=TM.your_calendar; rise($('qa'),p(u,q,q+.5)); rise($('qb'),p(u,q+.4,q+.9)); rise($('qc'),p(u,q+.8,q+1.3));
+  $('ring').style.strokeDashoffset=(202*(1-p(u,q+1.5,q+2.5))).toFixed(1); rise($('ql'),p(u,q+5.4,q+6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:122.75;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,369 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grit Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Grit: Experts improve through deliberate practice: targeting a specific weakness, working on it with full focus, getting feedback, and repeating. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GRIT · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Practice that actually</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">makes you better.</text>
+<text class="b" x="120" y="600" font-size="32">Why some practice works, and most practice doesn’t.</text>
+<rect class="s-ink" x="1160" y="220" width="300" height="290" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1160" y="220" width="300" height="50"/>
+<path class="s-line" d="M1210 270V510M1260 270V510M1310 270V510M1360 270V510M1410 270V510M1160 330H1460M1160 390H1460M1160 450H1460" stroke-width="2"/>
+<g id="cal"></g>
+<path class="s-ink" d="M1170 600V720H1460" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path id="flat" class="s-loss" d="M1180 690H1450" stroke-width="7" stroke-linecap="round" pathLength="1"/>
+<text class="m" x="1180" y="590" font-size="20">SKILL</text>
+<text class="m" x="1460" y="752" font-size="20" text-anchor="end">YEARS OF PRACTICE</text>
+</g>
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">More hours isn’t enough.</text>
+<text class="b" x="120" y="176" font-size="32">We drive almost every day, yet stopped improving long ago.</text>
+<g id="car">
+<path class="s-line" d="M120 600H640" stroke-width="6"/>
+<path id="road" class="s-muted" d="M120 636H640" stroke-width="5" stroke-dasharray="30 20"/>
+<path class="ink" d="M250 470l40-70h160l50 70z"/>
+<rect class="ink" x="180" y="470" width="380" height="90" rx="24"/>
+<path d="M300 462l26-48h50v48z" fill="var(--stage)"/><path d="M396 462v-48h50l30 48z" fill="var(--stage)"/>
+<circle class="gain" cx="350" cy="442" r="16"/>
+<circle cx="270" cy="560" r="34" fill="var(--stage)" stroke="var(--ink)" stroke-width="10"/>
+<circle cx="470" cy="560" r="34" fill="var(--stage)" stroke="var(--ink)" stroke-width="10"/>
+<text class="m" x="120" y="690" font-size="20">EVERY DAY, FOR YEARS</text>
+</g>
+<g id="chart">
+<path class="s-ink" d="M800 270V640H1440" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="812" y="258" font-size="20">SKILL</text>
+<text class="m" x="1440" y="680" font-size="20" text-anchor="end">HOURS DRIVEN</text>
+<path id="curve" class="s-ink" d="M810 620C900 430 980 380 1080 370H1430" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1"/>
+</g>
+<path id="plat" class="s-loss" d="M1090 370H1430" stroke-width="12" stroke-linecap="round" opacity="0"/>
+<g id="platL"><text class="m" x="1430" y="345" font-size="20" text-anchor="end" style="fill:var(--loss)">NO LONGER IMPROVING</text></g>
+<g id="clk">
+<circle class="s-ink" cx="1260" cy="520" r="64" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1260 520h30" stroke-width="6" stroke-linecap="round"/>
+<path id="hand" class="s-loss" d="M1260 520V472" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1260" y="616" font-size="20" text-anchor="middle">MORE HOURS</text>
+</g>
+<g id="how"><text class="d" x="120" y="790" font-size="46">What matters is <tspan style="fill:var(--gain)">how</tspan> the hours are spent.</text></g>
+</g>
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The expert puzzle.</text>
+<text class="b" x="120" y="176" font-size="32">Psychologist Anders Ericsson studied world-class performers.</text>
+<g id="res"><g id="resP"></g>
+<rect class="s-ink" x="300" y="400" width="66" height="86" rx="6" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M314 426h38M314 446h38M314 466h24" stroke-width="5"/>
+<text class="m" x="260" y="540" font-size="20" text-anchor="middle">ERICSSON</text></g>
+<path id="look" class="s-line" d="M320 330L600 350" stroke-width="4" stroke-dasharray="8 10"/>
+<g id="vio"><g id="vioP"></g>
+<g transform="rotate(-30 762 372)">
+<ellipse class="gain" cx="762" cy="372" rx="42" ry="22"/>
+<path class="s-ink" d="M802 372h62" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="870" cy="372" r="7"/>
+</g>
+<path class="s-ink" d="M744 316L812 432" stroke-width="4" stroke-linecap="round"/>
+<circle class="ink" cx="815" cy="438" r="10"/>
+<text class="m" x="680" y="540" font-size="20" text-anchor="middle">WORLD-CLASS PERFORMER</text></g>
+<g id="parts"></g>
+<g id="dp"><text class="d" x="120" y="790" font-size="50">He called it <tspan style="fill:var(--gain)">deliberate practice.</tspan></text></g>
+</g>
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Pick a stretch goal.</text>
+<text class="b" x="120" y="176" font-size="32">One small weakness, not the whole performance.</text>
+<g id="tgt">
+<circle class="s-ink" cx="300" cy="470" r="150" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="300" cy="470" r="105" fill="none" stroke-width="6"/>
+<circle class="s-ink" cx="300" cy="470" r="60" fill="none" stroke-width="6"/>
+<circle id="bull" cx="300" cy="470" r="26"/></g>
+<g id="arw"><g id="arwF"><path class="s-ink" d="M480 290L316 454M316 454l8-26M316 454l26-8M480 290l-4 22M480 290l-22 4" fill="none" stroke-width="7" stroke-linecap="round"/></g>
+<text class="m" x="300" y="668" font-size="20" text-anchor="middle" style="fill:var(--gain)">ONE SMALL WEAKNESS</text></g>
+<g id="pno"><text class="m" x="560" y="282" font-size="20">THE WHOLE PIECE</text><g id="keys"></g></g>
+<g id="pass"><rect class="gain" x="760" y="300" width="160" height="220" fill-opacity=".4"/>
+<path class="s-gain" d="M760 540v16h160v-16" fill="none" stroke-width="6"/>
+<text class="m" x="840" y="596" font-size="20" text-anchor="middle" style="fill:var(--gain)">ONE TRICKY PASSAGE</text></g>
+<g id="lad"><path class="s-ink" d="M1240 260V700M1400 260V700" stroke-width="7" stroke-linecap="round"/>
+<path class="s-ink" d="M1240 680h160M1240 610h160M1240 540h160M1240 470h160M1240 400h160M1240 330h160" stroke-width="6"/>
+<circle class="ink" cx="1320" cy="516" r="22"/>
+<text class="m" x="1222" y="547" font-size="20" text-anchor="end">NOW</text></g>
+<g id="gl"><path class="s-gain" d="M1240 470h160" stroke-width="12"/><circle class="gain" cx="1320" cy="444" r="18"/>
+<text class="m" x="1222" y="477" font-size="20" text-anchor="end" style="fill:var(--gain)">GOAL</text></g>
+<g id="beyond"><text class="d" x="120" y="800" font-size="46">Just beyond what you can do right now.</text></g>
+</g>
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Full focus.</text>
+<text class="b" x="120" y="176" font-size="32">Total concentration on that one goal.</text>
+<g id="fcs"><circle id="ring" class="s-gain" cx="360" cy="380" r="92" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<g id="fP"></g>
+<path class="s-ink" d="M298 384a62 62 0 0 1 124 0" fill="none" stroke-width="10"/>
+<rect class="gain" x="284" y="368" width="24" height="44" rx="8"/><rect class="gain" x="412" y="368" width="24" height="44" rx="8"/>
+<text class="m" x="360" y="660" font-size="20" text-anchor="middle">TOTAL CONCENTRATION</text></g>
+<g id="d0"><rect class="s-ink" x="650" y="262" width="44" height="76" rx="8" fill="var(--stage)" stroke-width="5"/><circle class="ink" cx="672" cy="326" r="4"/><text class="m" x="750" y="308" font-size="24">NO PHONES</text></g>
+<g id="d1"><circle class="s-ink" cx="676" cy="432" r="28" fill="none" stroke-width="5"/><circle class="ink" cx="642" cy="470" r="7"/><circle class="ink" cx="630" cy="486" r="4"/><text class="m" x="750" y="448" font-size="24">NO DAYDREAMING</text></g>
+<g id="d2"><circle class="s-ink" cx="672" cy="580" r="26" fill="none" stroke-width="5" stroke-dasharray="120 44"/><path class="ink" d="M690 552l14 18-22 4z"/><text class="m" x="750" y="588" font-size="24">NO AUTOPILOT</text></g>
+<path id="x0" class="s-loss" d="M628 256l92 88" stroke-width="7" stroke-linecap="round" pathLength="1"/>
+<path id="x1" class="s-loss" d="M628 396l92 88" stroke-width="7" stroke-linecap="round" pathLength="1"/>
+<path id="x2" class="s-loss" d="M628 536l92 88" stroke-width="7" stroke-linecap="round" pathLength="1"/>
+<g id="hg"><path class="s-ink" d="M1180 270h200M1180 610h200" stroke-width="8" stroke-linecap="round"/>
+<polygon id="sandT" class="gain"/><polygon id="sandB" class="gain"/>
+<path id="trk" class="s-gain" d="M1280 440V590" stroke-width="3"/>
+<path class="s-ink" d="M1200 280C1200 380 1280 410 1280 440C1280 470 1200 500 1200 600M1360 280C1360 380 1280 410 1280 440C1280 470 1360 500 1360 600" fill="none" stroke-width="6"/>
+<text class="m" x="1280" y="660" font-size="20" text-anchor="middle">SESSIONS OF ABOUT AN HOUR</text></g>
+<g id="rest"><text class="m" x="1280" y="696" font-size="20" text-anchor="middle" style="fill:var(--gain)">THEN REST</text></g>
+<g id="tired"><text class="d" x="120" y="800" font-size="46">Deep focus is tiring. Work, then rest.</text></g>
+</g>
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Get feedback.</text>
+<text class="b" x="120" y="176" font-size="32">Fast, honest feedback shows exactly what went wrong.</text>
+<g id="fb0"><rect class="s-line" x="120" y="230" width="420" height="270" rx="18" fill="var(--stage)" stroke-width="3"/><g id="cP"></g>
+<rect class="gain" x="330" y="262" width="170" height="76" rx="16"/><path class="gain" d="M344 330l-24 26 42-16z"/>
+<path d="M356 290h118M356 312h80" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="330" y="470" font-size="22" text-anchor="middle">A COACH</text></g>
+<g id="fb1"><rect class="s-line" x="590" y="230" width="420" height="270" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="ink" x="720" y="290" width="120" height="90" rx="12"/><path class="ink" d="M840 315l50-25v90l-50-25z"/><circle id="rec" class="loss" cx="750" cy="320" r="11"/>
+<text class="m" x="800" y="470" font-size="22" text-anchor="middle">A RECORDING</text></g>
+<g id="fb2"><rect class="s-line" x="1060" y="230" width="420" height="270" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-line" d="M1180 410a90 90 0 0 1 180 0" fill="none" stroke-width="14" stroke-linecap="round"/>
+<path id="ndl" class="s-ink" d="M1270 410V340" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="1270" cy="410" r="10"/>
+<text class="m" x="1270" y="470" font-size="22" text-anchor="middle">A SCORE</text></g>
+<g id="mk"><rect class="s-line" x="120" y="560" width="800" height="240" rx="14" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="604" font-size="20">YOUR ATTEMPT</text>
+<path class="s-ink" d="M160 700q40-40 80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0t80 0" fill="none" stroke-width="5"/>
+<circle id="m0" class="s-loss" cx="320" cy="700" r="34" fill="none" stroke-width="6"/>
+<circle id="m1" class="s-loss" cx="560" cy="700" r="34" fill="none" stroke-width="6"/>
+<circle id="m2" class="s-loss" cx="800" cy="700" r="34" fill="none" stroke-width="6"/></g>
+<g id="lean"><text class="d" x="980" y="650" font-size="46">Lean toward</text><text class="d" x="980" y="710" font-size="46">your mistakes.</text>
+<path class="s-gain" d="M1300 770H1000m22-18-22 18 22 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">4. Repeat and refine.</text>
+<text class="b" x="120" y="176" font-size="32">Adjust each time until the weakness is fixed.</text>
+<g id="lp"><circle class="s-line" cx="400" cy="500" r="160" fill="none" stroke-width="8"/><g id="spin"></g>
+<text class="d" x="400" y="516" font-size="48" text-anchor="middle">Repeat</text></g>
+<g id="wk"><text id="wkl" class="m" x="760" y="290" font-size="22">THE WEAKNESS</text>
+<rect class="s-line" x="760" y="310" width="680" height="50" rx="25" fill="none" stroke-width="4"/>
+<rect id="wkb" class="loss" x="760" y="310" height="50" rx="20" width="680"/></g>
+<g id="mir"><ellipse class="s-ink" cx="860" cy="560" rx="80" ry="110" fill="var(--stage)" stroke-width="6"/>
+<g id="mP" opacity=".45"></g><path class="s-ink" d="M860 670v40M820 710h80" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="980" y="545" font-size="22">REFLECT ON</text><text class="m" x="980" y="580" font-size="22">WHAT CHANGED</text></g>
+<g id="chk"><circle class="gain" cx="1370" cy="560" r="70"/><path d="M1338 562l22 22 44-48" fill="none" stroke="var(--on-gain)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="again"><text class="d" x="120" y="800" font-size="44">Then pick a new weakness and begin again.</text></g>
+</g>
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The spelling bee.</text>
+<text class="b" x="120" y="176" font-size="32">Duckworth studied finalists in the National Spelling Bee.</text>
+<g id="tro"><path class="gain" d="M190 250h140v70a70 70 0 0 1-140 0z"/>
+<path class="s-gain" d="M190 270h-30v30a30 30 0 0 0 30 30M330 270h30v30a30 30 0 0 1-30 30" fill="none" stroke-width="8"/>
+<rect class="gain" x="250" y="388" width="20" height="44"/><rect class="gain" x="210" y="430" width="100" height="24" rx="6"/>
+<text class="m" x="260" y="500" font-size="20" text-anchor="middle">FINALISTS</text></g>
+<g id="fc"><rect class="s-ink" x="420" y="250" width="200" height="130" rx="10" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="434" y="264" width="200" height="130" rx="10" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="448" y="278" width="200" height="130" rx="10" fill="var(--stage)" stroke-width="5"/>
+<text class="d5" x="548" y="355" font-size="40" text-anchor="middle">w·o·r·d</text>
+<text class="m" x="534" y="450" font-size="20" text-anchor="middle">ALONE</text></g>
+<g id="br"><text class="m" x="700" y="262" font-size="20">STUDYING WORDS ALONE</text>
+<rect id="b0" class="gain" x="700" y="280" height="44" rx="8" width="0"/>
+<text class="m" x="700" y="372" font-size="20">MOSTLY QUIZZED OR READ FOR FUN</text>
+<rect id="b1" x="700" y="390" height="44" rx="8" width="0" fill="var(--muted)"/>
+<text class="m" x="1400" y="470" font-size="18" text-anchor="end">HOW FAR THEY ADVANCED · ILLUSTRATION</text></g>
+<g id="gr"><text class="m" x="700" y="522" font-size="22" style="fill:var(--gain)">GRITTIER SPELLERS DID MORE OF THIS</text></g>
+<g id="frn"><circle class="s-ink" cx="230" cy="680" r="60" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="210" cy="665" r="6"/><circle class="ink" cx="250" cy="665" r="6"/>
+<path class="s-ink" d="M205 712q25-22 50 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="340" y="642" font-size="20">MOST EFFORTFUL</text><rect id="e0" class="loss" x="340" y="652" height="26" rx="6" width="0"/>
+<text class="m" x="340" y="714" font-size="20">LEAST ENJOYABLE</text><rect id="e1" x="340" y="724" height="26" rx="6" width="0" fill="var(--muted)"/></g>
+<g id="feel"><text class="d" x="120" y="830" font-size="40">Practice that works often doesn’t feel good.</text></g>
+</g>
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="330" font-size="80" letter-spacing="-2">What small weakness</text></g>
+<g id="qb"><text class="d" x="136" y="430" font-size="80" letter-spacing="-2">will you work on</text></g>
+<g id="qc"><text class="d" x="136" y="530" font-size="80" letter-spacing="-2"><tspan style="fill:var(--gain)">this week?</tspan></text></g>
+<g id="nb"><rect class="s-ink" x="1160" y="240" width="280" height="340" rx="14" fill="var(--stage)" stroke-width="7"/>
+<path class="s-line" d="M1210 320h190M1210 380h190M1210 500h190" stroke-width="6" stroke-linecap="round"/>
+<path class="s-gain" d="M1210 440h190" stroke-width="12" stroke-linecap="round"/><g id="rings"></g></g>
+<g id="steps"></g>
+<text class="m" x="143" y="800" font-size="26">ONE WEAKNESS · FULL FOCUS · FEEDBACK · REPEAT</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Practice That Actually Makes You Better&rdquo;, from <em>Grit</em> by Angela Duckworth. Anders Ericsson&#x27;s research on experts and Duckworth&#x27;s National Spelling Bee study are as reported in the book. The driver, pianist and other scenes are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 6.9], [6.9, 20.4], [20.4, 34.1], [34.1, 50.0], [50.0, 63.7], [63.7, 75.9], [75.9, 88.7], [88.7, 112.3], [112.3, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Practice Smarter", "More Hours Isn't Enough", "The Expert Puzzle", "Pick a Stretch Goal", "Full Focus", "Get Feedback", "Repeat and Refine", "The Spelling Bee", "Your Turn"];
+const TM={"calendar": 0.0, "driver": 7.2, "clock": 14.12, "researcher": 20.72, "violinist": 26.76, "target": 34.4, "piano_keys": 42.0, "ladder": 46.44, "headphones": 50.32, "hourglass": 57.8, "coach": 63.96, "red_marks": 71.92, "loop_arrow": 76.24, "mirror": 81.04, "checkmark": 85.68, "trophy": 88.96, "flashcards": 92.48, "frown_face": 102.88, "notebook": 112.64};
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-1.6*r)+' '+(y+4.2*r)+'v'+(-1.2*r)+'a'+1.6*r+' '+1.6*r+' 0 0 1 '+3.2*r+' 0v'+1.2*r+'z',class:c},g)};
+const T=(g,x,y,s,txt,a)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s},a||{}),g);e.textContent=txt;return e};
+const dr=(el,k)=>{el.setAttribute('stroke-dasharray','1 1');el.setAttribute('stroke-dashoffset',(1-k).toFixed(3))};
+const CAL=[];for(let i=0;i<24;i++){const x=1160+(i%6)*50,y=270+Math.floor(i/6)*60;CAL.push(mk('path',{d:'M'+(x+14)+' '+(y+18)+'l22 24m0-24l-22 24',class:'s-muted','stroke-width':4,'stroke-linecap':'round',fill:'none'},$('cal')))}
+P($('resP'),260,340,36,'ink');P($('vioP'),680,340,36,'ink');P($('fP'),360,380,50,'ink');P($('cP'),250,290,26,'ink');P($('mP'),860,510,22,'ink');
+const PT=['A SPECIFIC GOAL','FULL FOCUS','FAST FEEDBACK','REPEAT AND REFLECT'].map((s,i)=>{const g=mk('g',{},$('parts')),y=240+i*110;
+  mk('rect',{x:960,y:y,width:520,height:86,rx:43,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('circle',{cx:1003,cy:y+43,r:28,class:'gain'},g);
+  T(g,1003,y+53,28,String(i+1),{class:'d','text-anchor':'middle',style:'fill:var(--on-gain)'});T(g,1050,y+51,24,s,{class:'m'});return g});
+for(let i=0;i<12;i++)mk('rect',{x:560+i*40,y:300,width:40,height:220,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('keys'));
+for(let i=0;i<11;i++)if([0,1,3,4,5].includes(i%7))mk('rect',{x:588+i*40,y:300,width:24,height:130,class:'ink'},$('keys'));
+for(let k=0;k<3;k++)mk('path',{d:'M544 488h32l-16 24z',class:'ink',transform:'rotate('+k*120+' 400 500)'},$('spin'));
+for(let i=0;i<6;i++)mk('circle',{cx:1160,cy:280+i*52,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const ST=[[136,360,'20 FOCUSED MINUTES'],[526,260,'FEEDBACK'],[816,420,'TRY AGAIN TOMORROW']].map(q=>{const g=mk('g',{},$('steps'));
+  mk('rect',{x:q[0],y:660,width:q[1],height:64,rx:32,class:'gain'},g);T(g,q[0]+q[1]/2,701,24,q[2],{class:'m','text-anchor':'middle',style:'fill:var(--on-gain)'});return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  CAL.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.calendar+.3+i*.15,TM.calendar+.5+i*.15)));
+  dr($('flat'),p(u,TM.calendar+.5,TM.calendar+4));
+
+  R('car',TM.driver); $('road').setAttribute('stroke-dashoffset',(t*120%50).toFixed(1));
+  R('chart',TM.driver+2.2); dr($('curve'),p(u,TM.driver+2.4,TM.clock));
+  R('clk',TM.clock); $('hand').setAttribute('transform','rotate('+(Math.max(0,u-TM.clock)*240%360).toFixed(1)+' 1260 520)');
+  $('plat').setAttribute('opacity',p(u,TM.clock+.6,TM.clock+1.2)); R('platL',TM.clock+.6); R('how',TM.clock+3.7);
+
+  R('res',TM.researcher); R('vio',TM.violinist); $('look').setAttribute('opacity',p(u,TM.violinist+.3,TM.violinist+.9));
+  R('dp',TM.violinist+3.3); PT.forEach((g,i)=>rise(g,p(u,TM.violinist+3.8+i*.5,TM.violinist+4.3+i*.5)));
+
+  R('tgt',TM.target); R('arw',TM.target+2.9); const af=1-p(u,TM.target+2.9,TM.target+3.5);
+  $('arwF').setAttribute('transform','translate('+(af*120).toFixed(1)+' '+(-af*120).toFixed(1)+')');
+  $('bull').style.fill=u>=TM.target+3.4?'var(--gain)':'var(--ink)';
+  R('pno',TM.piano_keys); R('pass',TM.piano_keys+.8); R('lad',TM.ladder); R('gl',TM.ladder+.8); R('beyond',TM.ladder+1.4);
+
+  R('fcs',TM.headphones); $('ring').setAttribute('r',(92+6*Math.sin(t*3)).toFixed(1));
+  [0,1,2].forEach(i=>{const a=TM.headphones+3.8+i*.5; R('d'+i,a); dr($('x'+i),p(u,a+.3,a+.6))});
+  R('hg',TM.hourglass); const sk=p(u,TM.hourglass+.5,TM.hourglass+6), yt=300+130*sk, hw=70*(1-sk);
+  $('sandT').setAttribute('points',(1280-hw).toFixed(1)+','+yt.toFixed(1)+' '+(1280+hw).toFixed(1)+','+yt.toFixed(1)+' 1280,430');
+  $('sandB').setAttribute('points','1210,590 1350,590 1280,'+(590-110*sk).toFixed(1));
+  $('trk').setAttribute('opacity',sk>0&&sk<1?1:0); R('rest',TM.hourglass+1.2); R('tired',TM.hourglass+2.5);
+
+  R('fb0',TM.coach); R('fb1',TM.coach+3.4); R('fb2',TM.coach+4.2);
+  $('rec').setAttribute('opacity',Math.sin(t*4)>0?1:.25);
+  $('ndl').setAttribute('transform','rotate('+(-70+110*p(u,TM.coach+4.4,TM.coach+5.4)+3*Math.sin(t*5)).toFixed(1)+' 1270 410)');
+  R('mk',TM.red_marks); [0,1,2].forEach(i=>R('m'+i,TM.red_marks+.5+i*.4,.3)); R('lean',TM.red_marks+1.8);
+
+  R('lp',TM.loop_arrow); $('spin').setAttribute('transform','rotate('+(t*50%360).toFixed(1)+' 400 500)');
+  R('wk',TM.loop_arrow+.6); const nw=u>=TM.checkmark+.8;
+  $('wkb').setAttribute('width',(680*(nw?p(u,TM.checkmark+.8,TM.checkmark+1.6):1-p(u,TM.loop_arrow+1,TM.checkmark))).toFixed(1));
+  $('wkl').textContent=nw?'A NEW WEAKNESS':'THE WEAKNESS';
+  R('mir',TM.mirror); R('chk',TM.checkmark); R('again',TM.checkmark+.8);
+
+  R('tro',TM.trophy); R('fc',TM.flashcards); R('br',TM.flashcards+.5); const bk=p(u,TM.flashcards+1,TM.flashcards+3.5);
+  $('b0').setAttribute('width',(700*bk).toFixed(1)); $('b1').setAttribute('width',(380*bk).toFixed(1));
+  R('gr',TM.flashcards+8.2); R('frn',TM.frown_face); const ek=p(u,TM.frown_face+.6,TM.frown_face+2);
+  $('e0').setAttribute('width',(640*ek).toFixed(1)); $('e1').setAttribute('width',(90*ek).toFixed(1)); R('feel',TM.frown_face+5.7);
+
+  R('qa',TM.notebook); R('qb',TM.notebook+.4); R('qc',TM.notebook+.8); R('nb',TM.notebook+1.2);
+  ST.forEach((g,i)=>rise(g,p(u,TM.notebook+4.9+i*.8,TM.notebook+5.4+i*.8)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.31;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

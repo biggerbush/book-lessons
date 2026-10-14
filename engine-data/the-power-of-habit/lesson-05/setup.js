@@ -1,0 +1,23 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+const G=q=>mk('g',{},q);
+const dom=(q,n,x0,s,w,h,yb)=>({a:[...Array(n)].map((_,i)=>mk('rect',{x:x0+i*s,y:yb-h,width:w,height:h,rx:4,fill:i?'var(--ink)':'var(--gain)'},q)),x0:x0,s:s,w:w,yb:yb,mx:Math.asin(Math.min(1,(s-w)/h))*180/Math.PI});
+const D1=dom($('dom1'),12,160,110,24,100,820),D8=dom($('dom8'),5,1180,60,18,90,760);
+const RB=[0,1,2,3].map(i=>mk('rect',{x:1200+i*70,y:820,width:50,height:0,class:'gain'},$('rich')));
+const HR=[...Array(6)].map((_,i)=>{const g=G($('hrow')),x=120+(i%3)*140,y=260+Math.floor(i/3)*140;mk('rect',{x:x,y:y,width:100,height:100,rx:18,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('circle',{cx:x+50,cy:y+50,r:16,fill:'var(--muted)'},g);return g});
+const PA=(r,a)=>(1100+r*Math.cos(a)).toFixed(1)+' '+(600+r*Math.sin(a)).toFixed(1);
+const ST=[...Array(9)].map((_,k)=>{const a0=Math.PI*(1+k/9)+.012,a1=Math.PI*(1+(k+1)/9)-.012;return mk('path',{d:'M'+PA(170,a0)+'L'+PA(270,a0)+'A270 270 0 0 1 '+PA(270,a1)+'L'+PA(170,a1)+'A170 170 0 0 0 '+PA(170,a0)+'Z',fill:k==4?'var(--gain)':'var(--stage)',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},$('arch'))});
+const SM=[0,1,2].map(()=>mk('circle',{cx:480,cy:270,r:12,fill:'var(--muted)'},$('smoke')));
+let SI=null;
+for(let i=0;i<6;i++){const g=fig(G($('inv')),170+i*110,560,18,'ink');if(i===5)SI=g}
+for(let i=0;i<6;i++)fig(G($('inv')),225+i*110,650,18,'ink');
+const BQ=[225,445,665].map(x=>{const g=G($('bq'));mk('path',{d:'M'+(x-40)+' 430h80v60h-30l-10 18-10-18h-30z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4,'stroke-linejoin':'round'},g);const tx=mk('text',{x:x,y:476,'font-size':40,'text-anchor':'middle',class:'d'},g);tx.textContent='$';return [g,tx]});
+[468,498,528].forEach(y=>{mk('path',{d:'M850 '+(y-6)+'l8 8 16-16',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('plan'));mk('path',{d:'M884 '+y+'h66',stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},$('plan'))});
+const MX=[300,500,700],WX=[260,380,500,620,740];
+MX.forEach(x=>fig($('mgr'),x,280,22,'ink'));WX.forEach(x=>fig($('wrk'),x,600,22,'ink'));
+const LN=[];MX.forEach(m=>WX.forEach(w=>{if(Math.abs(m-w)<260)LN.push(mk('path',{d:'M'+m+' 384L'+w+' 570',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'10 10',fill:'none'},$('lines')))}));
+const BL=WX.map(x=>{const g=G($('bulbs'));mk('circle',{cx:x+44,cy:596,r:14,class:'gain'},g);mk('rect',{x:x+38,y:611,width:12,height:7,rx:2,class:'ink'},g);return g});
+const BX=[0,1,2,3,4].map(()=>mk('rect',{x:960,y:548,width:50,height:50,rx:6,class:'gain'},$('boxes')));
+for(let x=990;x<1480;x+=65)mk('circle',{cx:x,cy:612,r:6,class:'ink'},$('belt'));
+const DT=[];[[140,6,0],[220,9,.3]].forEach(q=>{for(let i=0;i<q[1];i++){const a=i*2*Math.PI/q[1]+q[2];DT.push(mk('circle',{cx:(500+q[0]*Math.cos(a)).toFixed(1),cy:(500+q[0]*Math.sin(a)).toFixed(1),r:10,fill:'var(--line)'},$('dots')))}});
+const RP=[0,1,2].map(()=>mk('circle',{cx:500,cy:500,r:56,fill:'none',stroke:'var(--gain)','stroke-width':4},$('rip')));
+const CP=[300,390,480].map(y=>{const g=G($('chips'));mk('rect',{x:1180,y:y,width:280,height:64,rx:32,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('circle',{cx:1214,cy:y+32,r:20,class:'gain'},g);mk('path',{d:'M1204 '+(y+32)+'l7 7 13-14',fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);mk('path',{d:'M1250 '+(y+32)+'h170',stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round'},g);return g});

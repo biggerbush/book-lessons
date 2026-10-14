@@ -1,0 +1,11 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+fig($('tugP'),1060,400,28,'ink');fig($('tugP'),1430,400,28,'loss');
+[330,1270].forEach(x=>fig($('pp1'),x,260,26,'ink'));
+[180,1420].forEach(x=>fig($('pp2'),x,380,26,'ink'));
+const JR=[];[580,700,900,1020].forEach(x=>[400,640].forEach(y=>{const c=mk('circle',{cx:x,cy:y,r:26,fill:'var(--ink)'},$('jur'));c.L=x<800;JR.push(c)}));
+[220,1380].forEach(x=>fig($('pp4'),x,330,30,'ink'));
+fig($('pp5'),220,300,30,'gain');fig($('pp5'),1380,300,30,'ink');
+fig($('mvA'),0,360,26,'gain');fig($('mvB'),0,360,26,'ink');
+fig($('chr'),880,440,28,'gain');fig($('chr'),1380,440,28,'ink');
+for(let i=0;i<5;i++)mk('circle',{cx:210+i*85,cy:230,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const tr=(id,x,y)=>$(id).setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');

@@ -1,0 +1,304 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Supercommunicators Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Supercommunicators: In practical conversations, openly sharing your goals and asking what the other person wants turns a tug of war into joint problem solving. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SUPERCOMMUNICATORS · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">What is this</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">really about?</text>
+<text class="b" x="120" y="600" font-size="32">Name your goal, ask for theirs, and solve it together.</text>
+<g id="tug"><path class="s-line" d="M1000 520H1480" stroke-width="4"/><g id="rope0"><g id="tugP"></g><path class="s-ink" d="M1100 470H1390" stroke-width="7" stroke-linecap="round"/><rect class="gain" x="1240" y="470" width="12" height="40"/></g></g>
+<g id="hour"><text class="m" x="1240" y="600" font-size="22" text-anchor="middle">1 HOUR · NO PROGRESS</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two people, two positions.</text>
+<text class="b" x="120" y="176" font-size="32">Deciding something together, like where to live.</text>
+<g id="pp1"></g>
+<g id="flats">
+<path class="s-ink" d="M290 430L330 400L370 430V480H290Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-ink" d="M1200 440L1270 400L1340 440V495H1200Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="330" y="515" font-size="20" text-anchor="middle">CHEAPER FLAT</text>
+<text class="m" x="1270" y="530" font-size="20" text-anchor="middle">BIGGER FLAT</text>
+</g>
+<g id="tbox"><rect class="s-line" x="620" y="240" width="360" height="150" rx="18" fill="var(--stage)" stroke-width="4"/><text class="m" x="800" y="284" font-size="20" text-anchor="middle">TRADING POSITIONS</text><path class="s-muted" d="M670 350H930" stroke-width="3" stroke-dasharray="6 8"/><circle id="ball" class="ink" cx="800" cy="350" r="16"/></g>
+<g id="hid">
+<path class="s-muted" d="M120 560H1480" stroke-width="3" stroke-dasharray="10 10"/>
+<text class="m" x="1480" y="545" font-size="20" text-anchor="end">SURFACE</text>
+<rect class="s-ink" x="150" y="600" width="360" height="190" rx="18" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<rect class="s-ink" x="1090" y="600" width="360" height="190" rx="18" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<text class="m" x="330" y="650" font-size="20" text-anchor="middle">UNSPOKEN GOAL</text>
+<text class="m" x="1270" y="650" font-size="20" text-anchor="middle">UNSPOKEN GOAL</text>
+<text class="d" x="330" y="765" font-size="90" text-anchor="middle" style="fill:var(--gain)">?</text>
+<text class="d" x="1270" y="765" font-size="90" text-anchor="middle" style="fill:var(--gain)">?</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hidden goals, harder pushing.</text>
+<text class="b" x="120" y="176" font-size="32">Each side pushes its position. Nobody moves.</text>
+<g id="arr"><g id="pp2"></g>
+<path id="aL" class="loss" d="M240 405H720V370L790 430L720 490V455H240Z"/>
+<path id="aR" class="ink" d="M1360 405H880V370L810 430L880 490V455H1360Z"/></g>
+<g id="clk"><circle class="s-ink" cx="800" cy="640" r="80" fill="var(--stage)" stroke-width="7"/><path id="hand" class="s-ink" d="M800 640V580" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="800" cy="640" r="8"/><text class="m" x="690" y="650" font-size="20" text-anchor="end">THE TALK DRAGS ON</text></g>
+<g id="st"><text class="m" x="940" y="610" font-size="22">FEELS LIKE DEBATE</text><text class="d" x="940" y="680" font-size="64" style="fill:var(--loss)">Stalemate.</text></g>
+<g id="ask"><text class="d" x="120" y="830" font-size="52">Ask: <tspan style="fill:var(--gain)">what is this really about?</tspan></text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A jury in a room.</text>
+<text class="b" x="120" y="176" font-size="32">A real jury, filmed for television, deciding a gun possession case.</text>
+<g id="tbl">
+<g id="cam"><rect class="s-ink" x="1330" y="215" width="110" height="70" rx="10" fill="var(--stage)" stroke-width="5"/><circle class="s-ink" cx="1385" cy="250" r="20" fill="none" stroke-width="5"/><circle id="rec" class="loss" cx="1460" cy="225" r="8"/></g>
+<rect class="s-ink" x="500" y="440" width="600" height="160" rx="80" fill="var(--stage)" stroke-width="6"/>
+<g id="jur"></g>
+</g>
+<g id="law"><rect class="s-ink" x="180" y="450" width="160" height="120" rx="8" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M200 450V570" stroke-width="5"/><text class="d5" x="270" y="522" font-size="32" text-anchor="middle">LAW</text><path class="s-line" d="M350 520H490" stroke-width="4" stroke-dasharray="6 8"/><text class="m" x="120" y="625" font-size="20">WHAT THE LAW SAYS</text></g>
+<g id="scl"><path class="s-ink" d="M1360 455V590M1310 590H1410M1270 470H1450M1270 470L1245 530M1270 470L1295 530M1450 470L1425 530M1450 470L1475 530" fill="none" stroke-width="5" stroke-linecap="round"/><path class="ink" d="M1240 530a30 18 0 0 0 60 0zM1420 530a30 18 0 0 0 60 0z"/><path class="s-line" d="M1110 520H1230" stroke-width="4" stroke-dasharray="6 8"/><text class="m" x="1480" y="625" font-size="20" text-anchor="end">IS A GUILTY VERDICT FAIR?</text></g>
+<g id="past"><path id="pa1" class="s-loss" d="M640 420C700 260 1000 230 1300 300" fill="none" stroke-width="5" stroke-dasharray="12 10"/><path id="pa2" class="s-muted" d="M960 420C900 260 600 230 300 300" fill="none" stroke-width="5" stroke-dasharray="12 10"/><text class="m" x="800" y="760" font-size="22" text-anchor="middle">TALKING PAST EACH OTHER</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Goals on the table.</text>
+<text class="b" x="120" y="176" font-size="32">Say plainly what matters to you, and why.</text>
+<g id="pp4"></g>
+<g id="bub4"><rect class="s-ink" x="120" y="212" width="340" height="68" rx="34" fill="var(--stage)" stroke-width="4"/><text class="m" x="290" y="253" font-size="20" text-anchor="middle">WHAT MATTERS TO ME</text>
+<rect class="s-ink" x="1140" y="212" width="340" height="68" rx="34" fill="var(--stage)" stroke-width="4"/><text class="m" x="1310" y="253" font-size="20" text-anchor="middle">AND WHY</text></g>
+<path class="s-ink" d="M500 560H1100M560 560V680M1040 560V680" stroke-width="8" stroke-linecap="round"/>
+<g id="wt"><text class="m" x="800" y="410" font-size="20" text-anchor="middle">WEIGHED TOGETHER</text></g>
+<g id="pz">
+<g id="pzA"><path id="pzAp" d="M0 0h160v33a22 22 0 0 1 0 44v33H0z" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/><text id="pzAt" class="m" x="80" y="62" font-size="20" text-anchor="middle">MY GOAL</text></g>
+<g id="pzB"><path id="pzBp" d="M0 0h160v110H0V77a22 22 0 0 0 0-44z" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/><text id="pzBt" class="m" x="90" y="62" font-size="20" text-anchor="middle">YOUR GOAL</text></g>
+</g>
+<g id="puz"><text class="d" x="800" y="790" font-size="52" text-anchor="middle">A shared puzzle.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Share, then ask.</text>
+<g id="pp5"></g>
+<g id="g1"><rect class="s-gain" x="300" y="230" width="340" height="84" rx="20" fill="var(--stage)" stroke-width="5"/><text class="d5" x="470" y="284" font-size="34" text-anchor="middle">My goal is…</text></g>
+<g id="g1b"><text class="m" x="300" y="360" font-size="20">SHORT: AN OFFER, NOT A DEMAND</text></g>
+<g id="g2"><rect class="s-ink" x="960" y="230" width="340" height="84" rx="20" fill="var(--stage)" stroke-width="5"/><text class="d" x="1130" y="294" font-size="60" text-anchor="middle">?</text><text class="m" x="1300" y="360" font-size="20" text-anchor="end">WHAT DO YOU HOPE TO GET?</text></g>
+<g id="vn">
+<g id="vA"><circle class="s-ink" cx="700" cy="640" r="170" fill="none" stroke-width="6"/><text class="m" x="615" y="648" font-size="22" text-anchor="middle">MINE</text></g>
+<g id="vB"><circle class="s-ink" cx="900" cy="640" r="170" fill="none" stroke-width="6"/><text class="m" x="985" y="648" font-size="22" text-anchor="middle">THEIRS</text></g>
+<g id="lens5"><path class="gain" d="M800 502.5A170 170 0 0 1 800 777.5A170 170 0 0 1 800 502.5Z"/><text class="m" x="800" y="634" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">BUILD</text><text class="m" x="800" y="662" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">HERE</text></g>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">From rope to bridge.</text>
+<text class="b" x="120" y="176" font-size="32">Stand on the same side of the problem.</text>
+<g id="st6"><path class="s-line" d="M120 470H1480" stroke-width="4"/><path id="rp6" class="s-ink" d="M340 420H1260" stroke-width="6" stroke-linecap="round"/><g id="mvA" transform="translate(300 0)"></g><g id="mvB"></g></g>
+<g id="prb"><rect x="1100" y="330" width="300" height="140" rx="14" fill="var(--stage)" stroke="var(--loss)" stroke-width="6"/><text class="m" x="1250" y="408" font-size="24" text-anchor="middle" style="fill:var(--loss)">THE PROBLEM</text></g>
+<path id="brg" class="s-gain" d="M450 470Q775 300 1090 470" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="mp"><rect class="s-line" x="120" y="540" width="1360" height="220" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="582" font-size="22">THE PLAN</text>
+<circle class="ink" cx="300" cy="670" r="14"/><path class="gain" d="M1300 700V620l50 18-50 18z"/><path class="s-gain" d="M1300 700V620" stroke-width="5"/>
+<circle class="loss" cx="620" cy="650" r="34"/><circle class="loss" cx="980" cy="680" r="34"/>
+<text class="m" x="620" y="594" font-size="22" text-anchor="middle">DISAGREEMENT</text><text class="m" x="980" y="750" font-size="22" text-anchor="middle">DISAGREEMENT</text>
+<path id="route" class="s-gain" d="M320 670C460 670 500 735 620 735S800 610 980 610S1180 670 1290 670" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/></g>
+<g id="open"><text class="d" x="120" y="830" font-size="38">Practical talks go better when goals are out in the open.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it today.</text>
+<g id="pad"><rect class="s-ink" x="160" y="230" width="440" height="420" rx="16" fill="var(--stage)" stroke-width="6"/><g id="rings"></g><path class="s-line" d="M200 360H560M200 430H560M200 500H560M200 570H560" stroke-width="3"/><path class="gain" d="M530 630l-10-30 60-80 20 15-60 80z"/><text class="m" x="160" y="690" font-size="20">ONE SENTENCE</text></g>
+<g id="w0"><text class="d5" x="200" y="350" font-size="36">What do I</text></g>
+<g id="w1"><text class="d5" x="200" y="420" font-size="36">actually want</text></g>
+<g id="w2"><text class="d5" x="200" y="490" font-size="36">here?</text></g>
+<g id="chr"><path class="s-ink" d="M830 460V640M830 560H920M920 560V640M1430 460V640M1430 560H1340M1340 560V640" stroke-width="7" stroke-linecap="round"/></g>
+<g id="cb1"><rect class="s-gain" x="720" y="260" width="320" height="76" rx="38" fill="var(--stage)" stroke-width="5"/><text class="m" x="880" y="305" font-size="20" text-anchor="middle">MY SENTENCE</text></g>
+<g id="cb2"><rect class="s-ink" x="1160" y="260" width="320" height="76" rx="38" fill="var(--stage)" stroke-width="5"/><text class="m" x="1320" y="305" font-size="20" text-anchor="middle">AND YOURS?</text></g>
+<g id="lst"><path id="wav" class="s-gain" d="M925 418q18 22 0 44M950 404q30 36 0 72" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="720" y="760" font-size="22">LISTEN FOR THE GOAL BEHIND THE FIRST ANSWER</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="ml"><text class="m" x="143" y="240" font-size="26">THINK OF A DISAGREEMENT YOU KEEP HAVING</text></g>
+<g id="mir"><ellipse class="s-ink" cx="1330" cy="330" rx="110" ry="140" fill="var(--stage)" stroke-width="8"/><path class="s-ink" d="M1330 470V520M1270 520H1390" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1290" cy="330" r="24"/><circle class="loss" cx="1370" cy="330" r="24"/><path class="ink" d="M1258 400a32 32 0 0 1 64 0z"/><path class="loss" d="M1338 400a32 32 0 0 1 64 0z"/>
+<text id="mq" class="d" x="1330" y="282" font-size="52" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Do you truly know</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">what the other person</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">wants</tspan> from it?</text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">NAME YOUR GOAL · ASK FOR THEIRS</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;What Is This Really About?&rdquo;, from <em>Supercommunicators</em> by Charles Duhigg. The filmed jury deliberating a gun possession case is described as reported in the book. The tug of war, flat-hunting couple, bridge and overlapping circles are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 8.8], [8.8, 24.4], [24.4, 40.9], [40.9, 56.9], [56.9, 69.5], [69.5, 85.2], [85.2, 102.4], [102.4, 115.9], [115.9, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["What's It About?", "The Practical Layer", "Why We Get Stuck", "A Jury in a Room", "Goals on the Table", "Share, Then Ask", "Rope Becomes Bridge", "Try It Today", "Your Challenge"];
+const TM={"rope": 0.0, "two_people": 9.08, "thought_box": 16.88, "hidden_goals": 20.48, "push_arrows": 24.72, "clock": 29.36, "jury_table": 41.2, "law_book": 46.92, "scales": 50.16, "speech_bubble": 57.2, "open_hands": 61.76, "my_goal": 69.8, "question_mark": 77.92, "venn": 81.52, "bridge": 85.48, "map": 92.11, "notepad": 102.72, "two_chairs": 108.72, "mirror": 116.24};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+fig($('tugP'),1060,400,28,'ink');fig($('tugP'),1430,400,28,'loss');
+[330,1270].forEach(x=>fig($('pp1'),x,260,26,'ink'));
+[180,1420].forEach(x=>fig($('pp2'),x,380,26,'ink'));
+const JR=[];[580,700,900,1020].forEach(x=>[400,640].forEach(y=>{const c=mk('circle',{cx:x,cy:y,r:26,fill:'var(--ink)'},$('jur'));c.L=x<800;JR.push(c)}));
+[220,1380].forEach(x=>fig($('pp4'),x,330,30,'ink'));
+fig($('pp5'),220,300,30,'gain');fig($('pp5'),1380,300,30,'ink');
+fig($('mvA'),0,360,26,'gain');fig($('mvB'),0,360,26,'ink');
+fig($('chr'),880,440,28,'gain');fig($('chr'),1380,440,28,'ink');
+for(let i=0;i<5;i++)mk('circle',{cx:210+i*85,cy:230,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const tr=(id,x,y)=>$(id).setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('tug'),p(u,TM.rope,TM.rope+.5)); tr('rope0',14*Math.sin(t*2.2),0); rise($('hour'),p(u,TM.rope+6.6,TM.rope+7.1));
+
+  rise($('pp1'),p(u,TM.two_people,TM.two_people+.5)); rise($('flats'),p(u,TM.two_people+4.2,TM.two_people+4.7));
+  rise($('tbox'),p(u,TM.thought_box,TM.thought_box+.5)); $('ball').setAttribute('cx',(800+110*Math.sin(t*2.5)).toFixed(1));
+  rise($('hid'),p(u,TM.hidden_goals,TM.hidden_goals+.6));
+
+  rise($('arr'),p(u,TM.push_arrows,TM.push_arrows+.5)); tr('aL',6*Math.sin(t*9),0); tr('aR',-6*Math.sin(t*9+1),0);
+  rise($('clk'),p(u,TM.clock,TM.clock+.5)); $('hand').setAttribute('transform','rotate('+(t*90%360).toFixed(1)+' 800 640)');
+  rise($('st'),p(u,TM.clock+2.9,TM.clock+3.4)); rise($('ask'),p(u,TM.clock+7.1,TM.clock+7.7));
+
+  rise($('tbl'),p(u,TM.jury_table,TM.jury_table+.5)); $('rec').setAttribute('opacity',Math.sin(t*4)>0?1:.2);
+  JR.forEach(c=>c.setAttribute('fill',c.L?(u>=TM.law_book?'var(--loss)':'var(--ink)'):(u>=TM.scales?'var(--muted)':'var(--ink)')));
+  rise($('law'),p(u,TM.law_book,TM.law_book+.5)); rise($('scl'),p(u,TM.scales,TM.scales+.5));
+  rise($('past'),p(u,TM.scales+4.6,TM.scales+5.1)); $('pa1').style.strokeDashoffset=(-t*30).toFixed(1); $('pa2').style.strokeDashoffset=(-t*30).toFixed(1);
+
+  rise($('pp4'),p(u,TM.speech_bubble,TM.speech_bubble+.5)); rise($('bub4'),p(u,TM.speech_bubble+.4,TM.speech_bubble+.9));
+  rise($('pz'),p(u,TM.speech_bubble+1,TM.speech_bubble+1.5));
+  const k4=p(u,TM.open_hands,TM.open_hands+1.2); tr('pzA',300+340*k4,440); tr('pzB',1140-340*k4,440);
+  rise($('wt'),p(u,TM.open_hands+1.2,TM.open_hands+1.7));
+  const pzo=u>=TM.open_hands+5.4; ['pzAp','pzBp'].forEach(i=>$(i).setAttribute('fill',pzo?'var(--gain)':'var(--stage)'));
+  ['pzAt','pzBt'].forEach(i=>$(i).style.fill=pzo?'var(--on-gain)':'var(--muted)');
+  rise($('puz'),p(u,TM.open_hands+5.4,TM.open_hands+6));
+
+  rise($('pp5'),p(u,TM.my_goal,TM.my_goal+.5)); rise($('g1'),p(u,TM.my_goal+.3,TM.my_goal+.8)); rise($('g1b'),p(u,TM.my_goal+4.2,TM.my_goal+4.7));
+  rise($('g2'),p(u,TM.question_mark,TM.question_mark+.5));
+  rise($('vn'),p(u,TM.venn,TM.venn+.5)); const k5=p(u,TM.venn,TM.venn+1.2); tr('vA',-140*(1-k5),0); tr('vB',140*(1-k5),0);
+  $('lens5').setAttribute('opacity',p(u,TM.venn+1,TM.venn+1.5));
+
+  rise($('st6'),p(u,TM.bridge,TM.bridge+.5)); const m6=p(u,TM.bridge+1.4,TM.bridge+2.6);
+  tr('mvB',1300-900*m6,0); $('rp6').setAttribute('opacity',1-m6);
+  rise($('prb'),p(u,TM.bridge+2.4,TM.bridge+2.9)); $('brg').setAttribute('stroke-dashoffset',1-p(u,TM.bridge+2.6,TM.bridge+3.6));
+  rise($('mp'),p(u,TM.map,TM.map+.5)); $('route').setAttribute('stroke-dashoffset',1-p(u,TM.map+.6,TM.map+2.6));
+  rise($('open'),p(u,TM.map+5.8,TM.map+6.4));
+
+  rise($('pad'),p(u,TM.notepad,TM.notepad+.5)); [0,1,2].forEach(i=>{const a=TM.notepad+.8+i*.6; rise($('w'+i),p(u,a,a+.4))});
+  rise($('chr'),p(u,TM.two_chairs,TM.two_chairs+.5)); rise($('cb1'),p(u,TM.two_chairs+.4,TM.two_chairs+.9)); rise($('cb2'),p(u,TM.two_chairs+2,TM.two_chairs+2.5));
+  rise($('lst'),p(u,TM.two_chairs+5,TM.two_chairs+5.5)); $('wav').setAttribute('opacity',(.55+.45*Math.sin(t*4)).toFixed(2));
+
+  rise($('ml'),p(u,TM.mirror,TM.mirror+.5)); rise($('mir'),p(u,TM.mirror+.3,TM.mirror+.9)); $('mq').setAttribute('opacity',(.6+.4*Math.sin(t*3)).toFixed(2));
+  rise($('qa'),p(u,TM.mirror+3,TM.mirror+3.5)); rise($('qb'),p(u,TM.mirror+3.4,TM.mirror+3.9)); rise($('qc'),p(u,TM.mirror+3.8,TM.mirror+4.3)); rise($('qd'),p(u,TM.mirror+4.4,TM.mirror+4.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.47;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

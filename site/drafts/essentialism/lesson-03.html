@@ -1,0 +1,344 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Essentialism Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Essentialism: Every yes is a no to something else, so instead of asking how to do it all, ask which trade-off you are willing to make. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">ESSENTIALISM · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">You can have anything,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not everything.</text>
+<text class="b" x="120" y="600" font-size="32">Every yes quietly closes a door. Choose which one.</text>
+<g id="jug"><path class="s-line" d="M1200 776h280" stroke-width="5" stroke-linecap="round"/><path class="s-ink" d="M1310 715l-50-75M1370 715l50-75" stroke-width="8" stroke-linecap="round"/><g id="jugp"></g><g id="balls"></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every yes is a no.</text>
+<text class="b" x="120" y="176" font-size="32">Walk through one door, and the others quietly close.</text>
+<g id="doors"></g>
+<g id="walker"></g>
+<g id="clk"><circle class="s-ink" cx="1360" cy="450" r="100" fill="var(--stage)" stroke-width="7"/><path id="wedge" class="gain" fill-opacity=".8"/><line id="hand" class="s-ink" x1="1360" y1="450" x2="1360" y2="380" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="1360" cy="450" r="9"/><text class="m" x="1360" y="604" font-size="24" text-anchor="middle" style="fill:var(--ink)">TIME &amp; ENERGY</text></g>
+<g id="tro"><text class="d" x="120" y="760" font-size="52">McKeown calls these trade-offs.</text><text class="m" x="120" y="816" font-size="26" style="fill:var(--ink)">AND WE CANNOT ESCAPE THEM</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The myth of doing it all.</text>
+<text class="b" x="120" y="176" font-size="32">We pretend trade-offs don’t exist, and keep adding.</text>
+<g id="busy"><g id="bp"></g><rect class="s-ink" x="760" y="220" width="440" height="520" rx="14" fill="var(--stage)" stroke-width="5"/></g>
+<g id="fit"><text class="m" x="120" y="640" font-size="22">HOW CAN I FIT IT</text><text class="m" x="120" y="672" font-size="22">ALL IN?</text></g>
+<g id="effl"></g>
+<g id="items"></g>
+<g id="thin"><text class="d5" x="120" y="820" font-size="40">Spread so thin that nothing gets our best.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Southwest chose what not to do.</text>
+<text class="b" x="120" y="176" font-size="32">Founder Herb Kelleher made deliberate trade-offs.</text>
+<g id="cards"></g>
+<g id="map"><rect class="s-line" x="820" y="250" width="660" height="360" rx="18" fill="var(--stage)" stroke-width="3"/><g id="routes"><text class="m" x="850" y="290" font-size="20">POINT TO POINT</text></g><g id="cities"></g><g id="swp"></g></g>
+<g id="wins"><rect class="gain" x="120" y="690" width="300" height="84" rx="42"/><text class="d5" x="270" y="744" font-size="36" text-anchor="middle" style="fill:var(--on-gain)">Low fares</text><rect class="gain" x="450" y="690" width="300" height="84" rx="42"/><text class="d5" x="600" y="744" font-size="36" text-anchor="middle" style="fill:var(--on-gain)">On time</text><text class="d" x="820" y="746" font-size="44">Simple, on purpose.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Continental tried to do both.</text>
+<text class="b" x="120" y="176" font-size="32">A budget service, with the full-service model still running.</text>
+<g id="cop"></g>
+<path id="pb" d="M290 460C600 460 600 300 880 300" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="pf" d="M290 460C600 460 600 620 880 620" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="lbls"><text id="lbb" class="m" x="920" y="310" font-size="24">BUDGET</text><text class="m" x="920" y="630" font-size="24">FULL SERVICE</text></g>
+<g id="stamp"><g transform="rotate(-6 1040 360)"><rect x="910" y="330" width="260" height="62" rx="8" fill="none" stroke="var(--loss)" stroke-width="5"/><text class="d" x="1040" y="374" font-size="34" text-anchor="middle" style="fill:var(--loss)">SHUT DOWN</text></g></g>
+<g id="drain"><text class="m" x="1340" y="240" font-size="22" text-anchor="middle">MONEY</text><rect class="s-ink" x="1260" y="260" width="160" height="400" rx="12" fill="none" stroke-width="5"/><rect id="cash" class="gain" x="1268" y="268" width="144" height="384" rx="6"/><g id="drips"></g></g>
+<g id="cost"><text class="d" x="120" y="820" font-size="46">Straddling both cost it heavily.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask a different question.</text>
+<text class="b" x="120" y="176" font-size="32">A trade-off is a choice, not a failure.</text>
+<g id="qm"><text class="d" x="110" y="450" font-size="220" style="fill:var(--gain)">?</text><text class="d5" x="120" y="560" font-size="44" fill-opacity=".55">How can I do it all?</text></g>
+<line id="oqs" x1="112" y1="545" x2="112" y2="545" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/>
+<g id="nq"><text class="d" x="120" y="650" font-size="52">Which problem do I want?</text></g>
+<g id="sc"><path class="s-ink" d="M1180 330V640" stroke-width="8"/><rect class="ink" x="1100" y="640" width="160" height="16" rx="8"/>
+<g id="beam"><path class="s-ink" d="M960 330H1400" stroke-width="10" stroke-linecap="round"/><path class="s-ink" d="M980 330L930 470M980 330L1030 470M1380 330L1330 470M1380 330L1430 470" stroke-width="4" fill="none"/><path class="ink" d="M910 470h140a70 36 0 0 1-140 0zM1310 470h140a70 36 0 0 1-140 0z"/><circle class="gain" cx="980" cy="440" r="28"/><path class="gain" d="M1380 404l9 20 22 2-17 14 5 22-19-12-19 12 5-22-17-14 22-2z"/></g>
+<circle class="ink" cx="1180" cy="330" r="12"/><text class="m" x="1180" y="710" font-size="22" text-anchor="middle">TWO GOOD THINGS</text></g>
+<g id="clar"><text class="d" x="120" y="800" font-size="44">Own the choice: <tspan style="fill:var(--gain)">guilt becomes clarity.</tspan></text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What can I go big on?</text>
+<text class="b" x="120" y="176" font-size="32">One free evening. Two good options.</text>
+<rect id="halo" x="1040" y="262" width="220" height="136" rx="20" fill="var(--gain)" fill-opacity=".12" stroke="var(--gain)" stroke-width="6"/>
+<g id="paths"><path id="pp" class="s-line" d="M800 620Q620 520 450 400" fill="none" stroke-width="5" stroke-dasharray="10 10"/><path id="pfam" class="s-line" d="M800 620Q980 520 1150 410" fill="none" stroke-width="5" stroke-dasharray="10 10"/></g>
+<g id="optP"><g id="optPi"><rect class="s-ink" x="380" y="280" width="140" height="90" rx="8" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M360 384h180" stroke-width="8" stroke-linecap="round"/></g><text id="lblP" class="m" x="450" y="244" font-size="22" text-anchor="middle" style="fill:var(--ink)">EXTRA PROJECT</text></g>
+<g id="optF"><g id="optFi"><g id="fam"></g></g><text id="lblF" class="m" x="1150" y="244" font-size="22" text-anchor="middle" style="fill:var(--ink)">REST WITH FAMILY</text></g>
+<g id="me"></g>
+<g id="bad"><text class="m" x="800" y="840" font-size="24" text-anchor="middle" style="fill:var(--loss)">DOING BOTH = BOTH DONE BADLY</text></g>
+<g id="good"><text class="m" x="800" y="840" font-size="24" text-anchor="middle" style="fill:var(--gain)">CHOOSE ONE ON PURPOSE. GIVE IT EVERYTHING.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Name the trade.</text>
+<text class="b" x="120" y="176" font-size="32">Before any new yes, write down what it will cost.</text>
+<g id="nb"><rect class="s-ink" x="200" y="230" width="800" height="520" rx="16" fill="var(--stage)" stroke-width="6"/><g id="rings"></g><text class="m" x="260" y="300" font-size="22">BEFORE I SAY YES</text><text class="m" x="260" y="400" font-size="20">YES TO</text><text class="m" x="260" y="500" font-size="20">IT WILL COST</text></g>
+<g id="row3"><text class="m" x="260" y="620" font-size="20" style="fill:var(--loss)">I GIVE UP</text></g>
+<g id="scr"></g>
+<line id="xs" x1="470" y1="612" x2="470" y2="612" stroke="var(--loss)" stroke-width="8" stroke-linecap="round"/>
+<g id="ans"><text class="m" x="1120" y="330" font-size="22">NOT WORTH IT?</text><text class="d" x="1110" y="500" font-size="150" style="fill:var(--gain)">No.</text><text class="m" x="1120" y="570" font-size="20">THEN YOU HAVE</text><text class="m" x="1120" y="600" font-size="20">YOUR ANSWER</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What trade-off</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">are you avoiding</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">right now?</text></g>
+<g id="nm"><text class="m" x="143" y="700" font-size="26">NAME IT OUT LOUD. CHOOSE ON PURPOSE.</text></g>
+<g id="mir"><ellipse class="s-ink" cx="1270" cy="420" rx="130" ry="180" fill="var(--stage)" stroke-width="8"/><g id="mp"></g><path class="s-line" d="M1190 320q20-50 60-70" stroke-width="6" fill="none" stroke-linecap="round"/><path class="s-ink" d="M1270 600v100M1190 700h160" stroke-width="8" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;You Can Have Anything, Not Everything&rdquo;, from <em>Essentialism</em> by Greg McKeown. The Southwest Airlines and Continental Airlines examples are as reported in the book. The doors, scales, free-evening choice and notebook habit are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 7.1], [7.1, 24.8], [24.8, 37.9], [37.9, 57.4], [57.4, 71.9], [71.9, 88.2], [88.2, 106.3], [106.3, 120.2], [120.2, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Every Yes Is a No", "The Myth of All", "A Bold Airline", "Trying to Do Both", "Which Problem?", "Go Big Somewhere", "Name the Trade", "Your Turn"];
+const TM={"juggler": 0.0, "open_door": 7.44, "closed_doors": 11.52, "clock": 15.04, "busy_person": 25.12, "todo_list": 28.96, "thin_lines": 33.12, "plane": 38.16, "crossed_meal": 42.8, "short_route": 48.24, "rival_plane": 57.68, "split_arrows": 62.16, "money_drain": 66.16, "question_mark": 72.16, "scales": 80.08, "spotlight": 88.48, "two_paths": 92.56, "notebook": 106.56, "crossed_item": 113.6, "mirror": 120.48};
+const P=(g,x,y,r,c)=>{const q=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:c},q);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},q);return q};
+const TX=(g,x,y,s,c,txt,o)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s,class:c},o||{}),g);e.textContent=txt;return e};
+const plane=(g,c)=>{const q=mk('g',{},g);['M-50-8h80q24 0 24 8t-24 8h-80z','M-6-6l-26-38h14l34 38z','M-6 6l-26 38h14l34-38z','M-50-8l-10-22h12l14 22z'].forEach(d=>mk('path',{d:d,class:c},q));return q};
+const drw=(e,k)=>e.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const lnk=(d,g,c,w)=>mk('path',{d:d,fill:'none',stroke:c,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1},g);
+
+P($('jugp'),1340,650,28,'ink');
+const BL=[0,1,2,3,4].map(i=>mk('circle',{r:16,class:i==4?'loss':'gain'},$('balls')));
+
+const DR=[0,1,2,3,4].map(i=>{const x=120+i*230,g=mk('g',{},$('doors'));
+  mk('rect',{x:x,y:300,width:170,height:320,fill:'var(--gain)','fill-opacity':.3},g);
+  const lf=mk('rect',{x:x,y:300,width:110,height:320,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const kn=mk('circle',{cx:x+90,cy:470,r:8,class:'ink'},g);
+  mk('rect',{x:x,y:300,width:170,height:320,fill:'none',stroke:'var(--ink)','stroke-width':7},g);
+  const lb=TX(g,x+85,280,26,'m',i==2?'YES':'NO',{'text-anchor':'middle',style:'fill:var('+(i==2?'--gain':'--loss')+')'});
+  return [x,lf,kn,lb]});
+P($('walker'),665,520,22,'ink');
+
+P($('bp'),260,380,36,'ink');
+const IT=['Work','Gym','Emails','Side project','Volunteering','Call a friend','Online course','Reply to texts','Dinner party','Big report'].map((s,i)=>{const y=270+i*46,g=mk('g',{},$('items'));
+  mk('rect',{x:790,y:y-22,width:24,height:24,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':3},g);TX(g,834,y,26,'b',s);
+  const l=mk('line',{x1:330,y1:470,x2:756,y2:y-10,stroke:'var(--gain)','stroke-linecap':'round'},$('effl'));return [g,l]});
+
+// Southwest cards
+const IC=['M-22 0a22 22 0 1 0 44 0a22 22 0 1 0-44 0M-9 0a9 9 0 1 0 18 0a9 9 0 1 0-18 0','M-14-24v30h28v18M-14 6v18','M0-24l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z'];
+const CD=['MEALS','ASSIGNED SEATS','FIRST CLASS'].map((s,i)=>{const y=250+i*120,g=mk('g',{},$('cards'));
+  const r=mk('rect',{x:120,y:y,width:600,height:96,rx:16,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  mk('path',{d:IC[i],transform:'translate(180 '+(y+48)+')',fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  TX(g,236,y+57,26,'m',s,{style:'fill:var(--ink)'});
+  mk('circle',{cx:660,cy:y+48,r:30,fill:'none',stroke:'var(--line)','stroke-width':3},g);
+  const x1=lnk('M644 '+(y+32)+'L676 '+(y+64),g,'var(--loss)',7),x2=lnk('M676 '+(y+32)+'L644 '+(y+64),g,'var(--loss)',7);
+  return [g,x1,x2,r]});
+// three separate, non-crossing direct routes
+const RP=[[[880,370],[1180,320]],[[1250,340],[1440,400]],[[900,560],[1420,470]]];
+const RT=RP.map(q=>lnk('M'+q[0]+'L'+q[1],$('routes'),'var(--gain)',5));
+RP.forEach(q=>q.forEach(c=>mk('circle',{cx:c[0],cy:c[1],r:11,class:'ink'},$('cities'))));
+const SW=plane($('swp'),'gain');
+
+const CP=plane($('cop'),'ink');
+const DP=[0,1,2].map(()=>mk('circle',{cx:1340,cy:680,r:8,class:'loss'},$('drips')));
+
+[1100,1150,1200].forEach(x=>P($('fam'),x,300,16,'ink'));
+const FAM=[...$('fam').querySelectorAll('circle,path')];
+P($('me'),800,650,26,'ink');
+
+for(let i=0;i<7;i++)mk('circle',{cx:200,cy:280+i*70,r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const SCR=[392,492,612].map(y=>{let d='M480 '+y;for(let k=0;k<22;k++)d+='q10 '+(k%2?-12:12)+' 20 0';return lnk(d,$('scr'),'var(--ink)',5)});
+
+P($('mp'),1270,370,34,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('jug'),p(u,TM.juggler,TM.juggler+.6));
+const dr=p(u,TM.juggler+3.8,TM.juggler+4.8);
+BL.forEach((b,i)=>{const a=t*2.2+i*1.2566;let x=1340+120*Math.cos(a),y=540+60*Math.sin(a);if(i==4){x+=(1450-x)*dr;y+=(760-y)*dr*dr}b.setAttribute('cx',x.toFixed(1));b.setAttribute('cy',y.toFixed(1))});
+
+rise($('doors'),p(u,TM.open_door-.6,TM.open_door));
+DR.forEach((d,i)=>{const a=i==2?TM.open_door:TM.closed_doors+i*.25,k=p(u,a,a+.8),w=i==2?110-80*k:110+60*k;
+  d[1].setAttribute('width',w.toFixed(1));d[2].setAttribute('cx',(d[0]+w-20).toFixed(1));
+  if(i!=2)d[1].setAttribute('fill',k>.95?'var(--loss)':'var(--stage)');d[3].setAttribute('opacity',k)});
+const wk=p(u,TM.open_door+.6,TM.open_door+2.4);
+$('walker').setAttribute('transform','translate(0 '+(200*(1-wk)).toFixed(1)+')');$('walker').setAttribute('opacity',p(u,TM.open_door+.4,TM.open_door+.8));
+rise($('clk'),p(u,TM.clock,TM.clock+.5));
+const wa=300*p(u,TM.clock+.5,TM.clock+4),wr=(wa-90)*Math.PI/180;
+$('wedge').setAttribute('d','M1360 450V362A88 88 0 '+(wa>180?1:0)+' 1 '+(1360+88*Math.cos(wr)).toFixed(1)+' '+(450+88*Math.sin(wr)).toFixed(1)+'Z');
+$('hand').setAttribute('transform','rotate('+((t*60)%360).toFixed(1)+' 1360 450)');
+rise($('tro'),p(u,TM.clock+4.8,TM.clock+5.4));
+
+rise($('busy'),p(u,TM.busy_person,TM.busy_person+.5));
+rise($('fit'),p(u,TM.todo_list,TM.todo_list+.5));
+const th=u>=TM.thin_lines;let n=0;
+const st=IT.map((q,i)=>{const a=i==0?TM.busy_person+1:TM.todo_list+(i-1)*.6;if(u>=a)n++;return a});
+IT.forEach((q,i)=>{const k=p(u,st[i],st[i]+.4);rise(q[0],k);q[1].setAttribute('opacity',k);
+  q[1].setAttribute('stroke-width',th?2:Math.max(2,30/Math.max(n,1)).toFixed(1));q[1].setAttribute('stroke',th?'var(--loss)':'var(--gain)')});
+$('bp').setAttribute('transform','translate('+(th?2*Math.sin(t*30):0).toFixed(1)+' 0)');
+rise($('thin'),p(u,TM.thin_lines,TM.thin_lines+.6));
+
+rise($('map'),p(u,TM.plane,TM.plane+.6));
+const f=.15+.7*((t*.2)%1),fo=Math.min(1,Math.min(f-.15,.85-f)/.06);
+SW.setAttribute('transform','translate('+(900+520*f).toFixed(1)+' '+(560-90*f).toFixed(1)+') rotate(-9.8) scale(.8)');SW.setAttribute('opacity',fo.toFixed(2));
+CD.forEach((c,i)=>{const a=TM.crossed_meal+i*.7;rise(c[0],p(u,a,a+.4));drw(c[1],p(u,a+.5,a+.75));drw(c[2],p(u,a+.75,a+1));
+  c[3].setAttribute('stroke',u>=a+.75?'var(--loss)':'var(--line)')});
+$('routes').setAttribute('opacity',p(u,TM.short_route,TM.short_route+.4));
+RT.forEach((r,i)=>drw(r,p(u,TM.short_route+i*.4,TM.short_route+i*.4+.6)));
+rise($('wins'),p(u,TM.short_route+5.4,TM.short_route+6));
+
+rise($('cop'),p(u,TM.rival_plane,TM.rival_plane+.6));
+const wob=u>=TM.split_arrows?10*Math.sin(t*3):0;
+CP.setAttribute('transform','translate(190 '+(460+4*Math.sin(t*2)).toFixed(1)+') rotate('+wob.toFixed(1)+') scale(1.4)');
+drw($('pb'),p(u,TM.split_arrows,TM.split_arrows+1.2));drw($('pf'),p(u,TM.split_arrows+.3,TM.split_arrows+1.5));
+rise($('lbls'),p(u,TM.split_arrows+1,TM.split_arrows+1.5));
+const sd=u>=TM.money_drain+3;$('pb').setAttribute('stroke',sd?'var(--loss)':'var(--ink)');$('lbb').style.fill=sd?'var(--loss)':'';
+rise($('drain'),p(u,TM.split_arrows+3,TM.split_arrows+3.6));
+const dd=p(u,TM.money_drain,TM.money_drain+4),h=384*(1-.85*dd);
+$('cash').setAttribute('y',(652-h).toFixed(1));$('cash').setAttribute('height',h.toFixed(1));
+DP.forEach((c,i)=>{const g=(t*1.2+i/3)%1;c.setAttribute('cy',(672+90*g).toFixed(1));c.setAttribute('opacity',u>=TM.money_drain?(1-g).toFixed(2):0)});
+rise($('cost'),p(u,TM.money_drain+.4,TM.money_drain+1));
+rise($('stamp'),p(u,TM.money_drain+3,TM.money_drain+3.4));
+
+rise($('qm'),p(u,TM.question_mark,TM.question_mark+.5));
+$('oqs').setAttribute('x2',(112+468*p(u,TM.question_mark+2.4,TM.question_mark+3)).toFixed(1));
+rise($('nq'),p(u,TM.question_mark+2.8,TM.question_mark+3.4));
+rise($('sc'),p(u,TM.scales,TM.scales+.6));
+$('beam').setAttribute('transform','rotate('+(3*Math.sin(t*1.5)).toFixed(2)+' 1180 330)');
+rise($('clar'),p(u,TM.scales+5,TM.scales+5.6));
+
+const c1=p(u,TM.spotlight,TM.spotlight+.6),bb=p(u,TM.two_paths+7,TM.two_paths+7.6),cc=p(u,TM.two_paths+11.1,TM.two_paths+11.7);
+rise($('me'),c1);
+rise($('paths'),p(u,TM.two_paths,TM.two_paths+.6));rise($('optP'),p(u,TM.two_paths+.6,TM.two_paths+1.1));rise($('optF'),p(u,TM.two_paths+1.2,TM.two_paths+1.7));
+const sP=1-.2*bb,sF=1-.2*bb+.4*cc;
+$('optPi').setAttribute('transform','translate(450 330) scale('+sP.toFixed(3)+') translate(-450 -330)');$('optPi').setAttribute('opacity',((1-.3*bb)*(1-.3*cc)).toFixed(2));
+$('optFi').setAttribute('transform','translate(1150 330) scale('+sF.toFixed(3)+') translate(-1150 -330)');$('optFi').setAttribute('opacity',(1-.3*bb+.3*cc).toFixed(2));
+$('halo').setAttribute('opacity',cc.toFixed(2));$('halo').setAttribute('stroke-width',(6+2*cc*Math.abs(Math.sin(t*2))).toFixed(1));
+$('lblP').style.fill=cc>.5?'var(--muted)':'var(--ink)';$('lblF').style.fill=cc>.5?'var(--gain)':'var(--ink)';
+FAM.forEach(e=>e.setAttribute('class',cc>.5?'gain':'ink'));$('pfam').setAttribute('class',cc>.5?'s-gain':'s-line');
+rise($('bad'),bb*(1-cc));rise($('good'),cc);
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.6));
+drw(SCR[0],p(u,TM.notebook+3.4,TM.notebook+4.6));drw(SCR[1],p(u,TM.notebook+4.8,TM.notebook+6));
+rise($('row3'),p(u,TM.crossed_item,TM.crossed_item+.4));drw(SCR[2],p(u,TM.crossed_item+.3,TM.crossed_item+1.3));
+$('xs').setAttribute('x2',(470+460*p(u,TM.crossed_item+1.5,TM.crossed_item+2.1)).toFixed(1));
+rise($('ans'),p(u,TM.crossed_item+4.6,TM.crossed_item+5.2));
+
+rise($('mir'),p(u,TM.mirror,TM.mirror+.6));
+rise($('qa'),p(u,TM.mirror,TM.mirror+.5));rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9));rise($('qc'),p(u,TM.mirror+.8,TM.mirror+1.3));
+rise($('nm'),p(u,TM.mirror+3,TM.mirror+3.6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.16;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

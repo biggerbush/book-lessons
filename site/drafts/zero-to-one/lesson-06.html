@@ -1,0 +1,323 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zero to One Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Zero to One: A small number of companies and decisions produce most of the results, so you should focus intensely on the few things that could matter enormously. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">ZERO TO ONE · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The Power Law</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Rules Everything</text>
+<text class="b" x="120" y="600" font-size="32">Why a few big winners outweigh everything else combined</text>
+<path class="s-line" d="M1060 724h420" stroke-width="5" stroke-linecap="round"/>
+<g id="tb0"></g>
+<rect id="tbar" class="gain" x="1380" width="64" rx="6"/>
+<g id="troph" opacity="0"><path class="gain" d="M-44-120h88v34a44 44 0 0 1-88 0z"/><path class="s-gain" d="M-44-104h-20a20 20 0 0 0 20 30M44-104h20a20 20 0 0 1-20 30" fill="none" stroke-width="7" stroke-linecap="round"/><rect class="gain" x="-8" y="-44" width="16" height="24"/><rect class="gain" x="-32" y="-22" width="64" height="16" rx="4"/></g>
+<g id="tnote"><text class="m" x="1060" y="770" font-size="18">NOT A FLUKE: HOW THE WORLD WORKS</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of curves.</text>
+<text class="b" x="120" y="176" font-size="32">How we picture outcomes, and how they often behave.</text>
+<g id="bp"><rect class="s-line" x="120" y="240" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="160" y="290" font-size="20">BELL CURVE</text>
+<path class="s-line" d="M160 682h560" stroke-width="4"/><g id="bbars"></g>
+<path id="bcur" class="s-ink" d="M170 680C340 680 360 370 432 370C504 370 524 680 694 680" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<text class="d5" x="160" y="732" font-size="30">Most results in the middle</text></g>
+<g id="pp"><rect class="s-line" x="840" y="240" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1440" y="290" font-size="20" text-anchor="end">POWER LAW</text>
+<path class="s-line" d="M880 682h560" stroke-width="4"/><g id="pbars"></g>
+<g id="ptxt"><text class="d5" x="880" y="732" font-size="30">A few winners tower over the rest</text></g>
+<g id="tail"><path class="s-gain" d="M1036 600v-14h398v14" fill="none" stroke-width="4" stroke-linejoin="round"/><text class="m" x="1235" y="570" font-size="20" text-anchor="middle">LONG, FLAT TAIL</text></g></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Facebook bet.</text>
+<text class="b" x="120" y="176" font-size="32">Thiel’s venture capital firm, Founders Fund.</text>
+<g id="jar"><rect class="ink" x="180" y="330" width="220" height="30" rx="8"/><rect class="s-ink" x="160" y="370" width="260" height="320" rx="36" fill="var(--stage)" stroke-width="7"/><g id="coins"></g><text class="m" x="290" y="740" font-size="20" text-anchor="middle">FOUNDERS FUND</text></g>
+<path id="flow" class="s-muted" d="M450 530h100" fill="none" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round" opacity="0"/>
+<path class="s-line" d="M580 702h900" stroke-width="4"/>
+<g id="port"></g>
+<g id="pl2"><text class="m" x="600" y="736" font-size="20">THE 2005 FUND</text></g>
+<text id="fbl" class="m" x="808" y="260" font-size="20" text-anchor="middle" style="fill:var(--gain)" opacity="0">FACEBOOK</text>
+<g id="oth"><rect id="othr" class="ink" x="1370" width="80" rx="4"/><text class="m" x="1410" y="736" font-size="20" text-anchor="middle">ALL OTHERS</text><text class="m" x="1410" y="762" font-size="20" text-anchor="middle">COMBINED</text></g>
+<g id="fbt"><text class="d" x="120" y="836" font-size="44">One bet returned more than all the others combined.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The runner-up: Palantir.</text>
+<text class="b" x="120" y="176" font-size="32">A data analysis company Thiel co-founded.</text>
+<path class="s-line" d="M140 722h1340" stroke-width="4"/>
+<rect class="gain" x="160" y="240" width="160" height="480" rx="6"/>
+<text class="m" x="240" y="756" font-size="20" text-anchor="middle">FACEBOOK</text>
+<rect id="palr" class="gain" fill-opacity=".6" x="400" width="160" rx="6"/>
+<g id="pall"><text class="m" x="480" y="756" font-size="20" text-anchor="middle">PALANTIR</text></g>
+<g id="rest3"><text class="d" x="600" y="640" font-size="64" text-anchor="middle" style="fill:var(--gain)">&gt;</text><rect id="restr" class="ink" x="640" width="160" rx="6"/><text class="m" x="720" y="756" font-size="20" text-anchor="middle">THE REST</text><text class="m" x="720" y="782" font-size="20" text-anchor="middle">COMBINED</text></g>
+<g id="tiny3"></g>
+<g id="tinyl"><text class="m" x="1180" y="756" font-size="20" text-anchor="middle">EACH OF THE REST</text><text class="d" x="120" y="846" font-size="40">Beside the two giants, the rest barely registered.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The investor’s rule.</text>
+<text class="b" x="120" y="176" font-size="32">Thiel’s strict test for every company in the fund.</text>
+<g id="card"><rect class="s-line" x="120" y="230" width="640" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="160" y="318" font-size="18">THE ENTIRE FUND</text>
+<path class="s-gain" d="M150 336h580" stroke-width="4" stroke-dasharray="12 10"/>
+<path class="s-line" d="M150 602h580" stroke-width="4"/>
+<rect id="cbar" class="gain" x="300" width="120" rx="6"/>
+<text class="m" x="360" y="630" font-size="18" text-anchor="middle">ONE COMPANY</text>
+<text class="m" x="120" y="690" font-size="20">COULD IT RETURN THE WHOLE FUND ON ITS OWN?</text></g>
+<g id="mag" opacity="0"><circle class="s-ink" cx="0" cy="0" r="70" fill="none" stroke-width="10"/><path class="s-ink" d="M50 50l50 50" stroke-width="16" stroke-linecap="round"/></g>
+<g id="chk"><circle class="gain" cx="610" cy="470" r="64"/><path d="M580 470l22 24 40-48" fill="none" stroke="var(--on-gain)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="spray"><rect class="s-line" x="840" y="230" width="640" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="880" y="318" font-size="18">THE ENTIRE FUND</text>
+<path class="s-gain" d="M870 336h580" stroke-width="4" stroke-dasharray="12 10"/>
+<path class="s-line" d="M870 602h580" stroke-width="4"/>
+<g id="sbars"></g>
+<text class="m" x="1160" y="630" font-size="18" text-anchor="middle">EACH SMALL BET</text>
+<text class="m" x="840" y="690" font-size="20">MANY SAFE BETS, SPREAD THIN</text></g>
+<g id="xmk"><circle class="loss" cx="1330" cy="440" r="64"/><path d="M1306 416l48 48M1354 416l-48 48" fill="none" stroke="var(--stage)" stroke-width="12" stroke-linecap="round"/></g>
+<g id="few"><text class="d" x="120" y="800" font-size="44">The few huge winners decide everything.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Think bigger.</text>
+<text class="b" x="120" y="176" font-size="32">The real danger isn’t the one most investors watch.</text>
+<g id="coin"><path id="ch0" class="loss" d="M300 350A110 110 0 0 0 300 570L286 520L310 470L290 410Z"/><path id="ch1" class="loss" d="M300 350A110 110 0 0 1 300 570L286 520L310 470L290 410Z"/><text class="m" x="300" y="640" font-size="20" text-anchor="middle">AVOIDING LOSSES</text></g>
+<g id="dang"><text class="m" x="640" y="230" font-size="20">UNDERESTIMATED GROWTH</text><path class="s-line" d="M640 722h340" stroke-width="4"/><rect class="s-muted" x="660" y="580" width="120" height="140" rx="6" fill="none" stroke-width="4" stroke-dasharray="10 8"/><rect id="actb" class="gain" x="820" width="120" rx="6"/><text class="m" x="720" y="754" font-size="18" text-anchor="middle">EXPECTED</text><text class="m" x="880" y="754" font-size="18" text-anchor="middle">BEST COMPANY</text></g>
+<g id="rgt"><path class="s-line" d="M1080 722h400" stroke-width="4"/><g id="mods"></g><text class="m" x="1280" y="754" font-size="18" text-anchor="middle">MODEST WINS</text>
+<g id="rock"><path id="flame" class="gain" fill-opacity=".6" d="M-14 4L0 46L14 4Z"/><path class="ink" d="M-26-30L-50 10L-26 0ZM26-30L50 10L26 0Z"/><path class="gain" d="M0-130C34-96 32-40 26 0H-26C-32-40-34-96 0-130Z"/><circle class="s-ink" cx="0" cy="-76" r="12" fill="var(--stage)" stroke-width="4"/></g></g>
+<g id="brk"><text class="d" x="120" y="830" font-size="44">One breakout success beats many modest ones.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your life follows it too.</text>
+<text class="b" x="120" y="176" font-size="32">You can’t hedge your own life like a fund.</text>
+<g id="cpl"><text class="m" x="1480" y="222" font-size="20" text-anchor="end">DOZENS OF POSSIBLE CAREERS</text></g>
+<g id="paths"></g>
+<g id="me"></g>
+<circle id="walker" class="gain" r="16" opacity="0"/>
+<g id="one"><text class="d" x="120" y="810" font-size="40">Pick the one path that could matter most. Commit.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Inside a business.</text>
+<text class="b" x="120" y="176" font-size="32">The same pattern shows up in how a company reaches customers.</text>
+<polygon id="beam" class="gain" points="345,430 345,510 1450,478 1450,422" fill-opacity=".16" opacity="0"/>
+<g id="mega"><rect class="ink" x="150" y="440" width="50" height="60" rx="8"/><path class="ink" d="M200 440L340 390V550L200 500Z"/><path class="s-ink" d="M360 440q16 30 0 60M380 420q28 50 0 100" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+<g id="chan"></g>
+<g id="pour"><text class="d" x="120" y="810" font-size="44">Find that one, and pour your energy there.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="80" letter-spacing="-2">What one project, skill</text></g>
+<g id="qb"><text class="d" x="136" y="440" font-size="80" letter-spacing="-2">or relationship could</text></g>
+<g id="qc"><text class="d" x="136" y="540" font-size="80" letter-spacing="-2">outweigh <tspan style="fill:var(--gain)">everything else?</tspan></text></g>
+<g id="qd"><text class="m" x="143" y="680" font-size="26">THIS WEEK, GIVE IT YOUR BEST HOURS FIRST</text></g>
+<g id="qg"><path class="s-line" d="M1290 762h180" stroke-width="4"/><rect id="qt" class="gain" x="1420" width="40" rx="4"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Power Law Rules Everything&rdquo;, from <em>Zero to One</em> by Peter Thiel with Blake Masters. Founders Fund&#x27;s 2005 fund, Facebook and Palantir are examples as reported in the book. The bell curve, power curve and bar drawings are illustrations, not real data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 9.9], [9.9, 27.5], [27.5, 42.9], [42.9, 58.9], [58.9, 74.5], [74.5, 89.9], [89.9, 105.1], [105.1, 118.0], [118.0, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["One Bet Wins", "Two Kinds of Curves", "The Facebook Bet", "The Runner Up", "The Investor's Rule", "Think Bigger", "Your Life Too", "Inside a Business", "Your Power Law"];
+const TM={"trophy": 0.0, "bell_curve": 10.24, "power_curve": 15.28, "long_tail": 23.52, "fund_jar": 27.76, "portfolio": 31.36, "facebook_bar": 35.12, "palantir_bar": 43.2, "tiny_bars": 54.8, "magnifier": 59.2, "checkmark": 62.16, "spray_can": 67.12, "broken_coin": 77.6, "rocket": 84.52, "person": 90.24, "career_paths": 94.48, "one_path": 99.12, "megaphone": 105.36, "channels": 108.32, "spotlight": 113.36};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const hb=(r,b,h)=>{h=Math.max(0,h);r.setAttribute('y',(b-h).toFixed(1));r.setAttribute('height',h.toFixed(1))};
+const T0=[40,26,52,18,34,22].map((h,i)=>mk('rect',{x:1080+i*46,y:720-h,width:30,height:h,rx:4,class:'ink'},$('tb0')));
+const BB=[],PB=[];for(let i=0;i<16;i++){BB.push(mk('rect',{x:180+i*32,width:22,rx:3,fill:'var(--muted)'},$('bbars')));PB.push(mk('rect',{x:900+i*34,width:24,rx:3,class:'ink'},$('pbars')))}
+const BH=i=>300*Math.exp(-Math.pow((i-7.5)/3.5,2)),PH=i=>380/Math.pow(i+1,1.2);
+for(let r=0;r<4;r++)for(let c=0;c<3;c++)mk('circle',{cx:220+c*70,cy:640-r*62,r:24,class:(r+c)%3?'ink':'gain'},$('coins'));
+const POH=[48,36,30,62,30,54,40,44],PO=POH.map((h,i)=>mk('rect',{x:600+i*90,width:56,rx:4,class:i==2?'gain':'ink'},$('port')));
+const TY=[];for(let i=0;i<12;i++){const h=6+((i*7)%5)*4;TY.push(mk('rect',{x:920+i*46,y:720-h,width:30,height:h,rx:3,class:'ink'},$('tiny3')))}
+const SB=[];for(let i=0;i<20;i++)SB.push(mk('rect',{x:886+i*28,width:18,rx:3,class:'loss'},$('sbars')));
+const SBH=i=>30+((i*7)%4)*5;
+for(let i=0;i<5;i++)mk('rect',{x:1100+i*80,y:692,width:40,height:30,rx:4,class:'ink'},$('mods'));
+fig($('me'),220,420,34,'ink');
+const PT=[];for(let i=0;i<8;i++){const y=250+i*64;PT.push([mk('path',{d:'M300 480C700 480 900 '+y+' 1366 '+y,fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round'},$('paths')),mk('circle',{cx:1380,cy:y,r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('paths'))])}
+const CR=[140,90,800,120,70,100].map((w,i)=>{const g=mk('g',{},$('chan')),y=260+i*84,tx=mk('text',{x:420,y:y+30,'font-size':22,class:'m',style:'fill:var(--muted)'},g);tx.textContent='CHANNEL '+(i+1);return [g,mk('rect',{x:580,y:y,height:44,width:0,rx:6,class:i==2?'gain':'ink'},g),w,tx]});
+[14,22,18,24].forEach((h,i)=>mk('rect',{x:1300+i*30,y:760-h,width:20,height:h,rx:3,class:'ink'},$('qg')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const tk=p(u,TM.trophy,TM.trophy+1.8),th=360*tk;hb($('tbar'),720,th);
+$('troph').setAttribute('transform','translate(1412 '+(712-th+4*Math.sin(t*2)).toFixed(1)+')');$('troph').setAttribute('opacity',p(u,TM.trophy+.8,TM.trophy+1.3));
+T0.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.trophy+i*.12,TM.trophy+i*.12+.4)));
+rise($('tnote'),p(u,TM.trophy+4.6,TM.trophy+5.1));
+
+rise($('bp'),p(u,TM.bell_curve-.3,TM.bell_curve+.3));
+BB.forEach((r,i)=>hb(r,680,BH(i)*p(u,TM.bell_curve+i*.06,TM.bell_curve+i*.06+.6)));
+$('bcur').style.strokeDashoffset=(1-p(u,TM.bell_curve+1.2,TM.bell_curve+2.6)).toFixed(3);
+rise($('pp'),p(u,TM.power_curve-.3,TM.power_curve+.3));
+const tw=u>=TM.power_curve+4.2,lt=u>=TM.long_tail;
+PB.forEach((r,i)=>{hb(r,680,PH(i)*p(u,TM.power_curve+i*.08,TM.power_curve+i*.08+.7));r.setAttribute('class',tw&&i<2?'gain':'ink');r.setAttribute('opacity',lt&&i>=4?(.5+.4*Math.abs(Math.sin(t*2+i*.4))).toFixed(2):1)});
+rise($('ptxt'),p(u,TM.power_curve+4.2,TM.power_curve+4.7));
+rise($('tail'),p(u,TM.long_tail,TM.long_tail+.5));
+
+rise($('jar'),p(u,TM.fund_jar,TM.fund_jar+.5));
+$('flow').setAttribute('opacity',p(u,TM.portfolio,TM.portfolio+.4));$('flow').style.strokeDashoffset=(-t*30).toFixed(1);
+rise($('pl2'),p(u,TM.portfolio,TM.portfolio+.5));
+const fg=p(u,TM.facebook_bar,TM.facebook_bar+1.4);
+PO.forEach((r,i)=>{const a=TM.portfolio+.3+i*.1,k=p(u,a,a+.4);hb(r,700,(i==2?30+390*fg:POH[i])*k)});
+$('fbl').setAttribute('y',(682-30-390*fg).toFixed(1));$('fbl').setAttribute('opacity',p(u,TM.facebook_bar+.4,TM.facebook_bar+.9));
+rise($('oth'),p(u,TM.facebook_bar+2.2,TM.facebook_bar+2.7));hb($('othr'),700,260*p(u,TM.facebook_bar+2.4,TM.facebook_bar+3.4));
+rise($('fbt'),p(u,TM.facebook_bar+3.2,TM.facebook_bar+3.8));
+
+hb($('palr'),720,300*p(u,TM.palantir_bar,TM.palantir_bar+1.2));rise($('pall'),p(u,TM.palantir_bar,TM.palantir_bar+.5));
+rise($('rest3'),p(u,TM.palantir_bar+5,TM.palantir_bar+5.5));hb($('restr'),720,200*p(u,TM.palantir_bar+5.2,TM.palantir_bar+6.2));
+TY.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.tiny_bars+i*.08,TM.tiny_bars+i*.08+.3)));
+rise($('tinyl'),p(u,TM.tiny_bars+.8,TM.tiny_bars+1.4));
+
+rise($('card'),p(u,TM.magnifier-.4,TM.magnifier+.1));
+hb($('cbar'),602,60+206*p(u,TM.checkmark,TM.checkmark+1.6));
+$('mag').setAttribute('transform','translate('+(360+30*Math.sin(t*1.2)).toFixed(1)+' '+(470+14*Math.sin(t*1.7)).toFixed(1)+')');$('mag').setAttribute('opacity',p(u,TM.magnifier,TM.magnifier+.5));
+rise($('chk'),p(u,TM.checkmark+1.6,TM.checkmark+2.1));
+rise($('spray'),p(u,TM.spray_can,TM.spray_can+.5));
+SB.forEach((r,i)=>{const a=TM.spray_can+.4+i*.07;hb(r,600,SBH(i)*p(u,a,a+.4))});
+rise($('xmk'),p(u,TM.spray_can+2.4,TM.spray_can+2.9));
+rise($('few'),p(u,TM.spray_can+3.5,TM.spray_can+4.1));
+
+const b5=SC[5][0]/K,bk=p(u,TM.broken_coin,TM.broken_coin+.8);rise($('coin'),p(u,b5+.5,b5+1));
+[-1,1].forEach((s,i)=>{const e=$('ch'+i);e.setAttribute('transform','translate('+(24*s*bk).toFixed(1)+' '+(10*bk).toFixed(1)+') rotate('+(8*s*bk).toFixed(1)+' 300 460)');e.setAttribute('opacity',(1-.5*bk).toFixed(2))});
+rise($('dang'),p(u,TM.broken_coin+.4,TM.broken_coin+.9));hb($('actb'),720,140+320*p(u,TM.broken_coin+1.4,TM.broken_coin+3));
+const rk=p(u,TM.rocket+.6,TM.rocket+2.6);rise($('rgt'),p(u,TM.rocket,TM.rocket+.5));
+$('rock').setAttribute('transform','translate(1280 '+(680-300*rk+(rk>0&&rk<1?3*Math.sin(t*9):0)).toFixed(1)+')');
+$('flame').setAttribute('transform','scale(1 '+(1+.3*Math.sin(t*14)).toFixed(2)+')');
+rise($('brk'),p(u,TM.rocket+2.8,TM.rocket+3.4));
+
+rise($('me'),p(u,TM.person,TM.person+.5));rise($('cpl'),p(u,TM.career_paths,TM.career_paths+.5));
+const pick=u>=TM.one_path,wk=p(u,TM.one_path+.6,TM.one_path+3.2);
+PT.forEach((q,i)=>{const k=p(u,TM.career_paths+i*.15,TM.career_paths+i*.15+.5),on=pick&&i==2,o=(k*(pick&&!on?.25:1)).toFixed(2);
+  q[0].setAttribute('opacity',o);q[1].setAttribute('opacity',o);q[0].setAttribute('stroke',on?'var(--gain)':'var(--muted)');q[0].setAttribute('stroke-width',on?8:4);q[0].setAttribute('stroke-dasharray',on?'none':'10 10');q[1].setAttribute('fill',on?'var(--gain)':'var(--stage)')});
+const WL=PT[2][0].getTotalLength(),wp=PT[2][0].getPointAtLength(WL*wk);
+$('walker').setAttribute('cx',wp.x.toFixed(1));$('walker').setAttribute('cy',wp.y.toFixed(1));$('walker').setAttribute('opacity',pick?1:0);
+rise($('one'),p(u,TM.one_path+.4,TM.one_path+1));
+
+rise($('mega'),p(u,TM.megaphone,TM.megaphone+.5));
+const sp=u>=TM.spotlight;
+CR.forEach(([g,r,w,tx],i)=>{const a=TM.channels+i*.3;rise(g,p(u,a,a+.4));r.setAttribute('width',(w*p(u,a+.2,a+(i==2?2.2:1))).toFixed(1));r.setAttribute('opacity',sp&&i!=2?.3:1);tx.style.fill=sp&&i==2?'var(--gain)':'var(--muted)'});
+$('beam').setAttribute('opacity',(p(u,TM.spotlight,TM.spotlight+.6)*(.8+.2*Math.sin(t*3))).toFixed(2));
+rise($('pour'),p(u,TM.spotlight+.8,TM.spotlight+1.4));
+
+const b8=SC[8][0]/K;
+rise($('qa'),p(u,b8+.4,b8+.9));rise($('qb'),p(u,b8+.8,b8+1.3));rise($('qc'),p(u,b8+1.2,b8+1.7));
+rise($('qg'),p(u,b8+1.4,b8+1.9));hb($('qt'),760,160*p(u,b8+1.8,b8+3.2));
+rise($('qd'),p(u,b8+6.6,b8+7.2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.56;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

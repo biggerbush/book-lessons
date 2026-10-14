@@ -1,0 +1,315 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Lean Startup Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of The Lean Startup: Every business idea rests on risky assumptions about value and growth, and you should identify and test the riskiest ones first. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE LEAN STARTUP · LESSON 3</text>
+<text class="d" x="116" y="330" font-size="84" letter-spacing="-2">Find your leap of faith</text>
+<text class="d" x="116" y="426" font-size="84" letter-spacing="-2">assumptions.</text>
+<text class="b" x="120" y="520" font-size="32">Every plan hides risky bets. Test the scariest one first.</text>
+<g id="chips"></g>
+<text id="rq" class="d" x="1420" y="668" font-size="60" style="fill:var(--loss)">?</text>
+<g id="map"><polygon class="s-ink" points="1170,550 1250,530 1330,550 1410,530 1410,580 1330,600 1250,580 1170,600" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><path class="s-line" d="M1250 530v50M1330 550v50" stroke-width="3"/><path class="s-gain" d="M1190 575Q1250 545 1300 565T1395 550" fill="none" stroke-width="4" stroke-dasharray="8 6"/></g>
+</g>
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Bets behind the plan.</text>
+<text class="b" x="120" y="176" font-size="32">Many confident numbers are really guesses.</text>
+<g id="fnd"></g>
+<g id="bulb"><circle class="gain" cx="260" cy="296" r="26"/><path class="s-gain" d="M222 258l-12-12M298 258l12-12M260 250v-18" stroke-width="5" stroke-linecap="round"/></g>
+<g id="sheet"><rect class="s-ink" x="460" y="260" width="540" height="360" rx="14" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M460 318h540" stroke-width="3"/>
+<text class="m" x="490" y="300" font-size="20">CUSTOMERS</text><text class="m" x="660" y="300" font-size="20">SALES</text><text class="m" x="830" y="300" font-size="20">GROWTH</text><g id="cells"></g></g>
+<g id="leap"><rect class="ink" x="1060" y="560" width="140" height="80"/><rect class="ink" x="1340" y="560" width="140" height="80"/>
+<path id="arc" class="s-gain" d="M1130 540Q1270 330 1410 540" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<circle id="ball" class="gain" r="18" cx="1130" cy="540"/>
+<text class="m" x="1270" y="690" font-size="22" text-anchor="middle">LEAP OF FAITH</text><text class="m" x="1270" y="722" font-size="22" text-anchor="middle">ASSUMPTION</text></g>
+<g id="jump"><text class="d" x="120" y="810" font-size="44">The whole business jumps on its riskiest guesses.</text></g>
+</g>
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two bets matter most.</text>
+<text class="b" x="120" y="176" font-size="32">Assumption 1: the value hypothesis.</text>
+<g id="pil"><rect class="ink" x="160" y="300" width="540" height="44"/><text class="m" x="430" y="329" font-size="20" text-anchor="middle" style="fill:var(--stage)">YOUR BUSINESS</text>
+<rect id="pv" x="210" y="344" width="120" height="356" fill="var(--line)"/><rect x="530" y="344" width="120" height="356" fill="var(--line)"/>
+<text class="d" x="270" y="545" font-size="64" text-anchor="middle">1</text><text class="d" x="590" y="545" font-size="64" text-anchor="middle">2</text>
+<rect class="ink" x="160" y="700" width="540" height="30"/>
+<text class="m" x="270" y="780" font-size="24" text-anchor="middle">VALUE</text><text class="m" x="590" y="780" font-size="24" text-anchor="middle">GROWTH</text></g>
+<g id="vh"><g id="heart" transform="translate(1150 360)"><path class="gain" d="M0 84C-105 14-112-63-52-77C-24-84-6-64 0-49C6-64 24-84 52-77C112-63 105 14 0 84Z"/></g></g>
+<g id="vq"><text class="d5" x="820" y="530" font-size="38">Do people actually get value</text><text class="d5" x="820" y="580" font-size="38">from it once they use it?</text></g>
+<g id="say"><rect class="s-muted" x="820" y="650" width="300" height="90" rx="16" fill="var(--stage)" stroke-width="4"/><text class="m" x="882" y="703" font-size="24" style="fill:var(--muted)">WHAT THEY SAY</text></g>
+<path id="sayx" class="s-loss" d="M840 684l22 22M862 684l-22 22" stroke-width="5" stroke-linecap="round"/>
+<g id="do2"><rect class="gain" x="1180" y="650" width="300" height="90" rx="16"/><text class="m" x="1330" y="703" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">WHAT THEY DO</text></g>
+</g>
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The growth bet.</text>
+<text class="b" x="120" y="176" font-size="32">Assumption 2: how will new customers discover this?</text>
+<circle id="ring" class="s-gain" cx="440" cy="310" r="22" fill="none" stroke-width="4"/>
+<g id="tlines"></g><g id="tree"></g>
+<g id="lb1"><text class="m" x="120" y="760" font-size="20">HAPPY USERS BRING FRIENDS</text></g>
+<g id="paid"></g>
+<g id="lb2"><text class="m" x="900" y="580" font-size="20">OR YOU PAY FOR EVERY SIGN-UP</text></g>
+<g id="stall"><text class="d" x="120" y="830" font-size="44">Loved but unheard? It still stalls.</text></g>
+</g>
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Facebook’s value bet.</text>
+<text class="b" x="120" y="176" font-size="32">Little revenue at first, yet investors were excited.</text>
+<g id="camp"><polygon class="s-ink" points="140,340 320,270 500,340" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="ink" x="170" y="350" width="30" height="220"/><rect class="ink" x="240" y="350" width="30" height="220"/><rect class="ink" x="310" y="350" width="30" height="220"/><rect class="ink" x="380" y="350" width="30" height="220"/><rect class="ink" x="450" y="350" width="30" height="220"/>
+<rect class="ink" x="140" y="580" width="360" height="30"/><text class="m" x="320" y="650" font-size="20" text-anchor="middle">CAMPUS</text></g>
+<g id="lap"><g id="lapu"></g><rect class="s-ink" x="670" y="490" width="100" height="66" rx="6" fill="var(--stage)" stroke-width="5"/><rect class="ink" x="655" y="556" width="130" height="10"/></g>
+<g id="rev"><text class="m" x="900" y="300" font-size="20">REVENUE</text><rect x="900" y="318" width="36" height="28" fill="var(--muted)"/></g>
+<g id="why"><text class="d" x="1240" y="350" font-size="72" style="fill:var(--loss)">Why?</text></g>
+<g id="back"><text class="m" x="900" y="440" font-size="20">THEY KEPT COMING BACK</text><g id="days"></g>
+<text class="m" x="900" y="590" font-size="20">TIME SPENT</text><rect id="tbar" class="gain" x="900" y="610" width="0" height="40" rx="8"/></g>
+<g id="ev1"><text class="d" x="120" y="800" font-size="52">Evidence for the value bet.</text><path class="s-gain" d="M980 780l22 22 40-44" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Facebook’s growth bet.</text>
+<text class="b" x="120" y="176" font-size="32">It spread across each new campus, fast.</text>
+<g id="fmap"><rect class="s-line" x="120" y="230" width="700" height="530" rx="18" fill="var(--stage)" stroke-width="4"/>
+<g id="blks"></g>
+<path class="s-line" d="M120 380h700M120 620h700M300 230v530M640 230v530" stroke-width="10"/><g id="dots"></g>
+<g id="pin"><path class="gain" d="M470 495c-30-40-36-56-36-70a36 36 0 0 1 72 0c0 14-6 30-36 70z"/><circle cx="470" cy="425" r="12" fill="var(--stage)"/></g></g>
+<g id="bill"><rect class="ink" x="1040" y="490" width="16" height="90"/><rect class="ink" x="1300" y="490" width="16" height="90"/>
+<rect class="s-ink" x="960" y="290" width="440" height="200" rx="12" fill="var(--stage)" stroke-width="6"/><text class="d" x="1180" y="420" font-size="80" text-anchor="middle" style="fill:var(--muted)">ADS</text>
+<text class="m" x="960" y="630" font-size="22">NO ADVERTISING SPEND</text></g>
+<path id="xad" class="s-loss" d="M990 310L1370 470M1370 310L990 470" stroke-width="12" stroke-linecap="round"/>
+<g id="ev2"><text class="d" x="960" y="720" font-size="52">Evidence for</text><text class="d" x="960" y="780" font-size="52">the <tspan style="fill:var(--gain)">growth bet.</tspan></text></g>
+</g>
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Spot the riskiest bet.</text>
+<text class="b" x="120" y="176" font-size="32">Compare analogs and antilogs.</text>
+<g id="k0"><rect class="s-line" x="120" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="230" y="290" width="200" height="130" rx="16" fill="var(--stage)" stroke-width="6"/><rect class="s-line" x="260" y="320" width="140" height="60" rx="30" fill="none" stroke-width="4"/>
+<circle class="ink" cx="295" cy="350" r="16"/><circle class="ink" cx="365" cy="350" r="16"/><path class="s-ink" d="M430 330c50 0 60 60 40 100" fill="none" stroke-width="4"/><circle class="ink" cx="470" cy="440" r="10"/>
+<text class="m" x="150" y="500" font-size="20">ANALOG · WALKMAN</text><text class="d5" x="150" y="560" font-size="32">People will listen</text><text class="d5" x="150" y="604" font-size="32">to music in public.</text></g>
+<g id="ok0"><path class="s-gain" d="M150 690l20 20 40-40" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="230" y="708" font-size="22" style="fill:var(--gain)">PROVEN</text></g>
+<g id="k1"><rect class="s-line" x="590" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-gain" d="M800 280v100m-40-40 40 40 40-40" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path class="s-ink" d="M730 400v30h140v-30" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<text class="m" x="620" y="500" font-size="20">ANTILOG · NAPSTER</text><text class="d5" x="620" y="560" font-size="32">People will download</text><text class="d5" x="620" y="604" font-size="32">music.</text></g>
+<g id="free"><rect class="s-loss" x="620" y="660" width="220" height="60" rx="30" fill="none" stroke-width="4"/><text class="m" x="730" y="698" font-size="22" text-anchor="middle" style="fill:var(--loss)">BUT FOR FREE</text></g>
+<g id="k2"><rect class="s-gain" x="1060" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="1270" y="440" font-size="200" text-anchor="middle" style="fill:var(--gain)">?</text>
+<text class="m" x="1090" y="500" font-size="20">THE LEAP OF FAITH</text><text class="d" x="1090" y="570" font-size="44">Will people pay</text><text class="d" x="1090" y="625" font-size="44">for music?</text></g>
+</g>
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Test it first.</text>
+<text class="b" x="120" y="176" font-size="32">Then leave the office and meet real customers.</text>
+<g id="mag"><g id="mchip"></g><g id="lens"><circle class="s-ink" cx="300" cy="400" r="70" fill="var(--stage)" fill-opacity=".3" stroke-width="12"/><path class="s-ink" d="M352 452L420 520" stroke-width="18" stroke-linecap="round"/></g>
+<text class="m" x="140" y="600" font-size="20">RISKIEST BET</text></g>
+<g id="door"><rect class="s-ink" x="560" y="260" width="200" height="300" fill="var(--ice)" stroke-width="6"/><g id="cust"></g>
+<polygon id="leaf" class="s-ink" points="560,260 760,260 760,560 560,560" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="560" y="610" font-size="20">SEE CUSTOMERS FIRSTHAND</text></g>
+<g id="list"><rect class="s-line" x="920" y="240" width="560" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="950" y="290" font-size="20">ASSUMPTIONS · RANKED BY RISK</text><g id="rows"></g></g>
+<g id="top1"><text class="m" x="950" y="742" font-size="20" style="fill:var(--gain)">START AT THE TOP</text></g>
+<g id="wrt"><text class="d" x="120" y="760" font-size="44">Write. Rank. Test the top one.</text></g>
+</g>
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="330" font-size="80" letter-spacing="-2">What’s the one assumption</text></g>
+<g id="qb"><text class="d" x="136" y="430" font-size="80" letter-spacing="-2">that, if wrong, makes</text></g>
+<g id="qc"><text class="d" x="136" y="530" font-size="80" letter-spacing="-2">everything else <tspan style="fill:var(--gain)">pointless?</tspan></text></g>
+<g id="ql"><text class="m" x="143" y="680" font-size="26">LOOK AT YOUR OWN IDEA TODAY</text></g>
+<g id="ech"><g id="echips"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Find Your Leap of Faith Assumptions&rdquo;, from <em>The Lean Startup</em> by Eric Ries. Examples of early Facebook, the Sony Walkman, Napster and Apple&#x27;s iPod are as reported in the book. Drawings of campuses, map pins, ripples and checklists are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 8.7], [8.7, 26.6], [26.6, 39.7], [39.7, 54.9], [54.9, 71.3], [71.3, 82.9], [82.9, 103.7], [103.7, 118.4], [118.4, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["A Hidden Bet", "Bets Behind the Plan", "The Value Bet", "The Growth Bet", "Facebook's Value", "Facebook's Growth", "Spot the Riskiest", "Test It First", "Your Leap"];
+const TM={"bet_chips": 0.0, "founder": 8.96, "spreadsheet": 11.84, "leap_arrow": 20.4, "two_pillars": 26.88, "value_heart": 29.76, "growth_tree": 40.0, "ripple": 45.36, "campus": 55.2, "laptop_user": 58.0, "map_pins": 71.56, "no_ads": 76.64, "walkman": 83.2, "napster_icon": 94.32, "question_mark": 99.2, "magnifier": 104.0, "door_open": 108.56, "checklist": 113.68};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const chip=(g,x,y,w,top)=>{mk('ellipse',{cx:x,cy:y+16,rx:w,ry:w/4,fill:'var(--ink)'},g);mk('rect',{x:x-w,y:y,width:2*w,height:16,fill:'var(--ink)'},g);return mk('ellipse',{cx:x,cy:y,rx:w,ry:w/4,fill:top||'var(--stage)',stroke:'var(--ink)','stroke-width':4},g)};
+const CH=[];for(let i=0;i<6;i++){const o=mk('g',{},$('chips')),n=mk('g',{},o);CH.push([o,n,chip(n,1300,740-i*30,90)])}
+fig($('fnd'),260,400,40,'ink');
+const SB=[],SQ=[];for(let r=0;r<4;r++)for(let c=0;c<3;c++){const x=480+c*170,y=330+r*70;
+SB.push(mk('rect',{x:x+10,y:y+16,width:70+((r*2+c)%3)*30,height:14,rx:7,class:'ink'},$('cells')));
+const q=mk('text',{x:x+70,y:y+46,'font-size':40,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},$('cells'));q.textContent='?';SQ.push(q)}
+const TR=[];const node=(x,y,dx,L,px,py)=>{const ln=L?mk('path',{d:'M'+px+' '+py+'L'+x+' '+y,class:'s-line','stroke-width':4},$('tlines')):null;
+const g=mk('g',{},$('tree'));mk('circle',{cx:x,cy:y,r:22-L*2,class:L?'gain':'ink'},g);TR.push([g,L,ln]);
+if(L<3){node(x-dx,y+130,dx/2,L+1,x,y);node(x+dx,y+130,dx/2,L+1,x,y)}};node(440,310,140,0);
+const PD=[];for(let i=0;i<6;i++){const g=mk('g',{},$('paid')),x=950+i*100;fig(g,x,460,18,'ink');mk('circle',{cx:x,cy:390,r:18,class:'loss'},g);
+const s=mk('text',{x:x,y:398,'font-size':22,'text-anchor':'middle',class:'d',style:'fill:var(--stage)'},g);s.textContent='$';PD.push(g)}
+fig($('lapu'),640,440,28,'ink');
+const DY=[];for(let i=0;i<7;i++)DY.push(mk('rect',{x:900+i*80,y:460,width:60,height:60,rx:10,fill:'var(--line)'},$('days')));
+// campus blocks shaded as the spread reaches them
+const BX=[[128,292],[310,630],[650,812]],BYY=[[238,372],[390,610],[630,752]],BLK=[];
+BX.forEach((bx,ci)=>BYY.forEach((by,ri)=>{const d=Math.abs(ci-1)+Math.abs(ri-1);
+BLK.push([mk('rect',{x:bx[0],y:by[0],width:bx[1]-bx[0],height:by[1]-by[0],rx:8,class:'gain','fill-opacity':0},$('blks')),d/2])}));
+const DOT=[];for(let i=0;i<60;i++){const rr=25*Math.sqrt(i+1),a=i*2.4,x=470+1.6*rr*Math.cos(a),y=495+1.05*rr*Math.sin(a);
+if(x<150||x>790||y<258||y>735)continue;DOT.push([mk('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:10,class:'gain'},$('dots')),i/59])}
+chip($('mchip'),260,440,90,'var(--loss)');
+[610,660,710].forEach(x=>fig($('cust'),x,400,16,'gain'));
+const RW=[];for(let i=0;i<4;i++){const y=330+i*100,g=mk('g',{},$('rows'));
+const r=mk('rect',{x:950,y:y,width:500,height:70,rx:12,fill:'none',stroke:'var(--line)','stroke-width':4},g);
+const n=mk('text',{x:975,y:y+48,'font-size':36,class:'d'},g);n.textContent=i+1;
+mk('path',{d:'M1010 '+(y+35)+'h190',class:'s-line','stroke-width':8,'stroke-linecap':'round'},g);
+mk('rect',{x:1230,y:y+23,width:200*(1-.25*i),height:24,rx:12,class:'loss'},g);RW.push([g,r])}
+for(let i=0;i<4;i++)chip($('echips'),1340,790-i*30,70,i===3?'var(--gain)':0);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const k0=p(t,.2,2);$('map').setAttribute('transform','translate(0 '+(-40*k0+5*Math.sin(t*1.5)).toFixed(1)+')');
+CH.forEach((c,i)=>rise(c[0],p(u,TM.bet_chips+i*.35,TM.bet_chips+i*.35+.4)));
+const rk=u>=TM.bet_chips+6.2;CH[3][2].setAttribute('fill',rk?'var(--loss)':'var(--stage)');CH[3][1].setAttribute('transform','translate('+(rk?(6*Math.sin(t*9)).toFixed(1):0)+' 0)');
+rise($('rq'),p(u,TM.bet_chips+6.2,TM.bet_chips+6.7));
+
+rise($('fnd'),p(u,TM.founder,TM.founder+.5));rise($('bulb'),p(u,TM.founder+1,TM.founder+1.5));rise($('sheet'),p(u,TM.spreadsheet,TM.spreadsheet+.5));
+SB.forEach((b,i)=>{const g=p(u,TM.spreadsheet+4.6+i*.1,TM.spreadsheet+4.9+i*.1);b.setAttribute('opacity',1-g);SQ[i].setAttribute('opacity',g)});
+rise($('leap'),p(u,TM.leap_arrow,TM.leap_arrow+.5));const lk=p(u,TM.leap_arrow+.6,TM.leap_arrow+2.2),mm=1-lk;$('arc').setAttribute('stroke-dashoffset',mm);
+$('ball').setAttribute('cx',(mm*mm*1130+2*mm*lk*1270+lk*lk*1410).toFixed(1));$('ball').setAttribute('cy',(mm*mm*540+2*mm*lk*330+lk*lk*540).toFixed(1));
+rise($('jump'),p(u,TM.leap_arrow+2,TM.leap_arrow+2.6));
+
+rise($('pil'),p(u,TM.two_pillars,TM.two_pillars+.5));$('pv').setAttribute('fill',u>=TM.value_heart?'var(--gain)':'var(--line)');
+rise($('vh'),p(u,TM.value_heart,TM.value_heart+.5));$('heart').setAttribute('transform','translate(1150 360) scale('+(1+.06*Math.abs(Math.sin(t*3))).toFixed(3)+')');
+rise($('vq'),p(u,TM.value_heart+.6,TM.value_heart+1.1));rise($('say'),p(u,TM.value_heart+6.9,TM.value_heart+7.4));
+$('sayx').setAttribute('opacity',p(u,TM.value_heart+7.6,TM.value_heart+8));rise($('do2'),p(u,TM.value_heart+8.2,TM.value_heart+8.7));
+
+TR.forEach(n=>{const a=TM.growth_tree+.5+n[1]*.6,k=p(u,a,a+.4);rise(n[0],k);if(n[2])n[2].setAttribute('opacity',k)});
+rise($('lb1'),p(u,TM.growth_tree+2.5,TM.growth_tree+3));
+const rg=(t*.8)%1;$('ring').setAttribute('r',(22+60*rg).toFixed(1));$('ring').setAttribute('opacity',u>=TM.ripple?(1-rg).toFixed(2):0);
+PD.forEach((g,i)=>rise(g,p(u,TM.ripple+.8+i*.3,TM.ripple+1.2+i*.3)));rise($('lb2'),p(u,TM.ripple+2.6,TM.ripple+3.1));
+rise($('stall'),p(u,TM.ripple+5.8,TM.ripple+6.4));
+
+rise($('camp'),p(u,TM.campus,TM.campus+.5));rise($('lap'),p(u,TM.laptop_user,TM.laptop_user+.5));rise($('rev'),p(u,TM.laptop_user+.4,TM.laptop_user+.9));
+rise($('why'),p(u,TM.laptop_user+4.2,TM.laptop_user+4.6));rise($('back'),p(u,TM.laptop_user+4.8,TM.laptop_user+5.3));
+DY.forEach((d,i)=>d.setAttribute('fill',u>=TM.laptop_user+7+i*.3?'var(--gain)':'var(--line)'));
+$('tbar').setAttribute('width',(560*p(u,TM.laptop_user+7,TM.laptop_user+10)).toFixed(1));rise($('ev1'),p(u,TM.laptop_user+11.2,TM.laptop_user+11.8));
+
+// growth bet: spread radiates from the first pin and fills the campus
+const ms=Math.min(TM.map_pins,SC[5][1]/K-5);
+rise($('fmap'),p(u,ms-.4,ms));
+DOT.forEach(d=>{const a=ms+.6+d[1]*3;d[0].setAttribute('opacity',p(u,a,a+.3))});
+BLK.forEach(b=>{const a=ms+.5+b[1]*2.8;b[0].setAttribute('fill-opacity',(.22*p(u,a,a+.6)).toFixed(3))});
+$('pin').setAttribute('transform','translate(0 '+(-6*Math.abs(Math.sin(t*2.5))).toFixed(1)+')');
+rise($('bill'),p(u,TM.no_ads-.6,TM.no_ads-.1));$('xad').setAttribute('opacity',p(u,TM.no_ads+.4,TM.no_ads+.8));rise($('ev2'),p(u,TM.no_ads+3.3,TM.no_ads+3.9));
+
+rise($('k0'),p(u,TM.walkman,TM.walkman+.5));rise($('ok0'),p(u,TM.walkman+5,TM.walkman+5.5));rise($('k1'),p(u,TM.napster_icon,TM.napster_icon+.5));
+rise($('free'),p(u,TM.napster_icon+2.5,TM.napster_icon+3));rise($('k2'),p(u,TM.question_mark,TM.question_mark+.5));
+
+rise($('mag'),p(u,TM.magnifier,TM.magnifier+.5));$('lens').setAttribute('transform','translate('+(30*Math.sin(t*1.4)).toFixed(1)+' 0)');
+rise($('door'),p(u,TM.door_open,TM.door_open+.5));const dk=p(u,TM.door_open+.6,TM.door_open+1.8),dw=200-150*dk,ds=30*dk;
+$('leaf').setAttribute('points','560,260 '+(560+dw)+','+(260-ds)+' '+(560+dw)+','+(560+ds)+' 560,560');
+rise($('list'),p(u,TM.checklist,TM.checklist+.5));RW.forEach((r,i)=>rise(r[0],p(u,TM.checklist+.5+i*.4,TM.checklist+.9+i*.4)));
+RW[0][1].setAttribute('stroke',u>=TM.checklist+2.5?'var(--gain)':'var(--line)');rise($('top1'),p(u,TM.checklist+2.5,TM.checklist+3));rise($('wrt'),p(u,TM.checklist+1.5,TM.checklist+2));
+
+const s8=SC[8][0]/K;rise($('ql'),p(u,s8+.3,s8+.8));rise($('ech'),p(u,s8+.3,s8+.8));
+rise($('qa'),p(u,s8+2.6,s8+3.1));rise($('qb'),p(u,s8+3,s8+3.5));rise($('qc'),p(u,s8+3.4,s8+3.9));
+$('echips').setAttribute('transform','translate(0 '+(-6*Math.sin(t*2)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

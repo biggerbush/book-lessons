@@ -1,0 +1,318 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Good to Great Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Good to Great: The Stockdale Paradox teaches that you must confront the harshest realities of your situation while never losing faith that you will prevail in the end. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GOOD TO GREAT · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Face the brutal facts.</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Keep the faith.</text>
+<text class="b" x="120" y="600" font-size="32">Face the hardest truth, and never stop believing you’ll win.</text>
+<g id="doors">
+<path class="s-line" d="M1180 520H1480" stroke-width="5"/>
+<rect x="1200" y="300" width="120" height="220" fill="var(--loss)"/>
+<rect x="1200" y="300" width="120" height="220" fill="none" stroke="var(--ink)" stroke-width="6"/>
+<circle cx="1300" cy="420" r="7" fill="var(--stage)"/>
+<rect x="1350" y="300" width="120" height="220" class="gain"/>
+<rect id="leafB" x="1350" y="300" width="120" height="220" fill="var(--ink)"/>
+<rect x="1350" y="300" width="120" height="220" fill="none" stroke="var(--ink)" stroke-width="6"/>
+<text class="m" x="1260" y="560" font-size="20" text-anchor="middle" style="fill:var(--loss)">DENIAL</text>
+<text class="m" x="1410" y="560" font-size="20" text-anchor="middle" style="fill:var(--gain)">REALITY</text>
+</g>
+<g id="walk"><g id="walkI"></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two grocers, one big shift.</text>
+<text class="b" x="120" y="176" font-size="32">A&amp;P was a giant. Kroger was a far less famous rival.</text>
+<path class="s-line" d="M120 640H1480" stroke-width="4"/>
+<g id="ghost"><rect x="880" y="330" width="560" height="310" rx="10" fill="none" stroke="var(--gain)" stroke-width="5" stroke-dasharray="14 10"/><text class="m" x="1420" y="364" font-size="20" text-anchor="end" style="fill:var(--gain)">BIGGER, MODERN STORES</text></g>
+<g id="ap"><text class="m" x="160" y="684" font-size="20">ONE OF THE BIGGEST RETAILERS IN THE WORLD</text></g>
+<g id="kp"><text class="m" x="900" y="684" font-size="20">A RIVAL, FAR LESS FAMOUS</text></g>
+<g id="cart"><g id="cartI"><path d="M0 0h24l24 80h110l22-60H38" fill="none" stroke="var(--ink)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle class="ink" cx="64" cy="100" r="12"/><circle class="ink" cx="144" cy="100" r="12"/></g>
+<text class="m" x="1270" y="770" font-size="20" text-anchor="end">SHOPPERS WANT BIGGER STORES, MORE CHOICE</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A&amp;P looked away.</text>
+<text class="b" x="120" y="176" font-size="32">It ran an experiment, heard a painful truth, and shut it down.</text>
+<g id="gk"><g id="gkb"><path class="s-line" d="M140 620H580" stroke-width="4"/></g>
+<circle cx="610" cy="300" r="22" fill="none" stroke="var(--gain)" stroke-width="8"/><path d="M632 300h70M682 300v18M698 300v14" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round"/></g>
+<g id="insight"><rect x="160" y="660" width="400" height="70" rx="12" fill="none" stroke="var(--loss)" stroke-width="4"/><text class="m" x="360" y="703" font-size="20" text-anchor="middle" style="fill:var(--loss)">OLD MODEL IS FALLING BEHIND</text></g>
+<g id="closed"><g id="closedS"><path d="M310 450L360 420L410 450" fill="none" stroke="var(--ink)" stroke-width="3"/><rect class="loss" x="290" y="450" width="140" height="56" rx="6"/><text class="d" x="360" y="489" font-size="30" text-anchor="middle" style="fill:var(--stage)">CLOSED</text></g></g>
+<g id="ch2"><text class="m" x="856" y="264" font-size="22">A&amp;P OVER TIME</text><path class="s-ink" d="M840 280V700H1460" fill="none" stroke-width="5"/><text class="m" x="1460" y="744" font-size="22" text-anchor="end">DECADES →</text>
+<path id="fall" d="M860 360C1000 380 1060 480 1160 520S1360 640 1440 670" fill="none" stroke="var(--loss)" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/></g>
+<g id="fallL"><text class="d" x="1440" y="615" font-size="36" text-anchor="end" style="fill:var(--loss)">A&amp;P</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Kroger faced the facts.</text>
+<text class="b" x="120" y="176" font-size="32">Same shift, same conclusion. A different choice.</text>
+<g id="doc"><rect x="160" y="240" width="220" height="190" rx="10" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path class="s-line" d="M190 290h160M190 330h160M190 370h100" stroke-width="6" stroke-linecap="round"/>
+<g id="mag"><circle r="56" fill="var(--stage)" fill-opacity=".5" stroke="var(--ink)" stroke-width="12"/><path d="M40 40l50 50" stroke="var(--ink)" stroke-width="16" stroke-linecap="round"/></g></g>
+<g id="concl"><text class="m" x="470" y="320" font-size="22">SAME SHIFT.</text><text class="m" x="470" y="352" font-size="22">SAME UNCOMFORTABLE</text><text class="m" x="470" y="384" font-size="22" style="fill:var(--loss)">CONCLUSION.</text></g>
+<g id="row"><text class="m" x="150" y="730" font-size="20">REBUILT, STORE BY STORE, AS SUPERSTORES</text></g>
+<g id="ch3"><path class="s-ink" d="M960 260V700H1460" fill="none" stroke-width="5"/>
+<path id="al" d="M980 420C1120 440 1240 560 1440 650" fill="none" stroke="var(--loss)" stroke-opacity=".5" stroke-width="5" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<path id="kl" d="M980 440C1120 460 1240 360 1440 290" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<text class="m" x="980" y="740" font-size="20" style="fill:var(--gain)">GOOD TO GREAT</text></g>
+<g id="ch3L"><text class="d" x="1440" y="270" font-size="32" text-anchor="end" style="fill:var(--gain)">KROGER</text><text class="d" x="1440" y="685" font-size="28" text-anchor="end" style="fill:var(--loss)">A&amp;P</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Admiral Jim Stockdale.</text>
+<text class="b" x="120" y="176" font-size="32">A senior American officer, held prisoner in the Vietnam War.</text>
+<g id="cell"><rect x="200" y="240" width="500" height="520" rx="6" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><g id="stock"></g><circle class="gain" cx="478" cy="580" r="9"/></g>
+<g id="bars"></g>
+<g id="st0"><text id="yrs" class="d" x="820" y="390" font-size="140">8</text><text class="m" x="828" y="470" font-size="22">ABOUT EIGHT YEARS IN PRISON</text></g>
+<g id="st1"><text id="tor" class="d" x="820" y="640" font-size="140" style="fill:var(--loss)">20+</text><text class="m" x="828" y="730" font-size="22">TORTURED MORE THAN TWENTY TIMES</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The optimists broke.</text>
+<text class="b" x="120" y="176" font-size="32">Who didn’t make it out? Stockdale’s answer: the optimists.</text>
+<g id="hope"><rect x="160" y="230" width="600" height="96" rx="48" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path d="M260 326l-20 40 60-40" fill="var(--stage)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/><text class="d5" x="460" y="292" font-size="42" text-anchor="middle">“Home by Christmas!”</text></g>
+<g id="tl"><path class="s-line" d="M160 540H1060" stroke-width="6" stroke-linecap="round"/><circle id="tdot" class="ink" cx="160" cy="540" r="16"/></g>
+<g id="heartW"><g id="heart"><path id="hp" d="M0 100C-140 10-130-100-50-100C-20-100 0-80 0-55C0-80 20-100 50-100C130-100 140 10 0 100Z"/><path id="crack" d="M0-55L-22-5L14 25L-12 65L0 100" fill="none" stroke="var(--stage)" stroke-width="9" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/></g></g>
+<g id="quote"><text class="d" x="120" y="790" font-size="52">“They died of a broken heart.”</text><text class="m" x="120" y="836" font-size="20">ADMIRAL JIM STOCKDALE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hold two ideas at once.</text>
+<text class="b" x="120" y="176" font-size="32">Stockdale accepted the brutal facts, and never doubted the end.</text>
+<g id="scl"><path d="M800 300L745 700h110z" fill="var(--line)"/><path class="s-ink" d="M640 700h320" stroke-width="6" stroke-linecap="round"/>
+<path id="beam" class="s-ink" d="M380 300H1220" stroke-width="10" stroke-linecap="round"/><circle class="ink" cx="800" cy="300" r="14"/>
+<g id="panL"><path class="s-ink" d="M0 0L-130 190M0 0L130 190" fill="none" stroke-width="3"/><g id="barsL"><rect x="-70" y="90" width="140" height="100" fill="none" stroke="var(--loss)" stroke-width="6"/><path d="M-35 90v100M0 90v100M35 90v100" stroke="var(--loss)" stroke-width="6"/></g><path class="ink" d="M-150 190Q0 250 150 190Z"/></g>
+<g id="panR"><path class="s-ink" d="M0 0L-130 190M0 0L130 190" fill="none" stroke-width="3"/><g id="sunR"><path class="gain" d="M-60 190A60 60 0 0 1 60 190Z"/></g><path class="ink" d="M-150 190Q0 250 150 190Z"/></g></g>
+<g id="lL"><text class="m" x="380" y="650" font-size="22" text-anchor="middle" style="fill:var(--loss)">ACCEPT THE BRUTAL FACTS</text><text class="m" x="380" y="690" font-size="20" text-anchor="middle">IT COULD TAKE A VERY LONG TIME</text></g>
+<g id="lR"><text class="m" x="1220" y="650" font-size="22" text-anchor="middle" style="fill:var(--gain)">NEVER LOSE FAITH</text><text class="m" x="1220" y="690" font-size="20" text-anchor="middle">YOU WILL PREVAIL IN THE END</text></g>
+<g id="parad"><text class="d" x="120" y="800" font-size="56">This is the <tspan style="fill:var(--gain)">Stockdale Paradox.</tspan></text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Let the truth be heard.</text>
+<text class="b" x="120" y="176" font-size="32">Great leaders made it easy for anyone to bring bad news.</text>
+<g id="tbl"><ellipse cx="600" cy="500" rx="230" ry="130" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><text class="d5" x="600" y="512" font-size="36" text-anchor="middle">the facts</text><g id="voices"></g></g>
+<g id="flag"><path class="s-ink" d="M958 490V330" stroke-width="6" stroke-linecap="round"/><rect class="loss" x="958" y="330" width="90" height="56"/></g>
+<g id="rf"><text class="d" x="1120" y="420" font-size="40">Bad news,</text><text class="d" x="1120" y="470" font-size="40" style="fill:var(--loss)">raised early.</text><text class="m" x="1120" y="520" font-size="20">SIMPLE WAYS, OPEN TO ANYONE</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Name one brutal fact</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">you’ve been avoiding,</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">and why you’ll <tspan style="fill:var(--gain)">still win.</tspan></text></g>
+<g id="card"><rect class="s-line" x="136" y="630" width="640" height="190" rx="16" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="166" y="672" font-size="20" style="fill:var(--loss)">THE BRUTAL FACT</text><path id="w0" d="M166 712h420" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<text class="m" x="166" y="762" font-size="20" style="fill:var(--gain)">WHY I WILL STILL WIN</text><path id="w1" d="M166 800h420" stroke="var(--gain)" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/></g>
+<g id="mir"><ellipse cx="1120" cy="680" rx="80" ry="110" fill="var(--stage)" stroke="var(--ink)" stroke-width="8"/><circle class="gain" cx="1120" cy="650" r="22"/><path class="gain" d="M1087 742v-28.6a33 33 0 0 1 66 0v28.6z"/><path class="s-ink" d="M1120 790v14M1080 806h80" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="133" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:13</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Face the Brutal Facts, Keep Faith&rdquo;, from <em>Good to Great</em> by Jim Collins. Examples as reported in the book: A and P versus Kroger, including the Golden Key store, and Admiral Jim Stockdale&#x27;s prison experience. The rising and falling lines, scale and sunrise are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=133, SC=[[0.0, 9.8], [9.8, 25.2], [25.2, 45.5], [45.5, 63.7], [63.7, 76.2], [76.2, 93.5], [93.5, 111.1], [111.1, 120.6], [120.6, 133.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Hope Versus Denial", "Two Grocers", "A and P Looks Away", "Kroger Faces It", "A Prisoner's Lesson", "Why Optimists Broke", "The Paradox", "Let Truth Be Heard", "Your Turn"];
+const TM={"two_doors": 0.0, "ap_store": 10.08, "kroger_store": 15.28, "shopping_cart": 19.6, "golden_key": 25.52, "closed_sign": 38.08, "falling_line": 42.4, "magnifier": 45.76, "blueprint": 50.72, "rising_line": 58.32, "stockdale": 64.0, "prison_cell": 71.4, "christmas_tree": 76.48, "broken_heart": 89.44, "scale": 93.76, "iron_bars": 96.56, "sunrise": 101.36, "open_table": 111.36, "red_flag": 116.16, "mirror": 120.88};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const dr=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const store=(g,x,y,w,h,name,fs,cls)=>{mk('rect',{x:x,y:y,width:w,height:h,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);
+  const n=Math.round(w/50),sw=w/n;for(let i=0;i<n;i++)mk('rect',{x:x+i*sw,y:y-40,width:sw,height:40,fill:i%2?'var(--stage)':'var(--'+cls+')',stroke:'var(--ink)','stroke-width':4},g);
+  const sh=fs*1.4;mk('rect',{x:x+w*.2,y:y-50-sh,width:w*.6,height:sh,rx:8,fill:'var(--ink)'},g);
+  const tx=mk('text',{x:x+w/2,y:y-50-sh*.28,'font-size':fs,'text-anchor':'middle',class:'d',style:'fill:var(--stage)'},g);tx.textContent=name;
+  [x+20,x+w/2+40].forEach(wx=>mk('rect',{x:wx,y:y+30,width:w/2-60,height:h*.4,fill:'none',stroke:'var(--ink)','stroke-width':4},g));
+  mk('rect',{x:x+w/2-30,y:y+h-110,width:60,height:110,fill:'var(--ink)'},g)};
+fig($('walkI'),0,0,14,'gain');
+store($('ap'),160,360,500,280,'A&P',56,'loss');
+store($('kp'),900,480,300,160,'KROGER',30,'gain');
+store($('gkb'),160,380,400,240,'GOLDEN KEY',30,'gain');
+const HS=[];for(let i=0;i<6;i++){const x=150+i*120;HS.push(mk('path',{d:'M'+x+' 600l45-40 45 40v80h-90z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},$('row')));mk('rect',{x:x+33,y:640,width:24,height:40,fill:'var(--ink)'},$('row'))}
+fig($('stock'),450,440,40,'ink');
+for(let i=0;i<9;i++)mk('path',{d:'M'+(250+i*50)+' 260V740',stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('bars'));
+mk('path',{d:'M230 300H670M230 700H670',stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('bars'));
+const MX=[260,560,860],MK=[],XS=[];
+['CHRISTMAS','EASTER','CHRISTMAS'].forEach((s,i)=>{const x=MX[i],g=mk('g',{},$('tl'));
+  if(i===1)mk('ellipse',{cx:x,cy:455,rx:38,ry:50,class:'gain'},g);else{mk('path',{d:'M'+x+' 395l-50 95h100z',class:'gain'},g);mk('rect',{x:x-10,y:490,width:20,height:24,class:'ink'},g)}
+  const tx=mk('text',{x:x,y:600,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;MK.push(g);
+  XS.push(mk('path',{d:'M'+(x-50)+' 390L'+(x+50)+' 510M'+(x+50)+' 390L'+(x-50)+' 510',stroke:'var(--loss)','stroke-width':8,'stroke-linecap':'round'},$('tl')))});
+for(let k=0;k<5;k++){const a=(-160+k*35)*Math.PI/180,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(76*c).toFixed(1)+' '+(190+76*s).toFixed(1)+'L'+(100*c).toFixed(1)+' '+(190+100*s).toFixed(1),stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},$('sunR'))}
+const HD=[],VL=[];for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);
+  VL.push(mk('path',{d:'M'+(600+292*c).toFixed(0)+' '+(500+198*s).toFixed(0)+'L'+(600+246*c).toFixed(0)+' '+(500+142*s).toFixed(0),stroke:'var(--gain)','stroke-width':5,'stroke-dasharray':'6 6','stroke-linecap':'round'},$('voices')));
+  HD.push(mk('circle',{cx:(600+330*c).toFixed(1),cy:(500+230*s).toFixed(1),r:28,class:'ink'},$('tbl')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('doors'),p(u,TM.two_doors,TM.two_doors+.6));
+$('leafB').setAttribute('width',(120-96*p(u,TM.two_doors+1,TM.two_doors+2.4)).toFixed(1));
+rise($('walk'),p(u,TM.two_doors+6.4,TM.two_doors+6.9));
+$('walkI').setAttribute('transform','translate('+(1260+150*p(u,TM.two_doors+6.6,TM.two_doors+8.4)).toFixed(1)+' 461)');
+
+rise($('ap'),p(u,TM.ap_store,TM.ap_store+.6)); rise($('kp'),p(u,TM.kroger_store,TM.kroger_store+.6));
+const cm=p(u,TM.shopping_cart,TM.shopping_cart+1.2);
+rise($('ghost'),p(u,TM.shopping_cart+.4,TM.shopping_cart+1.2)); rise($('cart'),cm);
+$('cartI').setAttribute('transform','translate('+(1300+60*(1-cm)).toFixed(1)+' 700)');
+
+rise($('gk'),p(u,TM.golden_key,TM.golden_key+.6)); rise($('insight'),p(u,TM.golden_key+6.6,TM.golden_key+7.2));
+rise($('closed'),p(u,TM.closed_sign,TM.closed_sign+.5));
+$('closedS').setAttribute('transform','rotate('+(5*Math.sin(t*2)).toFixed(2)+' 360 420)');
+$('gkb').setAttribute('opacity',(1-.55*p(u,TM.closed_sign,TM.closed_sign+1)).toFixed(2));
+rise($('ch2'),p(u,TM.falling_line-.3,TM.falling_line+.3)); dr($('fall'),p(u,TM.falling_line,TM.falling_line+2.2));
+rise($('fallL'),p(u,TM.falling_line+1.8,TM.falling_line+2.4));
+
+rise($('doc'),p(u,TM.magnifier,TM.magnifier+.6));
+$('mag').setAttribute('transform','translate('+(300+40*Math.sin(t*1.2)).toFixed(1)+' '+(340+20*Math.sin(t*1.7)).toFixed(1)+')');
+rise($('concl'),p(u,TM.magnifier+.8,TM.magnifier+1.4));
+rise($('row'),p(u,TM.blueprint,TM.blueprint+.5));
+HS.forEach((h,i)=>h.setAttribute('fill',u>=TM.blueprint+.6+i*.5?'var(--gain)':'var(--stage)'));
+rise($('ch3'),p(u,TM.rising_line-.3,TM.rising_line+.3));
+const r3=p(u,TM.rising_line,TM.rising_line+2.2); dr($('kl'),r3); dr($('al'),r3);
+rise($('ch3L'),p(u,TM.rising_line+1.8,TM.rising_line+2.4));
+
+rise($('cell'),p(u,TM.stockdale,TM.stockdale+.6)); rise($('bars'),p(u,TM.prison_cell,TM.prison_cell+.5));
+rise($('st0'),p(u,TM.prison_cell+.3,TM.prison_cell+.8)); $('yrs').textContent=Math.round(8*p(u,TM.prison_cell+.3,TM.prison_cell+1.5));
+rise($('st1'),p(u,TM.prison_cell+1.6,TM.prison_cell+2.1)); $('tor').textContent=Math.round(20*p(u,TM.prison_cell+1.6,TM.prison_cell+2.8))+'+';
+
+const c5=TM.christmas_tree, br=u>=TM.broken_heart;
+rise($('heartW'),p(u,c5,c5+.6));
+$('heart').setAttribute('transform','translate(1290 '+(470+(br?16*p(u,TM.broken_heart,TM.broken_heart+.8):0)).toFixed(1)+') scale('+(br?1:1+.05*Math.abs(Math.sin(t*3))).toFixed(3)+')');
+$('hp').style.fill=br?'var(--loss)':'var(--gain)'; dr($('crack'),p(u,TM.broken_heart,TM.broken_heart+.6));
+rise($('hope'),p(u,c5+5.4,c5+5.9)); rise($('tl'),p(u,c5+5.4,c5+5.9));
+MK.forEach((g,i)=>{const a=i?c5+9.1+i*1.1:c5+5.4; rise(g,p(u,a,a+.4))});
+const dx=160+900*p(u,c5+9.1,c5+12.6); $('tdot').setAttribute('cx',dx.toFixed(1));
+XS.forEach((x,i)=>x.setAttribute('opacity',cl((dx-MX[i]-10)/50).toFixed(2)));
+rise($('quote'),p(u,TM.broken_heart,TM.broken_heart+.6));
+
+rise($('scl'),p(u,TM.scale,TM.scale+.6));
+const ang=-8*p(u,TM.iron_bars,TM.iron_bars+1.2)+8*p(u,TM.sunrise,TM.sunrise+1.5), ar=ang*Math.PI/180, ca=420*Math.cos(ar), sa=420*Math.sin(ar);
+$('beam').setAttribute('transform','rotate('+ang.toFixed(2)+' 800 300)');
+$('panL').setAttribute('transform','translate('+(800-ca).toFixed(1)+' '+(300-sa).toFixed(1)+')');
+$('panR').setAttribute('transform','translate('+(800+ca).toFixed(1)+' '+(300+sa).toFixed(1)+')');
+rise($('barsL'),p(u,TM.iron_bars,TM.iron_bars+.5)); rise($('lL'),p(u,TM.iron_bars+.4,TM.iron_bars+.9));
+rise($('sunR'),p(u,TM.sunrise,TM.sunrise+.5)); rise($('lR'),p(u,TM.sunrise+.4,TM.sunrise+.9));
+rise($('parad'),p(u,TM.sunrise+8.6,TM.sunrise+9.2));
+
+rise($('tbl'),p(u,TM.open_table,TM.open_table+.6));
+VL.forEach(v=>v.setAttribute('stroke-dashoffset',(-t*20).toFixed(1)));
+HD[0].setAttribute('class',u>=TM.red_flag?'loss':'ink');
+rise($('flag'),p(u,TM.red_flag,TM.red_flag+.5)); rise($('rf'),p(u,TM.red_flag+.6,TM.red_flag+1.2));
+
+rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9)); rise($('qc'),p(u,TM.mirror+.8,TM.mirror+1.3));
+rise($('mir'),p(u,TM.mirror+1,TM.mirror+1.6)); rise($('card'),p(u,TM.mirror+5.4,TM.mirror+5.9));
+dr($('w0'),p(u,TM.mirror+5.8,TM.mirror+6.8)); dr($('w1'),p(u,TM.mirror+6.8,TM.mirror+7.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:129.15;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

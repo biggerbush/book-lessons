@@ -1,0 +1,322 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Good to Great Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Good to Great: Greatness never arrives in one dramatic moment; it builds as consistent effort in a single direction slowly turns a heavy flywheel until momentum takes over. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GOOD TO GREAT · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Turn the flywheel,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">avoid the doom loop.</text>
+<text class="b" x="120" y="600" font-size="32">Why lasting success comes from steady pushes, not dramatic leaps.</text>
+<g id="w0g"></g>
+<path class="s-line" d="M120 660V840H620" fill="none" stroke-width="4"/>
+<g id="my0"><path class="s-loss" d="M130 830H400V680H610" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linejoin="round"/><text class="m" x="680" y="730" font-size="22" style="fill:var(--loss)">LOOKS LIKE: OVERNIGHT</text></g>
+<g id="re0"><path id="rc0" class="s-gain" d="M130 830C360 826 480 790 610 670" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/><text class="m" x="680" y="800" font-size="22" style="fill:var(--gain)">REALLY: SLOW AND QUIET</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Picture a giant flywheel.</text>
+<text class="b" x="120" y="176" font-size="32">Heavy as a truck. You push, and it barely moves.</text>
+<path class="s-line" d="M420 800H1440" stroke-width="5" stroke-linecap="round"/>
+<g id="w1g"></g>
+<g id="pu1"><circle class="ink" cx="600" cy="452" r="32"/><path class="s-ink" d="M585 495L525 625M525 625L455 790M525 625L575 790M582 505L681 505M572 530L681 545" fill="none" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="pan1"><text class="m" x="1220" y="380" font-size="22">FULL TURNS</text><text id="tc1" class="d" x="1214" y="540" font-size="160">0</text><text id="st1" class="m" x="1220" y="600" font-size="22" style="fill:var(--gain)">BARELY ONE INCH</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Turn by turn, it speeds up.</text>
+<text class="b" x="120" y="176" font-size="32">Two turns, then four, then eight.</text>
+<g id="sp2"></g>
+<g id="w2g"></g>
+<text class="m" x="760" y="300" font-size="22">TURNS</text>
+<path class="s-line" d="M760 680H1460" stroke-width="4"/>
+<g id="br2"></g>
+<g id="pd2"></g>
+<g id="np2"><text class="m" x="660" y="772" font-size="22">NO SINGLE PUSH MADE THE DIFFERENCE</text></g>
+<g id="bt2"><text class="d" x="120" y="846" font-size="44">Buildup leads to <tspan style="fill:var(--gain)">breakthrough.</tspan></text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No single magic moment.</text>
+<text class="b" x="120" y="176" font-size="32">Leaders could not name the day it happened.</text>
+<g id="mic3"><rect class="s-ink" x="140" y="230" width="440" height="84" rx="18" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M350 314l20 40 20-40" fill="var(--stage)" stroke-width="4" stroke-linejoin="round"/><text class="m" x="360" y="282" font-size="24" text-anchor="middle">WHEN DID IT HAPPEN?</text>
+<rect class="ink" x="360" y="400" width="40" height="70" rx="20"/><path class="s-ink" d="M380 470V640M330 640h100" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="ld3"></g>
+<g id="sh3"><path class="s-ink" d="M592 500L545 455M688 500L735 455" fill="none" stroke-width="12" stroke-linecap="round"/><text class="d" x="640" y="350" font-size="90" text-anchor="middle" style="fill:var(--gain)">?</text><text class="m" x="640" y="650" font-size="20" text-anchor="middle">CAN’T POINT TO ONE</text></g>
+<g id="cal3"><rect class="s-ink" x="860" y="250" width="580" height="430" rx="14" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="860" y="250" width="580" height="64" rx="14"/><g id="cc3"></g></g>
+<g id="cn3"><text class="m" x="860" y="730" font-size="22">NO NAME. NO SLOGAN.</text></g>
+<g id="lt3"><text class="m" x="860" y="770" font-size="22" style="fill:var(--gain)">THE SIZE OF THE CHANGE WAS SEEN LATER</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Let results do the talking.</text>
+<text class="b" x="120" y="176" font-size="32">No hype. Real wins, even small ones.</text>
+<g id="mg4"><polygon class="ink" points="160,290 360,230 360,390 160,340"/><rect class="ink" x="130" y="292" width="30" height="52" rx="6"/><text class="m" x="120" y="440" font-size="22">NO HYPE, NO SELLING</text></g>
+<path id="st4" class="s-loss" d="M130 220L390 400" stroke-width="10" stroke-linecap="round"/>
+<g id="ch4"><path class="s-line" d="M140 500V740H600" fill="none" stroke-width="4"/><g id="cb4"></g><text class="m" x="120" y="790" font-size="22" style="fill:var(--gain)">REAL RESULTS, EVEN SMALL</text></g>
+<g id="w4g"></g>
+<g id="tm4"></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The doom loop.</text>
+<text class="b" x="120" y="176" font-size="32">The comparison companies lurched instead of pushing.</text>
+<g id="co5"><rect class="loss" x="140" y="360" width="160" height="280"/><text class="m" x="140" y="680" font-size="20">COMPARISON CO.</text></g>
+<path id="zz5" class="s-loss" d="M360 600L480 320L600 600L720 340L840 620L960 330" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<g id="zl5"></g>
+<g id="mg5"><rect id="ma5" class="loss" x="1080" y="440" width="120" height="200"/><rect id="mb5" class="s-loss" x="1360" y="440" width="120" height="200" fill="var(--stage)" stroke-width="6"/><text id="pl5" class="d" x="1280" y="560" font-size="60" text-anchor="middle">+</text>
+<path id="bs5" class="s-loss" d="M1270 410v-34M1220 420l-24-26M1320 420l24-26" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1280" y="690" font-size="22" text-anchor="middle">BUY MOMENTUM?</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every restart stops the wheel.</text>
+<text class="b" x="120" y="176" font-size="32">New leaders scrapped the past and started over.</text>
+<g id="w6g"></g>
+<text class="m" x="220" y="722" font-size="20">EFFORT SO FAR</text>
+<rect class="s-line" x="220" y="740" width="400" height="28" fill="none" stroke-width="3"/>
+<rect id="pf6" class="gain" x="220" y="740" width="0" height="28"/>
+<g id="nb6"></g>
+<circle id="rg6" class="s-loss" cx="1180" cy="480" r="190" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<circle id="dt6" class="loss" r="12"/>
+<g id="nd6"></g>
+<g id="dl6"><text class="d" x="1180" y="470" font-size="40" text-anchor="middle" style="fill:var(--loss)">DOOM</text><text class="d" x="1180" y="516" font-size="40" text-anchor="middle" style="fill:var(--loss)">LOOP</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Pick one direction. Keep pushing.</text>
+<text class="b" x="120" y="176" font-size="32">Rooted in your hedgehog concept.</text>
+<g id="ar7"><circle class="gain" cx="180" cy="380" r="26"/><path id="ln7" class="s-gain" d="M210 380H1280" stroke-width="14" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/><text class="m" x="120" y="450" font-size="22">HEDGEHOG CONCEPT</text></g>
+<path id="hd7" class="gain" d="M1270 345L1320 380L1270 415z"/>
+<g id="w7g"></g>
+<g id="fl7"></g>
+<g id="sw7"><text class="m" x="400" y="250" font-size="22" style="fill:var(--gain)">SMALL, VISIBLE WINS</text></g>
+<g id="st7"><text class="d" x="260" y="676" font-size="44" text-anchor="middle" style="fill:var(--stage)">STOP</text></g>
+<g id="rb7"><rect class="s-muted" x="420" y="620" width="300" height="80" rx="40" fill="none" stroke-width="5"/><text class="m" x="570" y="668" font-size="22" text-anchor="middle">START OVER</text></g>
+<path id="rx7" class="s-loss" d="M430 705L710 615" stroke-width="8" stroke-linecap="round"/>
+<g id="rs7"><text class="d5" x="790" y="650" font-size="40">Resist the urge to start over</text><text class="b" x="790" y="700" font-size="30">whenever progress feels slow.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="q0"><text class="d" x="136" y="300" font-size="84" letter-spacing="-2">What is one small push</text></g>
+<g id="q1"><text class="d" x="136" y="400" font-size="84" letter-spacing="-2">you could make today,</text></g>
+<g id="q2"><text class="d" x="136" y="500" font-size="84" letter-spacing="-2">in the same direction</text></g>
+<g id="q3"><text class="d" x="136" y="600" font-size="84" letter-spacing="-2">as <tspan style="fill:var(--gain)">yesterday?</tspan></text></g>
+<g id="w8g"></g>
+<path class="s-gain" d="M1218 576A130 130 0 0 1 1340 490M1325 474L1345 490L1325 506" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="lb8"><text class="m" x="143" y="740" font-size="26">ONE DIRECTION. EVERY DAY.</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Turn the Flywheel, Avoid the Doom Loop&rdquo;, from <em>Good to Great</em> by Jim Collins. The flywheel image, the interviews with good to great leaders, and the doom loop pattern in the comparison companies are as reported in the book. The flywheel, turn counter, charts and zigzag drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 10.4], [10.4, 26.3], [26.3, 45.5], [45.5, 59.5], [59.5, 72.7], [72.7, 86.2], [86.2, 103.2], [103.2, 119.9], [119.9, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Overnight Myth", "The Giant Flywheel", "Momentum Builds", "No Magic Moment", "Results Create Buy In", "The Doom Loop", "Why It Fails", "Your Flywheel", "Your Next Push"];
+const TM={"headline": 0.0, "flywheel": 10.72, "pusher": 16.08, "turn_counter": 26.64, "speed_lines": 35.76, "microphone": 45.84, "shrug": 51.44, "calendar": 54.0, "results_chart": 64.72, "team_cheer": 69.12, "comparison_co": 73.04, "zigzag": 76.28, "merger": 81.68, "new_boss": 86.48, "stalled_wheel": 96.0, "arrow": 103.52, "small_wins": 111.32, "stop_sign": 115.76, "question": 120.16};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const WH=(id,cx,cy,r,sw)=>{const par=$(id);
+  mk('path',{d:`M${cx} ${cy}L${cx-r*.55} ${cy+r+40}M${cx} ${cy}L${cx+r*.55} ${cy+r+40}M${cx-r*.8} ${cy+r+40}h${r*1.6}`,class:'s-muted',fill:'none','stroke-width':sw,'stroke-linecap':'round'},par);
+  const g=mk('g',{},par);
+  const o=mk('circle',{cx:cx,cy:cy,r:r,fill:'var(--stage)',class:'s-ink','stroke-width':sw*1.6},g);
+  mk('circle',{cx:cx,cy:cy,r:r*.78,fill:'none',class:'s-line','stroke-width':sw},g);
+  for(let i=0;i<6;i++){const a=i*Math.PI/3;mk('path',{d:`M${cx} ${cy}L${(cx+r*.78*Math.cos(a)).toFixed(1)} ${(cy+r*.78*Math.sin(a)).toFixed(1)}`,class:'s-ink','stroke-width':sw,'stroke-linecap':'round'},g)}
+  mk('circle',{cx:cx,cy:cy,r:r*.16,class:'ink'},g);mk('circle',{cx:cx,cy:cy-r*.89,r:r*.09,class:'gain'},g);
+  return {g:g,o:o,cx:cx,cy:cy}};
+const rot=(w,a)=>w.g.setAttribute('transform',`rotate(${a.toFixed(1)} ${w.cx} ${w.cy})`);
+const w0=WH('w0g',1320,330,110,6),w1=WH('w1g',900,520,220,8),w2=WH('w2g',400,490,170,7),w4=WH('w4g',1100,440,160,7),w6=WH('w6g',420,450,150,7),w7=WH('w7g',1400,380,70,5),w8=WH('w8g',1340,620,100,6);
+const T=(par,x,y,s,txt,a)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s,class:'m'},a||{}),par);e.textContent=txt;return e};
+
+[0,1].forEach(k=>[0,180].forEach(sd=>{const r=195+k*22,a1=(200+sd)*Math.PI/180,a2=(250+sd)*Math.PI/180;
+  mk('path',{d:`M${(400+r*Math.cos(a1)).toFixed(1)} ${(490+r*Math.sin(a1)).toFixed(1)}A${r} ${r} 0 0 1 ${(400+r*Math.cos(a2)).toFixed(1)} ${(490+r*Math.sin(a2)).toFixed(1)}`,class:'s-gain',fill:'none','stroke-width':5,'stroke-linecap':'round'},$('sp2'))}));
+const B2=[1,2,4,8].map((n,i)=>{const x=780+i*170;return [mk('rect',{x:x,y:680,width:120,height:0,rx:6,class:i===3?'gain':'ink'},$('br2')),T($('br2'),x+60,722,26,n,{'text-anchor':'middle'}),n*40]});
+const D2=[];for(let i=0;i<8;i++)D2.push(mk('circle',{cx:140+i*60,cy:765,r:10,class:'gain'},$('pd2')));
+
+fig($('ld3'),640,420,40,'ink');
+const C3=[];for(let r=0;r<5;r++)for(let c=0;c<7;c++)C3.push(mk('rect',{x:880+c*80,y:334+r*66,width:60,height:50,rx:8,fill:'var(--line)'},$('cc3')));
+
+const S4=[40,70,100,140,190].map((h,i)=>[mk('rect',{x:170+i*85,y:740,width:55,height:0,class:'gain'},$('cb4')),h]);
+const T4=[880,1000,1120,1240,1360].map(x=>{const g=mk('g',{},$('tm4'));fig(g,x,720,20,'ink');
+  const a=mk('path',{d:`M${x-22} 760L${x-38} 712M${x+22} 760L${x+38} 712`,class:'s-gain',fill:'none','stroke-width':8,'stroke-linecap':'round'},g);return [g,a]});
+
+for(let c=0;c<3;c++)for(let r=0;r<4;r++)mk('rect',{x:160+c*48,y:390+r*56,width:28,height:32,fill:'var(--stage)'},$('co5'));
+const Z5=[[480,295,'NEW PROGRAM'],[720,315,'NEW FAD'],[960,305,'REVERSE']].map(q=>{const g=mk('g',{},$('zl5'));T(g,q[0],q[1],20,q[2],{'text-anchor':'middle',style:'fill:var(--loss)'});return g});
+
+fig($('nb6'),720,400,34,'loss');T($('nb6'),720,590,20,'NEW LEADER',{'text-anchor':'middle'});
+const N6=[[1180,290,'RESTART'],[1370,480,'WHEEL STOPS'],[1180,670,'POOR RESULTS'],[990,480,'PANIC']].map(q=>{const g=mk('g',{},$('nd6'));
+  mk('rect',{x:q[0]-105,y:q[1]-30,width:210,height:60,rx:30,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);
+  T(g,q[0],q[1]+7,20,q[2],{'text-anchor':'middle',style:'fill:var(--ink)'});return g});
+
+const F7=[400,580,760,940,1120].map(x=>{const g=mk('g',{},$('fl7'));mk('path',{d:`M${x} 372V290`,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},g);mk('path',{d:`M${x} 290l50 18l-50 18z`,class:'gain'},g);return g});
+let oc='';for(let i=0;i<8;i++){const a=(22.5+45*i)*Math.PI/180;oc+=(260+90*Math.cos(a)).toFixed(1)+','+(660+90*Math.sin(a)).toFixed(1)+' '}
+$('st7').insertBefore(mk('polygon',{points:oc,class:'loss'},$('st7')),$('st7').firstChild);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const S=i=>SC[i][0]/K;
+  rot(w0,t*25);
+  rise($('my0'),p(u,TM.headline+.4,TM.headline+1)); rise($('re0'),p(u,TM.headline+5,TM.headline+5.5));
+  $('rc0').setAttribute('stroke-dashoffset',(1-p(u,TM.headline+5,TM.headline+7)).toFixed(3));
+
+  rise($('w1g'),p(u,TM.flywheel,TM.flywheel+.6)); rise($('pu1'),p(u,TM.pusher,TM.pusher+.5)); rise($('pan1'),p(u,TM.pusher,TM.pusher+.5));
+  rot(w1,3*p(u,TM.pusher+.5,TM.pusher+3)+357*p(u,TM.pusher+5.4,TM.pusher+9));
+  const full=u>=TM.pusher+9; $('tc1').textContent=full?'1':'0'; $('st1').textContent=full?'ONE FULL TURN':'BARELY ONE INCH';
+
+  const s2=S(2); rot(w2,20*Math.pow(Math.max(0,u-s2),2));
+  B2.forEach((b,i)=>{const a=TM.turn_counter+i*1.5,k=p(u,a,a+.8); b[0].setAttribute('height',(b[2]*k).toFixed(1)); b[0].setAttribute('y',(680-b[2]*k).toFixed(1)); rise(b[1],k)});
+  const np=TM.turn_counter+6.2; D2.forEach((d,i)=>rise(d,p(u,np+i*.15,np+i*.15+.3))); rise($('np2'),p(u,np,np+.5));
+  $('sp2').setAttribute('opacity',p(u,TM.speed_lines,TM.speed_lines+.6)); $('sp2').setAttribute('transform','rotate('+(t*120%360).toFixed(1)+' 400 490)');
+  rise($('bt2'),p(u,TM.speed_lines+5.7,TM.speed_lines+6.3));
+
+  rise($('mic3'),p(u,TM.microphone,TM.microphone+.5)); rise($('ld3'),p(u,TM.microphone+.4,TM.microphone+.9));
+  rise($('sh3'),p(u,TM.shrug,TM.shrug+.5)); rise($('cal3'),p(u,TM.calendar,TM.calendar+.5));
+  C3.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.calendar+i*.03,TM.calendar+i*.03+.3)));
+  rise($('cn3'),p(u,TM.calendar+.8,TM.calendar+1.3)); rise($('lt3'),p(u,TM.calendar+3.5,TM.calendar+4));
+
+  const s4=S(4); rise($('mg4'),p(u,s4+.6,s4+1.1)); $('st4').setAttribute('opacity',p(u,s4+1.6,s4+2));
+  rise($('ch4'),p(u,TM.results_chart,TM.results_chart+.5));
+  S4.forEach((b,i)=>{const a=TM.results_chart+.4+i*.4,k=p(u,a,a+.5); b[0].setAttribute('height',(b[1]*k).toFixed(1)); b[0].setAttribute('y',(740-b[1]*k).toFixed(1))});
+  rise($('w4g'),p(u,s4+.6,s4+1.2)); rot(w4,30*(u-s4)+40*Math.pow(Math.max(0,u-TM.team_cheer),2));
+  T4.forEach((q,i)=>{const a=TM.team_cheer+i*.2; rise(q[0],p(u,a,a+.4)); const bob=u>=TM.team_cheer+1?8*Math.abs(Math.sin(t*5+i)):0; q[1].setAttribute('transform','translate(0 '+(-bob).toFixed(1)+')')});
+
+  rise($('co5'),p(u,TM.comparison_co,TM.comparison_co+.5));
+  $('zz5').setAttribute('stroke-dashoffset',(1-p(u,TM.zigzag,TM.zigzag+3)).toFixed(3));
+  Z5.forEach((g,i)=>{const a=TM.zigzag+.8+i*.9; rise(g,p(u,a,a+.4))});
+  rise($('mg5'),p(u,TM.merger,TM.merger+.5)); const m5=p(u,TM.merger+.6,TM.merger+1.8);
+  $('ma5').setAttribute('x',(1080+70*m5).toFixed(1)); $('mb5').setAttribute('x',(1360-90*m5).toFixed(1));
+  $('pl5').setAttribute('opacity',(1-m5).toFixed(2)); $('bs5').setAttribute('opacity',p(u,TM.merger+1.8,TM.merger+2.2));
+
+  const s6=S(6),ts=TM.new_boss+4.6,d6=cl(u-ts,0,1.5);
+  rot(w6,70*(Math.min(u,ts)-s6)+70*(d6-d6*d6/3));
+  $('pf6').setAttribute('width',(400*cl((u-s6)/Math.max(.1,ts-s6))*(1-p(u,ts,ts+.8))).toFixed(1));
+  w6.o.style.stroke=u>=TM.stalled_wheel?'var(--loss)':'';
+  rise($('nb6'),p(u,TM.new_boss,TM.new_boss+.5));
+  [TM.new_boss,ts,TM.stalled_wheel,TM.stalled_wheel+1.2].forEach((a,i)=>rise(N6[i],p(u,a,a+.4)));
+  const lp=TM.stalled_wheel+3.4,lk=p(u,lp,lp+.6); $('rg6').setAttribute('opacity',(.25+.75*lk).toFixed(2)); rise($('dl6'),lk);
+  const an=t*1.6; $('dt6').setAttribute('cx',(1180+190*Math.cos(an)).toFixed(1)); $('dt6').setAttribute('cy',(480+190*Math.sin(an)).toFixed(1)); $('dt6').setAttribute('opacity',lk);
+
+  rise($('ar7'),p(u,TM.arrow,TM.arrow+.5)); $('ln7').setAttribute('stroke-dashoffset',(1-p(u,TM.arrow+.2,TM.arrow+1.4)).toFixed(3));
+  rise($('hd7'),p(u,TM.arrow+1.2,TM.arrow+1.6)); rise($('w7g'),p(u,TM.arrow+1.4,TM.arrow+1.9)); rot(w7,t*90);
+  F7.forEach((g,i)=>{const a=TM.small_wins+i*.4; rise(g,p(u,a,a+.4))}); rise($('sw7'),p(u,TM.small_wins,TM.small_wins+.5));
+  rise($('st7'),p(u,TM.stop_sign,TM.stop_sign+.5)); rise($('rb7'),p(u,TM.stop_sign+.5,TM.stop_sign+1));
+  $('rx7').setAttribute('opacity',p(u,TM.stop_sign+1.2,TM.stop_sign+1.5)); rise($('rs7'),p(u,TM.stop_sign+.8,TM.stop_sign+1.4));
+
+  [0,1,2,3].forEach(i=>rise($('q'+i),p(u,TM.question+i*.4,TM.question+i*.4+.5)));
+  rot(w8,t*30); rise($('lb8'),p(u,TM.question+2,TM.question+2.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.07;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

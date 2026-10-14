@@ -1,0 +1,359 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hidden Potential Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Hidden Potential: Learnable character skills like proactivity, discipline and determination drive growth more than innate ability does. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">HIDDEN POTENTIAL · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Character skills beat</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">natural talent.</text>
+<text class="b" x="120" y="600" font-size="32">The skills that drive growth can be learned, not inherited.</text>
+<path class="s-line" d="M1180 780h300" stroke-width="5" stroke-linecap="round"/>
+<g id="kids"></g>
+<path id="pb" class="s-muted" d="M1340 760C1400 740 1430 680 1470 640" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="pa" class="s-gain" d="M1340 760C1400 700 1420 420 1470 270" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<circle id="pdot" class="gain" cx="1470" cy="270" r="16"/>
+<text id="lbl20" class="m" x="1460" y="230" font-size="20" text-anchor="end">20 YEARS LATER</text>
+</g>
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The talent trap.</text>
+<text class="b" x="120" y="176" font-size="32">We spotlight the gifted and judge them by early wins.</text>
+<path class="ink" d="M360 230h80l-14 34h-52z"/>
+<polygon id="cone" class="gain" points="374,264 426,264 560,720 240,720" fill-opacity=".2"/>
+<path class="s-line" d="M180 720h680" stroke-width="5" stroke-linecap="round"/>
+<g id="star"></g>
+<g id="dark"></g>
+<g id="qm"><text class="d" x="640" y="560" font-size="48" text-anchor="middle" style="fill:var(--gain)">?</text><text class="d" x="760" y="560" font-size="48" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="card">
+<rect class="s-ink" x="920" y="260" width="300" height="400" rx="16" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="1070" y="460" font-size="140" text-anchor="middle" style="fill:var(--gain)">A+</text>
+<path class="s-line" d="M970 520h200M970 560h200M970 600h120" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1070" y="700" font-size="20" text-anchor="middle">EARLY TEST SCORE</text>
+</g>
+<g id="miss"><text class="d" x="120" y="810" font-size="44">This misses the skills that drive growth.</text></g>
+</g>
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Character skills.</text>
+<text class="b" x="120" y="176" font-size="32">Grant’s name for the skills that actually drive growth.</text>
+<g id="tbox">
+<path class="s-ink" d="M240 400v-40h100v40" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<rect class="ink" x="140" y="400" width="300" height="40" rx="6"/>
+<rect class="s-ink" x="140" y="440" width="300" height="170" rx="12" fill="var(--stage)" stroke-width="7"/>
+<rect class="gain" x="270" y="470" width="40" height="30" rx="6"/>
+<text class="m" x="290" y="660" font-size="22" text-anchor="middle">CHARACTER SKILLS</text>
+</g>
+<g id="cards"></g>
+</g>
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Character is not personality.</text>
+<text class="b" x="120" y="176" font-size="32">Personality is your tendency. Character is your choice.</text>
+<g id="mk0">
+<ellipse class="s-ink" cx="320" cy="430" rx="120" ry="150" fill="var(--stage)" stroke-width="7"/>
+<ellipse class="ink" cx="275" cy="400" rx="26" ry="14"/><ellipse class="ink" cx="365" cy="400" rx="26" ry="14"/>
+<path class="s-ink" d="M280 500q40 30 80 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="320" y="630" font-size="24" text-anchor="middle">PERSONALITY</text>
+<text class="d" x="580" y="470" font-size="110" text-anchor="middle" style="fill:var(--muted)">≠</text>
+</g>
+<g id="mk1"><text class="m" x="320" y="666" font-size="20" text-anchor="middle">YOUR NATURAL TENDENCY</text></g>
+<g id="fork">
+<path class="s-ink" d="M700 640L920 460" stroke-width="8" stroke-linecap="round"/>
+<path class="s-loss" d="M920 460C1060 540 1200 600 1420 600" fill="none" stroke-width="8" stroke-dasharray="12 12"/>
+<path id="bv" class="s-gain" d="M920 460C1060 360 1200 290 1420 280" fill="none" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="920" cy="460" r="14"/>
+<text class="m" x="1420" y="250" font-size="22" text-anchor="end" style="fill:var(--gain)">VALUES</text>
+<text class="m" x="1420" y="646" font-size="22" text-anchor="end" style="fill:var(--loss)">INSTINCTS</text>
+<text class="m" x="700" y="700" font-size="20">CHARACTER: WHAT YOU CHOOSE</text>
+</g>
+<circle id="walk" class="gain" r="18"/>
+<g id="gearg"><g id="gear"></g><text class="d" x="260" y="815" font-size="40">A skill you can build, not a trait you’re stuck with.</text></g>
+</g>
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The kindergarten study.</text>
+<text class="b" x="120" y="176" font-size="32">As reported in the book: children randomly assigned to classes.</text>
+<g id="rooms"></g>
+<g id="tlab"><text class="m" x="245" y="560" font-size="20" text-anchor="middle" style="fill:var(--gain)">STRONG TEACHER</text></g>
+<g id="chart">
+<path class="s-ink" d="M1000 260V620H1480" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="1480" y="280" font-size="20" text-anchor="end">TEST SCORES</text>
+<text class="m" x="1480" y="656" font-size="20" text-anchor="end">YEARS</text>
+</g>
+<path id="bump" class="s-gain" d="M1000 560C1080 560 1100 320 1160 320C1230 320 1260 540 1460 550" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="bmpL"><text class="m" x="1160" y="300" font-size="20" text-anchor="middle" style="fill:var(--gain)">BUMP</text></g>
+<g id="fadL"><text class="m" x="1440" y="520" font-size="20" text-anchor="end">FADED</text></g>
+<g id="fade"><text class="d" x="120" y="790" font-size="44">The test-score bump faded within a few years.</text></g>
+</g>
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hidden payoff.</text>
+<text class="b" x="120" y="176" font-size="32">Something surprising showed up in adulthood.</text>
+<rect class="loss" x="120" y="600" width="1360" height="260" fill-opacity=".08"/>
+<path class="s-ink" d="M120 600h1360" stroke-width="5"/>
+<g id="child"></g>
+<g id="yrs"><path class="s-muted" d="M320 520h300m-20-20 20 20-20 20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="470" y="490" font-size="20" text-anchor="middle">YEARS LATER</text></g>
+<g id="adult"></g>
+<g id="grad">
+<path class="ink" d="M940 480v40q40 20 80 0v-40z"/>
+<polygon class="ink" points="900,460 980,420 1060,460 980,500"/>
+<path class="s-gain" d="M1060 460v50" stroke-width="5"/><circle class="gain" cx="1060" cy="515" r="8"/>
+<text class="m" x="980" y="390" font-size="22" text-anchor="middle">COLLEGE</text>
+</g>
+<g id="bars"></g>
+<g id="earn"><text class="m" x="1330" y="310" font-size="22" text-anchor="middle">EARNED MORE</text></g>
+<g id="seed">
+<path id="rt0" class="s-gain" d="M760 602C762 660 752 710 744 800" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="rt1" class="s-gain" d="M758 630C720 660 680 676 640 740" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="rt2" class="s-gain" d="M762 626C796 652 818 690 826 750" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="rt3" class="s-gain" d="M752 700C716 718 690 750 676 820" fill="none" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="rt4" class="s-gain" d="M750 720C776 742 790 776 794 830" fill="none" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="rt5" class="s-gain" d="M680 702C660 708 640 720 616 712M806 690C826 700 836 712 848 706" fill="none" stroke-width="4" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<text class="m" x="560" y="650" font-size="20" text-anchor="end" style="fill:var(--gain)">ROOTS</text>
+</g>
+<g id="deep"><text class="d" x="870" y="760" font-size="32">Something deeper than test scores.</text></g>
+</g>
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What really grew.</text>
+<text class="b" x="120" y="176" font-size="32">The lasting gains traced back to character skills.</text>
+<g id="chips"></g>
+<g id="kid"><path id="arm" d="M852 478L862 520L866 560" fill="none" stroke="var(--gain)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/><circle id="hand" class="gain" cx="866" cy="560" r="14"/></g>
+<g id="pay">
+<g id="book">
+<rect class="s-ink" x="130" y="690" width="80" height="60" rx="6" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M146 708h48M146 722h48M146 736h30" stroke-width="4" stroke-linecap="round"/>
+</g>
+<path class="s-line" d="M240 750H1470" stroke-width="4" stroke-linecap="round"/>
+<path id="payln" class="s-gain" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="dots"></g>
+<text class="m" x="120" y="800" font-size="20">LESSONS FORGOTTEN</text>
+<text class="m" x="1480" y="800" font-size="20" text-anchor="end" style="fill:var(--gain)">SKILLS KEEP PAYING OFF</text>
+</g>
+</g>
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Look past raw ability.</text>
+<text class="b" x="120" y="176" font-size="32">Ask a different question.</text>
+<g id="mir">
+<path class="s-ink" d="M300 650v60M230 720h140" stroke-width="8" stroke-linecap="round"/>
+<ellipse class="s-ink" cx="300" cy="460" rx="150" ry="190" fill="var(--stage)" stroke-width="8"/>
+<path class="s-line" d="M200 380l50-50M210 430l80-80" stroke-width="5" stroke-linecap="round"/>
+<g id="mp"></g>
+</g>
+<g id="mirL"><text class="m" x="300" y="770" font-size="20" text-anchor="middle">LOOK PAST RAW ABILITY</text></g>
+<g id="chk">
+<rect class="s-line" x="560" y="250" width="620" height="440" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="600" y="306" font-size="20">ASK INSTEAD</text>
+<g id="items"></g>
+</g>
+<g id="spr">
+<path class="s-ink" d="M1240 680h160" stroke-width="6" stroke-linecap="round"/>
+<path id="stem" class="s-gain" d="M1320 680V380" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="lvs"><path class="gain" d="M1320 480q-70-10-80-70q70 0 80 70z"/><path class="gain" d="M1320 430q70-10 80-70q-70 0-80 70z"/></g>
+<text class="m" x="1320" y="730" font-size="20" text-anchor="middle">PREDICTS GROWTH</text>
+</g>
+</g>
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="84" letter-spacing="-2">Pick one character skill.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="84" letter-spacing="-2">Practise it this week.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="84" letter-spacing="-2">Then do it <tspan style="fill:var(--gain)">again tomorrow.</tspan></text></g>
+<g id="qm8"><text class="m" x="143" y="700" font-size="26">START ONE TASK BEFORE ANYONE ASKS</text></g>
+<g id="days"><text class="m" x="1042" y="650" font-size="20">THIS WEEK</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Character Skills Beat Natural Talent&rdquo;, from <em>Hidden Potential</em> by Adam Grant. The kindergarten classroom study is described as reported in the book. Drawings of children, teachers, toolboxes and sprouts are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 9.6], [9.6, 21.3], [21.3, 44.7], [44.7, 60.4], [60.4, 75.7], [75.7, 86.4], [86.4, 100.6], [100.6, 116.6], [116.6, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "The Talent Trap", "Character Skills", "Not Personality", "The Classroom Study", "The Hidden Payoff", "What Really Grew", "Your Move", "Your Challenge"];
+const TM={"two_kids": 0.0, "spotlight": 9.92, "test_score": 13.36, "toolbox": 21.6, "proactive": 24.32, "discipline": 29.76, "determined": 34.64, "team": 39.52, "mask": 45.04, "two_paths": 50.96, "gear": 55.8, "classroom": 60.72, "teacher": 67.6, "report_card": 71.16, "grown_up": 76.0, "graduation": 79.12, "seedling": 83.28, "habits": 86.72, "raised_hand": 90.24, "mirror": 100.88, "checklist": 106.16, "sprout": 113.12};
+const P=(g,x,y,r,c)=>{const e=mk('g',{fill:'var(--'+c+')'},g);mk('circle',{cx:x,cy:y,r:r},e);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},e);return e};
+const T=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a||{}),g);e.textContent=s;return e};
+const drw=(e,k)=>(typeof e==='string'?$(e):e).setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const KD=[1230,1290].map(x=>P($('kids'),x,704,18,'ink'));
+P($('star'),400,590,30,'gain');
+[640,760].forEach(x=>P($('dark'),x,610,26,'muted').setAttribute('opacity',.45));
+const SW={fill:'none','stroke-width':9,'stroke-linecap':'round','stroke-linejoin':'round'};
+const ICON=[g=>mk('path',Object.assign({d:'M-40 0h70m-26-26 26 26-26 26',stroke:'var(--gain)'},SW),g),
+g=>{[40,24].forEach(r=>mk('circle',{r:r,fill:'none',stroke:'var(--ink)','stroke-width':6},g));mk('circle',{r:9,fill:'var(--gain)'},g)},
+g=>{mk('path',{d:'M-45 40h90',stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},g);mk('path',Object.assign({d:'M0 26v-70m-24 24 24-24 24 24',stroke:'var(--gain)'},SW),g)},
+g=>{P(g,-22,-28,12,'ink');P(g,22,-28,12,'gain')}];
+const CD=[['Proactivity','TAKING INITIATIVE','INSTEAD OF WAITING'],['Discipline','STAYING ON TASK','DESPITE DISTRACTIONS'],['Determination','PUSHING THROUGH','OBSTACLES'],['Prosociality','WORKING WELL WITH OTHERS','AND LIFTING THEM UP']];
+const cards=CD.map((d,i)=>{const x=500+(i%2)*500,y=240+Math.floor(i/2)*280,g=mk('g',{},$('cards'));
+mk('rect',{x:x,y:y,width:480,height:250,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+ICON[i](mk('g',{transform:'translate('+(x+80)+' '+(y+95)+')'},g));
+T(g,x+150,y+108,d[0],{class:'d5','font-size':40});T(g,x+40,y+180,d[1],{class:'m','font-size':20});T(g,x+40,y+212,d[2],{class:'m','font-size':20});return g});
+let gd='';for(let i=0;i<32;i++){const a=i*Math.PI/16,r=i%4<2?46:32;gd+=(i?'L':'M')+(r*Math.cos(a)).toFixed(1)+' '+(r*Math.sin(a)).toFixed(1)}
+mk('path',{d:gd+'z',fill:'var(--gain)'},$('gear'));mk('circle',{r:12,fill:'var(--stage)'},$('gear'));
+const BV=$('bv');let BL=600;try{BL=BV.getTotalLength()}catch(e){}
+const RM=[],RK=[],RT=[];for(let r=0;r<3;r++){const x=120+r*280;
+RM.push(mk('rect',{x:x,y:230,width:250,height:290,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rooms')));
+RT.push(P($('rooms'),x+125,262,12,'ink'));
+for(let k=0;k<9;k++)RK.push(mk('circle',{cx:x+65+(k%3)*60,cy:370+Math.floor(k/3)*50,r:14,fill:'var(--ink)'},$('rooms')))}
+P($('child'),240,524,18,'ink');P($('adult'),760,466,32,'gain');
+const RTS=['rt0','rt1','rt2','rt3','rt4','rt5'];
+const BH=[100,180,260],BR=BH.map((h,i)=>mk('rect',{x:1220+i*80,y:600,width:60,height:0,rx:4,fill:'var(--gain)'},$('bars')));
+// scene 6: figure drawn over the arm so the arm joins at the shoulder
+P($('kid'),800,380,40,'gain');
+const CP=['INITIATIVE','FOCUS','PERSISTENCE','COOPERATION'].map((s,i)=>{const L=i<2,x=L?180:1100,y=270+(i%2)*140,g=mk('g',{},$('chips'));
+mk('path',{d:'M'+(L?500:1100)+' '+(y+35)+'L'+(L?730:860)+' '+(L?450:500),stroke:'var(--line)','stroke-width':4},g);
+mk('rect',{x:x,y:y,width:320,height:70,rx:35,fill:'var(--gain)'},g);
+T(g,x+160,y+45,s,{'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'});return g});
+// rising payoff curve and growing markers
+const PY=s=>[240+1220*s,750-130*Math.pow(s,1.6)];
+let pd='';for(let i=0;i<=40;i++){const q=PY(i/40);pd+=(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)}
+$('payln').setAttribute('d',pd);
+const DT=[];for(let i=1;i<=10;i++){const q=PY(i/10);DT.push([mk('circle',{cx:q[0].toFixed(1),cy:q[1].toFixed(1),r:0,fill:'var(--gain)'},$('dots')),6+i*1.3])}
+P($('mp'),300,380,30,'ink');
+const CK=['Takes initiative?','Stays focused?','Keeps going when tough?'].map((s,i)=>{const y=340+i*110;
+mk('rect',{x:600,y:y,width:56,height:56,rx:10,fill:'none',stroke:'var(--ink)','stroke-width':5},$('items'));
+T($('items'),690,y+40,s,{class:'d5','font-size':36});
+return mk('path',Object.assign({d:'M612 '+(y+28)+'l14 16 26-30',stroke:'var(--gain)',pathLength:1,'stroke-dasharray':1,'stroke-dashoffset':1},SW),$('items'))});
+const DY=[];for(let i=0;i<7;i++)DY.push(mk('circle',{cx:1060+i*64,cy:690,r:18,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('days')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+R('kids',TM.two_kids);const k0=p(u,TM.two_kids+5,TM.two_kids+8);drw('pa',k0);drw('pb',k0);
+KD[0].setAttribute('fill',k0>.5?'var(--gain)':'var(--ink)');R('lbl20',TM.two_kids+5);R('pdot',TM.two_kids+8);
+R('cone',TM.spotlight);$('cone').setAttribute('fill-opacity',(.2+.04*Math.sin(t*3)).toFixed(3));
+R('star',TM.spotlight+.3);R('dark',TM.spotlight+1);R('card',TM.test_score);R('qm',TM.test_score+4.2);R('miss',TM.test_score+4.4);
+R('tbox',TM.toolbox);[TM.proactive,TM.discipline,TM.determined,TM.team].forEach((a,i)=>rise(cards[i],p(u,a,a+.5)));
+R('mk0',TM.mask);R('mk1',TM.mask+3);R('fork',TM.two_paths);
+const w1=p(u,TM.two_paths+.8,TM.two_paths+2),w2=p(u,TM.two_paths+2,TM.two_paths+4);let wx=700+220*w1,wy=640-180*w1;
+if(w2>0){const q=BV.getPointAtLength(w2*BL);wx=q.x;wy=q.y}
+$('walk').setAttribute('cx',wx.toFixed(1));$('walk').setAttribute('cy',wy.toFixed(1));$('walk').setAttribute('opacity',p(u,TM.two_paths+.5,TM.two_paths+.9));
+R('gearg',TM.gear);$('gear').setAttribute('transform','translate(180 800) rotate('+(t*40%360).toFixed(1)+')');
+R('rooms',TM.classroom-.4);RK.forEach((c,k)=>c.setAttribute('opacity',p(u,TM.classroom+k*.1,TM.classroom+k*.1+.3)));
+const tc=u>=TM.teacher;RM[0].setAttribute('stroke',tc?'var(--gain)':'var(--ink)');RT[0].setAttribute('fill',tc?'var(--gain)':'var(--ink)');
+R('tlab',TM.teacher);R('chart',TM.report_card);drw('bump',p(u,TM.report_card+.3,TM.report_card+3));
+R('bmpL',TM.report_card+1.2);R('fadL',TM.report_card+2.8);R('fade',TM.report_card+3);
+R('child',SC[5][0]/K+.2);R('yrs',TM.grown_up);R('adult',TM.grown_up+.8);R('grad',TM.graduation);R('earn',TM.graduation+1.5);
+const bk=p(u,TM.graduation+1.5,TM.graduation+3);BR.forEach((b,i)=>{const h=BH[i]*bk;b.setAttribute('y',(600-h).toFixed(1));b.setAttribute('height',h.toFixed(1))});
+R('seed',TM.seedling,.3);RTS.forEach((id,i)=>drw(id,p(u,TM.seedling+.2+i*.25,TM.seedling+1.4+i*.25)));R('deep',TM.seedling+1.5);
+R('kid',TM.habits);const ak=p(u,TM.raised_hand,TM.raised_hand+.8);
+const ex=862+38*ak,ey=520-90*ak,hx=866+46*ak,hy=560-218*ak;
+$('arm').setAttribute('d','M852 478L'+ex.toFixed(1)+' '+ey.toFixed(1)+'L'+hx.toFixed(1)+' '+hy.toFixed(1));
+$('hand').setAttribute('cx',hx.toFixed(1));$('hand').setAttribute('cy',hy.toFixed(1));
+CP.forEach((g,i)=>{const a=TM.raised_hand+i*1.4;rise(g,p(u,a,a+.5))});
+const pb=TM.raised_hand+6.6;R('pay',pb);$('book').setAttribute('opacity',(1-.8*p(u,pb+.8,pb+2.8)).toFixed(2));
+drw('payln',p(u,pb+.5,pb+3.5));
+DT.forEach((d,i)=>{const k=p(u,pb+.6+i*.3,pb+.9+i*.3);d[0].setAttribute('r',(d[1]*k*(i===9?1+.12*Math.sin(t*3):1)).toFixed(1))});
+R('mir',TM.mirror);R('mirL',TM.mirror+1.5);R('chk',TM.checklist);
+CK.forEach((c,i)=>drw(c,p(u,TM.checklist+1.5+i*1.7,TM.checklist+2+i*1.7)));
+R('spr',TM.sprout);drw('stem',p(u,TM.sprout+.2,TM.sprout+1.4));R('lvs',TM.sprout+1.2);
+const S8=SC[8][0]/K;R('qa',S8+.6);R('qb',S8+1);R('qc',S8+7);R('qm8',S8+1.6);R('days',S8+1.6);
+DY.forEach((d,i)=>{const on=i===0?S8+2.2:S8+7.5+(i-1)*.5;d.setAttribute('fill',u>=on?'var(--gain)':'var(--stage)')});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.12;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

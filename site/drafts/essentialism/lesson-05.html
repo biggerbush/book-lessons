@@ -1,0 +1,360 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Essentialism Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Essentialism: Using extreme criteria, so that anything short of a clear yes becomes a no, frees you to commit fully to the best opportunities. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">ESSENTIALISM · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Not a clear yes?</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Then it’s a <tspan style="fill:var(--gain)">no</tspan>.</text>
+<text class="b" x="120" y="600" font-size="32">Why a strict filter beats a loose yes every time.</text>
+<g id="fun"><path class="s-ink" d="M1120 260H1460L1320 480V620M1260 620V480L1120 260" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><text class="m" x="1290" y="704" font-size="22" text-anchor="middle" style="fill:var(--gain)">CLEAR YES</text></g>
+<g id="fdots"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most of us say yes too easily.</text>
+<text class="b" x="120" y="176" font-size="32">If it seems useful, we say yes.</text>
+<g id="door1">
+<rect class="gain" x="160" y="260" width="240" height="480" fill-opacity=".18"/>
+<path class="s-ink" d="M160 260L300 300V700L160 740Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<circle class="ink" cx="280" cy="500" r="8"/>
+<rect class="s-ink" x="160" y="260" width="240" height="480" fill="none" stroke-width="7"/>
+<text class="m" x="280" y="790" font-size="20" text-anchor="middle">IF IT SEEMS USEFUL: YES</text>
+<path class="s-muted" d="M440 500h140m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="cal1"><rect class="s-line" x="620" y="240" width="572" height="524" rx="16" fill="var(--stage)" stroke-width="3"/><text class="m" x="640" y="290" font-size="22">THIS WEEK</text></g>
+<g id="cells1"></g>
+<g id="great1"><g id="great1w"><rect class="gain" x="1250" y="420" width="210" height="120" rx="14"/><text class="d" x="1355" y="494" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">GREAT</text></g></g>
+<g id="noroom"><text class="m" x="1355" y="600" font-size="22" text-anchor="middle" style="fill:var(--loss)">NO ROOM LEFT</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">“Hell yeah!” or no.</text>
+<text class="b" x="120" y="176" font-size="32">A rule from entrepreneur Derek Sivers.</text>
+<g id="siv"><g id="sivp"></g><text class="m" x="260" y="640" font-size="20" text-anchor="middle">DEREK SIVERS</text></g>
+<g id="bub2">
+<polygon class="s-ink" points="430,376 480,376 360,430" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="s-ink" x="400" y="260" width="380" height="120" rx="30" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="590" y="338" font-size="52" text-anchor="middle">Hell yeah?</text>
+</g>
+<g id="notyes"><text class="m" x="400" y="470" font-size="22" style="fill:var(--loss)">NOT A HELL YEAH? THEN NO.</text></g>
+<g id="cA"><rect class="s-line" x="880" y="240" width="280" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><g id="tA"></g>
+<text class="d5" x="1020" y="640" font-size="36" text-anchor="middle">Hell yeah</text><text class="m" x="1020" y="690" font-size="20" text-anchor="middle" style="fill:var(--gain)">BIG ENTHUSIASM</text></g>
+<g id="cB"><rect class="s-line" x="1200" y="240" width="280" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><g id="tB"></g>
+<text class="d5" x="1340" y="640" font-size="36" text-anchor="middle">Lukewarm</text><text class="m" x="1340" y="690" font-size="20" text-anchor="middle" style="fill:var(--loss)">THUMBS DOWN</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The 90 percent rule.</text>
+<text class="b" x="120" y="176" font-size="32">Score each option on your single most important criterion.</text>
+<g id="crit"><text class="m" x="172" y="278" font-size="22">YOUR #1 CRITERION</text></g>
+<g id="bar3">
+<rect x="200" y="408" width="1200" height="24" rx="12" fill="var(--line)"/>
+<rect class="gain" x="1280" y="408" width="120" height="24"/>
+<path class="s-gain" d="M1280 345V470" stroke-width="5" stroke-linecap="round"/>
+<text class="d" x="1280" y="334" font-size="30" text-anchor="middle" style="fill:var(--gain)">90</text>
+</g>
+<g id="tick3"></g>
+<g id="mk3"></g>
+<g id="rule3"><text class="d" x="120" y="640" font-size="56">Below 90? It’s a zero.</text><text class="m" x="120" y="700" font-size="22">ANYTHING SHORT OF A CLEAR YES IS REJECTED</text></g>
+<g id="stamp3"><g transform="translate(1220 640) rotate(-8)"><rect x="-170" y="-55" width="340" height="110" rx="10" fill="none" stroke="var(--loss)" stroke-width="8"/><text class="d" x="0" y="22" font-size="62" text-anchor="middle" style="fill:var(--loss)">REJECT</text></g></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it feels hard.</text>
+<text class="b" x="120" y="176" font-size="32">Saying no can feel harsh, even wasteful.</text>
+<path class="s-line" d="M800 230V720" stroke-width="3"/>
+<g id="rp4"></g>
+<g id="lf4"><text class="m" x="440" y="262" font-size="24" text-anchor="middle" style="fill:var(--loss)">STRETCHED THIN</text><g id="lfig4"></g></g>
+<g id="op4"></g>
+<g id="rt4">
+<text class="m" x="1160" y="262" font-size="24" text-anchor="middle" style="fill:var(--gain)">CONFIDENCE</text>
+<path class="s-line" d="M880 600H1460" stroke-width="5" stroke-linecap="round"/>
+<path class="s-gain" d="M940 640H1350" fill="none" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<path class="s-gain" d="M1340 624l20 16-20 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="gain" x="1280" y="445" width="180" height="110" rx="14"/>
+<text class="m" x="1370" y="508" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">CLEAR YES</text>
+<g id="wk4"></g>
+</g>
+<g id="nb4">
+<g opacity=".55"><rect x="935" y="305" width="130" height="50" rx="12" fill="none" stroke="var(--muted)" stroke-width="4" stroke-dasharray="8 6"/><text class="m" x="1000" y="337" font-size="18" text-anchor="middle">DECENT</text>
+<rect x="1155" y="305" width="130" height="50" rx="12" fill="none" stroke="var(--muted)" stroke-width="4" stroke-dasharray="8 6"/><text class="m" x="1220" y="337" font-size="18" text-anchor="middle">DECENT</text></g>
+<path d="M950 300l100 60M1050 300l-100 60M1170 300l100 60M1270 300l-100 60" stroke="var(--loss)" stroke-width="5" stroke-linecap="round" fill="none"/>
+</g>
+<g id="st4a"><text class="d" x="120" y="800" font-size="44">Every open option stretches you thin.</text></g>
+<g id="st4b"><text class="d" x="120" y="800" font-size="44">Tough criteria let you choose with <tspan style="fill:var(--gain)">confidence</tspan>.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Choosing between job offers.</text>
+<text class="b" x="120" y="176" font-size="32">It’s tempting to take whichever looks good enough.</text>
+<g id="ge5"><text class="m" x="160" y="340" font-size="24" style="fill:var(--loss)">GOOD ENOUGH? TAKE IT?</text></g>
+<g id="offers5"></g>
+<g id="pad5">
+<path class="s-muted" d="M800 520h70m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-ink" x="900" y="240" width="500" height="540" rx="16" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="980" cy="240" r="12"/><circle class="ink" cx="1080" cy="240" r="12"/><circle class="ink" cx="1180" cy="240" r="12"/><circle class="ink" cx="1280" cy="240" r="12"/>
+<text class="m" x="940" y="320" font-size="22">3 MINIMUM CRITERIA</text>
+<g id="padl5"></g>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Minimum and extreme criteria.</text>
+<text class="b" x="120" y="176" font-size="32">Meet every minimum, and at least two of the extremes.</text>
+<path class="s-line" d="M770 230V700" stroke-width="3"/>
+<g id="hd6"><text class="m" x="560" y="240" font-size="20" text-anchor="middle">MINIMUMS</text></g>
+<g id="st6"><text class="m" x="980" y="240" font-size="20" text-anchor="middle" style="fill:var(--gain)">EXTREMES</text></g>
+<g id="rs6"><text class="m" x="1320" y="240" font-size="20" text-anchor="middle">RESULT</text></g>
+<rect id="hl6" class="gain" x="110" y="590" width="1370" height="100" rx="16" fill-opacity=".15"/>
+<g id="rows6"></g>
+<g id="sl6"><text class="d" x="120" y="800" font-size="44">A short list you genuinely want.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every no clears space.</text>
+<text class="b" x="120" y="176" font-size="32">So when the right opportunity appears, you can grab it.</text>
+<rect class="s-line" x="120" y="230" width="600" height="500" rx="16" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="140" y="270" font-size="22">YOUR WEEK</text>
+<g id="cells7"></g>
+<g id="gold7"><rect class="gain" x="140" y="398" width="548" height="204" rx="14"/><text class="d5" x="414" y="512" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">The right opportunity</text></g>
+<path class="s-line" d="M820 700H1480" stroke-width="4"/>
+<g id="mny7"><text class="m" x="840" y="300" font-size="18">A LITTLE TO MANY</text><g id="many7"></g></g>
+<g id="few7"><text class="m" x="1180" y="300" font-size="18" style="fill:var(--gain)">EVERYTHING TO THE FEW</text>
+<rect id="fb0" class="gain" x="1210" y="700" width="80" height="0"/><rect id="fb1" class="gain" x="1330" y="700" width="80" height="0"/></g>
+<g id="ef7"><text class="d" x="120" y="810" font-size="44">Give everything to the few that earn it.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pick one decision.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Score it out of 100.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">Under <tspan style="fill:var(--gain)">90</tspan>? Let it go.</text></g>
+<g id="paper8">
+<rect class="s-ink" x="1240" y="260" width="200" height="260" rx="12" fill="var(--stage)" stroke-width="6"/>
+<text id="sc8" class="d" x="1340" y="400" font-size="64" text-anchor="middle">?</text>
+<text class="m" x="1340" y="450" font-size="22" text-anchor="middle">/ 100</text>
+<path class="gain" d="M1390 590l50-90 18 10-50 90-24 12z"/>
+</g>
+<text class="m" x="143" y="700" font-size="26">IF IT’S NOT A CLEAR YES, IT’S A NO</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;If It&#x27;s Not a Clear Yes&rdquo;, from <em>Essentialism</em> by Greg McKeown. Derek Sivers&#x27; hell yeah or no rule, the 90 percent rule and the job criteria exercise are as reported in the book. The dial, scale, stamps and lists are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 5.9], [5.9, 20.7], [20.7, 39.2], [39.2, 55.9], [55.9, 74.3], [74.3, 87.8], [87.8, 103.8], [103.8, 116.3], [116.3, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Clear Yes or No", "The Broad Filter", "Hell Yeah or No", "The 90 Percent Rule", "Why It Feels Hard", "Choosing a Job", "Minimum and Extreme", "Room for the Best", "Your Challenge"];
+const TM={"title_card": 0.0, "open_door": 6.24, "pile_tasks": 12.0, "derek_sivers": 20.96, "speech_bubble": 24.96, "thumbs_split": 34.16, "score_dial": 39.52, "scale_100": 47.92, "zero_stamp": 51.44, "tight_rope": 56.24, "maybe_cloud": 59.2, "clear_sky": 69.2, "job_offers": 74.56, "notepad": 81.92, "star_list": 88.08, "check_marks": 94.08, "short_list": 100.24, "golden_chance": 104.08, "full_effort": 110.88, "pen_paper": 116.56};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const star=(cx,cy,r)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r*.45:r;d+=(i?'L':'M')+(cx+q*Math.cos(a)).toFixed(1)+' '+(cy+q*Math.sin(a)).toFixed(1)}return d+'Z'};
+const tx=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+// title: one ball at a time through the filter
+const FB=mk('circle',{r:18,class:'loss'},$('fdots'));
+const C1=[];for(let r=0;r<4;r++)for(let c=0;c<5;c++){const g=mk('g',{},$('cells1'));mk('rect',{x:640+c*108,y:320+r*108,width:100,height:100,rx:10,fill:'var(--line)'},g);tx(g,690+c*108,378+r*108,'OK',{class:'m','font-size':20,'text-anchor':'middle'});C1.push(g)}
+person($('sivp'),260,420,40,'ink');
+function thumb(g,cx,cy,cls,down){const h=mk('g',{transform:'translate('+cx+' '+cy+') rotate('+(down?180:0)+')'},g);
+  mk('rect',{x:-55,y:-90,width:36,height:110,rx:18,class:cls},h);mk('rect',{x:-55,y:-10,width:110,height:90,rx:18,class:cls},h);
+  mk('path',{d:'M-10 18h50M-10 40h50M-10 62h50',stroke:'var(--stage)','stroke-width':5,'stroke-linecap':'round'},h);mk('rect',{x:60,y:-6,width:22,height:82,rx:6,class:'ink'},h)}
+thumb($('tA'),1020,440,'gain',0);thumb($('tB'),1340,440,'loss',1);
+mk('path',{d:star(146,270,18),class:'gain'},$('crit'));
+for(let i=0;i<=10;i++){mk('path',{d:'M'+(200+i*120)+' 440v16',class:'s-muted','stroke-width':3},$('tick3'));tx($('tick3'),200+i*120,492,String(i*10),{class:'m','font-size':20,'text-anchor':'middle'})}
+const MK=[['A',.4],['B',.7],['C',.95]].map((q,i)=>{const o=mk('g',{},$('mk3')),g=mk('g',{},o),c=mk('circle',{cx:0,cy:0,r:24,class:i==2?'gain':'ink'},g);
+  tx(g,0,8,q[0],{class:'d','font-size':24,'text-anchor':'middle',style:'fill:var('+(i==2?'--on-gain':'--stage')+')'});return [o,g,c,q[1]]});
+// scene 4: stretched thin vs confidence
+person($('lfig4'),440,470,28,'ink');
+const OP4=[[210,340],[670,340],[190,520],[690,520],[210,690],[670,690]].map(([x,y])=>{const s=mk('line',{x1:440,y1:560,x2:x,y2:y,'stroke-linecap':'round'},$('rp4')),g=mk('g',{},$('op4'));
+  mk('rect',{x:x-65,y:y-25,width:130,height:50,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  tx(g,x,y+7,'DECENT',{class:'m','font-size':18,'text-anchor':'middle',style:'fill:var(--ink)'});return [g,s]});
+person($('wk4'),940,482,28,'ink');
+const OF=[0,1,2].map(i=>{const x=160+i*220,y=400,g=mk('g',{},$('offers5'));mk('rect',{x:x,y:y,width:180,height:240,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('path',{d:'M'+(x+70)+' '+(y+64)+'v-16h40v16',fill:'none',stroke:'var(--ink)','stroke-width':6},g);mk('rect',{x:x+40,y:y+62,width:100,height:70,rx:10,class:'ink'},g);
+  tx(g,x+90,y+190,'OFFER '+'ABC'[i],{class:'m','font-size':20,'text-anchor':'middle'});return g});
+const PL=[0,1,2].map(i=>{tx($('padl5'),940,440+i*120,String(i+1),{class:'d','font-size':40});return mk('line',{x1:990,y1:428+i*120,x2:990,y2:428+i*120,class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('padl5'))});
+const CX=[440,560,680,860,980,1100],MD=[[1,1,0,1,1,0],[1,1,1,1,0,0],[1,1,1,1,1,0]];
+CX.forEach((x,j)=>{if(j<3)mk('rect',{x:x-18,y:262,width:36,height:36,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},$('hd6'));else mk('path',{d:star(x,280,22),class:'gain'},$('st6'))});
+const R6=MD.map((m,r)=>{const y=400+r*120,o=mk('g',{},$('rows6')),g=mk('g',{},o);tx(g,120,y+12,'Offer '+'ABC'[r],{class:'d5','font-size':36});
+  const mm=m.map((v,j)=>mk('path',{d:v?'M'+(CX[j]-18)+' '+y+'l12 14l24-28':'M'+(CX[j]-14)+' '+(y-14)+'l28 28m0-28l-28 28',fill:'none',stroke:v?'var(--gain)':'var(--loss)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g));
+  const ok=r==2,res=mk('g',{},g);mk('rect',{x:1240,y:y-28,width:160,height:56,rx:28,fill:ok?'var(--gain)':'none',stroke:ok?'none':'var(--loss)','stroke-width':4},res);
+  tx(res,1320,y+10,ok?'YES':'NO',{class:'d','font-size':28,'text-anchor':'middle',style:'fill:var('+(ok?'--on-gain':'--loss')+')'});return [o,g,mm,res]});
+const C7=[];for(let r=0;r<4;r++)for(let c=0;c<4;c++)C7.push(mk('rect',{x:140+c*140,y:290+r*108,width:128,height:96,rx:10,fill:'var(--line)'},$('cells7')));
+for(let i=0;i<8;i++)mk('rect',{x:840+i*36,y:650,width:24,height:50,fill:'var(--muted)'},$('many7'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const fv=p(u,TM.title_card,TM.title_card+.6); rise($('fun'),fv);
+  const ph=(t*.6)%4, fj=Math.floor(ph), ff=ph-fj, isY=fj==3;
+  let bx=1290, by=190+110*cl(ff/.35), bo=cl(ff/.08);
+  if(!isY){const b=cl((ff-.35)/.4),dir=fj%2?1:-1; bx+=dir*170*b; by-=120*b; bo*=1-b}
+  else{by+=350*cl((ff-.35)/.45); bo*=1-cl((ff-.9)/.1)}
+  FB.setAttribute('class',isY?'gain':'loss'); FB.setAttribute('cx',bx.toFixed(1)); FB.setAttribute('cy',by.toFixed(1)); FB.setAttribute('opacity',(bo*fv).toFixed(2));
+
+  rise($('door1'),p(u,TM.open_door,TM.open_door+.5)); rise($('cal1'),p(u,TM.open_door+1,TM.open_door+1.5));
+  C1.forEach((g,i)=>{const a=TM.pile_tasks+i*.18;rise(g,p(u,a,a+.3))});
+  const gr=p(u,TM.pile_tasks+4,TM.pile_tasks+4.5); rise($('great1'),gr);
+  $('great1w').setAttribute('transform','translate('+(-24*Math.abs(Math.sin(t*3))*gr).toFixed(1)+' 0)');
+  rise($('noroom'),p(u,TM.pile_tasks+4.6,TM.pile_tasks+5.1));
+
+  rise($('siv'),p(u,TM.derek_sivers,TM.derek_sivers+.5)); rise($('bub2'),p(u,TM.speech_bubble,TM.speech_bubble+.5));
+  rise($('notyes'),p(u,TM.speech_bubble+5.8,TM.speech_bubble+6.3));
+  rise($('cA'),p(u,TM.thumbs_split,TM.thumbs_split+.5)); rise($('cB'),p(u,TM.thumbs_split+.8,TM.thumbs_split+1.3));
+
+  rise($('bar3'),p(u,TM.score_dial,TM.score_dial+.6)); rise($('crit'),p(u,TM.score_dial+5,TM.score_dial+5.5));
+  rise($('tick3'),p(u,TM.scale_100,TM.scale_100+.5));
+  const zz=p(u,TM.zero_stamp+.3,TM.zero_stamp+1.2);
+  MK.forEach(([o,g,c,s],i)=>{const a=TM.scale_100+.6+i*.4;rise(o,p(u,a,a+.4));const x0=200+1200*s,z=i<2?zz:0;
+    g.setAttribute('transform','translate('+(x0+(200+i*100-x0)*z).toFixed(1)+' 370)');c.setAttribute('class',i==2?'gain':z>0?'loss':'ink')});
+  rise($('rule3'),p(u,TM.zero_stamp,TM.zero_stamp+.5)); rise($('stamp3'),p(u,TM.zero_stamp+1,TM.zero_stamp+1.3));
+
+  const cs=p(u,TM.clear_sky,TM.clear_sky+.8), stt=u>=TM.maybe_cloud+5;
+  rise($('lf4'),p(u,TM.tight_rope,TM.tight_rope+.5));
+  const jd=stt?5*Math.sin(t*9):0; $('lfig4').setAttribute('transform','translate('+jd.toFixed(1)+' 0)');
+  OP4.forEach(([g,s],i)=>{const a=TM.maybe_cloud+i*.4,k=p(u,a,a+.4);rise(g,k);s.setAttribute('opacity',k.toFixed(2));s.setAttribute('x1',(440+jd).toFixed(1));
+    s.setAttribute('stroke',stt?'var(--loss)':'var(--muted)');s.setAttribute('stroke-width',stt?5:3);s.setAttribute('stroke-dasharray',stt?'none':'8 8')});
+  rise($('st4a'),p(u,TM.maybe_cloud+5,TM.maybe_cloud+5.6)*(1-cs));
+  rise($('rt4'),p(u,TM.clear_sky,TM.clear_sky+.5)); rise($('nb4'),p(u,TM.clear_sky+.6,TM.clear_sky+1.1));
+  const wk=p(u,TM.clear_sky+.4,TM.clear_sky+2.4);
+  $('wk4').setAttribute('transform','translate('+(220*wk).toFixed(1)+' '+(-5*Math.abs(Math.sin(t*7))*(wk>0&&wk<1?1:0)).toFixed(1)+')');
+  rise($('st4b'),p(u,TM.clear_sky+.4,TM.clear_sky+1));
+
+  OF.forEach((g,i)=>{const a=TM.job_offers+i*.4;rise(g,p(u,a,a+.4))});
+  rise($('ge5'),p(u,TM.job_offers+5,TM.job_offers+5.5)); rise($('pad5'),p(u,TM.notepad,TM.notepad+.5));
+  PL.forEach((l,i)=>{const k=p(u,TM.notepad+.8+i*.9,TM.notepad+1.6+i*.9);l.setAttribute('x2',(990+370*k).toFixed(1));l.setAttribute('opacity',k>0?1:0)});
+
+  const s6=SC[6][0]/K;
+  rise($('hd6'),p(u,s6+.4,s6+.9)); rise($('st6'),p(u,TM.star_list,TM.star_list+.5)); rise($('rs6'),p(u,TM.check_marks,TM.check_marks+.5));
+  const sl=p(u,TM.short_list,TM.short_list+.6);
+  R6.forEach(([o,g,mm,res],r)=>{rise(g,p(u,s6+.6+r*.2,s6+1.1+r*.2));
+    mm.forEach((e,j)=>{const a=TM.check_marks+r*1.3+j*.15;e.setAttribute('opacity',p(u,a,a+.25))});
+    const ra=TM.check_marks+r*1.3+1;rise(res,p(u,ra,ra+.4));o.setAttribute('opacity',r<2?(1-.65*sl).toFixed(2):1)});
+  rise($('hl6'),sl); rise($('sl6'),p(u,TM.short_list+.5,TM.short_list+1.1));
+
+  const s7=SC[7][0]/K;
+  C7.forEach((c,i)=>{const a=TM.golden_chance+i*.12;c.setAttribute('opacity',(p(u,s7,s7+.4)*(1-p(u,a,a+.3))).toFixed(2))});
+  rise($('gold7'),p(u,TM.golden_chance+2.4,TM.golden_chance+3));
+  rise($('mny7'),p(u,TM.full_effort,TM.full_effort+.5)); rise($('few7'),p(u,TM.full_effort+1.2,TM.full_effort+1.6));
+  const fk=p(u,TM.full_effort+1.5,TM.full_effort+2.5);
+  $('fb0').setAttribute('height',(360*fk).toFixed(1)); $('fb0').setAttribute('y',(700-360*fk).toFixed(1));
+  $('fb1').setAttribute('height',(300*fk).toFixed(1)); $('fb1').setAttribute('y',(700-300*fk).toFixed(1));
+  rise($('ef7'),p(u,TM.full_effort+3,TM.full_effort+3.6));
+
+  rise($('qa'),p(u,TM.pen_paper,TM.pen_paper+.5)); rise($('qb'),p(u,TM.pen_paper+.4,TM.pen_paper+.9));
+  rise($('qc'),p(u,TM.pen_paper+5.8,TM.pen_paper+6.3)); rise($('paper8'),p(u,TM.pen_paper+.8,TM.pen_paper+1.3));
+  const lo=u>=TM.pen_paper+5.8; $('sc8').textContent=lo?'< 90':'?'; $('sc8').style.fill=lo?'var(--loss)':'var(--ink)';
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.17;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

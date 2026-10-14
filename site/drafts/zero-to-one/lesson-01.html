@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zero to One Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Zero to One: Real progress comes from creating something new, which is vertical progress, rather than copying what already works, which is horizontal progress. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">ZERO TO ONE · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">From Zero to One.</text>
+<text class="b" x="120" y="600" font-size="32">Why creating something new beats copying what already works</text>
+<path class="s-line" d="M1150 540H1480" stroke-width="5" stroke-linecap="round"/>
+<text class="d" x="1200" y="530" font-size="140" text-anchor="middle" style="fill:var(--muted)">0</text>
+<path id="t_arr" class="s-gain" d="M1250 430Q1290 290 1350 270" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="t_one"><text class="d" x="1410" y="330" font-size="170" text-anchor="middle" style="fill:var(--gain)">1</text></g>
+<g id="t_opp"><text class="m" x="120" y="680" font-size="22">PETER THIEL: THE FUTURE DEPENDS ON DOING THE OPPOSITE</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of progress.</text>
+<text class="b" x="120" y="176" font-size="32">Progress comes in two directions.</text>
+<g id="gh"><path class="s-line" d="M400 720H900M400 720V280" fill="none" stroke-width="4" stroke-dasharray="6 10"/><circle class="ink" cx="400" cy="720" r="14"/></g>
+<path id="fa" class="s-ink" d="M400 720H898" fill="none" stroke-width="10" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="fah" class="s-ink" d="M872 696l28 24-28 24" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="ta" class="s-gain" d="M400 720V282" fill="none" stroke-width="10" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="tah" class="s-gain" d="M376 308l24-28 24 28" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="hl"><text class="d5" x="940" y="734" font-size="40">Horizontal progress</text><text class="m" x="940" y="780" font-size="20">SIDEWAYS</text></g>
+<g id="vl"><text class="d" x="450" y="300" font-size="40" style="fill:var(--gain)">Vertical progress</text><text class="m" x="450" y="340" font-size="20">STRAIGHT UP</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Going sideways.</text>
+<g id="s2sub"><text class="b" x="120" y="176" font-size="32">Horizontal progress: copying things that already work.</text></g>
+<g id="s2n"><text class="d" x="120" y="320" font-size="96">1 → n</text></g>
+<g id="tw1"><text class="m" x="230" y="630" font-size="20" text-anchor="middle">ONE TYPEWRITER</text></g>
+<g id="tw1a"><path class="s-muted" d="M340 520H420M398 498l22 22-22 22" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="450" y="420" font-size="20">100 MORE OF THEM</text></g>
+<g id="twrow"></g>
+<g id="s2end"><text class="d" x="120" y="830" font-size="46">More of the same, spread wider.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Going up.</text>
+<g id="s3sub"><text class="b" x="120" y="176" font-size="32">Vertical progress: doing something nobody has done before.</text></g>
+<g id="s3n"><text class="d" x="120" y="320" font-size="96" style="fill:var(--gain)">0 → 1</text></g>
+<path class="s-line" d="M120 690H1480" stroke-width="4"/>
+<g id="tw2"></g>
+<g id="wp">
+<rect class="s-ink" x="800" y="380" width="260" height="180" rx="12" fill="var(--stage)" stroke-width="7"/>
+<path class="s-gain" d="M840 430h180M840 470h140M840 510h160" stroke-width="8" stroke-linecap="round"/>
+<path class="s-ink" d="M930 560v50M880 610h100" stroke-width="7" stroke-linecap="round"/>
+<rect class="ink" x="790" y="640" width="280" height="40" rx="8"/>
+</g>
+<path id="lp" class="s-gain" d="M440 540C470 330 640 290 770 380" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="lph"><path class="s-gain" d="M742 374l28 6-8 28" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="560" y="300" font-size="20" style="fill:var(--gain)">LEAP</text></g>
+<g id="nw"><rect class="gain" x="1120" y="400" width="300" height="100" rx="50"/><text class="d" x="1270" y="466" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">Brand new</text><text class="m" x="1270" y="550" font-size="20" text-anchor="middle">DID NOT EXIST BEFORE</text></g>
+<g id="s3end"><text class="d" x="120" y="800" font-size="48">That leap is vertical progress.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Globalization vs technology.</text>
+<text class="b" x="120" y="176" font-size="32">Thiel gives each direction a big name.</text>
+<g id="pL">
+<rect class="s-line" x="120" y="230" width="640" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="285" font-size="22">HORIZONTAL</text>
+<circle class="s-ink" cx="440" cy="460" r="130" fill="var(--stage)" stroke-width="6"/>
+<ellipse class="s-line" cx="440" cy="460" rx="60" ry="130" fill="none" stroke-width="4"/>
+<path class="s-line" d="M310 460H570M325 400H555M325 520H555" stroke-width="4"/>
+</g>
+<g id="gname"><ellipse class="s-muted" cx="440" cy="460" rx="190" ry="60" fill="none" stroke-width="3" stroke-dasharray="6 8"/><g id="gdots"></g>
+<text class="d" x="150" y="680" font-size="52">Globalization</text><text class="m" x="150" y="725" font-size="20">SPREADING WHAT WORKS</text></g>
+<g id="pR">
+<rect class="s-line" x="840" y="230" width="640" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="285" font-size="22">VERTICAL</text>
+<g id="rays"></g>
+<circle class="gain" cx="1160" cy="420" r="95"/>
+<rect class="ink" x="1120" y="515" width="80" height="20" rx="4"/><rect class="ink" x="1125" y="545" width="70" height="20" rx="4"/><rect class="ink" x="1137" y="575" width="46" height="16" rx="8"/>
+<text class="d" x="870" y="680" font-size="52">Technology</text><text class="m" x="870" y="725" font-size="20">ANY NEW, BETTER WAY OF DOING THINGS</text>
+</g>
+<g id="s4end"><text class="d" x="120" y="830" font-size="44">Not just computers.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The China example.</text>
+<text class="b" x="120" y="176" font-size="32">A clear case of horizontal progress.</text>
+<g id="chn"><path class="s-ink" d="M200 480C220 380 380 360 480 400C580 430 600 520 540 590C470 660 300 660 240 610C190 570 190 530 200 480Z" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/><text class="m" x="390" y="700" font-size="22" text-anchor="middle">CHINA</text></g>
+<g id="cmin"></g>
+<g id="usa"><path class="s-muted" d="M640 520H928M904 496l26 24-26 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="785" y="495" font-size="20" text-anchor="middle">BECOME MORE LIKE</text>
+<g id="usk"></g><path class="s-ink" d="M980 640H1460" stroke-width="6" stroke-linecap="round"/><text class="m" x="1220" y="690" font-size="20" text-anchor="middle">UNITED STATES TODAY</text></g>
+<g id="smk"><g id="smkin"></g><text class="m" x="520" y="300" font-size="20" style="fill:var(--loss)">STRAIN ON RESOURCES</text><text class="m" x="520" y="330" font-size="20" style="fill:var(--loss)">AND THE ENVIRONMENT</text></g>
+<g id="s5end"><text class="d" x="120" y="810" font-size="44">Old methods everywhere, no new technology.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every moment happens once.</text>
+<text class="b" x="120" y="176" font-size="32">Copying a great founder repeats a moment that is gone.</text>
+<g id="cal"><rect class="s-ink" x="120" y="240" width="300" height="340" rx="16" fill="var(--stage)" stroke-width="6"/><rect class="loss" x="123" y="243" width="294" height="70" rx="12"/>
+<circle class="ink" cx="190" cy="240" r="12"/><circle class="ink" cx="350" cy="240" r="12"/>
+<text class="d" x="270" y="470" font-size="100" text-anchor="middle">NOW</text><text class="m" x="270" y="540" font-size="20" text-anchor="middle">HAPPENS ONCE</text></g>
+<g id="cg"><rect class="s-line" x="500" y="240" width="460" height="420" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="730" y="290" font-size="20" text-anchor="middle">THE NEXT BILL GATES</text><g id="gp"></g>
+<text class="d5" x="730" y="580" font-size="34" text-anchor="middle">won’t build an</text><text class="d5" x="730" y="625" font-size="34" text-anchor="middle">operating system</text></g>
+<g id="cp"><rect class="s-line" x="1020" y="240" width="460" height="420" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1250" y="290" font-size="20" text-anchor="middle">THE NEXT LARRY PAGE</text>
+<rect class="s-ink" x="1080" y="390" width="340" height="70" rx="35" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="1370" cy="422" r="14" fill="none" stroke-width="5"/><path class="s-ink" d="M1380 432l14 14" stroke-width="5" stroke-linecap="round"/><path id="cur" class="s-ink" d="M1120 408v28" stroke-width="4"/>
+<text class="d5" x="1250" y="580" font-size="34" text-anchor="middle">won’t make another</text><text class="d5" x="1250" y="625" font-size="34" text-anchor="middle">search engine</text></g>
+<path id="x1" class="s-loss" d="M620 315L840 520M840 315L620 520" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="x2" class="s-loss" d="M1110 335L1390 515M1390 335L1110 515" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="s6end"><text class="d" x="120" y="790" font-size="42">Copying their moves misses what made them great.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why vertical matters.</text>
+<text class="b" x="120" y="176" font-size="32">Copying is easier. Creating raises the ceiling.</text>
+<g id="ceil"><path class="s-ink" d="M120 0H1480" stroke-width="5" stroke-dasharray="14 10"/><text class="m" x="120" y="-14" font-size="20">CEILING OF WHAT’S POSSIBLE</text></g>
+<g id="road"><path class="s-muted" d="M120 720H700" stroke-width="14" stroke-linecap="round"/><g id="rp"></g><text class="m" x="410" y="780" font-size="20" text-anchor="middle">COPYING · PATH ALREADY PROVEN</text></g>
+<g id="mtn"><polygon class="s-ink" points="760,720 1120,300 1480,720" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/><circle id="clb" class="gain" r="18"/>
+<text class="d" x="860" y="450" font-size="64" style="fill:var(--gain)">?</text><text class="m" x="820" y="500" font-size="20">NO MAP</text>
+<text class="m" x="1120" y="780" font-size="20" text-anchor="middle">CREATING · NOBODY HANDS YOU THE MAP</text></g>
+<g id="s7end"><text class="d" x="120" y="845" font-size="38">That’s the climb Thiel urges founders to make.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qm"><text class="m" x="143" y="230" font-size="26">LOOK AT YOUR OWN WORK THIS WEEK</text></g>
+<g id="qa"><text class="d" x="136" y="350" font-size="84" letter-spacing="-2">Where are you making</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="84" letter-spacing="-2"><tspan style="fill:var(--loss)">100 more typewriters</tspan>,</text></g>
+<g id="qc"><text class="d" x="136" y="550" font-size="84" letter-spacing="-2">and where could you build</text></g>
+<g id="qd"><text class="d" x="136" y="650" font-size="84" letter-spacing="-2">the <tspan style="fill:var(--gain)">first word processor</tspan>?</text></g>
+<g id="qg"><g id="q_tw"></g><path class="s-gain" d="M1310 770Q1336 722 1370 728" fill="none" stroke-width="5" stroke-linecap="round"/><rect class="gain" x="1380" y="700" width="100" height="70" rx="8"/><rect class="ink" x="1420" y="770" width="20" height="18"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;From Zero to One&rdquo;, from <em>Zero to One</em> by Peter Thiel with Blake Masters. The typewriter and word processor, China&#x27;s path of copying, and the Bill Gates and Larry Page examples are as reported in the book. The arrows, map, skyline and smoke drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 8.4], [8.4, 22.0], [22.0, 37.1], [37.1, 54.6], [54.6, 71.1], [71.1, 91.7], [91.7, 107.8], [107.8, 123.5], [123.5, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Zero to One", "Two Kinds of Progress", "Going Sideways", "Going Up", "Globalization vs Tech", "The China Example", "Each Moment Once", "Why Vertical Matters", "Your Zero to One"];
+const TM={"title_card": 0.0, "two_arrows": 8.72, "flat_arrow": 12.24, "tall_arrow": 15.44, "one_to_n": 22.32, "typewriter": 29.12, "typewriter_row": 31.04, "zero_to_one": 37.36, "word_proc": 44.4, "globe": 54.88, "lightbulb": 63.36, "china_map": 71.36, "us_skyline": 75.68, "smoke_cloud": 84.56, "calendar_page": 92.0, "gates_portrait": 96.4, "google_box": 100.56, "easy_road": 108.08, "hard_climb": 112.16, "mirror": 123.84};
+const pp=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const tw=(g,x,y,s,c)=>{const w=Math.max(2,5*s);mk('rect',{x:x-35*s,y:y-75*s,width:70*s,height:44*s,fill:'var(--stage)',stroke:'var(--'+c+')','stroke-width':w},g);
+  mk('rect',{x:x-60*s,y:y-40*s,width:120*s,height:50*s,rx:10*s,fill:'var(--'+c+')'},g);
+  mk('path',{d:'M'+(x-40*s)+' '+(y-15*s)+'h'+(80*s),stroke:'var(--stage)','stroke-width':Math.max(2,6*s),'stroke-dasharray':(6*s)+' '+(8*s)},g);return g};
+const dr=(id,k)=>{const e=$(id);e.setAttribute('stroke-dashoffset',(1-k).toFixed(3));e.setAttribute('opacity',k>0?1:0)};
+tw($('tw1'),230,560,1.4,'ink');
+const TWS=[];for(let i=0;i<100;i++)TWS.push(tw(mk('g',{},$('twrow')),450+(i%25)*41,480+Math.floor(i/25)*90,.3,'ink'));
+tw($('tw2'),420,674,1.6,'muted');
+[1180,1230,1280].forEach(x=>tw($('q_tw'),x,790,.35,'muted'));
+const GD=[0,1,2,3].map(()=>mk('rect',{width:18,height:18,rx:3,class:'ink'},$('gdots')));
+for(let i=0;i<7;i++){const a=Math.PI*(1+i/6),c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1160+115*c).toFixed(0)+' '+(420+115*s).toFixed(0)+'L'+(1160+150*c).toFixed(0)+' '+(420+150*s).toFixed(0),class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+[[1000,200],[1070,300],[1150,240],[1230,320],[1310,180],[1380,260]].forEach(q=>mk('rect',{x:q[0],y:640-q[1],width:60,height:q[1],class:'ink'},$('usk')));
+const CM=[50,80,60,90,45,70].map((h,i)=>mk('rect',{x:280+i*40,y:600-h,width:28,height:h,class:'ink'},$('cmin')));
+[[330,300,44],[390,272,52],[455,300,44],[300,330,30],[420,330,40]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],class:'loss','fill-opacity':.35},$('smkin')));
+pp($('gp'),730,360,36,'ink');
+pp($('rp'),0,-80,16,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+dr('t_arr',p(u,TM.title_card+.3,TM.title_card+1.5)); rise($('t_one'),p(u,TM.title_card+1.2,TM.title_card+1.8)); rise($('t_opp'),p(u,TM.title_card+5.4,TM.title_card+6));
+
+rise($('gh'),p(u,TM.two_arrows,TM.two_arrows+.5));
+dr('fa',p(u,TM.flat_arrow,TM.flat_arrow+1.2)); $('fah').setAttribute('opacity',p(u,TM.flat_arrow+1,TM.flat_arrow+1.3));
+dr('ta',p(u,TM.tall_arrow,TM.tall_arrow+1.2)); $('tah').setAttribute('opacity',p(u,TM.tall_arrow+1,TM.tall_arrow+1.3));
+rise($('hl'),p(u,TM.tall_arrow+2.6,TM.tall_arrow+3.1)); rise($('vl'),p(u,TM.tall_arrow+3,TM.tall_arrow+3.5));
+
+rise($('s2sub'),p(u,TM.one_to_n,TM.one_to_n+.5)); rise($('s2n'),p(u,TM.one_to_n+3.4,TM.one_to_n+3.9));
+rise($('tw1'),p(u,TM.typewriter,TM.typewriter+.5)); rise($('tw1a'),p(u,TM.typewriter_row,TM.typewriter_row+.4));
+TWS.forEach((g,i)=>{const a=TM.typewriter_row+.3+i*.025; g.setAttribute('opacity',p(u,a,a+.2))});
+rise($('s2end'),p(u,TM.typewriter_row+3.4,TM.typewriter_row+4));
+
+rise($('s3sub'),p(u,TM.zero_to_one,TM.zero_to_one+.5)); rise($('s3n'),p(u,TM.zero_to_one+3.8,TM.zero_to_one+4.3));
+rise($('tw2'),p(u,TM.zero_to_one+.3,TM.zero_to_one+.8)); rise($('wp'),p(u,TM.word_proc,TM.word_proc+.6));
+dr('lp',p(u,TM.word_proc+4.4,TM.word_proc+5.4)); $('lph').setAttribute('opacity',p(u,TM.word_proc+5.2,TM.word_proc+5.5));
+rise($('s3end'),p(u,TM.word_proc+4.6,TM.word_proc+5.2)); rise($('nw'),p(u,TM.word_proc+6.6,TM.word_proc+7.2));
+
+rise($('pL'),p(u,TM.globe,TM.globe+.5)); rise($('gname'),p(u,TM.globe+3,TM.globe+3.5));
+GD.forEach((r,i)=>{const a=t*.8+i*Math.PI/2; r.setAttribute('x',(431+190*Math.cos(a)).toFixed(1)); r.setAttribute('y',(451+60*Math.sin(a)).toFixed(1))});
+rise($('pR'),p(u,TM.lightbulb,TM.lightbulb+.5)); $('rays').setAttribute('opacity',(.6+.4*Math.sin(t*3)).toFixed(2));
+rise($('s4end'),p(u,TM.lightbulb+6.6,TM.lightbulb+7.1));
+
+rise($('chn'),p(u,TM.china_map,TM.china_map+.5)); rise($('usa'),p(u,TM.us_skyline,TM.us_skyline+.6));
+CM.forEach((r,i)=>{const a=TM.us_skyline+5.8+i*.2; rise(r,p(u,a,a+.3))});
+rise($('smk'),p(u,TM.smoke_cloud,TM.smoke_cloud+.8)); $('smkin').setAttribute('transform','translate('+(12*Math.sin(t*.9)).toFixed(1)+' '+(-6*Math.abs(Math.sin(t*.6))).toFixed(1)+')');
+rise($('s5end'),p(u,TM.smoke_cloud+1,TM.smoke_cloud+1.6));
+
+rise($('cal'),p(u,TM.calendar_page,TM.calendar_page+.5)); rise($('cg'),p(u,TM.gates_portrait,TM.gates_portrait+.5)); rise($('cp'),p(u,TM.google_box,TM.google_box+.5));
+$('cur').setAttribute('opacity',t%1<.5?1:0);
+dr('x1',p(u,TM.google_box+4.2,TM.google_box+4.8)); dr('x2',p(u,TM.google_box+4.5,TM.google_box+5.1)); rise($('s6end'),p(u,TM.google_box+4.4,TM.google_box+5));
+
+rise($('road'),p(u,TM.easy_road,TM.easy_road+.5)); $('ceil').setAttribute('opacity',p(u,TM.easy_road,TM.easy_road+.5));
+$('rp').setAttribute('transform','translate('+(160+480*p(u,TM.easy_road+.3,TM.easy_road+3.5)).toFixed(1)+' 726)');
+rise($('mtn'),p(u,TM.hard_climb,TM.hard_climb+.5));
+const ck=p(u,TM.hard_climb+.5,TM.hard_climb+8); $('clb').setAttribute('cx',(780+330*ck).toFixed(1)); $('clb').setAttribute('cy',(698-390*ck).toFixed(1));
+$('ceil').setAttribute('transform','translate(0 '+(460-220*p(u,TM.hard_climb+4.2,TM.hard_climb+5.6)).toFixed(1)+')');
+rise($('s7end'),p(u,TM.hard_climb+8.7,TM.hard_climb+9.3));
+
+rise($('qm'),p(u,TM.mirror,TM.mirror+.5));
+['qa','qb','qc','qd'].forEach((id,i)=>{const a=TM.mirror+2.9+i*.5; rise($(id),p(u,a,a+.5))});
+rise($('qg'),p(u,TM.mirror+5,TM.mirror+5.6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.79;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

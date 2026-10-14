@@ -1,0 +1,14 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const ring=(g,cx,cy,r,col,sw)=>mk('circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:col,'stroke-width':sw,pathLength:1,'stroke-dasharray':1,'stroke-dashoffset':1,'stroke-linecap':'round',transform:'rotate(-90 '+cx+' '+cy+')'},g);
+const RG=[[160,'var(--muted)',5],[115,'var(--ink)',6],[70,'var(--gain)',8]].map(q=>ring($('rings'),1310,400,q[0],q[1],q[2]));
+fig($('wr'),260,395,40,'ink');
+const GD=[[1150,330,36],[1240,295,30],[1250,385,28],[1330,340,24]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],class:'gain'},$('good')));
+fig($('mir'),290,380,30,'ink');
+const TV=[];for(let i=0;i<14;i++)TV.push(mk('circle',{cx:950+(i*137)%480,cy:245+(i*71)%120,r:6+(i%3)*3,class:'loss'},$('triv')));
+const PL=$('pool').querySelectorAll('ellipse');
+const TK=[230,410,560,790,960,1180,1390].map(x=>mk('circle',{cx:x,cy:262,r:10,class:'loss'},$('ticks')));
+const DR=[100,70,90,60,110].map((w,i)=>{const g=mk('g',{},$('drows'));mk('rect',{x:470,y:430+i*44,width:w,height:10,rx:5,class:'ink'},g);mk('rect',{x:620,y:430+i*44,width:[80,110,60,100,70][i],height:10,rx:5,class:i%2?'ink':'gain'},g);return g});
+const CP=$('climb'),CL=CP.getTotalLength();
+const SP=[];for(let i=0;i<8;i++)SP.push(mk('circle',{r:5,class:'gain'},$('spk')));
+const CW=[260,300,180,240,200,120,320],CR=CW.map((w,i)=>mk('rect',{x:200+[0,30,60,60,30,0,0][i],y:290+i*38,width:0,height:14,rx:7,fill:['var(--gain)','var(--ink)','var(--muted)'][i%3]},$('crows')));
+const QR=[[90,'var(--muted)',4],[60,'var(--ink)',5],[30,'var(--gain)',8]].map(q=>ring($('qg'),1370,700,q[0],q[1],q[2]));

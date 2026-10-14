@@ -1,0 +1,304 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Compound Effect Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of The Compound Effect: Writing down your daily behavior, such as every dollar spent or every bite eaten, reveals the unconscious habits steering your life. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMPOUND EFFECT · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Track everything you</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">want to change.</text>
+<text class="b" x="120" y="600" font-size="32">Write down what you do, and hidden habits come to light.</text>
+<g id="bills"></g>
+<g id="wal"><rect class="s-ink" x="1160" y="320" width="300" height="190" rx="24" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M1160 390h300" stroke-width="6"/><rect class="gain" x="1400" y="370" width="60" height="44" rx="10"/></g>
+<text id="wq" class="d" x="1290" y="490" font-size="96" text-anchor="middle" style="fill:var(--gain)">?</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most choices run on autopilot.</text>
+<text class="b" x="120" y="176" font-size="32">Tiny choices, made without deciding.</text>
+<rect class="s-ink" x="140" y="610" width="1340" height="36" rx="18" fill="none" stroke-width="6"/>
+<path id="belt" class="s-line" d="M170 628h1280" stroke-width="6" stroke-dasharray="20 24"/>
+<g id="items"></g>
+<g id="walker"></g>
+<g id="zz"><text class="d5" x="490" y="340" font-size="36" style="fill:var(--muted)">z z z</text></g>
+<g id="bf"><rect class="loss" x="362" y="384" width="116" height="26" rx="8"/><path class="s-loss" d="M366 396l-30 22" stroke-width="8" stroke-linecap="round"/></g>
+<text id="stkl" class="m" x="1200" y="262" font-size="20">TINY CHOICES ADD UP</text>
+<g id="stk"></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The fix: write it down.</text>
+<text class="b" x="120" y="176" font-size="32">Carry a small notebook and a pen everywhere.</text>
+<g id="nb"><rect class="s-ink" x="200" y="250" width="640" height="500" rx="16" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M520 250v500" stroke-width="5"/><g id="rul"></g><g id="wr"></g></g>
+<g id="penw"><g id="pen"><path class="gain" d="M0 0l14-38 70-70 24 24-70 70z"/><path class="ink" d="M0 0l14-38 24 24z"/></g></g>
+<g id="areas"><text class="m" x="960" y="300" font-size="22">PICK ONE AREA</text></g>
+<text id="rec" class="m" x="960" y="700" font-size="22" style="fill:var(--gain)">RECORD EVERY RELATED ACTION</text>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Write down every dollar.</text>
+<text class="b" x="120" y="176" font-size="32">Every one, no matter how small.</text>
+<g id="bill"><rect class="gain" x="120" y="240" width="300" height="150" rx="14"/><rect x="140" y="258" width="260" height="114" rx="8" fill="none" stroke="var(--on-gain)" stroke-width="3"/><circle cx="270" cy="315" r="40" fill="none" stroke="var(--on-gain)" stroke-width="4"/><text class="d" x="270" y="333" font-size="52" text-anchor="middle" style="fill:var(--on-gain)">$</text><text class="m" x="120" y="430" font-size="22">MONEY</text></g>
+<g id="rcw"><path id="rc" class="s-ink" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/></g>
+<g id="ritems"></g>
+<text id="tall" class="m" x="980" y="262" font-size="20">EACH ITEM SEEMS SMALL</text>
+<g id="tal"></g>
+<g id="tot"><text class="m" x="980" y="590" font-size="22">ADD THEM UP</text><rect id="totb" class="loss" x="980" y="615" width="0" height="60" rx="10"/></g>
+<g id="shk"><text class="d" x="980" y="780" font-size="72" style="fill:var(--loss)">Shocking.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Write down every bite.</text>
+<text class="b" x="120" y="176" font-size="32">Every bite you eat, and every sip you drink.</text>
+<g id="ap"><circle class="gain" cx="240" cy="400" r="60"/><circle class="gain" cx="300" cy="400" r="60"/><path class="s-ink" d="M270 345q4-30 20-40" fill="none" stroke-width="7" stroke-linecap="round"/><path class="ink" d="M282 330q30-20 50 0q-30 18-50 0z"/></g>
+<g id="chp"><ellipse class="loss" cx="230" cy="600" rx="34" ry="22"/><ellipse class="loss" cx="304" cy="592" rx="32" ry="20"/><ellipse class="loss" cx="262" cy="644" rx="34" ry="22"/><ellipse class="loss" cx="322" cy="640" rx="30" ry="20"/><ellipse class="loss" cx="206" cy="650" rx="28" ry="18"/><text class="m" x="120" y="730" font-size="20">CHIPS WHILE COOKING</text></g>
+<g id="logw"><rect class="s-ink" x="520" y="230" width="520" height="580" rx="14" fill="var(--stage)" stroke-width="6"/><text class="m" x="560" y="282" font-size="22">FOOD LOG</text></g>
+<g id="flog"></g>
+<g id="scl"><text class="m" x="1280" y="440" font-size="22" text-anchor="middle">THE SCALE</text><rect class="s-ink" x="1120" y="470" width="320" height="220" rx="30" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="1280" cy="550" r="46" fill="none" stroke-width="5"/><path class="s-loss" d="M1280 550l20-30" stroke-width="5" stroke-linecap="round"/></g>
+<text id="lsm" class="m" x="1120" y="760" font-size="20" style="fill:var(--gain)">THE LIST SAYS MORE</text>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Tracking is a mirror.</text>
+<g id="aw"><text class="b" x="120" y="176" font-size="32">Recording a behaviour makes you aware of it.</text></g>
+<g id="mir"><ellipse cx="560" cy="490" rx="190" ry="250" fill="var(--stage)" stroke="none"/><ellipse cx="560" cy="490" rx="190" ry="250" fill="var(--muted)" fill-opacity=".18" stroke="var(--ink)" stroke-width="10"/><path d="M440 330l60-60M430 400l100-100" stroke="var(--stage)" stroke-width="8" stroke-linecap="round"/><path class="s-ink" d="M560 740v60M460 810h200" stroke-width="10" stroke-linecap="round"/></g>
+<g id="refl"></g>
+<g id="bulb"><g id="rays"></g><circle id="bulbc" cx="1100" cy="380" r="80" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/><rect class="ink" x="1060" y="450" width="80" height="26" rx="4"/><rect class="ink" x="1070" y="482" width="60" height="18" rx="4"/></g>
+<g id="tog"><rect x="960" y="580" width="280" height="90" rx="45" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><circle id="knob" cx="1005" cy="625" r="32"/><text class="m" x="960" y="720" font-size="22">AUTOPILOT</text><text id="chl" class="m" x="1240" y="720" font-size="22" text-anchor="end">CHOICE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Patterns jump off the page.</text>
+<g id="rowl"><text class="m" x="120" y="365" font-size="20">MORNING</text><text class="m" x="120" y="485" font-size="20">AFTERNOON</text><text class="m" x="120" y="605" font-size="20">EVENING</text></g>
+<g id="cal"></g>
+<rect id="hA" x="294" y="414" width="592" height="122" rx="14" fill="none" stroke="var(--loss)" stroke-width="6"/>
+<rect id="hW" x="714" y="294" width="172" height="362" rx="14" fill="none" stroke="var(--loss)" stroke-width="6"/>
+<g id="mag" opacity="0"><circle r="64" fill="var(--stage)" fill-opacity=".25" stroke="var(--ink)" stroke-width="10"/><path class="s-ink" d="M45 45l50 50" stroke-width="16" stroke-linecap="round"/></g>
+<text id="arl" class="m" x="960" y="400" font-size="20">QUIETLY STEERING YOUR LIFE</text>
+<g id="arwg"><path id="arw" d="M940 470C1080 470 1100 700 1240 680S1400 560 1440 560" pathLength="1" fill="none" stroke="var(--loss)" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 1"/><path id="arh" class="s-loss" d="M1414 538l30 22-32 20" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="seen"><text class="d" x="120" y="790" font-size="44">Once seen, they lose their power.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Keep score.</text>
+<text class="b" x="120" y="176" font-size="32">You cannot improve what you are not measuring.</text>
+<g id="stw"><circle class="s-ink" cx="300" cy="450" r="130" fill="var(--stage)" stroke-width="8"/><rect class="ink" x="280" y="288" width="40" height="24" rx="4"/><path class="s-ink" d="M300 312v8M392 340l18-18" stroke-width="10" stroke-linecap="round"/><g id="tks"></g><path id="hand" class="s-gain" d="M300 450V350" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="300" cy="450" r="10"/></g>
+<text id="msr" class="m" x="300" y="640" font-size="22" text-anchor="middle">MEASURE IT</text>
+<g id="sb"><rect x="540" y="250" width="900" height="330" rx="20" fill="var(--ink)"/><text class="m" x="580" y="320" font-size="22" style="fill:var(--stage)">SCOREBOARD</text><text class="m" x="580" y="418" font-size="22" style="fill:var(--stage)">THIS WEEK</text><text class="m" x="580" y="508" font-size="22" style="fill:var(--stage)">LAST WEEK</text><rect x="820" y="385" width="580" height="50" rx="10" fill="none" stroke="var(--stage)" stroke-width="3"/><rect x="820" y="475" width="580" height="50" rx="10" fill="none" stroke="var(--stage)" stroke-width="3"/><rect id="b0" class="gain" x="820" y="385" width="0" height="50" rx="10"/><rect id="b1" class="gain" x="820" y="475" width="0" height="50" rx="10" fill-opacity=".6"/><g id="sbq"><text class="d" x="1110" y="428" font-size="44" text-anchor="middle" style="fill:var(--stage)">?</text><text class="d" x="1110" y="518" font-size="44" text-anchor="middle" style="fill:var(--stage)">?</text></g></g>
+<g id="cor"><text class="m" x="540" y="650" font-size="20">SMALL CORRECTIONS</text><path class="s-muted" d="M540 730H1360" stroke-width="3" stroke-dasharray="8 10"/><polyline id="wig" class="s-gain" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="ck"><circle class="gain" cx="1420" cy="730" r="36"/><path d="M1402 730l12 12 24-26" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What do you think</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">your notebook</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">will <tspan style="fill:var(--gain)">reveal</tspan>?</text></g>
+<g id="chal"><text class="m" x="143" y="700" font-size="26">PICK ONE AREA · TRACK IT FOR ONE FULL WEEK</text></g>
+<g id="pb"><rect class="s-ink" x="1160" y="250" width="260" height="340" rx="18" fill="var(--stage)" stroke-width="7"/><rect class="gain" x="1360" y="250" width="22" height="340"/><g id="pbx"></g><text class="m" x="1290" y="630" font-size="20" text-anchor="middle">ONE WEEK</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="113" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:53</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Track Everything You Want to Change&rdquo;, from <em>The Compound Effect</em> by Darren Hardy. The examples of recording every dollar spent and every bite eaten follow the tracking practice Hardy recommends, as reported in the book. The coffee cup, cookie, scoreboard and calendar drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=113, SC=[[0.0, 7.5], [7.5, 18.7], [18.7, 31.8], [31.8, 48.0], [48.0, 60.0], [60.0, 73.1], [73.1, 88.7], [88.7, 101.7], [101.7, 113.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Where Did It Go?", "Autopilot Living", "The Simple Fix", "Every Dollar", "Every Bite", "The Mirror Effect", "Patterns Appear", "Keep Score", "Your Challenge"];
+const TM={"empty_wallet": 0.0, "sleepwalker": 7.76, "coffee_cup": 11.12, "blindfold": 14.88, "notebook": 19.04, "pen": 23.28, "dollar_bill": 32.08, "receipt": 36.16, "tally_marks": 40.48, "apple": 48.32, "cookie": 52.44, "food_list": 55.52, "mirror": 60.32, "lightbulb": 67.76, "calendar": 73.44, "magnifier": 77.04, "arrow_path": 81.2, "stopwatch": 88.96, "scoreboard": 92.96, "checkmark": 97.2, "pocket_book": 102.0};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const T=(g,x,y,s,cls,txt,ex)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s,class:cls},ex||{}),g);e.textContent=txt;return e};
+const BL=[0,1,2].map(i=>{const g=mk('g',{},$('bills'));mk('rect',{x:-60,y:-30,width:120,height:60,rx:8,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);T(g,0,12,34,'d','$',{'text-anchor':'middle',style:'fill:var(--gain)'});return g});
+fig($('walker'),420,400,48,'ink');
+mk('path',{d:'M398 404q8 8 16 0M426 404q8 8 16 0',fill:'none',stroke:'var(--stage)','stroke-width':4,'stroke-linecap':'round'},$('walker'));
+mk('path',{d:'M470 520L600 500',class:'s-ink','stroke-width':14,'stroke-linecap':'round'},$('walker'));
+const IT=[0,1,2,3].map(i=>{const g=mk('g',{},$('items'));if(i%2===0){mk('rect',{x:-20,y:-56,width:40,height:50,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('path',{d:'M20 -44h8a9 9 0 0 1 0 18h-8',fill:'none',stroke:'var(--ink)','stroke-width':5},g)}else{mk('circle',{cx:0,cy:-30,r:26,class:'gain'},g);[[-8,-36],[8,-24],[6,-42]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:4,class:'ink'},g))}return g});
+const SK=[];for(let i=0;i<30;i++)SK.push(mk('rect',{x:1200+(i%5)*48,y:500-Math.floor(i/5)*44,width:40,height:40,rx:8,class:'loss'},$('stk')));
+const WL=[];for(let i=0;i<12;i++){const x=i<6?240:560,y=340+(i%6)*64,len=240-((i*37)%90);mk('path',{d:'M'+x+' '+y+'h240',class:'s-line','stroke-width':3},$('rul'));
+  const l=mk('line',{x1:x,y1:y-12,x2:x,y2:y-12,stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},$('wr'));
+  const b=i<6?null:mk('circle',{cx:x-14,cy:y-12,r:6,class:'gain'},$('wr'));WL.push([l,x,y,len,b])}
+const AR=['Money','Health','Time'].map((s,i)=>{const g=mk('g',{},$('areas'));const r=mk('rect',{x:960,y:330+i*100,width:440,height:80,rx:40,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);return [g,r,T(g,1000,384+i*100,40,'d5',s)]});
+const RI=[];for(let i=0;i<8;i++){const y=300+i*56,g=mk('g',{},$('ritems'));if(i<3)T(g,530,y,22,'m',['PARKING FEE','SNACK','APP SUBSCRIPTION'][i]);else mk('rect',{x:530,y:y-16,width:120+((i*53)%140),height:14,rx:7,fill:'var(--line)'},g);T(g,870,y,26,'d5','$',{'text-anchor':'end'});RI.push(g)}
+const rcpt=h=>{let d='M500 230h400v'+h.toFixed(1);for(let k=0;k<10;k++)d+='l-20 14l-20 -14';return d+'z'};
+const TL=[];for(let c=0;c<8;c++){const gx=980+(c%4)*120,gy=290+Math.floor(c/4)*120;for(let j=0;j<5;j++)TL.push(mk('path',{d:j<4?'M'+(gx+10+j*20)+' '+gy+'v90':'M'+(gx-4)+' '+(gy+76)+'L'+(gx+84)+' '+(gy+14),class:'s-ink','stroke-width':6,'stroke-linecap':'round'},$('tal')))}
+const FL=[];for(let i=0;i<9;i++){const y=340+i*52,g=mk('g',{},$('flog'));mk('circle',{cx:570,cy:y-8,r:8,class:['gain','loss'][i]||'ink'},g);if(i<2)T(g,596,y,22,'m',['APPLE','CHIPS, WHILE COOKING'][i]);else mk('rect',{x:596,y:y-15,width:160+((i*71)%220),height:14,rx:7,fill:'var(--line)'},g);FL.push(g)}
+fig($('refl'),560,450,40,'ink');mk('rect',{x:530,y:560,width:60,height:44,rx:4,class:'gain'},$('refl'));
+for(let k=0;k<7;k++){const a=Math.PI*(1+k/6),c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1100+110*c).toFixed(1)+' '+(380+110*s).toFixed(1)+'L'+(1100+140*c).toFixed(1)+' '+(380+140*s).toFixed(1),class:'s-gain','stroke-width':8,'stroke-linecap':'round'},$('rays'))}
+const DG='MTWTFSS'.split('').map((d,c)=>{const g=mk('g',{},$('cal'));T(g,338+c*84,284,22,'m',d,{'text-anchor':'middle'});
+  for(let r=0;r<3;r++){const x0=300+c*84,y0=300+r*120;mk('rect',{x:x0,y:y0,width:76,height:110,rx:10,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+    const n=(r===1||c>=5)?3+(r===1&&c>=5?2:0):(c*7+r*3)%3;for(let k=0;k<n;k++)mk('circle',{cx:x0+18+(k%3)*20,cy:y0+30+Math.floor(k/3)*24,r:8,class:'ink'},g)}return g});
+for(let k=0;k<12;k++){const a=k*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(300+106*c).toFixed(1)+' '+(450+106*s).toFixed(1)+'L'+(300+120*c).toFixed(1)+' '+(450+120*s).toFixed(1),class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('tks'))}
+const PB=[];for(let i=0;i<7;i++){PB.push(mk('rect',{x:1190,y:290+i*40,width:26,height:26,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('pbx')));mk('rect',{x:1236,y:298+i*40,width:90+((i*29)%40),height:10,rx:5,fill:'var(--line)'},$('pbx'))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const wk=p(u,TM.empty_wallet,TM.empty_wallet+.5);rise($('wal'),wk);
+BL.forEach((b,i)=>{const k=(t*.35+i/3)%1;b.setAttribute('transform','translate('+(1240+i*70+40*Math.sin(k*6+i)).toFixed(1)+' '+(360-210*k).toFixed(1)+')');b.setAttribute('opacity',(wk*Math.sin(k*Math.PI)).toFixed(2))});
+rise($('wq'),p(u,TM.empty_wallet+5.8,TM.empty_wallet+6.3));
+
+rise($('walker'),p(u,TM.sleepwalker,TM.sleepwalker+.5));rise($('zz'),p(u,TM.sleepwalker+.4,TM.sleepwalker+.9)*(.55+.45*Math.sin(t*2)));
+$('belt').style.strokeDashoffset=(t*110).toFixed(1);
+const ic=p(u,TM.coffee_cup,TM.coffee_cup+.5);
+IT.forEach((g,i)=>{const x=1450-((t*110+i*230)%920);g.setAttribute('transform','translate('+x.toFixed(1)+' 610)');g.setAttribute('opacity',(ic*cl((x-560)/80)*cl((1450-x)/60)).toFixed(2))});
+rise($('bf'),p(u,TM.blindfold,TM.blindfold+.5));rise($('stkl'),p(u,TM.blindfold+.3,TM.blindfold+.8));
+const ns=30*p(u,TM.blindfold+.3,TM.blindfold+4);SK.forEach((s,i)=>s.setAttribute('opacity',cl(ns-i)));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));
+const sel=TM.pen+4.2;let px=240,py=328;
+WL.forEach((w,i)=>{const a=i<6?TM.pen+.4+i*.55:sel+.8+(i-6)*.6,k=cl(lin(u,a,a+.5));w[0].setAttribute('x2',(w[1]+w[3]*k).toFixed(1));if(w[4])w[4].setAttribute('opacity',k>0?1:0);if(k>0){px=w[1]+w[3]*k;py=w[2]-12}});
+rise($('penw'),p(u,TM.pen,TM.pen+.4));$('pen').setAttribute('transform','translate('+px.toFixed(1)+' '+py+')');
+rise($('areas'),p(u,sel,sel+.5));const on=u>=sel+.6;
+AR[0][1].setAttribute('fill',on?'var(--gain)':'var(--stage)');AR[0][1].setAttribute('stroke',on?'var(--gain)':'var(--ink)');AR[0][2].style.fill=on?'var(--on-gain)':'';
+rise($('rec'),p(u,sel+.8,sel+1.3));
+
+rise($('bill'),p(u,TM.dollar_bill,TM.dollar_bill+.5));
+$('rc').setAttribute('d',rcpt(100+520*p(u,TM.receipt-.3,TM.receipt+4.2)));rise($('rcw'),p(u,TM.receipt-.3,TM.receipt+.2));
+RI.forEach((g,i)=>{const a=TM.receipt+(i<3?i*1.3:3.6+(i-3)*.3);rise(g,p(u,a,a+.4))});
+rise($('tall'),p(u,TM.tally_marks,TM.tally_marks+.5));
+const tn=40*cl(lin(u,TM.tally_marks+.3,TM.tally_marks+4));TL.forEach((s,i)=>s.setAttribute('opacity',cl(tn-i)));
+const ta=TM.tally_marks+4.5;rise($('tot'),p(u,ta,ta+.5));$('totb').setAttribute('width',(500*p(u,ta+.3,ta+1.8)).toFixed(1));rise($('shk'),p(u,ta+1.6,ta+2.1));
+
+rise($('ap'),p(u,TM.apple,TM.apple+.5));rise($('logw'),p(u,TM.apple+.4,TM.apple+.9));rise($('chp'),p(u,TM.cookie,TM.cookie+.5));
+FL.forEach((g,i)=>{const a=i===0?TM.apple+1:i===1?TM.cookie+.6:TM.food_list+(i-2)*.3;rise(g,p(u,a,a+.4))});
+const sa=TM.food_list+3;rise($('scl'),p(u,sa,sa+.5)*(1-.5*p(u,sa+1.2,sa+2)));rise($('lsm'),p(u,sa+1.2,sa+1.7));
+
+const aw=TM.mirror+4.1;rise($('mir'),p(u,TM.mirror,TM.mirror+.5));
+rise($('refl'),p(u,TM.mirror+.4,TM.mirror+.9)*(.3+.7*p(u,aw,aw+1)));rise($('aw'),p(u,aw,aw+.5));
+rise($('bulb'),p(u,aw+.6,aw+1.1));rise($('tog'),p(u,aw+.6,aw+1.1));
+const lit=p(u,TM.lightbulb,TM.lightbulb+.4);$('bulbc').setAttribute('fill',lit>.5?'var(--gain)':'var(--stage)');$('rays').setAttribute('opacity',(lit*(.7+.3*Math.sin(t*4))).toFixed(2));
+const sw=p(u,TM.lightbulb+.3,TM.lightbulb+1);$('knob').setAttribute('cx',(1005+190*sw).toFixed(1));$('knob').setAttribute('fill',sw>.5?'var(--gain)':'var(--muted)');$('chl').style.fill=sw>.5?'var(--gain)':'';
+
+DG.forEach((g,i)=>rise(g,p(u,TM.calendar+i*.4,TM.calendar+i*.4+.4)));rise($('rowl'),p(u,TM.calendar,TM.calendar+.5));
+const mg=p(u,TM.magnifier,TM.magnifier+2.2);$('mag').setAttribute('transform','translate('+(380+420*mg).toFixed(1)+' 475)');$('mag').setAttribute('opacity',p(u,TM.magnifier-.3,TM.magnifier+.2));
+const sn=TM.arrow_path+5.4,sc=u>=sn?'var(--gain)':'var(--loss)';
+rise($('hA'),p(u,TM.magnifier+1,TM.magnifier+1.5));rise($('hW'),p(u,TM.magnifier+2.6,TM.magnifier+3.1));$('hA').setAttribute('stroke',sc);$('hW').setAttribute('stroke',sc);
+const ak=p(u,TM.arrow_path,TM.arrow_path+2);$('arw').style.strokeDashoffset=(1-ak).toFixed(3);$('arh').setAttribute('opacity',cl((ak-.95)*20));
+rise($('arl'),p(u,TM.arrow_path,TM.arrow_path+.5));$('arwg').setAttribute('opacity',(1-.6*p(u,sn,sn+1)).toFixed(2));rise($('seen'),p(u,sn,sn+.5));
+
+rise($('stw'),p(u,TM.stopwatch,TM.stopwatch+.5));rise($('msr'),p(u,TM.stopwatch+1,TM.stopwatch+1.5));
+$('hand').setAttribute('transform','rotate('+(u>=TM.stopwatch?(t*120)%360:0).toFixed(1)+' 300 450)');
+rise($('sb'),p(u,TM.scoreboard,TM.scoreboard+.5));
+const ck=p(u,TM.checkmark,TM.checkmark+.6);$('sbq').setAttribute('opacity',((1-ck)*(.6+.4*Math.sin(t*3))).toFixed(2));
+$('b0').setAttribute('width',(420*p(u,TM.checkmark,TM.checkmark+1.2)).toFixed(1));$('b1').setAttribute('width',(500*p(u,TM.checkmark+.2,TM.checkmark+1.4)).toFixed(1));
+rise($('cor'),p(u,TM.checkmark+.4,TM.checkmark+.9));
+const wq=p(u,TM.checkmark+.6,TM.checkmark+3.2);let pts='';for(let i=0;i<=60;i++){const f=wq*i/60;pts+=(540+820*f).toFixed(1)+','+(730+70*Math.exp(-3*f)*Math.sin(f*18)).toFixed(1)+' '}$('wig').setAttribute('points',pts);
+rise($('ck'),p(u,TM.checkmark+3,TM.checkmark+3.5));
+
+rise($('pb'),p(u,TM.pocket_book,TM.pocket_book+.5));rise($('chal'),p(u,TM.pocket_book+.3,TM.pocket_book+.8));
+PB.forEach((b,i)=>b.setAttribute('fill',u>=TM.pocket_book+1+i*.5?'var(--gain)':'var(--stage)'));
+const qq=TM.pocket_book+5.4;rise($('qa'),p(u,qq,qq+.5));rise($('qb'),p(u,qq+.4,qq+.9));rise($('qc'),p(u,qq+.8,qq+1.3));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:109.01;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

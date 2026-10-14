@@ -1,0 +1,386 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grit Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Grit: At West Point, a simple grit score predicted which cadets would survive brutal summer training better than their talent-based admission scores did. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GRIT · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Why talent isn’t</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the whole story.</text>
+<text class="b" x="120" y="600" font-size="32">Why a simple grit score beat West Point's admissions numbers</text>
+<g id="crowd"></g>
+<g id="who"><text class="m" x="1318" y="600" font-size="24" text-anchor="middle" style="fill:var(--gain)">WHO STAYS?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">West Point.</text>
+<text class="b" x="120" y="176" font-size="32">The United States Military Academy. Getting in is incredibly hard.</text>
+<g id="gate">
+<rect class="ink" x="160" y="300" width="70" height="400"/><rect class="ink" x="480" y="300" width="70" height="400"/>
+<rect class="ink" x="150" y="280" width="90" height="24"/><rect class="ink" x="470" y="280" width="90" height="24"/>
+<path class="s-ink" d="M230 380Q355 260 480 380" fill="none" stroke-width="10"/>
+<path class="s-ink" d="M268 380V700M306 352V700M344 342V700M382 342V700M420 352V700M458 380V700" stroke-width="5"/>
+<path class="s-ink" d="M140 700H580" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="355" y="750" font-size="22" text-anchor="middle">WEST POINT</text>
+<text class="m" x="355" y="782" font-size="18" text-anchor="middle">HARD TO GET IN</text>
+</g>
+<g id="links"></g>
+<g id="cards"></g>
+<g id="wcs">
+<rect class="s-ink" x="1060" y="340" width="420" height="240" rx="18" fill="var(--stage)" stroke-width="6"/>
+<text class="d5" x="1090" y="420" font-size="40">Whole Candidate</text>
+<text class="d5" x="1090" y="470" font-size="40">Score</text>
+<rect x="1090" y="510" width="360" height="24" rx="12" fill="var(--line)"/>
+<rect id="wbar" x="1090" y="510" width="0" height="24" rx="12" fill="var(--ink)"/>
+<text class="m" x="1060" y="620" font-size="20">ALL OF IT IN ONE NUMBER</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Beast Barracks.</text>
+<text class="b" x="120" y="176" font-size="32">A brutal summer of training, before classes even begin.</text>
+<g id="clk">
+<circle class="ink" cx="250" cy="340" r="32"/><circle class="ink" cx="390" cy="340" r="32"/>
+<path class="s-ink" d="M265 515l-30 45M375 515l30 45" stroke-width="8" stroke-linecap="round"/>
+<circle class="s-ink" cx="320" cy="430" r="100" fill="var(--stage)" stroke-width="8"/>
+<line id="hH" class="s-ink" x1="320" y1="430" x2="320" y2="380" stroke-width="8" stroke-linecap="round"/>
+<line id="hM" class="s-loss" x1="320" y1="430" x2="320" y2="350" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="320" y="600" font-size="22" text-anchor="middle">BEFORE DAWN</text>
+</g>
+<g id="pills"></g>
+<g id="door">
+<rect x="1200" y="280" width="170" height="340" fill="var(--loss)" fill-opacity=".3" stroke="var(--ink)" stroke-width="6"/>
+<path class="s-ink" d="M1200 280L1150 300V600L1200 620Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="1285" y="660" font-size="20" text-anchor="middle">SOME DROP OUT</text>
+</g>
+<g id="row"></g>
+<g id="drop"><text class="d5" x="120" y="810" font-size="38">The admissions score couldn’t reliably say who.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A different idea.</text>
+<text class="b" x="120" y="176" font-size="32">Psychologist Angela Duckworth’s Grit Scale.</text>
+<g id="duck">
+<circle class="ink" cx="260" cy="360" r="50"/><path class="ink" d="M185 570v-65a75 75 0 0 1 150 0v65z"/>
+<rect class="gain" x="310" y="470" width="60" height="80" rx="6"/>
+<text class="m" x="260" y="620" font-size="20" text-anchor="middle">ANGELA DUCKWORTH</text>
+<text class="m" x="260" y="650" font-size="18" text-anchor="middle">PSYCHOLOGIST</text>
+</g>
+<g id="sheet">
+<rect class="s-ink" x="520" y="230" width="920" height="550" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="570" y="310" font-size="48">Grit Scale</text>
+<text class="m" x="880" y="300" font-size="20">HOW WELL DOES THIS DESCRIBE YOU?</text>
+</g>
+<g id="it0">
+<text class="d5" x="570" y="410" font-size="34">“I finish whatever I begin.”</text>
+<g id="dt0"></g>
+<text class="m" x="584" y="522" font-size="20">NOT LIKE ME</text><text class="m" x="1176" y="522" font-size="20" text-anchor="end">VERY MUCH LIKE ME</text>
+</g>
+<g id="it1">
+<text class="d5" x="570" y="580" font-size="34">“Setbacks don’t discourage me.”</text>
+<g id="dt1"></g>
+<text class="m" x="584" y="692" font-size="20">NOT LIKE ME</text><text class="m" x="1176" y="692" font-size="20" text-anchor="end">VERY MUCH LIKE ME</text>
+</g>
+<g id="more"><path class="s-line" d="M570 740h560M1160 740h120" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Grit = passion + perseverance.</text>
+<text class="b" x="120" y="176" font-size="32">For long-term goals.</text>
+<g id="p0">
+<rect class="s-line" x="120" y="220" width="640" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="160" y="690" font-size="52">Passion</text>
+<text class="m" x="160" y="740" font-size="20">STAYING POINTED ONE WAY OVER TIME</text>
+</g>
+<g id="p1">
+<rect class="s-line" x="840" y="220" width="640" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="880" y="690" font-size="52" style="fill:var(--gain)">Perseverance</text>
+<text class="m" x="880" y="740" font-size="20">CONTINUING TO CLIMB WHEN IT GETS HARD</text>
+</g>
+<g id="cmp">
+<circle class="s-ink" cx="440" cy="440" r="140" fill="var(--stage)" stroke-width="7"/>
+<text class="m" x="440" y="326" font-size="22" text-anchor="middle">N</text>
+<g id="ndl"><polygon class="gain" points="440,345 460,440 420,440"/><polygon class="ink" points="440,535 460,440 420,440"/><circle class="ink" cx="440" cy="440" r="10"/></g>
+</g>
+<g id="mtn">
+<polygon points="880,620 1160,290 1440,620" fill="var(--line)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M930 610L1300 520L1060 440L1200 360L1160 295" fill="none" stroke-width="4" stroke-dasharray="8 10" stroke-linecap="round"/>
+<path class="s-ink" d="M1160 290V232" stroke-width="5"/><path class="gain" d="M1160 232h50l-14 15 14 15h-50z"/>
+<circle id="clb" class="gain" r="14" cx="930" cy="610"/>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The surprise.</text>
+<text class="b" x="120" y="176" font-size="32">Both numbers, compared with who actually made it through.</text>
+<g id="ax">
+<path class="s-ink" d="M180 260V680H760M860 260V680H1440" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="180" y="245" font-size="20">MADE IT THROUGH ↑</text><text class="m" x="860" y="245" font-size="20">MADE IT THROUGH ↑</text>
+<text class="m" x="180" y="715" font-size="20">ADMISSIONS SCORE →</text><text class="m" x="860" y="715" font-size="20">GRIT SCORE →</text>
+<text class="m" x="1440" y="715" font-size="18" text-anchor="end">ILLUSTRATION</text>
+</g>
+<path id="ln0" class="s-loss" d="M200 470C380 450 560 490 740 465" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<path id="ln1" class="s-gain" d="M880 640C1060 600 1250 430 1420 290" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="cap0"><text class="d5" x="180" y="790" font-size="36" style="fill:var(--loss)">Did not predict finishing</text></g>
+<g id="cap1"><text class="d5" x="860" y="790" font-size="36" style="fill:var(--gain)">Predicted it remarkably well</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Talent is where you start.</text>
+<text class="b" x="120" y="176" font-size="32">Not whether you keep going.</text>
+<g id="bag">
+<path class="ink" d="M210 450Q280 420 350 450L330 475Q420 540 400 640Q390 690 280 690Q170 690 160 640Q140 540 230 475Z"/>
+<text class="m" x="280" y="600" font-size="22" text-anchor="middle" style="fill:var(--stage)">TALENT</text>
+<text class="m" x="280" y="730" font-size="20" text-anchor="middle">TALENT ISN’T USELESS</text>
+</g>
+<g id="lad">
+<path class="s-ink" d="M590 250V780M690 250V780" stroke-width="7" stroke-linecap="round"/>
+<path class="s-ink" d="M590 300h100M590 350h100M590 400h100M590 450h100M590 500h100M590 550h100M590 600h100M590 650h100M590 700h100M590 750h100" stroke-width="5"/>
+<circle class="gain" cx="640" cy="628" r="18"/>
+</g>
+<g id="st">
+<path class="s-muted" d="M405 590Q500 600 568 642M548 628l20 14-24 4" fill="none" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>
+<text class="m" x="710" y="636" font-size="18">START</text>
+<text class="m" x="280" y="770" font-size="18" text-anchor="middle">IT SETS WHERE YOU START</text>
+</g>
+<g id="fork">
+<path class="s-line" d="M820 660L1060 520L1440 260M1060 520L1440 680" fill="none" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-loss" d="M1080 528L1430 676" stroke-width="4" stroke-dasharray="10 10"/>
+<text class="d" x="1250" y="262" font-size="44" style="fill:var(--gain)">STAY</text>
+<text class="d" x="1300" y="750" font-size="44" style="fill:var(--muted)">QUIT</text>
+<circle id="fdot" class="gain" r="20" cx="820" cy="660"/>
+</g>
+<g id="fl"><text class="m" x="1130" y="808" font-size="20" text-anchor="middle">WHAT DECIDES IT: THE WILLINGNESS TO STAY</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A label is a snapshot.</text>
+<text class="b" x="120" y="176" font-size="32">Of the starting line, not the whole road.</text>
+<g id="mir">
+<ellipse class="s-ink" cx="280" cy="400" rx="130" ry="170" fill="var(--stage)" stroke-width="8"/>
+<circle class="ink" cx="280" cy="360" r="34"/><path class="ink" d="M229 503v-44a51 51 0 0 1 102 0v44z"/>
+<text class="m" x="280" y="605" font-size="20" text-anchor="middle">NATURALLY GIFTED?</text>
+</g>
+<g id="snap"><g transform="rotate(-4 780 400)">
+<rect class="s-ink" x="600" y="250" width="360" height="300" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-line" x="620" y="270" width="320" height="210" fill="none" stroke-width="3"/>
+<path class="s-ink" d="M700 290V460" stroke-width="6" stroke-dasharray="12 8"/>
+<circle class="ink" cx="740" cy="360" r="16"/><path class="ink" d="M716 427v-21a24 24 0 0 1 48 0v21z"/>
+<text class="m" x="780" y="525" font-size="18" text-anchor="middle">THE STARTING LINE</text>
+</g></g>
+<g id="road">
+<path class="s-ink" d="M120 630H1480M120 790H1480" stroke-width="5"/>
+<path class="s-line" d="M120 760H1480" stroke-width="4" stroke-dasharray="30 24"/>
+<path class="s-ink" d="M220 630V790" stroke-width="6"/>
+<path class="s-ink" d="M1440 790V560" stroke-width="5"/><path class="gain" d="M1440 560h44l-12 14 12 14h-44z"/>
+<g id="walk"></g>
+<text class="m" x="120" y="830" font-size="20">THE LONG ROAD</text>
+</g>
+<g id="lrt">
+<text class="d5" x="1060" y="330" font-size="36">The long road</text>
+<text class="d5" x="1060" y="380" font-size="36">is won by those</text>
+<text class="d" x="1060" y="430" font-size="36" style="fill:var(--gain)">who keep walking.</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which goal did you nearly</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">give up on because you felt</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">you weren’t <tspan style="fill:var(--gain)">talented enough</tspan>?</text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">THIS WEEK: ONE SMALL STEP BACK. STAYING IS A SKILL.</text></g>
+<g id="stp">
+<path class="s-ink" d="M1100 790h100v-50h100v-50h100v-50" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle id="sdot" class="gain" r="14" cx="1150" cy="776"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Why Talent Isn&#x27;t the Whole Story&rdquo;, from <em>Grit</em> by Angela Duckworth. The West Point Beast Barracks study and the Grit Scale are as reported in the book. Drawings of the alarm clock, compass, mountain, ladder and road are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 9.5], [9.5, 26.8], [26.8, 45.9], [45.9, 62.9], [62.9, 76.2], [76.2, 88.4], [88.4, 100.7], [100.7, 114.6], [114.6, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Talent Isn't Enough", "West Point", "Beast Barracks", "A Short Survey", "What Grit Means", "The Surprise", "Why It Matters", "Rethink Talent", "Your Challenge"];
+const TM={"title_cadet": 0.0, "academy_gate": 9.76, "application": 15.44, "whole_score": 21.68, "first_summer": 27.12, "alarm_clock": 33.44, "exit_door": 39.36, "duckworth": 46.16, "grit_scale": 50.48, "statements": 55.23, "two_parts": 63.2, "compass": 68.4, "mountain": 72.24, "compare_chart": 76.48, "score_flat": 80.8, "grit_rising": 84.56, "talent_bag": 88.72, "ladder": 91.28, "fork_road": 95.92, "mirror": 101.04, "scorecard": 105.84, "long_road": 109.68, "question_mark": 114.88};
+const fig=(g,x,y,r,c)=>{const a=c?{class:c}:{};mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)};
+const unit=(par,x,y,r,f)=>{const o=mk('g',{},par),i=mk('g',{fill:f||'var(--ink)'},o);fig(i,x,y,r);return [o,i]};
+const TXT=(par,x,y,s,fs,cls,anc)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:cls},par);if(anc)e.setAttribute('text-anchor',anc);e.textContent=s;return e};
+const along=(P,k)=>{const L=[];let T=0;for(let i=1;i<P.length;i++){const l=Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]);L.push(l);T+=l}let d=k*T;for(let i=0;i<L.length;i++){if(d<=L[i]||i===L.length-1){const f=Math.min(1,d/L[i]);return [P[i][0]+(P[i+1][0]-P[i][0])*f,P[i][1]+(P[i+1][1]-P[i][1])*f]}d-=L[i]}};
+// title crowd: 5x4 grid, equal cells, each figure stays in its own cell
+const crowd=[];for(let i=0;i<20;i++)crowd.push(unit($('crowd'),1190+(i%5)*64,270+Math.floor(i/5)*72,12));
+const QT=[3,9,14,17];
+const cards=['TOP GRADES','TEST SCORES','LEADERSHIP','PHYSICAL FITNESS'].map((s,i)=>{const y=260+i*104,g=mk('g',{},$('cards'));
+  mk('rect',{x:640,y:y,width:320,height:80,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);TXT(g,670,y+50,s,22,'m');
+  mk('path',{d:'M960 '+(y+40)+'C1010 '+(y+40)+' 1010 460 1060 460',fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'8 8'},$('links'));return g});
+const pills=['DRILLS','EXHAUSTION','CONSTANT PRESSURE'].map((s,i)=>{const y=290+i*96,g=mk('g',{},$('pills'));
+  mk('rect',{x:520,y:y,width:380,height:68,rx:34,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);TXT(g,710,y+43,s,22,'m','middle');return g});
+const row=[];for(let i=0;i<6;i++)row.push(unit($('row'),560+i*100,660,16));
+// grit scale answer circles, wider spacing so the larger labels fit
+const SEL=[4,3],dots=[0,1].map(k=>{const a=[];for(let j=0;j<5;j++)a.push(mk('circle',{cx:600+j*140,cy:470+k*170,r:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('dt'+k)));return a});
+const MP=[[930,610],[1300,520],[1060,440],[1200,360],[1160,295]],FP=[[820,660],[1060,520],[1440,260]];
+const wk=[0,1,2].map(i=>unit($('walk'),240+i*30,668,14,i===0?'var(--gain)':'var(--ink)'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+crowd.forEach((c,i)=>{const a=TM.title_cadet+.2+i*.04;rise(c[0],p(u,a,a+.4));const j=QT.indexOf(i);
+  if(j>=0){const k=p(u,TM.title_cadet+3+j*.7,TM.title_cadet+4.2+j*.7);c[1].setAttribute('fill',k>0?'var(--loss)':'var(--ink)');c[1].setAttribute('opacity',(1-.7*k).toFixed(2))}});
+rise($('who'),p(u,TM.title_cadet+7.5,TM.title_cadet+8));
+
+rise($('gate'),p(u,TM.academy_gate,TM.academy_gate+.6));
+cards.forEach((g,i)=>{const a=TM.application+i*.7;rise(g,p(u,a,a+.5))});
+$('links').setAttribute('opacity',p(u,TM.whole_score,TM.whole_score+.6));
+rise($('wcs'),p(u,TM.whole_score,TM.whole_score+.6));
+$('wbar').setAttribute('width',(360*p(u,TM.whole_score+.6,TM.whole_score+2.4)).toFixed(1));
+
+row.forEach((c,i)=>{const k=p(u,TM.first_summer+i*.15,TM.first_summer+.8+i*.15);let x=-160*(1-k),y=0,f='var(--ink)',o=k;
+  if(i>3){const a=TM.exit_door+.5+(i-4)*.9,q=p(u,a,a+1.5);x+=(1285-(560+i*100))*q;y=-140*q;if(q>0)f='var(--loss)';o=k*(1-cl((q-.7)/.3))}
+  c[1].setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');c[1].setAttribute('fill',f);c[0].setAttribute('opacity',o.toFixed(2))});
+rise($('clk'),p(u,TM.alarm_clock,TM.alarm_clock+.5));
+$('hM').setAttribute('transform','rotate('+((t*120)%360).toFixed(1)+' 320 430)');$('hH').setAttribute('transform','rotate('+((t*10)%360).toFixed(1)+' 320 430)');
+pills.forEach((g,i)=>{const a=TM.alarm_clock+.8+i*.9;rise(g,p(u,a,a+.5))});
+rise($('door'),p(u,TM.exit_door,TM.exit_door+.5));rise($('drop'),p(u,TM.exit_door+2.5,TM.exit_door+3.1));
+
+rise($('duck'),p(u,TM.duckworth,TM.duckworth+.5));rise($('sheet'),p(u,TM.grit_scale,TM.grit_scale+.6));
+[TM.statements,TM.statements+2.5].forEach((a,k)=>{rise($('it'+k),p(u,a,a+.5));dots[k].forEach((d,j)=>d.setAttribute('fill',j===SEL[k]&&u>=a+1?'var(--gain)':'var(--stage)'))});
+rise($('more'),p(u,TM.statements+4.5,TM.statements+5));
+
+rise($('p0'),p(u,TM.two_parts,TM.two_parts+.5));rise($('p1'),p(u,TM.two_parts+.6,TM.two_parts+1.1));
+rise($('cmp'),p(u,TM.compass,TM.compass+.5));
+const ck=p(u,TM.compass+.3,TM.compass+2.2),ang=(1-ck)*90*Math.sin(t*2.5)+2*Math.sin(t*1.5);
+$('ndl').setAttribute('transform','rotate('+ang.toFixed(1)+' 440 440)');
+rise($('mtn'),p(u,TM.mountain,TM.mountain+.5));
+const cp=along(MP,p(u,TM.mountain+.5,TM.mountain+4));$('clb').setAttribute('cx',cp[0].toFixed(1));$('clb').setAttribute('cy',cp[1].toFixed(1));
+
+rise($('ax'),p(u,TM.compare_chart,TM.compare_chart+.6));
+$('ln0').setAttribute('stroke-dashoffset',(1-p(u,TM.score_flat,TM.score_flat+1.5)).toFixed(3));rise($('cap0'),p(u,TM.score_flat+1,TM.score_flat+1.5));
+$('ln1').setAttribute('stroke-dashoffset',(1-p(u,TM.grit_rising,TM.grit_rising+1.5)).toFixed(3));rise($('cap1'),p(u,TM.grit_rising+1.2,TM.grit_rising+1.7));
+
+rise($('bag'),p(u,TM.talent_bag,TM.talent_bag+.5));rise($('lad'),p(u,TM.ladder,TM.ladder+.5));rise($('st'),p(u,TM.ladder+.8,TM.ladder+1.3));
+rise($('fork'),p(u,TM.fork_road,TM.fork_road+.5));
+const fp=along(FP,.95*p(u,TM.fork_road+.6,TM.fork_road+3.5));$('fdot').setAttribute('cx',fp[0].toFixed(1));$('fdot').setAttribute('cy',fp[1].toFixed(1));
+rise($('fl'),p(u,TM.fork_road+3,TM.fork_road+3.5));
+
+rise($('mir'),p(u,TM.mirror,TM.mirror+.6));rise($('snap'),p(u,TM.scorecard,TM.scorecard+.6));rise($('road'),p(u,TM.long_road,TM.long_road+.5));
+[[1160,5.5],[260,2.3],[480,3.3]].forEach((w,i)=>{const k=p(u,TM.long_road+.3,TM.long_road+w[1]),b=k>0&&k<1?-4*Math.abs(Math.sin(t*8)):0;
+  wk[i][1].setAttribute('transform','translate('+(w[0]*k).toFixed(1)+' '+b.toFixed(1)+')');if(i)wk[i][1].setAttribute('fill',k>=1?'var(--muted)':'var(--ink)')});
+rise($('lrt'),p(u,TM.long_road+1.5,TM.long_road+2.1));
+
+rise($('qa'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qb'),p(u,TM.question_mark+.4,TM.question_mark+.9));rise($('qc'),p(u,TM.question_mark+.8,TM.question_mark+1.3));
+rise($('stp'),p(u,TM.question_mark+1.5,TM.question_mark+2));rise($('qd'),p(u,TM.question_mark+6,TM.question_mark+6.6));
+const sj=Math.floor(t%3);$('sdot').setAttribute('cx',1150+sj*100);$('sdot').setAttribute('cy',776-sj*50);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.96;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

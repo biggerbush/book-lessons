@@ -1,0 +1,337 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Good to Great Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Good to Great: When disciplined people use disciplined thinking and take disciplined action, you no longer need heavy bureaucracy, and technology becomes an accelerator rather than a cause of success. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GOOD TO GREAT · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Build a culture</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of discipline.</text>
+<text class="b" x="120" y="600" font-size="32">Why great companies need fewer rules, not more.</text>
+<g id="tframe"><rect x="1140" y="260" width="320" height="320" rx="16" fill="none" stroke="var(--gain)" stroke-width="7"/><g id="tperson"></g><text class="m" x="1300" y="630" font-size="22" text-anchor="middle">FREEDOM IN A FRAME</text></g>
+<g id="tape0" opacity="0"><path d="M1160 330L1440 300M1160 440L1440 480M1160 530L1440 410" stroke="var(--loss)" stroke-width="12" stroke-linecap="round"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The bureaucracy trap.</text>
+<text class="b" x="120" y="176" font-size="32">As companies grow, rules pile up to keep people in line.</text>
+<path id="floor1" d="M140 652H940" stroke="var(--line)" stroke-width="6" stroke-linecap="round"/>
+<g id="stars1"></g><g id="staff"></g><g id="papers"></g>
+<g id="tape1"><path d="M160 540L940 620M160 620L940 540" fill="none" stroke="var(--loss)" stroke-width="8" stroke-dasharray="18 12" stroke-linecap="round"/></g>
+<g id="bq"><text class="d" x="120" y="830" font-size="36">Bureaucracy makes up for incompetence and a lack of discipline.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Freedom inside a framework.</text>
+<text class="b" x="120" y="176" font-size="32">A clear frame, with real freedom inside it.</text>
+<g id="fr2"><rect x="120" y="230" width="580" height="470" rx="16" fill="none" stroke="var(--gain)" stroke-width="7"/><g id="free"></g><text class="m" x="120" y="745" font-size="22">THE FRAMEWORK · FREEDOM INSIDE</text></g>
+<g id="plane"><rect x="860" y="300" width="560" height="80" rx="40" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><path d="M1060 370h140l-70 90h-40z" fill="var(--ink)"/><path d="M1350 304l60-84h28l-12 84z" fill="var(--ink)"/><path d="M892 330h50v24h-58z" fill="var(--gain)"/></g>
+<g id="chk"><rect x="860" y="500" width="260" height="240" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path d="M920 550h150M920 600h150M920 650h150M920 700h120" stroke="var(--line)" stroke-width="7" stroke-linecap="round"/><g id="ticks"></g><text class="m" x="990" y="780" font-size="20" text-anchor="middle">STRICT SYSTEM</text></g>
+<g id="pil"><g id="pilp"></g><path d="M1266 532h68l-10-22h-48z" fill="var(--ink)"/><text class="m" x="1300" y="780" font-size="20" text-anchor="middle" style="fill:var(--gain)">FINAL RESPONSIBILITY</text></g>
+<g id="fc"><text class="d" x="120" y="840" font-size="40">Self-disciplined people need far fewer controls.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rinse the cottage cheese.</text>
+<text class="b" x="120" y="176" font-size="32">Dave Scott, six-time Ironman triathlon champion.</text>
+<g id="ath"><g id="athp"></g><g id="medals"></g><text class="m" x="280" y="620" font-size="22" text-anchor="middle">6× IRONMAN CHAMPION</text></g>
+<g id="bowl3"><path d="M640 250h160v44" fill="none" stroke="var(--ink)" stroke-width="14" stroke-linejoin="round"/><g id="drops"></g><g id="lumps"></g><path d="M640 460h320a160 110 0 0 1-320 0z" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><g id="fat"></g><text class="m" x="800" y="740" font-size="22" text-anchor="middle">WASH OFF THE EXTRA FAT</text></g>
+<g id="days3"><g id="days"></g><text class="m" x="1100" y="630" font-size="18">EVERY SMALL THING, EVERY DAY</text></g>
+<g id="fz"><text class="d" x="120" y="836" font-size="40">Great companies had the same fanatical consistency.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The stop doing list.</text>
+<text class="b" x="120" y="176" font-size="32">Great companies also decided what to stop.</text>
+<g id="tdl"><rect x="120" y="230" width="500" height="550" rx="16" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/><text class="m" x="160" y="285" font-size="24">TO DO</text><g id="bars"></g></g>
+<g id="stl"><rect x="700" y="230" width="780" height="550" rx="16" fill="var(--stage)" stroke="var(--gain)" stroke-width="6"/><text class="m" x="760" y="285" font-size="24" style="fill:var(--gain)">STOP DOING</text></g>
+<g id="it0"><text class="d5" x="770" y="370" font-size="30">Opportunities that don’t fit</text></g>
+<g id="it1"><text class="d5" x="770" y="480" font-size="30">Projects that pull off course</text></g>
+<g id="it2"><text class="d5" x="770" y="590" font-size="30">Products that pull off course</text></g>
+<g id="it3"><text class="d5" x="770" y="700" font-size="30">Habits that pull off course</text></g>
+<g id="stamp"><g transform="rotate(-8 1380 360)"><rect x="1310" y="328" width="140" height="64" rx="8" fill="none" stroke="var(--loss)" stroke-width="5"/><text class="d" x="1380" y="376" font-size="40" text-anchor="middle" style="fill:var(--loss)">NO</text></g></g>
+<g id="strk"></g><g id="sc4"></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Discipline is not a tyrant.</text>
+<text class="b" x="120" y="176" font-size="32">Lasting discipline lives in the culture.</text>
+<path d="M800 260V720" stroke="var(--line)" stroke-width="3" stroke-dasharray="8 10"/>
+<g id="bossg">
+<g id="bossm">
+<g id="bossp"></g>
+<path d="M468 300l64-22v56l-64-22z" fill="var(--ink)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+<path d="M482 318l-10 40" stroke="var(--loss)" stroke-width="10" stroke-linecap="round"/>
+<path d="M548 290q12 16 0 32M564 278q22 28 0 56" fill="none" stroke="var(--loss)" stroke-width="5" stroke-linecap="round"/>
+<rect x="590" y="236" width="150" height="78" rx="18" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/>
+<path d="M610 312l-24 28 44-26" fill="var(--stage)" stroke="var(--loss)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d" x="665" y="294" font-size="48" text-anchor="middle" style="fill:var(--loss)">!!!</text>
+</g>
+<rect x="370" y="426" width="140" height="74" rx="6" fill="var(--ink)"/>
+<rect x="352" y="496" width="176" height="14" rx="4" fill="var(--ink)"/>
+<text class="m" x="440" y="472" font-size="18" text-anchor="middle" style="fill:var(--stage)">TYRANT</text>
+</g>
+<g id="crowd5"></g>
+<g id="leave5"><text class="m" x="440" y="760" font-size="22" text-anchor="middle" style="fill:var(--loss)">WHEN THE TYRANT LEAVES, IT COLLAPSES</text></g>
+<g id="ring5"><circle cx="1160" cy="480" r="160" fill="none" stroke="var(--gain)" stroke-width="6"/><text class="m" x="1160" y="488" font-size="24" text-anchor="middle" style="fill:var(--gain)">CULTURE</text></g>
+<g id="team5"></g>
+<g id="lbl5"><text class="m" x="1160" y="760" font-size="22" text-anchor="middle">DISCIPLINE LIVES IN THE PEOPLE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Technology is an accelerator.</text>
+<text class="b" x="120" y="176" font-size="32">It was never the main cause of a company’s leap.</text>
+<g id="gad"><rect x="160" y="250" width="260" height="170" rx="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><path d="M200 300h120M200 340h170M200 380h90" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/><path d="M290 420v40M240 462h100" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/></g>
+<g id="nocause"><text class="m" x="290" y="512" font-size="20" text-anchor="middle" style="fill:var(--loss)">NOT THE MAIN CAUSE</text></g>
+<g id="net6"><g id="links6"></g><g id="pulse6"></g><rect x="680" y="460" width="80" height="80" rx="10" fill="var(--ink)"/><g id="stores"></g></g>
+<g id="wal6"><text class="m" x="720" y="790" font-size="20" text-anchor="middle">WALGREENS PHARMACY NETWORK</text></g>
+<g id="focus6"><text class="m" x="720" y="836" font-size="20" text-anchor="middle" style="fill:var(--gain)">IT SERVED THEIR FOCUS: CONVENIENT DRUGSTORES</text></g>
+<g id="fly"><g id="wheel"><circle cx="1300" cy="480" r="130" fill="none" stroke="var(--ink)" stroke-width="8"/></g><circle cx="1300" cy="480" r="22" fill="var(--gain)"/><text class="m" x="1300" y="680" font-size="22" text-anchor="middle">MOMENTUM</text></g>
+<g id="boost"><path d="M1300 320A160 160 0 0 1 1460 480M1300 640A160 160 0 0 1 1140 480" fill="none" stroke="var(--gain)" stroke-width="7" stroke-linecap="round"/><text class="m" x="1300" y="720" font-size="22" text-anchor="middle" style="fill:var(--gain)">TECHNOLOGY SPEEDS IT UP</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Crawl, walk, run.</text>
+<text class="b" x="120" y="176" font-size="32">Walgreens tested first, then moved fast.</text>
+<g id="lane"><text class="m" x="120" y="250" font-size="22">RIVALS RUSH ONLINE</text><path d="M140 300H1340" stroke="var(--line)" stroke-width="4" stroke-dasharray="10 10"/><g id="rivals"></g><circle cx="1410" cy="300" r="40" fill="none" stroke="var(--ink)" stroke-width="5"/><ellipse cx="1410" cy="300" rx="16" ry="40" fill="none" stroke="var(--ink)" stroke-width="4"/><path d="M1370 300h80" stroke="var(--ink)" stroke-width="4"/></g>
+<g id="b70"><rect x="200" y="660" width="360" height="100" fill="var(--line)"/><text class="m" x="380" y="726" font-size="24" text-anchor="middle" style="fill:var(--ink)">CRAWL</text></g>
+<g id="b71"><rect x="560" y="560" width="360" height="200" fill="var(--line)"/><text class="m" x="740" y="726" font-size="24" text-anchor="middle" style="fill:var(--ink)">WALK</text></g>
+<g id="b72"><rect x="920" y="460" width="360" height="300" fill="var(--line)"/><text class="m" x="1100" y="726" font-size="24" text-anchor="middle" style="fill:var(--ink)">RUN</text></g>
+<g id="walker"></g>
+<g id="fast7"><path d="M1170 420H1450M1424 400l26 20-26 20" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1450" y="390" font-size="20" text-anchor="end" style="fill:var(--gain)">THEN MOVE FAST</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="card8"><rect x="1240" y="140" width="220" height="140" rx="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><text class="m" x="1262" y="176" font-size="18" style="fill:var(--gain)">STOP DOING</text><path d="M1262 215h160M1262 250h120" stroke="var(--line)" stroke-width="7" stroke-linecap="round"/><line id="st8" x1="1262" y1="215" x2="1262" y2="215" stroke="var(--gain)" stroke-width="7" stroke-linecap="round"/><path id="pen8" d="M0 0l6-18 36-36 12 12-36 36z" fill="var(--ink)"/></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Write your own</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">stop doing list today.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">What will you <tspan style="fill:var(--gain)">quit</tspan>?</text></g>
+<g id="lab8"><text class="m" x="143" y="700" font-size="26">NAME ONE THING. PUT YOUR BEST EFFORT WHERE IT MATTERS.</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="141" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:21</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Build a Culture of Discipline&rdquo;, from <em>Good to Great</em> by Jim Collins. Examples as reported in the book: Dave Scott&#x27;s cottage cheese habit, the airline pilot comparison, and Walgreens&#x27; pharmacy network and cautious internet approach. The startup, rulebook, scissors and rocket drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=141, SC=[[0.0, 8.3], [8.3, 28.3], [28.3, 47.5], [47.5, 66.7], [66.7, 83.9], [83.9, 96.6], [96.6, 114.7], [114.7, 129.6], [129.6, 141.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "The bureaucracy trap", "Freedom in a frame", "Rinse the cottage cheese", "The stop doing list", "Not a tyrant", "Tech as accelerator", "Crawl, walk, run", "Your challenge"];
+const TM={"title_card": 0.0, "startup": 8.56, "crowd": 12.56, "rulebook": 17.28, "frame": 28.64, "pilot": 34.16, "athlete": 47.76, "cheese": 53.04, "bowl": 57.04, "todo": 66.96, "stop_list": 69.52, "scissors": 79.36, "boss": 84.16, "team": 92.48, "gadget": 96.88, "network": 102.6, "rocket": 111.12, "web": 114.96, "steps": 118.88, "pen": 129.92};
+const V=n=>'var(--'+n+')';
+const PG=(par,x,y,r,f)=>{const g=mk('g',{fill:f},par);mk('circle',{cx:x,cy:y,r:r},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},g);return g};
+const tp=PG($('tperson'),1300,380,22,V('gain'));
+const ST=[];for(let i=0;i<9;i++)ST.push(PG($('staff'),200+i*85,560,22,i<3?V('gain'):(i==4||i==7)?V('loss'):V('ink')));
+for(let i=0;i<3;i++)mk('path',{d:'M'+(200+i*85)+' 478v26M'+(187+i*85)+' 491h26',stroke:V('gain'),'stroke-width':5,'stroke-linecap':'round'},$('stars1'));
+const PL={1:'RULES',4:'FORMS',6:'APPROVALS'},PP=[];
+for(let i=0;i<8;i++){const g=mk('g',{},$('papers')),y=720-i*40;mk('rect',{x:1060,y:y,width:340,height:30,rx:4,fill:V('stage'),stroke:V('ink'),'stroke-width':4},g);if(PL[i])mk('text',{x:1230,y:y+22,'font-size':18,'text-anchor':'middle',class:'m'},g).textContent=PL[i];PP.push(g)}
+const FP=[[240,330],[400,300],[560,360],[300,520],[500,540]].map(q=>PG($('free'),q[0],q[1],16,V('gain')));
+const TK=[0,1,2,3].map(i=>mk('path',{d:'M880 '+(548+i*50)+'l10 10 18-20',fill:'none',stroke:V('gain'),'stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('ticks')));
+PG($('pilp'),1300,560,30,V('gain'));
+PG($('athp'),280,330,40,V('gain'));
+const MD=[];for(let i=0;i<6;i++)MD.push(mk('circle',{cx:190+i*36,cy:560,r:13,fill:V('gain')},$('medals')));
+for(let i=0;i<6;i++)mk('circle',{cx:680+i*48,cy:456,r:20,fill:V('stage'),stroke:V('ink'),'stroke-width':4},$('lumps'));
+const DR=[0,1,2,3].map(()=>mk('circle',{cx:800,cy:300,r:7,fill:V('muted')},$('drops')));
+const FT=[0,1,2].map(i=>mk('circle',{cx:760+i*40,cy:590,r:9,fill:V('loss')},$('fat')));
+const DY=[];for(let i=0;i<20;i++)DY.push(mk('rect',{x:1100+(i%5)*72,y:300+Math.floor(i/5)*72,width:56,height:56,rx:8,stroke:V('ink'),'stroke-width':4,fill:V('stage')},$('days')));
+for(let i=0;i<9;i++){const y=316+i*48;mk('rect',{x:160,y:y-11,width:22,height:22,rx:4,fill:'none',stroke:V('muted'),'stroke-width':3},$('bars'));mk('rect',{x:200,y:y-6,width:240+(i*53)%160,height:12,rx:6,fill:V('line')},$('bars'))}
+const KS=[1,2,3].map(i=>mk('line',{x1:766,y1:360+i*110,x2:766,y2:360+i*110,stroke:V('loss'),'stroke-width':5,'stroke-linecap':'round'},$('strk')));
+const SCB=mk('g',{},$('sc4'));
+[-11,11].forEach(c=>mk('circle',{cx:-22,cy:c,r:10,fill:'none',stroke:V('ink'),'stroke-width':5},SCB));
+mk('path',{d:'M-14 -6L30 8M-14 6L30 -8',stroke:V('ink'),'stroke-width':5,'stroke-linecap':'round'},SCB);
+// scene 5: boss on podium, spaced crowd standing on a floor
+PG($('bossp'),440,300,30,V('loss'));
+mk('path',{d:'M140 660H770',stroke:V('line'),'stroke-width':6,'stroke-linecap':'round'},$('crowd5'));
+const CX5=[160,265,370,475,580,685];
+const CR=CX5.map(x=>PG($('crowd5'),x,590,16,V('ink')));
+const TP=[];for(let i=0;i<8;i++){const a=-Math.PI/2+i*Math.PI/4;TP.push(PG($('team5'),Math.round(1160+160*Math.cos(a)),Math.round(480+160*Math.sin(a)-25),16,V('gain')))}
+const S6=[],PU=[];for(let i=0;i<6;i++){const a=-Math.PI/2+i*Math.PI/3,x=Math.round(720+210*Math.cos(a)),y=Math.round(500+210*Math.sin(a));S6.push([x,y]);
+  mk('path',{d:'M720 500L'+x+' '+y,stroke:V('line'),'stroke-width':4},$('links6'));
+  mk('path',{d:'M'+(x-34)+' '+(y+30)+'v-36l34-26 34 26v36z',fill:V('stage'),stroke:V('ink'),'stroke-width':5,'stroke-linejoin':'round'},$('stores'));
+  mk('path',{d:'M'+x+' '+(y-4)+'v20M'+(x-10)+' '+(y+6)+'h20',stroke:V('gain'),'stroke-width':5,'stroke-linecap':'round'},$('stores'));
+  PU.push(mk('circle',{cx:720,cy:500,r:7,fill:V('gain')},$('pulse6')))}
+for(let i=0;i<6;i++){const a=i*Math.PI/3;mk('path',{d:'M1300 480L'+Math.round(1300+130*Math.cos(a))+' '+Math.round(480+130*Math.sin(a)),stroke:V('ink'),'stroke-width':6},$('wheel'))}
+const RV=[];for(let i=0;i<5;i++)RV.push(mk('circle',{cx:160,cy:300,r:16,fill:V('loss')},$('rivals')));
+PG($('walker'),0,0,22,V('gain'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('tframe'),p(u,TM.title_card,TM.title_card+.6));
+$('tape0').setAttribute('opacity',(p(u,TM.title_card+.6,TM.title_card+1.2)*(1-p(u,TM.title_card+5.4,TM.title_card+6.4))).toFixed(2));
+tp.setAttribute('transform','translate('+(60*Math.sin(t*.9)).toFixed(1)+' '+(40*Math.sin(t*1.3)).toFixed(1)+')');
+
+ST.forEach((g,i)=>{const a=i<3?TM.startup:TM.crowd+(i-3)*.35;rise(g,p(u,a,a+.4))});
+rise($('floor1'),p(u,TM.startup,TM.startup+.4)); rise($('stars1'),p(u,TM.startup+.4,TM.startup+.9));
+PP.forEach((g,i)=>rise(g,p(u,TM.rulebook+i*.3,TM.rulebook+i*.3+.4)));
+rise($('tape1'),p(u,TM.rulebook+2.5,TM.rulebook+3)); rise($('bq'),p(u,TM.rulebook+4.9,TM.rulebook+5.5));
+
+rise($('fr2'),p(u,TM.frame,TM.frame+.5));
+FP.forEach((g,i)=>g.setAttribute('transform','translate('+(30*Math.sin(t*.7+i*1.7)).toFixed(1)+' '+(30*Math.cos(t*.9+i*2.3)).toFixed(1)+')'));
+rise($('plane'),p(u,TM.pilot,TM.pilot+.5)); rise($('chk'),p(u,TM.pilot+2.9,TM.pilot+3.4));
+TK.forEach((k,i)=>k.setAttribute('opacity',p(u,TM.pilot+3.4+i*.4,TM.pilot+3.7+i*.4)));
+rise($('pil'),p(u,TM.pilot+4.5,TM.pilot+5)); rise($('fc'),p(u,TM.pilot+8.7,TM.pilot+9.3));
+
+rise($('ath'),p(u,TM.athlete,TM.athlete+.5));
+MD.forEach((c,i)=>rise(c,p(u,TM.athlete+.8+i*.15,TM.athlete+1.1+i*.15)));
+rise($('bowl3'),p(u,TM.cheese,TM.cheese+.5));
+const on3=u>=TM.cheese+.5?1:0;
+DR.forEach((c,k)=>{const ph=(t*1.2+k/4)%1;c.setAttribute('cy',(300+130*ph).toFixed(1));c.setAttribute('opacity',on3)});
+FT.forEach((c,k)=>{const ph=(t*.8+k/3)%1;c.setAttribute('cy',(590+100*ph).toFixed(1));c.setAttribute('opacity',(on3*(1-ph)).toFixed(2))});
+rise($('days3'),p(u,TM.bowl,TM.bowl+.5));
+DY.forEach((r,i)=>r.setAttribute('fill',u>=TM.bowl+.6+i*.2?V('gain'):V('stage')));
+rise($('fz'),p(u,TM.bowl+5.8,TM.bowl+6.4));
+
+rise($('tdl'),p(u,TM.todo,TM.todo+.5)); rise($('stl'),p(u,TM.stop_list,TM.stop_list+.5));
+rise($('it0'),p(u,TM.stop_list+4.2,TM.stop_list+4.7)); rise($('stamp'),p(u,TM.stop_list+5.2,TM.stop_list+5.6));
+let sy=470,cut=0;
+for(let i=1;i<4;i++){const b=TM.scissors+(i-1)*.3;rise($('it'+i),p(u,b,b+.4));const a=TM.scissors+1.2+(i-1),k=p(u,a,a+.9),x=766+464*k;KS[i-1].setAttribute('x2',x.toFixed(1));if(u>=a){sy=360+i*110;cut=k<1?1:0}}
+$('sc4').setAttribute('transform','translate(1370 '+sy+')');
+SCB.setAttribute('transform','rotate('+(cut*10*Math.sin(t*14)).toFixed(1)+')');
+$('sc4').setAttribute('opacity',(p(u,TM.scissors+.6,TM.scissors+1)*(1-p(u,TM.scissors+4.4,TM.scissors+4.8))).toFixed(2));
+
+// scene 5: the tyrant shouts, then walks off; the crowd topples one by one
+rise($('bossg'),p(u,TM.boss,TM.boss+.5)); rise($('crowd5'),p(u,TM.boss+.3,TM.boss+.8));
+const c5=p(u,TM.boss+3.6,TM.boss+5);
+const shout=(1-c5)*3*Math.sin(t*9);
+$('bossm').setAttribute('transform','translate('+(-240*c5).toFixed(1)+' '+shout.toFixed(1)+')'); $('bossm').setAttribute('opacity',(1-c5).toFixed(2));
+CR.forEach((g,i)=>{const k=p(u,TM.boss+4.4+i*.15,TM.boss+5.2+i*.15);g.setAttribute('transform','rotate('+(78*k).toFixed(1)+' '+CX5[i]+' 657)');g.setAttribute('fill',k>.3?V('muted'):V('ink'))});
+rise($('leave5'),p(u,TM.boss+3.4,TM.boss+3.9));
+rise($('ring5'),p(u,TM.team,TM.team+.5));
+TP.forEach((g,i)=>rise(g,p(u,TM.team+.2+i*.12,TM.team+.5+i*.12)));
+rise($('lbl5'),p(u,TM.team+1,TM.team+1.5));
+
+rise($('gad'),p(u,TM.gadget,TM.gadget+.5)); rise($('nocause'),p(u,TM.gadget+1.4,TM.gadget+1.9));
+rise($('net6'),p(u,TM.network,TM.network+.6)); rise($('wal6'),p(u,TM.network+.4,TM.network+.9));
+PU.forEach((c,i)=>{const s=S6[i],ph=(t*.6+i/6)%1;c.setAttribute('cx',(720+(s[0]-720)*ph).toFixed(1));c.setAttribute('cy',(500+(s[1]-500)*ph).toFixed(1));c.setAttribute('opacity',u>=TM.network+.6?1:0)});
+rise($('focus6'),p(u,TM.network+4.2,TM.network+4.8)); rise($('fly'),p(u,TM.network+4.2,TM.network+4.8));
+$('wheel').setAttribute('transform','rotate('+((t*20+Math.max(0,u-TM.rocket)*160)%360).toFixed(1)+' 1300 480)');
+rise($('boost'),p(u,TM.rocket,TM.rocket+.5));
+
+rise($('lane'),p(u,TM.web,TM.web+.5));
+RV.forEach((c,i)=>c.setAttribute('cx',(160+((t*320+i*236)%1160)).toFixed(1)));
+[0,1.5,3.5].forEach((d,i)=>rise($('b7'+i),p(u,TM.steps+d,TM.steps+d+.5)));
+const k1=p(u,TM.steps+1.5,TM.steps+2.5),k2=p(u,TM.steps+5,TM.steps+6);
+$('walker').setAttribute('transform','translate('+(380+360*(k1+k2)).toFixed(1)+' '+(568-100*(k1+k2)-3*Math.abs(Math.sin(t*5))).toFixed(1)+')');
+$('walker').setAttribute('opacity',p(u,TM.steps,TM.steps+.5));
+rise($('fast7'),p(u,TM.steps+5,TM.steps+5.6));
+
+rise($('card8'),p(u,TM.pen,TM.pen+.5));
+const x8=1262+160*p(u,TM.pen+.8,TM.pen+2);
+$('st8').setAttribute('x2',x8.toFixed(1)); $('pen8').setAttribute('transform','translate('+x8.toFixed(1)+' 215)');
+rise($('qa'),p(u,TM.pen+.2,TM.pen+.7)); rise($('qb'),p(u,TM.pen+.6,TM.pen+1.1)); rise($('qc'),p(u,TM.pen+1,TM.pen+1.5));
+rise($('lab8'),p(u,TM.pen+3,TM.pen+3.6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:137.09;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

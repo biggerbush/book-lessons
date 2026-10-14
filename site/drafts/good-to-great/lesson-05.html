@@ -1,0 +1,307 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Good to Great Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Good to Great: Greatness comes from focusing on where three circles overlap: what you can be best in the world at, what drives your economic engine, and what you are deeply passionate about. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GOOD TO GREAT · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Find your</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Hedgehog Concept.</text>
+<text class="b" x="120" y="600" font-size="32">Why great companies master one big thing instead of many.</text>
+<g id="qm"><text id="qmt" class="d" x="1300" y="330" font-size="180" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="fh0"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The fox and the hedgehog.</text>
+<text class="b" x="120" y="176" font-size="32">An old Greek parable, retold by Isaiah Berlin.</text>
+<g id="scroll"><rect class="s-ink" x="150" y="220" width="1300" height="150" rx="8" fill="var(--stage)" stroke-width="5"/><rect class="ink" x="120" y="208" width="36" height="174" rx="18"/><rect class="ink" x="1444" y="208" width="36" height="174" rx="18"/></g>
+<g id="quote"><text class="d5" x="190" y="282" font-size="40">“The fox knows many things,</text><text class="d5" x="190" y="338" font-size="40">but the hedgehog knows <tspan style="fill:var(--gain)">one big thing.</tspan>”</text><text class="m" x="1410" y="338" font-size="20" text-anchor="end">— ISAIAH BERLIN</text></g>
+<g id="fox1"><text class="m" x="380" y="760" font-size="22" text-anchor="middle">MANY THINGS</text></g>
+<g id="tricks"></g>
+<g id="hb"><g id="hog1"></g><g id="ball1"></g><text class="m" x="1100" y="760" font-size="22" text-anchor="middle" style="fill:var(--gain)">ONE BIG THING</text></g>
+<g id="lead"><text class="d" x="120" y="840" font-size="44">Great companies were run by hedgehogs.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Circle one: best in the world.</text>
+<text class="b" x="120" y="176" font-size="32">What could you be the best in the world at?</text>
+<g id="c2g"><circle class="s-gain" cx="400" cy="510" r="220" fill="none" stroke-width="8"/>
+<path class="gain" d="M400 380l9 20 22 2-17 14 5 22-19-12-19 12 5-22-17-14 22-2z"/>
+<rect class="ink" x="290" y="560" width="70" height="90"/><rect class="gain" x="365" y="470" width="70" height="180"/><rect class="ink" x="440" y="590" width="70" height="60"/>
+<text class="d" x="400" y="530" font-size="48" text-anchor="middle" style="fill:var(--on-gain)">1</text>
+<text class="m" x="400" y="780" font-size="22" text-anchor="middle">BEST IN THE WORLD AT</text></g>
+<g id="wish"><rect class="s-muted" x="740" y="260" width="320" height="140" rx="16" fill="none" stroke-width="4" stroke-dasharray="10 10"/><text class="m" x="770" y="306" font-size="20">WISH</text><text class="d5" x="770" y="362" font-size="36" fill-opacity=".6">Want to be best</text></g>
+<g id="could"><path class="s-muted" d="M1080 330h60m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="gain" x="1160" y="260" width="320" height="140" rx="16"/><text class="m" x="1190" y="306" font-size="20" style="fill:var(--on-gain)">TRULY</text><text class="d" x="1190" y="362" font-size="36" style="fill:var(--on-gain)">Could be best</text></g>
+<g id="cross"><rect class="s-loss" x="740" y="460" width="740" height="200" rx="16" fill="var(--stage)" stroke-width="4"/><text class="m" x="770" y="510" font-size="20" style="fill:var(--loss)">WHAT YOU CANNOT BE BEST AT</text><text class="d5" x="770" y="590" font-size="44">Even your core business</text></g>
+<path id="xline" class="s-loss" d="M760 574H1300" pathLength="1" fill="none" stroke-width="8" stroke-linecap="round"/>
+<path id="xmark" class="s-loss" d="M1360 520l80 80M1440 520l-80 80" pathLength="1" fill="none" stroke-width="12" stroke-linecap="round"/>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Circle two: the economic engine.</text>
+<text class="b" x="120" y="176" font-size="32">One key measure: profit per something.</text>
+<g id="c3g"><circle class="s-ink" cx="400" cy="510" r="220" fill="none" stroke-width="8"/><g id="gear"></g><text class="m" x="400" y="780" font-size="22" text-anchor="middle">YOUR ECONOMIC ENGINE</text></g>
+<g id="frac"><text class="d" x="1120" y="340" font-size="80" text-anchor="middle">Profit</text><path class="s-ink" d="M820 380H1420" stroke-width="8" stroke-linecap="round"/><text id="den" class="d" x="1120" y="480" font-size="72" text-anchor="middle" style="fill:var(--gain)">per ?</text></g>
+<g id="chips3"></g>
+<g id="sharp"><text class="d5" x="760" y="740" font-size="36">The right one sharpens everything.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Circle three: deep passion.</text>
+<text class="b" x="120" y="176" font-size="32">What are you deeply passionate about?</text>
+<g id="p4">
+<g id="p4c"><circle class="s-ink" cx="400" cy="510" r="220" fill="none" stroke-width="8"/><g id="heart4"><path class="gain" d="M0 90C-120 10-130-70-65-90C-30-100-8-80 0-60C8-80 30-100 65-90C130-70 120 10 0 90Z"/></g><text class="m" x="400" y="780" font-size="22" text-anchor="middle">DEEPLY PASSIONATE ABOUT</text></g>
+<g id="lit"><text class="d5" x="780" y="340" font-size="40">Can’t be faked or ordered.</text><g id="crowd4"></g></g>
+</g>
+<g id="venn4"></g>
+<g id="hc4"><circle class="gain" cx="800" cy="503" r="24"/><path class="s-gain" d="M830 503H1110" stroke-width="5" stroke-dasharray="8 8"/><text class="d" x="1130" y="490" font-size="48">Hedgehog</text><text class="d" x="1130" y="550" font-size="48" style="fill:var(--gain)">Concept</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Walgreens: one simple idea.</text>
+<g id="sub5"><text class="b" x="120" y="176" font-size="32">Best, most convenient drugstores, high profit per customer visit.</text></g>
+<g id="ch5"><path class="s-ink" d="M140 240V580H700" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<path id="mkt" class="s-muted" d="M140 560C300 545 480 540 680 520" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="wal" class="s-gain" d="M140 560C300 540 460 420 680 260" pathLength="1" fill="none" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="680" y="236" font-size="20" text-anchor="end" style="fill:var(--gain)">WALGREENS</text><text class="m" x="690" y="562" font-size="20" text-anchor="end">MARKET</text><text class="m" x="700" y="612" font-size="20" text-anchor="end">DECADES →</text></g>
+<g id="map5"><path d="M800 330H1460M800 500H1460M900 250V580M1120 250V580M1340 250V580" stroke="var(--line)" stroke-width="22" stroke-linecap="round" fill="none"/><text class="m" x="800" y="630" font-size="20">EASY CORNERS, CLUSTERED TOGETHER</text><g id="stores5"></g></g>
+<g id="ms0"><text class="d5" x="120" y="720" font-size="48" fill-opacity=".55">Profit per store</text></g>
+<path id="st5" class="s-loss" d="M112 704H512" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="ms1"><text class="d" x="120" y="810" font-size="56">Profit per <tspan style="fill:var(--gain)">customer visit</tspan></text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Clarity takes time.</text>
+<text class="b" x="120" y="176" font-size="32">Walgreens versus its comparison rival, Eckerd.</text>
+<g id="wl6"><text class="m" x="120" y="290" font-size="22" style="fill:var(--gain)">WALGREENS</text><path id="wa6" class="s-gain" d="M380 282H1440M1416 262l24 20-24 20" pathLength="1" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="ek6"><text class="m" x="120" y="420" font-size="22" style="fill:var(--loss)">ECKERD</text><path id="ez6" class="s-loss" d="M380 412L500 350L560 470L700 380L720 490L880 360L910 470L1010 420" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="nq"><text class="d" x="120" y="600" font-size="44">Not a quick brainstorm.</text></g>
+<g id="pages6"></g>
+<g id="yrs6"><text class="m" x="1120" y="630" font-size="22">ABOUT</text><text id="yn" class="d" x="1112" y="718" font-size="88" style="fill:var(--gain)">4 years</text><text class="m" x="1120" y="760" font-size="20">ON AVERAGE,</text><text class="m" x="1120" y="788" font-size="20">OF HONEST DEBATE</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Find your own overlap.</text>
+<text class="b" x="120" y="176" font-size="32">Try it for your team, or your own career.</text>
+<g id="pad"><rect class="s-ink" x="120" y="240" width="640" height="560" rx="14" fill="var(--stage)" stroke-width="6"/><g id="rings7"></g>
+<text class="m" x="150" y="340" font-size="20">STRENGTHS</text><text class="m" x="370" y="340" font-size="20">VALUE</text><text class="m" x="570" y="340" font-size="20">ENERGY</text></g>
+<g id="bars7"></g>
+<g id="venn7"></g>
+<path id="mark7" class="s-gain" d="M1120 448a52 52 0 1 1-1 0" pathLength="1" fill="none" stroke-width="8" stroke-linecap="round"/>
+<circle id="dot7" class="gain" cx="1120" cy="500" r="22"/>
+<g id="meet"><text class="d5" x="1120" y="820" font-size="36" text-anchor="middle">Circle where all three meet.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="l8"><text class="m" x="143" y="230" font-size="26">DRAW YOUR THREE CIRCLES THIS WEEK</text></g>
+<g id="qa"><text class="d" x="136" y="380" font-size="88" letter-spacing="-2">What sits in the middle,</text></g>
+<g id="qb"><text class="d" x="136" y="490" font-size="88" letter-spacing="-2">and what will you</text></g>
+<g id="qc"><text class="d" x="136" y="600" font-size="88" letter-spacing="-2">stop <tspan style="fill:var(--gain)">chasing?</tspan></text></g>
+<g id="v8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="134" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:14</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Find Your Hedgehog Concept&rdquo;, from <em>Good to Great</em> by Jim Collins. Walgreens, its comparison company Eckerd, and the four-year average are as reported in the book; the fox and hedgehog parable comes from Isaiah Berlin&#x27;s essay. The fox, hedgehog, three circles and notepad are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=134, SC=[[0.0, 7.1], [7.1, 30.5], [30.5, 43.9], [43.9, 60.3], [60.3, 74.7], [74.7, 97.4], [97.4, 112.6], [112.6, 124.7], [124.7, 134.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The One Big Thing", "Fox Versus Hedgehog", "Circle One: Best At", "Circle Two: Money", "Circle Three: Passion", "The Walgreens Story", "It Takes Time", "Find Your Overlap", "Your Challenge"];
+const TM={"question_mark": 0.0, "fox_hedgehog": 3.68, "greek_scroll": 7.44, "hedgehog_ball": 18.8, "leader": 24.88, "circle_best": 30.8, "crossed_out": 38.8, "circle_money": 44.16, "denominator": 48.08, "question_x": 54.0, "circle_heart": 60.56, "spark": 64.48, "overlap": 70.16, "drugstore": 74.96, "street_corner": 86.72, "profit_visit": 92.64, "rival_store": 97.68, "calendar": 104.08, "notepad": 112.88, "three_lists": 115.84};
+const T=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+const DR=(e,k)=>{e.setAttribute('stroke-dasharray','1 1');e.setAttribute('stroke-dashoffset',(1-k).toFixed(3));e.setAttribute('opacity',k>0?1:0)};
+const P=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const SPK=(x,y,r,R,n,a0,a1)=>{let d='';for(let i=0;i<=n*2;i++){const a=a0+(a1-a0)*i/(n*2),q=i%2?R:r;d+=(i?'L':'M')+(x+q*Math.cos(a)).toFixed(1)+' '+(y+q*Math.sin(a)).toFixed(1)}return d+'Z'};
+const VN=(g,cs,r)=>cs.map(c=>mk('circle',{cx:c[0],cy:c[1],r:r,fill:'var(--gain)','fill-opacity':.12,stroke:'var(--ink)','stroke-width':5},g));
+function hog(g,x,y,s){mk('path',{d:SPK(x,y,s,s*1.3,9,Math.PI,2*Math.PI),class:'gain'},g);mk('ellipse',{cx:x+s*1.05,cy:y-s*.22,rx:s*.45,ry:s*.28,class:'gain'},g);mk('circle',{cx:x+s*1.47,cy:y-s*.22,r:s*.08,class:'ink'},g);mk('circle',{cx:x+s*1.05,cy:y-s*.3,r:s*.06,fill:'var(--stage)'},g)}
+// curled hedgehog: one connected spiky ball with the snout tucked in at the lower right
+function curl(g,x,y,s){mk('path',{d:SPK(x,y,s,s*1.3,14,0,2*Math.PI),class:'gain'},g);
+  mk('ellipse',{cx:x+s*.92,cy:y+s*.5,rx:s*.42,ry:s*.27,transform:'rotate(28 '+(x+s*.92).toFixed(1)+' '+(y+s*.5).toFixed(1)+')',class:'gain'},g);
+  mk('circle',{cx:x+s*1.27,cy:y+s*.69,r:s*.09,class:'ink'},g);mk('circle',{cx:x+s*.82,cy:y+s*.36,r:s*.07,fill:'var(--stage)'},g)}
+function fox(g,x,y,s){const L=v=>v.toFixed(1),f=(a,b)=>L(x+a*s)+' '+L(y+b*s);
+  mk('path',{d:'M'+f(-1,0)+'C'+f(-1.6,-.1)+' '+f(-2,-.6)+' '+f(-1.7,-.9)+'C'+f(-1.6,-.4)+' '+f(-1.3,-.3)+' '+f(-.9,-.25)+'Z',class:'loss'},g);
+  mk('path',{d:'M'+f(-.6,.3)+'v'+L(.6*s)+'M'+f(.6,.3)+'v'+L(.6*s),stroke:'var(--loss)','stroke-width':L(.14*s),'stroke-linecap':'round'},g);
+  mk('ellipse',{cx:x,cy:y,rx:L(1.05*s),ry:L(.5*s),class:'loss'},g);
+  mk('path',{d:'M'+f(.6,-.4)+'L'+f(.85,-1)+'L'+f(1.05,-.5)+'L'+f(1.75,-.2)+'L'+f(.9,.15)+'Z',class:'loss'},g);
+  mk('circle',{cx:x+1.05*s,cy:y-.3*s,r:.08*s,fill:'var(--stage)'},g)}
+fox(mk('g',{},$('fh0')),1170,470,40);hog(mk('g',{},$('fh0')),1400,480,45);
+fox($('fox1'),380,610,70);hog($('hog1'),1100,650,75);
+curl($('ball1'),1100,610,56);
+const TR=[];for(let i=0;i<7;i++){const a=(-140+i*20)*Math.PI/180,c=Math.cos(a),s=Math.sin(a),x1=380+120*c,y1=610+120*s,x2=380+190*c,y2=610+190*s,hx=x2-18*c,hy=y2-18*s;
+  TR.push(mk('path',{d:'M'+x1.toFixed(1)+' '+y1.toFixed(1)+'L'+x2.toFixed(1)+' '+y2.toFixed(1)+'M'+(hx-12*s).toFixed(1)+' '+(hy+12*c).toFixed(1)+'L'+x2.toFixed(1)+' '+y2.toFixed(1)+'L'+(hx+12*s).toFixed(1)+' '+(hy-12*c).toFixed(1),fill:'none',stroke:'var(--loss)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('tricks')))}
+let gd='';for(let i=0;i<40;i++){const a=i*Math.PI/20,q=[112,112,88,88][i%4];gd+=(i?'L':'M')+(q*Math.cos(a)).toFixed(1)+' '+(q*Math.sin(a)).toFixed(1)}
+mk('path',{d:gd+'Z',class:'ink'},$('gear'));mk('circle',{cx:0,cy:0,r:34,fill:'var(--stage)'},$('gear'));
+const CP=['CUSTOMER','EMPLOYEE','STORE'].map((s,i)=>{const x=760+i*240,g=mk('g',{},$('chips3'));const r=mk('rect',{x:x,y:560,width:220,height:70,rx:35,'stroke-width':4},g);const tx=T(g,x+110,604,'PER '+s,{class:'m','font-size':22,'text-anchor':'middle'});return [g,r,tx,s.toLowerCase()]});
+const CR4=[];for(let i=0;i<5;i++){const x=820+i*140,g=mk('g',{},$('crowd4')),pr=P(g,x,520,26,'ink'),ry=mk('g',{},g);
+  for(let j=0;j<5;j++){const a=(-150+j*30)*Math.PI/180;mk('path',{d:'M'+(x+36*Math.cos(a)).toFixed(1)+' '+(520+36*Math.sin(a)).toFixed(1)+'L'+(x+52*Math.cos(a)).toFixed(1)+' '+(520+52*Math.sin(a)).toFixed(1),stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round'},ry)}CR4.push([pr,ry])}
+const V4=[[690,440,-110,-63,['BEST AT'],620,400],[910,440,110,-63,['ECONOMIC','ENGINE'],975,390],[800,630,0,127,['PASSION'],800,730]].map(c=>{const g=mk('g',{},$('venn4'));VN(g,[c],170);c[4].forEach((s,j)=>T(g,c[5],c[6]+j*26,s,{class:'m','font-size':20,'text-anchor':'middle'}));return [g,c[2],c[3]]});
+const ST5=[];[[900,330],[1120,330],[1340,330],[900,500],[1120,500],[1340,500]].forEach((q,i)=>{const ps=[[q[0]+34,q[1]-34]];if(i===0||i===1||i===4)ps.push([q[0]-34,q[1]+34]);
+  ps.forEach(s=>{const g=mk('g',{},$('stores5'));mk('rect',{x:s[0]-20,y:s[1]-17,width:40,height:34,rx:4,class:'gain'},g);mk('path',{d:'M'+s[0]+' '+(s[1]-9)+'v18M'+(s[0]-9)+' '+s[1]+'h18',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round'},g);ST5.push(g)})});
+const PG=[];for(let i=0;i<4;i++){const x=120+i*240,g=mk('g',{},$('pages6'));mk('rect',{x:x,y:640,width:200,height:160,rx:10,fill:'var(--stage)'},g);mk('rect',{x:x,y:640,width:200,height:36,class:'ink'},g);
+  mk('rect',{x:x,y:640,width:200,height:160,rx:10,fill:'none',stroke:'var(--ink)','stroke-width':5},g);T(g,x+100,665,'YEAR '+(i+1),{class:'m','font-size':20,'text-anchor':'middle',style:'fill:var(--stage)'});
+  mk('rect',{x:x+20,y:696,width:100,height:36,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('rect',{x:x+80,y:748,width:100,height:36,rx:16,class:'gain'},g);PG.push(g)}
+for(let i=0;i<8;i++)mk('circle',{cx:170+i*80,cy:240,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings7'));
+const B7=[150,370,570].map((x,c)=>{const a=[];for(let r=0;r<5;r++)a.push(mk('path',{d:'M'+x+' '+(400+r*70)+'h'+[150,110,140,90,130][(r+c)%5],stroke:r===2?'var(--gain)':'var(--line)','stroke-width':12,'stroke-linecap':'round'},$('bars7')));return a});
+const VC7=VN($('venn7'),[[1042,455],[1198,455],[1120,590]],150);
+VN($('v8'),[[1294,679],[1366,679],[1330,742]],70);const D8=mk('circle',{cx:1330,cy:700,r:16,class:'gain'},$('v8'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(e,a,d=.5)=>rise(typeof e==='string'?$(e):e,p(u,a,a+d));
+R('qm',TM.question_mark);$('qmt').setAttribute('transform','translate(0 '+(8*Math.sin(t*2)).toFixed(1)+')');
+R('fh0',TM.fox_hedgehog);
+
+R('scroll',TM.greek_scroll);const qt=TM.greek_scroll+4.2;R('quote',qt);R('fox1',qt+.6);R('hb',qt+.9);
+TR.forEach((a,i)=>R(a,TM.hedgehog_ball+i*.25,.3));
+const cu=p(u,TM.hedgehog_ball+2.2,TM.hedgehog_ball+3);$('hog1').setAttribute('opacity',1-cu);$('ball1').setAttribute('opacity',cu);
+$('ball1').setAttribute('transform','rotate('+(cu*360+(cu>=1?5*Math.sin(t*2):0)).toFixed(1)+' 1100 610)');
+R('lead',TM.leader);
+
+R('c2g',TM.circle_best);R('wish',TM.circle_best+5.8);R('could',TM.circle_best+7);
+R('cross',TM.crossed_out);DR($('xline'),p(u,TM.crossed_out+1,TM.crossed_out+1.8));DR($('xmark'),p(u,TM.crossed_out+1.6,TM.crossed_out+2.2));
+
+R('c3g',TM.circle_money);$('gear').setAttribute('transform','translate(400 510) rotate('+(t*25%360).toFixed(1)+')');
+R('frac',TM.denominator);
+const qx=u>=TM.question_x,ix=qx?Math.floor((u-TM.question_x)/1.3)%3:-1;
+CP.forEach((c,i)=>{R(c[0],TM.question_x+i*.3,.4);const on=i===ix;c[1].setAttribute('fill',on?'var(--gain)':'var(--stage)');c[1].setAttribute('stroke',on?'var(--gain)':'var(--ink)');c[2].style.fill=on?'var(--on-gain)':'var(--muted)'});
+$('den').textContent=qx?'per '+CP[ix][3]:'per ?';R('sharp',TM.question_x+3.5);
+
+R('p4c',TM.circle_heart);$('heart4').setAttribute('transform','translate(400 500) scale('+(1.4*(1+.07*Math.pow(Math.abs(Math.sin(t*3)),6))).toFixed(3)+')');
+R('lit',TM.spark);
+CR4.forEach((c,i)=>{const on=u>=TM.spark+1+i*.4;c[0].forEach(e=>e.setAttribute('class',on?'gain':'ink'));c[1].setAttribute('opacity',on?.6+.4*Math.abs(Math.sin(t*3+i)):0)});
+$('p4').setAttribute('opacity',1-p(u,TM.overlap,TM.overlap+.6));
+const vk=p(u,TM.overlap+.3,TM.overlap+1.5);V4.forEach(v=>{v[0].setAttribute('transform','translate('+(v[1]*(1-vk)).toFixed(1)+' '+(v[2]*(1-vk)).toFixed(1)+')');v[0].setAttribute('opacity',vk)});
+R('hc4',TM.overlap+1.4);
+
+R('ch5',TM.drugstore);const dk=p(u,TM.drugstore+.3,TM.drugstore+2.3);DR($('mkt'),dk);DR($('wal'),dk);
+R('sub5',TM.drugstore+5.4);R('map5',TM.street_corner);ST5.forEach((s,i)=>R(s,TM.street_corner+.6+i*.25,.3));
+R('ms0',TM.profit_visit);DR($('st5'),p(u,TM.profit_visit+.8,TM.profit_visit+1.3));R('ms1',TM.profit_visit+1.3);
+
+const s6=SC[6][0]/K;R('wl6',s6+.4);DR($('wa6'),p(u,s6+.6,s6+1.8));
+R('ek6',TM.rival_store);DR($('ez6'),p(u,TM.rival_store+.4,TM.rival_store+2.4));
+R('nq',TM.calendar);const ct=TM.calendar+3.4;PG.forEach((g,i)=>R(g,ct+i*.5,.4));R('yrs6',ct);
+const yn=Math.round(4*p(u,ct,ct+2));$('yn').textContent=yn+(yn===1?' year':' years');
+
+R('pad',TM.notepad);B7.forEach((col,c)=>col.forEach((b,r)=>R(b,TM.three_lists+c*1.6+r*.15,.3)));
+VC7.forEach((c,i)=>R(c,TM.three_lists+i*1.6+.8));
+const mt=TM.three_lists+5.4;DR($('mark7'),p(u,mt,mt+.8));R('dot7',mt+.6);R('meet',mt+.4);
+
+const s8=SC[8][0]/K;R('l8',s8+.3);R('v8',s8+.6);R('qa',s8+2.6);R('qb',s8+3);R('qc',s8+3.4);
+D8.setAttribute('r',(16+5*Math.abs(Math.sin(t*2.5))).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:130.43;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,297 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Lean Startup Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of The Lean Startup: Track actionable numbers, like how groups of customers behave over time, instead of flattering totals that hide whether you are really improving. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE LEAN STARTUP · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Beware of</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">vanity metrics.</text>
+<text class="b" x="120" y="600" font-size="32">Why your rising numbers might be hiding the real story.</text>
+<path class="s-ink" d="M1120 260V560H1460" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="up0" class="s-gain" d="M1140 540L1200 505L1260 515L1320 450L1380 425L1440 320" pathLength="1" stroke-dasharray="1 1" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="conf"></g>
+<g id="lie0"><text class="d" x="1170" y="400" font-size="120" style="fill:var(--loss)">?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The flattering total.</text>
+<text class="b" x="120" y="176" font-size="32">Vanity metrics: total signups, total revenue.</text>
+<path class="s-ink" d="M160 300V640H680" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="bars1"></g>
+<text class="m" x="160" y="690" font-size="20">TOTAL SIGNUPS · TOTAL REVENUE</text>
+<g id="team"></g>
+<g id="teamL"><text class="m" x="1020" y="590" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE TEAM FEELS GREAT</text></g>
+<g id="fog"><circle cx="300" cy="480" r="90" fill="var(--line)"/><circle cx="420" cy="430" r="110" fill="var(--line)"/><circle cx="540" cy="480" r="90" fill="var(--line)"/><circle cx="420" cy="540" r="80" fill="var(--line)"/><text class="d" x="420" y="530" font-size="120" text-anchor="middle" style="fill:var(--muted)">?</text></g>
+<g id="fogq"><text class="d" x="120" y="800" font-size="46">But did our latest work make things better?</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">IMVU’s happy chart.</text>
+<text class="b" x="120" y="176" font-size="32">Ries saw it firsthand at the avatar chat company he cofounded.</text>
+<g id="imvu"><rect class="s-ink" x="120" y="240" width="440" height="240" rx="16" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M340 480v40M280 520h120" fill="none" stroke-width="6" stroke-linecap="round"/><g id="avs"></g><rect class="s-ink" x="290" y="256" width="100" height="40" rx="20" fill="none" stroke-width="4"/><circle class="ink" cx="315" cy="276" r="5"/><circle class="ink" cx="340" cy="276" r="5"/><circle class="ink" cx="365" cy="276" r="5"/><text class="m" x="120" y="580" font-size="22">IMVU · AVATAR CHAT</text></g>
+<path class="s-ink" d="M680 240V560H1440" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="gu2" class="s-gain" d="M700 540L820 500L940 470L1060 420L1180 380L1300 330L1420 280" pathLength="1" stroke-dasharray="1 1" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="gr2" class="s-ink" d="M700 550L820 530L940 510L1060 480L1180 450L1300 420L1420 380" pathLength="1" stroke-dasharray="1 1" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="leg2"><rect class="gain" x="680" y="588" width="30" height="12" rx="3"/><text class="m" x="724" y="600" font-size="20">REGISTERED USERS</text><rect class="ink" x="990" y="588" width="30" height="12" rx="3"/><text class="m" x="1034" y="600" font-size="20">REVENUE</text><text class="m" x="1440" y="600" font-size="20" text-anchor="end">MONTHLY</text></g>
+<g id="ok2"><text class="d5" x="680" y="670" font-size="36">On paper, the business looked healthy.</text></g>
+<g id="feat2"></g>
+<g id="fl2"><path class="s-line" d="M120 800H1480" stroke-width="5"/><text class="m" x="120" y="846" font-size="20">NEW FEATURES, WEEK AFTER WEEK</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Which change helped?</text>
+<text class="b" x="120" y="176" font-size="32">Nobody could say.</text>
+<g id="hq"><g id="fl3"></g><rect class="gain" x="760" y="330" width="260" height="110" rx="16"/><text class="d" x="870" y="400" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">Growth</text><path d="M960 410v-50m-16 16 16-16 16 16" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="qb3"><circle class="s-loss" cx="1020" cy="330" r="34" fill="var(--stage)" stroke-width="6"/><text class="d" x="1020" y="346" font-size="44" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="ads3"><path class="ink" d="M130 560h40l70-40v120l-70-40h-40z"/><path class="s-muted" d="M260 580L890 440" fill="none" stroke-width="4" stroke-dasharray="8 8"/><g id="adots"></g><text class="m" x="120" y="690" font-size="20">MORE ADS, MORE PEOPLE</text></g>
+<g id="wh3"><path class="s-ink" d="M1190 620L1270 430L1350 620" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle class="s-ink" cx="1270" cy="430" r="140" fill="var(--stage)" stroke-width="8"/><g id="spk"></g><g id="ham"><ellipse class="gain" cx="1270" cy="536" rx="44" ry="26"/><circle class="gain" cx="1312" cy="522" r="18"/></g><text class="m" x="1270" y="670" font-size="20" text-anchor="middle">WORKING HARD</text></g>
+<g id="learn3"><text class="d" x="120" y="790" font-size="46">Working hard, but were they learning?</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Slice customers into cohorts.</text>
+<text class="b" x="120" y="176" font-size="32">Group them by when they joined, then track key steps.</text>
+<g id="rl0"><text class="m" x="120" y="335" font-size="22">JOINED</text></g>
+<g id="rows4"><text class="m" x="120" y="488" font-size="22">CHATTED</text><text class="m" x="120" y="618" font-size="22">PAID</text></g>
+<g id="coh"></g>
+<g id="arcs"></g>
+<g id="cmpL"><text class="m" x="120" y="790" font-size="22" style="fill:var(--gain)">COMPARE EACH NEW GROUP WITH THE ONES BEFORE</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The flat truth.</text>
+<text class="b" x="120" y="176" font-size="32">The result was sobering.</text>
+<path class="s-ink" d="M160 240V620H1000" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="tot5"><path id="totp" class="s-muted" d="M180 600L980 270" stroke-width="6" stroke-linecap="round" stroke-dasharray="14 12" fill="none"/><text class="m" x="760" y="300" font-size="20" text-anchor="end">TOTALS</text></g>
+<path id="flat5" class="s-loss" d="M180 470L340 462L500 474L660 466L820 472L980 468" pathLength="1" stroke-dasharray="1 1" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="fl5l"><text class="m" x="180" y="440" font-size="20" style="fill:var(--loss)">EACH NEW GROUP</text></g>
+<g id="pins5"></g>
+<g id="pinl"><text class="m" x="160" y="700" font-size="20" style="fill:var(--gain)">NEW FEATURES</text></g>
+<g id="mir5"><rect class="ink" x="1245" y="630" width="30" height="120" rx="10"/><ellipse class="s-ink" cx="1260" cy="430" rx="160" ry="200" fill="var(--stage)" stroke-width="8"/><text class="m" x="1260" y="380" font-size="20" text-anchor="middle">BEHIND THE TOTALS</text><path class="s-loss" d="M1150 430h220" stroke-width="8" stroke-linecap="round"/><text class="m" x="1260" y="490" font-size="20" text-anchor="middle" style="fill:var(--loss)">NOT IMPROVING</text></g>
+<g id="rth5"><text class="d" x="120" y="820" font-size="40">That truth forced a rethink of what customers want.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Three tests for a good metric.</text>
+<text class="b" x="120" y="176" font-size="32">Good metrics share three qualities.</text>
+<g id="cards"></g>
+<g id="ki0"><circle class="ink" cx="210" cy="575" r="36"/><path class="s-gain" d="M260 575h130m-20-20 20 20-20 20" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle class="gain" cx="440" cy="575" r="36"/><text class="m" x="210" y="650" font-size="18" text-anchor="middle">CHANGE</text><text class="m" x="440" y="650" font-size="18" text-anchor="middle">RESULT</text><text class="m" x="156" y="710" font-size="20">CLEAR CAUSE AND EFFECT</text></g>
+<g id="vfail"><text class="m" x="156" y="760" font-size="18" style="fill:var(--loss)">VANITY METRICS USUALLY FAIL</text></g>
+<g id="ki1"><text class="m" x="629" y="710" font-size="20">EVERYONE CAN</text><text class="m" x="629" y="740" font-size="20">UNDERSTAND IT</text></g>
+<g id="ki2"><rect class="s-ink" x="1166" y="500" width="130" height="160" rx="8" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M1190 540h80M1190 575h80M1190 610h50" stroke-width="6" stroke-linecap="round"/><circle class="s-gain" cx="1320" cy="600" r="42" fill="none" stroke-width="8"/><path class="s-gain" d="M1350 630l40 40" stroke-width="10" stroke-linecap="round"/><text class="m" x="1102" y="710" font-size="20">YOU CAN TRUST WHERE</text><text class="m" x="1102" y="740" font-size="20">IT CAME FROM</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Test one recent change.</text>
+<text class="b" x="120" y="176" font-size="32">Compare before and after, or split new customers in half.</text>
+<g id="nb7"><rect class="s-ink" x="120" y="240" width="180" height="220" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M150 300h120M150 340h120M150 380h80" stroke-width="6" stroke-linecap="round"/><rect class="gain" x="150" y="410" width="90" height="24" rx="6"/><text class="m" x="120" y="500" font-size="20">ONE RECENT CHANGE</text></g>
+<g id="ba7"><path class="s-line" d="M380 360H1440" stroke-width="5"/><path class="s-gain" d="M910 270V420" stroke-width="6" stroke-linecap="round"/><text class="m" x="910" y="255" font-size="20" text-anchor="middle" style="fill:var(--gain)">CHANGE</text><g id="badots"></g><text class="m" x="640" y="440" font-size="20" text-anchor="middle">BEFORE</text><text class="m" x="1180" y="440" font-size="20" text-anchor="middle">AFTER</text></g>
+<g id="sp7"><g id="clu"></g><text class="m" x="120" y="730" font-size="20">NEW CUSTOMERS</text><path class="s-muted" d="M300 650L520 580M300 650L520 700" fill="none" stroke-width="4"/><rect class="s-ink" x="520" y="545" width="380" height="70" rx="12" fill="var(--stage)" stroke-width="4"/><text class="m" x="540" y="588" font-size="20">HALF A · WITHOUT CHANGE</text><rect class="gain" x="520" y="665" width="380" height="70" rx="12"/><text class="m" x="540" y="708" font-size="20" style="fill:var(--on-gain)">HALF B · WITH CHANGE</text><rect id="bA" class="ink" x="960" y="560" width="0" height="40" rx="6"/><rect id="bB" class="gain" x="960" y="680" width="0" height="40" rx="6"/></g>
+<g id="eq7"><text class="d" x="1400" y="665" font-size="72" text-anchor="middle">=</text></g>
+<g id="fin7"><text class="d" x="120" y="820" font-size="40">No shift in behaviour? The change didn’t matter.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Does your favourite number</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">tell you <tspan style="fill:var(--gain)">what to do next</tspan>,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">or just make you feel good?</text></g>
+<g id="gg"><path class="s-ink" d="M1230 760A110 110 0 0 1 1450 760" fill="none" stroke-width="10" stroke-linecap="round"/><path id="ndl" class="s-gain" d="M1340 760V670" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1340" cy="760" r="14"/><text class="m" x="143" y="700" font-size="26">LOOK AT YOUR FAVOURITE NUMBER THIS WEEK</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Beware of Vanity Metrics&rdquo;, from <em>The Lean Startup</em> by Eric Ries. The IMVU cohort example and the three qualities of good metrics are as reported in the book. Charts, groups and lines are illustrations, not actual data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 7.8], [7.8, 22.1], [22.1, 39.7], [39.7, 52.4], [52.4, 67.2], [67.2, 82.8], [82.8, 102.2], [102.2, 119.4], [119.4, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Up and to the Right", "The Flattering Total", "IMVU's Happy Chart", "The Hidden Question", "Slicing Into Cohorts", "The Flat Truth", "Three Tests", "Your Next Move", "Your Challenge"];
+const TM={"rising_chart": 0.0, "total_users": 8.08, "cheer_team": 14.08, "fog_cloud": 17.92, "imvu_office": 22.44, "growth_graph": 27.92, "new_features": 34.8, "question_mark": 39.96, "busy_hamster": 48.35, "cohort_groups": 52.67, "funnel": 57.68, "side_by_side": 63.6, "flat_lines": 67.52, "mirror": 74.13, "three_a": 83.12, "cause_effect": 86.8, "open_report": 95.68, "notebook": 102.45, "before_after": 104.84, "split_test": 109.08, "mystery_dash": 119.68};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const draw=(el,k)=>{el.style.strokeDashoffset=1-k;el.style.opacity=k>0?1:0};
+const CF=[];for(let i=0;i<9;i++)CF.push(mk('rect',{x:1180+i*32,y:200,width:12,height:12,rx:2,class:i%3?'gain':'loss'},$('conf')));
+const B1=[];for(let i=0;i<8;i++)B1.push(mk('rect',{x:180+i*62,y:640,width:44,height:0,class:i==7?'gain':'ink'},$('bars1')));
+const TB=[880,1020,1160].map(x=>{const g=mk('g',{},$('team')),h=mk('g',{},g);fig(h,x,390,28,'gain');mk('path',{d:'M'+(x-36)+' 450l-34-70M'+(x+36)+' 450l34-70',class:'s-gain',fill:'none','stroke-width':10,'stroke-linecap':'round'},h);return [g,h]});
+fig($('avs'),240,340,22,'gain');fig($('avs'),440,340,22,'ink');
+const FB=[];for(let i=0;i<10;i++){const g=mk('g',{},$('feat2')),x=120+i*136;mk('rect',{x:x,y:724,width:112,height:56,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('text',{x:x+56,y:759,'font-size':18,'text-anchor':'middle',class:'m'},g).textContent='NEW';FB.push(g)}
+for(let i=0;i<3;i++){const y=240+i*90,f=$('fl3');mk('path',{d:'M360 '+(y+32)+'L760 385',class:'s-muted',fill:'none','stroke-width':3,'stroke-dasharray':'8 8'},f);mk('rect',{x:120,y:y,width:240,height:64,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},f);mk('text',{x:240,y:y+40,'font-size':20,'text-anchor':'middle',class:'m'},f).textContent='NEW FEATURE'}
+const AD=[0,1,2,3].map(()=>mk('circle',{r:10,class:'ink'},$('adots')));
+for(let i=0;i<4;i++){const a=i*Math.PI/4,c=130*Math.cos(a),s=130*Math.sin(a);mk('path',{d:'M'+(1270-c).toFixed(1)+' '+(430-s).toFixed(1)+'L'+(1270+c).toFixed(1)+' '+(430+s).toFixed(1),class:'s-line','stroke-width':4},$('spk'))}
+const CX=[520,760,1000,1240],FR=[[.55,.52,.56,.54],[.2,.22,.19,.21]],COH=[],RB=[],ARC=[];
+CX.forEach((c,i)=>{const g=mk('g',{},$('coh'));mk('text',{x:c,y:250,'font-size':20,'text-anchor':'middle',class:'m'},g).textContent='GROUP '+(i+1);
+  for(let j=0;j<9;j++)mk('circle',{cx:c-40+(j%3)*40,cy:290+Math.floor(j/3)*36,r:12,class:i==3?'gain':'ink'},g);COH.push(g);
+  [460,590].forEach((y,r)=>{mk('rect',{x:c-100,y:y,width:200,height:40,rx:6,fill:'var(--line)'},$('rows4'));RB.push([mk('rect',{x:c-100,y:y,width:0,height:40,rx:6,class:'gain'},$('rows4')),FR[r][i],r])});
+  if(i<3)ARC.push(mk('path',{d:'M'+c+' 680Q'+(c+120)+' 740 '+(c+240)+' 680',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-dasharray':'10 8','stroke-linecap':'round'},$('arcs')))});
+const PN=[];for(let i=0;i<6;i++)PN.push(mk('circle',{cx:260+i*130,cy:650,r:10,class:'gain'},$('pins5')));
+const KF=['Actionable','Accessible','Auditable'].map((w,i)=>{const x=120+i*473,g=mk('g',{},$('cards'));mk('rect',{x:x,y:230,width:414,height:560,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  mk('text',{x:x+36,y:370,'font-size':120,class:'d',style:'fill:var(--gain)'},g).textContent='A';mk('text',{x:x+36,y:450,'font-size':44,class:'d5'},g).textContent=w;return g});
+[703,800,897].forEach(x=>fig($('ki1'),x,540,20,'ink'));
+const BA=[];for(let i=0;i<12;i++)BA.push(mk('circle',{cx:i<6?440+i*80:980+(i-6)*80,cy:360,r:16,class:i<6?'ink':'gain'},$('badots')));
+for(let j=0;j<8;j++)mk('circle',{cx:160+(j%4)*40,cy:630+Math.floor(j/4)*40,r:14,class:'ink'},$('clu'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+draw($('up0'),p(u,TM.rising_chart,TM.rising_chart+2));
+CF.forEach((c,i)=>{c.setAttribute('opacity',p(u,TM.rising_chart+1.6+i*.06,TM.rising_chart+2));c.setAttribute('y',(200+(i*37)%50+6*Math.sin(t*3+i)).toFixed(1))});
+rise($('lie0'),p(u,TM.rising_chart+4.2,TM.rising_chart+4.7));
+
+B1.forEach((b,i)=>{const a=TM.total_users+i*.15,h=(40+i*40)*p(u,a,a+.4);b.setAttribute('y',(640-h).toFixed(1));b.setAttribute('height',h.toFixed(1))});
+TB.forEach((q,i)=>{rise(q[0],p(u,TM.cheer_team+i*.2,TM.cheer_team+i*.2+.5));q[1].setAttribute('transform','translate(0 '+(-12*Math.abs(Math.sin(t*4+i))).toFixed(1)+')')});
+rise($('teamL'),p(u,TM.cheer_team+.6,TM.cheer_team+1.1));
+rise($('fog'),p(u,TM.fog_cloud,TM.fog_cloud+.6));rise($('fogq'),p(u,TM.fog_cloud+.6,TM.fog_cloud+1.1));
+
+rise($('imvu'),p(u,TM.imvu_office,TM.imvu_office+.5));
+draw($('gu2'),p(u,TM.growth_graph,TM.growth_graph+1.6));draw($('gr2'),p(u,TM.growth_graph+.3,TM.growth_graph+1.9));
+rise($('leg2'),p(u,TM.growth_graph,TM.growth_graph+.5));rise($('ok2'),p(u,TM.growth_graph+4.2,TM.growth_graph+4.7));
+FB.forEach((b,i)=>rise(b,p(u,TM.new_features+i*.35,TM.new_features+i*.35+.4)));rise($('fl2'),p(u,TM.new_features,TM.new_features+.5));
+
+rise($('hq'),p(u,TM.question_mark-.6,TM.question_mark));rise($('qb3'),p(u,TM.question_mark,TM.question_mark+.5));
+const ad=TM.question_mark+4.9;rise($('ads3'),p(u,ad,ad+.5));
+AD.forEach((d,k)=>{const f=(t*.35+k/4)%1;d.setAttribute('cx',(260+630*f).toFixed(1));d.setAttribute('cy',(580-140*f).toFixed(1))});
+rise($('wh3'),p(u,TM.busy_hamster,TM.busy_hamster+.5));
+$('spk').setAttribute('transform','rotate('+((t*140)%360).toFixed(1)+' 1270 430)');
+$('ham').setAttribute('transform','translate(0 '+(-6*Math.abs(Math.sin(t*9))).toFixed(1)+')');
+rise($('learn3'),p(u,TM.busy_hamster+.8,TM.busy_hamster+1.3));
+
+rise($('rl0'),p(u,TM.cohort_groups,TM.cohort_groups+.5));
+COH.forEach((g,i)=>rise(g,p(u,TM.cohort_groups+.3+i*.3,TM.cohort_groups+.8+i*.3)));
+rise($('rows4'),p(u,TM.funnel,TM.funnel+.5));
+RB.forEach((q,i)=>{const a=TM.funnel+.6+q[2]*1.2+(i>>1)*.2;q[0].setAttribute('width',(200*q[1]*p(u,a,a+.6)).toFixed(1))});
+ARC.forEach((a,i)=>a.setAttribute('opacity',p(u,TM.side_by_side+i*.4,TM.side_by_side+i*.4+.4)));
+rise($('cmpL'),p(u,TM.side_by_side,TM.side_by_side+.5));
+
+rise($('tot5'),p(u,TM.flat_lines,TM.flat_lines+.5));$('totp').style.opacity=1-.75*p(u,TM.mirror,TM.mirror+.6);
+draw($('flat5'),p(u,TM.flat_lines+1.7,TM.flat_lines+3.2));rise($('fl5l'),p(u,TM.flat_lines+2.6,TM.flat_lines+3.1));
+PN.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.flat_lines+1.7+i*.3,TM.flat_lines+2+i*.3)));
+rise($('pinl'),p(u,TM.flat_lines+1.7,TM.flat_lines+2.2));
+rise($('mir5'),p(u,TM.mirror,TM.mirror+.6));rise($('rth5'),p(u,TM.mirror+5,TM.mirror+5.6));
+
+KF.forEach((g,i)=>rise(g,p(u,TM.three_a+i*.4,TM.three_a+i*.4+.5)));
+[TM.cause_effect,TM.open_report,TM.open_report+3].forEach((a,i)=>rise($('ki'+i),p(u,a,a+.5)));
+rise($('vfail'),p(u,TM.cause_effect+6.6,TM.cause_effect+7.1));
+
+rise($('nb7'),p(u,TM.notebook,TM.notebook+.5));rise($('ba7'),p(u,TM.before_after,TM.before_after+.5));
+BA.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.before_after+.4+i*.15,TM.before_after+.7+i*.15)));
+rise($('sp7'),p(u,TM.split_test,TM.split_test+.5));
+const bk=(360*p(u,TM.split_test+1,TM.split_test+2.5)).toFixed(1);$('bA').setAttribute('width',bk);$('bB').setAttribute('width',bk);
+rise($('eq7'),p(u,TM.split_test+5.4,TM.split_test+5.9));rise($('fin7'),p(u,TM.split_test+5.6,TM.split_test+6.2));
+
+const md=TM.mystery_dash;rise($('gg'),p(u,md,md+.5));
+$('ndl').setAttribute('transform','rotate('+(50*Math.sin(t*1.7)).toFixed(1)+' 1340 760)');
+rise($('qa'),p(u,md+2.9,md+3.4));rise($('qb'),p(u,md+3.3,md+3.8));rise($('qc'),p(u,md+3.7,md+4.2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.73;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

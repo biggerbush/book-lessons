@@ -1,0 +1,408 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Good to Great Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Good to Great: The leaders behind great companies combine personal humility with an intense, almost stubborn will to do what is best for the organization, as Darwin Smith did at Kimberly-Clark. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GOOD TO GREAT · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The humble, relentless</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Level 5 leader.</text>
+<text class="b" x="120" y="600" font-size="32">The greatest leaders pair quiet humility with an unbreakable will.</text>
+<g id="cover">
+<text class="m" x="1370" y="190" font-size="24" text-anchor="middle" style="fill:var(--muted)">STAR CEO</text>
+<g id="coverIn">
+<rect class="s-ink" x="1260" y="220" width="220" height="290" rx="10" fill="var(--stage)" stroke-width="6"/>
+<g id="covF"></g>
+<path class="s-line" d="M1290 484h160" stroke-width="6" stroke-linecap="round"/>
+</g></g>
+<path id="xout" class="s-loss" d="M1250 210L1490 520M1490 210L1250 520" pathLength="1" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="quiet"><g id="qP"></g><text class="m" x="1370" y="800" font-size="22" text-anchor="middle" style="fill:var(--gain)">LEVEL 5</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Five levels of leadership.</text>
+<text class="b" x="120" y="176" font-size="32">Collins’s ladder: five levels, one rare peak.</text>
+<path id="rails" class="s-ink" d="M340 250V800M600 250V800" stroke-width="8" stroke-linecap="round"/>
+<g id="rungs"></g>
+<g id="climbW"><g id="climb"></g></g>
+<g id="lv4"><text class="d" x="680" y="405" font-size="44">Level 4</text><text class="m" x="680" y="442" font-size="20">RALLIES PEOPLE AROUND A CLEAR VISION</text></g>
+<g id="lv5"><text class="d" x="680" y="305" font-size="60" style="fill:var(--gain)">Level 5</text><text class="m" x="680" y="345" font-size="22" style="fill:var(--gain)">PERSONAL HUMILITY + FIERCE PROFESSIONAL WILL</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">An unlikely boss.</text>
+<text class="b" x="120" y="176" font-size="32">Kimberly-Clark, 1971.</text>
+<g id="ds"><g id="dsP"></g><text class="d" x="120" y="660" font-size="52">Darwin Smith</text><text class="m" x="120" y="700" font-size="22">CHIEF EXECUTIVE · 1971</text></g>
+<g id="lb">
+<rect class="s-ink" x="390" y="470" width="100" height="120" rx="6" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="390" y="470" width="16" height="120"/>
+<text class="m" x="448" y="538" font-size="22" text-anchor="middle">LAW</text>
+<path class="s-muted" d="M580 330L591.8 363.8L627.6 364.5L599 386.2L609.4 420.5L580 400L550.6 420.5L561 386.2L532.4 364.5L568.2 363.8Z" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="d5" x="120" y="770" font-size="32">A mild-mannered in-house lawyer.</text>
+</g>
+<path id="noStar" class="s-loss" d="M530 430L630 330" pathLength="1" stroke-width="7" stroke-linecap="round"/>
+<g id="mill">
+<g id="smoke"></g>
+<rect class="ink" x="1270" y="300" width="50" height="260"/>
+<path class="s-ink" d="M860 560V400l100-60v60l100-60v60l100-60v60l100-60V560z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M820 560H1460" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="860" y="600" font-size="20">OLD PAPER MAKER</text>
+</g>
+<g id="chart">
+<path class="s-line" d="M860 640V820H1450" fill="none" stroke-width="3"/>
+<path id="mk1" class="s-ink" d="M860 820C1100 760 1250 700 1440 640" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="kc1" class="s-loss" d="M860 820C1100 805 1250 795 1440 780" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1440" y="625" font-size="20" text-anchor="end">MARKET</text>
+<text class="m" x="1440" y="760" font-size="20" text-anchor="end" style="fill:var(--loss)">KIMBERLY-CLARK</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Will under pressure.</text>
+<text class="b" x="120" y="176" font-size="32">Two months into the job: cancer, and less than a year to live.</text>
+<g id="doc">
+<rect class="s-ink" x="120" y="240" width="320" height="340" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="220" y="224" width="120" height="36" rx="8"/>
+<text class="m" x="150" y="310" font-size="20">DIAGNOSIS</text>
+<path class="s-line" d="M150 340h200M150 372h240" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="150" y="420" font-size="20" style="fill:var(--loss)">CANCER</text>
+<text class="d" x="150" y="505" font-size="56" style="fill:var(--loss)">&lt; 1 year</text>
+<text class="m" x="150" y="548" font-size="18">TO LIVE</text>
+</g>
+<g id="cal">
+<rect class="s-ink" x="520" y="240" width="380" height="330" rx="12" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="520" y="240" width="380" height="60" rx="12"/><rect class="ink" x="520" y="270" width="380" height="30"/>
+<text class="m" x="710" y="278" font-size="20" text-anchor="middle" style="fill:var(--stage)">KEPT WORKING</text>
+<g id="calG"></g>
+<text class="m" x="520" y="610" font-size="20">TREATMENT + RUNNING THE COMPANY</text>
+</g>
+<g id="yrs">
+<text class="m" x="980" y="330" font-size="22">HE LIVED ANOTHER</text>
+<text id="yrN" class="d" x="972" y="450" font-size="100" style="fill:var(--gain)">25 years</text>
+<text class="m" x="980" y="510" font-size="22">THE SAME STUBBORN WILL</text>
+</g>
+<g id="tlw">
+<text class="m" x="120" y="640" font-size="20" style="fill:var(--loss)">EXPECTED</text>
+<g id="tl"></g>
+<text class="m" x="120" y="745" font-size="20">YEAR 1</text>
+<text class="m" x="1472" y="745" font-size="20" text-anchor="end">YEAR 25</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The big bet.</text>
+<text class="b" x="120" y="176" font-size="32">Sell the paper mills. Pour the money into consumer brands.</text>
+<g id="millsW"><g id="mills"></g><path class="s-ink" d="M120 500H620" stroke-width="6" stroke-linecap="round"/></g>
+<g id="sign">
+<path class="s-ink" d="M200 640V720M540 640V720" stroke-width="8" stroke-linecap="round"/>
+<rect class="s-ink" x="150" y="560" width="440" height="80" rx="8" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="370" y="608" font-size="22" text-anchor="middle">KIMBERLY, WISCONSIN</text>
+<text class="m" x="150" y="770" font-size="20">THE TOWN THAT NAMED THE COMPANY</text>
+<g id="signTag" transform="rotate(8 535 552)"><rect class="loss" x="480" y="530" width="110" height="44" rx="6"/><text class="m" x="535" y="560" font-size="22" text-anchor="middle" style="fill:var(--stage)">SOLD</text></g>
+</g>
+<g id="flow"><g id="coins"></g><path class="s-muted" d="M846 398l24 22-24 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="br">
+<text class="m" x="880" y="305" font-size="20">CONSUMER BRANDS</text>
+<rect class="gain" x="880" y="330" width="260" height="150" rx="16"/><rect class="gain" x="1200" y="330" width="260" height="150" rx="16"/>
+<text class="d" x="1010" y="420" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">Huggies</text>
+<text class="d" x="1330" y="420" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">Kleenex</text>
+</g>
+<g id="riv">
+<g id="rivG"></g><g id="rivS"></g>
+<text class="d" x="1170" y="720" font-size="56" text-anchor="middle" style="fill:var(--muted)">VS</text>
+<text class="m" x="1340" y="810" font-size="20" text-anchor="middle" style="fill:var(--loss)">PROCTER &amp; GAMBLE</text>
+<text class="m" x="1000" y="810" font-size="20" text-anchor="middle" style="fill:var(--gain)">KIMBERLY-CLARK</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The payoff.</text>
+<text class="b" x="120" y="176" font-size="32">Cumulative stock returns over the next 20 years, versus the market.</text>
+<path id="ref" class="s-muted" d="M240 660H800" stroke-width="3" stroke-dasharray="6 8"/>
+<rect id="barM" x="260" y="780" width="200" height="0" fill="var(--muted)"/>
+<rect id="barK" class="gain" x="560" y="780" width="200" height="0"/>
+<path class="s-ink" d="M200 780H860" stroke-width="5" stroke-linecap="round"/>
+<g id="bl"><text class="m" x="360" y="820" font-size="20" text-anchor="middle">GENERAL MARKET</text><text class="m" x="660" y="820" font-size="20" text-anchor="middle" style="fill:var(--gain)">KIMBERLY-CLARK</text></g>
+<text id="vM" class="d" x="360" y="644" font-size="48" text-anchor="middle">1×</text>
+<text id="vK" class="d" x="660" y="268" font-size="56" text-anchor="middle" style="fill:var(--gain)">4.1×</text>
+<g id="tro">
+<path class="s-gain" d="M1140 310h-40v30a50 50 0 0 0 50 50M1340 310h40v30a50 50 0 0 1-50 50" fill="none" stroke-width="10" stroke-linecap="round"/>
+<path class="gain" d="M1140 280h200v80a100 100 0 0 1-200 0z"/>
+<rect class="gain" x="1225" y="455" width="30" height="60"/><rect class="gain" x="1170" y="515" width="140" height="30" rx="6"/>
+<text class="d" x="1000" y="640" font-size="40">World’s leading</text>
+<text class="d" x="1000" y="690" font-size="40">paper-based consumer</text>
+<text class="d" x="1000" y="740" font-size="40">products company.</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Humble at heart.</text>
+<text class="b" x="120" y="176" font-size="32">He never chased the spotlight.</text>
+<g id="spt">
+<polygon points="400,270 440,270 560,560 280,560" fill="var(--gain)" fill-opacity=".18"/>
+<ellipse cx="420" cy="560" rx="140" ry="22" fill="var(--gain)" fill-opacity=".3"/>
+<path class="ink" d="M390 240h60l-10 30h-40z"/>
+<path class="s-line" d="M140 584H720" stroke-width="4" stroke-linecap="round"/>
+<g id="smith"></g>
+</g>
+<g id="qt">
+<text class="d5" x="120" y="670" font-size="34">“I never stopped trying to become</text>
+<text class="d5" x="120" y="714" font-size="34">qualified for the job.”</text>
+<text class="m" x="120" y="760" font-size="20">DARWIN SMITH</text>
+</g>
+<g id="win">
+<rect class="s-ink" x="860" y="240" width="240" height="240" fill="var(--stage)" stroke-width="8"/>
+<g id="winF"></g>
+<path class="s-ink" d="M980 240V480M860 360H1100" stroke-width="6"/>
+<text class="m" x="980" y="525" font-size="22" text-anchor="middle">WINDOW</text>
+</g>
+<g id="mir">
+<ellipse class="s-ink" cx="1330" cy="360" rx="100" ry="120" fill="var(--stage)" stroke-width="8"/>
+<g id="mirF"></g>
+<text class="m" x="1330" y="525" font-size="22" text-anchor="middle">MIRROR</text>
+</g>
+<g id="we"><text class="d5" x="980" y="600" font-size="34" text-anchor="middle" style="fill:var(--gain)">Credit others</text><text class="m" x="980" y="640" font-size="20" text-anchor="middle">WHEN IT GOES WELL</text></g>
+<g id="mw"><text class="d5" x="1330" y="600" font-size="34" text-anchor="middle">Look at yourself</text><text class="m" x="1330" y="640" font-size="20" text-anchor="middle">WHEN IT GOES WRONG</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ambition for the company.</text>
+<text class="b" x="120" y="176" font-size="32">Level 5 leaders set up their successors to win.</text>
+<g id="pL">
+<rect class="s-line" x="120" y="240" width="640" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="290" font-size="22">LEVEL 5 LEADER</text>
+<path class="s-muted" d="M440 320V520" stroke-width="3" stroke-dasharray="6 8"/>
+<text class="m" x="448" y="515" font-size="18">HANDOFF</text>
+<path id="c1a" class="s-gain" d="M170 500L440 430" pathLength="1" stroke-width="7" stroke-linecap="round"/>
+<path id="c1b" class="s-gain" d="M440 430L710 330" pathLength="1" stroke-width="7" stroke-linecap="round"/>
+<g id="ldr"></g><g id="suc"></g>
+<rect id="baton" class="gain" x="372" y="630" width="44" height="14" rx="5" stroke="var(--ink)" stroke-width="3"/>
+<g id="cap1"><text class="d5" x="150" y="740" font-size="30">The company keeps climbing.</text></g>
+</g>
+<g id="pR">
+<rect class="s-line" x="840" y="240" width="640" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="290" font-size="22">COMPARISON COMPANIES</text>
+<path class="s-muted" d="M1160 320V520" stroke-width="3" stroke-dasharray="6 8"/>
+<text class="m" x="1170" y="515" font-size="18">BOSS LEAVES</text>
+<path id="c2a" class="s-ink" d="M890 500L1160 340" pathLength="1" stroke-width="7" stroke-linecap="round"/>
+<path id="c2b" class="s-loss" d="M1160 340L1430 500" pathLength="1" stroke-width="7" stroke-linecap="round"/>
+<g id="ego"></g>
+<g id="cap2"><text class="d5" x="870" y="740" font-size="30">Firms stumbled after he left.</text></g>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<text class="m" x="143" y="200" font-size="26">THIS WEEK</text>
+<g id="qa"><text class="d" x="136" y="320" font-size="84" letter-spacing="-2">When it goes well,</text></g>
+<g id="qb"><text class="d" x="136" y="420" font-size="84" letter-spacing="-2">name <tspan style="fill:var(--gain)">someone else.</tspan></text></g>
+<g id="qc"><text class="d" x="136" y="570" font-size="84" letter-spacing="-2">When it goes wrong,</text></g>
+<g id="qd"><text class="d" x="136" y="670" font-size="84" letter-spacing="-2">look in the mirror.</text></g>
+<g id="wi"><rect class="s-ink" x="1180" y="250" width="200" height="180" fill="var(--stage)" stroke-width="8"/><path class="s-ink" d="M1280 250V430M1180 340H1380" stroke-width="6"/></g>
+<g id="mi"><ellipse class="s-ink" cx="1280" cy="580" rx="80" ry="100" fill="var(--stage)" stroke-width="8"/><circle class="ink" cx="1280" cy="560" r="22"/><path class="ink" d="M1250 640v-20a30 30 0 0 1 60 0v20z"/></g>
+<g id="foot"><text class="m" x="143" y="780" font-size="26">THE WINDOW AND THE MIRROR</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Humble, Relentless Level 5 Leader&rdquo;, from <em>Good to Great</em> by Jim Collins. Darwin Smith&#x27;s story at Kimberly-Clark and the stock comparison are as reported in the book. The leadership ladder, window and mirror are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 8.3], [8.3, 24.9], [24.9, 39.3], [39.3, 56.2], [56.2, 73.7], [73.7, 85.4], [85.4, 103.0], [103.0, 115.1], [115.1, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Quiet Power", "The Five Levels", "An Unlikely Boss", "Will Under Pressure", "The Big Bet", "The Payoff", "Humble at Heart", "Ambition for Others", "Your Turn"];
+const TM={"quiet_ceo": 0.0, "ladder": 8.64, "level_four": 12.72, "level_five": 18.24, "darwin_smith": 25.2, "law_book": 30.72, "old_mill": 34.56, "doctor_chart": 39.64, "calendar": 45.2, "paper_mills": 56.48, "kimberly_sign": 60.44, "diaper_box": 65.76, "rival_giant": 70.0, "stock_chart": 74.0, "trophy": 81.32, "spotlight": 85.68, "window_mirror": 93.8, "successor": 103.31, "ego_boss": 109.72};
+const fig=(g,x,y,r,cls)=>{const G=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:cls},G);mk('path',{d:'M'+(x-1.5*r)+' '+(y+4.2*r)+'v'+(-1.3*r)+'a'+1.5*r+' '+1.5*r+' 0 0 1 '+3*r+' 0v'+1.3*r+'z',class:cls},G);return G};
+const dr=(el,k)=>{el.style.strokeDasharray='1 1';el.style.strokeDashoffset=(1-k).toFixed(3)};
+fig($('covF'),1370,330,30,'loss');fig($('qP'),1370,620,30,'gain');
+const RG=[],RP=[];for(let i=0;i<5;i++){const y=740-i*110,g=mk('g',{},$('rungs'));RG.push(g);
+  RP.push(mk('path',{d:'M340 '+y+'H600',class:'s-ink','stroke-width':8,'stroke-linecap':'round'},g));
+  const n=mk('text',{x:300,y:y+12,class:'d','font-size':36,'text-anchor':'end'},g);n.textContent=i+1;
+  if(i<3){const l=mk('text',{x:680,y:y+8,class:'m','font-size':22},g);l.textContent='LEVEL '+(i+1)}}
+fig($('climb'),0,-80,16,'gain');
+fig($('dsP'),300,360,48,'ink');
+const SMK=[0,1,2].map(()=>mk('circle',{cx:1295,cy:280,r:16,fill:'var(--line)'},$('smoke')));
+const CK=[];for(let i=0;i<15;i++){const x=555+(i%5)*66,y=325+Math.floor(i/5)*74;
+  mk('rect',{x:x,y:y,width:56,height:56,rx:6,fill:'none',class:'s-line','stroke-width':3},$('calG'));
+  CK.push(mk('path',{d:'M'+(x+14)+' '+(y+30)+'l10 10 20-22',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('calG')))}
+const TL=[];for(let i=0;i<25;i++)TL.push(mk('rect',{x:120+i*54.4,y:660,width:46,height:50,rx:6,fill:'var(--stage)',stroke:i?'var(--ink)':'var(--loss)','stroke-width':i?3:5},$('tl')));
+const ML=[0,1,2].map(i=>{const x=130+i*170,g=mk('g',{},$('mills')),b=mk('g',{},g);
+  mk('rect',{x:x+122,y:340,width:24,height:160,class:'ink'},b);
+  mk('path',{d:'M'+x+' 500V400l40-30v30l40-30v30l40-30V500z',class:'s-ink',fill:'var(--stage)','stroke-width':5,'stroke-linejoin':'round'},b);
+  const tg=mk('g',{transform:'rotate(-8 '+(x+70)+' 440)'},g);mk('rect',{x:x+20,y:420,width:100,height:40,rx:6,class:'loss'},tg);
+  const tx=mk('text',{x:x+70,y:448,class:'m','font-size':22,'text-anchor':'middle',style:'fill:var(--stage)'},tg);tx.textContent='SOLD';return [b,tg]});
+const CO=[0,1,2,3].map(()=>mk('circle',{r:14,cy:420,cx:650,class:'gain'},$('coins')));
+fig($('rivG'),1340,560,50,'loss');fig($('rivS'),1000,650,30,'gain');
+fig($('smith'),0,440,26,'ink');
+[[920,300],[1040,300],[920,420],[1040,420]].forEach(q=>fig($('winF'),q[0],q[1]-22,14,'gain'));
+fig($('mirF'),1330,320,26,'ink');
+// leader body spans x 294-366, successor body spans x 524-596: the baton travels in the clear gap between them
+fig($('ldr'),330,580,24,'ink');fig($('suc'),560,580,24,'gain');fig($('ego'),0,575,32,'loss');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const dc=p(u,TM.quiet_ceo+3,TM.quiet_ceo+3.8);
+  rise($('cover'),p(u,TM.quiet_ceo,TM.quiet_ceo+.5)); $('coverIn').setAttribute('opacity',(1-.6*dc).toFixed(2)); dr($('xout'),dc);
+  rise($('quiet'),p(u,TM.quiet_ceo+3.5,TM.quiet_ceo+4.1));
+
+  rise($('rails'),p(u,TM.ladder,TM.ladder+.5));
+  RG.forEach((g,i)=>rise(g,p(u,TM.ladder+.4+i*.35,TM.ladder+.8+i*.35)));
+  const a4=p(u,TM.level_four,TM.level_four+1.4),a5=p(u,TM.level_five,TM.level_five+1.4);
+  rise($('climbW'),p(u,TM.ladder+2,TM.ladder+2.5)); $('climb').setAttribute('transform','translate(470 '+(740-330*a4-110*a5).toFixed(1)+')');
+  rise($('lv4'),p(u,TM.level_four,TM.level_four+.5)); rise($('lv5'),p(u,TM.level_five,TM.level_five+.5));
+  RP[4].setAttribute('class',u>=TM.level_five+1?'s-gain':'s-ink');
+
+  rise($('ds'),p(u,TM.darwin_smith,TM.darwin_smith+.5)); rise($('lb'),p(u,TM.law_book,TM.law_book+.5));
+  dr($('noStar'),p(u,TM.law_book+1,TM.law_book+1.6));
+  rise($('mill'),p(u,TM.old_mill,TM.old_mill+.5)); rise($('chart'),p(u,TM.old_mill+.8,TM.old_mill+1.3));
+  dr($('mk1'),p(u,TM.old_mill+1,TM.old_mill+3)); dr($('kc1'),p(u,TM.old_mill+1,TM.old_mill+3));
+  SMK.forEach((c,i)=>{const k=(t*.5+i/3)%1; c.setAttribute('cy',(280-60*k).toFixed(1)); c.setAttribute('r',(12+12*k).toFixed(1)); c.setAttribute('opacity',(1-k).toFixed(2))});
+
+  rise($('doc'),p(u,TM.doctor_chart,TM.doctor_chart+.5)); rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+  CK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.calendar+.5+i*.2,TM.calendar+.7+i*.2)));
+  const y0=TM.calendar+4.9; rise($('yrs'),p(u,y0,y0+.5)); rise($('tlw'),p(u,y0,y0+.5));
+  $('yrN').textContent=Math.round(25*p(u,y0+.2,y0+2.2))+' years';
+  TL.forEach((r,i)=>r.setAttribute('fill',u>=y0+.2+i*.08?'var(--gain)':'var(--stage)'));
+
+  rise($('millsW'),p(u,TM.paper_mills,TM.paper_mills+.4));
+  ML.forEach((m,i)=>{const k=p(u,TM.paper_mills+.6+i*.4,TM.paper_mills+1+i*.4); m[0].setAttribute('opacity',(1-.6*k).toFixed(2)); m[1].setAttribute('opacity',k)});
+  rise($('sign'),p(u,TM.kimberly_sign,TM.kimberly_sign+.5)); $('signTag').setAttribute('opacity',p(u,TM.kimberly_sign+1.5,TM.kimberly_sign+1.9));
+  rise($('flow'),p(u,TM.diaper_box,TM.diaper_box+.4));
+  CO.forEach((c,i)=>{const k=(t*.6+i/4)%1; c.setAttribute('cx',(650+190*k).toFixed(1)); c.setAttribute('opacity',Math.sin(k*Math.PI).toFixed(2))});
+  rise($('br'),p(u,TM.diaper_box+.4,TM.diaper_box+.9)); rise($('riv'),p(u,TM.rival_giant,TM.rival_giant+.5));
+
+  const g1=p(u,TM.stock_chart,TM.stock_chart+.8),g2=p(u,TM.stock_chart+.6,TM.stock_chart+2.6),hM=120*g1,hK=Math.max(120*g1,492*g2);
+  $('barM').setAttribute('y',780-hM); $('barM').setAttribute('height',hM); $('barK').setAttribute('y',780-hK); $('barK').setAttribute('height',hK);
+  $('ref').setAttribute('opacity',g1); $('vM').setAttribute('opacity',g1); $('vK').setAttribute('opacity',g1);
+  $('vK').setAttribute('y',(760-hK).toFixed(1)); $('vK').textContent=(1+3.1*g2).toFixed(1)+'×';
+  rise($('bl'),p(u,TM.stock_chart,TM.stock_chart+.5)); rise($('tro'),p(u,TM.trophy,TM.trophy+.5));
+
+  rise($('spt'),p(u,TM.spotlight,TM.spotlight+.5));
+  $('smith').setAttribute('transform','translate('+(420+220*p(u,TM.spotlight+.4,TM.spotlight+1.8)).toFixed(1)+' 0)');
+  rise($('qt'),p(u,TM.spotlight+2.5,TM.spotlight+3.1));
+  rise($('win'),p(u,TM.window_mirror,TM.window_mirror+.5)); rise($('mir'),p(u,TM.window_mirror+.4,TM.window_mirror+.9));
+  rise($('we'),p(u,TM.window_mirror+3.8,TM.window_mirror+4.3)); rise($('mw'),p(u,TM.window_mirror+5.5,TM.window_mirror+6));
+
+  rise($('pL'),p(u,TM.successor,TM.successor+.5)); dr($('c1a'),p(u,TM.successor+.4,TM.successor+1.4));
+  const hb=p(u,TM.successor+1.6,TM.successor+2.8); $('baton').setAttribute('x',(372+104*hb).toFixed(1)); $('ldr').setAttribute('opacity',(1-.6*hb).toFixed(2));
+  dr($('c1b'),p(u,TM.successor+3,TM.successor+4.2)); rise($('cap1'),p(u,TM.successor+4,TM.successor+4.5));
+  rise($('pR'),p(u,TM.ego_boss,TM.ego_boss+.5)); dr($('c2a'),p(u,TM.ego_boss+.3,TM.ego_boss+1.2));
+  const lv=p(u,TM.ego_boss+1.4,TM.ego_boss+2.6); $('ego').setAttribute('transform','translate('+(1050+330*lv).toFixed(1)+' 0)'); $('ego').setAttribute('opacity',(1-lv).toFixed(2));
+  dr($('c2b'),p(u,TM.ego_boss+2.4,TM.ego_boss+3.4)); rise($('cap2'),p(u,TM.ego_boss+3,TM.ego_boss+3.5));
+
+  const s8=SC[8][0]/K;
+  rise($('qa'),p(u,s8+.3,s8+.8)); rise($('qb'),p(u,s8+.8,s8+1.3)); rise($('wi'),p(u,s8+1,s8+1.5));
+  rise($('qc'),p(u,s8+5.4,s8+5.9)); rise($('qd'),p(u,s8+5.9,s8+6.4)); rise($('mi'),p(u,s8+6.1,s8+6.6)); rise($('foot'),p(u,s8+7,s8+7.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.11;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

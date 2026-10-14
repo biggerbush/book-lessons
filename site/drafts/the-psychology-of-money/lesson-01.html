@@ -1,0 +1,316 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Psychology of Money Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Psychology of Money: Everyone&#x27;s money decisions make sense to them because they are shaped by the particular slice of history and experience each person has lived through. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE PSYCHOLOGY OF MONEY · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">No one is crazy</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">about money.</text>
+<text class="b" x="120" y="600" font-size="32">Why everyone’s money choices make sense to them.</text>
+<g id="coins"></g>
+<g id="wallet"><rect class="s-ink" x="1120" y="420" width="320" height="210" rx="26" fill="var(--stage)" stroke-width="8"/><path class="s-ink" d="M1440 490h-90a35 35 0 0 0 0 70h90" fill="var(--stage)" stroke-width="8"/><circle class="gain" cx="1360" cy="525" r="12"/></g>
+<g id="huh"><path id="huhR" class="s-loss" d="M950 220h110a20 20 0 0 1 20 20v60a20 20 0 0 1-20 20h-30l30 40-60-40h-50a20 20 0 0 1-20-20v-60a20 20 0 0 1 20-20z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text id="huhQ" class="d" x="1005" y="295" font-size="64" text-anchor="middle" style="fill:var(--loss)">?!</text>
+<path id="huhC" class="s-gain" d="M975 270l20 22 40-44" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">You’ve lived a tiny slice.</text>
+<text class="b" x="120" y="176" font-size="32">Money’s history stretches across centuries and continents.</text>
+<g id="globe"><circle class="s-ink" cx="330" cy="520" r="170" fill="var(--stage)" stroke-width="6"/><g id="mer"></g>
+<path class="s-ink" d="M160 520h340M182 435h296M182 605h296" stroke-width="4"/></g>
+<g id="tl"><text class="m" x="620" y="336" font-size="20">CENTURIES OF MONEY</text><path class="s-line" d="M620 380h840" stroke-width="8" stroke-linecap="round"/><g id="ticks"></g></g>
+<g id="slice"><rect id="sliceR" class="gain" x="1400" y="356" width="30" height="48" rx="4"/><text class="m" x="1460" y="336" font-size="20" text-anchor="end" style="fill:var(--gain)">YOUR LIFETIME</text></g>
+<g id="belief"><polygon class="gain" points="1400,404 1430,404 1460,560 620,560" fill-opacity=".18"/>
+<rect class="gain" x="620" y="560" width="840" height="220" rx="20"/>
+<text class="m" x="660" y="620" font-size="22" style="fill:var(--on-gain)">WHAT YOU BELIEVE ABOUT MONEY</text>
+<text class="d" x="660" y="710" font-size="46" style="fill:var(--on-gain)">Mostly shaped by that slice.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Same market. Different decades.</text>
+<text class="b" x="120" y="176" font-size="32">The US stock market after inflation, in each person’s teens and twenties.</text>
+<g id="p0"></g><g id="p1"></g><g id="ln0"></g><g id="ln1"></g>
+<g id="v0"><text class="d5" x="200" y="520" font-size="40" style="fill:var(--loss)">Almost nowhere</text></g>
+<g id="v1"><text class="d5" x="900" y="470" font-size="40" style="fill:var(--gain)">Almost 10× over</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Different years, different lessons.</text>
+<g id="f0"><g id="f0i"><circle class="s-loss" r="110" fill="var(--stage)" stroke-width="8"/><circle class="ink" cx="-38" cy="-12" r="10"/><circle class="ink" cx="38" cy="-12" r="10"/>
+<path class="s-loss" d="M-60-52L-20-38M60-52L20-38M-45 50q15-15 30 0t30 0t30 0" fill="none" stroke-width="7" stroke-linecap="round"/></g></g>
+<g id="q0"><text class="d5" x="360" y="600" font-size="34" text-anchor="middle">“Stocks are a slow,</text><text class="d5" x="360" y="644" font-size="34" text-anchor="middle">frustrating gamble.”</text></g>
+<g id="f1"><g id="f1i"><circle class="s-gain" r="110" fill="var(--stage)" stroke-width="8"/><circle class="ink" cx="-38" cy="-12" r="10"/><circle class="ink" cx="38" cy="-12" r="10"/>
+<path class="s-gain" d="M-55 28q55 60 110 0" fill="none" stroke-width="8" stroke-linecap="round"/></g></g>
+<g id="q1"><text class="d5" x="1240" y="600" font-size="34" text-anchor="middle">“Stocks are a reliable</text><text class="d5" x="1240" y="644" font-size="34" text-anchor="middle">way to build wealth.”</text></g>
+<g id="crazy"><text class="d" x="800" y="420" font-size="56" text-anchor="middle">No one’s crazy.</text></g>
+<g id="fool"><text class="d" x="120" y="780" font-size="48">Neither is foolish.</text></g>
+<g id="rep"><text class="m" x="120" y="836" font-size="22">THEY ARE SIMPLY REPORTING WHAT THEY LIVED THROUGH</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What the research found.</text>
+<text class="b" x="120" y="176" font-size="32">Economists Ulrike Malmendier and Stefan Nagel.</text>
+<g id="res"><text class="m" x="140" y="450" font-size="20">MALMENDIER &amp; NAGEL</text></g>
+<g id="grid"></g>
+<g id="dl"><text class="m" x="500" y="510" font-size="20">DECADES OF DATA ON HOW ORDINARY PEOPLE INVEST</text></g>
+<g id="early"><text class="m" x="120" y="580" font-size="20">ONE INVESTOR’S LIFETIME</text>
+<rect class="s-line" x="120" y="600" width="900" height="50" rx="25" fill="none" stroke-width="4"/>
+<rect class="gain" x="300" y="600" width="240" height="50"/>
+<text class="m" x="420" y="690" font-size="20" text-anchor="middle" style="fill:var(--gain)">EARLY ADULT YEARS</text>
+<path class="s-muted" d="M1040 625h110m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-ink" d="M1200 690A120 120 0 0 1 1440 690" fill="none" stroke-width="8" stroke-linecap="round"/>
+<line id="ndl" class="s-gain" x1="1320" y1="690" x2="1320" y2="600" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1320" cy="690" r="12"/>
+<text class="m" x="1320" y="730" font-size="20" text-anchor="middle">RISK-TAKING</text>
+<text class="d" x="120" y="810" font-size="40">Risk-taking tracked their own lifetime.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Living it beats reading it.</text>
+<g id="book"><path class="s-ink" d="M440 320c-60-20-180-20-240 0v220c60-20 180-20 240 0zM440 320c60-20 180-20 240 0v220c-60-20-180-20-240 0z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-line" d="M230 370h180M230 410h180M230 450h180M230 490h120" stroke-width="5" stroke-linecap="round"/>
+<polyline class="s-loss" points="470,400 520,380 570,395 610,470 650,480" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="200" y="610" font-size="22">READ ABOUT IT</text></g>
+<g id="live"><g id="me5"></g><path id="knot" class="s-loss" d="M980 440m-6 0a6 6 0 1 1 12 0a12 12 0 1 1-24 0a18 18 0 1 1 36 0a24 24 0 1 1-48 0" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="s-loss" d="M1120 260l90 15 40 40 90-10 70 40" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="kit"><rect class="s-ink" x="1130" y="390" width="120" height="80" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M1165 390v-16h50v16" fill="none" stroke-width="6"/>
+<rect class="s-ink" x="1310" y="370" width="100" height="100" rx="16" fill="var(--stage)" stroke-width="6"/><circle class="gain" cx="1340" cy="445" r="12"/><circle class="gain" cx="1380" cy="445" r="12"/><circle class="gain" cx="1360" cy="420" r="12"/></g>
+<text class="m" x="1190" y="510" font-size="20" text-anchor="middle">JOB</text><text class="m" x="1360" y="510" font-size="20" text-anchor="middle">SAVINGS</text>
+<text class="m" x="860" y="610" font-size="22">LIVE THROUGH IT</text></g>
+<text class="m" x="120" y="690" font-size="20">HOW LONG IT STICKS</text>
+<rect id="bk0" x="120" y="710" width="0" height="30" rx="6" fill="var(--muted)"/>
+<rect id="bk1" class="gain" x="840" y="710" width="0" height="30" rx="6"/>
+<g id="stick"><text class="d" x="120" y="820" font-size="40">That felt experience sticks far longer than any chart.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The lottery puzzle.</text>
+<text class="b" x="120" y="176" font-size="32">Lower income US households tend to spend more on lottery tickets.</text>
+<g id="bars"><text class="m" x="160" y="270" font-size="20">LOTTERY SPENDING (SCHEMATIC)</text>
+<rect id="lb0" class="loss" x="200" y="680" width="120" height="0"/><rect id="lb1" x="440" y="680" width="120" height="0" fill="var(--muted)"/>
+<path class="s-line" d="M160 680H600" stroke-width="5"/>
+<text class="m" x="260" y="720" font-size="20" text-anchor="middle">LOWER INCOME</text><text class="m" x="500" y="720" font-size="20" text-anchor="middle">WEALTHIER</text></g>
+<g id="irr"><text class="d" x="260" y="360" font-size="64" text-anchor="middle" style="fill:var(--loss)">?</text><text class="d5" x="760" y="300" font-size="34">From outside, it looks irrational.</text></g>
+<g id="tix"><rect class="s-gain" x="780" y="560" width="320" height="140" rx="14" fill="var(--stage)" stroke-width="6"/><path class="s-gain" d="M870 570v120" stroke-width="4" stroke-dasharray="8 8"/>
+<text class="m" x="985" y="622" font-size="22" text-anchor="middle">LOTTERY</text><text class="m" x="985" y="656" font-size="22" text-anchor="middle">TICKET</text></g>
+<g id="dream"><g id="drm"><circle class="gain" cx="1110" cy="575" r="7"/><circle class="gain" cx="1135" cy="555" r="10"/><circle class="gain" cx="1165" cy="535" r="12"/>
+<ellipse class="s-gain" cx="1290" cy="450" rx="180" ry="95" fill="var(--gain)" fill-opacity=".2" stroke-width="5"/>
+<path class="gain" d="M1240 490v-50l50-40 50 40v50z"/><text class="m" x="1290" y="522" font-size="20" text-anchor="middle">A BETTER LIFE</text></g></g>
+<g id="dr2"><text class="d" x="120" y="800" font-size="40">A ticket buys a dream that feels within reach.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Money tools are surprisingly young.</text>
+<text class="b" x="120" y="176" font-size="32">Many have existed for only a few decades.</text>
+<g id="tl2"><path class="s-line" d="M120 420H1480" stroke-width="8" stroke-linecap="round"/><text class="m" x="120" y="470" font-size="20">CENTURIES OF MONEY</text></g>
+<g id="young"><rect class="gain" x="1240" y="408" width="240" height="24" rx="12"/><text class="m" x="1480" y="510" font-size="20" text-anchor="end" style="fill:var(--gain)">ONLY A FEW DECADES</text></g>
+<g id="chair"><g id="chairR"><path class="s-ink" d="M1255 350h70M1255 350V290M1260 350v38M1320 350v38M1240 390q50 15 100 0" fill="none" stroke-width="7" stroke-linecap="round"/></g></g>
+<g id="idx"><circle class="s-ink" cx="1425" cy="350" r="42" fill="var(--stage)" stroke-width="6"/><path class="gain" d="M1425 350V308a42 42 0 0 1 40 54z"/></g>
+<g id="tools"><text class="m" x="1480" y="470" font-size="20" text-anchor="end">RETIREMENT ACCOUNTS · INDEX FUNDS</text></g>
+<g id="learn"></g>
+<g id="beg"><text class="d" x="120" y="820" font-size="44">We are all still beginners figuring this out.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What years taught them</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">that money lesson?</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">And what taught <tspan style="fill:var(--gain)">you</tspan>?</text></g>
+<text class="m" x="143" y="700" font-size="26">NO ONE IS CRAZY ABOUT MONEY</text>
+<g id="mir"><ellipse class="s-ink" cx="1360" cy="460" rx="90" ry="130" fill="var(--stage)" stroke-width="8"/>
+<circle class="gain" cx="1360" cy="430" r="28"/><path class="gain" d="M1318 540v-25a42 42 0 0 1 84 0v25z"/>
+<path class="s-ink" d="M1360 590v60M1310 650h100" stroke-width="8" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;No One Is Crazy About Money&rdquo;, from <em>The Psychology of Money</em> by Morgan Housel. Examples as reported in the book: stock returns for people born in 1950 versus 1970, research by Ulrike Malmendier and Stefan Nagel, and lottery spending by income. The rising and flat lines, faces and other drawings are illustrations, not exact data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 7.9], [7.9, 20.6], [20.6, 39.3], [39.3, 56.1], [56.1, 73.2], [73.2, 85.7], [85.7, 101.5], [101.5, 116.7], [116.7, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Crazy Money Choices", "Your Tiny Slice", "Two Birth Years", "Different Lessons", "What Research Found", "Feeling Beats Facts", "The Lottery Puzzle", "We Are All Beginners", "Your Turn"];
+const TM={"title_wallet": 0.0, "globe": 8.24, "tiny_slice": 12.32, "big_belief": 15.76, "baby_1950": 20.88, "flat_line": 23.68, "baby_1970": 30.0, "rising_line": 33.12, "cautious_face": 39.6, "eager_face": 44.36, "researchers": 56.36, "decades_data": 61.8, "early_years": 66.0, "textbook": 73.52, "stomach_knot": 76.16, "lottery": 86.0, "thin_paycheck": 92.48, "hope_dream": 95.04, "retire_chair": 101.76, "index_fund": 106.32, "learners": 112.4, "mirror": 117.04};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const tx=(g,a,s)=>{const e=mk('text',a,g);e.textContent=s;return e};
+const CO=[0,1,2].map(i=>mk('circle',{cx:1250+i*50,cy:300,r:20,class:'gain'},$('coins')));
+const MER=[0,1,2].map(()=>mk('ellipse',{cx:330,cy:520,rx:170,ry:170,fill:'none',class:'s-ink','stroke-width':4},$('mer')));
+for(let i=0;i<15;i++)mk('path',{d:'M'+(620+i*60)+' 366v28',class:'s-line','stroke-width':4},$('ticks'));
+const LN=[0,1].map(i=>{const ox=120+700*i,g=$('p'+i);
+  mk('rect',{x:ox,y:220,width:660,height:570,rx:18,fill:'var(--stage)',class:'s-line','stroke-width':3},g);
+  fig(g,ox+70,262,18,i?'gain':'ink');
+  tx(g,{x:ox+130,y:318,class:'d','font-size':52},'Born '+(i?1970:1950));
+  mk('path',{d:'M'+(ox+60)+' 420V720H'+(ox+600),fill:'none',class:'s-line','stroke-width':4},g);
+  tx(g,{x:ox+60,y:760,class:'m','font-size':20},'THEIR TEENS AND TWENTIES');
+  return mk('polyline',{fill:'none',class:i?'s-gain':'s-loss','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('ln'+i))});
+function curve(i,k){let s='';for(let j=0;j<=60*k;j++){const f=j/60,x=180+700*i+540*f,y=i?690-290*Math.pow(f,2.2)+6*Math.sin(f*19):640-10*Math.sin(f*17)+8*Math.sin(f*6);s+=x.toFixed(1)+','+y.toFixed(1)+' '}return s}
+fig($('res'),190,300,26,'ink');fig($('res'),290,300,26,'gain');
+const DT=[];for(let i=0;i<100;i++)DT.push(mk('circle',{cx:500+(i%20)*50,cy:270+Math.floor(i/20)*45,r:9,fill:i%7===3?'var(--gain)':'var(--muted)'},$('grid')));
+fig($('me5'),980,330,36,'ink');
+const LR=[];for(let i=0;i<6;i++){const x=220+i*170,g=mk('g',{},$('learn'));fig(g,x,600,26,'ink');
+  mk('rect',{x:x-16,y:668,width:32,height:32,rx:6,class:'gain'},g);
+  tx(g,{x:x,y:692,class:'d','font-size':24,'text-anchor':'middle',style:'fill:var(--on-gain)'},'L');LR.push(g)}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+CO.forEach((c,i)=>{const k=(t*.5+i/3)%1;c.setAttribute('cy',(250+190*k).toFixed(1));c.setAttribute('opacity',(k<.8?1:(1-k)/.2).toFixed(2))});
+  $('wallet').setAttribute('transform','translate(0 '+(4*Math.sin(t*2)).toFixed(1)+')');
+  rise($('huh'),p(u,TM.title_wallet,TM.title_wallet+.5));
+  const ok=u>=TM.title_wallet+5.4;$('huhR').setAttribute('class',ok?'s-gain':'s-loss');$('huhQ').setAttribute('opacity',ok?0:1);$('huhC').setAttribute('opacity',ok?1:0);
+
+  rise($('globe'),p(u,TM.globe,TM.globe+.5));MER.forEach((e,i)=>e.setAttribute('rx',(170*Math.abs(Math.cos(t*.6+i*1.05))).toFixed(1)));
+  rise($('tl'),p(u,TM.globe+.6,TM.globe+1.2));
+  rise($('slice'),p(u,TM.tiny_slice,TM.tiny_slice+.5));$('sliceR').setAttribute('opacity',(.6+.4*Math.abs(Math.sin(t*3))).toFixed(2));
+  rise($('belief'),p(u,TM.big_belief,TM.big_belief+.6));
+
+  [TM.baby_1950,TM.baby_1970].forEach((a,i)=>rise($('p'+i),p(u,a,a+.5)));
+  [TM.flat_line,TM.rising_line].forEach((a,i)=>{const k=p(u,a,a+2.5);LN[i].setAttribute('points',k>0?curve(i,k):'');rise($('v'+i),p(u,a+2,a+2.5))});
+
+  rise($('f0'),p(u,TM.cautious_face,TM.cautious_face+.5));rise($('q0'),p(u,TM.cautious_face+.6,TM.cautious_face+1.1));
+  $('f0i').setAttribute('transform','translate('+(360+3*Math.sin(t*9)).toFixed(1)+' 400)');
+  rise($('f1'),p(u,TM.eager_face,TM.eager_face+.5));rise($('q1'),p(u,TM.eager_face+.6,TM.eager_face+1.1));
+  $('f1i').setAttribute('transform','translate(1240 '+(400-6*Math.abs(Math.sin(t*2.5))).toFixed(1)+')');
+  const e=TM.eager_face;rise($('fool'),p(u,e+5.4,e+5.9));rise($('rep'),p(u,e+6.8,e+7.3));rise($('crazy'),p(u,e+10.2,e+10.7));
+
+  rise($('res'),p(u,TM.researchers,TM.researchers+.5));
+  DT.forEach((d,i)=>{const a=TM.decades_data+(i%20)*.08;d.setAttribute('opacity',p(u,a,a+.3).toFixed(2))});
+  rise($('dl'),p(u,TM.decades_data+1,TM.decades_data+1.5));rise($('early'),p(u,TM.early_years,TM.early_years+.6));
+  const ang=Math.PI*(1-(.15+.7*p(u,TM.early_years+.8,TM.early_years+2.2)))+.05*Math.sin(t*3);
+  $('ndl').setAttribute('x2',(1320+95*Math.cos(ang)).toFixed(1));$('ndl').setAttribute('y2',(690-95*Math.sin(ang)).toFixed(1));
+
+  const sk=TM.stomach_knot;rise($('book'),p(u,TM.textbook,TM.textbook+.5));
+  $('bk0').setAttribute('width',(220*p(u,TM.textbook+.8,TM.textbook+2)).toFixed(1));$('bk0').setAttribute('opacity',(1-.6*p(u,sk+7,sk+8)).toFixed(2));
+  rise($('live'),p(u,sk,sk+.5));$('knot').setAttribute('transform','rotate('+((t*120)%360).toFixed(1)+' 980 440)');
+  $('kit').setAttribute('transform','translate('+(u>=sk?3*Math.sin(t*14):0).toFixed(1)+' 0)');
+  $('bk1').setAttribute('width',(640*p(u,sk+1,sk+3)).toFixed(1));rise($('stick'),p(u,sk+7,sk+7.6));
+
+  rise($('bars'),p(u,TM.lottery,TM.lottery+.4));const L=p(u,TM.lottery+.4,TM.lottery+1.6);
+  $('lb0').setAttribute('height',(300*L).toFixed(1));$('lb0').setAttribute('y',(680-300*L).toFixed(1));
+  $('lb1').setAttribute('height',(140*L).toFixed(1));$('lb1').setAttribute('y',(680-140*L).toFixed(1));
+  rise($('irr'),p(u,TM.thin_paycheck,TM.thin_paycheck+.5));
+  rise($('tix'),p(u,TM.hope_dream,TM.hope_dream+.5));rise($('dream'),p(u,TM.hope_dream+1,TM.hope_dream+1.6));
+  $('drm').setAttribute('transform','translate(0 '+(6*Math.sin(t*1.6)).toFixed(1)+')');rise($('dr2'),p(u,TM.hope_dream+2,TM.hope_dream+2.6));
+
+  rise($('tl2'),p(u,TM.retire_chair,TM.retire_chair+.5));rise($('chair'),p(u,TM.retire_chair+.6,TM.retire_chair+1.1));
+  $('chairR').setAttribute('transform','rotate('+(4*Math.sin(t*2)).toFixed(2)+' 1290 395)');
+  rise($('young'),p(u,TM.retire_chair+1.2,TM.retire_chair+1.7));
+  rise($('idx'),p(u,TM.index_fund,TM.index_fund+.5));rise($('tools'),p(u,TM.index_fund+.5,TM.index_fund+1));
+  LR.forEach((g,i)=>{const a=TM.learners+i*.2;rise(g,p(u,a,a+.4))});rise($('beg'),p(u,TM.learners+1.4,TM.learners+2));
+
+  rise($('qa'),p(u,TM.mirror,TM.mirror+.5));rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9));
+  rise($('mir'),p(u,TM.mirror+.8,TM.mirror+1.4));rise($('qc'),p(u,TM.mirror+7.4,TM.mirror+7.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.93;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

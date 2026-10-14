@@ -1,0 +1,354 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deep Work Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Deep Work: Without clear ways to measure output, workplaces default to visible busyness like fast email replies, which crowds out deep work. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DEEP WORK · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Why busyness feels</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">like productivity.</text>
+<text class="b" x="120" y="600" font-size="32">Why looking busy quietly replaces doing your best work.</text>
+<g id="tenv"></g>
+<path class="s-ink" d="M1160 590V700H1440V590" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="1160" y="770" font-size="20">DEEP WORK</text>
+<rect class="s-line" x="1160" y="790" width="280" height="22" rx="11" fill="none" stroke-width="3"/>
+<rect id="tdeep" class="gain" x="1160" y="790" width="280" height="22" rx="11"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Who is creating value?</text>
+<text class="b" x="120" y="176" font-size="32">In most offices, it is surprisingly hard to measure.</text>
+<g id="desks"></g>
+<g id="qs"></g>
+<g id="chart">
+<path class="s-ink" d="M840 280V640H1440" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="bars"></g>
+<g id="hole"></g>
+<text class="m" x="1140" y="690" font-size="22" text-anchor="middle">A METRIC BLACK HOLE</text>
+</g>
+<g id="inv"><text class="d" x="120" y="800" font-size="44">The true cost of distraction stays invisible.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Busy looks like hard work.</text>
+<polygon id="spot" class="gain" points="330,210 410,210 540,700 220,700" fill-opacity=".18"/>
+<ellipse id="spotF" class="gain" cx="380" cy="700" rx="160" ry="26" fill-opacity=".3"/>
+<g id="jug"></g>
+<g id="balls"></g>
+<g id="rout"><rect class="s-muted" x="590" y="550" width="110" height="140" rx="10" fill="none" stroke-width="5" stroke-dasharray="9 9"/><path class="s-muted" d="M614 590h62M614 618h62M614 646h36" stroke-width="5" stroke-linecap="round"/><text class="m" x="645" y="734" font-size="22" text-anchor="middle">REAL OUTPUT</text></g>
+<g id="tiles"></g>
+<g id="proxy"><text class="d5" x="120" y="800" font-size="44">“Busyness as proxy for productivity.”</text></g>
+<g id="seen"><text class="m" x="120" y="848" font-size="20">BUSYNESS IS EASY TO SEE. REAL OUTPUT OFTEN IS NOT.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The path of least resistance.</text>
+<g id="hill">
+<path d="M160 760V520L300 240L1300 720H1480V760Z" fill="var(--line)" fill-opacity=".45"/>
+<path class="s-ink" d="M160 520L300 240L1300 720H1480" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="s-ink" d="M300 240V150" stroke-width="5" stroke-linecap="round"/>
+<path class="gain" d="M300 150h70l-16 20 16 20h-70z"/>
+<text class="m" x="390" y="176" font-size="20" style="fill:var(--gain)">DEEP WORK · HARD</text>
+</g>
+<g id="lr"><text class="m" x="812" y="556" font-size="22" text-anchor="middle" transform="rotate(25.6 812 556)">LEAST RESISTANCE</text></g>
+<circle id="ball" class="ink" r="26"/>
+<g id="phone">
+<rect class="loss" x="1330" y="570" width="80" height="140" rx="14"/>
+<rect x="1342" y="590" width="56" height="90" rx="4" fill="var(--stage)"/>
+<text class="m" x="1470" y="540" font-size="20" text-anchor="end" style="fill:var(--loss)">EASY · ALWAYS REACHABLE</text>
+</g>
+<path id="rings" d="M1305 600q-20 40 0 80M1285 585q-30 55 0 110M1435 600q20 40 0 80M1455 585q30 55 0 110" fill="none" stroke="var(--loss)" stroke-width="5" stroke-linecap="round"/>
+<g id="cult"><text class="d" x="120" y="830" font-size="44">Easy becomes the culture, even if it hurts results.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What email really costs.</text>
+<text class="b" x="120" y="176" font-size="32">Tom Cochran, chief technology officer at Atlantic Media.</text>
+<g id="cto"></g>
+<g id="clk"><circle class="s-ink" cx="460" cy="330" r="50" fill="var(--stage)" stroke-width="5"/><path id="pie" class="loss" d="M0 0"/></g>
+<g id="mails"></g>
+<g id="sheet">
+<rect class="s-ink" x="560" y="250" width="440" height="356" rx="12" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M560 306H1000M780 250V606" stroke-width="4"/>
+<text class="m" x="580" y="286" font-size="20">MESSAGES</text>
+<text class="m" x="800" y="286" font-size="20">SALARIES</text>
+<g id="rows"></g>
+</g>
+<path id="arr" class="s-muted" d="M1020 430h50m-16-16 16 16-16 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="coins"></g>
+<g id="cash"><text id="cashv" class="d" x="120" y="800" font-size="96" style="fill:var(--gain)">$1,000,000</text><text class="m" x="760" y="760" font-size="22">ROUGHLY, EVERY YEAR</text><text class="d5" x="760" y="810" font-size="40">in paid time</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One day fully offline.</text>
+<text class="b" x="120" y="176" font-size="32">Leslie Perlow, Harvard Business School, with Boston Consulting Group.</text>
+<g id="res"><rect x="250" y="450" width="50" height="66" rx="6" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><path class="s-gain" d="M260 472h30M260 488h30M260 504h18" stroke-width="4" stroke-linecap="round"/><text class="m" x="210" y="580" font-size="20" text-anchor="middle">RESEARCHER</text></g>
+<g id="cons"><text class="m" x="660" y="580" font-size="20" text-anchor="middle">CONSULTANTS</text></g>
+<g id="sig"></g>
+<g id="cal"><rect class="s-ink" x="960" y="280" width="520" height="260" rx="14" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M960 340H1480" stroke-width="4"/></g>
+<g id="offc"><rect class="gain" x="1174" y="346" width="92" height="188" rx="8"/><text class="d" x="1220" y="452" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">OFF</text><text class="m" x="1220" y="580" font-size="20" text-anchor="middle" style="fill:var(--gain)">ONE PREDICTABLE DAY PER WEEK</text></g>
+<g id="happy"></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Busy time steals deep time.</text>
+<g id="day">
+<text class="m" x="120" y="300" font-size="20">ONE WORKDAY</text>
+<rect class="s-ink" x="120" y="320" width="1360" height="180" rx="18" fill="none" stroke-width="5"/>
+<g id="shal"></g>
+<rect id="deepb" class="gain" x="280" y="340" width="1180" height="140" rx="12"/>
+<text id="deept" class="m" x="870" y="420" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">DEEP WORK</text>
+</g>
+<g id="bal">
+<path class="s-ink" d="M800 600V770" stroke-width="8" stroke-linecap="round"/>
+<path class="ink" d="M760 800h80l-40-40z"/>
+<g id="beam"><path class="s-ink" d="M550 600H1050" stroke-width="10" stroke-linecap="round"/></g>
+<circle class="ink" cx="800" cy="600" r="12"/>
+<g id="panL"><path class="s-ink" d="M0 0L-50 70M0 0L50 70" stroke-width="4" fill="none"/><path class="loss" d="M-75 70h150l-20 30h-110z"/></g>
+<g id="panR"><path class="s-ink" d="M0 0L-50 70M0 0L50 70" stroke-width="4" fill="none"/><path class="gain" d="M-75 70h150l-20 30h-110z"/></g>
+<text class="m" x="550" y="840" font-size="22" text-anchor="middle" style="fill:var(--loss)">LOOKING BUSY</text>
+<text class="m" x="1050" y="840" font-size="22" text-anchor="middle" style="fill:var(--gain)">DEEP WORK</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Spot the proxy.</text>
+<text class="b" x="120" y="176" font-size="32">Which of your habits exist mainly to look busy?</text>
+<g id="mir">
+<ellipse class="s-ink" cx="360" cy="470" rx="160" ry="220" fill="var(--stage)" stroke-width="8"/>
+<path class="s-line" d="M250 340q-16 60 0 120" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="refl"></g>
+<path class="s-ink" d="M360 690V740M290 740h140" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g id="tags"></g>
+<g id="card"><rect class="s-line" x="1000" y="260" width="480" height="380" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1030" y="310" font-size="22">JUDGE YOUR DAY BY</text></g>
+<g id="ck0"><rect x="1030" y="382" width="44" height="44" rx="8" fill="none" stroke="var(--loss)" stroke-width="4"/><path class="s-loss" d="M1042 394l20 20M1062 394l-20 20" stroke-width="4" stroke-linecap="round"/><text class="d5" x="1094" y="416" font-size="34" fill-opacity=".55">Messages answered</text></g>
+<line id="stk" class="s-ink" x1="1090" y1="405" x2="1090" y2="405" stroke-width="5" stroke-linecap="round"/>
+<g id="ck1"><rect class="gain" x="1030" y="502" width="44" height="44" rx="8"/><path d="M1040 524l9 10 16-18" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d" x="1094" y="536" font-size="34">What you produced</text></g>
+<g id="outp"><text class="d" x="120" y="820" font-size="46">Output, not activity.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What deep work could</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">those minutes have</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">bought</tspan> you?</text></g>
+<g id="tl"><text class="m" x="143" y="700" font-size="26">TOMORROW: COUNT EVERY INSTANT REPLY</text></g>
+<g id="tally"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Why Busyness Feels Like Productivity&rdquo;, from <em>Deep Work</em> by Cal Newport. The Tom Cochran email estimate and Leslie Perlow&#x27;s Boston Consulting Group study are as reported in the book. The foggy chart, money pile, scale and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 9.3], [9.3, 25.7], [25.7, 47.9], [47.9, 62.9], [62.9, 79.5], [79.5, 98.9], [98.9, 108.9], [108.9, 118.8], [118.8, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Busy Trap", "The Measuring Problem", "Busy Looks Good", "The Easy Path", "A Costly Inbox", "The Day Off Test", "The Real Cost", "Spot the Proxy", "Your Challenge"];
+const TM={"inbox_flood": 0.0, "office": 9.6, "foggy_chart": 15.04, "question_mark": 21.28, "juggler": 25.96, "replies": 31.92, "spotlight": 42.0, "downhill": 48.16, "sliding_ball": 52.64, "phone_ring": 57.36, "cto": 63.2, "spreadsheet": 70.08, "money_pile": 75.36, "researcher": 79.79, "consultants": 83.92, "calendar_off": 90.08, "happy_team": 94.21, "scale": 99.2, "shallow_pool": 103.6, "mirror": 109.16, "checklist": 114.16, "tally": 119.08};
+const P=(g,x,y,r,c)=>[mk('circle',{cx:x,cy:y,r:r,class:c},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)];
+const EN=(g,x,y,w,h)=>{mk('rect',{x:x,y:y,width:w,height:h,rx:5,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M'+x+' '+y+'L'+(x+w/2)+' '+(y+h*.6)+'L'+(x+w)+' '+y,fill:'none',stroke:'var(--ink)','stroke-width':4,'stroke-linejoin':'round'},g)};
+const TX=(g,x,y,s,a)=>{const e=mk('text',a,g);e.setAttribute('x',x);e.setAttribute('y',y);e.textContent=s;return e};
+const TE=[];for(let i=0;i<8;i++){const g=mk('g',{},$('tenv'));EN(g,0,0,90,60);TE.push([g,1180+(i%3)*85,630-Math.floor(i/3)*40])}
+const DK=[200,340,480,620].map(x=>{const g=mk('g',{},$('desks'));P(g,x,430,24,'ink');mk('rect',{x:x-55,y:535,width:110,height:12,rx:4,class:'ink'},g);mk('rect',{x:x-30,y:497,width:60,height:38,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  return [g,TX($('qs'),x,385,'?',{'font-size':56,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'})]});
+const BR=[120,200,160,260,220].map((h,i)=>mk('rect',{x:880+i*110,y:640-h,width:70,height:h,rx:6,class:'ink'},$('bars')));
+const RG=[110,150,190].map(r=>mk('ellipse',{cx:1140,cy:450,rx:r,ry:r*.36,fill:'none',stroke:'var(--loss)','stroke-width':4,'stroke-dasharray':'14 12'},$('hole')));
+const HC=mk('circle',{cx:1140,cy:450,r:0,class:'loss'},$('hole'));
+P($('jug'),380,470,30,'ink');mk('path',{d:'M335 545L300 470M425 545L460 470M362 596V690M398 596V690',class:'s-ink','stroke-width':10,'stroke-linecap':'round',fill:'none'},$('jug'));
+const BL=[0,1,2].map(()=>mk('circle',{r:20,class:'loss'},$('balls')));
+const TL=['Fast email replies','Packed calendars','Constant meetings'].map((s,i)=>{const y=250+i*130,g=mk('g',{},$('tiles'));
+  mk('rect',{x:760,y:y,width:720,height:100,rx:16,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  if(i==0)EN(g,790,y+28,70,46);
+  if(i==1){mk('rect',{x:790,y:y+22,width:70,height:58,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},g);for(let k=0;k<6;k++)mk('rect',{x:798+(k%3)*20,y:y+36+Math.floor(k/3)*20,width:14,height:14,class:'loss'},g)}
+  if(i==2){P(g,806,y+30,11,'ink');P(g,844,y+30,11,'ink')}
+  TX(g,900,y+63,s,{'font-size':38,class:'d5'});return g});
+P($('cto'),270,330,36,'ink');mk('rect',{x:150,y:490,width:240,height:14,rx:4,class:'ink'},$('cto'));mk('rect',{x:220,y:444,width:100,height:46,rx:5,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('cto'));
+// envelopes in the empty space around the figure: [x, y, slide-in dx, slide-in dy]
+const MS=[[140,296,-40,0],[248,214,0,-30],[340,214,30,-30],[140,396,-40,0],[344,402,30,0]];
+const ML=MS.map(()=>{const g=mk('g',{},$('mails'));EN(g,0,0,44,30);return g});
+const SR=[];for(let r=0;r<5;r++){const y=306+r*60,g=mk('g',{},$('rows'));if(r<4)mk('path',{d:'M560 '+(y+60)+'H1000',stroke:'var(--line)','stroke-width':3},g);
+  mk('rect',{x:580,y:y+22,width:60+((r*53)%120),height:16,rx:8,class:'ink'},g);mk('rect',{x:800,y:y+22,width:70+((r*71)%110),height:16,rx:8,class:'gain'},g);SR.push(g)}
+const CN=[];for(let s=0;s<4;s++)for(let k=0;k<3+2*s;k++)CN.push(mk('rect',{x:1100+s*95,y:600-k*20,width:80,height:18,rx:9,class:'gain',stroke:'var(--ink)','stroke-width':3},$('coins')));
+P($('res'),200,400,30,'ink');
+const CS=[480,600,720,840].map(x=>{mk('path',{d:'M'+(x-18)+' 352q18-16 36 0M'+(x-32)+' 338q32-28 64 0',fill:'none',stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round'},$('sig'));return P($('cons'),x,400,28,'ink')});
+['MON','TUE','WED','THU','FRI'].forEach((s,i)=>{TX($('cal'),1012+i*104,322,s,{'font-size':20,'text-anchor':'middle',class:'m'});if(i)mk('path',{d:'M'+(960+i*104)+' 340V540',stroke:'var(--line)','stroke-width':3},$('cal'))});
+const HP=['Enjoyed work more','Communicated better','Better client work'].map((s,i)=>{const x=120+i*460,g=mk('g',{},$('happy'));mk('circle',{cx:x+26,cy:708,r:26,class:'gain'},g);
+  mk('path',{d:'M'+(x+14)+' 708l9 10 17-19',fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);TX(g,x+66,720,s,{'font-size':34,class:'d5'});return g});
+const SH=[];for(let i=0;i<14;i++)SH.push(mk('rect',{x:140+i*70,y:350,width:56,height:120,rx:8,class:'loss'},$('shal')));
+P($('refl'),360,420,44,'ink');
+const TG=['INSTANT REPLIES?','EXTRA MEETINGS?','PACKED CALENDAR?'].map((s,i)=>{const y=290+i*100,g=mk('g',{},$('tags'));mk('rect',{x:580,y:y,width:340,height:64,rx:32,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);TX(g,750,y+40,s,{'font-size':22,'text-anchor':'middle',class:'m'});return g});
+const TY=[];for(let g=0;g<3;g++)for(let i=0;i<5;i++){const x=1100+g*120;TY.push(mk('path',{d:i<4?'M'+(x+i*20)+' 640V760':'M'+(x-12)+' 730L'+(x+72)+' 670',stroke:i<4?'var(--ink)':'var(--loss)','stroke-width':8,'stroke-linecap':'round'},$('tally')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+TE.forEach((e,i)=>{const a=TM.inbox_flood+i*.45,k=p(u,a,a+.6);e[0].setAttribute('transform','translate('+e[1]+' '+(200+(e[2]-200)*k).toFixed(1)+')');e[0].setAttribute('opacity',cl(lin(u,a,a+.15)))});
+$('tdeep').setAttribute('width',(280*(1-.85*p(u,TM.inbox_flood+4.6,TM.inbox_flood+7.5))).toFixed(1));
+
+DK.forEach((d,i)=>{rise(d[0],p(u,TM.office+i*.3,TM.office+i*.3+.5));rise(d[1],p(u,TM.question_mark+i*.25,TM.question_mark+i*.25+.4))});
+rise($('chart'),p(u,TM.foggy_chart,TM.foggy_chart+.5));
+const hk=p(u,TM.foggy_chart+1,TM.foggy_chart+3.5);HC.setAttribute('r',(70*hk).toFixed(1));
+RG.forEach((r,i)=>{r.setAttribute('opacity',hk);r.setAttribute('transform','rotate('+((t*(20+i*10))%360).toFixed(1)+' 1140 450)')});
+BR.forEach((b,i)=>{b.setAttribute('transform','translate('+((1140-915-i*110)*.3*hk).toFixed(1)+' 0)');b.setAttribute('opacity',(1-.75*hk).toFixed(2))});
+rise($('inv'),p(u,TM.foggy_chart+2.5,TM.foggy_chart+3.1));
+
+rise($('jug'),p(u,TM.juggler,TM.juggler+.5));const jb=p(u,TM.juggler+.3,TM.juggler+.8);
+BL.forEach((b,i)=>{const a=t*3+i*2.094;b.setAttribute('cx',(380+110*Math.cos(a)).toFixed(1));b.setAttribute('cy',(355+55*Math.sin(a)).toFixed(1));b.setAttribute('opacity',jb)});
+TL.forEach((g,i)=>rise(g,p(u,TM.replies+i*1.2,TM.replies+i*1.2+.5)));
+rise($('proxy'),p(u,TM.replies+5.4,TM.replies+6));
+const sp=p(u,TM.spotlight,TM.spotlight+.8);$('spot').setAttribute('opacity',sp);$('spotF').setAttribute('opacity',sp);
+rise($('rout'),p(u,TM.spotlight+.8,TM.spotlight+1.3));rise($('seen'),p(u,TM.spotlight+1.2,TM.spotlight+1.8));
+
+rise($('hill'),p(u,TM.downhill,TM.downhill+.6));
+const bx=520+700*p(u,TM.sliding_ball+.5,TM.sliding_ball+3.5);
+$('ball').setAttribute('cx',bx.toFixed(1));$('ball').setAttribute('cy',(240+.48*(bx-300)-29).toFixed(1));$('ball').setAttribute('opacity',p(u,TM.downhill+.4,TM.downhill+.9));
+rise($('lr'),p(u,TM.sliding_ball,TM.sliding_ball+.5));
+rise($('phone'),p(u,TM.phone_ring,TM.phone_ring+.4));$('rings').setAttribute('opacity',u>=TM.phone_ring?(.4+.6*Math.abs(Math.sin(t*6))).toFixed(2):0);
+rise($('cult'),p(u,TM.phone_ring+1,TM.phone_ring+1.6));
+
+rise($('cto'),p(u,TM.cto,TM.cto+.5));rise($('clk'),p(u,TM.cto+.3,TM.cto+.8));
+const pk=p(u,TM.cto+.8,TM.cto+6)*.85,pa=pk*2*Math.PI;
+$('pie').setAttribute('d',pk>0?'M460 330V280A50 50 0 '+(pa>Math.PI?1:0)+' 1 '+(460+50*Math.sin(pa)).toFixed(1)+' '+(330-50*Math.cos(pa)).toFixed(1)+'Z':'M0 0');
+ML.forEach((m,i)=>{const s=MS[i],a=TM.cto+.6+i*.5,k=p(u,a,a+.6),bob=4*Math.sin(t*2+i*1.3);
+  m.setAttribute('transform','translate('+(s[0]+s[2]*(1-k)).toFixed(1)+' '+(s[1]+s[3]*(1-k)+bob*k).toFixed(1)+')');m.setAttribute('opacity',k.toFixed(2))});
+rise($('sheet'),p(u,TM.spreadsheet,TM.spreadsheet+.5));SR.forEach((g,i)=>rise(g,p(u,TM.spreadsheet+.5+i*.4,TM.spreadsheet+.9+i*.4)));
+$('arr').setAttribute('opacity',p(u,TM.spreadsheet+3,TM.spreadsheet+3.5));
+CN.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.money_pile+i*.08,TM.money_pile+i*.08+.2)));
+rise($('cash'),p(u,TM.money_pile+.3,TM.money_pile+.8));$('cashv').textContent='$'+Math.round(1e6*p(u,TM.money_pile+.3,TM.money_pile+2.3)).toLocaleString('en-US');
+
+rise($('res'),p(u,TM.researcher,TM.researcher+.5));rise($('cons'),p(u,TM.consultants,TM.consultants+.5));
+$('sig').setAttribute('opacity',(p(u,TM.consultants+.5,TM.consultants+1)*(1-.85*p(u,TM.calendar_off+1,TM.calendar_off+2))).toFixed(2));
+rise($('cal'),p(u,TM.calendar_off,TM.calendar_off+.5));rise($('offc'),p(u,TM.calendar_off+.8,TM.calendar_off+1.3));
+HP.forEach((g,i)=>rise(g,p(u,TM.happy_team+i*.8,TM.happy_team+i*.8+.5)));
+CS.forEach(pp=>pp.forEach(e=>e.setAttribute('class',u>=TM.happy_team?'gain':'ink')));
+
+rise($('day'),p(u,TM.scale,TM.scale+.5));rise($('bal'),p(u,TM.scale+.3,TM.scale+.8));
+const s1=p(u,TM.scale+.5,TM.scale+1.5),s2=p(u,TM.shallow_pool+.3,TM.shallow_pool+3.3),nn=2+2*s1+10*s2,dx=140+nn*70;
+SH.forEach((r,i)=>r.setAttribute('opacity',cl(nn-i)));
+$('deepb').setAttribute('x',dx.toFixed(1));$('deepb').setAttribute('width',(1460-dx).toFixed(1));$('deept').setAttribute('x',((dx+1460)/2).toFixed(1));
+const an=-6*s1-8*s2,ar=an*Math.PI/180,cx=250*Math.cos(ar),cy=250*Math.sin(ar);
+$('beam').setAttribute('transform','rotate('+an.toFixed(2)+' 800 600)');
+$('panL').setAttribute('transform','translate('+(800-cx).toFixed(1)+' '+(600-cy).toFixed(1)+')');$('panR').setAttribute('transform','translate('+(800+cx).toFixed(1)+' '+(600+cy).toFixed(1)+')');
+
+rise($('mir'),p(u,TM.mirror,TM.mirror+.5));TG.forEach((g,i)=>rise(g,p(u,TM.mirror+1.2+i*.9,TM.mirror+1.7+i*.9)));
+rise($('card'),p(u,TM.checklist,TM.checklist+.5));rise($('ck0'),p(u,TM.checklist+.4,TM.checklist+.9));
+$('stk').setAttribute('x2',(1090+320*p(u,TM.checklist+1.2,TM.checklist+1.8)).toFixed(1));
+rise($('ck1'),p(u,TM.checklist+2,TM.checklist+2.5));rise($('outp'),p(u,TM.checklist+3,TM.checklist+3.6));
+
+rise($('tl'),p(u,TM.tally,TM.tally+.5));const tk=Math.floor(15*p(u,TM.tally+.5,TM.tally+5));
+TY.forEach((e,i)=>e.setAttribute('opacity',i<tk?1:0));
+rise($('qa'),p(u,TM.tally+5.4,TM.tally+5.9));rise($('qb'),p(u,TM.tally+5.8,TM.tally+6.3));rise($('qc'),p(u,TM.tally+6.2,TM.tally+6.7));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.12;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

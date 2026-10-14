@@ -1,0 +1,337 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Power of Habit Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Power of Habit: Much of what we do each day is habit rather than conscious choice, as shown by a man with severe memory loss who still formed new routines without remembering them. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE POWER OF HABIT · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Your life runs</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">on autopilot.</text>
+<text class="b" x="120" y="600" font-size="32">Most of what you do each day, you never decided.</text>
+<rect class="ink" x="1200" y="540" width="100" height="100"/>
+<circle class="s-ink" cx="1250" cy="400" r="160" fill="var(--stage)" stroke-width="8"/>
+<path class="s-line" d="M1140 380c0-70 60-100 110-100s110 30 110 100c0 50-40 80-110 80s-110-30-110-80zM1200 300v40M1300 300v40" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="rings"></g>
+<circle id="glow" class="gain" cx="1250" cy="400" r="0"/>
+<text id="apl" class="m" x="1250" y="700" font-size="22" text-anchor="middle" style="fill:var(--gain)">AUTOPILOT</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet Eugene Pauly.</text>
+<text class="b" x="120" y="176" font-size="32">Retired, living in California with his wife, Beverly.</text>
+<g id="fam"><g id="ppl"></g>
+<text class="m" x="300" y="620" font-size="22" text-anchor="middle">EUGENE</text>
+<text class="m" x="470" y="620" font-size="22" text-anchor="middle">BEVERLY</text>
+<text class="m" x="385" y="670" font-size="20" text-anchor="middle">CALIFORNIA</text></g>
+<text id="yr" class="d" x="560" y="280" font-size="72" style="fill:var(--loss)">1992</text>
+<circle id="hit" class="s-loss" cx="300" cy="400" r="58" fill="none" stroke-width="6" stroke-dasharray="10 8"/>
+<g id="virus"></g>
+<g id="slate"><rect class="s-line" x="860" y="240" width="620" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="900" y="290" font-size="22">NEW FACTS</text><g id="facts"></g>
+<text class="d5" x="900" y="720" font-size="34">Gone within moments.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">He couldn’t draw his own house.</text>
+<text class="b" x="120" y="176" font-size="32">A new home after the illness.</text>
+<g id="hs"><path class="s-ink" d="M160 420L310 300L460 420V560H160Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<rect class="ink" x="285" y="480" width="50" height="80"/>
+<text class="m" x="310" y="610" font-size="20" text-anchor="middle">NEW HOUSE</text></g>
+<g id="sketch"><rect class="s-ink" x="560" y="260" width="300" height="340" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="710" y="500" font-size="160" text-anchor="middle" style="fill:var(--muted)">?</text>
+<text class="m" x="710" y="640" font-size="20" text-anchor="middle">HIS SKETCH</text></g>
+<g id="plan"><rect class="s-ink" x="960" y="260" width="520" height="420" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="1223" y="263" width="254" height="204" fill-opacity=".2"/>
+<path class="s-ink" d="M1220 260V390M960 470H1150M1250 470H1480" stroke-width="6"/>
+<rect x="1400" y="320" width="60" height="120" fill="var(--line)"/><circle class="gain" cx="1430" cy="350" r="12"/>
+<rect x="1060" y="420" width="40" height="40" fill="var(--line)"/>
+<text class="m" x="990" y="300" font-size="20">LIVING</text><text class="m" x="1250" y="300" font-size="20">KITCHEN</text><text class="m" x="990" y="650" font-size="20">BEDROOM</text>
+<path id="kpath" class="s-gain" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="eat" class="gain" r="16" stroke="var(--stage)" stroke-width="4"/></g>
+<text id="kt" class="d" x="120" y="800" font-size="44">No map in his head. He still got there.</text>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every day, a walk.</text>
+<text class="b" x="120" y="176" font-size="32">A walk around the neighborhood.</text>
+<g id="grid"></g>
+<path id="home" class="s-ink" d="M600 250L635 215L670 250V290H600Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="635" y="320" font-size="20" text-anchor="middle">HOME</text>
+<path id="route" class="s-gain" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<circle id="walker" class="gain" r="16" stroke="var(--stage)" stroke-width="4"/>
+<g id="bev"><g id="bvp"></g>
+<circle class="s-loss" cx="440" cy="290" r="60" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="440" y="316" font-size="70" text-anchor="middle" style="fill:var(--loss)">?</text>
+<circle class="loss" cx="380" cy="370" r="10"/><circle class="loss" cx="352" cy="394" r="6"/>
+<text class="m" x="300" y="650" font-size="22" text-anchor="middle">BEVERLY</text></g>
+<text id="ht" class="d" x="120" y="810" font-size="40">Home every time, with no idea how.</text>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The object test.</text>
+<text class="b" x="120" y="176" font-size="32">Designed by memory researcher Larry Squire.</text>
+<g id="sci"><g id="scp"></g><text class="m" x="220" y="600" font-size="20" text-anchor="middle">LARRY SQUIRE</text></g>
+<g id="pair"><rect class="s-line" x="420" y="260" width="480" height="320" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect id="mk1" class="gain" x="525" y="500" width="70" height="24" rx="6"/>
+<circle id="lid" class="ink" cx="560" cy="430" r="60"/>
+<rect class="ink" x="700" y="370" width="120" height="120" rx="8"/>
+<text class="m" x="440" y="620" font-size="20">ONE IS MARKED UNDERNEATH</text></g>
+<g id="chart"><path class="s-ink" d="M1000 260V640H1460" fill="none" stroke-width="5"/>
+<text class="m" x="1020" y="280" font-size="20">RIGHT PICKS</text><text class="m" x="1460" y="680" font-size="20" text-anchor="end">WEEKS</text>
+<g id="bars"></g></g>
+<path id="chk" class="s-gain" d="M1404 270l16 16 30-34" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text id="pt" class="d" x="120" y="790" font-size="40">Better and better, with no memory of it.</text>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Habits live deeper in the brain.</text>
+<text class="b" x="120" y="176" font-size="32">The basal ganglia, spared by Eugene’s illness.</text>
+<g id="brn"><path class="ink" d="M410 650L430 760H480L485 650Z"/>
+<ellipse class="s-ink" cx="420" cy="470" rx="250" ry="190" fill="var(--stage)" stroke-width="7"/>
+<path class="s-line" d="M260 340q40-30 80 0M420 330q40-30 80 0M560 400q30 30 0 60" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+<g id="mem"><circle class="loss" cx="300" cy="470" r="46" fill-opacity=".35"/>
+<path class="s-loss" d="M276 446l48 48M324 446l-48 48" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="300" y="400" font-size="20" text-anchor="middle" style="fill:var(--loss)">MEMORY</text></g>
+<g id="bgg"><circle id="bgc" class="gain" cx="500" cy="500" r="50"/>
+<text class="m" x="500" y="600" font-size="20" text-anchor="middle" style="fill:var(--gain)">BASAL GANGLIA</text></g>
+<g id="trk"><text class="m" x="820" y="340" font-size="22" style="fill:var(--loss)">MEMORY</text>
+<path class="s-loss" d="M820 380H1080M1200 380H1460" stroke-width="8" stroke-dasharray="16 12"/>
+<path class="s-loss" d="M1120 360l40 40M1160 360l-40 40" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="820" y="520" font-size="22" style="fill:var(--gain)">HABIT</text>
+<path class="s-gain" d="M820 560H1460" stroke-width="10" stroke-linecap="round"/>
+<circle id="hdot" class="ink" cx="840" cy="560" r="18"/></g>
+<text id="aut" class="d" x="820" y="700" font-size="40">Works with no idea why.</text>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">It isn’t just Eugene.</text>
+<text class="b" x="120" y="176" font-size="32">A 2006 Duke University study, cited by Duhigg.</text>
+<g id="pie"><circle cx="360" cy="470" r="180" fill="var(--line)"/><path id="wedge" class="gain"/></g>
+<g id="pg"><text id="pct" class="d" x="640" y="420" font-size="120" style="fill:var(--gain)">40%+</text>
+<text class="m" x="646" y="470" font-size="22">OF DAILY ACTIONS ARE HABITS,</text><text class="m" x="646" y="502" font-size="22">NOT DECISIONS</text></g>
+<g id="ic0"><rect id="ib0" class="s-line" x="640" y="560" width="240" height="170" rx="16" fill="var(--stage)" stroke-width="3"/>
+<rect class="ink" x="670" y="650" width="150" height="18" rx="9"/><rect class="ink" x="800" y="636" width="50" height="32" rx="8"/><rect class="gain" x="806" y="612" width="38" height="24"/>
+<text class="m" x="760" y="770" font-size="20" text-anchor="middle">BRUSHING</text></g>
+<g id="ic1"><rect id="ib1" class="s-line" x="920" y="560" width="240" height="170" rx="16" fill="var(--stage)" stroke-width="3"/>
+<rect class="ink" x="990" y="596" width="100" height="44" rx="12"/><rect class="ink" x="960" y="630" width="160" height="50" rx="12"/>
+<circle cx="995" cy="684" r="18" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><circle cx="1085" cy="684" r="18" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<text class="m" x="1040" y="770" font-size="20" text-anchor="middle">THE DRIVE</text></g>
+<g id="ic2"><rect id="ib2" class="s-line" x="1200" y="560" width="240" height="170" rx="16" fill="var(--stage)" stroke-width="3"/>
+<rect class="ink" x="1285" y="585" width="70" height="124" rx="12"/><rect x="1295" y="600" width="50" height="84" fill="var(--stage)"/><circle class="gain" cx="1320" cy="697" r="5"/>
+<text class="m" x="1320" y="770" font-size="20" text-anchor="middle">YOUR PHONE</text></g>
+<text id="yt" class="d" x="120" y="840" font-size="40">You do them. You don’t choose them.</text>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Unsettling. But good news.</text>
+<text class="b" x="120" y="176" font-size="32">So much of life runs on autopilot.</text>
+<g id="sun"><g id="rays"></g><circle class="gain" cx="300" cy="440" r="70"/>
+<text class="m" x="300" y="640" font-size="22" text-anchor="middle" style="fill:var(--gain)">GOOD NEWS</text></g>
+<g id="wheel"><circle class="s-ink" cx="800" cy="470" r="170" fill="none" stroke-width="20"/>
+<path class="s-ink" d="M630 470H970M800 470V640" stroke-width="16"/><circle class="ink" cx="800" cy="470" r="40"/></g>
+<g id="road"><path class="s-line" d="M1100 740C1260 620 1180 420 1440 270" fill="none" stroke-width="60" stroke-linecap="round"/>
+<path class="s-gain" d="M1100 740C1260 620 1180 420 1440 270" fill="none" stroke-width="6" stroke-dasharray="20 18"/></g>
+<text id="st" class="d" x="120" y="800" font-size="48">Notice it, then steer it.</text>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">How many things happen</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">before you <tspan style="fill:var(--gain)">decide</tspan></text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">to do them?</text></g>
+<g id="clk"><circle class="s-ink" cx="1340" cy="450" r="110" fill="var(--stage)" stroke-width="8"/>
+<path class="gain" d="M1340 450V344A106 106 0 0 1 1393 358Z"/>
+<path id="hh" class="s-ink" d="M1340 450V390" stroke-width="8" stroke-linecap="round"/>
+<path id="mh" class="s-ink" d="M1340 450V365" stroke-width="5" stroke-linecap="round"/></g>
+<text id="tg" class="m" x="143" y="700" font-size="26">TOMORROW: WATCH ONE ORDINARY HOUR</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Your Life Runs on Autopilot&rdquo;, from <em>The Power of Habit</em> by Charles Duhigg. Examples as reported in the book: Eugene Pauly and Larry Squire&#x27;s research, plus a 2006 Duke University study on daily habits. Drawings of Eugene, his home, the test objects and the brain are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 9.3], [9.3, 27.1], [27.1, 40.8], [40.8, 53.5], [53.5, 71.0], [71.0, 87.7], [87.7, 104.5], [104.5, 115.6], [115.6, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Autopilot", "Meet Eugene", "The Lost Map", "The Daily Walk", "The Object Test", "Hidden Brain Part", "Not Just Eugene", "The Good News", "Your Challenge"];
+const TM={"brain_glow": 0.0, "eugene": 9.6, "virus": 15.36, "blank_slate": 22.48, "house": 27.44, "map_blank": 31.2, "kitchen": 35.44, "sneakers": 41.12, "worried_wife": 44.88, "front_door": 49.04, "scientist": 53.76, "object_pair": 58.52, "checkmark": 64.56, "basal_ganglia": 71.28, "two_paths": 79.2, "auto_pilot": 82.4, "pie_chart": 87.96, "toothbrush": 97.04, "you": 101.2, "sun_rays": 104.8, "steering": 108.96, "clock": 115.92};
+const prs=(g,x,y,r,f)=>{mk('circle',{cx:x,cy:y,r:r,fill:f},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',fill:f},g)};
+const len=P=>P.slice(1).reduce((s,b,i)=>s+Math.hypot(b[0]-P[i][0],b[1]-P[i][1]),0);
+const at=(P,s)=>{for(let i=1;i<P.length;i++){const a=P[i-1],b=P[i],l=Math.hypot(b[0]-a[0],b[1]-a[1]);if(s<=l||i==P.length-1){const k=cl(s/l);return[a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k]}s-=l}};
+const R0=[0,1,2].map(()=>mk('circle',{cx:1250,cy:400,r:30,fill:'none',stroke:'var(--gain)','stroke-width':4},$('rings')));
+prs($('ppl'),300,400,40,'var(--ink)');prs($('ppl'),470,412,36,'var(--muted)');
+const VR=[0,1,2,3,4].map(()=>{const g=mk('g',{},$('virus'));mk('path',{d:'M-24 0h48M0-24v48M-17-17l34 34M17-17l-34 34',stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round'},g);mk('circle',{r:13,class:'loss'},g);return g});
+const FB=[480,380,520,300,440].map((w,i)=>mk('rect',{x:900,y:340+i*70,width:w,height:24,rx:12,class:'ink'},$('facts')));
+const KP=[[1080,410],[1240,430],[1380,390]],KL=len(KP);
+$('kpath').setAttribute('d','M'+KP.join('L'));$('kpath').setAttribute('stroke-dasharray',KL);
+for(let r=0;r<3;r++)for(let c=0;c<4;c++)mk('rect',{x:700+c*200,y:250+r*160,width:160,height:120,rx:10,fill:'var(--line)'},$('grid'));
+const RP=[[680,230],[1280,230],[1280,550],[880,550],[880,390],[680,390],[680,230]],RL=len(RP);
+$('route').setAttribute('d','M'+RP.join('L'));$('route').setAttribute('stroke-dasharray',RL);
+prs($('bvp'),300,440,40,'var(--muted)');prs($('scp'),220,380,40,'var(--ink)');
+const BR=[0,1,2,3,4,5,6,7].map(i=>mk('rect',{x:1030+i*54,y:640,width:36,height:0,class:'gain'},$('bars')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(300+95*Math.cos(a)).toFixed(1)+' '+(440+95*Math.sin(a)).toFixed(1)+'L'+(300+130*Math.cos(a)).toFixed(1)+' '+(440+130*Math.sin(a)).toFixed(1),stroke:'var(--gain)','stroke-width':8,'stroke-linecap':'round'},$('rays'))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const g0=p(u,TM.brain_glow,TM.brain_glow+.6);
+  $('glow').setAttribute('r',(28*g0*(1+.12*Math.sin(t*3))).toFixed(1));
+  R0.forEach((c,i)=>{const k=(t*.5+i/3)%1;c.setAttribute('r',(30+110*k).toFixed(1));c.setAttribute('opacity',(g0*(1-k)).toFixed(2))});
+  rise($('apl'),p(u,TM.brain_glow+6.5,TM.brain_glow+7.1));
+
+  rise($('fam'),p(u,TM.eugene,TM.eugene+.5));rise($('yr'),p(u,TM.virus,TM.virus+.5));
+  VR.forEach((g,i)=>{const a=TM.virus+.3+i*.2,k=p(u,a,a+1.7),y0=340+i*40,x=780-480*k,y=y0+(400-y0)*k;
+    g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');g.setAttribute('opacity',((u>TM.virus?1:0)*(1-p(u,a+1.9,a+2.3))).toFixed(2))});
+  rise($('hit'),p(u,TM.virus+2.4,TM.virus+3));
+  rise($('slate'),p(u,TM.blank_slate,TM.blank_slate+.5));
+  FB.forEach((b,i)=>{const k=(t*.35+i*.2)%1;b.setAttribute('opacity',(k<.15?k/.15:k<.4?1:k<.6?1-(k-.4)/.2:0).toFixed(2))});
+
+  rise($('hs'),p(u,TM.house,TM.house+.5));rise($('sketch'),p(u,TM.map_blank,TM.map_blank+.5));rise($('plan'),p(u,TM.kitchen,TM.kitchen+.5));
+  const kk=p(u,TM.kitchen+.6,TM.kitchen+3),kp=at(KP,KL*kk);
+  $('eat').setAttribute('cx',kp[0].toFixed(1));$('eat').setAttribute('cy',kp[1].toFixed(1));$('kpath').setAttribute('stroke-dashoffset',(KL*(1-kk)).toFixed(1));
+  rise($('kt'),p(u,TM.kitchen+3,TM.kitchen+3.6));
+
+  const wk=p(u,TM.sneakers+.5,TM.front_door+1),wp=at(RP,RL*wk);
+  $('route').setAttribute('stroke-dashoffset',(RL*(1-wk)).toFixed(1));
+  $('walker').setAttribute('cx',wp[0].toFixed(1));$('walker').setAttribute('cy',wp[1].toFixed(1));rise($('walker'),p(u,TM.sneakers,TM.sneakers+.5));
+  rise($('bev'),p(u,TM.worried_wife,TM.worried_wife+.5));
+  $('home').style.fill=u>=TM.front_door+1?'var(--gain)':'var(--stage)';rise($('ht'),p(u,TM.front_door+1,TM.front_door+1.6));
+
+  rise($('sci'),p(u,TM.scientist,TM.scientist+.5));rise($('pair'),p(u,TM.object_pair,TM.object_pair+.5));
+  const lf=p(u,TM.object_pair+1.5,TM.object_pair+2.2);$('lid').setAttribute('transform','translate(0 '+(-60*lf).toFixed(1)+')');$('mk1').setAttribute('opacity',lf);
+  rise($('chart'),p(u,TM.checkmark,TM.checkmark+.5));
+  BR.forEach((b,i)=>{const h=(50+i*40)*p(u,TM.checkmark+.4+i*.4,TM.checkmark+.8+i*.4);b.setAttribute('y',(640-h).toFixed(1));b.setAttribute('height',h.toFixed(1))});
+  rise($('chk'),p(u,TM.checkmark+4,TM.checkmark+4.4));rise($('pt'),p(u,TM.checkmark+4.5,TM.checkmark+5.1));
+
+  rise($('brn'),p(u,TM.basal_ganglia,TM.basal_ganglia+.5));rise($('mem'),p(u,TM.basal_ganglia+1.5,TM.basal_ganglia+2));
+  rise($('bgg'),p(u,TM.basal_ganglia+3,TM.basal_ganglia+3.5));$('bgc').setAttribute('r',(50+6*Math.sin(t*3)).toFixed(1));
+  rise($('trk'),p(u,TM.two_paths,TM.two_paths+.5));$('hdot').setAttribute('cx',(840+600*((t*.25)%1)).toFixed(1));
+  rise($('aut'),p(u,TM.auto_pilot,TM.auto_pilot+.6));
+
+  rise($('pie'),p(u,TM.pie_chart,TM.pie_chart+.5));rise($('pg'),p(u,TM.pie_chart+.5,TM.pie_chart+1));
+  const pk=p(u,TM.pie_chart+.5,TM.pie_chart+2),pa=2*Math.PI*.4*pk;
+  $('wedge').setAttribute('d','M360 470L360 290A180 180 0 0 1 '+(360+180*Math.sin(pa)).toFixed(1)+' '+(470-180*Math.cos(pa)).toFixed(1)+'Z');
+  $('pct').textContent=Math.round(40*pk)+'%+';
+  [0,1,2].forEach(i=>{const a=TM.toothbrush+i*1.2;rise($('ic'+i),p(u,a,a+.5));$('ib'+i).style.stroke=u>=TM.you?'var(--gain)':'var(--line)'});
+  rise($('yt'),p(u,TM.you,TM.you+.6));
+
+  rise($('sun'),p(u,TM.sun_rays,TM.sun_rays+.5));$('rays').setAttribute('transform','rotate('+(t*20%360).toFixed(1)+' 300 440)');
+  rise($('wheel'),p(u,TM.steering,TM.steering+.5));$('wheel').setAttribute('transform','rotate('+(25*Math.sin(t*1.2)).toFixed(1)+' 800 470)');
+  rise($('road'),p(u,TM.steering+.8,TM.steering+1.3));rise($('st'),p(u,TM.steering+2,TM.steering+2.6));
+
+  rise($('clk'),p(u,TM.clock,TM.clock+.5));rise($('tg'),p(u,TM.clock+.4,TM.clock+.9));
+  $('mh').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 1340 450)');$('hh').setAttribute('transform','rotate('+(t*5%360).toFixed(1)+' 1340 450)');
+  rise($('qa'),p(u,TM.clock+3.5,TM.clock+4));rise($('qb'),p(u,TM.clock+3.9,TM.clock+4.4));rise($('qc'),p(u,TM.clock+4.3,TM.clock+4.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.4;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

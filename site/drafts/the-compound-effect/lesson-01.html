@@ -1,0 +1,324 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Compound Effect Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Compound Effect: Small actions repeated consistently over time compound into dramatic results, just as a penny doubled every day eventually outgrows a million dollars. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMPOUND EFFECT · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Small choices,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">huge results.</text>
+<text class="b" x="120" y="600" font-size="32">Why tiny daily choices quietly decide your biggest results.</text>
+<g id="cash">
+<rect class="s-ink" x="1180" y="280" width="260" height="110" rx="10" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="1170" y="268" width="260" height="110" rx="10" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="1160" y="256" width="260" height="110" rx="10" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-ink" cx="1290" cy="311" r="30" fill="none" stroke-width="5"/>
+<text class="d" x="1290" y="325" font-size="40" text-anchor="middle">$</text>
+<text class="m" x="1290" y="430" font-size="22" text-anchor="middle">$3 MILLION CASH</text>
+</g>
+<g id="pick"><text class="m" x="1290" y="226" font-size="20" text-anchor="middle" style="fill:var(--gain)">MOST PEOPLE PICK THIS</text></g>
+<g id="pen">
+<text class="d5" x="1290" y="490" font-size="36" text-anchor="middle">or</text>
+<g id="pg"><circle class="gain" cx="1290" cy="572" r="52"/><text class="d" x="1290" y="588" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">1¢</text></g>
+<text class="m" x="1290" y="670" font-size="22" text-anchor="middle">DOUBLES EVERY DAY</text>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A slow start.</text>
+<text class="b" x="120" y="176" font-size="32">Day 1 is a single penny. Watch it double.</text>
+<g id="cal"></g>
+<g id="g5"><text class="m" x="860" y="280" font-size="22">DAY 5</text><text id="v5" class="d" x="856" y="370" font-size="90">16¢</text></g>
+<g id="g20"><text class="m" x="860" y="450" font-size="22">DAY 20</text><text id="v20" class="d" x="856" y="540" font-size="90">≈ $5,000</text></g>
+<g id="bars">
+<text class="m" x="860" y="620" font-size="20">CASH · $3 MILLION</text>
+<rect class="ink" x="860" y="632" width="620" height="28"/>
+<text class="m" x="860" y="700" font-size="20" style="fill:var(--gain)">PENNY · DAY 20</text>
+<rect class="gain" x="860" y="712" width="4" height="28"/>
+<text class="d" x="120" y="820" font-size="44">The cash still looks like the smart pick.</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then the doubling roars.</text>
+<text class="b" x="120" y="176" font-size="32">Most of the growth arrives in the final few days.</text>
+<g id="fin"><rect class="gain" x="1117" y="260" width="183" height="500" fill-opacity=".15"/><text class="m" x="1268" y="232" font-size="20" text-anchor="end" style="fill:var(--gain)">FINAL FEW DAYS</text></g>
+<path class="s-ink" d="M200 260V760H1330" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-muted" d="M200 620H1320" stroke-width="3" stroke-dasharray="10 10"/>
+<text class="m" x="220" y="606" font-size="20">$3 MILLION CASH</text>
+<text class="m" x="200" y="800" font-size="20" text-anchor="middle">DAY 1</text>
+<text class="m" x="897" y="800" font-size="20" text-anchor="middle">DAY 20</text>
+<text class="m" x="1300" y="800" font-size="20" text-anchor="middle">DAY 31</text>
+<g id="qt"><path class="s-loss" d="M897 470V760" stroke-width="4" stroke-dasharray="8 8"/><text class="m" x="910" y="490" font-size="20" style="fill:var(--loss)">MOST QUIT HERE</text></g>
+<path id="cv" class="s-gain" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="tip" class="gain" r="12"/>
+<g id="big"><text class="m" x="240" y="330" font-size="24">DAY 31</text><text class="d" x="236" y="420" font-size="80" style="fill:var(--gain)">Over $10 million</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Three friends.</text>
+<text class="b" x="120" y="176" font-size="32">Similar lives, similar incomes, similar weight.</text>
+<g id="f0"></g><g id="f1"></g><g id="f2"></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Nothing seems to happen.</text>
+<text class="b" x="120" y="176" font-size="32">Five months in, all three look exactly the same.</text>
+<path class="s-line" d="M160 300V640H860" fill="none" stroke-width="4"/>
+<text class="m" x="160" y="676" font-size="20">MONTH 0</text>
+<text class="m" x="860" y="676" font-size="20" text-anchor="end">MONTH 5</text>
+<g id="ln4"></g>
+<g id="tags"><text class="m" x="180" y="400" font-size="20" style="fill:var(--gain)">SCOTT · SEEMS POINTLESS</text><text class="m" x="180" y="560" font-size="20" style="fill:var(--loss)">BRAD · SEEMS HARMLESS</text></g>
+<g id="same"><text class="m" x="1200" y="266" font-size="22" text-anchor="middle">MONTH 5</text></g>
+<g id="sign"><rect class="ink" x="1194" y="610" width="12" height="150"/><rect class="loss" x="1060" y="520" width="280" height="90" rx="10"/><text class="d" x="1200" y="580" font-size="44" text-anchor="middle" style="fill:var(--stage)">GIVE UP?</text></g>
+<g id="nore"><text class="d" x="120" y="820" font-size="44">Small choices show no reward yet.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Month 31: then it shows.</text>
+<text class="b" x="120" y="176" font-size="32">Change in weight after 31 months.</text>
+<path class="s-line" d="M200 520H1140" stroke-width="4"/>
+<rect id="bs" class="gain" x="330" y="520" width="140" height="0"/>
+<rect id="bb" class="loss" x="930" y="520" width="140" height="0"/>
+<g id="ls"><text class="d5" x="400" y="498" font-size="40" text-anchor="middle">Scott</text><text id="vs" class="d" x="400" y="768" font-size="48" text-anchor="middle" style="fill:var(--gain)">−33 lb</text></g>
+<g id="lb"><text class="d5" x="1000" y="570" font-size="40" text-anchor="middle">Brad</text><text id="vb" class="d" x="1000" y="296" font-size="48" text-anchor="middle" style="fill:var(--loss)">+33 lb</text></g>
+<g id="ll"><rect class="ink" x="630" y="514" width="140" height="12"/><text class="m" x="700" y="496" font-size="20" text-anchor="middle">NO CHANGE</text><text class="d5" x="700" y="570" font-size="40" text-anchor="middle">Larry</text></g>
+<g id="gap">
+<path class="s-muted" d="M480 718H1240M1080 322H1240" stroke-width="3" stroke-dasharray="8 8"/>
+<path class="s-ink" d="M1240 330V710M1222 348l18-18 18 18M1222 692l18 18 18-18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text id="vg" class="d" x="1270" y="540" font-size="80">66 lb</text><text class="m" x="1274" y="580" font-size="24">GAP</text>
+</g>
+<g id="tiny5"><text class="d" x="120" y="840" font-size="40">Built from choices too small to notice.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One simple formula.</text>
+<text class="b" x="120" y="176" font-size="32">Small, smart choices + consistency + time = radical difference.</text>
+<g id="f6"></g>
+<g id="rev"><path class="s-loss" d="M1340 455V585M1322 567l18 18 18-18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1310" y="528" font-size="22" text-anchor="end" style="fill:var(--loss)">SAME MATH, IN REVERSE</text></g>
+<g id="all6"><text class="d" x="120" y="840" font-size="40">Good or bad, every choice compounds.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why we miss it.</text>
+<text class="b" x="120" y="176" font-size="32">In the moment, each choice feels too small to matter.</text>
+<g id="mag">
+<text class="m" x="120" y="460" font-size="22">ONE CHOICE:</text>
+<text class="m" x="120" y="492" font-size="22">FEELS TINY</text>
+<circle class="s-ink" cx="210" cy="580" r="46" fill="none" stroke-width="5"/>
+<path class="s-ink" d="M177 613l-26 26" stroke-width="8" stroke-linecap="round"/>
+<rect id="one7" class="ink" x="198" y="568" width="24" height="24" rx="3"/>
+</g>
+<g id="arr7"><path class="s-muted" d="M268 560C420 440 640 440 798 518" fill="none" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/><path class="s-muted" d="M770 494L800 520L762 528" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="leg"><rect x="160" y="812" width="20" height="20" rx="3" fill="none" stroke="var(--gain)" stroke-width="3"/><text class="m" x="196" y="830" font-size="20">SKIPPED GOOD CHOICE</text><rect class="loss" x="560" y="812" width="20" height="20" rx="3"/><text class="m" x="596" y="830" font-size="20">INDULGED BAD CHOICE</text></g>
+<g id="blk"></g>
+<g id="tot"><text class="m" x="890" y="345" font-size="22" text-anchor="middle">THE TOTAL</text></g>
+<g id="fut"><path class="s-gain" d="M990 560H1100M1080 540l20 20-20 20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1190" y="670" font-size="22" text-anchor="middle" style="fill:var(--gain)">FUTURE YOU</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What small, smart choice</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">could you repeat every day,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">starting <tspan style="fill:var(--gain)">today</tspan>?</text></g>
+<g id="tiny8"><text class="m" x="143" y="700" font-size="26">MAKE IT TINY. KEEP IT GOING.</text></g>
+<path class="s-line" d="M1180 820H1460" stroke-width="4"/>
+<path id="cv8" class="s-gain" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="dot8" class="gain" r="12"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="134" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:14</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Small Choices, Huge Results&rdquo;, from <em>The Compound Effect</em> by Darren Hardy. The magic penny and the three friends Larry, Scott and Brad are examples as reported in the book. The rising curve, arrows and calendar are illustrations rather than data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=134, SC=[[0.0, 9.1], [9.1, 24.3], [24.3, 38.6], [38.6, 59.6], [59.6, 74.3], [74.3, 89.2], [89.2, 107.5], [107.5, 120.7], [120.7, 134.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Magic Penny", "A Slow Start", "The Final Surge", "Three Friends", "Nothing Seems to Happen", "Then It Shows", "The Formula", "Why We Miss It", "Your Penny"];
+const TM={"cash_offer": 0.0, "penny": 9.36, "day_five": 13.12, "day_twenty": 17.44, "rising_curve": 24.56, "day_thirty_one": 27.36, "three_friends": 38.88, "scott": 47.04, "brad": 53.68, "five_months": 59.92, "quit_sign": 69.04, "month_31": 74.56, "scale": 78.72, "gap_arrow": 83.84, "formula": 89.52, "reverse_arrow": 99.44, "single_moment": 107.76, "future_self": 116.4, "your_penny": 120.96};
+const cfFig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const cfTxt=(g,s,a)=>{const e=mk('text',a,g);e.textContent=s;return e};
+const cfFmt=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+const cfExpo=(x0,y0,w,h,f)=>{let d='',x=x0,y=y0;for(let s=0;s<=f+1e-9;s+=.01){x=x0+w*s;y=y0-h*Math.pow(2,30*s-30);d+=(d?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)}if(!d)d='M'+x0+' '+y0;return [d,x,y]};
+const cfCells=[];for(let i=0;i<31;i++){const x=120+(i%7)*90,y=240+Math.floor(i/7)*90;
+  cfCells.push([mk('rect',{x:x,y:y,width:80,height:80,rx:10,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},$('cal')),cfTxt($('cal'),i+1,{x:x+12,y:y+30,class:'m','font-size':18})])}
+const cfFN=[['Larry',['SAME ROUTINE']],['Scott',['+10 PAGES A DAY','−125 CALORIES']],['Brad',['+ BIG SCREEN TV','+ A FEW SNACKS']]];
+const cfFr=cfFN.map((f,i)=>{const x=360+i*440,g=$('f'+i),P=cfFig(g,x,300,40,'ink');cfTxt(g,f[0],{x:x,y:540,class:'d5','font-size':48,'text-anchor':'middle'});
+  const ch=mk('g',{},g);f[1].forEach((s,j)=>{mk('rect',{x:x-190,y:590+j*70,width:380,height:50,rx:25,fill:'var(--stage)',stroke:i==1?'var(--gain)':i==2?'var(--loss)':'var(--line)','stroke-width':4},ch);
+  cfTxt(ch,s,{x:x,y:622+j*70,class:'m','font-size':20,'text-anchor':'middle'})});return [P,ch]});
+for(let i=0;i<3;i++)cfFig($('same'),1060+i*140,320,28,'ink');
+const cfL4=[['gain',-6],['ink',0],['loss',6]].map(c=>[mk('path',{fill:'none',stroke:'var(--'+c[0]+')','stroke-width':5,'stroke-linecap':'round'},$('ln4')),c[1]]);
+const cfR6=[[['Small, smart','choices'],['Consistency'],['Time'],['Radical','difference']],[['One extra snack,','skipped walk'],['Consistency'],['Time'],['Compounds','just as surely']]];
+const cfB6=cfR6.map((row,r)=>row.map((L,k)=>{const x=120+k*360,y=r?600:280,g=mk('g',{},$('f6')),last=k==3;
+  mk('rect',{x:x,y:y,width:280,height:160,rx:18,fill:last?(r?'var(--loss)':'var(--gain)'):'var(--stage)',stroke:r?'var(--loss)':'var(--ink)','stroke-width':5},g);
+  L.forEach((s,j)=>cfTxt(g,s,{x:x+140,y:y+(L.length>1?72+j*42:92),class:'d5','font-size':28,'text-anchor':'middle',style:last?'fill:'+(r?'var(--stage)':'var(--on-gain)'):''}));
+  if(k)cfTxt(g,k==3?'=':'+',{x:x-40,y:y+102,class:'d','font-size':64,'text-anchor':'middle',style:'fill:var(--muted)'});return g}));
+const cfBL=[];for(let i=0;i<30;i++)cfBL.push(mk('rect',{rx:3,'stroke-width':3},$('blk')));
+cfFig($('fut'),1190,460,34,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('cash'),p(u,TM.cash_offer+.4,TM.cash_offer+.9)); rise($('pen'),p(u,TM.cash_offer+3.5,TM.cash_offer+4)); rise($('pick'),p(u,TM.cash_offer+8.2,TM.cash_offer+8.7));
+$('pg').setAttribute('transform','translate(1290 572) scale('+(1+.05*Math.sin(t*3)).toFixed(3)+') translate(-1290 -572)');
+
+rise($('cal'),p(u,TM.penny,TM.penny+.6));
+cfCells.forEach((c,i)=>{const d=i+1,a=d<=5?TM.penny+1+(TM.day_five-TM.penny-1)*(d-1)/5:d<=20?TM.day_five+1+(TM.day_twenty-TM.day_five-1)*(d-6)/15:1e9,on=u>=a;
+  c[0].setAttribute('fill',on?'var(--gain)':'var(--stage)'); c[0].setAttribute('stroke',on?'var(--gain)':'var(--line)'); c[1].style.fill=on?'var(--on-gain)':''});
+rise($('g5'),p(u,TM.day_five,TM.day_five+.5)); $('v5').textContent=Math.round(16*p(u,TM.day_five,TM.day_five+1.2))+'¢';
+rise($('g20'),p(u,TM.day_twenty,TM.day_twenty+.5)); $('v20').textContent='≈ $'+cfFmt(Math.round(100*p(u,TM.day_twenty,TM.day_twenty+1.4))*50);
+rise($('bars'),p(u,TM.day_twenty+4.6,TM.day_twenty+5.1));
+
+const cfE=cfExpo(200,760,1100,500,cl(lin(u,TM.rising_curve,TM.day_thirty_one+.8)));
+$('cv').setAttribute('d',cfE[0]); $('tip').setAttribute('cx',cfE[1].toFixed(1)); $('tip').setAttribute('cy',cfE[2].toFixed(1));
+rise($('big'),p(u,TM.day_thirty_one,TM.day_thirty_one+.5)); rise($('fin'),p(u,TM.day_thirty_one+5.3,TM.day_thirty_one+5.8)); rise($('qt'),p(u,TM.day_thirty_one+9.5,TM.day_thirty_one+10));
+
+cfFr.forEach((f,i)=>{rise($('f'+i),p(u,TM.three_friends+i*.3,TM.three_friends+i*.3+.5)); const a=[TM.three_friends+4.5,TM.scott,TM.brad][i]; rise(f[1],p(u,a,a+.5));
+  const c=i==1&&u>=TM.scott?'gain':i==2&&u>=TM.brad?'loss':'ink'; f[0].forEach(e=>e.setAttribute('class',c))});
+
+const cfK4=p(u,TM.five_months,TM.five_months+2.5);
+cfL4.forEach(l=>l[0].setAttribute('d','M160 470L'+(160+700*cfK4).toFixed(1)+' '+(470+l[1]*cfK4).toFixed(1)));
+rise($('same'),p(u,TM.five_months,TM.five_months+.5)); rise($('tags'),p(u,TM.five_months+4.2,TM.five_months+4.7));
+rise($('sign'),p(u,TM.quit_sign,TM.quit_sign+.5)); rise($('nore'),p(u,TM.quit_sign+.8,TM.quit_sign+1.3));
+
+const cfK1=p(u,TM.month_31,TM.month_31+1.2),cfK2=p(u,TM.scale,TM.scale+1.2);
+$('bs').setAttribute('height',(198*cfK1).toFixed(1)); $('bb').setAttribute('y',(520-198*cfK2).toFixed(1)); $('bb').setAttribute('height',(198*cfK2).toFixed(1));
+rise($('ls'),p(u,TM.month_31,TM.month_31+.5)); $('vs').textContent='−'+Math.round(33*cfK1)+' lb';
+rise($('lb'),p(u,TM.scale,TM.scale+.5)); $('vb').textContent='+'+Math.round(33*cfK2)+' lb';
+rise($('ll'),p(u,TM.scale+2.2,TM.scale+2.7));
+rise($('gap'),p(u,TM.gap_arrow,TM.gap_arrow+.5)); $('vg').textContent=Math.round(66*p(u,TM.gap_arrow,TM.gap_arrow+1.2))+' lb';
+rise($('tiny5'),p(u,TM.gap_arrow+1.5,TM.gap_arrow+2));
+
+cfB6[0].forEach((g,k)=>{const a=TM.formula+.6+k*1.4; rise(g,p(u,a,a+.5))});
+cfB6[1].forEach((g,k)=>{const a=TM.reverse_arrow+[.8,1.6,2.4,3.8][k]; rise(g,p(u,a,a+.5))});
+rise($('rev'),p(u,TM.reverse_arrow,TM.reverse_arrow+.5)); rise($('all6'),p(u,TM.reverse_arrow+4.5,TM.reverse_arrow+5));
+
+const cfSw=u>=TM.single_moment+4.6;
+cfBL.forEach((b,i)=>{const s=TM.future_self+.5+i*.06,k=p(u,s,s+.8),x=320+i*26,bad=i%3==1;
+  b.setAttribute('x',(x+(820-x)*k).toFixed(1)); b.setAttribute('y',(640+(108-i*13)*k).toFixed(1));
+  b.setAttribute('width',(20+120*k).toFixed(1)); b.setAttribute('height',(20-10*k).toFixed(1));
+  b.setAttribute('fill',!cfSw?'var(--ink)':bad?'var(--loss)':'none'); b.setAttribute('stroke',cfSw&&!bad?'var(--gain)':'none');
+  b.setAttribute('opacity',p(u,TM.single_moment+1+i*.08,TM.single_moment+1+i*.08+.3))});
+rise($('mag'),p(u,TM.single_moment+.3,TM.single_moment+.8));
+$('one7').setAttribute('transform','translate(210 580) scale('+(1+.08*Math.sin(t*3)).toFixed(3)+') translate(-210 -580)');
+rise($('leg'),p(u,TM.single_moment+4.6,TM.single_moment+5.1));
+rise($('arr7'),p(u,TM.future_self,TM.future_self+.6));
+rise($('fut'),p(u,TM.future_self+1.5,TM.future_self+2)); rise($('tot'),p(u,TM.future_self+2.5,TM.future_self+3));
+
+rise($('qa'),p(u,TM.your_penny,TM.your_penny+.5)); rise($('qb'),p(u,TM.your_penny+.4,TM.your_penny+.9)); rise($('qc'),p(u,TM.your_penny+.8,TM.your_penny+1.3));
+rise($('tiny8'),p(u,TM.your_penny+5.4,TM.your_penny+5.9));
+const cfE8=cfExpo(1180,820,280,120,p(u,TM.your_penny+5.4,TM.your_penny+8));
+$('cv8').setAttribute('d',cfE8[0]); $('dot8').setAttribute('cx',cfE8[1].toFixed(1)); $('dot8').setAttribute('cy',cfE8[2].toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:130.85;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

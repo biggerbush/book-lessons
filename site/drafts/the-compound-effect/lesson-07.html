@@ -1,0 +1,317 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Compound Effect Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of The Compound Effect: Doing a little more than expected at key moments, then staying consistent, multiplies the compound effect and ties every lesson together. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMPOUND EFFECT · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Go beyond expectations</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">to accelerate.</text>
+<text class="b" x="120" y="600" font-size="32">The extra rep is where the real growth happens.</text>
+<path class="s-ink" d="M1180 720h300" stroke-width="6" stroke-linecap="round"/>
+<path id="c0" class="s-ink" d="M1190 700Q1280 690 1340 650" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="stop0"><path class="s-loss" d="M1340 340V730" stroke-width="5" stroke-dasharray="12 10"/><text class="m" x="1340" y="770" font-size="20" text-anchor="middle" style="fill:var(--loss)">USUAL STOP</text></g>
+<path id="c1" class="s-gain" d="M1340 650Q1430 590 1470 320" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="acc0"><text class="m" x="1470" y="290" font-size="20" text-anchor="end" style="fill:var(--gain)">ACCELERATION</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Growth hides past the stop.</text>
+<text class="b" x="120" y="176" font-size="32">Most people stop at the first sign of pain.</text>
+<g id="lift">
+<path class="s-line" d="M140 600h320" stroke-width="5" stroke-linecap="round"/>
+<g id="lifter"></g>
+<path id="arms" class="s-ink" fill="none" stroke-width="12" stroke-linecap="round"/>
+<g id="bell"><path class="s-ink" d="M180 0h240" stroke-width="10" stroke-linecap="round"/><rect class="ink" x="170" y="-36" width="26" height="72" rx="6"/><rect class="ink" x="404" y="-36" width="26" height="72" rx="6"/></g>
+</g>
+<g id="sh1"><text class="m" x="300" y="650" font-size="20" text-anchor="middle" style="fill:var(--loss)">ARMS SHAKING</text></g>
+<g id="reps"><text class="m" x="640" y="370" font-size="22">PLAN: 10 REPS</text></g>
+<g id="stop1"><path class="s-loss" d="M1290 380V520" stroke-width="5" stroke-dasharray="10 8"/><text class="m" x="1290" y="560" font-size="20" text-anchor="middle" style="fill:var(--loss)">MOST STOP HERE</text></g>
+<g id="grow1"><path class="s-gain" d="M1296 340v-14h152v14" fill="none" stroke-width="5" stroke-linejoin="round"/><text class="m" x="1372" y="310" font-size="22" text-anchor="middle" style="fill:var(--gain)">GROWTH</text></g>
+<g id="bld1"><text class="d" x="120" y="800" font-size="48">The reps past the pain build the strength.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Do a little more than expected.</text>
+<text class="b" x="120" y="176" font-size="32">Expected effort gets expected results.</text>
+<g id="pan0"><rect class="s-line" x="120" y="220" width="620" height="440" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="270" font-size="22">WHAT IS EXPECTED</text></g>
+<g id="ck0"></g>
+<g id="st0g"><polygon id="st0" class="s-muted" fill="none" stroke-width="5" stroke-linejoin="round"/><text class="m" x="600" y="520" font-size="18" text-anchor="middle">EXPECTED RESULT</text></g>
+<g id="pan1"><rect class="s-line" x="860" y="220" width="620" height="440" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="890" y="270" font-size="22">A LITTLE MORE</text></g>
+<g id="ck1"></g>
+<g id="st1g"><polygon id="st1" class="gain"/><text class="m" x="1330" y="580" font-size="18" text-anchor="middle" style="fill:var(--gain)">BIGGER REWARD</text></g>
+<g id="wow2"><text class="d" x="120" y="790" font-size="52">Hardy: bring the wow.</text><polygon id="burst" class="gain"/><text class="d" x="870" y="772" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">WOW</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One extra page.</text>
+<text class="b" x="120" y="176" font-size="32">A few extra minutes can make your work stand out.</text>
+<g id="spot"><polygon class="gain" points="720,210 800,210 920,650 600,650" fill-opacity=".18"/><ellipse class="gain" cx="760" cy="650" rx="160" ry="26" fill-opacity=".25"/></g>
+<g id="docs"></g>
+<g id="note3"><g transform="rotate(8 845 425)"><rect class="gain" x="790" y="370" width="110" height="110" rx="6"/><path d="M808 405h74M808 430h74M808 455h44" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round"/></g></g>
+<text class="m" x="760" y="700" font-size="22" text-anchor="middle">YOURS</text>
+<g id="nl3"><text class="m" x="760" y="750" font-size="22" text-anchor="middle" style="fill:var(--gain)">+ ONE PAGE NOBODY ASKED FOR</text></g>
+<g id="out3"><text class="d" x="120" y="840" font-size="48">A few extra minutes. Your work stands out.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Small extras, remembered.</text>
+<text class="b" x="120" y="176" font-size="32">These extras cost little, yet people remember them.</text>
+<g id="cal4">
+<rect class="s-ink" x="180" y="260" width="220" height="260" rx="12" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="180" y="260" width="220" height="60" rx="12"/>
+<text class="m" x="290" y="299" font-size="22" text-anchor="middle" style="fill:var(--stage)">TUESDAY</text>
+<path class="s-line" d="M210 370h160M210 420h160M210 470h100" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="180" y="580" font-size="22">A SURPRISE NOTE, ON A TUESDAY</text>
+</g>
+<g id="note4"><rect class="s-ink" x="450" y="340" width="240" height="160" rx="8" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M450 340L570 410L690 340" fill="none" stroke-width="6" stroke-linejoin="round"/><path class="gain" d="M570 488c-30-20-30-44-15-46c8-1 13 3 15 9c2-6 7-10 15-9c15 2 15 26-15 46z"/></g>
+<g id="call4">
+<rect class="s-ink" x="920" y="260" width="150" height="280" rx="22" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="995" cy="510" r="9"/><circle class="ink" cx="995" cy="360" r="24"/><path class="ink" d="M959 440a36 36 0 0 1 72 0z"/>
+<path id="w0" class="s-gain" d="M1100 370a34 34 0 0 1 0 60" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="w1" class="s-gain" d="M1120 350a60 60 0 0 1 0 100" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="w2" class="s-gain" d="M1140 330a86 86 0 0 1 0 140" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="920" y="580" font-size="22">A CALL TO AN OLD FRIEND</text>
+</g>
+<g id="bub4"><rect class="gain" x="1200" y="310" width="260" height="90" rx="22"/><text class="m" x="1330" y="364" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">THANK YOU</text></g>
+<g id="bars4"><text class="m" x="120" y="712" font-size="22">COST</text><rect class="loss" x="340" y="688" width="80" height="34" rx="8"/><text class="m" x="120" y="792" font-size="22">REMEMBERED</text><rect id="memb" class="gain" x="340" y="768" width="0" height="34" rx="8"/></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Push when others let up.</text>
+<text class="b" x="120" y="176" font-size="32">Going beyond matters most when everyone else slows down.</text>
+<g id="track"></g>
+<g id="fin5"><text class="m" x="1405" y="380" font-size="22" text-anchor="middle">FINISH</text></g>
+<g id="run5"></g>
+<g id="out5"><text class="d" x="120" y="830" font-size="46">The final stretch is where you pull ahead.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Extras compound.</text>
+<text class="b" x="120" y="176" font-size="32">Consistency keeps the line rising. Going beyond makes it steeper.</text>
+<path class="s-ink" d="M200 260V720H1440" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="212" y="250" font-size="20">RESULTS</text>
+<text class="m" x="1440" y="760" font-size="20" text-anchor="end">DAY AFTER DAY</text>
+<g id="pen6"><circle class="gain" cx="260" cy="620" r="40"/><text class="d" x="260" y="632" font-size="32" text-anchor="middle" style="fill:var(--on-gain)">1¢</text><text class="m" x="320" y="628" font-size="20">ONE EXTRA EFFORT LOOKS TINY</text></g>
+<path id="cv0" class="s-muted" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="cv1" class="s-gain" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="arr6"><polygon id="arrP" class="gain" points="6,0 -30,-18 -30,18"/></g>
+<g id="lb0"><text class="m" x="1440" y="490" font-size="20" text-anchor="end">CONSISTENT</text></g>
+<g id="lb1"><text class="m" x="1200" y="280" font-size="22" text-anchor="end" style="fill:var(--gain)">+ GOING BEYOND</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="64">The whole book clicks into place.</text>
+<text class="b" x="120" y="176" font-size="32">Ownership, tracking, your why, routines, influences, going beyond.</text>
+<g id="frame7"><rect class="s-muted" x="525" y="235" width="270" height="270" rx="14" fill="none" stroke-width="3" stroke-dasharray="10 10"/><rect class="s-muted" x="805" y="235" width="270" height="270" rx="14" fill="none" stroke-width="3" stroke-dasharray="10 10"/><rect class="s-muted" x="525" y="515" width="270" height="270" rx="14" fill="none" stroke-width="3" stroke-dasharray="10 10"/><rect class="s-muted" x="805" y="515" width="270" height="270" rx="14" fill="none" stroke-width="3" stroke-dasharray="10 10"/></g>
+<g id="pc0"><rect class="s-ink" x="525" y="235" width="270" height="270" rx="14" fill="var(--stage)" stroke-width="5"/><ellipse class="s-ink" cx="660" cy="345" rx="48" ry="64" fill="none" stroke-width="6"/><path class="s-ink" d="M660 409v28M625 437h70" stroke-width="6" stroke-linecap="round"/><text class="m" x="660" y="480" font-size="22" text-anchor="middle">OWNERSHIP</text></g>
+<g id="pc1"><rect class="s-ink" x="805" y="235" width="270" height="270" rx="14" fill="var(--stage)" stroke-width="5"/><rect class="s-ink" x="895" y="280" width="90" height="130" rx="6" fill="none" stroke-width="6"/><path class="s-line" d="M915 320h50M915 350h50M915 380h30" stroke-width="6" stroke-linecap="round"/><text class="m" x="940" y="480" font-size="22" text-anchor="middle">TRACK + WHY</text></g>
+<g id="pc2"><rect class="s-ink" x="525" y="515" width="270" height="270" rx="14" fill="var(--stage)" stroke-width="5"/><circle class="s-ink" cx="660" cy="605" r="52" fill="none" stroke-width="6"/><path class="s-ink" d="M660 605v-32M660 605h24" stroke-width="6" stroke-linecap="round"/><text class="m" x="660" y="712" font-size="22" text-anchor="middle">ROUTINES +</text><text class="m" x="660" y="742" font-size="22" text-anchor="middle">INFLUENCES</text></g>
+<g id="pc3"><rect class="gain" x="805" y="515" width="270" height="270" rx="14"/><path d="M885 690L995 580M950 580h45v45" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="940" y="742" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">GO BEYOND</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pick one task.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Do a little more</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">than anyone <tspan style="fill:var(--gain)">expects</tspan>.</text></g>
+<g id="tgt"><circle class="s-ink" cx="1330" cy="440" r="130" fill="var(--stage)" stroke-width="7"/><circle class="s-gain" cx="1330" cy="440" r="86" fill="none" stroke-width="7"/><circle class="gain" cx="1330" cy="440" r="40"/></g>
+<g id="arw8"><path class="s-ink" d="M0 0L150-100M150-100h28M150-100v-28" fill="none" stroke-width="8" stroke-linecap="round"/></g>
+<g id="tm8"><text class="m" x="143" y="700" font-size="26">THEN DO IT AGAIN TOMORROW · LET IT COMPOUND</text></g>
+<g id="days8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Go Beyond Expectations to Accelerate&rdquo;, from <em>The Compound Effect</em> by Darren Hardy. The idea of extra reps past the point of pain and of bringing the wow is as reported in the book. The report, note, phone call, race and growth curve drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 9.9], [9.9, 26.1], [26.1, 41.9], [41.9, 52.7], [52.7, 64.4], [64.4, 77.4], [77.4, 93.5], [93.5, 109.2], [109.2, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Extra Mile", "Where Growth Hides", "Beyond the Expected", "Small Extras at Work", "Extras at Home", "When Others Let Up", "Extras Compound", "Tying It Together", "Your Extra Rep"];
+const TM={"stop_line": 0.0, "dumbbell": 10.16, "rep_counter": 12.68, "strong_arm": 21.4, "checklist": 29.52, "gold_star": 35.44, "wow_sign": 39.28, "report": 42.16, "sticky_note": 45.28, "spotlight": 49.08, "love_note": 53.04, "phone_call": 57.57, "runners": 69.28, "finish_line": 73.12, "penny": 77.68, "growth_curve": 83.12, "steep_arrow": 88.4, "puzzle": 93.76, "mirror": 96.52, "notebook": 98.8, "target": 109.48};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const starP=(cx,cy,R,r,n)=>{let s='';for(let i=0;i<2*n;i++){const a=-Math.PI/2+i*Math.PI/n,q=i%2?r:R;s+=(cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1)+' '}return s};
+const draw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+person($('lifter'),300,400,40,'ink');
+const RB=[];for(let i=0;i<10;i++){const x=640+i*82,g=mk('g',{},$('reps'));const r=mk('rect',{x:x,y:400,width:70,height:70,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:x+35,y:446,'font-size':26,'text-anchor':'middle',class:'m'},g);tx.textContent=i+1;RB.push([r,tx])}
+const CK=[0,1].map(q=>{const px=120+q*740,a=[];for(let j=0;j<3+q;j++){const y=310+j*70,g=mk('g',{},$('ck'+q)),x4=j===3;
+  mk('rect',{x:px+40,y:y,width:40,height:40,rx:8,fill:x4?'var(--gain)':'var(--stage)',stroke:x4?'var(--gain)':'var(--ink)','stroke-width':4},g);
+  mk('path',{d:'M'+(px+49)+' '+(y+20)+'l9 10l15-18',fill:'none',stroke:x4?'var(--on-gain)':'var(--ink)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  if(x4){const tx=mk('text',{x:px+100,y:y+28,'font-size':20,class:'m',style:'fill:var(--gain)'},g);tx.textContent='+ A LITTLE EXTRA'}
+  else mk('path',{d:'M'+(px+100)+' '+(y+20)+'h200',stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round'},g);a.push(g)}return a});
+$('st0').setAttribute('points',starP(600,420,50,22,5));$('st1').setAttribute('points',starP(1330,420,100,42,5));$('burst').setAttribute('points',starP(870,760,62,46,12));
+const DOC=[];for(let i=0;i<5;i++){const x=160+i*260,g=mk('g',{},$('docs')),h=mk('g',{},g);mk('rect',{x:x,y:400,width:160,height:210,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},h);
+  for(let k=0;k<4;k++)mk('path',{d:'M'+(x+24)+' '+(440+k*36)+'h'+(k===3?70:112),stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},h);DOC.push([g,h])}
+for(let i=0;i<6;i++)mk('path',{d:'M120 '+(395+i*70)+'H1480',stroke:'var(--line)','stroke-width':i%5?3:5},$('track'));
+for(let r=0;r<23;r++)for(let c=0;c<2;c++)mk('rect',{x:1390+c*15,y:397+r*15,width:15,height:15,fill:(r+c)%2?'var(--ink)':'var(--stage)'},$('fin5'));
+const RU=[];for(let i=0;i<5;i++){const g=mk('g',{},$('run5'));person(g,0,412+i*70,11,i===2?'gain':'ink');RU.push(g)}
+const cv=(H,k)=>{let d='';for(let i=0;i<=40;i++){const s=i/40;d+=(i?'L':'M')+(200+1240*s).toFixed(1)+' '+(720-H*(Math.exp(k*s)-1)/(Math.exp(k)-1)).toFixed(1)}return d};
+$('cv0').setAttribute('d',cv(200,1.5));$('cv1').setAttribute('d',cv(450,3));
+$('arrP').setAttribute('transform','translate(1440 270) rotate('+(Math.atan2(-1350*Math.exp(3)/(Math.exp(3)-1),1240)*180/Math.PI).toFixed(1)+')');
+const DY=[];for(let i=0;i<7;i++)DY.push(mk('circle',{cx:158+i*50,cy:770,r:14},$('days8')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+draw($('c0'),p(u,.2,1.4)); rise($('stop0'),p(u,TM.stop_line+.6,TM.stop_line+1.1));
+  draw($('c1'),p(u,TM.stop_line+7.2,TM.stop_line+9)); rise($('acc0'),p(u,TM.stop_line+8.6,TM.stop_line+9.2));
+
+  rise($('lift'),p(u,TM.dumbbell,TM.dumbbell+.5));
+  const sh=u>=TM.rep_counter+3?1:0, by=320+20*Math.sin(t*3)*(1-sh*.6), jx=sh*3*Math.sin(t*40);
+  $('bell').setAttribute('transform','translate('+jx.toFixed(1)+' '+by.toFixed(1)+')');
+  $('arms').setAttribute('d','M258 490L'+(212+jx).toFixed(1)+' '+by.toFixed(1)+'M342 490L'+(388+jx).toFixed(1)+' '+by.toFixed(1));
+  rise($('sh1'),p(u,TM.rep_counter+3,TM.rep_counter+3.5)); rise($('reps'),p(u,TM.rep_counter,TM.rep_counter+.4));
+  RB.forEach((b,i)=>{const g=i>=8, on=g?u>=TM.strong_arm+.3+(i-8)*.5:u>=TM.rep_counter+.5+i*.45;
+    b[0].setAttribute('fill',on?(g?'var(--gain)':'var(--ink)'):'var(--stage)'); b[0].setAttribute('stroke',g?'var(--gain)':'var(--ink)');
+    b[1].style.fill=on?(g?'var(--on-gain)':'var(--stage)'):'var(--muted)'});
+  rise($('stop1'),p(u,TM.strong_arm-4.6,TM.strong_arm-4.1)); rise($('grow1'),p(u,TM.strong_arm,TM.strong_arm+.5)); rise($('bld1'),p(u,TM.strong_arm+1,TM.strong_arm+1.6));
+
+  rise($('pan0'),p(u,TM.checklist,TM.checklist+.5)); CK[0].forEach((g,j)=>rise(g,p(u,TM.checklist+.4+j*.4,TM.checklist+.8+j*.4)));
+  rise($('st0g'),p(u,TM.checklist+2.2,TM.checklist+2.7));
+  rise($('pan1'),p(u,TM.gold_star,TM.gold_star+.5)); CK[1].forEach((g,j)=>{const a=TM.gold_star+.3+j*.3+(j===3?.4:0); rise(g,p(u,a,a+.4))});
+  rise($('st1g'),p(u,TM.gold_star+1.8,TM.gold_star+2.4));
+  rise($('wow2'),p(u,TM.wow_sign,TM.wow_sign+.5)); $('burst').setAttribute('transform','rotate('+(8*Math.sin(t*1.5)).toFixed(2)+' 870 760)');
+
+  const dim=1-.65*p(u,TM.spotlight,TM.spotlight+.6);
+  DOC.forEach((d,i)=>{rise(d[0],p(u,TM.report+i*.15,TM.report+i*.15+.4)); d[1].setAttribute('opacity',i===2?1:dim.toFixed(2))});
+  rise($('note3'),p(u,TM.sticky_note,TM.sticky_note+.5)); rise($('nl3'),p(u,TM.sticky_note+.6,TM.sticky_note+1.1));
+  $('spot').setAttribute('opacity',p(u,TM.spotlight,TM.spotlight+.6)); rise($('out3'),p(u,TM.spotlight+1,TM.spotlight+1.6));
+
+  rise($('cal4'),p(u,TM.love_note,TM.love_note+.5)); rise($('note4'),p(u,TM.love_note+1,TM.love_note+1.5));
+  rise($('call4'),p(u,TM.phone_call,TM.phone_call+.5)); rise($('bub4'),p(u,TM.phone_call+1.2,TM.phone_call+1.7));
+  [0,1,2].forEach(i=>$('w'+i).setAttribute('opacity',(.25+.75*(.5+.5*Math.sin(t*4-i*1.2))).toFixed(2)));
+  rise($('bars4'),p(u,TM.phone_call+5,TM.phone_call+5.5)); $('memb').setAttribute('width',(1000*p(u,TM.phone_call+5.4,TM.phone_call+7)).toFixed(1));
+
+  rise($('run5'),p(u,TM.runners,TM.runners+.4));
+  const ra=p(u,TM.runners,TM.runners+4.5), rf=p(u,TM.finish_line,TM.finish_line+2.5);
+  RU.forEach((g,i)=>{const x=i===2?170+800*ra+360*rf:170+(760+i*40)*ra, mv=i===2?(ra<1||(rf>0&&rf<1)):ra<1;
+    g.setAttribute('transform','translate('+x.toFixed(1)+' '+(mv?-4*Math.abs(Math.sin(t*8+i)):0).toFixed(1)+')')});
+  rise($('fin5'),p(u,TM.finish_line,TM.finish_line+.5)); rise($('out5'),p(u,TM.finish_line+1.5,TM.finish_line+2.1));
+
+  rise($('pen6'),p(u,TM.penny,TM.penny+.5));
+  draw($('cv0'),p(u,TM.growth_curve,TM.growth_curve+1.5)); draw($('cv1'),p(u,TM.growth_curve+1,TM.growth_curve+4));
+  rise($('arr6'),p(u,TM.steep_arrow,TM.steep_arrow+.4)); rise($('lb0'),p(u,TM.steep_arrow,TM.steep_arrow+.5)); rise($('lb1'),p(u,TM.steep_arrow+.6,TM.steep_arrow+1.1));
+
+  rise($('frame7'),p(u,TM.puzzle,TM.puzzle+.5)); rise($('pc0'),p(u,TM.mirror,TM.mirror+.5));
+  rise($('pc1'),p(u,TM.notebook,TM.notebook+.5)); rise($('pc2'),p(u,TM.notebook+2.5,TM.notebook+3));
+  const pk=p(u,TM.notebook+6.6,TM.notebook+7.4); $('pc3').setAttribute('transform','translate('+(260*(1-pk)).toFixed(1)+' 0)'); $('pc3').setAttribute('opacity',cl(pk*3).toFixed(2));
+
+  rise($('qa'),p(u,TM.target,TM.target+.5)); rise($('qb'),p(u,TM.target+.4,TM.target+.9)); rise($('qc'),p(u,TM.target+.8,TM.target+1.3));
+  rise($('tgt'),p(u,TM.target+1,TM.target+1.5));
+  const ak=p(u,TM.target+1.8,TM.target+2.4); $('arw8').setAttribute('transform','translate('+(1330+300*(1-ak)).toFixed(1)+' '+(440-200*(1-ak)).toFixed(1)+')'); $('arw8').setAttribute('opacity',ak>0?1:0);
+  rise($('tm8'),p(u,TM.target+5.8,TM.target+6.3));
+  DY.forEach((c,i)=>c.setAttribute('fill',u>=TM.target+6+i*.4?'var(--gain)':'var(--line)'));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.89;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

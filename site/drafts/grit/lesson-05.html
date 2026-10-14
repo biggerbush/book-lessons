@@ -1,0 +1,327 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grit Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Grit: Grit grows stronger when we see our work as connected to the well-being of others, the way one bricklayer sees himself building a cathedral rather than just laying bricks. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">GRIT · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Finding a purpose</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">beyond yourself.</text>
+<text class="b" x="120" y="600" font-size="32">Why seeing who your work helps makes you keep going</text>
+<g id="cath0"></g>
+<g id="tpp"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Three bricklayers.</text>
+<text class="b" x="120" y="176" font-size="32">An old parable, retold by Duckworth.</text>
+<path class="s-line" d="M120 760H1480" stroke-width="5" stroke-linecap="round"/>
+<g id="sun"><circle class="gain" cx="960" cy="270" r="34"/><g id="rays"></g></g>
+<g id="bl"></g>
+<g id="pb"><text class="m" x="1300" y="650" font-size="20" text-anchor="middle">PASSERBY</text></g>
+<g id="q1"><rect class="s-ink" x="1120" y="270" width="340" height="70" rx="35" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M1270 338l20 40 10-40" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><text class="m" x="1290" y="314" font-size="22" text-anchor="middle">WHAT ARE YOU DOING?</text></g>
+<g id="bw"></g>
+<text id="idw" class="m" x="200" y="806" font-size="20">IDENTICAL WORK, SIDE BY SIDE</text>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Three answers.</text>
+<text class="b" x="120" y="176" font-size="32">Same question: what are you doing?</text>
+<g id="a0"><g id="bb0"></g><text class="d5" x="340" y="258" font-size="32" text-anchor="middle">I am</text><text class="d5" x="340" y="304" font-size="32" text-anchor="middle">laying bricks.</text>
+<rect class="s-ink" x="300" y="540" width="80" height="40" fill="var(--stage)" stroke-width="6"/></g>
+<g id="a1"><g id="bb1"></g><text class="d5" x="800" y="258" font-size="32" text-anchor="middle">I am building</text><text class="d5" x="800" y="304" font-size="32" text-anchor="middle">a church.</text>
+<path class="s-ink" d="M730 620V500h140v120zM712 502L800 424L888 502M800 384v36M786 398h28M785 620v-40a15 15 0 0 1 30 0v40" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/></g>
+<g id="a2"><g id="bb2"></g><text class="d5" x="1260" y="258" font-size="32" text-anchor="middle">I am building</text><text class="d5" x="1260" y="304" font-size="32" text-anchor="middle" style="fill:var(--gain)">the house of God.</text>
+<path id="cg" class="s-gain" d="M1140 620V430L1180 370L1220 430V620M1220 500L1260 450L1300 500M1300 620V430L1340 370L1380 430V620M1140 620H1380M1220 500V620M1300 500V620M1282 550a22 22 0 1 0-44 0a22 22 0 1 0 44 0" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/></g>
+<g id="w2"></g>
+<g id="same"><text class="d" x="120" y="846" font-size="40">Same hands, same bricks, three very different stories.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Job, career, calling.</text>
+<text class="b" x="120" y="176" font-size="32">Duckworth’s three ways of seeing the same work.</text>
+<g id="j0"><rect class="s-line" x="120" y="230" width="414" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<ellipse id="coin" class="s-ink" cx="327" cy="390" rx="80" ry="80" fill="var(--stage)" stroke-width="7"/><ellipse id="coin2" class="s-gain" cx="327" cy="390" rx="50" ry="50" fill="none" stroke-width="6"/>
+<text class="d" x="156" y="580" font-size="64">Job</text><text class="m" x="156" y="630" font-size="20">DONE TO PAY THE BILLS</text><text class="m" x="156" y="750" font-size="20">BRICKLAYER 1</text></g>
+<g id="j1"><rect class="s-line" x="593" y="230" width="414" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M760 290V490M840 290V490M760 320h80M760 360h80M760 400h80M760 440h80M760 480h80" stroke-width="6" stroke-linecap="round"/><circle id="lad" class="gain" cx="800" cy="480" r="16"/>
+<text class="d" x="629" y="580" font-size="64">Career</text><text class="m" x="629" y="630" font-size="20">A PATH TOWARD</text><text class="m" x="629" y="662" font-size="20">ADVANCEMENT</text><text class="m" x="629" y="750" font-size="20">BRICKLAYER 2</text></g>
+<g id="j2"><rect class="s-gain" x="1066" y="230" width="414" height="560" rx="18" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-gain" cx="1273" cy="400" r="100" fill="none" stroke-width="3" stroke-dasharray="6 8"/><g id="ring"></g>
+<circle class="ink" cx="1273" cy="370" r="22"/><path class="ink" d="M1240 462v-29a33 33 0 0 1 66 0v29z"/>
+<text class="d" x="1102" y="580" font-size="64" style="fill:var(--gain)">Calling</text><text class="m" x="1102" y="630" font-size="20">DEEPLY MEANINGFUL,</text><text class="m" x="1102" y="662" font-size="20">CONNECTED TO SOMETHING</text><text class="m" x="1102" y="694" font-size="20">LARGER</text><text class="m" x="1102" y="750" font-size="20" style="fill:var(--gain)">BRICKLAYER 3</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">It’s not the title.</text>
+<text class="b" x="120" y="176" font-size="32">Amy Wrzesniewski studies how people describe their work.</text>
+<g id="amy"><g id="amyp"></g>
+<rect class="s-ink" x="290" y="470" width="70" height="100" rx="6" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M304 500h42M304 524h42M304 548h28" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="120" y="640" font-size="20">AMY WRZESNIEWSKI</text><text class="m" x="120" y="672" font-size="20">PSYCHOLOGIST</text></g>
+<g id="desks"></g>
+<g id="mat"><text class="d" x="120" y="790" font-size="44">What matters is how the worker sees it.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Gritty people look outward.</text>
+<text class="b" x="120" y="176" font-size="32">Duckworth’s surveys, and the role models of grit she met.</text>
+<g id="ch"><path class="s-ink" d="M200 260V700H760" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="480" y="744" font-size="20" text-anchor="middle">MORE GRIT →</text>
+<text class="m" x="170" y="480" font-size="18" text-anchor="middle" transform="rotate(-90 170 480)">DRIVE FOR A MEANINGFUL, OTHER-FOCUSED LIFE</text>
+<text class="m" x="750" y="680" font-size="18" text-anchor="end">ILLUSTRATION</text></g>
+<g id="pts"></g>
+<path id="trend" class="s-gain" d="M230 660L740 300" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="hl"></g>
+<g id="hp0"></g>
+<g id="hp1"></g>
+<g id="hard"><circle cx="970" cy="310" r="30" fill="var(--muted)"/><circle cx="1010" cy="292" r="36" fill="var(--muted)"/><circle cx="1052" cy="314" r="28" fill="var(--muted)"/><rect x="950" y="310" width="110" height="34" rx="17" fill="var(--muted)"/><g id="drops"></g></g>
+<text id="hm1" class="m" x="860" y="756" font-size="20">THEIR WORK MATTERED TO OTHER PEOPLE</text>
+<text id="hm2" class="m" x="860" y="794" font-size="20" style="fill:var(--gain)">A REASON TO KEEP GOING ON HARD DAYS</text>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Purpose comes later.</text>
+<text class="b" x="120" y="176" font-size="32">Interest and practice usually come first.</text>
+<g id="tl"><path class="s-ink" d="M160 640H1420M1400 620l24 20-24 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="ink" cx="340" cy="640" r="10"/><circle class="ink" cx="800" cy="640" r="10"/><circle class="gain" cx="1260" cy="640" r="12"/></g>
+<text id="lb0" class="m" x="340" y="690" font-size="24" text-anchor="middle">INTEREST</text>
+<text id="lb1" class="m" x="800" y="690" font-size="24" text-anchor="middle">PRACTICE</text>
+<text id="lb2" class="m" x="1260" y="690" font-size="24" text-anchor="middle" style="fill:var(--gain)">PURPOSE</text>
+<g id="plants"></g>
+<g id="helped"></g>
+<g id="okk"><text class="d" x="120" y="800" font-size="44">No calling yet? Nothing has gone wrong.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Growing your purpose.</text>
+<text class="b" x="120" y="176" font-size="32">Three steps Duckworth suggests.</text>
+<path id="ar0" class="s-muted" d="M460 400H670m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="ar1" class="s-muted" d="M930 400H1140m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="st0"><circle class="s-line" cx="330" cy="400" r="110" fill="var(--stage)" stroke-width="4"/>
+<path id="bray" class="s-gain" d="M330 316v-14M282 334l-10-10M378 334l10-10M268 380h-14M392 380h14" stroke-width="5" stroke-linecap="round"/>
+<circle id="bulb" class="s-ink" cx="330" cy="380" r="42" stroke-width="6"/><rect class="ink" x="312" y="426" width="36" height="26" rx="4"/>
+<text class="d" x="330" y="590" font-size="44" text-anchor="middle">Reflect</text><text class="m" x="330" y="640" font-size="20" text-anchor="middle">SEE HOW YOUR WORK</text><text class="m" x="330" y="672" font-size="20" text-anchor="middle">ALREADY HELPS OTHERS</text></g>
+<g id="st1"><circle class="s-line" cx="800" cy="400" r="110" fill="var(--stage)" stroke-width="4"/>
+<path class="s-ink" d="M776 392v-22h48v22" fill="none" stroke-width="7" stroke-linejoin="round"/><rect class="ink" x="740" y="392" width="120" height="76" rx="8"/><rect class="gain" x="788" y="412" width="24" height="14"/>
+<text class="d" x="800" y="590" font-size="44" text-anchor="middle">Small changes</text><text class="m" x="800" y="640" font-size="20" text-anchor="middle">TIE DAILY TASKS</text><text class="m" x="800" y="672" font-size="20" text-anchor="middle">TO YOUR VALUES</text></g>
+<g id="st2"><circle class="s-line" cx="1270" cy="400" r="110" fill="var(--stage)" stroke-width="4"/>
+<path class="gain" d="M1270 300l8 17 19 2-14 12 4 19-17-10-17 10 4-19-14-12 19-2z"/><circle class="ink" cx="1270" cy="396" r="24"/><path class="ink" d="M1234 497v-31a36 36 0 0 1 72 0v31z"/>
+<text class="d" x="1270" y="590" font-size="44" text-anchor="middle">A role model</text><text class="m" x="1270" y="640" font-size="20" text-anchor="middle">FIND ONE WHOSE</text><text class="m" x="1270" y="672" font-size="20" text-anchor="middle">PURPOSE INSPIRES YOU</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">Pick one task this week.</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="80" letter-spacing="-2">Who does it help?</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="80" letter-spacing="-2">Describe it like the</text></g>
+<g id="qd"><text class="d" x="136" y="630" font-size="80" letter-spacing="-2" style="fill:var(--gain)">third bricklayer would.</text></g>
+<text id="lab8" class="m" x="143" y="740" font-size="26">BUILD YOUR CATHEDRAL</text>
+<g id="cath8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Finding a Purpose Beyond Yourself&rdquo;, from <em>Grit</em> by Angela Duckworth. Examples as reported in the book: the three bricklayers parable, Amy Wrzesniewski&#x27;s job, career and calling research, and Duckworth&#x27;s surveys on grit and purpose. Drawings of people, bricks, the chart and the timeline are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 8.0], [8.0, 22.3], [22.3, 37.3], [37.3, 53.1], [53.1, 68.8], [68.8, 84.3], [84.3, 99.9], [99.9, 115.0], [115.0, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Same Work, Two Lives", "Three Bricklayers", "Three Answers", "Job, Career, Calling", "It's Not the Title", "Gritty People Look Out", "Purpose Comes Later", "Growing Your Purpose", "Your Cathedral"];
+const TM={"cathedral": 0.0, "bricklayers": 8.32, "passerby": 13.52, "brick_wall": 18.32, "speech_one": 22.56, "speech_two": 25.68, "speech_three": 28.88, "label_job": 37.6, "label_career": 42.72, "label_calling": 46.72, "amy": 53.36, "office_desk": 59.8, "survey_chart": 69.12, "helping_hand": 75.56, "timeline": 84.6, "seedling": 90.48, "lightbulb": 100.24, "toolbox": 105.28, "role_model": 111.52, "my_cathedral": 117.84};
+const P=(g,x,y,r,a)=>[mk('circle',Object.assign({cx:x,cy:y,r:r},a),g),mk('path',Object.assign({d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`},a),g)];
+const G=par=>mk('g',{},par);
+const wall=(g,x0,y0,cols,rows,w,h,sw)=>{const R=[];for(let r=0;r<rows;r++){const gr=G(g);R.push(gr);for(let c=0;c<=cols;c++){const bx=x0+c*w-(r%2?w/2:0),s=Math.max(bx,x0),e=Math.min(bx+w,x0+cols*w);if(e-s>1)mk('rect',{x:s,y:y0-(r+1)*h,width:e-s,height:h,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':sw},gr)}}return R};
+const CP='M0 400V120L40 0L80 120V400M80 200L180 120L280 200M280 400V120L320 0L360 120V400M0 400H360M155 400v-70a25 25 0 0 1 50 0v70M210 260a30 30 0 1 0-60 0a30 30 0 1 0 60 0';
+const cath=(id,x,y,s)=>{const g=mk('g',{transform:`translate(${x} ${y}) scale(${s})`},$(id));const B=wall(g,0,470,6,2,60,28,4);const pa=mk('path',{d:CP,fill:'none',stroke:'var(--gain)','stroke-width':8,'stroke-linejoin':'round','stroke-linecap':'round',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1},g);return [pa,B]};
+const dash=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const C0=cath('cath0',1100,300,1),C8=cath('cath8',1270,400,.5);
+const tp=[[990,{fill:'var(--muted)'}],[1050,{class:'ink'}]].map(q=>P($('tpp'),q[0],660,20,q[1]));
+for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${(960+44*c).toFixed(1)} ${(270+44*s).toFixed(1)}L${(960+58*c).toFixed(1)} ${(270+58*s).toFixed(1)}`,stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round'},$('rays'))}
+const W1=[300,600,900].map(x=>{const g=G($('bl'));P(g,x,480,32,{class:'ink'});return g});
+P($('pb'),1300,470,32,{fill:'var(--muted)'});
+const BW=wall($('bw'),200,760,10,4,80,40,4);
+[340,800,1260].forEach((c,i)=>{const g=$('bb'+i);mk('rect',{x:c-190,y:210,width:380,height:120,rx:24,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('path',{d:`M${c-18} 328l18 22 18-22`,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},g);P($('w2'),c,690,22,{class:'ink'})});
+const RG=[];for(let i=0;i<8;i++){const a=i*Math.PI/4;RG.push(mk('circle',{cx:(1273+100*Math.cos(a)).toFixed(1),cy:(400+100*Math.sin(a)).toFixed(1),r:14,class:'gain'},$('ring')))}
+P($('amyp'),230,420,36,{class:'ink'});
+const DK=[620,960,1300].map((c,i)=>{const d=G($('desks')),b=G($('desks')),on=i==2;P(d,c,460,30,{class:'ink'});
+  mk('rect',{x:c-140,y:560,width:280,height:26,rx:4,class:'ink'},d);mk('path',{d:`M${c-120} 586V700M${c+120} 586V700`,stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},d);
+  mk('rect',{x:c-100,y:606,width:200,height:40,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},d);
+  mk('text',{x:c,y:632,'font-size':18,'text-anchor':'middle',class:'m'},d).textContent='SAME JOB TITLE';
+  mk('rect',{x:c-110,y:250,width:220,height:70,rx:35,fill:on?'var(--gain)':'var(--stage)',stroke:on?'var(--gain)':'var(--ink)','stroke-width':4},b);
+  [[c-14,346,9],[c-24,384,6]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],fill:on?'var(--gain)':'var(--ink)'},b));
+  mk('text',{x:c,y:294,'font-size':24,'text-anchor':'middle',class:'m',style:on?'fill:var(--on-gain)':''},b).textContent=['JOB','CAREER','CALLING'][i];return [d,b]});
+const PT=[];for(let i=0;i<10;i++)PT.push(mk('circle',{cx:240+i*54,cy:650-i*36+((i*37)%5-2)*18,r:10,class:'ink',opacity:0},$('pts')));
+P($('hp0'),1000,470,30,{class:'ink'});
+const HL=[],HP=[[1340,310],[1380,460],[1340,600]].map(q=>{HL.push(mk('path',{d:`M1040 510L${q[0]-44} ${q[1]+50}`,stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},$('hl')));const g=G($('hp1'));P(g,q[0],q[1],24,{class:'gain'});return g});
+const DR=[];for(let i=0;i<5;i++)DR.push(mk('path',{d:`M${960+i*22} 350v14`,stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round'},$('drops')));
+const PL=[340,800,1260].map((c,k)=>{const H=[70,160,260][k],g=$('plants'),lv=[],st=mk('line',{x1:c,y1:630,x2:c,y2:630,stroke:'var(--ink)','stroke-width':7,'stroke-linecap':'round'},g);
+  for(let j=0;j<=k;j++){const f=(j+1)/(k+2),y=630-H*f;[-1,1].forEach(s=>lv.push([mk('ellipse',{cx:c+s*24,cy:y,rx:24,ry:10,transform:`rotate(${-s*25} ${c+s*24} ${y})`,fill:k==2?'var(--gain)':'var(--ink)',opacity:0},g),f]))}
+  return {st,H,lv,fl:k==2?mk('circle',{cx:c,cy:630-H,r:0,class:'gain'},g):null}});
+[1110,1410].forEach(x=>P($('helped'),x,540,16,{class:'gain'}));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+C0[1].forEach((r,i)=>rise(r,p(t,.2+i*.3,.7+i*.3)));
+  dash(C0[0],p(u,TM.cathedral+.6,TM.cathedral+4));
+  const dif=u>=TM.cathedral+5.8; tp[1].forEach(e=>e.setAttribute('class',dif?'gain':'ink'));
+
+  W1.forEach((w,i)=>rise(w,p(u,TM.bricklayers+i*.4,TM.bricklayers+i*.4+.5)));
+  rise($('pb'),p(u,TM.passerby,TM.passerby+.5)); rise($('q1'),p(u,TM.passerby+.6,TM.passerby+1.1));
+  BW.forEach((r,i)=>rise(r,p(u,TM.brick_wall+i*.4,TM.brick_wall+i*.4+.4)));
+  rise($('sun'),p(u,TM.brick_wall+.8,TM.brick_wall+1.3)); $('rays').setAttribute('transform','rotate('+((t*15)%360).toFixed(1)+' 960 270)');
+  rise($('idw'),p(u,TM.brick_wall+1.6,TM.brick_wall+2.1));
+
+  [TM.speech_one,TM.speech_two,TM.speech_three].forEach((a,i)=>rise($('a'+i),p(u,a,a+.5)));
+  $('cg').setAttribute('stroke-width',(6+2*Math.sin(t*3)).toFixed(1));
+  rise($('same'),p(u,TM.speech_three+4.1,TM.speech_three+4.7));
+
+  [TM.label_job,TM.label_career,TM.label_calling].forEach((a,i)=>rise($('j'+i),p(u,a,a+.5)));
+  const cs=Math.abs(Math.cos(t*1.6)); $('coin').setAttribute('rx',(80*cs+4).toFixed(1)); $('coin2').setAttribute('rx',(50*cs+2).toFixed(1));
+  $('lad').setAttribute('cy',(480-180*((t*.35)%1)).toFixed(1));
+  RG.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.label_calling+.6+i*.2,TM.label_calling+.9+i*.2)));
+
+  rise($('amy'),p(u,TM.amy,TM.amy+.5));
+  DK.forEach((d,i)=>{rise(d[0],p(u,TM.office_desk+i*.3,TM.office_desk+i*.3+.5)); rise(d[1],p(u,TM.office_desk+1.6+i*.9,TM.office_desk+2.1+i*.9))});
+  rise($('mat'),p(u,TM.office_desk+5.8,TM.office_desk+6.4));
+
+  rise($('ch'),p(u,TM.survey_chart,TM.survey_chart+.5));
+  PT.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.survey_chart+.6+i*.15,TM.survey_chart+.9+i*.15)));
+  dash($('trend'),p(u,TM.survey_chart+2.2,TM.survey_chart+3.6));
+  rise($('hp0'),p(u,TM.helping_hand,TM.helping_hand+.5));
+  HP.forEach((h,i)=>{const a=TM.helping_hand+.6+i*.4; rise(h,p(u,a,a+.4)); HL[i].setAttribute('opacity',p(u,a,a+.4))});
+  rise($('hm1'),p(u,TM.helping_hand+1.2,TM.helping_hand+1.7));
+  rise($('hard'),p(u,TM.helping_hand+5.4,TM.helping_hand+5.9)); rise($('hm2'),p(u,TM.helping_hand+5.8,TM.helping_hand+6.3));
+  DR.forEach((d,i)=>{const k=(t*1.2+i*.37)%1; d.setAttribute('transform','translate(0 '+(k*60).toFixed(1)+')'); d.setAttribute('opacity',(1-k).toFixed(2))});
+
+  rise($('tl'),p(u,TM.timeline,TM.timeline+.5));
+  [0,1,2].forEach(i=>rise($('lb'+i),p(u,TM.timeline+.6+i*.7,TM.timeline+1.1+i*.7)));
+  PL.forEach((q,k)=>{const g=p(u,TM.seedling+k*1.1,TM.seedling+k*1.1+1.2); q.st.setAttribute('y2',(630-q.H*g).toFixed(1));
+    q.lv.forEach(l=>l[0].setAttribute('opacity',g>=l[1]?1:0)); if(q.fl)q.fl.setAttribute('r',(26*cl((g-.9)*10)).toFixed(1))});
+  rise($('helped'),p(u,TM.seedling+3.8,TM.seedling+4.3));
+  rise($('okk'),p(u,TM.seedling+6.2,TM.seedling+6.8));
+
+  [TM.lightbulb,TM.toolbox,TM.role_model].forEach((a,i)=>rise($('st'+i),p(u,a,a+.5)));
+  rise($('ar0'),p(u,TM.toolbox-.4,TM.toolbox)); rise($('ar1'),p(u,TM.role_model-.4,TM.role_model));
+  const lit=u>=TM.lightbulb+.6; $('bulb').style.fill=lit?'var(--gain)':'var(--stage)';
+  $('bray').setAttribute('opacity',lit?(.6+.4*Math.sin(t*5)).toFixed(2):0);
+
+  const s8=SC[8][0]/K;
+  rise($('qa'),p(u,s8+.4,s8+.9));
+  C8[1].forEach((r,i)=>rise(r,p(u,s8+.8+i*.3,s8+1.2+i*.3)));
+  rise($('qb'),p(u,TM.my_cathedral,TM.my_cathedral+.5)); rise($('qc'),p(u,TM.my_cathedral+.6,TM.my_cathedral+1.1)); rise($('qd'),p(u,TM.my_cathedral+1.2,TM.my_cathedral+1.7));
+  dash(C8[0],p(u,TM.my_cathedral+.8,TM.my_cathedral+3));
+  rise($('lab8'),p(u,TM.my_cathedral+2,TM.my_cathedral+2.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.81;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

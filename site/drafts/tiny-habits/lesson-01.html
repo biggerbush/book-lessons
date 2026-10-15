@@ -1,0 +1,378 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiny Habits Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Tiny Habits: Habits fail because of poor design rather than weak willpower, so you can stop blaming yourself and start redesigning. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">TINY HABITS · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">It’s not you.</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">It’s the <tspan style="fill:var(--gain)">design</tspan>.</text>
+<text class="b" x="120" y="600" font-size="32">Why failed habits are a design problem, not a character flaw.</text>
+<rect class="s-ink" x="1120" y="200" width="320" height="340" rx="18" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="1220" y="180" width="120" height="40" rx="10"/>
+<g id="tl"></g>
+<g id="tag"><rect class="gain" x="1160" y="460" width="240" height="48" rx="24"/><text class="m" x="1280" y="491" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">FIX THE DESIGN</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The blame loop.</text>
+<text class="b" x="120" y="176" font-size="32">Big goal, busy life, harsh self-talk. Then repeat.</text>
+<g id="b0"><rect class="s-line" x="140" y="240" width="360" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<polygon class="s-ink" points="190,540 320,320 450,540" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M320 320V260" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M320 260l54 16-54 16z"/>
+<text class="m" x="320" y="630" font-size="22" text-anchor="middle">BIG GOAL</text></g>
+<path id="a0" class="s-muted" d="M510 410h90m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="b1"><rect class="s-line" x="620" y="240" width="360" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-line" d="M670 300V540H940" fill="none" stroke-width="4"/>
+<polyline id="slp" class="s-loss" points="680,310 750,330 820,410 900,520" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="340"/>
+<text class="m" x="800" y="630" font-size="22" text-anchor="middle">LIFE GETS BUSY</text></g>
+<path id="a1" class="s-muted" d="M990 410h90m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="b2"><rect class="s-line" x="1100" y="240" width="360" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<ellipse class="s-ink" cx="1280" cy="390" rx="100" ry="120" fill="var(--stage)" stroke-width="7"/>
+<g id="mirP"></g>
+<text class="d" x="1280" y="562" font-size="38" text-anchor="middle" style="fill:var(--loss)">“Lazy.”</text>
+<text class="m" x="1280" y="630" font-size="22" text-anchor="middle">THE MIRROR</text></g>
+<g id="ret"><path class="s-loss" d="M1280 660C1280 800 320 800 320 660" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<path class="s-loss" d="M298 684L320 660L342 684" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="800" y="840" font-size="22" text-anchor="middle">EACH LOOP MAKES THE NEXT TRY HARDER</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Willpower is a weak plan.</text>
+<text class="b" x="120" y="176" font-size="32">Motivation rises and falls like a wave.</text>
+<g id="sci"><g id="sciP"></g>
+<text class="d5" x="140" y="590" font-size="40">BJ Fogg</text>
+<text class="m" x="140" y="630" font-size="20">STANFORD UNIVERSITY</text>
+<text class="m" x="140" y="660" font-size="20">STUDIES HUMAN BEHAVIOR</text></g>
+<path class="s-line" d="M540 280V660H1460" fill="none" stroke-width="4"/>
+<text class="m" x="560" y="300" font-size="20">MOTIVATION</text>
+<path id="wv" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="hi"><text class="m" x="1460" y="300" font-size="22" text-anchor="end" style="fill:var(--gain)">FIRED UP</text></g>
+<g id="lo"><text class="m" x="1460" y="700" font-size="22" text-anchor="end" style="fill:var(--loss)">NOTHING AT ALL</text></g>
+<g id="weak"><text class="d" x="120" y="800" font-size="48">Relying on willpower is a weak plan.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Knowing isn’t doing.</text>
+<text class="b" x="120" y="176" font-size="32">Information alone rarely changes what we do.</text>
+<g id="kn"><g id="knP"></g>
+<g id="bub"><circle class="s-ink" cx="325" cy="430" r="9" fill="var(--stage)" stroke-width="4"/><circle class="s-ink" cx="355" cy="400" r="14" fill="var(--stage)" stroke-width="4"/>
+<ellipse class="s-ink" cx="560" cy="320" rx="230" ry="110" fill="var(--stage)" stroke-width="5"/>
+<polygon class="gain" points="487,262 513,238 548,304"/>
+<path d="M502 262l10-6M512 276l9-6M522 290l8-5" stroke="var(--on-gain)" stroke-width="3" stroke-linecap="round"/>
+<path class="s-ink" d="M500 250L478 228M500 250L492 224M500 250L470 242" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="s-muted" d="M585 304V266M640 304V276" fill="none" stroke-width="12" stroke-linecap="round"/>
+<circle class="ink" cx="570" cy="262" r="15"/><circle class="ink" cx="586" cy="248" r="16"/><circle class="ink" cx="602" cy="262" r="15"/>
+<circle class="ink" cx="627" cy="272" r="13"/><circle class="ink" cx="641" cy="261" r="14"/><circle class="ink" cx="655" cy="272" r="13"/>
+<path class="ink" d="M470 300h180a90 64 0 0 1-180 0z"/>
+<text class="m" x="560" y="478" font-size="22" text-anchor="middle" style="fill:var(--ink)">WE KNOW: VEGETABLES ARE HEALTHY</text></g></g>
+<g id="fr"><path class="s-muted" d="M800 330C960 330 1040 380 1080 440" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<path class="s-loss" d="M935 335l30 30M965 335l-30 30" stroke-width="7" stroke-linecap="round"/>
+<ellipse class="s-ink" cx="1180" cy="600" rx="200" ry="56" fill="var(--stage)" stroke-width="6"/>
+<g id="fz"></g><path class="ink" d="M1105 460h150l-18 130h-114z"/>
+<text class="m" x="1180" y="710" font-size="22" text-anchor="middle">WHAT LANDS ON THE PLATE</text></g>
+<g id="fade"><text class="d" x="120" y="810" font-size="44">Knowledge without good design usually fades.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Blame the plan, not yourself.</text>
+<text class="b" x="120" y="176" font-size="32">A door that sticks needs fixing, not stronger arms.</text>
+<g id="dr"><path class="s-line" d="M380 730H1060" stroke-width="4"/>
+<rect id="dp" y="258" height="468" stroke="var(--ink)" stroke-width="5"/>
+<circle id="dk" class="ink" cy="490" r="10"/>
+<path class="s-ink" d="M700 730V250H940V730" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<path id="jam" class="s-loss" d="M688 300l-22-12M688 330h-26M688 360l-22 12" stroke-width="5" stroke-linecap="round"/>
+<g id="pu"></g></g>
+<g id="na"><text class="m" x="480" y="620" font-size="22" text-anchor="middle" style="fill:var(--loss)">DON’T BLAME YOUR ARMS</text></g>
+<g id="tb"><path class="s-ink" d="M1210 590v-30h100v30" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<rect class="gain" x="1120" y="590" width="280" height="140" rx="14"/><rect x="1245" y="620" width="30" height="24" rx="4" fill="var(--on-gain)"/>
+<text class="m" x="1260" y="780" font-size="22" text-anchor="middle" style="fill:var(--gain)">FIX THE DOOR</text></g>
+<g id="same"><text class="d" x="120" y="840" font-size="48">Treat habits the same way.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fogg’s two push-ups.</text>
+<text class="b" x="120" y="176" font-size="32">Big workout plans never stuck. So he redesigned the habit.</text>
+<g id="pl"><rect class="s-ink" x="150" y="260" width="220" height="260" rx="14" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M190 320h140M190 370h140M190 420h140M190 470h90" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="260" y="572" font-size="22" text-anchor="middle">BIG WORKOUT PLAN</text></g>
+<path id="plx" class="s-loss" d="M160 270l200 240M360 270l-200 240" stroke-width="10" stroke-linecap="round"/>
+<g id="ba"><rect class="s-ink" x="600" y="320" width="52" height="100" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M480 420h180q0 90-90 90q-90 0-90-90z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M550 508l-10 22h70l-10-22" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="570" y="572" font-size="22" text-anchor="middle">AFTER THE BATHROOM</text></g>
+<path id="ar1" class="s-muted" d="M690 440h60m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="pf"><path class="s-line" d="M770 526H1020" stroke-width="4"/><text class="m" x="895" y="572" font-size="22" text-anchor="middle">TWO PUSH-UPS</text></g>
+<g id="ch"><path class="s-line" d="M1090 522H1470" stroke-width="4"/><text id="two" class="d" x="1122" y="490" font-size="28" text-anchor="middle">2</text></g>
+<g id="dzl"><text class="m" x="1280" y="572" font-size="22" text-anchor="middle" style="fill:var(--gain)">DOZENS A DAY</text></g>
+<g id="dz"><text class="d" x="120" y="720" font-size="48">Design did it, not a burst of willpower.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Kindness beats shame.</text>
+<text class="b" x="120" y="176" font-size="32">Feeling good about small wins builds momentum.</text>
+<g id="sh"><text class="m" x="120" y="270" font-size="22" style="fill:var(--loss)">SHAME DOESN’T HELP</text></g>
+<g id="fc"><circle class="s-ink" cx="340" cy="470" r="140" fill="var(--stage)" stroke-width="7"/>
+<circle class="ink" cx="290" cy="430" r="14"/><circle class="ink" cx="390" cy="430" r="14"/>
+<path id="mo" fill="none" stroke-width="8" stroke-linecap="round"/>
+<text id="fl" class="m" x="340" y="670" font-size="24" text-anchor="middle">JUDGING</text></g>
+<g id="st"></g>
+<g id="hr"><path id="hp" class="gain" d="M0 40C-60 0-60-50-25-50C-10-50 0-40 0-30C0-40 10-50 25-50C60-50 60 0 0 40Z"/></g>
+<g id="cf"><text class="d" x="120" y="830" font-size="44">Each small win makes the next change easier.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Become a habit designer.</text>
+<text class="b" x="120" y="176" font-size="32">Treat a stalled habit as a design problem to solve.</text>
+<g id="bp"><rect class="s-ink" x="120" y="230" width="760" height="520" rx="16" fill="var(--stage)" stroke-width="5"/>
+<g id="gr"></g>
+<rect id="gb" x="170" y="290" height="130" rx="12" stroke-width="6"/>
+<text id="gt" class="d" x="200" y="372" font-size="40">GOAL</text>
+<circle class="s-ink" cx="740" cy="355" r="70" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M740 355V305M740 355h36" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="740" y="462" font-size="22" text-anchor="middle" style="fill:var(--ink)">TIMING</text>
+<g id="tg"><path class="s-gain" d="M360 620A60 60 0 1 1 300 560" fill="none" stroke-width="7" stroke-linecap="round"/>
+<path class="s-gain" d="M285 545l15 15-15 15" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="390" y="628" font-size="22" style="fill:var(--gain)">TRY AGAIN</text></g></g>
+<g id="ann"><text id="tbig" class="m" x="170" y="270" font-size="22">TOO BIG?</text>
+<text class="m" x="740" y="268" font-size="22" text-anchor="middle" style="fill:var(--loss)">WRONG TIME?</text></g>
+<g id="pen"><path id="pn" class="gain" d="M0 0l-10 30-80 80-20-20 80-80z"/></g>
+<g id="qq"><text class="m" x="960" y="290" font-size="22">ASK</text>
+<text id="wq" class="d5" x="960" y="370" font-size="40">What’s wrong with me?</text>
+<line id="wqs" class="s-loss" x1="952" y1="357" x2="952" y2="357" stroke-width="5" stroke-linecap="round"/>
+<text class="d" x="960" y="450" font-size="44" style="fill:var(--gain)">What made it hard?</text></g>
+<g id="adj"><text class="d" x="960" y="600" font-size="44">Adjust one piece.</text><text class="d" x="960" y="660" font-size="44">Then try again.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="z0"><text class="m" x="143" y="250" font-size="26">THINK OF ONE HABIT YOU GAVE UP ON RECENTLY</text></g>
+<g id="qa"><text class="d" x="136" y="350" font-size="88" letter-spacing="-2">Write down one</text></g>
+<g id="qb"><text class="d" x="136" y="460" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">design flaw</tspan>,</text></g>
+<g id="qc"><text class="d" x="136" y="570" font-size="88" letter-spacing="-2">not one personal flaw.</text></g>
+<g id="pp"><rect class="s-ink" x="1200" y="240" width="240" height="230" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path id="w0" class="s-ink" d="M1240 310h160" stroke-width="8" stroke-linecap="round" stroke-dasharray="160"/>
+<path id="w1" class="s-ink" d="M1240 360h160" stroke-width="8" stroke-linecap="round" stroke-dasharray="160"/>
+<path id="w2" class="s-gain" d="M1240 410h100" stroke-width="8" stroke-linecap="round" stroke-dasharray="160"/></g>
+<text class="m" x="143" y="700" font-size="26">IT’S NOT YOU. IT’S THE DESIGN.</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;It&#x27;s Not You, It&#x27;s the Design&rdquo;, from <em>Tiny Habits</em> by BJ Fogg. Fogg&#x27;s push-up habit is described as reported in the book. The sticky door, mirror, motivation wave and vegetable plate are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 7.3], [7.3, 21.4], [21.4, 39.8], [39.8, 54.7], [54.7, 64.8], [64.8, 86.0], [86.0, 102.1], [102.1, 117.5], [117.5, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["It's Not You", "The Blame Loop", "The Willpower Myth", "Knowing Isn't Doing", "Blame the Plan", "Fogg's Push-Ups", "Kindness Works", "Become a Designer", "Your Challenge"];
+const TM={"failed_list": 0.0, "big_goal": 7.6, "slump": 10.96, "mirror": 14.88, "scientist": 21.68, "wave_line": 29.44, "salad": 40.08, "fries": 47.12, "sticky_door": 54.96, "toolbox": 59.57, "bathroom": 65.12, "pushup": 73.28, "counter": 77.0, "heart": 86.32, "smile": 93.68, "blueprint": 102.4, "question": 106.72, "pencil": 113.92, "paper": 120.76};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const XS=[0,1,2].map(i=>{const y=270+i*70,g=$('tl');mk('rect',{x:1160,y:y-20,width:40,height:40,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':5},g);mk('path',{d:`M1230 ${y}h170`,stroke:'var(--line)','stroke-width':10,'stroke-linecap':'round'},g);return mk('path',{d:`M1166 ${y-14}l28 28M1194 ${y-14}l-28 28`,stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},g)});
+fig($('mirP'),1280,330,26,'ink');
+fig($('sciP'),300,300,36,'ink');
+fig($('knP'),260,450,40,'ink');
+for(let i=0;i<7;i++){const h=150+(i*37)%40;mk('rect',{x:1112+i*19,y:590-h,width:14,height:h,rx:3,class:'loss'},$('fz'))}
+const PG=mk('g',{},$('pu'));fig(PG,480,400,36,'ink');mk('path',{d:'M515 480H692',stroke:'var(--ink)','stroke-width':12,'stroke-linecap':'round'},PG);
+const PB=mk('path',{stroke:'var(--ink)','stroke-width':12,'stroke-linecap':'round',fill:'none'},$('pf')),PA=mk('path',{stroke:'var(--ink)','stroke-width':10,'stroke-linecap':'round',fill:'none'},$('pf')),PH=mk('circle',{r:18,class:'ink'},$('pf'));
+const HB=[16,40,70,110,160,230],BR=HB.map((h,i)=>mk('rect',{x:1100+i*62,width:44,rx:6,class:'gain'},$('ch')));
+const CK=[];for(let i=0;i<5;i++){const x=640+i*140,y=700-i*90;mk('rect',{x:x,y:y,width:140,height:760-y,fill:'var(--line)'},$('st'));const g=mk('g',{},$('st'));mk('circle',{cx:x+70,cy:y-40,r:24,class:'gain'},g);mk('path',{d:`M${x+58} ${y-40}l9 9 16-18`,fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);CK.push(g)}
+for(let x=160;x<=840;x+=40)mk('path',{d:`M${x} 240V740`,stroke:'var(--line)','stroke-width':1.5},$('gr'));
+for(let y=270;y<=710;y+=40)mk('path',{d:`M130 ${y}H870`,stroke:'var(--line)','stroke-width':1.5},$('gr'));
+function strike(id,w,k){const l=$(id),x=+l.getAttribute('x1');l.setAttribute('x2',(x+(w+16)*k).toFixed(1))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+XS.forEach((x,i)=>x.setAttribute('opacity',p(u,TM.failed_list+.6+i*.5,TM.failed_list+.9+i*.5)));
+rise($('tag'),p(u,TM.failed_list+4.2,TM.failed_list+4.7));
+
+rise($('b0'),p(u,TM.big_goal,TM.big_goal+.5));
+$('a0').setAttribute('opacity',p(u,TM.slump-.4,TM.slump));
+rise($('b1'),p(u,TM.slump,TM.slump+.5));
+$('slp').setAttribute('stroke-dashoffset',(340*(1-p(u,TM.slump+.3,TM.slump+1.6))).toFixed(1));
+$('a1').setAttribute('opacity',p(u,TM.mirror-.4,TM.mirror));
+rise($('b2'),p(u,TM.mirror,TM.mirror+.5));
+rise($('ret'),p(u,TM.mirror+4.1,TM.mirror+4.7));
+
+rise($('sci'),p(u,TM.scientist,TM.scientist+.5));
+rise($('weak'),p(u,TM.scientist+3.4,TM.scientist+4));
+const wk=p(u,TM.wave_line,TM.wave_line+2.5);let wd='';
+for(let x=560;x<=560+880*wk;x+=8)wd+=(x===560?'M':'L')+x+' '+(480-150*Math.sin((x-560)/90-t*1.5)).toFixed(1);
+$('wv').setAttribute('d',wd);
+rise($('hi'),p(u,TM.wave_line+6.6,TM.wave_line+7.1));rise($('lo'),p(u,TM.wave_line+7,TM.wave_line+7.5));
+
+rise($('kn'),p(u,TM.salad,TM.salad+.5));
+rise($('fr'),p(u,TM.fries,TM.fries+.5));
+rise($('fade'),p(u,TM.fries+4.2,TM.fries+4.8));
+$('bub').setAttribute('opacity',(1-.6*p(u,TM.fries+4.2,TM.fries+6)).toFixed(2));
+
+rise($('dr'),p(u,TM.sticky_door,TM.sticky_door+.5));
+const o=p(u,TM.toolbox+.6,TM.toolbox+1.8),dw=232*(1-.75*o);
+$('dp').setAttribute('x',(936-dw).toFixed(1));$('dp').setAttribute('width',dw.toFixed(1));
+$('dp').style.fill=u>=TM.toolbox+.6?'var(--gain)':'var(--line)';
+$('dk').setAttribute('cx',(966-dw).toFixed(1));
+$('jam').setAttribute('opacity',(p(u,TM.sticky_door+.6,TM.sticky_door+1)*(1-o)).toFixed(2));
+const stuck=u>=TM.sticky_door&&u<TM.toolbox+.6;
+PG.setAttribute('transform','translate('+(stuck?4*Math.sin(t*30):0).toFixed(1)+' 0)');
+rise($('na'),p(u,TM.sticky_door+4.6,TM.sticky_door+5.1));
+rise($('tb'),p(u,TM.toolbox,TM.toolbox+.5));
+rise($('same'),p(u,TM.toolbox+2.2,TM.toolbox+2.8));
+
+rise($('pl'),p(u,TM.bathroom,TM.bathroom+.5));
+$('plx').setAttribute('opacity',p(u,TM.bathroom+1.5,TM.bathroom+2));
+rise($('ba'),p(u,TM.bathroom+4.6,TM.bathroom+5.1));
+$('ar1').setAttribute('opacity',p(u,TM.pushup-.4,TM.pushup));
+rise($('pf'),p(u,TM.pushup,TM.pushup+.5));
+const pk=u>=TM.pushup?(1-Math.cos(t*4))/2:0,ys=440+55*pk;
+PB.setAttribute('d','M790 520L960 '+ys.toFixed(1));PA.setAttribute('d','M960 '+ys.toFixed(1)+'V524');
+PH.setAttribute('cx',985);PH.setAttribute('cy',(ys-14).toFixed(1));
+rise($('ch'),p(u,TM.pushup+1,TM.pushup+1.5));
+BR.forEach((b,i)=>{const h=HB[i]*(i?p(u,TM.counter+i*.5,TM.counter+i*.5+.5):1);b.setAttribute('y',(520-h).toFixed(1));b.setAttribute('height',h.toFixed(1))});
+rise($('dzl'),p(u,TM.counter+3,TM.counter+3.5));
+rise($('dz'),p(u,TM.counter+5,TM.counter+5.6));
+
+rise($('fc'),p(u,TM.heart,TM.heart+.5));
+rise($('hr'),p(u,TM.heart+.3,TM.heart+.8));
+$('hp').setAttribute('transform','translate(1420 330) scale('+(1+.06*Math.abs(Math.sin(t*3))).toFixed(3)+')');
+rise($('sh'),p(u,TM.heart+.5,TM.heart+1));
+const sm=u>=TM.smile;
+$('mo').setAttribute('d',sm?'M270 515q70 60 140 0':'M270 545q70-50 140 0');
+$('mo').style.stroke=sm?'var(--gain)':'var(--loss)';
+$('fl').textContent=sm?'EXPERIMENTING':'JUDGING';$('fl').style.fill=sm?'var(--gain)':'var(--muted)';
+rise($('st'),p(u,TM.heart+3.8,TM.heart+4.4));
+CK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.heart+4.2+i*.4,TM.heart+4.5+i*.4)*(.4+.6*p(u,TM.smile+3.8+i*.5,TM.smile+4.2+i*.5))));
+rise($('cf'),p(u,TM.smile+3.8,TM.smile+4.4));
+
+rise($('bp'),p(u,TM.blueprint,TM.blueprint+.6));
+const pc=p(u,TM.pencil+.6,TM.pencil+1.8),gw=440-260*pc,fx=u>=TM.pencil+.6;
+$('gb').setAttribute('width',gw.toFixed(1));
+$('gb').style.fill=fx?'var(--gain)':'var(--stage)';$('gb').style.stroke=fx?'var(--gain)':'var(--loss)';
+$('gt').style.fill=fx?'var(--on-gain)':'var(--ink)';
+$('tbig').textContent=fx?'SMALLER':'TOO BIG?';$('tbig').style.fill=fx?'var(--gain)':'var(--loss)';
+rise($('ann'),p(u,TM.question+5,TM.question+5.5));
+rise($('pen'),p(u,TM.pencil,TM.pencil+.4));
+$('pn').setAttribute('transform','translate('+(174+gw).toFixed(1)+' 424)');
+$('tg').setAttribute('opacity',p(u,TM.pencil+1.5,TM.pencil+2));
+rise($('qq'),p(u,TM.question,TM.question+.5));
+let ww=420;try{const v=$('wq').getComputedTextLength();if(v>0)ww=v}catch(e){}
+strike('wqs',ww,p(u,TM.question+1.2,TM.question+1.8));
+rise($('adj'),p(u,TM.pencil+.6,TM.pencil+1.2));
+
+const s8=SC[8][0]/K;
+rise($('z0'),p(u,s8+.4,s8+.9));
+rise($('qa'),p(u,TM.paper,TM.paper+.5));rise($('qb'),p(u,TM.paper+.4,TM.paper+.9));rise($('qc'),p(u,TM.paper+.8,TM.paper+1.3));
+rise($('pp'),p(u,TM.paper,TM.paper+.5));
+[0,1,2].forEach(i=>$('w'+i).setAttribute('stroke-dashoffset',(160*(1-p(u,TM.paper+.8+i*.5,TM.paper+1.2+i*.5))).toFixed(1)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.15;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

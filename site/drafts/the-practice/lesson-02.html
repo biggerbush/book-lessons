@@ -1,0 +1,326 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Practice Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of The Practice: Because you cannot control how your work is received, you should commit to the process of making it rather than the result. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE PRACTICE · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Trust the process,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not the outcome.</text>
+<text class="b" x="120" y="600" font-size="32">Commit to the making, not to how it lands.</text>
+<g id="wr"><rect class="ink" x="1080" y="556" width="360" height="14" rx="7"/><rect class="s-ink" x="1260" y="532" width="110" height="24" fill="var(--stage)" stroke-width="4"/></g>
+<g id="sheets"></g>
+<g id="hush"><rect class="s-line" x="1110" y="240" width="160" height="80" rx="40" fill="var(--stage)" stroke-width="4"/><circle id="hd0" cx="1150" cy="280" r="8" fill="var(--muted)"/><circle id="hd1" cx="1190" cy="280" r="8" fill="var(--muted)"/><circle id="hd2" cx="1230" cy="280" r="8" fill="var(--muted)"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two things you hold.</text>
+<text class="b" x="120" y="176" font-size="32">Every piece of creative work comes with two parts.</text>
+<g id="bx0"><rect class="s-line" x="120" y="230" width="620" height="460" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="160" y="284" font-size="22" style="fill:var(--gain)">PROCESS</text></g>
+<g id="bx1"><rect class="s-line" x="860" y="230" width="620" height="460" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="900" y="284" font-size="22">OUTCOME</text></g>
+<g id="pc"><path id="zig" class="s-gain" d="M180 470l60-60 60 60 60-60 60 60 60-60 60 60 60-60" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="680"/>
+<g id="pen"><path class="ink" d="M0 0l-12-26h24z"/><rect class="ink" x="-12" y="-90" width="24" height="60" rx="4"/></g>
+<text class="d5" x="160" y="630" font-size="38">The daily act of making.</text></g>
+<g id="oc"><text class="d5" x="900" y="630" font-size="38">How people react.</text></g>
+<g id="mix"><path class="s-loss" d="M430 700C430 790 1170 790 1170 700" fill="none" stroke-width="5" stroke-dasharray="12 10"/><text class="m" x="800" y="840" font-size="22" text-anchor="middle" style="fill:var(--loss)">MOST OF US MIX THEM UP</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Only one part is yours.</text>
+<text class="b" x="120" y="176" font-size="32">You hold the process. The crowd holds the reaction.</text>
+<g id="dial"><circle class="s-ink" cx="330" cy="480" r="140" fill="var(--stage)" stroke-width="7"/><g id="ticks"></g>
+<path id="ptr" class="s-gain" d="M330 480V370" stroke-width="12" stroke-linecap="round"/><circle class="gain" cx="330" cy="480" r="20"/>
+<text class="m" x="330" y="690" font-size="22" text-anchor="middle" style="fill:var(--gain)">YOURS</text></g>
+<g id="i0"><circle class="gain" cx="522" cy="392" r="6"/><text class="m" x="540" y="400" font-size="22">WHEN YOU SIT DOWN</text></g>
+<g id="i1"><circle class="gain" cx="522" cy="472" r="6"/><text class="m" x="540" y="480" font-size="22">WHAT YOU TRY</text></g>
+<g id="i2"><circle class="gain" cx="522" cy="552" r="6"/><text class="m" x="540" y="560" font-size="22">HOW HARD YOU WORK</text></g>
+<g id="crw"><path class="s-line" d="M860 240V760" stroke-width="4" stroke-dasharray="10 12"/><text class="m" x="1200" y="790" font-size="22" text-anchor="middle">CLAPS? BUYS? SHARES?</text></g>
+<g id="theirs"><text class="m" x="1200" y="290" font-size="22" text-anchor="middle" style="fill:var(--loss)">THEIRS</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The outcome trap.</text>
+<text class="b" x="120" y="176" font-size="32">Tie your worth to results and every launch becomes a verdict.</text>
+<g id="me3"></g>
+<g id="board3"><rect class="s-ink" x="900" y="230" width="560" height="250" rx="14" fill="var(--stage)" stroke-width="6"/><text class="m" x="930" y="280" font-size="22">VERDICT</text></g>
+<path id="vline" class="s-loss" d="M900 430L440 540" stroke-width="5" stroke-dasharray="12 10" fill="none"/>
+<g id="cloud"><g id="cl3"><circle class="loss" cx="280" cy="360" r="70" fill-opacity=".22"/><circle class="loss" cx="370" cy="325" r="90" fill-opacity=".22"/><circle class="loss" cx="470" cy="360" r="70" fill-opacity=".22"/><circle class="loss" cx="370" cy="400" r="78" fill-opacity=".22"/></g>
+<g id="w0"><text class="m" x="370" y="340" font-size="22" text-anchor="middle" style="fill:var(--ink)">ANXIOUS</text></g>
+<g id="w1"><text class="m" x="370" y="375" font-size="22" text-anchor="middle" style="fill:var(--ink)">CAUTIOUS</text></g>
+<g id="w2"><text class="m" x="370" y="410" font-size="22" text-anchor="middle" style="fill:var(--ink)">COPY WHAT WORKED</text></g></g>
+<g id="wk"><text class="m" x="930" y="580" font-size="22">THE WORK</text>
+<rect x="930" y="604" width="220" height="180" rx="10" fill="none" stroke="var(--line)" stroke-width="4" stroke-dasharray="10 8"/>
+<rect id="wrect" x="930" y="604" width="220" height="180" rx="10"/>
+<path id="wkarr" d="M1130 764L1020 670m0 30v-30h30" fill="none" stroke="var(--muted)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="small"><text class="d" x="1200" y="680" font-size="48">Smaller</text><text class="d" x="1200" y="740" font-size="48">and safer.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">It might not work.</text>
+<text class="b" x="120" y="176" font-size="32">Real creative work always carries that chance.</text>
+<circle class="gain" cx="280" cy="565" r="40"/><text class="m" x="280" y="572" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">YOU</text>
+<g id="wind"><path class="s-gain" d="M320 540C520 260 700 640 1060 420" fill="none" stroke-width="7" stroke-dasharray="14 12" stroke-linecap="round"/>
+<text id="qm" class="d" x="1200" y="470" font-size="230" text-anchor="middle" style="fill:var(--gain)">?</text>
+<text class="m" x="1200" y="606" font-size="22" text-anchor="middle">CREATIVE WORK</text></g>
+<g id="safe"><path class="s-muted" d="M320 590L765 700" stroke-width="7" stroke-linecap="round"/><rect class="s-line" x="770" y="650" width="420" height="96" rx="14" fill="var(--stage)" stroke-width="4"/><text class="m" x="980" y="706" font-size="20" text-anchor="middle">JUST FOLLOWING INSTRUCTIONS</text></g>
+<g id="flaw"><text class="m" x="120" y="800" font-size="22">UNCERTAINTY IS NOT A FLAW IN YOUR PLAN</text></g>
+<g id="deal"><text class="d" x="120" y="854" font-size="44">It is part of the deal.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Godin’s daily blog.</text>
+<text class="b" x="120" y="176" font-size="32">He writes and posts every single day.</text>
+<g id="lap"><rect class="s-ink" x="160" y="270" width="420" height="270" rx="12" fill="var(--stage)" stroke-width="7"/><path class="ink" d="M120 552h500l-30 30H150z"/><g id="tl"></g>
+<text class="m" x="370" y="650" font-size="22" text-anchor="middle">WRITE · POST · REPEAT</text></g>
+<g id="cal"><rect class="ink" x="760" y="240" width="686" height="50" rx="8"/><text class="m" x="1103" y="273" font-size="20" text-anchor="middle" style="fill:var(--stage)">ONE POST, EVERY DAY</text>
+<text class="m" x="760" y="700" font-size="20">HOW POPULAR EACH POST WAS (ILLUSTRATIVE)</text></g>
+<g id="cmt"><text class="d" x="120" y="800" font-size="46">Committed to the writing, not to one post.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Results follow practice.</text>
+<text class="b" x="120" y="176" font-size="32">A steady practice gives good results more chances to show up.</text>
+<rect x="120" y="700" width="1360" height="36" rx="10" fill="var(--line)"/>
+<g id="plants"></g>
+<g id="can"></g>
+<g id="tend"><text class="m" x="120" y="800" font-size="22">TEND THE SOIL DAILY. TODAY’S SEED DOES NOT HAVE TO BLOOM TONIGHT.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Shift your question.</text>
+<g id="oq"><rect class="s-loss" x="120" y="230" width="500" height="320" rx="18" fill="var(--stage)" stroke-width="5"/><text class="m" x="160" y="290" font-size="22" style="fill:var(--loss)">OLD QUESTION</text>
+<text class="d5" x="160" y="400" font-size="52">Will this</text><text class="d5" x="160" y="466" font-size="52">succeed?</text></g>
+<line id="ostk" class="s-loss" x1="150" y1="500" x2="150" y2="500" stroke-width="7" stroke-linecap="round"/>
+<path id="arr7" class="s-muted" d="M660 390h110m-26-26 26 26-26 26" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="nq"><rect class="s-gain" x="820" y="230" width="660" height="320" rx="18" fill="var(--stage)" stroke-width="5"/><text class="m" x="860" y="290" font-size="22" style="fill:var(--gain)">NEW QUESTION</text>
+<text class="d" x="860" y="370" font-size="44">Did I show up and do</text><text class="d" x="860" y="430" font-size="44">the work as well as</text><text class="d" x="860" y="490" font-size="44">I could today?</text></g>
+<g id="chk"><circle class="gain" cx="900" cy="700" r="70"/><path id="tick" d="M866 702l24 24 46-50" fill="none" stroke="var(--on-gain)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="120"/>
+<text class="d" x="1000" y="700" font-size="60">Yes.</text><text class="m" x="1000" y="746" font-size="22">NO MATTER WHAT ANYONE ELSE DOES</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Pick one small project.</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">Decide your process</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">for this week.</tspan></text></g>
+<g id="jg"><text class="m" x="143" y="640" font-size="26">JUDGE YOURSELF ONLY ON WHETHER YOU FOLLOWED IT</text><g id="days"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="120" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:00</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Trust the Process, Not the Outcome&rdquo;, from <em>The Practice</em> by Seth Godin. The example of Godin&#x27;s daily blogging habit is as reported in the book. The boxes, dial, scoreboard and garden drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=120, SC=[[0.0, 8.7], [8.7, 23.0], [23.0, 38.4], [38.4, 52.5], [52.5, 67.4], [67.4, 82.5], [82.5, 96.2], [96.2, 109.2], [109.2, 120.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Trust the Process", "Two Things You Hold", "What You Control", "The Outcome Trap", "It Might Not Work", "Godin's Daily Blog", "Results Follow Practice", "Shift Your Question", "Your Challenge"];
+const TM={"writer": 0.0, "two_boxes": 9.04, "process_box": 12.56, "outcome_box": 16.64, "control_dial": 23.28, "crowd": 31.92, "scoreboard": 38.72, "stress_cloud": 43.92, "question_mark": 52.8, "safe_path": 58.4, "laptop": 67.68, "calendar": 72.96, "seedlings": 82.8, "garden": 90.88, "old_question": 96.48, "new_question": 100.96, "checkmark": 104.72};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);return mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+fig($('wr'),1190,420,32,'ink');
+const SH=[0,1,2].map(()=>mk('rect',{width:40,height:50,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('sheets')));
+const BB=[980,1110,1240,1370].map((x,i)=>{fig($('oc'),x,470,22,'ink');const b=mk('g',{},$('oc'));
+  mk('rect',{x:x-32,y:350,width:64,height:56,rx:14,fill:'var(--stage)',stroke:'var(--muted)','stroke-width':4},b);
+  const tx=mk('text',{x:x,y:390,'font-size':32,'text-anchor':'middle',class:'d'},b);tx.textContent=['?','…','!','?'][i];return b});
+for(let i=0;i<9;i++){const a=(-150+i*37.5)*Math.PI/180,s=Math.sin(a),c=-Math.cos(a);mk('path',{d:'M'+(330+150*s).toFixed(1)+' '+(480+150*c).toFixed(1)+'L'+(330+168*s).toFixed(1)+' '+(480+168*c).toFixed(1),stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('ticks'))}
+const CR=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++){const g=mk('g',{},$('crw'));fig(g,990+c*140,350+r*140,18,'ink');g.setAttribute('fill-opacity',.55);CR.push(g)}
+fig($('me3'),370,570,36,'ink');
+const RW=[0,1,2].map(i=>{const y=340+i*55,g=mk('g',{},$('board3'));const tx=mk('text',{x:930,y:y,'font-size':22,class:'m'},g);tx.textContent='LAUNCH '+(i+1);
+  mk('path',{d:'M1080 '+(y-8)+'H1350',stroke:'var(--line)','stroke-width':4,'stroke-dasharray':'4 8'},g);
+  mk('path',{d:'M1386 '+(y-24)+'l28 28m0-28l-28 28',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},g);return g});
+const TW=[340,300,320,260,200],TL=TW.map((w,i)=>mk('rect',{x:200,y:310+i*42,height:14,rx:7,width:0,fill:i?'var(--line)':'var(--ink)'},$('tl')));
+const CE=[];for(let i=0;i<28;i++){const x=760+(i%7)*98,y=310+Math.floor(i/7)*90,hit=i===4||i===13||i===22,h=hit?60:12+((i*7)%5)*6;
+  const r=mk('rect',{x:x,y:y,width:92,height:80,rx:8,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},$('cal'));
+  const b=mk('rect',{x:x+30,y:y+72-h,width:32,height:h,rx:4,fill:hit?'var(--gain)':'var(--muted)'},$('cal'));CE.push([r,b])}
+const PH=[180,240,140,280,200,260,160],PL=PH.map((h,i)=>{const x=220+i*160;
+  return {x:x,h:h,s:mk('path',{stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round',fill:'none'},$('plants')),l:mk('path',{fill:'var(--ink)'},$('plants')),b:i%2?mk('circle',{r:0,class:'gain'},$('plants')):null}});
+mk('ellipse',{cx:1360,cy:696,rx:16,ry:10,class:'gain'},$('plants'));
+const tdy=mk('text',{x:1360,y:772,'font-size':20,'text-anchor':'middle',class:'m'},$('plants'));tdy.textContent='TODAY';
+mk('rect',{x:-50,y:-30,width:100,height:60,rx:10,class:'ink'},$('can'));
+mk('path',{d:'M45 -10L100 -40M-50 -10a26 26 0 0 1 0-30',stroke:'var(--ink)','stroke-width':10,'stroke-linecap':'round',fill:'none'},$('can'));
+const DR=[0,1,2].map(()=>mk('circle',{r:6,class:'gain'},$('can')));
+const DY=[];for(let i=0;i<7;i++){const x=143+i*90;mk('rect',{x:x,y:690,width:64,height:64,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('days'));
+  DY.push(mk('path',{d:'M'+(x+14)+' 722l14 14 24-28',fill:'none',stroke:'var(--gain)','stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round','stroke-dasharray':60,'stroke-dashoffset':60},$('days')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('wr'),p(u,TM.writer,TM.writer+.6));
+const sk=p(u,TM.writer+1,TM.writer+1.6);
+SH.forEach((s,i)=>{const c=(t*.4+i/3)%1;s.setAttribute('x',(1300+150*c).toFixed(1));s.setAttribute('y',(480-180*c).toFixed(1));s.setAttribute('opacity',((1-c)*sk).toFixed(2))});
+rise($('hush'),p(u,TM.writer+2.5,TM.writer+3));
+[0,1,2].forEach(i=>$('hd'+i).setAttribute('cy',(280-6*Math.max(0,Math.sin(t*3-i))).toFixed(1)));
+
+rise($('bx0'),p(u,TM.two_boxes,TM.two_boxes+.5)); rise($('bx1'),p(u,TM.two_boxes+.3,TM.two_boxes+.8));
+rise($('pc'),p(u,TM.process_box,TM.process_box+.5));
+const zk=p(u,TM.process_box+.3,TM.process_box+3.5),zd=zk*679,zs=Math.min(7,Math.floor(zd/84.85)),zf=cl(zd/84.85-zs);
+$('zig').setAttribute('stroke-dashoffset',(680*(1-zk)).toFixed(1));
+$('pen').setAttribute('transform','translate('+(180+60*(zs+zf)).toFixed(1)+' '+(470-60*(zs%2?1-zf:zf)).toFixed(1)+') rotate(18)');
+rise($('oc'),p(u,TM.outcome_box,TM.outcome_box+.5));
+BB.forEach((b,i)=>{const a=TM.outcome_box+.6+i*.4;rise(b,p(u,a,a+.4))});
+rise($('mix'),p(u,TM.outcome_box+5.4,TM.outcome_box+6));
+
+rise($('dial'),p(u,TM.control_dial,TM.control_dial+.5));
+let dk=0;[0,1,2].forEach(i=>{const a=TM.control_dial+4.6+i*1.2,k=p(u,a,a+.5);dk+=k;rise($('i'+i),k)});
+$('ptr').setAttribute('transform','rotate('+(-100+70*dk+4*Math.sin(t*2)).toFixed(1)+' 330 480)');
+rise($('crw'),p(u,TM.crowd,TM.crowd+.6));
+CR.forEach((g,i)=>g.setAttribute('transform','translate(0 '+(-6*Math.abs(Math.sin(t*3+i))).toFixed(1)+')'));
+rise($('theirs'),p(u,TM.crowd+4.6,TM.crowd+5.1));
+
+rise($('me3'),p(u,TM.scoreboard,TM.scoreboard+.5)); rise($('board3'),p(u,TM.scoreboard+.2,TM.scoreboard+.7));
+RW.forEach((g,i)=>{const a=TM.scoreboard+.8+i*.6;g.setAttribute('opacity',p(u,a,a+.4))});
+$('vline').setAttribute('opacity',p(u,TM.scoreboard+2.6,TM.scoreboard+3.2));
+rise($('cloud'),p(u,TM.stress_cloud,TM.stress_cloud+.5));
+$('cl3').setAttribute('transform','translate('+(5*Math.sin(t*1.7)).toFixed(1)+' '+(4*Math.sin(t*2.3)).toFixed(1)+')');
+[0,1,2].forEach(i=>{const a=TM.stress_cloud+.8+i*.9;rise($('w'+i),p(u,a,a+.4))});
+rise($('wk'),p(u,TM.stress_cloud+.4,TM.stress_cloud+.9));
+const sh=p(u,TM.stress_cloud+5.4,TM.stress_cloud+6.6);
+$('wrect').setAttribute('width',(220-140*sh).toFixed(1)); $('wrect').setAttribute('height',(180-120*sh).toFixed(1));
+$('wrect').style.fill=sh>.5?'var(--muted)':'var(--gain)';
+$('wkarr').setAttribute('opacity',p(u,TM.stress_cloud+5.8,TM.stress_cloud+6.4));
+rise($('small'),p(u,TM.stress_cloud+5.6,TM.stress_cloud+6.2));
+
+rise($('wind'),p(u,TM.question_mark,TM.question_mark+.6));
+$('qm').setAttribute('transform','translate(0 '+(-6-6*Math.sin(t*1.8)).toFixed(1)+')');
+rise($('safe'),p(u,TM.safe_path,TM.safe_path+.5));
+rise($('flaw'),p(u,TM.safe_path+4.2,TM.safe_path+4.7)); rise($('deal'),p(u,TM.safe_path+8.4,TM.safe_path+9));
+
+rise($('lap'),p(u,TM.laptop,TM.laptop+.5));
+const ty=(t*.6)%6;TL.forEach((r,i)=>r.setAttribute('width',(TW[i]*cl(ty-i)).toFixed(1)));
+rise($('cal'),p(u,TM.laptop+3,TM.laptop+3.6));
+CE.forEach((c,i)=>{const a=TM.calendar+i*.18,k=p(u,a,a+.3);c[0].setAttribute('stroke',k>.5?'var(--ink)':'var(--line)');c[1].setAttribute('opacity',k)});
+rise($('cmt'),p(u,TM.calendar+5.8,TM.calendar+6.4));
+
+PL.forEach((q,i)=>{const a=TM.seedlings+i*.25,g=p(u,a,a+1.6),top=700-q.h*g,sw=4*Math.sin(t*1.5+i)*g,my=700-q.h*g*.5;
+  q.s.setAttribute('d','M'+q.x+' 700Q'+q.x+' '+my.toFixed(1)+' '+(q.x+sw).toFixed(1)+' '+top.toFixed(1));
+  q.l.setAttribute('d','M'+q.x+' '+my.toFixed(1)+'q'+(30*g).toFixed(1)+' '+(-24*g).toFixed(1)+' '+(52*g).toFixed(1)+' 0q'+(-22*g).toFixed(1)+' '+(22*g).toFixed(1)+' '+(-52*g).toFixed(1)+' 0');
+  if(q.b){const bk=p(u,TM.seedlings+3+i*.4,TM.seedlings+3.6+i*.4);q.b.setAttribute('cx',(q.x+sw).toFixed(1));q.b.setAttribute('cy',top.toFixed(1));q.b.setAttribute('r',(22*bk).toFixed(1))}});
+const cx=200+1060*p(u,TM.garden,TM.garden+5);
+rise($('can'),p(u,TM.garden,TM.garden+.5)); $('can').setAttribute('transform','translate('+cx.toFixed(1)+' 300)');
+DR.forEach((d,i)=>{const c=(t*1.2+i/3)%1;d.setAttribute('cx',(100+6*i).toFixed(1));d.setAttribute('cy',(-30+90*c).toFixed(1));d.setAttribute('opacity',(1-c).toFixed(2))});
+rise($('tend'),p(u,TM.garden+.8,TM.garden+1.4));
+
+rise($('oq'),p(u,TM.old_question,TM.old_question+.5));
+const ok=p(u,TM.new_question,TM.new_question+.6);
+$('ostk').setAttribute('x2',(150+440*ok).toFixed(1)); $('ostk').setAttribute('y2',(500-140*ok).toFixed(1)); $('ostk').setAttribute('opacity',ok>0?1:0);
+$('arr7').setAttribute('opacity',ok);
+rise($('nq'),p(u,TM.new_question+.3,TM.new_question+.9));
+rise($('chk'),p(u,TM.checkmark,TM.checkmark+.5));
+$('tick').setAttribute('stroke-dashoffset',(120*(1-p(u,TM.checkmark+.3,TM.checkmark+1))).toFixed(1));
+
+const S8=SC[8][0]/K;
+rise($('qa'),p(u,S8+.3,S8+.8)); rise($('qb'),p(u,S8+.7,S8+1.2)); rise($('qc'),p(u,S8+1.1,S8+1.6));
+rise($('jg'),p(u,S8+5.4,S8+6));
+DY.forEach((d,i)=>{const a=S8+6+i*.35;d.setAttribute('stroke-dashoffset',(60*(1-p(u,a,a+.3))).toFixed(1))});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:116.69;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

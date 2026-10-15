@@ -1,0 +1,20 @@
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const MI=[0,1,2].map(i=>mk('circle',{cx:1300,cy:420,r:34-i*6,class:'loss','fill-opacity':.2},$('mist')));
+person($('fcp'),300,380,40,'ink');
+for(let r=0;r<4;r++)for(let c=0;c<6;c++)if(!(r===2&&c===3))mk('rect',{x:1090+c*58,y:345+r*66,width:36,height:36,rx:6,class:'s-line',fill:'none','stroke-width':3},$('days'));
+const CG=[];for(let i=0;i<14;i++){const x=440+i*72,s=14+(i*7)%18;CG.push(i%2?mk('rect',{x:x-s/2,y:500-s/2,width:s,height:s,rx:3,class:'s-muted',fill:'none','stroke-width':4},$('chg')):mk('circle',{cx:x,cy:500,r:s/2,class:'s-muted',fill:'none','stroke-width':4},$('chg')))}
+person($('bz'),220,440,40,'ink');
+const AS=[240,316,392].map(y=>{const g=mk('g',{},$('asks'));mk('rect',{x:340,y:y,width:460,height:56,rx:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:570,y:y+36,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent='WHAT WILL CHANGE IN 10 YEARS?';return g});
+const ED=[0,1,2].map(()=>mk('circle',{r:7,cy:420,class:'gain'},$('dots')));
+for(let i=0;i<6;i++)mk('rect',{x:170+i*50,y:300,width:50,height:60,fill:i%2?'var(--stage)':'var(--gain)',stroke:'var(--ink)','stroke-width':3},$('awn'));
+const FM=[[600,560,'fc0'],[1360,560,'fc1']].map(([x,y,id])=>{const g=mk('g',{transform:'translate('+x+' '+y+')'},$(id));mk('circle',{r:64,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);[-22,22].forEach(e=>mk('circle',{cx:e,cy:-14,r:7,class:'ink'},g));return mk('path',{fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},g)});
+const MO=['M-26 22h52','M-30 14q30 34 60 0','M-26 30q14-14 52-6','M-12 30a12 16 0 1 0 24 0a12 16 0 1 0-24 0'],EMO=['THE SAME EXCITEMENT','THE SAME ENVY','THE SAME PANIC'];
+const TR=['GREED','FEAR','STORIES','COMPARISON'].map((s,i)=>{const y=320+i*100,g=mk('g',{},$('trs'));const tx=mk('text',{x:120,y:y+8,'font-size':24,class:'m'},g);tx.textContent=s;
+  const b=mk('path',{stroke:'var(--gain)','stroke-width':10,'stroke-linecap':'round',fill:'none'},g);
+  const ds=[560,820,1080,1340].map(x=>mk('circle',{cx:x,cy:y,r:12,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g));return [g,b,ds,y]});
+['ANCIENT','MEDIEVAL','INDUSTRIAL','TODAY'].forEach((s,i)=>{const tx=mk('text',{x:560+i*260,y:770,'font-size':20,'text-anchor':'middle',class:'m'},$('eras'));tx.textContent=s});
+for(let i=0;i<14;i++)mk('circle',{cx:220+i*90,cy:230,r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const W1=[520,440,500,380,460],W2=[520,470,540,400,500];
+const L1=W1.map((w,i)=>mk('rect',{x:210,y:370+i*68,height:12,width:0,rx:6,class:'loss','fill-opacity':.55},$('ln1')));
+const L2=W2.map((w,i)=>mk('rect',{x:850,y:370+i*68,height:12,width:0,rx:6,class:'gain'},$('ln2')));
+person($('mp8'),1370,400,28,'ink');

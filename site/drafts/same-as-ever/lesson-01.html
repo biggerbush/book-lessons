@@ -1,0 +1,373 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same as Ever Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Same as Ever: Instead of predicting specific events, focus on the human behaviours that stay the same across every era. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAME AS EVER · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Bet on what</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">never changes.</text>
+<text class="b" x="120" y="600" font-size="32">Stop guessing the future and study what people always do.</text>
+<g id="ball">
+<path class="ink" d="M1240 550h120l20 50h-160z"/>
+<circle class="s-ink" cx="1300" cy="420" r="120" fill="var(--ice)" stroke-width="8"/>
+<g id="mist"></g>
+<text id="bq" class="d" x="1300" y="462" font-size="120" text-anchor="middle" style="fill:var(--loss)">?</text>
+</g>
+<path id="bx" class="s-loss" d="M1190 300L1410 540" stroke-width="10" stroke-linecap="round" stroke-dasharray="330" stroke-dashoffset="330"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The forecast trap.</text>
+<text class="b" x="120" y="176" font-size="32">Confident predictions, surprising years.</text>
+<g id="fc">
+<g id="fcp"></g>
+<rect class="ink" x="160" y="540" width="300" height="18" rx="4"/>
+<path class="s-ink" d="M190 558v150M430 558v150" stroke-width="8" stroke-linecap="round"/>
+<rect class="s-ink" x="520" y="250" width="460" height="320" rx="14" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="550" y="295" font-size="20">NEXT YEAR’S FORECAST</text>
+<path class="s-gain" d="M560 520L680 480L800 430L940 340" fill="none" stroke-width="7" stroke-dasharray="14 10" stroke-linecap="round"/>
+</g>
+<path id="real" class="s-loss" d="M800 430L860 400L900 530L940 550" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="260" stroke-dashoffset="260"/>
+<g id="cal">
+<rect class="s-ink" x="1060" y="250" width="380" height="380" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1060" y="250" width="380" height="70" rx="16"/><rect class="ink" x="1060" y="290" width="380" height="30"/>
+<text class="m" x="1090" y="294" font-size="20" style="fill:var(--stage)">THE YEAR ARRIVES</text>
+<g id="days"></g>
+<g id="ev"><circle class="loss" cx="1282" cy="495" r="38"/><text class="d" x="1282" y="512" font-size="48" text-anchor="middle" style="fill:var(--stage)">!</text></g>
+</g>
+<g id="hard"><text class="d" x="120" y="800" font-size="48">Specific events are almost impossible to call.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Flip the question.</text>
+<g id="qL"><rect class="s-loss" x="120" y="230" width="600" height="190" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="150" y="280" font-size="22">THE USUAL QUESTION</text>
+<text class="d" x="150" y="370" font-size="48">What will change?</text></g>
+<g id="flip" transform="translate(800 325)"><text id="qm" class="d" x="0" y="40" font-size="120" text-anchor="middle" style="fill:var(--muted)">?</text></g>
+<g id="qR"><rect class="gain" x="880" y="230" width="600" height="190" rx="18"/>
+<text class="m" x="910" y="280" font-size="22" style="fill:var(--on-gain)">HOUSEL’S QUESTION</text>
+<text class="d" x="910" y="370" font-size="40" style="fill:var(--on-gain)">What will stay the same?</text></g>
+<g id="tl">
+<text class="m" x="120" y="470" font-size="20">WHAT CHANGES</text>
+<g id="chg"></g>
+<rect class="gain" x="120" y="576" width="1330" height="16" rx="8"/>
+<text class="m" x="120" y="626" font-size="20" style="fill:var(--gain)">WHAT STAYS THE SAME</text>
+<path class="s-ink" d="M120 660H1450m-20-18 20 18-20 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="120" y="700" font-size="20">PAST</text><text class="m" x="800" y="700" font-size="20" text-anchor="middle">NOW</text><text class="m" x="1450" y="700" font-size="20" text-anchor="end">FUTURE</text>
+</g>
+<g id="rel"><text class="d" x="120" y="800" font-size="48">That question has far more reliable answers.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Bezos’s question.</text>
+<text class="b" x="120" y="176" font-size="32">A habit of Amazon founder Jeff Bezos.</text>
+<g id="bzg"><g id="bz"></g><text class="m" x="220" y="660" font-size="22" text-anchor="middle">BEZOS</text></g>
+<g id="asks"></g>
+<g id="nob"><rect class="s-muted" x="340" y="500" width="460" height="56" rx="28" fill="none" stroke-width="3" stroke-dasharray="8 8"/>
+<text class="m" x="570" y="536" font-size="20" text-anchor="middle">WHAT WON’T CHANGE?</text>
+<text class="m" x="570" y="600" font-size="20" text-anchor="middle" style="fill:var(--loss)">ALMOST NOBODY ASKED</text></g>
+<g id="cart">
+<rect class="gain" x="1110" y="410" width="90" height="100" rx="6"/><rect class="gain" x="1220" y="430" width="90" height="80" rx="6"/>
+<path class="s-ink" d="M960 290h60l50 220h300l50-180H1040" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<circle class="ink" cx="1110" cy="560" r="22"/><circle class="ink" cx="1340" cy="560" r="22"/>
+</g>
+<g id="tg0"><rect class="gain" x="920" y="620" width="260" height="64" rx="32"/><text class="m" x="1050" y="660" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">LOW PRICES</text></g>
+<g id="tg1"><rect class="gain" x="1200" y="620" width="280" height="64" rx="32"/><text class="m" x="1340" y="660" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">FAST DELIVERY</text></g>
+<g id="eff"><path class="s-gain" d="M830 420H950m-20-18 20 18-20 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><g id="dots"></g></g>
+<g id="never"><text class="d" x="120" y="800" font-size="44">Effort spent on what never changes is never wasted.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The details change.</text>
+<text class="b" x="120" y="176" font-size="32">The tools look nothing alike.</text>
+<g id="mk0">
+<rect class="s-line" x="120" y="220" width="620" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="268" font-size="20">CENTURIES AGO</text>
+<path class="s-ink" d="M180 360v260M460 360v260" stroke-width="8" stroke-linecap="round"/>
+<g id="awn"></g>
+<rect class="ink" x="170" y="540" width="300" height="24" rx="4"/>
+<circle class="gain" cx="230" cy="524" r="16"/><circle class="ink" cx="270" cy="524" r="16"/><circle class="gain" cx="310" cy="524" r="16"/>
+<rect class="s-ink" x="220" y="590" width="80" height="60" fill="none" stroke-width="5"/><rect class="s-ink" x="330" y="590" width="80" height="60" fill="none" stroke-width="5"/>
+<g id="fc0"></g>
+</g>
+<g id="mk1">
+<rect class="s-line" x="860" y="220" width="620" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="890" y="268" font-size="20">TODAY</text>
+<rect class="s-ink" x="920" y="300" width="170" height="320" rx="24" fill="var(--stage)" stroke-width="6"/>
+<path class="s-gain" d="M945 520L980 470L1010 500L1040 420L1065 440" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="s-line" d="M985 590h40" stroke-width="6" stroke-linecap="round"/>
+<g id="fc1"></g>
+</g>
+<path id="neq" class="s-loss" d="M770 410h60M770 440h60M820 395l-40 60" stroke-width="6" stroke-linecap="round"/>
+<path id="eq" class="s-gain" d="M770 570h60M770 600h60" stroke-width="8" stroke-linecap="round"/>
+<text id="emo" class="m" x="800" y="760" font-size="26" text-anchor="middle" style="fill:var(--gain)">THE SAME EXCITEMENT</text>
+<g id="cost"><text class="d" x="120" y="840" font-size="44">Different costumes, worn by the same people.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Human constants.</text>
+<text class="b" x="120" y="176" font-size="32">The same traits show up in every era.</text>
+<g id="trs"></g>
+<g id="eras"></g>
+<path id="tech" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="techl"><text class="m" x="1380" y="250" font-size="22" text-anchor="end">TECHNOLOGY</text></g>
+<g id="barely"><text class="d" x="120" y="840" font-size="44">These traits barely move.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A sturdier map.</text>
+<text class="b" x="120" y="176" font-size="32">Constants guide you better than any forecast.</text>
+<g id="mp">
+<path class="s-ink" d="M120 280l130-40 130 40 130-40v320l-130 40-130-40-130 40z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-line" d="M250 240v320M380 280v320" stroke-width="3"/>
+<path class="s-gain" d="M160 520c60-40 80-120 160-130s100-70 150-120" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/>
+<circle class="gain" cx="470" cy="270" r="16"/>
+<text class="m" x="120" y="660" font-size="20">CONSTANTS AS YOUR GUIDE</text>
+</g>
+<g id="bb">
+<path id="wv" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="d" x="700" y="290" font-size="48" text-anchor="middle" style="fill:var(--muted)">?</text><text class="d" x="850" y="290" font-size="48" text-anchor="middle" style="fill:var(--muted)">?</text><text class="d" x="1000" y="290" font-size="48" text-anchor="middle" style="fill:var(--muted)">?</text>
+<text class="m" x="600" y="660" font-size="20">BOOM OR BUST: WHEN?</text>
+</g>
+<g id="th">
+<rect class="s-ink" x="1290" y="250" width="44" height="330" rx="22" fill="var(--stage)" stroke-width="6"/>
+<rect id="merc" class="loss" x="1302" y="500" width="20" height="100"/>
+<circle class="loss" cx="1312" cy="600" r="40"/>
+<path class="s-muted" d="M1350 300h20M1350 380h20M1350 460h20" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="1312" y="680" font-size="20" text-anchor="middle" style="fill:var(--loss)">PEOPLE OVERREACT</text>
+</g>
+<g id="anc"><g id="ancI"><circle class="s-ink" cx="160" cy="722" r="14" fill="none" stroke-width="6"/><path class="s-gain" d="M160 736v94M136 752h48M120 800q40 50 80 0" fill="none" stroke-width="8" stroke-linecap="round"/></g>
+<text class="d" x="240" y="800" font-size="48">Plan around behaviour, not headlines.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A simple practice.</text>
+<text class="b" x="120" y="176" font-size="32">Before a big decision, write it down.</text>
+<g id="nb">
+<rect class="s-ink" x="160" y="230" width="1280" height="520" rx="16" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M800 260v460" stroke-width="4"/>
+<g id="rings"></g>
+</g>
+<g id="c1"><text class="m" x="210" y="320" font-size="22">1 · THE FORECAST IT DEPENDS ON</text><g id="ln1"></g></g>
+<g id="c2"><text class="m" x="850" y="320" font-size="22" style="fill:var(--gain)">2 · STILL TRUE IF IT’S WRONG</text><g id="ln2"></g></g>
+<rect id="hl" class="s-gain" x="820" y="270" width="600" height="460" rx="14" fill="none" stroke-width="7"/>
+<g id="lean"><text class="d" x="120" y="830" font-size="44">Lean your choice toward the second column.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="84" letter-spacing="-2">What about people</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="84" letter-spacing="-2">will still be true</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="84" letter-spacing="-2">in <tspan style="fill:var(--gain)">twenty years?</tspan></text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">HOW COULD YOU BUILD YOUR NEXT DECISION AROUND IT?</text></g>
+<g id="mir">
+<path class="s-ink" d="M1370 570v60M1320 640h100" stroke-width="8" stroke-linecap="round"/>
+<ellipse class="s-ink" cx="1370" cy="420" rx="90" ry="150" fill="var(--ice)" stroke-width="8"/>
+<g id="mp8"></g>
+<path id="glint" class="s-gain" d="M1316 340l36-40M1320 370l20-22" stroke-width="6" stroke-linecap="round"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="134" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:14</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Bet on What Never Changes&rdquo;, from <em>Same as Ever</em> by Morgan Housel. The Jeff Bezos example about focusing on what will not change is as reported in the book. The forecaster, old marketplace, phone trader and two-column notebook drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=134, SC=[[0.0, 6.7], [6.7, 23.0], [23.0, 34.7], [34.7, 57.7], [57.7, 76.9], [76.9, 91.0], [91.0, 108.9], [108.9, 122.4], [122.4, 134.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Bet on What Lasts", "The Forecast Trap", "The Other Question", "Bezos's Insight", "Details Change", "Human Constants", "Why It Helps", "Use It Today", "Your Turn"];
+const TM={"crystal_ball": 0.0, "forecaster": 6.96, "calendar": 12.48, "question_mark": 23.32, "timeline": 31.36, "bezos": 34.96, "shopping_cart": 47.12, "old_market": 58.0, "modern_phone": 61.36, "two_faces": 67.28, "greed_fear": 77.2, "storyteller": 81.6, "map": 91.28, "thermometer": 99.44, "anchor": 105.28, "notebook": 109.2, "two_columns": 115.28, "mirror": 122.72};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const MI=[0,1,2].map(i=>mk('circle',{cx:1300,cy:420,r:34-i*6,class:'loss','fill-opacity':.2},$('mist')));
+person($('fcp'),300,380,40,'ink');
+for(let r=0;r<4;r++)for(let c=0;c<6;c++)if(!(r===2&&c===3))mk('rect',{x:1090+c*58,y:345+r*66,width:36,height:36,rx:6,class:'s-line',fill:'none','stroke-width':3},$('days'));
+const CG=[];for(let i=0;i<14;i++){const x=440+i*72,s=14+(i*7)%18;CG.push(i%2?mk('rect',{x:x-s/2,y:500-s/2,width:s,height:s,rx:3,class:'s-muted',fill:'none','stroke-width':4},$('chg')):mk('circle',{cx:x,cy:500,r:s/2,class:'s-muted',fill:'none','stroke-width':4},$('chg')))}
+person($('bz'),220,440,40,'ink');
+const AS=[240,316,392].map(y=>{const g=mk('g',{},$('asks'));mk('rect',{x:340,y:y,width:460,height:56,rx:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:570,y:y+36,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent='WHAT WILL CHANGE IN 10 YEARS?';return g});
+const ED=[0,1,2].map(()=>mk('circle',{r:7,cy:420,class:'gain'},$('dots')));
+for(let i=0;i<6;i++)mk('rect',{x:170+i*50,y:300,width:50,height:60,fill:i%2?'var(--stage)':'var(--gain)',stroke:'var(--ink)','stroke-width':3},$('awn'));
+const FM=[[600,560,'fc0'],[1360,560,'fc1']].map(([x,y,id])=>{const g=mk('g',{transform:'translate('+x+' '+y+')'},$(id));mk('circle',{r:64,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);[-22,22].forEach(e=>mk('circle',{cx:e,cy:-14,r:7,class:'ink'},g));return mk('path',{fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},g)});
+const MO=['M-26 22h52','M-30 14q30 34 60 0','M-26 30q14-14 52-6','M-12 30a12 16 0 1 0 24 0a12 16 0 1 0-24 0'],EMO=['THE SAME EXCITEMENT','THE SAME ENVY','THE SAME PANIC'];
+const TR=['GREED','FEAR','STORIES','COMPARISON'].map((s,i)=>{const y=320+i*100,g=mk('g',{},$('trs'));const tx=mk('text',{x:120,y:y+8,'font-size':24,class:'m'},g);tx.textContent=s;
+  const b=mk('path',{stroke:'var(--gain)','stroke-width':10,'stroke-linecap':'round',fill:'none'},g);
+  const ds=[560,820,1080,1340].map(x=>mk('circle',{cx:x,cy:y,r:12,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g));return [g,b,ds,y]});
+['ANCIENT','MEDIEVAL','INDUSTRIAL','TODAY'].forEach((s,i)=>{const tx=mk('text',{x:560+i*260,y:770,'font-size':20,'text-anchor':'middle',class:'m'},$('eras'));tx.textContent=s});
+for(let i=0;i<14;i++)mk('circle',{cx:220+i*90,cy:230,r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const W1=[520,440,500,380,460],W2=[520,470,540,400,500];
+const L1=W1.map((w,i)=>mk('rect',{x:210,y:370+i*68,height:12,width:0,rx:6,class:'loss','fill-opacity':.55},$('ln1')));
+const L2=W2.map((w,i)=>mk('rect',{x:850,y:370+i*68,height:12,width:0,rx:6,class:'gain'},$('ln2')));
+person($('mp8'),1370,400,28,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  R('ball',TM.crystal_ball,.6);
+  MI.forEach((c,i)=>{const a=t*1.2+i*2.1;c.setAttribute('cx',(1300+50*Math.cos(a)).toFixed(1));c.setAttribute('cy',(420+40*Math.sin(a*1.3)).toFixed(1))});
+  $('bq').setAttribute('opacity',p(u,TM.crystal_ball+1,TM.crystal_ball+1.8).toFixed(2));
+  $('bx').setAttribute('stroke-dashoffset',(330*(1-p(u,TM.crystal_ball+3,TM.crystal_ball+3.6))).toFixed(1));
+
+  R('fc',TM.forecaster); R('cal',TM.calendar);
+  $('real').setAttribute('stroke-dashoffset',(260*(1-p(u,TM.calendar+.8,TM.calendar+2.2))).toFixed(1));
+  const ev=p(u,TM.calendar+.6,TM.calendar+1.2)*(1+(u>TM.calendar+1.2?.12*Math.abs(Math.sin(t*3)):0));
+  $('ev').setAttribute('transform','translate(1282 495) scale('+ev.toFixed(3)+') translate(-1282 -495)');
+  R('hard',TM.calendar+4.2,.6);
+
+  R('qL',TM.question_mark);
+  const fl=p(u,TM.question_mark+1.2,TM.question_mark+2.2);
+  $('flip').setAttribute('transform','translate(800 325) scale('+Math.cos(2*Math.PI*fl).toFixed(3)+' 1)');
+  $('qm').style.fill=fl>.5?'var(--gain)':'var(--muted)';
+  R('qR',TM.question_mark+2.6); R('tl',TM.timeline); R('rel',TM.timeline+.8,.6);
+  CG.forEach((c,i)=>c.setAttribute('transform','translate(0 '+(30*Math.sin(t*1.3+i*1.7)).toFixed(1)+')'));
+
+  R('bzg',TM.bezos);
+  AS.forEach((g,i)=>{const a=TM.bezos+4.2+i*.5;rise(g,p(u,a,a+.4))});
+  R('nob',TM.bezos+9.9,.6);
+  R('cart',TM.shopping_cart); R('tg0',TM.shopping_cart+1.5); R('tg1',TM.shopping_cart+2.5);
+  R('eff',TM.shopping_cart+5.4,.6); R('never',TM.shopping_cart+5.9,.6);
+  ED.forEach((d,i)=>d.setAttribute('cx',(830+((t*80+i*40)%110)).toFixed(1)));
+
+  R('mk0',TM.old_market); R('mk1',TM.modern_phone);
+  $('neq').setAttribute('opacity',p(u,TM.modern_phone+3.8,TM.modern_phone+4.3).toFixed(2));
+  $('eq').setAttribute('opacity',p(u,TM.two_faces,TM.two_faces+.5).toFixed(2));
+  const ek=u<TM.two_faces?-1:Math.floor((u-TM.two_faces)/1.7)%3;
+  FM.forEach(m=>m.setAttribute('d',MO[ek+1]));
+  R('emo',TM.two_faces); $('emo').textContent=EMO[Math.max(ek,0)];
+  R('cost',TM.two_faces+5.4,.6);
+
+  TR.forEach(([g,b,ds,y],i)=>{const a=[TM.greed_fear,TM.greed_fear+1.2,TM.storyteller,TM.storyteller+2.5][i];rise(g,p(u,a,a+.4));
+    const k=p(u,a,a+1.2);b.setAttribute('d','M400 '+y+'H'+(400+1040*k).toFixed(1));ds.forEach((d,j)=>d.setAttribute('opacity',k*1040>=160+j*260?1:0))});
+  R('eras',TM.greed_fear);
+  const tk=p(u,TM.storyteller+5.8,TM.storyteller+7.6);let td='M400 720';
+  for(let f=.025;f<=tk+1e-6;f+=.025)td+='L'+(400+1040*f).toFixed(1)+' '+(720-480*f*f*f).toFixed(1);
+  $('tech').setAttribute('d',td); R('techl',TM.storyteller+7.2); R('barely',TM.storyteller+6.4,.6);
+
+  R('mp',TM.map); R('bb',TM.map+5);
+  let w='';for(let x=600;x<=1100;x+=10)w+=(x===600?'M':'L')+x+' '+(430-100*Math.sin((x-600)/80+t*1.2)).toFixed(1);
+  $('wv').setAttribute('d',w);
+  R('th',TM.thermometer);
+  const lv=u<TM.thermometer+.6?.15:.25+.7*Math.pow(Math.abs(Math.sin(t*1.4)),3),mh=300*lv;
+  $('merc').setAttribute('y',(560-mh).toFixed(1)); $('merc').setAttribute('height',(mh+40).toFixed(1));
+  R('anc',TM.anchor,.6); $('ancI').setAttribute('transform','translate(0 '+(4*Math.sin(t*2)).toFixed(1)+')');
+
+  R('nb',TM.notebook); R('c1',TM.notebook+2.1); R('c2',TM.two_columns);
+  L1.forEach((r,i)=>{const a=TM.notebook+2.5+i*.4;r.setAttribute('width',(W1[i]*p(u,a,a+.5)).toFixed(1))});
+  L2.forEach((r,i)=>{const a=TM.two_columns+.5+i*.4;r.setAttribute('width',(W2[i]*p(u,a,a+.5)).toFixed(1))});
+  $('hl').setAttribute('opacity',p(u,TM.two_columns+5.4,TM.two_columns+5.9).toFixed(2)); R('lean',TM.two_columns+5.4,.6);
+
+  R('qa',TM.mirror); R('qb',TM.mirror+.4); R('qc',TM.mirror+.8); R('mir',TM.mirror+.4,.6); R('qd',TM.mirror+7,.6);
+  $('glint').setAttribute('opacity',(.3+.7*Math.abs(Math.sin(t*1.5))).toFixed(2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:130.35;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

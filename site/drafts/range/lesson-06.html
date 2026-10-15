@@ -1,0 +1,389 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Range Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Range: People from outside a field, and creators like Nintendo&#x27;s Gunpei Yokoi who combine well-known tools in new ways, often find solutions that deep specialists miss. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">RANGE · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The outsider’s</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">fresh eyes.</text>
+<text class="b" x="120" y="600" font-size="32">Why outsiders and old tools often beat the experts</text>
+<circle class="s-line" cx="1280" cy="480" r="170" fill="none" stroke-width="4" stroke-dasharray="12 12"/>
+<text class="m" x="1280" y="262" font-size="20" text-anchor="middle">YOUR FIELD</text>
+<path id="shack" class="s-ink" d="M1220 440v-50a60 60 0 0 1 120 0v50" fill="none" stroke-width="16" stroke-linecap="round"/>
+<rect class="ink" x="1190" y="430" width="180" height="150" rx="16"/>
+<g id="khole"><circle cx="1280" cy="490" r="14" fill="var(--stage)"/><rect x="1272" y="490" width="16" height="40" fill="var(--stage)"/></g>
+<g id="key" opacity="0"><circle class="s-gain" cx="0" cy="0" r="22" fill="none" stroke-width="8"/><path class="s-gain" d="M22 0h64M66 0v16M80 0v12" fill="none" stroke-width="8" stroke-linecap="round"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Even the experts were stuck.</text>
+<text class="b" x="120" y="176" font-size="32">After the Exxon Valdez oil spill in Alaska.</text>
+<path id="wave1" class="s-loss" fill="none" stroke-width="4"/>
+<g id="barge">
+<path class="s-ink" d="M160 370H760L710 460H210Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path class="loss" d="M186 384H734L700 446H220Z"/>
+<text class="m" x="160" y="520" font-size="20">OIL SKIMMED INTO BARGES</text>
+</g>
+<g id="ice"></g>
+<g id="pumpg">
+<path class="s-ink" d="M720 380C790 270 850 270 900 340" fill="none" stroke-width="14" stroke-linecap="round"/>
+<rect class="s-ink" x="900" y="300" width="170" height="140" rx="14" fill="var(--stage)" stroke-width="7"/>
+<text class="m" x="985" y="378" font-size="22" text-anchor="middle">PUMP</text>
+<path class="s-loss" d="M780 280l50 50M830 280l-50 50" stroke-width="10" stroke-linecap="round"/>
+<text class="m" x="900" y="490" font-size="22" style="fill:var(--loss)">TOO THICK TO PUMP OUT</text>
+</g>
+<g id="team"></g>
+<g id="years"><text class="d" x="1060" y="700" font-size="60">Years.</text><text class="d" x="1060" y="770" font-size="60" style="fill:var(--loss)">No fix.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Post the puzzle to the world.</text>
+<text class="b" x="120" y="176" font-size="32">An oil spill research group put it on InnoCentive.</text>
+<g id="web">
+<rect class="s-ink" x="600" y="270" width="400" height="330" rx="16" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M600 314h400" stroke-width="4"/>
+<circle class="ink" cx="630" cy="292" r="6"/><circle class="ink" cx="652" cy="292" r="6"/><circle class="ink" cx="674" cy="292" r="6"/>
+<text class="m" x="800" y="360" font-size="22" text-anchor="middle">INNOCENTIVE</text>
+<path class="gain" d="M740 400h40a20 20 0 0 1 40 0h40v40a20 20 0 0 1 0 40v40H740Z"/>
+<text class="m" x="800" y="578" font-size="18" text-anchor="middle">OPEN CHALLENGE</text>
+</g>
+<g id="crowd2"></g>
+<g id="arr2"><path class="s-gain" d="M450 440h120m-18-18 18 18-18 18M1150 440h-120m18-18-18 18 18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="any"><text class="d" x="120" y="790" font-size="52">Anyone could answer, any background.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">An idea from construction.</text>
+<text class="b" x="120" y="176" font-size="32">The winner: a chemist who had once worked in construction.</text>
+<g id="chem"><g id="chemf"></g><path class="gain" d="M204 330a36 36 0 0 1 72 0h14v12H190v-12z"/>
+<text class="m" x="240" y="560" font-size="20" text-anchor="middle">CHEMIST</text>
+<text class="m" x="240" y="590" font-size="20" text-anchor="middle">EX-CONSTRUCTION</text></g>
+<g id="p1">
+<rect class="s-line" x="420" y="250" width="460" height="430" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="450" y="300" font-size="20">BUILDERS: WET CONCRETE</text>
+<rect x="460" y="470" width="380" height="150" rx="10" fill="var(--muted)" fill-opacity=".35"/>
+<g id="vib1"><rect class="ink" x="620" y="320" width="60" height="40" rx="8"/><path class="s-ink" d="M650 360V600" stroke-width="12" stroke-linecap="round"/></g>
+<path id="buzz1" class="s-gain" d="M610 500q-12 12 0 24M690 500q12 12 0 24" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="450" y="660" font-size="20" style="fill:var(--gain)">KEEPS FLOWING</text>
+</g>
+<g id="arr3"><path class="s-muted" d="M890 465h110m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="950" y="430" font-size="18" text-anchor="middle">SAME TRICK</text></g>
+<g id="p2">
+<rect class="s-line" x="1020" y="250" width="460" height="430" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1050" y="300" font-size="20">THE OIL BARGE</text>
+<rect id="oilL" class="loss" x="1060" y="470" width="380" height="150" rx="10"/>
+<rect id="oilG" class="gain" x="1060" y="470" width="380" height="150" rx="10" opacity="0"/>
+<g id="vib2"><rect class="ink" x="1220" y="320" width="60" height="40" rx="8"/><path class="s-ink" d="M1250 360V600" stroke-width="12" stroke-linecap="round"/></g>
+<path id="buzz2" class="s-ink" d="M1210 500q-12 12 0 24M1290 500q12 12 0 24" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="1050" y="660" font-size="20" style="fill:var(--gain)">STAYS LIQUID ENOUGH TO PUMP</text>
+</g>
+<g id="shk"><text class="d" x="120" y="790" font-size="50">Shake the oil like concrete, and it flows.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Distance helps.</text>
+<text class="b" x="120" y="176" font-size="32">Harvard researcher Karim Lakhani studied problems like this.</text>
+<g id="res"><g id="resf"></g>
+<circle class="s-gain" cx="300" cy="430" r="28" fill="none" stroke-width="7"/><path class="s-gain" d="M320 450l26 26" stroke-width="9" stroke-linecap="round"/>
+<text class="m" x="220" y="570" font-size="20" text-anchor="middle">KARIM LAKHANI</text>
+<text class="m" x="220" y="600" font-size="20" text-anchor="middle">HARVARD</text></g>
+<g id="chart">
+<path class="s-ink" d="M460 250V640H1440" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="480" y="256" font-size="20">MORE LIKELY TO SUCCEED</text>
+<g id="bars"></g>
+<text class="m" x="580" y="680" font-size="20" text-anchor="middle">NEAR THEIR SPECIALTY</text>
+<text class="m" x="1300" y="680" font-size="20" text-anchor="middle">FAR FROM IT</text>
+<text class="m" x="1440" y="726" font-size="22" text-anchor="end">ILLUSTRATIVE</text>
+</g>
+<g id="eye"><path class="s-gain" d="M1250 300Q1300 255 1350 300Q1300 345 1250 300Z" fill="var(--stage)" stroke-width="6"/><circle id="pupil" class="gain" cx="1300" cy="300" r="12"/></g>
+<g id="fresh"><text class="d" x="120" y="810" font-size="50">Outsiders bring tools insiders never try.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet Gunpei Yokoi.</text>
+<text class="b" x="120" y="176" font-size="32">No star engineer: he maintained Nintendo’s card-making machines.</text>
+<g id="mach">
+<rect class="s-ink" x="120" y="260" width="380" height="260" rx="16" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="140" y="296" font-size="20">CARD MACHINE</text>
+<g id="gears"></g>
+<g id="cards"></g>
+<text class="m" x="120" y="680" font-size="20">PLAYING CARDS</text>
+</g>
+<g id="yok"><text class="m" x="640" y="580" font-size="20" text-anchor="middle">GUNPEI YOKOI</text><text class="m" x="640" y="610" font-size="18" text-anchor="middle">NOT A STAR ENGINEER</text></g>
+<g id="grab"><rect class="ink" x="820" y="460" width="60" height="70" rx="10"/><circle id="ball" class="ink" cx="1392" cy="495" r="30"/></g>
+<g id="spare"><text class="m" x="840" y="380" font-size="20">BUILT IN SPARE MOMENTS</text></g>
+<g id="hit"><text class="d" x="840" y="680" font-size="52" style="fill:var(--gain)">A hit toy.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Withered technology.</text>
+<text class="b" x="120" y="176" font-size="32">Yokoi’s motto: “lateral thinking with withered technology.”</text>
+<g id="pt0"><rect x="150" y="250" width="100" height="70" rx="6" fill="var(--line)" stroke="var(--ink)" stroke-width="6"/></g>
+<g id="pt1"><rect class="ink" x="165" y="370" width="70" height="70" rx="6"/><path class="s-ink" d="M180 358v12M200 358v12M220 358v12M180 440v12M200 440v12M220 440v12" stroke-width="5"/></g>
+<g id="pt2"><rect class="s-ink" x="150" y="490" width="90" height="50" rx="6" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="240" y="503" width="10" height="24"/><rect class="gain" x="158" y="498" width="60" height="34"/></g>
+<g id="l0"><text class="m" x="280" y="296" font-size="22">OLD</text></g>
+<g id="l1"><text class="m" x="280" y="416" font-size="22">CHEAP</text></g>
+<g id="l2"><text class="m" x="280" y="524" font-size="22">WELL-UNDERSTOOD</text></g>
+<g id="arw6"><path class="s-muted" d="M500 420h90m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="gb">
+<rect class="s-ink" x="620" y="230" width="260" height="390" rx="24" fill="var(--stage)" stroke-width="7"/>
+<rect x="650" y="270" width="200" height="150" fill="var(--line)" stroke="var(--ink)" stroke-width="4"/>
+<path class="s-ink" d="M680 380h40M760 320h50M700 330h20" stroke-width="10"/>
+<path class="ink" d="M670 500h40v20h-40zM680 490h20v40h-20z"/>
+<circle class="gain" cx="820" cy="495" r="16"/><circle class="gain" cx="785" cy="525" r="16"/>
+<path class="s-ink" d="M790 590l30-20M810 595l30-20" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="750" y="660" font-size="20" text-anchor="middle">BLACK &amp; WHITE SCREEN</text>
+</g>
+<g id="vs"><text class="d5" x="980" y="440" font-size="40" text-anchor="middle" style="fill:var(--muted)">vs</text></g>
+<g id="riv">
+<rect class="s-ink" x="1080" y="300" width="360" height="240" rx="40" fill="var(--stage)" stroke-width="7"/>
+<rect class="gain" x="1170" y="330" width="60" height="180"/><rect class="loss" x="1230" y="330" width="60" height="180"/><rect x="1290" y="330" width="60" height="180" fill="var(--ice)"/>
+<rect class="s-ink" x="1170" y="330" width="180" height="180" fill="none" stroke-width="4"/>
+<path class="ink" d="M1110 412h36v16h-36zM1120 402h16v36h-16z"/><circle class="ink" cx="1400" cy="420" r="13"/>
+<text class="m" x="1260" y="600" font-size="20" text-anchor="middle">RIVALS: COLOR SCREENS</text>
+</g>
+<g id="bat">
+<text class="m" x="120" y="724" font-size="20">BATTERY</text>
+<rect class="s-ink" x="620" y="690" width="260" height="50" rx="6" fill="none" stroke-width="5"/><rect class="ink" x="880" y="703" width="10" height="24"/>
+<rect id="bf0" class="gain" x="626" y="696" width="0" height="38"/>
+<rect class="s-ink" x="1080" y="690" width="350" height="50" rx="6" fill="none" stroke-width="5"/><rect class="ink" x="1430" y="703" width="10" height="24"/>
+<rect id="bf1" class="loss" x="1086" y="696" width="0" height="38"/>
+</g>
+<g id="sold"><text class="d" x="120" y="830" font-size="44">Cheaper, tougher, longer-lasting. It outsold them.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Combine what you already know.</text>
+<text class="b" x="120" y="176" font-size="32">You don’t need cutting-edge knowledge to innovate.</text>
+<g id="tbx">
+<path class="s-ink" d="M190 410L222 312" stroke-width="12" stroke-linecap="round"/><circle class="s-ink" cx="228" cy="296" r="16" fill="none" stroke-width="10"/>
+<path class="s-gain" d="M268 410l18-90" stroke-width="10" stroke-linecap="round"/>
+<path class="s-ink" d="M340 410V310" stroke-width="12" stroke-linecap="round"/><rect class="ink" x="310" y="290" width="60" height="26" rx="4"/>
+<rect class="ink" x="120" y="400" width="320" height="140" rx="12"/>
+<text class="m" x="120" y="580" font-size="20">FAMILIAR TOOLS</text>
+</g>
+<g id="venn">
+<circle class="s-ink" cx="720" cy="440" r="130" fill="none" stroke-width="6"/>
+<circle class="s-ink" cx="900" cy="440" r="130" fill="none" stroke-width="6" stroke-dasharray="14 10"/>
+<text class="m" x="650" y="610" font-size="20" text-anchor="middle">YOUR FIELD</text>
+<text class="m" x="970" y="610" font-size="20" text-anchor="middle">ANOTHER FIELD</text>
+</g>
+<path id="star" class="gain" d="M810 400l11 26 28 3-21 18 6 28-24-14-24 14 6-28-21-18 28-3z"/>
+<g id="shr"><g id="sh0"></g><g id="sh1"></g>
+<path class="s-gain" d="M1200 380Q1295 290 1390 380" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<circle id="sdot" class="gain" r="10"/>
+<text class="m" x="1170" y="560" font-size="20" text-anchor="middle">YOU</text>
+<text class="m" x="1480" y="560" font-size="20" text-anchor="end">FRIEND, OTHER JOB</text></g>
+<g id="stk"><text class="d" x="120" y="790" font-size="48">Stuck? Tell a smart friend from another job.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Who will you tell</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">your stubborn problem</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">this week?</text></g>
+<g id="qlab"><text class="m" x="143" y="700" font-size="26">EXPLAIN IT. ASK HOW THEIR WORLD WOULD HANDLE IT.</text></g>
+<g id="qfig"><circle class="ink" cx="1240" cy="720" r="22"/><path class="ink" d="M1207 812v-29a33 33 0 0 1 66 0v29z"/>
+<circle class="gain" cx="1420" cy="720" r="22"/><path class="gain" d="M1387 812v-29a33 33 0 0 1 66 0v29z"/></g>
+<g id="qq1"><rect class="s-ink" x="1260" y="630" width="60" height="50" rx="14" fill="var(--stage)" stroke-width="4"/><text class="d" x="1290" y="668" font-size="36" text-anchor="middle">?</text></g>
+<g id="qq2"><rect class="s-gain" x="1340" y="630" width="60" height="50" rx="14" fill="var(--stage)" stroke-width="4"/><text class="d" x="1370" y="668" font-size="36" text-anchor="middle" style="fill:var(--gain)">!</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="123" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:03</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Outsider&#x27;s Fresh Eyes&rdquo;, from <em>Range</em> by David Epstein. The Exxon Valdez oil puzzle solved through InnoCentive, Karim Lakhani&#x27;s research on outside solvers, and Gunpei Yokoi&#x27;s work at Nintendo are as reported in the book. The distance bar and crowd drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=123, SC=[[0.0, 8.7], [8.7, 24.3], [24.3, 34.9], [34.9, 49.6], [49.6, 63.9], [63.9, 76.7], [76.7, 97.7], [97.7, 111.9], [111.9, 123.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Stuck Experts", "A Puzzle Goes Public", "Concrete to the Rescue", "Distance Helps", "Meet Gunpei Yokoi", "Withered Technology", "Your Move", "Your Challenge"];
+const TM={"stuck_lock": 0.0, "oil_tanker": 9.04, "frozen_oil": 15.04, "expert_team": 20.96, "web_board": 24.64, "crowd_icons": 30.96, "chemist": 35.15, "vibrator": 39.44, "shaking_oil": 44.8, "researcher": 49.92, "distance_bar": 53.84, "fresh_eyes": 59.92, "yokoi": 64.24, "grab_arm": 71.2, "old_parts": 77.0, "game_boy": 86.64, "battery": 91.36, "toolbox": 98.0, "two_fields": 101.04, "share_arrow": 106.96};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,fill:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',fill:c},g)};
+for(let i=0;i<6;i++)mk('rect',{x:250+i*80,y:392+(i%2)*20,width:28,height:28,rx:4,fill:'var(--ice)',stroke:'var(--ink)','stroke-width':3},$('ice'));
+const TP=[];for(let i=0;i<5;i++){const x=200+i*140,g=mk('g',{},$('team'));fig(g,x,640,26,'var(--ink)');
+  mk('circle',{cx:x+34,cy:578,r:24,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const q=mk('text',{x:x+34,y:589,'font-size':30,'text-anchor':'middle',class:'d'},g);q.textContent='?';TP.push(g)}
+const CW=[];[180,290,400,1200,1310,1420].forEach((x,a)=>[300,440,580].forEach((y,b)=>{const k=a*3+b,g=mk('g',{},$('crowd2'));
+  fig(g,x,y,16,k===4?'var(--gain)':k%2?'var(--muted)':'var(--ink)');CW.push([g,(k*7)%18])}));
+fig($('chemf'),240,360,34,'var(--ink)');
+fig($('resf'),220,380,32,'var(--ink)');
+const BH=[70,120,170,230,300],BR=BH.map((h,i)=>mk('rect',{x:520+i*180,y:640,width:120,height:0,fill:i>2?'var(--gain)':'var(--line)'},$('bars')));
+const GR=[[230,390],[370,390]].map(([x,y])=>{const g=mk('g',{},$('gears'));
+  mk('circle',{cx:x,cy:y,r:56,fill:'none',stroke:'var(--ink)','stroke-width':14,'stroke-dasharray':'10 9'},g);
+  mk('circle',{cx:x,cy:y,r:44,fill:'var(--ink)'},g);mk('circle',{cx:x,cy:y,r:12,fill:'var(--stage)'},g);return [g,x,y]});
+const CD=[0,1,2,3].map(i=>{const g=mk('g',{},$('cards'));
+  mk('rect',{x:0,y:0,width:50,height:70,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  mk('circle',{cx:25,cy:35,r:9,fill:i%2?'var(--loss)':'var(--ink)'},g);return g});
+fig($('yok'),640,400,32,'var(--gain)');
+const armA=mk('polyline',{fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},$('grab')),
+  armB=mk('polyline',{fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},$('grab')),
+  claw=mk('path',{fill:'none',stroke:'var(--gain)','stroke-width':8,'stroke-linecap':'round'},$('grab'));
+fig($('sh0'),1170,400,26,'var(--ink)');fig($('sh1'),1420,400,26,'var(--gain)');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const kk=p(u,TM.stuck_lock+1,TM.stuck_lock+3);
+$('key').setAttribute('transform','translate('+(1440-99*kk).toFixed(1)+' '+(780-229*kk).toFixed(1)+') rotate(-135)');
+$('key').setAttribute('opacity',p(u,TM.stuck_lock,TM.stuck_lock+.6));
+$('shack').setAttribute('transform','translate(0 '+(-34*p(u,TM.stuck_lock+3.2,TM.stuck_lock+3.8)).toFixed(1)+')');
+
+let wv='M120 450';for(let x=120;x<=860;x+=20)wv+='L'+x+' '+(450+5*Math.sin(x/40+t*2)).toFixed(1);$('wave1').setAttribute('d',wv);
+rise($('barge'),p(u,TM.oil_tanker,TM.oil_tanker+.5));rise($('ice'),p(u,TM.frozen_oil,TM.frozen_oil+.5));rise($('pumpg'),p(u,TM.frozen_oil+1,TM.frozen_oil+1.6));
+TP.forEach((g,i)=>rise(g,p(u,TM.expert_team+i*.25,TM.expert_team+i*.25+.4)));rise($('years'),p(u,TM.expert_team+1.5,TM.expert_team+2.1));
+
+rise($('web'),p(u,TM.web_board,TM.web_board+.6));
+CW.forEach(([g,o])=>{const a=TM.crowd_icons+o*.1;rise(g,p(u,a,a+.35))});
+rise($('arr2'),p(u,TM.crowd_icons+1.8,TM.crowd_icons+2.3));rise($('any'),p(u,TM.crowd_icons+2.5,TM.crowd_icons+3.1));
+
+rise($('chem'),p(u,TM.chemist,TM.chemist+.5));rise($('p1'),p(u,TM.vibrator,TM.vibrator+.5));
+const b1=u>=TM.vibrator+1,b2=u>=TM.shaking_oil+1;
+$('vib1').setAttribute('transform','translate('+(b1?4*Math.sin(t*60):0).toFixed(1)+' 0)');$('buzz1').setAttribute('opacity',b1?.5+.5*Math.sin(t*20):0);
+rise($('arr3'),p(u,TM.shaking_oil,TM.shaking_oil+.5));rise($('p2'),p(u,TM.shaking_oil,TM.shaking_oil+.5));
+$('vib2').setAttribute('transform','translate('+(b2?4*Math.sin(t*60):0).toFixed(1)+' 0)');$('buzz2').setAttribute('opacity',b2?.5+.5*Math.sin(t*20):0);
+$('oilG').setAttribute('opacity',p(u,TM.shaking_oil+1.5,TM.shaking_oil+3));rise($('shk'),p(u,TM.shaking_oil+3,TM.shaking_oil+3.6));
+
+rise($('res'),p(u,TM.researcher,TM.researcher+.5));rise($('chart'),p(u,TM.distance_bar,TM.distance_bar+.5));
+BR.forEach((r,i)=>{const h=BH[i]*p(u,TM.distance_bar+.6+i*.4,TM.distance_bar+1.2+i*.4);r.setAttribute('y',(640-h).toFixed(1));r.setAttribute('height',h.toFixed(1))});
+rise($('eye'),p(u,TM.fresh_eyes,TM.fresh_eyes+.5));$('pupil').setAttribute('cx',(1300+10*Math.sin(t*1.5)).toFixed(1));
+rise($('fresh'),p(u,TM.fresh_eyes+.4,TM.fresh_eyes+1));
+
+rise($('yok'),p(u,TM.yokoi,TM.yokoi+.5));rise($('mach'),p(u,TM.yokoi+3.5,TM.yokoi+4.1));
+GR.forEach(([g,x,y],i)=>g.setAttribute('transform','rotate('+((i?-1:1)*t*40).toFixed(1)+' '+x+' '+y+')'));
+CD.forEach((g,i)=>{const k=(t*.4+i/4)%1;g.setAttribute('transform','translate('+(130+320*k).toFixed(1)+' 560)');g.setAttribute('opacity',Math.sin(Math.PI*k).toFixed(2))});
+rise($('grab'),p(u,TM.grab_arm,TM.grab_arm+.5));rise($('spare'),p(u,TM.grab_arm,TM.grab_arm+.5));
+const e=p(u,TM.grab_arm+.6,TM.grab_arm+2.4)*(.92+.08*Math.sin(t*2)),w5=18+57*e,h5=Math.sqrt(6400-w5*w5)/2;
+let A='',B='';for(let i=0;i<=6;i++){const x=(880+i*w5).toFixed(1),s=i%2?1:-1;A+=x+','+(495+s*h5).toFixed(1)+' ';B+=x+','+(495-s*h5).toFixed(1)+' '}
+armA.setAttribute('points',A);armB.setAttribute('points',B);
+const ex=(880+6*w5).toFixed(1);claw.setAttribute('d','M'+ex+' '+(495-h5).toFixed(1)+'q30 0 30 '+h5.toFixed(1)+'M'+ex+' '+(495+h5).toFixed(1)+'q30 0 30 '+(-h5).toFixed(1));
+rise($('hit'),p(u,TM.grab_arm+2.6,TM.grab_arm+3.2));
+
+[0,1,2].forEach(i=>{rise($('pt'+i),p(u,TM.old_parts+i*.5,TM.old_parts+i*.5+.4));rise($('l'+i),p(u,TM.old_parts+3.8+i*.5,TM.old_parts+4.2+i*.5))});
+rise($('arw6'),p(u,TM.old_parts+5.5,TM.old_parts+6));rise($('gb'),p(u,TM.game_boy,TM.game_boy+.6));
+rise($('vs'),p(u,TM.game_boy+2.5,TM.game_boy+3));rise($('riv'),p(u,TM.game_boy+2.5,TM.game_boy+3.1));
+rise($('bat'),p(u,TM.battery,TM.battery+.5));
+$('bf0').setAttribute('width',(248*p(u,TM.battery+.5,TM.battery+2.5)).toFixed(1));$('bf1').setAttribute('width',(80*p(u,TM.battery+.5,TM.battery+1.2)).toFixed(1));
+rise($('sold'),p(u,TM.battery+2,TM.battery+2.6));
+
+rise($('tbx'),p(u,TM.toolbox,TM.toolbox+.5));rise($('venn'),p(u,TM.two_fields,TM.two_fields+.5));
+rise($('star'),p(u,TM.two_fields+1.5,TM.two_fields+2));rise($('shr'),p(u,TM.share_arrow,TM.share_arrow+.5));
+const k7=(t*.5)%1,m7=1-k7;$('sdot').setAttribute('cx',(m7*m7*1200+2*m7*k7*1295+k7*k7*1390).toFixed(1));$('sdot').setAttribute('cy',(m7*m7*380+2*m7*k7*290+k7*k7*380).toFixed(1));
+rise($('stk'),p(u,TM.share_arrow+2,TM.share_arrow+2.6));
+
+const s8=SC[8][0]/K;
+rise($('qa'),p(u,s8+.3,s8+.8));rise($('qb'),p(u,s8+.7,s8+1.2));rise($('qc'),p(u,s8+1.1,s8+1.6));
+rise($('qfig'),p(u,s8+1.5,s8+2));rise($('qq1'),p(u,s8+2,s8+2.4));
+rise($('qlab'),p(u,s8+4.8,s8+5.3));rise($('qq2'),p(u,s8+5.3,s8+5.7));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:119.41;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,337 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Range Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Range: Slow, difficult learning, such as testing yourself, mixing up problem types and wrestling with concepts, feels worse in the moment but builds knowledge that lasts and transfers. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">RANGE · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Struggle now,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">learn more later.</text>
+<text class="b" x="120" y="600" font-size="32">Why the hard way of learning is often the smart way.</text>
+<g id="road0"><path class="s-loss" d="M1080 720H1480" stroke-width="6" stroke-dasharray="16 12" stroke-linecap="round"/><text class="m" x="1080" y="764" font-size="20">THE EASY ROAD</text></g>
+<g id="hill0"><polygon class="s-ink" points="1080,640 1300,260 1480,640" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><path class="s-ink" d="M1300 262V196" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1302 196l40 14-40 14z"/></g>
+<polyline id="climb0" class="s-gain" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="climber" class="gain" r="16"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hint trap.</text>
+<text class="b" x="120" y="176" font-size="32">A middle school math class, filmed for research.</text>
+<g id="room1">
+<rect class="s-ink" x="160" y="230" width="600" height="240" rx="12" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="220" y="380" font-size="72">x = ?</text>
+<rect class="ink" x="1340" y="230" width="100" height="64" rx="8"/><path class="ink" d="M1340 262l-40-24v48z"/>
+<text class="m" x="1390" y="330" font-size="20" text-anchor="middle">FILMED</text>
+<rect class="ink" x="440" y="712" width="280" height="14"/>
+</g>
+<g id="stu1"></g>
+<text id="q1" class="d" x="640" y="590" font-size="64" style="fill:var(--loss)">?</text>
+<g id="tch1"></g>
+<g id="hints1"></g>
+<g id="ans1"><path class="s-gain" d="M560 360l30 30 70-80" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="feel1"><text class="d" x="120" y="810" font-size="40">Feels better. But the concept was never wrestled with.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A desirable difficulty.</text>
+<text class="b" x="120" y="176" font-size="32">Robert Bjork’s name for productive struggle.</text>
+<g id="badge2"><rect class="gain" x="120" y="226" width="460" height="64" rx="32"/><text class="m" x="350" y="267" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">DESIRABLE DIFFICULTY</text></g>
+<g id="ax2"><path class="s-ink" d="M200 340V760H1440" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="220" y="362" font-size="20">HOW MUCH YOU KEEP</text><text class="m" x="1440" y="800" font-size="20" text-anchor="end">TIME</text></g>
+<g id="lg2a"><path class="s-gain" d="M700 262h50" stroke-width="6"/><text class="m" x="765" y="270" font-size="20">SLOW AND EFFORTFUL</text></g>
+<g id="lg2b"><path class="s-loss" d="M1080 262h50" stroke-width="6"/><text class="m" x="1145" y="270" font-size="20">SMOOTH AND QUICK</text></g>
+<polyline id="pl2a" class="s-gain" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline id="pl2b" class="s-loss" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="lb2a"><text class="d" x="1440" y="410" font-size="40" text-anchor="end" style="fill:var(--gain)">Sticks</text></g>
+<g id="lb2b"><text class="d" x="1440" y="650" font-size="40" text-anchor="end" style="fill:var(--loss)">Fades</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Test yourself first.</text>
+<text class="b" x="120" y="176" font-size="32">Before you feel ready, and even if you guess wrong.</text>
+<g id="card3"><rect class="s-ink" x="160" y="250" width="500" height="320" rx="20" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="190" y="300" font-size="22">QUIZ CARD</text>
+<text id="qm3" class="d" x="410" y="500" font-size="180" text-anchor="middle">?</text>
+<path id="ok3" class="s-gain" d="M340 420l50 50 100-110" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="guess3"><rect x="160" y="610" width="500" height="100" rx="14" fill="var(--stage)" stroke="var(--loss)" stroke-width="4" stroke-dasharray="12 8"/>
+<text class="d5" x="190" y="672" font-size="36">My first guess</text></g>
+<path id="x3" class="s-loss" d="M180 660H640" stroke-width="6" stroke-linecap="round"/>
+<g id="net3"></g>
+<path id="link3" class="s-gain" fill="none" stroke-width="5" stroke-dasharray="10 8" d="M1166 520C960 520 860 410 664 410"/>
+<g id="lens3"><g id="lensI"><circle class="s-ink" r="46" fill="none" stroke-width="10"/><path class="s-ink" d="M33 33l40 40" stroke-width="14" stroke-linecap="round"/></g></g>
+<g id="stick3"><text class="d" x="120" y="800" font-size="44">The search makes the right answer stick.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Mix it up.</text>
+<text class="b" x="120" y="176" font-size="32">Blocked practice vs. interleaving.</text>
+<text class="m" x="120" y="262" font-size="22">BLOCKED</text>
+<g id="blk4"></g>
+<g id="mix4"><text class="m" x="120" y="432" font-size="22">INTERLEAVED</text></g>
+<g id="strat4"><text class="d5" x="1180" y="480" font-size="30">Learns to pick</text><text class="d5" x="1180" y="520" font-size="30" style="fill:var(--gain)">the strategy.</text></g>
+<g id="ch4a"><text class="m" x="120" y="610" font-size="22">IN THE MOMENT</text><path class="s-line" d="M160 820H700" stroke-width="4"/>
+<rect id="b4a0" x="200" width="140" fill="var(--muted)"/><rect id="b4a1" x="400" width="140" class="gain"/>
+<text class="m" x="270" y="850" font-size="18" text-anchor="middle">BLOCKED</text><text class="m" x="470" y="850" font-size="18" text-anchor="middle">MIXED</text></g>
+<g id="ch4b"><text class="m" x="820" y="610" font-size="22">LATER TEST</text><path class="s-line" d="M860 820H1400" stroke-width="4"/>
+<rect id="b4b0" x="900" width="140" fill="var(--muted)"/><rect id="b4b1" x="1100" width="140" class="gain"/>
+<text class="m" x="970" y="850" font-size="18" text-anchor="middle">BLOCKED</text><text class="m" x="1170" y="850" font-size="18" text-anchor="middle">MIXED</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The cadet study.</text>
+<text class="b" x="120" y="176" font-size="32">US Air Force Academy: cadets randomly assigned to calculus professors.</text>
+<g id="box5">
+<rect class="s-line" x="120" y="360" width="640" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-line" x="840" y="360" width="640" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="160" y="400" font-size="20">SOME PROFESSORS</text><text class="m" x="880" y="400" font-size="20">OTHER PROFESSORS</text>
+<g id="prof5"></g></g>
+<g id="ra5"><text class="m" x="160" y="590" font-size="20">COURSE 1</text><rect id="c5a" x="160" y="604" height="36" class="ink"/><text class="m" x="160" y="680" font-size="20">REVIEWS</text><g id="st5a"></g></g>
+<g id="rb5"><text class="m" x="880" y="590" font-size="20">COURSE 1</text><rect id="c5b" x="880" y="604" height="36" class="ink"/><text class="m" x="880" y="680" font-size="20">REVIEWS</text><g id="st5b"></g></g>
+<g id="nx5"><text class="m" x="160" y="770" font-size="20">NEXT COURSE</text><text class="m" x="880" y="770" font-size="20" style="fill:var(--gain)">NEXT COURSE</text></g>
+<rect id="n5a" x="160" y="784" height="36" fill="var(--muted)"/><rect id="n5b" x="880" y="784" height="36" class="gain"/>
+<g id="cad5"></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Built to last.</text>
+<text class="b" x="120" y="176" font-size="32">Deeper concepts, not just what the next exam needs.</text>
+<rect x="120" y="480" width="840" height="380" fill="var(--line)" fill-opacity=".35"/>
+<rect x="1300" y="480" width="180" height="380" fill="var(--line)" fill-opacity=".35"/>
+<path class="s-ink" d="M120 480H960M1300 480H1480" stroke-width="5" stroke-linecap="round"/>
+<g id="sh6"><path class="s-muted" d="M260 480V380" stroke-width="6" stroke-linecap="round"/><path d="M260 420q-40-10-50-40q40 0 50 40z" fill="var(--muted)"/>
+<path class="s-loss" d="M260 480l-30 40M260 480v50M260 480l30 40" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="260" y="340" font-size="20" text-anchor="middle">NEXT EXAM ONLY</text></g>
+<g id="dp6"><path class="s-ink" d="M640 480V280" stroke-width="8" stroke-linecap="round"/>
+<path class="gain" d="M640 350q-70-5-90-60q70-5 90 60z"/><path class="gain" d="M640 320q70-5 90-60q-70-5-90 60z"/>
+<text class="m" x="640" y="236" font-size="20" text-anchor="middle">DEEP CONCEPTS</text></g>
+<g id="roots6"></g>
+<g id="br6"><path id="brp6" class="s-gain" d="M960 480Q1130 360 1300 480" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<text class="m" x="1390" y="450" font-size="20" text-anchor="middle">NEW PROBLEM</text>
+<text class="d5" x="1130" y="640" font-size="34" text-anchor="middle">Helps with</text><text class="d5" x="1130" y="690" font-size="34" text-anchor="middle" style="fill:var(--gain)">new problems.</text></g>
+<circle id="walk6" class="gain" r="14"/>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try this.</text>
+<text class="b" x="120" y="176" font-size="32">Three ways to make learning a little harder.</text>
+<g id="k0"><rect class="s-line" x="120" y="230" width="414" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="247" y="290" width="160" height="200" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M267 290V490" stroke-width="4"/>
+<g id="wl7"></g>
+<text class="d5" x="150" y="600" font-size="36">Close your notes</text><text class="m" x="150" y="660" font-size="20">WRITE WHAT YOU</text><text class="m" x="150" y="692" font-size="20">REMEMBER FIRST</text></g>
+<g id="k1"><rect class="s-line" x="593" y="230" width="414" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="mix7"></g>
+<text class="d5" x="623" y="600" font-size="36">Mix the types</text><text class="m" x="623" y="660" font-size="20">DIFFERENT PROBLEMS</text><text class="m" x="623" y="692" font-size="20">IN ONE SESSION</text></g>
+<g id="k2"><rect class="s-line" x="1066" y="230" width="414" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="ink" x="1253" y="296" width="40" height="20" rx="4"/><circle class="s-ink" cx="1273" cy="420" r="100" fill="var(--stage)" stroke-width="8"/>
+<path id="wd7" class="gain" fill-opacity=".4"/><line id="hd7" class="s-ink" x1="1273" y1="420" x2="1273" y2="340" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="1273" cy="420" r="10"/>
+<text class="d5" x="1096" y="600" font-size="36">Wait a minute</text><text class="m" x="1096" y="660" font-size="20">BEFORE YOU REACH</text><text class="m" x="1096" y="692" font-size="20">FOR THE HINT</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What are you learning</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">right now that feels</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">too easy?</text></g>
+<g id="lab8"><text class="m" x="143" y="700" font-size="26">THIS WEEK, MAKE IT HARDER ON PURPOSE</text></g>
+<g id="mt8"><polygon class="s-ink" points="1180,760 1330,500 1470,760" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/></g>
+<path id="cl8" class="s-gain" d="M1200 740L1300 650L1280 600L1330 510" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="fl8"><path class="s-ink" d="M1330 500V440" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1332 440l44 16-44 16z"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Struggle Now, Learn More Later&rdquo;, from <em>Range</em> by David Epstein. Examples as reported in the book: filmed research of math classrooms, Robert Bjork&#x27;s idea of desirable difficulties, research on testing and mixed practice, and the Air Force Academy calculus study. The classroom, mountain, and professor drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 9.9], [9.9, 25.0], [25.0, 39.9], [39.9, 53.8], [53.8, 75.5], [75.5, 95.1], [95.1, 111.0], [111.0, 124.0], [124.0, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Struggle Now", "The Hint Trap", "Good Difficulty", "Test Yourself", "Mix It Up", "The Cadet Study", "Built to Last", "Try This", "Your Challenge"];
+const TM={"easy_road": 0.0, "classroom": 10.24, "student": 14.0, "teacher": 16.32, "bjork": 25.28, "mountain": 31.28, "fast_lane": 35.84, "quiz_card": 40.16, "wrong_guess": 44.28, "blocked_set": 54.08, "mixed_set": 59.28, "academy": 75.84, "prof_a": 81.8, "prof_b": 87.04, "next_course": 90.32, "deep_roots": 95.44, "bridge": 106.0, "notebook": 111.28, "shuffle": 116.16, "stopwatch": 120.0, "question": 124.32};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const part=(P,k)=>{const n=P.length-1,f=cl(k)*n,i=Math.min(Math.floor(f),n),s=P.slice(0,i+1);let e=P[i];if(i<n){const a=P[i],b=P[i+1],r=f-i;e=[a[0]+(b[0]-a[0])*r,a[1]+(b[1]-a[1])*r];s.push(e)}return [s.map(q=>q[0].toFixed(1)+','+q[1].toFixed(1)).join(' '),e]};
+const draw=(el,k)=>{el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));el.setAttribute('opacity',k>0?1:0)};
+const CP=[[1120,640],[1250,580],[1180,500],[1300,430],[1260,360],[1300,290]];
+fig($('stu1'),580,600,24,'ink');fig($('tch1'),1000,560,30,'ink');
+const H1=[0,1,2].map(i=>{const g=mk('g',{},$('hints1'));mk('rect',{x:860+i*150,y:330,width:120,height:56,rx:28,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);mk('text',{x:920+i*150,y:366,'font-size':22,'text-anchor':'middle',class:'m'},g).textContent='HINT';return g});
+const S2=[],F2=[];for(let x=200;x<=1440;x+=20){const k=(x-200)/1240;S2.push([x,740-300*(1-Math.exp(-k*4))+12*Math.sin(x/23)*(1-k)]);F2.push([x,740-340*(k<.15?k/.15:Math.exp(-(k-.15)*2.2))])}
+const N3=[[900,300],[1040,280],[1200,310],[1360,290],[960,420],[1110,400],[1280,430],[1420,410],[880,540],[1030,560],[1180,520],[1340,560],[980,650],[1240,650]];
+N3.forEach((a,i)=>[i+1,i+4].forEach(j=>{if(j<N3.length&&!(j===i+1&&i%4===3))mk('path',{d:'M'+a[0]+' '+a[1]+'L'+N3[j][0]+' '+N3[j][1],class:'s-line','stroke-width':3},$('net3'))}));
+const ND=N3.map(a=>mk('circle',{cx:a[0],cy:a[1],r:14,class:'ink'},$('net3')));
+const tile=(g,ty)=>{mk('rect',{x:0,y:0,width:80,height:80,rx:12,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);if(ty===0)mk('rect',{x:16,y:16,width:48,height:48,class:'ink'},g);else if(ty===1)mk('circle',{cx:40,cy:40,r:26,class:'gain'},g);else mk('path',{d:'M40 12L68 66H12z',class:'loss'},g)};
+const BK=[];for(let i=0;i<10;i++){const o=mk('g',{transform:'translate('+(120+i*104)+' 280)'},$('blk4')),g=mk('g',{},o);tile(g,0);BK.push(g)}
+const T4=[0,0,0,0,1,1,1,2,2,2],S4=[3,7,0,5,9,2,6,1,8,4],MX=T4.map(ty=>{const g=mk('g',{},$('mix4'));tile(g,ty);return g});
+fig($('prof5'),690,450,24,'ink');fig($('prof5'),1410,450,24,'ink');
+const star=(cx,cy,R)=>{let d='';for(let k=0;k<10;k++){const a=-Math.PI/2+k*Math.PI/5,r=k%2?R*.45:R;d+=(k?'L':'M')+(cx+r*Math.cos(a)).toFixed(1)+' '+(cy+r*Math.sin(a)).toFixed(1)}return d+'Z'};
+[[160,5,'st5a'],[880,2,'st5b']].forEach(([ox,n,id])=>{for(let i=0;i<5;i++)mk('path',{d:star(ox+20+i*50,712,20),fill:i<n?'var(--gain)':'none',stroke:i<n?'var(--gain)':'var(--muted)','stroke-width':3,'stroke-linejoin':'round'},$(id))});
+const AS=[0,1,1,0,1,0,0,1,0,1,1,0],C0=[],C1=[];let ka=0,kb=0;
+const CD=AS.map((a,i)=>{C0.push([500+i*54,280]);C1.push(a?[900+(kb++)*70,470]:[180+(ka++)*70,470]);return mk('circle',{r:14,fill:'var(--muted)'},$('cad5'))});
+const R6=['M640 480C640 600 560 680 540 820','M640 480C650 620 700 700 760 800','M640 480V830','M640 480C620 560 520 580 470 640','M640 480C660 560 760 580 820 640'].map(d=>mk('path',{d:d,class:'s-gain','stroke-width':6,fill:'none','stroke-linecap':'round',pathLength:1,'stroke-dasharray':'1 1'},$('roots6')));
+const W7=[100,80,96,60].map((w,i)=>mk('path',{d:'M287 '+(340+i*36)+'h'+w,class:'s-gain','stroke-width':6,'stroke-linecap':'round',pathLength:1,'stroke-dasharray':'1 1'},$('wl7')));
+const M7=[0,1,2].map(ty=>{const g=mk('g',{},$('mix7'));tile(g,ty);return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('road0'),p(u,TM.easy_road,TM.easy_road+.5));rise($('hill0'),p(u,TM.easy_road+.6,TM.easy_road+1.1));
+const c0=part(CP,p(u,TM.easy_road+5.4,TM.easy_road+11));$('climb0').setAttribute('points',c0[0]);
+$('climber').setAttribute('cx',c0[1][0].toFixed(1));$('climber').setAttribute('cy',(c0[1][1]-14).toFixed(1));$('climber').setAttribute('opacity',p(u,TM.easy_road+.8,TM.easy_road+1.3));
+
+rise($('room1'),p(u,TM.classroom,TM.classroom+.5));rise($('stu1'),p(u,TM.student,TM.student+.5));
+$('q1').setAttribute('opacity',(p(u,TM.student+.4,TM.student+.9)*(1-p(u,TM.teacher+3,TM.teacher+3.4))).toFixed(2));
+rise($('tch1'),p(u,TM.teacher,TM.teacher+.5));H1.forEach((g,i)=>rise(g,p(u,TM.teacher+.5+i*.8,TM.teacher+.9+i*.8)));
+rise($('ans1'),p(u,TM.teacher+3,TM.teacher+3.5));rise($('feel1'),p(u,TM.teacher+4.6,TM.teacher+5.2));
+
+rise($('badge2'),p(u,TM.bjork,TM.bjork+.5));rise($('ax2'),p(u,TM.bjork+1,TM.bjork+1.5));
+rise($('lg2a'),p(u,TM.mountain,TM.mountain+.4));$('pl2a').setAttribute('points',part(S2,p(u,TM.mountain,TM.mountain+2.5))[0]);$('pl2a').setAttribute('opacity',u>=TM.mountain?1:0);rise($('lb2a'),p(u,TM.mountain+2.4,TM.mountain+2.9));
+rise($('lg2b'),p(u,TM.fast_lane,TM.fast_lane+.4));$('pl2b').setAttribute('points',part(F2,p(u,TM.fast_lane,TM.fast_lane+2))[0]);$('pl2b').setAttribute('opacity',u>=TM.fast_lane?1:0);rise($('lb2b'),p(u,TM.fast_lane+1.9,TM.fast_lane+2.4));
+
+const W=TM.wrong_guess,s3=p(u,W+5.7,W+6.7);
+rise($('card3'),p(u,TM.quiz_card,TM.quiz_card+.5));rise($('guess3'),p(u,W,W+.5));$('x3').setAttribute('opacity',p(u,W+1.2,W+1.6));
+rise($('net3'),p(u,W+.3,W+.8));rise($('lens3'),p(u,W+.5,W+1));
+const lx=1150+230*Math.sin(t*.9),ly=460+150*Math.sin(t*1.3);
+$('lensI').setAttribute('transform','translate('+(lx+(1180-lx)*s3).toFixed(1)+' '+(ly+(520-ly)*s3).toFixed(1)+')');
+ND[10].setAttribute('class',s3>0?'gain':'ink');ND[10].setAttribute('r',(14+8*s3).toFixed(1));
+$('link3').setAttribute('opacity',s3);$('qm3').setAttribute('opacity',(1-s3).toFixed(2));$('ok3').setAttribute('opacity',s3);
+rise($('stick3'),p(u,W+6,W+6.6));
+
+BK.forEach((g,i)=>rise(g,p(u,TM.blocked_set+i*.25,TM.blocked_set+i*.25+.4)));
+const M=TM.mixed_set,sh=p(u,M+.8,M+2.2);rise($('mix4'),p(u,M,M+.5));
+MX.forEach((g,i)=>{const x=120+(i+(S4[i]-i)*sh)*104,y=450-36*Math.sin(Math.PI*sh)*(i%2?1:-1);g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')')});
+rise($('ch4a'),p(u,M+5,M+5.5));rise($('ch4b'),p(u,M+9.2,M+9.7));rise($('strat4'),p(u,M+10,M+10.5));
+const ga=p(u,M+5.3,M+6.3),gb=p(u,M+9.5,M+10.5);
+[['b4a0',170*ga],['b4a1',100*ga],['b4b0',80*gb],['b4b1',170*gb]].forEach(([id,h])=>{$(id).setAttribute('y',(820-h).toFixed(1));$(id).setAttribute('height',h.toFixed(1))});
+
+rise($('box5'),p(u,TM.academy+.5,TM.academy+1));
+CD.forEach((c,i)=>{const m=p(u,TM.academy+2.5+i*.08,TM.academy+4+i*.08);c.setAttribute('cx',(C0[i][0]+(C1[i][0]-C0[i][0])*m).toFixed(1));c.setAttribute('cy',(C0[i][1]+(C1[i][1]-C0[i][1])*m).toFixed(1));c.setAttribute('opacity',p(u,TM.academy+i*.05,TM.academy+.5+i*.05))});
+rise($('ra5'),p(u,TM.prof_a,TM.prof_a+.5));rise($('rb5'),p(u,TM.prof_b,TM.prof_b+.5));rise($('nx5'),p(u,TM.next_course,TM.next_course+.5));
+$('c5a').setAttribute('width',(520*p(u,TM.prof_a+.3,TM.prof_a+1.3)).toFixed(1));$('c5b').setAttribute('width',(260*p(u,TM.prof_b+.3,TM.prof_b+1.3)).toFixed(1));
+$('n5a').setAttribute('width',(280*p(u,TM.next_course+.4,TM.next_course+1.6)).toFixed(1));$('n5b').setAttribute('width',(520*p(u,TM.next_course+.4,TM.next_course+1.6)).toFixed(1));
+
+const D=TM.deep_roots;rise($('sh6'),p(u,D,D+.5));rise($('dp6'),p(u,D+.4,D+.9));
+const rk=.25*p(u,D+.4,D+1.4)+.75*p(u,D+6.6,D+9);R6.forEach(r=>draw(r,rk));
+rise($('br6'),p(u,TM.bridge,TM.bridge+.4));draw($('brp6'),p(u,TM.bridge,TM.bridge+1.5));
+const ws=(t*.25)%1,wq=1-ws;$('walk6').setAttribute('cx',(wq*wq*960+2*wq*ws*1130+ws*ws*1300).toFixed(1));$('walk6').setAttribute('cy',(wq*wq*480+2*wq*ws*360+ws*ws*480-16).toFixed(1));$('walk6').setAttribute('opacity',u>=TM.bridge+1.5?1:0);
+
+rise($('k0'),p(u,TM.notebook,TM.notebook+.5));rise($('k1'),p(u,TM.shuffle,TM.shuffle+.5));rise($('k2'),p(u,TM.stopwatch,TM.stopwatch+.5));
+W7.forEach((w,i)=>draw(w,p(u,TM.notebook+.6+i*.5,TM.notebook+1+i*.5)));
+const f7=Math.max(0,u-TM.shuffle)/1.5,b7=Math.floor(f7),r7=ease(cl((f7-b7)*2)),SX=[650,760,870];
+M7.forEach((g,i)=>{const a=SX[(i+b7)%3],b=SX[(i+b7+1)%3],x=f7>0?a+(b-a)*r7:SX[i],y=350-(f7>0?30*Math.sin(Math.PI*r7)*(i===1?-1:1):0);g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')')});
+const sw=p(u,TM.stopwatch+.5,TM.stopwatch+4.5),an=sw*2*Math.PI*.999,hx=1273+88*Math.sin(an),hy=420-88*Math.cos(an);
+$('wd7').setAttribute('d',sw>0?'M1273 420L1273 332A88 88 0 '+(an>Math.PI?1:0)+' 1 '+hx.toFixed(1)+' '+hy.toFixed(1)+'Z':'M1273 420');
+$('hd7').setAttribute('x2',(1273+80*Math.sin(an)).toFixed(1));$('hd7').setAttribute('y2',(420-80*Math.cos(an)).toFixed(1));
+
+const Q=TM.question;rise($('qa'),p(u,Q,Q+.5));rise($('qb'),p(u,Q+.4,Q+.9));rise($('qc'),p(u,Q+.8,Q+1.3));
+rise($('mt8'),p(u,Q+1.4,Q+1.9));rise($('lab8'),p(u,Q+4.2,Q+4.7));draw($('cl8'),p(u,Q+4.2,Q+5.6));rise($('fl8'),p(u,Q+5.6,Q+6.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.52;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

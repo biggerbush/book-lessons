@@ -1,0 +1,348 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jab, Jab, Jab, Right Hook Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Jab, Jab, Jab, Right Hook: A strong right hook is visually striking, clearly worded and makes the next step effortless, especially on a phone. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">JAB, JAB, JAB, RIGHT HOOK · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Make your ask</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">impossible to miss.</text>
+<text class="b" x="120" y="600" font-size="32">Turn your big moment into a punch nobody can miss.</text>
+<g id="tgt"><circle class="s-ink" cx="1150" cy="360" r="80" fill="var(--stage)" stroke-width="7"/><circle class="s-gain" cx="1150" cy="360" r="50" fill="none" stroke-width="8"/><circle class="gain" cx="1150" cy="360" r="20"/></g>
+<g id="hk0"><text class="m" x="1150" y="490" font-size="22" text-anchor="middle" style="fill:var(--gain)">RIGHT HOOK</text></g>
+<g id="burst0"></g>
+<g id="gloveW"><g id="glove" transform="translate(1370 360)"><rect class="ink" x="40" y="-46" width="70" height="92" rx="12"/><rect class="gain s-ink" x="-90" y="-62" width="140" height="124" rx="56" stroke-width="6"/><ellipse class="gain s-ink" cx="-10" cy="-52" rx="44" ry="20" stroke-width="6"/></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most brands whiff the punch.</text>
+<text class="b" x="120" y="176" font-size="32">One glance on a scrolling feed is all you get.</text>
+<g id="ph1"><rect class="s-ink" x="160" y="230" width="320" height="610" rx="40" fill="var(--stage)" stroke-width="8"/><g id="feed"></g><circle id="thumb1" r="34" fill="var(--muted)" fill-opacity=".5"/></g>
+<g id="post1w"><g id="post1">
+<rect class="s-ink" x="620" y="240" width="440" height="400" rx="18" fill="var(--stage)" stroke-width="5"/>
+<rect x="650" y="270" width="380" height="200" fill="var(--line)"/>
+<circle cx="760" cy="380" r="50" fill="var(--muted)" fill-opacity=".35"/><circle cx="900" cy="360" r="70" fill="var(--muted)" fill-opacity=".25"/>
+<path class="s-muted" d="M650 500h220M650 518h180M650 536h200" stroke-width="3"/>
+<rect class="s-muted" x="650" y="565" width="220" height="50" rx="25" fill="none" stroke-width="3" stroke-dasharray="8 8"/>
+<circle cx="1036" cy="616" r="6" fill="var(--muted)"/>
+</g>
+<g id="cal1L"><path class="s-loss" d="M880 506H1086M880 590H1086M1046 616L1086 644" stroke-width="3" stroke-dasharray="4 6" stroke-linecap="round"/></g>
+</g>
+<g id="cal1">
+<text class="m" x="1100" y="514" font-size="22" style="fill:var(--loss)">TINY TEXT</text>
+<text class="m" x="1100" y="598" font-size="22" style="fill:var(--loss)">NO NEXT STEP</text>
+<text class="m" x="1100" y="654" font-size="22" style="fill:var(--loss)">HIDDEN LOGO</text>
+</g>
+<g id="gone1"><text class="d" x="620" y="712" font-size="52" style="fill:var(--loss)">Gone in a moment.</text></g>
+<g id="pills1"></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stop the scroll with one image.</text>
+<text class="b" x="120" y="176" font-size="32">His critiques keep flagging cluttered, dull, forgettable pictures.</text>
+<g id="flag2"></g>
+<g id="bold2">
+<rect class="s-ink" x="1000" y="230" width="440" height="470" rx="18" fill="var(--stage)" stroke-width="6"/>
+<circle class="gain" cx="1300" cy="380" r="90"/>
+<path class="ink" d="M1030 670L1180 480L1290 610L1340 560L1410 670Z"/>
+</g>
+<g id="stop2"><text class="m" x="1220" y="744" font-size="22" text-anchor="middle" style="fill:var(--gain)">STOPS THE SCROLL</text></g>
+<g id="eye2"><path class="s-ink" d="M120 790Q200 730 280 790Q200 850 120 790Z" fill="var(--stage)" stroke-width="6"/><circle id="pup2" class="ink" cy="790" r="18" cx="200"/>
+<text class="d" x="310" y="805" font-size="40">Seen before a single word is read.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Remember the size of a phone.</text>
+<text class="b" x="120" y="176" font-size="32">Text that’s fine on a monitor shrinks to specks on a phone.</text>
+<g id="mon3">
+<rect class="s-ink" x="120" y="240" width="640" height="380" rx="16" fill="var(--stage)" stroke-width="7"/>
+<rect x="160" y="280" width="560" height="170" fill="var(--line)"/><circle class="gain" cx="620" cy="365" r="50"/>
+<text class="d5" x="160" y="505" font-size="32">Fresh bread, baked this morning.</text>
+<circle class="gain" cx="184" cy="572" r="22"/><text class="m" x="220" y="579" font-size="20">CORNER BAKERY</text>
+<path class="s-ink" d="M440 620v44M340 668h200" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g id="arr3"><path class="s-muted" d="M800 440h150m-20-20 20 20-20 20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="875" y="412" font-size="18" text-anchor="middle">ON A PHONE</text></g>
+<g id="ph3">
+<rect class="s-ink" x="1000" y="270" width="220" height="430" rx="30" fill="var(--stage)" stroke-width="7"/>
+<rect x="1022" y="310" width="176" height="70" fill="var(--line)"/><circle class="gain" cx="1170" cy="345" r="16"/>
+<circle class="gain" cx="1030" cy="445" r="4"/>
+</g>
+<g id="specks3"></g>
+<g id="lab3a"><text class="m" x="1260" y="400" font-size="20" style="fill:var(--loss)">UNREADABLE</text><text class="m" x="1260" y="426" font-size="20" style="fill:var(--loss)">SPECKS</text></g>
+<g id="lab3b"><circle id="ring3" class="s-loss" cx="1030" cy="445" r="18" fill="none" stroke-width="4"/><text class="m" x="1260" y="470" font-size="20" style="fill:var(--loss)">WHO POSTED</text><text class="m" x="1260" y="496" font-size="20" style="fill:var(--loss)">THIS?</text></g>
+<g id="miss3"><text class="d" x="120" y="800" font-size="44">Can’t read it or tell who? The punch misses.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Say one thing, plainly.</text>
+<text class="b" x="120" y="176" font-size="32">Clutter confuses. A clear ask reads like a friendly sign.</text>
+<g id="clut4w">
+<rect class="s-line" x="120" y="240" width="580" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="285" font-size="20">THE CLUTTERED POST</text>
+<g id="ca0"></g>
+<g id="ca1"><text class="d5" x="150" y="500" font-size="34">The best. The boldest. Ever!</text></g>
+<g id="ca2"><path class="s-muted" d="M150 560h500M150 586h500M150 612h460M150 638h500M150 664h420M150 690h500M150 716h300" stroke-width="3"/></g>
+<g id="q4"><text class="d" x="722" y="340" font-size="64" style="fill:var(--loss)">?</text><text class="d" x="752" y="470" font-size="64" style="fill:var(--loss)">?</text><text class="d" x="722" y="600" font-size="64" style="fill:var(--loss)">?</text></g>
+</g>
+<g id="one4"><text class="m" x="1140" y="300" font-size="22" text-anchor="middle">ONE MESSAGE PER POST</text><path class="s-ink" d="M1140 340V800M1040 800h200" stroke-width="12" stroke-linecap="round"/></g>
+<g id="sign4"><polygon class="gain" points="820,380 1400,380 1460,440 1400,500 820,500"/><text id="sgt4" class="d" x="1110" y="458" font-size="52" text-anchor="middle" style="fill:var(--on-gain)">Shop the sale</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make the next step effortless.</text>
+<text class="b" x="120" y="176" font-size="32">Every extra step is a place to quit.</text>
+<g id="maze5"><text class="m" x="120" y="250" font-size="20">HUNT FOR A LINK · COPY AN ADDRESS · FIVE SCREENS</text><g id="mzb"></g><circle id="trav5" r="14" class="loss"/></g>
+<g id="quit5"><text class="d" x="960" y="580" font-size="40" text-anchor="middle" style="fill:var(--loss)">They quit.</text></g>
+<g id="short5"><circle class="ink" cx="160" cy="700" r="22"/><text class="m" x="640" y="670" font-size="20" text-anchor="middle" style="fill:var(--gain)">ONE TAP AWAY</text><line id="sl5" class="s-gain" x1="190" y1="700" x2="190" y2="700" stroke-width="6" stroke-linecap="round"/><circle id="dot5" class="gain" cy="700" r="12"/></g>
+<g id="btn5"><rect id="btnr5" class="s-gain" fill="none" stroke-width="4"/><rect class="gain" x="1100" y="650" width="340" height="100" rx="50"/><text class="d" x="1270" y="716" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">Tap here</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your audience lives on mobile.</text>
+<text class="b" x="120" y="176" font-size="32">Design every ask for a thumb, not a mouse.</text>
+<g id="phA6">
+<rect class="s-ink" x="200" y="240" width="300" height="580" rx="40" fill="var(--stage)" stroke-width="8"/>
+<rect x="230" y="290" width="240" height="220" fill="var(--line)"/><circle class="gain" cx="350" cy="400" r="60"/>
+<rect class="ink" x="230" y="540" width="200" height="18" rx="9"/><rect x="230" y="574" width="150" height="18" rx="9" fill="var(--muted)"/>
+<rect class="gain" x="240" y="660" width="220" height="80" rx="40"/><text class="d" x="350" y="712" font-size="32" text-anchor="middle" style="fill:var(--on-gain)">Shop now</text>
+</g>
+<g id="thL6"><text class="m" x="350" y="226" font-size="20" text-anchor="middle" style="fill:var(--gain)">FOR A THUMB</text></g>
+<circle id="rip6" class="s-gain" cx="350" cy="700" fill="none" stroke-width="5"/>
+<ellipse id="th6" cx="380" rx="34" ry="50" fill="var(--muted)" fill-opacity=".55"/>
+<g id="mouse6"><path class="s-ink" d="M640 400v120l32-30 22 48 18-8-22-46h44z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><path class="s-loss" d="M620 420l110 110M730 420l-110 110" stroke-width="8" stroke-linecap="round"/><text class="m" x="680" y="590" font-size="20" text-anchor="middle">NOT A MOUSE</text></g>
+<g id="phB6">
+<text class="m" x="1150" y="226" font-size="20" text-anchor="middle">THE LINK OPENS…</text>
+<rect class="s-ink" x="1000" y="240" width="300" height="580" rx="40" fill="var(--stage)" stroke-width="8"/>
+<rect class="s-loss" x="880" y="330" width="540" height="300" fill="var(--stage)" stroke-width="4"/>
+<path class="s-muted" d="M910 370h480M910 400h300M910 430h420M910 590h480" stroke-width="3"/>
+<rect x="910" y="460" width="150" height="100" fill="var(--line)"/><rect x="1080" y="460" width="150" height="100" fill="var(--line)"/><rect x="1250" y="460" width="140" height="100" fill="var(--line)"/>
+<text class="m" x="1150" y="700" font-size="18" text-anchor="middle" style="fill:var(--loss)">AWKWARD ON A PHONE</text>
+</g>
+<g id="drift6"><g id="drift6m"></g></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Check it on your own phone.</text>
+<text class="b" x="120" y="176" font-size="32">Three questions before you post.</text>
+<g id="ph7">
+<rect class="s-ink" x="160" y="220" width="300" height="600" rx="40" fill="var(--stage)" stroke-width="8"/>
+<circle class="gain" cx="200" cy="280" r="18"/><rect class="ink" x="228" y="272" width="130" height="16" rx="8"/>
+<rect x="190" y="320" width="240" height="200" rx="8" fill="var(--line)"/><circle class="gain" cx="310" cy="420" r="55"/>
+<rect class="ink" x="190" y="562" width="230" height="20" rx="10"/><rect class="ink" x="190" y="598" width="170" height="20" rx="10"/>
+<rect class="gain" x="190" y="680" width="240" height="70" rx="35"/><text class="d" x="310" y="724" font-size="28" text-anchor="middle" style="fill:var(--on-gain)">Order now</text>
+</g>
+<circle id="rg0" class="s-gain" cx="200" cy="280" r="30" fill="none" stroke-width="4" stroke-dasharray="8 6"/>
+<rect id="rg1" class="s-gain" x="176" y="548" width="268" height="84" rx="12" fill="none" stroke-width="4" stroke-dasharray="8 6"/>
+<rect id="rg2" class="s-gain" x="176" y="668" width="268" height="94" rx="47" fill="none" stroke-width="4" stroke-dasharray="8 6"/>
+<g id="lk7"><text class="m" x="680" y="250" font-size="22">LOOK AT IT ON YOUR OWN PHONE</text></g>
+<g id="eye7"><path class="s-ink" d="M510 500Q570 450 630 500Q570 550 510 500Z" fill="var(--stage)" stroke-width="6"/><circle id="pup7" class="ink" cx="558" cy="500" r="14"/></g>
+<g id="rows7"></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Would a stranger know</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">what you want them to do</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">in <tspan style="fill:var(--gain)">two seconds?</tspan></text></g>
+<g id="lbl8"><text class="m" x="143" y="700" font-size="26">OPEN YOUR LAST POST ON YOUR PHONE</text></g>
+<g id="sw8"><rect class="ink" x="1326" y="538" width="28" height="20" rx="4"/><circle class="s-ink" cx="1340" cy="640" r="80" fill="var(--stage)" stroke-width="8"/><circle class="ink" cx="1340" cy="640" r="8"/><text class="m" x="1340" y="770" font-size="22" text-anchor="middle">2 SEC</text></g>
+<path id="hand8" class="s-gain" d="M1340 640V590" stroke-width="8" stroke-linecap="round"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Make Your Ask Impossible to Miss&rdquo;, from <em>Jab, Jab, Jab, Right Hook</em> by Gary Vaynerchuk. The critiques of cluttered images, tiny text and buried logos are drawn from the annotated brand posts as reported in the book. The phones, feeds, mazes and checklists are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 7.6], [7.6, 28.0], [28.0, 43.4], [43.4, 61.6], [61.6, 76.7], [76.7, 89.2], [89.2, 101.9], [101.9, 113.3], [113.3, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "The Missed Punch", "Seen First", "Easy to Read", "Clearly Worded", "Effortless Step", "Mobile First", "Your Checklist", "Your Turn"];
+const TM={"boxer_glove": 0.0, "phone_feed": 7.92, "blurry_post": 13.12, "thumb_swipe": 18.72, "bold_image": 28.32, "eye_magnet": 32.72, "small_screen": 43.68, "tiny_words": 46.08, "brand_logo": 51.12, "one_message": 61.92, "cluttered_ad": 65.28, "clear_sign": 70.32, "link_button": 77.04, "maze_path": 79.92, "short_path": 85.92, "pocket_phone": 89.52, "thumb_tap": 93.2, "awkward_page": 96.96, "check_eye": 102.16, "check_brand": 105.2, "check_words": 107.52, "check_tap": 110.24};
+const pp=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4}v-${r*1.2}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.2}z`,class:c},g)};
+const T=(g,a,s)=>{const e=mk('text',a,g);e.textContent=s;return e};
+for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${(1150+100*c).toFixed(1)} ${(360+100*s).toFixed(1)}L${(1150+132*c).toFixed(1)} ${(360+132*s).toFixed(1)}`,stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('burst0'))}
+const FD=[0,1,2,3].map(i=>{const g=mk('g',{},$('feed'));mk('rect',{x:190,y:0,width:260,height:120,rx:12,fill:'var(--line)'},g);mk('rect',{x:206,y:86,width:120+i%2*60,height:14,rx:7,fill:'var(--muted)'},g);mk('circle',{cx:420,cy:26,r:12,fill:'var(--muted)'},g);return g});
+const PL=['SEE IT','GET IT','ACT ON IT'].map((s,i)=>{const g=mk('g',{},$('pills1'));mk('rect',{x:620+i*280,y:760,width:260,height:64,rx:32,fill:'var(--gain)'},g);T(g,{x:750+i*280,y:802,'font-size':26,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'},s);return g});
+const FC=['CLUTTERED','DULL','FORGETTABLE'].map((s,i)=>{const x=120+i*290,g=mk('g',{},$('flag2'));mk('rect',{x:x,y:300,width:250,height:300,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  if(i==0)for(let k=0;k<12;k++)mk('rect',{x:x+20+(k%4)*54,y:325+Math.floor(k/4)*85,width:44+(k*7)%14,height:60,rx:6,fill:k%3?'var(--line)':'var(--muted)'},g);
+  if(i==1)mk('rect',{x:x+25,y:330,width:200,height:240,fill:'var(--line)'},g);
+  if(i==2)mk('circle',{cx:x+125,cy:450,r:70,fill:'var(--muted)','fill-opacity':.2},g);
+  mk('path',{d:`M${x+200} 280l50 50M${x+250} 280l-50 50`,stroke:'var(--loss)','stroke-width':9,'stroke-linecap':'round'},g);
+  T(g,{x:x+125,y:650,'font-size':22,'text-anchor':'middle',class:'m'},s);return g});
+for(let r=0;r<3;r++)for(let k=0;k<(r<2?22:14);k++)mk('circle',{cx:1026+k*8,cy:400+r*14,r:2.2,fill:'var(--muted)'},$('specks3'));
+[[230,370],[410,360],[590,380]].forEach(q=>{mk('circle',{cx:q[0],cy:q[1],r:58,class:'loss'},$('ca0'));T($('ca0'),{x:q[0],y:q[1]+8,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--stage)'},'OFFER!')});
+const SG=['Shop the sale','Sign up here','Try it today'];
+const MZ=[[160,400],[360,320],[560,480],[760,320],[960,480],[1160,320],[1360,400]];
+mk('polyline',{points:MZ.join(' '),fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'10 8'},$('mzb'));
+mk('circle',{cx:160,cy:400,r:22,class:'ink'},$('mzb'));mk('circle',{cx:1360,cy:400,r:30,fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'6 6'},$('mzb'));
+MZ.slice(1,6).forEach((q,i)=>{mk('rect',{x:q[0]-50,y:q[1]-40,width:100,height:80,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('mzb'));T($('mzb'),{x:q[0],y:q[1]+13,'font-size':36,'text-anchor':'middle',class:'d'},i+1)});
+[[830,730],[900,750],[970,730]].forEach(q=>pp($('drift6m'),q[0],q[1],14,'ink'));
+const CK=[],ROW=[[350,'Who is it from, at a glance?'],[510,'Can you read every word?'],[670,'Is the next step one tap?']].map(([y,s])=>{const g=mk('g',{},$('rows7'));mk('rect',{x:680,y:y-30,width:60,height:60,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);T(g,{x:770,y:y+15,'font-size':44,class:'d'},s);CK.push(mk('path',{d:`M694 ${y}l14 14 26-30`,fill:'none',stroke:'var(--gain)','stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round'},g));return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d)), S=(id,k,v)=>$(id).setAttribute(k,v);
+  const b0=TM.boxer_glove; R('gloveW',b0); R('tgt',b0+.3); R('hk0',b0+.8);
+  const c0=(t*1.5)%4,k0=Math.floor(c0),pu=Math.sin(Math.PI*(c0-k0));
+  S('glove','transform',`translate(${(1370-(k0<3?40:110)*pu).toFixed(1)} 360)`);
+  S('burst0','opacity',(k0==3&&pu>.7?1:0)*p(u,b0,b0+.5));
+
+  R('ph1',TM.phone_feed);
+  FD.forEach((g,i)=>{const y=((i*150-t*50)%600+600)%600;g.setAttribute('transform',`translate(0 ${(270+y).toFixed(1)})`);g.setAttribute('opacity',(cl(y/30)*cl((410-y)/30)).toFixed(2))});
+  const sw=(t*.8)%1; S('thumb1','cx',400); S('thumb1','cy',(760-180*ease(cl(sw/.4))).toFixed(1));
+  S('thumb1','opacity',(p(u,TM.phone_feed+.5,TM.phone_feed+1)*(1-cl((sw-.4)/.15))).toFixed(2));
+  R('post1',TM.blurry_post); R('cal1L',TM.blurry_post+1.5,.6); R('cal1',TM.blurry_post+1.5,.6);
+  const gs=p(u,TM.thumb_swipe,TM.thumb_swipe+.6); S('post1w','transform',`translate(0 ${(-40*gs).toFixed(1)})`); S('post1w','opacity',(1-.85*gs).toFixed(2));
+  R('gone1',TM.thumb_swipe+.3);
+  PL.forEach((g,i)=>{const a=TM.thumb_swipe+2.2+i*1.4;rise(g,p(u,a,a+.5))});
+
+  R('bold2',TM.bold_image); R('stop2',TM.bold_image+1);
+  FC.forEach((g,i)=>{const a=TM.eye_magnet+i*1.5;rise(g,p(u,a,a+.5))});
+  const e2=TM.eye_magnet+7.3; R('eye2',e2); S('pup2','cx',(200+40*p(u,e2+.4,e2+1.2)).toFixed(1));
+
+  R('mon3',TM.small_screen); R('arr3',TM.small_screen+.8); R('ph3',TM.small_screen+1.2);
+  R('specks3',TM.tiny_words); R('lab3a',TM.tiny_words+.6);
+  R('lab3b',TM.brand_logo); S('ring3','r',(18+4*Math.sin(t*4)).toFixed(1)); R('miss3',TM.brand_logo+7);
+
+  R('one4',TM.one_message);
+  [0,1,2].forEach(i=>R('ca'+i,TM.cluttered_ad+i*1.5)); R('q4',TM.cluttered_ad+4);
+  S('clut4w','opacity',(1-.6*p(u,TM.clear_sign,TM.clear_sign+.6)).toFixed(2));
+  R('sign4',TM.clear_sign); $('sgt4').textContent=SG[cl(Math.floor((u-TM.clear_sign)/2.2),0,2)];
+
+  R('btn5',TM.link_button);
+  const rc=(t%1.4)/1.4,re=14*rc; S('btnr5','x',1100-re); S('btnr5','y',650-re); S('btnr5','width',340+2*re); S('btnr5','height',100+2*re); S('btnr5','rx',50+re); S('btnr5','opacity',(1-rc).toFixed(2));
+  R('maze5',TM.maze_path);
+  const mq=p(u,TM.maze_path+.5,TM.maze_path+5)*4,mi=Math.min(Math.floor(mq),3),mf=mq-mi,A=MZ[mi],B=MZ[mi+1],fall=p(u,TM.maze_path+5,TM.maze_path+5.6);
+  S('trav5','cx',(A[0]+(B[0]-A[0])*mf).toFixed(1)); S('trav5','cy',(A[1]+(B[1]-A[1])*mf+40*fall).toFixed(1)); S('trav5','opacity',u<TM.maze_path+.5?0:1-fall);
+  R('quit5',TM.maze_path+5.2);
+  R('short5',TM.short_path); const sx=190+900*p(u,TM.short_path+.2,TM.short_path+1.2); S('sl5','x2',sx.toFixed(1)); S('dot5','cx',sx.toFixed(1));
+
+  R('phA6',TM.pocket_phone); R('thL6',TM.thumb_tap);
+  const tc=(t%1.2)/1.2,th=p(u,TM.thumb_tap,TM.thumb_tap+.5),rr=tc>.25?(tc-.25)/.75:0;
+  S('th6','cy',(800-70*Math.sin(Math.PI*cl(tc/.5))).toFixed(1)); S('th6','opacity',th);
+  S('rip6','r',(20+90*rr).toFixed(1)); S('rip6','opacity',(th*(tc>.25?1-rr:0)).toFixed(2));
+  R('mouse6',TM.thumb_tap+1.2); R('phB6',TM.awkward_page); R('drift6',TM.awkward_page+1);
+  const dr=p(u,TM.awkward_page+2,TM.awkward_page+5); S('drift6m','transform',`translate(${(-140*dr).toFixed(1)} 0)`); S('drift6m','opacity',(1-dr).toFixed(2));
+
+  R('ph7',TM.check_eye); R('lk7',TM.check_eye+.3); R('eye7',TM.check_eye+.8);
+  const CT=[TM.check_brand,TM.check_words,TM.check_tap];
+  CT.forEach((a,i)=>{rise(ROW[i],p(u,a,a+.5)); S('rg'+i,'opacity',p(u,a+.3,a+.8)); CK[i].setAttribute('opacity',p(u,a+1,a+1.4))});
+  S('pup7','cy',500+(u>=CT[2]?12:u>=CT[1]?4:u>=CT[0]?-10:0));
+
+  const s8=SC[8][0]/K; R('lbl8',s8+.4); R('sw8',s8+.6); S('hand8','opacity',p(u,s8+.6,s8+1.1));
+  S('hand8','transform',`rotate(${((t%2)/2*360).toFixed(1)} 1340 640)`);
+  R('qa',s8+4.6); R('qb',s8+5); R('qc',s8+5.4);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.61;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

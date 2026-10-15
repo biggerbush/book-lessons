@@ -1,0 +1,339 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crush It! Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Crush It!: Gary&#x27;s core formula is to love your family, work superhard, and live your passion, in that order. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">CRUSH IT! · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Family, hustle,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">passion.</text>
+<text class="b" x="120" y="600" font-size="32">Three priorities, ranked in the right order, power everything else.</text>
+<path class="s-line" d="M1030 540h440" stroke-width="5" stroke-linecap="round"/>
+<g id="pod"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One line sums it all up.</text>
+<text class="b" x="120" y="176" font-size="32">Gary’s whole philosophy, in three parts.</text>
+<g id="cards"></g>
+<g id="qban"><rect x="120" y="580" width="1360" height="110" rx="18" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/>
+<text class="d5" x="150" y="650" font-size="42">“Love your family, work superhard, live your passion.”</text></g>
+<g id="ordr"><text class="d" x="120" y="800" font-size="50">In that order. <tspan style="fill:var(--gain)">The order matters.</tspan></text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Family comes first.</text>
+<text class="b" x="120" y="176" font-size="32">Above money, and above ambition.</text>
+<g id="fr0"><rect class="gain" x="120" y="250" width="520" height="80" rx="14"/><text class="d" x="150" y="304" font-size="40" style="fill:var(--on-gain)">1  Family</text></g>
+<g id="fr1"><rect x="120" y="350" width="440" height="70" rx="14" fill="none" stroke="var(--line)" stroke-width="4"/><text class="m" x="150" y="395" font-size="24">2  MONEY</text></g>
+<g id="fr2"><rect x="120" y="440" width="440" height="70" rx="14" fill="none" stroke="var(--line)" stroke-width="4"/><text class="m" x="150" y="485" font-size="24">3  AMBITION</text></g>
+<g id="fcost"><text class="m" x="120" y="580" font-size="22">A BUSINESS MEANS NOTHING</text><text class="m" x="120" y="614" font-size="22">IF IT COSTS YOU THE PEOPLE YOU LOVE</text></g>
+<g id="fshop"><path class="s-ink" d="M130 660v160M130 680h340" fill="none" stroke-width="6" stroke-linecap="round"/><path class="s-ink" d="M190 680v30M450 680v30" stroke-width="3"/>
+<rect class="gain" x="150" y="710" width="340" height="90" rx="10"/><text class="d5" x="175" y="768" font-size="32" style="fill:var(--on-gain)">FAMILY BUSINESS</text></g>
+<g id="fhouse"><path class="s-ink" d="M800 390L1060 230L1320 390" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<rect class="s-ink" x="850" y="390" width="420" height="290" fill="var(--stage)" stroke-width="7"/><g id="fppl"></g></g>
+<g id="fshd"><path d="M1405 420l65 25v70c0 50-30 80-65 95-35-15-65-45-65-95v-70z" fill="var(--stage)" stroke="var(--gain)" stroke-width="6" stroke-linejoin="round"/><g id="fshh"></g></g>
+<g id="frsn"><text class="d5" x="850" y="760" font-size="34">The reason for the work,</text><text class="d5" x="850" y="806" font-size="34">not an obstacle to it.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Hustle is required.</text>
+<text class="b" x="120" y="176" font-size="32">Gary does not soften this part.</text>
+<g id="tbx"><path class="s-ink" d="M240 330v-30h100v30" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<rect class="ink" x="160" y="330" width="260" height="170" rx="12"/><rect class="gain" x="270" y="380" width="40" height="30" rx="4"/>
+<text class="m" x="290" y="620" font-size="20" text-anchor="middle">HARD WORK</text></g>
+<g id="clk"><circle class="s-ink" cx="800" cy="420" r="140" fill="var(--stage)" stroke-width="7"/><path id="cswp" class="gain" fill-opacity=".25"/><g id="ctk"></g>
+<line id="chand" class="s-gain" x1="800" y1="420" x2="800" y2="310" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="800" cy="420" r="10"/>
+<text class="m" x="800" y="620" font-size="20" text-anchor="middle">LONG, FOCUSED HOURS</text></g>
+<g id="tv"><rect class="s-ink" x="1140" y="300" width="300" height="200" rx="16" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M1290 500v40M1240 540h100" stroke-width="7" stroke-linecap="round"/>
+<path id="tvp" class="loss" d="M1265 365l60 35-60 35z"/><g id="tvh"></g>
+<text class="m" x="1290" y="620" font-size="20" text-anchor="middle">IDLE TIME → BUILDING TIME</text></g>
+<g id="nos"><text class="d" x="120" y="780" font-size="56">No shortcuts.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Gary’s own hustle.</text>
+<text class="b" x="120" y="176" font-size="32">Long days in the store, and then some.</text>
+<g id="ls"><rect class="s-ink" x="170" y="420" width="260" height="180" fill="var(--stage)" stroke-width="6"/><path class="gain" d="M160 420h280l-20-40h-240z"/>
+<text class="m" x="300" y="470" font-size="22" text-anchor="middle">LIQUOR</text><rect class="ink" x="320" y="500" width="60" height="100"/><rect class="s-ink" x="200" y="500" width="70" height="50" fill="none" stroke-width="4"/>
+<text class="m" x="300" y="670" font-size="20" text-anchor="middle">DAD’S LIQUOR STORE, NJ</text></g>
+<path id="ar1" class="s-muted" d="M460 520h70m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="wl"><rect class="s-ink" x="560" y="320" width="440" height="280" fill="var(--stage)" stroke-width="7"/>
+<path class="s-line" d="M580 455h400M580 575h400" stroke-width="5"/><g id="wlb"></g>
+<rect class="gain" x="620" y="280" width="320" height="60" rx="10"/><text class="d5" x="780" y="321" font-size="30" text-anchor="middle" style="fill:var(--on-gain)">WINE LIBRARY</text>
+<text class="m" x="780" y="670" font-size="20" text-anchor="middle">A MUCH BIGGER WINE BUSINESS</text></g>
+<path id="ar2" class="s-muted" d="M1020 520h70m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="cam"><path class="s-ink" d="M1260 510L1200 620M1260 510L1320 620M1260 510V620" stroke-width="6" stroke-linecap="round"/>
+<rect class="ink" x="1160" y="380" width="200" height="130" rx="14"/><circle class="s-ink" cx="1400" cy="445" r="44" fill="var(--stage)" stroke-width="8"/>
+<circle id="rec" class="loss" cx="1192" cy="410" r="10"/>
+<text class="m" x="1300" y="670" font-size="20" text-anchor="middle">WINE LIBRARY TV</text><g id="wk"></g>
+<text class="m" x="1300" y="790" font-size="18" text-anchor="middle">ALMOST EVERY WEEKDAY</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Passion is the fuel.</text>
+<text class="b" x="120" y="176" font-size="32">It is what makes the hustle bearable.</text>
+<g id="flm"><g id="flp"></g><text class="m" x="330" y="680" font-size="22" text-anchor="middle">FUEL</text></g>
+<g id="ps0"><text class="m" x="600" y="330" font-size="22">WHEN YOU LOVE YOUR SUBJECT</text></g>
+<g id="pst"><text class="d5" x="600" y="430" font-size="56" fill-opacity=".55">Sacrifice</text></g>
+<line id="pss" class="s-ink" x1="592" y1="412" x2="592" y2="412" stroke-width="6" stroke-linecap="round"/>
+<g id="ps2"><text class="d" x="600" y="540" font-size="80" style="fill:var(--gain)">Play.</text></g>
+<g id="bulb"><g id="blr"></g><circle id="blc" cx="1260" cy="410" r="100" fill="var(--stage)" stroke-width="7"/>
+<path id="blf" d="M1230 470l10-40 10 30 10-30 10 30 10-30 10 40" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<rect class="ink" x="1215" y="505" width="90" height="70" rx="8"/>
+<path id="blk" class="s-loss" d="M1200 345l30 30-20 22M1315 340l-22 40 18 14" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="1260" y="680" font-size="20" text-anchor="middle">NO CARE → BURNOUT</text></g>
+<g id="pb"><text class="d" x="120" y="790" font-size="46">Love the work, and the long hours feel lighter.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why the order matters.</text>
+<text class="b" x="120" y="176" font-size="32">The ranking is a tiebreaker when priorities collide.</text>
+<g id="scl"><path class="ink" d="M440 650l20-30h80l20 30z"/><path class="s-ink" d="M500 300V620" stroke-width="10" stroke-linecap="round"/>
+<line id="beam" class="s-ink" x1="240" y1="300" x2="760" y2="300" stroke-width="10" stroke-linecap="round"/><circle class="gain" cx="500" cy="300" r="14"/>
+<g id="pl"></g><g id="pr"></g></g>
+<g id="sw"><text class="d" x="120" y="770" font-size="50">A clash? <tspan style="fill:var(--gain)">Family wins.</tspan></text></g>
+<text id="stl" class="m" x="980" y="330" font-size="20">EACH SERVES THE ONE ABOVE</text>
+<g id="st0"><rect class="s-ink" x="980" y="620" width="500" height="100" fill="var(--stage)" stroke-width="6"/><text class="d5" x="1000" y="685" font-size="36">Passion</text></g>
+<g id="st1"><rect class="ink" x="1140" y="520" width="340" height="100"/><text class="d5" x="1160" y="585" font-size="36" style="fill:var(--stage)">Hustle</text></g>
+<g id="st2"><rect class="gain" x="1300" y="420" width="180" height="100"/><text class="d" x="1320" y="485" font-size="36" style="fill:var(--on-gain)">Family</text><g id="sth"></g></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Each part needs the others.</text>
+<g id="venn"><circle id="vc0" cx="560" cy="420" r="160" fill="var(--gain)" fill-opacity="0" stroke="var(--ink)" stroke-width="6"/>
+<circle id="vc1" cx="740" cy="420" r="160" fill="var(--gain)" fill-opacity="0" stroke="var(--ink)" stroke-width="6"/>
+<circle id="vc2" cx="650" cy="575" r="160" fill="var(--gain)" fill-opacity="0" stroke="var(--ink)" stroke-width="6"/>
+<text class="d5" x="480" y="400" font-size="34" text-anchor="middle">Passion</text><text class="d5" x="820" y="400" font-size="34" text-anchor="middle">Hustle</text>
+<text class="d5" x="650" y="680" font-size="34" text-anchor="middle">Family</text><g id="vh"></g></g>
+<g id="vt0"><text class="d5" x="980" y="330" font-size="40">Passion, no hustle</text><text class="m" x="980" y="372" font-size="22">→ STAYS A HOBBY</text></g>
+<g id="vt1"><text class="d5" x="980" y="470" font-size="40">Hustle, no passion</text><text class="m" x="980" y="512" font-size="22">→ BECOMES A GRIND</text></g>
+<g id="vt2"><g id="vtp"></g><text class="d5" x="1080" y="630" font-size="40">Both, no family</text><text class="m" x="1080" y="672" font-size="22" style="fill:var(--loss)">→ SUCCESSFUL BUT ALONE</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What are your three</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">priorities, <tspan style="fill:var(--gain)">in order?</tspan></text></g>
+<g id="qm1"><text class="m" x="143" y="580" font-size="26">WRITE THEM ON A CARD</text></g>
+<g id="qm2"><text class="m" x="143" y="640" font-size="26" style="fill:var(--gain)">THIS WEEK: CATCH ONE MISMATCH, AND FIX IT</text></g>
+<g id="card" transform="rotate(-4 1280 640)"><rect class="s-ink" x="1120" y="520" width="320" height="240" rx="12" fill="var(--stage)" stroke-width="6"/><g id="cln"></g></g>
+<g id="cck"><circle class="gain" cx="1430" cy="530" r="32"/><path d="M1414 530l11 11 20-22" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Family, Hustle, Passion&rdquo;, from <em>Crush It!</em> by Gary Vaynerchuk. Gary&#x27;s formula and his work in his father&#x27;s store, Wine Library and Wine Library TV are as reported in the book. The scale, ladder, flame and circle drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 7.5], [7.5, 20.0], [20.0, 36.7], [36.7, 55.5], [55.5, 70.0], [70.0, 84.4], [84.4, 97.1], [97.1, 110.6], [110.6, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Three Simple Words", "The Formula", "Family First", "Hustle Is Required", "Gary's Own Hustle", "Passion Is Fuel", "Why Order Matters", "Put It Together", "Your Turn"];
+const TM={"hook_scale": 0.0, "three_cards": 7.84, "quote_banner": 11.2, "number_rank": 16.88, "family_home": 20.32, "heart_shield": 29.44, "shop_sign": 33.44, "toolbox": 37.04, "clock_face": 41.36, "tv_off": 49.6, "liquor_store": 55.76, "wine_bottles": 59.44, "video_camera": 63.68, "flame": 70.32, "burnout_bulb": 80.16, "balance_scale": 84.72, "ladder_steps": 93.2, "venn_circles": 97.44, "lone_figure": 105.28, "index_card": 110.88};
+const IC={heart:'M0 40C-50 8-54-30-25-37C-12-40-3-31 0-23C3-31 12-40 25-37C54-30 50 8 0 40Z',
+flame:'M0-48C18-24 36-8 30 16C26 36 12 46 0 46C-12 46-28 36-30 16C-32-2-18-12-12-26C-6-10 0-6 4-12C10-24 4-36 0-48Z',
+hammer:'M-40-40h60v26h-60zM-6-14h14v60h-14z',
+bottle:'M-10-60h20v30c12 6 16 14 16 26v74h-52v-74c0-12 4-20 16-26z',
+house:'M-46 0L0-40L46 0v44h-92z'};
+const ico=(g,n,x,y,s,cls)=>mk('path',{d:IC[n],transform:'translate('+x+' '+y+') scale('+s+')',class:cls},g);
+const per=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const txt=(g,s,a)=>{const e=mk('text',a,g);e.textContent=s;return e};
+const strike=(id,w,k)=>{const l=$(id);l.setAttribute('x2',(+l.getAttribute('x1')+w*k).toFixed(1))};
+const POD=[[1050,410,130,'2','hammer'],[1190,340,200,'1','heart'],[1330,450,90,'3','flame']].map((q,i)=>{const g=mk('g',{},$('pod'));
+  mk('rect',{x:q[0],y:q[1],width:140,height:q[2],class:i==1?'gain':'ink'},g);
+  txt(g,q[3],{x:q[0]+70,y:q[1]+62,'font-size':48,'text-anchor':'middle',class:'d',style:'fill:var('+(i==1?'--on-gain':'--stage')+')'});
+  ico(g,q[4],q[0]+70,q[1]-60,.9,i==1?'gain':'ink');return g});
+const CARDS=[['Family','heart'],['Hustle','hammer'],['Passion','flame']].map((q,i)=>{const x=120+i*460,g=mk('g',{},$('cards'));
+  mk('rect',{x:x,y:230,width:440,height:300,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  ico(g,q[1],x+220,345,1.2,i?'ink':'gain');txt(g,q[0],{x:x+220,y:480,'font-size':52,'text-anchor':'middle',class:'d'});
+  const b=mk('g',{},$('cards'));mk('circle',{cx:x+56,cy:286,r:30,class:'gain'},b);
+  txt(b,String(i+1),{x:x+56,y:298,'font-size':32,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'});return [g,b]});
+per($('fppl'),970,470,24,'ink');per($('fppl'),1065,500,18,'gain');per($('fppl'),1160,470,24,'ink');
+ico($('fshh'),'heart',1405,505,.7,'gain');
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(800+124*c).toFixed(1)+' '+(420+124*s).toFixed(1)+'L'+(800+136*c).toFixed(1)+' '+(420+136*s).toFixed(1),class:'s-ink','stroke-width':i%3?3:6,'stroke-linecap':'round'},$('ctk'))}
+ico($('tvh'),'hammer',1300,405,.9,'gain');
+const BT=[];[417,537].forEach((y,r)=>{for(let i=0;i<7;i++)BT.push(ico($('wlb'),'bottle',610+i*60,y,.5,(i+r)%2?'ink':'gain'))});
+const WK=[];for(let i=0;i<5;i++)WK.push(mk('rect',{x:1180+i*52,y:710,width:40,height:44,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('wk')));
+const FLP=ico($('flp'),'flame',0,0,3,'gain');
+for(let i=0;i<8;i++){const a=i*Math.PI/4+.39,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1260+122*c).toFixed(1)+' '+(410+122*s).toFixed(1)+'L'+(1260+146*c).toFixed(1)+' '+(410+146*s).toFixed(1),class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('blr'))}
+const pan=(g,lab,item)=>{mk('path',{d:'M0 0L-70 110M0 0L70 110',class:'s-ink','stroke-width':3},g);
+  mk('path',{d:'M-80 110h160a80 40 0 0 1-160 0z',class:'ink'},g);item(g);
+  txt(g,lab,{x:0,y:190,'font-size':20,'text-anchor':'middle',class:'m'})};
+pan($('pl'),'DEADLINE',g=>{mk('rect',{x:-40,y:60,width:80,height:50,rx:6,class:'loss'},g);mk('path',{d:'M-14 60v-12h28v12',fill:'none',class:'s-loss','stroke-width':5},g)});
+pan($('pr'),'HOME',g=>ico(g,'house',0,66,.9,'gain'));
+ico($('sth'),'heart',1390,370,.6,'gain');
+ico($('vh'),'heart',650,478,.45,'gain');
+per($('vtp'),1010,600,20,'ink');
+const CL=[0,1,2].map(i=>{const y=600+i*60;txt($('cln'),String(i+1),{x:1150,y:y+8,'font-size':24,class:'m'});
+  return mk('path',{d:'M1185 '+y+'h215',class:i?'s-ink':'s-gain','stroke-width':5,'stroke-linecap':'round','stroke-dasharray':215,'stroke-dashoffset':215},$('cln'))});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+[1,0,2].forEach((i,o)=>rise(POD[i],p(u,TM.hook_scale+.5+o*.6,TM.hook_scale+1+o*.6)));
+
+  CARDS.forEach((c,i)=>{const a=TM.three_cards+.4+i*.6;rise(c[0],p(u,a,a+.5));const b=TM.number_rank+.3+i*.4;rise(c[1],p(u,b,b+.4))});
+  rise($('qban'),p(u,TM.quote_banner,TM.quote_banner+.6));rise($('ordr'),p(u,TM.number_rank+1.4,TM.number_rank+2));
+
+  [0,1,2].forEach(i=>rise($('fr'+i),p(u,TM.family_home+i*.6,TM.family_home+i*.6+.5)));
+  rise($('fhouse'),p(u,TM.family_home+.3,TM.family_home+.9));
+  rise($('fcost'),p(u,TM.family_home+4.2,TM.family_home+4.8));
+  rise($('fshd'),p(u,TM.heart_shield,TM.heart_shield+.5));rise($('frsn'),p(u,TM.heart_shield+.4,TM.heart_shield+1));
+  rise($('fshop'),p(u,TM.shop_sign,TM.shop_sign+.6));
+
+  rise($('tbx'),p(u,TM.toolbox,TM.toolbox+.5));rise($('clk'),p(u,TM.clock_face,TM.clock_face+.5));
+  const ck=3*p(u,TM.clock_face+.4,TM.clock_face+5.2),ca=ck*2*Math.PI,fr=Math.min(ck,.999)*2*Math.PI;
+  $('chand').setAttribute('x2',(800+110*Math.sin(ca)).toFixed(1));$('chand').setAttribute('y2',(420-110*Math.cos(ca)).toFixed(1));
+  $('cswp').setAttribute('d',fr>0?'M800 420L800 300A120 120 0 '+(fr>Math.PI?1:0)+' 1 '+(800+120*Math.sin(fr)).toFixed(1)+' '+(420-120*Math.cos(fr)).toFixed(1)+'Z':'');
+  rise($('nos'),p(u,TM.clock_face+5.3,TM.clock_face+5.9));
+  rise($('tv'),p(u,TM.tv_off,TM.tv_off+.5));const sw=p(u,TM.tv_off+2,TM.tv_off+2.6);
+  $('tvp').setAttribute('opacity',1-sw);$('tvh').setAttribute('opacity',sw);
+
+  rise($('ls'),p(u,TM.liquor_store,TM.liquor_store+.6));
+  rise($('ar1'),p(u,TM.wine_bottles,TM.wine_bottles+.4));rise($('wl'),p(u,TM.wine_bottles+.2,TM.wine_bottles+.7));
+  BT.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.wine_bottles+.6+i*.08,TM.wine_bottles+.9+i*.08)));
+  rise($('ar2'),p(u,TM.video_camera,TM.video_camera+.4));rise($('cam'),p(u,TM.video_camera+.2,TM.video_camera+.7));
+  $('rec').setAttribute('opacity',Math.sin(t*4)>0?1:.25);
+  WK.forEach((w,i)=>w.setAttribute('fill',u>=TM.video_camera+1.5+i*.5?'var(--gain)':'var(--stage)'));
+
+  rise($('flm'),p(u,TM.flame,TM.flame+.5));const fg=.4+.6*p(u,TM.flame,TM.flame+1.2);
+  FLP.setAttribute('transform','translate(330 470) scale('+(3*fg*(1+.04*Math.sin(t*7))).toFixed(3)+' '+(3*fg*(1+.06*Math.sin(t*5.3))).toFixed(3)+')');
+  rise($('pb'),p(u,TM.flame+.8,TM.flame+1.4));
+  rise($('ps0'),p(u,TM.flame+4.6,TM.flame+5.1));rise($('pst'),p(u,TM.flame+4.9,TM.flame+5.4));
+  strike('pss',260,p(u,TM.flame+5.8,TM.flame+6.4));rise($('ps2'),p(u,TM.flame+6.2,TM.flame+6.8));
+  rise($('bulb'),p(u,TM.burnout_bulb,TM.burnout_bulb+.5));const on=1-p(u,TM.burnout_bulb+1.2,TM.burnout_bulb+2.2);
+  $('blr').setAttribute('opacity',(on*(.6+.4*Math.sin(t*25))).toFixed(2));
+  const bc=on>.5?'var(--gain)':'var(--loss)';$('blc').style.stroke=bc;$('blf').style.stroke=bc;
+  $('blf').setAttribute('stroke-dasharray',on>.5?'none':'14 10');$('blk').setAttribute('opacity',1-on);
+
+  rise($('scl'),p(u,TM.balance_scale,TM.balance_scale+.6));
+  const ta=(12*p(u,TM.balance_scale+4.2,TM.balance_scale+5.4)+1.5*Math.sin(t*1.5)*(u<TM.balance_scale+4.2?1:0))*Math.PI/180,bx=260*Math.cos(ta),by=260*Math.sin(ta);
+  $('beam').setAttribute('x1',(500-bx).toFixed(1));$('beam').setAttribute('y1',(300-by).toFixed(1));$('beam').setAttribute('x2',(500+bx).toFixed(1));$('beam').setAttribute('y2',(300+by).toFixed(1));
+  $('pl').setAttribute('transform','translate('+(500-bx).toFixed(1)+' '+(300-by).toFixed(1)+')');$('pr').setAttribute('transform','translate('+(500+bx).toFixed(1)+' '+(300+by).toFixed(1)+')');
+  rise($('sw'),p(u,TM.balance_scale+4.8,TM.balance_scale+5.4));
+  rise($('stl'),p(u,TM.ladder_steps,TM.ladder_steps+.4));[0,1,2].forEach(i=>rise($('st'+i),p(u,TM.ladder_steps+i*.6,TM.ladder_steps+i*.6+.5)));
+
+  [0,1,2].forEach(i=>rise($('vc'+i),p(u,TM.venn_circles+i*.4,TM.venn_circles+i*.4+.5)));rise($('vh'),p(u,TM.venn_circles+1.4,TM.venn_circles+1.9));
+  const h0=u>=TM.venn_circles+3&&u<TM.venn_circles+5.6,h1=u>=TM.venn_circles+5.6&&u<TM.lone_figure,lo=u>=TM.lone_figure;
+  $('vc0').setAttribute('fill-opacity',h0?.3:0);$('vc1').setAttribute('fill-opacity',h1?.3:0);
+  $('vc2').setAttribute('opacity',lo?.3:1);$('vc2').setAttribute('stroke-dasharray',lo?'12 12':'none');
+  rise($('vt0'),p(u,TM.venn_circles+3,TM.venn_circles+3.5));rise($('vt1'),p(u,TM.venn_circles+5.6,TM.venn_circles+6.1));rise($('vt2'),p(u,TM.lone_figure,TM.lone_figure+.6));
+
+  rise($('qa'),p(u,TM.index_card,TM.index_card+.5));rise($('qb'),p(u,TM.index_card+.4,TM.index_card+.9));
+  rise($('qm1'),p(u,TM.index_card+1,TM.index_card+1.5));rise($('card'),p(u,TM.index_card+.8,TM.index_card+1.3));
+  CL.forEach((l,i)=>l.setAttribute('stroke-dashoffset',(215*(1-p(u,TM.index_card+1.4+i*.6,TM.index_card+2+i*.6))).toFixed(1)));
+  rise($('qm2'),p(u,TM.index_card+4.2,TM.index_card+4.8));rise($('cck'),p(u,TM.index_card+4.6,TM.index_card+5.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.03;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

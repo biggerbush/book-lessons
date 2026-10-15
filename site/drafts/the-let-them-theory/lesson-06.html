@@ -1,0 +1,339 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Let Them Theory Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of The Let Them Theory: When others succeed or move faster, let them, and use that feeling as a signal to focus on your own goals. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE LET THEM THEORY · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Turn comparison</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">into direction.</text>
+<text class="b" x="120" y="600" font-size="32">Let their success point you toward your own next step.</text>
+<rect class="s-ink" x="1180" y="220" width="240" height="440" rx="32" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M1270 250h60" stroke-width="6" stroke-linecap="round"/>
+<g id="scr">
+<rect class="gain" x="1204" y="290" width="192" height="130" rx="14"/>
+<path d="M1300 318l9 20 22 2-17 14 5 22-19-12-19 12 5-22-17-14 22-2z" fill="var(--on-gain)"/>
+<text class="m" x="1300" y="402" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">BIG NEWS</text>
+<rect x="1204" y="440" width="192" height="60" rx="12" fill="var(--line)"/>
+<rect x="1204" y="520" width="192" height="60" rx="12" fill="var(--line)"/>
+</g>
+<g id="hrt"><path id="hrtP" class="gain" d="M0 120C-150 20-160-90-75-110C-35-120-8-92 0-70C8-92 35-120 75-110C160-90 150 20 0 120Z"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The moment it hits.</text>
+<text class="b" x="120" y="176" font-size="32">A friend gets the promotion you were quietly hoping for.</text>
+<g id="fr"><g id="frP"></g><rect class="gain" x="260" y="620" width="200" height="56" rx="28"/><text class="m" x="360" y="655" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">PROMOTED</text></g>
+<g id="frB"><rect class="s-ink" x="440" y="240" width="380" height="80" rx="20" fill="var(--stage)" stroke-width="5"/><text class="d5" x="466" y="291" font-size="28">I got the promotion!</text></g>
+<g id="you"><g id="youP"></g><text class="m" x="1000" y="672" font-size="20" text-anchor="middle">YOU</text></g>
+<g id="rep"><rect class="s-ink" x="620" y="460" width="240" height="76" rx="20" fill="var(--stage)" stroke-width="5"/><text class="d5" x="646" y="509" font-size="30">Congrats!</text></g>
+<g id="knot"><path d="M960 560c20-30 60-30 70 0s-40 40-60 10 30-40 50-10-20 30-40 10" fill="none" stroke="var(--loss)" stroke-width="7" stroke-linecap="round"/></g>
+<g id="th0"><circle class="s-line" cx="1068" cy="362" r="8" fill="none" stroke-width="4"/><circle class="s-line" cx="1092" cy="336" r="12" fill="none" stroke-width="4"/><rect class="s-loss" x="1120" y="250" width="330" height="76" rx="38" fill="var(--stage)" stroke-width="5"/><text class="d5" x="1146" y="301" font-size="34">Why them?</text></g>
+<g id="th1"><rect class="s-loss" x="1120" y="350" width="330" height="76" rx="38" fill="var(--stage)" stroke-width="5"/><text class="d5" x="1146" y="401" font-size="34">Why not me?</text></g>
+<g id="spi"></g>
+<g id="jud"><text class="d" x="120" y="790" font-size="46">It feels like a judgment on your own life.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Comparison makes us feel behind.</text>
+<text class="b" x="120" y="176" font-size="32">Mel Robbins: it feels like someone just passed you.</text>
+<g id="trk">
+<path class="s-line" d="M120 285H1000M120 405H1000M120 520H1000" stroke-width="4"/>
+<path class="s-muted" d="M1000 285V520" stroke-width="4" stroke-dasharray="8 8"/>
+<g id="rT"><circle class="gain" cx="0" cy="350" r="26"/><text class="m" x="0" y="314" font-size="18" text-anchor="middle">THEM</text></g>
+<g id="rY"><circle class="ink" cx="0" cy="460" r="26"/><text class="m" x="0" y="424" font-size="18" text-anchor="middle">YOU</text></g>
+</g>
+<g id="pie"><circle class="s-ink" cx="1250" cy="420" r="140" fill="var(--line)" stroke-width="6"/><path id="slc" class="gain" d="M1250 420L1250 280A140 140 0 0 1 1371.2 350Z" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/></g>
+<g id="pieT"><text class="d" x="120" y="700" font-size="44">As if their success took a slice of ours.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Success is not a pie.</text>
+<g id="sub3"><text class="b" x="120" y="176" font-size="32">There is enough success to go around for everyone.</text></g>
+<g id="npie"><circle class="s-ink" cx="1380" cy="150" r="40" fill="var(--line)" stroke-width="5"/><path class="s-ink" d="M1380 150V110M1380 150l34 20" stroke-width="5"/><path class="s-loss" d="M1346 116l68 68" stroke-width="8" stroke-linecap="round"/></g>
+<g id="tbl"><rect class="ink" x="120" y="440" width="880" height="16" rx="8"/><rect class="ink" x="150" y="456" width="14" height="100"/><rect class="ink" x="956" y="456" width="14" height="100"/><path class="s-line" d="M1012 448h90" stroke-width="6" stroke-dasharray="10 10"/></g>
+<g id="seats"></g>
+<g id="lbl3"><text class="m" x="400" y="500" font-size="20" text-anchor="middle" style="fill:var(--gain)">FRIEND</text><text class="m" x="640" y="500" font-size="20" text-anchor="middle" style="fill:var(--gain)">YOU</text></g>
+<g id="door"><rect class="gain" x="1166" y="286" width="208" height="348" fill-opacity=".35"/><rect class="s-ink" x="1160" y="280" width="220" height="360" fill="none" stroke-width="7"/><g id="dp"><rect class="s-ink" x="1166" y="286" width="208" height="348" fill="var(--stage)" stroke-width="5"/><circle class="ink" cx="1350" cy="470" r="9"/></g><text class="m" x="1270" y="690" font-size="20" text-anchor="middle">THE DOOR YOU WANT</text></g>
+<g id="cnl"><text class="d" x="120" y="800" font-size="46">Their promotion doesn’t cancel yours.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Let them win.</text>
+<g id="sub4"><text class="b" x="120" y="176" font-size="32">Their timeline was never yours to control.</text></g>
+<g id="ltS"><rect class="gain" x="120" y="220" width="420" height="100" rx="18"/><text class="d" x="150" y="292" font-size="60" style="fill:var(--on-gain)">LET THEM</text></g>
+<g id="lc0"><rect class="s-ink" x="120" y="350" width="520" height="60" rx="14" fill="var(--stage)" stroke-width="4"/><text class="d5" x="146" y="391" font-size="32">…get promoted.</text></g>
+<g id="lc1"><rect class="s-ink" x="120" y="430" width="520" height="60" rx="14" fill="var(--stage)" stroke-width="4"/><text class="d5" x="146" y="471" font-size="32">…buy the house.</text></g>
+<g id="lc2"><rect class="s-ink" x="120" y="510" width="520" height="60" rx="14" fill="var(--stage)" stroke-width="4"/><text class="d5" x="146" y="551" font-size="32">…move faster.</text></g>
+<g id="bat"><rect class="s-ink" x="120" y="620" width="280" height="90" rx="12" fill="none" stroke-width="6"/><rect class="ink" x="400" y="645" width="16" height="40" rx="4"/><rect id="batF" class="loss" x="132" y="632" width="256" height="66" rx="6"/><text class="m" x="120" y="750" font-size="20">CATCHING UP DRAINS YOU</text></g>
+<g id="clocks"></g>
+<g id="clk"><text class="d" x="1150" y="700" font-size="36" text-anchor="middle">Your life runs on its own clock.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Envy is a signal.</text>
+<text class="b" x="120" y="176" font-size="32">A teacher, not an enemy.</text>
+<g id="comp"><circle class="s-ink" cx="450" cy="480" r="170" fill="var(--stage)" stroke-width="7"/><circle class="s-line" cx="450" cy="480" r="130" fill="none" stroke-width="3"/>
+<text class="m" x="450" y="340" font-size="22" text-anchor="middle">N</text><text class="m" x="602" y="488" font-size="22" text-anchor="middle">E</text><text class="m" x="298" y="488" font-size="22" text-anchor="middle">W</text><text class="m" x="450" y="638" font-size="22" text-anchor="middle">S</text>
+<g id="ndl"><path class="gain" d="M450 370L466 480H434Z"/><path d="M450 590L466 480H434Z" fill="var(--muted)"/><circle class="ink" cx="450" cy="480" r="10"/></g></g>
+<g id="cpl"><text class="m" x="450" y="710" font-size="22" text-anchor="middle">IT POINTS AT WHAT YOU WANT</text></g>
+<g id="spot"><polygon class="gain" points="1118,264 1182,264 1330,640 970,640" fill-opacity=".2"/><rect class="ink" x="1110" y="220" width="80" height="44" rx="10"/>
+<rect class="gain" x="1075" y="580" width="40" height="60"/><rect class="gain" x="1125" y="530" width="40" height="110"/><rect class="gain" x="1175" y="480" width="40" height="160"/>
+<text class="m" x="1150" y="690" font-size="22" text-anchor="middle">MORE GROWTH AT WORK</text></g>
+<g id="ctx"><text class="d" x="120" y="810" font-size="50">Comparison becomes <tspan style="fill:var(--gain)">directions</tspan>.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then, let me.</text>
+<text class="b" x="120" y="176" font-size="32">Turn the feeling into your own next move.</text>
+<g id="lmS"><rect class="gain" x="120" y="230" width="380" height="100" rx="18"/><text class="d" x="150" y="302" font-size="60" style="fill:var(--on-gain)">LET ME</text></g>
+<g id="lm0"><text class="d5" x="120" y="400" font-size="34">…get clear on what I want.</text></g>
+<g id="lm1"><text class="d5" x="120" y="460" font-size="34">…take one small step today.</text></g>
+<g id="ask"><text class="m" x="120" y="550" font-size="20">ASK YOUR MANAGER</text><rect class="s-ink" x="120" y="570" width="620" height="90" rx="20" fill="var(--stage)" stroke-width="5"/><text class="d5" x="146" y="625" font-size="28">“What does the next level require?”</text></g>
+<g id="stp"><path d="M800 700h120v-80h120v-80h120v-80h120v-80h120V700Z" fill="var(--line)"/><path class="s-ink" d="M800 700h120v-80h120v-80h120v-80h120v-80h120" fill="none" stroke-width="6" stroke-linejoin="round"/><path class="s-ink" d="M1370 380V280" stroke-width="5"/><path class="gain" d="M1370 280l60 22-60 22z"/></g>
+<g id="clm"></g>
+<g id="nud"><text class="d" x="120" y="800" font-size="46">Their win becomes your nudge to move.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Let go of the rest.</text>
+<text class="b" x="120" y="176" font-size="32">Some comparisons point to things you cannot change.</text>
+<g id="zone"><text class="m" x="440" y="266" font-size="22" text-anchor="middle" style="fill:var(--muted)">OUTSIDE YOUR CONTROL</text><circle class="s-loss" cx="440" cy="480" r="190" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<g id="lgo">
+<g id="dc0"><rect class="s-ink" x="376" y="330" width="56" height="56" rx="10" fill="var(--stage)" stroke-width="5"/><circle class="ink" cx="390" cy="344" r="5"/><circle class="ink" cx="404" cy="358" r="5"/><circle class="ink" cx="418" cy="372" r="5"/></g>
+<g id="dc1"><rect class="s-ink" x="448" y="330" width="56" height="56" rx="10" fill="var(--stage)" stroke-width="5"/><circle class="ink" cx="462" cy="344" r="5"/><circle class="ink" cx="490" cy="344" r="5"/><circle class="ink" cx="476" cy="358" r="5"/><circle class="ink" cx="462" cy="372" r="5"/><circle class="ink" cx="490" cy="372" r="5"/></g>
+<g id="l0"><text class="m" x="440" y="420" font-size="22" text-anchor="middle" style="fill:var(--muted)">LUCK</text></g>
+<g id="l1">
+<path class="s-ink" d="M300 524h110" stroke-width="6" stroke-linecap="round"/>
+<path class="s-ink" d="M318 524V448" stroke-width="6" stroke-linecap="round"/>
+<path class="ink" d="M321 448h62l-14 16 14 16h-62z"/>
+<rect x="333" y="454" width="12" height="10" fill="var(--stage)"/><rect x="357" y="454" width="12" height="10" fill="var(--stage)"/>
+<rect x="345" y="464" width="12" height="10" fill="var(--stage)"/>
+<path class="s-ink" d="M380 524V500" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="360" y="560" font-size="22" text-anchor="middle" style="fill:var(--muted)">STARTING</text><text class="m" x="360" y="586" font-size="22" text-anchor="middle" style="fill:var(--muted)">POINT</text></g>
+<g id="l2">
+<circle class="s-ink" cx="520" cy="485" r="32" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M520 485V463M520 485l-14 10" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M520 437A48 48 0 1 0 568 485" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M558 495L568 483L578 495" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="520" y="572" font-size="22" text-anchor="middle" style="fill:var(--muted)">PAST</text></g>
+</g></g>
+<g id="hand"><g id="fist"><rect class="ink" x="400" y="770" width="80" height="80" rx="24"/><path d="M412 795h56M412 818h56" stroke="var(--stage)" stroke-width="4"/></g>
+<g id="opn"><rect class="ink" x="405" y="785" width="70" height="65" rx="18"/><path class="s-ink" d="M415 790V742M435 788V732M455 788V734M475 790V746M408 824l-30-30" stroke-width="14" stroke-linecap="round"/></g></g>
+<path class="s-line" d="M960 700h380" stroke-width="5"/>
+<g id="blk"></g>
+<g id="kee"><text class="m" x="1150" y="760" font-size="22" text-anchor="middle">KEEP YOUR ENERGY FOR WHAT YOU CAN BUILD</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="260" font-size="76" letter-spacing="-2">Whose success stung</text></g>
+<g id="qb"><text class="d" x="136" y="350" font-size="76" letter-spacing="-2">you recently?</text></g>
+<g id="qc"><text class="d" x="136" y="470" font-size="76" letter-spacing="-2">What is it pointing to,</text></g>
+<g id="qd"><text class="d" x="136" y="560" font-size="76" letter-spacing="-2">and what <tspan style="fill:var(--gain)">small step</tspan></text></g>
+<g id="qe"><text class="d" x="136" y="650" font-size="76" letter-spacing="-2">will you take this week?</text></g>
+<text class="m" x="143" y="750" font-size="26">LET THEM. THEN, LET ME.</text>
+<circle class="s-ink" cx="1340" cy="440" r="90" fill="var(--stage)" stroke-width="7"/>
+<g id="qn"><path class="gain" d="M1340 370L1354 440H1326Z"/><path d="M1340 510L1354 440H1326Z" fill="var(--muted)"/><circle class="ink" cx="1340" cy="440" r="8"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Turn Comparison Into Direction&rdquo;, from <em>The Let Them Theory</em> by Mel Robbins. The idea that envy can act as a teacher and that success is not limited is as reported in the book; the friend&#x27;s promotion is an illustrative scenario, not a story from the book. The race track, pie, compass and dice drawings are metaphors, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 7.0], [7.0, 25.0], [25.0, 38.2], [38.2, 52.4], [52.4, 69.5], [69.5, 86.6], [86.6, 101.7], [101.7, 116.2], [116.2, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Their Win, Your Sting", "The Moment It Hits", "Why It Stings", "Success Is Not a Pie", "Let Them Win", "Envy Is a Signal", "Then, Let Me", "Let Go of the Rest", "Your Turn"];
+const TM={"phone_scroll": 0.0, "sinking_heart": 3.92, "friend_news": 7.28, "knot_stomach": 15.63, "mind_spiral": 18.24, "race_track": 30.64, "pie_slice": 34.48, "endless_table": 40.72, "open_door": 47.92, "let_them_sign": 54.96, "clock_pair": 67.2, "compass": 71.28, "spotlight": 78.16, "let_me_sign": 88.96, "small_step": 91.88, "dice_roll": 105.36, "open_hand": 109.95};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);return mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+person($('frP'),360,380,50,'ink'); person($('youP'),1000,420,50,'ink');
+let sd='';for(let i=0;i<=60;i++){const a=i*.35,r=4+i*.9;sd+=(i?'L':'M')+(r*Math.cos(a)).toFixed(1)+' '+(r*Math.sin(a)).toFixed(1)}
+const SPI=mk('path',{d:sd,fill:'none',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},$('spi'));
+const seats=[];for(let i=0;i<11;i++){const x=160+i*80,g=mk('g',{},$('seats'));person(g,x,312,18,'ink');mk('ellipse',{cx:x,cy:430,rx:28,ry:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);seats.push(g)}
+const CK=[1000,1300].map((x,i)=>{const g=mk('g',{},$('clocks'));mk('circle',{cx:x,cy:470,r:110,fill:'var(--stage)',stroke:i?'var(--gain)':'var(--ink)','stroke-width':7},g);
+  for(let k=0;k<12;k++){const a=k*Math.PI/6;mk('line',{x1:x+90*Math.cos(a),y1:470+90*Math.sin(a),x2:x+100*Math.cos(a),y2:470+100*Math.sin(a),stroke:'var(--muted)','stroke-width':4},g)}
+  const h=mk('line',{x1:x,y1:470,x2:x,y2:410,stroke:'var(--ink)','stroke-width':9,'stroke-linecap':'round'},g);
+  const m=mk('line',{x1:x,y1:470,x2:x,y2:385,stroke:i?'var(--gain)':'var(--ink)','stroke-width':5,'stroke-linecap':'round'},g);
+  mk('text',{x:x,y:620,'font-size':20,'text-anchor':'middle',class:'m'},g).textContent=i?'YOUR CLOCK':'THEIR CLOCK';return [g,h,m,x]});
+person($('clm'),0,0,18,'gain');
+const BL=[];for(let i=0;i<6;i++)BL.push(mk('rect',{x:1000,y:640-62*i,width:300,height:56,rx:8,class:'gain'},$('blk')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const sc=p(u,TM.phone_scroll,TM.phone_scroll+1);
+  $('scr').setAttribute('opacity',sc); $('scr').setAttribute('transform','translate(0 '+(60*(1-sc)).toFixed(1)+')');
+  const hs=p(u,TM.sinking_heart,TM.sinking_heart+1.5), hb=1+.05*Math.pow(Math.abs(Math.sin(t*3)),6)*(1-hs);
+  $('hrt').setAttribute('transform','translate(1300 '+(740+40*hs).toFixed(1)+') scale('+((.38-.14*hs)*hb).toFixed(3)+')');
+  $('hrtP').setAttribute('class',u>=TM.sinking_heart?'loss':'gain');
+
+  rise($('fr'),p(u,TM.friend_news,TM.friend_news+.5)); rise($('frB'),p(u,TM.friend_news+.6,TM.friend_news+1.1));
+  rise($('you'),p(u,TM.friend_news+.3,TM.friend_news+.8)); rise($('rep'),p(u,TM.friend_news+6.2,TM.friend_news+6.7));
+  rise($('knot'),p(u,TM.knot_stomach,TM.knot_stomach+.5));
+  rise($('th0'),p(u,TM.mind_spiral,TM.mind_spiral+.5)); rise($('th1'),p(u,TM.mind_spiral+1.2,TM.mind_spiral+1.7));
+  rise($('spi'),p(u,TM.mind_spiral+.5,TM.mind_spiral+1)); SPI.setAttribute('transform','translate(1285 560) rotate('+((t*90)%360).toFixed(1)+')');
+  rise($('jud'),p(u,TM.mind_spiral+4.2,TM.mind_spiral+4.8));
+
+  rise($('trk'),p(u,SC[2][0]/K+.5,SC[2][0]/K+1));
+  const rk=p(u,TM.race_track,TM.race_track+4), bob=Math.abs(Math.sin(t*6))*6*(rk>0&&rk<1?1:0);
+  $('rT').setAttribute('transform','translate('+(160+800*rk).toFixed(1)+' '+(-bob).toFixed(1)+')');
+  $('rY').setAttribute('transform','translate('+(240+360*rk).toFixed(1)+' '+(-bob).toFixed(1)+')');
+  rise($('pie'),p(u,TM.pie_slice,TM.pie_slice+.5)); const pk=p(u,TM.pie_slice+.6,TM.pie_slice+1.4);
+  $('slc').setAttribute('transform','translate('+(30*pk).toFixed(1)+' '+(-52*pk).toFixed(1)+')');
+  rise($('pieT'),p(u,TM.pie_slice+1,TM.pie_slice+1.6));
+
+  rise($('npie'),p(u,SC[3][0]/K+.4,SC[3][0]/K+.9)); rise($('tbl'),p(u,TM.endless_table,TM.endless_table+.5)); rise($('sub3'),p(u,TM.endless_table,TM.endless_table+.5));
+  const hl=u>=TM.endless_table+4.6;
+  seats.forEach((g,i)=>{const a=TM.endless_table+.3+i*.15; rise(g,p(u,a,a+.4)); if(i===3||i===6){const c=hl?'gain':'ink'; g.children[0].setAttribute('class',c); g.children[1].setAttribute('class',c)}});
+  rise($('lbl3'),p(u,TM.endless_table+4.6,TM.endless_table+5.1)); rise($('cnl'),p(u,TM.endless_table+4.6,TM.endless_table+5.2));
+  rise($('door'),p(u,TM.open_door,TM.open_door+.5)); const sx=1-.75*p(u,TM.open_door+.8,TM.open_door+2);
+  $('dp').setAttribute('transform','matrix('+sx.toFixed(3)+',0,0,1,'+(1166*(1-sx)).toFixed(1)+',0)');
+
+  rise($('ltS'),p(u,TM.let_them_sign,TM.let_them_sign+.5));
+  [0,1,2].forEach(i=>{const a=TM.let_them_sign+.8+i*1.6; rise($('lc'+i),p(u,a,a+.4))});
+  rise($('sub4'),p(u,TM.let_them_sign+5.4,TM.let_them_sign+6)); rise($('bat'),p(u,TM.let_them_sign+8.4,TM.let_them_sign+8.9));
+  $('batF').setAttribute('width',(256*(1-.85*p(u,TM.let_them_sign+8.8,TM.let_them_sign+12))).toFixed(1));
+  CK.forEach((c,i)=>{rise(c[0],p(u,TM.clock_pair+i*.4,TM.clock_pair+i*.4+.5)); const s=i?40:200;
+    c[1].setAttribute('transform','rotate('+((t*s/12)%360).toFixed(1)+' '+c[3]+' 470)'); c[2].setAttribute('transform','rotate('+((t*s)%360).toFixed(1)+' '+c[3]+' 470)')});
+  rise($('clk'),p(u,TM.clock_pair+1,TM.clock_pair+1.6));
+
+  rise($('comp'),p(u,TM.compass,TM.compass+.5));
+  const na=85+70*Math.sin(t*4.5)*(1-p(u,TM.compass+.5,TM.compass+4.5));
+  $('ndl').setAttribute('transform','rotate('+na.toFixed(1)+' 450 480)');
+  rise($('cpl'),p(u,TM.compass+4.5,TM.compass+5)); rise($('spot'),p(u,TM.spotlight,TM.spotlight+.6)); rise($('ctx'),p(u,TM.spotlight+5,TM.spotlight+5.6));
+
+  rise($('stp'),p(u,SC[6][0]/K+.5,SC[6][0]/K+1)); rise($('clm'),p(u,SC[6][0]/K+.8,SC[6][0]/K+1.3));
+  rise($('lmS'),p(u,TM.let_me_sign,TM.let_me_sign+.5)); rise($('lm0'),p(u,TM.let_me_sign+.6,TM.let_me_sign+1.1));
+  rise($('lm1'),p(u,TM.small_step,TM.small_step+.5)); rise($('ask'),p(u,TM.small_step+3.8,TM.small_step+4.4));
+  const ps=p(u,TM.small_step+.5,TM.small_step+1.5)+p(u,TM.small_step+8.3,TM.small_step+9.3), hop=30*Math.sin(Math.PI*(ps%1));
+  $('clm').setAttribute('transform','translate('+(860+120*ps).toFixed(1)+' '+(700-80*ps-75-hop).toFixed(1)+')');
+  rise($('nud'),p(u,TM.small_step+8.3,TM.small_step+8.9));
+
+  rise($('zone'),p(u,SC[7][0]/K+.5,SC[7][0]/K+1));
+  [0,1,2].forEach(i=>{const a=TM.dice_roll+.6+i*.6; rise($('l'+i),p(u,a,a+.4))});
+  const dr=360*p(u,TM.dice_roll,TM.dice_roll+1.2);
+  $('dc0').setAttribute('transform','rotate('+dr.toFixed(1)+' 404 358)'); $('dc1').setAttribute('transform','rotate('+(-dr).toFixed(1)+' 476 358)');
+  const rl=p(u,TM.open_hand+.4,TM.open_hand+1.6);
+  $('lgo').setAttribute('transform','translate(0 '+(-14*rl+3*Math.sin(t*1.5)*rl).toFixed(1)+')'); $('lgo').setAttribute('opacity',(1-.3*rl).toFixed(2));
+  rise($('hand'),p(u,SC[7][0]/K+1,SC[7][0]/K+1.5)); const oh=p(u,TM.open_hand,TM.open_hand+.4);
+  $('fist').setAttribute('opacity',1-oh); $('opn').setAttribute('opacity',oh);
+  BL.forEach((b,i)=>{const a=TM.open_hand+3.4+i*.3; rise(b,p(u,a,a+.3))}); rise($('kee'),p(u,TM.open_hand+3.4,TM.open_hand+4));
+
+  const s8=SC[8][0]/K;
+  rise($('qa'),p(u,s8+.3,s8+.8)); rise($('qb'),p(u,s8+.7,s8+1.2));
+  rise($('qc'),p(u,s8+3.4,s8+3.9)); rise($('qd'),p(u,s8+3.8,s8+4.3)); rise($('qe'),p(u,s8+4.2,s8+4.7));
+  $('qn').setAttribute('transform','rotate('+(45+60*Math.sin(t*4)*(1-p(u,s8+.5,s8+4))).toFixed(1)+' 1340 440)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.6;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,399 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>$100M Leads Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of $100M Leads: Cold outreach scales your reach to people who don&#x27;t know you, and it works through volume, personalization, and offering value up front. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">$100M LEADS · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Reach strangers with</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">cold outreach.</text>
+<text class="b" x="120" y="600" font-size="32">How to win over people who have never heard of you</text>
+<g id="door">
+<rect class="gain" x="1240" y="280" width="200" height="360"/>
+<rect id="panel" x="1240" y="280" width="200" height="360" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/>
+<circle id="knob" class="ink" cx="1410" cy="470" r="11"/>
+<rect class="s-ink" x="1230" y="270" width="220" height="375" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<path class="s-ink" d="M1190 645h280" stroke-width="6" stroke-linecap="round"/>
+<g id="rings"><path class="s-muted" d="M1214 440a36 36 0 0 0 0 56M1198 426a56 56 0 0 0 0 84" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Beyond your circle.</text>
+<text class="b" x="120" y="176" font-size="32">Warm outreach runs out. Cold outreach reaches strangers.</text>
+<g id="links"></g>
+<g id="warm">
+<circle id="warmring" class="s-line" cx="380" cy="500" r="150" fill="none" stroke-width="5"/>
+<g id="wdots"></g>
+<circle class="gain" cx="380" cy="500" r="52"/>
+<text class="d" x="380" y="509" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">YOU</text>
+<text class="m" x="380" y="700" font-size="22" text-anchor="middle">PEOPLE YOU KNOW</text>
+</g>
+<g id="crowd"></g>
+<g id="chan"><text class="m" x="720" y="776" font-size="22">ONE AT A TIME · EMAIL · MESSAGE · PHONE</text></g>
+<g id="far"><text class="d" x="120" y="840" font-size="44">Reach far more people than your network ever could.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start with a list.</text>
+<text class="b" x="120" y="176" font-size="32">The right people, and a way to reach them.</text>
+<g id="list"><rect class="s-ink" x="120" y="230" width="460" height="480" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="150" y="272" font-size="20">CONTACT LIST</text><g id="rows"></g></g>
+<g id="targ">
+<circle class="s-ink" cx="1180" cy="450" r="170" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="1180" cy="450" r="110" fill="none" stroke-width="6"/>
+<circle class="gain" cx="1180" cy="450" r="50"/>
+<text class="m" x="1180" y="680" font-size="22" text-anchor="middle">QUALITY OVER QUANTITY</text>
+</g>
+<g id="aim"></g>
+<g id="src"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make it personal.</text>
+<text class="b" x="120" y="176" font-size="32">Generic messages get ignored. Specific ones get replies.</text>
+<g id="pile"></g>
+<text id="ign" class="m" x="150" y="806" font-size="22" style="fill:var(--loss)">GENERIC = IGNORED</text>
+<g id="prof">
+<rect class="s-ink" x="600" y="260" width="400" height="440" rx="18" fill="var(--stage)" stroke-width="5"/>
+<g id="av"></g>
+<g id="sp0"><path class="s-gain" d="M636 500l10 10l18-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="680" y="510" font-size="20">THEIR BUSINESS</text></g>
+<g id="sp1"><path class="s-gain" d="M636 560l10 10l18-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="680" y="570" font-size="20">A RECENT POST</text></g>
+<g id="sp2"><path class="s-gain" d="M636 620l10 10l18-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="680" y="630" font-size="20">A LIKELY PROBLEM</text></g>
+</g>
+<g id="mag"><circle class="s-ink" cx="0" cy="0" r="56" fill="var(--ice)" fill-opacity=".3" stroke-width="10"/><path class="s-ink" d="M40 40l40 40" stroke-width="16" stroke-linecap="round"/></g>
+<g id="rep"><rect class="gain" x="1060" y="330" width="400" height="150" rx="24"/><path class="gain" d="M1110 470l-10 60l64-60z"/>
+<text class="d" x="1260" y="420" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">Tell me more!</text></g>
+<g id="meter"><text class="m" x="1060" y="620" font-size="20">MORE PERSONAL = MORE REPLIES</text>
+<rect class="s-ink" x="1060" y="645" width="400" height="28" rx="14" fill="none" stroke-width="4"/>
+<rect id="mfill" class="gain" x="1060" y="645" width="0" height="28" rx="14"/></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Give before you ask.</text>
+<text class="b" x="120" y="176" font-size="32">Lead with value, not a sales pitch.</text>
+<g id="me4"><text class="m" x="260" y="680" font-size="22" text-anchor="middle">YOU</text></g>
+<g id="them4"><text class="m" x="1340" y="680" font-size="22" text-anchor="middle">STRANGER</text></g>
+<text id="qm" class="d" x="1340" y="410" font-size="56" text-anchor="middle" style="fill:var(--muted)">?</text>
+<g id="pitch"><rect x="160" y="240" width="380" height="90" rx="20" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/>
+<text class="d5" x="190" y="300" font-size="36">“Book a call?”</text></g>
+<line id="pstrike" class="s-ink" x1="175" y1="288" x2="175" y2="288" stroke-width="6" stroke-linecap="round"/>
+<g id="garrow"><path class="s-gain" d="M600 340Q870 220 1140 340" fill="none" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/>
+<path class="s-gain" d="M1119 342L1140 340L1128 324" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="gift">
+<rect class="gain" x="-55" y="-10" width="110" height="80" rx="4" stroke="var(--ink)" stroke-width="5"/>
+<rect class="gain" x="-66" y="-36" width="132" height="28" rx="4" stroke="var(--ink)" stroke-width="5"/>
+<rect x="-10" y="-36" width="20" height="106" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/>
+<path d="M0 -36C-20 -76 -62 -66 -44 -44C-36 -36 -14 -36 0 -36Z M0 -36C20 -76 62 -66 44 -44C36 -36 14 -36 0 -36Z" fill="var(--stage)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+<circle class="ink" cx="0" cy="-38" r="8"/>
+<path class="s-ink" d="M56 -22L72 -56" stroke-width="3" stroke-linecap="round"/>
+<rect x="58" y="-92" width="84" height="36" rx="10" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/>
+<text class="m" x="100" y="-67" font-size="20" text-anchor="middle" style="fill:var(--ink)">FREE</text>
+<text class="m" x="0" y="104" font-size="20" text-anchor="middle">LEAD MAGNET</text>
+</g>
+<g id="trust"><text class="m" x="560" y="664" font-size="22">TRUST</text>
+<rect class="s-ink" x="560" y="680" width="480" height="28" rx="14" fill="none" stroke-width="4"/>
+<rect id="tfill" class="gain" x="560" y="680" width="0" height="28" rx="14"/></g>
+<g id="earn"><text class="d" x="120" y="810" font-size="44">Helping first earns the reason to trust you.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Follow up.</text>
+<text class="b" x="120" y="176" font-size="32">Several times, across different channels.</text>
+<g id="cal"></g>
+<text id="first" class="m" x="120" y="600" font-size="22">MOST PEOPLE WON’T ANSWER THE FIRST MESSAGE</text>
+<g id="clear"><text class="d" x="120" y="740" font-size="48">Keep going until you get a clear yes or no.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Putting it together.</text>
+<text class="b" x="120" y="176" font-size="32">A bookkeeper reaching out to local restaurant owners.</text>
+<g id="bk"><text class="m" x="220" y="620" font-size="22" text-anchor="middle">BOOKKEEPER</text></g>
+<g id="rA"><text class="m" x="1120" y="640" font-size="20" text-anchor="middle">OWNER</text></g>
+<g id="rB"><text class="m" x="1360" y="640" font-size="20" text-anchor="middle" style="fill:var(--gain)">SECOND LOCATION</text>
+<g id="pin"><circle class="gain" cx="1360" cy="345" r="20"/><path class="gain" d="M1343 355L1360 390L1377 355z"/><circle cx="1360" cy="345" r="7" fill="var(--stage)"/></g></g>
+<g id="msg">
+<path class="s-gain" d="M300 450h76m-16-14 16 14-16 14M975 450h50m-16-14 16 14-16 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="400" y="290" width="560" height="320" rx="18" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/>
+<text class="d5" x="430" y="350" font-size="32">Congrats on your</text>
+<text class="d5" x="430" y="392" font-size="32">second location!</text>
+<rect class="gain" x="830" y="322" width="100" height="44" rx="22"/>
+<text class="m" x="880" y="351" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">FREE</text>
+<g id="chk"></g>
+</g>
+<g id="help"><text class="d" x="120" y="790" font-size="52" style="fill:var(--gain)">No pitch, just help.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Play the numbers.</text>
+<g id="fun"><text class="m" x="120" y="205" font-size="20">STRANGERS CONTACTED</text><g id="fin"></g>
+<path class="s-ink" d="M160 290H640L430 560V620H370V560Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<g id="fall"></g></g>
+<g id="resp"><circle class="gain" cx="384" cy="660" r="13"/><circle class="gain" cx="416" cy="660" r="13"/>
+<text class="m" x="400" y="712" font-size="20" text-anchor="middle" style="fill:var(--gain)">ONLY A FEW RESPOND</text></g>
+<g id="dial">
+<path class="s-line" d="M787.4 535A130 130 0 1 1 1012.6 535" fill="none" stroke-width="14" stroke-linecap="round"/>
+<path id="darc" class="s-gain" fill="none" stroke-width="14" stroke-linecap="round"/>
+<line id="ndl" class="s-ink" x1="900" y1="470" x2="900" y2="470" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="900" cy="470" r="16"/>
+<text class="m" x="900" y="640" font-size="22" text-anchor="middle">CONTACT MORE</text>
+</g>
+<g id="ver"><text class="m" x="1110" y="640" font-size="20">IMPROVE AS YOU LEARN</text></g>
+<g id="team"><text class="m" x="740" y="710" font-size="22">SOFTWARE + HIRED HELP</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">Pick ten strangers</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">you could genuinely help,</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">with a <tspan style="fill:var(--gain)">free</tspan>, personal offer.</text></g>
+<g id="tenm"></g>
+<text id="fu" class="m" x="143" y="760" font-size="26">THEN FOLLOW UP UNTIL EVERY ONE ANSWERS</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Reach Strangers With Cold Outreach&rdquo;, from <em>$100M Leads</em> by Alex Hormozi. The tactics of building a list, personalizing, offering value first, following up, and scaling with help are as reported in the book. The bookkeeper story and the funnel drawing are illustrations, not data or examples from the book. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 7.3], [7.3, 23.5], [23.5, 38.0], [38.0, 56.5], [56.5, 72.8], [72.8, 83.6], [83.6, 99.3], [99.3, 117.5], [117.5, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Knock on New Doors", "Beyond Your Circle", "Start With a List", "Make It Personal", "Give Before You Ask", "Follow Up", "Putting It Together", "Play the Numbers", "Your Challenge"];
+const TM={"closed_door": 0.0, "small_circle": 7.6, "huge_crowd": 12.48, "contact_list": 23.76, "target_icon": 27.8, "inbox_pile": 38.32, "magnifier": 43.2, "reply_bubble": 52.48, "gift_box": 56.84, "handshake": 67.2, "calendar": 73.12, "stack_notes": 76.16, "bookkeeper": 83.92, "new_location": 87.44, "free_guide": 91.2, "funnel": 99.6, "dial_up": 104.96, "team_bots": 111.12, "ten_messages": 117.76};
+const T=(g,x,y,s,c,tx,o)=>{const e=mk('text',Object.assign({x,y,'font-size':s,class:c},o||{}),g);e.textContent=tx;return e};
+const P=(g,x,y,r,f)=>[mk('circle',{cx:x,cy:y,r,fill:f},g),mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,fill:f},g)];
+const env=(g,x,y,w,h,s,f)=>{mk('rect',{x,y,width:w,height:h,rx:8,fill:f||'var(--stage)',stroke:s,'stroke-width':5},g);mk('path',{d:`M${x} ${y+4}l${w/2} ${h*.55}l${w/2} ${-h*.55}`,fill:'none',stroke:s,'stroke-width':5,'stroke-linejoin':'round','stroke-linecap':'round'},g)};
+const G=par=>mk('g',{},par);
+
+for(let i=0;i<6;i++){const a=i*Math.PI/3;mk('circle',{cx:380+100*Math.cos(a),cy:500+100*Math.sin(a),r:16,fill:'var(--ink)'},$('wdots'))}
+const CD=[];for(let r=0;r<7;r++)for(let c=0;c<10;c++)CD.push(mk('circle',{cx:720+c*80,cy:280+r*72,r:12,fill:'var(--muted)'},$('crowd')));
+const LI=[3,17,25,38,44,52,61,66];
+const LN=LI.map(i=>mk('path',{d:`M432 500L${CD[i].getAttribute('cx')} ${CD[i].getAttribute('cy')}`,stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8',fill:'none'},$('links')));
+
+const ROWS=[],BADX=[],AIM=[];
+for(let i=0;i<6;i++){const y=320+i*65,g=G($('rows'));mk('circle',{cx:170,cy:y,r:16,fill:'var(--ink)'},g);
+  mk('rect',{x:200,y:y-8,width:160+(i*37)%60,height:16,rx:8,fill:'var(--line)'},g);
+  mk('rect',{x:430,y:y-10,width:100,height:20,rx:10,fill:'none',stroke:'var(--muted)','stroke-width':3},g);ROWS.push(g);
+  if(i==1||i==4)BADX.push(mk('path',{d:`M548 ${y-12}l24 24m0-24l-24 24`,stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},$('aim')));
+  else AIM.push(mk('path',{d:`M545 ${y}C800 ${y} 900 450 ${1166+(i%3)*8} ${444+i*2}`,fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},$('aim')))}
+const SRC=['BUILD IT YOURSELF','CONTACT-FINDING TOOLS','BUY A LIST'].map((s,i)=>{const g=G($('src'));
+  mk('rect',{x:120+i*460,y:750,width:440,height:64,rx:32,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);T(g,340+i*460,790,22,'m',s,{'text-anchor':'middle'});return g});
+
+const PL=[];for(let i=0;i<9;i++){const g=G($('pile'));env(g,150+((i*37)%60),600-i*36,280,160,'var(--muted)');PL.push(g)}
+P($('av'),800,320,30,'var(--ink)');
+
+P($('me4'),260,470,36,'var(--gain)');const TH=P($('them4'),1340,470,36,'var(--ink)');
+
+const TC=[[0,'EMAIL'],[2,'MESSAGE'],[3,'PHONE'],[5,'EMAIL']].map(([d,s])=>{const cx=210+d*196,g=G($('cal'));
+  if(s=='EMAIL')env(g,cx-45,340,90,60,'var(--ink)');
+  else if(s=='PHONE'){mk('rect',{x:cx-22,y:325,width:44,height:80,rx:10,fill:'none',stroke:'var(--ink)','stroke-width':5},g);mk('circle',{cx,cy:392,r:5,fill:'var(--ink)'},g)}
+  else mk('path',{d:`M${cx-45} 335h90v56h-50l-24 20v-20h-16z`,fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},g);
+  T(g,cx,452,20,'m',s,{'text-anchor':'middle'});T(g,cx,494,22,'m','NO REPLY',{'text-anchor':'middle',style:'fill:var(--loss)'});return g});
+const DB=G($('cal'));$('cal').insertBefore(DB,$('cal').firstChild);
+for(let i=0;i<7;i++){const x=120+i*196;mk('rect',{x,y:240,width:180,height:280,rx:14,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},DB);T(DB,x+20,280,20,'m','DAY '+(i+1))}
+const ANS=G($('cal'));mk('rect',{x:1296,y:240,width:180,height:280,rx:14,fill:'var(--gain)'},ANS);
+T(ANS,1386,380,30,'d','YES / NO',{'text-anchor':'middle',style:'fill:var(--on-gain)'});
+T(ANS,1386,438,22,'m','CLEAR',{'text-anchor':'middle',style:'fill:var(--on-gain)'});
+T(ANS,1386,470,22,'m','ANSWER',{'text-anchor':'middle',style:'fill:var(--on-gain)'});
+
+const shop=(g,x)=>{for(let k=0;k<4;k++)mk('rect',{x:x+k*40,y:410,width:40,height:30,fill:k%2?'var(--stage)':'var(--gain)',stroke:'var(--ink)','stroke-width':3},g);
+  mk('rect',{x,y:440,width:160,height:160,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);mk('rect',{x:x+62,y:520,width:36,height:80,fill:'var(--ink)'},g);
+  [16,108].forEach(o=>mk('rect',{x:x+o,y:466,width:36,height:30,fill:'none',stroke:'var(--muted)','stroke-width':4},g))};
+shop($('rA'),1040);shop($('rB'),1280);P($('bk'),220,400,40,'var(--gain)');
+['COSTS · SITE ONE','COSTS · SITE TWO','TRACK BOTH SITES'].forEach((s,i)=>{const y=460+i*48,g=$('chk');
+  mk('rect',{x:430,y:y-20,width:24,height:24,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':3},g);
+  mk('path',{d:`M434 ${y-8}l7 7l12-14`,fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-linecap':'round'},g);T(g,470,y,20,'m',s)});
+
+for(let i=0;i<24;i++)mk('circle',{cx:180+(i%12)*40,cy:232+Math.floor(i/12)*30,r:10,fill:'var(--muted)'},$('fin'));
+const FL=[];for(let i=0;i<8;i++)FL.push(mk('circle',{r:9,fill:'var(--ink)'},$('fall')));
+const VB=[];for(let i=0;i<3;i++){const y=340+i*80,g=$('ver');
+  mk('rect',{x:1110,y,width:350,height:56,rx:12,fill:'none',stroke:'var(--ink)','stroke-width':4},g);
+  VB.push(mk('rect',{x:1110,y,width:0,height:56,rx:12,fill:'var(--gain)','fill-opacity':.45},g));T(g,1130,y+36,20,'m','MESSAGE V'+(i+1))}
+const TMG=[];for(let i=0;i<8;i++){const x=760+i*90,g=G($('team'));
+  if(i%2){mk('path',{d:`M${x} 752v-14`,stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},g);mk('rect',{x:x-25,y:752,width:50,height:44,rx:10,fill:'var(--ink)'},g);
+    [-10,10].forEach(o=>mk('circle',{cx:x+o,cy:772,r:5,fill:'var(--stage)'},g))}
+  else P(g,x,762,13,'var(--gain)');TMG.push(g)}
+
+const EN=[],CK=[];for(let i=0;i<10;i++){const g=G($('tenm'));env(g,140+i*124,600,92,62,'var(--ink)');EN.push(g);
+  const c=G($('tenm'));mk('circle',{cx:232+i*124,cy:600,r:16,fill:'var(--gain)'},c);
+  mk('path',{d:`M${224+i*124} 600l6 6l10-12`,fill:'none',stroke:'var(--on-gain)','stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round'},c);CK.push(c)}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(e,a,d=.5)=>rise(typeof e==='string'?$(e):e,p(u,a,a+d));
+
+  R('door',TM.closed_door);
+  const op=p(u,TM.closed_door+4.6,TM.closed_door+5.6);
+  $('panel').setAttribute('width',(200-150*op).toFixed(1)); $('knob').setAttribute('cx',(1410-150*op).toFixed(1));
+  $('rings').setAttribute('opacity',((1-op)*p(u,TM.closed_door+1,TM.closed_door+1.4)*(.5+.5*Math.sin(t*8))).toFixed(2));
+
+  R('warm',TM.small_circle); $('warmring').style.stroke=u>=TM.small_circle+2.5?'var(--loss)':'';
+  CD.forEach((c,i)=>{const a=TM.huge_crowd+(i%10)*.08; c.setAttribute('opacity',p(u,a,a+.4))});
+  LI.forEach((k,j)=>{const a=TM.huge_crowd+1+j*.5,on=u>=a+.3; LN[j].setAttribute('opacity',p(u,a,a+.3)); CD[k].setAttribute('fill',on?'var(--gain)':'var(--muted)'); CD[k].setAttribute('r',on?16:12)});
+  R('chan',TM.huge_crowd+.8); R('far',TM.huge_crowd+5.8);
+
+  R('list',TM.contact_list);
+  ROWS.forEach((g,i)=>{const a=TM.contact_list+.4+i*.2,k=p(u,a,a+.4); rise(g,(i==1||i==4)?k*(1-.65*p(u,TM.target_icon+1.5,TM.target_icon+2)):k)});
+  R('targ',TM.target_icon);
+  AIM.forEach((a,j)=>a.setAttribute('opacity',p(u,TM.target_icon+1+j*.3,TM.target_icon+1.4+j*.3)));
+  BADX.forEach(b=>b.setAttribute('opacity',p(u,TM.target_icon+1.5,TM.target_icon+2)));
+  SRC.forEach((g,i)=>R(g,TM.target_icon+5.8+i*.6));
+
+  PL.forEach((g,i)=>R(g,TM.inbox_pile+i*.15,.4)); R('ign',TM.inbox_pile+2);
+  R('prof',TM.magnifier);
+  const m1=p(u,TM.magnifier+2.6,TM.magnifier+3.4);
+  $('mag').setAttribute('transform',`translate(${(800+175*m1+6*Math.sin(t*2)*(1-m1)).toFixed(1)} ${(370+320*m1+4*Math.sin(t*2.6)).toFixed(1)})`);
+  $('mag').setAttribute('opacity',p(u,TM.magnifier+.2,TM.magnifier+.7));
+  [0,1,2].forEach(i=>R('sp'+i,TM.magnifier+3.3+i*1.2));
+  R('rep',TM.reply_bubble); R('meter',TM.reply_bubble+.6);
+  $('mfill').setAttribute('width',(400*p(u,TM.reply_bubble+.8,TM.reply_bubble+2.6)).toFixed(1));
+
+  R('me4',SC[4][0]/K+.3); R('them4',SC[4][0]/K+.6);
+  $('qm').setAttribute('opacity',(p(u,SC[4][0]/K+.6,SC[4][0]/K+1.1)*(1-p(u,TM.handshake,TM.handshake+.4))).toFixed(2));
+  R('pitch',TM.gift_box);
+  $('pstrike').setAttribute('x2',(175+300*p(u,TM.gift_box+1.6,TM.gift_box+2.2)).toFixed(1)); $('pstrike').setAttribute('opacity',u>=TM.gift_box+1.6?1:0);
+  const gk=p(u,TM.gift_box+4.9,TM.gift_box+6.4), GA=TM.gift_box+6.4;
+  $('gift').setAttribute('transform',`translate(${(420+730*gk).toFixed(1)} ${(470-70*Math.sin(Math.PI*gk)).toFixed(1)})`);
+  $('gift').setAttribute('opacity',p(u,TM.gift_box+2.4,TM.gift_box+2.9));
+  $('garrow').setAttribute('opacity',p(u,TM.gift_box+4.5,TM.gift_box+5.1));
+  TH.forEach(e=>e.setAttribute('fill',u>=TM.handshake?'var(--gain)':'var(--ink)'));
+  R('trust',Math.min(TM.handshake,GA-.3));
+  $('tfill').setAttribute('width',(480*(.4*p(u,GA,GA+.8)+.6*p(u,TM.handshake+.4,TM.handshake+2))).toFixed(1));
+  R('earn',TM.handshake+1);
+
+  R('cal',TM.calendar); R(TC[0],TM.calendar+.3); R('first',TM.calendar+.8);
+  TC.slice(1).forEach((g,i)=>R(g,TM.stack_notes+i*.9));
+  R(ANS,TM.stack_notes+4); R('clear',TM.stack_notes+4.6);
+
+  R('bk',TM.bookkeeper); R('rA',TM.bookkeeper+1); R('rB',TM.new_location);
+  $('pin').setAttribute('transform',`translate(0 ${(-8*Math.abs(Math.sin(t*3))).toFixed(1)})`);
+  R('msg',TM.free_guide); R('help',TM.free_guide+6.2);
+
+  R('fun',TM.funnel);
+  FL.forEach((c,i)=>{const k=(t*.4+i/8)%1,x0=200+i*57; c.setAttribute('cx',(400+(x0-400)*(1-k)).toFixed(1)); c.setAttribute('cy',(300+250*k).toFixed(1)); c.setAttribute('opacity',((1-k)*.9).toFixed(2))});
+  R('resp',TM.funnel+2.6);
+  R('dial',TM.dial_up);
+  const dv=p(u,TM.dial_up+.3,TM.dial_up+2.3),th=(-120+240*dv)*Math.PI/180,ex=900+130*Math.sin(th),ey=470-130*Math.cos(th);
+  $('darc').setAttribute('d',`M787.4 535A130 130 0 ${240*dv>180?1:0} 1 ${ex.toFixed(1)} ${ey.toFixed(1)}`);
+  $('ndl').setAttribute('x2',(900+100*Math.sin(th)).toFixed(1)); $('ndl').setAttribute('y2',(470-100*Math.cos(th)).toFixed(1));
+  R('ver',TM.dial_up+.6);
+  VB.forEach((b,i)=>b.setAttribute('width',(350*[.3,.6,.9][i]*p(u,TM.dial_up+1+i*.8,TM.dial_up+1.6+i*.8)).toFixed(1)));
+  R('team',TM.team_bots); TMG.forEach((g,i)=>R(g,TM.team_bots+.3+i*.25,.4));
+
+  R('qa',TM.ten_messages); R('qb',TM.ten_messages+.4); R('qc',TM.ten_messages+.8);
+  EN.forEach((g,i)=>R(g,TM.ten_messages+1.6+i*.2,.4));
+  CK.forEach((g,i)=>R(g,TM.ten_messages+6.8+i*.25,.3)); R('fu',TM.ten_messages+6.6);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.85;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

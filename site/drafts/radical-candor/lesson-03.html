@@ -1,0 +1,304 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Radical Candor Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Radical Candor: Most feedback failures fall into Ruinous Empathy, Obnoxious Aggression or Manipulative Insincerity, and Ruinous Empathy, staying nice to avoid discomfort, is the most common. 8 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">RADICAL CANDOR · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Four ways bosses</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">get it wrong.</text>
+<text class="b" x="120" y="600" font-size="32">Why staying nice is the most common way bosses fail.</text>
+<g id="t_guy"></g>
+<g id="t_alert"><circle class="gain" cx="1410" cy="240" r="36"/><text class="d" x="1410" y="256" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">!</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two lines, four boxes.</text>
+<text class="b" x="120" y="176" font-size="32">Caring personally, and challenging directly.</text>
+<g id="g_ax"><path class="s-ink" d="M320 790V215M306 234l14-19 14 19M320 790h615M916 776l19 14-19 14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="290" y="505" font-size="20" text-anchor="middle" transform="rotate(-90 290 505)">CARE PERSONALLY</text>
+<text class="m" x="625" y="836" font-size="20" text-anchor="middle">CHALLENGE DIRECTLY</text></g>
+<g id="g_box"></g>
+<g id="g_tr"><text class="m" x="1000" y="320" font-size="22">BOTH HIGH</text><text class="d" x="1000" y="390" font-size="52" style="fill:var(--gain)">Radical Candor.</text></g>
+<g id="g_three"><text class="m" x="1000" y="540" font-size="22">THE OTHER THREE</text><text class="d5" x="1000" y="600" font-size="40">Where feedback</text><text class="d5" x="1000" y="650" font-size="40" style="fill:var(--loss)">goes wrong.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The loud mocker.</text>
+<text class="b" x="120" y="176" font-size="32">You point at the zipper and laugh in front of everyone.</text>
+<g id="m2"></g>
+<g id="a_col"></g>
+<g id="a_boss"><g id="a_bossf"></g><path class="s-ink" d="M548 410L378 498" stroke-width="12" stroke-linecap="round"/>
+<rect x="650" y="200" width="210" height="76" rx="16" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/><path d="M690 276l-24 30 46-30" fill="var(--stage)" stroke="var(--loss)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d" x="755" y="252" font-size="40" text-anchor="middle" style="fill:var(--loss)">HA HA!</text></g>
+<g id="a_crowd"></g>
+<g id="a_jerk">
+<g id="a_l"><polygon points="1000,320 1120,320 1104,400 1132,470 1100,540 1116,620 1000,620" fill="var(--stage)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/><path class="s-line" d="M1024 370h70M1024 420h76M1024 470h70M1024 520h60" stroke-width="6" stroke-linecap="round"/></g>
+<g id="a_r"><polygon points="1130,320 1250,320 1250,620 1126,620 1110,540 1142,470 1114,400" fill="var(--stage)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/><path class="s-line" d="M1150 370h76M1162 420h64M1166 470h60" stroke-width="6" stroke-linecap="round"/></g>
+<text class="d5" x="940" y="700" font-size="40">“I’m just being honest.”</text>
+<text class="m" x="940" y="748" font-size="20">THE BOSS WHO TEARS YOUR WORK APART</text></g>
+<g id="a_def"><text class="d" x="120" y="820" font-size="44"><tspan style="fill:var(--loss)">Obnoxious Aggression:</tspan> challenge, no care.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The whisperer.</text>
+<text class="b" x="120" y="176" font-size="32">You say nothing to them, but snicker about it later.</text>
+<g id="m3"></g>
+<g id="w_col"></g>
+<g id="w_wh"><g id="w_f"></g><rect x="470" y="250" width="230" height="70" rx="16" fill="var(--stage)" stroke="var(--loss)" stroke-width="5" stroke-dasharray="10 8"/><text class="d5" x="585" y="297" font-size="34" text-anchor="middle" style="fill:var(--loss)">hehe…</text></g>
+<g id="w_bs">
+<rect x="900" y="280" width="580" height="110" rx="16" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/><text class="m" x="930" y="318" font-size="20">TO YOUR FACE</text><text class="d5" x="930" y="368" font-size="38" style="fill:var(--gain)">“Great work!”</text>
+<rect x="900" y="410" width="580" height="110" rx="16" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/><text class="m" x="930" y="448" font-size="20">BEHIND YOUR BACK</text><text class="d5" x="930" y="498" font-size="38" style="fill:var(--loss)">“What a mess.”</text></g>
+<g id="w_why"><text class="m" x="900" y="580" font-size="20">WHY PEOPLE SLIDE HERE</text></g>
+<g id="w_def"><text class="d" x="120" y="820" font-size="40"><tspan style="fill:var(--loss)">Manipulative Insincerity:</tspan> no care, no challenge.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The silent friend.</text>
+<text class="b" x="120" y="176" font-size="32">You say nothing, to spare them the awkward moment.</text>
+<g id="m4"></g>
+<g id="r_stage"><polygon class="gain" fill-opacity=".25" points="1150,250 1190,250 1330,640 1010,640"/><rect class="ink" x="860" y="640" width="620" height="36" rx="6"/></g>
+<g id="r_fr"><g id="r_ff"></g><rect x="190" y="286" width="100" height="56" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><text class="d" x="240" y="324" font-size="34" text-anchor="middle">…</text>
+<path class="gain" d="M345 420c-30-20-34-46-16-52 8-3 14 2 16 8 2-6 8-11 16-8 18 6 14 32-16 52z"/></g>
+<g id="r_cw"><g id="r_col"></g></g>
+<g id="r_def"><text class="d" x="120" y="750" font-size="40"><tspan style="fill:var(--loss)">Ruinous Empathy:</tspan> caring, but not challenging.</text></g>
+<g id="r_top"><text class="d" x="120" y="830" font-size="44">The most common mistake, by far.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The story of Bob.</text>
+<text class="b" x="120" y="176" font-size="32">Scott learned this the hard way.</text>
+<g id="b_kb"><g id="b_f"></g><text class="m" x="220" y="520" font-size="20" text-anchor="middle">KIM</text><text class="m" x="420" y="520" font-size="20" text-anchor="middle">BOB</text></g>
+<g id="b_tr">
+<rect class="gain" x="140" y="560" width="190" height="50" rx="25"/><text class="m" x="235" y="592" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">CHARMING</text>
+<rect class="gain" x="350" y="560" width="190" height="50" rx="25"/><text class="m" x="445" y="592" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">LIKEABLE</text>
+<rect x="560" y="300" width="140" height="180" rx="8" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path class="s-line" d="M584 330h92M584 355h92M584 380h60" stroke-width="6" stroke-linecap="round"/>
+<path class="s-loss" d="M600 410l60 50M660 410l-60 50" stroke-width="8" stroke-linecap="round"/><text class="m" x="630" y="520" font-size="20" text-anchor="middle">HIS WORK</text></g>
+<g id="b_pat"><rect x="140" y="204" width="380" height="64" rx="16" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/><text class="d5" x="330" y="247" font-size="30" text-anchor="middle">“You’ll get there!”</text><path id="b_arm" class="s-ink" fill="none" stroke-width="10" stroke-linecap="round"/></g>
+<g id="b_team"><g id="b_tf"></g><text class="m" x="800" y="540" font-size="20">THE TEAM COVERS FOR HIM</text></g>
+<g id="b_exit"><g id="b_bob2"></g><polygon id="b_door" class="ink"/><rect class="s-ink" x="1240" y="240" width="170" height="270" fill="none" stroke-width="6"/>
+<text class="d" x="120" y="720" font-size="52">“Why did you never tell me?”</text><text class="m" x="120" y="776" font-size="20">BOB, ON HIS WAY OUT</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Moments, not people.</text>
+<text class="b" x="120" y="176" font-size="32">The boxes describe behavior, not types of people.</text>
+<g id="n_ppl"></g>
+<g id="n_lab"><text class="m" x="120" y="590" font-size="22">LABEL THE BEHAVIOR, NOT THE PERSON</text></g>
+<g id="n_grid"></g>
+<path id="n_arr" class="s-gain" d="M1030 620L1218 432M1182 432h36v36" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="n_tw"><g id="n_tok"><circle class="gain" r="36"/><text class="m" y="8" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">YOU</text></g></g>
+<g id="n_m"><text class="d5" x="120" y="660" font-size="34">Everyone lands in each box sometimes,</text><text class="d5" x="120" y="705" font-size="34">even Scott herself.</text></g>
+<g id="n_a"><text class="d" x="120" y="800" font-size="40" style="fill:var(--gain)">Notice your box. Move up and right.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What feedback are you</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">holding back to stay nice?</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">Say it kindly and clearly.</text>
+<text class="m" x="143" y="700" font-size="26">THIS WEEK, BEFORE IT COSTS SOMEONE MORE</text></g>
+<g id="q_bub"><rect class="gain" x="1260" y="640" width="220" height="120" rx="24"/><path class="gain" d="M1300 756l-20 44 56-44z"/><g id="q_dots"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Four Ways Bosses Get It Wrong&rdquo;, from <em>Radical Candor</em> by Kim Scott. The open zipper scenario and the story of Bob are as reported in the book. The grid, boxes and arrow are conceptual illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 8.4], [8.4, 23.5], [23.5, 37.0], [37.0, 57.8], [57.8, 75.2], [75.2, 96.8], [96.8, 111.4], [111.4, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Four Ways to Fail", "The Grid", "The Loud Mocker", "The Whisperer", "The Silent Friend", "The Story of Bob", "Not Personality Types", "Your Move"];
+const TM={"open_fly": 0.0, "grid": 8.72, "top_right": 15.52, "three_boxes": 19.84, "crowd": 23.84, "jerk": 32.32, "whisper": 37.28, "backstab": 47.2, "silent": 58.08, "stage": 67.2, "bob": 75.52, "pat_back": 83.44, "team": 88.48, "exit_door": 92.16, "labels": 97.12, "mirror": 102.8, "arrow": 106.72};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const guy=(g,x,y,fly=true)=>{mk('circle',{cx:x,cy:y,r:34,class:'ink'},g);mk('path',{d:`M${x-60} ${y+150}v-50a60 60 0 0 1 120 0v50z`,class:'ink'},g);
+  mk('rect',{x:x-50,y:y+150,width:100,height:120,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);mk('path',{d:`M${x} ${y+205}v65`,class:'s-ink','stroke-width':6},g);
+  return fly?mk('path',{d:`M${x-12} ${y+156}L${x} ${y+196}L${x+12} ${y+156}`,fill:'none',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g):null};
+const mini=id=>[0,1,2,3].map(i=>mk('rect',{x:1340+(i%2)*72,y:120+Math.floor(i/2)*72,width:64,height:64,rx:8,fill:'var(--stage)',stroke:i===1?'var(--gain)':'var(--line)','stroke-width':4},$(id)));
+const tx=(g,s,a)=>{const e=mk('text',a,g);e.textContent=s;return e};
+const F0=guy($('t_guy'),1290,290), F2=guy($('a_col'),300,330), F3=guy($('w_col'),240,330), F4=guy($('r_col'),0,0);
+guy($('a_bossf'),600,330,false);
+const M2=mini('m2'),M3=mini('m3'),M4=mini('m4');
+const BX=[[340,230],[630,230],[340,510],[630,510]],BN=[['Ruinous','Empathy'],['Radical','Candor'],['Manipulative','Insincerity'],['Obnoxious','Aggression']];
+const box=BX.map((b,i)=>{const g=mk('g',{},$('g_box'));const r=mk('rect',{x:b[0],y:b[1],width:280,height:270,rx:14,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);
+  return [g,r,BN[i].map((s,k)=>tx(g,s,{x:b[0]+24,y:b[1]+60+k*38,'font-size':30,class:'d5'}))]});
+const CR=[];for(let i=0;i<7;i++){const g=mk('g',{opacity:.55},$('a_crowd'));fig(g,160+i*100,660,16,'ink');CR.push(g)}
+fig($('w_f'),530,380,30,'ink');fig($('w_f'),650,380,30,'ink');
+const CHP=['WANTS TO BE LIKED','TOO WORN OUT TO ARGUE'].map((s,i)=>{const g=mk('g',{},$('w_why'));mk('rect',{x:900,y:600+i*80,width:460,height:60,rx:30,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);tx(g,s,{x:930,y:638+i*80,'font-size':20,class:'m',style:'fill:var(--ink)'});return g});
+fig($('r_ff'),240,400,34,'ink');
+fig($('b_f'),220,340,34,'ink');fig($('b_f'),420,340,34,'ink');
+[840,960,1080].forEach(x=>{fig($('b_tf'),x,380,28,'loss');mk('rect',{x:x-34,y:300,width:68,height:44,rx:4,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},$('b_tf'))});
+fig($('b_bob2'),1325,340,26,'gain');
+const TG=['JERK','FAKE','PUSHOVER'].map((s,i)=>{const x=200+i*200,g=mk('g',{},$('n_ppl'));fig(g,x,330,30,'ink');
+  mk('rect',{x:x-85,y:490,width:170,height:50,rx:10,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);tx(g,s,{x:x,y:522,'font-size':22,class:'m','text-anchor':'middle',style:'fill:var(--loss)'});
+  const k=mk('path',{d:`M${x-72} 514h144`,class:'s-gain','stroke-width':3,'stroke-linecap':'round',pathLength:1,'stroke-dasharray':1,'stroke-dashoffset':1},g);return [g,k]});
+const GC=[[1005,390],[1275,390],[1005,660],[1275,660]],GL=[['RUINOUS','EMPATHY'],['RADICAL','CANDOR'],['MANIPULATIVE','INSINCERITY'],['OBNOXIOUS','AGGRESSION']];
+const NB=GC.map((c,i)=>{const x=c[0]-125,y=c[1]-150;const r=mk('rect',{x:x,y:y,width:250,height:250,rx:14,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},$('n_grid'));
+  GL[i].forEach((s,k)=>tx($('n_grid'),s,{x:x+20,y:y+40+k*26,'font-size':20,class:'m',style:'fill:var(--ink)'}));return r});
+const QD=[0,1,2].map(i=>mk('circle',{cx:1320+i*50,cy:700,r:12,fill:'var(--on-gain)'},$('q_dots')));
+const ORD=[0,1,3,2];
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('t_guy'),p(u,TM.open_fly,TM.open_fly+.6)); rise($('t_alert'),p(u,TM.open_fly+.8,TM.open_fly+1.3));
+  $('t_alert').setAttribute('transform','translate(0 '+(6*Math.sin(t*3)).toFixed(1)+')');
+  [F0,F2,F3,F4].forEach(f=>f.setAttribute('opacity',(.35+.65*Math.abs(Math.sin(t*3))).toFixed(2)));
+
+  rise($('g_ax'),p(u,TM.grid,TM.grid+.5));
+  box.forEach(([g,r,ts],i)=>{const a=TM.grid+1+i*.4;rise(g,p(u,a,a+.4));const tr=i===1&&u>=TM.top_right,bad=i!==1&&u>=TM.three_boxes;
+    r.setAttribute('fill',tr?'var(--gain)':bad?'var(--loss)':'var(--stage)');r.setAttribute('fill-opacity',bad?.15:1);
+    r.setAttribute('stroke',tr?'var(--gain)':bad?'var(--loss)':'var(--line)');ts.forEach(e=>e.style.fill=tr?'var(--on-gain)':'var(--ink)')});
+  rise($('g_tr'),p(u,TM.top_right,TM.top_right+.5)); rise($('g_three'),p(u,TM.three_boxes,TM.three_boxes+.5));
+
+  rise($('a_col'),p(u,TM.crowd,TM.crowd+.5)); rise($('a_boss'),p(u,TM.crowd+.6,TM.crowd+1.1));
+  CR.forEach((g,i)=>rise(g,.55*p(u,TM.crowd+1.4+i*.15,TM.crowd+1.8+i*.15)));
+  M2[3].setAttribute('fill',u>=TM.crowd+5?'var(--loss)':'var(--stage)'); rise($('a_def'),p(u,TM.crowd+5,TM.crowd+5.6));
+  rise($('a_jerk'),p(u,TM.jerk,TM.jerk+.5)); const tr=p(u,TM.jerk+.7,TM.jerk+1.7);
+  $('a_l').setAttribute('transform','translate('+(-26*tr).toFixed(1)+' '+(12*tr).toFixed(1)+') rotate('+(-7*tr).toFixed(2)+' 1000 620)');
+  $('a_r').setAttribute('transform','translate('+(26*tr).toFixed(1)+' '+(12*tr).toFixed(1)+') rotate('+(7*tr).toFixed(2)+' 1250 620)');
+
+  rise($('w_col'),p(u,TM.whisper,TM.whisper+.5)); rise($('w_wh'),p(u,TM.whisper+.8,TM.whisper+1.3));
+  M3[2].setAttribute('fill',u>=TM.whisper+6.2?'var(--loss)':'var(--stage)'); rise($('w_def'),p(u,TM.whisper+6.2,TM.whisper+6.8));
+  rise($('w_bs'),p(u,TM.backstab,TM.backstab+.5)); rise($('w_why'),p(u,TM.backstab+5.8,TM.backstab+6.3));
+  CHP.forEach((g,i)=>rise(g,p(u,TM.backstab+6.2+i*.8,TM.backstab+6.7+i*.8)));
+
+  rise($('r_fr'),p(u,TM.silent,TM.silent+.5)); rise($('r_cw'),p(u,TM.silent+.4,TM.silent+.9));
+  M4[0].setAttribute('fill',u>=TM.silent+5.7?'var(--loss)':'var(--stage)'); rise($('r_def'),p(u,TM.silent+5.7,TM.silent+6.3));
+  rise($('r_stage'),p(u,TM.stage,TM.stage+.5));
+  $('r_col').setAttribute('transform','translate('+(560+610*p(u,TM.stage+.3,TM.stage+2.8)).toFixed(1)+' 370)');
+  rise($('r_top'),p(u,TM.stage+4.2,TM.stage+4.8));
+
+  rise($('b_kb'),p(u,TM.bob,TM.bob+.5)); rise($('b_tr'),p(u,TM.bob+5,TM.bob+5.6));
+  rise($('b_pat'),p(u,TM.pat_back,TM.pat_back+.5)); const o=u>=TM.pat_back?8*Math.abs(Math.sin(t*4)):0;
+  $('b_arm').setAttribute('d','M252 430Q320 '+(392+o).toFixed(1)+' 384 '+(420+o).toFixed(1));
+  rise($('b_team'),p(u,TM.team,TM.team+.5)); $('b_tf').setAttribute('transform','translate(0 '+(u>=TM.team?3*Math.sin(t*5):0).toFixed(1)+')');
+  rise($('b_exit'),p(u,TM.exit_door,TM.exit_door+.5)); const dk=p(u,TM.exit_door+.6,TM.exit_door+1.6),dx=1243+dk*120;
+  $('b_door').setAttribute('points',dx.toFixed(1)+','+(243+dk*14).toFixed(1)+' 1407,243 1407,507 '+dx.toFixed(1)+','+(507-dk*14).toFixed(1));
+
+  rise($('n_grid'),p(u,TM.labels,TM.labels+.5));
+  TG.forEach(([g,k],i)=>{rise(g,p(u,TM.labels+.3+i*.3,TM.labels+.8+i*.3));k.setAttribute('stroke-dashoffset',(1-p(u,TM.labels+2+i*.3,TM.labels+2.4+i*.3)).toFixed(3))});
+  rise($('n_lab'),p(u,TM.labels+3,TM.labels+3.5));
+  rise($('n_tw'),p(u,TM.mirror,TM.mirror+.5)); rise($('n_m'),p(u,TM.mirror,TM.mirror+.5));
+  const s=t*.7,i0=Math.floor(s)%4,f=ease(cl((s%1)*2.5-1.2)),A=GC[ORD[i0]],B=GC[ORD[(i0+1)%4]],ak=p(u,TM.arrow+.8,TM.arrow+2);
+  let x=A[0]+(B[0]-A[0])*f,y=A[1]+(B[1]-A[1])*f; x+=(GC[1][0]-x)*ak; y+=(GC[1][1]-y)*ak;
+  $('n_tok').setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');
+  $('n_arr').setAttribute('stroke-dashoffset',(1-p(u,TM.arrow,TM.arrow+1)).toFixed(3)); rise($('n_a'),p(u,TM.arrow+.4,TM.arrow+1));
+  NB[1].setAttribute('stroke',u>=TM.arrow?'var(--gain)':'var(--line)');
+
+  const q0=SC[7][0]/K;
+  rise($('qa'),p(u,q0+.3,q0+.8)); rise($('qb'),p(u,q0+.7,q0+1.2)); rise($('q_bub'),p(u,q0+1.2,q0+1.7)); rise($('qc'),p(u,q0+5.8,q0+6.4));
+  QD.forEach((c,i)=>c.setAttribute('opacity',(.35+.65*Math.abs(Math.sin(t*2.5-i*.6))).toFixed(2)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.45;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

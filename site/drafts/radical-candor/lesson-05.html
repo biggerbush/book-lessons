@@ -1,0 +1,397 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Radical Candor Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Radical Candor: Good guidance is humble, helpful, immediate and given face to face, with criticism usually in private and praise often in public. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">RADICAL CANDOR · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Humble, helpful,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">immediate, in person.</text>
+<text class="b" x="120" y="600" font-size="32">Four qualities that make feedback land, and where to give it.</text>
+<g id="face">
+<circle class="s-ink" cx="1300" cy="330" r="120" fill="var(--stage)" stroke-width="8"/>
+<circle class="ink" cx="1258" cy="295" r="12"/><circle class="ink" cx="1342" cy="295" r="12"/>
+<rect class="s-ink" x="1240" y="345" width="120" height="44" rx="12" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1270 345v44M1300 345v44M1330 345v44" stroke-width="4"/>
+<path id="spin0" class="loss" d="M1274 349h22v14l-6 8-6-6-10 4z"/>
+</g>
+<g id="qb0"><circle class="s-ink" cx="1440" cy="190" r="40" fill="var(--stage)" stroke-width="5"/><text class="d" x="1440" y="208" font-size="50" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The simplest candor.</text>
+<text class="b" x="120" y="176" font-size="32">Pull them aside, tell them now, help them fix it.</text>
+<path class="s-line" d="M160 600H1460" stroke-width="4"/>
+<rect class="s-ink" x="1140" y="270" width="240" height="330" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="1350" cy="440" r="8"/>
+<text class="m" x="1260" y="320" font-size="20" text-anchor="middle">MEETING</text>
+<g id="col"></g>
+<g id="you1"></g>
+<g id="wb"><rect x="540" y="270" width="300" height="70" rx="20" fill="var(--stage)" stroke="var(--gain)" stroke-width="4"/><path class="gain" d="M660 338l8 26 20-26z"/><text class="m" x="690" y="313" font-size="22" text-anchor="middle" style="fill:var(--ink)">PSST · SPINACH</text></g>
+<path id="ok1" class="s-gain" d="M890 350l16 16 30-34" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="120" y="670" font-size="22">FOUR QUALITIES</text>
+<g id="q4"></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Be humble.</text>
+<g id="hb2"><text class="b" x="120" y="176" font-size="32">You might be wrong about what you saw.</text></g>
+<g id="magw"><g id="mag">
+<path class="s-ink" d="M465 555L560 650" stroke-width="26" stroke-linecap="round"/>
+<circle class="s-ink" cx="380" cy="470" r="120" fill="var(--stage)" stroke-width="14"/>
+<circle cx="350" cy="450" r="30" fill="var(--muted)" fill-opacity=".4"/><circle cx="412" cy="492" r="22" fill="var(--muted)" fill-opacity=".4"/><circle cx="366" cy="515" r="14" fill="var(--muted)" fill-opacity=".4"/>
+</g></g>
+<text id="qm" class="d" x="600" y="400" font-size="120" style="fill:var(--loss)">?</text>
+<g id="bub2">
+<rect class="s-ink" x="760" y="260" width="720" height="260" rx="28" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M890 517L880 588L950 517" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="d5" x="800" y="370" font-size="40">“Here’s what I noticed.”</text>
+<text class="d5" x="800" y="440" font-size="40">“Am I missing something?”</text>
+<text class="m" x="800" y="490" font-size="20" style="fill:var(--gain)">MY VIEW, NOT THE TRUTH</text>
+</g>
+<g id="ppl2"></g>
+<g id="corr"><path class="s-gain" d="M1290 755Q1090 805 902 757" fill="none" stroke-width="5" stroke-dasharray="10 9"/><path class="s-gain" d="M920 741L896 757L922 771" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1090" y="820" font-size="20" text-anchor="middle">INVITE THEM TO CORRECT YOU</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Be helpful.</text>
+<text class="b" x="120" y="176" font-size="32">Feedback is a tool for them, not for you.</text>
+<g id="tb">
+<path class="s-ink" d="M280 330v-40h160v40" fill="none" stroke-width="10" stroke-linejoin="round"/>
+<rect class="gain" x="160" y="330" width="400" height="190" rx="14"/>
+<path d="M160 390h400" stroke="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="335" y="375" width="50" height="30" rx="6"/>
+</g>
+<g id="nf">
+<text class="m" x="120" y="610" font-size="22">NOT FOR:</text>
+<text class="d5" x="120" y="670" font-size="40">Venting</text>
+<text class="d5" x="120" y="740" font-size="40">Proving you’re smart</text>
+<line id="k3a" x1="112" y1="656" x2="290" y2="656" stroke="var(--loss)" stroke-width="6" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<line id="k3b" x1="112" y1="726" x2="555" y2="726" stroke="var(--loss)" stroke-width="6" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+</g>
+<g id="tg">
+<circle class="s-ink" cx="1080" cy="470" r="180" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="1080" cy="470" r="120" fill="none" stroke-width="6"/>
+<circle class="gain" cx="1080" cy="470" r="60"/>
+<text class="m" x="1080" y="710" font-size="22" text-anchor="middle">AIM AT WHAT THEY CAN CHANGE</text>
+</g>
+<g id="arr" opacity="0"><path class="s-ink" d="M0 0L180-115" stroke-width="8" stroke-linecap="round"/><path class="ink" d="M0 0L35-8L22-28z"/><path class="s-gain" d="M160-102l22 22M174-112l22 22" stroke-width="6" stroke-linecap="round"/></g>
+<g id="bo"><text class="d" x="1080" y="790" font-size="44" text-anchor="middle">They leave better off.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Be immediate.</text>
+<text class="b" x="120" y="176" font-size="32">Talk while the moment is still fresh.</text>
+<path class="s-line" d="M160 640H1460" stroke-width="6" stroke-linecap="round"/>
+<g id="clk">
+<circle class="s-ink" cx="260" cy="420" r="100" fill="var(--stage)" stroke-width="8"/><g id="ticks"></g>
+<line id="h1" class="s-ink" x1="260" y1="420" x2="260" y2="362" stroke-width="7" stroke-linecap="round"/>
+<line id="h2" class="s-ink" x1="260" y1="420" x2="304" y2="420" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M260 625v30" stroke-width="6"/><text class="m" x="260" y="690" font-size="20" text-anchor="middle">IT HAPPENS</text>
+</g>
+<path id="arcL" d="M260 600Q780 460 1300 600" fill="none" stroke="var(--loss)" stroke-width="5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="arcG" d="M260 600Q410 560 560 600" fill="none" stroke="var(--gain)" stroke-width="6" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="cal">
+<rect x="1180" y="300" width="240" height="240" rx="14" fill="var(--stage)" stroke="var(--loss)" stroke-width="6"/>
+<rect class="loss" x="1180" y="300" width="240" height="56" rx="14"/>
+<path class="s-ink" d="M1230 286v30M1370 286v30" stroke-width="8" stroke-linecap="round"/>
+<g id="calg"></g>
+<path d="M1300 625v30" stroke="var(--loss)" stroke-width="6"/>
+<text class="m" x="1300" y="690" font-size="20" text-anchor="middle" style="fill:var(--loss)">ANNUAL REVIEW</text>
+</g>
+<g id="gone"><text class="m" x="960" y="490" font-size="20" text-anchor="middle" style="fill:var(--loss)">MONTHS LATER, THE MOMENT IS GONE</text></g>
+<g id="sw">
+<rect class="gain" x="548" y="318" width="24" height="22" rx="4"/>
+<circle cx="560" cy="430" r="90" fill="var(--stage)" stroke="var(--gain)" stroke-width="8"/>
+<line id="swh" class="s-ink" x1="560" y1="430" x2="560" y2="366" stroke-width="6" stroke-linecap="round"/>
+<path d="M560 625v30" stroke="var(--gain)" stroke-width="6"/>
+<text class="m" x="560" y="690" font-size="20" text-anchor="middle" style="fill:var(--gain)">2–3 MINUTES</text>
+<text class="m" x="560" y="718" font-size="20" text-anchor="middle">RIGHT AFTER</text>
+</g>
+<g id="fast"><text class="d" x="120" y="810" font-size="44">Quick talks, right after it happens.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">4. Be in person.</text>
+<text class="b" x="120" y="176" font-size="32">Let them see your face and hear your tone.</text>
+<g id="lap">
+<rect class="s-ink" x="200" y="260" width="360" height="230" rx="12" fill="var(--stage)" stroke-width="7"/>
+<path class="ink" d="M150 490h460l-30 36H180z"/>
+<text class="d5" x="240" y="350" font-size="40">Fix this.</text>
+<path class="s-line" d="M240 395h260M240 435h180" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="bl"><text class="m" x="380" y="575" font-size="22" text-anchor="middle" style="fill:var(--loss)">TONE GETS LOST</text></g>
+<g id="fc"><text class="m" x="1160" y="530" font-size="20" text-anchor="middle">YOU SEE HOW IT LANDS, AND ADJUST</text></g>
+<g id="rk"><text class="m" x="120" y="625" font-size="22">BEST TO WORST</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Private criticism. Public praise.</text>
+<g id="pr">
+<rect class="s-line" x="120" y="220" width="640" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-line" d="M140 540H740" stroke-width="4"/>
+<rect class="s-ink" x="580" y="290" width="130" height="250" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="600" cy="420" r="8"/>
+<g id="pr6p"></g>
+<text class="m" x="120" y="600" font-size="22">CRITICISM: USUALLY IN PRIVATE</text>
+</g>
+<g id="pu">
+<rect class="s-line" x="840" y="220" width="640" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<polygon id="cone" class="gain" points="1160,244 1050,530 1270,530" fill-opacity=".25"/>
+<rect class="ink" x="1138" y="228" width="44" height="22" rx="6"/>
+<g id="pu6p"></g>
+<text class="m" x="840" y="600" font-size="22">PRAISE: OFTEN IN PUBLIC</text>
+</g>
+<g id="r6o0"><text class="m" x="120" y="660" font-size="20" style="fill:var(--gain)">MAKE PRAISE SPECIFIC</text><text class="d5" x="120" y="708" font-size="36" style="fill:var(--muted)">“Great job.”</text>
+<line id="k60" x1="112" y1="696" x2="370" y2="696" stroke="var(--ink)" stroke-width="5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></g>
+<g id="r6n0"><path class="s-muted" d="M520 696h50m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round"/><text class="d" x="620" y="708" font-size="36">“Your demo answered every question.”</text></g>
+<g id="r6o1"><text class="m" x="120" y="760" font-size="20" style="fill:var(--gain)">DESCRIBE THE WORK, NOT THE PERSON</text><text class="d5" x="120" y="808" font-size="36" style="fill:var(--muted)">“You’re careless.”</text>
+<line id="k61" x1="112" y1="796" x2="490" y2="796" stroke="var(--ink)" stroke-width="5" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></g>
+<g id="r6n1"><path class="s-muted" d="M520 796h50m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round"/><text class="d" x="620" y="808" font-size="36">“This report has errors.”</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Small, frequent, normal.</text>
+<text class="b" x="120" y="176" font-size="32">Feedback becomes part of everyday work.</text>
+<g id="big">
+<rect class="loss" x="120" y="260" width="280" height="240" rx="16"/>
+<text class="d" x="260" y="425" font-size="140" text-anchor="middle" style="fill:var(--stage)">!</text>
+<text class="m" x="260" y="540" font-size="20" text-anchor="middle">ONE BIG EVENT</text>
+<path id="bx" d="M140 280L380 480M380 280L140 480" stroke="var(--ink)" stroke-width="8" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+</g>
+<g id="notes"></g>
+<g id="nlab"><path class="s-line" d="M480 448H1430" stroke-width="4"/><text class="m" x="480" y="485" font-size="20">MANY SMALL TALKS · EVERY DAY</text></g>
+<g id="tm">
+<path class="s-line" d="M950 780A150 150 0 0 1 1250 780" fill="none" stroke-width="18"/>
+<path id="tarc" d="M950 780A150 150 0 0 1 1250 780" fill="none" stroke="var(--gain)" stroke-width="18" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<line id="ndl" class="s-ink" x1="1100" y1="780" x2="1100" y2="665" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1100" cy="780" r="14"/>
+<text class="m" x="950" y="822" font-size="20" text-anchor="middle" style="fill:var(--loss)">DREAD</text>
+<text class="m" x="1250" y="822" font-size="20" text-anchor="middle" style="fill:var(--gain)">TRUST</text>
+</g>
+<g id="tt"><text class="d" x="120" y="740" font-size="44">Quick and kind</text><text class="d" x="120" y="800" font-size="44">becomes trusted.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What will you tell</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">a teammate within</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">the hour, <tspan style="fill:var(--gain)">face to face</tspan>?</text></g>
+<g id="gfx">
+<rect class="gain" x="1358" y="198" width="24" height="22" rx="4"/>
+<circle cx="1370" cy="300" r="80" fill="var(--stage)" stroke="var(--gain)" stroke-width="8"/>
+<line id="gh" class="s-ink" x1="1370" y1="300" x2="1370" y2="242" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1370" y="420" font-size="22" text-anchor="middle" style="fill:var(--gain)">3 MIN</text>
+</g>
+<g id="qlab"><text class="m" x="143" y="700" font-size="26">THEN ASK HOW IT LANDED</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="122" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:02</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Humble, Helpful, Immediate, In Person&rdquo;, from <em>Radical Candor</em> by Kim Scott. The spinach-in-the-teeth example and the advice on quick in-person conversations are as reported in the book. All drawings, including the trust meter, are illustrations rather than data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=122, SC=[[0.0, 6.8], [6.8, 21.5], [21.5, 30.7], [30.7, 41.4], [41.4, 54.0], [54.0, 70.2], [70.2, 91.2], [91.2, 108.7], [108.7, 122.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Spinach in Your Teeth", "The Simplest Candor", "Be Humble", "Be Helpful", "Be Immediate", "Be In Person", "Private and Public", "Small and Often", "Your Next Move"];
+const TM={"spinach": 0.0, "colleague": 7.12, "whisper": 11.84, "magnifier": 21.76, "speech_bubble": 25.6, "toolbox": 31.04, "target": 36.56, "clock": 41.68, "calendar": 43.68, "stopwatch": 49.04, "laptop": 54.32, "faces": 61.92, "closed_door": 70.48, "spotlight": 75.76, "label": 85.76, "small_notes": 91.52, "trust_meter": 102.24};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const tx=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+const sk=(id,k)=>$(id).setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+
+fig($('col'),0,420,40,'ink');
+mk('rect',{x:-18,y:426,width:36,height:12,rx:4,fill:'var(--stage)'},$('col'));
+const sp1=mk('rect',{x:-12,y:427,width:9,height:10,class:'loss'},$('col'));
+fig($('you1'),0,420,40,'gain');
+const Q4=['HUMBLE','HELPFUL','IMMEDIATE','IN PERSON'].map((s,i)=>{const g=mk('g',{},$('q4')),x=120+i*350;
+  mk('rect',{x:x,y:700,width:300,height:70,rx:35,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);
+  tx(g,x+150,744,s,{class:'m','font-size':22,'text-anchor':'middle',style:'fill:var(--ink)'});return g});
+
+fig($('ppl2'),880,620,28,'gain'); fig($('ppl2'),1300,620,28,'ink');
+
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(260+80*c).toFixed(1)+' '+(420+80*s).toFixed(1)+'L'+(260+92*c).toFixed(1)+' '+(420+92*s).toFixed(1),stroke:'var(--ink)','stroke-width':4},$('ticks'))}
+for(let r=0;r<3;r++)for(let c=0;c<4;c++)mk('circle',{cx:1220+c*54,cy:400+r*44,r:9,fill:'var(--muted)','fill-opacity':.5},$('calg'));
+
+let bp='';for(let i=0;i<16;i++){const a=i*Math.PI/8,r=i%2?30:64;bp+=(640+r*Math.cos(a)).toFixed(1)+','+(320+r*Math.sin(a)).toFixed(1)+' '}
+mk('polygon',{points:bp,class:'loss'},$('bl'));
+fig($('fc'),960,320,40,'gain'); fig($('fc'),1360,320,40,'ink');
+[960,1360].forEach(x=>[-13,13].forEach(d=>mk('circle',{cx:x+d,cy:312,r:5,fill:'var(--stage)'},$('fc'))));
+mk('path',{d:'M946 334q14 12 28 0',fill:'none',stroke:'var(--stage)','stroke-width':4,'stroke-linecap':'round'},$('fc'));
+const mB=mk('path',{fill:'none',stroke:'var(--stage)','stroke-width':4,'stroke-linecap':'round'},$('fc'));
+const W5=[1130,1165,1200].map(x=>mk('path',{d:'M'+x+' 300q18 20 0 40',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round'},$('fc')));
+[['IN PERSON','var(--gain)','var(--gain)','var(--on-gain)'],['VIDEO / PHONE','var(--stage)','var(--gain)','var(--ink)'],['EMAIL','var(--stage)','var(--line)','var(--muted)']].forEach((c,i)=>{const x=120+i*460;
+  mk('rect',{x:x,y:645,width:380,height:90,rx:45,fill:c[1],stroke:c[2],'stroke-width':4},$('rk'));
+  tx($('rk'),x+190,699,c[0],{class:'m','font-size':24,'text-anchor':'middle',style:'fill:'+c[3]});
+  if(i<2)tx($('rk'),x+420,708,'›',{class:'d','font-size':56,'text-anchor':'middle',style:'fill:var(--muted)'})});
+
+fig($('pr6p'),260,330,30,'gain'); fig($('pr6p'),400,330,30,'ink');
+fig($('pu6p'),1160,380,30,'gain');
+[920,980,1340,1400].forEach(x=>mk('circle',{cx:x,cy:510,r:18,class:'ink'},$('pu6p')));
+
+const NT=[];for(let i=0;i<24;i++){const c=i%12,r=Math.floor(i/12);NT.push(mk('rect',{x:480+c*82,y:300+r*76,width:48,height:48,rx:8,class:'gain'},$('notes')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('face').setAttribute('transform','translate(0 '+(6*Math.sin(t*1.5)).toFixed(1)+')');
+rise($('spin0'),p(u,TM.spinach,TM.spinach+.5)); rise($('qb0'),p(u,TM.spinach+5.8,TM.spinach+6.3));
+
+const cw=p(u,TM.colleague,TM.colleague+3), yw=p(u,TM.whisper,TM.whisper+1.2);
+$('col').setAttribute('transform','translate('+(560+260*cw).toFixed(1)+' 0)'); $('col').setAttribute('opacity',p(u,TM.colleague,TM.colleague+.5));
+$('you1').setAttribute('transform','translate('+(260+420*yw).toFixed(1)+' 0)'); $('you1').setAttribute('opacity',p(u,TM.whisper,TM.whisper+.4));
+rise($('wb'),p(u,TM.whisper+1,TM.whisper+1.5)); sp1.setAttribute('opacity',1-p(u,TM.whisper+2.4,TM.whisper+3)); rise($('ok1'),p(u,TM.whisper+3,TM.whisper+3.5));
+Q4.forEach((g,i)=>{const a=TM.whisper+5.8+i*.4; rise(g,p(u,a,a+.5))});
+
+rise($('magw'),p(u,TM.magnifier,TM.magnifier+.5));
+$('mag').setAttribute('transform','translate('+(10*Math.sin(t*1.2)).toFixed(1)+' '+(8*Math.cos(t*.9)).toFixed(1)+')');
+rise($('hb2'),p(u,TM.magnifier+1.4,TM.magnifier+1.9)); rise($('qm'),p(u,TM.magnifier+1.8,TM.magnifier+2.3));
+rise($('bub2'),p(u,TM.speech_bubble,TM.speech_bubble+.5)); rise($('ppl2'),p(u,TM.speech_bubble+.3,TM.speech_bubble+.8)); rise($('corr'),p(u,TM.speech_bubble+2,TM.speech_bubble+2.6));
+
+rise($('tb'),p(u,TM.toolbox,TM.toolbox+.5)); rise($('nf'),p(u,TM.toolbox+1.4,TM.toolbox+1.9));
+sk('k3a',p(u,TM.toolbox+2.2,TM.toolbox+2.7)); sk('k3b',p(u,TM.toolbox+2.8,TM.toolbox+3.4));
+rise($('tg'),p(u,TM.target,TM.target+.5));
+const ak=1-p(u,TM.target+.6,TM.target+1.2);
+$('arr').setAttribute('transform','translate('+(1080+200*ak).toFixed(1)+' '+(470-128*ak).toFixed(1)+')'); $('arr').setAttribute('opacity',p(u,TM.target+.6,TM.target+.8));
+rise($('bo'),p(u,TM.target+2,TM.target+2.6));
+
+rise($('clk'),p(u,TM.clock,TM.clock+.5));
+$('h1').setAttribute('transform','rotate('+(t*20).toFixed(1)+' 260 420)'); $('h2').setAttribute('transform','rotate('+(t*120).toFixed(1)+' 260 420)');
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5)); sk('arcL',p(u,TM.calendar+.5,TM.calendar+2)); rise($('gone'),p(u,TM.calendar+2,TM.calendar+2.5));
+rise($('sw'),p(u,TM.stopwatch,TM.stopwatch+.5)); sk('arcG',p(u,TM.stopwatch+.3,TM.stopwatch+.9));
+$('swh').setAttribute('transform','rotate('+(360*p(u,TM.stopwatch,TM.stopwatch+4)).toFixed(1)+' 560 430)');
+rise($('fast'),p(u,TM.stopwatch+1.5,TM.stopwatch+2.1));
+
+rise($('lap'),p(u,TM.laptop,TM.laptop+.5)); rise($('bl'),p(u,TM.laptop+3.4,TM.laptop+3.8));
+rise($('fc'),p(u,TM.faces,TM.faces+.5));
+const sm=p(u,TM.faces+2,TM.faces+3); mB.setAttribute('d','M1346 336q14 '+(sm*12).toFixed(1)+' 28 0');
+W5.forEach((w,i)=>w.setAttribute('opacity',(.3+.7*(.5+.5*Math.sin(t*4-i*1.2))).toFixed(2)));
+rise($('rk'),p(u,TM.faces+5.4,TM.faces+6));
+
+rise($('pr'),p(u,TM.closed_door,TM.closed_door+.5)); rise($('pu'),p(u,TM.spotlight,TM.spotlight+.5));
+$('cone').setAttribute('fill-opacity',(.22+.08*Math.sin(t*2)).toFixed(2));
+[TM.spotlight+6.2,TM.label].forEach((a,i)=>{rise($('r6o'+i),p(u,a,a+.4)); sk('k6'+i,p(u,a+.8,a+1.3)); rise($('r6n'+i),p(u,a+1.2,a+1.7))});
+
+rise($('big'),p(u,TM.small_notes,TM.small_notes+.5)); sk('bx',p(u,TM.small_notes+5,TM.small_notes+5.6));
+NT.forEach((n,i)=>{const a=TM.small_notes+.6+i*.12; n.setAttribute('opacity',p(u,a,a+.3))});
+rise($('nlab'),p(u,TM.small_notes+.6,TM.small_notes+1.1));
+rise($('tm'),p(u,TM.trust_meter,TM.trust_meter+.5));
+const tr=p(u,TM.trust_meter+.5,TM.trust_meter+3); sk('tarc',tr);
+$('ndl').setAttribute('transform','rotate('+(-80+160*tr).toFixed(1)+' 1100 780)');
+rise($('tt'),p(u,TM.trust_meter+1,TM.trust_meter+1.6));
+
+const s8=SC[8][0]/K;
+rise($('gfx'),p(u,s8+.2,s8+.7)); $('gh').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 1370 300)');
+rise($('qa'),p(u,s8+.4,s8+.9)); rise($('qb'),p(u,s8+1,s8+1.5)); rise($('qc'),p(u,s8+4.6,s8+5.1)); rise($('qlab'),p(u,s8+9.6,s8+10.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:118.67;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

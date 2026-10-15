@@ -1,0 +1,21 @@
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+P($('t_me'),1170,380,34,'ink');
+const TO=[[1380,300],[1440,420],[1380,540]];TO.forEach(q=>P($('t_oth'),q[0],q[1],20,'loss'));
+const TS=TO.map(q=>mk('path',{d:'M1215 470L'+(q[0]-26)+' '+(q[1]+40),class:'s-loss','stroke-width':4,'stroke-linecap':'round'},$('t_str')));
+P($('p_mel'),260,470,40,'ink');
+[620,720,820,920].forEach(x=>P($('p_teen'),x,520,28,'gain'));
+P($('p_dau'),1300,490,36,'ink');
+P($('w_mel'),1150,560,40,'ink');
+for(let i=0;i<4;i++)mk('rect',{x:i%2?780:740,y:310+i*52,width:80,height:28,rx:10,fill:'var(--muted)','fill-opacity':.5},$('c_ph'));
+P($('c_out'),950,470,16,'loss');
+P($('c_you'),1170,400,30,'ink');P($('c_you'),1380,400,30,'loss');
+P($('d_me'),220,430,34,'ink');P($('d_oth'),900,430,34,'loss');
+// scene 5: you open your hands and release three people
+P($('e_fig'),400,400,34,'ink');
+const EF=[[200,300],[400,220],[600,300]].map(q=>{const g=mk('g',{},$('e_c'));P(g,0,0,14,'loss');return [g,q]});
+P($('e_me'),1150,500,40,'ink');
+const FO=[[980,330],[1060,470],[980,610]];FO.forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:30,class:'loss'},$('f_o')));
+const FD=[];for(let i=0;i<12;i++)FD.push(mk('circle',{r:9},$('f_d')));
+for(let i=0;i<5;i++)mk('circle',{cx:250+i*45,cy:330,r:8,class:'ink'},$('g_nb'));
+P($('g_p1'),720,440,40,'ink');P($('g_p2'),1130,440,40,'ink');
+const fx=v=>v.toFixed(1);

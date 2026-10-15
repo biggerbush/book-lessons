@@ -1,0 +1,357 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiny Habits Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Tiny Habits: Any behavior happens only when motivation, ability, and a prompt all come together at the same moment. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">TINY HABITS · LESSON 2</text>
+<text class="d" x="116" y="330" font-size="84" letter-spacing="-2">The behavior formula:</text>
+<text class="d" x="116" y="426" font-size="84" letter-spacing="-2">Motivation, Ability,</text>
+<text class="d" x="116" y="522" font-size="84" letter-spacing="-2" style="fill:var(--gain)">Prompt.</text>
+<text class="b" x="120" y="610" font-size="32">Three ingredients have to meet before any behavior happens.</text>
+<g id="t0g"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">B = MAP.</text>
+<text class="b" x="120" y="176" font-size="32">BJ Fogg studied what makes people act, at Stanford.</text>
+<g id="lab">
+<path class="s-ink" d="M130 340L270 260L410 340Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<g id="cols"></g>
+<rect class="ink" x="130" y="520" width="280" height="20"/>
+<text class="m" x="270" y="580" font-size="20" text-anchor="middle">STANFORD</text>
+</g>
+<g id="fcard">
+<rect class="s-line" x="520" y="230" width="960" height="260" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text id="bB" class="d" x="620" y="420" font-size="150" text-anchor="middle" style="fill:var(--gain)">B</text>
+<text class="d" x="790" y="420" font-size="150" text-anchor="middle">=</text>
+<text class="d" x="960" y="420" font-size="150" text-anchor="middle">M</text>
+<text class="d" x="1130" y="420" font-size="150" text-anchor="middle">A</text>
+<text class="d" x="1300" y="420" font-size="150" text-anchor="middle">P</text>
+</g>
+<g id="ic1"></g>
+<g id="miss1">
+<path class="s-loss" d="M1255 595l90 90M1345 595l-90 90" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="120" y="840" font-size="22" style="fill:var(--loss)">MISSING ONE? NOTHING HAPPENS.</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A phone rings.</text>
+<text class="b" x="120" y="176" font-size="32">Three things line up at the same moment.</text>
+<g id="per2"></g>
+<g id="face"><circle cx="243" cy="392" r="6" fill="var(--stage)"/><circle cx="277" cy="392" r="6" fill="var(--stage)"/><path d="M240 412q20 18 40 0" fill="none" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/></g>
+<path class="s-ink" d="M120 640h820M180 640v120M880 640v120" stroke-width="8" stroke-linecap="round"/>
+<path id="arm" class="s-ink" fill="none" stroke-width="16" stroke-linecap="round"/>
+<g id="phW"><g id="ph"><rect class="ink" x="520" y="440" width="110" height="200" rx="18"/><rect x="532" y="462" width="86" height="140" rx="6" fill="var(--stage)"/></g></g>
+<g id="waves" fill="none" stroke-width="6" stroke-linecap="round"><path d="M660 490q30 50 0 100"/><path d="M690 470q48 70 0 140"/><path d="M720 450q66 90 0 180"/></g>
+<g id="rows2"></g>
+<g id="pick"><text class="d" x="120" y="830" font-size="48">All three line up, so you pick it up.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The action line.</text>
+<text class="b" x="120" y="176" font-size="32">Motivation goes up. Ability goes across.</text>
+<g id="axes3">
+<path class="s-ink" d="M240 240V760H1100M228 256l12-16 12 16M1084 748l16 12-16 12" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="200" y="500" font-size="20" text-anchor="middle" transform="rotate(-90 200 500)">MOTIVATION</text>
+<text class="m" x="250" y="800" font-size="20">HARD</text>
+<text class="m" x="670" y="800" font-size="20" text-anchor="middle">ABILITY</text>
+<text class="m" x="1100" y="800" font-size="20" text-anchor="end">EASY</text>
+</g>
+<path id="curve" class="s-gain" d="M300 280Q380 690 1080 720" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<g id="alab"><text class="m" x="1100" y="676" font-size="20" text-anchor="end" style="fill:var(--gain)">ACTION LINE</text></g>
+<g id="dA"><circle id="rA" cx="760" cy="400" fill="none" stroke="var(--gain)" stroke-width="4"/><circle class="gain" cx="760" cy="400" r="22"/><text class="m" x="800" y="392" font-size="20" style="fill:var(--gain)">ACTION</text></g>
+<g id="dB"><circle cx="500" cy="700" r="22" fill="var(--muted)"/><text class="m" x="540" y="708" font-size="20">IGNORED</text></g>
+<g id="pA"><text class="d5" x="1180" y="400" font-size="36">Above the line:</text><text class="b" x="1180" y="446" font-size="30">the prompt works.</text></g>
+<g id="pB"><text class="d5" x="1180" y="620" font-size="36">Below the line:</text><text class="b" x="1180" y="666" font-size="30">prompt ignored.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A trade-off.</text>
+<text class="b" x="120" y="176" font-size="32">Motivation and ability balance each other.</text>
+<g id="ss">
+<path class="s-line" d="M300 700h1000" stroke-width="5" stroke-linecap="round"/>
+<path class="ink" d="M800 600L740 700H860Z"/>
+<g id="plank"><rect class="ink" x="380" y="588" width="840" height="24" rx="12"/>
+<circle class="s-ink" cx="420" cy="560" r="40" fill="var(--stage)" stroke-width="6"/><text class="d" x="420" y="575" font-size="40" text-anchor="middle">M</text>
+<circle class="s-ink" cx="1180" cy="560" r="40" fill="var(--stage)" stroke-width="6"/><text class="d" x="1180" y="575" font-size="40" text-anchor="middle">A</text></g>
+<text class="m" x="800" y="790" font-size="20" text-anchor="middle">MOTIVATION AND ABILITY TRADE OFF</text>
+</g>
+<g id="hard"><text class="d" x="120" y="270" font-size="44">Hard task</text><text class="m" x="120" y="305" font-size="20" style="fill:var(--loss)">NEEDS SKY-HIGH MOTIVATION</text>
+<path class="s-line" d="M124 452h256" stroke-width="5" stroke-linecap="round"/>
+<path class="loss" d="M140 450L230 330L270 380L300 350L360 450Z"/>
+<path d="M213 353L230 330L247 352L238 346L230 356L222 346Z" fill="var(--stage)"/></g>
+<g id="easy"><text class="d" x="1480" y="270" font-size="44" text-anchor="end">Easy task</text><text class="m" x="1480" y="305" font-size="20" text-anchor="end" style="fill:var(--gain)">HAPPENS EVEN WHEN YOU BARELY CARE</text>
+<path class="s-line" d="M1224 452h256" stroke-width="5" stroke-linecap="round"/>
+<path class="gain" d="M1310 450V424a6 6 0 0 1 6-6H1394a6 6 0 0 1 6 6V450Z"/>
+<path id="hop" class="s-gain" d="M1250 440Q1355 360 1460 440" fill="none" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<path class="s-gain" d="M1440 420l20 20-26 6" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1355" y="490" font-size="18" text-anchor="middle">ONE SMALL STEP</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No prompt, no action.</text>
+<text class="b" x="120" y="176" font-size="32">Motivation and ability are not enough on their own.</text>
+<g id="bars5">
+<rect class="s-ink" x="160" y="280" width="70" height="300" rx="8" fill="none" stroke-width="5"/><rect id="fM" class="gain" x="166" width="58" rx="4"/>
+<rect class="s-ink" x="290" y="280" width="70" height="300" rx="8" fill="none" stroke-width="5"/><rect id="fA" class="gain" x="296" width="58" rx="4"/>
+<text class="d" x="195" y="630" font-size="40" text-anchor="middle">M</text><text class="d" x="325" y="630" font-size="40" text-anchor="middle">A</text>
+</g>
+<g id="bell5"><text id="zz" class="m" x="505" y="340" font-size="26">Z z z</text><text class="m" x="470" y="630" font-size="20" text-anchor="middle">PROMPT?</text></g>
+<g id="stW">
+<rect x="670" y="300" width="260" height="260" rx="8" fill="none" stroke="var(--muted)" stroke-width="5" stroke-dasharray="14 12"/>
+<text class="d" x="800" y="420" font-size="48" text-anchor="middle" style="fill:var(--line)">DO IT</text>
+<text class="d" x="800" y="486" font-size="48" text-anchor="middle" style="fill:var(--line)">NOW</text>
+<text class="m" x="800" y="630" font-size="20" text-anchor="middle" style="fill:var(--loss)">NO CUE</text>
+</g>
+<path id="cueX" class="s-loss" d="M690 320L910 540M910 320L690 540" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<g id="closet">
+<rect class="s-ink" x="1060" y="260" width="380" height="500" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1060 420h380M1250 260v160" stroke-width="5"/>
+<rect class="loss" x="1350" y="486" width="70" height="260"/>
+<ellipse class="loss" cx="1385" cy="746" rx="35" ry="12"/>
+<path d="M1350 576q35 14 70 0M1350 656q35 14 70 0" fill="none" stroke="var(--stage)" stroke-width="5"/>
+<ellipse cx="1385" cy="486" rx="35" ry="13" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/>
+<path transform="translate(1385 486) scale(1 .4)" d="M0 0a4 4 0 0 1 8 0a8 8 0 0 1-16 0a12 12 0 0 1 24 0a16 16 0 0 1-32 0a20 20 0 0 1 40 0a26 26 0 0 1-52 0" fill="none" stroke="var(--loss)" stroke-width="4" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+<path class="s-muted" d="M1300 600H1340" stroke-width="3" stroke-linecap="round"/>
+<text class="m" x="1292" y="606" font-size="18" text-anchor="end">YOGA MAT</text>
+<text class="m" x="1250" y="800" font-size="20" text-anchor="middle">INTENTION, NO PROMPT</text>
+</g>
+<g id="nb5"><text class="d5" x="120" y="830" font-size="36">Without a prompt, nothing happens.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Debug in this order.</text>
+<text class="b" x="120" y="176" font-size="32">When a behavior isn’t happening, check these three.</text>
+<g id="cards6"></g>
+<g id="lensW"><g id="lens6"><circle class="s-ink" cx="0" cy="0" r="46" fill="var(--stage)" stroke-width="10"/><path class="s-ink" d="M33 33l40 40" stroke-width="16" stroke-linecap="round"/></g></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it today.</text>
+<text class="b" x="120" y="176" font-size="32">Pick one habit you keep meaning to start.</text>
+<g id="hcard"><rect class="s-line" x="120" y="240" width="380" height="340" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="290" font-size="22">YOUR HABIT</text><path class="s-line" d="M150 360h190M150 420h190M150 480h190" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M380 520l70-120 22 12-70 120-30 14z"/></g>
+<g id="rows7"></g>
+<g id="chain7"><rect class="s-ink" x="120" y="680" width="240" height="70" rx="35" fill="none" stroke-width="8"/><rect id="lk" x="320" y="680" width="240" height="70" rx="35" fill="none" stroke-width="8"/><rect class="s-ink" x="520" y="680" width="240" height="70" rx="35" fill="none" stroke-width="8"/>
+<text class="m" x="240" y="723" font-size="24" text-anchor="middle">M</text><text class="m" x="440" y="723" font-size="24" text-anchor="middle">A</text><text class="m" x="640" y="723" font-size="24" text-anchor="middle">P</text>
+<text class="d" x="820" y="730" font-size="44">Fix the weakest link.</text><text class="m" x="820" y="780" font-size="20" style="fill:var(--gain)">THE BEHAVIOR OFTEN APPEARS</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Something you did today</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">without effort:</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">can you spot <tspan style="fill:var(--gain)">M, A and P</tspan>?</text></g>
+<text class="m" x="143" y="700" font-size="26">MOTIVATION · ABILITY · PROMPT</text>
+<g id="end3"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="133" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:13</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Motivation, Ability, Prompt: The Behavior Formula&rdquo;, from <em>Tiny Habits</em> by BJ Fogg. The ringing phone and the troubleshooting order are as reported in the book. The action line graph, yoga mat, and habit scenes are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=133, SC=[[0.0, 9.9], [9.9, 29.1], [29.1, 45.7], [45.7, 61.6], [61.6, 72.3], [72.3, 89.3], [89.3, 109.0], [109.0, 122.3], [122.3, 133.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Hidden Formula", "B Equals MAP", "The Ringing Phone", "The Action Line", "The Trade-Off", "No Prompt, No Action", "Debug in Order", "Try It Today", "Your Challenge"];
+const TM={"title_card": 0.0, "stanford_lab": 10.16, "formula_card": 14.88, "three_icons": 19.84, "ringing_phone": 29.44, "eager_face": 31.68, "phone_reach": 35.36, "graph_axes": 46.0, "action_curve": 51.2, "dot_above": 55.2, "seesaw": 61.92, "hard_task": 64.96, "easy_task": 68.72, "sleeping_bell": 72.6, "sticky_note": 79.92, "forgotten_mat": 83.76, "detective": 89.6, "check_prompt": 95.12, "check_ability": 99.68, "check_motive": 104.48, "your_habit": 109.28, "map_check": 112.0, "your_day": 122.56};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const ICP={m:'M0 30C-50 0-45-35-22-38C-10-40-3-30 0-22C3-30 10-40 22-38C45-35 50 0 0 30Z',a:'M-36 30V14H-12V-6H12V-26H36V30Z',p:'M-30 20C-28-10-24-32 0-32C24-32 28-10 30 20L38 28H-38Z'};
+const ico=(k,x,y,s,col,g)=>{const h=mk('g',{transform:'translate('+x+' '+y+') scale('+s+')'},g);mk('path',{d:ICP[k],fill:col},h);if(k==='p'){mk('circle',{cx:0,cy:36,r:7,fill:col},h);mk('circle',{cx:0,cy:-36,r:5,fill:col},h)}return h};
+const tx=(g,s,a)=>{const e=mk('text',a,g);e.textContent=s;return e};
+const ring=(g,x,y,r)=>mk('circle',{cx:x,cy:y,r:r,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);
+
+const T0=['M','A','P'].map(L=>{const g=mk('g',{},$('t0g'));ring(g,0,0,46);tx(g,L,{x:0,y:16,'font-size':44,'text-anchor':'middle',class:'d'});return g});
+const T0E=[[1330,330],[1252,465],[1408,465]],T0S=[[1330,190],[1170,580],[1430,600]];
+const t0b=mk('g',{},$('t0g'));mk('circle',{cx:1330,cy:420,r:34,class:'gain'},t0b);tx(t0b,'B',{x:1330,y:432,'font-size':34,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'});
+
+for(let i=0;i<4;i++)mk('rect',{x:160+i*64,y:352,width:28,height:160,class:'ink'},$('cols'));
+const IC1=[['m','Motivation'],['a','Ability'],['p','Prompt']].map((d,i)=>{const x=700+i*300,g=mk('g',{},$('ic1'));ring(g,x,640,64);ico(d[0],x,640,1.1,i?'var(--ink)':'var(--gain)',g);tx(g,d[1],{x:x,y:760,'font-size':34,'text-anchor':'middle',class:'d5'});return g});
+
+fig($('per2'),260,400,50,'ink');
+const R2=[['Motivation: high','EXPECTING GOOD NEWS'],['Ability: easy','PHONE RIGHT BESIDE YOU'],['Prompt: the ring','IT SAYS ACT NOW']].map((d,i)=>{const y=320+i*130,g=mk('g',{},$('rows2'));const c=mk('circle',{cx:1030,cy:y,r:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('path',{d:'M1016 '+y+'l10 10 18-20',fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  tx(g,d[0],{x:1080,y:y+12,'font-size':40,class:'d5'});tx(g,d[1],{x:1080,y:y+48,'font-size':20,class:'m'});return [g,c]});
+
+ico('p',470,420,1.4,'var(--muted)',$('bell5'));
+
+const C6=[['1','Prompt','IS ANYTHING','REMINDING YOU?','p'],['2','Ability','TOO HARD','RIGHT NOW?','a'],['3','Motivation','LEAST RELIABLE','LEVER','m']].map((d,i)=>{const x=420+i*360,y=280,col=i==2?'var(--loss)':'var(--ink)',g=mk('g',{},$('cards6'));
+  mk('rect',{x:x,y:y,width:320,height:320,rx:18,fill:'var(--stage)',stroke:i==2?'var(--loss)':'var(--line)','stroke-width':i==2?5:3},g);
+  tx(g,d[0],{x:x+30,y:y+100,'font-size':80,class:'d',style:'fill:'+col});ico(d[4],x+250,y+70,.9,col,g);
+  tx(g,d[1],{x:x+30,y:y+190,'font-size':40,class:'d5'});
+  if(i<2)mk('path',{d:'M'+(x+325)+' 440h30m-10-10 10 10-10 10',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  const q=mk('g',{},$('cards6'));tx(q,d[2],{x:x+30,y:y+240,'font-size':20,class:'m',style:'fill:'+col});tx(q,d[3],{x:x+30,y:y+272,'font-size':20,class:'m',style:'fill:'+col});return [g,q]});
+
+const R7=[['m','Do I want it?'],['a','Can I do it easily?'],['p','What will prompt me?']].map((d,i)=>{const y=300+i*120,g=mk('g',{},$('rows7'));ring(g,620,y,42);ico(d[0],620,y,.75,'var(--gain)',g);tx(g,d[1],{x:690,y:y+14,'font-size':40,class:'d5'});return g});
+
+const E8=['M','A','P'].map((L,i)=>{const g=mk('g',{},$('end3'));ring(g,0,0,32);tx(g,L,{x:0,y:11,'font-size':30,'text-anchor':'middle',class:'d'});return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const k0=p(u,TM.title_card+.8,TM.title_card+2.6);
+  T0.forEach((g,i)=>{const x=T0S[i][0]+(T0E[i][0]-T0S[i][0])*k0,y=T0S[i][1]+(T0E[i][1]-T0S[i][1])*k0+4*Math.sin(t*2+i);g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')')});
+  rise(t0b,p(u,TM.title_card+2.4,TM.title_card+3));
+
+  rise($('lab'),p(u,TM.stanford_lab,TM.stanford_lab+.5)); rise($('fcard'),p(u,TM.formula_card,TM.formula_card+.5));
+  IC1.forEach((g,i)=>{const a=TM.three_icons+i*.5;rise(g,p(u,a,a+.5))});
+  const ms=p(u,TM.three_icons+5.7,TM.three_icons+6.2); rise($('miss1'),ms); $('bB').style.fill=ms>.5?'var(--muted)':'var(--gain)';
+
+  const pk=p(u,TM.phone_reach+9.2,TM.phone_reach+10), rg=p(u,TM.ringing_phone,TM.ringing_phone+.5);
+  rise($('phW'),rg); $('ph').setAttribute('transform','translate('+(-60*pk).toFixed(1)+' '+(-100*pk).toFixed(1)+')');
+  $('waves').setAttribute('opacity',(rg*(1-pk)*(.55+.45*Math.sin(t*10))).toFixed(2)); $('waves').style.stroke=u>=TM.phone_reach+4.2?'var(--gain)':'var(--ink)';
+  rise($('face'),p(u,TM.eager_face,TM.eager_face+.5));
+  $('arm').setAttribute('d','M320 520Q420 560 '+(520-60*pk).toFixed(1)+' '+(560-100*pk).toFixed(1)); $('arm').setAttribute('opacity',p(u,TM.phone_reach,TM.phone_reach+.6));
+  const a2=[TM.eager_face,TM.phone_reach,TM.phone_reach+4.2];
+  R2.forEach((r,i)=>{rise(r[0],p(u,a2[i],a2[i]+.5));r[1].setAttribute('fill',u>=a2[i]+.4?'var(--gain)':'var(--stage)')});
+  rise($('pick'),pk);
+
+  rise($('axes3'),p(u,TM.graph_axes,TM.graph_axes+.5));
+  $('curve').setAttribute('stroke-dashoffset',(1-p(u,TM.action_curve,TM.action_curve+1.5)).toFixed(3));
+  rise($('alab'),p(u,TM.action_curve+1.2,TM.action_curve+1.7));
+  const fr=(t*1.2)%1; $('rA').setAttribute('r',(22+40*fr).toFixed(1)); $('rA').setAttribute('opacity',(1-fr).toFixed(2));
+  rise($('dA'),p(u,TM.dot_above,TM.dot_above+.5)); rise($('pA'),p(u,TM.dot_above+.4,TM.dot_above+.9));
+  rise($('dB'),p(u,TM.dot_above+4.6,TM.dot_above+5.1)); rise($('pB'),p(u,TM.dot_above+5,TM.dot_above+5.5));
+
+  rise($('ss'),p(u,TM.seesaw,TM.seesaw+.5));
+  const h4=p(u,TM.hard_task,TM.hard_task+1), e4=p(u,TM.easy_task,TM.easy_task+1);
+  $('plank').setAttribute('transform','rotate('+(3*Math.sin(t*2)*(1-h4)+12*h4-24*e4).toFixed(2)+' 800 600)');
+  rise($('hard'),p(u,TM.hard_task,TM.hard_task+.5)); rise($('easy'),p(u,TM.easy_task,TM.easy_task+.5));
+  $('hop').setAttribute('stroke-dashoffset',(-t*20).toFixed(1));
+
+  rise($('bell5'),p(u,TM.sleeping_bell,TM.sleeping_bell+.5)); $('zz').setAttribute('y',(340-8*Math.sin(t*2)).toFixed(1));
+  const f5=p(u,TM.sleeping_bell+2.2,TM.sleeping_bell+3.2);
+  ['fM','fA'].forEach(id=>{$(id).setAttribute('y',(574-288*f5).toFixed(1));$(id).setAttribute('height',(288*f5).toFixed(1))});
+  rise($('bars5'),p(u,TM.sleeping_bell+2,TM.sleeping_bell+2.5));
+  rise($('stW'),p(u,TM.sticky_note,TM.sticky_note+.5));
+  const cx5=p(u,TM.sticky_note+.6,TM.sticky_note+1.3); $('cueX').setAttribute('stroke-dashoffset',(1-cx5).toFixed(3)); $('cueX').setAttribute('opacity',cx5>0?1:0);
+  rise($('closet'),p(u,TM.forgotten_mat,TM.forgotten_mat+.5)); rise($('nb5'),p(u,TM.forgotten_mat+1,TM.forgotten_mat+1.5));
+
+  rise($('lensW'),p(u,TM.detective,TM.detective+.5));
+  const lx=230+350*p(u,TM.check_prompt,TM.check_prompt+.8)+360*p(u,TM.check_ability,TM.check_ability+.8)+360*p(u,TM.check_motive,TM.check_motive+.8);
+  $('lens6').setAttribute('transform','translate('+lx.toFixed(1)+' '+(690+6*Math.sin(t*3)).toFixed(1)+')');
+  const c6=[TM.check_prompt,TM.check_ability,TM.check_motive], q6=[TM.check_prompt+1.8,TM.check_ability+1.4,TM.check_motive+.6];
+  C6.forEach((c,i)=>{rise(c[0],p(u,c6[i],c6[i]+.5));rise(c[1],p(u,q6[i],q6[i]+.5))});
+
+  rise($('hcard'),p(u,TM.your_habit,TM.your_habit+.5));
+  R7.forEach((g,i)=>{const a=TM.map_check+i*2;rise(g,p(u,a,a+.5))});
+  rise($('chain7'),p(u,TM.map_check+6.9,TM.map_check+7.4));
+  const fx=u>=TM.map_check+7.8; $('lk').setAttribute('stroke',fx?'var(--gain)':'var(--loss)'); $('lk').setAttribute('stroke-dasharray',fx?'none':'12 10');
+
+  rise($('qa'),p(u,TM.your_day,TM.your_day+.5)); rise($('qb'),p(u,TM.your_day+.4,TM.your_day+.9)); rise($('qc'),p(u,TM.your_day+3.4,TM.your_day+3.9));
+  const e8=p(u,TM.your_day+3.6,TM.your_day+5);
+  E8.forEach((g,i)=>{g.setAttribute('opacity',p(u,TM.your_day+3.4,TM.your_day+3.9));g.setAttribute('transform','translate('+(1290+70*i)+' '+(720+[-80,70,-50][i]*(1-e8)).toFixed(1)+')')});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:129.31;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

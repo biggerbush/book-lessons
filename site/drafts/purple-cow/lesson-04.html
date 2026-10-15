@@ -1,0 +1,397 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purple Cow Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Purple Cow: The opposite of remarkable is not bad but very good, because competent, familiar products blend in and get ignored. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">PURPLE COW · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Very good is</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the <tspan style="fill:var(--loss)">enemy.</tspan></text>
+<text class="b" x="120" y="600" font-size="32">Why competent products quietly disappear, and what to do instead.</text>
+<g id="herd"></g>
+<text id="ig" class="m" x="1000" y="535" font-size="20">ALL VERY GOOD. ALL IGNORED.</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The real opposite.</text>
+<text class="b" x="120" y="176" font-size="32">It isn’t bad. It’s very good.</text>
+<g id="scl">
+<path class="s-ink" d="M260 360H1340" stroke-width="8" stroke-linecap="round"/>
+<path class="s-line" d="M530 344v32M800 344v32M1070 344v32" stroke-width="5" stroke-linecap="round"/>
+<circle class="loss" cx="260" cy="360" r="18"/><circle class="gain" cx="1340" cy="360" r="18"/>
+<text class="m" x="260" y="420" font-size="26" text-anchor="middle">BAD</text>
+<text class="m" x="1340" y="420" font-size="26" text-anchor="middle" style="fill:var(--gain)">REMARKABLE</text>
+</g>
+<g id="arc">
+<path class="s-muted" d="M1330 330Q800 190 270 330" fill="none" stroke-width="4" stroke-dasharray="10 10"/>
+<text class="m" x="800" y="244" font-size="20" text-anchor="middle">THE USUAL OPPOSITE?</text>
+</g>
+<g id="qcard">
+<rect class="s-line" x="120" y="470" width="760" height="260" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d5" x="160" y="570" font-size="40">“The opposite of remarkable</text>
+<text class="d5" x="160" y="630" font-size="40">is <tspan style="fill:var(--loss)">very good</tspan>.”</text>
+<text class="m" x="160" y="690" font-size="22">SETH GODIN</text>
+</g>
+<g id="bx0">
+<rect class="s-line" x="960" y="470" width="240" height="260" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1080" y="520" font-size="22" text-anchor="middle">BAD</text>
+<g id="cmp"></g>
+<text class="m" x="1080" y="716" font-size="18" text-anchor="middle">COMPLAINTS</text>
+</g>
+<g id="bx1">
+<rect class="s-line" x="1240" y="470" width="240" height="260" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1360" y="520" font-size="22" text-anchor="middle">VERY GOOD</text>
+<text class="d" x="1360" y="630" font-size="60" text-anchor="middle" style="fill:var(--muted)">· · ·</text>
+<text class="m" x="1360" y="716" font-size="18" text-anchor="middle">NOTHING</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Very good blends in.</text>
+<text class="b" x="120" y="176" font-size="32">Meeting expectations feels like background.</text>
+<g id="shp">
+<circle class="ink" cx="240" cy="420" r="50"/>
+<path class="ink" d="M165 640v-65a75 75 0 0 1 150 0v65z"/>
+<circle class="ink" cx="300" cy="395" r="7"/><circle class="ink" cx="330" cy="378" r="10"/><circle class="ink" cx="365" cy="360" r="13"/>
+<text class="m" x="240" y="680" font-size="20" text-anchor="middle">SHOPPER</text>
+</g>
+<text id="zz" class="d" x="240" y="350" font-size="40" text-anchor="middle" style="fill:var(--muted)">z z</text>
+<g id="lst">
+<rect class="s-line" x="400" y="300" width="520" height="320" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="430" y="344" font-size="22">WHAT YOU EXPECT</text>
+<g id="lsti">
+<rect class="s-ink" x="430" y="370" width="40" height="40" rx="8" fill="none" stroke-width="4"/>
+<rect class="s-ink" x="430" y="460" width="40" height="40" rx="8" fill="none" stroke-width="4"/>
+<rect class="s-ink" x="430" y="550" width="40" height="40" rx="8" fill="none" stroke-width="4"/>
+<text class="d5" x="500" y="403" font-size="36">It works.</text>
+<text class="d5" x="500" y="493" font-size="36">It looks decent.</text>
+<text class="d5" x="500" y="583" font-size="36">It arrives on time.</text>
+<g id="ck"></g>
+</g></g>
+<g id="tst"><g id="tsti">
+<rect id="toast" x="1110" y="480" width="160" height="110" rx="18" fill="var(--line)" stroke="var(--ink)" stroke-width="5"/>
+<rect x="1040" y="470" width="300" height="180" rx="40" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/>
+<rect class="ink" x="1340" y="530" width="34" height="16" rx="6"/>
+<path class="s-ink" d="M1080 660v14M1300 660v14" stroke-width="8" stroke-linecap="round"/>
+</g>
+<text class="m" x="1190" y="714" font-size="22" text-anchor="middle">NOBODY MENTIONS IT</text>
+</g>
+<g id="bg2"><text class="d" x="120" y="800" font-size="48">Expected means invisible.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A wall of paint.</text>
+<text class="b" x="120" y="176" font-size="32">Godin’s example: the hardware store paint aisle.</text>
+<g id="shelves"><path class="s-ink" d="M160 420H1440M160 600H1440M160 780H1440" stroke-width="8" stroke-linecap="round"/></g>
+<g id="cans"></g>
+<g id="nr"><text class="m" x="120" y="840" font-size="22">NO REASON TO NOTICE ANY ONE OF THEM</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hidden hassle.</text>
+<text class="b" x="120" y="176" font-size="32">Two problems no one questioned.</text>
+<path class="s-line" d="M160 780H860" stroke-width="4"/>
+<ellipse id="pud0" class="loss" cx="270" cy="778" rx="0" ry="12"/>
+<ellipse id="pud1" class="loss" cx="740" cy="778" rx="0" ry="12"/>
+<g id="bigcan">
+<path d="M300 380V720A200 40 0 0 0 700 720V380Z" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/>
+<rect x="303" y="500" width="394" height="100" fill="var(--line)"/>
+<text class="m" x="500" y="562" font-size="30" text-anchor="middle">PAINT</text>
+<ellipse cx="500" cy="380" rx="200" ry="40" fill="var(--line)" stroke="var(--ink)" stroke-width="7"/>
+<g id="lid"><ellipse cx="500" cy="374" rx="196" ry="36" fill="var(--muted)" stroke="var(--ink)" stroke-width="5"/></g>
+</g>
+<g id="drp"></g>
+<g id="scr"><g id="scri"><rect class="ink" x="0" y="-5" width="120" height="10" rx="3"/><rect class="loss" x="120" y="-18" width="90" height="36" rx="14"/></g></g>
+<g id="h0"><circle class="loss" cx="920" cy="420" r="22"/><text class="d" x="920" y="429" font-size="26" text-anchor="middle" style="fill:var(--stage)">1</text><text class="m" x="960" y="429" font-size="26">PRY OFF THE LID</text></g>
+<g id="h1"><circle class="loss" cx="920" cy="520" r="22"/><text class="d" x="920" y="529" font-size="26" text-anchor="middle" style="fill:var(--stage)">2</text><text class="m" x="960" y="529" font-size="26">DRIPS ON THE FLOOR</text></g>
+<g id="acc"><text class="d" x="900" y="680" font-size="52">That was just how</text><text class="d" x="900" y="744" font-size="52">paint came.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Dutch Boy changed the can.</text>
+<text class="b" x="120" y="176" font-size="32">Same very good paint. A remarkable container.</text>
+<g id="old">
+<rect x="170" y="430" width="180" height="200" fill="var(--stage)" class="s-muted" stroke-width="6"/>
+<ellipse cx="260" cy="430" rx="90" ry="18" fill="var(--line)" class="s-muted" stroke-width="6"/>
+<text class="m" x="260" y="680" font-size="20" text-anchor="middle">METAL TIN</text>
+</g>
+<path id="arr" class="s-muted" d="M390 530h90m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="jug">
+<rect class="s-gain" x="690" y="310" width="110" height="120" rx="30" fill="none" stroke-width="22"/>
+<rect class="gain" x="560" y="380" width="240" height="270" rx="30"/>
+<rect class="ink" x="590" y="350" width="70" height="34" rx="8"/>
+<path class="ink" d="M560 410l-56-36l14-18l52 22z"/>
+<rect x="585" y="465" width="190" height="125" rx="12" fill="var(--stage)"/>
+<text class="m" x="680" y="518" font-size="26" text-anchor="middle" style="fill:var(--ink)">TWIST &amp;</text>
+<text class="m" x="680" y="558" font-size="26" text-anchor="middle" style="fill:var(--ink)">POUR</text>
+</g>
+<g id="cl0"><path class="s-ink" d="M814 350H870" stroke-width="3"/><text class="m" x="880" y="358" font-size="22">HANDLE</text></g>
+<g id="cl1"><path class="s-ink" d="M625 348V290" stroke-width="3"/><text class="m" x="625" y="278" font-size="22" text-anchor="middle">SCREW-OFF LID</text></g>
+<g id="cl2"><path class="s-ink" d="M508 370L476 330" stroke-width="3"/><text class="m" x="470" y="318" font-size="22" text-anchor="middle">SPOUT</text></g>
+<g id="store">
+<rect class="s-ink" x="1040" y="300" width="420" height="380" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M1040 440H1460M1040 580H1460" stroke-width="5"/>
+<text class="m" x="1250" y="720" font-size="20" text-anchor="middle">SHELF SPACE</text>
+</g>
+<g id="bub"></g>
+<g id="still"><text class="m" x="120" y="770" font-size="22">THE PAINT: STILL JUST VERY GOOD</text></g>
+<g id="made"><text class="d" x="120" y="840" font-size="52">The can made it <tspan style="fill:var(--gain)">remarkable</tspan>.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Very good is the starting line.</text>
+<text class="b" x="120" y="176" font-size="32">Your competitors are very good too.</text>
+<g id="lad">
+<path class="s-ink" d="M220 270V780M400 270V780M220 390H400M220 480H400M220 570H400M220 660H400" stroke-width="8" stroke-linecap="round"/>
+<path class="s-gain" d="M220 300H400" stroke-width="10" stroke-linecap="round"/>
+<path class="s-muted" d="M220 750H400" stroke-width="10" stroke-linecap="round"/>
+</g>
+<g id="stl"><text class="m" x="430" y="758" font-size="22">VERY GOOD = START</text></g>
+<g id="topl"><text class="m" x="430" y="308" font-size="22" style="fill:var(--gain)">REMARKABLE</text></g>
+<g id="crw"></g>
+<g id="youG"><circle class="s-gain" cx="1085" cy="562" r="46" fill="none" stroke-width="5" stroke-dasharray="8 8"/></g>
+<g id="nolook"><text class="m" x="800" y="800" font-size="22">RIGHT IN THE MIDDLE, WHERE NO ONE LOOKS</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Find your paint can.</text>
+<text class="b" x="120" y="176" font-size="32">What do your customers simply put up with?</text>
+<g id="nb">
+<rect class="s-ink" x="160" y="250" width="560" height="520" rx="16" fill="var(--stage)" stroke-width="6"/>
+<g id="spi"></g>
+<text class="m" x="200" y="320" font-size="22">WHAT PEOPLE PUT UP WITH</text>
+<path class="s-line" d="M220 380H680M220 490H680M220 600H680M220 710H680" stroke-width="3"/>
+</g>
+<g id="it0"><circle class="loss" cx="250" cy="358" r="10"/><text class="m" x="280" y="366" font-size="26">DRIPS ON THE FLOOR</text></g>
+<g id="it1"><circle class="loss" cx="250" cy="468" r="10"/><text class="m" x="280" y="476" font-size="26">PRYING OFF THE LID</text></g>
+<g id="it2"><circle class="loss" cx="250" cy="578" r="10"/><text class="m" x="280" y="586" font-size="26">YOURS: __________</text></g>
+<g id="ars"></g>
+<g id="rays"></g>
+<g id="bulb"><circle class="gain" cx="1150" cy="400" r="110"/><rect class="ink" x="1100" y="500" width="100" height="26" rx="6"/><rect class="ink" x="1110" y="532" width="80" height="22" rx="6"/></g>
+<g id="chance"><text class="d" x="900" y="680" font-size="40">Every accepted annoyance</text><text class="d" x="900" y="734" font-size="40">is a chance to <tspan style="fill:var(--gain)">stand out</tspan>.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="280" font-size="88" letter-spacing="-2">What do you offer</text></g>
+<g id="qb"><text class="d" x="136" y="380" font-size="88" letter-spacing="-2">that is <tspan style="fill:var(--loss)">very good</tspan>, and</text></g>
+<g id="qc"><text class="d" x="136" y="480" font-size="88" letter-spacing="-2">what would make it</text></g>
+<g id="qd"><text class="d" x="136" y="580" font-size="88" letter-spacing="-2" style="fill:var(--gain)">worth talking about?</text></g>
+<g id="endl"><text class="m" x="143" y="700" font-size="26">FIND YOUR PAINT CAN</text></g>
+<g id="endcow"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="123" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:03</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Very Good Is the Enemy&rdquo;, from <em>Purple Cow</em> by Seth Godin. The Dutch Boy Twist and Pour paint can is used as reported in the book. The scale, checkmarks, crowd and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=123, SC=[[0.0, 8.4], [8.4, 26.8], [26.8, 46.3], [46.3, 61.3], [61.3, 72.4], [72.4, 92.3], [92.3, 102.7], [102.7, 114.1], [114.1, 123.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Very Good Is the Enemy", "The Real Opposite", "Why Good Blends In", "A Wall of Paint", "The Hidden Hassle", "The Twist", "Competence Isn't Enough", "Find Your Paint Can", "Your Challenge"];
+const TM={"brown_cow": 0.0, "scale": 8.72, "quote_card": 16.48, "shopper": 27.12, "checkmarks": 33.84, "yawn": 42.48, "paint_aisle": 46.56, "metal_cans": 49.68, "screwdriver": 61.6, "drips": 65.28, "dutch_boy": 72.72, "plastic_jug": 76.76, "store_shelf": 82.32, "ladder": 92.64, "crowd": 98.32, "notebook": 102.96, "lightbulb": 110.32, "question": 114.4};
+const PP=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const cow=(g,x,y,f)=>{mk('path',{d:`M${x+18} ${y+46}v32M${x+82} ${y+46}v32`,stroke:f,'stroke-width':9,'stroke-linecap':'round'},g);mk('rect',{x:x,y:y,width:100,height:50,rx:18,fill:f},g);mk('circle',{cx:x+110,cy:y+6,r:20,fill:f},g);mk('circle',{cx:x+42,cy:y+22,r:10,fill:'var(--stage)','fill-opacity':.5},g)};
+const tx=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+const COW=[],BDG=[];
+for(let i=0;i<6;i++){const x=1000+(i%3)*160,y=280+Math.floor(i/3)*140,g=mk('g',{},$('herd'));cow(g,x,y,'var(--muted)');COW.push(g);
+  const b=mk('g',{},$('herd'));mk('circle',{cx:x+50,cy:y-26,r:16,fill:'var(--gain)'},b);
+  mk('path',{d:`M${x+42} ${y-26}l6 6l11-12`,fill:'none',stroke:'var(--on-gain)','stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round'},b);BDG.push(b)}
+const CMP=[[990,548],[1090,594],[1000,644]].map(q=>{const g=mk('g',{},$('cmp'));mk('rect',{x:q[0],y:q[1],width:90,height:42,rx:14,class:'loss'},g);
+  tx(g,q[0]+45,q[1]+31,'!!',{class:'d','font-size':26,'text-anchor':'middle',style:'fill:var(--stage)'});return g});
+const CK=[0,1,2].map(i=>mk('path',{d:`M438 ${390+i*90}l12 12l24-26`,fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('ck')));
+// paint aisle
+const CAN=[];
+for(let r=0;r<3;r++)for(let i=0;i<6;i++){const x=205+i*210,y=300+r*180,g=mk('g',{},$('cans'));
+  mk('rect',{x:x,y:y,width:140,height:120,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('ellipse',{cx:x+70,cy:y,rx:70,ry:14,fill:'var(--line)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('rect',{x:x+12,y:y+40,width:116,height:46,rx:6,fill:'var(--stage)',stroke:'var(--muted)','stroke-width':3},g);
+  CAN.push([g,tx(g,x+70,y+72,'GOOD',{class:'m','font-size':24,'text-anchor':'middle'})])}
+// drips: [startX,startY,runX,runTop,runEnd]; side runs hug the outer walls to the floor, front run stops above the label band
+const DR=[[700,384,712,406,770],[300,384,288,406,770],[380,414,380,424,470]].map(q=>[q,mk('path',{class:'s-loss','stroke-width':14,'stroke-linecap':'round','stroke-linejoin':'round',fill:'none'},$('drp'))]);
+for(let i=0;i<6;i++)[520,620].forEach(y=>mk('rect',{x:1065+i*65,y:y,width:45,height:60,class:'s-muted',fill:'var(--line)','stroke-width':3},$('store')));
+for(let i=0;i<3;i++)mk('rect',{x:1090+i*110,y:360,width:70,height:80,rx:12,class:'gain'},$('store'));
+const BUB=[1060,1200,1340].map(x=>{const g=mk('g',{},$('bub'));mk('rect',{x:x,y:210,width:120,height:54,rx:16,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);
+  tx(g,x+60,250,'!',{class:'d','font-size':32,'text-anchor':'middle',style:'fill:var(--gain)'});return g});
+const CRW=[];
+for(let r=0;r<4;r++)for(let c=0;c<7;c++){const g=mk('g',{},$('crw'));PP(g,800+c*95,300+r*120,18,'ink');CRW.push(g)}
+PP($('youG'),1085,540,18,'gain');
+for(let i=0;i<9;i++)mk('circle',{cx:200+i*60,cy:250,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('spi'));
+const ARS=[358,468,578].map(y=>mk('path',{d:`M740 ${y}C880 ${y} 900 400 1020 400`,fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-dasharray':'10 10'},$('ars')));
+for(let i=0;i<6;i++){const a=(-165+i*30)*Math.PI/180,c=Math.cos(a),s=Math.sin(a);
+  mk('path',{d:`M${(1150+135*c).toFixed(1)} ${(400+135*s).toFixed(1)}L${(1150+175*c).toFixed(1)} ${(400+175*s).toFixed(1)}`,class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+cow($('endcow'),1260,700,'var(--gain)');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const B=TM.brown_cow;
+  COW.forEach((g,i)=>rise(g,p(u,B+i*.15,B+i*.15+.5)));
+  BDG.forEach((g,i)=>rise(g,p(u,B+6.6+i*.15,B+7+i*.15)));
+  $('herd').setAttribute('opacity',(1-.55*p(u,B+8,B+9.5)).toFixed(2));
+  rise($('ig'),p(u,B+8,B+8.5));
+
+  rise($('scl'),p(u,TM.scale,TM.scale+.5)); rise($('arc'),p(u,TM.scale+5.4,TM.scale+5.9));
+  rise($('qcard'),p(u,TM.quote_card,TM.quote_card+.5)); rise($('bx0'),p(u,TM.quote_card+4.2,TM.quote_card+4.7));
+  CMP.forEach((g,i)=>rise(g,p(u,TM.quote_card+4.6+i*.3,TM.quote_card+4.9+i*.3)));
+  rise($('bx1'),p(u,TM.quote_card+6.7,TM.quote_card+7.2));
+
+  const yw=p(u,TM.yawn,TM.yawn+1);
+  rise($('shp'),p(u,TM.shopper,TM.shopper+.5)); rise($('lst'),p(u,TM.shopper+3.7,TM.shopper+4.2));
+  CK.forEach((c,i)=>rise(c,p(u,TM.checkmarks+i*.8,TM.checkmarks+i*.8+.4)));
+  rise($('tst'),p(u,TM.checkmarks+4.2,TM.checkmarks+4.7));
+  $('toast').setAttribute('y',(480-90*p(u,TM.checkmarks+5,TM.checkmarks+5.5)).toFixed(1));
+  $('lsti').setAttribute('opacity',(1-.55*yw).toFixed(2)); $('tsti').setAttribute('opacity',(1-.55*yw).toFixed(2));
+  rise($('zz'),yw*(.7+.3*Math.sin(t*2))); rise($('bg2'),p(u,TM.yawn+.4,TM.yawn+.9));
+
+  rise($('shelves'),p(u,TM.paint_aisle,TM.paint_aisle+.5));
+  CAN.forEach((c,i)=>{const a=TM.metal_cans+i*.08;rise(c[0],p(u,a,a+.4));c[1].setAttribute('opacity',p(u,TM.metal_cans+5.4+i*.05,TM.metal_cans+5.8+i*.05))});
+  $('cans').setAttribute('opacity',(1-.25*p(u,TM.metal_cans+9.2,TM.metal_cans+10)).toFixed(2));
+  rise($('nr'),p(u,TM.metal_cans+9.2,TM.metal_cans+9.7));
+
+  const S=TM.screwdriver,pr=p(u,S+.8,S+2)*(1+.15*Math.sin(t*3)*(u>S+2?1:0));
+  rise($('bigcan'),p(u,S-.2,S+.3)); rise($('scr'),p(u,S+.4,S+.8));
+  $('scri').setAttribute('transform','translate(620 406) rotate('+(-(25+15*pr)).toFixed(1)+')');
+  $('lid').setAttribute('transform','translate(0 '+(-14*pr).toFixed(1)+')');
+  DR.forEach(([q,e],i)=>{const k=p(u,TM.drips+i*.4,TM.drips+i*.4+2);const y=q[3]+(q[4]-q[3])*k;
+    e.setAttribute('d','M'+q[0]+' '+q[1]+'Q'+q[2]+' '+(q[1]+8)+' '+q[2]+' '+q[3]+'V'+y.toFixed(0));e.setAttribute('opacity',k>0?1:0)});
+  $('pud1').setAttribute('rx',(90*p(u,TM.drips+1.8,TM.drips+3.2)).toFixed(1));
+  $('pud0').setAttribute('rx',(70*p(u,TM.drips+2.2,TM.drips+3.6)).toFixed(1));
+  rise($('h0'),p(u,S+.4,S+.9)); rise($('h1'),p(u,TM.drips,TM.drips+.5)); rise($('acc'),p(u,TM.drips+4.5,TM.drips+5.1));
+
+  rise($('old'),p(u,TM.dutch_boy,TM.dutch_boy+.5)); rise($('arr'),p(u,TM.dutch_boy+.6,TM.dutch_boy+1.1));
+  rise($('jug'),p(u,TM.plastic_jug,TM.plastic_jug+.6));
+  [0,1,2].forEach(i=>{const a=TM.plastic_jug+1.5+i*1.2;rise($('cl'+i),p(u,a,a+.4))});
+  rise($('store'),p(u,TM.store_shelf,TM.store_shelf+.5));
+  BUB.forEach((g,i)=>rise(g,p(u,TM.store_shelf+.6+i*.3,TM.store_shelf+1+i*.3)));
+  rise($('still'),p(u,TM.store_shelf+6.6,TM.store_shelf+7.1)); rise($('made'),p(u,TM.store_shelf+9.6,TM.store_shelf+10.1));
+
+  rise($('lad'),p(u,TM.ladder,TM.ladder+.5)); rise($('stl'),p(u,TM.ladder+.6,TM.ladder+1.1)); rise($('topl'),p(u,TM.ladder+1.4,TM.ladder+1.9));
+  CRW.forEach((g,i)=>{const a=TM.ladder+4.2+i*.04;rise(g,p(u,a,a+.4))});
+  rise($('youG'),p(u,TM.crowd,TM.crowd+.5)); rise($('nolook'),p(u,TM.crowd+.6,TM.crowd+1.1));
+
+  rise($('nb'),p(u,TM.notebook,TM.notebook+.5));
+  [0,1,2].forEach(i=>{const a=TM.notebook+3.4+i*1.2;rise($('it'+i),p(u,a,a+.4))});
+  ARS.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.lightbulb+i*.2,TM.lightbulb+i*.2+.4)));
+  rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.5));
+  const rs=1+.04*Math.sin(t*3);
+  $('rays').setAttribute('opacity',p(u,TM.lightbulb+.3,TM.lightbulb+.8));
+  $('rays').setAttribute('transform','translate(1150 400) scale('+rs.toFixed(3)+') translate(-1150 -400)');
+  rise($('chance'),p(u,TM.lightbulb+.6,TM.lightbulb+1.1));
+
+  ['qa','qb','qc','qd'].forEach((id,i)=>rise($(id),p(u,TM.question+i*.4,TM.question+i*.4+.5)));
+  rise($('endl'),p(u,TM.question+2.2,TM.question+2.7));
+  rise($('endcow'),p(u,TM.question+1.8,TM.question+2.3)*(.9+.1*Math.sin(t*2)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:119.33;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

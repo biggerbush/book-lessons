@@ -1,0 +1,404 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crush It! Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Crush It!: Start on nights and weekends, be patient before monetizing, and value legacy over quick money to make your passion last. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">CRUSH IT! · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Play the</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">long game.</text>
+<text class="b" x="120" y="600" font-size="32">Build slowly, protect your name, and let your passion last.</text>
+<g id="hg">
+<polygon id="sandT" class="gain"/><polygon id="sandB" class="gain"/>
+<line id="stream" class="s-gain" x1="1330" y1="460" x2="1330" y2="630" stroke-width="5" stroke-dasharray="10 8"/>
+<path class="s-ink" d="M1240 286C1240 380 1320 420 1320 460C1320 500 1240 540 1240 634M1420 286C1420 380 1340 420 1340 460C1340 500 1420 540 1420 634" fill="none" stroke-width="7" stroke-linecap="round"/>
+<rect class="ink" x="1210" y="262" width="240" height="24" rx="8"/>
+<rect class="ink" x="1210" y="634" width="240" height="24" rx="8"/>
+</g>
+<g id="stay"><text class="m" x="1330" y="720" font-size="22" text-anchor="middle" style="fill:var(--gain)">BE THE ONE WHO STAYS</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Keep the day job.</text>
+<text class="b" x="120" y="176" font-size="32">Keep your paycheck and build on the side.</text>
+<g id="day">
+<rect class="s-line" x="120" y="230" width="620" height="400" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">DAY JOB</text>
+<circle class="gain" cx="660" cy="280" r="28"/>
+<rect class="s-ink" x="430" y="390" width="160" height="100" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M510 490v36M180 530h500" stroke-width="7" stroke-linecap="round"/>
+<g id="dper"></g>
+</g>
+<g id="pay"><rect class="gain" x="150" y="556" width="230" height="54" rx="8"/><text class="m" x="265" y="591" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">PAYCHECK</text></g>
+<g id="night">
+<rect class="loss" x="860" y="230" width="620" height="400" rx="18" fill-opacity=".14"/>
+<text class="m" x="890" y="280" font-size="22">NIGHTS &amp; WEEKENDS</text>
+<path class="gain" d="M1410 250A44 44 0 1 0 1450 320A36 36 0 1 1 1410 250Z"/>
+<circle class="ink" cx="1000" cy="330" r="5"/><circle class="ink" cx="1210" cy="320" r="5"/><circle class="ink" cx="1310" cy="370" r="5"/>
+<rect class="ink" x="1130" y="430" width="150" height="90" rx="6"/>
+<path class="s-ink" d="M1100 520h210M900 532h540" stroke-width="7" stroke-linecap="round"/>
+<g id="nper"></g>
+</g>
+<g id="net">
+<path class="s-gain" d="M160 690Q800 790 1440 690" fill="none" stroke-width="6"/>
+<path class="s-gain" d="M160 730Q800 830 1440 730" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<text class="d5" x="120" y="846" font-size="40">A safety net lets you take creative risks.</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Find the hours.</text>
+<text class="b" x="120" y="176" font-size="32">So where does the time come from?</text>
+<g id="tv">
+<path class="s-ink" d="M250 300l-40-50M360 300l40-50M230 560l20-40M380 560l-20-40" stroke-width="6" stroke-linecap="round"/>
+<rect class="s-ink" x="140" y="300" width="330" height="220" rx="16" fill="var(--stage)" stroke-width="7"/>
+<rect id="scr" class="loss" x="165" y="325" width="280" height="170" rx="6" fill-opacity=".3"/>
+</g>
+<g id="ph"><rect class="s-ink" x="510" y="360" width="110" height="190" rx="16" fill="var(--stage)" stroke-width="6"/><g id="phl"></g></g>
+<g id="lbtv"><text class="m" x="140" y="670" font-size="20">WATCHING OR SCROLLING</text></g>
+<g id="clk">
+<path class="s-muted" d="M650 440h60m-18-18 18 18-18 18M950 440h50m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="s-ink" cx="830" cy="440" r="100" fill="var(--stage)" stroke-width="7"/>
+<g id="ticks"></g>
+<line class="s-ink" x1="830" y1="440" x2="880" y2="440" stroke-width="8" stroke-linecap="round"/>
+<line id="hand" class="s-gain" x1="830" y1="440" x2="830" y2="365" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="830" cy="440" r="10"/>
+<text class="m" x="730" y="670" font-size="20">TRADE THEM FOR BUILDING</text>
+<text class="m" x="1460" y="670" font-size="20" text-anchor="end" style="fill:var(--gain)">NIGHTS ADD UP</text>
+</g>
+<g id="bars"></g>
+<g id="huge"><text class="d" x="120" y="790" font-size="46">A few years of nights add up to something huge.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Gary’s slow start.</text>
+<text class="b" x="120" y="176" font-size="32">Wine Library TV, episode after episode.</text>
+<g id="cam">
+<rect class="ink" x="150" y="260" width="200" height="120" rx="14"/>
+<path class="ink" d="M350 300l60-30v100l-60-30z"/>
+<circle cx="230" cy="320" r="34" fill="var(--stage)"/>
+<circle id="rec" class="loss" cx="320" cy="282" r="9"/>
+<rect class="gain" x="488" y="270" width="20" height="44" rx="4"/><rect class="gain" x="470" y="306" width="56" height="114" rx="14"/>
+<text class="m" x="560" y="330" font-size="26">WINE LIBRARY TV</text>
+</g>
+<g id="eps"><text class="m" x="560" y="374" font-size="24">FILMED DAY AFTER DAY</text></g>
+<g id="aud"></g>
+<g id="lbA"><text class="m" x="120" y="812" font-size="20">EARLY: A HANDFUL OF VIEWERS</text></g>
+<g id="lbB"><text class="m" x="1460" y="812" font-size="20" text-anchor="end" style="fill:var(--gain)">LATER: A BIG AUDIENCE</text></g>
+<g id="shop">
+<path class="s-ink" d="M1290 390V290l80-50 80 50v100z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="gain" x="1350" y="330" width="40" height="60"/>
+<text class="m" x="1270" y="330" font-size="22" text-anchor="end" style="fill:var(--gain)">FAMILY BUSINESS</text>
+</g>
+<g id="grow"><path class="s-gain" d="M1440 462V404M1424 420l16-16 16 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="love"><text class="d5" x="120" y="856" font-size="36">He kept going, because he loved talking about wine.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Audience before money.</text>
+<text class="b" x="120" y="176" font-size="32">Grow the audience first. Let the money wait.</text>
+<g id="plant"><path id="stem" class="s-gain" stroke-width="8" stroke-linecap="round" fill="none"/><g id="leaves"></g><path class="loss" d="M740 620h120l-16 90h-88z"/></g>
+<g id="early">
+<circle class="loss" cx="320" cy="330" r="50"/><text class="d" x="320" y="350" font-size="56" text-anchor="middle" style="fill:var(--stage)">$</text>
+<g id="flee"></g>
+<text class="m" x="140" y="640" font-size="22" style="fill:var(--loss)">CASH IN TOO EARLY</text>
+</g>
+<g id="give">
+<rect class="gain" x="1250" y="300" width="100" height="80" rx="6"/><rect class="gain" x="1240" y="282" width="120" height="22" rx="6"/>
+<path d="M1300 282v98" stroke="var(--on-gain)" stroke-width="6"/>
+<g id="fans"></g>
+<text class="m" x="1460" y="640" font-size="22" text-anchor="end" style="fill:var(--gain)">GIVE VALUE FREELY</text>
+</g>
+<g id="bigc"></g>
+<g id="bct"><text class="m" x="800" y="840" font-size="22" text-anchor="middle">ATTENTION AND TRUST FIRST</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">When money arrives.</text>
+<text class="b" x="120" y="176" font-size="32">Opportunities knock once people truly follow you.</text>
+<g id="comm"><circle class="gain" cx="330" cy="470" r="42"/><text class="m" x="330" y="478" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">YOU</text></g>
+<g id="doors"></g>
+<g id="links"></g>
+<g id="listen"><text class="d" x="120" y="810" font-size="46">Doors open because a community listens.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Legacy over cash.</text>
+<text class="b" x="120" y="176" font-size="32">Gary cares more about the legacy he leaves than a quick payday.</text>
+<g id="scl">
+<path class="s-ink" d="M800 500V720" stroke-width="10" stroke-linecap="round"/>
+<rect class="ink" x="680" y="716" width="240" height="22" rx="8"/>
+<line id="beam" class="s-ink" stroke-width="10" stroke-linecap="round"/>
+<line id="stL" class="s-ink" stroke-width="7" stroke-linecap="round"/>
+<line id="stR" class="s-ink" stroke-width="7" stroke-linecap="round"/>
+<rect id="pnL" class="ink" width="200" height="14" rx="7"/>
+<rect id="pnR" class="ink" width="200" height="14" rx="7"/>
+<g id="itL"><g id="bag"><path class="gain" d="M-40 0C-75 0-70-70-22-82l-12-22h68l-12 22C70-70 75 0 40 0z"/><text class="d" x="0" y="-22" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">$</text></g></g>
+<g id="itR"><g id="tree"><rect id="trk" class="ink"/><circle id="tc0" class="gain"/><circle id="tc1" class="gain"/><circle id="tc2" class="gain"/></g></g>
+<circle class="ink" cx="800" cy="500" r="16"/>
+</g>
+<g id="lbL"><text class="m" x="500" y="800" font-size="22" text-anchor="middle">QUICK PAYDAY</text></g>
+<g id="lbL2"><text class="m" x="500" y="840" font-size="20" text-anchor="middle" style="fill:var(--loss)">BETRAYS YOUR AUDIENCE</text></g>
+<g id="lbR"><text class="m" x="1100" y="800" font-size="22" text-anchor="middle">LEGACY</text></g>
+<g id="lbR2"><text class="m" x="1100" y="840" font-size="20" text-anchor="middle" style="fill:var(--gain)">GROWS FOR DECADES</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Patience is a skill.</text>
+<text class="b" x="120" y="176" font-size="32">Think in years, not weeks.</text>
+<g id="cal">
+<rect class="s-ink" x="120" y="240" width="360" height="320" rx="12" fill="var(--stage)" stroke-width="6"/>
+<rect class="loss" x="120" y="240" width="360" height="60" rx="12"/>
+<text class="m" x="300" y="280" font-size="22" text-anchor="middle" style="fill:var(--stage)">YEARS, NOT WEEKS</text>
+<g id="cells"></g>
+</g>
+<g id="imp"><text class="m" x="120" y="620" font-size="22" style="fill:var(--loss)">IMPATIENCE KILLS</text><text class="m" x="120" y="652" font-size="22" style="fill:var(--loss)">MOST PROJECTS</text></g>
+<g id="mtn">
+<polygon class="loss" points="560,780 1180,260 1480,780" fill-opacity=".15"/>
+<polyline class="s-ink" points="560,780 1180,260 1480,780" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="gain" d="M1180 260v-70l50 20-50 20z"/><path class="s-ink" d="M1180 260v-70" stroke-width="5"/>
+<g id="steps"></g>
+<circle id="clb" class="gain" r="18"/>
+</g>
+<g id="step"><text class="d" x="120" y="850" font-size="40">Every night of work is another step up.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qt"><text class="m" x="143" y="250" font-size="26">TONIGHT, FIND ONE HOUR YOU USUALLY GIVE AWAY</text></g>
+<g id="clk2"><circle class="s-ink" cx="1360" cy="250" r="70" fill="var(--stage)" stroke-width="7"/><path id="wedge" class="gain" d="M1360 250L1360 186A64 64 0 0 1 1392 194.6Z"/><circle class="ink" cx="1360" cy="250" r="8"/></g>
+<g id="qa"><text class="d" x="136" y="430" font-size="88" letter-spacing="-2">What could five years</text></g>
+<g id="qb"><text class="d" x="136" y="540" font-size="88" letter-spacing="-2">of <tspan style="fill:var(--gain)">those hours</tspan> build?</text></g>
+<g id="hrs"></g>
+<g id="qt2"><text class="m" x="143" y="770" font-size="26">SPEND IT ON YOUR PASSION</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="118" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:58</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Play the Long Game&rdquo;, from <em>Crush It!</em> by Gary Vaynerchuk. Gary&#x27;s experience building Wine Library TV is as reported in the book. The crowds, coins, scale, tree and mountain are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=118, SC=[[0.0, 6.9], [6.9, 21.6], [21.6, 33.7], [33.7, 52.2], [52.2, 66.6], [66.6, 81.0], [81.0, 93.9], [93.9, 106.4], [106.4, 118.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Play the Long Game", "Keep the Day Job", "Find the Hours", "Gary's Slow Start", "Audience Before Money", "When Money Arrives", "Legacy Over Cash", "Patience Is a Skill", "Your Challenge"];
+const TM={"hourglass": 0.0, "desk_job": 7.2, "moon": 14.12, "tv_remote": 21.92, "clock": 29.04, "camera": 34.0, "small_crowd": 40.32, "seedling": 52.48, "big_crowd": 64.24, "coins": 66.88, "handshake": 77.04, "scale": 81.28, "gold_bag": 86.96, "tree": 90.45, "calendar": 94.24, "mountain": 102.24};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+fig($('dper'),300,400,26,'ink'); fig($('nper'),1040,400,26,'gain');
+const PL=[0,1,2,3].map(i=>mk('rect',{x:528,y:380,width:74,height:10,rx:5,class:'loss'},$('phl')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('line',{x1:830+80*Math.cos(a),y1:440+80*Math.sin(a),x2:830+92*Math.cos(a),y2:440+92*Math.sin(a),class:'s-ink','stroke-width':4},$('ticks'))}
+const SQ=[];for(let i=0;i<6;i++)for(let j=0;j<(i+1)*2;j++)SQ.push(mk('rect',{x:1030+i*72,y:598-j*28,width:60,height:22,rx:4,class:'gain'},$('bars')));
+// episode strip with a column of viewers under each episode, growing along the timeline
+const EP=[];for(let i=0;i<20;i++)EP.push(mk('rect',{x:120+i*68,y:470,width:56,height:44,rx:6,stroke:'var(--ink)','stroke-width':4},$('eps')));
+const VC=[];for(let i=0;i<20;i++){const cx=148+i*68,n=Math.round(1+13*Math.pow(i/19,3)),figs=[];
+  for(let k=0;k<n;k++){const g=mk('g',{},$('aud')),j=Math.floor(k/2),x=n===1?cx:cx+(k%2?14:-14);fig(g,x,752-j*34,6,'ink');figs.push(g)}
+  VC.push(figs)}
+const LY=[560,500,440,390],LV=LY.map((y,i)=>{const s=i%2?1:-1,x=800+s*32;return mk('ellipse',{cx:x,cy:y,rx:32,ry:13,class:'gain',transform:'rotate('+(-25*s)+' '+x+' '+y+')'},$('leaves'))});
+const FL=[230,320,410].map(x=>{const g=mk('g',{},$('flee'));fig(g,x,470,20,'ink');return g});
+[1180,1300,1420].forEach(x=>fig($('fans'),x,470,20,'ink'));
+const BC=[];for(let i=0;i<16;i++)BC.push(mk('circle',{cx:200+i*80,cy:770,r:18,class:'gain'},$('bigc')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('circle',{cx:330+120*Math.cos(a),cy:470+120*Math.sin(a),r:20,class:'ink'},$('comm'))}
+// doors: indigo leaf shrinks toward its hinge (explicit width, no scaling); handle sits on the right side
+const DR=['ADVERTISING','SPONSORSHIPS','SPEAKING','CONSULTING'].map((s,i)=>{const x=640+i*210,g=mk('g',{},$('doors'));
+  mk('rect',{x:x,y:300,width:150,height:260,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);
+  mk('circle',{cx:x+75,cy:430,r:40,class:'gain'},g);
+  const d=mk('text',{x:x+75,y:446,'font-size':44,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'},g);d.textContent='$';
+  const pg=mk('rect',{x:x+3,y:303,width:144,height:254,class:'loss'},g);
+  const hd=mk('circle',{cx:x+126,cy:440,r:9,class:'gain'},g);
+  const lb=mk('text',{x:x+75,y:278,'font-size':20,'text-anchor':'middle',class:'m'},g);lb.textContent=s;
+  const a=(15+22*i)*Math.PI/180,sx=330+150*Math.cos(a),sy=470+150*Math.sin(a),ex=x+75,ey=568;
+  const lk=mk('g',{},$('links'));
+  mk('path',{d:'M'+sx.toFixed(1)+' '+sy.toFixed(1)+'Q'+ex+' '+(620+i*45)+' '+ex+' '+ey,fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-dasharray':'10 10','stroke-linecap':'round'},lk);
+  mk('circle',{cx:sx.toFixed(1),cy:sy.toFixed(1),r:7,class:'gain'},lk);
+  mk('circle',{cx:ex,cy:ey,r:7,class:'gain'},lk);
+  return [pg,hd,lb,lk]});
+const CE=[];for(let i=0;i<42;i++)CE.push(mk('rect',{x:140+(i%7)*48,y:320+Math.floor(i/7)*38,width:40,height:28,rx:4},$('cells')));
+const ST=[];for(let i=0;i<12;i++)ST.push(mk('path',{d:'M'+(600+i*46)+' '+(746-i*38.6).toFixed(1)+'v-38h46',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('steps')));
+const HR=[];for(let i=0;i<30;i++)HR.push(mk('rect',{x:143+i*44,y:660,width:32,height:32,rx:6},$('hrs')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const k0=cl(t/9)*.95,ly=300+150*k0,hw=85*(455-ly)/155;
+  $('sandT').setAttribute('points',(1330-hw).toFixed(1)+','+ly.toFixed(1)+' '+(1330+hw).toFixed(1)+','+ly.toFixed(1)+' 1330,455');
+  $('sandB').setAttribute('points','1250,630 1410,630 1330,'+(630-140*k0).toFixed(1));
+  $('stream').setAttribute('opacity',k0<.95?1:0); $('stream').setAttribute('stroke-dashoffset',(-t*60).toFixed(1));
+  rise($('hg'),p(u,TM.hourglass,TM.hourglass+.6)); rise($('stay'),p(u,TM.hourglass+5,TM.hourglass+5.5));
+
+  rise($('day'),p(u,TM.desk_job,TM.desk_job+.5)); rise($('pay'),p(u,TM.desk_job+4.2,TM.desk_job+4.7));
+  rise($('night'),p(u,TM.moon,TM.moon+.5)); rise($('net'),p(u,TM.moon+3.7,TM.moon+4.3));
+
+  rise($('tv'),p(u,TM.tv_remote,TM.tv_remote+.5)); $('scr').setAttribute('fill-opacity',(.25+.1*Math.sin(t*7)).toFixed(2));
+  rise($('ph'),p(u,TM.tv_remote+3,TM.tv_remote+3.5)); rise($('lbtv'),p(u,TM.tv_remote+3,TM.tv_remote+3.5));
+  PL.forEach((l,i)=>l.setAttribute('y',(380+((i*40+t*30)%150)).toFixed(1)));
+  rise($('clk'),p(u,TM.clock,TM.clock+.5)); $('hand').setAttribute('transform','rotate('+((t*90)%360).toFixed(1)+' 830 440)');
+  SQ.forEach((s,k)=>s.setAttribute('opacity',p(u,TM.clock+1+k*.12,TM.clock+1.3+k*.12)));
+  rise($('huge'),p(u,TM.clock+3,TM.clock+3.6));
+
+  // Gary: viewers grow column by column along the episode strip
+  rise($('cam'),p(u,TM.camera,TM.camera+.5)); $('rec').setAttribute('opacity',Math.sin(t*5)>0?1:.2);
+  rise($('eps'),p(u,TM.camera+2,TM.camera+2.5));
+  VC.forEach((figs,i)=>{const a=i<6?TM.small_crowd+i*.3:TM.small_crowd+8+(i-6)*3/13;
+    EP[i].setAttribute('fill',u>=Math.min(TM.camera+2.2+i*.6,a-.2)?'var(--gain)':'var(--stage)');
+    const q=p(u,a,a+.8)*figs.length; figs.forEach((g,k)=>rise(g,cl(q-k)))});
+  rise($('lbA'),p(u,TM.small_crowd+.5,TM.small_crowd+1));
+  rise($('love'),p(u,TM.small_crowd+3.8,TM.small_crowd+4.4));
+  rise($('shop'),p(u,TM.small_crowd+8,TM.small_crowd+8.5));
+  rise($('lbB'),p(u,TM.small_crowd+10,TM.small_crowd+10.5));
+  rise($('grow'),p(u,TM.small_crowd+10.6,TM.small_crowd+11.1));
+
+  rise($('plant'),p(u,TM.seedling,TM.seedling+.5));
+  const st=620-260*(.15+.85*p(u,TM.seedling,TM.big_crowd+1)); $('stem').setAttribute('d','M800 620V'+st.toFixed(1));
+  LV.forEach((l,i)=>l.setAttribute('opacity',cl((LY[i]-st)/30)));
+  rise($('early'),p(u,TM.seedling+4.6,TM.seedling+5.1));
+  const fl=p(u,TM.seedling+6,TM.seedling+7.5); FL.forEach((g,i)=>{g.setAttribute('transform','translate('+(-(30+i*40)*fl).toFixed(1)+' 0)'); g.setAttribute('opacity',(1-.7*fl).toFixed(2))});
+  rise($('give'),p(u,TM.seedling+11.6,TM.seedling+12.1));
+  BC.forEach((c,i)=>rise(c,p(u,TM.big_crowd+i*.08,TM.big_crowd+.4+i*.08))); rise($('bct'),p(u,TM.big_crowd+.6,TM.big_crowd+1.1));
+
+  // doors open: leaf narrows to its hinge, handle fades
+  rise($('comm'),p(u,TM.coins,TM.coins+.5)); rise($('doors'),p(u,TM.coins+.6,TM.coins+1.1));
+  DR.forEach(([pg,hd,lb,lk],i)=>{const k=p(u,TM.coins+3.4+i*.9,TM.coins+4+i*.9);
+    pg.setAttribute('width',(144*(1-.85*k)).toFixed(1)); hd.setAttribute('opacity',cl(1-2*k).toFixed(2));
+    lb.setAttribute('opacity',k); lk.setAttribute('opacity',p(u,TM.handshake+i*.3,TM.handshake+.4+i*.3))});
+  rise($('listen'),p(u,TM.handshake+.6,TM.handshake+1.2));
+
+  // seesaw: pans attached to beam ends by matching stems
+  rise($('scl'),p(u,TM.scale,TM.scale+.5));
+  const an=(-8*p(u,TM.gold_bag+.5,TM.gold_bag+1.5)+18*p(u,TM.tree+.5,TM.tree+2.5))*Math.PI/180,bc=300*Math.cos(an),bs=300*Math.sin(an);
+  const xL=800-bc,yL=500-bs,xR=800+bc,yR=500+bs;
+  $('beam').setAttribute('x1',xL.toFixed(1)); $('beam').setAttribute('y1',yL.toFixed(1)); $('beam').setAttribute('x2',xR.toFixed(1)); $('beam').setAttribute('y2',yR.toFixed(1));
+  [[xL,yL,'stL','pnL','itL'],[xR,yR,'stR','pnR','itR']].forEach(([x,y,s,pn,it])=>{
+    $(s).setAttribute('x1',x.toFixed(1)); $(s).setAttribute('y1',y.toFixed(1)); $(s).setAttribute('x2',x.toFixed(1)); $(s).setAttribute('y2',(y-40).toFixed(1));
+    $(pn).setAttribute('x',(x-100).toFixed(1)); $(pn).setAttribute('y',(y-52).toFixed(1));
+    $(it).setAttribute('transform','translate('+x.toFixed(1)+' '+(y-52).toFixed(1)+')')});
+  rise($('bag'),p(u,TM.gold_bag,TM.gold_bag+.5));
+  const ts=.3+.7*p(u,TM.tree,TM.tree+3);
+  $('trk').setAttribute('x',(-9*ts).toFixed(1)); $('trk').setAttribute('y',(-80*ts).toFixed(1)); $('trk').setAttribute('width',(18*ts).toFixed(1)); $('trk').setAttribute('height',(80*ts).toFixed(1));
+  [[0,-120,44],[-38,-92,30],[38,-92,30]].forEach((c,i)=>{const e=$('tc'+i); e.setAttribute('cx',(c[0]*ts).toFixed(1)); e.setAttribute('cy',(c[1]*ts).toFixed(1)); e.setAttribute('r',(c[2]*ts).toFixed(1))});
+  $('tree').setAttribute('opacity',p(u,TM.scale+2.2,TM.scale+2.7));
+  rise($('lbL'),p(u,TM.gold_bag,TM.gold_bag+.5)); rise($('lbL2'),p(u,TM.gold_bag+2,TM.gold_bag+2.5));
+  rise($('lbR'),p(u,TM.scale+2.2,TM.scale+2.7)); rise($('lbR2'),p(u,TM.tree,TM.tree+.5));
+
+  rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+  CE.forEach((c,i)=>c.setAttribute('fill',u>=TM.calendar+.5+i*.15?'var(--gain)':'var(--line)'));
+  rise($('imp'),p(u,TM.calendar+2.1,TM.calendar+2.6)); rise($('mtn'),p(u,TM.mountain,TM.mountain+.5));
+  const cb=12*p(u,TM.mountain+.5,TM.mountain+5.5); ST.forEach((s,i)=>s.setAttribute('opacity',cl(cb-i+1)));
+  $('clb').setAttribute('cx',(600+cb*46).toFixed(1)); $('clb').setAttribute('cy',(688-cb*38.6+3*Math.sin(t*6)).toFixed(1));
+  rise($('step'),p(u,TM.mountain+1.5,TM.mountain+2.1));
+
+  const S8=SC[8][0]/K;
+  rise($('qt'),p(u,S8+.3,S8+.8)); rise($('clk2'),p(u,S8+.6,S8+1.1)); $('wedge').setAttribute('opacity',(.7+.3*Math.sin(t*3)).toFixed(2));
+  rise($('qt2'),p(u,S8+1.2,S8+1.7)); rise($('qa'),p(u,S8+5.8,S8+6.3)); rise($('qb'),p(u,S8+6.3,S8+6.8));
+  HR.forEach((h,i)=>h.setAttribute('fill',u>=S8+7+i*.15?'var(--gain)':'var(--line)'));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:114.13;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

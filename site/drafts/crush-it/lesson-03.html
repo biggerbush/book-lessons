@@ -1,0 +1,384 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crush It! Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Crush It!: Everyone now needs a personal brand, because people connect with and buy from individuals they trust. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">CRUSH IT! · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">You are</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the brand.</text>
+<text class="b" x="120" y="600" font-size="32">Why your own name is your most valuable business asset</text>
+<ellipse class="s-ink" cx="1300" cy="400" rx="130" ry="180" fill="var(--stage)" stroke-width="8"/>
+<ellipse class="s-line" cx="1300" cy="400" rx="112" ry="162" fill="none" stroke-width="3"/>
+<path class="s-ink" d="M1300 580v80M1220 680h160" stroke-width="8" stroke-linecap="round"/>
+<g id="mirFig"></g>
+<path id="spk" class="s-gain" d="M0-22v44M-22 0h44" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Everyone is a brand.</text>
+<text class="b" x="120" y="176" font-size="32">Employees too, not just entrepreneurs.</text>
+<g id="ppl"></g>
+<g id="ego"><rect class="s-loss" x="120" y="640" width="200" height="64" rx="32" fill="var(--stage)" stroke-width="4"/><text class="d" x="220" y="684" font-size="34" text-anchor="middle">EGO</text></g>
+<line id="egoS" class="s-ink" x1="136" y1="672" x2="136" y2="672" stroke-width="5" stroke-linecap="round"/>
+<g id="known"><rect class="gain" x="360" y="640" width="440" height="64" rx="32"/><text class="m" x="580" y="680" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">KNOWN FOR SOMETHING</text></g>
+<circle id="glow" class="gain" cx="1200" cy="410" r="210" fill-opacity=".12"/>
+<g id="lap">
+<rect class="s-ink" x="1000" y="280" width="400" height="260" rx="14" fill="var(--stage)" stroke-width="7"/>
+<path class="ink" d="M960 540h480l-30 34H990z"/>
+<rect class="s-ink" x="1030" y="310" width="340" height="50" rx="25" fill="none" stroke-width="4"/>
+<text class="d5" x="1056" y="344" font-size="26">Your Name</text>
+<circle class="s-ink" cx="1336" cy="333" r="10" fill="none" stroke-width="4"/>
+<rect class="gain" x="1030" y="390" width="300" height="16" rx="8"/>
+<rect fill="var(--line)" x="1030" y="426" width="250" height="12" rx="6"/>
+<rect fill="var(--line)" x="1030" y="456" width="280" height="12" rx="6"/>
+<rect fill="var(--line)" x="1030" y="486" width="220" height="12" rx="6"/>
+<text class="m" x="1200" y="640" font-size="20" text-anchor="middle">SEARCHED · REMEMBERED · TALKED ABOUT</text>
+</g>
+</g>
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">People buy from people.</text>
+<text class="b" x="120" y="176" font-size="32">A familiar face feels safer than a logo.</text>
+<g id="corp">
+<rect class="s-muted" x="150" y="300" width="280" height="340" fill="var(--stage)" stroke-width="5" stroke-dasharray="12 8"/>
+<circle class="loss" cx="290" cy="355" r="28"/>
+<g id="cwin"></g>
+<text class="m" x="290" y="690" font-size="20" text-anchor="middle">FACELESS COMPANY</text>
+<path class="s-loss" d="M760 380Q600 260 440 380" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<path class="s-loss" d="M585 305l30 30m0-30l-30 30" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g id="shp"><g id="shpF"></g><text class="m" x="800" y="600" font-size="20" text-anchor="middle">YOU</text></g>
+<g id="sel"><g id="selF"></g><text class="m" x="1290" y="600" font-size="20" text-anchor="middle">A PERSON YOU TRUST</text>
+<path class="s-gain" d="M840 380Q1045 260 1250 380" fill="none" stroke-width="5" stroke-dasharray="10 10"/></g>
+<path id="armA" class="s-ink" d="M830 470H1040" stroke-width="14" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="armB" class="s-gain" d="M1260 470H1050" stroke-width="14" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="chk"><circle class="gain" cx="1045" cy="410" r="30"/><path d="M1031 410l10 10 18-20" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="easy"><text class="d" x="120" y="800" font-size="46">Trust the person, and buying becomes easy.</text></g>
+</g>
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Gary’s wine story.</text>
+<text class="b" x="120" y="176" font-size="32">Wine Library TV put the person at the center.</text>
+<g id="btl">
+<path class="ink" d="M205 330h30v70c25 10 25 20 25 40v190a10 10 0 0 1-10 10h-60a10 10 0 0 1-10-10V440c0-20 0-30 25-40z"/>
+<rect class="gain" x="180" y="490" width="80" height="70"/>
+<text class="m" x="120" y="700" font-size="20">FAMILY WINE SHOP</text>
+<text class="m" x="120" y="730" font-size="20">NEW JERSEY</text>
+</g>
+<g id="cam">
+<circle class="s-ink" cx="415" cy="408" r="22" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="475" cy="408" r="22" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="380" y="430" width="140" height="100" rx="12"/>
+<polygon class="ink" points="520,455 580,425 580,535 520,505"/>
+<path class="s-ink" d="M450 530L410 640M450 530v110M450 530l40 110" stroke-width="6" stroke-linecap="round"/>
+<circle id="rec" class="gain" cx="402" cy="452" r="7"/>
+<text class="m" x="380" y="700" font-size="20">WINE LIBRARY TV</text>
+</g>
+<g id="tv">
+<rect class="s-ink" x="640" y="300" width="360" height="300" rx="16" fill="var(--stage)" stroke-width="7"/>
+<g id="tvF"></g>
+<text class="m" x="820" y="650" font-size="20" text-anchor="middle">GARY, NOT THE STORE</text>
+</g>
+<g id="eps"></g>
+<g id="crowd"></g>
+<g id="crl"><text class="m" x="1270" y="620" font-size="20" text-anchor="middle">THOUSANDS OF WINE LOVERS</text></g>
+<g id="trl"><text class="m" x="1270" y="660" font-size="20" text-anchor="middle" style="fill:var(--gain)">TRUST HIS HONEST OPINIONS</text></g>
+</g>
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Trust turns into sales.</text>
+<text class="b" x="120" y="176" font-size="32">The brand was Gary, and the store benefited.</text>
+<g id="gry"><g id="gryF"></g><text class="m" x="240" y="600" font-size="20" text-anchor="middle">GARY</text></g>
+<g id="bub"><rect class="s-ink" x="160" y="240" width="160" height="64" rx="14" fill="var(--stage)" stroke-width="4"/><text class="m" x="240" y="280" font-size="20" text-anchor="middle">TRY THIS</text></g>
+<g id="tar"><path class="s-gain" d="M320 470H548" stroke-width="6" stroke-dasharray="12 8"/><path class="s-gain" d="M540 452l18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="440" y="450" font-size="20" text-anchor="middle">TRUST</text></g>
+<g id="shop">
+<rect class="s-ink" x="600" y="330" width="300" height="310" fill="var(--stage)" stroke-width="6"/>
+<rect id="sign" class="s-ink" x="640" y="250" width="220" height="50" rx="8" fill="var(--stage)" stroke-width="5"/>
+<text id="signT" class="m" x="750" y="283" font-size="22" text-anchor="middle">WINE SHOP</text>
+<path class="ink" d="M590 330h320l-20 50H610z"/>
+<rect class="s-ink" x="630" y="410" width="60" height="80" fill="none" stroke-width="5"/><rect class="s-ink" x="810" y="410" width="60" height="80" fill="none" stroke-width="5"/>
+<rect id="door" class="s-ink" x="710" y="480" width="80" height="160" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="750" y="690" font-size="20" text-anchor="middle">THE FAMILY STORE</text>
+</g>
+<g id="chart"><path class="s-ink" d="M1000 300V640H1440" fill="none" stroke-width="5" stroke-linejoin="round"/><g id="bars"></g><text class="m" x="1000" y="690" font-size="20">SALES (ILLUSTRATIVE)</text></g>
+<path id="sarr" class="s-gain" d="M1040 600L1160 520L1260 450L1400 330" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<circle id="sdot" class="gain" cx="1400" cy="330" r="14"/>
+</g>
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your brand travels.</text>
+<text class="b" x="120" y="176" font-size="32">A job can disappear. Your name goes wherever you go.</text>
+<g id="jobIc"><rect class="s-ink" x="140" y="330" width="240" height="290" fill="var(--stage)" stroke-width="6"/><g id="jobw"></g></g>
+<text id="jobL" class="m" x="260" y="670" font-size="20" text-anchor="middle">JOB</text>
+<g id="suit">
+<path class="s-ink" d="M590 380v-30a20 20 0 0 1 20-20h60a20 20 0 0 1 20 20v30" fill="none" stroke-width="8"/>
+<rect class="s-gain" x="470" y="380" width="340" height="240" rx="24" fill="var(--stage)" stroke-width="8"/>
+<text class="m" x="640" y="670" font-size="20" text-anchor="middle">PORTABLE</text>
+</g>
+<g id="chips5"></g>
+<g id="darr"><path class="s-gain" d="M830 500H936" stroke-width="6" stroke-dasharray="10 8"/><path class="s-gain" d="M926 484l16 16-16 16" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="dr0"><rect class="gain" x="960" y="320" width="180" height="300"/><rect class="s-ink" x="960" y="320" width="180" height="300" fill="none" stroke-width="6"/><text class="m" x="1050" y="670" font-size="20" text-anchor="middle">SPEAKING</text></g>
+<g id="dr1"><rect class="gain" x="1260" y="320" width="180" height="300"/><rect class="s-ink" x="1260" y="320" width="180" height="300" fill="none" stroke-width="6"/><text class="m" x="1350" y="670" font-size="20" text-anchor="middle">BOOKS</text></g>
+</g>
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Claim your name online.</text>
+<text class="b" x="120" y="176" font-size="32">Secure it early, and the same everywhere.</text>
+<g id="tag">
+<rect class="gain" x="120" y="250" width="420" height="270" rx="20"/>
+<text class="m" x="330" y="300" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">HELLO, MY NAME IS</text>
+<rect x="150" y="330" width="360" height="160" rx="10" fill="var(--stage)"/>
+<text class="d" x="330" y="430" font-size="56" text-anchor="middle">Your Name</text>
+</g>
+<g id="dom">
+<rect class="s-ink" x="120" y="580" width="420" height="80" rx="40" fill="var(--stage)" stroke-width="5"/>
+<rect class="ink" x="150" y="616" width="24" height="20" rx="3"/><path class="s-ink" d="M155 616v-6a7 7 0 0 1 14 0v6" fill="none" stroke-width="4"/>
+<text class="d5" x="190" y="633" font-size="34">yourname.com</text>
+<text class="m" x="120" y="700" font-size="20">YOUR OWN WEBSITE ADDRESS</text>
+</g>
+<g id="garr"><path class="s-muted" d="M565 420h90m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="680" y="640" font-size="20">SAME USERNAME EVERYWHERE</text></g>
+<g id="tiles"></g>
+<g id="checks"></g>
+<g id="find"><text class="d" x="120" y="800" font-size="46">People can always find the real you.</text></g>
+</g>
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every choice builds it.</text>
+<text class="b" x="120" y="176" font-size="32">Post, video, reply: each one counts, for better or worse.</text>
+<path id="cons" class="s-gain" d="M160 652L704 334" stroke-width="5" stroke-dasharray="4 12" stroke-linecap="round"/>
+<g id="prints"></g>
+<g id="consL"><text class="m" x="120" y="720" font-size="20" style="fill:var(--gain)">CONSISTENT = EASY TO REMEMBER</text></g>
+<g id="scale">
+<path class="s-ink" d="M1170 330V640" stroke-width="8" stroke-linecap="round"/>
+<rect class="ink" x="1080" y="640" width="180" height="20" rx="6"/>
+<line id="beam" class="s-ink" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1170" cy="330" r="14"/>
+<g id="pans"></g>
+</g>
+<g id="asset"><text class="m" x="1170" y="700" font-size="20" text-anchor="middle">TREAT YOUR NAME AS AN ASSET</text></g>
+<g id="ask"><text class="d" x="120" y="800" font-size="40">Would this make people trust you more?</text></g>
+</g>
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="380" font-size="64" letter-spacing="-1">Search your own name.</text></g>
+<g id="qb"><text class="d" x="136" y="470" font-size="64" letter-spacing="-1">What would a stranger</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="64" letter-spacing="-1" style="fill:var(--gain)">find?</text></g>
+<g id="qm"><rect class="gain" x="136" y="672" width="44" height="44" rx="10"/><path d="M147 694l8 8 15-16" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="200" y="703" font-size="22">THEN CLAIM YOUR NAME ON ONE SITE THIS WEEK</text></g>
+<g id="brw">
+<rect class="s-ink" x="980" y="200" width="500" height="560" rx="20" fill="var(--stage)" stroke-width="6"/>
+<circle cx="1012" cy="230" r="7" fill="var(--line)"/><circle cx="1036" cy="230" r="7" fill="var(--line)"/><circle cx="1060" cy="230" r="7" fill="var(--line)"/>
+<path class="s-line" d="M983 254h494" stroke-width="3"/>
+<g id="sbar"><rect class="s-ink" x="1010" y="276" width="440" height="60" rx="30" fill="var(--stage)" stroke-width="5"/>
+<text id="stxt" class="d5" x="1040" y="317" font-size="28"></text>
+<circle class="s-gain" cx="1408" cy="302" r="12" fill="none" stroke-width="5"/><path class="s-gain" d="M1417 311l11 11" stroke-width="5" stroke-linecap="round"/></g>
+<g id="res"></g>
+<g id="rck"><circle class="gain" cx="1446" cy="386" r="20"/><path d="M1436 386l7 7 12-13" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+<g id="eye"><path class="s-ink" d="M990 810q30-30 60 0q-30 30-60 0z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><circle id="pup" class="ink" cx="1020" cy="810" r="9"/>
+<text class="m" x="1070" y="817" font-size="20">WHAT A STRANGER SEES</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;You Are the Brand&rdquo;, from <em>Crush It!</em> by Gary Vaynerchuk. The Wine Library TV story is used as reported in the book. Drawings of shoppers, sales arrows and crowds are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 5.9], [5.9, 24.9], [24.9, 39.9], [39.9, 57.5], [57.5, 71.5], [71.5, 87.0], [87.0, 100.3], [100.3, 118.7], [118.7, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["You Are the Brand", "Everyone Is a Brand", "People Buy From People", "Gary's Wine Story", "Trust Turns Into Sales", "Your Brand Travels", "Claim Your Name", "Every Choice Builds It", "Your Move"];
+const TM={"title_mirror": 0.0, "brand_label": 6.16, "office_worker": 11.6, "laptop_glow": 20.16, "shopper": 25.16, "handshake": 32.88, "wine_bottle": 40.16, "video_camera": 43.12, "viewer_crowd": 54.4, "shop_door": 57.8, "sales_arrow": 67.36, "suitcase": 71.79, "open_doors": 82.08, "name_tag": 87.28, "domain_badge": 91.2, "username_grid": 97.04, "footprints": 100.56, "scale_balance": 110.56, "search_bar": 118.96};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const T=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+const R=(e,u,a,d=.5)=>rise(typeof e==='string'?$(e):e,p(u,a,a+d));
+const DR=(id,k)=>$(id).setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+fig($('mirFig'),1300,330,36,'gain');
+const P1=['ENTREPRENEUR','CELEBRITY','EMPLOYEE'].map((s,i)=>{const x=220+i*200,g=mk('g',{},$('ppl'));fig(g,x,380,34,i===2?'gain':'ink');
+  if(i===2)mk('path',{d:'M'+x+' 432l-8 12 8 34 8-34z',class:'ink'},g);
+  mk('path',{d:'M'+x+' 314V346',class:'s-muted','stroke-width':3},g);mk('rect',{x:x-60,y:270,width:120,height:44,rx:10,class:'gain'},g);
+  T(g,x,299,'BRAND',{class:'m','font-size':20,'text-anchor':'middle',style:'fill:var(--on-gain)'});T(g,x,580,s,{class:'m','font-size':20,'text-anchor':'middle'});return g});
+for(let i=0;i<12;i++)mk('rect',{x:180+(i%3)*80,y:410+Math.floor(i/3)*55,width:50,height:35,fill:'var(--line)'},$('cwin'));
+fig($('shpF'),800,400,34,'ink');fig($('selF'),1290,400,34,'gain');fig($('tvF'),820,380,40,'gain');fig($('gryF'),240,380,40,'gain');
+const EP=[];for(let i=0;i<8;i++)EP.push(mk('rect',{x:640+i*46,y:680,width:36,height:24,rx:5,fill:'var(--line)'},$('eps')));
+const CR=[];for(let i=0;i<24;i++){const x=1110+(i%6)*66,y=330+Math.floor(i/6)*70,g=mk('g',{fill:'var(--ink)'},$('crowd'));mk('circle',{cx:x,cy:y,r:14},g);mk('path',{d:'M'+(x-18)+' '+(y+40)+'a18 18 0 0 1 36 0z'},g);CR.push(g)}
+const BR=[];for(let i=0;i<5;i++)BR.push(mk('rect',{x:1040+i*80,y:640,width:50,height:0,class:'gain','fill-opacity':.35},$('bars')));
+for(let i=0;i<8;i++)mk('rect',{x:180+(i%2)*100,y:370+Math.floor(i/2)*60,width:60,height:36,fill:'var(--line)'},$('jobw'));
+const CH5=['REPUTATION','AUDIENCE','SKILLS','YOUR NAME'].map((s,i)=>{const g=mk('g',{},$('chips5'));mk('rect',{x:500,y:405+i*50,width:280,height:40,rx:20,class:'gain'},g);T(g,640,432+i*50,s,{class:'m','font-size':20,'text-anchor':'middle',style:'fill:var(--on-gain)'});return g});
+const LV=[0,1].map(i=>mk('polygon',{fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},$('dr'+i)));
+const TL=[],CK=[];for(let i=0;i<6;i++){const x=680+(i%3)*270,y=250+Math.floor(i/3)*180,g=mk('g',{},$('tiles'));
+  mk('rect',{x:x,y:y,width:240,height:150,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);
+  const k=i%3;if(k===0)mk('circle',{cx:x+40,cy:y+42,r:16,class:'ink'},g);else if(k===1)mk('rect',{x:x+24,y:y+26,width:32,height:32,rx:9,class:'ink'},g);else mk('path',{d:'M'+(x+24)+' '+(y+58)+'l16-32 16 32z',class:'ink'},g);
+  T(g,x+24,y+116,'@yourname',{class:'d5','font-size':30});TL.push(g);
+  const c=mk('g',{},$('checks'));mk('circle',{cx:x+204,cy:y+40,r:18,class:'gain'},c);mk('path',{d:'M'+(x+195)+' '+(y+40)+'l6 6 11-12',fill:'none',stroke:'var(--on-gain)','stroke-width':4,'stroke-linecap':'round'},c);CK.push(c)}
+const FL={1:'POST',3:'VIDEO',6:'REPLY'},FP=[];for(let i=0;i<8;i++){const s=i%2?1:-1,x=180+i*72+s*7,y=640-i*42+s*12,g=mk('g',{},$('prints'));
+  mk('ellipse',{cx:x,cy:y,rx:12,ry:19,class:i===4?'loss':'gain',transform:'rotate(60 '+x+' '+y+')'},g);
+  if(FL[i])T(g,x+26,y+44,FL[i],{class:'m','font-size':20});FP.push(g)}
+const PN=[['TRUST UP','gain'],['TRUST DOWN','loss']].map(q=>{const g=mk('g',{},$('pans'));mk('path',{d:'M0 0L-70 130M0 0L70 130',class:'s-ink','stroke-width':3},g);
+  mk('path',{d:'M-90 130h180a90 40 0 0 1-180 0z',class:q[1]},g);T(g,0,210,q[0],{class:'m','font-size':20,'text-anchor':'middle'});return g});
+// closing scene: search results card
+const RS=[0,1,2].map(i=>{const y=364+i*110,g=mk('g',{},$('res'));
+  const av=mk('circle',{cx:1032,cy:y+22,r:22,fill:'var(--line)'},g);
+  const tl=mk('rect',{x:1070,y:y+6,width:[300,240,270][i],height:16,rx:8,fill:'var(--line)'},g);
+  mk('rect',{x:1070,y:y+36,width:360,height:10,rx:5,fill:'var(--line)'},g);
+  mk('rect',{x:1070,y:y+56,width:[260,300,220][i],height:10,rx:5,fill:'var(--line)'},g);
+  return [g,av,tl]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+R('mirFig',u,TM.title_mirror,.8);
+const sp=.6+.4*Math.sin(t*2.4);$('spk').setAttribute('transform','translate(1450 250) scale('+sp.toFixed(3)+')');$('spk').setAttribute('opacity',p(u,TM.title_mirror+.6,TM.title_mirror+1.2));
+
+P1.forEach((g,i)=>{const a=i<2?TM.brand_label+i*.5:TM.office_worker;R(g,u,a)});
+R('ego',u,TM.office_worker+3.4);$('egoS').setAttribute('x2',(136+168*p(u,TM.office_worker+4,TM.office_worker+4.6)).toFixed(1));
+R('known',u,TM.office_worker+5.6);R('lap',u,TM.laptop_glow);
+$('glow').setAttribute('r',(200+12*Math.sin(t*2)).toFixed(1));$('glow').setAttribute('opacity',p(u,TM.laptop_glow+.4,TM.laptop_glow+1.2));
+
+R('shp',u,TM.shopper);R('corp',u,TM.shopper+1.8);R('sel',u,TM.shopper+2.6);
+DR('armA',p(u,TM.handshake,TM.handshake+.8));DR('armB',p(u,TM.handshake,TM.handshake+.8));
+R('chk',u,TM.handshake+.8);R('easy',u,TM.handshake+3.4,.6);
+
+R('btl',u,TM.wine_bottle);R('cam',u,TM.video_camera);R('tv',u,TM.video_camera+.6);
+$('rec').setAttribute('opacity',Math.sin(t*5)>0?1:.2);
+EP.forEach((e,i)=>e.setAttribute('fill',u>=TM.video_camera+6.2+i*.5?'var(--gain)':'var(--line)'));
+CR.forEach((g,i)=>{R(g,u,TM.video_camera+6.2+i*.12,.3);g.setAttribute('fill',u>=TM.viewer_crowd+i*.05?'var(--gain)':'var(--ink)')});
+R('crl',u,TM.video_camera+6.2);R('trl',u,TM.viewer_crowd);
+
+R('gry',u,TM.shop_door);R('shop',u,TM.shop_door+.3);R('tar',u,TM.shop_door+.8);
+$('door').style.fill=u>=TM.shop_door+1.4?'var(--gain)':'var(--stage)';
+R('bub',u,TM.shop_door+3.4);
+const sb=u>=TM.shop_door+6.4;$('sign').style.fill=sb?'var(--gain)':'var(--stage)';$('signT').style.fill=sb?'var(--on-gain)':'';
+R('chart',u,TM.shop_door+3.4);
+BR.forEach((b,i)=>{const h=(50+i*55)*p(u,TM.shop_door+3.8+i*.4,TM.shop_door+4.6+i*.4)+60*p(u,TM.sales_arrow,TM.sales_arrow+1.2)*(i/4);b.setAttribute('height',h.toFixed(1));b.setAttribute('y',(640-h).toFixed(1))});
+const sk=p(u,TM.sales_arrow,TM.sales_arrow+1.2);DR('sarr',sk);$('sdot').setAttribute('opacity',sk>.95?1:0);
+
+R('suit',u,TM.suitcase);$('jobIc').setAttribute('opacity',(1-.8*p(u,TM.suitcase+2.2,TM.suitcase+3)).toFixed(2));
+CH5.forEach((g,i)=>R(g,u,i<2?TM.suitcase+2.6+i*.4:TM.suitcase+7.6+(i-2)*.4));
+R('darr',u,TM.open_doors);
+LV.forEach((l,i)=>{R('dr'+i,u,TM.open_doors+i*.4);const x=960+i*300,k=p(u,TM.open_doors+.5+i*.6,TM.open_doors+1.5+i*.6),w=180*(1-.65*k);
+  l.setAttribute('points',x+',320 '+(x+w).toFixed(1)+','+(320+30*k).toFixed(1)+' '+(x+w).toFixed(1)+','+(620-30*k).toFixed(1)+' '+x+',620')});
+
+R('tag',u,TM.name_tag);R('dom',u,TM.domain_badge);R('garr',u,TM.domain_badge+2);
+TL.forEach((g,i)=>R(g,u,TM.domain_badge+2+i*.4));CK.forEach((c,i)=>R(c,u,TM.username_grid+i*.15,.3));R('find',u,TM.username_grid+.6,.6);
+
+FP.forEach((g,i)=>R(g,u,TM.footprints+i*.4,.3));
+$('cons').setAttribute('opacity',p(u,TM.footprints+5.4,TM.footprints+6.2));R('consL',u,TM.footprints+5.4);
+R('scale',u,TM.scale_balance);R('asset',u,TM.scale_balance+.6);
+const bk=p(u,TM.scale_balance+4.2,TM.scale_balance+5.2),ba=.06*Math.sin(t*1.5)*(1-bk)-.16*bk,cx=220*Math.cos(ba),cy=220*Math.sin(ba);
+$('beam').setAttribute('x1',(1170-cx).toFixed(1));$('beam').setAttribute('y1',(330-cy).toFixed(1));$('beam').setAttribute('x2',(1170+cx).toFixed(1));$('beam').setAttribute('y2',(330+cy).toFixed(1));
+PN[0].setAttribute('transform','translate('+(1170-cx).toFixed(1)+' '+(330-cy).toFixed(1)+')');PN[1].setAttribute('transform','translate('+(1170+cx).toFixed(1)+' '+(330+cy).toFixed(1)+')');
+R('ask',u,TM.scale_balance+4.2,.6);
+
+// closing: browser card with search, results, stranger's eye
+R('brw',u,TM.search_bar);const nm='Your Name';$('stxt').textContent=nm.slice(0,Math.round(nm.length*p(u,TM.search_bar+.3,TM.search_bar+1.5)))+(Math.sin(t*6)>0?'|':'');
+R('qa',u,TM.search_bar+.4);R('qb',u,TM.search_bar+.8);R('qc',u,TM.search_bar+1.2);
+RS.forEach((r,i)=>R(r[0],u,TM.search_bar+1.6+i*.35,.4));
+R('eye',u,TM.search_bar+2.6);$('pup').setAttribute('cx',(1020+5*Math.sin(t*1.5)).toFixed(1));
+const cl8=u>=TM.search_bar+5.4;RS[0][1].setAttribute('fill',cl8?'var(--gain)':'var(--line)');RS[0][2].setAttribute('fill',cl8?'var(--gain)':'var(--line)');
+R('rck',u,TM.search_bar+5.6,.4);R('qm',u,TM.search_bar+5.4,.6);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.28;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

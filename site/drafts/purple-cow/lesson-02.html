@@ -1,0 +1,392 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purple Cow Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Purple Cow: The era of making an average product for the masses and shouting about it on TV is over, because people are overwhelmed and ignore ads. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">PURPLE COW · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Why the old advertising</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">formula broke.</text>
+<text class="b" x="120" y="600" font-size="32">Why buying attention with ads stopped working for ordinary products.</text>
+<path class="s-ink" d="M1300 260l50 50 50-50" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-ink" x="1220" y="310" width="260" height="190" rx="18" fill="var(--stage)" stroke-width="7"/>
+<g id="tvscr"><rect class="gain" x="1244" y="334" width="212" height="142" rx="8"/><text id="adtxt" class="d" x="1350" y="425" font-size="56" text-anchor="middle" style="fill:var(--on-gain)">AD</text></g>
+<path class="s-ink" d="M1310 500l-20 40M1390 500l20 40" stroke-width="6" stroke-linecap="round"/>
+<g id="qm"><text class="d" x="1350" y="445" font-size="96" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="remote"><rect class="s-ink" x="1300" y="650" width="70" height="180" rx="22" fill="var(--stage)" stroke-width="6"/><circle class="loss" cx="1335" cy="690" r="14"/><circle class="ink" cx="1320" cy="740" r="7"/><circle class="ink" cx="1350" cy="740" r="7"/><circle class="ink" cx="1320" cy="775" r="7"/><circle class="ink" cx="1350" cy="775" r="7"/></g>
+<g id="sig"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A simple old recipe.</text>
+<text class="b" x="120" y="176" font-size="32">For decades, companies followed one dependable formula.</text>
+<g id="fac">
+<g id="smoke"></g>
+<rect class="ink" x="400" y="290" width="34" height="110"/>
+<path class="s-ink" d="M140 600V420l80-50v50l80-50v50l80-50v50l80-50V600z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="ink" x="270" y="510" width="60" height="90"/>
+<text class="m" x="300" y="660" font-size="22" text-anchor="middle">FACTORY</text>
+</g>
+<g id="avg">
+<path class="s-muted" d="M480 500h90m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="aud"></g>
+<rect class="s-ink" x="600" y="400" width="240" height="200" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M600 450h240" stroke-width="4"/>
+<text class="m" x="720" y="540" font-size="24" text-anchor="middle" style="fill:var(--ink)">AVERAGE</text>
+<text class="m" x="720" y="660" font-size="22" text-anchor="middle">SAFE · FOR EVERYONE</text>
+</g>
+<text id="plus1" class="d" x="930" y="525" font-size="80" text-anchor="middle" style="fill:var(--muted)">+</text>
+<g id="tv1">
+<path class="s-ink" d="M1130 300l40 50 40-50" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-ink" x="1020" y="350" width="300" height="230" rx="18" fill="var(--stage)" stroke-width="7"/>
+<rect class="gain" x="1044" y="374" width="252" height="182" rx="8"/>
+<text class="d" x="1170" y="485" font-size="48" text-anchor="middle" style="fill:var(--on-gain)">BUY IT!</text>
+<g id="waves"></g>
+<text class="m" x="1170" y="660" font-size="22" text-anchor="middle">LOTS OF TV ADS</text>
+</g>
+<g id="eq1"><text class="d" x="120" y="790" font-size="48">Average product + lots of TV ads.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The TV-industrial complex.</text>
+<text class="b" x="120" y="176" font-size="32">Seth Godin’s name for the old money machine.</text>
+<ellipse id="loopE" class="s-gain" cx="800" cy="520" rx="350" ry="225" fill="none" stroke-width="5" stroke-dasharray="12 12"/>
+<g id="chev"></g>
+<circle id="orb" class="gain" r="14"/>
+<g id="nodes"></g>
+<g id="cash"></g>
+<g id="worked"><text class="m" x="800" y="640" font-size="24" text-anchor="middle" style="fill:var(--gain)">ROUND AND ROUND</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it worked back then.</text>
+<text class="b" x="120" y="176" font-size="32">Few channels, few choices, and attention you could buy.</text>
+<g id="fam">
+<rect class="s-ink" x="150" y="320" width="220" height="160" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="170" y="340" width="180" height="120" rx="6"/>
+<path class="s-ink" d="M230 480l-16 30M290 480l16 30" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="260" y="550" font-size="20" text-anchor="middle">A FEW CHANNELS</text>
+<rect x="440" y="500" width="310" height="80" rx="20" fill="var(--line)"/>
+<g id="famp"></g>
+<rect class="s-ink" x="420" y="550" width="350" height="56" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="410" y="530" width="30" height="100" rx="12"/><rect class="ink" x="750" y="530" width="30" height="100" rx="12"/>
+<text class="m" x="595" y="670" font-size="20" text-anchor="middle">EVERY EVENING</text>
+</g>
+<g id="help"><rect class="gain" x="150" y="220" width="280" height="64" rx="32"/><path class="gain" d="M240 282l20 26 20-26z"/><text class="m" x="290" y="260" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">TRY THIS ONE</text></g>
+<g id="shelf3">
+<path class="s-ink" d="M880 420h560M880 600h560M880 250v370M1440 250v370" fill="none" stroke-width="6" stroke-linecap="round"/>
+<rect x="940" y="330" width="70" height="90" rx="6" fill="var(--muted)" fill-opacity=".5"/>
+<rect class="gain" x="1060" y="300" width="110" height="120" rx="8"/>
+<text class="m" x="1115" y="368" font-size="18" text-anchor="middle" style="fill:var(--on-gain)">BRAND</text>
+<rect x="1220" y="330" width="70" height="90" rx="6" fill="var(--muted)" fill-opacity=".5"/>
+<rect x="1000" y="510" width="70" height="90" rx="6" fill="var(--muted)" fill-opacity=".5"/>
+<rect x="1250" y="510" width="70" height="90" rx="6" fill="var(--muted)" fill-opacity=".5"/>
+<text class="m" x="1160" y="660" font-size="22" text-anchor="middle">FEWER CHOICES</text>
+</g>
+<g id="pay">
+<circle class="gain" cx="160" cy="770" r="36"/><text class="d" x="160" y="786" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">$</text>
+<path class="s-muted" d="M214 770h70m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-ink" d="M310 770q50-44 100 0q-50 44-100 0z" fill="none" stroke-width="6" stroke-linejoin="round"/><circle class="ink" cx="360" cy="770" r="14"/>
+<text class="d" x="450" y="788" font-size="48">Pay for ads, get noticed.</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then choices exploded.</text>
+<text class="b" x="120" y="176" font-size="32">Packed aisles, less time, and no urgent need.</text>
+<g id="aisle"></g>
+<g id="clk">
+<circle class="s-ink" cx="1240" cy="340" r="100" fill="var(--stage)" stroke-width="8"/>
+<path id="hrH" class="s-ink" d="M1240 340v-50" stroke-width="8" stroke-linecap="round"/>
+<path id="mnH" class="s-loss" d="M1240 340v-80" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="1240" cy="340" r="9"/>
+<text class="m" x="1240" y="490" font-size="22" text-anchor="middle">LESS TIME AND ATTENTION</text>
+</g>
+<g id="own"><text class="m" x="1245" y="660" font-size="22" text-anchor="middle">WHAT WE OWN WORKS FINE</text></g>
+<g id="filt"><path class="s-gain" d="M130 710h140l-50 60v50l-40 20v-70z" fill="none" stroke-width="6" stroke-linejoin="round"/><text class="d" x="310" y="790" font-size="48">Shoppers now filter things out.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Everyone tunes out.</text>
+<text class="b" x="120" y="176" font-size="32">Ads arrive from every direction, all day long.</text>
+<g id="ads5"></g>
+<g id="me5"><circle class="ink" cx="800" cy="450" r="56"/><path class="ink" d="M700 640v-20a100 100 0 0 1 200 0v20z"/></g>
+<g id="muff"><path class="s-gain" d="M736 450a64 64 0 0 1 128 0" fill="none" stroke-width="12"/><circle class="gain" cx="740" cy="455" r="26"/><circle class="gain" cx="860" cy="455" r="26"/></g>
+<g id="chips5"></g>
+<g id="surv"><text class="d" x="120" y="846" font-size="40">Ignoring ads is how people survive the flood.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Shouting gets pricey.</text>
+<text class="b" x="120" y="176" font-size="32">Ads cost more, and each dollar buys less attention.</text>
+<g id="tag6">
+<g id="tagS"><path class="loss" d="M-130-80h180l80 80-80 80h-180z"/><circle cx="50" cy="0" r="14" fill="var(--stage)"/><text id="tagT" class="d" x="-40" y="22" font-size="64" text-anchor="middle" style="fill:var(--stage)">$</text></g>
+<text class="m" x="400" y="690" font-size="22" text-anchor="middle">COST OF REACHING PEOPLE</text>
+</g>
+<g id="crwd"><g id="crowd6"></g><text class="m" x="1120" y="690" font-size="22" text-anchor="middle">ATTENTION PER AD DOLLAR</text></g>
+<g id="nobuy"><text class="d" x="120" y="800" font-size="48">You can no longer buy your way into minds.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The old machine has snapped.</text>
+<text class="b" x="120" y="176" font-size="32">Ads can no longer carry an ordinary product.</text>
+<text class="m" x="380" y="270" font-size="20" text-anchor="middle">THE OLD LOOP</text>
+<path id="loop7" class="s-gain" fill="none" stroke-width="7" stroke-dasharray="14 10" stroke-linecap="round"/>
+<g id="chev7"></g>
+<path id="tips7" class="s-loss" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="crack7" class="s-loss" d="M380 526l-12 14 14 12-14 14 12 14-10 14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="eq7a">
+<rect class="s-ink" x="640" y="360" width="220" height="150" rx="10" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="750" y="444" font-size="22" text-anchor="middle" style="fill:var(--ink)">AVERAGE</text>
+<text class="d" x="910" y="460" font-size="64" text-anchor="middle" style="fill:var(--muted)">+</text>
+<rect class="gain" x="960" y="360" width="200" height="150" rx="10"/>
+<text class="d" x="1060" y="455" font-size="48" text-anchor="middle" style="fill:var(--on-gain)">$$$</text>
+<text class="d" x="1205" y="460" font-size="64" text-anchor="middle" style="fill:var(--muted)">=</text>
+</g>
+<g id="eq7b">
+<rect class="s-muted" x="1250" y="360" width="220" height="150" rx="10" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<text class="d" x="1360" y="460" font-size="64" text-anchor="middle" style="fill:var(--muted)">?</text>
+<text class="m" x="1360" y="560" font-size="22" text-anchor="middle" style="fill:var(--loss)">NOBODY NOTICES</text>
+</g>
+<g id="bulb">
+<g id="rays"></g>
+<circle class="gain" cx="220" cy="710" r="60"/><rect class="ink" x="194" y="764" width="52" height="40" rx="8"/>
+<text class="d" x="340" y="720" font-size="48">Attention must come from</text>
+<text class="d" x="340" y="784" font-size="48" style="fill:var(--gain)">the product itself.</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">With zero advertising,</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">would anyone <tspan style="fill:var(--gain)">notice</tspan></text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">your product?</text></g>
+<g id="fix8"><text class="m" x="143" y="700" font-size="26">IF NOT, FIX THE PRODUCT BEFORE THE NEXT AD</text></g>
+<g id="g8">
+<circle id="glow8" class="s-gain" cx="1360" cy="660" r="90" fill="none" stroke-width="5"/>
+<rect class="gain" x="1300" y="600" width="120" height="120" rx="12"/>
+<text class="d" x="1360" y="684" font-size="64" text-anchor="middle" style="fill:var(--on-gain)">?</text>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Why the Old Advertising Formula Broke&rdquo;, from <em>Purple Cow</em> by Seth Godin. The TV-industrial complex cycle is described as reported in the book. Drawings of crowded aisles, ad piles, price tags and crowds are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 7.8], [7.8, 20.0], [20.0, 36.9], [36.9, 53.1], [53.1, 72.2], [72.2, 88.1], [88.1, 100.2], [100.2, 115.6], [115.6, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Turn It Off", "A Simple Old Recipe", "The Money Machine", "Why It Worked Then", "Then Choices Exploded", "Everyone Tunes Out", "Shouting Gets Pricey", "The Broken Loop", "Your Turn"];
+const TM={"remote": 0.0, "factory": 8.08, "average_box": 11.84, "tv_set": 16.48, "store_shelf": 24.8, "cash_stack": 29.12, "loop_arrow": 32.56, "family_couch": 37.2, "few_products": 40.96, "crowded_aisle": 53.44, "clock": 58.64, "ad_pile": 72.52, "earmuffs": 76.28, "price_tag": 88.4, "tiny_crowd": 91.68, "snapped_loop": 100.48, "lightbulb": 109.92};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const SIG=[0,1,2].map(k=>mk('path',{d:'M'+(1315-k*12)+' '+(632-k*14)+'q'+(20+k*12)+' '+(-16-k*8)+' '+(40+k*24)+' 0',fill:'none',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},$('sig')));
+const SM=[0,1,2].map(()=>mk('circle',{cx:417,cy:280,r:10,fill:'var(--muted)'},$('smoke')));
+const AU=[0,1,2,3,4].map(i=>{const g=mk('g',{},$('aud'));fig(g,630+i*45,310,12,'ink');return g});
+const WV=[0,1,2].map(k=>mk('path',{d:'M'+(1345+k*40)+' '+(420-k*20)+'q'+(20+k*10)+' '+(45+k*20)+' 0 '+(90+k*40),fill:'none',class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('waves')));
+const nodes=[[800,295,'TV ADS'],[1150,520,'SHOPPERS'],[800,745,'STORE SHELVES'],[450,520,'PROFITS']].map(q=>{const g=mk('g',{},$('nodes'));mk('rect',{x:q[0]-140,y:q[1]-45,width:280,height:90,rx:45,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:q[0],y:q[1]+9,'font-size':26,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=q[2];return g});
+[1,3,5,7].forEach(k=>{const a=k*Math.PI/4,x=800+350*Math.cos(a),y=520+225*Math.sin(a),r=Math.atan2(225*Math.cos(a),-350*Math.sin(a))*180/Math.PI;mk('path',{d:'M-14-14L6 0-14 14',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round',transform:'translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+r.toFixed(1)+')'},$('chev'))});
+const bills=[0,1,2,3,4].map(i=>mk('rect',{x:720,y:560-i*30,width:160,height:24,rx:4,class:'gain',stroke:'var(--stage)','stroke-width':3},$('cash')));
+[520,600,680].forEach(x=>fig($('famp'),x,470,20,'ink'));
+const prods=[];[330,430,530,630].forEach((sy,r)=>{mk('path',{d:'M120 '+sy+'h780',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},$('aisle'));for(let i=0;i<14;i++){const h=50+((i*7+r*3)%3)*10;prods.push(mk('rect',{x:126+i*55,y:sy-3-h,width:44,height:h,rx:4,fill:'var(--muted)','fill-opacity':[.35,.6,.85][(i+r)%3]},$('aisle')))}});
+[1030,1190,1350].forEach(x=>{mk('rect',{x:x,y:540,width:110,height:70,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('own'));mk('path',{d:'M'+(x+35)+' 576l14 14 26-28',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('own'))});
+const ads=[[0,580],[180,580]].concat([0,1,2,3,4,5,6,7].map(k=>[22.5+45*k,540])).map(q=>{const a=q[0]*Math.PI/180,g=mk('g',{},$('ads5'));mk('rect',{x:-55,y:-30,width:110,height:60,rx:10,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);const tx=mk('text',{x:0,y:12,'font-size':32,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},g);tx.textContent='AD';return [g,Math.cos(a)*q[1],Math.sin(a)*220]});
+const chips=['SKIP','SCROLL','MUTE','WALK AWAY'].map((s,i)=>{const g=mk('g',{},$('chips5'));mk('rect',{x:120+i*300,y:716,width:260,height:60,rx:30,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:250+i*300,y:754,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;return g});
+const crowd=[];for(let i=0;i<24;i++){const g=mk('g',{},$('crowd6'));fig(g,840+(i%8)*80,330+Math.floor(i/8)*110,16,i%9===4?'gain':'ink');crowd.push(g)}
+const rays=[-150,-120,-90,-60,-30].map(d=>{const a=d*Math.PI/180;return [mk('path',{class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays')),Math.cos(a),Math.sin(a)]});
+// scene 7: clockwise loop chevrons (right, top, left), same style as the scene 2 cycle
+const LC={x:380,y:440,r:120};
+const chev7=[0,1.5*Math.PI,Math.PI].map(a=>{const x=LC.x+LC.r*Math.cos(a),y=LC.y+LC.r*Math.sin(a),r=Math.atan2(Math.cos(a),-Math.sin(a))*180/Math.PI;
+  return mk('path',{d:'M-14-14L6 0-14 14',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round',transform:'translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+r.toFixed(1)+')'},$('chev7'))});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const pr=TM.remote, off=p(u,pr+3.6,pr+4.1), adGone=p(u,pr+3.2,pr+3.6);
+  rise($('remote'),p(u,pr,pr+.5));
+  SIG.forEach((s,k)=>s.setAttribute('opacity',(u>pr+2.4&&u<pr+4.4?(.5+.5*Math.sin(t*8-k)):0).toFixed(2)));
+  $('adtxt').setAttribute('opacity',(1-adGone).toFixed(2));
+  $('tvscr').setAttribute('transform','translate(0 '+(405*off*.97).toFixed(1)+') scale(1 '+(1-off*.97).toFixed(3)+')');
+  $('tvscr').setAttribute('opacity',(1-off).toFixed(2));
+  $('tvscr').style.display=off>=1?'none':'';
+  rise($('qm'),p(u,pr+4.2,pr+4.7));
+  $('qm').style.display=u<pr+4.15?'none':'';
+
+  rise($('fac'),p(u,TM.factory,TM.factory+.5));
+  SM.forEach((c,i)=>{const k=(t*.5+i/3)%1;c.setAttribute('cy',(280-k*50).toFixed(1));c.setAttribute('r',(8+k*8).toFixed(1));c.setAttribute('opacity',((1-k)*.6).toFixed(2))});
+  rise($('avg'),p(u,TM.average_box,TM.average_box+.5));
+  AU.forEach((g,i)=>rise(g,p(u,TM.average_box+1+i*.3,TM.average_box+1.4+i*.3)));
+  rise($('plus1'),p(u,TM.tv_set-.3,TM.tv_set+.2)); rise($('tv1'),p(u,TM.tv_set,TM.tv_set+.5));
+  WV.forEach((w,k)=>w.setAttribute('opacity',u>TM.tv_set?(.5+.5*Math.sin(t*5-k*1.2)).toFixed(2):0));
+  rise($('eq1'),p(u,TM.tv_set+1.5,TM.tv_set+2.1));
+
+  const s2=SC[2][0]/K;
+  rise(nodes[0],p(u,s2+.6,s2+1.1)); rise(nodes[1],p(u,TM.store_shelf,TM.store_shelf+.5)); rise(nodes[2],p(u,TM.store_shelf+1.6,TM.store_shelf+2.1)); rise(nodes[3],p(u,TM.cash_stack,TM.cash_stack+.5));
+  bills.forEach((b,i)=>rise(b,p(u,TM.cash_stack+.4+i*.25,TM.cash_stack+.7+i*.25)));
+  const lp=p(u,TM.loop_arrow,TM.loop_arrow+.6);
+  $('loopE').setAttribute('opacity',(.25+.75*lp).toFixed(2)); $('loopE').setAttribute('stroke-dashoffset',(-t*30).toFixed(1));
+  $('chev').setAttribute('opacity',lp);
+  const oa=-Math.PI/2+Math.max(0,u-TM.loop_arrow)*1.6;
+  $('orb').setAttribute('cx',(800+350*Math.cos(oa)).toFixed(1)); $('orb').setAttribute('cy',(520+225*Math.sin(oa)).toFixed(1)); $('orb').setAttribute('opacity',lp);
+  rise($('worked'),p(u,TM.loop_arrow+1.5,TM.loop_arrow+2));
+
+  rise($('fam'),p(u,TM.family_couch,TM.family_couch+.6));
+  rise($('shelf3'),p(u,TM.few_products,TM.few_products+.6));
+  rise($('help'),p(u,TM.few_products+4.6,TM.few_products+5.1));
+  rise($('pay'),p(u,TM.few_products+9.2,TM.few_products+9.8));
+
+  prods.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.crowded_aisle+i*.04,TM.crowded_aisle+i*.04+.3)));
+  rise($('clk'),p(u,TM.clock,TM.clock+.5));
+  $('mnH').setAttribute('transform','rotate('+((t*200)%360).toFixed(1)+' 1240 340)');
+  $('hrH').setAttribute('transform','rotate('+((t*17)%360).toFixed(1)+' 1240 340)');
+  rise($('own'),p(u,TM.clock+3.8,TM.clock+4.3));
+  rise($('filt'),p(u,TM.clock+10,TM.clock+10.6));
+
+  const ea=TM.earmuffs, mf=p(u,ea,ea+.8);
+  ads.forEach((a,i)=>{const s0=TM.ad_pile+i*.3,k=p(u,s0,s0+.6),r=1.1-.1*k+.05*mf+.012*Math.sin(t*2+i);a[0].setAttribute('transform','translate('+(800+a[1]*r).toFixed(1)+' '+(450+a[2]*r).toFixed(1)+')');a[0].setAttribute('opacity',(k*(1-.7*mf)).toFixed(2))});
+  rise($('muff'),p(u,ea,ea+.5));
+  chips.forEach((g,i)=>rise(g,p(u,ea+4.2+i*.5,ea+4.6+i*.5)));
+  rise($('surv'),p(u,ea+7.2,ea+7.8));
+
+  const pt=p(u,TM.price_tag,TM.price_tag+3);
+  rise($('tag6'),p(u,TM.price_tag,TM.price_tag+.5));
+  $('tagS').setAttribute('transform','translate(400 460) scale('+(.7+.55*pt).toFixed(3)+')');
+  $('tagT').textContent='$'.repeat(1+Math.round(pt*2));
+  rise($('crwd'),p(u,TM.tiny_crowd,TM.tiny_crowd+.5));
+  crowd.forEach((g,i)=>{if(i%9===4){g.setAttribute('opacity',1);return}const a=TM.tiny_crowd+1+((i*7)%24)*.08;g.setAttribute('opacity',(1-.85*p(u,a,a+.4)).toFixed(2))});
+  rise($('nobuy'),p(u,TM.tiny_crowd+4.5,TM.tiny_crowd+5.1));
+
+  // scene 7: circular loop that snaps open at the bottom, ends splaying outward
+  const sn=p(u,TM.snapped_loop+.4,TM.snapped_loop+1), hg=(1.5+22*sn)*Math.PI/180;
+  const a0=Math.PI/2+hg, a1=Math.PI/2+2*Math.PI-hg, NP=90;
+  const lpt=a=>{const dist=Math.min(a-a0,a1-a),f=Math.max(0,1-dist/.9),r=LC.r+34*sn*f*f;return [LC.x+r*Math.cos(a),LC.y+r*Math.sin(a)]};
+  let ld='';for(let i=0;i<=NP;i++){const q=lpt(a0+(a1-a0)*i/NP);ld+=(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)}
+  $('loop7').setAttribute('d',ld);
+  $('loop7').setAttribute('stroke-dashoffset',sn>0?0:(-t*30).toFixed(1));
+  const lc=sn>0?'var(--loss)':'var(--gain)'; $('loop7').style.stroke=lc; chev7.forEach(c=>c.setAttribute('stroke',lc));
+  let td='';[[a0,-1],[a1,1]].forEach(([a,s])=>{const E=lpt(a),T=[-Math.sin(a)*s,Math.cos(a)*s],N=[Math.cos(a),Math.sin(a)];
+    const P=(tt,nn)=>(E[0]+T[0]*tt+N[0]*nn).toFixed(1)+' '+(E[1]+T[1]*tt+N[1]*nn).toFixed(1);
+    td+='M'+P(0,11)+'L'+P(9,5)+'L'+P(3,0)+'L'+P(11,-5)+'L'+P(0,-11)});
+  $('tips7').setAttribute('d',td); $('tips7').setAttribute('opacity',sn.toFixed(2));
+  $('crack7').setAttribute('opacity',sn.toFixed(2));
+  rise($('eq7a'),p(u,TM.snapped_loop+3,TM.snapped_loop+3.5)); rise($('eq7b'),p(u,TM.snapped_loop+4.5,TM.snapped_loop+5));
+  rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.6));
+  rays.forEach((r,i)=>{const a=78,b=100+8*Math.sin(t*4+i);r[0].setAttribute('d','M'+(220+r[1]*a).toFixed(1)+' '+(710+r[2]*a).toFixed(1)+'L'+(220+r[1]*b).toFixed(1)+' '+(710+r[2]*b).toFixed(1))});
+
+  const s8=SC[8][0]/K, gl=(t*.8)%1;
+  rise($('qa'),p(u,s8+.5,s8+1)); rise($('qb'),p(u,s8+.9,s8+1.4)); rise($('qc'),p(u,s8+1.3,s8+1.8));
+  rise($('g8'),p(u,s8+1.8,s8+2.4));
+  $('glow8').setAttribute('r',(80+30*gl).toFixed(1)); $('glow8').setAttribute('stroke-opacity',(1-gl).toFixed(2));
+  rise($('fix8'),p(u,s8+6.3,s8+6.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

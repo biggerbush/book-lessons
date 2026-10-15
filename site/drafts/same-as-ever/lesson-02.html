@@ -1,0 +1,370 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same as Ever Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Same as Ever: The biggest risks are the ones nobody anticipates, so prepare for surprises rather than trying to forecast them. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAME AS EVER · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Risk is what</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">you don’t see.</text>
+<text class="b" x="120" y="600" font-size="32">The danger that hurts most is the one nobody pictured.</text>
+<g id="cone"><polygon points="1215,470 1480,330 1480,610" fill="var(--gain)" fill-opacity=".2"/><circle class="gain" cx="1360" cy="450" r="14"/><circle class="gain" cx="1430" cy="400" r="14"/><circle class="gain" cx="1440" cy="530" r="14"/><text class="m" x="1480" y="660" font-size="20" text-anchor="end" style="fill:var(--gain)">WHAT YOU WATCH</text></g>
+<g id="tp"></g>
+<g id="unseen"><circle id="ud" class="loss" cx="1060" cy="470" r="24"/><text class="m" x="1060" y="540" font-size="20" text-anchor="middle" style="fill:var(--loss)">UNSEEN</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Houdini’s famous trick.</text>
+<text class="b" x="120" y="176" font-size="32">Strong men punched him in the stomach as hard as they could.</text>
+<g id="curt">
+<path d="M300 214H390Q350 450 420 690H300Z" fill="var(--loss)" fill-opacity=".18"/>
+<path d="M1300 214H1210Q1250 450 1180 690H1300Z" fill="var(--loss)" fill-opacity=".18"/>
+<path d="M300 214H1300V246q-50 34-100 0q-50 34-100 0q-50 34-100 0q-50 34-100 0q-50 34-100 0q-50 34-100 0q-50 34-100 0q-50 34-100 0q-50 34-100 0q-50 34-100 0Z" fill="var(--loss)" fill-opacity=".3"/>
+<path class="s-ink" d="M300 214H1300" stroke-width="8" stroke-linecap="round"/>
+</g>
+<rect class="ink" x="300" y="690" width="1000" height="16" rx="8"/>
+<g id="hou"><text class="m" x="800" y="420" font-size="22" text-anchor="middle">HOUDINI</text></g>
+<g id="men"></g>
+<g id="arms">
+<path id="a0" class="s-ink" d="M625 622L660 640" stroke-width="14" stroke-linecap="round" fill="none"/>
+<path id="a1" class="s-ink" d="M975 622L940 640" stroke-width="14" stroke-linecap="round" fill="none"/>
+<circle id="f0" class="ink" cx="660" cy="640" r="22"/><circle id="f1" class="ink" cx="940" cy="640" r="22"/>
+</g>
+<g id="imp"><path class="s-loss" d="M712 608l-12-14M712 672l-12 14M694 604l-5-17M888 608l12-14M888 672l12 14M906 604l5-17" stroke-width="5" stroke-linecap="round" fill="none"/></g>
+<g id="brace"><rect class="s-gain" x="724" y="600" width="152" height="84" rx="26" fill="none" stroke-width="6" stroke-dasharray="14 10"/><text class="m" x="800" y="770" font-size="22" text-anchor="middle" style="fill:var(--gain)">MUSCLES TIGHT · BLOWS BARELY HURT</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The punch he didn’t brace for.</text>
+<text class="b" x="120" y="176" font-size="32">As the book tells it, a student visited him backstage.</text>
+<path class="s-line" d="M400 705h1000" stroke-width="4"/>
+<g id="cch">
+<rect class="s-line" x="470" y="480" width="560" height="130" rx="24" fill="var(--stage)" stroke-width="4"/>
+<rect class="ink" x="450" y="600" width="600" height="70" rx="18"/>
+<rect class="ink" x="480" y="668" width="16" height="37"/><rect class="ink" x="1004" y="668" width="16" height="37"/>
+<circle class="gain" cx="540" cy="568" r="32"/><rect class="gain" x="578" y="560" width="340" height="40" rx="20"/>
+</g>
+<g id="stu"></g>
+<g id="bq"><rect class="s-ink" x="950" y="330" width="460" height="100" rx="20" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M1170 428l30 40 4-40" fill="var(--stage)" stroke-width="4"/><text class="d5" x="975" y="392" font-size="30">“Can you take any punch?”</text></g>
+<g id="ba"><rect class="s-ink" x="500" y="340" width="160" height="90" rx="20" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M560 428l-10 36 34-36" fill="var(--stage)" stroke-width="4"/><text class="d" x="580" y="400" font-size="40" text-anchor="middle">Yes.</text></g>
+<g id="bst"><path class="s-loss" d="M760 520v-24M812 540l18-18M708 540l-18-18M820 590h24M700 590h-24" stroke-width="6" stroke-linecap="round"/></g>
+<circle id="fst" class="loss" r="26"/>
+<g id="nb"><text class="d" x="120" y="800" font-size="44">He struck before Houdini could brace.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hit he didn’t expect.</text>
+<text class="b" x="120" y="176" font-size="32">Days later, Houdini died from a ruptured appendix.</text>
+<g id="rl"><text class="m" x="120" y="260" font-size="22">THE REAL LESSON IS NOT THE PUNCH ITSELF</text></g>
+<g id="bed">
+<rect class="ink" x="160" y="430" width="20" height="230" rx="6"/><rect class="ink" x="160" y="560" width="440" height="30" rx="6"/><rect class="ink" x="580" y="590" width="20" height="70"/>
+<ellipse class="s-line" cx="225" cy="535" rx="40" ry="18" fill="var(--stage)" stroke-width="4"/>
+<circle cx="235" cy="515" r="26" fill="var(--muted)"/>
+<rect class="s-ink" x="270" y="505" width="320" height="55" rx="16" fill="var(--stage)" stroke-width="5"/>
+<circle id="spot" class="loss" cx="380" cy="532" r="12"/>
+<text class="m" x="380" y="650" font-size="22" text-anchor="middle">RUPTURED APPENDIX</text>
+</g>
+<g id="shd">
+<text class="m" x="870" y="320" font-size="22" style="fill:var(--gain)">EXPECTED</text>
+<path class="s-gain" d="M1075 340A150 150 0 0 0 1075 600" fill="none" stroke-width="14" stroke-linecap="round"/>
+<path class="s-gain" d="M870 380H1012l-28-22M870 460H995l-28-22M870 540H1010l-28-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="sp"></g>
+</g>
+<path id="ua" class="s-loss" d="M1440 640L1200 505" pathLength="1" stroke-width="8" stroke-linecap="round" fill="none"/>
+<g id="ul"><text class="m" x="1470" y="700" font-size="22" text-anchor="end" style="fill:var(--loss)">UNEXPECTED</text></g>
+<g id="k1"><text class="d" x="120" y="790" font-size="40">Ready for every hit he expected.</text></g>
+<g id="k2"><text class="d" x="120" y="846" font-size="40" style="fill:var(--loss)">Defenceless against the one he didn’t.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The biggest news was a surprise.</text>
+<text class="b" x="120" y="176" font-size="32">Housel: the century’s biggest events share a pattern.</text>
+<g id="np"></g>
+<g id="rs"><text class="d" x="120" y="800" font-size="44">Surprises reshaped the world more than any forecast.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Forecasts miss the blank spaces.</text>
+<text class="b" x="120" y="176" font-size="32">A forecast can only include risks someone already imagined.</text>
+<g id="ball">
+<circle class="s-ink" cx="330" cy="440" r="120" fill="var(--stage)" stroke-width="7"/>
+<circle class="gain" cx="300" cy="420" r="12"/><circle class="gain" cx="360" cy="400" r="12"/><circle class="gain" cx="340" cy="470" r="12"/>
+<path class="ink" d="M250 600L270 560h120l20 40z"/>
+<text class="m" x="330" y="660" font-size="22" text-anchor="middle">ONLY IMAGINED RISKS</text>
+</g>
+<g id="mapf">
+<path class="s-muted" d="M455 430L630 390" stroke-width="4" stroke-dasharray="8 10"/>
+<rect class="s-line" x="600" y="240" width="880" height="460" rx="12" fill="var(--stage)" stroke-width="4"/>
+<polygon class="s-ink" points="640,280 960,280 1000,420 900,520 640,500" fill="var(--gain)" fill-opacity=".15" stroke-width="5" stroke-linejoin="round"/>
+<circle class="gain" cx="720" cy="340" r="12"/><circle class="gain" cx="840" cy="350" r="12"/><circle class="gain" cx="780" cy="420" r="12"/><circle class="gain" cx="900" cy="380" r="12"/>
+<text class="m" x="670" y="480" font-size="20">FORECAST</text>
+</g>
+<g id="bl"><text class="m" x="1460" y="280" font-size="20" text-anchor="end" style="fill:var(--loss)">BLANK SPACES</text></g>
+<g id="qm"></g>
+<g id="easy"><text class="d" x="120" y="790" font-size="36">Easy-to-see dangers get prepared for, so they do less harm.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Prepare. Don’t predict.</text>
+<text class="b" x="120" y="176" font-size="32">Could you cope with something you never saw coming?</text>
+<g id="lq">
+<rect class="s-line" x="120" y="240" width="600" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="420" y="580" font-size="280" text-anchor="middle" style="fill:var(--loss)">?</text>
+<text class="m" x="420" y="670" font-size="22" text-anchor="middle">WHAT EXACTLY GOES WRONG NEXT?</text>
+</g>
+<path id="x1" class="s-ink" d="M220 300L620 620" pathLength="1" stroke-width="10" stroke-linecap="round"/>
+<path id="x2" class="s-ink" d="M620 300L220 620" pathLength="1" stroke-width="10" stroke-linecap="round"/>
+<g id="rt">
+<path class="s-muted" d="M760 475h70m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-line" x="880" y="240" width="600" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="tb"><path class="s-ink" d="M1110 440v-40h140v40" fill="none" stroke-width="10" stroke-linejoin="round"/><rect class="gain" x="1000" y="440" width="360" height="190" rx="16"/><rect x="1000" y="500" width="360" height="12" fill="var(--stage)"/><rect class="ink" x="1160" y="490" width="40" height="34" rx="6"/></g>
+<text class="m" x="1180" y="680" font-size="22" text-anchor="middle">COULD I COPE WITH THE UNKNOWN?</text>
+</g>
+<g id="rdy"><text class="d" x="120" y="800" font-size="48">Being ready beats guessing.</text><rect class="gain" x="124" y="824" width="200" height="10"/></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Keep a cushion for the unknown.</text>
+<text class="b" x="120" y="176" font-size="32">A buffer not assigned to any particular disaster.</text>
+<g id="jar">
+<rect id="cf" class="gain" x="190" y="636" width="220" height="0" rx="24"/>
+<rect class="ink" x="200" y="290" width="200" height="26" rx="8"/>
+<rect class="s-ink" x="180" y="316" width="240" height="330" rx="34" fill="none" stroke-width="6"/>
+<rect class="s-ink" x="220" y="430" width="160" height="56" rx="10" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="300" y="465" font-size="18" text-anchor="middle">UNASSIGNED</text>
+<text class="m" x="300" y="700" font-size="22" text-anchor="middle">A CUSHION</text>
+</g>
+<g id="chips"></g>
+<g id="rain"></g>
+<g id="um">
+<path class="gain" d="M1000 440a200 200 0 0 1 400 0z"/>
+<path class="s-ink" d="M1200 440V640a20 20 0 0 1-40 0" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="mp"></g>
+<g id="sm"><circle cx="1261" cy="514" r="3" fill="var(--stage)"/><circle cx="1279" cy="514" r="3" fill="var(--stage)"/><path d="M1259 527q11 10 22 0" fill="none" stroke="var(--stage)" stroke-width="3" stroke-linecap="round"/></g>
+</g>
+<g id="st"><text class="d" x="120" y="800" font-size="40">You don’t need the storm’s name to carry an umbrella.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<text class="m" x="143" y="220" font-size="26">YOUR CHALLENGE</text>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Could your <tspan style="fill:var(--gain)">money, health</tspan></text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">or work</tspan> survive a hit</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">you never saw coming?</text></g>
+<g id="pl"></g>
+<g id="mr">
+<ellipse class="s-ink" cx="1360" cy="690" rx="60" ry="80" fill="var(--stage)" stroke-width="6"/>
+<circle cx="1360" cy="665" r="20" fill="var(--muted)"/><path d="M1330 730v-12a30 30 0 0 1 60 0v12z" fill="var(--muted)"/>
+<path class="s-ink" d="M1360 770v30M1320 800h80" stroke-width="6" stroke-linecap="round"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="119" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:59</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Risk Is What You Don&#x27;t See&rdquo;, from <em>Same as Ever</em> by Morgan Housel. Examples as reported in the book: Harry Houdini&#x27;s fatal dressing room punch, and Pearl Harbor, nine eleven and COVID as unforeseen turning points. The drawings of the crystal ball, blank map, savings jar and umbrella are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=119, SC=[[0.0, 8.2], [8.2, 21.4], [21.4, 36.5], [36.5, 49.1], [49.1, 63.9], [63.9, 78.1], [78.1, 90.4], [90.4, 105.9], [105.9, 119.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Risk Is Hidden", "Houdini's Trick", "The Punch He Missed", "The Hidden Damage", "History Rhymes", "Why Forecasts Fail", "Prepare, Not Predict", "Your Hidden Buffer", "Your Challenge"];
+const TM={"title_card": 0.0, "houdini": 8.48, "stage_punch": 13.04, "student": 21.72, "couch": 26.2, "fist": 31.8, "hospital_bed": 36.8, "shield": 43.76, "newspapers": 49.44, "calendar": 54.08, "crystal_ball": 64.24, "blank_map": 68.72, "question_mark": 78.44, "toolbox": 82.2, "savings_jar": 90.72, "umbrella": 96.24, "calm_face": 102.56, "mirror": 106.16};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const drw=(el,k)=>{el.setAttribute('stroke-dasharray','1');el.setAttribute('stroke-dashoffset',(1-k).toFixed(3))};
+const pill=(par,x,y,w,s)=>{const g=mk('g',{},par);mk('rect',{x:x,y:y,width:w,height:68,rx:34,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);const tx=mk('text',{x:x+w/2,y:y+43,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g};
+person($('tp'),1180,420,30,'gain');
+person($('hou'),800,500,44,'gain');
+const men=[590,1010].map(x=>{const g=mk('g',{},$('men'));person(g,x,547,34,'ink');return g});
+person($('stu'),1200,560,34,'ink');
+person($('sp'),1150,420,30,'gain');
+person($('mp'),1270,520,28,'ink');
+const PAP=[],HL=[],CAL=[];
+['PEARL HARBOR','9/11','COVID'].forEach((s,i)=>{const x=120+i*470,g=mk('g',{},$('np'));
+  mk('rect',{x:x,y:240,width:400,height:360,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const m=mk('text',{x:x+24,y:282,'font-size':20,class:'m'},g);m.textContent='THE DAILY NEWS';
+  mk('path',{d:'M'+(x+24)+' 298h352',stroke:'var(--ink)','stroke-width':3},g);
+  for(let j=0;j<5;j++)mk('rect',{x:x+24,y:410+j*32,width:j%2?260:352,height:14,rx:7,fill:'var(--line)'},g);
+  const h=mk('text',{x:x+24,y:374,'font-size':42,class:'d',style:'fill:var(--loss)'},$('np'));h.textContent=s;
+  const c=mk('g',{},$('np'));mk('rect',{x:x+24,y:640,width:64,height:60,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},c);
+  mk('rect',{x:x+24,y:640,width:64,height:16,rx:4,class:'ink'},c);
+  mk('path',{d:'M'+(x+40)+' 668l32 24m0-24l-32 24',stroke:'var(--loss)','stroke-width':5,'stroke-linecap':'round'},c);
+  const l=mk('text',{x:x+104,y:680,'font-size':18,class:'m'},c);l.textContent='NOT ON THE CALENDAR';
+  PAP.push(g);HL.push(h);CAL.push(c)});
+const QM=[[1150,340],[1360,440],[1060,610],[1310,650],[800,640]].map(q=>{const e=mk('text',{x:q[0],y:q[1],'font-size':56,class:'d','text-anchor':'middle',style:'fill:var(--loss)'},$('qm'));e.textContent='?';return e});
+const CHP=['SPARE SAVINGS','SPARE TIME','FLEXIBLE PLANS'].map((s,i)=>pill($('chips'),500,320+i*110,380,s));
+const PL=['MONEY','HEALTH','WORK'].map((s,i)=>pill($('pl'),136+i*240,660,210,s));
+const RN=[];for(let i=0;i<14;i++){const x=1020+i*27;RN.push([mk('path',{stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round'},$('rain')),x,(i*.37)%1])}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('cone').setAttribute('opacity',p(u,TM.title_card,TM.title_card+.8));
+  rise($('unseen'),p(u,TM.title_card+2.5,TM.title_card+3.2));
+  $('ud').setAttribute('cx',(1060+40*Math.sin(t*1.6)).toFixed(1));
+
+  rise($('hou'),p(u,TM.houdini,TM.houdini+.5));
+  const sp=p(u,TM.stage_punch,TM.stage_punch+.5); men.forEach(g=>rise(g,sp)); rise($('arms'),sp);
+  const ph=(t*1.1)%1, hit=ph<.25?ease(ph/.25):1-ease((ph-.25)/.75);
+  const fx0=660+42*hit, fx1=940-42*hit;
+  $('f0').setAttribute('cx',fx0.toFixed(1)); $('f1').setAttribute('cx',fx1.toFixed(1));
+  $('a0').setAttribute('d','M625 622L'+fx0.toFixed(1)+' 640'); $('a1').setAttribute('d','M975 622L'+fx1.toFixed(1)+' 640');
+  $('imp').setAttribute('opacity',(sp*(hit>.85?1:0)).toFixed(2));
+  rise($('brace'),p(u,TM.stage_punch+6.2,TM.stage_punch+6.8));
+
+  rise($('stu'),p(u,TM.student,TM.student+.5));
+  rise($('cch'),p(u,TM.couch,TM.couch+.5));
+  rise($('bq'),p(u,TM.couch+2,TM.couch+2.5));
+  rise($('ba'),p(u,TM.fist,TM.fist+.4));
+  const fk=p(u,TM.fist+1.2,TM.fist+1.7);
+  $('fst').setAttribute('cx',(1130-370*fk).toFixed(1)); $('fst').setAttribute('cy',(640-60*fk).toFixed(1)); $('fst').setAttribute('opacity',u>=TM.fist+1?1:0);
+  $('bst').setAttribute('opacity',fk>=1?1:0);
+  rise($('nb'),p(u,TM.fist+1.8,TM.fist+2.3));
+
+  rise($('bed'),p(u,TM.hospital_bed,TM.hospital_bed+.5));
+  $('spot').setAttribute('r',(12+4*Math.abs(Math.sin(t*2.5))).toFixed(1));
+  rise($('rl'),p(u,TM.shield-3.8,TM.shield-3.3));
+  rise($('shd'),p(u,TM.shield,TM.shield+.5)); rise($('k1'),p(u,TM.shield+.6,TM.shield+1.1));
+  const ua=p(u,TM.shield+2,TM.shield+2.8); drw($('ua'),ua); $('ua').setAttribute('opacity',ua>0?1:0);
+  rise($('ul'),p(u,TM.shield+2,TM.shield+2.5)); rise($('k2'),p(u,TM.shield+2.8,TM.shield+3.3));
+
+  PAP.forEach((g,i)=>rise(g,p(u,TM.newspapers+i*.4,TM.newspapers+i*.4+.5)));
+  HL.forEach((h,i)=>{const a=TM.calendar+i*.9; rise(h,p(u,a,a+.4)); rise(CAL[i],p(u,a+.3,a+.7))});
+  rise($('rs'),p(u,TM.calendar+4.9,TM.calendar+5.5));
+
+  rise($('ball'),p(u,TM.crystal_ball,TM.crystal_ball+.5));
+  rise($('mapf'),p(u,TM.crystal_ball+1,TM.crystal_ball+1.6));
+  rise($('bl'),p(u,TM.blank_map,TM.blank_map+.5));
+  QM.forEach((q,i)=>q.setAttribute('opacity',(p(u,TM.blank_map+.6+i*.3,TM.blank_map+1+i*.3)*(.6+.4*Math.sin(t*2+i))).toFixed(2)));
+  rise($('easy'),p(u,TM.blank_map+5,TM.blank_map+5.6));
+
+  rise($('lq'),p(u,TM.question_mark,TM.question_mark+.5));
+  const c1=p(u,TM.question_mark+1.5,TM.question_mark+2), c2=p(u,TM.question_mark+1.8,TM.question_mark+2.3);
+  drw($('x1'),c1); drw($('x2'),c2); $('x1').setAttribute('opacity',c1>0?1:0); $('x2').setAttribute('opacity',c2>0?1:0);
+  rise($('rt'),p(u,TM.toolbox,TM.toolbox+.5));
+  $('tb').setAttribute('transform','translate(0 '+(-6*Math.abs(Math.sin(t*2))).toFixed(1)+')');
+  rise($('rdy'),p(u,TM.toolbox+6.2,TM.toolbox+6.8));
+
+  rise($('jar'),p(u,TM.savings_jar,TM.savings_jar+.5));
+  const fh=300*p(u,TM.savings_jar+.6,TM.savings_jar+3.5); $('cf').setAttribute('y',(636-fh).toFixed(1)); $('cf').setAttribute('height',fh.toFixed(1));
+  CHP.forEach((c,i)=>rise(c,p(u,TM.umbrella+i*.8,TM.umbrella+i*.8+.4)));
+  rise($('um'),p(u,TM.umbrella+.4,TM.umbrella+.9));
+  $('rain').setAttribute('opacity',p(u,TM.umbrella+1,TM.umbrella+1.6));
+  RN.forEach(r=>{const ct=440-Math.sqrt(40000-(r[1]-1200)**2), y=230+(ct-254)*((t*1.4+r[2])%1); r[0].setAttribute('d','M'+r[1]+' '+y.toFixed(1)+'v24')});
+  $('sm').setAttribute('opacity',p(u,TM.calm_face,TM.calm_face+.5));
+  rise($('st'),p(u,TM.calm_face,TM.calm_face+.6));
+
+  rise($('mr'),p(u,TM.mirror,TM.mirror+.5));
+  PL.forEach((g,i)=>rise(g,p(u,TM.mirror+.6+i*.5,TM.mirror+1+i*.5)));
+  ['qa','qb','qc'].forEach((id,i)=>rise($(id),p(u,TM.mirror+4.6+i*.4,TM.mirror+5.1+i*.4)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:115.07;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

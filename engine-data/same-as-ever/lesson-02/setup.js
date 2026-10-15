@@ -1,0 +1,25 @@
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const drw=(el,k)=>{el.setAttribute('stroke-dasharray','1');el.setAttribute('stroke-dashoffset',(1-k).toFixed(3))};
+const pill=(par,x,y,w,s)=>{const g=mk('g',{},par);mk('rect',{x:x,y:y,width:w,height:68,rx:34,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);const tx=mk('text',{x:x+w/2,y:y+43,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g};
+person($('tp'),1180,420,30,'gain');
+person($('hou'),800,500,44,'gain');
+const men=[590,1010].map(x=>{const g=mk('g',{},$('men'));person(g,x,547,34,'ink');return g});
+person($('stu'),1200,560,34,'ink');
+person($('sp'),1150,420,30,'gain');
+person($('mp'),1270,520,28,'ink');
+const PAP=[],HL=[],CAL=[];
+['PEARL HARBOR','9/11','COVID'].forEach((s,i)=>{const x=120+i*470,g=mk('g',{},$('np'));
+  mk('rect',{x:x,y:240,width:400,height:360,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const m=mk('text',{x:x+24,y:282,'font-size':20,class:'m'},g);m.textContent='THE DAILY NEWS';
+  mk('path',{d:'M'+(x+24)+' 298h352',stroke:'var(--ink)','stroke-width':3},g);
+  for(let j=0;j<5;j++)mk('rect',{x:x+24,y:410+j*32,width:j%2?260:352,height:14,rx:7,fill:'var(--line)'},g);
+  const h=mk('text',{x:x+24,y:374,'font-size':42,class:'d',style:'fill:var(--loss)'},$('np'));h.textContent=s;
+  const c=mk('g',{},$('np'));mk('rect',{x:x+24,y:640,width:64,height:60,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},c);
+  mk('rect',{x:x+24,y:640,width:64,height:16,rx:4,class:'ink'},c);
+  mk('path',{d:'M'+(x+40)+' 668l32 24m0-24l-32 24',stroke:'var(--loss)','stroke-width':5,'stroke-linecap':'round'},c);
+  const l=mk('text',{x:x+104,y:680,'font-size':18,class:'m'},c);l.textContent='NOT ON THE CALENDAR';
+  PAP.push(g);HL.push(h);CAL.push(c)});
+const QM=[[1150,340],[1360,440],[1060,610],[1310,650],[800,640]].map(q=>{const e=mk('text',{x:q[0],y:q[1],'font-size':56,class:'d','text-anchor':'middle',style:'fill:var(--loss)'},$('qm'));e.textContent='?';return e});
+const CHP=['SPARE SAVINGS','SPARE TIME','FLEXIBLE PLANS'].map((s,i)=>pill($('chips'),500,320+i*110,380,s));
+const PL=['MONEY','HEALTH','WORK'].map((s,i)=>pill($('pl'),136+i*240,660,210,s));
+const RN=[];for(let i=0;i<14;i++){const x=1020+i*27;RN.push([mk('path',{stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round'},$('rain')),x,(i*.37)%1])}

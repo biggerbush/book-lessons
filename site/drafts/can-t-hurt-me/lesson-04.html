@@ -1,0 +1,404 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Can&#x27;t Hurt Me Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Can&#x27;t Hurt Me: When you&#x27;re struggling, remembering the hard things you&#x27;ve already overcome gives you fuel to keep going. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">CAN'T HURT ME · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Reach into the</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">cookie jar.</text>
+<text class="b" x="120" y="600" font-size="32">Your past victories are fuel for today's hardest moments.</text>
+<g id="tjar"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The moment you crack.</text>
+<text class="b" x="120" y="176" font-size="32">Deep in a hard challenge, your mind starts to whisper.</text>
+<path class="s-line" d="M160 722h600" stroke-width="6" stroke-linecap="round"/>
+<g id="run"></g>
+<path id="burn" class="s-loss" d="M330 600q12-14 0-28M480 600q12-14 0-28M320 670q12-14 0-28M490 670q12-14 0-28" fill="none" stroke-width="5" stroke-linecap="round"/>
+<g id="tc">
+<circle class="loss" cx="520" cy="350" r="10"/><circle class="loss" cx="585" cy="330" r="15"/><circle class="loss" cx="645" cy="320" r="18"/>
+<rect x="680" y="220" width="700" height="190" rx="95" fill="var(--loss)" fill-opacity=".12" stroke="var(--loss)" stroke-width="5"/>
+<text class="d5" x="1030" y="315" font-size="52" text-anchor="middle" style="fill:var(--loss)">“You should quit.”</text>
+<text class="m" x="1030" y="370" font-size="20" text-anchor="middle">YOUR LEGS BURN · YOUR MIND WHISPERS</text>
+</g>
+<g id="evr"><text class="m" x="1140" y="690" font-size="20" text-anchor="middle">IT COMES FOR EVERYONE</text></g>
+<g id="rf">
+<text class="d" x="120" y="820" font-size="44">What matters is what you reach for next.</text>
+<path class="s-gain" d="M1180 806h100m-18-16 18 16-18 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A cookie jar in his mind.</text>
+<text class="b" x="120" y="176" font-size="32">Each cookie: something hard he already survived.</text>
+<circle class="s-line" cx="420" cy="520" r="240" fill="none" stroke-width="5" stroke-dasharray="14 12"/>
+<text class="m" x="420" y="810" font-size="20" text-anchor="middle">HIS MIND</text>
+<g id="shf">
+<rect class="ink" x="250" y="600" width="340" height="16" rx="4"/>
+<path class="s-ink" d="M290 616v40h30M550 616v40h-30" fill="none" stroke-width="6" stroke-linejoin="round"/>
+</g>
+<g id="mc">
+<rect class="s-line" x="800" y="290" width="640" height="240" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="960" y="370" font-size="22">EACH COOKIE IS A MEMORY OF</text>
+<text class="d5" x="960" y="430" font-size="40">something hard he</text>
+<text class="d5" x="960" y="480" font-size="40">survived or achieved.</text>
+</g>
+<g id="rch">
+<path class="s-gain" d="M510 470Q650 360 820 620" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<text class="m" x="960" y="668" font-size="22" style="fill:var(--gain)">REACH IN WHEN HE STRUGGLES</text>
+</g>
+<g id="s2mv"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What’s inside the jar.</text>
+<text class="b" x="120" y="176" font-size="32">Each cookie is a hard thing he already did.</text>
+<g id="ca0">
+<rect class="s-line" x="120" y="220" width="414" height="600" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M327 300c-40-20-110-20-140-6v120c30-14 100-14 140 6zM327 300c40-20 110-20 140-6v120c-30-14-100-14-140 6z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-line" d="M212 330h86M212 360h86M356 330h86M356 360h86" stroke-width="5" stroke-linecap="round"/>
+<text class="d" x="156" y="530" font-size="48">Reading</text>
+<text class="m" x="156" y="590" font-size="20">LEARNED TO TRULY READ</text><text class="m" x="156" y="624" font-size="20">AND STUDY, AFTER YEARS</text><text class="m" x="156" y="658" font-size="20">OF FAKING SCHOOL</text>
+</g>
+<g id="ca1">
+<rect class="s-line" x="593" y="220" width="414" height="600" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="700" y="300" width="200" height="110" rx="16" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="800" cy="340" r="30" fill="none" stroke-width="5"/>
+<line id="ndl" class="s-loss" x1="800" y1="340" x2="800" y2="316" stroke-width="5" stroke-linecap="round"/>
+<text id="lbs" class="d" x="629" y="530" font-size="48">100+ pounds</text>
+<text class="m" x="629" y="590" font-size="20">LOST TO QUALIFY FOR</text><text class="m" x="629" y="624" font-size="20">SEAL TRAINING</text>
+</g>
+<g id="ca2">
+<rect class="s-line" x="1066" y="220" width="414" height="600" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-gain" d="M1273 440V276M1213 290v40a60 60 0 0 0 120 0v-40M1259 296l14-24 14 24M1203 304l10-18 10 18M1323 304l10-18 10 18" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="1102" y="530" font-size="48" style="fill:var(--gain)">Made it</text>
+<text class="m" x="1102" y="590" font-size="20">THROUGH SEAL TRAINING,</text><text class="m" x="1102" y="624" font-size="20">AFTER SETBACKS</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not only wins.</text>
+<text class="b" x="120" y="176" font-size="32">The jar also holds the pain he lived through.</text>
+<g id="tro">
+<path class="gain" d="M1300 260h120v50a60 60 0 0 1-120 0z"/>
+<path class="s-gain" d="M1300 280h-26v20a26 26 0 0 0 30 24M1420 280h26v20a26 26 0 0 1-30 24" fill="none" stroke-width="6"/>
+<rect class="gain" x="1352" y="368" width="16" height="40"/><rect class="gain" x="1320" y="408" width="80" height="18" rx="4"/>
+<text class="m" x="1360" y="470" font-size="20" text-anchor="middle">TROPHIES</text>
+</g>
+<g id="cld">
+<rect class="loss" x="300" y="280" width="400" height="120" rx="60"/><circle class="loss" cx="420" cy="290" r="55"/><circle class="loss" cx="560" cy="280" r="65"/>
+<g id="rain"></g>
+</g>
+<g id="chips4"></g>
+<g id="boy"></g>
+<circle id="ring" class="s-gain" cx="500" cy="600" r="100" fill="none" stroke-width="6"/>
+<g id="lbl4"><text class="m" x="500" y="750" font-size="22" text-anchor="middle" style="fill:var(--gain)">SURVIVING IS PROOF OF STRENGTH</text></g>
+<g id="scar"><text class="d" x="120" y="840" font-size="52">Scars are <tspan style="fill:var(--gain)">evidence</tspan>, not <tspan style="fill:var(--loss)">excuses</tspan>.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Using it mid-race.</text>
+<text class="b" x="120" y="176" font-size="32">His body screamed stop. He remembered who he had already been.</text>
+<g id="mtn">
+<path d="M120 760L380 520L520 600L800 320L940 460V760Z" fill="var(--line)" fill-opacity=".5"/>
+<path class="s-ink" d="M120 760L380 520L520 600L800 320L940 460" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<circle id="rnr" class="gain" r="18"/>
+</g>
+<g id="stp"><text class="d" x="140" y="300" font-size="56" style="fill:var(--loss)">Stop.</text></g>
+<g id="rem"><text class="m" x="140" y="350" font-size="22" style="fill:var(--gain)">REMEMBER WHO YOU’VE ALREADY BEEN</text></g>
+<g id="gau">
+<path class="s-line" d="M1030 600A190 190 0 0 1 1410 600" fill="none" stroke-width="14" stroke-linecap="round"/>
+<path id="gfill" class="s-gain" fill="none" stroke-width="14" stroke-linecap="round"/>
+<text class="d5" x="1030" y="648" font-size="28" text-anchor="middle" style="fill:var(--loss)">EMPTY</text>
+<text class="d5" x="1410" y="648" font-size="28" text-anchor="middle" style="fill:var(--gain)">FULL</text>
+<line id="fn" class="s-ink" x1="1220" y1="600" x2="1060" y2="600" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1220" cy="600" r="16"/>
+</g>
+<g id="fck"></g>
+<g id="lbl5"><text class="m" x="1220" y="780" font-size="22" text-anchor="middle">EACH MEMORY REFILLS THE TANK</text></g>
+<g id="brn"><text class="d" x="120" y="840" font-size="44">Don’t wallow in the past. Burn it as fuel.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it works.</text>
+<text class="b" x="120" y="176" font-size="32">Doubt on one side. Evidence on the other.</text>
+<g id="bh"><text class="m" x="800" y="290" font-size="24" text-anchor="middle">YOU’VE BEEN HERE BEFORE · AND CAME OUT THE OTHER SIDE</text></g>
+<path class="ink" d="M800 580l-50 150h100z"/>
+<line id="bm" class="s-ink" stroke-width="10" stroke-linecap="round"/>
+<g id="lpn">
+<g id="dv">
+<text class="d5" x="0" y="-100" font-size="40" text-anchor="middle" style="fill:var(--loss)">“You can’t</text>
+<text class="d5" x="0" y="-52" font-size="40" text-anchor="middle" style="fill:var(--loss)">handle this.”</text>
+</g>
+<path class="s-ink" d="M0 0L-100 120M0 0L100 120" stroke-width="3"/>
+<path class="ink" d="M-110 120a110 36 0 0 0 220 0z"/>
+<g id="ldb"><circle class="loss" cx="0" cy="92" r="28"/><text class="d" x="0" y="104" font-size="34" text-anchor="middle" style="fill:var(--stage)">?</text></g>
+</g>
+<g id="rpn">
+<g id="ev">
+<text class="m" x="0" y="-80" font-size="22" text-anchor="middle" style="fill:var(--gain)">HARD EVIDENCE</text>
+<text class="m" x="0" y="-50" font-size="22" text-anchor="middle" style="fill:var(--gain)">YOU ALREADY HAVE</text>
+</g>
+<path class="s-ink" d="M0 0L-100 120M0 0L100 120" stroke-width="3"/>
+<path class="ink" d="M-110 120a110 36 0 0 0 220 0z"/>
+</g>
+<g id="cf"><text class="d" x="120" y="852" font-size="50">Confidence: not a feeling. <tspan style="fill:var(--gain)">A fact.</tspan></text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Build your own jar.</text>
+<text class="b" x="120" y="176" font-size="32">Write your victories and survived hardships in a journal.</text>
+<g id="nb">
+<rect class="s-ink" x="160" y="240" width="480" height="520" rx="12" fill="var(--stage)" stroke-width="6"/>
+<g id="spr"></g>
+<text class="m" x="210" y="300" font-size="22">MY COOKIE JAR</text>
+<path class="s-line" d="M210 386h390M210 476h390M210 566h390M210 656h390" stroke-width="3"/>
+</g>
+<g id="it0"><path class="s-gain" d="M208 358l10 10 18-22" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="250" y="372" font-size="30">A finished project</text></g>
+<g id="it1"><path class="s-gain" d="M208 448l10 10 18-22" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="250" y="462" font-size="30">A hard conversation</text></g>
+<g id="it2"><path class="s-gain" d="M208 538l10 10 18-22" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="250" y="552" font-size="30">A tough year survived</text></g>
+<path id="pen" class="gain" d="M0 0l6-32 72-112 22 14-72 112z"/>
+<g id="bw">
+<text class="m" x="920" y="530" font-size="22" text-anchor="middle">BIG WINS</text>
+<text class="m" x="1220" y="530" font-size="22" text-anchor="middle">SMALL ONES</text>
+</g>
+<g id="rd">
+<text class="d" x="760" y="680" font-size="44">Read it before you face</text>
+<text class="d" x="760" y="740" font-size="44">something difficult.</text>
+<rect class="gain" x="764" y="766" width="140" height="10"/>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="330" font-size="88" letter-spacing="-2">What is one hard thing</text></g>
+<g id="qb"><text class="d" x="136" y="440" font-size="88" letter-spacing="-2">you have already</text></g>
+<g id="qc"><text class="d" x="136" y="550" font-size="88" letter-spacing="-2" style="fill:var(--gain)">overcome?</text></g>
+<g id="w8"><text class="m" x="143" y="700" font-size="26">WRITE IT DOWN TODAY · PUT IT IN YOUR JAR</text></g>
+<g id="j8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Reach Into the Cookie Jar&rdquo;, from <em>Can&#x27;t Hurt Me</em> by David Goggins. Examples, including learning to study, losing over 100 pounds, SEAL training and ultramarathons, are from Goggins&#x27;s life as reported in the book. The jar, fuel gauge and evidence pile are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 7.6], [7.6, 21.2], [21.2, 34.8], [34.8, 51.2], [51.2, 68.5], [68.5, 87.2], [87.2, 103.0], [103.0, 118.9], [118.9, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Reach Into the Jar", "The Moment You Crack", "The Idea", "What's Inside", "Not Only Wins", "Using It Mid-Race", "Why It Works", "Build Your Own Jar", "Your First Cookie"];
+const TM={"cookie_jar": 0.0, "runner": 7.92, "thought_cloud": 10.88, "kitchen_shelf": 21.52, "memory_card": 25.36, "book_open": 35.12, "scale": 42.56, "trident": 47.44, "storm_cloud": 51.52, "small_boy": 60.08, "mountain_trail": 68.8, "fuel_gauge": 78.08, "doubt_voice": 87.52, "evidence_pile": 90.56, "notebook": 103.28, "pen_list": 111.04};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const ck=(g,x,y,r)=>{const c=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:'gain'},c);[[-.4,-.3],[.3,-.35],[.05,.1],[-.3,.4],[.42,.32]].forEach(d=>mk('circle',{cx:x+d[0]*r,cy:y+d[1]*r,r:Math.max(3,r*.11),class:'ink'},c));return c};
+const jar=(g,cx,y,w,h)=>{mk('rect',{x:cx-w/2,y:y,width:w,height:h,rx:w*.16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':7},g);mk('rect',{x:cx-w*.34,y:y-12,width:w*.68,height:16,rx:6,class:'ink'},g);return mk('rect',{x:cx-w*.4,y:y-44,width:w*.8,height:30,rx:8,class:'ink'},g)};
+const lg=(x,y,a,b,L1,L2)=>{const kx=x+L1*Math.sin(a),ky=y+L1*Math.cos(a);return 'M'+x+' '+y+'L'+kx.toFixed(1)+' '+ky.toFixed(1)+'L'+(kx+L2*Math.sin(b)).toFixed(1)+' '+(ky+L2*Math.cos(b)).toFixed(1)};
+
+const lid0=jar($('tjar'),1300,340,280,300);
+[[1230,580],[1300,590],[1370,580],[1265,515],[1340,515]].forEach(q=>ck($('tjar'),q[0],q[1],34));
+const tck=ck($('tjar'),0,0,44);
+
+const RL=[0,1,2,3].map(()=>mk('path',{fill:'none',stroke:'var(--ink)','stroke-width':14,'stroke-linecap':'round','stroke-linejoin':'round'},$('run')));
+mk('path',{d:'M420 370L400 520',stroke:'var(--ink)','stroke-width':16,'stroke-linecap':'round'},$('run'));
+mk('circle',{cx:420,cy:330,r:34,class:'ink'},$('run'));
+for(let i=0;i<5;i++){const x=900+i*120;fig($('evr'),x,560,18,'ink');mk('rect',{x:x-26,y:500,width:52,height:26,rx:13,fill:'var(--loss)','fill-opacity':.35},$('evr'))}
+ck($('rf'),1340,806,36);
+
+jar($('shf'),420,440,180,160);
+[[385,555],[455,555],[420,500]].forEach(q=>ck($('shf'),q[0],q[1],26));
+ck($('mc'),880,410,50);
+const mv2=ck($('s2mv'),0,0,30);
+
+[120,593,1066].forEach((x,i)=>ck($('ca'+i),x+370,262,22));
+
+const RN4=[];for(let i=0;i<6;i++)RN4.push(mk('path',{d:'M'+(340+i*64)+' 420l-12 50',class:'s-loss','stroke-width':5,'stroke-linecap':'round','stroke-dasharray':'14 14'},$('rain')));
+const CH4=['ABUSIVE FATHER','POVERTY','RACISM'].map((s,i)=>{const g=mk('g',{},$('chips4'));mk('rect',{x:820,y:250+i*84,width:380,height:64,rx:32,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);const tx=mk('text',{x:1010,y:290+i*84,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+fig($('boy'),500,560,24,'ink');
+
+const PT=[[120,760],[380,520],[520,600],[800,320]],SG=[];let TOT=0;
+for(let i=0;i<3;i++){const l=Math.hypot(PT[i+1][0]-PT[i][0],PT[i+1][1]-PT[i][1]);SG.push(l);TOT+=l}
+const FX=[1120,1220,1320],FC=FX.map(()=>ck($('fck'),0,0,26));
+
+const PILE=[[-40,100],[0,100],[40,100],[-20,64],[20,64],[0,28]].map(q=>ck($('rpn'),q[0],q[1],20));
+
+for(let y=270;y<=730;y+=46)mk('circle',{cx:160,cy:y,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('spr'));
+ck($('bw'),920,400,90);ck($('bw'),1220,430,50);
+
+jar($('j8'),1340,600,200,200).setAttribute('opacity',0);
+const dck=ck($('j8'),0,0,40);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('tjar'),p(u,TM.cookie_jar,TM.cookie_jar+.6));
+const k0=p(u,TM.cookie_jar+4.5,TM.cookie_jar+5.5);
+lid0.setAttribute('transform','translate('+(-230*k0).toFixed(1)+' '+(-50*k0).toFixed(1)+') rotate('+(-25*k0).toFixed(1)+' 1300 311)');
+const c0=p(u,TM.cookie_jar+5.3,TM.cookie_jar+6.5);
+tck.setAttribute('transform','translate(1300 '+(520-290*c0+6*Math.sin(t*2)*c0).toFixed(1)+')');tck.setAttribute('opacity',c0>0?1:0);
+
+rise($('run'),p(u,TM.runner,TM.runner+.5));
+const w=t*7;[0,1].forEach(j=>{const ph=j*Math.PI,a=.6*Math.sin(w+ph),b=a-.9*(1+Math.sin(w+ph+1.5))/2,c=-.7*Math.sin(w+ph);RL[j].setAttribute('d',lg(400,520,a,b,95,100));RL[2+j].setAttribute('d',lg(415,385,c,c+1.5,60,55))});
+rise($('burn'),p(u,TM.thought_cloud,TM.thought_cloud+.5));rise($('tc'),p(u,TM.thought_cloud+.6,TM.thought_cloud+1.1));
+rise($('evr'),p(u,TM.thought_cloud+5,TM.thought_cloud+5.6));rise($('rf'),p(u,TM.thought_cloud+7.9,TM.thought_cloud+8.5));
+
+rise($('shf'),p(u,TM.kitchen_shelf,TM.kitchen_shelf+.6));rise($('mc'),p(u,TM.memory_card,TM.memory_card+.6));
+const m2=p(u,TM.memory_card+5.7,TM.memory_card+7),n2=1-m2;
+mv2.setAttribute('transform','translate('+(n2*n2*420+2*n2*m2*650+m2*m2*880).toFixed(1)+' '+(n2*n2*520+2*n2*m2*330+m2*m2*660).toFixed(1)+')');
+mv2.setAttribute('opacity',u>=TM.memory_card+5.7?1:0);
+rise($('rch'),p(u,TM.memory_card+6.5,TM.memory_card+7));
+
+[TM.book_open,TM.scale,TM.trident].forEach((a,i)=>rise($('ca'+i),p(u,a,a+.5)));
+$('ndl').setAttribute('transform','rotate('+(70-140*p(u,TM.scale+.3,TM.scale+2)).toFixed(1)+' 800 340)');
+$('lbs').textContent=Math.round(100*p(u,TM.scale+.3,TM.scale+1.8))+'+ pounds';
+
+rise($('tro'),p(u,TM.storm_cloud,TM.storm_cloud+.5));rise($('cld'),p(u,TM.storm_cloud+2.5,TM.storm_cloud+3));
+RN4.forEach(r=>r.setAttribute('stroke-dashoffset',(-(t*60)%28).toFixed(1)));
+CH4.forEach((g,i)=>{const a=TM.storm_cloud+3+i*1.3;rise(g,p(u,a,a+.4))});
+rise($('boy'),p(u,TM.small_boy,TM.small_boy+.5));
+const rg=p(u,TM.small_boy+.8,TM.small_boy+1.6);$('ring').setAttribute('opacity',rg);$('ring').setAttribute('r',(60+40*rg).toFixed(1));
+rise($('lbl4'),p(u,TM.small_boy+1,TM.small_boy+1.5));rise($('scar'),p(u,TM.small_boy+3.4,TM.small_boy+4));
+
+rise($('mtn'),p(u,TM.mountain_trail,TM.mountain_trail+.6));
+let dd=cl(lin(u,TM.mountain_trail,TM.fuel_gauge+5))*TOT,si=0;while(si<2&&dd>SG[si]){dd-=SG[si];si++}
+const sf=Math.min(1,dd/SG[si]);
+$('rnr').setAttribute('cx',(PT[si][0]+(PT[si+1][0]-PT[si][0])*sf).toFixed(1));$('rnr').setAttribute('cy',(PT[si][1]+(PT[si+1][1]-PT[si][1])*sf-22).toFixed(1));
+rise($('stp'),p(u,TM.mountain_trail+.6,TM.mountain_trail+1.1));rise($('rem'),p(u,TM.mountain_trail+4.6,TM.mountain_trail+5.2));
+rise($('gau'),p(u,TM.mountain_trail+1,TM.mountain_trail+1.6));
+let fl=.7-.6*p(u,TM.mountain_trail+.5,TM.fuel_gauge);
+FC.forEach((c,i)=>{const a=TM.fuel_gauge+i*1.4,k=p(u,a,a+.8);fl+=.3*k;
+c.setAttribute('transform','translate('+(FX[i]+(1220-FX[i])*k).toFixed(1)+' '+(710-110*k).toFixed(1)+')');c.setAttribute('opacity',(p(u,a-.6,a-.2)*(1-p(u,a+.5,a+.8))).toFixed(2))});
+const fc=cl(fl),fa=Math.PI*(1+fc);
+$('fn').setAttribute('x2',(1220+160*Math.cos(fa)).toFixed(1));$('fn').setAttribute('y2',(600+160*Math.sin(fa)).toFixed(1));
+$('gfill').setAttribute('d','M1030 600A190 190 0 0 1 '+(1220+190*Math.cos(fa)).toFixed(1)+' '+(600+190*Math.sin(fa)).toFixed(1));
+$('gfill').setAttribute('opacity',fc>.01?1:0);
+rise($('lbl5'),p(u,TM.fuel_gauge,TM.fuel_gauge+.5));rise($('brn'),p(u,TM.fuel_gauge+5,TM.fuel_gauge+5.6));
+
+const tl=.2*p(u,TM.doubt_voice,TM.doubt_voice+1)-.4*p(u,TM.evidence_pile,TM.evidence_pile+3),dy=340*Math.sin(tl);
+$('bm').setAttribute('x1',460);$('bm').setAttribute('y1',(580+dy).toFixed(1));$('bm').setAttribute('x2',1140);$('bm').setAttribute('y2',(580-dy).toFixed(1));
+$('lpn').setAttribute('transform','translate(460 '+(580+dy).toFixed(1)+')');$('rpn').setAttribute('transform','translate(1140 '+(580-dy).toFixed(1)+')');
+rise($('dv'),p(u,TM.doubt_voice,TM.doubt_voice+.5));$('ldb').setAttribute('opacity',p(u,TM.doubt_voice,TM.doubt_voice+.5));
+PILE.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.evidence_pile+i*.4,TM.evidence_pile+i*.4+.3)));
+rise($('ev'),p(u,TM.evidence_pile,TM.evidence_pile+.5));rise($('bh'),p(u,TM.evidence_pile+4.6,TM.evidence_pile+5.2));rise($('cf'),p(u,TM.evidence_pile+10.7,TM.evidence_pile+11.3));
+
+const nbk=p(u,TM.notebook,TM.notebook+.6);rise($('nb'),nbk);
+let px=560,py=700;[0,1,2].forEach(i=>{const a=TM.pen_list+i*1.6;rise($('it'+i),p(u,a,a+.4));if(u>=a){px=250+340*p(u,a,a+1.2);py=372+90*i}});
+$('pen').setAttribute('transform','translate('+px.toFixed(1)+' '+py+')');$('pen').setAttribute('opacity',nbk);
+rise($('bw'),p(u,TM.notebook+5.4,TM.notebook+6));rise($('rd'),p(u,TM.pen_list+5,TM.pen_list+5.6));
+
+const q0=SC[8][0]/K;
+rise($('qa'),p(u,q0+.3,q0+.8));rise($('qb'),p(u,q0+.7,q0+1.2));rise($('qc'),p(u,q0+1.1,q0+1.6));
+rise($('j8'),p(u,q0+.6,q0+1.2));rise($('w8'),p(u,q0+3.8,q0+4.3));
+const dk=p(u,q0+4,q0+4.8);dck.setAttribute('transform','translate(1340 '+(470+230*dk).toFixed(1)+')');dck.setAttribute('opacity',p(u,q0+3.8,q0+4.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.23;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

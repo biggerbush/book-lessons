@@ -1,0 +1,20 @@
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const house=(g,x,gy,w,h,st)=>{const a=Object.assign({fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},st);mk('path',Object.assign({d:'M'+x+' '+gy+'V'+(gy-h)+'H'+(x+w)+'V'+gy+'ZM'+(x-20)+' '+(gy-h)+'L'+(x+w/2)+' '+(gy-h-w*.42)+'L'+(x+w+20)+' '+(gy-h)+'Z'},a),g);mk('rect',{x:x+w*.4,y:gy-h*.45,width:w*.2,height:h*.45,fill:a.stroke},g)};
+const pan=(g,cls,lbl)=>{mk('path',{d:'M0 0L-110 150M0 0L110 150',class:'s-ink','stroke-width':4,fill:'none'},g);mk('path',{d:'M-125 150a125 50 0 0 0 250 0z',class:'ink'},g);const b=mk('g',{},g);for(let i=0;i<3;i++)mk('rect',{x:-75+i*52,y:90,width:46,height:58,rx:8,class:cls},b);const tx=mk('text',{x:0,y:240,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=lbl;return b};
+const B=mk('path',{class:'s-ink','stroke-width':10,'stroke-linecap':'round'},$('beam')),PL=$('panL'),PR=$('panR'),RB=pan(PL,'gain','RESULTS'),EB=pan(PR,'loss','EXPECTATIONS');
+person($('f1'),340,480,40,'ink');person($('f2'),960,480,40,'ink');
+house($('h50'),260,720,260,180,{});
+house($('today'),760,720,560,240,{fill:'none',stroke:'var(--muted)','stroke-dasharray':'16 12'});
+const HS=[0,1,2,3,4].map(i=>{const g=mk('g',{},$('street'));house(g,160+i*270,600,170,130,i==2?{fill:'var(--gain)'}:{});if(i<4){const e=mk('text',{x:380+i*270,y:560,'font-size':44,'text-anchor':'middle',class:'d',style:'fill:var(--muted)'},$('eqs'));e.textContent='='}return g});
+const L5=['s-muted','s-gain','s-loss'].map((c,i)=>mk('polyline',{class:c,fill:'none','stroke-width':6,'stroke-linejoin':'round','stroke-linecap':'round','stroke-dasharray':i==2?'14 10':'none'},$('lines5')));
+const F5=[q=>700-440*q*q,q=>700-140*q,q=>700-330*Math.pow(q,1.2)];
+const curve=(f,k)=>{let s='';for(let i=0;i<=50;i++){const q=Math.min(i/50,k);s+=(220+1120*q).toFixed(1)+','+f(q).toFixed(1)+' ';if(i/50>=k)break}return s};
+house($('tvh'),620,400,120,70,{fill:'var(--gain)','stroke-width':3});
+const dial=(cx,cls)=>{const g=$('dials');mk('path',{d:'M'+(cx-170)+' 560A170 170 0 0 1 '+(cx+170)+' 560',class:'s-line',fill:'none','stroke-width':16,'stroke-linecap':'round'},g);const n=mk('line',{x1:cx,y1:560,x2:cx,y2:420,class:cls,'stroke-width':8,'stroke-linecap':'round'},g);mk('circle',{cx:cx,cy:560,r:16,class:'ink'},g);return n};
+const N1=dial(480,'s-gain'),N2=dial(1120,'s-loss');
+const needle=(n,cx,v)=>{const a=Math.PI*(1-v);n.setAttribute('x2',(cx+140*Math.cos(a)).toFixed(1));n.setAttribute('y2',(560-140*Math.sin(a)).toFixed(1))};
+for(let i=0;i<8;i++)mk('circle',{cx:200+i*60,cy:280,r:12,class:'s-ink',fill:'var(--stage)','stroke-width':5},$('spir'));
+const NL=[0,1,2,3].map(i=>mk('line',{x1:200,x2:200,y1:420+i*60,y2:420+i*60,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('nlines')));
+person($('refl'),1100,400,34,'ink');
+let sp='';for(let i=0;i<10;i++){const r=i%2?22:50,a=-Math.PI/2+i*Math.PI/5;sp+=(i?'L':'M')+(1100+r*Math.cos(a)).toFixed(1)+' '+(470+r*Math.sin(a)).toFixed(1)}
+mk('path',{d:sp+'Z',class:'gain'},$('phone'));

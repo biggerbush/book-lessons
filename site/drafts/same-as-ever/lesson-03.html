@@ -1,0 +1,325 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same as Ever Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Same as Ever: How satisfied we feel depends less on our circumstances and more on how they compare with what we expected. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAME AS EVER · LESSON 3</text>
+<text class="d" x="116" y="340" font-size="84" letter-spacing="-2">Happiness is</text>
+<text class="d" x="116" y="436" font-size="84" letter-spacing="-2">results minus</text>
+<text class="d" x="116" y="532" font-size="84" letter-spacing="-2">expectations.</text>
+<text class="b" x="120" y="630" font-size="32">Why feeling rich depends on where you set the bar.</text>
+<g id="raisebox">
+<rect class="s-ink" x="1160" y="530" width="220" height="170" fill="var(--stage)" stroke-width="7"/>
+<rect class="s-ink" x="1140" y="480" width="260" height="50" fill="var(--stage)" stroke-width="7"/>
+<rect class="gain" x="1255" y="480" width="30" height="220"/>
+<text class="m" x="1270" y="745" font-size="22" text-anchor="middle">RAISE</text>
+</g>
+<g id="texp"><path class="s-loss" d="M1100 0H1440" stroke-width="6" stroke-dasharray="14 10" stroke-linecap="round"/><text class="m" x="1440" y="-16" font-size="20" text-anchor="end" style="fill:var(--loss)">EXPECTED</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">It works like a balance.</text>
+<text class="b" x="120" y="176" font-size="32">Morgan Housel’s simple formula for happiness.</text>
+<g id="scl"><path class="s-ink" d="M800 330V720M690 720H910" stroke-width="10" stroke-linecap="round" fill="none"/><g id="beam"></g><g id="panL"></g><g id="panR"></g><circle class="ink" cx="800" cy="330" r="18"/></g>
+<g id="fml"><text class="d" x="120" y="820" font-size="56">Happiness = <tspan style="fill:var(--gain)">results</tspan> − <tspan style="fill:var(--loss)">expectations</tspan></text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two friends, one bonus.</text>
+<text class="b" x="120" y="176" font-size="32">The same modest bonus lands in both accounts.</text>
+<g id="fr">
+<g id="f1"></g><g id="f2"></g>
+<rect class="gain" x="480" y="450" width="80" height="200" rx="6"/>
+<rect class="gain" x="1080" y="450" width="80" height="200" rx="6"/>
+<text class="m" x="520" y="690" font-size="20" text-anchor="middle">BONUS</text>
+<text class="m" x="1120" y="690" font-size="20" text-anchor="middle">BONUS</text>
+</g>
+<g id="lo">
+<path class="s-loss" d="M460 640H640" stroke-width="5" stroke-dasharray="12 8"/>
+<text class="m" x="650" y="646" font-size="20" style="fill:var(--loss)">EXPECTED NOTHING</text>
+<path class="s-gain" d="M610 628V466M592 486l18-20 18 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="632" y="545" font-size="20" style="fill:var(--gain)">DELIGHTED</text>
+<path d="M324 486q16 16 32 0" fill="none" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="hi">
+<path class="s-loss" d="M1060 250H1240" stroke-width="5" stroke-dasharray="12 8"/>
+<text class="m" x="1250" y="256" font-size="20" style="fill:var(--loss)">EXPECTED DOUBLE</text>
+<path class="s-loss" d="M1200 440V268M1182 288l18-20 18 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1222" y="360" font-size="20" style="fill:var(--loss)">CHEATED</text>
+<path d="M944 498q16-16 32 0" fill="none" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="moods"><text class="d" x="120" y="800" font-size="52">Same bank balance. Opposite moods.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">America after World War Two.</text>
+<text class="b" x="120" y="176" font-size="32">Smaller homes and smaller paychecks than today.</text>
+<g id="h50"><text class="m" x="390" y="770" font-size="22" text-anchor="middle">1950s</text></g>
+<g id="today"><text class="m" x="1040" y="770" font-size="22" text-anchor="middle">TODAY</text></g>
+<g id="modest"><text class="m" x="390" y="810" font-size="20" text-anchor="middle">MODEST BY TODAY’S STANDARDS</text></g>
+<g id="well"><circle class="gain" cx="390" cy="340" r="46"/><path d="M370 348q20 22 40 0" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round"/><text class="m" x="460" y="348" font-size="22" style="fill:var(--gain)">DOING WELL</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Everyone lived about the same.</text>
+<text class="b" x="120" y="176" font-size="32">Similar houses, similar incomes, similar hopes.</text>
+<g id="street"></g>
+<g id="eqs"></g>
+<g id="sim"><text class="m" x="800" y="650" font-size="22" text-anchor="middle">SIMILAR HOUSE · SIMILAR INCOME · MODEST FEELS NORMAL</text></g>
+<g id="gapg">
+<text class="m" x="120" y="736" font-size="20">RESULTS</text>
+<text class="m" x="120" y="796" font-size="20">EXPECTED</text>
+<rect id="rb" class="gain" x="300" y="712" width="0" height="32" rx="6"/>
+<rect id="eb" class="loss" x="300" y="772" width="0" height="32" rx="6"/>
+<text class="m" x="1230" y="796" font-size="22" style="fill:var(--gain)">SMALL GAP</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The goalposts moved.</text>
+<text class="b" x="120" y="176" font-size="32">Incomes split apart, and screens showed the very top.</text>
+<path class="s-ink" d="M220 260V760H1340" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="236" y="280" font-size="20">INCOME</text>
+<text class="m" x="1340" y="790" font-size="20" text-anchor="end">DECADES →</text>
+<g id="lines5"></g>
+<text id="lb0" class="m" x="1355" y="266" font-size="20">TOP</text>
+<text id="lb1" class="m" x="1355" y="566" font-size="20" style="fill:var(--gain)">TYPICAL</text>
+<text id="lb2" class="m" x="1355" y="376" font-size="20" style="fill:var(--loss)">EXPECTED</text>
+<g id="tv"><path class="s-ink" d="M650 262l-30-38M710 262l30-38" stroke-width="5" stroke-linecap="round"/><rect class="s-ink" x="560" y="260" width="240" height="160" rx="14" fill="var(--stage)" stroke-width="6"/><g id="tvh"></g></g>
+<g id="behind"><text class="d" x="120" y="845" font-size="40">Richer than their grandparents, yet feeling behind.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two dials, not one.</text>
+<text class="b" x="120" y="176" font-size="32">Happiness = results − expectations. Most of us only turn one.</text>
+<g id="dls">
+<g id="dials"></g>
+<text class="m" x="480" y="625" font-size="22" text-anchor="middle" style="fill:var(--gain)">RESULTS</text>
+<text class="m" x="1120" y="625" font-size="22" text-anchor="middle" style="fill:var(--loss)">EXPECTATIONS</text>
+<text class="m" x="120" y="730" font-size="22">HAPPINESS</text>
+<rect class="s-line" x="330" y="705" width="1000" height="36" rx="18" fill="none" stroke-width="3"/>
+<rect id="hbar" class="gain" x="330" y="705" width="0" height="36" rx="18"/>
+</g>
+<g id="wh"><text class="m" x="480" y="360" font-size="20" text-anchor="middle">WORK HARDER</text></g>
+<g id="lb"><text class="m" x="1120" y="360" font-size="20" text-anchor="middle" style="fill:var(--gain)">LOWER THE BAR</text></g>
+<g id="strive"><text class="d" x="120" y="830" font-size="40">Keep striving. Just watch where your goalposts sit.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try this.</text>
+<text class="b" x="120" y="176" font-size="32">Two checks before your next big purchase or promotion.</text>
+<g id="nb">
+<rect class="s-ink" x="160" y="280" width="500" height="440" rx="12" fill="var(--stage)" stroke-width="7"/>
+<g id="spir"></g>
+<text class="m" x="200" y="350" font-size="22">WHAT I EXPECT TO FEEL</text>
+<g id="nlines"></g>
+</g>
+<g id="mir">
+<text class="m" x="1100" y="252" font-size="22" text-anchor="middle">WHO AM I COMPARING TO?</text>
+<ellipse class="s-ink" cx="1100" cy="490" rx="170" ry="210" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M1100 700V770M1000 770H1200" stroke-width="8" stroke-linecap="round"/>
+<g id="refl"></g>
+</g>
+<g id="phone"><rect class="s-loss" x="1020" y="360" width="160" height="260" rx="18" fill="var(--stage)" stroke-width="6"/><text class="m" x="1100" y="580" font-size="18" text-anchor="middle">HIGHLIGHTS</text></g>
+<g id="reel"><text class="d" x="120" y="840" font-size="36">Is your bar being set by someone else’s highlight reel?</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="400" font-size="76" letter-spacing="-2">Where in your life are</text></g>
+<g id="qb"><text class="d" x="136" y="500" font-size="76" letter-spacing="-2">your results good, but your</text></g>
+<g id="qc"><text class="d" x="136" y="600" font-size="76" letter-spacing="-2"><tspan style="fill:var(--loss)">expectations</tspan> ran ahead?</text></g>
+<g id="qm"><circle class="gain" cx="1370" cy="230" r="70"/><text class="d" x="1370" y="262" font-size="90" text-anchor="middle" style="fill:var(--on-gain)">?</text></g>
+<g id="nudge">
+<text class="m" x="143" y="760" font-size="26">CAN YOU NUDGE THAT BAR DOWN THIS WEEK?</text>
+<rect class="gain" x="1280" y="700" width="80" height="100" rx="6"/>
+<path id="nbar" class="s-loss" d="M1240 0H1400" stroke-width="6" stroke-dasharray="12 8" stroke-linecap="round"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Happiness Is Expectations Minus Results&rdquo;, from <em>Same as Ever</em> by Morgan Housel. The post-war America example is as reported in the book. The two friends, the scale and the dials are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 6.5], [6.5, 23.0], [23.0, 37.7], [37.7, 52.8], [52.8, 68.0], [68.0, 87.3], [87.3, 106.8], [106.8, 121.3], [121.3, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "The Formula", "Same Result", "Post-War America", "Like the Neighbours", "Goalposts Move", "The Hidden Lever", "Try This", "Your Turn"];
+const TM={"raise_box": 0.0, "scale": 6.8, "results_pile": 11.16, "expect_pile": 14.32, "two_friends": 23.32, "low_bar": 27.04, "high_bar": 30.32, "house_1950": 38.04, "small_home": 42.0, "street": 53.07, "neighbour": 57.68, "income_gap": 68.32, "tv_screen": 72.08, "rising_arrow": 77.84, "two_dials": 87.6, "expect_dial": 95.84, "notebook": 107.12, "mirror": 112.48, "question_mark": 121.6};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const house=(g,x,gy,w,h,st)=>{const a=Object.assign({fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},st);mk('path',Object.assign({d:'M'+x+' '+gy+'V'+(gy-h)+'H'+(x+w)+'V'+gy+'ZM'+(x-20)+' '+(gy-h)+'L'+(x+w/2)+' '+(gy-h-w*.42)+'L'+(x+w+20)+' '+(gy-h)+'Z'},a),g);mk('rect',{x:x+w*.4,y:gy-h*.45,width:w*.2,height:h*.45,fill:a.stroke},g)};
+const pan=(g,cls,lbl)=>{mk('path',{d:'M0 0L-110 150M0 0L110 150',class:'s-ink','stroke-width':4,fill:'none'},g);mk('path',{d:'M-125 150a125 50 0 0 0 250 0z',class:'ink'},g);const b=mk('g',{},g);for(let i=0;i<3;i++)mk('rect',{x:-75+i*52,y:90,width:46,height:58,rx:8,class:cls},b);const tx=mk('text',{x:0,y:240,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=lbl;return b};
+const B=mk('path',{class:'s-ink','stroke-width':10,'stroke-linecap':'round'},$('beam')),PL=$('panL'),PR=$('panR'),RB=pan(PL,'gain','RESULTS'),EB=pan(PR,'loss','EXPECTATIONS');
+person($('f1'),340,480,40,'ink');person($('f2'),960,480,40,'ink');
+house($('h50'),260,720,260,180,{});
+house($('today'),760,720,560,240,{fill:'none',stroke:'var(--muted)','stroke-dasharray':'16 12'});
+const HS=[0,1,2,3,4].map(i=>{const g=mk('g',{},$('street'));house(g,160+i*270,600,170,130,i==2?{fill:'var(--gain)'}:{});if(i<4){const e=mk('text',{x:380+i*270,y:560,'font-size':44,'text-anchor':'middle',class:'d',style:'fill:var(--muted)'},$('eqs'));e.textContent='='}return g});
+const L5=['s-muted','s-gain','s-loss'].map((c,i)=>mk('polyline',{class:c,fill:'none','stroke-width':6,'stroke-linejoin':'round','stroke-linecap':'round','stroke-dasharray':i==2?'14 10':'none'},$('lines5')));
+const F5=[q=>700-440*q*q,q=>700-140*q,q=>700-330*Math.pow(q,1.2)];
+const curve=(f,k)=>{let s='';for(let i=0;i<=50;i++){const q=Math.min(i/50,k);s+=(220+1120*q).toFixed(1)+','+f(q).toFixed(1)+' ';if(i/50>=k)break}return s};
+house($('tvh'),620,400,120,70,{fill:'var(--gain)','stroke-width':3});
+const dial=(cx,cls)=>{const g=$('dials');mk('path',{d:'M'+(cx-170)+' 560A170 170 0 0 1 '+(cx+170)+' 560',class:'s-line',fill:'none','stroke-width':16,'stroke-linecap':'round'},g);const n=mk('line',{x1:cx,y1:560,x2:cx,y2:420,class:cls,'stroke-width':8,'stroke-linecap':'round'},g);mk('circle',{cx:cx,cy:560,r:16,class:'ink'},g);return n};
+const N1=dial(480,'s-gain'),N2=dial(1120,'s-loss');
+const needle=(n,cx,v)=>{const a=Math.PI*(1-v);n.setAttribute('x2',(cx+140*Math.cos(a)).toFixed(1));n.setAttribute('y2',(560-140*Math.sin(a)).toFixed(1))};
+for(let i=0;i<8;i++)mk('circle',{cx:200+i*60,cy:280,r:12,class:'s-ink',fill:'var(--stage)','stroke-width':5},$('spir'));
+const NL=[0,1,2,3].map(i=>mk('line',{x1:200,x2:200,y1:420+i*60,y2:420+i*60,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('nlines')));
+person($('refl'),1100,400,34,'ink');
+let sp='';for(let i=0;i<10;i++){const r=i%2?22:50,a=-Math.PI/2+i*Math.PI/5;sp+=(i?'L':'M')+(1100+r*Math.cos(a)).toFixed(1)+' '+(470+r*Math.sin(a)).toFixed(1)}
+mk('path',{d:sp+'Z',class:'gain'},$('phone'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('raisebox'),p(u,TM.raise_box,TM.raise_box+.6));
+const T0=$('texp');T0.setAttribute('opacity',p(u,TM.raise_box+1.5,TM.raise_box+2));T0.setAttribute('transform','translate(0 '+(470-200*p(u,TM.raise_box+2,TM.raise_box+4)).toFixed(1)+')');
+
+rise($('scl'),p(u,TM.scale,TM.scale+.6));
+const rp=p(u,TM.results_pile,TM.results_pile+.8),ep=p(u,TM.expect_pile,TM.expect_pile+.8),th=(ep-rp)*.16,bc=330*Math.cos(th),bs=330*Math.sin(th);
+B.setAttribute('d','M'+(800-bc).toFixed(1)+' '+(330-bs).toFixed(1)+'L'+(800+bc).toFixed(1)+' '+(330+bs).toFixed(1));
+PL.setAttribute('transform','translate('+(800-bc).toFixed(1)+' '+(330-bs).toFixed(1)+')');PR.setAttribute('transform','translate('+(800+bc).toFixed(1)+' '+(330+bs).toFixed(1)+')');
+rise(RB,rp);rise(EB,ep);rise($('fml'),p(u,TM.expect_pile+4.2,TM.expect_pile+4.8));
+
+rise($('fr'),p(u,TM.two_friends,TM.two_friends+.6));rise($('lo'),p(u,TM.low_bar,TM.low_bar+.6));rise($('hi'),p(u,TM.high_bar,TM.high_bar+.6));rise($('moods'),p(u,TM.high_bar+3.4,TM.high_bar+4));
+
+rise($('h50'),p(u,TM.house_1950,TM.house_1950+.6));rise($('today'),p(u,TM.small_home,TM.small_home+.6));
+rise($('modest'),p(u,TM.small_home+5,TM.small_home+5.6));rise($('well'),p(u,TM.small_home+8.4,TM.small_home+9));
+
+HS.forEach((g,i)=>rise(g,p(u,TM.street+i*.3,TM.street+i*.3+.5)));
+rise($('eqs'),p(u,TM.neighbour,TM.neighbour+.6));rise($('sim'),p(u,TM.neighbour+.4,TM.neighbour+1));
+const gk=p(u,TM.neighbour+5.8,TM.neighbour+7);rise($('gapg'),p(u,TM.neighbour+5.8,TM.neighbour+6.2));
+$('rb').setAttribute('width',(860*gk).toFixed(1));$('eb').setAttribute('width',(900*gk).toFixed(1));
+
+const ik=p(u,TM.income_gap,TM.income_gap+1.6),xk=p(u,TM.rising_arrow,TM.rising_arrow+1.6);
+L5[0].setAttribute('points',curve(F5[0],ik));L5[1].setAttribute('points',curve(F5[1],ik));L5[2].setAttribute('points',curve(F5[2],xk));
+L5[2].setAttribute('opacity',u>=TM.rising_arrow?1:0);
+$('lb0').setAttribute('opacity',p(u,TM.income_gap+1.4,TM.income_gap+1.8));$('lb1').setAttribute('opacity',p(u,TM.income_gap+1.4,TM.income_gap+1.8));$('lb2').setAttribute('opacity',p(u,TM.rising_arrow+1.4,TM.rising_arrow+1.8));
+rise($('tv'),p(u,TM.tv_screen,TM.tv_screen+.6));rise($('behind'),p(u,TM.rising_arrow+3.4,TM.rising_arrow+4));
+
+rise($('dls'),p(u,TM.two_dials,TM.two_dials+.6));
+const pw=p(u,TM.two_dials+4.6,TM.two_dials+6.6),rv=.5+.15*pw+(u>TM.two_dials+4.6&&u<TM.expect_dial?.02*Math.sin(t*9):0),ev=.75-.45*p(u,TM.expect_dial,TM.expect_dial+1.5);
+needle(N1,480,rv);needle(N2,1120,ev);
+$('hbar').setAttribute('width',(1000*cl(.3+(rv-.5)*.6+(.75-ev)*1.3)).toFixed(1));
+rise($('wh'),p(u,TM.two_dials+4.6,TM.two_dials+5.2));rise($('lb'),p(u,TM.expect_dial,TM.expect_dial+.6));rise($('strive'),p(u,TM.expect_dial+5.4,TM.expect_dial+6));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.6));
+NL.forEach((l,i)=>l.setAttribute('x2',(200+420*p(u,TM.notebook+1+i*.8,TM.notebook+1.8+i*.8)).toFixed(1)));
+rise($('mir'),p(u,TM.mirror,TM.mirror+.6));
+const ph=p(u,TM.mirror+3.4,TM.mirror+4);$('refl').setAttribute('opacity',(1-ph).toFixed(2));rise($('phone'),ph);rise($('reel'),p(u,TM.mirror+4,TM.mirror+4.6));
+
+rise($('qa'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qb'),p(u,TM.question_mark+.4,TM.question_mark+.9));rise($('qc'),p(u,TM.question_mark+.8,TM.question_mark+1.3));
+rise($('qm'),p(u,TM.question_mark+1.2,TM.question_mark+1.8));rise($('nudge'),p(u,TM.question_mark+5.4,TM.question_mark+6));
+$('nbar').setAttribute('transform','translate(0 '+(640+48*p(u,TM.question_mark+6,TM.question_mark+7.2)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.6;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

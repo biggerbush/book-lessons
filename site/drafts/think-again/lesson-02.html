@@ -1,0 +1,328 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Think Again Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Think Again: The best thinkers pair belief in their ability to learn with humility about whether they currently have the right answer. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THINK AGAIN · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Confident humility:</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the sweet spot.</text>
+<text class="b" x="120" y="600" font-size="32">Why the best learners are both sure and unsure.</text>
+<g id="gauge">
+<path class="s-loss" d="M1150 470A150 150 0 0 1 1225 340.1" fill="none" stroke-width="24"/>
+<path id="gmid" class="s-gain" d="M1225 340.1A150 150 0 0 1 1375 340.1" fill="none" stroke-width="24"/>
+<path class="s-loss" d="M1375 340.1A150 150 0 0 1 1450 470" fill="none" stroke-width="24"/>
+<g id="needle"><path class="s-ink" d="M1300 470V352" stroke-width="8" stroke-linecap="round"/></g>
+<circle class="ink" cx="1300" cy="470" r="18"/>
+<text class="m" x="1150" y="520" font-size="20">TOO UNSURE</text>
+<text class="m" x="1450" y="520" font-size="20" text-anchor="end">TOO SURE</text>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two ditches, one road.</text>
+<text class="b" x="120" y="176" font-size="32">Picture a road with a ditch on each side.</text>
+<g id="road1">
+<path class="loss" d="M200 560Q350 760 500 560Z" fill-opacity=".15"/>
+<path class="loss" d="M1100 560Q1250 760 1400 560Z" fill-opacity=".15"/>
+<path class="s-ink" d="M120 560H200Q350 760 500 560H1100Q1250 760 1400 560H1480" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect class="ink" x="540" y="542" width="520" height="18" rx="4"/>
+<text class="m" x="800" y="604" font-size="20" text-anchor="middle">THE ROAD OF RETHINKING</text>
+</g>
+<g id="car"><path class="gain" d="M730 532v-24a8 8 0 0 1 8-8h22l16-26h48l16 26h22a8 8 0 0 1 8 8v24z"/><circle class="ink" cx="770" cy="534" r="13"/><circle class="ink" cx="830" cy="534" r="13"/></g>
+<g id="qb">
+<path class="s-ink" d="M315 652V590a12 12 0 0 1 24 0v26h22v-26a12 12 0 0 1 24 0v62" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<g id="qbp"></g>
+<rect class="s-ink" x="180" y="436" width="150" height="62" rx="14" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M290 498l24 30" stroke-width="5" stroke-linecap="round"/>
+<text class="d5" x="255" y="478" font-size="30" text-anchor="middle">I’d win!</text>
+<text class="m" x="350" y="790" font-size="20" text-anchor="middle">ARMCHAIR QUARTERBACK</text>
+<text class="m" x="350" y="822" font-size="20" text-anchor="middle">MORE CONFIDENCE THAN SKILL</text>
+</g>
+<g id="imp">
+<g id="impp"></g>
+<ellipse class="s-loss" cx="1350" cy="462" rx="90" ry="38" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-loss" cx="1290" cy="514" r="9" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="1350" y="473" font-size="30" text-anchor="middle">A fraud?</text>
+<text class="m" x="1250" y="790" font-size="20" text-anchor="middle">IMPOSTOR</text>
+<text class="m" x="1250" y="822" font-size="20" text-anchor="middle">SKILLED, BUT FEELS A FRAUD</text>
+</g>
+<g id="both"><text class="d" x="800" y="430" font-size="44" text-anchor="middle">Both ditches block rethinking.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The overconfident.</text>
+<text class="b" x="120" y="176" font-size="32">David Dunning and Justin Kruger’s pattern on tests of skill.</text>
+<g id="paper"><rect class="s-ink" x="140" y="240" width="300" height="380" rx="10" fill="var(--stage)" stroke-width="6"/><text class="m" x="170" y="290" font-size="20">TEST OF SKILL</text><g id="plines"></g></g>
+<g id="leg">
+<rect class="loss" x="600" y="248" width="20" height="20"/><text class="m" x="630" y="266" font-size="20">ACTUAL SCORE</text>
+<rect x="860" y="248" width="20" height="20" fill="none" stroke="var(--ink)" stroke-width="3" stroke-dasharray="5 3"/><text class="m" x="890" y="266" font-size="20">WHAT THEY GUESSED</text>
+<text class="m" x="1440" y="266" font-size="18" text-anchor="end">SCHEMATIC, NOT DATA</text>
+<path class="s-ink" d="M600 680H1440" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="bars"></g>
+<g id="gap"><rect class="loss" x="645" y="380" width="70" height="220" fill-opacity=".12" stroke="var(--loss)" stroke-width="4" stroke-dasharray="8 6"/><text class="d" x="680" y="512" font-size="60" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="bs"><text class="d" x="120" y="790" font-size="46">When we know too little, we can’t see the gap.</text></g>
+<g id="cwc"><text class="m" x="120" y="846" font-size="22" style="fill:var(--loss)">CONFIDENCE WITHOUT COMPETENCE</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Beware of Mount Stupid.</text>
+<text class="b" x="120" y="176" font-size="32">A little knowledge can feel like expertise.</text>
+<path class="s-ink" d="M160 240V760H1440" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="178" y="250" font-size="20">CONFIDENCE</text>
+<text class="m" x="1440" y="800" font-size="20" text-anchor="end">KNOWLEDGE →</text>
+<path id="mtf" class="loss" d="M160 760C260 760 300 300 420 300C540 300 560 680 700 680C900 680 1100 480 1440 420V760Z" fill-opacity=".1"/>
+<path id="mt" class="s-ink" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" d="M160 760C260 760 300 300 420 300C540 300 560 680 700 680C900 680 1100 480 1440 420" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="kl" class="s-gain" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" d="M420 300C540 300 560 680 700 680C900 680 1100 480 1440 420" fill="none" stroke-width="8"/>
+<g id="msl"><text class="m" x="380" y="290" font-size="22" text-anchor="end" style="fill:var(--loss)">MOUNT STUPID</text></g>
+<g id="flag"><path class="s-ink" d="M444 300V236" stroke-width="5" stroke-linecap="round"/><path class="loss" d="M444 236l36 14-36 14z"/></g>
+<g id="climw"><g id="clim"></g></g>
+<g id="kll"><text class="m" x="980" y="470" font-size="22" style="fill:var(--gain)">KEEP LEARNING</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet Halla Tómasdóttir.</text>
+<text class="b" x="120" y="176" font-size="32">A businesswoman from Iceland who doubted herself.</text>
+<g id="halla"><g id="hallap"></g><text class="m" x="340" y="680" font-size="22" text-anchor="middle">HALLA TÓMASDÓTTIR</text><text class="m" x="340" y="712" font-size="20" text-anchor="middle">ICELAND</text></g>
+<g id="ballot"><g id="bp"><rect class="s-ink" x="720" y="350" width="80" height="100" rx="6" fill="var(--stage)" stroke-width="5"/><path class="s-gain" d="M738 400l14 16 30-34" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect class="s-ink" x="620" y="480" width="280" height="200" rx="12" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="700" y="474" width="120" height="12" rx="6"/>
+<text class="d5" x="760" y="600" font-size="44" text-anchor="middle">2016</text><text class="m" x="760" y="720" font-size="20" text-anchor="middle">PRESIDENTIAL ELECTION</text></g>
+<g id="cloud"><path id="cl" class="loss" fill-opacity=".2" d="M280 340a40 40 0 0 1-6-79a56 56 0 0 1 104-22a46 46 0 0 1 74 46a28 28 0 0 1-12 55z"/><circle class="loss" cx="384" cy="366" r="9" fill-opacity=".3"/><text class="m" x="360" y="300" font-size="20" text-anchor="middle">AM I QUALIFIED?</text></g>
+<g id="fuel"><path class="s-gain" d="M470 290C640 220 840 240 990 305" fill="none" stroke-width="5" stroke-dasharray="10 8" stroke-linecap="round"/></g>
+<g id="f0"><rect class="gain" x="1000" y="260" width="440" height="90" rx="16"/><text class="d5" x="1040" y="320" font-size="40" style="fill:var(--on-gain)">Study</text></g>
+<g id="f1"><rect class="gain" x="1000" y="380" width="440" height="90" rx="16"/><text class="d5" x="1040" y="440" font-size="40" style="fill:var(--on-gain)">Listen</text></g>
+<g id="f2"><rect class="gain" x="1000" y="500" width="440" height="90" rx="16"/><text class="d5" x="1040" y="560" font-size="40" style="fill:var(--on-gain)">Prepare</text></g>
+<g id="fl"><text class="m" x="1000" y="640" font-size="22" style="fill:var(--gain)">DOUBT BECOMES FUEL</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Barely noticed, then second.</text>
+<text class="b" x="120" y="176" font-size="32">Her 2016 presidential race in the polls (schematic).</text>
+<g id="chart"><path class="s-ink" d="M160 260V720H1100" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="178" y="270" font-size="20">SUPPORT</text><text class="m" x="1100" y="760" font-size="20" text-anchor="end">ELECTION DAY</text>
+<g id="others"></g><text class="m" x="196" y="664" font-size="20" style="fill:var(--gain)">HALLA</text>
+<path id="hl" class="s-gain" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle id="hd" class="gain" cx="180" cy="690" r="14"/></g>
+<g id="p2"><text class="d" x="1180" y="450" font-size="150" letter-spacing="-4" style="fill:var(--gain)">2nd</text><text class="m" x="1184" y="540" font-size="20">PLACE ON ELECTION DAY</text></g>
+<g id="dw"><text class="m" x="1184" y="620" font-size="20">SHE DID NOT WIN, BUT</text><text class="m" x="1184" y="652" font-size="20">PROVED HER DOUBTERS,</text><text class="m" x="1184" y="684" font-size="20">AND HERSELF, WRONG</text></g>
+<g id="hum"><text class="d" x="120" y="830" font-size="40">Humility kept her curious. Confidence kept her running.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Confident humility.</text>
+<text class="b" x="120" y="176" font-size="32">Believe in yourself. Doubt your current answer.</text>
+<g id="va"><circle id="vc1" class="s-ink" cx="540" cy="470" r="220" fill="none" stroke-width="6"/><text class="d" x="540" y="740" font-size="40" text-anchor="middle">Confidence</text><text class="m" x="540" y="780" font-size="20" text-anchor="middle">I CAN LEARN AND REACH MY GOAL</text></g>
+<g id="vb"><circle id="vc2" class="s-ink" cx="1060" cy="470" r="220" fill="none" stroke-width="6"/><text class="d" x="1060" y="740" font-size="40" text-anchor="middle">Humility</text><text class="m" x="1060" y="780" font-size="20" text-anchor="middle">MY ANSWER MIGHT BE WRONG</text></g>
+<g id="fut"><path class="s-ink" d="M460 500H600M580 480l20 20-20 20" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path class="s-ink" d="M650 520V400" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M650 400l50 20-50 20z"/></g>
+<g id="qmk"><text class="d" x="1060" y="540" font-size="200" text-anchor="middle">?</text></g>
+<g id="lens"><path class="gain" d="M800 309A220 220 0 0 1 800 631A220 220 0 0 1 800 309Z"/><text class="d" x="800" y="482" font-size="30" text-anchor="middle" style="fill:var(--on-gain)">BOTH</text></g>
+<g id="ptr"><path class="s-gain" d="M800 640V796" stroke-width="4"/><text class="m" x="800" y="832" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE SWEET SPOT</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it today.</text>
+<text class="b" x="120" y="176" font-size="32">Before your next big decision, write it down.</text>
+<g id="nb"><rect class="s-ink" x="160" y="220" width="1280" height="580" rx="16" fill="var(--stage)" stroke-width="6"/><g id="rings"></g>
+<text class="m" x="240" y="290" font-size="22">WHAT I BELIEVE</text><g id="belg"></g>
+<path class="s-line" d="M200 390H1400M800 410V770" stroke-width="4"/></g>
+<g id="lc"><text class="m" x="240" y="450" font-size="22" style="fill:var(--gain)">I’M SURE I CAN LEARN</text><g id="lcl"></g></g>
+<g id="rc"><text class="m" x="840" y="450" font-size="22" style="fill:var(--loss)">I MIGHT BE WRONG ABOUT</text><g id="rcl"></g></g>
+<g id="hil"><rect x="820" y="612" width="440" height="56" rx="12" fill="none" stroke="var(--gain)" stroke-width="4" stroke-dasharray="10 8"/><text class="m" x="840" y="730" font-size="22" style="fill:var(--gain)">TEST THIS FIRST</text></g>
+<g id="magw"><g id="mag"><circle class="s-ink" cx="0" cy="0" r="60" fill="var(--stage)" fill-opacity=".3" stroke-width="10"/><path class="s-ink" d="M42 42L100 100" stroke-width="18" stroke-linecap="round"/></g></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="w0"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">Where in your life are</text></g>
+<g id="w1"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">you sitting in a ditch?</text></g>
+<g id="w2"><text class="d" x="136" y="540" font-size="80" letter-spacing="-2" style="fill:var(--gain)">Which way do you need</text></g>
+<g id="w3"><text class="d" x="136" y="640" font-size="80" letter-spacing="-2" style="fill:var(--gain)">to steer?</text></g>
+<g id="wh"><g id="wheel"><circle class="s-ink" cx="1340" cy="470" r="110" fill="none" stroke-width="16"/><path class="s-ink" d="M1232 470H1448M1340 470V580" stroke-width="12" stroke-linecap="round"/><circle class="gain" cx="1340" cy="470" r="28"/></g>
+<path class="s-ink" d="M1190 640h25q30 50 60 0h120q30 50 60 0h25" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text class="m" x="143" y="760" font-size="26">STEER BACK TO THE ROAD</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Confident Humility: The Sweet Spot&rdquo;, from <em>Think Again</em> by Adam Grant. Examples as reported in the book: the Dunning and Kruger research on overconfidence and Halla Tómasdóttir&#x27;s 2016 run for president of Iceland. The road, ditches, mountain and poll chart are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 8.5], [8.5, 27.3], [27.3, 44.9], [44.9, 59.0], [59.0, 73.7], [73.7, 91.9], [91.9, 107.6], [107.6, 121.0], [121.0, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Two Ditches", "The Overconfident", "Mount Stupid", "The Impostor", "The Surprise", "The Sweet Spot", "Try It Today", "Your Turn"];
+const TM={"title_card": 0.0, "road": 8.8, "armchair_qb": 11.76, "impostor": 17.76, "test_paper": 27.6, "low_scorers": 33.28, "blind_spot": 38.16, "mountain": 45.2, "climber": 50.72, "halla": 59.28, "ballot": 63.6, "doubt_cloud": 68.32, "poll_chart": 74.0, "rising_line": 76.96, "two_dials": 92.24, "arrow_future": 95.76, "question_mark": 99.44, "notebook": 107.92, "two_columns": 111.68, "magnifier": 117.68, "steering": 121.28};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+fig($('qbp'),350,560,22,'loss');fig($('impp'),1250,560,22,'loss');
+for(let i=0;i<5;i++){const y=340+i*54;mk('rect',{x:168,y:y-22,width:26,height:26,fill:'none',stroke:'var(--ink)','stroke-width':4},$('plines'));mk('path',{d:'M212 '+(y-9)+'H410',stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},$('plines'))}
+const HA=[80,180,280,380],HE=[300,320,340,360],BA=[],BE=[];
+[720,920,1120,1320].forEach((x,i)=>{BA.push(mk('rect',{x:x-75,y:680,width:70,height:0,class:'loss'},$('bars')));BE.push(mk('rect',{x:x+5,y:680,width:70,height:0,fill:'none',stroke:'var(--ink)','stroke-width':4,'stroke-dasharray':'10 8'},$('bars')));const tx=mk('text',{x:x,y:716,'font-size':20,'text-anchor':'middle',class:'m'},$('bars'));tx.textContent=['LOWEST','LOW','HIGH','HIGHEST'][i]});
+const bz=(s,a)=>{const q=1-s;return q*q*q*a[0]+3*q*q*s*a[1]+3*q*s*s*a[2]+s*s*s*a[3]};
+fig($('clim'),0,-62,12,'gain');
+const QM=[[-34,-70],[30,-84],[-6,-104]].map(d=>{const e=mk('text',{x:d[0],y:d[1],'font-size':30,class:'d','text-anchor':'middle',style:'fill:var(--loss)'},$('clim'));e.textContent='?';return e});
+fig($('hallap'),340,430,46,'gain');
+const PX=[180,360,540,720,900,1080],HY=[690,680,650,580,470,400];
+[[300,300,305,310,320,330],[380,400,420,450,480,500],[450,470,500,520,540,560]].forEach(a=>mk('path',{d:'M'+a.map((y,i)=>PX[i]+' '+y).join('L'),fill:'none',class:'s-muted','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('others')));
+const scr=(x,y,w,a)=>{let d='M'+x+' '+y;for(let i=0;i<w;i+=20)d+='q10 '+(i%40?a:-a)+' 20 0';return d};
+const SW={fill:'none','stroke-width':5,'stroke-linecap':'round'};
+for(let x=240;x<=1360;x+=80)mk('circle',{cx:x,cy:220,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const BEL=mk('path',Object.assign({d:scr(240,340,1100,7),stroke:'var(--ink)',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1},SW),$('belg'));
+[520,580].forEach(y=>mk('path',Object.assign({d:scr(240,y,480,6),stroke:'var(--ink)'},SW),$('lcl')));
+[520,580,640].forEach((y,i)=>mk('path',Object.assign({d:scr(840,y,400,i===2?14:6),stroke:i===2?'var(--loss)':'var(--ink)'},SW),$('rcl')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+R('gauge',TM.title_card,.6);
+const na=64*Math.sin(t*2.2)*cl(1-(u-TM.title_card)/6)+3*Math.sin(t*.9);
+$('needle').setAttribute('transform','rotate('+na.toFixed(2)+' 1300 470)');
+$('gmid').setAttribute('stroke-width',u>=TM.title_card+5.8?34:24);
+
+R('road1',TM.road);R('car',TM.road+.6);R('qb',TM.armchair_qb);R('imp',TM.impostor);R('both',TM.impostor+6.1);
+
+R('paper',TM.test_paper);R('leg',TM.low_scorers);
+BA.forEach((r,i)=>{const a=TM.low_scorers+i*.25,k=p(u,a,a+1);r.setAttribute('y',680-HA[i]*k);r.setAttribute('height',HA[i]*k);BE[i].setAttribute('y',680-HE[i]*k);BE[i].setAttribute('height',HE[i]*k)});
+R('gap',TM.blind_spot);R('bs',TM.blind_spot+.3,.6);R('cwc',TM.blind_spot+5.4);
+
+const m3=p(u,TM.mountain,TM.mountain+2);$('mt').setAttribute('stroke-dashoffset',1-m3);$('mtf').setAttribute('opacity',m3);R('msl',TM.mountain+1.6);
+const ck=p(u,TM.climber,TM.climber+3.5);R('climw',TM.climber,.4);
+$('clim').setAttribute('transform','translate('+bz(ck,[160,260,300,420]).toFixed(1)+' '+bz(ck,[760,760,300,300]).toFixed(1)+')');
+QM.forEach(e=>e.setAttribute('opacity',(1-ck).toFixed(2)));R('flag',TM.climber+3.4);
+$('kl').setAttribute('stroke-dashoffset',1-p(u,TM.climber+5.4,TM.climber+7.4));R('kll',TM.climber+6.4);
+
+R('halla',TM.halla);R('ballot',TM.ballot);
+$('bp').setAttribute('transform','translate(0 '+(130*p(u,TM.ballot+.6,TM.ballot+1.8)).toFixed(1)+')');
+R('cloud',TM.ballot+2.4);$('cl').setAttribute('class',u>=TM.doubt_cloud?'gain':'loss');
+R('fuel',TM.doubt_cloud,.8);['f0','f1','f2'].forEach((id,i)=>R(id,TM.doubt_cloud+1.6+i*.8));R('fl',TM.doubt_cloud+4);
+
+R('chart',TM.poll_chart);
+const hk=p(u,TM.rising_line,TM.rising_line+4)*5;let hd='M180 690',ex=180,ey=690;
+for(let i=1;i<=5;i++){const f=cl(hk-i+1);if(f<=0)break;ex=PX[i-1]+(PX[i]-PX[i-1])*f;ey=HY[i-1]+(HY[i]-HY[i-1])*f;hd+='L'+ex.toFixed(1)+' '+ey.toFixed(1)}
+$('hl').setAttribute('d',hd);$('hd').setAttribute('cx',ex.toFixed(1));$('hd').setAttribute('cy',ey.toFixed(1));
+R('p2',TM.rising_line+4);R('dw',TM.rising_line+6.2);R('hum',TM.rising_line+11.2);
+
+R('va',TM.two_dials);R('vb',TM.two_dials+.6);
+const mg=p(u,TM.question_mark+5,TM.question_mark+6.2);$('vc1').setAttribute('cx',540+110*mg);$('vc2').setAttribute('cx',1060-110*mg);
+R('fut',TM.arrow_future);R('qmk',TM.question_mark);R('lens',TM.question_mark+5.9);R('ptr',TM.question_mark+6.4);
+
+R('nb',TM.notebook);BEL.setAttribute('stroke-dashoffset',1-p(u,TM.notebook+1,TM.notebook+3));
+R('lc',TM.two_columns+.3);R('rc',TM.two_columns+3.6);R('magw',TM.magnifier,.4);
+const mm=p(u,TM.magnifier,TM.magnifier+1.6);
+$('mag').setAttribute('transform','translate('+(1380-340*mm).toFixed(1)+' '+(760-120*mm+4*Math.sin(t*3)).toFixed(1)+')');
+R('hil',TM.magnifier+1.6);
+
+R('w0',TM.steering);R('w1',TM.steering+.4);R('wh',TM.steering+.8);R('w2',TM.steering+4.1);R('w3',TM.steering+4.5);
+$('wheel').setAttribute('transform','rotate('+(28*Math.sin(t*1.3)).toFixed(1)+' 1340 470)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.2;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

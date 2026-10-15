@@ -1,0 +1,300 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Range Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Range: Thinking by analogy to many different domains, rather than only to similar past cases, helps people solve new problems that no single specialty has seen before. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">RANGE · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Borrow ideas from</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">distant fields.</text>
+<text class="b" x="120" y="600" font-size="32">Why the best ideas often come from far away</text>
+<g id="lk0"></g>
+<g id="glow"></g>
+<circle id="bulb" class="s-ink" cx="1300" cy="410" r="90" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M1270 500v40h60v-40M1278 562h44" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The tumor puzzle.</text>
+<text class="b" x="120" y="176" font-size="32">A tumor deep inside, and rays that can destroy it.</text>
+<g id="mach"><rect class="s-ink" x="140" y="430" width="170" height="120" rx="16" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="310" y="470" width="44" height="40"/><circle class="gain" cx="190" cy="470" r="12"/><text class="m" x="225" y="590" font-size="22" text-anchor="middle">RAY</text></g>
+<g id="pat"><ellipse class="s-ink" cx="860" cy="490" rx="380" ry="170" fill="var(--stage)" stroke-width="7"/><g id="cells"></g><circle class="loss" cx="900" cy="490" r="40"/><text class="m" x="900" y="566" font-size="20" text-anchor="middle">TUMOR</text></g>
+<rect id="beam" class="ink" x="354" y="482" width="0" height="16"/>
+<g id="burnT"><text class="d" x="120" y="740" font-size="46">One strong ray burns everything in its path.</text></g>
+<g id="most"><text class="m" x="120" y="800" font-size="24" style="fill:var(--loss)">MOST PEOPLE GIVEN THIS PUZZLE CANNOT SOLVE IT</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The fortress story.</text>
+<g id="rd"><g id="roads"></g><g id="mines"></g></g>
+<circle id="blast" class="s-loss" cx="600" cy="510" r="10" fill="none" stroke-width="6" opacity="0"/>
+<g id="fort"><rect class="s-ink" x="730" y="440" width="140" height="140" fill="var(--stage)" stroke-width="7"/><path class="ink" d="M730 440v-22h28v22zM786 440v-22h28v22zM842 440v-22h28v22z"/><text class="m" x="800" y="518" font-size="18" text-anchor="middle">FORTRESS</text></g>
+<g id="army"><g id="armyD"></g><text class="m" x="120" y="518" font-size="20">ONE BIG ARMY</text><path id="armyX" class="s-loss" d="M360 450l110 110M470 450l-110 110" stroke-width="8" stroke-linecap="round" opacity="0"/></g>
+<g id="troops"></g>
+<g id="grpL"><text class="m" x="1140" y="500" font-size="22" style="fill:var(--gain)">SMALL GROUPS</text><text class="m" x="1140" y="534" font-size="22" style="fill:var(--gain)">ARRIVE TOGETHER</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Same structure, underneath.</text>
+<g id="sub3"><text class="b" x="120" y="176" font-size="32">After the fortress story, many more people solve it.</text></g>
+<g id="bod3"><ellipse class="s-ink" cx="400" cy="500" rx="230" ry="180" fill="var(--stage)" stroke-width="6"/><circle id="tum3" class="loss" cx="400" cy="500" r="30"/></g>
+<g id="rays3"></g>
+<g id="ray3L"><text class="m" x="400" y="820" font-size="22" text-anchor="middle">MANY WEAK RAYS, ONE MEETING POINT</text></g>
+<g id="ice"><rect class="loss" x="760" y="420" width="720" height="320" fill-opacity=".1"/><path class="s-loss" d="M760 420h720" stroke-width="4"/>
+<polygon class="s-ink" points="880,420 940,300 1000,280 1060,420" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<polygon class="s-ink" points="1180,420 1240,300 1300,280 1360,420" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="970" y="252" font-size="22" text-anchor="middle">ARMIES</text><text class="m" x="1270" y="252" font-size="22" text-anchor="middle">MEDICINE</text></g>
+<g id="under"><polygon class="s-ink" points="820,420 1420,420 1460,550 1340,700 920,700 780,550" fill="var(--stage)" fill-opacity=".75" stroke-width="6" stroke-linejoin="round" stroke-dasharray="14 10"/>
+<text class="d5" x="1120" y="500" font-size="36" text-anchor="middle">Same deep structure</text><g id="icon3"></g></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Compare many distant examples.</text>
+<g id="sci"><text class="b" x="120" y="176" font-size="32">Psychologist Dedre Gentner studies how we spot hidden structure.</text><g id="sciP"></g>
+<text class="m" x="120" y="560" font-size="22">DEDRE GENTNER</text><text class="m" x="120" y="592" font-size="20">PSYCHOLOGIST</text></g>
+<g id="web4"></g>
+<g id="cards4"></g>
+<g id="node4"><rect class="gain" x="780" y="660" width="360" height="80" rx="40"/><text class="m" x="960" y="708" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">SHARED PATTERN</text></g>
+<g id="deep4"><text class="d" x="120" y="830" font-size="44">Varied cases make the deep idea stand out.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Kepler’s wandering analogies.</text>
+<g id="kep"><text class="b" x="120" y="176" font-size="32">A problem nobody had a field for.</text><g id="kepP"></g>
+<text class="m" x="120" y="560" font-size="22">JOHANNES KEPLER</text><text class="m" x="120" y="592" font-size="20">ASTRONOMER</text></g>
+<g id="sys"><ellipse class="s-line" cx="900" cy="480" rx="160" ry="110" fill="none" stroke-width="4"/><ellipse class="s-line" cx="900" cy="480" rx="270" ry="190" fill="none" stroke-width="4"/>
+<circle class="gain" cx="900" cy="480" r="46"/><circle id="pl0" class="ink" r="14"/><circle id="pl1" class="ink" r="18"/>
+<text class="m" x="900" y="262" font-size="22" text-anchor="middle">WHY DO PLANETS MOVE THIS WAY?</text></g>
+<circle id="force" class="s-gain" cx="900" cy="480" r="50" fill="none" stroke-width="5"/>
+<g id="chips5"></g>
+<g id="each5"><text class="d" x="120" y="800" font-size="44">Each comparison pushed his thinking somewhere new.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Inside view vs. outside view.</text>
+<g id="sub6"><text class="b" x="120" y="176" font-size="32">We zoom in on a problem’s own details and a few similar cases.</text></g>
+<g id="unl"></g>
+<circle id="lens6" class="s-gain" cx="800" cy="500" r="110" fill="none" stroke-width="6" stroke-dasharray="14 10"/>
+<g id="core6"><circle class="ink" cx="880" cy="500" r="16"/><circle class="ink" cx="760" cy="431" r="16"/><circle class="ink" cx="760" cy="569" r="16"/><circle class="loss" cx="800" cy="500" r="30"/></g>
+<circle id="ring6" class="s-ink" cx="800" cy="500" r="110" fill="none" stroke-width="5"/>
+<g id="inL"><path class="s-ink" d="M384 500H688" stroke-width="4" stroke-linecap="round"/><circle class="ink" cx="690" cy="500" r="7"/><text class="m" x="120" y="508" font-size="24" style="fill:var(--ink)">THE INSIDE VIEW</text></g>
+<g id="outL"><circle class="gain" cx="1022" cy="314" r="7"/><path class="s-gain" d="M1022 314H1104" stroke-width="4" stroke-linecap="round"/><text class="m" x="1120" y="322" font-size="24" style="fill:var(--gain)">THE OUTSIDE VIEW</text></g>
+<g id="wide6"><text class="d" x="120" y="850" font-size="40">A wider view reveals options a narrow view hides.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it yourself.</text>
+<text class="b" x="120" y="176" font-size="32">Three steps for the next time you are stuck.</text>
+<g id="t0"><rect class="s-line" x="120" y="230" width="414" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="rings7" fill="none" stroke="var(--ink)" stroke-width="5" stroke-dasharray="10 8"><circle cx="327" cy="450" r="125"/><circle cx="327" cy="450" r="88"/><circle cx="327" cy="450" r="52"/></g>
+<circle class="gain" cx="327" cy="450" r="22"/><text class="m" x="150" y="700" font-size="20">1 · STRIP IT TO THE CORE</text></g>
+<g id="t1"><rect class="s-line" x="593" y="230" width="414" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="map7"></g><circle class="gain" cx="800" cy="450" r="22"/><text class="m" x="623" y="700" font-size="20">2 · FIND IT IN OTHER FIELDS</text></g>
+<g id="t2"><rect class="s-line" x="1066" y="230" width="414" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M1233 500v-30h80v30" fill="none" stroke-width="7" stroke-linejoin="round"/><rect class="s-ink" x="1183" y="500" width="180" height="110" rx="10" fill="var(--stage)" stroke-width="7"/>
+<g id="items7"></g><text class="m" x="1096" y="700" font-size="20">3 · COLLECT, THEN CHOOSE</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="84" letter-spacing="-2">Pick one problem.</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="84" letter-spacing="-2">Can you find three</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="84" letter-spacing="-2" style="fill:var(--gain)">distant fields that</text></g>
+<g id="qd"><text class="d" x="136" y="630" font-size="84" letter-spacing="-2">already solved it?</text></g>
+<text class="m" x="143" y="740" font-size="26">BORROW FROM FAR AWAY</text>
+<g id="net8"></g>
+<circle id="c8" class="loss" cx="1290" cy="480" r="32"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Borrow Ideas From Distant Fields&rdquo;, from <em>Range</em> by David Epstein. Examples as reported in the book: the tumor and fortress analogy puzzle, Dedre Gentner&#x27;s research on analogy, and Johannes Kepler&#x27;s reasoning about planetary motion. All drawings, including the iceberg, web and maps, are illustrations rather than data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 10.2], [10.2, 24.9], [24.9, 38.0], [38.0, 53.9], [53.9, 69.7], [69.7, 87.4], [87.4, 106.3], [106.3, 120.3], [120.3, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Borrow Ideas", "The Tumor Puzzle", "The Fortress Story", "Deep Structure", "Many Distant Examples", "Kepler's Wandering", "Inside Versus Outside", "Try It Yourself", "Your Challenge"];
+const TM={"lightbulb": 0.0, "patient": 10.52, "ray_machine": 13.92, "burst": 16.72, "fortress": 25.2, "roads": 28.24, "small_groups": 33.52, "arrows": 38.32, "iceberg": 47.28, "scientist": 54.16, "cards": 58.56, "web": 63.92, "kepler": 70.0, "planets": 74.64, "magnet": 77.36, "inside_view": 87.68, "outside_view": 96.64, "question": 106.64, "map": 110.64, "toolbox": 116.45, "challenge": 120.64};
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const conv=(g,x,y,R,w)=>{for(let i=0;i<6;i++){const a=i*Math.PI/3,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${x+R*c} ${y+R*s}L${x+R*.35*c} ${y+R*.35*s}`,stroke:'var(--gain)','stroke-width':w,'stroke-linecap':'round'},g)}mk('circle',{cx:x,cy:y,r:R*.18,fill:'var(--gain)'},g)};
+const F0=[[1130,230],[1450,260],[1130,640],[1450,620]],TR=F0.map(([x,y])=>{mk('path',{d:`M${x} ${y}L1300 410`,stroke:'var(--line)','stroke-width':4,'stroke-dasharray':'8 10'},$('lk0'));mk('circle',{cx:x,cy:y,r:22,class:'ink'},$('lk0'));return mk('circle',{r:9,class:'gain'},$('lk0'))});
+for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${1300+112*c} ${410+112*s}L${1300+140*c} ${410+140*s}`,class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('glow'))}
+const CE=[];for(let x=520;x<=1200;x+=56)for(const y of [395,445,535,585]){if(((x-860)/350)**2+((y-490)/150)**2<1&&Math.hypot(x-900,y-490)>80)CE.push([mk('circle',{cx:x,cy:y,r:10,class:'ink','fill-opacity':.25},$('cells')),x,(y===445||y===535)&&x<880])}
+const G2=[];for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${800+110*c} ${510+110*s}L${800+290*c} ${510+290*s}`,class:'s-line','stroke-width':14,'stroke-linecap':'round'},$('roads'));mk('circle',{cx:800+200*c,cy:510+200*s,r:10,class:'loss'},$('mines'));const g=mk('g',{},$('troops'));for(let j=-1;j<2;j++)mk('circle',{cx:-s*j*16,cy:c*j*16,r:7,class:'gain'},g);G2.push([g,c,s])}
+for(let i=0;i<16;i++)mk('circle',{cx:380+(i%4)*22,cy:477+Math.floor(i/4)*22,r:8,class:'ink'},$('armyD'));
+const R3=[];for(let i=0;i<8;i++){const a=i*Math.PI/4+Math.PI/8,c=Math.cos(a),s=Math.sin(a);R3.push(mk('path',{d:`M${400+270*c} ${500+270*s}L${400+40*c} ${500+40*s}`,class:'s-gain','stroke-width':5,'stroke-linecap':'round','stroke-dasharray':230},$('rays3')))}
+conv($('icon3'),1120,610,60,6);
+P($('sciP'),250,330,36,'ink');P($('kepP'),240,330,36,'ink');
+const CD=[0,1,2,3].map(i=>{const x=460+i*260,cx=x+110,g=mk('g',{},$('cards4'));mk('rect',{x:x,y:240,width:220,height:260,rx:16,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);
+  const s=mk('g',{fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},g);
+  const ic=[['rect',{x:cx-50,y:290,width:100,height:80}],['ellipse',{cx:cx,cy:330,rx:70,ry:40}],['circle',{cx:cx,cy:330,r:40}],['path',{d:`M${cx-55} 370L${cx} 290L${cx+55} 370z`}]][i];mk(ic[0],ic[1],s);
+  conv(g,cx,445,32,4);return [g,s]});
+const W4=CD.map((c,i)=>mk('path',{d:`M${570+i*260} 500L960 660`,class:'s-gain','stroke-width':4,'stroke-dasharray':'8 8'},$('web4')));
+const C5=['LIGHT','MAGNETISM','SMELL'].map((s,i)=>{const y=300+i*148,g=mk('g',{},$('chips5'));mk('path',{d:`M1240 ${y+32}L952 480`,class:'s-gain','stroke-width':4,'stroke-dasharray':'8 8'},g);mk('rect',{x:1240,y:y,width:240,height:64,rx:32,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);mk('text',{x:1360,y:y+41,'font-size':22,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+const U6=[];for(let i=0;i<10;i++){const a=i*Math.PI/5+.3,c=Math.cos(a),s=Math.sin(a),x=800+235*c,y=500+235*s,g=mk('g',{},$('unl')),k=i%3;mk('path',{d:`M${800+120*c} ${500+120*s}L${800+205*c} ${500+205*s}`,class:'s-gain','stroke-width':3,'stroke-dasharray':'6 8'},g);
+  mk(k===0?'circle':k===1?'rect':'path',k===0?{cx:x,cy:y,r:20,class:'gain'}:k===1?{x:x-18,y:y-18,width:36,height:36,class:'gain'}:{d:`M${x-22} ${y+18}L${x} ${y-22}L${x+22} ${y+18}z`,class:'gain'},g);U6.push(g)}
+const M7=['NATURE','SPORTS','COOKING','HISTORY'].map((s,i)=>{const x=i%2?910:690,y=i<2?330:570,g=mk('g',{},$('map7'));mk('path',{d:`M800 450L${x} ${y}`,class:'s-gain','stroke-width':4,'stroke-dasharray':'8 8'},g);mk('rect',{x:x-75,y:y-25,width:150,height:50,rx:25,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('text',{x:x,y:y+7,'font-size':18,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+const I7=[0,1,2,3].map(i=>mk(i%2?'rect':'circle',i%2?{x:-13,y:-13,width:26,height:26,class:'gain'}:{r:14,class:'gain'},$('items7')));
+const N8=[[1150,330],[1450,360],[1400,680]].map(([x,y])=>{const g=mk('g',{},$('net8'));mk('path',{d:`M1290 480L${x} ${y}`,class:'s-gain','stroke-width':5,'stroke-dasharray':'10 10'},g);mk('circle',{cx:x,cy:y,r:26,class:'gain'},g);return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+TR.forEach((c,i)=>{const f=((t*.35+i*.25)%1)*.6,[x,y]=F0[i];c.setAttribute('cx',(x+(1300-x)*f).toFixed(1));c.setAttribute('cy',(y+(410-y)*f).toFixed(1));c.setAttribute('opacity',p(t,.5,1.5))});
+const lb=p(u,TM.lightbulb+1,TM.lightbulb+2);$('bulb').style.fill=lb>.5?'var(--gain)':'var(--stage)';$('glow').setAttribute('opacity',(lb*(.7+.3*Math.sin(t*3))).toFixed(2));
+
+rise($('pat'),p(u,TM.patient,TM.patient+.5));rise($('mach'),p(u,TM.ray_machine,TM.ray_machine+.5));
+const bk=p(u,TM.burst,TM.burst+1.2),tip=354+506*bk;$('beam').setAttribute('width',(506*bk).toFixed(1));
+CE.forEach(([c,x,b])=>{const on=b&&bk>0&&tip>x;c.setAttribute('class',on?'loss':'ink');c.setAttribute('fill-opacity',on?1:.25)});
+rise($('burnT'),p(u,TM.burst+1,TM.burst+1.6));rise($('most'),p(u,TM.burst+5,TM.burst+5.6));
+
+rise($('fort'),p(u,TM.fortress,TM.fortress+.5));rise($('rd'),p(u,TM.roads,TM.roads+.5));rise($('army'),p(u,TM.roads+1,TM.roads+1.5));
+const bl=p(u,TM.roads+2.5,TM.roads+3.5);$('blast').setAttribute('r',(10+60*bl).toFixed(1));$('blast').setAttribute('opacity',bl>0&&bl<1?(1-bl).toFixed(2):0);
+$('armyX').setAttribute('opacity',p(u,TM.roads+3,TM.roads+3.4));
+const gk=p(u,TM.small_groups+.5,TM.small_groups+3);G2.forEach(([g,c,s])=>{const r=280-150*gk;g.setAttribute('transform',`translate(${(800+r*c).toFixed(1)} ${(510+r*s).toFixed(1)})`);g.setAttribute('opacity',p(u,TM.small_groups,TM.small_groups+.5))});
+rise($('grpL'),p(u,TM.small_groups+.5,TM.small_groups+1));
+
+rise($('bod3'),p(u,TM.arrows,TM.arrows+.5));rise($('sub3'),p(u,TM.arrows,TM.arrows+.5));
+R3.forEach((r,i)=>{const k=p(u,TM.arrows+4.9+i*.15,TM.arrows+5.6+i*.15);r.setAttribute('stroke-dashoffset',(230*(1-k)).toFixed(1))});
+$('tum3').setAttribute('opacity',(1-.7*p(u,TM.arrows+6.5,TM.arrows+7.5)).toFixed(2));rise($('ray3L'),p(u,TM.arrows+5.5,TM.arrows+6));
+rise($('ice'),p(u,TM.iceberg,TM.iceberg+.5));rise($('under'),p(u,TM.iceberg+3.8,TM.iceberg+4.4));
+
+rise($('sci'),p(u,TM.scientist,TM.scientist+.5));
+CD.forEach(([g,s],i)=>{rise(g,p(u,TM.cards+i*.6,TM.cards+i*.6+.5));s.setAttribute('opacity',(1-.75*p(u,TM.web+1,TM.web+2)).toFixed(2))});
+W4.forEach((w,i)=>w.setAttribute('opacity',p(u,TM.web+i*.3,TM.web+i*.3+.4)));
+rise($('node4'),p(u,TM.web+.8,TM.web+1.3));rise($('deep4'),p(u,TM.web+1.5,TM.web+2.1));
+
+rise($('kep'),p(u,TM.kepler,TM.kepler+.5));rise($('sys'),p(u,TM.planets,TM.planets+.5));
+$('pl0').setAttribute('cx',(900+160*Math.cos(t*.9)).toFixed(1));$('pl0').setAttribute('cy',(480+110*Math.sin(t*.9)).toFixed(1));
+$('pl1').setAttribute('cx',(900+270*Math.cos(t*.5+2)).toFixed(1));$('pl1').setAttribute('cy',(480+190*Math.sin(t*.5+2)).toFixed(1));
+const fc=(t*.6)%1;$('force').setAttribute('r',(50+80*fc).toFixed(1));$('force').setAttribute('opacity',(p(u,TM.magnet,TM.magnet+.5)*(1-fc)).toFixed(2));
+C5.forEach((g,i)=>rise(g,p(u,TM.magnet+i*1.4,TM.magnet+i*1.4+.5)));rise($('each5'),p(u,TM.magnet+7,TM.magnet+7.6));
+
+rise($('core6'),p(u,TM.inside_view,TM.inside_view+.5));rise($('sub6'),p(u,TM.inside_view,TM.inside_view+.5));
+$('ring6').setAttribute('opacity',p(u,TM.inside_view+.3,TM.inside_view+.8));
+const ex6=p(u,TM.outside_view,TM.outside_view+1.2);
+$('lens6').setAttribute('opacity',p(u,TM.outside_view,TM.outside_view+.3));$('lens6').setAttribute('r',(110+180*ex6).toFixed(1));
+rise($('inL'),p(u,TM.inside_view+7,TM.inside_view+7.5));rise($('outL'),p(u,TM.outside_view+1.2,TM.outside_view+1.7));
+U6.forEach((g,i)=>rise(g,p(u,TM.outside_view+.6+i*.2,TM.outside_view+1+i*.2)));rise($('wide6'),p(u,TM.outside_view+5.3,TM.outside_view+5.9));
+
+rise($('t0'),p(u,TM.question,TM.question+.5));$('rings7').setAttribute('opacity',(1-.85*p(u,TM.question+1.5,TM.question+3)).toFixed(2));
+rise($('t1'),p(u,TM.map,TM.map+.5));M7.forEach((g,i)=>rise(g,p(u,TM.map+.6+i*.5,TM.map+1+i*.5)));
+rise($('t2'),p(u,TM.toolbox,TM.toolbox+.5));
+I7.forEach((e,i)=>{const k=p(u,TM.toolbox+.5+i*.5,TM.toolbox+1+i*.5);e.setAttribute('transform',`translate(${1213+i*40} ${(320+235*k).toFixed(1)})`);e.setAttribute('opacity',cl(k*5))});
+
+rise($('qa'),p(u,TM.challenge,TM.challenge+.5));rise($('qb'),p(u,TM.challenge+2.9,TM.challenge+3.4));
+rise($('qc'),p(u,TM.challenge+3.3,TM.challenge+3.8));rise($('qd'),p(u,TM.challenge+3.7,TM.challenge+4.2));
+rise($('c8'),p(u,TM.challenge,TM.challenge+.5));N8.forEach((g,i)=>rise(g,p(u,TM.challenge+3.5+i*.5,TM.challenge+4+i*.5)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.24;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

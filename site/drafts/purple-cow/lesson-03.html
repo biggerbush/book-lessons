@@ -1,0 +1,375 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purple Cow Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Purple Cow: A remarkable product is one people feel compelled to tell others about, so the product itself becomes the marketing. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">PURPLE COW · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Remarkable means</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">worth talking about.</text>
+<text class="b" x="120" y="600" font-size="32">Build the reason people talk right into the product.</text>
+<g id="tcan">
+<rect class="s-ink" x="1220" y="360" width="220" height="250" fill="var(--stage)" stroke-width="7"/>
+<rect class="gain" x="1224" y="440" width="212" height="90"/>
+<text class="m" x="1330" y="494" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">PAINT</text>
+<path class="s-ink" d="M1220 610a110 26 0 0 0 220 0" fill="none" stroke-width="7"/>
+<ellipse class="s-ink" cx="1330" cy="360" rx="110" ry="26" fill="var(--stage)" stroke-width="7"/>
+</g>
+<g id="tbub">
+<path class="s-gain" d="M1290 200h160a20 20 0 0 1 20 20v60a20 20 0 0 1-20 20h-110l-40 26 6-26h-16a20 20 0 0 1-20-20v-60a20 20 0 0 1 20-20z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d" x="1370" y="276" font-size="64" text-anchor="middle" style="fill:var(--gain)">!!</text>
+<g id="tw"><path class="s-gain" d="M1190 440q-24 40 0 80M1160 420q-36 60 0 120M1462 450q18 30 0 60" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Remark-able.</text>
+<text class="b" x="120" y="176" font-size="32">Godin takes the word very literally.</text>
+<g id="dict">
+<rect class="s-line" x="120" y="240" width="600" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="160" y="290" font-size="20">DICTIONARY</text>
+<text class="d" x="160" y="390" font-size="64">re·mark·able</text>
+<text class="b" x="160" y="436" font-size="28">adjective</text>
+<g id="dfn"><text class="d5" x="160" y="500" font-size="36" style="fill:var(--gain)">worth making a</text><text class="d5" x="160" y="548" font-size="36" style="fill:var(--gain)">remark about.</text></g>
+</g>
+<g id="fr1">
+<g id="fr1p"></g>
+<rect class="ink" x="1000" y="600" width="300" height="14" rx="7"/>
+<path class="s-ink" d="M1150 614v120M1100 734h100" stroke-width="8" stroke-linecap="round"/>
+<rect class="s-ink" x="1060" y="566" width="34" height="34" rx="6" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="1206" y="566" width="34" height="34" rx="6" fill="var(--stage)" stroke-width="5"/>
+</g>
+<g id="bub1">
+<path id="bp1" class="s-ink" d="M820 250h440a20 20 0 0 1 20 20v70a20 20 0 0 1-20 20h-330l-30 60-20-60h-90a20 20 0 0 1-20-20v-70a20 20 0 0 1 20-20z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text id="bt1" class="d" x="1040" y="318" font-size="32" text-anchor="middle">“You have to see this!”</text>
+</g>
+<g id="lbl1"><text class="m" x="800" y="228" font-size="20" style="fill:var(--gain)">WHAT EVERY PRODUCT COMPETES FOR</text></g>
+<g id="nob"><text class="d" x="120" y="810" font-size="44">No remark? Then it barely exists.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The old paint can.</text>
+<text class="b" x="120" y="176" font-size="32">For decades, the same round metal can.</text>
+<g id="mcan">
+<rect class="s-ink" x="480" y="400" width="320" height="320" fill="var(--stage)" stroke-width="7"/>
+<path class="s-line" d="M484 460h312M484 680h312" stroke-width="5"/>
+<path class="s-ink" d="M480 720a160 36 0 0 0 320 0" fill="none" stroke-width="7"/>
+<ellipse id="lidE" class="s-ink" cx="640" cy="400" rx="160" ry="36" fill="var(--line)" stroke-width="7"/>
+<g id="drp"></g>
+</g>
+<g id="sdr"><path class="s-loss" d="M300 270L390 330" stroke-width="26" stroke-linecap="round"/><path class="s-ink" d="M390 330L478 392" stroke-width="9" stroke-linecap="round"/></g>
+<g id="whd">
+<path class="s-ink" d="M480 480Q640 180 800 480" fill="none" stroke-width="4"/>
+<rect class="s-ink" x="597" y="296" width="26" height="42" rx="13" fill="var(--stage)" stroke-width="4"/>
+<rect class="s-ink" x="627" y="292" width="26" height="46" rx="13" fill="var(--stage)" stroke-width="4"/>
+<rect class="s-ink" x="657" y="296" width="26" height="42" rx="13" fill="var(--stage)" stroke-width="4"/>
+<path id="ouch" class="s-loss" d="M580 300l-22-8M582 326l-24 4M700 300l22-8M698 326l24 4" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="c20"><rect class="loss" x="960" y="300" width="8" height="86"/><text class="d5" x="990" y="340" font-size="38">Same round metal can</text><text class="m" x="990" y="376" font-size="20">FOR DECADES</text></g>
+<g id="c21"><rect class="loss" x="960" y="450" width="8" height="86"/><text class="d5" x="990" y="490" font-size="38">Pry it, then it drips</text><text class="m" x="990" y="526" font-size="20">SCREWDRIVER REQUIRED</text></g>
+<g id="c22"><rect class="loss" x="960" y="600" width="8" height="86"/><text class="d5" x="990" y="640" font-size="38">Thin wire handle</text><text class="m" x="990" y="676" font-size="20">DIGS INTO YOUR FINGERS</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Twist and Pour.</text>
+<text class="b" x="120" y="176" font-size="32">Dutch Boy redesigned the container itself.</text>
+<g id="ghost">
+<rect class="s-muted" x="160" y="480" width="220" height="240" fill="none" stroke-width="4" stroke-dasharray="10 8"/>
+<ellipse class="s-muted" cx="270" cy="480" rx="110" ry="24" fill="none" stroke-width="4" stroke-dasharray="10 8"/>
+<text class="m" x="270" y="764" font-size="20" text-anchor="middle">OLD CAN</text>
+<path class="s-muted" d="M420 620h100m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="jug">
+<path class="s-ink" d="M600 312l-30-12v36l30-6z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<rect class="s-ink" x="600" y="300" width="110" height="64" fill="var(--stage)" stroke-width="6"/>
+<path id="hdl" class="s-ink" d="M860 420h40a50 50 0 0 1 50 50v140a50 50 0 0 1-50 50h-40" fill="none" stroke-width="20" stroke-linecap="round"/>
+<rect class="s-ink" x="560" y="360" width="300" height="380" rx="46" fill="var(--stage)" stroke-width="7"/>
+<text class="m" x="710" y="520" font-size="22" text-anchor="middle">DUTCH BOY</text>
+<text class="d" x="710" y="580" font-size="34" text-anchor="middle">TWIST</text>
+<text class="d" x="710" y="624" font-size="34" text-anchor="middle" style="fill:var(--gain)">&amp; POUR</text>
+<g id="cap"><rect class="gain" x="588" y="256" width="134" height="48" rx="10"/><path class="s-line" d="M612 266v28M636 266v28M660 266v28M684 266v28" stroke-width="4"/></g>
+</g>
+<g id="f0"><circle class="gain" cx="1056" cy="346" r="12"/><text class="d5" x="1084" y="360" font-size="40">Plastic jug</text></g>
+<g id="f1"><circle class="gain" cx="1056" cy="446" r="12"/><text class="d5" x="1084" y="460" font-size="40">Real handle</text></g>
+<g id="f2"><circle class="gain" cx="1056" cy="546" r="12"/><text class="d5" x="1084" y="560" font-size="40">Screw-off lid</text></g>
+<g id="f3"><circle class="gain" cx="1056" cy="646" r="12"/><text class="d5" x="1084" y="660" font-size="40">Pour spout</text></g>
+<g id="same3"><text class="d" x="120" y="830" font-size="44">Same paint inside. New experience outside.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">People noticed.</text>
+<text class="b" x="120" y="176" font-size="32">The first time they picked one up.</text>
+<g id="cust">
+<g id="custp"></g>
+<rect class="gain" x="360" y="500" width="50" height="70" rx="10"/>
+<g id="exc"><text class="d" x="232" y="370" font-size="56" style="fill:var(--gain)">!</text><text class="d" x="362" y="356" font-size="56" style="fill:var(--gain)">!</text></g>
+<text class="m" x="140" y="680" font-size="20">PAINTERS &amp; HOMEOWNERS</text>
+</g>
+<g id="shelf">
+<rect class="s-line" x="640" y="250" width="840" height="430" fill="none" stroke-width="4"/>
+<g id="slots"></g>
+<path class="s-ink" d="M640 390h840M640 530h840M640 670h840" stroke-width="6"/>
+</g>
+<g id="more"><path class="s-gain" d="M652 740v-30m-12 12 12-12 12 12" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="680" y="738" font-size="22" style="fill:var(--gain)">MORE SHELF SPACE · MORE SALES</text></g>
+<g id="expl"><text class="d" x="120" y="830" font-size="44">The can did the explaining an ad would do.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Marketing inside the product.</text>
+<text class="b" x="120" y="176" font-size="32">Not bolted on at the end.</text>
+<text class="m" x="120" y="262" font-size="20">MOST COMPANIES</text>
+<g id="ob0"><rect class="s-ink" x="120" y="290" width="320" height="100" rx="14" fill="var(--stage)" stroke-width="5"/><text class="m" x="280" y="348" font-size="22" text-anchor="middle">BUILD PRODUCT</text></g>
+<g id="ob1"><path class="s-muted" d="M448 340h36m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round"/><rect class="s-ink" x="500" y="290" width="320" height="100" rx="14" fill="var(--stage)" stroke-width="5"/><text class="m" x="660" y="348" font-size="22" text-anchor="middle">HAND TO MARKETING</text></g>
+<g id="ob2"><path class="s-muted" d="M828 340h36m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round"/><rect class="s-loss" x="880" y="290" width="320" height="100" rx="14" fill="var(--stage)" stroke-width="5"/><text class="m" x="1040" y="348" font-size="22" text-anchor="middle" style="fill:var(--loss)">PROMOTE</text></g>
+<g id="new5"><text class="m" x="120" y="482" font-size="20" style="fill:var(--gain)">GODIN</text>
+<rect id="bar5" class="gain" x="120" y="510" height="100" rx="50" width="0"/>
+<text id="bt5" class="m" x="660" y="569" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">DESIGN + BUILD + MARKETING, FROM DAY ONE</text></g>
+<g id="spr5"><g id="rings"></g><circle class="gain" cx="1360" cy="560" r="34"/><g id="dots5"></g></g>
+<g id="spr5t"><text class="d" x="120" y="790" font-size="44">Use it, show it, talk about it: it spreads.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The remark test.</text>
+<text class="b" x="120" y="176" font-size="32">Can a customer describe it to a friend in one sentence?</text>
+<g id="mag"><g id="magI">
+<circle class="s-ink" cx="290" cy="470" r="100" fill="var(--stage)" stroke-width="14"/>
+<text class="d" x="290" y="505" font-size="100" text-anchor="middle">?</text>
+<path class="s-ink" d="M362 542L440 620" stroke-width="26" stroke-linecap="round"/>
+</g></g>
+<g id="pp6"><g id="pp6c"></g><g id="frd"></g><g id="spk"></g>
+<text class="m" x="620" y="650" font-size="20" text-anchor="middle">CUSTOMER</text>
+<text class="m" x="1380" y="650" font-size="20" text-anchor="middle">FRIEND</text></g>
+<g id="cd1"><rect class="s-muted" x="760" y="300" width="480" height="100" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="b" x="1000" y="362" font-size="32" text-anchor="middle">“It’s fine paint.”</text>
+<text class="m" x="760" y="436" font-size="20" style="fill:var(--loss)">BORING: NOTHING TRAVELS</text></g>
+<g id="cd2"><rect class="gain" x="760" y="540" width="480" height="100" rx="18"/>
+<text class="d" x="1000" y="602" font-size="32" text-anchor="middle" style="fill:var(--on-gain)">“You have to see this!”</text>
+<text class="m" x="760" y="676" font-size="20" style="fill:var(--gain)">LEAN IN: WORTH SPREADING</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it today.</text>
+<text class="b" x="120" y="176" font-size="32">Fix the product, not the slogan.</text>
+<g id="p0"><rect class="s-line" x="120" y="240" width="420" height="460" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="290" font-size="20">1 · ONE THING YOU OFFER</text>
+<path class="s-ink" d="M240 420l40-40h180l-40 40zM420 420l40-40v160l-40 40z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="s-ink" x="240" y="420" width="180" height="160" fill="var(--stage)" stroke-width="6"/>
+<text class="d5" x="150" y="664" font-size="30">Your product</text></g>
+<g id="p1"><rect class="s-line" x="590" y="240" width="420" height="460" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="620" y="290" font-size="20">2 · THE DELIGHTED SENTENCE</text>
+<rect class="s-ink" x="680" y="340" width="240" height="290" rx="12" fill="var(--stage)" stroke-width="6"/>
+<g id="pad"></g>
+<text class="d5" x="620" y="674" font-size="30">Write it down</text></g>
+<g id="p2"><rect class="s-line" x="1060" y="240" width="420" height="460" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1090" y="290" font-size="20">3 · CHANGE THE PRODUCT</text>
+<text class="m" x="1270" y="370" font-size="24" text-anchor="middle">SLOGAN</text>
+<line id="sstk" class="s-loss" x1="1216" y1="362" x2="1216" y2="362" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M1180 440l40-40h180l-40 40zM1360 440l40-40v160l-40 40z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect id="cube3" class="s-ink" x="1180" y="440" width="180" height="160" stroke-width="6"/>
+<path id="pen3" class="gain" d="M0 0l8-30 80-80 22 22-80 80z"/>
+<text class="d5" x="1090" y="674" font-size="30">Product, not slogan</text></g>
+<g id="rep7"><text class="d" x="120" y="800" font-size="40">Until that sentence is worth repeating.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What would people say</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">about your work,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">in <tspan style="fill:var(--gain)">one line</tspan>?</text></g>
+<text class="m" x="143" y="700" font-size="26">DESCRIBE IT IN ONE SENTENCE</text>
+<g id="qbub"><path class="s-gain" d="M1180 560h240a20 20 0 0 1 20 20v130a20 20 0 0 1-20 20h-180l-60 40 14-40h-14a20 20 0 0 1-20-20v-130a20 20 0 0 1 20-20z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<text class="d" x="1300" y="690" font-size="120" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Remarkable Means Worth Talking About&rdquo;, from <em>Purple Cow</em> by Seth Godin. The Dutch Boy Twist and Pour paint container is an example as reported in the book. The cafe friends, the timelines and the sentence cards are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 8.4], [8.4, 28.4], [28.4, 40.7], [40.7, 58.0], [58.0, 72.2], [72.2, 88.4], [88.4, 105.9], [105.9, 119.9], [119.9, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Worth a Remark", "The Word Itself", "The Old Paint Can", "Twist and Pour", "People Noticed", "Product as Marketing", "The Remark Test", "Try It Today", "Your Challenge"];
+const TM={"paint_can": 0.0, "dictionary": 8.72, "two_friends": 15.36, "speech_bubble": 20.08, "metal_can": 28.72, "screwdriver": 32.88, "wire_handle": 37.12, "dutch_boy": 41.04, "plastic_jug": 44.64, "screw_lid": 48.96, "customer": 58.32, "store_shelf": 62.64, "old_timeline": 72.48, "new_timeline": 77.28, "magnifier": 88.72, "sentence_card": 96.08, "spark": 101.36, "your_product": 106.16, "notepad": 109.92, "pencil_edit": 114.24, "question_mark": 120.16};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+fig($('fr1p'),920,470,28,'ink');fig($('fr1p'),1380,470,28,'ink');
+const DR=[[500,140],[600,80],[770,170]].map(d=>[mk('path',{class:'s-loss','stroke-width':10,'stroke-linecap':'round',fill:'none'},$('drp')),d[0],d[1]]);
+fig($('custp'),300,420,36,'ink');
+const SLT=[];for(let r=0;r<3;r++)for(let i=0;i<10;i++){const x=660+i*82,yb=[390,530,670][r];
+  const o=mk('rect',{x:x,y:yb-84,width:56,height:84,class:'ink','fill-opacity':.3},$('slots'));
+  const j=mk('rect',{x:x,y:yb-90,width:56,height:90,rx:12,class:'gain'},$('slots'));SLT.push([o,j,(i*7+r*3)%30])}
+const RG=[0,1,2].map(()=>mk('circle',{cx:1360,cy:560,fill:'none',stroke:'var(--gain)','stroke-width':4},$('rings')));
+const D5=[];for(let i=0;i<6;i++){const a=i*Math.PI/3+.5;D5.push(mk('circle',{cx:(1360+118*Math.cos(a)).toFixed(0),cy:(560+110*Math.sin(a)).toFixed(0),r:14,class:'ink'},$('dots5')))}
+fig($('pp6c'),620,480,30,'ink');fig($('frd'),1380,480,30,'ink');
+for(let i=0;i<8;i++){const a=i*Math.PI/4;mk('path',{d:'M'+(1360+52*Math.cos(a)).toFixed(0)+' '+(476+52*Math.sin(a)).toFixed(0)+'L'+(1360+76*Math.cos(a)).toFixed(0)+' '+(476+76*Math.sin(a)).toFixed(0),class:'s-gain','stroke-width':5,'stroke-linecap':'round'},$('spk'))}
+for(let i=0;i<4;i++)mk('circle',{cx:720+i*53,cy:340,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('pad'));
+const PL=[180,170,180,110].map((w,i)=>[mk('path',{class:'s-gain','stroke-width':8,'stroke-linecap':'round',fill:'none'},$('pad')),w,410+i*52]);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('tcan'),p(u,TM.paint_can,TM.paint_can+.6));
+rise($('tbub'),p(u,TM.paint_can+6.6,TM.paint_can+7.1));
+$('tw').setAttribute('opacity',(.35+.65*Math.abs(Math.sin(t*2))).toFixed(2));
+
+rise($('dict'),p(u,TM.dictionary,TM.dictionary+.5)); rise($('dfn'),p(u,TM.dictionary+3,TM.dictionary+3.5));
+rise($('fr1'),p(u,TM.two_friends,TM.two_friends+.5)); rise($('bub1'),p(u,TM.two_friends+2.5,TM.two_friends+3));
+const sb=u>=TM.speech_bubble; $('bp1').style.fill=sb?'var(--gain)':'var(--stage)'; $('bp1').style.stroke=sb?'var(--gain)':'var(--ink)'; $('bt1').style.fill=sb?'var(--on-gain)':'var(--ink)';
+rise($('lbl1'),p(u,TM.speech_bubble,TM.speech_bubble+.5)); rise($('nob'),p(u,TM.speech_bubble+4.5,TM.speech_bubble+5));
+
+rise($('mcan'),p(u,TM.metal_can,TM.metal_can+.5)); rise($('c20'),p(u,TM.metal_can+.5,TM.metal_can+1));
+rise($('sdr'),p(u,TM.screwdriver,TM.screwdriver+.5)); rise($('c21'),p(u,TM.screwdriver+.5,TM.screwdriver+1));
+$('lidE').setAttribute('transform','rotate('+(-7*p(u,TM.screwdriver+.6,TM.screwdriver+1.4)).toFixed(2)+' 800 400)');
+const dk=p(u,TM.screwdriver+1.5,TM.screwdriver+4.5); DR.forEach(d=>{d[0].setAttribute('d','M'+d[1]+' 440V'+(440+d[2]*dk).toFixed(1)); d[0].setAttribute('opacity',dk>0?1:0)});
+rise($('whd'),p(u,TM.wire_handle,TM.wire_handle+.5)); rise($('c22'),p(u,TM.wire_handle+.5,TM.wire_handle+1));
+$('ouch').setAttribute('opacity',(.3+.7*Math.abs(Math.sin(t*3))).toFixed(2));
+
+rise($('ghost'),p(u,TM.dutch_boy,TM.dutch_boy+.5)); rise($('jug'),p(u,TM.dutch_boy+.4,TM.dutch_boy+1));
+$('hdl').style.stroke=u>=TM.plastic_jug?'var(--gain)':'var(--ink)';
+rise($('f0'),p(u,TM.plastic_jug+.3,TM.plastic_jug+.8)); rise($('f1'),p(u,TM.plastic_jug+.9,TM.plastic_jug+1.4));
+const ck=p(u,TM.screw_lid,TM.screw_lid+1.2); $('cap').setAttribute('transform','translate(0 '+(-36*ck).toFixed(1)+') rotate('+(-12*ck).toFixed(1)+' 655 280)');
+rise($('f2'),p(u,TM.screw_lid+.3,TM.screw_lid+.8)); rise($('f3'),p(u,TM.screw_lid+1.6,TM.screw_lid+2.1));
+rise($('same3'),p(u,TM.screw_lid+6.2,TM.screw_lid+6.7));
+
+rise($('cust'),p(u,TM.customer,TM.customer+.5)); $('exc').setAttribute('opacity',(p(u,TM.customer+1,TM.customer+1.4)*(.5+.5*Math.abs(Math.sin(t*3)))).toFixed(2));
+rise($('shelf'),p(u,TM.store_shelf,TM.store_shelf+.5));
+const nn=3+27*p(u,TM.store_shelf+.6,TM.store_shelf+4); SLT.forEach(s=>{const k=cl(nn-s[2]); s[1].setAttribute('opacity',k.toFixed(2)); s[0].setAttribute('opacity',(1-k).toFixed(2))});
+rise($('more'),p(u,TM.store_shelf+3,TM.store_shelf+3.5)); rise($('expl'),p(u,TM.store_shelf+6.2,TM.store_shelf+6.7));
+
+[0,1,2].forEach(i=>rise($('ob'+i),p(u,TM.old_timeline+i*.7,TM.old_timeline+i*.7+.5)));
+rise($('new5'),p(u,TM.new_timeline,TM.new_timeline+.4)); $('bar5').setAttribute('width',(1080*p(u,TM.new_timeline,TM.new_timeline+1.5)).toFixed(1));
+$('bt5').setAttribute('opacity',p(u,TM.new_timeline+1.3,TM.new_timeline+1.8));
+rise($('spr5'),p(u,TM.new_timeline+5.4,TM.new_timeline+5.9));
+RG.forEach((c,i)=>{const f=((t*.5+i/3)%1); c.setAttribute('r',(40+80*f).toFixed(1)); c.setAttribute('opacity',(1-f).toFixed(2))});
+D5.forEach((d,i)=>{const a=TM.new_timeline+6+i*.3; d.setAttribute('opacity',p(u,a,a+.3)); d.setAttribute('class',u>=a+.3?'gain':'ink')});
+rise($('spr5t'),p(u,TM.new_timeline+5.6,TM.new_timeline+6.2));
+
+rise($('mag'),p(u,TM.magnifier,TM.magnifier+.5));
+$('magI').setAttribute('transform','translate('+(14*Math.sin(t*1.2)).toFixed(1)+' '+(10*Math.sin(t*1.7)).toFixed(1)+')');
+rise($('pp6'),p(u,TM.magnifier+3.8,TM.magnifier+4.3));
+rise($('cd1'),p(u,TM.sentence_card,TM.sentence_card+.5)); rise($('cd2'),p(u,TM.spark,TM.spark+.5));
+const lk=p(u,TM.spark+.3,TM.spark+1.1); $('frd').setAttribute('transform','rotate('+(-12*lk).toFixed(2)+' 1380 606)');
+$('spk').setAttribute('opacity',(lk*(.5+.5*Math.abs(Math.sin(t*4)))).toFixed(2));
+
+rise($('p0'),p(u,TM.your_product,TM.your_product+.5)); rise($('p1'),p(u,TM.notepad,TM.notepad+.5));
+PL.forEach((l,i)=>{const k=p(u,TM.notepad+.8+i*.8,TM.notepad+1.6+i*.8); l[0].setAttribute('d','M710 '+l[2]+'h'+(l[1]*k).toFixed(1)); l[0].setAttribute('opacity',k>0?1:0)});
+rise($('p2'),p(u,TM.pencil_edit,TM.pencil_edit+.5));
+$('sstk').setAttribute('x2',(1216+108*p(u,TM.pencil_edit+.6,TM.pencil_edit+1.2)).toFixed(1));
+const pk=p(u,TM.pencil_edit+1,TM.pencil_edit+3); $('pen3').setAttribute('transform','translate('+(1200+140*pk).toFixed(1)+' '+(560-14*Math.abs(Math.sin(pk*12))).toFixed(1)+')');
+$('cube3').style.fill=u>=TM.pencil_edit+2?'var(--gain)':'var(--stage)';
+rise($('rep7'),p(u,TM.pencil_edit+3,TM.pencil_edit+3.5));
+
+rise($('qa'),p(u,TM.question_mark,TM.question_mark+.5)); rise($('qb'),p(u,TM.question_mark+.4,TM.question_mark+.9)); rise($('qc'),p(u,TM.question_mark+.8,TM.question_mark+1.3));
+rise($('qbub'),p(u,TM.question_mark+1.3,TM.question_mark+1.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.45;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

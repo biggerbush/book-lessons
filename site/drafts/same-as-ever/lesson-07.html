@@ -1,0 +1,379 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same as Ever Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Same as Ever: Since the future is unpredictable, the wisest plan is to leave margin for error and accept volatility as the price of long-term reward. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAME AS EVER · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Build room</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">for error.</text>
+<g id="tsub"><text class="b" x="120" y="600" font-size="32">Why the smartest plan expects things to go wrong.</text></g>
+<path id="tw" class="gain"/>
+<path class="s-muted" d="M1180 260H1440" stroke-width="3" stroke-dasharray="8 8"/>
+<path class="s-ink" d="M1180 260V600H1440V260" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="s-gain" d="M1452 268h16V420h-16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1310" y="350" font-size="22" text-anchor="middle">ROOM FOR ERROR</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Plans meet reality.</text>
+<text class="b" x="120" y="176" font-size="32">A perfect ten-year budget, sketched in advance.</text>
+<g id="who1"></g>
+<g id="brd1">
+<rect class="s-line" x="340" y="230" width="680" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="370" y="272" font-size="20">10-YEAR BUDGET</text>
+<text class="m" x="390" y="710" font-size="18">YEAR 1</text>
+<text class="m" x="970" y="710" font-size="18" text-anchor="end">YEAR 10</text>
+<path id="plan1" class="s-ink" d="M390 660L970 330" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round"/>
+</g>
+<polyline id="real1" class="s-loss" points="390,660 480,610 560,565 580,640 660,600 720,560 740,660 820,620 880,590 900,690 970,650" pathLength="1" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="bolts1"></g>
+<g id="cloud1"><circle class="loss" cx="1210" cy="320" r="46"/><circle class="loss" cx="1280" cy="290" r="62"/><circle class="loss" cx="1350" cy="320" r="46"/><rect class="loss" x="1164" y="316" width="232" height="50" rx="25"/></g>
+<g id="chips1"></g>
+<g id="fut1"><text class="d" x="120" y="830" font-size="44">The future keeps surprising us.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Widen the gap.</text>
+<text class="b" x="120" y="176" font-size="32">Not a sharper forecast: more room between need and have.</text>
+<g id="need2"><text class="m" x="120" y="280" font-size="22">WHAT YOU NEED</text><rect class="loss" x="120" y="300" width="560" height="70" rx="10"/></g>
+<g id="have2"><text class="m" x="120" y="430" font-size="22">WHAT YOU HAVE</text></g>
+<rect id="hbar" class="ink" x="120" y="450" width="0" height="70" rx="10"/>
+<rect id="cush" class="gain" x="680" y="450" width="0" height="70"/>
+<g id="gap2"><path class="s-muted" d="M680 290V540" stroke-width="3" stroke-dasharray="8 8"/></g>
+<g id="room2"><path id="brk2" class="s-gain" fill="none" stroke-width="5" stroke-linejoin="round"/><text class="m" x="680" y="610" font-size="24" style="fill:var(--gain)">ROOM FOR ERROR</text></g>
+<g id="hits2"></g>
+<g id="game2"><text class="d" x="120" y="760" font-size="52">It keeps you in the game.</text><text class="m" x="120" y="812" font-size="22">WHEN OTHERS ARE FORCED OUT</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What room looks like.</text>
+<text class="b" x="120" y="176" font-size="32">Margin you can see, in money and in life.</text>
+<g id="k0">
+<rect class="s-line" x="120" y="230" width="414" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">IN MONEY</text>
+<circle id="coin3" class="ink" cx="317" cy="300" r="18"/>
+<path class="gain" d="M262 404l18-44 34 32z"/>
+<ellipse class="gain" cx="317" cy="470" rx="110" ry="80"/>
+<rect class="gain" x="415" y="450" width="34" height="40" rx="10"/>
+<rect class="gain" x="250" y="530" width="26" height="50" rx="8"/><rect class="gain" x="350" y="530" width="26" height="50" rx="8"/>
+<path class="s-gain" d="M210 460q-34-8-20 24" fill="none" stroke-width="6" stroke-linecap="round"/>
+<rect x="292" y="402" width="50" height="10" rx="5" fill="var(--stage)"/><circle cx="388" cy="446" r="7" fill="var(--stage)"/>
+<text class="d5" x="150" y="700" font-size="36">Savings</text><text class="m" x="150" y="745" font-size="20">LEFT UNTOUCHED</text>
+</g>
+<g id="k1">
+<rect class="s-line" x="593" y="230" width="414" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="623" y="280" font-size="22">IN MONEY</text>
+<rect id="inc3" class="ink" x="680" y="340" width="100" height="260" rx="6"/>
+<rect class="loss" x="840" y="530" width="100" height="70" rx="6"/>
+<path class="s-gain" d="M660 530H960" stroke-width="3" stroke-dasharray="8 8"/>
+<g id="bad3"><text class="m" x="960" y="516" font-size="18" text-anchor="end" style="fill:var(--loss)">BAD YEAR</text></g>
+<text class="m" x="730" y="630" font-size="18" text-anchor="middle">INCOME</text><text class="m" x="890" y="630" font-size="18" text-anchor="middle">DEBT</text>
+<text class="d5" x="623" y="700" font-size="36">Small debts</text><text class="m" x="623" y="745" font-size="20">SURVIVE A BAD YEAR</text>
+</g>
+<g id="k2">
+<rect class="s-line" x="1066" y="230" width="414" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1096" y="280" font-size="22">IN LIFE</text>
+<rect class="s-ink" x="1106" y="320" width="334" height="260" rx="10" fill="var(--stage)" stroke-width="5"/>
+<rect class="ink" x="1106" y="320" width="334" height="44" rx="10"/>
+<g id="grid3"></g>
+<rect id="del3" class="ink" x="1178" y="376" width="54" height="56" rx="8"/>
+<text class="d5" x="1096" y="700" font-size="36">Slack</text><text class="m" x="1096" y="745" font-size="20">ONE DELAY WON'T TOPPLE ALL</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Volatility is a fee.</text>
+<text class="b" x="120" y="176" font-size="32">Rising over decades, jagged all the way up.</text>
+<g id="ax4"><path class="s-line" d="M160 240V700H1090" fill="none" stroke-width="4" stroke-linecap="round"/><text class="m" x="1090" y="735" font-size="20" text-anchor="end">DECADES</text></g>
+<polyline id="mk4" class="s-ink" pathLength="1" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="drops4"></g>
+<g id="tk4">
+<rect class="gain" x="1140" y="280" width="320" height="170" rx="16"/>
+<circle cx="1140" cy="365" r="18" fill="var(--stage)"/><circle cx="1460" cy="365" r="18" fill="var(--stage)"/>
+<text class="d" x="1300" y="380" font-size="72" text-anchor="middle" style="fill:var(--on-gain)">FEE</text>
+<text class="m" x="1300" y="425" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">FOR LONG-TERM GAINS</text>
+</g>
+<g id="fine4">
+<rect x="1140" y="490" width="320" height="120" rx="16" fill="none" stroke="var(--loss)" stroke-width="5"/>
+<text class="d" x="1300" y="572" font-size="60" text-anchor="middle" style="fill:var(--loss)">FINE</text>
+<text class="m" x="1140" y="650" font-size="20">NOT A PUNISHMENT</text>
+</g>
+<line id="strk4" class="s-ink" x1="1220" y1="552" x2="1220" y2="552" stroke-width="7" stroke-linecap="round"/>
+<g id="bump4"><text class="d" x="120" y="820" font-size="46">No reward without paying for the bumps.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fee, not fine.</text>
+<text class="b" x="120" y="176" font-size="32">A toll road to somewhere wonderful. You expected to pay.</text>
+<g id="road5">
+<rect x="120" y="580" width="1360" height="80" fill="var(--line)"/>
+<path d="M140 620H1460" stroke="var(--stage)" stroke-width="4" stroke-dasharray="24 20"/>
+<rect class="ink" x="645" y="384" width="140" height="24" rx="6"/>
+<rect class="s-ink" x="660" y="406" width="110" height="154" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="680" y="430" width="70" height="50" fill="none" stroke-width="4"/>
+<text class="m" x="715" y="525" font-size="18" text-anchor="middle">TOLL</text>
+<g id="car5"><path class="gain" d="M28 588l18-32h60l18 32z"/><rect class="gain" x="0" y="586" width="150" height="46" rx="14"/><circle class="ink" cx="34" cy="634" r="16"/><circle class="ink" cx="116" cy="634" r="16"/></g>
+<line id="arm5" class="s-loss" x1="790" y1="570" x2="980" y2="570" stroke-width="10" stroke-linecap="round"/>
+<circle class="ink" cx="790" cy="570" r="10"/>
+</g>
+<g id="star5w"><g id="star5"><circle class="s-gain" r="62" fill="none" stroke-width="4" stroke-dasharray="6 12"/><path class="gain" d="M0 -44L12 -14L44 -12L18 8L28 40L0 22L-28 40L-18 8L-44 -12L-12 -14Z"/></g>
+<text class="m" x="1480" y="535" font-size="20" text-anchor="end">SOMEWHERE WONDERFUL</text></g>
+<g id="paid5"><rect class="gain" x="645" y="300" width="140" height="50" rx="25"/><text class="m" x="715" y="333" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">PAID</text></g>
+<g id="inv5"><text class="d" x="270" y="750" font-size="40">See declines as the fee, and you can sit tight.</text><text class="m" x="270" y="800" font-size="22">INSTEAD OF SELLING IN A PANIC</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Same downturn, two outcomes.</text>
+<text class="b" x="120" y="176" font-size="32">Only one of them gets to wait for the recovery.</text>
+<g id="p6a">
+<rect class="s-line" x="120" y="230" width="640" height="570" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="275" font-size="22" style="fill:var(--loss)">NO CUSHION</text>
+<polyline id="cv0" class="s-ink" pathLength="1" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="s-line" d="M360 722h160" stroke-width="4" stroke-linecap="round"/>
+<g id="tow6"></g>
+</g>
+<g id="sold6"><circle class="loss" cx="412" cy="510" r="14"/><text class="m" x="412" y="552" font-size="22" text-anchor="middle" style="fill:var(--loss)">SOLD</text></g>
+<g id="cap6a"><text class="d5" x="150" y="772" font-size="32">Forced to sell at the worst time.</text></g>
+<g id="p6b">
+<rect class="s-line" x="840" y="230" width="640" height="570" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="275" font-size="22" style="fill:var(--gain)">ROOM FOR ERROR</text>
+<polyline id="cv1a" class="s-ink" pathLength="1" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline id="cv1b" class="s-gain" pathLength="1" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g id="house6">
+<path class="s-ink" d="M1095 612L1190 545L1285 612" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<rect class="s-ink" x="1110" y="610" width="160" height="80" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1175" y="645" width="30" height="45"/>
+<rect class="gain" x="1070" y="690" width="240" height="32" rx="8"/>
+<text class="m" x="1190" y="713" font-size="18" text-anchor="middle" style="fill:var(--on-gain)">CUSHION</text>
+</g>
+<g id="cap6b"><text class="d5" x="870" y="772" font-size="32">Waits it out. Recovery works.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your next step.</text>
+<text class="b" x="120" y="176" font-size="32">Ask one question, then build the cushion.</text>
+<g id="q7"><text class="m" x="120" y="270" font-size="22">IF YOUR INCOME STOPPED</text><text class="d" x="120" y="340" font-size="60">for six months?</text>
+<text class="m" x="120" y="615" font-size="20">HOW MANY WOULD YOUR CUSHION COVER?</text></g>
+<g id="mon7"></g>
+<g id="rope7">
+<path class="s-ink" d="M900 330V640M1440 330V640" stroke-width="6" stroke-linecap="round"/>
+<path class="s-ink" d="M900 340H1440" stroke-width="5" stroke-linecap="round"/>
+<g id="walk7"><path class="s-ink" d="M1100 300h140" stroke-width="5" stroke-linecap="round"/></g>
+</g>
+<g id="net7"></g>
+<g id="netlab7"><text class="m" x="910" y="650" font-size="20" style="fill:var(--gain)">A LITTLE MORE THAN FEELS NECESSARY</text></g>
+<g id="sur7"><text class="d" x="120" y="790" font-size="36">The surprise you plan for rarely matches the one that comes.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="290" font-size="80" letter-spacing="-2">Where in your life are you</text></g>
+<g id="qb"><text class="d" x="136" y="390" font-size="80" letter-spacing="-2">running with <tspan style="fill:var(--loss)">zero margin</tspan>,</text></g>
+<g id="qc"><text class="d" x="136" y="490" font-size="80" letter-spacing="-2">and what one <tspan style="fill:var(--gain)">buffer</tspan> could</text></g>
+<g id="qd"><text class="d" x="136" y="590" font-size="80" letter-spacing="-2">you add this week?</text></g>
+<text class="m" x="143" y="710" font-size="26">LEAVE ROOM FOR ERROR</text>
+<g id="cup8"><path id="qw" class="gain"/><path class="s-gain" d="M1260 580H1440" stroke-width="4" stroke-dasharray="8 8"/><path class="s-ink" d="M1260 580V780H1440V580" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="110" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:50</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Build Room for Error&rdquo;, from <em>Same as Ever</em> by Morgan Housel. Draws on Housel&#x27;s idea of market volatility as a fee rather than a fine, as reported in the book. The planner, toll road, two investors and stock chart are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=110, SC=[[0.0, 3.9], [3.9, 19.9], [19.9, 35.3], [35.3, 47.9], [47.9, 63.7], [63.7, 76.0], [76.0, 89.0], [89.0, 100.8], [100.8, 110.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Room for Error", "Plans Meet Reality", "The Buffer Idea", "What Room Looks Like", "Volatility Is a Fee", "Fee, Not Fine", "Why Buffers Win", "Your Next Step", "Your Challenge"];
+const TM={"title_card": 0.0, "planner": 4.24, "storm_cloud": 8.56, "gap_bar": 20.24, "cushion": 26.72, "piggy_bank": 35.6, "low_debt": 38.96, "calendar": 42.4, "market_line": 48.24, "ticket": 54.16, "toll_booth": 64.0, "calm_investor": 70.96, "two_paths": 76.28, "fragile_tower": 79.36, "sturdy_house": 83.52, "checklist": 89.32, "safety_net": 93.6, "question_mark": 101.12};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const wv=(x0,x1,y,b,a,ph)=>{let d='M'+x0+' '+b;for(let x=x0;x<x1;x+=8)d+='L'+x+' '+(y+a*Math.sin(x/30+ph)).toFixed(1);return d+'L'+x1+' '+(y+a*Math.sin(x1/30+ph)).toFixed(1)+'L'+x1+' '+b+'Z'};
+const draw=(el,k)=>{el.setAttribute('stroke-dasharray','1 1');el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));el.style.opacity=k>0?1:0};
+fig($('who1'),230,440,32,'ink');
+// bolts: x, top y; each 60px tall, clear of the black plan line, just above each drop on the indigo line
+const B1=[[570,470],[730,488],[890,515]].map(([x,y])=>mk('path',{d:'M'+(x+10)+' '+y+'L'+(x-6)+' '+(y+30)+'H'+(x+8)+'L'+(x-5)+' '+(y+60),class:'s-loss',fill:'none','stroke-width':6,'stroke-linejoin':'round','stroke-linecap':'round'},$('bolts1')));
+const CH1=['JOB LOSS','ILLNESS','MARKET CRASH','???'].map((s,i)=>{const g=mk('g',{},$('chips1'));mk('rect',{x:1100,y:470+i*80,width:360,height:60,rx:30,fill:'var(--stage)',stroke:i<3?'var(--loss)':'var(--muted)','stroke-width':4,'stroke-dasharray':i<3?'none':'10 8'},g);const tx=mk('text',{x:1280,y:508+i*80,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const H2=[0,1,2].map(()=>mk('circle',{r:20,class:'loss',opacity:0},$('hits2')));
+const TK3=[[0,0],[0,3],[1,0],[1,2],[1,3],[2,0],[2,1],[2,2]];
+for(let r=0;r<3;r++)for(let c=0;c<5;c++){const tk=TK3.some(q=>q[0]==r&&q[1]==c);mk('rect',{x:1114+c*64,y:376+r*66,width:54,height:56,rx:8,fill:tk?'var(--ink)':'none',stroke:tk?'none':'var(--gain)','stroke-width':3,'stroke-dasharray':tk?'none':'6 6'},$('grid3'))}
+const V4=i=>7*i+25*Math.sin(i*1.3)+15*Math.sin(i*2.9)-(i>=20&&i<30?150*(1-(i-20)/10):0)-(i>=42&&i<52?150*(1-(i-42)/10):0);
+let pt4='';for(let i=0;i<=60;i++)pt4+=(170+i*15)+','+(690-.95*V4(i)).toFixed(1)+' ';$('mk4').setAttribute('points',pt4);
+[20,42].forEach(i=>mk('circle',{cx:170+i*15,cy:(690-.95*V4(i)).toFixed(1),r:13,class:'loss',stroke:'var(--stage)','stroke-width':4},$('drops4')));
+const Y6=s=>s<.45?340+170*(.5-.5*Math.cos(Math.PI*s/.45)):510-200*(.5-.5*Math.cos(Math.PI*(s-.45)/.55));
+const P6=(px,a,b)=>{let q='';for(let k=0;k<=20;k++){const s=a+(b-a)*k/20;q+=(px+40+s*560).toFixed(1)+','+Y6(s).toFixed(1)+' '}return q};
+$('cv0').setAttribute('points',P6(120,0,.45));$('cv1a').setAttribute('points',P6(840,0,.45));$('cv1b').setAttribute('points',P6(840,.45,1));
+const TB=[0,1,2,3,4].map(k=>mk('rect',{x:410+(k%2?8:-6),y:694-26*k,width:60,height:24,rx:4,fill:'var(--ink)'},$('tow6')));
+const MO=[0,1,2,3,4,5].map(i=>{const x=120+i*105;mk('rect',{x:x,y:400,width:90,height:130,rx:10,fill:'none',stroke:'var(--line)','stroke-width':4},$('mon7'));const tx=mk('text',{x:x+45,y:565,'font-size':20,'text-anchor':'middle',class:'m'},$('mon7'));tx.textContent='M'+(i+1);return mk('rect',{x:x+6,y:524,width:78,height:0,rx:6,class:'gain'},$('mon7'))});
+fig($('walk7'),1170,262,18,'ink');
+const NA={stroke:'var(--gain)','stroke-width':4,'vector-effect':'non-scaling-stroke','stroke-linecap':'round'};
+[530,560,590].forEach(y=>mk('path',Object.assign({d:'M910 '+y+'H1430'},NA),$('net7')));
+for(let x=910;x<=1430;x+=40)mk('path',Object.assign({d:'M'+x+' 530V590'},NA),$('net7'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('tw').setAttribute('d',wv(1188,1432,430,592,8,t*2));
+rise($('tsub'),p(u,TM.title_card,TM.title_card+.6));
+
+rise($('who1'),p(u,TM.planner,TM.planner+.5)); rise($('brd1'),p(u,TM.planner,TM.planner+.5)); draw($('plan1'),p(u,TM.planner+.6,TM.planner+2.4));
+const cs=TM.storm_cloud;
+$('cloud1').setAttribute('transform','translate('+(80*(1-p(u,cs,cs+1))).toFixed(1)+' '+(4*Math.sin(t*2)).toFixed(1)+')'); $('cloud1').setAttribute('opacity',p(u,cs,cs+.6));
+draw($('real1'),p(u,cs+.6,cs+3.4));
+B1.forEach((b,i)=>{const a=cs+.8+i;b.setAttribute('opacity',p(u,a,a+.3))});
+CH1.forEach((g,i)=>{const a=i<3?cs+.8+i:cs+5.8;rise(g,p(u,a,a+.4))});
+rise($('fut1'),p(u,cs+6.2,cs+6.8));
+
+rise($('need2'),p(u,TM.gap_bar,TM.gap_bar+.5)); rise($('have2'),p(u,TM.gap_bar+.4,TM.gap_bar+.9)); rise($('gap2'),p(u,TM.gap_bar+2.4,TM.gap_bar+2.9));
+const HA=[0,1,2].map(i=>TM.cushion+1.2+i*1.4);
+let E=120+1180*p(u,TM.gap_bar+.6,TM.gap_bar+2.8); HA.forEach(a=>E-=110*p(u,a+.45,a+.8));
+$('hbar').setAttribute('width',Math.max(0,E-120).toFixed(1)); $('cush').setAttribute('width',Math.max(0,E-680).toFixed(1)); $('cush').setAttribute('opacity',p(u,TM.cushion,TM.cushion+.5));
+$('brk2').setAttribute('d','M680 540v14H'+Math.max(680,E).toFixed(1)+'v-14'); rise($('room2'),p(u,TM.cushion,TM.cushion+.5));
+H2.forEach((h,i)=>{const a=HA[i];h.setAttribute('cx',1250-110*i);h.setAttribute('cy',(230+220*p(u,a,a+.45)).toFixed(1));h.setAttribute('opacity',(u<a?0:1-p(u,a+.45,a+.9)).toFixed(2))});
+rise($('game2'),p(u,TM.cushion+6.6,TM.cushion+7.2));
+
+rise($('k0'),p(u,TM.piggy_bank,TM.piggy_bank+.5)); rise($('k1'),p(u,TM.low_debt,TM.low_debt+.5)); rise($('k2'),p(u,TM.calendar,TM.calendar+.5));
+const cc=(t%1.6)/1.6; $('coin3').setAttribute('cy',(300+100*ease(Math.min(cc/.7,1))).toFixed(1)); $('coin3').setAttribute('opacity',(cc<.75?1:0)*p(u,TM.piggy_bank+.5,TM.piggy_bank+.8));
+const bd=p(u,TM.low_debt+1.6,TM.low_debt+2.4), ih=260-120*bd; $('inc3').setAttribute('height',ih.toFixed(1)); $('inc3').setAttribute('y',(600-ih).toFixed(1)); rise($('bad3'),bd);
+$('del3').setAttribute('x',(1178+64*p(u,TM.calendar+1.4,TM.calendar+2.2)).toFixed(1)); $('del3').setAttribute('class',u>=TM.calendar+1?'loss':'ink');
+
+rise($('ax4'),p(u,TM.market_line,TM.market_line+.5)); draw($('mk4'),p(u,TM.market_line+.3,TM.market_line+4));
+rise($('drops4'),p(u,TM.ticket,TM.ticket+.5)); rise($('tk4'),p(u,TM.ticket+.3,TM.ticket+.8)); rise($('fine4'),p(u,TM.ticket+1.5,TM.ticket+2));
+$('strk4').setAttribute('x2',(1220+160*p(u,TM.ticket+2.2,TM.ticket+2.8)).toFixed(1)); rise($('bump4'),p(u,TM.ticket+7,TM.ticket+7.6));
+
+const ta=TM.toll_booth;
+rise($('road5'),p(u,ta,ta+.5)); rise($('star5w'),p(u,ta+.5,ta+1));
+$('star5').setAttribute('transform','translate(1390 430) rotate('+(t*20%360).toFixed(1)+')');
+$('car5').setAttribute('transform','translate('+(140+480*p(u,ta+.3,ta+2.6)+560*p(u,ta+5.2,ta+8)).toFixed(1)+' 0)');
+$('arm5').setAttribute('transform','rotate('+(-80*p(u,ta+4.4,ta+5.2)).toFixed(1)+' 790 570)');
+rise($('paid5'),p(u,ta+4.2,ta+4.7)); rise($('inv5'),p(u,TM.calm_investor,TM.calm_investor+.6));
+
+rise($('p6a'),p(u,TM.two_paths,TM.two_paths+.5)); rise($('p6b'),p(u,TM.two_paths+.2,TM.two_paths+.7));
+draw($('cv0'),p(u,TM.two_paths+.4,TM.two_paths+2.4)); draw($('cv1a'),p(u,TM.two_paths+.4,TM.two_paths+2.4));
+const tf=p(u,TM.fragile_tower+.6,TM.fragile_tower+1.6);
+$('tow6').setAttribute('transform','rotate('+(-28*tf).toFixed(1)+' 440 720)'); TB.forEach(b=>b.setAttribute('fill',tf>0?'var(--loss)':'var(--ink)'));
+rise($('sold6'),p(u,TM.fragile_tower+.4,TM.fragile_tower+.9)); rise($('cap6a'),p(u,TM.fragile_tower+1,TM.fragile_tower+1.6));
+draw($('cv1b'),p(u,TM.sturdy_house+.3,TM.sturdy_house+2.5)); rise($('house6'),p(u,TM.sturdy_house,TM.sturdy_house+.5)); rise($('cap6b'),p(u,TM.sturdy_house+1,TM.sturdy_house+1.6));
+
+rise($('q7'),p(u,TM.checklist,TM.checklist+.5));
+MO.forEach((m,i)=>{const a=TM.checklist+1.5+i*.5,h=118*p(u,a,a+.4);m.setAttribute('height',h.toFixed(1));m.setAttribute('y',(524-h).toFixed(1))});
+const sn=TM.safety_net;
+rise($('rope7'),p(u,sn,sn+.5)); $('walk7').setAttribute('transform','rotate('+(6*Math.sin(t*1.8)).toFixed(2)+' 1170 338)');
+const sx=.35+.65*p(u,sn+1,sn+2.6); $('net7').setAttribute('transform','translate(1170 0) scale('+sx.toFixed(3)+' 1) translate(-1170 0)'); $('net7').setAttribute('opacity',p(u,sn+.6,sn+1));
+rise($('netlab7'),p(u,sn+2.6,sn+3.1)); rise($('sur7'),p(u,sn+3.5,sn+4.1));
+
+const qm=TM.question_mark;
+rise($('qa'),p(u,qm,qm+.5)); rise($('qb'),p(u,qm+.4,qm+.9)); rise($('qc'),p(u,qm+.8,qm+1.3)); rise($('qd'),p(u,qm+1.2,qm+1.7));
+rise($('cup8'),p(u,qm+1.6,qm+2.2)); $('qw').setAttribute('d',wv(1268,1432,660,772,6,t*2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:106.61;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

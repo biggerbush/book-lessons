@@ -1,0 +1,323 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Subtle Art of Not Giving a F*ck Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of The Subtle Art of Not Giving a F*ck: Life is never free of problems, so happiness comes from choosing struggles you enjoy and solving them. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE SUBTLE ART OF NOT GIVING A F*CK · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Choose your problems,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not a problem-free life.</text>
+<text class="b" x="120" y="600" font-size="32">Happiness isn’t a problem-free life. It’s choosing better problems.</text>
+<rect class="s-loss" x="1150" y="700" width="80" height="80" rx="8" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="1190" y="758" font-size="44" text-anchor="middle" style="fill:var(--loss)">!</text>
+<rect class="s-loss" x="1250" y="640" width="90" height="140" rx="8" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="1295" y="730" font-size="44" text-anchor="middle" style="fill:var(--loss)">!</text>
+<rect id="tb3" x="1360" y="560" width="100" height="220" rx="8" stroke-width="6"/>
+<g id="thop"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Problems never end.</text>
+<text class="b" x="120" y="176" font-size="32">Solve one, and another takes its place.</text>
+<g id="pA"><rect class="s-loss" x="140" y="420" width="140" height="140" rx="12" fill="var(--stage)" stroke-width="7"/><text class="d" x="210" y="516" font-size="72" text-anchor="middle" style="fill:var(--loss)">!</text><text class="m" x="210" y="600" font-size="20" text-anchor="middle">PROBLEM</text></g>
+<g id="pB"><path class="s-muted" d="M300 520L400 620M372 618L400 620L398 592" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-loss" x="420" y="560" width="140" height="140" rx="12" fill="var(--stage)" stroke-width="7"/><text class="d" x="490" y="656" font-size="72" text-anchor="middle" style="fill:var(--loss)">!</text><text class="m" x="490" y="740" font-size="20" text-anchor="middle">SWAPPED</text></g>
+<g id="pC"><path class="s-muted" d="M300 460L400 360M372 362L400 360L398 388" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-loss" x="420" y="210" width="200" height="200" rx="14" fill="var(--stage)" stroke-width="8"/><text class="d" x="520" y="350" font-size="110" text-anchor="middle" style="fill:var(--loss)">!!</text><text class="m" x="520" y="444" font-size="20" text-anchor="middle">UPGRADED</text></g>
+<g id="lad"><path class="s-ink" d="M1000 700V220M1200 700V220" stroke-width="8" stroke-linecap="round"/><g id="rungs"></g><g id="clb"></g><text class="m" x="1100" y="740" font-size="20" text-anchor="middle">A FRESH CHALLENGE ON EVERY RUNG</text></g>
+<g id="l1n"><text class="d" x="120" y="800" font-size="40">That’s not bad news. It’s just how life works.</text></g>
+<g id="l1w"><text class="m" x="120" y="846" font-size="22" style="fill:var(--loss)">WAITING FOR NOTHING TO GO WRONG MEANS WAITING FOREVER</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The gym example.</text>
+<text class="b" x="120" y="176" font-size="32">One of Manson’s own examples.</text>
+<g id="gP"><g id="gFig"></g><text class="m" x="250" y="580" font-size="20" text-anchor="middle">HEALTH PROBLEM</text></g>
+<g id="gC"><path class="s-muted" d="M330 415h80M396 401l14 14-14 14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-ink" x="440" y="325" width="280" height="180" rx="16" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M510 415h140" stroke-width="10"/><rect class="ink" x="496" y="385" width="18" height="60" rx="4"/><rect class="ink" x="646" y="385" width="18" height="60" rx="4"/>
+<text class="m" x="580" y="545" font-size="20" text-anchor="middle">GYM MEMBERSHIP</text>
+<path class="s-muted" d="M730 415h80" stroke-width="6" stroke-linecap="round"/></g>
+<g id="b1"><path class="s-muted" d="M810 415V285h50" fill="none" stroke-width="5"/><rect class="s-loss" x="860" y="230" width="600" height="110" rx="14" fill="var(--stage)" stroke-width="5"/>
+<g id="alm"><circle class="s-ink" cx="920" cy="290" r="30" fill="none" stroke-width="6"/><path class="s-ink" d="M920 290v-17M920 290h13" stroke-width="5" stroke-linecap="round"/><circle class="ink" cx="896" cy="262" r="10"/><circle class="ink" cx="944" cy="262" r="10"/></g>
+<text class="m" x="990" y="294" font-size="26">WAKE UP EARLY</text></g>
+<g id="b2"><path class="s-muted" d="M810 415h50" stroke-width="5"/><rect class="s-loss" x="860" y="360" width="600" height="110" rx="14" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M885 445h70l14-50" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path id="belt" class="s-ink" d="M888 456h64" stroke-width="4" stroke-dasharray="10 10"/>
+<text class="m" x="990" y="424" font-size="26">SWEAT ON A MACHINE</text></g>
+<g id="b3"><path class="s-muted" d="M810 415V545h50" fill="none" stroke-width="5"/><rect class="s-loss" x="860" y="490" width="600" height="110" rx="14" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M895 515h44v14M907 548v14M922 548v20M937 548v14" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="990" y="554" font-size="26">SHOWER, RUSH TO WORK</text></g>
+<g id="gN"><text class="m" x="860" y="650" font-size="22" style="fill:var(--loss)">OLD PROBLEM → NEW PROBLEMS</text></g>
+<g id="gProg"><text class="d" x="120" y="790" font-size="48">That’s not failure. That’s progress.</text><rect class="gain" x="124" y="814" width="160" height="10"/></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Where happiness comes from.</text>
+<g id="hF"><circle class="gain" cx="330" cy="500" r="120"/><circle cx="290" cy="465" r="12" fill="var(--on-gain)"/><circle cx="370" cy="465" r="12" fill="var(--on-gain)"/><path id="smile" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round"/></g>
+<g id="hQ"><rect class="gain" x="560" y="230" width="920" height="110" rx="20"/><text class="d5" x="590" y="300" font-size="40" style="fill:var(--on-gain)">“Happiness comes from solving problems.”</text><text class="m" x="1480" y="374" font-size="20" text-anchor="end">MARK MANSON</text></g>
+<g id="hP"><rect class="s-ink" x="640" y="420" width="140" height="140" rx="12" fill="var(--line)" stroke-width="5"/><rect class="s-ink" x="790" y="420" width="140" height="140" rx="12" fill="var(--line)" stroke-width="5"/><rect class="s-ink" x="640" y="570" width="140" height="140" rx="12" fill="var(--line)" stroke-width="5"/>
+<rect class="s-muted" x="790" y="570" width="140" height="140" rx="12" fill="none" stroke-width="4" stroke-dasharray="8 8"/>
+<rect id="pc4" class="gain" x="790" y="570" width="140" height="140" rx="12"/>
+<path id="hC" class="s-gain" d="M1080 560l60 60 120-140" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="270"/></g>
+<g id="hS"><text class="d" x="120" y="790" font-size="42">The good feeling lives in the solving,</text><text class="b" x="120" y="840" font-size="32">not in having nothing to solve.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask a better question.</text>
+<g id="qL"><g id="qM"><rect class="s-line" x="120" y="220" width="620" height="490" rx="18" fill="var(--stage)" stroke-width="3"/><text class="d" x="146" y="480" font-size="220" style="fill:var(--muted)">?</text></g>
+<g id="qQ"><text class="d5" x="320" y="340" font-size="44">What do you want</text><text class="d5" x="320" y="394" font-size="44">to enjoy?</text></g>
+<g id="qI"><path class="ink" d="M195 540l20-34h80l20 34z"/><rect class="ink" x="160" y="540" width="170" height="50" rx="14"/><circle class="s-ink" cx="200" cy="595" r="18" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="290" cy="595" r="18" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M420 570h120" stroke-width="10"/><rect class="ink" x="410" y="545" width="16" height="50" rx="4"/><rect class="ink" x="534" y="545" width="16" height="50" rx="4"/>
+<path class="ink" d="M650 610C600 580 600 535 625 532C640 530 648 542 650 550C652 542 660 530 675 532C700 535 700 580 650 610Z"/>
+<text class="m" x="160" y="680" font-size="20" style="fill:var(--muted)">EVERYONE WANTS THE SAME THINGS</text></g></g>
+<g id="qS"><path class="s-ink" d="M1150 300V620" stroke-width="8"/><rect class="ink" x="1070" y="620" width="160" height="16" rx="6"/>
+<line id="beam" class="s-ink" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1150" cy="300" r="12"/>
+<g id="panL"><path class="s-ink" d="M0 0L-50 90M0 0L50 90" fill="none" stroke-width="3"/><path class="s-ink" d="M-75 90h150a75 28 0 0 1-150 0z" fill="var(--stage)" stroke-width="5"/><circle class="gain" cx="0" cy="66" r="22"/><text class="m" x="0" y="160" font-size="20" text-anchor="middle">THE REWARD</text></g>
+<g id="panR"><path class="s-ink" d="M0 0L-50 90M0 0L50 90" fill="none" stroke-width="3"/><path class="s-ink" d="M-75 90h150a75 28 0 0 1-150 0z" fill="var(--stage)" stroke-width="5"/><rect class="loss" x="-32" y="34" width="64" height="56" rx="6"/><text class="m" x="0" y="160" font-size="20" text-anchor="middle" style="fill:var(--loss)">THE PAIN</text></g></g>
+<g id="qT"><text class="d" x="820" y="740" font-size="48" style="fill:var(--gain)">What pain do you want?</text></g>
+<g id="qT2"><text class="b" x="820" y="796" font-size="32">What struggle will you keep going with?</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The rock star dream.</text>
+<text class="b" x="120" y="176" font-size="32">Manson, as a teenager.</text>
+<rect class="s-line" x="120" y="230" width="640" height="450" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-line" x="840" y="230" width="640" height="450" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="276" font-size="22">THE DREAM</text><text class="m" x="870" y="276" font-size="22">THE PRACTICE</text>
+<g id="rC"><polygon class="gain" points="440,300 370,540 510,540" fill-opacity=".25"/><g id="crowdW"></g></g>
+<g id="rG"><rect class="ink" x="160" y="540" width="560" height="18" rx="4"/><g id="rFig"></g><g id="gtrD"></g></g>
+<g id="rE"><path class="s-line" d="M880 600h560" stroke-width="4"/><g id="gtrP"></g>
+<text class="m" x="1110" y="350" font-size="20">PRACTICE LOG</text><g id="pl"></g><text class="m" x="1110" y="470" font-size="20" style="fill:var(--loss)">EMPTY FOR YEARS</text></g>
+<g id="rL"><text class="m" x="140" y="730" font-size="26" style="fill:var(--gain)">LOVED THE RESULT</text><text class="m" x="860" y="730" font-size="26" style="fill:var(--loss)">NOT THE PROCESS</text></g>
+<g id="rV"><text class="d" x="120" y="820" font-size="46">He wanted the victory without the fight.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="60">What you’ll struggle for defines you.</text>
+<g id="mG"><text class="m" x="120" y="300" font-size="22">PEOPLE WHO GET SOMEWHERE</text><text class="d5" x="120" y="360" font-size="40">choose the daily grind</text><text class="d5" x="120" y="410" font-size="40">and find it worth it.</text>
+<polygon class="s-ink" points="640,760 1040,240 1440,760" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<g id="flg"><path class="s-ink" d="M1040 240V160" stroke-width="5"/><polygon class="gain" points="1040,160 1092,176 1040,192"/></g>
+<polyline id="mpath" class="s-muted" fill="none" stroke-width="4" stroke-dasharray="10 10"/>
+<polyline id="trail" class="s-gain" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="clm"></g><text class="m" x="1140" y="700" font-size="20">THE DAILY GRIND</text></g>
+<g id="cL"><text class="m" x="120" y="540" font-size="22" style="fill:var(--gain)">A CLIMBER LOVES THE CLIMB</text><text class="d5" x="120" y="600" font-size="40">not just the view.</text></g>
+<g id="mD"><text class="d" x="120" y="840" font-size="44">Who you are is what you’re willing to struggle for.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try the Tuesday test.</text>
+<g id="nB"><rect class="s-ink" x="120" y="230" width="340" height="330" rx="14" fill="var(--stage)" stroke-width="6"/><g id="rings"></g>
+<text class="m" x="150" y="300" font-size="22">ONE GOAL</text><polygon id="star" class="gain"/><path class="s-line" d="M150 520h280" stroke-width="5" stroke-linecap="round"/></g>
+<g id="cA"><g id="days"></g><path class="s-gain" d="M734 320V360" stroke-width="5"/><rect class="s-gain" x="540" y="360" width="940" height="200" rx="16" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="570" y="404" font-size="22">AN ORDINARY TUESDAY</text></g>
+<g id="bG"></g>
+<g id="bB"><text class="m" x="1450" y="404" font-size="20" text-anchor="end">THE BORING PARTS TOO</text></g>
+<g id="oY"><rect class="gain" x="120" y="620" width="660" height="200" rx="18"/><text class="d" x="150" y="700" font-size="38" style="fill:var(--on-gain)">Love the everyday struggle?</text><text class="d5" x="150" y="760" font-size="34" style="fill:var(--on-gain)">Keep going.</text></g>
+<g id="oN"><rect class="s-loss" x="820" y="620" width="660" height="200" rx="18" fill="var(--stage)" stroke-width="5"/><text class="d" x="850" y="700" font-size="38">Only the finish line?</text><text class="d5" x="850" y="760" font-size="34" style="fill:var(--loss)">Choose a different goal.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="q1"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">What problem would you</text></g>
+<g id="q2"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">happily solve <tspan style="fill:var(--gain)">every day</tspan>,</text></g>
+<g id="q3"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">even without applause?</text></g>
+<g id="q4"><text class="m" x="143" y="640" font-size="26">START CHOOSING THAT ONE</text></g>
+<g id="spt"><polygon id="cone" class="gain" points="1285,596 1315,596 1420,812 1180,812"/><ellipse class="gain" cx="1300" cy="816" rx="130" ry="20" fill-opacity=".5"/><rect class="ink" x="1275" y="562" width="50" height="36" rx="6"/><g id="sFig"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Choose Your Problems, Not Problem-Free Life&rdquo;, from <em>The Subtle Art of Not Giving a F*ck</em> by Mark Manson. The gym membership example and Manson&#x27;s teenage rock star dream are as reported in the book. The ladder, puzzle, climber and Tuesday test drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 6.7], [6.7, 28.0], [28.0, 45.6], [45.6, 61.7], [61.7, 76.6], [76.6, 93.8], [93.8, 108.2], [108.2, 124.9], [124.9, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Better Problems", "Problems Never End", "The Gym Example", "Happiness Is Solving", "A Better Question", "The Rock Star Dream", "Struggle Defines You", "Try This Test", "Your Challenge"];
+const TM={"title_card": 0.0, "problem_box": 7.04, "swap_arrows": 10.64, "ladder": 15.68, "runner": 28.28, "alarm_clock": 33.76, "treadmill": 35.76, "smiling_face": 45.88, "quote_banner": 48.88, "puzzle": 53.36, "question_mark": 61.96, "scales": 68.96, "guitar": 76.88, "stage_crowd": 80.56, "empty_room": 84.32, "mountain": 94.08, "climber": 98.88, "notebook": 108.48, "calendar": 111.2, "spotlight": 125.24};
+const fig=(g,x,y,r,cls)=>{const a=cls?{class:cls}:{};mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)};
+const tx=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+// guitar: two-lobed body, neck, headstock (local origin = lower lobe centre, pointing up)
+const gtr=(g,tf,filled,sw)=>{const G=mk('g',{transform:tf},g),F=filled?'var(--ink)':'var(--stage)',H=filled?'var(--stage)':'var(--ink)',S={stroke:'var(--ink)','stroke-width':sw,'stroke-linejoin':'round'};
+  mk('rect',Object.assign({x:-6,y:-192,width:12,height:132,rx:3,fill:F},S),G);
+  mk('rect',Object.assign({x:-13,y:-224,width:26,height:36,rx:6,fill:F},S),G);
+  mk('circle',{cx:-17,cy:-214,r:4,fill:'var(--ink)'},G);mk('circle',{cx:17,cy:-214,r:4,fill:'var(--ink)'},G);mk('circle',{cx:-17,cy:-198,r:4,fill:'var(--ink)'},G);mk('circle',{cx:17,cy:-198,r:4,fill:'var(--ink)'},G);
+  mk('path',Object.assign({d:'M-21.9 -26A26 26 0 1 1 21.9 -26A34 34 0 1 1 -21.9 -26Z',fill:F},S),G);
+  mk('circle',{cx:0,cy:-14,r:9,fill:H},G);
+  mk('rect',{x:-12,y:10,width:24,height:6,rx:2,fill:H},G);
+  if(!filled)mk('path',{d:'M0 10V-188',stroke:'var(--muted)','stroke-width':2},G);
+  return G};
+gtr($('gtrD'),'translate(470 508) rotate(55) scale(.7)',true,4);
+gtr($('gtrP'),'translate(960 566) rotate(20)',false,6);
+fig($('thop'),0,-60,14,'gain');
+const LB=[650,570,490,410,330,250].map(y=>{mk('path',{d:'M1000 '+y+'h200',class:'s-ink','stroke-width':7,'stroke-linecap':'round'},$('rungs'));return mk('rect',{x:1225,y:y-36,width:36,height:36,rx:6,'stroke-width':5,stroke:'var(--loss)'},$('rungs'))});
+fig($('clb'),0,-60,14,'gain');
+fig($('gFig'),250,400,30);
+fig($('rFig'),440,448,22,'gain');
+fig($('sFig'),1300,722,20,'gain');
+for(let i=0;i<10;i++){const x=190+i*56;fig($('crowdW'),x,600,11,'ink');mk('path',{d:'M'+(x-16)+' 632l-8-32M'+(x+16)+' 632l8-32',class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('crowdW'))}
+for(let i=0;i<7;i++)mk('circle',{cx:1130+i*48,cy:405,r:18,fill:'none',class:'s-muted','stroke-width':4,'stroke-dasharray':'5 5'},$('pl'));
+for(let i=0;i<6;i++)mk('circle',{cx:160+i*56,cy:230,r:10,fill:'var(--stage)',class:'s-ink','stroke-width':5},$('rings'));
+let sp='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?26:60;sp+=(290+r*Math.cos(a)).toFixed(1)+','+(420+r*Math.sin(a)).toFixed(1)+' '}$('star').setAttribute('points',sp);
+['MON','TUE','WED','THU','FRI','SAT','SUN'].forEach((s,i)=>{const x=540+i*134,on=i===1;mk('rect',{x:x,y:230,width:120,height:90,rx:12,fill:on?'var(--gain)':'var(--stage)',stroke:on?'var(--gain)':'var(--ink)','stroke-width':4},$('days'));const e=tx($('days'),x+60,284,s,{class:'m','font-size':22,'text-anchor':'middle'});if(on)e.style.fill='var(--on-gain)'});
+[[570,430,300,1],[890,430,260,0],[570,470,180,0],[770,470,340,1],[570,510,420,0],[1010,510,200,1]].forEach(b=>mk('rect',{x:b[0],y:b[1],width:b[2],height:24,rx:12,fill:b[3]?'var(--gain)':'var(--line)'},$(b[3]?'bG':'bB')));
+const MP=[[760,740],[1000,660],[860,560],[1060,480],[960,390],[1022,268]],PS=MP.map(q=>q.join(',')).join(' ');
+$('mpath').setAttribute('points',PS);$('trail').setAttribute('points',PS);
+const seg=[];let TL=0;for(let i=1;i<MP.length;i++){const d=Math.hypot(MP[i][0]-MP[i-1][0],MP[i][1]-MP[i-1][1]);seg.push(d);TL+=d}
+$('trail').setAttribute('stroke-dasharray',TL.toFixed(1)+' '+TL.toFixed(1));
+const along=k=>{let d=k*TL;for(let i=0;i<seg.length;i++){if(d<=seg[i]||i===seg.length-1){const f=cl(d/seg[i]);return [MP[i][0]+(MP[i+1][0]-MP[i][0])*f,MP[i][1]+(MP[i+1][1]-MP[i][1])*f]}d-=seg[i]}};
+fig($('clm'),-8,-44,10,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d)=>rise($(id),p(u,a,a+(d||.5)));
+  const hk=p(u,TM.title_card+4.2,TM.title_card+5.2),hx=1295+115*hk,hy=640-80*hk-70*Math.sin(Math.PI*hk);
+  $('thop').setAttribute('transform','translate('+hx.toFixed(1)+' '+hy.toFixed(1)+')');
+  const on3=hk>.95;$('tb3').style.fill=on3?'var(--gain)':'var(--stage)';$('tb3').style.stroke=on3?'var(--gain)':'var(--loss)';
+
+  R('pA',TM.problem_box);R('pB',TM.swap_arrows+1);R('pC',TM.swap_arrows+3);R('lad',TM.ladder);
+  const lk=5*p(u,TM.ladder+.8,TM.ladder+4.2);$('clb').setAttribute('transform','translate(1100 '+(650-80*lk).toFixed(1)+')');
+  LB.forEach((b,i)=>b.style.fill=lk>=i+.5?'var(--gain)':'var(--stage)');
+  R('l1n',TM.ladder+4.5);R('l1w',TM.ladder+9);
+
+  R('gP',TM.runner);R('gC',TM.runner+2.5);R('b1',TM.alarm_clock);R('b2',TM.treadmill);R('b3',TM.treadmill+2.5);R('gN',TM.treadmill+5);R('gProg',TM.treadmill+8.4);
+  $('gFig').style.fill=u>=TM.treadmill+8.4?'var(--gain)':'var(--loss)';
+  const ring=u>=TM.alarm_clock&&u<TM.alarm_clock+1.5;$('alm').setAttribute('transform','rotate('+(ring?8*Math.sin(t*40):0).toFixed(1)+' 920 290)');
+  $('belt').setAttribute('stroke-dashoffset',(-(t*40)%20).toFixed(1));
+
+  R('hF',TM.smiling_face);R('hQ',TM.quote_banner);R('hP',TM.puzzle);
+  const pk=p(u,TM.puzzle+.3,TM.puzzle+1.5);$('pc4').setAttribute('transform','translate('+(400*(1-pk)).toFixed(1)+' 0)');
+  const sm=p(u,TM.puzzle+1.5,TM.puzzle+2.3);$('smile').setAttribute('d','M270 545Q330 '+(545+70*sm).toFixed(1)+' 390 545');
+  $('hC').setAttribute('stroke-dashoffset',(270*(1-sm)).toFixed(1));R('hS',TM.puzzle+4.1);
+
+  R('qM',TM.question_mark);R('qQ',TM.question_mark+.3);R('qI',TM.question_mark+3.7);
+  $('qL').setAttribute('opacity',(1-.35*p(u,TM.scales,TM.scales+.8)).toFixed(2));R('qS',TM.scales);
+  const ba=.2*p(u,TM.scales+.8,TM.scales+1.8),bc=230*Math.cos(ba),bs=230*Math.sin(ba);
+  const bm=$('beam');bm.setAttribute('x1',(1150-bc).toFixed(1));bm.setAttribute('y1',(300-bs).toFixed(1));bm.setAttribute('x2',(1150+bc).toFixed(1));bm.setAttribute('y2',(300+bs).toFixed(1));
+  $('panL').setAttribute('transform','translate('+(1150-bc).toFixed(1)+' '+(300-bs).toFixed(1)+')');
+  $('panR').setAttribute('transform','translate('+(1150+bc).toFixed(1)+' '+(300+bs).toFixed(1)+')');
+  R('qT',TM.scales+.6);R('qT2',TM.scales+5.4);
+
+  R('rG',TM.guitar);R('rC',TM.stage_crowd);$('crowdW').setAttribute('transform','translate(0 '+(5*Math.sin(t*7)).toFixed(1)+')');
+  R('rE',TM.empty_room);R('rL',TM.empty_room+4.6);R('rV',TM.empty_room+7.9);
+
+  R('mG',TM.mountain);R('cL',TM.climber);
+  const ck=p(u,TM.climber,TM.climber+4.5),cp=along(ck);
+  $('clm').setAttribute('transform','translate('+cp[0].toFixed(1)+' '+cp[1].toFixed(1)+')');
+  $('trail').setAttribute('stroke-dashoffset',(TL*(1-ck)).toFixed(1));R('mD',TM.climber+5.3);
+
+  R('nB',TM.notebook);R('cA',TM.calendar);R('bG',TM.calendar+.8);R('bB',TM.calendar+3.7);R('oY',TM.calendar+6.7);R('oN',TM.calendar+10.1);
+
+  R('q1',TM.spotlight);R('q2',TM.spotlight+.4);R('q3',TM.spotlight+.8);R('spt',TM.spotlight+1.2);R('q4',TM.spotlight+4.6);
+  $('cone').setAttribute('fill-opacity',(.22+.06*Math.sin(t*3)).toFixed(2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.32;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

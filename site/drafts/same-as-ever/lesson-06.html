@@ -1,0 +1,367 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same as Ever Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Same as Ever: Bad news hits suddenly and grabs attention, while progress compounds slowly and quietly, so we underrate how much things improve. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAME AS EVER · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Overnight tragedies,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">long-term miracles.</text>
+<text class="b" x="120" y="600" font-size="32">Why setbacks shout and progress whispers, and how to notice both</text>
+<path class="s-line" d="M1170 700h300" stroke-width="6" stroke-linecap="round"/>
+<g id="oak">
+<rect class="ink" x="1306" y="430" width="28" height="270" rx="6"/>
+<g id="canopy"><circle id="cn0" class="gain" cx="1320" cy="360" r="100"/><circle id="cn1" class="gain" cx="1240" cy="430" r="66"/><circle id="cn2" class="gain" cx="1400" cy="430" r="66"/></g>
+</g>
+<g id="fire"></g>
+<g id="lb0"><text class="m" x="1320" y="744" font-size="20" text-anchor="middle">GROWN OVER DECADES</text></g>
+<g id="lb1"><text class="m" x="1320" y="780" font-size="20" text-anchor="middle" style="fill:var(--loss)">GONE IN AN AFTERNOON</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Bad news arrives all at once.</text>
+<text class="b" x="120" y="176" font-size="32">A market crash, a war or a pandemic can change everything in days.</text>
+<path class="s-line" d="M160 240V700H900" fill="none" stroke-width="4"/>
+<path id="crash" class="s-ink" d="M160 620L260 590L340 600L430 540L520 520L600 470L700 400" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<path id="plunge" class="s-loss" d="M700 400L730 690" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<g id="days"><text class="m" x="760" y="560" font-size="22" style="fill:var(--loss)">DAYS</text></g>
+<g id="evs"></g>
+<g id="paper"><g id="paperIn">
+<rect class="s-ink" x="1000" y="240" width="460" height="440" rx="8" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1030" y="290" font-size="22">THE DAILY</text>
+<path class="s-line" d="M1030 310h400" stroke-width="3"/>
+<text class="d" x="1030" y="400" font-size="72" style="fill:var(--loss)">BREAKING</text>
+<path class="s-line" d="M1030 460h400M1030 500h400M1030 540h300M1030 600h400M1030 640h240" stroke-width="10" stroke-linecap="round"/>
+</g><text class="m" x="1230" y="730" font-size="22" text-anchor="middle">IMPOSSIBLE TO IGNORE</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Good news compounds quietly.</text>
+<text class="b" x="120" y="176" font-size="32">Small gains stack on top of each other, year after year.</text>
+<path class="s-line" d="M150 700H900" stroke-width="4"/>
+<g id="bars"></g>
+<g id="yay"><text class="m" x="160" y="744" font-size="20">YEAR AFTER YEAR</text></g>
+<g id="cal">
+<rect class="ink" x="1020" y="240" width="420" height="50" rx="8"/>
+<g id="cells"></g>
+<text class="m" x="1020" y="650" font-size="20">ONE DAY: LOOKS LIKE NOTHING</text>
+</g>
+<g id="nohead"><rect class="s-muted" x="1020" y="690" width="420" height="100" rx="12" fill="none" stroke-width="4" stroke-dasharray="10 10"/><text class="d5" x="1230" y="752" font-size="34" text-anchor="middle" style="fill:var(--muted)">No headline</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1903: the first powered flight.</text>
+<text class="b" x="120" y="176" font-size="32">The Wright brothers.</text>
+<path class="s-line" d="M120 500H700" stroke-width="4"/>
+<g id="plane"><g id="planeIn">
+<rect class="ink" x="220" y="300" width="380" height="16" rx="8"/>
+<rect class="ink" x="240" y="380" width="340" height="16" rx="8"/>
+<path class="s-ink" d="M290 316v64M410 316v64M530 316v64" stroke-width="5"/>
+<path class="s-ink" d="M560 352H660" stroke-width="6" stroke-linecap="round"/>
+<rect class="gain" x="640" y="320" width="20" height="64" rx="4"/>
+<path class="s-ink" d="M205 300v100" stroke-width="5" stroke-linecap="round"/>
+</g></g>
+<g id="crowd"><text class="m" x="120" y="560" font-size="20">WHAT YOU MIGHT PICTURE</text></g>
+<g id="paper3">
+<rect class="s-ink" x="900" y="230" width="560" height="420" rx="8" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="930" y="280" font-size="22">THE MORNING PAPER</text>
+<path class="s-line" d="M930 300h500" stroke-width="3"/>
+<rect class="ink" x="930" y="330" width="420" height="30" rx="4"/>
+<path class="s-line" d="M930 420h220M930 460h220M930 500h220M930 540h220M930 580h160" stroke-width="10" stroke-linecap="round"/>
+<rect class="s-muted" x="1180" y="400" width="250" height="210" rx="8" fill="none" stroke-width="3" stroke-dasharray="8 8"/>
+<text class="m" x="1305" y="512" font-size="20" text-anchor="middle">FLIGHT?</text>
+<text class="m" x="900" y="690" font-size="22">MOST NEWSPAPERS IGNORED IT</text>
+</g>
+<g id="yrs">
+<path class="s-line" d="M120 740H1480" stroke-width="4"/>
+<g id="ticks"></g>
+<text class="m" x="120" y="790" font-size="22">1903</text>
+</g>
+<g id="yrsEnd"><text class="m" x="1480" y="790" font-size="22" text-anchor="end" style="fill:var(--gain)">YEARS LATER, THE WORLD GETS IT</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Heart disease: a quiet miracle.</text>
+<text class="b" x="120" y="176" font-size="32">Over decades, the death rate has fallen dramatically.</text>
+<g id="heart"><g id="heartIn"><path class="loss" d="M0 100C-130 20-140-80-70-100C-30-110-5-85 0-60C5-85 30-110 70-100C140-80 130 20 0 100Z"/></g>
+<text class="m" x="330" y="620" font-size="22" text-anchor="middle">HEART DISEASE</text></g>
+<g id="ch4">
+<path class="s-line" d="M640 260V660H1460" fill="none" stroke-width="4"/>
+<path id="old" class="s-muted" d="M680 300H1440" stroke-width="3" stroke-dasharray="8 10"/>
+<text class="m" x="660" y="250" font-size="20">DEATH RATE</text>
+<text class="m" x="1460" y="700" font-size="20" text-anchor="end">DECADES</text>
+</g>
+<g id="saved"></g>
+<path id="hline" class="s-loss" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<g id="svlab"><text class="m" x="660" y="744" font-size="20" style="fill:var(--gain)">PEOPLE ALIVE WHO OTHERWISE WOULD NOT BE</text></g>
+<g id="nn"><text class="d" x="120" y="830" font-size="46">Never one big day, so it barely registered.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A lopsided picture.</text>
+<text class="b" x="120" y="176" font-size="32">Tragedies grab attention instantly. Miracles hide in slow trends.</text>
+<g id="sc5">
+<path class="s-line" d="M160 760H960" stroke-width="4" stroke-linecap="round"/>
+<path class="s-ink" d="M560 440V760M460 760H660" stroke-width="8" stroke-linecap="round"/>
+<line id="beam" class="s-ink" stroke-width="10" stroke-linecap="round"/>
+<circle class="ink" cx="560" cy="440" r="14"/>
+<g id="lp"><path class="s-ink" d="M0 0L-80 110M0 0L80 110" stroke-width="3"/><path class="s-ink" d="M-90 110H90" stroke-width="8" stroke-linecap="round"/><rect class="loss" x="-60" y="30" width="120" height="80" rx="6"/><text class="m" x="0" y="150" font-size="20" text-anchor="middle" style="fill:var(--loss)">TRAGEDY: SUDDEN</text></g>
+<g id="rp"><path class="s-ink" d="M0 0L-80 110M0 0L80 110" stroke-width="3"/><path class="s-ink" d="M-90 110H90" stroke-width="8" stroke-linecap="round"/><g id="rpd"></g><text class="m" x="0" y="150" font-size="20" text-anchor="middle" style="fill:var(--gain)">MIRACLE: SLOW</text></g>
+</g>
+<g id="face"><circle class="s-ink" cx="1240" cy="420" r="110" fill="var(--stage)" stroke-width="7"/><circle class="ink" cx="1205" cy="395" r="10"/><circle class="ink" cx="1275" cy="395" r="10"/><path class="s-loss" d="M1190 482Q1240 440 1290 482" fill="none" stroke-width="8" stroke-linecap="round"/></g>
+<g id="f1"><text class="m" x="1240" y="600" font-size="22" text-anchor="middle" style="fill:var(--loss)">FEELS LIKE: WORSE</text></g>
+<g id="f2"><text class="m" x="1240" y="640" font-size="22" text-anchor="middle" style="fill:var(--gain)">ACTUALLY: QUIETLY BETTER</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The same pattern in your life.</text>
+<g id="chips6"></g>
+<g id="ch6">
+<clipPath id="clip6"><rect x="120" y="300" width="1360" height="460" rx="16"/></clipPath>
+<rect class="s-line" x="120" y="300" width="1360" height="460" rx="16" fill="var(--stage)" stroke-width="3"/>
+<g clip-path="url(#clip6)"><g id="zg">
+<path id="g6" class="s-gain" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" pathLength="1" stroke-dasharray="1"/>
+<circle id="dip" class="loss" r="10"/>
+</g></g>
+</g>
+<g id="zl"><text id="zlt" class="m" x="120" y="810" font-size="22">ZOOMED IN</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Look back to see it.</text>
+<text class="b" x="120" y="176" font-size="32">Compare today with ten or twenty years ago, not with last week.</text>
+<g id="alb"></g>
+<g id="log"><rect class="s-line" x="120" y="630" width="1360" height="210" rx="16" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="675" font-size="22">SLOW WINS LOG</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">This week, pick one area</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">and list what improved</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">over the <tspan style="fill:var(--gain)">last decade</tspan>.</text></g>
+<g id="ml"><text class="m" x="143" y="700" font-size="26">A MIRACLE MAY BE HIDING IN PLAIN SIGHT</text></g>
+<g id="mag"><g id="magIn">
+<circle class="s-ink" cx="1290" cy="690" r="70" fill="var(--stage)" stroke-width="14"/>
+<path class="s-ink" d="M1342 742L1410 810" stroke-width="22" stroke-linecap="round"/>
+<path class="s-gain" d="M1290 725v-45" stroke-width="6" stroke-linecap="round"/>
+<circle class="gain" cx="1274" cy="680" r="14"/><circle class="gain" cx="1306" cy="672" r="16"/>
+</g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="126" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:06</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Overnight Tragedies, Long-Term Miracles&rdquo;, from <em>Same as Ever</em> by Morgan Housel. The Wright brothers&#x27; first flight and the long decline in heart disease deaths are as reported in the book. The oak tree, crash chart, falling line and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=126, SC=[[0.0, 9.3], [9.3, 21.4], [21.4, 36.3], [36.3, 52.1], [52.1, 71.1], [71.1, 86.5], [86.5, 102.7], [102.7, 113.9], [113.9, 126.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Grown Slow, Lost Fast", "Fast Bad News", "Slow Good News", "The Wright Brothers", "A Quiet Miracle", "Why We Feel Gloomy", "Your Own Slow Wins", "Look Back to See It", "Your Challenge"];
+const TM={"oak_tree": 0.0, "crash_chart": 9.6, "headline": 18.0, "stair_steps": 21.68, "calendar": 30.24, "wright_plane": 36.56, "empty_paper": 43.6, "years_pass": 48.4, "heart_icon": 52.4, "falling_line": 56.08, "no_news": 66.0, "news_scale": 71.44, "gloomy_face": 80.72, "investor": 86.8, "long_view": 97.52, "photo_album": 102.96, "progress_log": 109.28, "magnifier": 114.16};
+const pers=(g,x,y,r,at)=>{mk('circle',Object.assign({cx:x,cy:y,r:r},at),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},at),g)};
+const dr=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const tf=(el,s)=>el.setAttribute('transform',s);
+const lbl=(g,x,y,s,at)=>{const tx=mk('text',Object.assign({x:x,y:y,'font-size':20,'text-anchor':'middle',class:'m'},at||{}),g);tx.textContent=s;return tx};
+// flames: amber, pointed flickering tips
+const FOUT='M0 0C-30 0-40-26-26-56C-22-42-14-38-12-46C-14-70 0-84 0-112C14-84 30-62 24-40C30-46 34-50 34-56C44-30 32 0 0 0Z';
+const FIN='M0 -6C-14 -6-18-20-10-34C-6-44 0-50 0-64C6-50 14-40 12-28C14-16 10-6 0-6Z';
+const FL=[[1250,470,.9],[1320,400,1.2],[1395,470,.9],[1280,330,.7],[1365,325,.8],[1276,702,.7],[1364,702,.6]].map(q=>{const g=mk('g',{},$('fire'));
+  mk('path',{d:FOUT,class:'gain',stroke:'var(--stage)','stroke-width':3,'stroke-linejoin':'round'},g);mk('path',{d:FIN,fill:'var(--stage)'},g);return [g,q]});
+const CAN=[$('cn0'),$('cn1'),$('cn2')];
+const EV=['MARKET CRASH','WAR','PANDEMIC'].map((s,i)=>{const g=mk('g',{},$('evs'));mk('rect',{x:120+i*240,y:740,width:220,height:56,rx:28,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);lbl(g,230+i*240,776,s);return g});
+const BR=[];for(let i=0;i<14;i++){const h=40*Math.pow(1.15,i);BR.push(mk('rect',{x:160+i*52,y:700-h,width:40,height:h,rx:4,class:'gain'},$('bars')))}
+const CD=[];for(let r=0;r<5;r++)for(let c=0;c<7;c++){const x=1020+c*60,y=300+r*60,td=r*7+c===17;mk('rect',{x:x,y:y,width:60,height:60,fill:'none',stroke:td?'var(--gain)':'var(--line)','stroke-width':td?5:2},$('cells'));CD.push(mk('circle',{cx:x+30,cy:y+30,r:4,class:'gain'},$('cells')))}
+for(let i=0;i<6;i++){const x=170+i*90,g=$('crowd'),st={fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'6 6'};pers(g,x,600,18,st);mk('path',{d:'M'+(x-27)+' 652l-16-46M'+(x+27)+' 652l16-46',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round',fill:'none'},g)}
+const TK=[];for(let i=0;i<12;i++)TK.push(mk('circle',{cx:200+i*112,cy:740,r:10,fill:'var(--line)'},$('ticks')));
+const fy=x=>{const s=(x-680)/760;return 300+300*s*s*(3-2*s)};
+let hd='';for(let x=680;x<=1440;x+=20)hd+=(x===680?'M':'L')+x+' '+fy(x).toFixed(1);$('hline').setAttribute('d',hd);
+const SV=[];for(let x=740;x<=1420;x+=40)for(let y=336;y<fy(x)-18;y+=36)SV.push(mk('circle',{cx:x,cy:y,r:8,class:'gain'},$('saved')));
+for(let i=0;i<15;i++){const row=i<10?0:1;mk('circle',{cx:row?-32+(i-10)*16:-72+i*16,cy:row?86:100,r:6,class:'gain'},$('rpd'))}
+const C6=['SAVINGS','SKILLS','HEALTH','RELATIONSHIPS'].map((s,i)=>{const g=mk('g',{},$('chips6'));mk('rect',{x:120+i*345,y:210,width:325,height:56,rx:28,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);lbl(g,282+i*345,246,s);return g});
+const gy=x=>720-380*Math.pow((x-160)/1280,1.4)+(x>=1180?110*Math.exp(-(x-1180)/120):0);
+let gd='';for(let x=160;x<=1440;x+=16)gd+=(x===160?'M':'L')+x+' '+gy(x).toFixed(1);$('g6').setAttribute('d',gd);
+const DY=gy(1184);$('dip').setAttribute('cx',1184);$('dip').setAttribute('cy',DY.toFixed(1));
+const AL=[['20 YEARS AGO',.25],['10 YEARS AGO',.6],['LAST WEEK',1],['TODAY',1]].map((q,i)=>{const x=120+i*350,cx=x+155,s=q[1],g=mk('g',{},$('alb'));
+  const r=mk('rect',{x:x,y:230,width:310,height:300,rx:12,fill:'var(--stage)',stroke:'var(--line)','stroke-width':5},g);
+  mk('rect',{x:cx-8*s-2,y:510-130*s,width:16*s+4,height:130*s,class:'ink'},g);mk('circle',{cx:cx,cy:510-130*s,r:80*s,class:'gain'},g);
+  mk('path',{d:'M'+(x+30)+' 510h250',stroke:'var(--line)','stroke-width':4},g);lbl(g,cx,572,q[0]);return [g,r]});
+const LG=['Savings up','A new skill','Better health'].map((s,i)=>{const y=720+i*45,g=mk('g',{},$('log'));mk('path',{d:'M160 '+(y-12)+'l10 10l20-22',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);const tx=mk('text',{x:204,y:y,'font-size':30,class:'d5'},g);tx.textContent=s;return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const gr=.15+.85*p(u,TM.oak_tree,TM.oak_tree+3);
+tf($('oak'),'translate(1320 700) scale('+gr.toFixed(3)+') translate(-1320 -700)');
+const fk=p(u,TM.oak_tree+4,TM.oak_tree+4.6);
+const chr=p(u,TM.oak_tree+4.3,TM.oak_tree+6);
+CAN.forEach(c=>c.style.fill=chr>.3?'var(--muted)':'var(--gain)');
+$('canopy').setAttribute('opacity',(1-.5*chr).toFixed(2));
+tf($('canopy'),'translate(1320 430) scale('+(1-.3*chr).toFixed(3)+') translate(-1320 -430)');
+$('fire').setAttribute('opacity',fk.toFixed(2));
+FL.forEach(([g,q],i)=>{const sx=q[2]*fk*(1+.06*Math.sin(t*7+i)),sy=q[2]*fk*(.85+.2*Math.sin(t*9+i*2)),rt=5*Math.sin(t*6+i*1.7);
+  tf(g,'translate('+q[0]+' '+q[1]+') rotate('+rt.toFixed(2)+') scale('+sx.toFixed(3)+' '+sy.toFixed(3)+')')});
+rise($('lb0'),p(u,TM.oak_tree+1,TM.oak_tree+1.5));rise($('lb1'),p(u,TM.oak_tree+4.2,TM.oak_tree+4.7));
+
+dr($('crash'),p(u,TM.crash_chart,TM.crash_chart+2.4));dr($('plunge'),p(u,TM.crash_chart+2.4,TM.crash_chart+2.7));
+rise($('days'),p(u,TM.crash_chart+2.7,TM.crash_chart+3.1));
+EV.forEach((g,i)=>{const a=TM.crash_chart+3.6+i*.6;rise(g,p(u,a,a+.4))});
+const hk=p(u,TM.headline,TM.headline+.4);rise($('paper'),hk);
+tf($('paperIn'),'rotate('+(3*Math.sin(t*18)*hk*(1-p(u,TM.headline+.4,TM.headline+1.6))).toFixed(2)+' 1230 460)');
+
+BR.forEach((b,i)=>{const a=TM.stair_steps+i*.5;b.setAttribute('opacity',p(u,a,a+.3))});
+rise($('yay'),p(u,TM.stair_steps+2,TM.stair_steps+2.5));
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+CD.forEach((c,i)=>{const a=TM.calendar+.4+i*.05;c.setAttribute('opacity',p(u,a,a+.2))});
+rise($('nohead'),p(u,TM.calendar+4.1,TM.calendar+4.6));
+
+rise($('plane'),p(u,TM.wright_plane,TM.wright_plane+.5));
+tf($('planeIn'),'translate('+(30*p(u,TM.wright_plane,TM.wright_plane+3)).toFixed(1)+' '+(6*Math.sin(t*2)-20*p(u,TM.wright_plane,TM.wright_plane+3)).toFixed(1)+')');
+rise($('crowd'),p(u,TM.wright_plane+4.1,TM.wright_plane+4.6)*(1-.5*p(u,TM.empty_paper,TM.empty_paper+.6)));
+rise($('paper3'),p(u,TM.empty_paper,TM.empty_paper+.5));
+rise($('yrs'),p(u,TM.years_pass,TM.years_pass+.5));
+TK.forEach((c,i)=>c.setAttribute('fill',u>=TM.years_pass+.4+i*.3?'var(--gain)':'var(--line)'));
+rise($('yrsEnd'),p(u,TM.years_pass+4,TM.years_pass+4.5));
+
+rise($('heart'),p(u,TM.heart_icon,TM.heart_icon+.5));
+tf($('heartIn'),'translate(330 440) scale('+(1+.06*Math.pow(Math.abs(Math.sin(t*3)),6)).toFixed(3)+')');
+rise($('ch4'),p(u,TM.falling_line,TM.falling_line+.5));
+dr($('hline'),p(u,TM.falling_line+.3,TM.falling_line+3.5));
+SV.forEach((c,i)=>{const a=TM.falling_line+6.2+i*.02;c.setAttribute('opacity',p(u,a,a+.3))});
+rise($('svlab'),p(u,TM.falling_line+6.2,TM.falling_line+6.7));
+rise($('nn'),p(u,TM.no_news,TM.no_news+.6));
+
+// scale: pivot raised to y=440 so the lowered pan stays well above the floor at y=760
+rise($('sc5'),p(u,TM.news_scale,TM.news_scale+.5));
+const PY=440,an=-13*p(u,TM.news_scale+3.8,TM.news_scale+5)*Math.PI/180,bx=300*Math.cos(an),by=300*Math.sin(an);
+const bm=$('beam');bm.setAttribute('x1',(560-bx).toFixed(1));bm.setAttribute('y1',(PY-by).toFixed(1));bm.setAttribute('x2',(560+bx).toFixed(1));bm.setAttribute('y2',(PY+by).toFixed(1));
+tf($('lp'),'translate('+(560-bx).toFixed(1)+' '+(PY-by).toFixed(1)+')');tf($('rp'),'translate('+(560+bx).toFixed(1)+' '+(PY+by).toFixed(1)+')');
+rise($('face'),p(u,TM.gloomy_face,TM.gloomy_face+.5));rise($('f1'),p(u,TM.gloomy_face+.8,TM.gloomy_face+1.3));rise($('f2'),p(u,TM.gloomy_face+2,TM.gloomy_face+2.5));
+
+rise($('ch6'),p(u,TM.investor,TM.investor+.5));
+C6.forEach((g,i)=>{const a=TM.investor+3.8+i*.4;rise(g,p(u,a,a+.4))});
+dr($('g6'),p(u,TM.investor,TM.investor+9));
+$('dip').setAttribute('opacity',p(u,TM.investor+7.2,TM.investor+7.6));
+const z=1+2*p(u,TM.long_view,TM.long_view+1.2)*(1-p(u,TM.long_view+3.7,TM.long_view+5));
+tf($('zg'),'translate(1184 '+DY.toFixed(1)+') scale('+z.toFixed(3)+') translate(-1184 '+(-DY).toFixed(1)+')');
+rise($('zl'),p(u,TM.long_view,TM.long_view+.5));
+const zo=u>=TM.long_view+3.7;$('zlt').textContent=zo?'ZOOMED OUT: THE GROWTH IS REAL':'ZOOMED IN: IT LOOKS LIKE LOSS';$('zlt').style.fill=zo?'var(--gain)':'var(--loss)';
+
+AL.forEach((a,i)=>{const s=TM.photo_album+i*.5;rise(a[0],p(u,s,s+.4));a[1].setAttribute('stroke',(i===0||i===3)&&u>=TM.photo_album+3.5?'var(--gain)':'var(--line)')});
+rise($('log'),p(u,TM.progress_log,TM.progress_log+.5));
+LG.forEach((g,i)=>{const a=TM.progress_log+1+i*.8;rise(g,p(u,a,a+.4))});
+
+rise($('qa'),p(u,TM.magnifier,TM.magnifier+.5));rise($('qb'),p(u,TM.magnifier+.4,TM.magnifier+.9));rise($('qc'),p(u,TM.magnifier+.8,TM.magnifier+1.3));
+rise($('mag'),p(u,TM.magnifier+1.5,TM.magnifier+2));rise($('ml'),p(u,TM.magnifier+7,TM.magnifier+7.5));
+tf($('magIn'),'translate('+(24*Math.sin(t*.9)).toFixed(1)+' '+(12*Math.sin(t*1.4)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:122.91;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

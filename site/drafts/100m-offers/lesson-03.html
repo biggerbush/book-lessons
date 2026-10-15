@@ -1,0 +1,326 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>$100M Offers Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of $100M Offers: Premium prices create a virtuous cycle, because more margin lets you deliver better results and attract more committed customers. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">$100M OFFERS · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Charge more,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not less.</text>
+<text class="b" x="120" y="600" font-size="32">Why higher prices can make you better at serving customers.</text>
+<g id="t0tag"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Cheap is a trap.</text>
+<text class="b" x="120" y="176" font-size="32">Lower price, thin margin, almost nothing to spend.</text>
+<g id="s1bar">
+<rect class="s-ink" x="200" y="460" width="220" height="260" fill="var(--line)" stroke-width="6"/>
+<text class="m" x="310" y="598" font-size="22" text-anchor="middle" style="fill:var(--ink)">COST</text>
+<rect id="mg" class="gain" x="200" y="280" width="220" height="180"/>
+<text id="mgl" class="m" x="440" y="378" font-size="22" style="fill:var(--gain)">MARGIN</text>
+<text class="m" x="310" y="756" font-size="22" text-anchor="middle">YOUR PRICE</text>
+</g>
+<g id="s1own"><circle id="sweat" class="loss" cx="876" cy="350" r="8"/><text class="m" x="820" y="600" font-size="22" text-anchor="middle">OWNER</text></g>
+<g id="s1r0"><path class="s-ink" d="M1060 280h-50v80h80v-50z" fill="none" stroke-width="6" stroke-linejoin="round"/><path class="s-loss" d="M1060 280h30v30" fill="none" stroke-width="4" stroke-dasharray="6 6"/><text class="m" x="1120" y="330" font-size="24">CUT CORNERS</text></g>
+<g id="s1r1"><path class="s-ink" d="M1010 430h60M1030 455h60M1010 480h50" stroke-width="6" stroke-linecap="round"/><text class="m" x="1120" y="465" font-size="24">RUSHED WORK</text></g>
+<g id="s1r2"><path class="s-loss" d="M1010 570l28 26 20-12 32 40m0 0v-24m0 24h-24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1120" y="610" font-size="24" style="fill:var(--loss)">RESULTS SUFFER</text></g>
+<g id="s1race"><text class="d" x="120" y="838" font-size="48">Being the cheapest is a race nobody wins.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The vicious cycle.</text>
+<text class="b" x="120" y="176" font-size="32">Picture a spiral pointing downward.</text>
+<path id="coilD" class="s-loss" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="ballD" class="loss" r="16"/>
+<g id="stD"></g>
+<g id="loopD"><path class="s-loss" d="M960 640H920V280H946" fill="none" stroke-width="5" stroke-dasharray="10 8"/><path class="s-loss" d="M936 268l14 12-14 12" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="960" y="730" font-size="22" style="fill:var(--loss)">CUSTOMERS LEAVE · DISCOUNT AGAIN</text></g>
+<g id="worse"><text class="d" x="120" y="830" font-size="44">Round and round, each loop a little worse.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Now flip the cycle.</text>
+<text class="b" x="120" y="176" font-size="32">The same spiral, pointing up.</text>
+<path id="coilU" class="s-gain" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="ballU" class="gain" r="16"/>
+<g id="stU"></g>
+<g id="ic0"><circle class="s-gain" cx="230" cy="680" r="46" fill="var(--stage)" stroke-width="4"/><circle class="gain" cx="230" cy="664" r="13"/><path class="gain" d="M208 702a22 22 0 0 1 44 0z"/><text class="m" x="230" y="760" font-size="20" text-anchor="middle">STAFF</text></g>
+<g id="ic1"><circle class="s-gain" cx="420" cy="680" r="46" fill="var(--stage)" stroke-width="4"/><path class="s-gain" d="M398 702l32-32" stroke-width="10" stroke-linecap="round"/><circle class="s-gain" cx="438" cy="662" r="13" fill="none" stroke-width="7"/><text class="m" x="420" y="760" font-size="20" text-anchor="middle">TOOLS</text></g>
+<g id="ic2"><circle class="s-gain" cx="610" cy="680" r="46" fill="var(--stage)" stroke-width="4"/><ellipse class="s-gain" cx="610" cy="680" rx="28" ry="16" fill="none" stroke-width="6"/><circle class="gain" cx="610" cy="680" r="8"/><text class="m" x="610" y="760" font-size="20" text-anchor="middle">ATTENTION</text></g>
+<g id="loopU"><path class="s-gain" d="M960 685H920V265H946" fill="none" stroke-width="5" stroke-dasharray="10 8"/><path class="s-gain" d="M936 253l14 12-14 12" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+<g id="lift"><text class="d" x="120" y="840" font-size="44">Results bring referrals. The cycle keeps lifting.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Paying more buys commitment.</text>
+<text class="b" x="120" y="176" font-size="32">Something else happens when people pay more.</text>
+<g id="wal"><g id="bills"></g>
+<rect class="s-ink" x="160" y="360" width="340" height="200" rx="22" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="420" y="430" width="80" height="60" rx="12"/>
+<text class="m" x="330" y="596" font-size="22" text-anchor="middle">PAYS MORE</text></g>
+<g id="chk"></g>
+<g id="barsT"><text class="m" x="120" y="652" font-size="20">COMMITMENT AND OUTCOMES · ILLUSTRATION</text>
+<text class="m" x="120" y="700" font-size="20">CHEAP BUYER</text><text class="m" x="120" y="770" font-size="20" style="fill:var(--gain)">COMMITTED BUYER</text>
+<rect id="barL" class="loss" x="460" y="670" height="44" rx="8"/><rect id="barG" class="gain" x="460" y="740" height="44" rx="8"/>
+<text id="outT" class="m" x="480" y="770" font-size="20" style="fill:var(--on-gain)">BETTER OUTCOMES</text></g>
+<g id="look"><text class="d5" x="120" y="844" font-size="36">Better outcomes make your service look even better.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Price filters who walks in.</text>
+<text class="b" x="120" y="176" font-size="32">High prices also filter who walks through your door.</text>
+<g id="fun"><path class="s-ink" d="M600 260H1000L840 520V600H760V520Z" fill="none" stroke-width="6" stroke-linejoin="round"/><g id="dots"></g><text class="m" x="800" y="680" font-size="22" text-anchor="middle">PREMIUM PRICE</text></g>
+<g id="lowP"><rect class="s-line" x="120" y="240" width="400" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><g id="lowF"></g>
+<rect class="s-loss" x="380" y="262" width="100" height="64" rx="14" fill="var(--stage)" stroke-width="4"/><text class="d" x="430" y="308" font-size="40" text-anchor="middle" style="fill:var(--loss)">!!</text>
+<text class="m" x="150" y="610" font-size="22">LOWEST PAYING CLIENTS</text><text class="m" x="150" y="660" font-size="22" style="fill:var(--loss)">COMPLAIN THE MOST</text><text class="m" x="150" y="710" font-size="22" style="fill:var(--loss)">VALUE THE WORK LEAST</text></g>
+<g id="hiP"><rect class="s-line" x="1080" y="240" width="400" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><g id="hiF"></g>
+<path class="gain" d="M1380 330c-30-20-34-44-16-50 8-3 14 2 16 8 2-6 8-11 16-8 18 6 14 30-16 50z"/>
+<text class="m" x="1110" y="610" font-size="22">PREMIUM BUYERS</text><text class="m" x="1110" y="660" font-size="22" style="fill:var(--gain)">RESPECTFUL · MOTIVATED</text><text class="m" x="1110" y="710" font-size="22" style="fill:var(--gain)">EASIER TO SERVE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A personal trainer.</text>
+<text class="b" x="120" y="176" font-size="32">Same work, two ways to price it.</text>
+<g id="pre"><rect class="s-line" x="120" y="220" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="276" font-size="22">SMALL FEE · CROWDS OF CLIENTS</text><g id="tr0"></g><g id="crowd0"></g></g>
+<g id="clk"><circle class="s-loss" cx="250" cy="640" r="40" fill="var(--stage)" stroke-width="6"/><path id="hand" class="s-loss" d="M250 640V612" stroke-width="6" stroke-linecap="round"/><text class="m" x="320" y="648" font-size="22" style="fill:var(--loss)">STRETCHED THIN</text></g>
+<g id="post"><rect class="s-line" x="840" y="220" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="276" font-size="22">FAR HIGHER FEE · FEWER CLIENTS</text><g id="tr1"></g><g id="cli"></g>
+<rect class="s-ink" x="1310" y="330" width="130" height="150" rx="10" fill="var(--stage)" stroke-width="5"/><path class="s-gain" d="M1335 370h80M1335 405h80M1335 440h50" stroke-width="6" stroke-linecap="round"/><text class="m" x="1375" y="518" font-size="20" text-anchor="middle">MEAL PLAN</text>
+<g id="ci"></g><text class="m" x="1220" y="627" font-size="20">DAILY CHECK-INS</text></g>
+<g id="refs"><text class="d" x="120" y="810" font-size="44">Her clients transform, and referrals roll in.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask the ten-times question.</text>
+<text class="b" x="120" y="176" font-size="32">A powerful thought experiment.</text>
+<g id="t7s"></g>
+<g id="t7a"><path class="s-muted" d="M370 360h150m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="t7b"></g>
+<g id="q7"><text class="d5" x="960" y="320" font-size="40">What would you need</text><text class="d5" x="960" y="375" font-size="40">to deliver to justify</text><text class="d5" x="960" y="430" font-size="40" style="fill:var(--gain)">ten times the price?</text></g>
+<g id="road"><polyline class="s-gain" points="160,660 440,580 760,660 1080,580 1380,620" fill="none" stroke-width="5" stroke-dasharray="12 10" stroke-linejoin="round"/></g>
+<g id="pins"></g>
+<g id="flag"><path class="s-ink" d="M1380 620V540" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1380 540h60l-14 18 14 18h-60z"/><text class="m" x="1470" y="514" font-size="24" text-anchor="end" style="fill:var(--gain)">BETTER OFFER</text></g>
+<g id="raise"><text class="d" x="120" y="820" font-size="44">Then raise your price, and deliver that value.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="q8a"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What would make</text></g>
+<g id="q8b"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">your offer worth</text></g>
+<g id="q8c"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">ten times</tspan> its price?</text></g>
+<g id="q8m"><text class="m" x="143" y="700" font-size="26">WRITE THREE ANSWERS · PICK ONE THIS WEEK</text></g>
+<g id="pad"><rect class="s-ink" x="1220" y="300" width="240" height="300" rx="16" fill="var(--stage)" stroke-width="6"/></g>
+<g id="pl"></g>
+<g id="pchk"><circle class="gain" cx="1420" cy="380" r="22"/><path d="M1409 380l8 8 14-16" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Charge More, Not Less&rdquo;, from <em>$100M Offers</em> by Alex Hormozi. The vicious and virtuous cycles and the ten times pricing question are presented as reported in the book. The personal trainer, the spirals and the effort bar are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 7.9], [7.9, 24.7], [24.7, 41.1], [41.1, 58.6], [58.6, 71.1], [71.1, 85.4], [85.4, 103.1], [103.1, 118.4], [118.4, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Hook", "The cheap trap", "The vicious cycle", "Flip the cycle", "Price buys commitment", "Better customers", "A trainer example", "Ask the big question", "Your challenge"];
+const TM={"hero_tag": 0.0, "thin_coin": 8.16, "tired_owner": 17.2, "down_spiral": 25.04, "bad_review": 32.96, "up_spiral": 41.4, "toolbox": 46.88, "wallet_open": 58.88, "effort_bar": 65.09, "filter_funnel": 71.36, "happy_client": 80.64, "trainer": 85.68, "clock_strain": 90.6, "meal_plan": 93.92, "ten_x": 103.44, "idea_list": 111.4, "mirror": 118.67};
+const P=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const R=(e,u,a,d=.5)=>rise(typeof e==='string'?$(e):e,p(u,a,a+d));
+const tag=(g,txt,fs)=>{const w=mk('g',{},g);const pa=mk('path',{d:'M-150 -90H90L170 0L90 90H-150Z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':8,'stroke-linejoin':'round'},w);
+  mk('circle',{cx:110,cy:0,r:16,fill:'none',stroke:'var(--ink)','stroke-width':6},w);const tx=mk('text',{x:-30,y:fs*.35,'font-size':fs,'text-anchor':'middle',class:'d'},w);tx.textContent=txt;return {w,pa,tx}};
+const T0=tag($('t0tag'),'$',120);
+P($('s1own'),820,380,40,'ink');
+const coil=(cx,Rr,yA,yB,amp)=>{const a=[];for(let i=0;i<=180;i++){const q=i/180*6*Math.PI;a.push([cx+Rr*Math.cos(q),yA+(yB-yA)*i/180+amp*Math.sin(q)])}return a};
+const CD=coil(500,300,280,720,40),CU=coil(420,240,560,290,30);
+const part=(el,pts,f)=>{el.setAttribute('opacity',f>0?1:0);const k=Math.max(2,Math.round(pts.length*f));el.setAttribute('d','M'+pts.slice(0,k).map(q=>q[0].toFixed(0)+' '+q[1].toFixed(0)).join('L'))};
+const ballAt=(el,pts,on,tt)=>{const q=pts[Math.floor(((tt*.1)%1)*(pts.length-1))];el.setAttribute('cx',q[0].toFixed(1));el.setAttribute('cy',q[1].toFixed(1));el.setAttribute('opacity',on?1:0)};
+const col=(g,L,y0,st,h,c)=>L.map((s,i)=>{const y=y0+i*st,e=mk('g',{},g);mk('rect',{x:960,y:y,width:480,height:h,rx:14,fill:'var(--stage)',stroke:c,'stroke-width':5},e);
+  const tx=mk('text',{x:1200,y:y+h/2+8,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},e);tx.textContent=s;
+  if(i<L.length-1)mk('path',{d:'M1200 '+(y+h+6)+'v'+(st-h-12)+'m-8-8 8 8 8-8',fill:'none',stroke:c,'stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round'},e);return e});
+const BD=col($('stD'),['LOW PRICE','LOW MARGIN','WEAKER SERVICE','UNHAPPY CUSTOMERS'],240,120,80,'var(--loss)');
+const BU=col($('stU'),['HIGHER PRICE','HEALTHY MARGIN','BETTER DELIVERY','BETTER RESULTS','REFERRALS'],230,105,70,'var(--gain)');
+for(let i=0;i<3;i++)mk('rect',{x:196+i*12,y:384+i*8,width:260,height:70,rx:6,class:'gain',stroke:'var(--stage)','stroke-width':3},$('bills'));
+const CK=['Takes it seriously.','Shows up.','Follows through.'].map((s,i)=>{const y=330+i*90,g=mk('g',{},$('chk'));mk('circle',{cx:650,cy:y-14,r:24,class:'gain'},g);
+  mk('path',{d:'M638 '+(y-14)+'l8 9 16-18',fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  const tx=mk('text',{x:700,y:y,'font-size':40,class:'d5'},g);tx.textContent=s;return g});
+const DT=[];for(let i=0;i<12;i++)DT.push(mk('circle',{r:14,class:i%3===0?'loss':'gain'},$('dots')));
+P($('lowF'),320,380,34,'loss');P($('hiF'),1280,380,34,'gain');
+const TR0=P($('tr0'),240,380,30,'ink'),CR=[];
+for(let i=0;i<16;i++)CR.push(mk('circle',{cx:420+(i%4)*70,cy:360+Math.floor(i/4)*60,r:16,class:'ink'},$('crowd0')));
+P($('tr1'),960,380,30,'gain');
+const CL=[1090,1160,1230].map(x=>P($('cli'),x,410,16,'ink')),CI=[];
+for(let i=0;i<7;i++)CI.push(mk('circle',{cx:900+i*48,cy:620,r:16,stroke:'var(--gain)','stroke-width':4},$('ci')));
+const TS=tag($('t7s'),'$',120),TB=tag($('t7b'),'×10',110);
+TS.w.setAttribute('transform','translate(240 360) scale(.45)');TB.pa.style.stroke='var(--gain)';TB.tx.style.fill='var(--gain)';
+const PN=[[440,580],[760,660],[1080,580]].map((q,i)=>{const g=mk('g',{},$('pins'));mk('circle',{cx:q[0],cy:q[1],r:26,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);
+  const n=mk('text',{x:q[0],y:q[1]+10,'font-size':28,'text-anchor':'middle',class:'d'},g);n.textContent=i+1;
+  const l=mk('text',{x:q[0],y:q[1]+74,'font-size':24,'text-anchor':'middle',class:'m'},g);l.textContent='ANSWER';return g});
+const PL=[380,450,520].map(y=>mk('path',{d:'M1260 '+y+'h'+(y===380?130:160),stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round'},$('pl')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const f0=p(u,TM.hero_tag+4.5,TM.hero_tag+5.5),c0=f0>.5?'var(--gain)':'var(--loss)';
+  R('t0tag',u,TM.hero_tag,.6);
+  T0.w.setAttribute('transform','translate(1260 380) rotate('+(4*Math.sin(t*1.5)).toFixed(2)+') scale('+(.6+.4*f0).toFixed(3)+')');
+  T0.pa.style.stroke=c0;T0.tx.style.fill=c0;
+
+  const mh=180-164*p(u,TM.thin_coin+3.5,TM.thin_coin+5);
+  $('mg').setAttribute('y',(460-mh).toFixed(1));$('mg').setAttribute('height',mh.toFixed(1));$('mgl').setAttribute('y',(468-mh/2).toFixed(1));
+  R('s1bar',u,TM.thin_coin);R('s1own',u,TM.tired_owner);
+  $('sweat').setAttribute('cy',(350+10*Math.abs(Math.sin(t*3))).toFixed(1));
+  for(let i=0;i<3;i++)R('s1r'+i,u,TM.tired_owner+.6+i*.8);
+  R('s1race',u,TM.tired_owner+4.2);
+
+  part($('coilD'),CD,p(u,TM.down_spiral,TM.down_spiral+2));ballAt($('ballD'),CD,u>=TM.down_spiral+2,t);
+  BD.forEach((e,i)=>R(e,u,TM.down_spiral+2.2+i*1.1));
+  R('loopD',u,TM.bad_review);R('worse',u,TM.bad_review+4.2);
+
+  part($('coilU'),CU,p(u,TM.up_spiral,TM.up_spiral+2));ballAt($('ballU'),CU,u>=TM.up_spiral+2,t);
+  [TM.up_spiral+.4,TM.up_spiral+2.9,TM.toolbox+5.8,TM.toolbox+6.6,TM.toolbox+8].forEach((a,i)=>R(BU[i],u,a));
+  for(let i=0;i<3;i++)R('ic'+i,u,TM.toolbox+i*1.6);
+  R('loopU',u,TM.toolbox+8.4);R('lift',u,TM.toolbox+8.6);
+
+  R('wal',u,TM.wallet_open-.4);$('bills').setAttribute('transform','translate(0 '+(-130*p(u,TM.wallet_open,TM.wallet_open+1)).toFixed(1)+')');
+  CK.forEach((g,i)=>R(g,u,TM.wallet_open+3+i*.6));
+  R('barsT',u,TM.effort_bar);const eb=p(u,TM.effort_bar+.4,TM.effort_bar+2);
+  $('barL').setAttribute('width',(260*eb).toFixed(1));$('barG').setAttribute('width',(900*eb).toFixed(1));
+  $('outT').setAttribute('opacity',p(u,TM.effort_bar+1.6,TM.effort_bar+2));R('look',u,TM.effort_bar+2.5);
+
+  R('fun',u,TM.filter_funnel);
+  DT.forEach((d,i)=>{const ph=(t*.3+i/12)%1;let x,y,o=1;
+    if(i%3===0){const x0=650+(i*29)%50;if(ph<.35){x=x0;y=200+100*ph/.35}else{const k=cl((ph-.35)/.4);x=x0-(x0-575)*k;y=300-80*Math.sin(k*Math.PI)+40*k;o=1-k}}
+    else{const x0=680+(i*137)%240;if(ph<.6){const k=ph/.6;x=x0+(800-x0)*k*k;y=200+320*k}else{const k=(ph-.6)/.4;x=800;y=520+100*k;o=1-k*k}}
+    d.setAttribute('cx',x.toFixed(1));d.setAttribute('cy',y.toFixed(1));d.setAttribute('opacity',o.toFixed(2))});
+  R('lowP',u,TM.filter_funnel+3.8);R('hiP',u,TM.happy_client);
+
+  R('pre',u,TM.trainer);CR.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.trainer+.6+i*.1,TM.trainer+.9+i*.1)));
+  R('clk',u,TM.clock_strain);$('hand').setAttribute('transform','rotate('+((t*360)%360).toFixed(1)+' 250 640)');
+  TR0.forEach(e=>e.setAttribute('class',u>=TM.clock_strain?'loss':'ink'));
+  R('post',u,TM.meal_plan);
+  CI.forEach((c,i)=>c.setAttribute('fill',u>=TM.meal_plan+2+i*.4?'var(--gain)':'var(--stage)'));
+  CL.forEach(pr=>pr.forEach(e=>e.setAttribute('class',u>=TM.meal_plan+6.6?'gain':'ink')));
+  R('refs',u,TM.meal_plan+6.6);
+
+  R('t7s',u,TM.ten_x);R('t7a',u,TM.ten_x+.8);R('t7b',u,TM.ten_x+1.2);
+  TB.w.setAttribute('transform','translate(740 360) scale('+(.45+.4*p(u,TM.ten_x+1.2,TM.ten_x+2.2)).toFixed(3)+')');
+  R('q7',u,TM.ten_x+2.6);R('road',u,TM.idea_list);
+  PN.forEach((g,i)=>R(g,u,TM.idea_list+.5+i*.6));R('flag',u,TM.idea_list+2.4);R('raise',u,TM.idea_list+3.8);
+
+  R('q8a',u,TM.mirror);R('q8b',u,TM.mirror+.4);R('q8c',u,TM.mirror+.8);R('pad',u,TM.mirror+1.2);
+  R('q8m',u,TM.mirror+4.2);
+  PL.forEach((l,i)=>l.setAttribute('stroke',u>=TM.mirror+4.4+i*.5?'var(--ink)':'var(--line)'));
+  R('pchk',u,TM.mirror+6.2);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.57;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,374 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purple Cow Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Purple Cow: Things that are merely good become invisible, while something truly different, like a purple cow, demands attention. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">PURPLE COW · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The day the cows</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">got boring.</text>
+<text class="b" x="120" y="600" font-size="32">Why good things fade and different things get noticed.</text>
+<path class="s-line" d="M1040 515h440" stroke-width="5" stroke-linecap="round"/>
+<g id="t0c"></g>
+<g id="t0p"></g>
+<g id="t0x"><text class="d" x="1430" y="250" font-size="72" style="fill:var(--gain)">!</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A drive through France.</text>
+<text class="b" x="120" y="176" font-size="32">Seth Godin’s family road trip through the countryside.</text>
+<path d="M120 540Q800 440 1480 540V700H120z" fill="var(--ice)"/>
+<rect x="120" y="700" width="1360" height="110" fill="var(--line)"/>
+<path d="M120 755h1360" stroke="var(--stage)" stroke-width="6" stroke-dasharray="30 30"/>
+<g id="f1cows"></g>
+<g id="car">
+<path class="s-ink" d="M50 0l34-48h96l34 48z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<circle class="ink" cx="112" cy="-20" r="13"/><circle class="ink" cx="160" cy="-20" r="13"/>
+<rect class="s-ink" x="0" y="0" width="264" height="62" rx="18" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="60" cy="64" r="22"/><circle class="ink" cx="204" cy="64" r="22"/>
+</g>
+<g id="hearts">
+<path class="gain" d="M380 438c-34-22-34-50-12-54 6-1 10 2 12 8 2-6 6-9 12-8 22 4 22 32-12 54z"/>
+<path class="gain" d="M460 398c-34-22-34-50-12-54 6-1 10 2 12 8 2-6 6-9 12-8 22 4 22 32-12 54z"/>
+<path class="gain" d="M540 448c-34-22-34-50-12-54 6-1 10 2 12 8 2-6 6-9 12-8 22 4 22 32-12 54z"/>
+</g>
+<g id="pb"><text class="m" x="1480" y="300" font-size="22" text-anchor="end">LIKE A PICTURE BOOK</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Twenty minutes later.</text>
+<text class="b" x="120" y="176" font-size="32">The charm wore off.</text>
+<g id="clk">
+<circle class="s-ink" cx="300" cy="460" r="150" fill="var(--stage)" stroke-width="8"/>
+<path id="wedge" class="gain" fill-opacity=".5"/>
+<g id="ticks"></g>
+<line id="hand" class="s-ink" x1="300" y1="460" x2="300" y2="350" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="300" cy="460" r="10"/>
+<text class="m" x="300" y="660" font-size="22" text-anchor="middle">ABOUT 20 MINUTES</text>
+</g>
+<g id="nob"><text class="m" x="300" y="725" font-size="20" text-anchor="middle">NOBODY LOOKS OUT THE WINDOW</text></g>
+<g id="grid"></g>
+<g id="bor"><text class="d" x="120" y="820" font-size="46">Even a beautiful cow had become boring.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then: a purple cow.</text>
+<text class="b" x="120" y="176" font-size="32">Same field, same fence, but one cow changes everything.</text>
+<rect class="s-ink" x="120" y="240" width="400" height="360" rx="36" fill="var(--ice)" stroke-width="8"/>
+<g id="faces"></g>
+<path class="s-line" d="M720 700H1480" stroke-width="5"/>
+<g id="c3"></g>
+<g id="rays"></g>
+<g id="p3"></g>
+<g id="fence"></g>
+<circle id="flash" cx="215" cy="725" r="60" fill="none" class="s-gain" stroke-width="6"/>
+<g id="phone">
+<rect class="s-ink" x="160" y="630" width="110" height="190" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect x="175" y="655" width="80" height="130" rx="6" fill="var(--ice)"/>
+<circle class="loss" cx="215" cy="720" r="20"/>
+</g>
+<g id="frnd"><path class="s-gain" d="M290 740h30" stroke-width="5" stroke-dasharray="6 6"/></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Good becomes invisible.</text>
+<text class="b" x="120" y="176" font-size="32">Attention filters out what looks like what we’ve already seen.</text>
+<path class="s-ink" d="M160 400q100-90 200 0q-100 90-200 0z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<circle class="ink" cx="260" cy="400" r="34"/><circle cx="272" cy="390" r="9" fill="var(--stage)"/>
+<text class="m" x="260" y="510" font-size="26" text-anchor="middle">YOU</text>
+<g id="flt">
+<rect class="s-ink" x="580" y="260" width="40" height="320" fill="none" stroke-width="6"/>
+<g id="hatch"></g>
+<text class="m" x="600" y="630" font-size="24" text-anchor="middle">ATTENTION FILTER</text>
+</g>
+<g id="dots"></g>
+<g id="row"></g>
+<g id="inv"><text class="d" x="120" y="800" font-size="52">Being good does not mean being noticed.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most products are brown cows.</text>
+<text class="b" x="120" y="176" font-size="32">Each one is fine. None of them stands out.</text>
+<g id="shelfb"><rect class="ink" x="160" y="480" width="1280" height="12"/><rect class="ink" x="160" y="720" width="1280" height="12"/></g>
+<g id="boxes"></g>
+<path id="trail" class="s-muted" stroke-width="4" stroke-dasharray="8 10" fill="none"/>
+<g id="eye2"><path class="s-ink" d="M-40 0q40-36 80 0q-40 36-80 0z" fill="var(--stage)" stroke-width="5"/><circle class="ink" cx="8" cy="0" r="12"/></g>
+<g id="slide"><text class="m" x="120" y="852" font-size="20">YOUR EYES SLIDE RIGHT PAST, LIKE THE FRENCH COWS</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Different grabs attention.</text>
+<text class="b" x="120" y="176" font-size="32">Its difference is part of the thing itself.</text>
+<g id="mega">
+<path class="s-ink" d="M160 320h50l150-70v220l-150-70h-50z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M385 300q30 60 0 120M405 275q40 85 0 170" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="260" y="556" font-size="26" text-anchor="middle">LOUDER?</text>
+</g>
+<line id="xm" class="s-loss" x1="150" y1="240" x2="150" y2="240" stroke-width="10" stroke-linecap="round"/>
+<polygon id="beam" class="gain" points="1010,210 1050,210 1160,560 900,560" fill-opacity=".25"/>
+<g id="c6"></g>
+<g id="p6"></g>
+<g id="st1"><text class="d" x="120" y="700" font-size="56" style="fill:var(--gain)">Different stops people.</text></g>
+<g id="st2"><text class="d5" x="120" y="780" font-size="44" style="fill:var(--muted)">Familiar lets them keep walking.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Spot your brown cows.</text>
+<text class="b" x="120" y="176" font-size="32">Something to try today.</text>
+<g id="nb">
+<rect class="s-ink" x="120" y="240" width="440" height="500" rx="16" fill="var(--stage)" stroke-width="6"/>
+<g id="spir"></g>
+<rect class="s-ink" x="160" y="358" width="24" height="24" rx="4" fill="none" stroke-width="4"/>
+<rect class="s-ink" x="160" y="458" width="24" height="24" rx="4" fill="none" stroke-width="4"/>
+<rect class="s-ink" x="160" y="558" width="24" height="24" rx="4" fill="none" stroke-width="4"/>
+<text class="m" x="200" y="380" font-size="24">A PRODUCT</text>
+<text class="m" x="200" y="480" font-size="24">A SERVICE</text>
+<text class="m" x="200" y="580" font-size="24">A PRESENTATION</text>
+</g>
+<g id="pick">
+<rect class="gain" x="160" y="358" width="24" height="24" rx="4"/>
+<path d="M165 370l6 6 9-11" fill="none" stroke="var(--on-gain)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-gain" d="M200 396h165" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="160" y="690" font-size="22" style="fill:var(--gain)">PICK ONE</text>
+</g>
+<g id="cards"></g>
+<g id="str">
+<path class="s-muted" d="M1050 608L975 560" stroke-width="4" stroke-dasharray="6 8"/>
+<text class="m" x="1120" y="680" font-size="20">AFTER 20 MINUTES</text>
+<text class="m" x="1120" y="710" font-size="20">OF SIMILAR OPTIONS</text>
+</g>
+<g id="wq"><text class="d" x="120" y="830" font-size="44">Would they look up, or would it blend in?</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="320" font-size="80" letter-spacing="-2">What one change would</text></g>
+<g id="qb"><text class="d" x="136" y="420" font-size="80" letter-spacing="-2">make your work look</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="80" letter-spacing="-2"><tspan style="fill:var(--loss)">purple</tspan> in a field of brown?</text></g>
+<g id="ql"><text class="m" x="143" y="630" font-size="26">BE THE PURPLE COW</text></g>
+<g id="row8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Day the Cows Got Boring&rdquo;, from <em>Purple Cow</em> by Seth Godin. The family road trip past cows in France is as reported in the book. The purple cow, supermarket shelf, and stranger scenes are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 8.9], [8.9, 23.5], [23.5, 36.7], [36.7, 52.7], [52.7, 67.4], [67.4, 82.7], [82.7, 98.0], [98.0, 112.7], [112.7, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Purple Cow", "A Drive Through France", "Twenty Minutes Later", "Then a Purple Cow", "Good Becomes Invisible", "Most Products Are Brown", "Different Grabs Attention", "Spot Your Brown Cows", "Your Challenge"];
+const TM={"title_cow": 0.0, "car": 9.2, "cows": 13.96, "clock": 23.84, "cow_copies": 29.92, "purple_cow": 36.96, "faces_glass": 40.96, "phone_photo": 44.05, "filter": 54.96, "cow_row": 60.16, "shelf": 71.52, "fine_box": 75.92, "spotlight": 83.04, "contrast": 89.92, "notebook": 100.56, "stranger": 105.2, "question": 113.04};
+const S='var(--stage)',I='var(--ink)',PU='var(--loss)';
+const cow=(g,x,y,s,f)=>{const w=mk('g',{},g),c=mk('g',{transform:'translate('+x+' '+y+') scale('+s+')'},w);
+mk('path',{d:'M-38 20v50M-18 20v50M22 20v50M42 20v50M-60-18q-22 10-14 42',fill:'none',stroke:I,'stroke-width':8,'stroke-linecap':'round'},c);
+mk('rect',{x:-62,y:-36,width:124,height:66,rx:28,fill:f||S,stroke:I,'stroke-width':5},c);
+if(!f){mk('ellipse',{cx:-22,cy:-8,rx:16,ry:11,fill:I},c);mk('ellipse',{cx:22,cy:8,rx:11,ry:8,fill:I},c)}
+mk('path',{d:'M60-56l-8-14M86-56l8-14',stroke:I,'stroke-width':5,'stroke-linecap':'round'},c);
+mk('rect',{x:50,y:-58,width:46,height:42,rx:14,fill:f||S,stroke:I,'stroke-width':5},c);
+mk('circle',{cx:82,cy:-42,r:4,fill:I},c);return w};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+[1110,1260,1400].forEach(x=>cow($('t0c'),x,470,.6));
+cow($('t0p'),1280,330,1.3,PU);
+const C1=[640,840,1040,1240,1400].map(x=>cow($('f1cows'),x,610,.7));
+for(let i=0;i<12;i++){const a=i*Math.PI/6,s=Math.sin(a),c=Math.cos(a);mk('path',{d:'M'+(300+122*s).toFixed(1)+' '+(460-122*c).toFixed(1)+'L'+(300+138*s).toFixed(1)+' '+(460-138*c).toFixed(1),stroke:I,'stroke-width':5,'stroke-linecap':'round'},$('ticks'))}
+const G2=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++)G2.push(cow($('grid'),700+c*220,340+r*150,.8));
+[220,320,420].forEach(x=>person($('faces'),x,410,30,'ink'));
+[820,1380].forEach(x=>cow($('c3'),x,610,.8));
+const P3=cow($('p3'),1100,580,1.15,PU);
+for(let i=0;i<7;i++){const a=Math.PI+(i+1)*Math.PI/8,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1110+150*c).toFixed(1)+' '+(540+150*s).toFixed(1)+'L'+(1110+190*c).toFixed(1)+' '+(540+190*s).toFixed(1),stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+let fp='M720 630H1480M720 670H1480';for(let x=720;x<=1480;x+=95)fp+='M'+x+' 600V700';
+mk('path',{d:fp,stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round',fill:'none'},$('fence'));
+[350,410,470].forEach(x=>person($('frnd'),x,700,16,'ink'));
+let hp='';for(let y=280;y<580;y+=20)hp+='M580 '+y+'h40';mk('path',{d:hp,stroke:I,'stroke-width':3},$('hatch'));
+const D4=[];for(let i=0;i<6;i++)D4.push(mk('circle',{cx:1460,cy:320,r:12,fill:'var(--muted)'},$('dots')));
+const R4=[780,960,1140,1320].map(x=>cow($('row'),x,480,.7));
+const BX=[],CK=[];for(let r=0;r<2;r++)for(let i=0;i<10;i++){const x=180+i*126,y=300+r*240,g=mk('g',{},$('boxes'));
+mk('rect',{x:x,y:y,width:100,height:180,rx:6,fill:'var(--line)',stroke:I,'stroke-width':4},g);
+mk('rect',{x:x+15,y:y+60,width:70,height:40,fill:S},g);BX.push(g);
+CK.push(mk('path',{d:'M'+(x+36)+' '+(y+80)+'l10 10 18-18',fill:'none',stroke:I,'stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g))}
+const G6=[620,800,1240,1410].map(x=>cow($('c6'),x,470,.7));
+cow($('p6'),1030,460,1,PU);
+for(let x=160;x<=520;x+=60)mk('circle',{cx:x,cy:240,r:10,fill:S,stroke:I,'stroke-width':4},$('spir'));
+const CD=[];let YR;for(let i=0;i<8;i++){const x=700+(i%4)*190,y=280+Math.floor(i/4)*150,yo=i===5,g=mk('g',{},$('cards'));
+const r=mk('rect',{x:x,y:y,width:150,height:120,rx:12,fill:yo?S:'var(--line)',stroke:yo?'var(--gain)':I,'stroke-width':yo?6:4,'stroke-dasharray':yo?'10 8':'none'},g);
+if(yo){YR=r;mk('path',{d:'M'+(x+30)+' '+(y+36)+'h90',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},g);
+const tx=mk('text',{x:x+75,y:y+88,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--gain)'},g);tx.textContent='YOURS'}
+else mk('path',{d:'M'+(x+25)+' '+(y+38)+'h100M'+(x+25)+' '+(y+64)+'h60',stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round'},g);
+CD.push(g)}
+person($('str'),1060,640,26,'ink');
+let RG;for(let i=0;i<13;i++){const x=150+i*70;if(i===8){RG=mk('circle',{cx:x,cy:740,r:34,fill:'none',stroke:'var(--gain)','stroke-width':5},$('row8'));mk('circle',{cx:x,cy:740,r:24,class:'loss'},$('row8'))}else mk('circle',{cx:x,cy:740,r:16,fill:'var(--muted)','fill-opacity':.5},$('row8'))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('t0p'),p(u,TM.title_cow,TM.title_cow+.7));
+$('t0x').setAttribute('opacity',u>TM.title_cow+1?(.6+.4*Math.sin(t*5)).toFixed(2):0);
+
+const cx=120+180*p(u,TM.car,TM.car+2.5);
+$('car').setAttribute('transform','translate('+cx.toFixed(1)+' '+(690+2*Math.sin(t*12)).toFixed(1)+')');
+$('car').setAttribute('opacity',p(u,TM.car,TM.car+.5));
+C1.forEach((c,i)=>{const a=TM.cows+i*.3;rise(c,p(u,a,a+.5))});
+rise($('hearts'),p(u,TM.cows+4.6,TM.cows+5.1)); rise($('pb'),p(u,TM.cows+6.8,TM.cows+7.3));
+
+rise($('clk'),p(u,TM.clock,TM.clock+.5));
+const ck=p(u,TM.clock+.3,TM.clock+2.8),ca=ck*2*Math.PI/3,sx=Math.sin(ca),sy=Math.cos(ca);
+$('wedge').setAttribute('d','M300 460L300 320A140 140 0 0 1 '+(300+140*sx).toFixed(1)+' '+(460-140*sy).toFixed(1)+'Z');
+$('hand').setAttribute('x2',(300+110*sx).toFixed(1)); $('hand').setAttribute('y2',(460-110*sy).toFixed(1));
+rise($('nob'),p(u,TM.clock+3.8,TM.clock+4.3));
+const fd=p(u,TM.cow_copies+3.8,TM.cow_copies+5);
+G2.forEach((c,i)=>{const a=TM.cow_copies+i*.2;rise(c,p(u,a,a+.4)*(1-.6*fd))});
+rise($('bor'),p(u,TM.cow_copies+3.8,TM.cow_copies+4.4));
+
+rise(P3,p(u,TM.purple_cow,TM.purple_cow+.6));
+$('rays').setAttribute('opacity',(p(u,TM.purple_cow+.6,TM.purple_cow+1.1)*(.6+.4*Math.sin(t*4))).toFixed(2));
+rise($('faces'),p(u,TM.faces_glass,TM.faces_glass+.5));
+rise($('phone'),p(u,TM.phone_photo,TM.phone_photo+.5));
+const fl=p(u,TM.phone_photo+.6,TM.phone_photo+1.4);
+$('flash').setAttribute('r',(60+60*fl).toFixed(1)); $('flash').setAttribute('opacity',(fl>0&&fl<1?1-fl:0).toFixed(2));
+rise($('frnd'),p(u,TM.phone_photo+2,TM.phone_photo+2.5));
+
+rise($('flt'),p(u,TM.filter,TM.filter+.5));
+const dv=p(u,TM.filter,TM.filter+.5);
+D4.forEach((d,i)=>{const q=((t*.3+i/6)%1);d.setAttribute('cx',(1460-q*830).toFixed(1));d.setAttribute('opacity',(dv*(q>.9?(1-q)*10:1)).toFixed(2))});
+const gone=1-.85*p(u,TM.cow_row+1.8,TM.cow_row+3.5);
+R4.forEach((c,i)=>{const a=TM.cow_row+i*.25;rise(c,p(u,a,a+.4)*gone)});
+rise($('inv'),p(u,TM.cow_row+4.2,TM.cow_row+4.8));
+
+rise($('shelfb'),p(u,TM.shelf,TM.shelf+.5));
+BX.forEach((b,i)=>{const a=TM.shelf+.3+i*.06;rise(b,p(u,a,a+.4))});
+CK.forEach((c,i)=>{const a=TM.fine_box+i*.05;c.setAttribute('opacity',p(u,a,a+.3))});
+const gx=160+1280*p(u,TM.fine_box+2.1,TM.fine_box+5);
+$('eye2').setAttribute('transform','translate('+gx.toFixed(1)+' 790)'); $('eye2').setAttribute('opacity',u>=TM.fine_box+2.1?1:0);
+$('trail').setAttribute('d','M160 790H'+gx.toFixed(1));
+rise($('slide'),p(u,TM.fine_box+2.4,TM.fine_box+2.9));
+
+rise($('mega'),p(u,TM.spotlight,TM.spotlight+.5));
+const xk=p(u,TM.spotlight+1.6,TM.spotlight+2.1);
+$('xm').setAttribute('x2',(150+290*xk).toFixed(1)); $('xm').setAttribute('y2',(240+260*xk).toFixed(1));
+rise($('p6'),p(u,TM.spotlight+3.7,TM.spotlight+4.2));
+$('beam').setAttribute('opacity',p(u,TM.contrast,TM.contrast+.6));
+G6.forEach(c=>c.setAttribute('opacity',(1-.6*p(u,TM.contrast,TM.contrast+.8)).toFixed(2)));
+rise($('st1'),p(u,TM.contrast+4.6,TM.contrast+5.1)); rise($('st2'),p(u,TM.contrast+6,TM.contrast+6.5));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5)); rise($('pick'),p(u,TM.notebook+2,TM.notebook+2.5));
+CD.forEach((c,i)=>{const a=TM.stranger+i*.1;rise(c,p(u,a,a+.4))});
+rise($('str'),p(u,TM.stranger+1,TM.stranger+1.5));
+YR.setAttribute('stroke',u>=TM.stranger+4.6&&Math.sin(t*3)<0?'var(--ink)':'var(--gain)');
+rise($('wq'),p(u,TM.stranger+4.6,TM.stranger+5.1));
+
+rise($('qa'),p(u,TM.question,TM.question+.5)); rise($('qb'),p(u,TM.question+.4,TM.question+.9)); rise($('qc'),p(u,TM.question+.8,TM.question+1.3));
+rise($('ql'),p(u,TM.question+1.4,TM.question+1.9)); rise($('row8'),p(u,TM.question+1.6,TM.question+2.1));
+RG.setAttribute('r',(34+6*Math.sin(t*3)).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.71;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

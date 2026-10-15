@@ -1,0 +1,294 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiny Habits Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Tiny Habits: Attach each tiny habit to something you already do with a simple recipe: after I do this, I will do that. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">TINY HABITS · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Anchor it to</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">your routine.</text>
+<text class="b" x="120" y="600" font-size="32">Link each new habit to something you already do daily.</text>
+<g id="note0"><g transform="rotate(-6 1290 400)"><rect class="loss" x="1170" y="290" width="240" height="230" fill-opacity=".25"/><rect class="s-loss" x="1170" y="290" width="240" height="230" fill="none" stroke-width="5"/><path class="s-loss" d="M1200 360h170M1200 410h170M1200 460h110" stroke-width="6" stroke-linecap="round"/></g></g>
+<g id="anc0"></g>
+</g>
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Reminders fail.</text>
+<text class="b" x="120" y="176" font-size="32">Alarms go off at awkward moments, and we swipe them away.</text>
+<g id="rem">
+<g id="ph"><rect class="s-ink" x="170" y="250" width="180" height="340" rx="28" fill="var(--stage)" stroke-width="7"/><text class="m" x="260" y="330" font-size="22" text-anchor="middle">ALARM</text><path class="ink" d="M228 490q0-64 32-64q32 0 32 64z"/><circle class="ink" cx="260" cy="502" r="8"/>
+<g id="wv"><path class="s-loss" d="M145 340q-24 50 0 100M375 340q24 50 0 100" fill="none" stroke-width="6" stroke-linecap="round"/></g></g>
+<g id="sn1"><rect class="loss" x="420" y="280" width="200" height="200" fill-opacity=".25"/><path class="s-loss" d="M450 340h140M450 380h140M450 420h90" stroke-width="6" stroke-linecap="round"/></g>
+<g id="app"><rect class="s-ink" x="680" y="300" width="160" height="160" rx="36" fill="var(--stage)" stroke-width="7"/><circle class="loss" cx="836" cy="304" r="24"/><path class="s-ink" d="M720 380h80M720 420h50" stroke-width="7" stroke-linecap="round"/></g>
+<text class="m" x="120" y="660" font-size="22">ALARMS · APPS · STICKY NOTES</text>
+</g>
+<path id="swipe" class="s-ink" d="M140 420H380m-24-24 24 24-24 24" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="swp"><text class="d5" x="120" y="760" font-size="40" style="fill:var(--loss)">Swiped away.</text></g>
+<g id="pr1"><rect class="s-gain" x="960" y="240" width="520" height="460" rx="18" fill="var(--stage)" stroke-width="4"/><text class="m" x="990" y="290" font-size="22">A BETTER PROMPT</text><g id="anc1"></g><text class="d5" x="1220" y="660" font-size="32" text-anchor="middle">Something you already do</text></g>
+</g>
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The recipe.</text>
+<text class="b" x="120" y="176" font-size="32">After I do this, I will do that.</text>
+<g id="card"><rect class="s-ink" x="120" y="220" width="1360" height="270" rx="20" fill="var(--stage)" stroke-width="5"/><text class="m" x="1440" y="270" font-size="20" text-anchor="end">RECIPE</text>
+<text class="d" x="170" y="328" font-size="60">After I</text><rect class="s-ink" x="430" y="270" width="620" height="74" rx="37" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<text class="d" x="170" y="448" font-size="60">I will</text><rect class="gain" x="430" y="390" width="620" height="74" rx="37"/></g>
+<g id="slt"><text id="sl0" class="m" x="740" y="315" font-size="24" text-anchor="middle">EXISTING ROUTINE</text><text id="sl1" class="m" x="740" y="435" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">NEW TINY HABIT</text></g>
+<g id="anc2"></g>
+<g id="brush"><text class="m" x="160" y="580" font-size="20">ANCHOR · BRUSH YOUR TEETH</text><rect class="ink" x="160" y="700" width="330" height="28" rx="14"/><rect class="ink" x="480" y="690" width="90" height="44" rx="10"/><path class="s-muted" d="M495 686v-36M515 686v-36M535 686v-36M555 686v-36" stroke-width="7" stroke-linecap="round"/></g>
+<g id="tooth"><path class="s-gain" d="M640 700h170m-22-22 22 22-22 22" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="900" y="580" font-size="20">NEW HABIT · FLOSS ONE TOOTH</text>
+<path class="s-ink" d="M940 620q60-30 120 0q20 60-10 110l-15 70q-10 20-20-10l-15-50-15 50q-10 30-20 10l-15-70q-30-50-10-110z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path id="floss" class="s-gain" d="M890 660H1110" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fogg’s push-ups.</text>
+<g id="pee"><text class="b" x="120" y="176" font-size="32">After I pee, I will do two push-ups.</text></g>
+<g id="fogg"><text class="m" x="240" y="580" font-size="20" text-anchor="middle">BJ FOGG</text></g>
+<g id="door"><rect class="s-ink" x="400" y="270" width="220" height="380" rx="8" fill="var(--stage)" stroke-width="7"/><circle class="ink" cx="585" cy="470" r="12"/><text class="m" x="510" y="700" font-size="20" text-anchor="middle">BATHROOM</text><path class="s-muted" d="M660 460h90m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="pu"><path class="s-line" d="M780 642H1200" stroke-width="5"/><circle id="pu_h" class="ink" cx="1130" r="26"/><path id="pu_b" class="s-ink" fill="none" stroke-width="16" stroke-linecap="round"/><path id="pu_a" class="s-ink" fill="none" stroke-width="12" stroke-linecap="round"/>
+<text class="d" x="1260" y="600" font-size="80" style="fill:var(--gain)">×2</text><text class="m" x="120" y="850" font-size="20">EVERY BATHROOM TRIP ADDS TWO PUSH-UPS</text></g>
+<g id="tally"></g>
+</g>
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Be precise.</text>
+<text class="b" x="120" y="176" font-size="32">Anchor to a specific action, at the moment it ends.</text>
+<g id="cloud"><path class="s-loss" d="M220 440a60 60 0 0 1 10-118a80 80 0 0 1 150-30a60 60 0 0 1 80 70a50 50 0 0 1-20 78z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round" stroke-dasharray="14 10"/>
+<text class="m" x="340" y="380" font-size="20" text-anchor="middle" style="fill:var(--loss)">SOMETIME IN</text><text class="m" x="340" y="410" font-size="20" text-anchor="middle" style="fill:var(--loss)">THE MORNING</text>
+<text class="d5" x="340" y="520" font-size="44" text-anchor="middle" style="fill:var(--loss)">Vague</text></g>
+<g id="cof"><rect id="lvl" class="ink" x="808" width="124" fill-opacity=".7"/><path class="s-ink" d="M800 400h140v110q0 30-30 30h-80q-30 0-30-30z" fill="none" stroke-width="7" stroke-linejoin="round"/><path class="s-ink" d="M940 420q50 0 50 40t-50 40" fill="none" stroke-width="7"/>
+<path id="strm" class="s-ink" d="M905 326V520" stroke-width="8" stroke-linecap="round"/>
+<path class="s-ink" d="M990 250h160l20 130H970z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/><path class="s-ink" d="M995 290L905 322M1150 280q50 20 10 80M1030 250v-20h80v20" fill="none" stroke-width="8" stroke-linecap="round"/>
+<text class="d5" x="1220" y="360" font-size="44" style="fill:var(--gain)">Precise</text>
+<text class="m" x="640" y="600" font-size="20">POURING COFFEE</text><rect class="s-line" x="640" y="620" width="660" height="40" rx="20" fill="none" stroke-width="4"/><rect id="pf" class="gain" x="640" y="620" height="40" rx="20"/></g>
+<g id="flag"><path class="s-ink" d="M1300 560V690" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1300 560h70l-18 20 18 20h-70z"/></g>
+<g id="te"><text class="m" x="1300" y="730" font-size="22" text-anchor="middle" style="fill:var(--gain)">TRAILING EDGE</text></g>
+<g id="prc"><text class="d5" x="120" y="820" font-size="34">Start the new habit the moment the anchor ends.</text></g>
+</g>
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Match the fit.</text>
+<text class="b" x="120" y="176" font-size="32">Same place as the habit. Same frequency too.</text>
+<g id="pin"><path class="gain" d="M200 470C160 410 150 390 150 360a50 50 0 0 1 100 0c0 30-10 50-50 110z"/><circle cx="200" cy="360" r="18" fill="var(--stage)"/></g>
+<g id="kit"><rect class="s-line" x="320" y="240" width="540" height="320" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="350" y="285" font-size="22">KITCHEN · WIPE THE COUNTER</text>
+<path class="s-ink" d="M520 430V370h40v15" fill="none" stroke-width="8" stroke-linecap="round"/><rect class="ink" x="360" y="430" width="460" height="30"/><rect class="s-line" x="380" y="460" width="420" height="70" fill="none" stroke-width="4"/>
+<rect id="sponge" class="gain" y="405" width="70" height="25" rx="6"/><path class="s-gain" d="M780 320l18 20 36-40" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="car"><g opacity=".55"><rect class="s-line" x="920" y="240" width="540" height="320" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="950" y="285" font-size="22">CAR</text>
+<path class="s-ink" d="M990 470h340v-50l-60-60h-190l-60 60z" fill="none" stroke-width="7" stroke-linejoin="round"/><circle class="ink" cx="1060" cy="480" r="28"/><circle class="ink" cx="1260" cy="480" r="28"/></g>
+<path class="s-loss" d="M1380 290l40 40m0-40l-40 40" stroke-width="8" stroke-linecap="round"/></g>
+<g id="calic"><rect class="s-ink" x="145" y="690" width="110" height="100" rx="10" fill="none" stroke-width="6"/><rect class="ink" x="145" y="690" width="110" height="26"/><text class="m" x="330" y="640" font-size="20">DAILY ANCHOR → DAILY HABIT</text></g>
+<g id="cal"></g>
+</g>
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start the day.</text>
+<text class="b" x="120" y="176" font-size="32">The very first moment of every morning.</text>
+<circle id="sun" class="gain" cx="1100" r="50"/>
+<rect class="s-ink" x="900" y="230" width="400" height="270" fill="none" stroke-width="7"/><path class="s-ink" d="M1100 230V500M900 365H1300" stroke-width="5"/>
+<path class="s-line" d="M120 720H1480" stroke-width="5"/>
+<rect class="ink" x="160" y="400" width="26" height="320"/><rect class="s-ink" x="186" y="520" width="474" height="50" rx="12" fill="var(--stage)" stroke-width="6"/><ellipse class="s-ink" cx="250" cy="502" rx="50" ry="18" fill="var(--stage)" stroke-width="5"/><rect class="ink" x="630" y="570" width="20" height="150"/>
+<circle class="ink" cx="560" cy="380" r="34"/><path class="s-ink" d="M560 425L575 515M575 520H680" fill="none" stroke-width="30" stroke-linecap="round"/>
+<path id="shin" class="s-ink" fill="none" stroke-width="22" stroke-linecap="round"/><path id="foot" class="s-ink" fill="none" stroke-width="14" stroke-linecap="round"/>
+<path id="imp" class="s-gain" d="M664 704l-24-12M740 704l24-12" stroke-width="5" stroke-linecap="round"/>
+<g id="bub"><path class="gain" d="M770 585L610 420L800 612z"/><rect class="gain" x="740" y="560" width="700" height="100" rx="50"/><text class="d5" x="1090" y="622" font-size="36" text-anchor="middle" style="fill:var(--on-gain)">“It’s going to be a great day.”</text></g>
+<g id="smile"><circle class="gain" cx="1400" cy="320" r="56"/><circle cx="1380" cy="305" r="7" fill="var(--on-gain)"/><circle cx="1420" cy="305" r="7" fill="var(--on-gain)"/><path d="M1375 335q25 22 50 0" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round"/></g>
+<g id="maui"><text class="d" x="120" y="820" font-size="48">The Maui habit.</text><text class="m" x="600" y="820" font-size="22">TAKES JUST SECONDS</text></g>
+</g>
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Write yours.</text>
+<text class="b" x="120" y="176" font-size="32">Five daily anchors, one recipe, a few test days.</text>
+<g id="paper"><rect class="s-ink" x="120" y="220" width="440" height="560" rx="12" fill="var(--stage)" stroke-width="5"/><text class="m" x="160" y="285" font-size="20">FIVE THINGS I DO DAILY</text></g>
+<rect id="hl" class="gain" x="140" y="488" width="400" height="60" rx="12" fill-opacity=".3"/>
+<g id="rows"></g>
+<g id="pen"><path class="gain" d="M0 0l14-40 60-150 24 10-60 150z"/></g>
+<g id="chain"><rect class="s-gain" x="580" y="503" width="90" height="34" rx="17" fill="none" stroke-width="7"/><rect class="s-gain" x="650" y="503" width="90" height="34" rx="17" fill="none" stroke-width="7"/></g>
+<g id="card7"><rect class="s-ink" x="760" y="300" width="720" height="260" rx="18" fill="var(--stage)" stroke-width="5"/><text class="m" x="790" y="350" font-size="20">MY RECIPE</text>
+<text class="d" x="790" y="430" font-size="48">After I <tspan style="fill:var(--gain)">______</tspan>,</text><text class="d" x="790" y="510" font-size="48">I will <tspan style="fill:var(--gain)">______</tspan>.</text></g>
+<g id="tw"><text class="m" x="760" y="620" font-size="20">TEST FOR A FEW DAYS</text><g id="days"></g>
+<g id="swap"><path class="s-muted" d="M1350 680h90m-16-14 16 14-16 14M1440 720h-90m16-14-16 14 16 14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="760" y="810" font-size="20">SWAP THE ANCHOR IF IT DOESN’T FIT</text></g></g>
+</g>
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which everyday moment</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">will carry your next</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">tiny habit</tspan>?</text></g>
+<g id="qm"><text class="m" x="143" y="700" font-size="26">TONIGHT: WRITE ONE RECIPE THAT BEGINS “AFTER I…”</text></g>
+<g id="anc8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Anchor It to Your Routine&rdquo;, from <em>Tiny Habits</em> by BJ Fogg. The floss-one-tooth recipe, Fogg&#x27;s push-ups after using the bathroom, and the Maui habit are as reported in the book. The kitchen, coffee, and timeline drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 7.4], [7.4, 22.3], [22.3, 39.6], [39.6, 52.8], [52.8, 71.8], [71.8, 86.3], [86.3, 99.9], [99.9, 115.5], [115.5, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Reminders Fail", "The Recipe", "Fogg's Push-Ups", "Be Precise", "Match the Fit", "Start the Day", "Write Yours", "Your Challenge"];
+const TM={"sticky_note": 0.0, "phone_alarm": 7.68, "snooze_hand": 12.6, "anchor_icon": 16.56, "recipe_card": 22.56, "toothbrush": 31.12, "floss_one": 35.12, "bj_fogg": 39.92, "bathroom_door": 43.36, "pushup_man": 48.32, "vague_cloud": 53.12, "coffee_mug": 58.4, "finish_line": 63.44, "map_pin": 72.08, "kitchen": 76.0, "calendar": 81.36, "bed_feet": 86.64, "sunrise": 91.44, "smile_face": 96.16, "pen_paper": 100.24, "day_timeline": 101.84, "link_chain": 106.64, "test_week": 111.44};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const anchor=(g,x,y,s,col)=>{const a=mk('g',{transform:'translate('+x+' '+y+') scale('+s+')'},g);mk('circle',{cx:0,cy:-130,r:20,fill:'none',stroke:col,'stroke-width':14},a);mk('path',{d:'M0 -110V130M-60 -70H60M-110 40Q-100 130 0 130Q100 130 110 40M-128 58l18-18 18 18M92 58l18-18 18 18',fill:'none',stroke:col,'stroke-width':14,'stroke-linecap':'round','stroke-linejoin':'round'},a);return a};
+anchor($('anc0'),1300,420,1,'var(--gain)');anchor($('anc1'),1220,470,.85,'var(--gain)');anchor($('anc2'),1150,307,.28,'var(--ink)');anchor($('anc8'),1320,470,.75,'var(--gain)');
+person($('fogg'),240,360,40,'ink');
+const TL=[];for(let i=0;i<10;i++){const g=mk('g',{},$('tally'));[0,26].forEach(d=>mk('rect',{x:140+i*134+d,y:740,width:16,height:60,rx:8,class:'gain'},g));TL.push(g)}
+const CAL=[];for(let i=0;i<7;i++){const x=330+i*160,g=mk('g',{},$('cal'));mk('rect',{x:x,y:660,width:140,height:160,rx:14,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);mk('path',{d:'M'+(x+70)+' 710V780',stroke:'var(--line)','stroke-width':4},g);mk('circle',{cx:x+70,cy:710,r:18,class:'ink'},g);mk('circle',{cx:x+70,cy:780,r:18,class:'gain'},g);CAL.push(g)}
+const LW=[300,240,330,210,270],RW=LW.map((w,i)=>{const y=360+i*80,g=mk('g',{},$('rows'));mk('text',{x:160,y:y+8,class:'m','font-size':22},g).textContent=i+1;let d='M200 '+y;for(let x=0;x<w;x+=30)d+='q15 -14 30 0';mk('path',{d:d,fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},g);return g});
+const DY=[];for(let i=0;i<4;i++){const x=800+i*140;mk('circle',{cx:x,cy:700,r:40,fill:'none',stroke:'var(--line)','stroke-width':4},$('days'));DY.push(mk('path',{d:'M'+(x-16)+' 700l10 12 22-26',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('days')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('note0'),p(u,TM.sticky_note,TM.sticky_note+.5)*(1-p(u,TM.sticky_note+3.6,TM.sticky_note+4.4)));
+rise($('anc0'),p(u,TM.sticky_note+4.8,TM.sticky_note+5.4));
+
+rise($('ph'),p(u,TM.phone_alarm,TM.phone_alarm+.4));rise($('sn1'),p(u,TM.phone_alarm+1.2,TM.phone_alarm+1.6));rise($('app'),p(u,TM.phone_alarm+2.4,TM.phone_alarm+2.8));
+$('wv').setAttribute('opacity',u<TM.snooze_hand?(.5+.5*Math.sin(t*9)).toFixed(2):0);
+const sw=p(u,TM.snooze_hand,TM.snooze_hand+1);
+$('swipe').setAttribute('opacity',sw>0&&sw<1?1:0);$('swipe').setAttribute('transform','translate('+(-80+300*sw).toFixed(1)+' 0)');
+$('rem').setAttribute('opacity',(1-.65*sw).toFixed(2));
+rise($('swp'),p(u,TM.snooze_hand+.8,TM.snooze_hand+1.3));rise($('pr1'),p(u,TM.anchor_icon,TM.anchor_icon+.5));
+
+rise($('card'),p(u,TM.recipe_card,TM.recipe_card+.5));rise($('slt'),p(u,TM.recipe_card+4.6,TM.recipe_card+5.1));
+$('sl0').textContent=u>=TM.toothbrush?'BRUSH MY TEETH':'EXISTING ROUTINE';$('sl1').textContent=u>=TM.floss_one?'FLOSS ONE TOOTH':'NEW TINY HABIT';
+rise($('brush'),p(u,TM.toothbrush,TM.toothbrush+.5));rise($('anc2'),p(u,TM.toothbrush,TM.toothbrush+.5));rise($('tooth'),p(u,TM.floss_one,TM.floss_one+.5));
+$('floss').setAttribute('transform','translate(0 '+(8*Math.sin(t*4)).toFixed(1)+')');
+
+rise($('fogg'),p(u,TM.bj_fogg,TM.bj_fogg+.5));rise($('door'),p(u,TM.bathroom_door,TM.bathroom_door+.5));rise($('pee'),p(u,TM.bathroom_door,TM.bathroom_door+.5));
+rise($('pu'),p(u,TM.pushup_man,TM.pushup_man+.5));
+const dy=30*(.5+.5*Math.sin(t*4));
+$('pu_h').setAttribute('cy',(552+dy).toFixed(1));$('pu_b').setAttribute('d','M1100 '+(572+dy).toFixed(1)+'L820 630');$('pu_a').setAttribute('d','M1085 '+(576+dy).toFixed(1)+'L1085 636');
+TL.forEach((g,i)=>{const a=TM.pushup_man+.8+i*.4;rise(g,p(u,a,a+.3))});
+
+rise($('cloud'),p(u,TM.vague_cloud,TM.vague_cloud+.5));rise($('cof'),p(u,TM.coffee_mug,TM.coffee_mug+.5));
+const pr=p(u,TM.coffee_mug+.6,TM.finish_line);
+$('lvl').setAttribute('y',(530-90*pr).toFixed(1));$('lvl').setAttribute('height',(90*pr).toFixed(1));
+$('strm').setAttribute('opacity',pr>0&&pr<1?1:0);$('pf').setAttribute('width',(660*pr).toFixed(1));
+rise($('flag'),p(u,TM.finish_line,TM.finish_line+.5));rise($('prc'),p(u,TM.finish_line+.6,TM.finish_line+1.2));rise($('te'),p(u,TM.finish_line+7,TM.finish_line+7.5));
+
+rise($('pin'),p(u,TM.map_pin,TM.map_pin+.5));rise($('kit'),p(u,TM.kitchen,TM.kitchen+.5));rise($('car'),p(u,TM.kitchen+3,TM.kitchen+3.5));
+$('sponge').setAttribute('x',(620+60*Math.sin(t*3)).toFixed(1));
+rise($('calic'),p(u,TM.calendar,TM.calendar+.5));CAL.forEach((g,i)=>{const a=TM.calendar+.3+i*.2;rise(g,p(u,a,a+.3))});
+
+const f=p(u,TM.bed_feet+.6,TM.bed_feet+1.2),fy=(640+72*f).toFixed(1);
+$('shin').setAttribute('d','M680 525L680 '+fy);$('foot').setAttribute('d','M680 '+fy+'h40');
+$('imp').setAttribute('opacity',f>=1&&u<TM.bed_feet+2.4?1:0);
+const sp=p(u,TM.sunrise,TM.sunrise+1.5);$('sun').setAttribute('cy',(470-130*sp).toFixed(1));$('sun').setAttribute('opacity',sp.toFixed(2));
+rise($('bub'),p(u,TM.sunrise+1,TM.sunrise+1.5));rise($('smile'),p(u,TM.smile_face,TM.smile_face+.5));rise($('maui'),p(u,TM.smile_face+.4,TM.smile_face+.9));
+
+rise($('paper'),p(u,TM.pen_paper,TM.pen_paper+.5));
+RW.forEach((g,i)=>{const a=TM.day_timeline+i*.7;rise(g,p(u,a,a+.4))});
+const pk=cl((u-TM.day_timeline)/.7,0,4.99),pi=Math.floor(pk),pfr=pk-pi;
+$('pen').setAttribute('transform','translate('+(200+LW[pi]*pfr).toFixed(1)+' '+(352+pi*80)+')');$('pen').setAttribute('opacity',p(u,TM.pen_paper,TM.pen_paper+.5).toFixed(2));
+rise($('hl'),p(u,TM.link_chain,TM.link_chain+.5));rise($('chain'),p(u,TM.link_chain+.4,TM.link_chain+.9));rise($('card7'),p(u,TM.link_chain+.8,TM.link_chain+1.3));
+rise($('tw'),p(u,TM.test_week,TM.test_week+.5));DY.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.test_week+.6+i*.5,TM.test_week+.9+i*.5).toFixed(2)));
+rise($('swap'),p(u,TM.test_week+3,TM.test_week+3.5));
+
+const S8=SC[8][0]/K;
+rise($('qm'),p(u,S8+.4,S8+.9));rise($('qa'),p(u,S8+5.4,S8+5.9));rise($('qb'),p(u,S8+5.8,S8+6.3));rise($('qc'),p(u,S8+6.2,S8+6.7));rise($('anc8'),p(u,S8+6.6,S8+7.2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.45;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

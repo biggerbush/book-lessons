@@ -1,0 +1,297 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Range Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Range: Early specialization and repetition work in kind environments with clear rules and quick feedback, but most real-world problems are wicked, and there narrow experience can mislead you. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">RANGE · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Kind Worlds and</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Wicked Worlds.</text>
+<text class="b" x="120" y="600" font-size="32">Why practice pays off in some places and misleads in others</text>
+<g id="tBoard"><g id="tSq"></g><text class="m" x="1128" y="510" font-size="20" text-anchor="middle" style="fill:var(--gain)">KIND</text></g>
+<g id="tStorm"><g id="tRain"></g><circle class="loss" cx="1310" cy="320" r="40"/><circle class="loss" cx="1370" cy="300" r="50"/><circle class="loss" cx="1428" cy="326" r="34"/><rect class="loss" x="1300" y="320" width="140" height="40" rx="20"/><text class="m" x="1370" y="510" font-size="20" text-anchor="middle" style="fill:var(--loss)">WICKED</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of world.</text>
+<text class="b" x="120" y="176" font-size="32">Psychologist Robin Hogarth gave them names.</text>
+<path class="s-line" d="M160 720H1440" stroke-width="5" stroke-linecap="round"/>
+<g id="hog"><text class="m" x="800" y="570" font-size="22" text-anchor="middle">ROBIN HOGARTH</text><text class="m" x="800" y="602" font-size="18" text-anchor="middle">PSYCHOLOGIST</text></g>
+<g id="kSign"><rect class="ink" x="392" y="490" width="16" height="230"/><rect class="gain" x="220" y="380" width="360" height="110" rx="12"/><circle cx="280" cy="435" r="20" fill="none" stroke="var(--on-gain)" stroke-width="5"/><path d="M280 400v-6M280 470v6M245 435h-6M315 435h6" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round"/><text class="d" x="334" y="452" font-size="48" style="fill:var(--on-gain)">KIND</text><text class="m" x="400" y="770" font-size="20" text-anchor="middle">SAME RULES · FAST FEEDBACK</text></g>
+<g id="wSign"><rect class="ink" x="1192" y="490" width="16" height="230"/><rect class="loss" x="1020" y="380" width="360" height="110" rx="12"/><path d="M1046 450l12-30 12 30 12-30 12 30 12-30 12 30" fill="none" stroke="var(--stage)" stroke-width="5" stroke-linejoin="round"/><text class="d" x="1136" y="452" font-size="48" style="fill:var(--stage)">WICKED</text><text class="m" x="1200" y="770" font-size="20" text-anchor="middle">SHIFTING RULES · LATE FEEDBACK</text></g>
+<g id="sum1"><text class="d" x="120" y="842" font-size="44">It’s all about rules and feedback.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Golf and chess are kind.</text>
+<text class="b" x="120" y="176" font-size="32">Same rules. Quick, honest feedback.</text>
+<g id="golfP"><rect class="s-line" x="120" y="230" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="280" font-size="22">GOLF</text>
+<path class="s-line" d="M160 600H720" stroke-width="6" stroke-linecap="round"/><path class="ink" d="M214 600v-10h12v10z"/><ellipse class="ink" cx="640" cy="602" rx="18" ry="5"/>
+<path class="s-ink" d="M640 600V420" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M640 420l60 25-60 25z"/>
+<circle id="gBall" class="ink" cx="220" cy="588" r="10"/></g>
+<g id="gRule"><text class="m" x="150" y="664" font-size="20">THE RULES STAY THE SAME</text></g>
+<g id="gSee"><text class="m" x="150" y="702" font-size="20" style="fill:var(--gain)">YOU SEE THE RESULT RIGHT AWAY</text></g>
+<g id="chessP"><rect class="s-line" x="840" y="230" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="870" y="280" font-size="22">CHESS</text><g id="cBoard"></g><text class="m" x="1160" y="690" font-size="20" text-anchor="middle">CLEAR RULES · HONEST FEEDBACK</text></g>
+<g id="kPay"><text class="d" x="120" y="820" font-size="46">Here, early practice and repetition pay off.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Masters see patterns.</text>
+<text class="b" x="120" y="176" font-size="32">Their memory works best on positions that really happen.</text>
+<g id="gm"><g id="gmP"></g><path class="s-muted" d="M272 372L530 410" stroke-width="3" stroke-dasharray="8 8"/><text class="m" x="240" y="590" font-size="20" text-anchor="middle">CHESS MASTER</text></g>
+<g id="rgB"><g id="rgS"></g><text class="m" x="540" y="604" font-size="20">REAL GAME</text><rect class="s-line" x="540" y="616" width="288" height="28" rx="6" fill="none" stroke-width="3"/><rect id="rb0" class="gain" x="540" y="616" width="0" height="28" rx="6"/></g>
+<g id="rl0"><text class="m" x="540" y="690" font-size="20" style="fill:var(--gain)">RECALLED REMARKABLY WELL</text></g>
+<g id="rdB"><g id="rdS"></g><text class="m" x="1060" y="604" font-size="20">RANDOM PIECES</text><rect class="s-line" x="1060" y="616" width="288" height="28" rx="6" fill="none" stroke-width="3"/><rect id="rb1" class="loss" x="1060" y="616" width="0" height="28" rx="6"/></g>
+<g id="rl1"><text class="m" x="1060" y="690" font-size="20" style="fill:var(--loss)">ADVANTAGE MOSTLY DISAPPEARS</text></g>
+<g id="pat"><text class="d" x="120" y="800" font-size="46">Kind worlds repeat their patterns constantly.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Wicked worlds are different.</text>
+<text class="b" x="120" y="176" font-size="32">Unclear, shifting rules. Late or wrong feedback.</text>
+<g id="mz"><path class="s-ink" d="M240 240H640V640M640 720H160V240M240 320H480M560 240V400M160 400H320V560M400 400V640H560M480 480H640M240 640H320" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle class="gain" cx="200" cy="280" r="14"/></g>
+<path id="mw" class="s-loss" d="M480 560h80" stroke-width="10" stroke-linecap="round" opacity="0"/>
+<g id="ruleL"><text class="m" x="400" y="768" font-size="22" text-anchor="middle" style="fill:var(--loss)">RULES KEEP CHANGING</text></g>
+<g id="clk"><circle class="s-ink" cx="1000" cy="440" r="110" fill="var(--stage)" stroke-width="7"/><g id="ticks"></g><path id="hand" class="s-loss" d="M1000 440V350" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="1000" cy="440" r="9"/><text class="m" x="1000" y="600" font-size="22" text-anchor="middle">FEEDBACK ARRIVES…</text></g>
+<g id="f0"><text class="d5" x="1180" y="390" font-size="52">Late.</text></g>
+<g id="f1"><text class="d5" x="1180" y="460" font-size="52">Wrong.</text></g>
+<g id="f2"><text class="d5" x="1180" y="530" font-size="52" style="fill:var(--loss)">Never.</text></g>
+<g id="most"><text class="d" x="760" y="720" font-size="46">Most of work and life</text><text class="d" x="760" y="776" font-size="46">looks like this.</text><text class="m" x="760" y="826" font-size="20">FROM MEDICINE TO BUSINESS</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The tongue doctor.</text>
+<text class="b" x="120" y="176" font-size="32">Early 1900s New York: a doctor famous for spotting typhoid.</text>
+<g id="doc"><g id="docP"></g><circle cx="280" cy="388" r="11" fill="var(--stage)" class="s-ink" stroke-width="4"/><text class="m" x="280" y="590" font-size="20" text-anchor="middle">THE DOCTOR</text></g>
+<g id="pts"><text class="m" x="1000" y="590" font-size="20" text-anchor="middle">PATIENTS</text></g>
+<g id="germs"><path class="s-loss" d="M640 372q90-100 180 0q90-100 180 0q90-100 180 0q90-100 180 0" fill="none" stroke-width="3" stroke-dasharray="6 8"/></g>
+<g id="hnd" opacity="0"><rect class="ink" x="-13" y="-4" width="26" height="28" rx="8"/><path class="s-ink" d="M-8 -2v-16M0 -4v-20M8 -2v-16M12 8l10-10" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="bub"><rect class="s-ink" x="130" y="206" width="380" height="92" rx="16" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M266 298l14 36 20-36" fill="var(--stage)" stroke-width="4" stroke-linejoin="round"/><path d="M270 296h26" stroke="var(--stage)" stroke-width="6"/><text class="m" x="320" y="262" font-size="26" text-anchor="middle" style="fill:var(--ink)">MY METHOD WORKS!</text></g>
+<g id="bubX" opacity="0"><path class="s-loss" d="M538 226l52 52M590 226l-52 52" stroke-width="10" stroke-linecap="round"/></g>
+<g id="gTxt"><text class="d" x="120" y="790" font-size="46">His unwashed hands spread the disease.</text><text class="m" x="120" y="838" font-size="20" style="fill:var(--loss)">FROM PATIENT TO PATIENT</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">When practice misleads.</text>
+<text class="b" x="120" y="176" font-size="32">Plenty of practice, plenty of feedback, the wrong lesson.</text>
+<g id="b0"><rect class="s-ink" x="120" y="240" width="300" height="100" rx="16" fill="var(--stage)" stroke-width="5"/><text class="m" x="270" y="300" font-size="26" text-anchor="middle" style="fill:var(--ink)">PRACTICE</text></g>
+<g id="b1"><path class="s-muted" d="M430 290h110m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-ink" x="560" y="240" width="300" height="100" rx="16" fill="var(--stage)" stroke-width="5"/><text class="m" x="710" y="300" font-size="26" text-anchor="middle" style="fill:var(--ink)">FEEDBACK</text></g>
+<g id="b2"><path id="ar2" d="M870 290h110m-18-18 18 18-18 18" fill="none" stroke="var(--muted)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect id="lb" x="1000" y="240" width="340" height="100" rx="16" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><text id="lt" class="m" x="1170" y="300" font-size="26" text-anchor="middle">LESSON</text></g>
+<g id="loop1"><path class="s-muted" d="M1170 345C1170 430 270 430 270 345" fill="none" stroke-width="4" stroke-dasharray="10 10"/><path class="s-muted" d="M256 362l14-17 14 17" fill="none" stroke-width="4" stroke-linecap="round"/></g>
+<g id="chart"><path class="s-ink" d="M160 480V740H900" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="900" y="776" font-size="20" text-anchor="end">REPETITIONS</text>
+<path id="cf" class="s-loss" d="M160 720C400 700 600 560 900 500" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<path id="sk" class="s-muted" d="M160 720C400 712 600 706 900 704" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<text class="m" x="920" y="508" font-size="22" style="fill:var(--loss)">CONFIDENCE</text><text class="m" x="920" y="712" font-size="22">SKILL</text></g>
+<g id="face"><circle class="s-ink" cx="1300" cy="600" r="80" fill="var(--stage)" stroke-width="6"/><circle class="ink" cx="1272" cy="582" r="8"/><circle class="ink" cx="1328" cy="582" r="8"/><path class="s-ink" d="M1260 620q40 40 80 0" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="old"><text class="d" x="120" y="842" font-size="40">Old patterns feel trustworthy, even when things change.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Know your world.</text>
+<text class="b" x="120" y="176" font-size="32">Before you double down on drills, ask which world you are in.</text>
+<g id="qm"><text class="d" x="300" y="600" font-size="300" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="chk"><text class="m" x="520" y="320" font-size="22">ASK FIRST</text>
+<rect class="s-ink" x="520" y="360" width="60" height="60" rx="10" fill="var(--stage)" stroke-width="5"/><text class="d" x="550" y="404" font-size="40" text-anchor="middle" style="fill:var(--gain)">?</text><text class="d5" x="610" y="404" font-size="38">Rules stable?</text>
+<rect class="s-ink" x="520" y="480" width="60" height="60" rx="10" fill="var(--stage)" stroke-width="5"/><text class="d" x="550" y="524" font-size="40" text-anchor="middle" style="fill:var(--gain)">?</text><text class="d5" x="610" y="524" font-size="38">Fast, accurate feedback?</text></g>
+<g id="lens"><polygon id="cone" class="gain" fill-opacity=".2"/><path class="s-ink" d="M1140 470q60-46 120 0q-60 46-120 0z" fill="var(--stage)" stroke-width="6"/><circle class="ink" cx="1200" cy="470" r="14"/><g id="dots"></g><text class="m" x="1300" y="720" font-size="20" text-anchor="middle">YOUR VIEW</text></g>
+<g id="wide"><text class="d5" x="120" y="810" font-size="36">If not: slow down, test assumptions, look beyond your usual cases.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qL"><text class="m" x="143" y="280" font-size="26">THINK OF ONE DECISION YOU MAKE OFTEN AT WORK</text></g>
+<g id="qa"><text class="d" x="136" y="440" font-size="88" letter-spacing="-2">Is it <tspan style="fill:var(--gain)">golf</tspan>,</text></g>
+<g id="qb"><text class="d" x="136" y="550" font-size="88" letter-spacing="-2">or is it a <tspan style="fill:var(--loss)">maze</tspan>?</text></g>
+<g id="qK"><text class="m" x="143" y="690" font-size="26">KIND WORLD OR WICKED WORLD?</text></g>
+<g id="mir"><g id="mirI"><ellipse class="s-ink" cx="1300" cy="420" rx="130" ry="170" fill="var(--stage)" stroke-width="8"/><rect class="ink" x="1286" y="590" width="28" height="150" rx="10"/>
+<path class="s-ink" d="M1240 340V500M1215 500h50" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1240 340l50 20-50 20z"/>
+<path class="s-loss" d="M1310 400h80v80h-80v-50M1330 420h40v40h-20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="139" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:19</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Kind Worlds and Wicked Worlds&rdquo;, from <em>Range</em> by David Epstein. Robin Hogarth&#x27;s kind and wicked environments, the chess memory research and the New York typhoid doctor are as reported in the book. The golf, maze, storm and checklist drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=139, SC=[[0.0, 8.3], [8.3, 20.5], [20.5, 41.1], [41.1, 60.2], [60.2, 75.2], [75.2, 96.1], [96.1, 115.1], [115.1, 130.4], [130.4, 139.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Kind Worlds, Wicked", "Naming the Two Worlds", "Kind Worlds", "Patterns That Repeat", "Wicked Worlds", "The Tongue Doctor", "When Practice Misleads", "Know Your World", "Your Challenge"];
+const TM={"game_board": 0.0, "storm_cloud": 3.28, "hogarth": 8.56, "sun_sign": 12.0, "thorn_sign": 14.88, "golf_course": 20.8, "golf_ball": 26.72, "chess_board": 31.12, "grandmaster": 41.4, "real_game": 44.88, "random_board": 49.44, "maze": 60.48, "shifting_rule": 62.72, "delayed_clock": 65.6, "doctor": 75.52, "tongue": 81.28, "sick_patients": 85.84, "germs": 91.28, "wrong_arrow": 100.32, "confident_face": 103.84, "question_mark": 115.44, "checklist": 120.16, "wide_lens": 124.56, "mirror": 130.72};
+const person=(par,x,y,r,f)=>{const g=mk('g',{fill:f},par);mk('circle',{cx:x,cy:y,r:r},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},g);return g};
+const grid=(par,x0,y0,s,n)=>{for(let r=0;r<n;r++)for(let c=0;c<n;c++)mk('rect',{x:x0+c*s,y:y0+r*s,width:s,height:s,fill:(r+c)%2?'var(--ink)':'var(--stage)','fill-opacity':(r+c)%2?.25:1},par);mk('rect',{x:x0,y:y0,width:s*n,height:s*n,fill:'none',stroke:'var(--ink)','stroke-width':5},par)};
+const pc=(par,x,y,r,dark)=>mk('circle',{cx:x,cy:y,r:r,fill:dark?'var(--ink)':'var(--gain)',stroke:'var(--stage)','stroke-width':3},par);
+grid($('tSq'),1040,280,44,4);
+const rain=[0,1,2,3,4].map(()=>mk('path',{class:'s-loss','stroke-width':5,'stroke-linecap':'round'},$('tRain')));
+person($('hog'),800,360,36,'var(--ink)');
+grid($('cBoard'),1000,310,40,8);
+[[1,6],[2,6],[3,5],[4,4],[5,6],[2,1],[4,1],[5,2],[3,3]].forEach((q,i)=>pc($('cBoard'),1020+q[0]*40,330+q[1]*40,13,i>4));
+person($('gmP'),240,380,36,'var(--ink)');
+grid($('rgS'),540,270,36,8);grid($('rdS'),1060,270,36,8);
+const RP=[[0,0],[0,2],[0,4],[0,6],[0,7],[1,0],[1,1],[1,2],[1,5],[1,6],[1,7],[2,3],[3,4],[4,4],[5,2],[6,0],[6,1],[6,5],[6,6],[6,7],[7,0],[7,4],[7,7]];
+const RD=RP.map((q,i)=>{pc($('rgS'),558+q[1]*36,288+q[0]*36,12,q[0]<4);const k=(i*29+7)%64;return [pc($('rdS'),1078+q[1]*36,288+q[0]*36,12,q[0]<4),1078+q[1]*36,288+q[0]*36,1078+(k&7)*36,288+(k>>3)*36]});
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(1000+92*Math.cos(a)).toFixed(1)+' '+(440+92*Math.sin(a)).toFixed(1)+'L'+(1000+104*Math.cos(a)).toFixed(1)+' '+(440+104*Math.sin(a)).toFixed(1),class:'s-ink','stroke-width':4,'stroke-linecap':'round'},$('ticks'))}
+person($('docP'),280,400,34,'var(--ink)');
+const PT=[640,820,1000,1180,1360].map(x=>person($('pts'),x,420,26,'var(--ink)'));
+const GM=[];for(let i=0;i<14;i++)GM.push(mk('circle',{r:6,class:'loss'},$('germs')));
+const DT=[];for(let i=0;i<7;i++)DT.push(mk('circle',{cx:1450,cy:290+i*60,r:12},$('dots')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d)),s6=SC[6][0]/K;
+R('tBoard',TM.game_board);R('tStorm',TM.storm_cloud);
+rain.forEach((l,i)=>{const y=372+(t*110+i*31)%84;l.setAttribute('d','M'+(1300+i*32)+' '+y.toFixed(1)+'l-6 16')});
+
+R('hog',TM.hogarth);R('kSign',TM.sun_sign);R('wSign',TM.thorn_sign);R('sum1',TM.thorn_sign+1.8,.6);
+
+R('golfP',TM.golf_course);R('gRule',TM.golf_course+2.2);
+const gk=p(u,TM.golf_ball+.3,TM.golf_ball+1.8);$('gBall').setAttribute('cx',(220+412*gk).toFixed(1));$('gBall').setAttribute('cy',(588-260*Math.sin(Math.PI*gk)).toFixed(1));
+R('gSee',TM.golf_ball+1.8);R('chessP',TM.chess_board);R('kPay',TM.chess_board+5,.6);
+
+R('gm',TM.grandmaster);R('rgB',TM.grandmaster+.6);R('rl0',TM.real_game+1);
+$('rb0').setAttribute('width',(259*p(u,TM.real_game+.5,TM.real_game+2)).toFixed(1));
+R('rdB',TM.random_board);R('rl1',TM.random_board+1.6);
+$('rb1').setAttribute('width',(72*p(u,TM.random_board+1.2,TM.random_board+2.4)).toFixed(1));
+const sk2=p(u,TM.random_board+.3,TM.random_board+1.5);RD.forEach(q=>{q[0].setAttribute('cx',(q[1]+(q[3]-q[1])*sk2).toFixed(1));q[0].setAttribute('cy',(q[2]+(q[4]-q[2])*sk2).toFixed(1))});
+R('pat',TM.random_board+4.2,.6);
+
+R('mz',TM.maze);R('ruleL',TM.shifting_rule);
+$('mw').setAttribute('transform','rotate('+(u>=TM.shifting_rule?90*Math.sin(t*1.6):0).toFixed(1)+' 480 560)');$('mw').setAttribute('opacity',p(u,TM.shifting_rule,TM.shifting_rule+.4));
+R('clk',TM.delayed_clock);$('hand').setAttribute('transform','rotate('+(t*120%360).toFixed(1)+' 1000 440)');
+[0,1,2].forEach(i=>R('f'+i,TM.delayed_clock+.6+i*.9));R('most',TM.delayed_clock+4.1,.6);
+
+R('doc',TM.doctor);R('pts',TM.doctor+.8);
+// hand stops just left of each patient's head (8px gap), hopping between them
+const hk=p(u,TM.tongue+.3,TM.tongue+4),hx=584+720*hk,hy=432-40*Math.abs(Math.sin(hk*4*Math.PI));
+$('hnd').setAttribute('transform','translate('+hx.toFixed(1)+' '+hy.toFixed(1)+')');$('hnd').setAttribute('opacity',p(u,TM.tongue,TM.tongue+.3));
+PT.forEach((g,i)=>g.setAttribute('fill',u>=TM.sick_patients+.6+i*.6?'var(--loss)':'var(--ink)'));
+R('bub',TM.sick_patients+3);R('germs',TM.germs);R('gTxt',TM.germs+.8,.6);
+const bx=p(u,TM.germs+1,TM.germs+1.4);$('bubX').setAttribute('opacity',bx.toFixed(2));$('bubX').setAttribute('transform','translate(564 252) scale('+(.6+.4*bx).toFixed(3)+') translate(-564 -252)');
+GM.forEach((g,i)=>{const x=640+(i*52+t*80)%720;g.setAttribute('cx',x.toFixed(1));g.setAttribute('cy',(372-50*Math.abs(Math.sin(Math.PI*(x-640)/180))).toFixed(1))});
+
+R('b0',s6+.4);R('b1',s6+1.4);R('b2',s6+2.4);$('loop1').setAttribute('opacity',p(u,s6+2.8,s6+3.4));
+const wr=u>=TM.wrong_arrow;$('lb').setAttribute('fill',wr?'var(--loss)':'var(--stage)');$('lb').setAttribute('stroke',wr?'var(--loss)':'var(--ink)');
+$('lt').textContent=wr?'WRONG LESSON':'LESSON';$('lt').style.fill=wr?'var(--stage)':'var(--ink)';$('ar2').setAttribute('stroke',wr?'var(--loss)':'var(--muted)');
+R('chart',TM.confident_face);const cd=p(u,TM.confident_face+.3,TM.confident_face+2.3);$('cf').setAttribute('stroke-dashoffset',(1-cd).toFixed(3));$('sk').setAttribute('stroke-dashoffset',(1-cd).toFixed(3));
+R('face',TM.confident_face+.8);R('old',TM.confident_face+4.2,.6);
+
+R('qm',TM.question_mark);R('lens',TM.question_mark+1);R('chk',TM.checklist);
+const h=30+170*p(u,TM.wide_lens,TM.wide_lens+1.5);$('cone').setAttribute('points','1262,470 1460,'+(470-h).toFixed(1)+' 1460,'+(470+h).toFixed(1));
+DT.forEach(d=>d.setAttribute('fill',Math.abs(+d.getAttribute('cy')-470)<=h?'var(--gain)':'var(--line)'));
+R('wide',TM.wide_lens+.8,.6);
+
+R('qL',TM.mirror);R('mir',TM.mirror+.4);$('mirI').setAttribute('transform','rotate('+(3*Math.sin(t*1.2)).toFixed(2)+' 1300 740)');
+R('qa',TM.mirror+3.8);R('qb',TM.mirror+4.4);R('qK',TM.mirror+5);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:135.71;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,317 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Practice Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of The Practice: Good creative work is made for a specific audience and aims to create a specific change for them, not to please everyone. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE PRACTICE · LESSON 4</text>
+<text class="d" x="116" y="420" font-size="84" letter-spacing="-2">Who is it for?</text>
+<text class="b" x="120" y="540" font-size="32">Stop making work for everyone and start making it for someone.</text>
+<g id="chairs"></g>
+<g id="spot"><path class="gain" d="M1220 200h40l70 280h-180z" fill-opacity=".22"/><rect class="ink" x="1212" y="178" width="56" height="28" rx="6"/><g id="spotP"></g></g>
+</g>
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The everyone trap.</text>
+<text class="b" x="120" y="176" font-size="32">It feels safe to try to please every face in the crowd.</text>
+<rect class="s-ink" x="160" y="260" width="400" height="360" rx="14" fill="var(--stage)" stroke-width="6"/>
+<g id="blur"></g>
+<circle id="core" class="gain" cx="360" cy="440" r="90"/>
+<g id="rays"></g>
+<g id="crowd"></g>
+<text class="m" x="160" y="700" font-size="22">YOUR WORK</text>
+<text class="m" x="780" y="700" font-size="22">THE CROWD</text>
+<g id="bland"><text class="d" x="120" y="800" font-size="46">Aimed at everyone, it comes out <tspan style="fill:var(--loss)">bland.</tspan></text></g>
+</g>
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Godin’s first question.</text>
+<text class="b" x="120" y="176" font-size="32">Start every project by picturing a real person.</text>
+<g id="card"><rect class="s-ink" x="120" y="240" width="600" height="300" rx="18" fill="var(--stage)" stroke-width="6"/><text class="m" x="160" y="300" font-size="22">QUESTION 1</text></g>
+<g id="qtext"><text class="d" x="160" y="440" font-size="64">Who is it <tspan style="fill:var(--gain)">for?</tspan></text></g>
+<g id="mkt"></g>
+<g id="mktL"><text class="m" x="1170" y="222" font-size="24" text-anchor="middle" style="fill:var(--muted)">A VAGUE MARKET</text></g>
+<g id="sk"></g>
+<g id="skL"><text class="m" x="1170" y="680" font-size="20" text-anchor="middle" style="fill:var(--gain)">A REAL PERSON YOU CAN PICTURE</text></g>
+<g id="care0"><text class="d5" x="120" y="640" font-size="36">What do they care about?</text></g>
+<g id="care1"><text class="d5" x="120" y="700" font-size="36">What do they believe?</text></g>
+</g>
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The smallest viable audience.</text>
+<text class="b" x="120" y="176" font-size="32">The smallest group your work could truly matter to.</text>
+<g id="evd"><circle class="s-line" cx="420" cy="500" r="250" fill="none" stroke-width="4"/><text class="m" x="420" y="790" font-size="20" text-anchor="middle">EVERYONE</text></g>
+<g id="tiny"><circle class="s-gain" cx="420" cy="500" r="70" fill="var(--gain)" fill-opacity=".15" stroke-width="6"/><path class="s-gain" d="M420 246V424" stroke-width="3" stroke-dasharray="6 6" stroke-linecap="round"/><text class="m" x="420" y="232" font-size="20" text-anchor="middle" style="fill:var(--gain)">SMALLEST VIABLE AUDIENCE</text></g>
+<g id="spr"></g>
+<g id="fewA"><text class="m" x="860" y="270" font-size="22">A FEW, DEEPLY</text></g>
+<g id="manyB"><text class="m" x="860" y="612" font-size="22">MANY, A LITTLE</text></g>
+</g>
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Godin’s second question.</text>
+<text class="b" x="120" y="176" font-size="32">What is it for? Good work changes something for someone.</text>
+<g id="bef"><text class="m" x="300" y="580" font-size="22" text-anchor="middle">BEFORE</text></g>
+<g id="aft"><text class="m" x="1300" y="580" font-size="22" text-anchor="middle" style="fill:var(--gain)">AFTER</text></g>
+<path id="arr" class="s-gain" d="M420 430H1150" stroke-width="10" stroke-linecap="round" stroke-dasharray="730"/>
+<path id="arrH" class="s-gain" d="M1130 400l36 30-36 30" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="chg"><text class="m" x="790" y="395" font-size="22" text-anchor="middle">THE CHANGE</text></g>
+<g id="c0"><rect class="gain" x="120" y="620" width="420" height="90" rx="16"/><text class="d5" x="150" y="678" font-size="34" style="fill:var(--on-gain)">Feels less alone</text></g>
+<g id="c1"><rect class="gain" x="590" y="620" width="420" height="90" rx="16"/><text class="d5" x="620" y="678" font-size="34" style="fill:var(--on-gain)">Learns a skill</text></g>
+<g id="c2"><rect class="gain" x="1060" y="620" width="420" height="90" rx="16"/><text class="d5" x="1090" y="678" font-size="34" style="fill:var(--on-gain)">Sees it differently</text></g>
+<g id="aim"><text class="d" x="120" y="810" font-size="44">Name the change, and you know what to aim at.</text></g>
+</g>
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A song for one tired parent.</text>
+<text class="b" x="120" y="176" font-size="32">Every choice gets easier: the tempo, the words, the length.</text>
+<g id="sw"><text class="m" x="260" y="540" font-size="22" text-anchor="middle">SONGWRITER</text></g>
+<g id="par"><circle class="gain" cx="1420" cy="250" r="34"/><circle cx="1436" cy="240" r="30" fill="var(--stage)"/><text class="m" x="1250" y="540" font-size="22" text-anchor="middle">NEW PARENT · 3 AM</text></g>
+<g id="notes"></g>
+<g id="sl"></g>
+<g id="zz"><text class="d5" x="1330" y="330" font-size="34" style="fill:var(--gain)">Zz</text><text class="m" x="1250" y="578" font-size="22" text-anchor="middle" style="fill:var(--gain)">ONE PARENT, ONE NIGHT</text></g>
+</g>
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">That’s fine. It’s not for you.</text>
+<text class="b" x="120" y="176" font-size="32">Criticism from outside your audience is not a verdict.</text>
+<circle id="aud" cx="480" cy="500" r="220" fill="none" stroke-width="5"/>
+<g id="audH"><circle class="gain" cx="460" cy="540" r="34"/><path class="s-gain" d="M490 540V420l50 16" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="crit"></g>
+<g id="bub"><rect class="s-ink" x="1150" y="250" width="330" height="90" rx="16" fill="var(--stage)" stroke-width="5"/><text class="d5" x="1172" y="306" font-size="30">“I don’t like it.”</text></g>
+<g id="sign"><rect class="ink" x="852" y="500" width="16" height="260"/><polygon class="gain" points="740,430 990,430 1030,470 990,510 740,510"/><text class="m" x="865" y="479" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">NOT FOR YOU</text></g>
+<g id="verd"><text class="d5" x="1080" y="700" font-size="32">A verdict on your work</text></g>
+<line id="vs" class="s-loss" x1="1072" y1="690" x2="1072" y2="690" stroke-width="6" stroke-linecap="round"/>
+<g id="never"><text class="m" x="1080" y="770" font-size="20" style="fill:var(--gain)">IT WAS NEVER MEANT FOR THEM</text></g>
+</g>
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Specific gives direction.</text>
+<text class="b" x="120" y="176" font-size="32">Leave some people out, and gain a way to judge the work.</text>
+<path id="road" class="s-ink" d="M440 700V560" stroke-width="10" stroke-linecap="round"/>
+<path id="brA" class="s-gain" d="M440 560L220 320" stroke-width="10" stroke-linecap="round" fill="none"/>
+<path id="brB" class="s-muted" d="M440 560L660 320" stroke-width="10" stroke-linecap="round" fill="none" stroke-dasharray="4 18"/>
+<g id="la"><text class="m" x="220" y="290" font-size="22" text-anchor="middle" style="fill:var(--gain)">YOUR AUDIENCE</text></g>
+<g id="lb"><text class="m" x="660" y="290" font-size="22" text-anchor="middle">LEFT OUT</text></g>
+<g id="comp"><circle class="s-ink" cx="1140" cy="460" r="150" fill="var(--stage)" stroke-width="6"/><text class="d5" x="1140" y="290" font-size="32" text-anchor="middle" style="fill:var(--gain)">THEM</text><text class="m" x="1140" y="660" font-size="20" text-anchor="middle">A WAY TO JUDGE</text>
+<g id="ndl"><polygon class="gain" points="1140,330 1162,460 1118,460"/><polygon class="ink" points="1118,460 1162,460 1140,590"/></g><circle class="ink" cx="1140" cy="460" r="10"/></g>
+<g id="qold"><text class="d5" x="120" y="800" font-size="44" fill-opacity=".55">Is it good?</text></g>
+<line id="qs" class="s-ink" x1="112" y1="786" x2="112" y2="786" stroke-width="5" stroke-linecap="round"/>
+<g id="qnew"><text class="d" x="520" y="800" font-size="48">Does it <tspan style="fill:var(--gain)">work for them?</tspan></text></g>
+</g>
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Who is it for,</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">and what change</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">do you <tspan style="fill:var(--gain)">want?</tspan></text></g>
+<g id="nb"><rect class="s-ink" x="1120" y="250" width="320" height="360" rx="14" fill="var(--stage)" stroke-width="7"/><g id="nbl"></g></g>
+<g id="only"><text class="m" x="143" y="700" font-size="26">MAKE THE NEXT PIECE ONLY FOR THEM</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Who Is It For?&rdquo;, from <em>The Practice</em> by Seth Godin. The questions who is it for and what is it for, the smallest viable audience, and the it&#x27;s not for you response are ideas as reported in the book. The crowd and the songwriter for new parents are our own illustrations, not examples or data from the book. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 8.3], [8.3, 20.7], [20.7, 34.2], [34.2, 49.9], [49.9, 66.4], [66.4, 80.8], [80.8, 96.7], [96.7, 108.8], [108.8, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Who Is It For", "The Everyone Trap", "Godin's First Question", "Small Is Enough", "Godin's Second Question", "A Quick Picture", "Not For You", "Why Specific Works", "Your Turn"];
+const TM={"empty_room": 0.0, "spotlight": 4.72, "crowd": 8.64, "blurry_work": 16.48, "question_card": 20.96, "sketch_person": 26.96, "tiny_circle": 34.48, "few_fans": 41.76, "arrow_change": 50.16, "before_after": 58.08, "songwriter": 66.72, "lullaby": 71.84, "critic": 81.12, "sign_not_you": 84.4, "split_path": 96.96, "compass": 100.28, "notebook": 109.12};
+const P=(g,x,y,r,a)=>{const e=mk('g',{},g);mk('circle',Object.assign({cx:x,cy:y,r:r},a),e);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),e);return e};
+const G={class:'gain'},I={class:'ink'},L={class:'loss'};
+[1020,1090,1160,1320,1390,1460].forEach(x=>mk('path',{d:'M'+(x-18)+' 400v70M'+(x-18)+' 440h36v30',class:'s-muted',fill:'none','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('chairs')));
+P($('spotP'),1240,372,18,G);
+const B=[];for(let i=0;i<8;i++)B.push(mk('circle',{cx:360,cy:440,r:90,fill:'var(--muted)','fill-opacity':.22},$('blur')));
+for(let i=0;i<5;i++)mk('path',{d:'M560 440L750 '+(300+i*80),class:'s-line','stroke-width':3,'stroke-dasharray':'6 8'},$('rays'));
+// crowd: 4 well-spaced rows
+const CR=[];for(let j=0;j<4;j++)for(let i=0;i<9;i++)CR.push(P($('crowd'),790+i*84,280+j*100,13,I));
+for(let i=0;i<48;i++){const c=i%8,r=Math.floor(i/8);mk('circle',{cx:920+c*72+(r*37+c*23)%30-15,cy:270+r*68+(c*29+r*13)%24-12,r:9,fill:'var(--muted)'},$('mkt'))}
+P($('sk'),1170,370,56,{class:'s-ink',fill:'var(--stage)','stroke-width':6});
+// everyone: grey dots, with a clear vertical channel for the label's leader line
+for(let i=0;i<70;i++){const a=i*2.4,rr=140+(i*37%95),x=420+rr*Math.cos(a),y=500+rr*Math.sin(a);if(Math.abs(x-420)<24&&y<440)continue;mk('circle',{cx:x.toFixed(0),cy:y.toFixed(0),r:7,fill:'var(--muted)','fill-opacity':.6},$('evd'))}
+for(let i=0;i<5;i++){const a=i*1.26;mk('circle',{cx:420+34*Math.cos(a),cy:500+34*Math.sin(a),r:11,class:'gain'},$('tiny'))}
+const SP=[];for(let i=0;i<10;i++){const a=(i/9)*Math.PI*1.2-.1*Math.PI;SP.push(mk('circle',{cx:420+108*Math.cos(a),cy:500+108*Math.sin(a),r:11},$('spr')))}
+const FA=[880,1000,1120].map(x=>{P($('fewA'),x+30,500,16,G);return mk('rect',{x:x,width:60,rx:6,class:'gain'},$('fewA'))});
+const MB=[];for(let i=0;i<12;i++){const x=890+i*50;P($('manyB'),x,690,12,I);MB.push(mk('rect',{x:x-5,width:10,rx:5,class:'ink'},$('manyB')))}
+mk('path',{d:'M870 664H1460',class:'s-line','stroke-width':2},$('manyB'));
+P($('bef'),300,330,50,L);P($('aft'),1300,330,50,G);
+P($('sw'),260,330,40,I);P($('par'),1250,330,40,I);mk('circle',{cx:1250,cy:440,r:22,class:'gain'},$('par'));
+const NT=[];for(let i=0;i<4;i++){const g=mk('g',{},$('notes'));mk('circle',{cx:0,cy:0,r:11,class:'gain'},g);mk('path',{d:'M10 0v-36l14 6',class:'s-gain',fill:'none','stroke-width':5,'stroke-linecap':'round'},g);NT.push(g)}
+const SL=[['TEMPO','Slow',.2],['WORDS','Soft and simple',.35],['LENGTH','Short',.25]].map((d,i)=>{const y=640+i*70,g=mk('g',{},$('sl'));
+ mk('text',{x:120,y:y+8,'font-size':22,class:'m'},g).textContent=d[0];mk('path',{d:'M320 '+y+'H980',class:'s-line','stroke-width':6,'stroke-linecap':'round'},g);
+ const k=mk('circle',{cy:y,r:16,class:'gain'},g),v=mk('text',{x:1020,y:y+11,'font-size':32,class:'d5'},$('sl'));v.textContent=d[1];return [g,k,v,d[2]]});
+P($('crit'),1120,430,40,L);
+for(let i=0;i<8;i++){const a=i*Math.PI/4+.4;mk('circle',{cx:480+150*Math.cos(a),cy:500+150*Math.sin(a),r:20,class:'gain'},$('audH'))}
+[0,1,2,3].forEach(i=>{const a=i*Math.PI/2;mk('path',{d:'M'+(1140+128*Math.cos(a))+' '+(460+128*Math.sin(a))+'L'+(1140+146*Math.cos(a))+' '+(460+146*Math.sin(a)),class:'s-ink','stroke-width':5},$('comp'))});
+for(let i=0;i<6;i++)mk('circle',{cx:1120,cy:290+i*58,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('nb'));
+const NL=[0,1,2,3].map(i=>mk('path',{d:'M1170 '+(330+i*70)+'H1400',stroke:i?'var(--line)':'var(--gain)','stroke-width':i?8:10,'stroke-linecap':'round'},$('nbl')));
+const strike=(id,x1,len,k)=>$(id).setAttribute('x2',(x1+len*k).toFixed(1));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('chairs'),p(u,TM.empty_room,TM.empty_room+.6));
+rise($('spot'),p(u,TM.spotlight,TM.spotlight+.6));
+
+CR.forEach((g,i)=>rise(g,p(u,TM.crowd+i*.05,TM.crowd+i*.05+.4)));
+$('rays').setAttribute('opacity',p(u,TM.crowd+4.2,TM.crowd+4.8));
+const bl=p(u,TM.blurry_work,TM.blurry_work+1.5);
+B.forEach((c,i)=>{c.setAttribute('cx',(360+40*bl*Math.cos(i*Math.PI/4)).toFixed(1));c.setAttribute('cy',(440+40*bl*Math.sin(i*Math.PI/4)).toFixed(1));c.setAttribute('opacity',bl)});
+$('core').style.fill=bl>.4?'var(--muted)':'var(--gain)';$('core').setAttribute('fill-opacity',(1-.6*bl).toFixed(2));
+rise($('bland'),p(u,TM.blurry_work+1,TM.blurry_work+1.6));
+
+rise($('card'),p(u,TM.question_card,TM.question_card+.5));
+rise($('qtext'),p(u,TM.question_card+4.2,TM.question_card+4.7));
+const skp=p(u,TM.sketch_person,TM.sketch_person+.8), mk0=p(u,TM.question_card,TM.question_card+.6);
+$('mkt').setAttribute('opacity',(mk0*(1-.85*skp)).toFixed(2));
+rise($('mktL'),mk0*(1-skp));
+rise($('sk'),p(u,TM.sketch_person,TM.sketch_person+.6));rise($('skL'),p(u,TM.sketch_person+.6,TM.sketch_person+1.1));
+rise($('care0'),p(u,TM.sketch_person+5.3,TM.sketch_person+5.8));rise($('care1'),p(u,TM.sketch_person+5.9,TM.sketch_person+6.4));
+
+rise($('evd'),p(u,TM.tiny_circle,TM.tiny_circle+.6));rise($('tiny'),p(u,TM.tiny_circle+.8,TM.tiny_circle+1.4));
+const fw=p(u,TM.few_fans+.4,TM.few_fans+1.6);
+rise($('fewA'),p(u,TM.few_fans,TM.few_fans+.5));rise($('manyB'),p(u,TM.few_fans+.3,TM.few_fans+.8));
+FA.forEach(r=>{const h=166*fw;r.setAttribute('y',(476-h).toFixed(1));r.setAttribute('height',h.toFixed(1))});
+MB.forEach(r=>{const h=22*fw;r.setAttribute('y',(664-h).toFixed(1));r.setAttribute('height',h.toFixed(1))});
+SP.forEach((c,i)=>{const on=u>=TM.few_fans+4.6+i*.2;c.setAttribute('fill',on?'var(--gain)':'var(--muted)');c.setAttribute('fill-opacity',on?1:.6)});
+$('spr').setAttribute('opacity',p(u,TM.tiny_circle,TM.tiny_circle+.6));
+
+rise($('bef'),p(u,TM.arrow_change,TM.arrow_change+.5));
+const ar=p(u,TM.arrow_change+4.2,TM.arrow_change+5.6);
+$('arr').setAttribute('stroke-dashoffset',(730*(1-ar)).toFixed(1));$('arr').setAttribute('opacity',ar>0?1:0);
+$('arrH').setAttribute('opacity',p(u,TM.arrow_change+5.4,TM.arrow_change+5.7));
+rise($('chg'),p(u,TM.arrow_change+4.4,TM.arrow_change+4.9));rise($('aft'),p(u,TM.arrow_change+5.5,TM.arrow_change+6));
+[0,1,2].forEach(i=>rise($('c'+i),p(u,TM.before_after+i*1.2,TM.before_after+i*1.2+.5)));
+rise($('aim'),p(u,TM.before_after+5.4,TM.before_after+6));
+
+rise($('sw'),p(u,TM.songwriter,TM.songwriter+.5));rise($('par'),p(u,TM.songwriter+1,TM.songwriter+1.5));
+const nv=p(u,TM.songwriter+1.5,TM.songwriter+2.2);
+NT.forEach((g,i)=>{const f=(t*.15+i/4)%1;g.setAttribute('transform','translate('+(380+760*f).toFixed(1)+' '+(330-40*Math.sin(f*Math.PI*2)).toFixed(1)+')');g.setAttribute('opacity',(nv*Math.min(1,f*8,(1-f)*8)).toFixed(2))});
+SL.forEach((s,i)=>{rise(s[0],p(u,TM.lullaby,TM.lullaby+.5));const k=p(u,TM.lullaby+.6+i,TM.lullaby+1.4+i),v=cl(s[3]+(1-k)*(.4+.25*Math.sin(t*2.2+i*2)),0,1);
+ s[1].setAttribute('cx',(320+660*v).toFixed(1));rise(s[2],k)});
+rise($('zz'),p(u,TM.lullaby+4.6,TM.lullaby+5.2));
+
+const nev=p(u,TM.sign_not_you+9.5,TM.sign_not_you+10);
+$('aud').setAttribute('stroke',nev>.5?'var(--gain)':'var(--line)');$('aud').setAttribute('stroke-dasharray',nev>.5?'14 10':'none');
+rise($('crit'),p(u,TM.critic,TM.critic+.5));rise($('bub'),p(u,TM.critic+.6,TM.critic+1.1));
+rise($('sign'),p(u,TM.sign_not_you,TM.sign_not_you+.6));
+rise($('verd'),p(u,TM.sign_not_you+4.6,TM.sign_not_you+5.1));strike('vs',1072,388,p(u,TM.sign_not_you+5.4,TM.sign_not_you+6));
+rise($('never'),nev);
+
+rise($('road'),p(u,TM.split_path,TM.split_path+.5));
+const ba=p(u,TM.split_path+.4,TM.split_path+1.4),bb=p(u,TM.split_path+.8,TM.split_path+1.8);
+$('brA').setAttribute('stroke-dasharray',(326*ba).toFixed(1)+' 2000');$('brA').setAttribute('opacity',ba>0?1:0);$('brB').setAttribute('opacity',(bb*.6).toFixed(2));
+rise($('la'),p(u,TM.split_path+1.2,TM.split_path+1.7));rise($('lb'),p(u,TM.split_path+1.6,TM.split_path+2.1));
+rise($('comp'),p(u,TM.compass,TM.compass+.5));
+const cs=p(u,TM.compass+.5,TM.compass+2.5);$('ndl').setAttribute('transform','rotate('+((1-cs)*70*Math.sin(t*3)).toFixed(1)+' 1140 460)');
+rise($('qold'),p(u,TM.compass+6.2,TM.compass+6.7));strike('qs',112,280,p(u,TM.compass+6.9,TM.compass+7.4));rise($('qnew'),p(u,TM.compass+7.4,TM.compass+8));
+
+rise($('qa'),p(u,TM.notebook,TM.notebook+.5));rise($('qb'),p(u,TM.notebook+.4,TM.notebook+.9));rise($('qc'),p(u,TM.notebook+.8,TM.notebook+1.3));
+rise($('nb'),p(u,TM.notebook+.3,TM.notebook+.9));
+NL.forEach((l,i)=>{const k=p(u,TM.notebook+1.2+i*.8,TM.notebook+1.9+i*.8);l.setAttribute('stroke-dasharray',(230*k).toFixed(1)+' 2000');l.setAttribute('opacity',k>0?1:0)});
+rise($('only'),p(u,TM.notebook+7.3,TM.notebook+7.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.55;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

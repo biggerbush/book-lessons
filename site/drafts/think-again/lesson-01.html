@@ -1,0 +1,341 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Think Again Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Think Again: We often defend, attack, or seek approval for our views, but thinking like a scientist means treating beliefs as hypotheses to test. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THINK AGAIN · LESSON 1</text>
+<text class="d" x="116" y="340" font-size="84" letter-spacing="-2">Preacher, prosecutor,</text>
+<text class="d" x="116" y="436" font-size="84" letter-spacing="-2">politician,</text>
+<text class="d" x="116" y="532" font-size="84" letter-spacing="-2">or <tspan style="fill:var(--gain)">scientist?</tspan></text>
+<text class="b" x="120" y="630" font-size="32">Four mental roles, and why the scientist rethinks best.</text>
+<g id="brain">
+<circle class="s-ink" cx="1320" cy="430" r="140" fill="var(--stage)" stroke-width="7"/>
+<path class="ink" d="M1170 760v-30a150 110 0 0 1 300 0v30z"/>
+<polygon id="gA" class="gain"/><polygon id="gB" class="ink"/>
+<circle cx="1275" cy="400" r="16" fill="var(--stage)"/><circle cx="1365" cy="466" r="11" fill="var(--stage)"/>
+</g>
+<g id="rare"><text class="m" x="1320" y="810" font-size="20" text-anchor="middle">RARELY TURNED</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. The preacher.</text>
+<text class="b" x="120" y="176" font-size="32">Phil Tetlock: we slip into familiar mental roles.</text>
+<g id="rl1"></g>
+<g id="pre">
+<g id="pfig"></g>
+<path id="arm" class="s-loss" d="M480 520L560 440" stroke-width="14" stroke-linecap="round"/>
+<path class="s-ink" d="M310 560h240l-30 220h-180z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<rect class="ink" x="290" y="544" width="280" height="20" rx="6"/>
+<path class="s-ink" d="M430 616l44 14v30c0 30-22 44-44 54c-22-10-44-24-44-54v-30z" fill="var(--loss)" stroke-width="5"/>
+<text class="m" x="430" y="756" font-size="18" text-anchor="middle">SACRED BELIEF</text>
+</g>
+<g id="serm">
+<path class="loss" d="M660 536L580 570L710 536z"/>
+<rect x="620" y="330" width="500" height="210" rx="24" fill="var(--stage)" stroke="var(--loss)" stroke-width="6"/>
+<g id="slines"></g>
+</g>
+<g id="lis"></g><g id="lisq"></g><g id="qx"></g>
+<g id="lect"><text class="d" x="120" y="840" font-size="44">We stop listening and start lecturing.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. The prosecutor.</text>
+<text class="b" x="120" y="176" font-size="32">We line up arguments to prove someone else wrong.</text>
+<g id="rl2"></g>
+<g id="pros"><g id="pfig2"></g><path class="s-loss" d="M300 540L440 500" stroke-width="12" stroke-linecap="round"/></g>
+<g id="cards"></g>
+<g id="def"><g id="dfig"></g><path class="s-loss" d="M860 560H924m-16-14 16 14-16 14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="stamp"><rect x="920" y="330" width="160" height="56" rx="8" fill="none" stroke="var(--loss)" stroke-width="5" transform="rotate(-8 1000 358)"/><text class="d" x="1000" y="372" font-size="36" text-anchor="middle" style="fill:var(--loss)" transform="rotate(-8 1000 358)">WRONG</text></g>
+<g id="goals">
+<rect class="s-ink" x="1150" y="476" width="30" height="30" fill="none" stroke-width="4"/>
+<path class="s-loss" d="M1156 491l7 8 13-16" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="1196" y="500" font-size="22" style="fill:var(--loss)">WIN THE CASE</text>
+<rect class="s-ink" x="1150" y="546" width="30" height="30" fill="none" stroke-width="4"/>
+<text class="m" x="1196" y="570" font-size="22">FIND THE TRUTH</text>
+<path class="s-muted" d="M1190 562H1420" stroke-width="4"/>
+</g>
+<g id="win2"><text class="d" x="120" y="840" font-size="44">Win the case, not find the truth.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. The politician.</text>
+<text class="b" x="120" y="176" font-size="32">We campaign for the audience’s approval.</text>
+<g id="rl3"></g>
+<g id="pol"><g id="polfig"></g>
+<path class="s-ink" d="M330 560v-30" stroke-width="5"/><circle class="ink" cx="330" cy="524" r="9"/>
+<rect class="s-ink" x="250" y="560" width="160" height="220" fill="var(--stage)" stroke-width="7"/>
+<path class="loss" d="M330 620l9 20 22 2-17 14 5 22-19-12-19 12 5-22-17-14 22-2z"/>
+</g>
+<g id="doubt"><ellipse class="s-ink" cx="200" cy="340" rx="70" ry="44" fill="var(--stage)" stroke-width="4"/><circle class="s-ink" cx="272" cy="390" r="8" fill="var(--stage)" stroke-width="3"/><circle class="s-ink" cx="288" cy="404" r="5" fill="var(--stage)" stroke-width="3"/><text class="d" x="200" y="358" font-size="54" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="spk"><path class="ink" d="M470 418L420 452L520 418z"/><rect class="s-ink" x="440" y="330" width="470" height="90" rx="20" fill="var(--stage)" stroke-width="5"/><text class="d5" x="462" y="386" font-size="30">Just what you want to hear!</text></g>
+<g id="crowd3"></g><g id="thumbs"></g>
+<g id="mtr"><text class="m" x="990" y="780" font-size="20">APPROVAL</text><rect id="meter" class="loss" x="990" y="796" width="0" height="24" rx="12"/><rect class="s-ink" x="990" y="796" width="470" height="24" rx="12" fill="none" stroke-width="4"/></g>
+<g id="say3"><text class="d" x="120" y="840" font-size="40">We say what they want to hear.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Busy being right.</text>
+<text class="b" x="120" y="176" font-size="32">In all three roles, our own views stay safe from questioning.</text>
+<g id="trio"></g><g id="chk"></g><g id="ties"></g>
+<g id="vault"><rect class="s-ink" x="640" y="560" width="320" height="220" rx="16" fill="var(--stage)" stroke-width="7"/>
+<g id="lock"><path class="s-ink" d="M770 640v-24a30 30 0 0 1 60 0v24" fill="none" stroke-width="10"/><rect class="loss" x="755" y="636" width="90" height="70" rx="10"/><circle cx="800" cy="664" r="9" fill="var(--stage)"/></g>
+<text class="m" x="800" y="752" font-size="20" text-anchor="middle">OUR OWN VIEWS</text></g>
+<g id="others"></g>
+<g id="outs"><path class="s-gain" d="M630 700H460m20-16-20 16 20 16M970 700H1140m-20-16 20 16-20 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="never4"><text class="d" x="120" y="840" font-size="44">We change other minds, never our own.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">4. The scientist.</text>
+<text class="b" x="120" y="176" font-size="32">A belief is a hypothesis: a best guess waiting to be tested.</text>
+<g id="rl5"></g>
+<g id="sci"><g id="sfig"></g></g>
+<g id="flask5"><path class="gain" d="M365 650h70l20 40a10 10 0 0 1-10 14h-90a10 10 0 0 1-10-14z"/><path class="s-ink" d="M385 560v50l-40 80a14 14 0 0 0 12 20h86a14 14 0 0 0 12-20l-40-80v-50" fill="none" stroke-width="6" stroke-linejoin="round"/><rect class="ink" x="375" y="550" width="50" height="12" rx="4"/><g id="bub5"></g></g>
+<g id="cyc"><circle class="s-line" cx="850" cy="560" r="170" fill="none" stroke-width="4"/></g>
+<circle id="dot5" class="gain" r="12"/>
+<g id="pills"></g>
+<g id="wcard"><rect class="s-ink" x="1200" y="400" width="280" height="300" rx="20" fill="var(--stage)" stroke-width="5"/>
+<path id="wx" class="s-loss" d="M1290 490l100 100M1390 490l-100 100" stroke-width="14" stroke-linecap="round"/>
+<text id="wl1" class="m" x="1340" y="660" font-size="22" text-anchor="middle" style="fill:var(--loss)">WRONG?</text>
+<g id="winfo"><circle class="gain" cx="1340" cy="540" r="56"/><text class="d" x="1340" y="566" font-size="72" text-anchor="middle" style="fill:var(--on-gain)">i</text></g>
+<text id="wl2" class="m" x="1340" y="660" font-size="22" text-anchor="middle" style="fill:var(--gain)">NEW INFORMATION</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The startup study.</text>
+<text class="b" x="120" y="176" font-size="32">Early-stage entrepreneurs in Italy.</text>
+<g id="italy"><path class="s-ink" d="M200 250L300 230L350 280L330 340L380 420L440 500L470 560L520 600L500 640L450 620L430 680L400 700L410 760L370 740L350 660L300 560L250 480L200 420L170 330Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><ellipse class="s-ink" cx="180" cy="560" rx="22" ry="44" fill="var(--stage)" stroke-width="5"/><ellipse class="s-ink" cx="380" cy="800" rx="44" ry="22" fill="var(--stage)" stroke-width="5"/><text class="m" x="400" y="300" font-size="22">ITALY</text></g>
+<g id="train"><rect class="s-ink" x="560" y="340" width="360" height="300" rx="18" fill="var(--stage)" stroke-width="5"/><rect class="ink" x="600" y="370" width="280" height="40" rx="6"/><text class="m" x="740" y="397" font-size="18" text-anchor="middle" style="fill:var(--stage)">BUSINESS TRAINING</text></g>
+<g id="split"><path class="s-muted" d="M920 450C970 450 970 355 1010 355M920 530C970 530 970 690 1010 690" fill="none" stroke-width="5" stroke-dasharray="10 8"/></g>
+<g id="grpA"><rect class="s-ink" x="1020" y="230" width="460" height="250" rx="18" fill="var(--stage)" stroke-width="4"/><text class="m" x="1050" y="270" font-size="20">STANDARD TRAINING</text></g>
+<g id="grpB"><rect class="s-gain" x="1020" y="520" width="460" height="300" rx="18" fill="var(--stage)" stroke-width="5"/><text class="m" x="1050" y="560" font-size="20" style="fill:var(--gain)">STRATEGY = THEORY</text><text class="m" x="1050" y="590" font-size="20" style="fill:var(--gain)">PLANS = TESTS</text></g>
+<g id="dots6"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What happened?</text>
+<text class="b" x="120" y="176" font-size="32">Treating plans as experiments paid off.</text>
+<g id="chart"><text class="m" x="160" y="280" font-size="20">REVENUE (SCHEMATIC)</text>
+<rect id="bar0" class="loss" x="240" y="720" width="140" height="0"/><rect id="bar1" class="gain" x="480" y="720" width="140" height="0"/>
+<path class="s-ink" d="M160 300V720H700" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="310" y="756" font-size="20" text-anchor="middle">OTHERS</text><text class="m" x="550" y="756" font-size="20" text-anchor="middle">SCIENTIFIC</text><text class="m" x="550" y="782" font-size="20" text-anchor="middle">THINKERS</text></g>
+<g id="piv"><path class="s-muted" d="M852 560H1360" stroke-width="5" stroke-dasharray="10 10"/><circle class="ink" cx="840" cy="560" r="12"/><rect class="loss" x="1370" y="500" width="18" height="120"/>
+<path class="s-loss" d="M1220 540l40 40M1260 540l-40 40" stroke-width="10" stroke-linecap="round"/><text class="m" x="1240" y="626" font-size="20" text-anchor="middle">TEST: NOT WORKING</text></g>
+<path id="pp" class="s-gain" d="M852 560H1100C1180 560 1220 400 1430 400" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="ph" class="s-gain" d="M1414 384l18 16-18 16" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="piv2"><text class="m" x="1460" y="350" font-size="22" text-anchor="end" style="fill:var(--gain)">CHANGE COURSE</text></g>
+<g id="better"><text class="d" x="120" y="840" font-size="48">Better at rethinking. Better at business.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pick one strong opinion.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">What evidence would</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">change your mind?</tspan></text></g>
+<g id="q8"><text class="m" x="143" y="700" font-size="26">RUN YOUR OWN EXPERIMENT THIS WEEK</text></g>
+<g id="lensw"><g id="lens8"><circle class="s-ink" cx="1300" cy="660" r="90" fill="var(--stage)" stroke-width="14"/><text class="d" x="1300" y="700" font-size="110" text-anchor="middle" style="fill:var(--gain)">?</text><path class="s-ink" d="M1366 726L1430 790" stroke-width="24" stroke-linecap="round"/></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="118" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:58</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Preacher, Prosecutor, Politician, or Scientist?&rdquo;, from <em>Think Again</em> by Adam Grant. Examples used are Phil Tetlock&#x27;s mental roles and a study of Italian entrepreneurs taught scientific thinking, as reported in the book. The revenue bars and pivot arrow are illustrations, not actual data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=118, SC=[[0.0, 7.6], [7.6, 24.7], [24.7, 34.8], [34.8, 45.9], [45.9, 57.7], [57.7, 75.8], [75.8, 89.9], [89.9, 105.9], [105.9, 118.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Think Again", "The Preacher", "The Prosecutor", "The Politician", "The Hidden Problem", "Enter the Scientist", "The Startup Study", "What Happened", "Your Experiment"];
+const TM={"brain_gears": 0.0, "preacher": 7.92, "pulpit": 17.44, "prosecutor": 25.04, "evidence_box": 27.52, "politician": 35.12, "crowd": 37.52, "thumbs_up": 40.88, "mirror": 46.16, "locked_door": 49.68, "scientist": 58.0, "hypothesis": 61.28, "flask": 67.04, "italy_map": 76.08, "startup_desk": 80.4, "two_groups": 84.08, "revenue_bars": 90.24, "pivot_arrow": 94.64, "question_mark": 106.24};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const gp=(ro,ri,n)=>{let s='';for(let i=0;i<n*4;i++){const a=i*Math.PI/(n*2),rr=i%4<2?ro:ri;s+=(rr*Math.cos(a)).toFixed(1)+','+(rr*Math.sin(a)).toFixed(1)+' '}return s};
+$('gA').setAttribute('points',gp(72,56,10));$('gB').setAttribute('points',gp(52,38,7));
+const RN=['PREACHER','PROSECUTOR','POLITICIAN','SCIENTIST'];
+const roles=gid=>RN.map((s,i)=>{const g=mk('g',{},$(gid)),x=120+i*346;const r=mk('rect',{x:x,y:220,width:322,height:56,rx:28,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);const tx=mk('text',{x:x+161,y:256,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return [g,r,tx]});
+const R1=roles('rl1'),R2=roles('rl2'),R3=roles('rl3'),R5=roles('rl5');
+function hi(R,i,on){const r=R[i][1],tx=R[i][2],sc=i>2;r.setAttribute('stroke',on?(sc?'var(--gain)':'var(--loss)'):'var(--line)');r.setAttribute('fill',on&&sc?'var(--gain)':'var(--stage)');tx.style.fill=on?(sc?'var(--on-gain)':'var(--loss)'):''}
+fig($('pfig'),430,430,42,'ink');
+const SW=[420,360,400,240],SL=SW.map((w,i)=>mk('rect',{x:660,y:380+i*40,width:0,height:14,rx:7,class:'ink'},$('slines')));
+const QB=[1250,1340,1430].map(x=>{fig($('lis'),x,620,22,'ink');const b=mk('g',{},$('lisq'));mk('rect',{x:x-30,y:520,width:60,height:50,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},b);const q=mk('text',{x:x,y:556,'font-size':32,'text-anchor':'middle',class:'d'},b);q.textContent='?';mk('path',{d:'M'+(x-36)+' 578L'+(x+36)+' 512',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},$('qx'));return b});
+fig($('pfig2'),250,440,40,'ink');fig($('dfig'),1000,450,36,'ink');
+const CD=['A','B','C','D'].map((s,i)=>{const g=mk('g',{},$('cards')),y=700-i*76;mk('rect',{x:480,y:y,width:360,height:64,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:506,y:y+40,'font-size':22,class:'m'},g);tx.textContent='EXHIBIT '+s;mk('path',{d:'M700 '+(y+32)+'h110',stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},g);return g});
+fig($('polfig'),330,440,40,'ink');
+const CR=[0,1,2].map(r=>{const g=mk('g',{},$('crowd3'));for(let c=0;c<6;c++)fig(g,990+c*92,480+r*90,16,'ink');return g});
+const TH=[];for(let c=0;c<6;c++){const x=990+c*92,y=420;TH.push(mk('path',{d:'M'+(x-16)+' '+(y+18)+'v-20h8l8-18a5 5 0 0 1 9 4l-3 12h12a5 5 0 0 1 5 6l-4 16z',class:'gain'},$('thumbs')))}
+[[320,'PREACHER'],[800,'PROSECUTOR'],[1280,'POLITICIAN']].forEach(([x,s])=>{fig($('trio'),x,300,34,'ink');const tx=mk('text',{x:x,y:485,'font-size':22,'text-anchor':'middle',class:'m'},$('trio'));tx.textContent=s;
+  mk('path',{d:'M'+(x+46)+' 282l12 14 24-28',fill:'none',stroke:'var(--loss)','stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round'},$('chk'));
+  mk('path',{d:'M'+x+' 500L'+(800+(x-800)*.27)+' 556',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'8 8'},$('ties'))});
+const OM=[[240,650],[330,700],[230,760],[1370,650],[1270,700],[1380,760]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:22,class:'ink'},$('others')));
+fig($('sfig'),250,440,40,'gain');
+const BB=[[385,7],[400,5],[415,8]].map(q=>mk('circle',{cx:q[0],cy:680,r:q[1],fill:'var(--stage)',stroke:'var(--gain)','stroke-width':3},$('bub5')));
+const PP=[[850,390,'HYPOTHESIS'],[1020,560,'TEST'],[850,730,'EVIDENCE'],[680,560,'UPDATE']].map((q,i)=>{const g=mk('g',{},$('pills'));mk('rect',{x:q[0]-110,y:q[1]-28,width:220,height:56,rx:28,fill:i?'var(--stage)':'var(--gain)',stroke:i?'var(--ink)':'var(--gain)','stroke-width':5},g);const tx=mk('text',{x:q[0],y:q[1]+7,'font-size':20,'text-anchor':'middle',class:'m',style:i?'fill:var(--ink)':'fill:var(--on-gain)'},g);tx.textContent=q[2];return g});
+const IP=[[230,290],[290,270],[220,360],[280,330],[270,420],[320,400],[310,480],[360,470],[350,540],[400,520],[390,600],[420,560]];
+const DT=IP.map(()=>mk('circle',{r:12,class:'ink'},$('dots6')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const rv=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  const g0=TM.brain_gears+5,ga=60*Math.min(u,g0)+6*Math.max(0,u-g0);
+  $('gA').setAttribute('transform','translate(1275 400) rotate('+ga.toFixed(1)+')');
+  $('gB').setAttribute('transform','translate(1365 466) rotate('+(-ga*10/7+13).toFixed(1)+')');
+  rv('brain',TM.brain_gears,.6); rv('rare',g0);
+
+  R1.forEach((c,i)=>rise(c[0],p(u,TM.preacher+i*.3,TM.preacher+i*.3+.4))); hi(R1,0,u>=TM.preacher+7);
+  rv('pre',TM.preacher+7);
+  $('arm').setAttribute('transform','rotate('+(u>=TM.pulpit?14*Math.sin(t*5):0).toFixed(1)+' 480 520)');
+  rv('serm',TM.pulpit); SL.forEach((l,i)=>l.setAttribute('width',(SW[i]*p(u,TM.pulpit+.4+i*.5,TM.pulpit+.9+i*.5)).toFixed(0)));
+  rv('lis',TM.pulpit+1); QB.forEach((b,i)=>rise(b,p(u,TM.pulpit+1.5+i*.3,TM.pulpit+1.9+i*.3)));
+  $('qx').setAttribute('opacity',p(u,TM.pulpit+4.9,TM.pulpit+5.3)); rv('lect',TM.pulpit+4.9,.6);
+
+  hi(R2,1,u>=TM.prosecutor); rv('pros',TM.prosecutor);
+  CD.forEach((g,i)=>rise(g,p(u,TM.evidence_box+i*.5,TM.evidence_box+i*.5+.4)));
+  rv('def',TM.evidence_box+2); rv('stamp',TM.evidence_box+3,.3);
+  rv('goals',TM.prosecutor+6.7); rv('win2',TM.prosecutor+7.1,.6);
+
+  hi(R3,2,u>=TM.politician); rv('pol',TM.politician);
+  CR.forEach((g,i)=>rise(g,p(u,TM.crowd+i*.3,TM.crowd+i*.3+.4)));
+  TH.forEach((h,i)=>rise(h,p(u,TM.crowd+1.2+i*.35,TM.crowd+1.5+i*.35)));
+  rv('mtr',TM.crowd+1); $('meter').setAttribute('width',(470*p(u,TM.crowd+1.2,TM.crowd+3.4)).toFixed(0));
+  rv('spk',TM.thumbs_up); rv('say3',TM.thumbs_up+.6); rv('doubt',TM.thumbs_up+2.5);
+
+  rv('trio',TM.mirror); $('chk').setAttribute('opacity',p(u,TM.mirror+.8,TM.mirror+1.2));
+  rv('vault',TM.locked_door); $('ties').setAttribute('opacity',p(u,TM.locked_door+.4,TM.locked_door+1));
+  const lk=u>=TM.locked_door+4.2&&u<TM.locked_door+5.4?6*Math.sin(t*40):0; $('lock').setAttribute('transform','translate('+lk.toFixed(1)+' 0)');
+  rv('others',TM.locked_door+4.2); rv('outs',TM.locked_door+4.4); OM.forEach(c=>c.setAttribute('class',u>=TM.locked_door+5?'gain':'ink'));
+  rv('never4',TM.locked_door+4.6,.6);
+
+  hi(R5,3,u>=TM.scientist); rv('sci',TM.scientist); rv('flask5',TM.scientist+.4);
+  BB.forEach((b,i)=>{b.setAttribute('cy',(690-((t*60+i*57)%170)).toFixed(1)); b.setAttribute('opacity',u>=TM.flask?1:0)});
+  rv('cyc',TM.hypothesis); PP.forEach((g,i)=>{const a=i?TM.flask+i*.4:TM.hypothesis+.3; rise(g,p(u,a,a+.4))});
+  const da=-Math.PI/2+Math.max(0,u-TM.flask)*1.4; $('dot5').setAttribute('cx',(850+170*Math.cos(da)).toFixed(1)); $('dot5').setAttribute('cy',(560+170*Math.sin(da)).toFixed(1)); $('dot5').setAttribute('opacity',u>=TM.flask?1:0);
+  rv('wcard',TM.flask+5); const nw=p(u,TM.flask+7.6,TM.flask+8.2);
+  $('wx').setAttribute('opacity',1-nw); $('wl1').setAttribute('opacity',1-nw); $('winfo').setAttribute('opacity',nw); $('wl2').setAttribute('opacity',nw);
+
+  rv('italy',TM.italy_map); rv('train',TM.startup_desk); rv('split',TM.two_groups); rv('grpA',TM.two_groups+.2); rv('grpB',TM.two_groups+.4);
+  DT.forEach((c,i)=>{const a=p(u,TM.startup_desk+.3+i*.06,TM.startup_desk+1.2+i*.06),b=p(u,TM.two_groups+.6+i*.06,TM.two_groups+1.6+i*.06),k=i%2,j=i>>1;
+    const x1=635+(i%4)*70,y1=470+(i>>2)*60,x2=1150+(j%3)*100,y2=(k?670:340)+(j>2?(k?80:70):0);
+    c.setAttribute('cx',(IP[i][0]+(x1-IP[i][0])*a+(x2-x1)*b).toFixed(1)); c.setAttribute('cy',(IP[i][1]+(y1-IP[i][1])*a+(y2-y1)*b).toFixed(1));
+    c.setAttribute('class',k&&b>.5?'gain':'ink'); c.setAttribute('opacity',p(u,TM.italy_map+.6+i*.08,TM.italy_map+1+i*.08))});
+
+  rv('chart',TM.revenue_bars);
+  const h0=120*p(u,TM.revenue_bars+.4,TM.revenue_bars+1.6),h1=360*p(u,TM.revenue_bars+.7,TM.revenue_bars+2.4);
+  $('bar0').setAttribute('y',720-h0); $('bar0').setAttribute('height',h0); $('bar1').setAttribute('y',720-h1); $('bar1').setAttribute('height',h1);
+  rv('piv',TM.pivot_arrow); $('pp').setAttribute('stroke-dashoffset',(1-p(u,TM.pivot_arrow+1.5,TM.pivot_arrow+3)).toFixed(3));
+  $('ph').setAttribute('opacity',p(u,TM.pivot_arrow+2.9,TM.pivot_arrow+3.2)); rv('piv2',TM.pivot_arrow+2.8);
+  rv('better',TM.pivot_arrow+7,.6);
+
+  rv('qa',TM.question_mark); rv('qb',TM.question_mark+3.4); rv('qc',TM.question_mark+3.8); rv('q8',TM.question_mark+4.5);
+  rv('lensw',TM.question_mark+.5,.6); $('lens8').setAttribute('transform','translate('+(18*Math.sin(t*1.2)).toFixed(1)+' 0)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:114.36;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

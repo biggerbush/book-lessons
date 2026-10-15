@@ -1,0 +1,383 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Radical Candor Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Radical Candor: Bosses build trust by asking for feedback on their own work first and rewarding it when they get it, before they start giving criticism to others. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">RADICAL CANDOR · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Ask for criticism</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">before giving it.</text>
+<text class="b" x="120" y="600" font-size="32">Earn the right to criticize by inviting criticism first.</text>
+<g id="t_ppl"></g>
+<circle id="t_ring" class="s-gain" cx="1180" cy="455" r="110" fill="none" stroke-width="5" opacity="0"/>
+<path id="t_arc" class="s-gain" d="M1400 330Q1290 220 1180 330" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="t_head" class="s-gain" d="M1184 300L1180 330L1210 326" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0"/>
+<g id="t_lab"><text class="m" x="1290" y="240" font-size="20" text-anchor="middle">ASK FOR IT FIRST</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why start with you?</text>
+<text class="b" x="120" y="176" font-size="32">A new boss hands out criticism on day one.</text>
+<g id="w_kim"><text class="m" x="120" y="240" font-size="22">KIM SCOTT · MANAGED TEAMS AT GOOGLE AND APPLE</text></g>
+<rect class="ink" x="120" y="600" width="340" height="160" rx="6"/>
+<rect class="ink" x="1000" y="600" width="480" height="160" rx="6"/>
+<g id="w_boss"></g><g id="w_team"></g><g id="w_bub"></g>
+<g id="w_nt"><text class="m" x="730" y="720" font-size="22" text-anchor="middle" style="fill:var(--loss)">NO TRUST YET</text></g>
+<g id="w_br">
+<path class="s-gain" d="M460 604Q730 660 1000 604" fill="none" stroke-width="24" stroke-dasharray="8 22"/>
+<path class="s-gain" d="M460 604Q730 660 1000 604M460 570Q730 626 1000 570" fill="none" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="w_ask"><text class="m" x="730" y="720" font-size="22" text-anchor="middle" style="fill:var(--gain)">ASK FOR CRITICISM FIRST</text></g>
+<g id="w_take"><text class="d" x="120" y="830" font-size="44">Show you can take what you plan to dish out.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Feel the sting yourself.</text>
+<text class="b" x="120" y="176" font-size="32">Hearing criticism stings, even when you asked for it.</text>
+<g id="h_heart" transform="translate(330 470)">
+<path id="h_hp" d="M0 90C-120 10-130-80-60-95C-25-102-5-80 0-60C5-80 25-102 60-95C130-80 120 10 0 90Z"/>
+<path id="h_crack" d="M-6-62l26 44-28 26 24 40" fill="none" stroke="var(--stage)" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+</g>
+<g id="h_land">
+<text class="m" x="600" y="300" font-size="22">FEEL IT, AND YOU LEARN</text>
+<text class="d5" x="600" y="370" font-size="44">how your words will land</text>
+<text class="d5" x="600" y="424" font-size="44">on others.</text>
+</g>
+<g id="h_road">
+<rect class="ink" x="600" y="500" width="880" height="180" rx="10"/>
+<path d="M630 590H1450" stroke="var(--stage)" stroke-width="6" stroke-dasharray="30 24"/>
+<path d="M1420 525l30 20-30 20" fill="none" stroke="var(--stage)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M660 615l-30 20 30 20" fill="none" stroke="var(--gain)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="h_c0" cy="545" r="14" fill="var(--stage)"/>
+<circle id="h_c1" cy="635" r="14" class="gain"/>
+<text class="m" x="600" y="720" font-size="20">YOU TO THE TEAM · THE TEAM TO YOU</text>
+</g>
+<g id="h_st"><text class="d" x="120" y="820" font-size="44">A two-way street, not a one-way order.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Have one go-to question.</text>
+<text class="b" x="120" y="176" font-size="32">Phrase it in your own words.</text>
+<g id="q_boss"></g>
+<g id="q_bub">
+<rect class="s-ink" x="120" y="220" width="940" height="160" rx="20" fill="var(--stage)" stroke-width="5"/>
+<path class="ink" d="M1060 320l60 24-60 10z"/>
+</g>
+<g id="q_txt">
+<text class="d5" x="160" y="285" font-size="36">“What could I do, or stop doing, that would</text>
+<text class="d5" x="160" y="340" font-size="36">make working with me <tspan style="fill:var(--gain)">easier</tspan>?”</text>
+</g>
+<g id="q_cd">
+<rect class="ink" x="200" y="450" width="180" height="310" rx="6"/>
+<circle cx="350" cy="610" r="10" fill="var(--stage)"/>
+<text class="d5" x="420" y="560" font-size="34">“Any feedback for me?”</text>
+<text class="b" x="420" y="610" font-size="28">A polite nothing.</text>
+</g>
+<g id="q_od">
+<polygon class="gain" points="880,760 1060,760 1120,820 820,820" fill-opacity=".2"/>
+<rect class="gain" x="880" y="450" width="180" height="310" fill-opacity=".35"/>
+<rect class="s-ink" x="880" y="450" width="180" height="310" fill="none" stroke-width="6"/>
+<path class="ink" d="M880 450l70 24v262l-70 24z"/>
+<text class="d5" x="1100" y="560" font-size="32">A specific question</text>
+<text class="b" x="1100" y="610" font-size="28">An honest answer.</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Count to six.</text>
+<text class="b" x="120" y="176" font-size="32">Expect silence. Sit with it before you speak.</text>
+<g id="c_room">
+<rect x="300" y="560" width="620" height="24" rx="6" fill="var(--line)"/>
+<path class="s-ink" d="M340 584v110M880 584v110" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g id="c_idea"><rect class="gain" x="596" y="290" width="88" height="56" rx="16"/><text class="d" x="640" y="333" font-size="36" text-anchor="middle" style="fill:var(--on-gain)">!</text></g>
+<g id="c_dial">
+<g id="c_segs"></g>
+<text id="c_num" class="d" x="1240" y="492" font-size="120" text-anchor="middle">0</text>
+<text class="m" x="1240" y="660" font-size="22" text-anchor="middle">COUNT SLOWLY</text>
+</g>
+<g id="c_fear"><text class="m" x="120" y="770" font-size="22" style="fill:var(--loss)">CRITICIZING THE BOSS FEELS RISKY</text></g>
+<g id="c_real"><text class="d" x="120" y="840" font-size="44">Often someone says something real.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Listen, don’t defend.</text>
+<text class="b" x="120" y="176" font-size="32">Listen to understand, not to argue.</text>
+<ellipse class="ink" cx="260" cy="480" rx="24" ry="40"/><ellipse class="ink" cx="540" cy="480" rx="24" ry="40"/>
+<circle class="s-ink" cx="400" cy="480" r="140" fill="var(--stage)" stroke-width="7"/>
+<circle class="ink" cx="350" cy="440" r="11"/><circle class="ink" cx="450" cy="440" r="11"/>
+<path id="l_mouth" class="s-ink" d="M350 545q50 26 100 0" fill="none" stroke-width="7" stroke-linecap="round"/>
+<g id="l_zip">
+<path class="s-ink" d="M340 550h112M355 540v20M375 540v20M395 540v20M415 540v20M435 540v20" stroke-width="5" stroke-linecap="round"/>
+<path class="s-loss" d="M462 548v-8a8 8 0 0 1 16 0v8" fill="none" stroke-width="5"/>
+<rect class="loss" x="455" y="548" width="30" height="26" rx="4"/>
+</g>
+<g id="l_waves"></g>
+<text class="m" x="720" y="300" font-size="22">WHEN CRITICISM COMES</text>
+<g id="l_und"><text class="d" x="720" y="370" font-size="52">Listen to <tspan style="fill:var(--gain)">understand</tspan>.</text></g>
+<g id="l_d0"><text id="l_t0" class="d5" x="720" y="480" font-size="40" style="fill:var(--muted)">Explain yourself</text></g>
+<line id="l_s0" class="s-loss" x1="714" y1="468" x2="714" y2="468" stroke-width="6" stroke-linecap="round" opacity="0"/>
+<g id="l_d1"><text id="l_t1" class="d5" x="720" y="550" font-size="40" style="fill:var(--muted)">Criticize the criticism</text></g>
+<line id="l_s1" class="s-loss" x1="714" y1="538" x2="714" y2="538" stroke-width="6" stroke-linecap="round" opacity="0"/>
+<g id="l_quiet"><text class="d" x="120" y="800" font-size="40">A defensive reply teaches everyone to stay quiet.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Reward the candor.</text>
+<text class="b" x="120" y="176" font-size="32">Show people that speaking up was worth it.</text>
+<g id="f0">
+<rect class="s-line" x="120" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="190" y="330" width="274" height="120" rx="20"/><path class="gain" d="M240 448l-10 40 50-40z"/>
+<text class="d" x="327" y="405" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">Thank you</text>
+<text class="d5" x="156" y="600" font-size="46">Thank them.</text>
+<text class="m" x="156" y="650" font-size="20">AND MEAN IT</text>
+</g>
+<g id="f1">
+<rect class="s-line" x="593" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="f_gear"></g>
+<text class="d5" x="629" y="600" font-size="46">Act on it.</text>
+<text class="m" x="629" y="650" font-size="20">LET PEOPLE SEE</text><text class="m" x="629" y="682" font-size="20">THE CHANGE</text>
+</g>
+<g id="f2">
+<rect class="s-line" x="1066" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="1163" y="290" width="220" height="220" rx="10" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1187" y="342" font-size="24" style="fill:var(--gain)">BECAUSE…</text>
+<path class="s-line" d="M1187 390h172M1187 430h172M1187 470h110" stroke-width="7" stroke-linecap="round"/>
+<text class="d5" x="1102" y="600" font-size="46">Explain why.</text>
+<text class="m" x="1102" y="650" font-size="20">IF YOU CAN’T FIX IT,</text><text class="m" x="1102" y="682" font-size="20">SHOW YOU TOOK IT SERIOUSLY</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then give it.</text>
+<text class="b" x="120" y="176" font-size="32">Repeat until asking and answering feel normal.</text>
+<polygon class="ink" points="270,680 430,680 410,750 290,750"/>
+<path id="g_stem" class="s-gain" d="M350 680V340" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="g_lv"></g>
+<circle id="g_fl" class="gain" cx="350" cy="322" r="24"/>
+<g id="g_ppl"></g>
+<g id="g_hs">
+<path class="s-gain" d="M950 485Q1020 520 1090 500" fill="none" stroke-width="14" stroke-linecap="round"/>
+<path class="s-ink" d="M1250 485Q1180 520 1110 500" fill="none" stroke-width="14" stroke-linecap="round"/>
+<circle class="gain" cx="1100" cy="500" r="20"/>
+</g>
+<path id="g_arc" class="s-gain" d="M900 330Q1100 230 1300 330" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="g_bel"><path class="s-gain" d="M1272 304L1300 330L1264 334" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1100" y="250" font-size="22" text-anchor="middle">THEY BELIEVE YOU MEAN WELL</text></g>
+<g id="g_trust"><text class="d" x="120" y="830" font-size="44">Your criticism arrives with trust built in.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">This week, ask one person</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">your <tspan style="fill:var(--gain)">go-to question</tspan>.</text></g>
+<g id="k0"><text class="m" x="143" y="600" font-size="26"><tspan style="fill:var(--gain)">1</tspan>  COUNT TO SIX</text></g>
+<g id="k1"><text class="m" x="143" y="650" font-size="26"><tspan style="fill:var(--gain)">2</tspan>  LISTEN</text></g>
+<g id="k2"><text class="m" x="143" y="700" font-size="26"><tspan style="fill:var(--gain)">3</tspan>  CHANGE ONE THING</text></g>
+<g id="k_cal">
+<rect class="s-ink" x="1240" y="580" width="200" height="210" rx="12" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="1243" y="583" width="194" height="47" rx="9"/>
+<rect class="ink" x="1280" y="562" width="12" height="36" rx="6"/><rect class="ink" x="1388" y="562" width="12" height="36" rx="6"/>
+<g id="k_grid"></g>
+<path id="k_chk" d="M1312 705l7 8 13-15" fill="none" stroke="var(--on-gain)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="133" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:13</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Ask for Criticism Before Giving It&rdquo;, from <em>Radical Candor</em> by Kim Scott. The go-to question and count-to-six advice are Kim Scott&#x27;s recommendations as reported in the book. The boss, team, bridge and door drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=133, SC=[[0.0, 9.1], [9.1, 29.7], [29.7, 43.5], [43.5, 64.7], [64.7, 80.1], [80.1, 93.9], [93.9, 105.8], [105.8, 119.8], [119.8, 133.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Turn the Tables", "Why Start With You", "Feel It Yourself", "A Go-To Question", "Count to Six", "Listen, Don't Defend", "Reward the Candor", "Then Give It", "Your Challenge"];
+const TM={"boss_mirror": 0.0, "new_manager": 9.36, "wary_team": 13.68, "trust_bridge": 24.32, "sting_heart": 30.0, "two_way_road": 38.88, "speech_bubble": 43.76, "closed_door": 55.2, "open_door": 60.72, "silent_room": 64.96, "counting_hand": 70.16, "open_ears": 80.4, "locked_lips": 85.28, "thank_you": 94.24, "fixed_gear": 96.88, "reason_card": 101.04, "growing_plant": 106.08, "handshake": 110.8, "calendar_page": 120.08};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const setc=(a,c)=>a.forEach(e=>e.setAttribute('class',c));
+const dr=(el,k)=>{el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));el.setAttribute('opacity',k>0?1:0)};
+const arc=(cx,cy,R,a0,a1)=>'M'+(cx+R*Math.cos(a0)).toFixed(1)+' '+(cy+R*Math.sin(a0)).toFixed(1)+'A'+R+' '+R+' 0 0 1 '+(cx+R*Math.cos(a1)).toFixed(1)+' '+(cy+R*Math.sin(a1)).toFixed(1);
+fig($('t_ppl'),1180,400,34,'gain');fig($('t_ppl'),1400,400,34,'ink');
+fig($('w_boss'),290,449,36,'gain');
+const WT=[1120,1240,1360].map(x=>fig($('w_team'),x,474,30,'ink'));
+const WB=[0,1,2].map(()=>{const g=mk('g',{opacity:0},$('w_bub'));mk('rect',{x:0,y:0,width:56,height:44,rx:10,class:'loss'},g);const tx=mk('text',{x:28,y:35,'font-size':32,'text-anchor':'middle',class:'d',style:'fill:var(--stage)'},g);tx.textContent='!';return g});
+fig($('q_boss'),1250,240,34,'gain');
+fig($('c_room'),190,400,34,'gain');[480,640,800].forEach(x=>fig($('c_room'),x,410,30,'ink'));
+const CB=[480,640,800].map(x=>{const g=mk('g',{},$('c_room'));mk('rect',{x:x-44,y:290,width:88,height:56,rx:16,fill:'var(--stage)',stroke:'var(--muted)','stroke-width':4},g);[-18,0,18].forEach(d=>mk('circle',{cx:x+d,cy:318,r:5,fill:'var(--muted)'},g));return g});
+const CS=[];for(let i=0;i<6;i++){const a0=-Math.PI/2+i*Math.PI/3+.12;CS.push(mk('path',{d:arc(1240,450,130,a0,a0+Math.PI/3-.24),fill:'none','stroke-width':24,'stroke-linecap':'round',stroke:'var(--line)'},$('c_segs')))}
+const LW=[60,95,130].map(r=>mk('path',{d:arc(540,480,r,-.6,.6),fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('l_waves')));
+// strike-through widths: measured from the rendered text, with estimates as fallback
+const SW={l_t0:300,l_t1:410};
+function measureStrikes(){for(const k in SW){try{const v=$(k).getComputedTextLength();if(v>0)SW[k]=v}catch(e){}}}
+measureStrikes(); if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measureStrikes);
+const SO=6; // overhang on each side
+const GP=[];for(let k=0;k<40;k++){const r=k%4<2?100:78,a=k*Math.PI*2/40;GP.push((800+r*Math.cos(a)).toFixed(1)+' '+(400+r*Math.sin(a)).toFixed(1))}
+mk('path',{d:'M'+GP.join('L')+'Z',class:'gain'},$('f_gear'));mk('circle',{cx:800,cy:400,r:32,fill:'var(--stage)'},$('f_gear'));
+const GL=[[600,-1,'ANSWER'],[520,1,'ASK'],[440,-1,'ASK'],[370,1,'ANSWER']].map(([y,s,l])=>{const g=mk('g',{},$('g_lv'));mk('ellipse',{cx:350+s*50,cy:y,rx:50,ry:18,class:'gain',transform:'rotate('+(-s*20)+' '+(350+s*50)+' '+y+')'},g);const tx=mk('text',{x:350+s*118,y:y+9,'font-size':24,'text-anchor':s>0?'start':'end',class:'m',style:'fill:var(--ink)'},g);tx.textContent=l;return g});
+fig($('g_ppl'),900,380,36,'gain');fig($('g_ppl'),1300,380,36,'ink');
+for(let i=0;i<12;i++)mk('rect',{x:1262+(i%4)*44,y:650+Math.floor(i/4)*40,width:30,height:30,rx:5,fill:i===5?'var(--gain)':'var(--line)'},$('k_grid'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const a0=p(u,TM.boss_mirror,TM.boss_mirror+1.6);dr($('t_arc'),a0);$('t_head').setAttribute('opacity',a0>.95?1:0);
+rise($('t_lab'),p(u,TM.boss_mirror+1,TM.boss_mirror+1.5));
+$('t_ring').setAttribute('opacity',(p(u,TM.boss_mirror+6.6,TM.boss_mirror+7.2)*(.6+.4*Math.sin(t*3))).toFixed(2));
+
+rise($('w_boss'),p(u,TM.new_manager,TM.new_manager+.5));
+const fb=1-p(u,TM.trust_bridge,TM.trust_bridge+.5);
+WB.forEach((b,i)=>{const a=TM.new_manager+.6+i*.7,k=p(u,a,a+1.8);b.setAttribute('transform','translate('+(380+580*k).toFixed(1)+' '+(330+i*40)+')');b.setAttribute('opacity',((u>=a?1:0)*fb).toFixed(2))});
+const wc=u>=TM.wary_team&&u<TM.trust_bridge+.5?'loss':'ink';WT.forEach(e=>setc(e,wc));
+rise($('w_nt'),p(u,TM.wary_team,TM.wary_team+.5)*fb);
+rise($('w_kim'),p(u,TM.wary_team+4.6,TM.wary_team+5.1));
+rise($('w_br'),p(u,TM.trust_bridge,TM.trust_bridge+.6));rise($('w_ask'),p(u,TM.trust_bridge+.5,TM.trust_bridge+1));
+rise($('w_take'),p(u,TM.trust_bridge+1.2,TM.trust_bridge+1.8));
+
+const st=u>=TM.sting_heart,sh=st?6*Math.sin(t*40)*(1-p(u,TM.sting_heart,TM.sting_heart+1.2)):0;
+$('h_hp').style.fill=st?'var(--loss)':'var(--line)';$('h_crack').setAttribute('opacity',st?1:0);
+$('h_heart').setAttribute('transform','translate('+(330+sh).toFixed(1)+' 470)');
+rise($('h_land'),p(u,TM.sting_heart+3.8,TM.sting_heart+4.3));
+const cr=(t*.25)%1;$('h_c0').setAttribute('cx',(660+740*cr).toFixed(1));$('h_c1').setAttribute('cx',(1420-740*cr).toFixed(1));
+rise($('h_road'),p(u,TM.two_way_road,TM.two_way_road+.6));rise($('h_st'),p(u,TM.two_way_road+1,TM.two_way_road+1.6));
+
+rise($('q_bub'),p(u,TM.speech_bubble,TM.speech_bubble+.5));rise($('q_txt'),p(u,TM.speech_bubble+4.9,TM.speech_bubble+5.4));
+rise($('q_cd'),p(u,TM.closed_door,TM.closed_door+.5));rise($('q_od'),p(u,TM.open_door,TM.open_door+.5));
+
+rise($('c_room'),p(u,TM.silent_room,TM.silent_room+.5));rise($('c_fear'),p(u,TM.silent_room+1.5,TM.silent_room+2));
+rise($('c_dial'),p(u,TM.counting_hand,TM.counting_hand+.5));
+const n=u<TM.counting_hand+.8?0:Math.min(6,1+Math.floor((u-TM.counting_hand-.8)/.85));
+CS.forEach((s,i)=>s.setAttribute('stroke',i<n?'var(--gain)':'var(--line)'));$('c_num').textContent=n;
+const ki=p(u,TM.counting_hand+6.2,TM.counting_hand+6.7);rise($('c_idea'),ki);CB[1].setAttribute('opacity',(1-ki).toFixed(2));
+rise($('c_real'),p(u,TM.counting_hand+6.6,TM.counting_hand+7.2));
+
+const ow=p(u,TM.open_ears,TM.open_ears+.5);LW.forEach((w,i)=>w.setAttribute('opacity',(ow*(.35+.65*Math.max(0,Math.sin(t*3+i)))).toFixed(2)));
+rise($('l_und'),p(u,TM.open_ears+.3,TM.open_ears+.8));
+const zk=p(u,TM.locked_lips+.4,TM.locked_lips+.9);$('l_mouth').setAttribute('opacity',(1-zk).toFixed(2));rise($('l_zip'),zk);
+[0,1].forEach(i=>{const a=TM.locked_lips+i*.6,s=p(u,a+1.2,a+1.8),x1=720-SO,len=SW['l_t'+i]+2*SO,ln=$('l_s'+i);
+  rise($('l_d'+i),p(u,a,a+.4));ln.setAttribute('x1',x1);ln.setAttribute('x2',(x1+len*s).toFixed(1));ln.setAttribute('opacity',s>0?1:0)});
+rise($('l_quiet'),p(u,TM.locked_lips+4.2,TM.locked_lips+4.8));
+
+[TM.thank_you,TM.fixed_gear,TM.reason_card].forEach((a,i)=>rise($('f'+i),p(u,a,a+.5)));
+$('f_gear').setAttribute('transform','rotate('+((t*30)%360).toFixed(1)+' 800 400)');
+
+dr($('g_stem'),p(u,TM.growing_plant,TM.growing_plant+4));
+GL.forEach((l,i)=>{const a=TM.growing_plant+.8+i*.8;rise(l,p(u,a,a+.4))});
+rise($('g_fl'),p(u,TM.growing_plant+4,TM.growing_plant+4.4));
+rise($('g_ppl'),p(u,TM.growing_plant+2,TM.growing_plant+2.5));
+rise($('g_hs'),p(u,TM.handshake,TM.handshake+.5));rise($('g_trust'),p(u,TM.handshake+.6,TM.handshake+1.2));
+dr($('g_arc'),p(u,TM.handshake+5,TM.handshake+6));rise($('g_bel'),p(u,TM.handshake+5.8,TM.handshake+6.3));
+
+rise($('qa'),p(u,TM.calendar_page,TM.calendar_page+.5));rise($('qb'),p(u,TM.calendar_page+.4,TM.calendar_page+.9));
+rise($('k_cal'),p(u,TM.calendar_page+.8,TM.calendar_page+1.3));dr($('k_chk'),p(u,TM.calendar_page+1.3,TM.calendar_page+1.9));
+[0,1,2].forEach(i=>{const a=TM.calendar_page+3.8+i*.5;rise($('k'+i),p(u,a,a+.4))});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:129.23;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

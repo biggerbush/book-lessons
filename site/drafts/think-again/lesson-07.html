@@ -1,0 +1,398 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Think Again Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Think Again: Creating psychological safety at work and regularly rechecking our own plans keeps rethinking a habit, not a crisis. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THINK AGAIN · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Build a life</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of rethinking.</text>
+<text class="b" x="120" y="600" font-size="32">Make rethinking a regular habit at work and in life.</text>
+<rect class="s-ink" x="1220" y="300" width="160" height="220" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1245 350h110M1245 390h110M1245 430h80M1245 470h100" stroke-width="6" stroke-linecap="round"/>
+<path id="crack" class="s-loss" d="M1300 300L1285 360L1318 410L1288 460L1306 520" pathLength="1" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="cyc"><g id="cycr"><path class="s-gain" d="M1300 240A170 170 0 1 1 1130 410" fill="none" stroke-width="8" stroke-linecap="round"/><path class="s-gain" d="M1110 432L1130 406L1150 432" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<text id="rt0" class="m" x="1300" y="640" font-size="22" text-anchor="middle" style="fill:var(--gain)">A ROUTINE, NOT A REPAIR</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rethink before a crisis forces it.</text>
+<text class="b" x="120" y="176" font-size="32">It takes two things: a safe workplace and a habit of questioning.</text>
+<g id="paths1">
+<path class="s-muted" d="M140 320H1270" stroke-width="6" stroke-linecap="round"/>
+<rect class="loss" x="1280" y="240" width="28" height="160" rx="6"/>
+<text class="m" x="1330" y="328" font-size="22" style="fill:var(--loss)">CRISIS</text>
+<path id="br1" class="s-gain" d="M520 320C640 320 640 250 760 250H1200" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round"/>
+<circle class="gain" cx="520" cy="320" r="14"/>
+<g id="brh1"><path class="s-gain" d="M1185 235L1205 250L1185 265" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="780" y="228" font-size="22" style="fill:var(--gain)">RETHINK EARLY</text></g>
+<circle id="dot1" class="ink" cx="140" cy="320" r="18"/>
+</g>
+<g id="wk1">
+<rect class="s-line" x="120" y="440" width="640" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="490" font-size="22">1 · AT WORK</text>
+<g id="ppl1"></g>
+<text class="d5" x="150" y="752" font-size="34">Speaking up feels safe.</text>
+</g>
+<g id="mr1">
+<rect class="s-line" x="840" y="440" width="640" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="490" font-size="22">2 · IN YOUR OWN LIFE</text>
+<g id="me1"></g>
+<ellipse class="s-ink" cx="1180" cy="610" rx="80" ry="100" fill="var(--stage)" stroke-width="6"/>
+<g id="rf1"></g>
+<text id="q1" class="d" x="1330" y="660" font-size="110" style="fill:var(--gain)">?</text>
+<text class="d5" x="870" y="752" font-size="34">Question your own plans.</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A puzzling finding.</text>
+<text class="b" x="120" y="176" font-size="32">Researcher Amy Edmondson studied hospital teams.</text>
+<g id="hosp2">
+<rect class="s-ink" x="160" y="320" width="340" height="400" fill="var(--stage)" stroke-width="6"/>
+<path class="s-gain" d="M330 362v76M292 400h76" stroke-width="22"/>
+<g id="win2"></g>
+</g>
+<g id="exp2"><text class="m" x="120" y="790" font-size="22">EXPECTED: BEST TEAMS, FEWEST MISTAKES</text></g>
+<g id="ch2">
+<path class="s-ink" d="M700 300V720H1420" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="720" y="310" font-size="22">ERRORS REPORTED</text>
+<rect id="b2a" class="loss" x="820" y="720" width="200" height="0"/>
+<rect id="b2b" class="gain" x="1120" y="720" width="200" height="0"/>
+<text class="m" x="920" y="760" font-size="20" text-anchor="middle">WEAKER TEAMS</text>
+<text class="m" x="1220" y="760" font-size="20" text-anchor="middle" style="fill:var(--gain)">STRONGEST TEAMS</text>
+</g>
+<g id="bk2"><text class="d" x="700" y="836" font-size="44">That seemed backwards.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Safety explains it.</text>
+<g id="p3a">
+<rect class="s-line" x="120" y="220" width="640" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="268" font-size="22" style="fill:var(--gain)">BEST TEAMS</text>
+<g id="nf3"></g>
+<g id="nb3"><rect class="gain" x="330" y="300" width="260" height="70" rx="18"/><text class="m" x="460" y="343" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">I MADE AN ERROR</text></g>
+<g id="ok3"></g>
+<text class="m" x="150" y="615" font-size="20">CAUGHT AND FIXED EARLY</text>
+</g>
+<g id="p3b">
+<rect class="s-line" x="840" y="220" width="640" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="268" font-size="22" style="fill:var(--loss)">WEAKER TEAMS</text>
+<g id="wf3"></g>
+<g id="fb3"><circle class="loss" cx="1034" cy="332" r="6"/><circle class="loss" cx="1052" cy="312" r="9"/><rect x="1070" y="260" width="240" height="70" rx="35" fill="var(--stage)" stroke="var(--loss)" stroke-width="4" stroke-dasharray="10 8"/><text class="m" x="1190" y="303" font-size="22" text-anchor="middle" style="fill:var(--loss)">STAY QUIET</text></g>
+<g id="hd3"></g>
+<rect id="rug3" class="ink" x="880" y="530" width="0" height="60" rx="10"/>
+<text class="m" x="870" y="615" font-size="20">HIDDEN, NEVER LEARNED FROM</text>
+</g>
+<g id="sh3">
+<path class="gain" d="M200 680l60 22v58c0 40-30 62-60 76c-30-14-60-36-60-76v-58z"/>
+<path d="M175 752l18 20 36-40" fill="none" stroke="var(--stage)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="300" y="760" font-size="56">Psychological safety</text>
+<text class="m" x="302" y="810" font-size="22">TAKE A RISK WITHOUT BEING HUMILIATED</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Leaders go first.</text>
+<text class="b" x="120" y="176" font-size="32">At the Gates Foundation, leaders read harsh criticism aloud.</text>
+<g id="cam4">
+<rect class="ink" x="170" y="310" width="50" height="24" rx="6"/>
+<rect class="ink" x="140" y="330" width="150" height="100" rx="14"/>
+<circle cx="215" cy="380" r="30" fill="var(--stage)"/>
+<circle id="rec4" class="loss" cx="270" cy="350" r="8"/>
+<path class="s-ink" d="M215 430L160 600M215 430L270 600M215 430V600" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="215" y="650" font-size="20" text-anchor="middle">ON CAMERA</text>
+</g>
+<g id="ld4">
+<g id="lf4"></g>
+<rect class="s-ink" x="430" y="450" width="100" height="120" rx="6" fill="var(--stage)" stroke-width="5"/>
+<path class="s-loss" d="M450 485h60M450 510h60M450 535h40" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="480" y="650" font-size="20" text-anchor="middle">HARSHEST CRITICISM,</text>
+<text class="m" x="480" y="682" font-size="20" text-anchor="middle">ALOUD</text>
+</g>
+<g id="lp4">
+<rect class="s-ink" x="680" y="300" width="300" height="190" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="ink" d="M650 500H1010L990 522H670Z"/>
+<g id="cm4"></g>
+<text class="m" x="830" y="650" font-size="20" text-anchor="middle">MELINDA GATES READS</text>
+<text class="m" x="830" y="682" font-size="20" text-anchor="middle">COMMENTS ABOUT HERSELF</text>
+</g>
+<g id="em4"><g id="ef4"></g><text class="m" x="1270" y="650" font-size="20" text-anchor="middle" style="fill:var(--gain)">MORE WILLING</text><text class="m" x="1270" y="682" font-size="20" text-anchor="middle" style="fill:var(--gain)">TO SPEAK UP</text></g>
+<g id="op4"><text class="d" x="120" y="800" font-size="48">Openness at the top makes speaking up safe.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The same trap waits at home.</text>
+<text class="b" x="120" y="176" font-size="32">We lock onto a goal early, then stop asking if it still fits.</text>
+<g id="sign5">
+<rect class="ink" x="214" y="340" width="12" height="300"/>
+<rect class="loss" x="120" y="260" width="200" height="80" rx="8"/>
+<text class="m" x="150" y="308" font-size="22" style="fill:var(--stage)">ONE WAY</text>
+<path d="M262 300h34m-12-12 12 12-12 12" fill="none" stroke="var(--stage)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="ch5">
+<g id="kid5"></g>
+<path class="s-ink" d="M460 520H770M750 504L770 520L750 536" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-ink" d="M800 430V560" stroke-width="6" stroke-linecap="round"/>
+<path class="loss" d="M800 430L860 450L800 470Z"/>
+<text class="m" x="400" y="610" font-size="20">GOAL PICKED EARLY</text>
+<text class="m" x="400" y="640" font-size="20">THEN NEVER QUESTIONED</text>
+</g>
+<g id="hole5">
+<rect id="hl5" class="loss" x="1040" y="420" width="240" height="40" fill-opacity=".25"/>
+<polygon id="pl5" class="ink" points="1320,420 1400,420 1480,420"/>
+<path class="s-ink" d="M900 420H1480" stroke-width="6" stroke-linecap="round"/>
+<g id="dg5"></g>
+</g>
+<g id="esc5">
+<text class="d" x="120" y="770" font-size="52">Escalation of commitment</text>
+<text class="m" x="120" y="820" font-size="22">THE MORE WE INVEST, THE HARDER WE DIG IN</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Book a life checkup.</text>
+<text class="b" x="120" y="176" font-size="32">Once or twice a year, while you are still healthy.</text>
+<g id="cal6">
+<rect class="s-ink" x="120" y="240" width="440" height="400" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="120" y="240" width="440" height="76" rx="14"/>
+<g id="grd6"></g>
+<text class="m" x="120" y="690" font-size="22">ONCE OR TWICE A YEAR</text>
+</g>
+<g id="st6">
+<rect class="s-ink" x="700" y="300" width="200" height="280" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M730 360h140M730 400h140M730 540h100" stroke-width="6" stroke-linecap="round"/>
+<path class="s-ink" d="M740 230Q740 300 800 300Q860 300 860 230M800 300V470" fill="none" stroke-width="6" stroke-linecap="round"/>
+<circle id="cp6" class="gain" cx="800" cy="490" r="26"/>
+<text class="m" x="800" y="690" font-size="22" text-anchor="middle">A CHECKUP FOR YOUR PLANS</text>
+</g>
+<g id="spl6">
+<rect class="ink" x="1254" y="260" width="12" height="400"/>
+<path class="loss" d="M1250 410H1100L1070 440L1100 470H1250Z"/>
+<text class="m" x="1120" y="448" font-size="22" style="fill:var(--stage)">REGRET</text>
+<text class="m" x="1270" y="700" font-size="22" text-anchor="middle">ADJUST COURSE EARLY</text>
+</g>
+<g id="spr6"><path class="gain" d="M1270 300H1440L1470 330L1440 360H1270Z"/><text class="m" x="1300" y="338" font-size="22" style="fill:var(--on-gain)">ADJUST</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Questions to ask.</text>
+<text class="b" x="120" y="176" font-size="32">Small, regular checks keep rethinking a habit.</text>
+<g id="qc7"><rect class="gain" x="120" y="230" width="420" height="260" rx="18"/><text class="d" x="330" y="420" font-size="160" text-anchor="middle" style="fill:var(--on-gain)">?</text></g>
+<g id="qt7"><text class="d5" x="120" y="560" font-size="30">When did my beliefs</text><text class="d5" x="120" y="600" font-size="30">about my work</text><text class="d5" x="120" y="640" font-size="30">last change?</text></g>
+<g id="cp7">
+<circle class="s-ink" cx="790" cy="360" r="130" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="790" y="264" font-size="20" text-anchor="middle">N</text>
+<g id="nd7"><polygon class="gain" points="790,280 806,360 774,360"/><polygon class="loss" points="806,360 790,440 774,360"/></g>
+<circle class="ink" cx="790" cy="360" r="10"/>
+</g>
+<g id="ct7"><text class="d5" x="580" y="560" font-size="30">Am I still learning?</text><text class="d5" x="580" y="600" font-size="30">Do my goals still fit</text><text class="d5" x="580" y="640" font-size="30">who I am becoming?</text></g>
+<g id="tb7">
+<g id="tp7"></g>
+<ellipse class="s-ink" cx="1260" cy="410" rx="190" ry="60" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1180 400h50M1290 420h50" stroke-width="10" stroke-linecap="round"/>
+</g>
+<g id="ty7"><rect class="gain" x="1180" y="482" width="160" height="40" rx="20"/><text class="m" x="1260" y="509" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">THANK YOU</text></g>
+<g id="tt7"><text class="d5" x="1060" y="580" font-size="30">What could I be</text><text class="d5" x="1060" y="620" font-size="30">doing better?</text><text class="m" x="1060" y="670" font-size="20" style="fill:var(--gain)">THANK WHOEVER ANSWERS HONESTLY</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa8"><text class="d5" x="136" y="300" font-size="56">Put a life checkup on your calendar today.</text></g>
+<g id="qb8"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Then ask one colleague:</text></g>
+<g id="qc8"><text class="d" x="136" y="580" font-size="96" letter-spacing="-2" style="fill:var(--gain)">“What should I rethink?”</text></g>
+<g id="qm8"><text class="m" x="143" y="700" font-size="26">RETHINKING IS A HABIT, NOT A CRISIS</text></g>
+<g id="cal8">
+<rect class="s-ink" x="1250" y="650" width="200" height="170" rx="12" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1250" y="650" width="200" height="40" rx="12"/>
+<path id="ck8" class="s-gain" d="M1300 750L1330 780L1390 720" pathLength="1" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="pen8"><path class="s-ink" d="M4 -10L36 -80" stroke-width="14" stroke-linecap="round"/><circle class="ink" cx="0" cy="0" r="5"/></g>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Build a Life of Rethinking&rdquo;, from <em>Think Again</em> by Adam Grant. Examples as reported in the book: Amy Edmondson&#x27;s hospital team research and the Gates Foundation leaders reading criticisms aloud. The chart and checkup drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 8.1], [8.1, 23.1], [23.1, 36.7], [36.7, 56.6], [56.6, 71.9], [71.9, 86.9], [86.9, 101.2], [101.2, 116.7], [116.7, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Rethinking on Purpose", "Habit, Not Crisis", "A Puzzling Finding", "Safety Explains It", "Leaders Go First", "Our Own Tunnels", "Book a Checkup", "Questions to Ask", "Your Challenge"];
+const TM={"broken_plan": 0.0, "two_paths": 8.4, "workplace": 13.44, "mirror": 18.8, "hospital": 23.36, "error_chart": 30.08, "nurse": 37.04, "fear_bubble": 45.12, "shield": 50.0, "leader": 56.88, "laptop": 62.72, "raised_hand": 66.88, "road_sign": 72.24, "childhood": 75.12, "deep_hole": 81.16, "calendar": 87.2, "stethoscope": 92.8, "signpost": 97.08, "question_card": 101.52, "compass": 105.52, "team_table": 110.64, "pen": 117.0};
+const fig=(g,x,y,r,c)=>{const G=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:c},G);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},G);return G};
+const dr=(el,k)=>{el.style.strokeDasharray='1';el.style.strokeDashoffset=(1-k).toFixed(3)};
+const tx=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+const B1=[300,440,580].map((x,i)=>{fig($('ppl1'),x,600,24,'ink');const b=mk('g',{},$('ppl1'));mk('rect',{x:x-34,y:508,width:68,height:54,rx:14,class:'gain'},b);tx(b,x,548,i==1?'?':'!',{class:'d','font-size':36,'text-anchor':'middle',style:'fill:var(--on-gain)'});return b});
+fig($('me1'),960,600,24,'ink');fig($('rf1'),1180,580,20,'s-muted').setAttribute('opacity',.5);
+for(let i=0;i<3;i++)for(let j=0;j<3;j++)mk('rect',{x:200+i*95,y:490+j*70,width:60,height:44,class:'s-line',fill:'none','stroke-width':4},$('win2'));
+fig($('nf3'),260,360,30,'gain');fig($('wf3'),980,360,30,'ink');
+const OK3=[],HD3=[];for(let i=0;i<5;i++){OK3.push(mk('circle',{cx:200+i*110,cy:560,r:20,fill:'var(--stage)',stroke:'var(--line)','stroke-width':5},$('ok3')));HD3.push(mk('circle',{cx:920+i*110,cy:560,r:20,class:'loss'},$('hd3')))}
+fig($('lf4'),480,370,34,'gain');
+const CM4=[200,160,180].map((w,i)=>{const g=mk('g',{},$('cm4'));mk('circle',{cx:715,cy:347+i*50,r:12,fill:'var(--muted)'},g);mk('rect',{x:740,y:340+i*50,width:w,height:14,rx:7,class:'loss'},g);return g});
+const AR4=[];for(let i=0;i<4;i++){const x=1120+i*100;fig($('ef4'),x,420,26,'ink');const a=mk('g',{},$('ef4'));mk('path',{d:'M'+(x+30)+' 490L'+(x+50)+' 410',stroke:'var(--gain)','stroke-width':10,'stroke-linecap':'round'},a);mk('circle',{cx:x+50,cy:404,r:10,class:'gain'},a);AR4.push(a)}
+fig($('kid5'),420,470,18,'gain');
+fig($('dg5'),0,0,22,'ink');mk('path',{d:'M30 30L70 -40M58 -56l28 18',stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round'},$('dg5'));
+const HL6=[];for(let r=0;r<5;r++)for(let c=0;c<7;c++){const e=mk('rect',{x:142+c*58,y:336+r*56,width:46,height:46,rx:8,fill:'none',stroke:'var(--line)','stroke-width':4},$('grd6'));if((c==2&&r==1)||(c==5&&r==3))HL6.push(e)}
+const TB7=[1140,1260,1380].map(x=>fig($('tp7'),x,280,22,'ink'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+dr($('crack'),p(t,TM.broken_plan+.3,TM.broken_plan+1.3));
+R('cyc',TM.broken_plan+4);R('rt0',TM.broken_plan+4.4);
+$('cycr').setAttribute('transform','rotate('+(t*30%360).toFixed(1)+' 1300 410)');
+
+R('paths1',TM.two_paths);dr($('br1'),p(u,TM.two_paths+1.5,TM.two_paths+3));R('brh1',TM.two_paths+2.8,.3);
+$('dot1').setAttribute('cx',(140+1120*p(u,TM.two_paths,TM.two_paths+4)).toFixed(1));
+R('wk1',TM.workplace);B1.forEach((b,i)=>rise(b,p(u,TM.workplace+1+i*.5,TM.workplace+1.4+i*.5)));
+R('mr1',TM.mirror);$('q1').setAttribute('y',(660+6*Math.sin(t*3)).toFixed(1));
+
+R('hosp2',TM.hospital);R('exp2',TM.hospital+2);R('ch2',TM.error_chart);
+const ha=140*p(u,TM.error_chart+.4,TM.error_chart+1.6),hb=360*p(u,TM.error_chart+.8,TM.error_chart+2.2);
+$('b2a').setAttribute('y',720-ha);$('b2a').setAttribute('height',ha);$('b2b').setAttribute('y',720-hb);$('b2b').setAttribute('height',hb);
+R('bk2',TM.error_chart+3.8);
+
+R('p3a',TM.nurse);R('nb3',TM.nurse+1);
+OK3.forEach((c,i)=>{const on=u>=TM.nurse+5+i*.3;c.setAttribute('fill',on?'var(--gain)':'var(--stage)');c.setAttribute('stroke',on?'var(--gain)':'var(--line)')});
+R('p3b',TM.fear_bubble);R('fb3',TM.fear_bubble+.6);
+$('rug3').setAttribute('width',(520*p(u,TM.fear_bubble+2,TM.fear_bubble+3.5)).toFixed(1));
+R('sh3',TM.shield);
+
+R('cam4',TM.leader);$('rec4').setAttribute('opacity',Math.sin(t*5)>0?1:.2);R('ld4',TM.leader+1);
+R('lp4',TM.laptop);CM4.forEach((g,i)=>rise(g,p(u,TM.laptop+.6+i*.4,TM.laptop+1+i*.4)));
+R('em4',TM.raised_hand);AR4.forEach((a,i)=>rise(a,p(u,TM.raised_hand+1+i*.6,TM.raised_hand+1.4+i*.6)));
+R('op4',TM.raised_hand+3.5);
+
+R('sign5',TM.road_sign);R('ch5',TM.childhood);R('hole5',TM.deep_hole);R('esc5',TM.deep_hole+1);
+const dd=40+260*p(u,TM.deep_hole+.5,TM.deep_hole+5.5),ph=dd*.4;
+$('hl5').setAttribute('height',dd.toFixed(1));
+$('dg5').setAttribute('transform','translate(1160 '+(420+dd-96+4*Math.sin(t*6)).toFixed(1)+')');
+$('pl5').setAttribute('points','1320,420 1400,'+(420-ph).toFixed(1)+' 1480,420');
+
+R('cal6',TM.calendar);HL6.forEach((e,i)=>{const on=u>=TM.calendar+1.2+i*.6;e.setAttribute('fill',on?'var(--gain)':'none');e.setAttribute('stroke',on?'var(--gain)':'var(--line)')});
+R('st6',TM.stethoscope);$('cp6').setAttribute('r',(26+3*Math.pow(Math.abs(Math.sin(t*3)),6)).toFixed(1));
+R('spl6',TM.signpost);R('spr6',TM.signpost+1);
+
+R('qc7',TM.question_card);R('qt7',TM.question_card+.6);R('cp7',TM.compass);R('ct7',TM.compass+1.5);
+const na=p(u,TM.compass,TM.compass+4);$('nd7').setAttribute('transform','rotate('+((1-na)*70*Math.sin(na*14)+3*Math.sin(t*2)).toFixed(1)+' 790 360)');
+R('tb7',TM.team_table);R('tt7',TM.team_table+1);R('ty7',TM.team_table+3.5);
+TB7[1].childNodes.forEach(n=>n.setAttribute('class',u>=TM.team_table+3.5?'gain':'ink'));
+
+R('qa8',TM.pen);R('cal8',TM.pen);
+const ck=p(u,TM.pen+.5,TM.pen+1.7),sl=ck*127.3;dr($('ck8'),ck);
+let px,py;if(sl<42.4){px=1300+30*sl/42.4;py=750+30*sl/42.4}else{const f=(sl-42.4)/84.9;px=1330+60*f;py=780-60*f}
+$('pen8').setAttribute('transform','translate('+px.toFixed(1)+' '+py.toFixed(1)+')');
+R('qb8',TM.pen+3.4);R('qc8',TM.pen+3.9);R('qm8',TM.pen+4.6);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.19;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

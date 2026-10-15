@@ -1,0 +1,368 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Think Again Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Think Again: Skilled persuaders find common ground, use a few strong arguments, and ask questions instead of overwhelming people with force. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THINK AGAIN · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Debate like a dance,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not a war.</text>
+<text class="b" x="120" y="600" font-size="32">Why the best persuaders agree first and argue less</text>
+<ellipse class="s-line" cx="1300" cy="484" rx="130" ry="60" fill="none" stroke-width="4" stroke-dasharray="10 10"/>
+<circle id="secret" class="gain" cx="1300" cy="484" r="12"/>
+<g id="tdance"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most of us argue like soldiers.</text>
+<text class="b" x="120" y="176" font-size="32">We fire every argument and refuse to give any ground.</text>
+<path class="s-line" d="M160 560H1440" stroke-width="5" stroke-linecap="round"/>
+<g id="fighters"></g>
+<g id="arrows"></g>
+<g id="bricks"></g>
+<g id="l1"><text class="m" x="300" y="610" font-size="22" text-anchor="middle">FIRE EVERY ARGUMENT</text></g>
+<g id="l2"><text class="m" x="1140" y="610" font-size="22" text-anchor="middle" style="fill:var(--loss)">DIG IN</text></g>
+<g id="cap1"><text class="d" x="120" y="780" font-size="46">Attacked people dig in and build walls.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Human vs machine.</text>
+<text class="b" x="120" y="176" font-size="32">In 2019, champion debater Harish Natarajan faced IBM’s Project Debater.</text>
+<g id="stg">
+<rect class="ink" x="200" y="640" width="1200" height="30" rx="8" fill-opacity=".25"/>
+<g id="harish2"></g>
+<rect class="s-ink" x="330" y="520" width="140" height="120" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="400" y="710" font-size="20" text-anchor="middle">HARISH NATARAJAN</text>
+</g>
+<g id="robot">
+<path class="s-ink" d="M1220 400v-28" stroke-width="5"/><circle class="ink" cx="1220" cy="366" r="8"/>
+<rect class="s-ink" x="1170" y="400" width="100" height="80" rx="14" fill="var(--stage)" stroke-width="6"/>
+<circle class="gain" cx="1198" cy="440" r="9"/><circle class="gain" cx="1242" cy="440" r="9"/>
+<rect class="ink" x="1205" y="480" width="30" height="40"/>
+<rect class="s-ink" x="1150" y="520" width="140" height="120" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="1220" y="710" font-size="20" text-anchor="middle">PROJECT DEBATER</text>
+</g>
+<g id="docs"></g>
+<g id="card">
+<rect class="s-ink" x="520" y="220" width="560" height="120" rx="16" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="800" y="272" font-size="22" text-anchor="middle">SHOULD GOVERNMENTS</text>
+<text class="m" x="800" y="308" font-size="22" text-anchor="middle">SUBSIDIZE PRESCHOOL?</text>
+</g>
+<g id="tags">
+<rect class="s-ink" x="310" y="740" width="180" height="50" rx="25" fill="none" stroke-width="4"/>
+<text class="m" x="400" y="773" font-size="24" text-anchor="middle">AGAINST</text>
+<rect class="s-ink" x="1130" y="740" width="180" height="50" rx="25" fill="none" stroke-width="4"/>
+<text class="m" x="1220" y="773" font-size="24" text-anchor="middle">FOR</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start with agreement.</text>
+<text class="b" x="120" y="176" font-size="32">He couldn’t match the evidence, so he named where they agreed.</text>
+<g id="h3"><g id="h3p"></g><g id="mtn"></g>
+<text class="m" x="200" y="630" font-size="20" text-anchor="middle">HARISH</text>
+<text class="m" x="530" y="630" font-size="18" text-anchor="middle">MOUNTAIN OF EVIDENCE</text></g>
+<g id="bub"><rect class="gain" x="120" y="220" width="480" height="100" rx="20"/><path class="gain" d="M170 318L196 420L250 318z"/>
+<text class="d5" x="150" y="282" font-size="30" style="fill:var(--on-gain)">Here’s where we agree.</text></g>
+<g id="fair"><text class="m" x="120" y="700" font-size="22" style="fill:var(--gain)">SEEN AS FAIR, NOT JUST FIGHTING</text></g>
+<g id="aud">
+<rect class="s-line" x="860" y="230" width="620" height="430" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1000" y="280" font-size="20" text-anchor="middle">AGAINST</text>
+<text class="m" x="1320" y="280" font-size="20" text-anchor="middle">FOR</text>
+<path class="s-muted" d="M1170 300V570" stroke-width="3" stroke-dasharray="6 8"/>
+<g id="dots"></g><g id="movers"></g>
+<text class="m" x="890" y="630" font-size="20">MORE LISTENERS MOVED HIS WAY</text>
+</g>
+<g id="cap3"><text class="d" x="120" y="800" font-size="44">Agree first, then argue.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What skilled negotiators do.</text>
+<text class="b" x="120" y="176" font-size="32">Researchers compared skilled negotiators with average ones.</text>
+<g id="tbl">
+<g id="grpS"></g>
+<rect class="gain" x="190" y="466" width="220" height="22" rx="11"/>
+<text class="m" x="300" y="530" font-size="22" text-anchor="middle" style="fill:var(--gain)">SKILLED</text>
+<path class="s-line" d="M450 360V500" stroke-width="4" stroke-dasharray="6 8" stroke-linecap="round"/>
+<g id="grpA" opacity=".55"></g>
+<rect class="ink" x="490" y="466" width="220" height="22" rx="11" fill-opacity=".55"/>
+<text class="m" x="600" y="530" font-size="22" text-anchor="middle">AVERAGE</text>
+</g>
+<g id="mag"><g id="magp"><circle class="s-ink" cx="0" cy="0" r="38" fill="var(--stage)" fill-opacity=".3" stroke-width="7"/><path class="s-ink" d="M28 28l26 26" stroke-width="12" stroke-linecap="round"/></g>
+<text class="m" x="450" y="640" font-size="20" text-anchor="middle">WHAT DO THE BEST DO DIFFERENTLY?</text></g>
+<path id="lens" class="gain" d="M1150 332.5A170 170 0 0 1 1150 607.5A170 170 0 0 1 1150 332.5z"/>
+<g id="vn"><circle class="s-ink" cx="1050" cy="470" r="170" fill="none" stroke-width="5"/><circle class="s-ink" cx="1250" cy="470" r="170" fill="none" stroke-width="5"/>
+<text class="m" x="980" y="478" font-size="24" text-anchor="middle">YOU</text><text class="m" x="1320" y="478" font-size="24" text-anchor="middle">THEM</text></g>
+<g id="cg"><text class="d" x="1150" y="700" font-size="36" text-anchor="middle" style="fill:var(--gain)">Common ground</text></g>
+<g id="cap4"><text class="d" x="120" y="800" font-size="44">Shared goals before demands.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fewer, stronger points.</text>
+<text class="b" x="120" y="176" font-size="32">Each weak reason dilutes your strongest one.</text>
+<g id="lbl5"><text class="m" x="160" y="290" font-size="20">A PILE OF MIXED REASONS</text><path class="s-ink" d="M160 700H740" stroke-width="5" stroke-linecap="round"/></g>
+<g id="bars5"></g>
+<g id="avgG"><path id="avg" class="s-ink" fill="none" stroke-width="4" stroke-dasharray="10 8"/><text id="avgT" class="m" x="740" y="328" font-size="20" text-anchor="end">AVERAGE STRENGTH</text></g>
+<g id="shk"><text class="m" x="160" y="745" font-size="20" style="fill:var(--loss)">LISTENERS LATCH ONTO THE SHAKIEST POINT</text></g>
+<g id="rp"><text class="m" x="920" y="290" font-size="20">A FEW SOLID REASONS</text><path class="s-ink" d="M920 700H1420" stroke-width="5" stroke-linecap="round"/>
+<g id="rbars"></g><path class="s-ink" d="M920 373H1420" stroke-width="4" stroke-dasharray="10 8"/>
+<text class="m" x="1420" y="361" font-size="20" text-anchor="end" style="fill:var(--gain)">STAYS STRONG</text></g>
+<g id="cap5"><text class="d" x="120" y="820" font-size="40">A few solid reasons hit harder than a pile.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask, don’t push.</text>
+<text class="b" x="120" y="176" font-size="32">Skilled negotiators asked many more questions.</text>
+<g id="ppl6"></g>
+<g id="qm"><text class="d" x="420" y="520" font-size="180" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="ear"><path class="s-gain" d="M568 446q16 24 0 48M586 432q26 38 0 76" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="think"><circle class="ink" cx="684" cy="416" r="8"/><circle class="ink" cx="704" cy="386" r="12"/>
+<ellipse class="s-ink" cx="750" cy="330" rx="60" ry="40" fill="var(--stage)" stroke-width="5"/>
+<circle class="gain" cx="728" cy="330" r="7"/><circle class="gain" cx="750" cy="330" r="7"/><circle class="gain" cx="772" cy="330" r="7"/></g>
+<g id="l6a"><text class="m" x="120" y="680" font-size="22">YOU CARE WHAT THEY THINK</text></g>
+<g id="l6b"><text class="m" x="120" y="716" font-size="22" style="fill:var(--gain)">THEY KEEP THINKING, NOT BRACING</text></g>
+<polyline id="spir" class="s-loss" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="l6c"><text class="m" x="1180" y="720" font-size="22" text-anchor="middle">ATTACK–DEFEND SPIRAL</text></g>
+<g id="nox"><path class="s-ink" d="M1060 350L1300 590M1300 350L1060 590" stroke-width="12" stroke-linecap="round"/>
+<text class="m" x="1180" y="760" font-size="24" text-anchor="middle" style="fill:var(--gain)">AVOIDED</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Debate like a dance.</text>
+<text class="b" x="120" y="176" font-size="32">Move together, adjusting as you go.</text>
+<g id="feet"></g>
+<g id="dancers"><g id="pair">
+<path class="s-line" d="M730 352Q800 296 870 352" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="8 8"/>
+<g id="dA"></g><g id="dB"></g>
+<path class="s-ink" d="M768 474Q800 492 832 474" fill="none" stroke-width="8" stroke-linecap="round"/>
+</g></g>
+<g id="l7"><text class="m" x="800" y="625" font-size="22" text-anchor="middle">NO ONE LEADS EVERY STEP</text></g>
+<g id="waves"></g>
+<g id="l7b"><text class="m" x="120" y="840" font-size="22" style="fill:var(--gain)">A SHARED RHYTHM</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa">
+<circle class="s-ink" cx="180" cy="296" r="34" fill="none" stroke-width="6"/>
+<circle class="s-gain" cx="222" cy="296" r="34" fill="none" stroke-width="6"/>
+<text class="d" x="300" y="320" font-size="68" letter-spacing="-1">Name one thing you agree on.</text></g>
+<g id="qb">
+<path class="s-muted" d="M156 452H246" stroke-width="5" stroke-linecap="round"/>
+<rect class="ink" x="160" y="430" width="18" height="22" rx="3" fill-opacity=".4"/>
+<rect class="gain" x="188" y="374" width="26" height="78" rx="4"/>
+<rect class="ink" x="224" y="436" width="18" height="16" rx="3" fill-opacity=".4"/>
+<text class="d" x="300" y="440" font-size="68" letter-spacing="-1">Give your strongest reason.</text></g>
+<g id="qc">
+<rect class="s-ink" x="150" y="496" width="100" height="70" rx="20" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M174 566L166 590L196 566" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="d" x="200" y="549" font-size="44" text-anchor="middle" style="fill:var(--gain)">?</text>
+<text class="d" x="300" y="560" font-size="68" letter-spacing="-1">Ask one genuine <tspan style="fill:var(--gain)">question</tspan>.</text></g>
+<g id="fin"><text class="m" x="143" y="700" font-size="26">YOUR NEXT DEBATE</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="140" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:20</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Debate Like a Dance, Not a War&rdquo;, from <em>Think Again</em> by Adam Grant. Examples as reported in the book: Harish Natarajan&#x27;s 2019 debate against IBM&#x27;s Project Debater, and research comparing skilled and average negotiators. The scale, coins, spiral and dancers are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=140, SC=[[0.0, 8.7], [8.7, 21.1], [21.1, 40.7], [40.7, 57.1], [57.1, 76.7], [76.7, 94.2], [94.2, 112.8], [112.8, 126.0], [126.0, 140.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "The War Mindset", "Human vs Machine", "Start With Agreement", "Experts at the Table", "Fewer, Stronger Points", "Ask, Don't Push", "The Dance", "Your Next Debate"];
+const TM={"hook": 0.0, "two_fighters": 8.96, "arrows": 12.16, "wall": 16.56, "stage": 21.36, "robot": 28.16, "topic_card": 33.12, "harish": 40.96, "handshake": 44.56, "audience": 53.44, "table": 57.44, "magnifier": 62.64, "venn": 67.52, "scale": 76.96, "weak_reason": 80.72, "gold_coin": 90.04, "question_mark": 94.48, "ear": 98.88, "spiral": 106.72, "dancers": 113.12, "footsteps": 116.64, "rhythm": 120.8, "your_turn": 126.32};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-1.6*r} ${y+3.6*r}v${-.6*r}a${1.6*r} ${1.6*r} 0 0 1 ${3.2*r} 0v${.6*r}z`,class:c},g)};
+const TA=mk('g',{},$('tdance')),TB=mk('g',{},$('tdance'));fig(TA,0,-50,26,'ink');fig(TB,0,-50,26,'gain');
+fig($('fighters'),300,400,40,'ink');fig($('fighters'),1300,400,40,'ink');
+const AR=[0,1,2,3,4].map(()=>{const g=mk('g',{},$('arrows'));mk('path',{d:'M0 0h70m-18-14 18 14-18 14',fill:'none',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+const BR=[];for(let r=0;r<6;r++)for(let c=0;c<2;c++)BR.push(mk('rect',{x:1080+c*60,y:524-r*36,width:60,height:36,class:'loss',stroke:'var(--stage)','stroke-width':4},$('bricks')));
+fig($('harish2'),400,440,36,'ink');
+const DOC=[[1320,390],[1380,425],[1325,465],[1385,500],[1322,540],[1382,575]].map(q=>{const g=mk('g',{},$('docs'));mk('rect',{x:q[0],y:q[1],width:40,height:50,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},g);mk('path',{d:`M${q[0]+8} ${q[1]+16}h24M${q[0]+8} ${q[1]+28}h24M${q[0]+8} ${q[1]+40}h14`,stroke:'var(--muted)','stroke-width':3},g);return g});
+fig($('h3p'),200,470,34,'ink');
+for(let i=0;i<10;i++){const w=200-(i%3)*20;mk('rect',{x:530-w/2+(i%2?8:-8),y:578-i*24,width:w,height:22,rx:3,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},$('mtn'))}
+for(let j=0;j<12;j++)[910,1230].forEach(x0=>mk('circle',{cx:x0+(j%4)*60,cy:330+Math.floor(j/4)*70,r:18,class:'ink'},$('dots')));
+const MV=[0,1,2,3].map(c=>mk('circle',{cx:1230+c*60,cy:540,r:18,class:'ink'},$('movers')));
+// skilled vs average groups
+[230,300,370].forEach(x=>fig($('grpS'),x,380,20,'ink'));
+[530,600,670].forEach(x=>fig($('grpA'),x,380,20,'ink'));
+const SB=mk('rect',{x:180,y:700,width:80,height:0,class:'gain'},$('bars5'));
+const WH=[120,90,140,70],WB=WH.map((h,i)=>mk('rect',{x:290+i*110,y:700,width:80,height:0,class:'loss'},$('bars5')));
+const RH=[360,320,300],RB=RH.map((h,i)=>mk('rect',{x:960+i*140,y:700,width:100,height:0,class:'gain'},$('rbars')));
+const bar=(r,h,k)=>{r.setAttribute('y',(700-h*k).toFixed(1));r.setAttribute('height',(h*k).toFixed(1))};
+fig($('ppl6'),220,470,36,'ink');fig($('ppl6'),640,470,36,'ink');
+// dancers side by side, facing each other
+fig($('dA'),740,400,30,'ink');fig($('dB'),860,400,30,'gain');
+mk('circle',{cx:756,cy:394,r:5,fill:'var(--stage)'},$('dA'));mk('circle',{cx:844,cy:394,r:5,fill:'var(--stage)'},$('dB'));
+const FP=[];for(let i=0;i<16;i++){const th=i*Math.PI/8,x=800+540*Math.cos(th),y=470+200*Math.sin(th),an=Math.atan2(200*Math.cos(th),-540*Math.sin(th))*180/Math.PI;
+FP.push(mk('ellipse',{cx:0,cy:0,rx:10,ry:17,class:i%2?'gain':'ink',transform:`translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${(an-90).toFixed(1)})`},$('feet')))}
+const W1=mk('path',{fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},$('waves')),W2=mk('path',{fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},$('waves'));
+const wv=(ph,tt)=>{let s='';for(let x=160;x<=1440;x+=20)s+=(x===160?'M':'L')+x+' '+(760+22*Math.sin(x/70-tt*3+ph)).toFixed(1);return s};
+const orb=(g,cx,cy,rx,ry,a)=>g.setAttribute('transform',`translate(${(cx+rx*Math.cos(a)).toFixed(1)} ${(cy+ry*Math.sin(a)).toFixed(1)})`);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+orb(TA,1300,440,130,60,t*.9);orb(TB,1300,440,130,60,t*.9+Math.PI);
+rise($('tdance'),p(u,TM.hook,TM.hook+.6));rise($('secret'),p(u,TM.hook+6.2,TM.hook+6.7));$('secret').setAttribute('r',(12+3*Math.sin(t*3)).toFixed(1));
+
+rise($('fighters'),p(u,TM.two_fighters,TM.two_fighters+.5));rise($('arrows'),p(u,TM.arrows,TM.arrows+.5));rise($('l1'),p(u,TM.arrows,TM.arrows+.5));
+const end=u>=TM.wall?1010:1170;
+AR.forEach((a,i)=>{const s=(t*380+i*157)%(end-380);a.setAttribute('transform',`translate(${(380+s).toFixed(1)} ${370+i*32})`);a.setAttribute('opacity',(1-cl((s-(end-460))/80)).toFixed(2))});
+BR.forEach((b,i)=>{const a=TM.wall+Math.floor(i/2)*.15;b.setAttribute('opacity',p(u,a,a+.3))});
+rise($('l2'),p(u,TM.wall+.6,TM.wall+1.1));rise($('cap1'),p(u,TM.wall+1,TM.wall+1.6));
+
+rise($('stg'),p(u,TM.stage,TM.stage+.5));rise($('robot'),p(u,TM.robot,TM.robot+.5));
+DOC.forEach((d,i)=>{const a=TM.robot+.4+i*.2;rise(d,p(u,a,a+.3))});
+rise($('card'),p(u,TM.topic_card,TM.topic_card+.5));rise($('tags'),p(u,TM.topic_card+3.3,TM.topic_card+3.8));
+
+rise($('h3'),p(u,TM.harish,TM.harish+.5));rise($('bub'),p(u,TM.handshake,TM.handshake+.5));rise($('fair'),p(u,TM.handshake+5.4,TM.handshake+5.9));
+rise($('aud'),p(u,TM.audience,TM.audience+.5));
+const mv=p(u,TM.audience+.6,TM.audience+2.4);
+MV.forEach((c,i)=>{const k=cl((mv-i*.08)/.76);c.setAttribute('cx',(1230+i*60-320*k).toFixed(1));c.setAttribute('class',k>.5?'gain':'ink')});
+rise($('cap3'),p(u,TM.audience+1,TM.audience+1.6));
+
+rise($('tbl'),p(u,TM.table,TM.table+.5));rise($('mag'),p(u,TM.magnifier,TM.magnifier+.5));
+$('magp').setAttribute('transform',`translate(${(300+60*Math.sin(t*.9)).toFixed(1)} 272)`);
+rise($('vn'),p(u,TM.venn,TM.venn+.5));$('lens').setAttribute('opacity',p(u,TM.venn+.6,TM.venn+1.6));
+rise($('cg'),p(u,TM.venn+1,TM.venn+1.5));rise($('cap4'),p(u,TM.venn+4.2,TM.venn+4.8));
+
+rise($('lbl5'),p(u,TM.scale,TM.scale+.5));bar(SB,360,p(u,TM.scale,TM.scale+.8));
+let sh=360,n=1;WB.forEach((r,i)=>{const a=TM.weak_reason+i*.5,k=p(u,a,a+.5);bar(r,WH[i],k);sh+=WH[i]*k;n+=k});
+const ay=(700-sh/n).toFixed(1);$('avg').setAttribute('d',`M160 ${ay}H740`);$('avgT').setAttribute('y',ay-12);
+$('avgG').setAttribute('opacity',p(u,TM.scale+.6,TM.scale+1.1));
+const dis=p(u,TM.weak_reason+4.6,TM.weak_reason+5.2);SB.setAttribute('opacity',(1-.6*dis).toFixed(2));
+WB[3].setAttribute('stroke',dis>0?'var(--ink)':'none');WB[3].setAttribute('stroke-width',(4+3*Math.abs(Math.sin(t*4))).toFixed(1));rise($('shk'),dis);
+rise($('rp'),p(u,TM.gold_coin,TM.gold_coin+.5));RB.forEach((r,i)=>{const a=TM.gold_coin+.3+i*.3;bar(r,RH[i],p(u,a,a+.8))});
+rise($('cap5'),p(u,TM.gold_coin+1,TM.gold_coin+1.6));
+
+rise($('ppl6'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qm'),p(u,TM.question_mark+.3,TM.question_mark+.8));
+rise($('ear'),p(u,TM.ear,TM.ear+.5));rise($('l6a'),p(u,TM.ear+.3,TM.ear+.8));
+rise($('think'),p(u,TM.ear+3.7,TM.ear+4.2));rise($('l6b'),p(u,TM.ear+3.9,TM.ear+4.4));
+const sp=p(u,TM.spiral,TM.spiral+3),N=Math.floor(167*sp);let pts='1180,470';
+for(let k=1;k<=N;k++){const th=k*.15,r=4+th*7.5;pts+=' '+(1180+r*Math.cos(th)).toFixed(1)+','+(470+r*Math.sin(th)).toFixed(1)}
+$('spir').setAttribute('points',pts);$('spir').setAttribute('opacity',u>=TM.spiral?1:0);
+rise($('l6c'),p(u,TM.spiral+.5,TM.spiral+1));rise($('nox'),p(u,TM.spiral+3.4,TM.spiral+3.9));
+
+const sw=Math.sin(t*1.6);
+$('pair').setAttribute('transform',`translate(${(40*sw).toFixed(1)} 0) rotate(${(6*sw).toFixed(2)} 800 470)`);
+$('dA').setAttribute('transform',`translate(0 ${(-8*Math.max(0,Math.sin(t*3.2))).toFixed(1)})`);
+$('dB').setAttribute('transform',`translate(0 ${(-8*Math.max(0,-Math.sin(t*3.2))).toFixed(1)})`);
+rise($('dancers'),p(u,TM.dancers,TM.dancers+.5));
+FP.forEach((f,i)=>{const a=TM.footsteps+i*.25;f.setAttribute('opacity',p(u,a,a+.3))});rise($('l7'),p(u,TM.footsteps+.5,TM.footsteps+1));
+const ph=Math.PI*(1-p(u,TM.rhythm+.5,TM.rhythm+4));W1.setAttribute('d',wv(0,t));W2.setAttribute('d',wv(ph,t));
+rise($('waves'),p(u,TM.rhythm,TM.rhythm+.5));rise($('l7b'),p(u,TM.rhythm+3,TM.rhythm+3.5));
+
+rise($('qa'),p(u,TM.your_turn,TM.your_turn+.5));rise($('fin'),p(u,TM.your_turn+.5,TM.your_turn+1));
+rise($('qb'),p(u,TM.your_turn+5.4,TM.your_turn+5.9));rise($('qc'),p(u,TM.your_turn+6.4,TM.your_turn+6.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:136.12;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

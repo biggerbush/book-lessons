@@ -1,0 +1,380 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purple Cow Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Purple Cow: Once a remarkable idea succeeds, profit from it while building the next one, because today&#x27;s purple cow becomes tomorrow&#x27;s brown cow. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">PURPLE COW · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Milk it, then find</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the next cow.</text>
+<text class="b" x="120" y="600" font-size="32">Every purple cow fades, so profit now and build the next.</text>
+<g id="l7clock"><circle class="s-ink" cx="1290" cy="230" r="54" fill="var(--stage)" stroke-width="7"/><path id="l7hand" class="s-loss" d="M1290 230V190" stroke-width="7" stroke-linecap="round"/></g>
+<g id="l7tcow"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Success changes colour.</text>
+<text class="b" x="120" y="176" font-size="32">Today’s purple cow becomes tomorrow’s brown cow.</text>
+<g id="l7copy"></g>
+<g id="l7mcow"></g>
+<g id="l7fans"></g>
+<g id="l7s1b"><text class="d5" x="120" y="820" font-size="36">Nothing changed about your product. The world around it did.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Remarkable then, normal now.</text>
+<text class="b" x="120" y="176" font-size="32">Godin points to Starbucks, a once remarkable idea.</text>
+<g id="l7cup">
+<g id="l7steam"></g>
+<path id="l7cupf" class="s-ink" d="M200 300h240l-28 220H228z" fill="var(--gain)" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-ink" d="M434 340h26a34 34 0 0 1 0 90h-34M170 540h300" fill="none" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g id="l7sign">
+<rect class="s-ink" x="540" y="270" width="600" height="150" rx="16" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="570" y="320" font-size="22">PLAIN COFFEE BECAME</text>
+<text class="d" x="570" y="388" font-size="42">A cozy, pricey ritual</text>
+</g>
+<g id="l7talk">
+<path class="s-ink" d="M1200 290h80v56h-50l-14 16v-16h-16zM1295 290h80v56h-50l-14 16v-16h-16zM1390 290h80v56h-50l-14 16v-16h-16z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d" x="1240" y="331" font-size="34" text-anchor="middle" style="fill:var(--gain)">!</text>
+<text class="d" x="1335" y="331" font-size="34" text-anchor="middle" style="fill:var(--gain)">!</text>
+<text class="d" x="1430" y="331" font-size="34" text-anchor="middle" style="fill:var(--gain)">!</text>
+</g>
+<g id="l7shops"></g>
+<g id="l7s2b"><text class="d5" x="120" y="832" font-size="38">Now it’s simply where many people grab a coffee.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">When you have a hit, milk it.</text>
+<text class="b" x="120" y="176" font-size="32">Extract the profit, scale it up, and enjoy the run.</text>
+<g id="l7kcow"></g>
+<g id="l7pail">
+<g id="l7drops"></g>
+<path class="s-ink" d="M640 470q65-70 130 0" fill="none" stroke-width="5"/>
+<path class="s-ink" d="M640 470h130l-16 100h-98z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+</g>
+<g id="l7jar">
+<path class="s-muted" d="M800 520h100m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="l7coins"></g>
+<path class="s-ink" d="M950 330h180v24q20 10 20 36v170q0 20-20 20H950q-20 0-20-20V390q0-26 20-36z" fill="none" stroke-width="7"/>
+<text class="m" x="1040" y="640" font-size="22" text-anchor="middle">PROFIT</text>
+</g>
+<g id="l7scale"><g id="l7bars"></g><path class="s-ink" d="M1200 580h260" stroke-width="5"/><text class="m" x="1330" y="640" font-size="22" text-anchor="middle">SCALE IT UP</text></g>
+<g id="l7wave"><path id="l7wv" class="s-gain" fill="none" stroke-width="6" stroke-linecap="round"/><text class="m" x="120" y="770" font-size="20">RIDE THE WAVE WHILE PEOPLE ARE STILL TALKING</text></g>
+<g id="l7s3b"><text class="d5" x="120" y="840" font-size="36">There’s nothing wrong with cashing in on something remarkable.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Success makes you cautious.</text>
+<text class="b" x="120" y="176" font-size="32">Now there is something to protect.</text>
+<g id="l7meet">
+<path class="s-loss" d="M340 300l40 70h-80z" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<text class="d" x="340" y="362" font-size="34" text-anchor="middle" style="fill:var(--loss)">!</text>
+<g id="l7ppl"></g>
+<rect class="ink" x="150" y="556" width="380" height="22" rx="6"/>
+<text class="m" x="340" y="630" font-size="22" text-anchor="middle">THE TEAM</text>
+</g>
+<g id="l7safe">
+<rect class="ink" x="626" y="320" width="20" height="44"/><rect class="ink" x="626" y="540" width="20" height="44"/>
+<rect class="s-ink" x="640" y="250" width="440" height="400" rx="18" fill="var(--stage)" stroke-width="8"/>
+<rect class="s-line" x="670" y="280" width="380" height="340" rx="10" fill="none" stroke-width="4"/>
+<circle class="s-ink" cx="1010" cy="320" r="22" fill="none" stroke-width="6"/>
+<g id="l7scow"></g>
+<text class="m" x="860" y="694" font-size="22" text-anchor="middle">SOMETHING TO PROTECT</text>
+</g>
+<g id="l7book">
+<rect class="s-ink" x="1160" y="260" width="280" height="300" rx="10" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="1160" y="260" width="30" height="300"/>
+<text class="d" x="1315" y="340" font-size="44" text-anchor="middle">RULES</text>
+<path class="s-line" d="M1225 400h180M1225 450h180M1225 500h120" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="l7bulb">
+<circle class="s-muted" cx="1300" cy="640" r="34" fill="none" stroke-width="6"/>
+<path class="s-muted" d="M1286 680h28" stroke-width="8" stroke-linecap="round"/>
+<path class="s-loss" d="M1256 596l88 88M1344 596l-88 88" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="1300" y="740" font-size="20" text-anchor="middle">NEW IDEA</text>
+</g>
+<g id="l7s4b"><text class="d5" x="120" y="820" font-size="40">Yesterday’s rebels become today’s boring brown cows.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hold two jobs at once.</text>
+<text class="b" x="120" y="176" font-size="32">Milk today’s hit. Fund tomorrow’s risky idea.</text>
+<g id="l7p1">
+<rect class="s-line" x="120" y="230" width="640" height="330" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">JOB 1 · MILK THE HIT</text>
+<g id="l7jcow"></g><g id="l7jcoins"></g>
+</g>
+<g id="l7p2">
+<rect class="s-line" x="840" y="230" width="640" height="330" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="280" font-size="22">JOB 2 · FUND THE NEXT RISKY IDEA</text>
+<g id="l7ncow"></g>
+<path class="s-ink" d="M1330 500l62-62" stroke-width="14" stroke-linecap="round"/>
+<circle class="s-ink" cx="1408" cy="422" r="22" fill="none" stroke-width="10"/>
+</g>
+<circle id="l7fc" class="gain" r="18" cx="640" cy="420" opacity="0"/>
+<g id="l7w1"><text class="d5" x="150" y="625" font-size="30" style="fill:var(--loss)">Without it: you run out of money.</text></g>
+<g id="l7w2"><text class="d5" x="870" y="625" font-size="30" style="fill:var(--loss)">Without it: you run out of future.</text></g>
+<g id="l7cyc"><g id="l7pills"></g><path class="s-gain" d="M1315 768v40H265v-34m-14 14 14-14 14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Keep scanning the field.</text>
+<g id="l7s6sub"><text class="b" x="120" y="176" font-size="32">What do your customers now take for granted?</text></g>
+<g id="l7fcows"></g>
+<g id="l7fence"><path class="s-ink" d="M120 730H1480" stroke-width="6"/></g>
+<g id="l7qm"><text class="d" x="905" y="515" font-size="110" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="l7lens"><g id="l7lensm"><circle class="s-ink" r="80" fill="var(--stage)" fill-opacity=".25" stroke-width="12"/><path class="s-ink" d="M57-57l60-60" stroke-width="20" stroke-linecap="round"/></g></g>
+<g id="l7s6b"><text class="d5" x="120" y="830" font-size="36">Whatever feels normal today is the brown cow to replace.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make room for experiments.</text>
+<text class="b" x="120" y="176" font-size="32">Regular time, even a small slice, for bets that might fail.</text>
+<g id="l7cal">
+<rect class="ink" x="120" y="240" width="620" height="66" rx="12"/>
+<text class="m" x="150" y="283" font-size="24" style="fill:var(--stage)">EVERY WEEK</text>
+<g id="l7cells"></g>
+</g>
+<g id="l7stamp"><rect class="s-gain" x="140" y="680" width="580" height="80" rx="10" fill="none" stroke-width="5"/><text class="m" x="430" y="730" font-size="26" text-anchor="middle" style="fill:var(--gain)">ESSENTIAL, NOT A LUXURY</text></g>
+<g id="l7sprout">
+<path id="l7stem" class="s-gain" d="M1170 718V700" fill="none" stroke-width="8" stroke-linecap="round"/>
+<path id="l7leaves" class="gain" d="M1170 700q-50-10-60-50q50 0 60 50zM1170 700q50-10 60-50q-50 0-60 50z"/>
+<path class="s-ink" d="M900 700H1440" stroke-width="8" stroke-linecap="round"/>
+<ellipse class="gain" cx="1170" cy="730" rx="20" ry="12"/>
+<text class="m" x="1170" y="780" font-size="20" text-anchor="middle">A TINY BET</text>
+</g>
+<g id="l7ncow2"></g>
+<g id="l7s7b"><text class="d5" x="120" y="840" font-size="36">A tiny bet today could become your next purple cow.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="l7qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What part of your best idea</text></g>
+<g id="l7qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">already feels <tspan style="fill:var(--gain)">ordinary</tspan></text></g>
+<g id="l7qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">to your customers?</text></g>
+<g id="l7s8m"><text class="m" x="143" y="700" font-size="26">START BUILDING ITS REPLACEMENT THIS WEEK</text></g>
+<g id="l7mir">
+<ellipse class="s-ink" cx="1340" cy="620" rx="92" ry="110" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M1340 730v20M1295 750h90" stroke-width="8" stroke-linecap="round"/>
+<g id="l7mcow3"></g>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Milk It, Then Find the Next Cow&rdquo;, from <em>Purple Cow</em> by Seth Godin. The Starbucks example is as reported in the book. The cows, cafes, teams and cycle arrow are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 5.8], [5.8, 25.3], [25.3, 43.5], [43.5, 58.0], [58.0, 74.6], [74.6, 95.3], [95.3, 105.7], [105.7, 119.5], [119.5, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Success Changes Color", "The Coffee Story", "Milk It", "The Trap", "Two Jobs at Once", "Keep Hunting", "Your Next Cow", "Your Challenge"];
+const TM={"title_cow": 0.0, "purple_cow": 6.08, "crowd": 9.28, "copycats": 12.0, "coffee_cup": 25.56, "cafe_sign": 29.56, "street_corner": 34.44, "milk_pail": 43.84, "cash_jar": 48.48, "meeting": 58.32, "safe_box": 60.88, "rule_book": 65.44, "two_teams": 74.88, "workshop": 82.24, "cycle_arrow": 91.88, "field": 95.6, "magnifier": 98.56, "question_mark": 101.36, "calendar": 106.0, "seed": 115.76, "mirror": 119.76};
+// safety: make sure every scene group the template expects exists
+(function(){const s0=$('s0'),sv=s0&&s0.parentNode;if(sv&&SC&&SC.length){for(let i=1;i<SC.length;i++){if(!$('s'+i))mk('g',{id:'s'+i,opacity:0},sv)}}})();
+const RZ=(el,k)=>{if(el)rise(el,k)};
+const SA=(el,a,v)=>{if(el)el.setAttribute(a,v)};
+const PAR=id=>$(id)||$('s0');
+const L7person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const L7cow=(par,x,y,s,c,ex)=>{const o=mk('g',ex||{},par),g=mk('g',{transform:'translate('+x+' '+y+') scale('+s+')'},o),S={stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},A=a=>Object.assign({},S,a);
+  [-55,-25,25,55].forEach(l=>mk('path',A({d:'M'+l+' 30V88','stroke-width':10}),g));
+  mk('path',A({d:'M-82-20q-28 10-22 46M82-70l-10-18M118-70l10-18',fill:'none'}),g);
+  const b=[mk('rect',A({x:-85,y:-45,width:170,height:90,rx:32,fill:c}),g),mk('rect',A({x:68,y:-72,width:64,height:58,rx:20,fill:c}),g)];
+  [[-30,-8,22,16],[30,14,16,12]].forEach(e=>mk('ellipse',{cx:e[0],cy:e[1],rx:e[2],ry:e[3],fill:'var(--ink)','fill-opacity':.2},g));
+  mk('circle',{cx:110,cy:-50,r:5,fill:'var(--ink)'},g);return {o,b}};
+const L7col=(c,v)=>c.b.forEach(e=>e.setAttribute('fill',v));
+L7cow(PAR('l7tcow'),1290,430,1.1,'var(--gain)');
+const MC=L7cow(PAR('l7mcow'),800,430,1.2,'var(--gain)');
+for(let i=0;i<7;i++)L7person(PAR('l7fans'),500+i*100,650,18,'ink');
+const CP=[[260,330],[300,560],[1350,330],[1320,560],[500,300],[1110,300]].map(q=>L7cow(PAR('l7copy'),q[0],q[1],.5,'var(--gain)'));
+const ST=[260,320,380].map(x=>mk('path',{d:'M'+x+' 280q-14-15 0-30t0-30',fill:'none',class:'s-muted','stroke-width':5,'stroke-linecap':'round'},PAR('l7steam')));
+const SH=[];for(let i=0;i<8;i++){const x=120+i*170,g=mk('g',{},PAR('l7shops'));
+  mk('rect',{x:x,y:620,width:150,height:130,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('rect',{x:x-6,y:600,width:162,height:30,rx:6,fill:'var(--muted)'},g);
+  mk('rect',{x:x+55,y:690,width:40,height:60,fill:'var(--line)'},g);
+  [x+12,x+106].forEach(w=>mk('rect',{x:w,y:650,width:32,height:28,fill:'var(--line)'},g));SH.push(g)}
+L7cow(PAR('l7kcow'),380,440,1.3,'var(--gain)');
+const DR=[0,1,2].map(()=>mk('circle',{cx:705,cy:380,r:9,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},PAR('l7drops')));
+const CO=[];for(let i=0;i<8;i++)CO.push(mk('rect',{x:958,y:556-i*26,width:164,height:20,rx:8,class:'gain'},PAR('l7coins')));
+const BH=[80,150,230],BR=BH.map((h,i)=>mk('rect',{x:1220+i*80,y:580,width:60,height:0,rx:6,class:'gain'},PAR('l7bars')));
+for(let i=0;i<4;i++)L7person(PAR('l7ppl'),220+i*80,470,22,'ink');
+const SC4=L7cow(PAR('l7scow'),840,470,.85,'var(--gain)');
+L7cow(PAR('l7jcow'),380,440,.8,'var(--gain)');
+const JK=[];for(let i=0;i<5;i++)JK.push(mk('ellipse',{cx:640,cy:520-i*22,rx:50,ry:12,class:'gain',stroke:'var(--ink)','stroke-width':3},PAR('l7jcoins')));
+L7cow(PAR('l7ncow'),1100,440,.8,'var(--stage)',{'stroke-dasharray':'10 8'});
+const PL=['MILK','INVEST','INVENT','REPEAT'].map((s,i)=>{const x=120+i*350,g=PAR('l7pills');
+  const r=mk('rect',{x:x,y:700,width:290,height:64,rx:32,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);
+  const tx=mk('text',{x:x+145,y:741,'font-size':24,'text-anchor':'middle',class:'m'},g);tx.textContent=s;
+  if(i<3)mk('path',{d:'M'+(x+298)+' 732h42m-14-14 14 14-14 14',fill:'none',class:'s-muted','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return [r,tx]});
+const FC=[];for(let i=0;i<10;i++){const r=i<5?0:1,x=r?330+(i-5)*260:220+i*270;FC.push(L7cow(PAR('l7fcows'),x,r?610:420,.6,'var(--muted)'))}
+for(let x=140;x<=1460;x+=110)mk('path',{d:'M'+x+' 712v48',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},PAR('l7fence'));
+const CE=[];for(let r=0;r<4;r++)for(let c=0;c<7;c++){const x=120+c*88.5,y=320+r*82,e=mk('rect',{x:x,y:y,width:82,height:74,rx:8,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},PAR('l7cells'));
+  if(c===4){const tx=mk('text',{x:x+41,y:y+45,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},PAR('l7cells'));tx.textContent='TRY';CE.push([e,tx])}}
+L7cow(PAR('l7ncow2'),1170,340,.8,'var(--gain)');
+L7cow(PAR('l7mcow3'),1330,624,.5,'var(--muted)');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>RZ($(id),p(u,a,a+d));
+  RZ($('l7tcow'),p(t,.2,.9)); R('l7clock',TM.title_cow); SA($('l7hand'),'transform','rotate('+(t*120%360).toFixed(1)+' 1290 230)');
+
+  R('l7mcow',TM.purple_cow); R('l7fans',TM.crowd);
+  CP.forEach((c,i)=>{const a=TM.copycats+i*.35; RZ(c.o,p(u,a,a+.4))});
+  const br=u>=TM.copycats+5; [MC].concat(CP).forEach(c=>L7col(c,br?'var(--muted)':'var(--gain)'));
+  R('l7s1b',TM.copycats+8.3);
+
+  R('l7cup',TM.coffee_cup);
+  ST.forEach((s,i)=>{const k=(t*.6+i*.33)%1; s.setAttribute('transform','translate(0 '+(-30*k).toFixed(1)+')'); s.setAttribute('opacity',Math.sin(Math.PI*k).toFixed(2))});
+  R('l7sign',TM.cafe_sign); R('l7talk',TM.cafe_sign+1.5);
+  SH.forEach((g,i)=>{const a=TM.street_corner+i*.25; RZ(g,p(u,a,a+.4))});
+  SA($('l7cupf'),'fill',u>=TM.street_corner+2.5?'var(--muted)':'var(--gain)');
+  R('l7s2b',TM.street_corner+4.6);
+
+  R('l7kcow',TM.milk_pail); R('l7pail',TM.milk_pail+.6);
+  DR.forEach((d,i)=>{const k=((t*.9+i*.33)%1); d.setAttribute('cy',(380+90*k).toFixed(1)); d.setAttribute('opacity',(1-k).toFixed(2))});
+  R('l7jar',TM.cash_jar); const nc=Math.round(8*p(u,TM.cash_jar+.4,TM.cash_jar+3.5)); CO.forEach((c,i)=>c.setAttribute('opacity',i<nc?1:0));
+  R('l7scale',TM.cash_jar+1.5); const bk=p(u,TM.cash_jar+1.5,TM.cash_jar+3.5);
+  BR.forEach((b,i)=>{const h=BH[i]*bk; b.setAttribute('y',(580-h).toFixed(1)); b.setAttribute('height',h.toFixed(1))});
+  let wd='M120 700'; for(let x=120;x<=1480;x+=40)wd+='L'+x+' '+(700+12*Math.sin(x/70-t*2.5)).toFixed(1); SA($('l7wv'),'d',wd);
+  R('l7wave',TM.cash_jar+4.2); R('l7s3b',TM.cash_jar+7.6);
+
+  R('l7meet',TM.meeting); R('l7safe',TM.safe_box); R('l7book',TM.rule_book); R('l7bulb',TM.rule_book+1.5);
+  L7col(SC4,u>=TM.rule_book+5?'var(--muted)':'var(--gain)'); R('l7s4b',TM.rule_book+5);
+
+  R('l7p1',TM.two_teams); const nj=Math.round(5*p(u,TM.two_teams+4.6,TM.two_teams+6)); JK.forEach((c,i)=>c.setAttribute('opacity',i<nj?1:0));
+  R('l7p2',TM.workshop); const fk=(t*.5)%1, fcEl=$('l7fc');
+  SA(fcEl,'cx',(640+350*fk).toFixed(1)); SA(fcEl,'cy',(420-90*Math.sin(Math.PI*fk)).toFixed(1));
+  SA(fcEl,'opacity',(p(u,TM.workshop+.5,TM.workshop+1)*Math.min(1,Math.sin(Math.PI*fk)*3)).toFixed(2));
+  R('l7w1',TM.workshop+4.6); R('l7w2',TM.workshop+8); R('l7cyc',TM.cycle_arrow);
+  const ix=Math.floor(t*1.5)%4, on=u>=TM.cycle_arrow+.5;
+  PL.forEach((q,i)=>{const h=on&&i===ix; q[0].setAttribute('fill',h?'var(--gain)':'var(--stage)'); q[1].style.fill=h?'var(--on-gain)':''});
+
+  FC.forEach((c,i)=>{const a=TM.field+i*.12; RZ(c.o,p(u,a,a+.4))}); R('l7fence',TM.field);
+  R('l7lens',TM.magnifier); R('l7s6sub',TM.magnifier);
+  const lk=p(u,TM.question_mark,TM.question_mark+1), lx=300+900*(.5+.5*Math.sin(t*.7)), ly=480+70*Math.sin(t*1.3);
+  SA($('l7lensm'),'transform','translate('+(lx+(860-lx)*lk).toFixed(1)+' '+(ly+(615-ly)*lk).toFixed(1)+')');
+  R('l7qm',TM.question_mark+.8); R('l7s6b',TM.question_mark+1.8);
+
+  R('l7cal',TM.calendar);
+  CE.forEach((c,i)=>{const o=u>=TM.calendar+1+i*.5; c[0].setAttribute('fill',o?'var(--gain)':'var(--stage)'); c[1].setAttribute('opacity',o?1:0)});
+  R('l7stamp',TM.calendar+5.4);
+  R('l7sprout',TM.seed); const gr=p(u,TM.seed+.3,TM.seed+1.8);
+  SA($('l7stem'),'d','M1170 718V'+(700-220*gr).toFixed(1));
+  SA($('l7leaves'),'transform','translate(0 '+(-220*gr).toFixed(1)+')'); SA($('l7leaves'),'opacity',gr.toFixed(2));
+  R('l7ncow2',TM.seed+1.8); R('l7s7b',TM.seed+.5);
+
+  R('l7qa',TM.mirror); R('l7qb',TM.mirror+.4); R('l7qc',TM.mirror+.8); R('l7mir',TM.mirror+1.2); R('l7s8m',TM.mirror+5);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.35;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

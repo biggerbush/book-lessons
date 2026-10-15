@@ -1,0 +1,326 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same as Ever Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Same as Ever: People are persuaded by compelling stories more than by facts, so the best idea doesn&#x27;t always win. 8 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAME AS EVER · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The best story</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">wins.</text>
+<text class="b" x="120" y="600" font-size="32">Why a gripping story so often beats the plain facts</text>
+<path class="s-ink" d="M1400 140v58" stroke-width="5" stroke-linecap="round"/>
+<polygon id="cone" points="1380,236 1420,236 1450,660 1150,660" fill="var(--gain)" fill-opacity=".22"/>
+<path class="ink" d="M1376 236h48l-10-38h-28z"/>
+<ellipse id="pool" class="gain" cx="1300" cy="660" rx="150" ry="26" fill-opacity=".5"/>
+<path class="s-line" d="M1120 690h360" stroke-width="5" stroke-linecap="round"/>
+<g id="star0"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two pitches. One room.</text>
+<text class="b" x="120" y="176" font-size="32">Correct numbers versus a story people can feel.</text>
+<g id="paIn">
+<g id="cardA"><rect class="s-line" x="120" y="220" width="640" height="460" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="266" font-size="22">PITCH A · THE SPREADSHEET</text><g id="pA"></g></g>
+<g id="grid"></g>
+</g>
+<g id="cardB"><rect class="s-line" x="840" y="220" width="640" height="460" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="870" y="266" font-size="22">PITCH B · THE STORY</text><g id="pB"></g></g>
+<g id="tale">
+<path class="s-ink" d="M1074 290h342a24 24 0 0 1 24 24v142a24 24 0 0 1-24 24h-326l-78 40 30-46a24 24 0 0 1-12-18v-142a24 24 0 0 1 24-24z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path id="hrt1" class="gain" d="M1245 450c-80-45-90-105-45-115c22-5 38 8 45 25c7-17 23-30 45-25c45 10 35 70-45 115z"/>
+<circle class="gain" cx="1120" cy="340" r="8"/><circle class="gain" cx="1380" cy="350" r="10"/><circle class="gain" cx="1370" cy="440" r="6"/>
+</g>
+<g id="winB"><rect class="gain" x="1290" y="236" width="160" height="44" rx="22"/><text class="m" x="1370" y="266" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">WINS</text></g>
+<g id="quote"><text class="d" x="120" y="790" font-size="56">“The best story wins.”</text><rect class="gain" x="124" y="816" width="160" height="10"/></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why stories stick.</text>
+<text class="b" x="120" y="176" font-size="32">Our brains are not built to weigh data calmly.</text>
+<g id="brainG">
+<text class="m" x="1180" y="262" font-size="22" text-anchor="middle">YOUR BRAIN</text>
+<ellipse class="s-ink" cx="1180" cy="440" rx="220" ry="160" fill="var(--stage)" stroke-width="7"/>
+<path class="s-line" d="M1180 290v300M1030 380q40-30 80 0M1250 380q40-30 80 0M1040 500q40 30 80 0M1250 500q40 30 80 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="fire">
+<g id="ppl"></g>
+<path class="s-ink" d="M300 668L460 628M300 628L460 668" stroke-width="14" stroke-linecap="round"/>
+<path id="flame" class="gain" d="M380 640c-55-25-45-95 0-140c8 40 55 55 42 105c-6 25-20 35-42 35z"/>
+<text class="m" x="120" y="740" font-size="22">AROUND THE FIRE: STORIES, NOT TABLES</text>
+</g>
+<g id="tokS"><rect class="gain" x="-70" y="-28" width="140" height="56" rx="12"/><text class="m" x="0" y="8" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">STORY</text></g>
+<g id="tokF"><rect class="loss" x="-70" y="-28" width="140" height="56" rx="12"/><text class="m" x="0" y="8" font-size="22" text-anchor="middle" style="fill:var(--stage)">FACT</text></g>
+<g id="wired"><text class="d" x="120" y="830" font-size="48">Not a flaw to fix. It’s how we’re wired.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One plus one equals three.</text>
+<text class="b" x="120" y="176" font-size="32">Documentary maker Ken Burns brings still images to life.</text>
+<g id="cam">
+<circle class="s-ink" cx="230" cy="282" r="44" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="340" cy="282" r="44" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="170" y="330" width="260" height="130" rx="14"/><path class="ink" d="M430 372L500 340V452L430 420z"/>
+<text class="m" x="170" y="505" font-size="20">KEN BURNS</text>
+</g>
+<g id="photos">
+<rect class="s-ink" x="660" y="250" width="320" height="220" fill="var(--stage)" stroke-width="5" transform="rotate(-8 820 360)"/>
+<rect class="s-ink" x="660" y="250" width="320" height="220" fill="var(--stage)" stroke-width="5" transform="rotate(5 820 360)"/>
+<rect class="s-ink" x="660" y="250" width="320" height="220" fill="var(--stage)" stroke-width="5"/>
+<path class="ink" d="M680 450l100-110 60 60 60-80 60 130z" fill-opacity=".3"/><circle class="gain" cx="920" cy="296" r="22"/>
+<rect id="vf" class="s-gain" width="140" height="100" fill="none" stroke-width="5" stroke-dasharray="12 8"/>
+<g transform="rotate(4 1190 355)"><rect class="s-ink" x="1080" y="270" width="220" height="170" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M1110 320h160M1110 360h160M1110 400h100" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+<g id="eqA"><text class="d" x="120" y="700" font-size="150">1 + 1 =</text></g>
+<g id="eqB"><text class="d" x="660" y="700" font-size="150" style="fill:var(--gain)">3</text></g>
+<g id="eye"><g id="eyeIn"><path class="s-ink" d="M1040 620q160-110 320 0q-160 110-320 0z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/><circle class="gain" cx="1200" cy="620" r="36"/></g><text class="m" x="1200" y="720" font-size="20" text-anchor="middle">ATTENTION</text></g>
+<g id="arr"><text class="d5" x="120" y="800" font-size="40">Same facts. Arranged into something bigger.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Good ideas can lose.</text>
+<text class="b" x="120" y="176" font-size="32">The right idea does not automatically win.</text>
+<g id="bulb"><g id="rays"></g>
+<path id="bulbOff" d="M360 420C360 390 320 380 320 330A80 80 0 1 1 480 330C480 380 440 390 440 420Z" fill="var(--muted)" fill-opacity=".3"/>
+<path id="bulbLit" class="gain" d="M360 420C360 390 320 380 320 330A80 80 0 1 1 480 330C480 380 440 390 440 420Z"/>
+<path class="s-ink" d="M360 420C360 390 320 380 320 330A80 80 0 1 1 480 330C480 380 440 390 440 420Z" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M382 420V372M418 420V372M382 372l9-14 9 14 9-14 9 14" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="ink" x="364" y="422" width="72" height="14" rx="5"/><rect class="ink" x="364" y="440" width="72" height="14" rx="5"/><rect class="ink" x="366" y="458" width="68" height="12" rx="5"/>
+<path class="ink" d="M382 472h36l-8 16h-20z"/>
+</g>
+<g id="shelf"><path class="s-ink" d="M200 500H600M260 500v40M540 500v40" stroke-width="10" stroke-linecap="round"/>
+<path class="s-muted" d="M290 495V418M290 495L338 398M290 495L362 466M290 462q14 2 24-12q10 8 30 8M290 438q18 0 34-24q14 12 30 20" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="dust"></g><text class="m" x="400" y="590" font-size="20" text-anchor="middle">TRUE, BUT EXPLAINED BADLY</text></g>
+<g id="mega"><path class="ink" d="M720 400h40l160-80v200l-160-80h-40z"/><path class="s-ink" d="M770 440l12 50" stroke-width="12" stroke-linecap="round"/><g id="waves"></g><text class="m" x="1270" y="610" font-size="20" text-anchor="middle">A WEAKER IDEA, TOLD BEAUTIFULLY</text></g>
+<g id="crowd2"></g>
+<g id="half"><text class="d" x="120" y="710" font-size="48">Being right is only half the job.</text>
+<rect class="gain" x="120" y="750" width="680" height="70" rx="12"/><text class="m" x="150" y="795" font-size="24" style="fill:var(--on-gain)">BEING RIGHT</text>
+<rect class="s-gain" x="800" y="750" width="680" height="70" rx="12" fill="none" stroke-width="4" stroke-dasharray="12 10"/><text class="m" x="830" y="795" font-size="24" style="fill:var(--gain)">TELLING IT WELL</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Use it yourself.</text>
+<text class="b" x="120" y="176" font-size="32">Don’t just present the facts. Give them a story.</text>
+<g id="nb"><rect class="s-ink" x="120" y="240" width="280" height="320" rx="12" fill="var(--stage)" stroke-width="6"/><text class="m" x="260" y="292" font-size="22" text-anchor="middle">FACTS</text><path class="s-line" d="M160 340h200M160 390h200M160 440h200M160 490h140" stroke-width="6" stroke-linecap="round"/><path class="s-muted" d="M415 400h40m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+<path id="arcP" class="s-line" d="M500 520Q780 160 1060 520" fill="none" stroke-width="6" pathLength="1" stroke-dasharray="1 1"/>
+<g id="n0"><text class="m" x="500" y="590" font-size="20" text-anchor="middle">A PERSON</text></g>
+<g id="n1"><circle class="loss" cx="780" cy="340" r="34"/><text class="d" x="780" y="356" font-size="44" text-anchor="middle" style="fill:var(--stage)">!</text><text class="m" x="780" y="290" font-size="20" text-anchor="middle">A PROBLEM</text></g>
+<g id="n2"><circle class="gain" cx="1060" cy="520" r="34"/><path d="M1044 520l12 12 22-24" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1060" y="590" font-size="20" text-anchor="middle">A CHANGE</text></g>
+<g id="lis"><path class="s-gain" d="M1104 520h160" stroke-width="5" stroke-dasharray="10 8"/><path class="gain" d="M1320 420c-36-20-40-48-20-52c10-2 17 4 20 11c3-7 10-13 20-11c20 4 16 32-20 52z"/><text class="m" x="1320" y="300" font-size="20" text-anchor="middle">WHY IT MATTERS TO THEM</text><g id="lisP"></g></g>
+<g id="far">
+<path class="s-line" d="M120 650H1240M120 780H1240" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="1264" y="657" font-size="20">FACTS ALONE</text>
+<text class="m" x="1264" y="787" font-size="20">FACTS IN A STORY</text>
+<g id="fA"><rect class="s-ink" x="-50" y="-44" width="100" height="44" rx="8" fill="var(--stage)" stroke-width="4"/><text class="m" x="0" y="-15" font-size="18" text-anchor="middle">FACT</text></g>
+<g id="fS"><rect class="s-ink" x="-50" y="-100" width="100" height="44" rx="8" fill="var(--stage)" stroke-width="4"/><text class="m" x="0" y="-71" font-size="18" text-anchor="middle">FACT</text><rect class="gain" x="-80" y="-50" width="160" height="50" rx="10"/><text class="m" x="0" y="-18" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">STORY</text></g>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Guard yourself.</text>
+<text class="b" x="120" y="176" font-size="32">The same power works on you.</text>
+<g id="shd"><path class="s-gain" d="M300 240L440 290V430C440 540 370 600 300 640C230 600 160 540 160 430V290z" fill="var(--stage)" stroke-width="8" stroke-linejoin="round"/></g>
+<g id="pz"><rect class="ink" x="262" y="380" width="26" height="100" rx="6"/><rect class="ink" x="312" y="380" width="26" height="100" rx="6"/><text class="m" x="300" y="690" font-size="20" text-anchor="middle">PAUSE FIRST</text></g>
+<g id="post"><rect class="s-ink" x="540" y="230" width="400" height="460" rx="14" fill="var(--stage)" stroke-width="6"/>
+<path id="hrt2" class="gain" d="M740 500c-120-70-130-160-60-180c30-8 50 10 60 34c10-24 30-42 60-34c70 20 60 110-60 180z"/>
+<circle class="gain" cx="590" cy="290" r="8"/><circle class="gain" cx="895" cy="290" r="10"/><circle class="gain" cx="600" cy="520" r="6"/>
+<rect class="gain" x="600" y="570" width="280" height="70" rx="35"/><text class="d" x="740" y="616" font-size="32" text-anchor="middle" style="fill:var(--on-gain)">SAY YES</text></g>
+<g id="bare"><rect class="s-line" x="1040" y="230" width="440" height="460" rx="14" fill="var(--stage)" stroke-width="3"/><text class="m" x="1070" y="280" font-size="20">STRIP THE STORY AWAY</text>
+<path class="s-ink" d="M1080 340h300M1080 400h220M1080 460h260" stroke-width="8" stroke-linecap="round"/><text class="d" x="1260" y="620" font-size="120" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="mag"><circle class="s-ink" r="70" fill="var(--stage)" fill-opacity=".35" stroke-width="12"/><path class="s-ink" d="M50 50L110 110" stroke-width="20" stroke-linecap="round"/></g>
+<g id="cur"><text class="d" x="120" y="800" font-size="50">A great story deserves curiosity, not trust.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">How could you tell</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">your unheard idea</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">as a <tspan style="fill:var(--gain)">story</tspan> this week?</text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">THE BEST STORY WINS</text></g>
+<g id="tb"><ellipse class="s-ink" cx="1300" cy="690" rx="150" ry="95" fill="var(--stage)" stroke-width="7"/><circle class="s-ink" cx="1140" cy="796" r="18" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="1100" cy="836" r="10" fill="var(--stage)" stroke-width="5"/>
+<circle id="tbb" cx="1300" cy="668" r="40"/><rect class="ink" x="1284" y="710" width="32" height="24" rx="4"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Best Story Wins&rdquo;, from <em>Same as Ever</em> by Morgan Housel. The Ken Burns example and his one plus one equals three idea are as reported in the book. The pitching room, campfire, dusty shelf and advert drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 8.3], [8.3, 27.1], [27.1, 45.3], [45.3, 69.0], [69.0, 85.1], [85.1, 100.0], [100.0, 114.7], [114.7, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Best Story Wins", "The Big Claim", "Why Stories Stick", "One Plus One", "Good Ideas Lose", "Use It Yourself", "Guard Yourself", "Your Challenge"];
+const TM={"spotlight": 0.0, "two_doors": 8.64, "spreadsheet": 11.68, "storyteller": 15.6, "brain": 27.44, "campfire": 30.64, "filmmaker": 45.56, "photo_stack": 48.88, "equation": 57.28, "lightbulb": 69.31, "dusty_shelf": 72.88, "megaphone": 77.92, "notebook": 85.44, "character": 89.2, "listener": 93.16, "shield": 100.27, "ad_poster": 102.4, "magnifier": 106.56, "thought_bubble": 114.96};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-1.6*r)+' '+(y+3.6*r)+'v'+(-r)+'a'+(1.6*r)+' '+(1.6*r)+' 0 0 1 '+(3.2*r)+' 0v'+r+'z',class:cls},g)};
+fig($('star0'),1300,500,30,'ink');
+const cells=[];for(let r=0;r<5;r++)for(let c=0;c<4;c++){const g=mk('g',{},$('grid')),x=180+c*130,y=300+r*40;mk('rect',{x:x,y:y,width:130,height:40,fill:r?'var(--stage)':'var(--line)',stroke:'var(--ink)','stroke-width':2},g);mk('rect',{x:x+20,y:y+16,width:40+((r*3+c*5)%4)*15,height:8,fill:'var(--muted)'},g);cells.push(g)}
+fig($('pA'),440,540,22,'ink');fig($('pB'),980,540,22,'ink');
+[[220,560],[540,560],[290,470],[470,470]].forEach(q=>fig($('ppl'),q[0],q[1],20,'ink'));
+for(let i=0;i<7;i++){const a=Math.PI*(1+i/6);mk('path',{d:'M'+(400+98*Math.cos(a)).toFixed(0)+' '+(330+98*Math.sin(a)).toFixed(0)+'L'+(400+122*Math.cos(a)).toFixed(0)+' '+(330+122*Math.sin(a)).toFixed(0),class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('rays'))}
+[[360,290,4],[420,272,5],[448,318,4],[352,326,5],[438,350,3],[392,262,3]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],fill:'var(--muted)'},$('dust')));
+[[230,488],[470,486],[505,489],[560,487],[245,485]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:3,fill:'var(--muted)'},$('dust')));
+const WV=[0,1,2].map(i=>mk('path',{d:'M'+(950+i*40)+' '+(360-i*20)+'q'+(30+i*10)+' '+(60+i*20)+' 0 '+(120+i*40),class:'s-gain',fill:'none','stroke-width':6,'stroke-linecap':'round'},$('waves')));
+const CR=[];for(let r=0;r<7;r++)for(let c=0;c<10;c++)CR.push(mk('circle',{cx:1090+c*40,cy:300+r*40,r:13,class:'ink'},$('crowd2')));
+fig($('n0'),500,470,18,'ink');fig($('lisP'),1320,470,26,'gain');
+const pulse=(id,cx,cy,k)=>$(id).setAttribute('transform','translate('+cx+' '+cy+') scale('+k.toFixed(3)+') translate('+(-cx)+' '+(-cy)+')');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const sp=p(u,TM.spotlight,TM.spotlight+1.2);
+$('cone').setAttribute('opacity',(sp*(.9+.1*Math.sin(t*3))).toFixed(3));$('pool').setAttribute('opacity',sp.toFixed(3));rise($('star0'),sp);
+
+rise($('cardA'),p(u,TM.two_doors,TM.two_doors+.5));rise($('cardB'),p(u,TM.two_doors+.3,TM.two_doors+.8));
+cells.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.spreadsheet+i*.06,TM.spreadsheet+i*.06+.3).toFixed(2)));
+rise($('tale'),p(u,TM.storyteller,TM.storyteller+.6));pulse('hrt1',1245,400,1+.06*Math.sin(t*4));
+const w1=p(u,TM.storyteller+4.1,TM.storyteller+4.8);$('paIn').setAttribute('opacity',(1-.6*w1).toFixed(2));rise($('winB'),w1);
+rise($('quote'),p(u,TM.storyteller+7.1,TM.storyteller+7.7));
+
+rise($('brainG'),p(u,TM.brain,TM.brain+.6));rise($('fire'),p(u,TM.campfire,TM.campfire+.6));
+$('flame').setAttribute('transform','translate(380 640) scale('+(1+.06*Math.sin(t*9)).toFixed(3)+' '+(1+.1*Math.sin(t*7)).toFixed(3)+') translate(-380 -640)');
+const v=TM.campfire+5,ms=p(u,v,v+1.4),mf=p(u,v+.4,v+1.8),df=p(u,v+2.4,v+3.6);
+$('tokS').setAttribute('transform','translate('+(760+420*ms).toFixed(1)+' 400)');$('tokS').setAttribute('opacity',p(u,v,v+.3).toFixed(2));
+$('tokF').setAttribute('transform','translate('+(760+420*mf+200*df).toFixed(1)+' '+(500+240*df).toFixed(1)+')');$('tokF').setAttribute('opacity',(p(u,v+.4,v+.7)*(1-df)).toFixed(2));
+rise($('wired'),p(u,TM.brain+14.5,TM.brain+15.1));
+
+rise($('cam'),p(u,TM.filmmaker,TM.filmmaker+.5));rise($('photos'),p(u,TM.photo_stack,TM.photo_stack+.6));
+const al=TM.photo_stack+3.8;$('vf').setAttribute('opacity',p(u,al,al+.4).toFixed(2));$('vf').setAttribute('x',(755+65*Math.sin(t*.8)).toFixed(1));$('vf').setAttribute('y',(310+25*Math.sin(t*.6)).toFixed(1));
+rise($('eqA'),p(u,TM.equation,TM.equation+.5));rise($('eqB'),p(u,TM.equation+1.2,TM.equation+1.7));
+rise($('arr'),p(u,TM.equation+4.5,TM.equation+5.1));
+const at=p(u,TM.equation+9.9,TM.equation+10.6);rise($('eye'),at);$('eyeIn').setAttribute('transform','translate(0 620) scale(1 '+(.1+.9*at).toFixed(3)+') translate(0 -620)');
+
+rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.5));
+const ds=p(u,TM.dusty_shelf,TM.dusty_shelf+1.2);rise($('shelf'),p(u,TM.dusty_shelf,TM.dusty_shelf+.5));
+$('rays').setAttribute('opacity',(1-ds).toFixed(2));$('bulbLit').setAttribute('opacity',(1-ds).toFixed(2));$('bulbOff').setAttribute('opacity',ds.toFixed(2));
+$('dust').setAttribute('opacity',p(u,TM.dusty_shelf+.4,TM.dusty_shelf+1.6).toFixed(2));
+rise($('mega'),p(u,TM.megaphone,TM.megaphone+.5));
+WV.forEach((w,i)=>w.setAttribute('opacity',u>=TM.megaphone?(.3+.7*Math.abs(Math.sin(t*3-i*.8))).toFixed(2):0));
+CR.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.megaphone+.5+i*.04,TM.megaphone+.8+i*.04).toFixed(2)));
+rise($('half'),p(u,TM.megaphone+4.2,TM.megaphone+4.8));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));
+$('arcP').setAttribute('stroke-dashoffset',(1-p(u,TM.character,TM.character+2.4)).toFixed(3));
+[0,1,2].forEach(i=>rise($('n'+i),p(u,TM.character+i*1.2,TM.character+i*1.2+.5)));
+rise($('lis'),p(u,TM.listener,TM.listener+.6));
+const fu=TM.listener+3.8;rise($('far'),p(u,fu,fu+.5));
+$('fA').setAttribute('transform','translate('+(170+200*p(u,fu+.3,fu+1.5)).toFixed(1)+' 650)');
+$('fS').setAttribute('transform','translate('+(200+880*p(u,fu+.3,fu+2.5)).toFixed(1)+' 780)');
+
+rise($('shd'),p(u,TM.shield,TM.shield+.5));rise($('post'),p(u,TM.ad_poster,TM.ad_poster+.5));rise($('pz'),p(u,TM.ad_poster+1,TM.ad_poster+1.5));
+pulse('hrt2',740,420,1+.07*Math.sin(t*4));
+const mo=p(u,TM.magnifier+.3,TM.magnifier+2);$('mag').setAttribute('opacity',p(u,TM.magnifier,TM.magnifier+.5).toFixed(2));
+$('mag').setAttribute('transform','translate('+(660+160*mo).toFixed(1)+' '+(400+40*Math.sin(t*1.2)).toFixed(1)+')');
+rise($('bare'),p(u,TM.magnifier+1,TM.magnifier+1.6));rise($('cur'),p(u,TM.magnifier+4.9,TM.magnifier+5.5));
+
+rise($('tb'),p(u,TM.thought_bubble,TM.thought_bubble+.6));
+const q=TM.thought_bubble+4.9;rise($('qa'),p(u,q,q+.5));rise($('qb'),p(u,q+.4,q+.9));rise($('qc'),p(u,q+.8,q+1.3));rise($('qd'),p(u,q+1.3,q+1.8));
+$('tbb').setAttribute('fill',u>=q+.8?'var(--gain)':'var(--line)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.16;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

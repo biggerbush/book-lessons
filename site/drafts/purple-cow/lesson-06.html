@@ -1,0 +1,367 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Purple Cow Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Purple Cow: Aim your product at the small group of eager early adopters who love new things and spread ideas to everyone else. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">PURPLE COW · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Design for</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the sneezers.</text>
+<text class="b" x="120" y="600" font-size="32">Win the eager few, and they will win everyone else.</text>
+<g id="snz0"></g>
+<g id="arc0"></g>
+<g id="dots0"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">How new ideas spread.</text>
+<text class="b" x="120" y="176" font-size="32">Godin borrows a familiar curve of how a market adopts.</text>
+<g id="bc1"></g>
+<g id="le1">
+<text class="m" x="200" y="560" font-size="20" style="fill:var(--gain)">HUNGRY FOR</text>
+<text class="m" x="200" y="590" font-size="20" style="fill:var(--gain)">ANYTHING NEW</text>
+<text class="m" x="200" y="770" font-size="20">INNOVATORS +</text>
+<text class="m" x="200" y="800" font-size="20">EARLY ADOPTERS</text>
+</g>
+<g id="bm1">
+<text class="m" x="800" y="640" font-size="20" text-anchor="middle">WANTS WHAT WORKS</text>
+<text class="m" x="800" y="672" font-size="20" text-anchor="middle">IGNORES WHAT IS NEW</text>
+<text class="m" x="800" y="770" font-size="20" text-anchor="middle">THE MAJORITY</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most aim at the big middle.</text>
+<text class="b" x="120" y="176" font-size="32">Because that is where the money seems to be.</text>
+<g id="mega"><path class="ink" d="M150 470h50l140-70v200l-140-70h-50z"/><text class="m" x="150" y="650" font-size="20">YOUR MESSAGE</text></g>
+<path id="aim" class="s-loss" d="M360 500H1100" stroke-width="4" stroke-dasharray="10 12"/>
+<g id="crowd2"><text class="m" x="1290" y="740" font-size="20" text-anchor="middle">THE MAJORITY</text></g>
+<g id="wall2"></g>
+<g id="wl2"><text class="m" x="1000" y="270" font-size="20" text-anchor="middle">BUSY · SATISFIED · IGNORING YOU</text></g>
+<g id="ads2"></g>
+<g id="bnc2"><text class="d" x="120" y="800" font-size="48">Messages aimed at them bounce off.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet the sneezers.</text>
+<text class="b" x="120" y="176" font-size="32">They spread the ideas they love without being asked.</text>
+<g id="snz3"><text class="m" x="300" y="650" font-size="22" text-anchor="middle" style="fill:var(--gain)">SNEEZER</text></g>
+<g id="cld"><g id="cldi">
+<circle class="s-ink" cx="440" cy="410" r="28" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-ink" cx="520" cy="420" r="28" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-ink" cx="480" cy="390" r="34" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-ink" cx="472" cy="440" r="26" fill="var(--stage)" stroke-width="4"/>
+</g></g>
+<g id="tg3"></g>
+<g id="mk3"><text class="m" x="1068" y="760" font-size="20">THE MARKET</text></g>
+<g id="cold3"><text class="d" x="120" y="830" font-size="44">It spreads like a cold.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The otaku.</text>
+<text class="b" x="120" y="176" font-size="32">A Japanese word for a deep obsession with a category.</text>
+<g id="bdg"><rect class="gain" x="120" y="240" width="380" height="100" rx="50"/><text class="d" x="310" y="312" font-size="60" text-anchor="middle" style="fill:var(--on-gain)">OTAKU</text></g>
+<g id="pr4"></g>
+<g id="fan4"><text class="m" x="310" y="710" font-size="22" text-anchor="middle" style="fill:var(--gain)">FIRST FANS</text></g>
+<g id="shf"></g>
+<g id="ff4"><text class="d" x="120" y="830" font-size="44">Obsessed customers become first fans.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Build it for the eager few.</text>
+<text class="b" x="120" y="176" font-size="32">Not for the average buyer.</text>
+<g id="bp5">
+<rect class="s-line" x="120" y="230" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="grid5"></g>
+<text class="m" x="150" y="280" font-size="20">BLUEPRINT</text>
+<rect class="s-ink" x="280" y="380" width="320" height="220" rx="30" fill="none" stroke-width="5" stroke-dasharray="14 10"/>
+<circle class="s-ink" cx="440" cy="490" r="40" fill="none" stroke-width="5"/>
+</g>
+<g id="few5"><text class="m" x="150" y="700" font-size="20" style="fill:var(--gain)">FOR THE EAGER FEW</text></g>
+<g id="ef5"><g id="ef5i"></g></g>
+<g id="mg5">
+<circle class="s-ink" cx="1120" cy="480" r="150" fill="var(--stage)" stroke-width="14"/>
+<path class="s-ink" d="M1226 586L1340 700" stroke-width="26" stroke-linecap="round"/>
+<circle class="gain" cx="1120" cy="470" r="70"/>
+<circle cx="1095" cy="450" r="7" fill="var(--on-gain)"/><circle cx="1145" cy="450" r="7" fill="var(--on-gain)"/>
+<path id="grin5" d="M1085 488q35 34 70 0" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g id="st0"><text class="m" x="860" y="270" font-size="24">STOP</text></g>
+<g id="st1"><text class="m" x="990" y="270" font-size="24">GRIN</text></g>
+<g id="st2"><text class="m" x="1120" y="270" font-size="24" style="fill:var(--gain)">GRAB A FRIEND</text></g>
+<g id="et5"><text class="d5" x="120" y="810" font-size="36">A feature the majority would never request.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Let the sneezers carry it.</text>
+<text class="b" x="120" y="176" font-size="32">Their stories travel toward the middle of the curve.</text>
+<g id="bc6"></g>
+<text class="m" x="220" y="740" font-size="20" style="fill:var(--gain)">SNEEZERS</text>
+<text class="m" x="800" y="740" font-size="20" text-anchor="middle">THE MAJORITY</text>
+<g id="arr6"></g>
+<g id="cr6"></g>
+<g id="cow6">
+<rect class="loss" x="1180" y="380" width="180" height="90" rx="34"/>
+<circle class="loss" cx="1380" cy="382" r="32"/>
+<path class="s-ink" d="M1366 352l-8-20M1394 352l8-20" stroke-width="6" stroke-linecap="round"/>
+<path class="s-loss" d="M1205 465v55M1235 465v55M1305 465v55M1335 465v55" stroke-width="10" stroke-linecap="round"/>
+<circle cx="1230" cy="415" r="16" fill="var(--stage)"/><circle cx="1300" cy="430" r="12" fill="var(--stage)"/>
+</g>
+<g id="nn6"><text class="m" x="1270" y="570" font-size="20" text-anchor="middle">NICHE TO NORMAL</text></g>
+<g id="frd6"><text class="m" x="120" y="790" font-size="20">A FRIEND’S WORD BEATS ANY AD</text></g>
+<g id="ig6"><text class="d" x="120" y="845" font-size="40">Reach the masses by ignoring them at first.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Find your few.</text>
+<text class="b" x="120" y="176" font-size="32">Every market has its own sneezers, from software to cooking.</text>
+<g id="map7">
+<rect class="s-line" x="120" y="230" width="600" height="510" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-line" d="M180 300Q300 250 400 300Q500 330 480 430Q440 520 320 500Q180 470 180 300Z" fill="none" stroke-width="4"/>
+<path class="s-line" d="M420 520Q560 480 660 540Q700 640 600 690Q460 710 420 620Z" fill="none" stroke-width="4"/>
+</g>
+<g id="pins7"></g>
+<g id="nl7"><rect class="s-ink" x="800" y="230" width="300" height="510" rx="12" fill="var(--stage)" stroke-width="5"/><text class="m" x="830" y="290" font-size="22">WHO + WHERE</text></g>
+<g id="gift7">
+<rect class="gain" x="1190" y="480" width="240" height="190"/>
+<rect class="loss" x="1298" y="480" width="24" height="190"/>
+<g id="lid7">
+<rect class="gain" x="1170" y="430" width="280" height="50" rx="8"/>
+<rect class="loss" x="1298" y="430" width="24" height="50"/>
+<circle class="s-loss" cx="1290" cy="414" r="16" fill="none" stroke-width="8"/><circle class="s-loss" cx="1330" cy="414" r="16" fill="none" stroke-width="8"/>
+</g>
+<path id="spk7" class="s-gain" d="M1160 380l-30-30M1310 370v-50M1450 380l24-24" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="q7"><text class="d" x="120" y="820" font-size="40">So remarkable they can’t keep quiet.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">Who are the ten people</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">in your field most likely</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">to talk about <tspan style="fill:var(--gain)">something new</tspan>?</text></g>
+<g id="wr8"><text class="m" x="143" y="640" font-size="26">WRITE THEIR NAMES DOWN. DESIGN FOR THEM.</text></g>
+<g id="ten8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Design for the Sneezers&rdquo;, from <em>Purple Cow</em> by Seth Godin. The idea diffusion curve, sneezers and otaku are concepts as reported in the book. The hot sauce shelf, the bell curve and the sneeze clouds are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 6.6], [6.6, 24.2], [24.2, 38.1], [38.1, 52.0], [52.0, 68.3], [68.3, 83.1], [83.1, 100.0], [100.0, 114.5], [114.5, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Who Spreads the Word", "The Bell Curve", "The Common Mistake", "Meet the Sneezers", "The Otaku", "Build for Them", "Let Them Carry It", "Find Your Few", "Your Challenge"];
+const TM={"title_cow": 0.0, "bell_curve": 6.92, "left_edge": 12.08, "big_middle": 18.68, "wall": 29.92, "ad_bounce": 35.12, "sneezer": 38.36, "sneeze_cloud": 41.92, "otaku_badge": 52.28, "shelf": 58.24, "blueprint": 68.56, "magnifier": 74.8, "edge_feature": 79.84, "arrow_flow": 83.36, "crowd": 88.12, "map_pin": 100.32, "name_list": 105.64, "gift_box": 109.44};
+const fig=(g,x,y,r,c)=>[mk('circle',{cx:x,cy:y,r:r,class:c},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)];
+const setC=(f,c)=>f.forEach(e=>e.setAttribute('class',c));
+const bY=(x,b,h,s)=>b-h*Math.exp(-(((x-800)/s)**2));
+const bD=(a,c,b,h,s,z)=>{let d='';for(let x=a;x<=c;x+=10)d+=(d?'L':'M')+x+' '+bY(x,b,h,s).toFixed(1);return z?d+'L'+c+' '+b+'L'+a+' '+b+'Z':d};
+const star=(cx,cy,R)=>{let d='';for(let i=0;i<10;i++){const r=i%2?R*.45:R,a=-Math.PI/2+i*Math.PI/5;d+=(i?'L':'M')+(cx+r*Math.cos(a)).toFixed(1)+' '+(cy+r*Math.sin(a)).toFixed(1)}return d+'Z'};
+
+fig($('snz0'),1150,420,34,'gain');
+const A0=[60,95,130].map(R=>{const a=.7;return mk('path',{d:'M'+(1150+R*Math.cos(a)).toFixed(1)+' '+(420-R*Math.sin(a)).toFixed(1)+'A'+R+' '+R+' 0 0 1 '+(1150+R*Math.cos(a)).toFixed(1)+' '+(420+R*Math.sin(a)).toFixed(1),fill:'none',class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('arc0'))});
+const T0=[];for(let c=0;c<4;c++)for(let r=0;r<7;r++)T0.push([mk('circle',{cx:1330+c*40,cy:300+r*40,r:10,class:'ink'},$('dots0')),c*40,Math.abs(r*40-120)]);
+
+mk('path',{d:'M160 720H1440',class:'s-line','stroke-width':4},$('bc1'));
+const L1=mk('path',{d:bD(200,470,720,460,260,1),class:'gain','fill-opacity':.45},$('bc1'));
+const M1=mk('path',{d:bD(600,1000,720,460,260,1),fill:'var(--line)'},$('bc1'));
+const CV1=mk('path',{d:bD(200,1400,720,460,260),fill:'none',class:'s-ink','stroke-width':7,'stroke-linecap':'round',pathLength:1,'stroke-dasharray':1},$('bc1'));
+
+[1180,1290,1400].forEach(x=>[330,470,610].forEach(y=>fig($('crowd2'),x,y,20,'ink')));
+for(let r=0;r<10;r++){const y=300+r*40;mk('rect',{x:960,y:y,width:80,height:40,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('wall2'));mk('path',{d:'M'+(r%2?980:1020)+' '+y+'v40',stroke:'var(--ink)','stroke-width':4},$('wall2'))}
+const AD=[0,1,2,3].map(()=>mk('rect',{width:44,height:30,rx:4,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},$('ads2')));
+
+fig($('snz3'),300,430,40,'gain');
+const T3=[['FRIENDS',300],['COWORKERS',450],['FOLLOWERS',600]].map(([s,y])=>{const g=mk('g',{},$('tg3'));mk('path',{d:'M570 420L740 '+(y+20),class:'s-line','stroke-width':4,'stroke-dasharray':'8 8'},g);fig(g,780,y,18,'ink');const tx=mk('text',{x:830,y:y+30,class:'m','font-size':22},g);tx.textContent=s;return g});
+const D3=[];for(let c=0;c<8;c++)for(let r=0;r<8;r++){const x=1080+c*52,y=290+r*58;D3.push([mk('circle',{cx:x,cy:y,r:12,class:'ink'},$('mk3')),Math.hypot(x-1080,y-493)])}
+
+const B4=[];[400,580,760].forEach((y,k)=>{mk('rect',{x:640,y:y,width:800,height:12,rx:4,class:'ink'},$('shf'));for(let i=0;i<10;i++){const x=670+i*76,h=70+((i*7+k*3)%3)*12,g=mk('g',{},$('shf')),c4=['gain','loss','ink'][(i+k)%3];mk('rect',{x:x,y:y-h,width:50,height:h,rx:10,class:c4},g);mk('rect',{x:x+17,y:y-h-26,width:16,height:30,rx:4,class:c4},g);B4.push(g)}});
+const P4=fig($('pr4'),310,480,40,'ink');
+
+for(let x=160;x<=720;x+=40)mk('path',{d:'M'+x+' 240V720',stroke:'var(--line)','stroke-width':1.5},$('grid5'));
+for(let y=310;y<=670;y+=40)mk('path',{d:'M130 '+y+'H750',stroke:'var(--line)','stroke-width':1.5},$('grid5'));
+mk('path',{d:star(600,380,44),class:'gain'},$('ef5i'));
+
+mk('path',{d:'M160 700H1440',class:'s-line','stroke-width':4},$('bc6'));
+mk('path',{d:bD(200,430,700,400,230,1),class:'gain','fill-opacity':.45},$('bc6'));
+mk('path',{d:bD(200,1400,700,400,230),fill:'none',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},$('bc6'));
+const AR6=['M380 620Q520 360 680 480','M400 640Q600 330 800 470','M420 660Q680 320 920 480'].map(d=>mk('path',{d:d,fill:'none',class:'s-gain','stroke-width':5,'stroke-linecap':'round','stroke-dasharray':'12 14'},$('arr6')));
+[[680,480],[800,470],[920,480]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:9,class:'gain'},$('arr6')));
+const CR6=[];for(let r=0;r<2;r++)for(let c=0;c<6;c++)CR6.push([fig($('cr6'),640+c*64,530+r*85,13,'ink'),c]);
+
+const P7=[[300,400,'SOFTWARE'],[600,330,'CYCLING'],[560,600,'COOKING']].map(([x,y,s])=>{const g=mk('g',{},$('pins7'));mk('path',{d:'M'+x+' '+y+'l-22-38a25 25 0 1 1 44 0z',class:'gain'},g);mk('circle',{cx:x,cy:y-50,r:9,fill:'var(--stage)'},g);const tx=mk('text',{x:x,y:y+34,class:'m','font-size':20,'text-anchor':'middle'},g);tx.textContent=s;return g});
+const R7=[];for(let i=0;i<6;i++){const y=360+i*60;mk('circle',{cx:840,cy:y,r:8,class:'gain'},$('nl7'));R7.push([mk('rect',{x:864,y:y-6,width:0,height:12,rx:6,class:'ink'},$('nl7')),200-(i*37)%60])}
+
+const TEN=[];for(let i=0;i<10;i++)TEN.push(mk('circle',{cx:160+i*64,cy:750,r:20,class:'ink'},$('ten8')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('snz0'),p(u,TM.title_cow,TM.title_cow+.6));
+A0.forEach((a,i)=>a.setAttribute('opacity',(u<TM.title_cow+.6?0:.25+.75*Math.max(0,Math.sin(t*3-i*.8))).toFixed(2)));
+T0.forEach(([e,dx,dy])=>e.setAttribute('class',u>TM.title_cow+1.5+dx/60+dy/120?'gain':'ink'));
+
+CV1.setAttribute('stroke-dashoffset',(1-p(u,TM.bell_curve,TM.bell_curve+1.6)).toFixed(3));
+rise(L1,p(u,TM.left_edge,TM.left_edge+.5)); rise($('le1'),p(u,TM.left_edge+.3,TM.left_edge+.8));
+rise(M1,p(u,TM.big_middle,TM.big_middle+.5)); rise($('bm1'),p(u,TM.big_middle+.3,TM.big_middle+.8));
+
+const s2=SC[2][0]/K;
+rise($('mega'),p(u,s2+.3,s2+.8)); rise($('crowd2'),p(u,s2+.8,s2+1.3)); $('aim').setAttribute('opacity',p(u,s2+1.6,s2+2.2));
+rise($('wall2'),p(u,TM.wall,TM.wall+.5)); rise($('wl2'),p(u,TM.wall+.4,TM.wall+.9));
+const ab=p(u,TM.ad_bounce,TM.ad_bounce+.4);
+AD.forEach((a,i)=>{const c=((t*.5+i/4)%1+1)%1;let x,y=485+(i-1.5)*28,o=1;if(c<.6)x=350+566*(c/.6);else{const k=(c-.6)/.4;x=916-260*k;y+=160*k*k;o=1-k}a.setAttribute('x',x.toFixed(1));a.setAttribute('y',y.toFixed(1));a.setAttribute('opacity',(o*ab).toFixed(2))});
+rise($('bnc2'),p(u,TM.ad_bounce,TM.ad_bounce+.5));
+
+rise($('snz3'),p(u,TM.sneezer,TM.sneezer+.5));
+rise($('cld'),p(u,TM.sneeze_cloud,TM.sneeze_cloud+.4));
+const cs=1+.06*Math.sin(t*4); $('cldi').setAttribute('transform','translate(480 415) scale('+cs.toFixed(3)+') translate(-480 -415)');
+T3.forEach((g,i)=>{const a=TM.sneeze_cloud+.8+i*.9; rise(g,p(u,a,a+.4))});
+const a3=TM.sneeze_cloud+6.2; rise($('mk3'),p(u,a3-.6,a3-.1));
+D3.forEach(([e,d])=>e.setAttribute('class',u>a3+d/180?'gain':'ink'));
+rise($('cold3'),p(u,a3+.5,a3+1));
+
+rise($('bdg'),p(u,TM.otaku_badge,TM.otaku_badge+.5)); rise($('pr4'),p(u,TM.otaku_badge+.6,TM.otaku_badge+1.1));
+rise($('shf'),p(u,TM.shelf-.3,TM.shelf+.2)); B4.forEach((g,i)=>rise(g,p(u,TM.shelf+i*.08,TM.shelf+i*.08+.3)));
+const f4=TM.shelf+6.5; setC(P4,u>=f4?'gain':'ink'); rise($('fan4'),p(u,f4,f4+.5)); rise($('ff4'),p(u,f4+.3,f4+.8));
+
+rise($('bp5'),p(u,TM.blueprint,TM.blueprint+.5)); rise($('few5'),p(u,TM.blueprint+2,TM.blueprint+2.5));
+rise($('mg5'),p(u,TM.magnifier,TM.magnifier+.5));
+[0,1,2].forEach(i=>{const a=TM.magnifier+1.2+i*1; rise($('st'+i),p(u,a,a+.4))});
+$('grin5').setAttribute('opacity',p(u,TM.magnifier+2.2,TM.magnifier+2.6));
+rise($('ef5'),p(u,TM.edge_feature,TM.edge_feature+.5));
+const es=1+.1*Math.abs(Math.sin(t*3)); $('ef5i').setAttribute('transform','translate(600 380) scale('+es.toFixed(3)+') translate(-600 -380)');
+rise($('et5'),p(u,TM.edge_feature+.4,TM.edge_feature+.9));
+
+rise($('arr6'),p(u,TM.arrow_flow,TM.arrow_flow+.6)); AR6.forEach(a=>a.setAttribute('stroke-dashoffset',(-t*40).toFixed(1)));
+rise($('cr6'),p(u,TM.arrow_flow+1,TM.arrow_flow+1.5));
+CR6.forEach(([f,c])=>setC(f,u>TM.crowd+.4+c*.35?'gain':'ink'));
+rise($('frd6'),p(u,TM.crowd,TM.crowd+.5)); rise($('ig6'),p(u,TM.crowd+4.6,TM.crowd+5.1));
+rise($('cow6'),p(u,TM.crowd+8.8,TM.crowd+9.3)); rise($('nn6'),p(u,TM.crowd+9.2,TM.crowd+9.7));
+
+rise($('map7'),p(u,TM.map_pin,TM.map_pin+.5));
+P7.forEach((g,i)=>{const a=TM.map_pin+.6+i*1.1; rise(g,p(u,a,a+.4))});
+rise($('nl7'),p(u,TM.name_list,TM.name_list+.5));
+R7.forEach(([e,w],i)=>e.setAttribute('width',(w*p(u,TM.name_list+.6+i*.5,TM.name_list+1+i*.5)).toFixed(1)));
+rise($('gift7'),p(u,TM.gift_box,TM.gift_box+.5));
+$('lid7').setAttribute('transform','translate(0 '+(-14*Math.abs(Math.sin(t*3))).toFixed(1)+')');
+$('spk7').setAttribute('opacity',(.3+.7*Math.abs(Math.sin(t*3))).toFixed(2));
+rise($('q7'),p(u,TM.gift_box+.8,TM.gift_box+1.3));
+
+const s8=SC[8][0]/K;
+rise($('qa'),p(u,s8+.3,s8+.8)); rise($('qb'),p(u,s8+.7,s8+1.2)); rise($('qc'),p(u,s8+1.1,s8+1.6));
+rise($('ten8'),p(u,s8+1.6,s8+2.1)); rise($('wr8'),p(u,s8+6.2,s8+6.7));
+TEN.forEach((e,i)=>e.setAttribute('class',u>s8+6.6+i*.3?'gain':'ink'));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.09;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

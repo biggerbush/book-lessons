@@ -1,0 +1,28 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const HP=(x,y,s)=>`M${x} ${y+.8*s}C${x-1.6*s} ${y-.1*s} ${x-.7*s} ${y-1.1*s} ${x} ${y-.4*s}C${x+.7*s} ${y-1.1*s} ${x+1.6*s} ${y-.1*s} ${x} ${y+.8*s}Z`;
+fig($('tppl'),1220,400,30,'ink');fig($('tppl'),1420,400,30,'gain');
+mk('path',{d:HP(1300,282,18),class:'gain'},$('tb'));
+fig($('wp'),800,400,50,'ink');
+const LCg=[[120,300,'What they care about'],[120,520,'What worries them'],[1080,400,'Where they hope to go']].map((c,i)=>{const [x,y,s]=c,ix=x+50,iy=y+50,g=mk('g',{},$('life'));
+  mk('path',{d:i<2?`M520 ${y+50}L622 ${i?560:440}`:'M1080 450H990',class:'s-line','stroke-width':4,'stroke-dasharray':'6 8'},g);
+  mk('rect',{x:x,y:y,width:400,height:100,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  if(i==0)mk('path',{d:HP(ix,iy+2,20),class:'gain'},g);
+  if(i==1)[[-14,6,14],[2,-4,18],[16,6,13]].forEach(q=>mk('circle',{cx:ix+q[0],cy:iy+q[1],r:q[2],class:'loss'},g));
+  if(i==2){mk('path',{d:`M${ix-14} ${iy+26}V${iy-26}`,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},g);mk('path',{d:`M${ix-12} ${iy-26}l34 12-34 12z`,class:'gain'},g)}
+  mk('text',{x:x+100,y:y+60,'font-size':26,class:'d5'},g).textContent=s;return g});
+[260,230,250,200,260,220,150].forEach((w,i)=>mk('path',{d:`M200 ${300+i*50}h${w}`,class:'s-line','stroke-width':8,'stroke-linecap':'round'},$('doclines')));
+fig($('sad'),1080,540,24,'loss');
+fig($('whp'),900,460,40,'gain');
+const pan=(id,l)=>{const g=$(id);mk('path',{d:'M0 0L-120 120M0 0L120 120',class:'s-muted','stroke-width':3},g);
+  const b=mk('path',{d:'M-140 120h280a140 60 0 0 1-280 0z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},g);
+  const tx=mk('text',{x:0,y:160,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=l;return [b,tx]};
+const PN=[pan('pl','CARE'),pan('pr','CHALLENGE')];
+const BUB=['MONDAY','TUESDAY','WEDNESDAY'].map((s,i)=>{const x=120+i*470,g=mk('g',{},$('bubs'));
+  mk('path',{d:`M${x} 240h400v110h-300l-30 30v-30h-70z`,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4,'stroke-linejoin':'round'},g);
+  mk('text',{x:x+30,y:302,'font-size':20,class:'m'},g).textContent=s;
+  mk('circle',{cx:x+350,cy:295,r:26,class:i==1?'loss':'gain'},g);
+  mk('path',{d:i==1?`M${x+340} 285l20 20m0-20l-20 20`:`M${x+338} 296l9 9 16-18`,fill:'none',stroke:'var(--stage)','stroke-width':5,'stroke-linecap':'round'},g);return g});
+fig($('mirp'),380,500,32,'ink');
+fig($('lisp'),980,540,30,'ink');fig($('lisp'),1360,540,30,'gain');
+for(let r=0;r<3;r++)for(let c=0;c<4;c++)mk('rect',{x:258+c*44,y:350+r*38,width:32,height:28,rx:4,fill:'var(--line)'},$('cal7'));
+const DAY=$('cal7').children[6];

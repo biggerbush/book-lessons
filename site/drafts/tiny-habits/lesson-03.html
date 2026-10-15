@@ -1,0 +1,314 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiny Habits Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Tiny Habits: Choose golden behaviors that you want to do, that make a real impact, and that you can actually do, rather than relying on fickle motivation. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">TINY HABITS · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Pick habits you</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">actually want.</text>
+<text class="b" x="120" y="600" font-size="32">Choose habits that matter, that you want, and that you can do.</text>
+<g id="tp"></g>
+<g id="wishG">
+<circle class="s-ink" cx="1282" cy="470" r="14" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-ink" cx="1294" cy="514" r="9" fill="var(--stage)" stroke-width="5"/>
+<g id="cl0"></g>
+<g id="ww0"><text class="d5" x="1290" y="340" font-size="28" text-anchor="middle">Calmer</text></g>
+<g id="ww1"><text class="d5" x="1290" y="375" font-size="28" text-anchor="middle">Sleep better</text></g>
+<g id="ww2"><text class="d5" x="1290" y="410" font-size="28" text-anchor="middle">Get fit</text></g>
+</g>
+<g id="nott"><text class="m" x="1300" y="770" font-size="22" text-anchor="middle" style="fill:var(--loss)">CAN’T DO IT TODAY</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A wish is not a behavior.</text>
+<text class="b" x="120" y="176" font-size="32">BJ Fogg calls a broad wish an aspiration.</text>
+<g id="asp"><g id="cl1"></g><text class="d5" x="420" y="450" font-size="44" text-anchor="middle">Less stress</text><text class="m" x="420" y="610" font-size="22" text-anchor="middle">ASPIRATION</text></g>
+<path id="arr1" class="s-muted" d="M690 430h150m-26-26 26 26-26 26" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="beh"><rect class="s-ink" x="920" y="290" width="560" height="280" rx="18" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1200" y="540" font-size="20" text-anchor="middle">ONE SPECIFIC ACTION, RIGHT NOW</text>
+<text class="m" x="1200" y="610" font-size="22" text-anchor="middle">BEHAVIOR</text></g>
+<g id="walk"><g id="wp"></g><path id="legs" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="d5" x="1080" y="400" font-size="44">Short walk</text><text class="d5" x="1080" y="452" font-size="44">at lunch</text>
+<circle class="gain" cx="1410" cy="360" r="28"/></g>
+<g id="cando"><text class="m" x="420" y="660" font-size="22" text-anchor="middle" style="fill:var(--loss)">YOU CAN’T PERFORM IT</text>
+<text class="m" x="1200" y="660" font-size="22" text-anchor="middle" style="fill:var(--gain)">YOU CAN DO IT TODAY</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Choose golden behaviors.</text>
+<text class="b" x="120" y="176" font-size="32">The best habits to pick pass three tests.</text>
+<g id="star"><text class="m" x="360" y="730" font-size="22" text-anchor="middle" style="fill:var(--gain)">GOLDEN BEHAVIOR</text></g>
+<g id="rows"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Wave a magic wand.</text>
+<text class="b" x="120" y="176" font-size="32">Which behaviors would you make happen instantly?</text>
+<g id="wand"><path class="s-ink" d="M200 760L420 500" stroke-width="16" stroke-linecap="round"/></g>
+<g id="spk"></g>
+<g id="l3"><text class="m" x="120" y="300" font-size="22" style="fill:var(--gain)">FOR LESS STRESS</text></g>
+<g id="swarm"></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Map the impact.</text>
+<text class="b" x="120" y="176" font-size="32">Slide each card up if it helps a lot, down if it barely helps.</text>
+<g id="gr4"></g>
+<g id="hon"><text class="m" x="120" y="830" font-size="20">BE HONEST: SOME POPULAR IDEAS WON’T DO MUCH FOR YOU</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Map the ease.</text>
+<text class="b" x="120" y="176" font-size="32">Easy cards slide right. Hard ones slide left.</text>
+<g id="fm"><text class="d" x="1480" y="124" font-size="44" text-anchor="end" style="fill:var(--gain)">Focus Mapping</text></g>
+<g id="gr5"></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Find the gold.</text>
+<text class="b" x="120" y="176" font-size="32">Top right: high impact, and easy to do.</text>
+<g id="gr6"></g>
+<g id="later"><text class="m" x="590" y="724" font-size="20" text-anchor="middle">CAN WAIT · NO GUILT</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why golden behaviors stick.</text>
+<text class="b" x="120" y="176" font-size="32">Motivation comes and goes like a wave.</text>
+<g id="mot"><text class="m" x="120" y="250" font-size="22">MOTIVATION</text></g>
+<path id="wav" class="s-loss" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="dptr" class="s-loss" fill="none" stroke-width="4" stroke-linecap="round" stroke-dasharray="6 8"/>
+<g id="dread"><rect class="loss" x="705" y="514" width="110" height="56" rx="10"/><text class="m" x="760" y="549" font-size="18" text-anchor="middle" style="fill:var(--stage)">DREAD</text></g>
+<g id="wl"><text class="m" x="120" y="580" font-size="22">A HABIT YOU WANT</text><path class="s-line" d="M120 720H1480" stroke-width="5" stroke-linecap="round"/></g>
+<path id="push" class="s-gain" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="smile"><circle class="gain" r="48"/><circle cx="-16" cy="-12" r="6" fill="var(--on-gain)"/><circle cx="16" cy="-12" r="6" fill="var(--on-gain)"/><path d="M-22 10q22 22 44 0" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round"/></g>
+<g id="quote"><text class="d5" x="120" y="830" font-size="40">“Help people do what they already want to do.”</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which behavior lands</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">in your <tspan style="fill:var(--gain)">golden corner</tspan>?</text></g>
+<g id="qm"><text class="m" x="143" y="600" font-size="26">TONIGHT: ONE ASPIRATION · TEN BEHAVIORS · MAP THEM</text></g>
+<rect class="s-ink" x="1260" y="230" width="200" height="200" rx="12" fill="var(--stage)" stroke-width="5"/>
+<rect id="mz" x="1360" y="230" width="100" height="100" rx="12" fill="var(--gain)" fill-opacity=".25"/>
+<path class="s-line" d="M1360 238V422M1268 330H1452" stroke-width="3" stroke-dasharray="6 6"/>
+<g id="scr"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Pick Habits You Actually Want&rdquo;, from <em>Tiny Habits</em> by BJ Fogg. The magic wand brainstorm, the swarm of behaviors and Focus Mapping are methods described in the book; the stress-relief cards are an illustrative example. The grid and the motivation wave are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 9.3], [9.3, 25.4], [25.4, 42.5], [42.5, 63.5], [63.5, 77.7], [77.7, 90.9], [90.9, 106.4], [106.4, 121.5], [121.5, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Wishes Aren't Habits", "Aspiration vs Action", "Three Golden Tests", "Swarm of Options", "Map the Impact", "Map the Ease", "Find the Gold", "Why It Works", "Your Turn"];
+const TM={"wish_cloud": 0.0, "aspiration": 9.6, "behavior_box": 13.52, "walk_lunch": 19.2, "gold_star": 25.68, "check_one": 30.72, "check_two": 35.12, "check_three": 38.64, "magic_wand": 42.8, "bee_swarm": 50.96, "grid": 63.84, "up_arrow": 67.68, "side_arrow": 78.0, "top_corner": 91.2, "gold_cards": 98.76, "discard_pile": 103.04, "wave_line": 106.72, "smile_face": 112.72};
+const pers=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:`M${x-1.6*r} ${y+3.6*r}v${-0.6*r}a${1.6*r} ${1.6*r} 0 0 1 ${3.2*r} 0v${0.6*r}z`,class:cls},g)};
+const tx=(g,x,y,s,cls,str,ex)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s,class:cls},ex||{}),g);e.textContent=str;return e};
+const CLD='M-150 60A60 60 0 0 1-130-40A80 80 0 0 1 20-90A70 70 0 0 1 140-30A55 55 0 0 1 150 60Z';
+const cloud=(g,x,y,s)=>mk('path',{d:CLD,transform:`translate(${x} ${y}) scale(${s})`,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6/s,'stroke-linejoin':'round'},g);
+const C0=cloud($('cl0'),1290,360,1.1);cloud($('cl1'),420,430,1.2);
+pers($('tp'),1300,580,34,'ink');pers($('wp'),1010,350,22,'ink');
+const starPts=(cx,cy,R,r)=>{let s='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r:R;s+=(cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1)+' '}return s};
+const STAR=mk('polygon',{points:starPts(360,500,170,72),class:'gain',stroke:'var(--gain)','stroke-width':8,'stroke-linejoin':'round'},$('star'));
+mk('polygon',{points:starPts(436,482,30,13),class:'gain'},$('wand'));
+for(let i=0;i<6;i++){const a=-Math.PI/2+i*Math.PI/3,x=436+74*Math.cos(a),y=482+74*Math.sin(a);mk('path',{d:`M${x-10} ${y}h20M${x} ${y-10}v20`,stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round'},$('spk'))}
+const RW=[['It makes an impact.','REALLY HELPS YOU REACH YOUR ASPIRATION'],['You want to do it.','SOMETHING YOU GENUINELY WANT TO DO'],['You can do it.','YOU CAN ACTUALLY GET YOURSELF TO DO IT']];
+const rows=RW.map((r,i)=>{const y=300+150*i,g=mk('g',{},$('rows'));const b=mk('rect',{x:660,y:y,width:72,height:72,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const c=mk('path',{d:`M676 ${y+38}l16 16 28-32`,fill:'none',stroke:'var(--gain)','stroke-width':9,'stroke-linecap':'round','stroke-linejoin':'round','stroke-dasharray':80},g);
+  tx(g,770,y+50,46,'d',r[0]);tx(g,772,y+88,20,'m',r[1]);return [g,b,c]});
+const SW=[[580,230],[890,240],[1200,250],[620,375],[930,390],[1210,380],[560,530],[870,520],[1180,540],[720,680],[1030,690]];
+const LB={0:'MEDITATE',4:'STRETCH',6:'JOURNAL',9:'PHONE OUT OF BEDROOM'},LI=[0,4,6,9];
+const cards=SW.map((q,i)=>{const g=mk('g',{},$('swarm'));mk('rect',{x:0,y:0,width:260,height:70,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const l=mk('path',{d:'M30 30h170M30 46h110',stroke:'var(--line)','stroke-width':5,'stroke-linecap':'round'},g);
+  const w=LB[i]?tx(g,130,42,18,'m',LB[i],{'text-anchor':'middle'}):null;return {g,w,l}});
+// chart grid: box y 210-740, midline 475, x-axis 775
+const MID=475;
+const CD=[['STRETCH',440,280,1010],['MEDITATE',600,410,500],['PHONE OUT',760,430,1040],['',920,650,560],['LUNCH WALK',1080,350,1220],['JOURNAL',1240,650,1250]];
+const grid=par=>{const fg=mk('g',{},par);
+  mk('rect',{x:340,y:210,width:1000,height:530,rx:16,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},fg);
+  mk('path',{d:'M840 226V724M356 475H1324',stroke:'var(--line)','stroke-width':3,'stroke-dasharray':'10 10'},fg);
+  const ar={fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'};
+  const va=mk('g',{},par);mk('path',Object.assign({d:'M300 730V226m-18 22 18-22 18 22'},ar),va);const hi=tx(va,120,236,20,'m','HIGH IMPACT');tx(va,120,738,20,'m','LOW IMPACT');
+  const ha=mk('g',{},par);mk('path',Object.assign({d:'M350 775H1330m-22-18 22 18-22 18'},ar),ha);tx(ha,120,783,20,'m','HARD TO DO');const ez=tx(ha,1480,783,20,'m','EASY TO DO',{'text-anchor':'end'});
+  const cs=CD.map(c=>{const g=mk('g',{},par);const r=mk('rect',{x:-75,y:-28,width:150,height:56,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+    const w=c[0]?tx(g,0,7,18,'m',c[0],{'text-anchor':'middle'}):mk('path',{d:'M-45 0h90',stroke:'var(--line)','stroke-width':5,'stroke-linecap':'round'},g);return {g,r,w}});
+  return {fg,va,ha,hi,ez,cs}};
+const G4=grid($('gr4')),G5=grid($('gr5')),G6=grid($('gr6'));
+const CZ=mk('rect',{x:840,y:210,width:500,height:265,rx:16,fill:'var(--gain)','fill-opacity':.15,stroke:'var(--gain)','stroke-width':5},G6.fg);
+const at=(c,x,y,o)=>{c.g.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)})`);c.g.setAttribute('opacity',o)};
+// 'can wait' stack in the bottom-left: MEDITATE, blank, JOURNAL stacked with every label still readable
+const PILE=[[590,540],[590,600],[590,660]];
+const SP2=[[1272,250],[1330,262],[1410,248],[1290,300],[1380,310],[1275,350],[1340,370],[1400,360],[1300,400],[1420,405]];
+const scraps=SP2.map(q=>mk('rect',{x:q[0],y:q[1],width:36,height:18,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},$('scr')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const A=TM.wish_cloud;
+  rise($('wishG'),p(u,A,A+.6));
+  ['ww0','ww1','ww2'].forEach((id,i)=>rise($(id),p(u,A+.8+i*.9,A+1.3+i*.9)));
+  rise($('nott'),p(u,A+4.2,A+4.7)); C0.setAttribute('stroke-dasharray',u>=A+4.2?'16 12':'none');
+
+  rise($('asp'),p(u,TM.aspiration,TM.aspiration+.6));
+  rise($('beh'),p(u,TM.behavior_box,TM.behavior_box+.6)); $('arr1').setAttribute('opacity',p(u,TM.behavior_box,TM.behavior_box+.6));
+  rise($('walk'),p(u,TM.walk_lunch,TM.walk_lunch+.6)); rise($('cando'),p(u,TM.walk_lunch+1.5,TM.walk_lunch+2.1));
+  const sw=12*Math.sin(t*6); $('legs').setAttribute('d',`M1002 429l${(-sw).toFixed(1)} 32M1018 429l${sw.toFixed(1)} 32`);
+
+  rise($('star'),p(u,TM.gold_star,TM.gold_star+.6)); STAR.setAttribute('transform',`rotate(${(8*Math.sin(t*.8)).toFixed(2)} 360 500)`);
+  [TM.check_one,TM.check_two,TM.check_three].forEach((a,i)=>{rise(rows[i][0],p(u,a,a+.5));const k=p(u,a+.4,a+1);
+    rows[i][2].setAttribute('stroke-dashoffset',(80*(1-k)).toFixed(1));rows[i][1].setAttribute('stroke',k>0?'var(--gain)':'var(--ink)')});
+
+  rise($('wand'),p(u,TM.magic_wand,TM.magic_wand+.6)); rise($('spk'),p(u,TM.magic_wand+4.2,TM.magic_wand+4.7));
+  cards.forEach((c,i)=>{const a=TM.bee_swarm+i*.4,k=p(u,a,a+.9),q=SW[i],x=436+(q[0]-436)*k,y=482+(q[1]-482)*k+5*Math.sin(t*2.2+i)*k;
+    c.g.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${(.2+.8*k).toFixed(3)})`);c.g.setAttribute('opacity',u>=a?1:0);
+    if(c.w){const b=TM.bee_swarm+6.2+LI.indexOf(i)*.8,s=p(u,b,b+.4);c.w.setAttribute('opacity',s);c.l.setAttribute('opacity',1-s)}});
+  rise($('l3'),p(u,TM.bee_swarm+6.2,TM.bee_swarm+6.7));
+
+  rise(G4.fg,p(u,TM.grid,TM.grid+.6)); rise(G4.va,p(u,TM.up_arrow,TM.up_arrow+.5)); G4.ha.setAttribute('opacity',0);
+  G4.cs.forEach((c,i)=>{const d=CD[i],k=p(u,TM.up_arrow+.8+i*.9,TM.up_arrow+1.6+i*.9);at(c,d[1],MID+(d[2]-MID)*k,p(u,TM.grid+.8+i*.2,TM.grid+1.2+i*.2))});
+  rise($('hon'),p(u,TM.up_arrow+7.4,TM.up_arrow+7.9));
+
+  const B=TM.side_arrow;
+  G5.cs.forEach((c,i)=>{const d=CD[i],a=d[3]>d[1]?B+2.2+i*.3:B+7.2+i*.3,k=p(u,a,a+1);at(c,d[1]+(d[3]-d[1])*k,d[2],1)});
+  rise(G5.ha,p(u,B,B+.5)); rise($('fm'),p(u,B+11.4,B+12));
+
+  const C=TM.top_corner, hl=u>=C+4.2;
+  CZ.setAttribute('opacity',p(u,C,C+.6)); G6.hi.style.fill=hl?'var(--gain)':''; G6.ez.style.fill=hl?'var(--gain)':'';
+  G6.cs.forEach((c,i)=>{const d=CD[i];
+    if(i%2===0){const g=u>=TM.gold_cards+i*.15;c.r.setAttribute('fill',g?'var(--gain)':'var(--stage)');c.r.setAttribute('stroke',g?'var(--gain)':'var(--ink)');c.w.style.fill=g?'var(--on-gain)':'';at(c,d[3],d[2],1)}
+    else{const j=(i-1)/2,k=p(u,TM.discard_pile+j*.3,TM.discard_pile+j*.3+.9),q=PILE[j];
+      c.r.setAttribute('stroke',k>0?'var(--muted)':'var(--ink)');
+      at(c,d[3]+(q[0]-d[3])*k,d[2]+(q[1]-d[2])*k,(1-.45*k).toFixed(3))}});
+  rise($('later'),p(u,TM.discard_pile+.8,TM.discard_pile+1.4));
+
+  const L=TM.wave_line, pw=p(u,L,L+1.5), wy=x=>400+80*Math.sin(x/150-t*1.4);
+  let wd='';for(let x=120;x<=120+1360*pw;x+=10)wd+=(wd?'L':'M')+x+' '+wy(x).toFixed(1);
+  $('wav').setAttribute('d',wd||'M120 400'); rise($('mot'),p(u,L,L+.5));
+  const dk=p(u,L+1.5,L+2);
+  $('dread').setAttribute('opacity',dk); $('dptr').setAttribute('d',`M760 506V${(wy(760)+12).toFixed(1)}`); $('dptr').setAttribute('opacity',dk);
+  const S=TM.smile_face, sk=p(u,S+.5,S+4.5), sx=400+880*sk;
+  $('smile').setAttribute('transform',`translate(${sx.toFixed(1)} 670) rotate(${((sx-400)/48*57.3).toFixed(1)})`); $('smile').setAttribute('opacity',p(u,S,S+.5));
+  $('push').setAttribute('d',`M${(sx-130).toFixed(1)} 670h60m-16-16 16 16-16 16`); $('push').setAttribute('opacity',u>=S&&sk<.25?1:0);
+  rise($('wl'),p(u,S,S+.5)); rise($('quote'),p(u,S+5.3,S+5.9));
+
+  const E=SC[8][0]/K;
+  rise($('qa'),p(u,E+.4,E+.9)); rise($('qb'),p(u,E+.8,E+1.3)); rise($('qm'),p(u,E+1.2,E+1.7));
+  scraps.forEach((s,i)=>s.setAttribute('opacity',p(u,E+1+i*.35,E+1.3+i*.35)));
+  const gd=u>=E+5.3; scraps[2].setAttribute('fill',gd?'var(--gain)':'var(--stage)'); scraps[2].setAttribute('stroke',gd?'var(--gain)':'var(--ink)');
+  $('mz').setAttribute('opacity',p(u,E+5.3,E+5.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.79;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

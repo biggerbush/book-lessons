@@ -1,0 +1,309 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jab, Jab, Jab, Right Hook Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Jab, Jab, Jab, Right Hook: Win attention by giving value repeatedly before you ever ask your audience for anything. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">JAB, JAB, JAB, RIGHT HOOK · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Jab, jab, jab,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">then the right hook.</text>
+<text class="b" x="120" y="600" font-size="32">Give, give, give, and only then ask for something.</text>
+<g id="tgt"><circle class="s-line" cx="1340" cy="330" r="80" fill="none" stroke-width="6"/><circle class="s-line" cx="1340" cy="330" r="44" fill="none" stroke-width="6"/><circle class="gain" cx="1340" cy="330" r="14"/></g>
+<g id="tg"></g>
+<g id="tmiss"><text class="m" x="1340" y="480" font-size="24" text-anchor="middle" style="fill:var(--loss)">MOST OF THEM MISS</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Social media is a boxing match.</text>
+<text class="b" x="120" y="176" font-size="32">The prize is your audience’s attention.</text>
+<g id="ring">
+<path class="s-line" d="M200 380H1000M200 460H1000M200 540H1000" stroke-width="5"/>
+<rect class="ink" x="186" y="300" width="28" height="340" rx="6"/><rect class="ink" x="986" y="300" width="28" height="340" rx="6"/>
+<rect class="ink" x="160" y="640" width="880" height="24" rx="4"/>
+</g>
+<g id="prize"><path class="s-ink" d="M1140 420Q1270 300 1400 420Q1270 540 1140 420Z" fill="var(--stage)" stroke-width="7"/><circle class="gain" cx="1270" cy="420" r="44"/><circle class="ink" cx="1270" cy="420" r="18"/><text class="m" x="1270" y="560" font-size="22" text-anchor="middle">THE PRIZE: ATTENTION</text></g>
+<g id="bxr"></g>
+<g id="jab"></g>
+<g id="jl0"><text class="m" x="560" y="260" font-size="22" style="fill:var(--gain)">JAB</text></g>
+<g id="jl1"><text class="m" x="650" y="260" font-size="22" style="fill:var(--gain)">JAB</text></g>
+<g id="jl2"><text class="m" x="740" y="260" font-size="22" style="fill:var(--gain)">JAB</text></g>
+<g id="setup"><text class="d" x="120" y="780" font-size="46">Light jabs set up something bigger.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A jab gives without asking.</text>
+<text class="b" x="120" y="176" font-size="32">A small piece of content made for your audience.</text>
+<g id="phone"><rect class="s-ink" x="160" y="230" width="300" height="560" rx="36" fill="var(--stage)" stroke-width="7"/><g id="feed"></g></g>
+<g id="fc"><circle class="s-ink" cx="700" cy="420" r="90" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M660 400q12-16 24 0M716 400q12-16 24 0" fill="none" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M650 440q50 60 100 0z"/><text class="m" x="700" y="580" font-size="20" text-anchor="middle">MAKE THEM LAUGH</text></g>
+<g id="lb"><path class="s-ink" d="M1000 306v-26M926 336l-18-18M1074 336l18-18" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="1000" cy="400" r="70"/><rect class="ink" x="976" y="470" width="48" height="36" rx="6"/><text class="m" x="1000" y="580" font-size="20" text-anchor="middle">TEACH SOMETHING</text></g>
+<g id="sn"><circle class="gain" cx="1300" cy="420" r="50"/><text class="m" x="1300" y="580" font-size="20" text-anchor="middle">BRIGHTEN THEIR DAY</text></g>
+<g id="nostr"><text class="d" x="600" y="740" font-size="48">No sale. No link. No strings.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The right hook: you finally ask.</text>
+<text class="b" x="120" y="176" font-size="32">The punch that turns attention into results.</text>
+<path id="arc" class="s-gain" d="M220 660Q240 380 600 400" fill="none" stroke-width="6" stroke-dasharray="12 12"/>
+<g id="hk"></g>
+<g id="att"><rect class="s-ink" x="700" y="340" width="300" height="120" rx="16" fill="var(--stage)" stroke-width="5"/><text class="m" x="850" y="408" font-size="24" text-anchor="middle">ATTENTION</text></g>
+<g id="res"><path class="s-muted" d="M1010 400h70m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="s-line" d="M1100 560H1440" stroke-width="4"/><text class="m" x="1270" y="600" font-size="22" text-anchor="middle" style="fill:var(--gain)">RESULTS</text></g>
+<g id="bars"></g>
+<g id="ch0"><rect class="gain" x="700" y="640" width="240" height="64" rx="32"/><text class="m" x="820" y="680" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">BUY THIS</text></g>
+<g id="ch1"><rect class="gain" x="960" y="640" width="240" height="64" rx="32"/><text class="m" x="1080" y="680" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">SIGN UP HERE</text></g>
+<g id="ch2"><rect class="gain" x="1220" y="640" width="240" height="64" rx="32"/><text class="m" x="1340" y="680" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">VISIT OUR STORE</text></g>
+<g id="nohook"><text class="d" x="120" y="800" font-size="44">Without it, goodwill never becomes business.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most brands throw hooks nonstop.</text>
+<text class="b" x="120" y="176" font-size="32">Every post is a discount, a launch, a demand.</text>
+<g id="mega"><path class="loss" d="M170 430L330 360V580L170 510Z"/><rect class="loss" x="140" y="430" width="40" height="80" rx="8"/><rect class="loss" x="230" y="540" width="26" height="60" rx="6"/><path class="s-loss" d="M360 420q30 50 0 100M395 395q45 75 0 150" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="posts"></g>
+<g id="price"><text class="m" x="460" y="640" font-size="22">LIKE A SALESPERSON WHO ONLY TALKS PRICE</text></g>
+<g id="crowd4"></g>
+<g id="chev"></g>
+<g id="nob"><text class="m" x="1265" y="660" font-size="22" text-anchor="middle" style="fill:var(--loss)">NOBODY RESPONDS</text></g>
+<g id="why"><text class="d" x="120" y="790" font-size="48">People scroll right past.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Gifts build goodwill.</text>
+<text class="b" x="120" y="176" font-size="32">Each jab is a small gift.</text>
+<g id="gifts"></g>
+<g id="meter"><rect class="s-ink" x="160" y="460" width="840" height="64" rx="32" fill="var(--stage)" stroke-width="5"/><rect id="mfill" class="gain" x="166" y="466" width="0" height="52" rx="26"/></g>
+<g id="l0"><text class="m" x="440" y="580" font-size="22" text-anchor="middle">LIKE</text></g>
+<g id="l1"><text class="m" x="720" y="580" font-size="22" text-anchor="middle">TRUST</text></g>
+<g id="l2"><text class="m" x="1000" y="580" font-size="22" text-anchor="end" style="fill:var(--gain)">LOOK FORWARD</text></g>
+<g id="env"><rect class="gain" x="1120" y="300" width="320" height="200" rx="12"/><path d="M1120 300L1280 420L1440 300" fill="none" stroke="var(--stage)" stroke-width="6" stroke-linejoin="round"/><text class="m" x="1280" y="560" font-size="22" text-anchor="middle" style="fill:var(--gain)">INVITATION</text></g>
+<g id="intr"><text class="m" x="1280" y="610" font-size="22" text-anchor="middle">INTERRUPTION</text><line class="s-loss" x1="1185" y1="603" x2="1375" y2="603" stroke-width="4"/></g>
+<g id="inv"><text class="d" x="120" y="780" font-size="48">Your hook feels like an invitation.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Picture a small bakery.</text>
+<text class="b" x="120" y="176" font-size="32">An illustration: weeks of jabs, then one offer.</text>
+<g id="bak"><rect class="s-ink" x="160" y="340" width="340" height="360" fill="var(--stage)" stroke-width="6"/><g id="awn"></g><text class="m" x="330" y="385" font-size="22" text-anchor="middle">BAKERY</text><rect class="s-ink" x="190" y="400" width="140" height="120" fill="none" stroke-width="5"/><rect class="ink" x="360" y="520" width="100" height="180"/></g>
+<g id="k0"><rect class="s-ink" x="600" y="300" width="190" height="230" rx="14" fill="var(--stage)" stroke-width="4"/><path class="s-gain" d="M645 450Q695 370 745 450" fill="none" stroke-width="26" stroke-linecap="round"/><path d="M672 405l8 16M695 392v20M718 405l-8 16" stroke="var(--stage)" stroke-width="4"/><text class="m" x="695" y="500" font-size="18" text-anchor="middle">CROISSANT TIP</text></g>
+<g id="k1"><rect class="s-ink" x="820" y="300" width="190" height="230" rx="14" fill="var(--stage)" stroke-width="4"/><text class="d" x="915" y="470" font-size="110" text-anchor="middle">!</text><circle class="loss" cx="870" cy="450" r="8"/><circle class="loss" cx="960" cy="420" r="6"/><text class="m" x="915" y="500" font-size="18" text-anchor="middle">KITCHEN MISHAP</text></g>
+<g id="k2"><rect class="s-ink" x="1040" y="300" width="190" height="230" rx="14" fill="var(--stage)" stroke-width="4"/><path class="gain" d="M1090 450a45 45 0 0 1 90 0z"/><path class="s-ink" d="M1070 450h130" stroke-width="5" stroke-linecap="round"/><text class="m" x="1135" y="500" font-size="18" text-anchor="middle">MORNING VIEW</text></g>
+<g id="k3"><rect class="gain" x="1260" y="300" width="190" height="230" rx="14"/><rect x="1285" y="380" width="140" height="80" rx="8" fill="none" stroke="var(--on-gain)" stroke-width="3" stroke-dasharray="8 6"/><text class="d" x="1355" y="432" font-size="30" text-anchor="middle" style="fill:var(--on-gain)">OFFER</text><text class="m" x="1355" y="500" font-size="18" text-anchor="middle" style="fill:var(--on-gain)">WEEKEND OFFER</text><text class="m" x="1355" y="600" font-size="20" text-anchor="middle" style="fill:var(--gain)">ONE ASK</text></g>
+<g id="tl"><path class="s-line" d="M600 570H1450" stroke-width="4"/><text class="m" x="915" y="600" font-size="20" text-anchor="middle">WEEKS OF JABS</text></g>
+<g id="fol"></g>
+<g id="yes"><text class="d" x="120" y="830" font-size="40">Followers who enjoyed the jabs say yes.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Give more than you ask.</text>
+<text class="b" x="120" y="176" font-size="32">Jab, jab, jab, then the hook. Giving clearly outweighs asking.</text>
+<path class="s-ink" d="M460 320V600M380 600h160" stroke-width="8" stroke-linecap="round"/>
+<g id="scl"></g>
+<line id="beam" class="s-ink" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="460" cy="320" r="12"/>
+<g id="gl"><text class="m" x="220" y="560" font-size="22" text-anchor="middle" style="fill:var(--gain)">GIVE</text></g>
+<g id="al"><text class="m" x="700" y="560" font-size="22" text-anchor="middle" style="fill:var(--loss)">ASK</text></g>
+<g id="cal"><rect class="s-ink" x="870" y="230" width="580" height="340" rx="14" fill="var(--stage)" stroke-width="5"/><rect class="ink" x="870" y="230" width="580" height="44" rx="14"/><g id="cells"></g><text class="m" x="870" y="606" font-size="20">STEADY, WEEK AFTER WEEK</text></g>
+<g id="nb"><rect class="s-ink" x="120" y="640" width="1360" height="176" rx="16" fill="var(--stage)" stroke-width="5"/><text class="m" x="170" y="700" font-size="22">BEFORE YOU POST, ASK</text><text class="d" x="170" y="776" font-size="52">What does my audience <tspan style="fill:var(--gain)">get</tspan> from this?</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Post three jabs</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">that give something real</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">before you <tspan style="fill:var(--gain)">ask</tspan>.</text></g>
+<text class="m" x="143" y="700" font-size="26">THIS WEEK: JAB, JAB, JAB, THEN THE HOOK</text>
+<g id="cg"></g>
+<g id="hg"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Jab, Jab, Jab, Then the Right Hook&rdquo;, from <em>Jab, Jab, Jab, Right Hook</em> by Gary Vaynerchuk. The boxing metaphor of jabs and right hooks is Gary Vaynerchuk&#x27;s, as reported in the book. The bakery is an invented illustration, and the trust meter and scale drawings are visual metaphors, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 6.2], [6.2, 20.5], [20.5, 34.7], [34.7, 49.8], [49.8, 67.1], [67.1, 82.0], [82.0, 96.6], [96.6, 115.9], [115.9, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Jab, Jab, Right Hook", "The Boxing Ring", "What a Jab Is", "The Right Hook", "The Common Mistake", "Why Jabs Work", "A Bakery, Imagined", "Give More Than Ask", "Your Challenge"];
+const TM={"gloves": 0.0, "boxing_ring": 6.48, "boxer": 12.88, "jab_punch": 16.24, "phone_feed": 20.8, "laugh_face": 26.08, "lightbulb": 27.68, "right_hook": 35.04, "cart_icon": 38.32, "megaphone": 50.08, "sale_posts": 54.8, "yawn_crowd": 62.68, "gift_box": 67.36, "trust_meter": 71.68, "bakery": 82.32, "croissant": 84.08, "coupon": 90.64, "scale": 96.92, "calendar": 104.68, "notebook": 110.69, "challenge": 116.24};
+const pers=(g,x,y,r,a)=>[mk('circle',Object.assign({cx:x,cy:y,r:r},a),g),mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)];
+const glove=(g,cls,s)=>{const q=mk('g',{transform:'scale('+s+')'},g);mk('rect',{x:-38,y:40,width:76,height:44,rx:8,fill:'var(--muted)'},q);mk('rect',{x:-50,y:-46,width:100,height:92,rx:40,class:cls},q);mk('rect',{x:-64,y:-6,width:34,height:44,rx:17,class:cls,stroke:'var(--stage)','stroke-width':5},q);return q};
+const G=(par,x,y,cls,s)=>{const w=mk('g',{transform:'translate('+x+' '+y+')'},par);glove(w,cls,s);return w};
+const R=(id,u,a,d=.5)=>rise($(id),p(u,a,a+d));
+const TG=G($('tg'),1420,760,'loss',1);
+pers($('bxr'),420,500,32,{class:'ink'});pers($('bxr'),820,500,32,{fill:'var(--muted)','fill-opacity':.5});
+const JB=G($('jab'),490,570,'gain',.5);
+for(let i=0;i<3;i++){const y=280+i*165;mk('rect',{x:190,y:y,width:240,height:140,rx:12,fill:'none',stroke:'var(--line)','stroke-width':4},$('feed'));mk('path',{d:'M214 '+(y+40)+'h120M214 '+(y+80)+'h180',stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},$('feed'))}
+for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1300+68*c).toFixed(1)+' '+(420+68*s).toFixed(1)+'L'+(1300+92*c).toFixed(1)+' '+(420+92*s).toFixed(1),stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('sn'))}
+const HK=G($('hk'),220,660,'gain',.8);
+const BH=[60,110,160,220],BR=BH.map((h,i)=>mk('rect',{x:1110+i*85,y:560,width:60,height:0,rx:6,class:'gain'},$('bars')));
+const TL=['SALE','NEW!','BUY NOW','LAUNCH','DEAL','ORDER'].map((s,i)=>{const x=460+(i%3)*170,y=250+Math.floor(i/3)*170,g=mk('g',{},$('posts'));mk('rect',{x:x,y:y,width:150,height:150,rx:14,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);const tx=mk('text',{x:x+75,y:y+86,'font-size':26,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},g);tx.textContent=s;return g});
+for(let i=0;i<4;i++){const x=1100+i*110;pers($('crowd4'),x,360,26,{fill:'var(--muted)'});mk('circle',{cx:x,cy:368,r:7,fill:'var(--stage)'},$('crowd4'));mk('path',{d:'M'+(x-14)+' 350h9M'+(x+5)+' 350h9',stroke:'var(--stage)','stroke-width':4,'stroke-linecap':'round'},$('crowd4'))}
+const CV=[0,1,2].map(()=>mk('path',{d:'M-22 12l22-20 22 20',fill:'none',stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('chev')));
+const GF=[0,1,2,3,4].map(i=>{const x=200+i*180,g=mk('g',{},$('gifts'));mk('rect',{x:x-40,y:300,width:80,height:70,class:'gain'},g);mk('rect',{x:x-46,y:280,width:92,height:22,class:'gain'},g);mk('rect',{x:x-6,y:280,width:12,height:90,fill:'var(--stage)'},g);[-12,12].forEach(d=>mk('circle',{cx:x+d,cy:268,r:10,fill:'none',stroke:'var(--ink)','stroke-width':4},g));mk('path',{d:'M'+x+' 392v44',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'6 6'},g);return g});
+for(let i=0;i<5;i++)mk('rect',{x:160+i*68,y:290,width:68,height:60,fill:i%2?'var(--stage)':'var(--gain)',stroke:'var(--ink)','stroke-width':4},$('awn'));
+const FL=[0,1,2,3,4,5,6].map(i=>pers($('fol'),660+i*120,670,18,{fill:'var(--muted)'}));
+const pan=par=>{const g=mk('g',{},par);mk('path',{d:'M0 0L-90 100M0 0L90 100',stroke:'var(--ink)','stroke-width':3,fill:'none'},g);mk('path',{d:'M-90 100a90 30 0 0 0 180 0z',class:'ink'},g);return g};
+const PL=pan($('scl')),PR=pan($('scl'));
+const GB=[-54,-17,20].map(x=>mk('rect',{x:x,y:66,width:34,height:34,rx:6,class:'gain'},PL)),AB=mk('rect',{x:-17,y:66,width:34,height:34,rx:6,class:'loss'},PR);
+const CE=[...Array(28)].map((_,i)=>mk('rect',{x:890+(i%7)*80,y:292+Math.floor(i/7)*68,width:60,height:52,rx:8,fill:'var(--line)'},$('cells')));
+const CG=[940,1060,1180].map(x=>{const g=mk('g',{},$('cg'));G(g,x,690,'gain',.55);return g});
+const HG=G($('hg'),1360,690,'ink',.75);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const sw=p(t,TM.gloves+.6,TM.gloves+1.6),wb=(1-sw)*6*Math.sin(t*5);
+TG.setAttribute('transform','translate('+(1420-240*sw+wb).toFixed(1)+' '+(760-550*sw).toFixed(1)+')');
+R('tg',u,TM.gloves,.4); R('tmiss',u,TM.gloves+4.6);
+
+R('ring',u,TM.boxing_ring); R('prize',u,TM.boxing_ring+2); R('bxr',u,TM.boxer); R('jab',u,TM.jab_punch);
+const jp=u>=TM.jab_punch?Math.pow(Math.max(0,Math.sin(t*5)),3):0; JB.setAttribute('transform','translate('+(490+150*jp).toFixed(1)+' 570)');
+[0,1,2].forEach(i=>R('jl'+i,u,TM.jab_punch+i*.5,.3)); R('setup',u,TM.jab_punch+2);
+
+R('phone',u,TM.phone_feed); R('fc',u,TM.laugh_face); R('lb',u,TM.lightbulb); R('sn',u,TM.lightbulb+2); R('nostr',u,TM.lightbulb+4.5);
+
+const hs=p(u,TM.right_hook,TM.right_hook+1.2),h1=1-hs;
+HK.setAttribute('transform','translate('+(h1*h1*220+2*h1*hs*240+hs*hs*600).toFixed(1)+' '+(h1*h1*660+2*h1*hs*380+hs*hs*400).toFixed(1)+')');
+R('hk',u,TM.right_hook,.3); $('arc').setAttribute('opacity',p(u,TM.right_hook,TM.right_hook+1)); R('att',u,TM.right_hook);
+[0,1,2].forEach(i=>R('ch'+i,u,TM.cart_icon+i,.4)); R('res',u,TM.cart_icon+3.7);
+BR.forEach((b,i)=>{const h=BH[i]*p(u,TM.cart_icon+3.9+i*.2,TM.cart_icon+5+i*.2);b.setAttribute('height',h.toFixed(1));b.setAttribute('y',(560-h).toFixed(1))});
+R('nohook',u,TM.cart_icon+8.7);
+
+R('mega',u,TM.megaphone); TL.forEach((g,i)=>rise(g,p(u,TM.sale_posts+i*.3,TM.sale_posts+i*.3+.4))); R('price',u,TM.sale_posts+3.8);
+R('crowd4',u,TM.yawn_crowd); $('chev').setAttribute('opacity',p(u,TM.yawn_crowd,TM.yawn_crowd+.5));
+CV.forEach((c,i)=>{const o=(t*40+i*35)%105;c.setAttribute('transform','translate(1265 '+(610-o).toFixed(1)+')');c.setAttribute('opacity',(1-o/105).toFixed(2))});
+R('nob',u,TM.yawn_crowd+.4); R('why',u,TM.yawn_crowd+1);
+
+GF.forEach((g,i)=>rise(g,p(u,TM.gift_box+i*.4,TM.gift_box+i*.4+.4))); R('meter',u,TM.gift_box+2);
+$('mfill').setAttribute('width',(828*p(u,TM.trust_meter,TM.trust_meter+5)).toFixed(1));
+[1.2,2.4,3.8].forEach((d,i)=>R('l'+i,u,TM.trust_meter+d));
+R('env',u,TM.trust_meter+6.2); R('intr',u,TM.trust_meter+6.6); R('inv',u,TM.trust_meter+7);
+
+R('bak',u,TM.bakery); R('tl',u,TM.croissant); R('k0',u,TM.croissant); R('k1',u,TM.croissant+2.2); R('k2',u,TM.croissant+4.4);
+R('fol',u,TM.croissant+5); R('k3',u,TM.coupon);
+const yy=u>=TM.coupon+2.5; FL.forEach(f=>f.forEach(e=>e.setAttribute('fill',yy?'var(--gain)':'var(--muted)'))); R('yes',u,TM.coupon+2.5);
+
+const a=.21*p(u,TM.scale+4.6,TM.scale+5.6),ca=240*Math.cos(a),sa=240*Math.sin(a);
+const bm=$('beam'); bm.setAttribute('x1',(460-ca).toFixed(1)); bm.setAttribute('y1',(320+sa).toFixed(1)); bm.setAttribute('x2',(460+ca).toFixed(1)); bm.setAttribute('y2',(320-sa).toFixed(1));
+PL.setAttribute('transform','translate('+(460-ca).toFixed(1)+' '+(320+sa).toFixed(1)+')'); PR.setAttribute('transform','translate('+(460+ca).toFixed(1)+' '+(320-sa).toFixed(1)+')');
+GB.forEach((b,i)=>rise(b,p(u,TM.scale+i*.6,TM.scale+i*.6+.4))); rise(AB,p(u,TM.scale+2,TM.scale+2.4));
+R('gl',u,TM.scale); R('al',u,TM.scale+2); R('cal',u,TM.calendar);
+CE.forEach((c,i)=>{const d=i%7,on=u>=TM.calendar+.5+i*.12;c.setAttribute('fill',on?(d===6?'var(--loss)':d%2===0?'var(--gain)':'var(--line)'):'var(--line)')});
+R('nb',u,TM.notebook);
+
+R('qa',u,TM.challenge); R('qb',u,TM.challenge+.4); R('qc',u,TM.challenge+.8);
+CG.forEach((g,i)=>rise(g,p(u,TM.challenge+1.2+i*.6,TM.challenge+1.6+i*.6)));
+const hk=p(u,TM.challenge+5.8,TM.challenge+6.6); R('hg',u,TM.challenge+5.8,.3);
+HG.setAttribute('transform','translate('+(1360+60*(1-hk)).toFixed(1)+' '+(690-40*Math.sin(hk*Math.PI)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.15;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

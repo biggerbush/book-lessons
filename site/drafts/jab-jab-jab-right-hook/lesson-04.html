@@ -1,0 +1,315 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jab, Jab, Jab, Right Hook Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Jab, Jab, Jab, Right Hook: On Facebook, the algorithm rewards posts people genuinely engage with, so every post must earn attention instead of demanding it. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">JAB, JAB, JAB, RIGHT HOOK · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Facebook: earn your</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">place in the feed.</text>
+<text class="b" x="120" y="600" font-size="32">Why every Facebook post has to earn its spot.</text>
+<g id="ph0"><rect class="s-ink" x="1180" y="220" width="260" height="520" rx="36" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="1270" y="234" width="80" height="10" rx="5"/><g id="ph0c"></g></g>
+<g id="nope"><path class="s-loss" d="M1270 380L1350 460M1350 380L1270 460" stroke-width="9" stroke-linecap="round"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The algorithm is the gatekeeper.</text>
+<text class="b" x="120" y="176" font-size="32">More posts wait than anyone could scroll through.</text>
+<g id="stkL"><text class="m" x="140" y="250" font-size="22">YOUR BRAND</text></g>
+<g id="gate"><text class="m" x="800" y="244" font-size="22" text-anchor="middle">ALGORITHM</text><rect class="loss" x="780" y="260" width="40" height="200" rx="6"/><rect class="loss" x="780" y="560" width="40" height="200" rx="6"/><path class="s-loss" d="M770 510Q800 485 830 510Q800 535 770 510Z" fill="none" stroke-width="4"/><circle class="loss" cx="800" cy="510" r="8"/></g>
+<g id="fans1"><text class="m" x="1220" y="360" font-size="22">YOUR FANS</text></g>
+<g id="stk"></g>
+<g id="hide1"><text class="d" x="120" y="830" font-size="40">Only a few get through. The rest stay hidden.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">EdgeRank weighed three things.</text>
+<text class="b" x="120" y="176" font-size="32">Facebook’s filter when Gary wrote the book.</text>
+<g id="pf0"><rect class="s-line" x="120" y="240" width="440" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="290" font-size="20">01</text><text class="d5" x="150" y="350" font-size="44">Affinity</text></g>
+<g id="pf1"><rect class="s-line" x="580" y="240" width="440" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="610" y="290" font-size="20">02</text><text class="d5" x="610" y="350" font-size="44">Type</text></g>
+<g id="pf2"><rect class="s-line" x="1040" y="240" width="440" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1070" y="290" font-size="20">03</text><text class="d5" x="1070" y="350" font-size="44">Time</text></g>
+<g id="pd0"><circle class="gain" cx="230" cy="520" r="50"/><text class="m" x="230" y="529" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">YOU</text><g id="aff"></g><text class="m" x="150" y="700" font-size="20">HOW OFTEN THEY</text><text class="m" x="150" y="730" font-size="20">INTERACT WITH YOU</text></g>
+<g id="pd1"><path class="ink" d="M800 520L770 610H830Z"/><g id="scl"></g><text class="m" x="610" y="700" font-size="20">COMMENTS AND SHARES</text><text class="m" x="610" y="730" font-size="20">COUNT MORE THAN LIKES</text></g>
+<g id="pd2"><circle class="s-ink" cx="1260" cy="500" r="100" fill="var(--stage)" stroke-width="7"/><g id="ticks"></g><line id="hh" class="s-ink" x1="1260" y1="500" x2="1260" y2="450" stroke-width="8" stroke-linecap="round"/><line id="hm" class="s-gain" x1="1260" y1="500" x2="1260" y2="420" stroke-width="6" stroke-linecap="round"/><circle class="ink" cx="1260" cy="500" r="9"/><text class="m" x="1070" y="700" font-size="20">FRESH POSTS</text><text class="m" x="1070" y="730" font-size="20">BEAT STALE ONES</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Engagement snowballs.</text>
+<text class="b" x="120" y="176" font-size="32">Each post affects the reach of the next one.</text>
+<g id="sbTl"><text class="m" x="120" y="270" font-size="22" style="fill:var(--gain)">PEOPLE LIKE, COMMENT, SHARE</text><path class="s-line" d="M220 400H1160" stroke-width="4" stroke-dasharray="10 10"/></g>
+<g id="sbT"></g>
+<g id="sbTr"><text class="m" x="1260" y="410" font-size="22" style="fill:var(--gain)">MORE REACH</text></g>
+<g id="sbBl"><text class="m" x="120" y="560" font-size="22" style="fill:var(--loss)">PEOPLE IGNORE YOU</text><path class="s-line" d="M220 680H1160" stroke-width="4" stroke-dasharray="10 10"/></g>
+<g id="sbB"></g>
+<g id="sbBr"><text class="m" x="1260" y="690" font-size="22" style="fill:var(--loss)">LESS REACH</text></g>
+<g id="behind"><text class="d" x="120" y="830" font-size="40">Your next post starts from behind.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The feed is not a billboard.</text>
+<text class="b" x="120" y="176" font-size="32">Nonstop sales pitches get scrolled right past.</text>
+<g id="bb"><path class="s-ink" d="M240 500V640M540 500V640" stroke-width="8" stroke-linecap="round"/><rect class="s-loss" x="140" y="250" width="500" height="250" rx="8" fill="var(--stage)" stroke-width="8"/><text class="d" x="390" y="400" font-size="80" text-anchor="middle" style="fill:var(--loss)">BUY NOW!</text><text class="m" x="390" y="452" font-size="22" text-anchor="middle">SALE · SALE · SALE</text></g>
+<g id="ph4"><rect class="s-ink" x="760" y="230" width="260" height="470" rx="32" fill="var(--stage)" stroke-width="7"/><g id="feed4"></g></g>
+<g id="swipe"><path class="s-muted" d="M1060 560V380m-18 18 18-18 18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="ch4"><text class="m" x="1140" y="285" font-size="20">YOUR REACH</text><path class="s-ink" d="M1120 300V640H1460" fill="none" stroke-width="5" stroke-linecap="round"/><path id="rch" class="s-loss" d="M1130 340C1250 360 1320 520 1450 610" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/></g>
+<g id="bad"><text class="d" x="120" y="790" font-size="48">A bad post is not neutral.</text></g>
+<g id="cost"><text class="m" x="120" y="845" font-size="24" style="fill:var(--loss)">IT COSTS YOU TOMORROW’S AUDIENCE</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Earn your place in the feed.</text>
+<text class="b" x="120" y="176" font-size="32">Would it feel at home next to a friend’s photo?</text>
+<g id="fc"><rect class="s-line" x="140" y="230" width="560" height="280" rx="16" fill="var(--stage)" stroke-width="3"/><circle class="ink" cx="190" cy="272" r="20"/><text class="m" x="226" y="279" font-size="20">A FRIEND</text><rect x="170" y="305" width="500" height="180" rx="8" fill="var(--muted)" fill-opacity=".18"/><path class="ink" d="M190 485L330 360L420 440L500 380L650 485Z" fill-opacity=".6"/><circle class="gain" cx="600" cy="345" r="22"/></g>
+<g id="yc"><rect class="s-gain" x="140" y="540" width="560" height="300" rx="16" fill="var(--stage)" stroke-width="4"/><circle class="gain" cx="190" cy="582" r="20"/><text class="m" x="226" y="589" font-size="20">YOUR BRAND</text><rect x="170" y="612" width="500" height="150" rx="8" fill="var(--muted)" fill-opacity=".18"/>
+<g id="lf"><circle class="gain" cx="420" cy="687" r="52"/><path d="M392 676q8-12 16 0M432 676q8-12 16 0" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round"/><path d="M392 696q28 34 56 0z" fill="var(--on-gain)"/></g>
+<rect id="tb1" class="ink" x="170" y="782" width="500" height="14" rx="7"/><rect id="tb2" x="170" y="808" width="420" height="14" rx="7" fill="var(--line)"/></g>
+<text class="m" x="820" y="280" font-size="22">BEFORE YOU POST</text>
+<g id="ck0"><circle class="gain" cx="840" cy="349" r="22"/><path d="M829 349l8 8 14-15" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="880" y="360" font-size="32">Their interests, not your pitch.</text></g>
+<g id="ck1"><circle class="gain" cx="840" cy="489" r="22"/><path d="M829 489l8 8 14-15" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="880" y="500" font-size="32">Funny, useful or surprising.</text></g>
+<g id="ck2"><circle class="gain" cx="840" cy="629" r="22"/><path d="M829 629l8 8 14-15" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="880" y="640" font-size="32">Short words, strong image.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Pay to amplify what works.</text>
+<text class="b" x="120" y="176" font-size="32">Money is a megaphone, not a fix.</text>
+<g id="coins"><text class="m" x="240" y="820" font-size="20" text-anchor="middle">PAID PROMOTION</text></g>
+<path id="carr" class="s-gain" d="M310 690Q500 720 686 626" fill="none" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<g id="mega"><path class="s-ink" d="M700 541L690 630" stroke-width="12" stroke-linecap="round"/><polygon class="s-ink" points="580,440 900,330 900,610 580,500" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/><rect class="ink" x="560" y="435" width="24" height="70" rx="6"/></g>
+<g id="bor"><rect class="s-muted" x="320" y="230" width="200" height="120" rx="12" fill="none" stroke-width="4" stroke-dasharray="8 8"/><rect x="345" y="255" width="150" height="14" rx="7" fill="var(--line)"/><rect x="345" y="285" width="110" height="14" rx="7" fill="var(--line)"/><text class="m" x="420" y="390" font-size="24" text-anchor="middle">BORING</text></g>
+<g id="borx"><path class="s-loss" d="M345 250L495 330M495 250L345 330" stroke-width="6" stroke-linecap="round" opacity=".75"/></g>
+<g id="lov"><rect class="gain" x="320" y="420" width="200" height="150" rx="12"/><path transform="translate(420 470) scale(1.3) translate(-460 -460)" d="M460 485c-30-20-40-38-28-52c10-11 24-6 28 4c4-10 18-15 28-4c12 14 2 32-28 52z" fill="var(--on-gain)"/><text class="m" x="420" y="550" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">LOVED</text></g>
+<g id="waves"></g>
+<g id="crowd"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Audit your last 10 posts.</text>
+<text class="b" x="120" y="176" font-size="32">Rank by comments and shares, not by your own taste.</text>
+<g id="bars7"></g>
+<g id="tiles"></g>
+<g id="more7"><path class="s-gain" d="M745 240h12v166h-12" fill="none" stroke-width="4" stroke-linecap="round"/><text class="m" x="775" y="330" font-size="22" style="fill:var(--gain)">MAKE MORE OF THESE</text></g>
+<g id="loop7"><g id="lp"><path class="s-gain" d="M1380 330A90 90 0 1 1 1290 240M1272 224L1294 240L1272 256" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g><text class="m" x="1290" y="339" font-size="24" text-anchor="middle">REPEAT</text><text class="m" x="1290" y="465" font-size="20" text-anchor="middle">WEEK AFTER WEEK</text><text class="m" x="1130" y="800" font-size="20">REACH</text><path class="s-line" d="M1120 762H1460" stroke-width="4"/><g id="wk7"></g></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="320" font-size="88" letter-spacing="-2">Before you post:</text></g>
+<g id="qb"><text class="d" x="136" y="430" font-size="88" letter-spacing="-2">would I stop</text></g>
+<g id="qc"><text class="d" x="136" y="540" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">scrolling</tspan> for this?</text></g>
+<g id="q8m"><text class="m" x="143" y="680" font-size="26">IF NOT, REWRITE IT UNTIL YOU WOULD.</text></g>
+<g id="q8p"><rect class="s-ink" x="1200" y="250" width="240" height="420" rx="30" fill="var(--stage)" stroke-width="7"/><rect x="1225" y="290" width="190" height="90" rx="10" fill="var(--line)"/><rect class="gain" x="1225" y="415" width="190" height="90" rx="10"/><text class="d" x="1320" y="472" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">STOP</text><rect x="1225" y="540" width="190" height="90" rx="10" fill="var(--line)"/><rect id="q8r" class="s-gain" x="1213" y="403" width="214" height="114" rx="16" fill="none" stroke-width="4"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Facebook: Earn Your Place in the Feed&rdquo;, from <em>Jab, Jab, Jab, Right Hook</em> by Gary Vaynerchuk. The EdgeRank algorithm and its three factors are as reported in the book, which describes Facebook at the time of writing. The snowball, shrinking reach and ranked list drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 6.8], [6.8, 22.1], [22.1, 40.0], [40.0, 54.9], [54.9, 71.1], [71.1, 89.5], [89.5, 104.1], [104.1, 116.3], [116.3, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "The Gatekeeper", "EdgeRank", "Engagement Snowballs", "The Ad Trap", "Earn It", "Pay to Amplify", "Act Today", "Your Challenge"];
+const TM={"phone_feed": 0.0, "gatekeeper": 7.12, "post_stack": 12.72, "edgerank": 22.36, "affinity": 26.4, "weight": 30.4, "clock": 35.68, "snowball": 40.32, "shrinking": 50.0, "billboard": 55.2, "scroll_past": 60.08, "friend_post": 71.36, "laugh_face": 81.04, "short_text": 85.76, "coins": 89.76, "megaphone": 97.6, "your_posts": 104.4, "ranked_list": 106.8, "repeat_loop": 113.04};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+const C0=[0,1,2,3].map(i=>{const y=260+i*115,y1=i===1,g=mk('g',{},$('ph0c'));
+  mk('rect',{x:1210,y:y,width:200,height:90,rx:12,fill:'var(--stage)',stroke:y1?'var(--gain)':'var(--line)','stroke-width':4},g);
+  mk('circle',{cx:1236,cy:y+26,r:12,fill:y1?'var(--gain)':'var(--muted)'},g);
+  mk('rect',{x:1256,y:y+20,width:130,height:10,rx:5,fill:'var(--line)'},g);
+  mk('rect',{x:1226,y:y+50,width:170,height:24,rx:4,fill:y1?'var(--gain)':'var(--line)','fill-opacity':.6},g);return g});
+const P1=[];for(let i=0;i<18;i++){const c=i%3,r=Math.floor(i/3),x=140+c*160,y=270+r*80,s=[1,8,15].indexOf(i),g=mk('g',{},$('stk'));
+  mk('rect',{x:x,y:y,width:140,height:56,rx:10,fill:'var(--stage)',stroke:s>=0?'var(--gain)':'var(--ink)','stroke-width':4},g);
+  mk('rect',{x:x+14,y:y+16,width:80,height:8,fill:'var(--line)'},g);mk('rect',{x:x+14,y:y+32,width:110,height:8,fill:'var(--line)'},g);P1.push([g,x,y,s])}
+[[1220,420],[1320,420],[1420,420],[1270,560],[1370,560]].forEach(q=>fig($('fans1'),q[0],q[1],22,'ink'));
+const AF=[0,1,2,3,4].map(k=>mk('path',{d:'M284 520Q350 '+(520+(k-2)*80)+' 418 520',fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-linecap':'round'},$('aff')));
+fig($('aff'),450,470,22,'ink');
+const SB=mk('line',{stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('scl'));
+const PAN=['LIKE','SHARE'].map((s,i)=>{const g=mk('g',{},$('scl'));mk('line',{x1:0,y1:-60,x2:0,y2:0,stroke:'var(--muted)','stroke-width':3},g);
+  mk('rect',{x:-55,y:0,width:110,height:50,rx:8,fill:i?'var(--gain)':'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:0,y:33,'font-size':20,'text-anchor':'middle',class:'m',style:i?'fill:var(--on-gain)':''},g);tx.textContent=s;return g});
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('line',{x1:1260+82*Math.cos(a),y1:500+82*Math.sin(a),x2:1260+94*Math.cos(a),y2:500+94*Math.sin(a),stroke:'var(--ink)','stroke-width':4},$('ticks'))}
+const XS=[220,400,610,860,1160],RG=[24,34,46,60,78],RL=[60,46,34,24,14];
+const TOPC=XS.map((x,i)=>mk('circle',{cx:x,cy:400,r:RG[i],class:'gain'},$('sbT')));
+const BOTC=XS.map((x,i)=>mk('circle',{cx:x,cy:680,r:RL[i],class:'loss'},$('sbB')));
+const AD=['SALE','BUY NOW','SHOP TODAY','LAST CHANCE','SALE'].map(s=>{const g=mk('g',{},$('feed4'));
+  mk('rect',{x:790,y:0,width:200,height:80,rx:10,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  const tx=mk('text',{x:890,y:50,'font-size':26,'text-anchor':'middle',class:'d5'},g);tx.textContent=s;return g});
+const COINS=[0,1,2,3,4,5,6].map(i=>mk('ellipse',{cx:240,cy:760-i*24,rx:64,ry:18,fill:'var(--gain)',stroke:'var(--ink)','stroke-width':3},$('coins')));
+const WV=[60,110,160].map(r=>mk('path',{d:'M'+(900+r*.766)+' '+(470-r*.643)+'A'+r+' '+r+' 0 0 1 '+(900+r*.766)+' '+(470+r*.643),fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('waves')));
+const CR=[];for(let i=0;i<30;i++)CR.push(fig(mk('g',{},$('crowd')),1120+(i%5)*80,300+Math.floor(i/5)*66,10,'gain'));
+const RK=[6,1,8,3,0,9,4,2,7,5],BL=[520,440,370,310,250,200,150,110,70,40];
+const TL=RK.map((_,i)=>{const g=mk('g',{},$('tiles'));const r=mk('rect',{x:0,y:0,width:90,height:90,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:45,y:58,'font-size':32,'text-anchor':'middle',class:'d5'},g);tx.textContent=i+1;return [g,r,tx]});
+const BR=BL.map((w,r)=>mk('rect',{x:210,y:245+r*60,height:36,rx:6,width:0,fill:r<3?'var(--gain)':'var(--line)'},$('bars7')));
+const WB=[0,1,2,3,4,5].map(i=>mk('rect',{x:1130+i*56,y:760,width:40,height:0,rx:4,class:'gain'},$('wk7')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('ph0'),p(u,TM.phone_feed,TM.phone_feed+.6));
+const no=p(u,TM.phone_feed+4.6,TM.phone_feed+5.1); C0[1].setAttribute('opacity',(1-.75*no).toFixed(2)); rise($('nope'),no);
+
+rise($('stkL'),p(u,TM.gatekeeper,TM.gatekeeper+.5)); rise($('gate'),p(u,TM.gatekeeper+.4,TM.gatekeeper+1)); rise($('fans1'),p(u,TM.gatekeeper+1,TM.gatekeeper+1.6));
+const hd=p(u,TM.post_stack+6.2,TM.post_stack+7.6);
+P1.forEach(([g,x,y,s],i)=>{const a=TM.post_stack+i*.12,o=p(u,a,a+.3);g.setAttribute('opacity',(o*(s<0?1-.8*hd:1)).toFixed(2));
+  if(s>=0)g.setAttribute('transform','translate('+((940-x)*hd).toFixed(1)+' '+((380+s*80-y)*hd).toFixed(1)+')')});
+rise($('hide1'),p(u,TM.post_stack+6.8,TM.post_stack+7.4));
+
+[0,1,2].forEach(i=>rise($('pf'+i),p(u,TM.edgerank+i*.4,TM.edgerank+i*.4+.5)));
+rise($('pd0'),p(u,TM.affinity,TM.affinity+.5)); AF.forEach((a,k)=>a.setAttribute('opacity',p(u,TM.affinity+.5+k*.35,TM.affinity+.8+k*.35)));
+rise($('pd1'),p(u,TM.weight,TM.weight+.5));
+const ag=.26*p(u,TM.weight+1,TM.weight+2.2),bc=Math.cos(ag)*130,bs=Math.sin(ag)*130;
+SB.setAttribute('x1',800-bc);SB.setAttribute('y1',520-bs);SB.setAttribute('x2',800+bc);SB.setAttribute('y2',520+bs);
+PAN[0].setAttribute('transform','translate('+(800-bc).toFixed(1)+' '+(580-bs).toFixed(1)+')');PAN[1].setAttribute('transform','translate('+(800+bc).toFixed(1)+' '+(580+bs).toFixed(1)+')');
+rise($('pd2'),p(u,TM.clock,TM.clock+.5)); const cr=u>TM.clock?u-TM.clock:0;
+$('hm').setAttribute('transform','rotate('+((cr*240)%360).toFixed(1)+' 1260 500)'); $('hh').setAttribute('transform','rotate('+((cr*20)%360).toFixed(1)+' 1260 500)');
+
+rise($('sbTl'),p(u,TM.snowball,TM.snowball+.5));
+TOPC.forEach((c,i)=>{const a=i?TM.snowball+4.2+i*.6:TM.snowball+.4;rise(c,p(u,a,a+.4))});
+rise($('sbTr'),p(u,TM.snowball+7.4,TM.snowball+7.9));
+rise($('sbBl'),p(u,TM.shrinking,TM.shrinking+.5));
+BOTC.forEach((c,i)=>{const a=TM.shrinking+.3+i*.5;rise(c,p(u,a,a+.4))});
+rise($('sbBr'),p(u,TM.shrinking+2.8,TM.shrinking+3.3)); rise($('behind'),p(u,TM.shrinking+3.4,TM.shrinking+4));
+
+rise($('bb'),p(u,TM.billboard,TM.billboard+.6)); rise($('ph4'),p(u,TM.billboard+2.5,TM.billboard+3.1));
+const sp=u>TM.scroll_past?((u-TM.scroll_past)*140)%110:0;
+AD.forEach((g,i)=>{const y=255+i*110-sp;g.setAttribute('transform','translate(0 '+y.toFixed(1)+')');g.setAttribute('opacity',(cl((y-240)/15)*cl((690-y-80)/20)).toFixed(2))});
+rise($('swipe'),p(u,TM.scroll_past,TM.scroll_past+.5)); rise($('ch4'),p(u,TM.scroll_past+1,TM.scroll_past+1.5));
+$('rch').setAttribute('stroke-dashoffset',(1-p(u,TM.scroll_past+1.5,TM.scroll_past+4)).toFixed(3));
+rise($('bad'),p(u,TM.scroll_past+5.8,TM.scroll_past+6.4)); rise($('cost'),p(u,TM.scroll_past+8.4,TM.scroll_past+9));
+
+rise($('fc'),p(u,TM.friend_post,TM.friend_post+.6)); rise($('yc'),p(u,TM.friend_post+1,TM.friend_post+1.6));
+rise($('ck0'),p(u,TM.friend_post+6.2,TM.friend_post+6.7)); rise($('lf'),p(u,TM.laugh_face,TM.laugh_face+.5)); rise($('ck1'),p(u,TM.laugh_face+.4,TM.laugh_face+.9));
+rise($('ck2'),p(u,TM.short_text,TM.short_text+.5)); const sh=p(u,TM.short_text+.5,TM.short_text+1.3);
+$('tb1').setAttribute('width',(500-280*sh).toFixed(1)); $('tb2').setAttribute('opacity',(1-sh).toFixed(2));
+
+COINS.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.coins+i*.2,TM.coins+i*.2+.3))); rise($('coins'),p(u,TM.coins,TM.coins+.4));
+$('carr').setAttribute('opacity',p(u,TM.coins+1.8,TM.coins+2.4));
+rise($('mega'),p(u,TM.coins+5.8,TM.coins+6.4)); rise($('bor'),p(u,TM.coins+5.8,TM.coins+6.3)); rise($('borx'),p(u,TM.coins+6.6,TM.coins+7));
+rise($('lov'),p(u,TM.megaphone,TM.megaphone+.5));
+WV.forEach((w,k)=>w.setAttribute('opacity',(p(u,TM.megaphone+.4+k*.2,TM.megaphone+.7+k*.2)*(.35+.65*Math.abs(Math.sin(t*3-k)))).toFixed(2)));
+CR.forEach((g,i)=>g.setAttribute('opacity',p(u,TM.megaphone+.8+i*.06,TM.megaphone+1.1+i*.06)));
+
+const rk=p(u,TM.ranked_list,TM.ranked_list+1.4),tp=u>=TM.ranked_list+5.4;
+TL.forEach(([g,r,tx],i)=>{const a=TM.your_posts+i*.12,q=RK.indexOf(i),x0=140+(i%5)*110,y0=240+Math.floor(i/5)*110,y1=236+q*60,s=1-.4*rk,h=tp&&q<3;
+  g.setAttribute('transform','translate('+(x0+(140-x0)*rk).toFixed(1)+' '+(y0+(y1-y0)*rk).toFixed(1)+') scale('+s.toFixed(3)+')');g.setAttribute('opacity',p(u,a,a+.3));
+  r.setAttribute('fill',h?'var(--gain)':'var(--stage)');r.setAttribute('stroke',h?'var(--gain)':'var(--ink)');tx.style.fill=h?'var(--on-gain)':''});
+BR.forEach((b,r)=>b.setAttribute('width',(BL[r]*p(u,TM.ranked_list+1.2+r*.08,TM.ranked_list+1.8+r*.08)).toFixed(1)));
+rise($('more7'),p(u,TM.ranked_list+5.4,TM.ranked_list+6));
+rise($('loop7'),p(u,TM.repeat_loop,TM.repeat_loop+.5)); $('lp').setAttribute('transform','rotate('+(u>TM.repeat_loop?((u-TM.repeat_loop)*90)%360:0).toFixed(1)+' 1290 330)');
+WB.forEach((b,i)=>{const h=(60+i*36)*p(u,TM.repeat_loop+.6+i*.3,TM.repeat_loop+1.1+i*.3);b.setAttribute('height',h.toFixed(1));b.setAttribute('y',(760-h).toFixed(1))});
+
+const S8=SC[8][0]/K;
+rise($('qa'),p(u,S8+.3,S8+.8)); rise($('qb'),p(u,S8+.7,S8+1.2)); rise($('qc'),p(u,S8+1.1,S8+1.6));
+rise($('q8p'),p(u,S8+.5,S8+1.1)); rise($('q8m'),p(u,S8+4.9,S8+5.5)); $('q8r').setAttribute('opacity',(.3+.7*Math.abs(Math.sin(t*2.5))).toFixed(2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.72;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

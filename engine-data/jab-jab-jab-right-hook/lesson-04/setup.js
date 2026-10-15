@@ -1,0 +1,31 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+const C0=[0,1,2,3].map(i=>{const y=260+i*115,y1=i===1,g=mk('g',{},$('ph0c'));
+  mk('rect',{x:1210,y:y,width:200,height:90,rx:12,fill:'var(--stage)',stroke:y1?'var(--gain)':'var(--line)','stroke-width':4},g);
+  mk('circle',{cx:1236,cy:y+26,r:12,fill:y1?'var(--gain)':'var(--muted)'},g);
+  mk('rect',{x:1256,y:y+20,width:130,height:10,rx:5,fill:'var(--line)'},g);
+  mk('rect',{x:1226,y:y+50,width:170,height:24,rx:4,fill:y1?'var(--gain)':'var(--line)','fill-opacity':.6},g);return g});
+const P1=[];for(let i=0;i<18;i++){const c=i%3,r=Math.floor(i/3),x=140+c*160,y=270+r*80,s=[1,8,15].indexOf(i),g=mk('g',{},$('stk'));
+  mk('rect',{x:x,y:y,width:140,height:56,rx:10,fill:'var(--stage)',stroke:s>=0?'var(--gain)':'var(--ink)','stroke-width':4},g);
+  mk('rect',{x:x+14,y:y+16,width:80,height:8,fill:'var(--line)'},g);mk('rect',{x:x+14,y:y+32,width:110,height:8,fill:'var(--line)'},g);P1.push([g,x,y,s])}
+[[1220,420],[1320,420],[1420,420],[1270,560],[1370,560]].forEach(q=>fig($('fans1'),q[0],q[1],22,'ink'));
+const AF=[0,1,2,3,4].map(k=>mk('path',{d:'M284 520Q350 '+(520+(k-2)*80)+' 418 520',fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-linecap':'round'},$('aff')));
+fig($('aff'),450,470,22,'ink');
+const SB=mk('line',{stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('scl'));
+const PAN=['LIKE','SHARE'].map((s,i)=>{const g=mk('g',{},$('scl'));mk('line',{x1:0,y1:-60,x2:0,y2:0,stroke:'var(--muted)','stroke-width':3},g);
+  mk('rect',{x:-55,y:0,width:110,height:50,rx:8,fill:i?'var(--gain)':'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:0,y:33,'font-size':20,'text-anchor':'middle',class:'m',style:i?'fill:var(--on-gain)':''},g);tx.textContent=s;return g});
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('line',{x1:1260+82*Math.cos(a),y1:500+82*Math.sin(a),x2:1260+94*Math.cos(a),y2:500+94*Math.sin(a),stroke:'var(--ink)','stroke-width':4},$('ticks'))}
+const XS=[220,400,610,860,1160],RG=[24,34,46,60,78],RL=[60,46,34,24,14];
+const TOPC=XS.map((x,i)=>mk('circle',{cx:x,cy:400,r:RG[i],class:'gain'},$('sbT')));
+const BOTC=XS.map((x,i)=>mk('circle',{cx:x,cy:680,r:RL[i],class:'loss'},$('sbB')));
+const AD=['SALE','BUY NOW','SHOP TODAY','LAST CHANCE','SALE'].map(s=>{const g=mk('g',{},$('feed4'));
+  mk('rect',{x:790,y:0,width:200,height:80,rx:10,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  const tx=mk('text',{x:890,y:50,'font-size':26,'text-anchor':'middle',class:'d5'},g);tx.textContent=s;return g});
+const COINS=[0,1,2,3,4,5,6].map(i=>mk('ellipse',{cx:240,cy:760-i*24,rx:64,ry:18,fill:'var(--gain)',stroke:'var(--ink)','stroke-width':3},$('coins')));
+const WV=[60,110,160].map(r=>mk('path',{d:'M'+(900+r*.766)+' '+(470-r*.643)+'A'+r+' '+r+' 0 0 1 '+(900+r*.766)+' '+(470+r*.643),fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('waves')));
+const CR=[];for(let i=0;i<30;i++)CR.push(fig(mk('g',{},$('crowd')),1120+(i%5)*80,300+Math.floor(i/5)*66,10,'gain'));
+const RK=[6,1,8,3,0,9,4,2,7,5],BL=[520,440,370,310,250,200,150,110,70,40];
+const TL=RK.map((_,i)=>{const g=mk('g',{},$('tiles'));const r=mk('rect',{x:0,y:0,width:90,height:90,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:45,y:58,'font-size':32,'text-anchor':'middle',class:'d5'},g);tx.textContent=i+1;return [g,r,tx]});
+const BR=BL.map((w,r)=>mk('rect',{x:210,y:245+r*60,height:36,rx:6,width:0,fill:r<3?'var(--gain)':'var(--line)'},$('bars7')));
+const WB=[0,1,2,3,4,5].map(i=>mk('rect',{x:1130+i*56,y:760,width:40,height:0,rx:4,class:'gain'},$('wk7')));

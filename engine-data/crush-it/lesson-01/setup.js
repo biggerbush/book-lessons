@@ -1,0 +1,24 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const HP='M0 8C-14-2-14-14-6-16C-2-17 0-14 0-12C0-14 2-17 6-16C14-14 14-2 0 8Z';
+const R=(id,a,d=.5)=>rise($(id),p(u0,a,a+d));
+let u0=0;
+const drawK=(id,k)=>$(id).setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const coins=[0,1,2,3].map(i=>mk('ellipse',{cx:1440,cy:560-i*22,rx:34,ry:12,fill:'var(--gain)',stroke:'var(--ink)','stroke-width':4},$('t_coins')));
+fig($('g_you'),200,500,28,'gain');mk('path',{d:HP,class:'gain',transform:'translate(200 432) scale(1.6)'},$('g_you'));
+fig($('g_exec'),530,470,26,'ink');
+for(let i=0;i<9;i++)fig($('g_crowd'),960+i*60,690,16,'ink');
+[-112,-68,-22,22,68,112,150].forEach(a=>{const r=a*Math.PI/180;fig($('l_ppl'),1180+220*Math.cos(r),470+220*Math.sin(r),14,'gain')});
+fig($('f_fam'),170,480,22,'ink');fig($('f_fam'),225,520,14,'gain');fig($('f_fam'),280,480,22,'ink');
+fig($('f_store'),1160,600,18,'gain');
+const bot=(x,y,h)=>'M'+(x-5)+' '+y+'h10v'+(h*.28)+'q9 6 9 18V'+(y+h)+'h-28V'+(y+h*.28+18)+'q0-12 9-18z';
+[945,1265].forEach(x0=>{for(let i=0;i<4;i++)mk('path',{d:bot(x0+i*36,500,115),fill:i%2?'var(--ink)':'var(--gain)'},$('f_bot'))});
+fig($('v_gary'),790,460,34,'ink');
+[-150,-120,-90,-60,-30].forEach(a=>{const r=a*Math.PI/180,c=Math.cos(r),s=Math.sin(r);mk('path',{d:'M'+(790+50*c).toFixed(1)+' '+(460+50*s).toFixed(1)+'L'+(790+74*c).toFixed(1)+' '+(460+74*s).toFixed(1),class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('v_en'))});
+for(let i=0;i<5;i++)fig($('v_view'),1160+i*65,640,16,'gain');
+const HR=[0,1,2,3,4,5].map(()=>mk('path',{d:HP,class:'gain'},$('v_hearts')));
+for(let r=0;r<3;r++)for(let c=0;c<4;c++)mk('rect',{x:190+c*64,y:465+r*44,width:48,height:30,rx:6,fill:'var(--stage)'},$('c_reg'));
+const BR=[0,1,2,3].map(i=>mk('rect',{x:560+i*70,y:650,width:46,height:0,class:'gain'},$('c_bars')));
+fig($('c_gary'),1240,540,30,'ink');
+const PL=['SPEAKING','BOOKS','NEW VENTURES'].map((s,i)=>{const g=mk('g',{},$('c_pills'));mk('rect',{x:850,y:360+i*90,width:220,height:60,rx:30,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);const tx=mk('text',{x:960,y:397+i*90,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const DT=[];for(let i=0;i<37;i++)for(let j=0;j<11;j++){const x=150+i*26,y=500+j*28,d=Math.hypot(x-700,y-640);DT.push([mk('circle',{cx:x,cy:y,r:6},$('a_dots')),d<80,d])}
+fig($('k_me'),300,600,38,'gain');

@@ -1,0 +1,302 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Same as Ever Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Same as Ever: Long stretches of stability make people comfortable taking bigger risks, which eventually creates the next crisis. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAME AS EVER · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Calm plants the seeds</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of crazy.</text>
+<text class="b" x="120" y="600" font-size="32">Why long stretches of safety quietly build the next crisis.</text>
+<g id="tg">
+<rect class="loss" x="1200" y="470" width="280" height="300" fill-opacity=".1"/>
+<path id="sea" class="s-loss" fill="none" stroke-width="5"/>
+<path id="root" class="s-loss" d="M1340 700l-14-40 22-30-18-40 16-36-8-34" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1"/>
+<ellipse class="gain" cx="1340" cy="712" rx="22" ry="14"/>
+<g id="boat"><path class="ink" d="M1280 462h120l-20 26h-80z"/><path class="s-ink" d="M1340 462v-110" stroke-width="5"/><path class="gain" d="M1346 360l50 90h-50z"/></g>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hyman Minsky’s big idea.</text>
+<text class="b" x="120" y="176" font-size="32">Why do financial crises keep happening, even in modern economies?</text>
+<g id="mk1"><g id="ec"></g><text class="m" x="250" y="580" font-size="22" text-anchor="middle">HYMAN MINSKY</text></g>
+<g id="ch1"><path class="s-ink" d="M400 300V540H720" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="400" y="590" font-size="18">CRISES KEEP RETURNING</text></g>
+<path id="cy" class="s-loss" d="M400 510L470 430L482 525L560 420L572 525L650 410L662 525L710 470" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="qcard">
+<rect class="s-line" x="780" y="240" width="700" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="820" y="390" font-size="160" style="fill:var(--gain)">“</text>
+<text class="d" x="830" y="470" font-size="64">Stability is</text>
+<text class="d" x="830" y="550" font-size="64" style="fill:var(--gain)">destabilizing.</text>
+<text class="m" x="830" y="620" font-size="20">MINSKY’S CORE INSIGHT, AS HOUSEL TELLS IT</text>
+</g>
+<g id="bk"><text class="d5" x="120" y="780" font-size="40">Sounds backwards. But every era repeats it.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Good years breed bigger bets.</text>
+<text class="b" x="120" y="176" font-size="32">How a long calm quietly changes behaviour.</text>
+<g id="yrs"></g>
+<g id="yl"><text class="m" x="120" y="400" font-size="22">STEADY JOBS · RISING PRICES · NOTHING BREAKS</text></g>
+<g id="rw"></g>
+<g id="bb"><text class="d" x="120" y="800" font-size="44">The calm feels permanent, so the bets grow.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Small bets, one tall tower.</text>
+<text class="b" x="120" y="176" font-size="32">How a long calm turns into a crisis.</text>
+<path class="s-ink" d="M680 760H1480" stroke-width="6" stroke-linecap="round"/>
+<g id="tw"></g>
+<circle id="shk" class="loss" cy="725" r="18"/>
+<g id="t31"><text class="d5" x="120" y="330" font-size="40">Each bet makes sense</text><text class="d5" x="120" y="380" font-size="40">on its own.</text></g>
+<g id="t32"><text class="d5" x="120" y="480" font-size="40">Together they stack</text><text class="d5" x="120" y="530" font-size="40">into a tower of risk.</text></g>
+<g id="t33"><text class="d5" x="120" y="630" font-size="40" style="fill:var(--loss)">A small shock,</text><text class="d5" x="120" y="680" font-size="40" style="fill:var(--loss)">and it all falls.</text></g>
+<g id="t34"><text class="d" x="120" y="830" font-size="44">The calm helped cause the crisis.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Great Moderation.</text>
+<text class="b" x="120" y="176" font-size="32">Housel points to the years before 2008.</text>
+<g id="mk4"><path class="s-ink" d="M160 560H1440" stroke-width="5" stroke-linecap="round"/><path class="s-muted" d="M1360 280V560" stroke-width="4" stroke-dasharray="8 8"/><text class="d5" x="1360" y="612" font-size="36" text-anchor="middle">2008</text><text class="m" x="160" y="600" font-size="20">GROWTH</text></g>
+<polyline id="gl" class="s-ink" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="br4"><path class="s-gain" d="M560 290v-20H1300v20" fill="none" stroke-width="5"/><text class="m" x="930" y="250" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE GREAT MODERATION</text></g>
+<g id="pt4"><text class="m" x="930" y="350" font-size="20" text-anchor="middle">BIG RECESSIONS: A THING OF THE PAST?</text></g>
+<g id="hs"></g>
+<g id="hl"><text class="m" x="120" y="790" font-size="22">EASY LENDING · RISKY HOME LOANS</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then the crash.</text>
+<text class="b" x="120" y="176" font-size="32">Calm was not the opposite of the crash. It was the soil.</text>
+<path class="s-ink" d="M140 460H840" stroke-width="5" stroke-linecap="round"/>
+<g id="bars"></g>
+<rect id="fb" x="730" width="64"/>
+<g id="cl5"><text class="m" x="762" y="740" font-size="18" text-anchor="middle">FINANCIAL CRISIS</text><text class="m" x="762" y="766" font-size="18" text-anchor="middle">DEEP RECESSION</text></g>
+<g id="bt5"><text class="d" x="120" y="840" font-size="40">The belief that things were safe made them unsafe.</text></g>
+<g id="soil"><rect x="900" y="620" width="580" height="140" rx="14" fill="var(--line)"/><ellipse class="gain" cx="1190" cy="660" rx="26" ry="16"/><text class="m" x="1190" y="730" font-size="22" text-anchor="middle" style="fill:var(--ink)">CALM</text></g>
+<path id="plant" class="s-loss" d="M1190 646L1168 570L1214 510L1164 440L1208 370L1186 310M1214 510l60-30M1164 440l-56-24" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="cr5"><text class="d" x="1190" y="280" font-size="48" text-anchor="middle" style="fill:var(--loss)">CRASH</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not stupidity. Human nature.</text>
+<text class="b" x="120" y="176" font-size="32">When risk feels gone, taking more risk feels rational.</text>
+<g id="hd">
+<circle class="s-ink" cx="380" cy="420" r="140" fill="var(--stage)" stroke-width="7"/>
+<path class="s-gain" d="M320 420l40 40 80-90" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="380" y="520" font-size="20" text-anchor="middle">RATIONAL?</text>
+<path class="ink" d="M250 650v-20a130 60 0 0 1 260 0v20z"/>
+<text class="m" x="380" y="700" font-size="22" text-anchor="middle">NOT STUPIDITY · HUMAN NATURE</text>
+</g>
+<g id="pd">
+<path class="s-ink" d="M1000 240H1200" stroke-width="8" stroke-linecap="round"/>
+<path class="s-line" d="M907 470A300 300 0 0 0 1293 470" fill="none" stroke-width="4" stroke-dasharray="8 10"/>
+<text class="d" x="880" y="570" font-size="40" text-anchor="end" style="fill:var(--gain)">BOOM</text>
+<text class="d" x="1320" y="570" font-size="40" style="fill:var(--loss)">BUST</text>
+<line id="arm" class="s-ink" x1="1100" y1="240" stroke-width="6" stroke-linecap="round"/>
+<circle id="bob" r="36"/>
+</g>
+<g id="gn"></g>
+<g id="gl6"><text class="m" x="700" y="770" font-size="20">EACH GENERATION LEARNS THE LESSON, THEN FORGETS IT</text></g>
+<g id="bt6"><text class="d" x="120" y="840" font-size="44">Booms and busts keep returning.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Calm is a warning light.</text>
+<text class="b" x="120" y="176" font-size="32">The same pattern shows up in your own money and habits.</text>
+<g id="wl"><rect class="s-ink" x="140" y="320" width="260" height="180" rx="22" fill="var(--stage)" stroke-width="7"/><rect class="s-ink" x="300" y="380" width="120" height="64" rx="14" fill="var(--stage)" stroke-width="6"/><circle class="gain" cx="340" cy="412" r="14"/><text class="m" x="270" y="560" font-size="22" text-anchor="middle">MONEY &amp; HABITS</text></g>
+<g id="ckf"><rect class="s-line" x="500" y="260" width="540" height="340" rx="18" fill="var(--stage)" stroke-width="3"/></g>
+<g id="ck"></g>
+<g id="al"><g id="rays"></g><circle id="lamp" class="loss" cx="1270" cy="420" r="80"/><circle class="s-ink" cx="1270" cy="420" r="80" fill="none" stroke-width="7"/><path class="s-ink" d="M1230 520h80v30h-80z" fill="var(--stage)" stroke-width="6"/><text class="m" x="1270" y="620" font-size="22" text-anchor="middle">A WARNING LIGHT,</text><text class="m" x="1270" y="652" font-size="22" text-anchor="middle">NOT A GREEN LIGHT</text></g>
+<g id="mg"><text class="d" x="120" y="790" font-size="40">The longer it goes well, check your margins more.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="q0"><text class="m" x="143" y="230" font-size="26">THINK OF ONE AREA THAT HAS FELT CALM FOR YEARS</text></g>
+<g id="qa"><text class="d" x="136" y="360" font-size="88" letter-spacing="-2">What risk have you</text></g>
+<g id="qb"><text class="d" x="136" y="470" font-size="88" letter-spacing="-2">quietly added because</text></g>
+<g id="qc"><text class="d" x="136" y="580" font-size="88" letter-spacing="-2">nothing has gone <tspan style="fill:var(--gain)">wrong?</tspan></text></g>
+<g id="qg"><path class="s-line" d="M1180 770q40-12 80 0t80 0t80 0" fill="none" stroke-width="6" stroke-linecap="round"/><rect class="loss" x="1290" y="726" width="100" height="30" rx="4"/><rect class="loss" x="1302" y="694" width="100" height="30" rx="4"/><rect class="loss" x="1284" y="662" width="100" height="30" rx="4"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Calm Plants the Seeds of Crazy&rdquo;, from <em>Same as Ever</em> by Morgan Housel. Draws on Hyman Minsky&#x27;s idea that stability is destabilizing and the calm years before the 2008 financial crisis, as reported in the book. The tower, pendulum, and flat line drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 8.0], [8.0, 27.1], [27.1, 43.8], [43.8, 59.2], [59.2, 74.6], [74.6, 87.2], [87.2, 106.3], [106.3, 124.7], [124.7, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Calm Plants Crazy", "The Big Idea", "How It Works", "The Turn", "Great Moderation", "The Crash", "It Is Not a Flaw", "In Your Life", "Your Challenge"];
+const TM={"calm_sea": 0.0, "economist": 8.32, "quote_card": 16.56, "good_years": 27.4, "confidence": 33.76, "borrowing": 41.04, "stack": 44.08, "crack": 50.0, "timeline": 59.52, "flat_line": 66.32, "house": 70.96, "falling_bar": 74.88, "soil": 82.8, "human_head": 87.52, "pendulum": 92.08, "wallet": 106.64, "checklist": 110.0, "alarm": 115.84};
+const fig=(g,x,y,r,c)=>[mk('circle',{cx:x,cy:y,r:r,class:c},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)];
+const dr=(e,k)=>{e.setAttribute('stroke-dashoffset',(1-k).toFixed(3));e.setAttribute('opacity',k>0?1:0)};
+fig($('ec'),250,320,40,'ink');[236,264].forEach(x=>mk('circle',{cx:x,cy:316,r:10,fill:'none',stroke:'var(--stage)','stroke-width':4},$('ec')));
+const YB=[];for(let i=0;i<8;i++){const x=120+i*170,g=mk('g',{},$('yrs'));mk('rect',{x:x,y:250,width:150,height:100,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('circle',{cx:x+75,cy:300,r:22,class:'gain'},g);YB.push(g)}
+const RW=[['CONFIDENCE','gain',450],['PERCEIVED RISK','loss',550],['BORROWING & BETS','ink',650]].map(([s,c,y])=>{const g=mk('g',{},$('rw'));const tx=mk('text',{x:120,y:y+32,'font-size':22,class:'m'},g);tx.textContent=s;mk('rect',{x:520,y:y,width:960,height:44,rx:22,fill:'var(--line)'},g);return [g,mk('rect',{x:520,y:y,height:44,rx:22,fill:'var(--'+c+')'},g)]});
+const TW=[0,10,-8,14,-6,12,-10].map((o,i)=>{const g=mk('g',{},$('tw'));const r=mk('rect',{x:-120,y:-32,width:240,height:64,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:0,y:8,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent='BET';return [g,r,1030+o,725-70*i]});
+// collapsed pile: 3 on the ground, 2 resting on them, 2 tipped on top; no block covers another
+const FT=[[810,725,0],[1060,725,-2],[1310,725,2],[935,650,3],[1185,650,-3],[905,566,-7],[1215,566,8]];
+const GL=[];for(let x=160;x<=1340;x+=8){const A=x<480?90:x<620?90-78*(x-480)/140:12;GL.push([x,430-.03*(x-160)+A*Math.sin(x/26)])}
+const HS=[];for(let i=0;i<6;i++){const x=560+i*138,g=mk('g',{},$('hs'));mk('path',{d:'M'+(x-40)+' 720v-50l40-36 40 36v50z',fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5,'stroke-linejoin':'round'},g);mk('rect',{x:x-10,y:692,width:20,height:28,fill:'var(--loss)'},g);HS.push(g)}
+const BR=[];for(let i=0;i<6;i++){const h=70+i*18;BR.push(mk('rect',{x:160+i*95,y:460-h,width:64,height:h,class:'gain'},$('bars')))}
+const GN=[];for(let i=0;i<6;i++){const g=mk('g',{},$('gn'));GN.push([g,...fig(g,720+i*130,640,16,'gain')])}
+const CK=['Stop saving','Skip checkups','Stretch the budget'].map((s,i)=>{const y=340+i*100,g=mk('g',{},$('ck'));mk('rect',{x:530,y:y-40,width:48,height:48,rx:8,fill:'none',stroke:'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:610,y:y,'font-size':34,class:'d5'},g);tx.textContent=s;return [g,mk('path',{d:'M534 '+(y-36)+'l40 40m0-40l-40 40',fill:'none',stroke:'var(--loss)','stroke-width':7,'stroke-linecap':'round',pathLength:1,'stroke-dasharray':'1 1'},g)]});
+for(let i=0;i<7;i++){const a=Math.PI*(1+i/6),c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1270+100*c).toFixed(1)+' '+(420+100*s).toFixed(1)+'L'+(1270+130*c).toFixed(1)+' '+(420+130*s).toFixed(1),stroke:'var(--loss)','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(e,a,d=.5)=>rise(typeof e=='string'?$(e):e,p(u,a,a+d));
+  let sv='M1200 470';for(let x=1200;x<=1480;x+=20)sv+='L'+x+' '+(470+4*Math.sin(x/40+t*1.5)).toFixed(1);$('sea').setAttribute('d',sv);
+  $('boat').setAttribute('transform','translate(0 '+(3*Math.sin(t*1.5+1)).toFixed(1)+')');
+  R('tg',TM.calm_sea); dr($('root'),p(u,TM.calm_sea+1,TM.calm_sea+4));
+
+  R('mk1',TM.economist); R('ch1',TM.economist+3); dr($('cy'),p(u,TM.economist+3,TM.economist+6)); R('qcard',TM.quote_card); R('bk',TM.quote_card+4);
+
+  YB.forEach((g,i)=>R(g,TM.good_years+i*.3)); R('yl',TM.good_years+3);
+  const rk=[TM.confidence,TM.confidence+3.4,TM.borrowing]; RW.forEach((r,i)=>R(r[0],rk[i]));
+  const wv=[.25+.7*p(u,TM.confidence,TM.confidence+3),.8-.65*p(u,TM.confidence+3.4,TM.confidence+6.4),.2+.75*p(u,TM.borrowing,TM.borrowing+2.5)];
+  RW.forEach((r,i)=>r[1].setAttribute('width',(960*wv[i]).toFixed(1))); R('bb',TM.borrowing+.5);
+
+  const wb=(u>TM.crack&&u<TM.crack+.9)?2*Math.sin(t*30):0;
+  TW.forEach((b,i)=>{const a0=TM.crack+.8+(6-i)*.06,k=p(u,a0,a0+1),f=FT[i],x=b[2]+(f[0]-b[2])*k,y=b[3]+(f[1]-b[3])*k,a=f[2]*k+wb*(1-k);
+    b[0].setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+') rotate('+a.toFixed(1)+')');
+    b[0].setAttribute('opacity',p(u,TM.stack+i*.4,TM.stack+i*.4+.3)); b[1].setAttribute('stroke',u>=TM.stack+3?'var(--loss)':'var(--ink)')});
+  $('shk').setAttribute('cx',(1460-300*p(u,TM.crack,TM.crack+.8)).toFixed(1)); $('shk').setAttribute('opacity',u>=TM.crack?1-p(u,TM.crack+1.6,TM.crack+2.2):0);
+  R('t31',TM.stack); R('t32',TM.stack+3); R('t33',TM.crack); R('t34',TM.crack+4.2);
+
+  R('mk4',TM.timeline); R('br4',TM.timeline+3); R('pt4',TM.flat_line+1);
+  const xl=u<TM.flat_line?160+400*p(u,TM.timeline,TM.timeline+2.5):560+780*p(u,TM.flat_line,TM.flat_line+3);
+  $('gl').setAttribute('points',GL.filter(q=>q[0]<=xl).map(q=>q[0]+','+q[1].toFixed(1)).join(' '));
+  HS.forEach((h,i)=>R(h,TM.house+i*.3)); R('hl',TM.house+.5);
+
+  BR.forEach((b,i)=>R(b,TM.falling_bar+i*.1));
+  const fk=p(u,TM.falling_bar+1.2,TM.falling_bar+2.4),fs=196-436*fk,fb=$('fb');
+  fb.setAttribute('y',fs>=0?460-fs:460); fb.setAttribute('height',Math.abs(fs).toFixed(1)); fb.setAttribute('fill',fk>.5?'var(--loss)':'var(--gain)'); fb.setAttribute('opacity',p(u,TM.falling_bar+.6,TM.falling_bar+.9));
+  R('cl5',TM.falling_bar+1.8); R('bt5',TM.falling_bar+3.7); R('soil',TM.soil); dr($('plant'),p(u,TM.soil+.6,TM.soil+2.6)); R('cr5',TM.soil+2.4);
+
+  R('hd',TM.human_head); R('pd',TM.pendulum);
+  const an=38*p(u,TM.pendulum,TM.pendulum+2)*Math.sin(t*1.8)*Math.PI/180,bx=1100+300*Math.sin(an),by=240+300*Math.cos(an);
+  $('arm').setAttribute('x2',bx.toFixed(1)); $('arm').setAttribute('y2',by.toFixed(1)); $('bob').setAttribute('cx',bx.toFixed(1)); $('bob').setAttribute('cy',by.toFixed(1)); $('bob').setAttribute('fill',an<0?'var(--gain)':'var(--loss)');
+  GN.forEach((g,i)=>{const a=TM.pendulum+3.8+i*.6;R(g[0],a);const c=u<a+1.2?'var(--gain)':'var(--muted)';g[1].style.fill=c;g[2].style.fill=c});
+  R('gl6',TM.pendulum+3.8); R('bt6',TM.pendulum+10.4);
+
+  R('wl',TM.wallet); R('ckf',TM.checklist);
+  CK.forEach((c,i)=>{const a=TM.checklist+.4+i*1.6;R(c[0],a);dr(c[1],p(u,a+.6,a+1))});
+  R('al',TM.alarm); $('lamp').setAttribute('fill-opacity',u>=TM.alarm?(.45+.55*Math.abs(Math.sin(t*4))).toFixed(2):.2); R('mg',TM.alarm+5);
+
+  const q8=SC[8][0]/K; R('q0',q8+.3); R('qg',q8+.6); R('qa',q8+4.4); R('qb',q8+4.8); R('qc',q8+5.2);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.21;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

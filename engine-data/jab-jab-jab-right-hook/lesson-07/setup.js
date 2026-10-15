@@ -1,0 +1,21 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const ring=(g,s)=>{const h=s/2;mk('rect',{x:-h,y:-h,width:s,height:s,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);[.84,.68].forEach(k=>mk('rect',{x:-h*k,y:-h*k,width:s*k,height:s*k,fill:'none',stroke:'var(--line)','stroke-width':4},g));[[-1,-1],[1,-1],[1,1],[-1,1]].forEach(c=>mk('circle',{cx:c[0]*h,cy:c[1]*h,r:s/16,class:'ink'},g));return g};
+const tR=ring(mk('g',{},$('tRing')),260);mk('circle',{cx:-50,cy:10,r:24,class:'ink'},tR);const tG=mk('circle',{cx:40,cy:-10,r:26,class:'gain'},tR);
+for(let x=290;x<1480;x+=170)mk('path',{d:'M'+x+' 390V760',class:'s-line','stroke-width':2,'stroke-dasharray':'4 8'},$('grid'));
+[470,690].forEach(y=>mk('path',{d:'M150 '+y+'H1450',class:'s-line','stroke-width':2,'stroke-dasharray':'4 8'},$('grid')));
+const TL=['RISES','GROWS CROWDED','FADES'].map((s,i)=>{const x=270+i*400,g=mk('g',{},$('tiles'));mk('rect',{x:x,y:250,width:260,height:110,rx:20,fill:'var(--stage)',stroke:i==1?'var(--loss)':'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:x+130,y:314,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const mR=ring(mk('g',{},$('mRing')),160);mk('circle',{cx:0,cy:0,r:20,class:'gain'},mR);
+// crowd: 9 dots evenly spaced on a circle of radius 160 (corner posts reach ~123px, dots r14 -> 23px clearance)
+const CRR=160,CR=[];for(let i=0;i<9;i++)CR.push(mk('circle',{r:14,class:'ink'},$('crowd1')));
+fig($('qs'),440,470,26,'gain');
+const WV=[];for(let i=0;i<6;i++)WV.push({e:mk('path',{fill:'none',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},$('waves')),s:i<3?1:-1,f:(i%3)/3});
+const CD=[];for(let i=0;i<10;i++)CD.push(mk('circle',{cx:1270+(i%4)*36+(i>>2)*14,cy:390+(i>>2)*34+(i%2)*8,r:11,class:'loss'},$('cdots')));
+const BB=[225,240,255].map(x=>mk('circle',{cx:x,r:6,fill:'var(--stage)'},$('bub')));
+const RW=[220,170,240,150,200].map((w,i)=>{const y=330+i*58,g=mk('g',{},$('rows'));mk('circle',{cx:415,cy:y-6,r:8,class:'gain'},g);mk('path',{d:'M440 '+(y-6)+'h'+w,class:'s-line','stroke-width':6,'stroke-linecap':'round'},g);return g});
+for(let i=0;i<5;i++)mk('circle',{cx:430+i*60,cy:260,r:10,fill:'var(--stage)',class:'s-ink','stroke-width':4},$('nb'));
+const JB=[[1170,440,1],[1400,300,0],[1205,475,1],[1150,650,0],[1160,465,1]].map(q=>({x:q[0],y:q[1],h:q[2],c:mk('circle',{r:16,cx:800,cy:450},$('jabs'))}));
+const TS=[mk('circle',{cx:310,cy:420,r:72,class:'ink'},$('tshp')),mk('path',{d:'M310 345L392 490H228z',class:'ink'},$('tshp')),mk('rect',{x:245,y:355,width:130,height:130,rx:12,class:'ink'},$('tshp'))];
+const BU=[[1000,250,0],[1140,340,1],[1000,430,0],[1140,520,1]].map(q=>{const g=mk('g',{},$('chat'));mk('rect',{x:q[0],y:q[1],width:340,height:70,rx:22,fill:q[2]?'var(--gain)':'var(--stage)',stroke:q[2]?'var(--gain)':'var(--ink)','stroke-width':4},g);mk('path',{d:'M'+(q[0]+30)+' '+(q[1]+27)+'h220M'+(q[0]+30)+' '+(q[1]+47)+'h140',stroke:q[2]?'var(--on-gain)':'var(--line)','stroke-width':6,'stroke-linecap':'round'},g);return g});
+const CE=[];for(let j=0;j<4;j++)for(let i=0;i<7;i++)CE.push(mk('rect',{x:140+i*80,y:280+j*80,width:66,height:66,rx:10,stroke:'var(--ink)','stroke-width':4},$('cells')));
+fig(mk('g',{transform:'rotate(14 1400 500)'},$('tb')),1400,470,16,'loss');
+const eR=ring(mk('g',{transform:'translate(1360 680)'},$('eRing')),160),eG=mk('circle',{cx:90,cy:0,r:22,class:'gain'},eR);

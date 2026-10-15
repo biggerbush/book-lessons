@@ -1,0 +1,22 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+const tx=(g,x,y,s,f,c,a,st)=>{const e=mk('text',{x:x,y:y,'font-size':f,class:c,'text-anchor':a||'start'},g);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const dr=(e,k)=>{e.style.strokeDashoffset=1-k;e.style.opacity=k>0?1:0};
+const pill=(g,x,y,w,s,col)=>{mk('rect',{x:x,y:y,width:w,height:50,rx:25,fill:'var(--stage)',stroke:col,'stroke-width':4},g);tx(g,x+w/2,y+33,s,20,'m','middle')};
+fig($('f0'),1200,610,16,'gain');
+fig($('fb'),720,330,34,'loss');fig($('fb'),870,410,26,'ink');fig($('fb'),950,460,18,'ink');
+fig($('fc'),1270,470,22,'ink');
+[660,730,800].forEach(x=>mk('path',{d:'M'+x+' 330v-40l30-26 30 26v40z',class:'ink'},$('hs')));
+fig($('k2'),1220,280,24,'gain');
+const BU=[[1040,250],[1340,240],[1050,350],[1350,345]].map(q=>{const g=mk('g',{},$('bub2'));mk('rect',{x:q[0],y:q[1],width:80,height:56,rx:12,class:'loss'},g);tx(g,q[0]+40,q[1]+42,'!',36,'d','middle','fill:var(--stage)');return g});
+const GR=['F','D','F','F'].map((s,i)=>{const y=590+i*55;mk('path',{d:'M190 '+y+'H440',class:'s-line','stroke-width':5},$('grd'));return tx($('grd'),500,y+14,s,40,'d','middle','fill:var(--loss)')});
+const SPR=[];for(let i=0;i<6;i++)SPR.push(mk('circle',{cx:915+(i%3)*24,cy:358+Math.floor(i/3)*26+(i%3)*6,r:6,fill:'var(--muted)'},$('spr')));
+const AT=[0,1,2,3,4].map(i=>{const x=640+i*80,g=mk('g',{},$('att'));mk('circle',{cx:x,cy:560,r:24,class:i<4?'loss':'gain'},g);mk('path',{d:i<4?'M'+(x-9)+' 551l18 18m0-18l-18 18':'M'+(x-10)+' 560l7 8 14-16',fill:'none',stroke:'var(--stage)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+const TF=[0,1,2].map(i=>{const x=1080+i*130;mk('rect',{x:x,y:260,width:110,height:90,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('tl'));const o=mk('rect',{x:x,y:260,width:110,height:90,rx:10,fill:'var(--gain)',opacity:0},$('tl'));tx($('tl'),x+55,312,'MONTH '+(i+1),18,'m','middle');return o});
+const CP=['RUN','SWIM','TRAIN'].map((s,i)=>{const g=mk('g',{},$('chp'));mk('rect',{x:120+i*210,y:206,width:190,height:56,rx:28,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);tx(g,215+i*210,242,s,22,'m','middle');return g});
+const SB=[[360,410],[620,520]].map(q=>{const g=mk('g',{},$('stb'));mk('circle',{cx:q[0],cy:q[1],r:12,class:'loss'},g);tx(g,q[0],q[1]-26,'SETBACK',18,'m','middle','fill:var(--loss)');return g});
+[300,480,660].forEach(y=>mk('path',{d:'M742 480C1000 480 1200 '+y+' 1440 '+y,fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'10 12'},$('fut')));
+const TG=[['FATHER',160,150],['RACISM',330,150],['FAILURES',500,170]].map(q=>{const g=mk('g',{},$('tags'));pill(g,q[1],370,q[2],q[0],'var(--loss)');return g});
+const GL=$('gp').getTotalLength();
+fig($('fg7'),580,420,34,'ink');
+const P7=['WOUNDS','LABELS','FAILURES'].map((s,i)=>{const g=mk('g',{},$('tags7')),y=430+i*80;pill(g,120,y,200,s,'var(--loss)');mk('path',{d:'M320 '+(y+25)+'H380',class:'s-line','stroke-width':4},g);return g});
+const ST=[];for(let i=0;i<6;i++){const h=(i+1)*60;ST.push(mk('rect',{x:780+i*110,y:700-h,width:106,height:h,rx:6,class:'gain'},$('stp7')))}

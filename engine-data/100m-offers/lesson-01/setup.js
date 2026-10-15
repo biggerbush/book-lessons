@@ -1,0 +1,31 @@
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const clock=(g,x,y,r,w)=>{mk('circle',{cx:x,cy:y,r:r,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':w},g);mk('path',{d:'M'+x+' '+y+'V'+(y-r*.65)+'M'+x+' '+y+'h'+(r*.5),stroke:'var(--ink)','stroke-width':w,'stroke-linecap':'round'},g)};
+const S={stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'};
+const shops=[],tags=[];
+[160,1000].forEach(x=>{const g=mk('g',{},$('shops'));shops.push(g);
+  mk('rect',{x:x,y:340,width:440,height:360,fill:'var(--stage)',...S},g);
+  mk('rect',{x:x-10,y:280,width:460,height:60,rx:8,fill:'var(--line)',...S},g);
+  mk('rect',{x:x+40,y:400,width:220,height:150,fill:'none',...S},g);
+  mk('rect',{x:x+110,y:455,width:80,height:70,class:'ink'},g);
+  mk('path',{d:'M'+(x+110)+' 480h80',stroke:'var(--stage)','stroke-width':5},g);
+  mk('rect',{x:x+300,y:520,width:100,height:180,fill:'none',...S},g);
+  const tg=mk('g',{},g);mk('rect',{x:x+60,y:585,width:180,height:70,rx:12,class:'loss'},tg);
+  const tx=mk('text',{x:x+150,y:636,'font-size':48,'text-anchor':'middle',class:'d',style:'fill:var(--stage)'},tg);tx.textContent='$';tags.push(tg)});
+P($('shopper'),800,480,30,'ink');
+const bars=[400,360,300,230,160,90].map((h,i)=>{const g=mk('g',{},$('bars')),x=200+i*115;
+  mk('rect',{x:x,y:700-h,width:80,height:h,rx:6,fill:i%2?'var(--muted)':'var(--ink)'},g);
+  const tx=mk('text',{x:x+40,y:735,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=i%2?'B':'A';return g});
+P($('trd'),300,300,45,'ink');
+clock($('clkd'),560,400,80,6);
+const RW=[];for(let i=0;i<7;i++){const x=200+i*180,g=mk('g',{},$('row'));P(g,x,650,18,'ink');clock(g,x+50,690,20,4);RW.push(g)}
+for(let k=0;k<5;k++)mk('path',{d:'M700 '+(300+k*80)+'H1460',stroke:'var(--line)','stroke-width':4},$('lane'));
+mk('path',{d:'M1440 300V620',stroke:'var(--ink)','stroke-width':5,'stroke-dasharray':'10 8'},$('lane'));
+[340,500,580].forEach(y=>mk('circle',{cx:780,cy:y,r:24,class:'ink'},$('rv')));
+P($('mird'),300,400,34,'gain');
+const lu=[720,940,1160,1380].map((x,i)=>{const g=mk('g',{},$('lu'));P(g,x,360,32,i?'ink':'gain');
+  const lb=mk('text',{x:x,y:530,'font-size':20,'text-anchor':'middle',class:'m',style:i?'':'fill:var(--gain)'},g);lb.textContent=i?'RIVAL':'YOU';
+  const tg=mk('g',{},g);mk('rect',{x:x-34,y:250,width:68,height:56,rx:10,class:'loss'},tg);
+  const tx=mk('text',{x:x,y:292,'font-size':36,'text-anchor':'middle',class:'d',style:'fill:var(--stage)'},tg);tx.textContent='$';return [g,tg]});
+let sd='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?18:44;sd+=(i?'L':'M')+(r*Math.cos(a)).toFixed(1)+' '+(r*Math.sin(a)).toFixed(1)}
+mk('path',{d:sd+'Z',class:'gain'},$('star'));
+const hw=x=>440-7*Math.sin((x-220)/6)-3*Math.sin((x-220)/17);

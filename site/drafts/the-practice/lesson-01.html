@@ -1,0 +1,377 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Practice Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Practice: Creative work is not a talent some people are born with but a practice anyone can choose to commit to. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE PRACTICE · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Creativity is a choice,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not a gift.</text>
+<text class="b" x="120" y="600" font-size="32">Creative work is a practice you choose, not a gift you're born with.</text>
+<g id="rays"></g>
+<circle id="bulb" cx="1340" cy="330" r="80" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/>
+<path class="s-ink" d="M1310 412v40h60v-40M1316 474h48" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Waiting for lightning.</text>
+<g id="s1sub"><text class="b" x="120" y="176" font-size="32">Many of us believe creativity works like this.</text></g>
+<g id="desk">
+<rect class="ink" x="300" y="600" width="620" height="16" rx="4"/>
+<path class="s-ink" d="M330 616v130M890 616v130" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="480" cy="480" r="36"/>
+<path class="ink" d="M420 600v-30a60 60 0 0 1 120 0v30z"/>
+<rect class="s-ink" x="640" y="410" width="200" height="190" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="740" y="660" font-size="20" text-anchor="middle">A BLANK PAGE</text>
+</g>
+<g id="cloud"><circle class="loss" cx="450" cy="280" r="45" fill-opacity=".3"/><circle class="loss" cx="510" cy="260" r="55" fill-opacity=".3"/><circle class="loss" cx="575" cy="285" r="42" fill-opacity=".3"/></g>
+<path id="bolt" class="gain" d="M525 318L485 384H515L492 436L545 368H515L540 318Z"/>
+<g id="born">
+<g id="bornF"></g>
+<circle cx="1350" cy="414" r="24" fill="none" stroke="var(--muted)" stroke-width="4" stroke-dasharray="6 6"/>
+<text class="m" x="1150" y="670" font-size="20" text-anchor="middle">BORN WITH IT</text>
+<text class="m" x="1350" y="670" font-size="20" text-anchor="middle">BORN WITHOUT</text>
+</g>
+<g id="either"><text class="d" x="120" y="810" font-size="44">Either you have the spark, or you don't.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A comfortable excuse.</text>
+<g id="s2sub"><text class="b" x="120" y="176" font-size="32">Seth Godin: this belief is a story we tell ourselves.</text></g>
+<g id="shieldG">
+<path class="loss s-loss" d="M400 260L570 310V470C570 590 490 670 400 710C310 670 230 590 230 470V310Z" fill-opacity=".15" stroke-width="7" stroke-linejoin="round"/>
+<text class="m" x="400" y="470" font-size="22" text-anchor="middle">I'M JUST NOT</text>
+<text class="m" x="400" y="504" font-size="22" text-anchor="middle">CREATIVE</text>
+<text class="m" x="400" y="760" font-size="20" text-anchor="middle">IT LETS US OFF THE HOOK</text>
+</g>
+<g id="sofaG">
+<rect x="820" y="440" width="560" height="150" rx="30" fill="var(--line)"/>
+<rect class="s-ink" x="800" y="570" width="600" height="80" rx="20" fill="var(--stage)" stroke-width="6"/>
+<g id="sofaP"></g>
+<rect class="ink" x="780" y="520" width="60" height="130" rx="20"/><rect class="ink" x="1360" y="520" width="60" height="130" rx="20"/>
+<path class="s-ink" d="M830 650v36M1370 650v36" stroke-width="8" stroke-linecap="round"/>
+<g id="zz"><text class="d5" x="1160" y="420" font-size="36" style="fill:var(--muted)">z z</text></g>
+<text class="m" x="1100" y="740" font-size="20" text-anchor="middle">NEVER HAVE TO TRY</text>
+</g>
+<g id="nofail"><text class="d" x="120" y="830" font-size="46">And if we never try, we can never fail.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Skill beats talent.</text>
+<g id="s3sub"><text class="b" x="120" y="176" font-size="32">Godin draws a clear line between talent and skill.</text></g>
+<path class="s-line" d="M800 240V760" stroke-width="4" stroke-dasharray="10 10"/>
+<g id="talG">
+<text class="m" x="160" y="270" font-size="24">TALENT</text>
+<rect x="340" y="380" width="240" height="40" fill="none" stroke="var(--muted)" stroke-width="5" stroke-dasharray="12 10"/>
+<rect x="360" y="420" width="200" height="160" fill="none" stroke="var(--muted)" stroke-width="5" stroke-dasharray="12 10"/>
+<path d="M460 380v200M460 380c-40-50-80-10-40 0M460 380c40-50 80-10 40 0" fill="none" stroke="var(--muted)" stroke-width="5" stroke-dasharray="12 10"/>
+<text class="m" x="460" y="650" font-size="20" text-anchor="middle">WHAT YOU SUPPOSEDLY</text>
+<text class="m" x="460" y="680" font-size="20" text-anchor="middle">START WITH</text>
+</g>
+<g id="ladG">
+<text class="m" x="860" y="270" font-size="24" style="fill:var(--gain)">SKILL</text>
+<path class="s-ink" d="M1060 760V300M1200 760V300" stroke-width="8" stroke-linecap="round"/>
+<g id="rungs"></g>
+<g id="climbW"></g>
+</g>
+<g id="any3"><g id="crowd3"></g><text class="d" x="120" y="830" font-size="42">Skill is open to anyone willing to practice.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not just for artists.</text>
+<g id="s4sub"><text class="b" x="120" y="176" font-size="32">Creativity is bringing something new into the world to make things better.</text></g>
+<g id="card0">
+<rect class="s-line" x="120" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<ellipse class="s-ink" cx="310" cy="410" rx="130" ry="95" fill="var(--stage)" stroke-width="6"/>
+<circle class="gain" cx="250" cy="370" r="16"/><circle class="loss" cx="310" cy="350" r="16"/><circle class="ink" cx="370" cy="370" r="16"/><circle cx="240" cy="440" r="16" fill="var(--muted)"/>
+<circle class="s-ink" cx="330" cy="455" r="18" fill="var(--stage)" stroke-width="4"/>
+<path class="s-ink" d="M410 490L490 300" stroke-width="12" stroke-linecap="round"/><circle class="gain" cx="408" cy="496" r="14"/>
+<text class="d5" x="156" y="600" font-size="40">Art</text>
+<text class="m" x="156" y="650" font-size="20">PAINT, POETRY, MUSIC</text>
+</g>
+<g id="card1">
+<rect class="s-line" x="593" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="630" y="280" width="260" height="180" fill="var(--stage)" stroke-width="6"/>
+<g id="oldb"><path d="M660 330h160M660 370h120M660 410h180" stroke="var(--muted)" stroke-width="6" stroke-linecap="round"/></g>
+<g id="newb"><circle class="gain" cx="690" cy="370" r="26"/><path class="s-gain" d="M730 370h50m-14-14 14 14-14 14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="gain" x="800" y="344" width="52" height="52" rx="6"/></g>
+<g id="tchr"></g>
+<path class="s-ink" d="M925 410L890 385" stroke-width="5" stroke-linecap="round"/>
+<text class="d5" x="629" y="600" font-size="40">Teaching</text>
+<text class="m" x="629" y="650" font-size="20">A TEACHER REDESIGNING</text>
+<text class="m" x="629" y="680" font-size="20">A LESSON</text>
+</g>
+<g id="card2">
+<rect class="s-line" x="1066" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="ink" x="1110" y="340" width="60" height="60" rx="8"/><rect class="ink" x="1240" y="340" width="60" height="60" rx="8"/><rect class="ink" x="1370" y="340" width="60" height="60" rx="8"/>
+<path class="s-ink" d="M1170 370h70" stroke-width="6"/>
+<path id="brk" d="M1300 370h70" stroke-width="6" stroke-linecap="round"/>
+<text class="d5" x="1102" y="600" font-size="40">Managing</text>
+<text class="m" x="1102" y="650" font-size="20">A MANAGER FIXING</text>
+<text class="m" x="1102" y="680" font-size="20">A BROKEN PROCESS</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A daily post.</text>
+<g id="s5sub"><text class="b" x="120" y="176" font-size="32">Godin points to his own habit as an example.</text></g>
+<g id="ideas"></g>
+<g id="lap">
+<rect class="s-ink" x="160" y="300" width="480" height="300" rx="14" fill="var(--stage)" stroke-width="7"/>
+<path class="ink" d="M120 620h560l-40 34H160z"/>
+<g id="lines"></g>
+</g>
+<g id="cal">
+<text class="m" x="780" y="300" font-size="22">A POST EVERY DAY, INSPIRED OR NOT</text>
+<g id="cells"></g>
+</g>
+<g id="arrive"><text class="d" x="120" y="790" font-size="44">He keeps showing up, and the ideas arrive.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Choose it.</text>
+<g id="s6sub"><text class="b" x="120" y="176" font-size="32">Creativity is a decision, not a birthright.</text></g>
+<g id="post">
+<rect class="ink" x="392" y="300" width="16" height="460" rx="4"/>
+<path class="gain" d="M410 320h330l40 40-40 40H410z"/>
+<text class="m" x="430" y="368" font-size="22" style="fill:var(--on-gain)">COMMIT TO A PRACTICE</text>
+<path d="M390 430H170l-40 40 40 40h220z" fill="var(--stage)" stroke="var(--muted)" stroke-width="4" stroke-linejoin="round"/>
+<text class="m" x="372" y="477" font-size="20" text-anchor="end">WAIT FOR A GIFT</text>
+</g>
+<g id="steps"></g>
+<g id="flag"><path class="s-ink" d="M1400 450V330" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1404 330h60l-20 22 20 22h-60z"/></g>
+<g id="today"><text class="d" x="120" y="830" font-size="46">The choice is yours to make today.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start small.</text>
+<text class="b" x="120" y="176" font-size="32">One creative act you can repeat.</text>
+<g id="st0">
+<rect class="s-line" x="120" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="230" y="280" width="200" height="250" rx="8" fill="var(--stage)" stroke-width="6"/>
+<g id="spiral"></g><g id="plines"></g>
+<path class="gain" d="M452 500l50-150 16 6-50 150-18 10z"/>
+<text class="d5" x="156" y="610" font-size="40">One small act</text>
+<text class="m" x="156" y="660" font-size="20">WRITE A PAGE OR</text>
+<text class="m" x="156" y="690" font-size="20">SKETCH AN IDEA</text>
+</g>
+<g id="st1">
+<rect class="s-line" x="593" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="s-ink" cx="800" cy="410" r="130" fill="var(--stage)" stroke-width="8"/>
+<path id="wedge" class="gain" fill-opacity=".8"/>
+<g id="ticks"></g>
+<path class="s-ink" d="M800 410L760 360" stroke-width="10" stroke-linecap="round"/>
+<line id="hand" class="s-ink" x1="800" y1="410" x2="800" y2="310" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="800" cy="410" r="10"/>
+<text class="d5" x="629" y="610" font-size="40">A regular time</text>
+<text class="m" x="629" y="660" font-size="20">EVEN JUST</text>
+<text class="m" x="629" y="690" font-size="20">FIFTEEN MINUTES</text>
+</g>
+<g id="st2">
+<rect class="s-line" x="1066" y="230" width="414" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="gain" cx="1180" cy="400" r="46"/><g id="sunr"></g>
+<circle cx="1340" cy="410" r="30" fill="var(--muted)"/><circle cx="1375" cy="390" r="38" fill="var(--muted)"/><circle cx="1410" cy="412" r="28" fill="var(--muted)"/>
+<path class="s-gain" d="M1158 510l18 18 34-36M1352 510l18 18 34-36" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d5" x="1102" y="610" font-size="40">Inspired or not</text>
+<text class="m" x="1102" y="660" font-size="20">DO IT EITHER WAY</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What would you make</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">if you stopped waiting</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">to be <tspan style="fill:var(--gain)">gifted</tspan>?</text></g>
+<g id="mirr">
+<ellipse class="s-ink" cx="1380" cy="450" rx="80" ry="110" fill="var(--stage)" stroke-width="8"/>
+<g id="mfig"></g>
+<path class="s-ink" d="M1380 560v70M1330 640h100" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g id="begin"><text class="m" x="143" y="700" font-size="26">CHOOSE IT, AND BEGIN THIS WEEK</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="122" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:02</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Creativity Is a Choice, Not a Gift&rdquo;, from <em>The Practice</em> by Seth Godin. Seth Godin&#x27;s daily blogging habit is used as reported in the book. The lightning bolt, ladder, scale and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=122, SC=[[0.0, 7.9], [7.9, 22.6], [22.6, 37.5], [37.5, 54.5], [54.5, 69.4], [69.4, 84.7], [84.7, 100.0], [100.0, 112.7], [112.7, 122.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Creativity Is a Choice", "Waiting for Lightning", "A Comfortable Excuse", "Skill Beats Talent", "Not Just for Artists", "A Daily Post", "Choose It", "Start Small", "Your Turn"];
+const TM={"spark": 0.0, "waiting_man": 8.16, "lightning": 12.32, "shield": 27.04, "sofa": 30.48, "scale": 41.6, "ladder": 44.4, "paintbrush": 54.8, "teacher": 63.04, "manager": 66.4, "laptop": 72.72, "calendar": 76.8, "signpost": 89.28, "footprints": 93.44, "notebook": 100.32, "clock": 106.32, "mirror": 113.04};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const star=(cx,cy,R,g)=>{let s='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?R*.45:R;s+=(cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1)+' '}return mk('polygon',{points:s,class:'gain'},g)};
+const ray=(g,cx,cy,r1,r2,a,w)=>mk('path',{d:'M'+(cx+r1*Math.cos(a)).toFixed(1)+' '+(cy+r1*Math.sin(a)).toFixed(1)+'L'+(cx+r2*Math.cos(a)).toFixed(1)+' '+(cy+r2*Math.sin(a)).toFixed(1),stroke:'var(--gain)','stroke-width':w,'stroke-linecap':'round'},g);
+const sa=i=>SC[i][0]/K;
+for(let i=0;i<7;i++)ray($('rays'),1340,330,100,135,-Math.PI+i*Math.PI/6,8);
+fig($('bornF'),1150,500,30,'ink');fig($('bornF'),1350,500,30,'ink');star(1150,414,26,$('bornF'));
+fig($('sofaP'),1100,450,30,'ink');
+const RG=[];for(let i=0;i<7;i++)RG.push(mk('path',{d:'M1060 '+(700-60*i)+'h140',class:'s-ink','stroke-width':8,'stroke-linecap':'round'},$('rungs')));
+const CL=mk('g',{},$('climbW'));fig(CL,0,-84,20,'gain');
+[900,960,1280,1340,1400].forEach(x=>fig($('crowd3'),x,690,14,'ink'));
+fig($('tchr'),950,360,22,'ink');
+const ID=[280,400,520].map(x=>star(x,255,22,$('ideas')));
+const LN=[300,380,240,340,200].map((w,i)=>[mk('rect',{x:200,y:340+i*48,width:0,height:16,rx:8,fill:i?'var(--muted)':'var(--ink)'},$('lines')),w]);
+const CE=[];for(let r=0;r<4;r++)for(let c=0;c<7;c++)CE.push(mk('rect',{x:780+c*100,y:330+r*90,width:90,height:80,rx:10},$('cells')));
+const FP=[];for(let i=0;i<12;i++){const k=i/11,s=i%2?14:-14,x=520+840*k+.306*s,y=720-270*k+.952*s;FP.push(mk('ellipse',{cx:x.toFixed(1),cy:y.toFixed(1),rx:16,ry:10,class:'ink',transform:'rotate(-17.8 '+x.toFixed(1)+' '+y.toFixed(1)+')'},$('steps')))}
+for(let i=0;i<8;i++)mk('circle',{cx:230,cy:300+i*30,r:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('spiral'));
+const PL=[];for(let i=0;i<5;i++)PL.push(mk('path',{d:'M265 '+(340+i*36)+'h'+(i===4?80:140),stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},$('plines')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(800+112*Math.cos(a)).toFixed(1)+' '+(410+112*Math.sin(a)).toFixed(1)+'L'+(800+124*Math.cos(a)).toFixed(1)+' '+(410+124*Math.sin(a)).toFixed(1),stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},$('ticks'))}
+for(let i=0;i<8;i++)ray($('sunr'),1180,400,58,74,i*Math.PI/4,6);
+fig($('mfig'),1380,420,26,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const g0=TM.spark+5.4;
+  $('rays').setAttribute('opacity',(u<TM.spark?0:u<g0?.35+.3*Math.abs(Math.sin(t*7)):1).toFixed(2));
+  $('bulb').style.fill=u>=g0?'var(--gain)':'var(--stage)';
+
+  rise($('desk'),p(u,TM.waiting_man,TM.waiting_man+.5)); rise($('cloud'),p(u,TM.lightning,TM.lightning+.5));
+  $('bolt').setAttribute('opacity',u<TM.lightning+.3?0:(Math.sin(t*9)>.3?1:.15));
+  rise($('s1sub'),p(u,TM.lightning+4.2,TM.lightning+4.7)); rise($('born'),p(u,TM.lightning+7.5,TM.lightning+8)); rise($('either'),p(u,TM.lightning+8,TM.lightning+8.6));
+
+  rise($('s2sub'),p(u,sa(2)+.3,sa(2)+.8)); rise($('shieldG'),p(u,TM.shield,TM.shield+.5)); rise($('sofaG'),p(u,TM.sofa,TM.sofa+.5));
+  $('zz').setAttribute('transform','translate(0 '+(-8*Math.sin(t*2)).toFixed(1)+')'); rise($('nofail'),p(u,TM.sofa+5.4,TM.sofa+6));
+
+  rise($('s3sub'),p(u,sa(3)+.3,sa(3)+.8)); rise($('talG'),p(u,TM.scale,TM.scale+.5)); rise($('ladG'),p(u,TM.ladder,TM.ladder+.5));
+  RG.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.ladder+.3+i*.65,TM.ladder+.6+i*.65)));
+  CL.setAttribute('transform','translate(1130 '+(760-60*7*p(u,TM.ladder+.6,TM.ladder+5.2)).toFixed(1)+')');
+  rise($('any3'),p(u,TM.ladder+5.8,TM.ladder+6.4));
+
+  [TM.paintbrush,TM.teacher,TM.manager].forEach((a,i)=>rise($('card'+i),p(u,a,a+.5)));
+  rise($('s4sub'),p(u,TM.paintbrush+3.4,TM.paintbrush+3.9));
+  const nb=p(u,TM.teacher+.8,TM.teacher+1.4); $('oldb').setAttribute('opacity',1-nb); rise($('newb'),nb);
+  const fx=u>=TM.manager+.8; $('brk').style.stroke=fx?'var(--gain)':'var(--loss)'; $('brk').setAttribute('stroke-dasharray',fx?'none':'8 12');
+
+  rise($('s5sub'),p(u,sa(5)+.3,sa(5)+.8)); rise($('lap'),p(u,TM.laptop,TM.laptop+.5));
+  LN.forEach((l,i)=>l[0].setAttribute('width',(l[1]*p(u,TM.laptop+.5+i*.7,TM.laptop+1.1+i*.7)).toFixed(1)));
+  rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+  CE.forEach((c,i)=>c.setAttribute('fill',u>=TM.calendar+.5+i*.13?'var(--gain)':'var(--line)'));
+  ID.forEach((s,i)=>rise(s,p(u,TM.calendar+5.3+i*.3,TM.calendar+5.7+i*.3))); rise($('arrive'),p(u,TM.calendar+5.3,TM.calendar+5.9));
+
+  rise($('s6sub'),p(u,sa(6)+.3,sa(6)+.8)); rise($('post'),p(u,TM.signpost,TM.signpost+.5));
+  FP.forEach((f,i)=>f.setAttribute('opacity',p(u,TM.footprints+i*.35,TM.footprints+i*.35+.25)));
+  rise($('flag'),p(u,TM.footprints+4.2,TM.footprints+4.7)); rise($('today'),p(u,TM.footprints+5,TM.footprints+5.6));
+
+  rise($('st0'),p(u,TM.notebook,TM.notebook+.5)); PL.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.notebook+.8+i*.6,TM.notebook+1.1+i*.6)));
+  rise($('st1'),p(u,TM.clock,TM.clock+.5));
+  const wa=p(u,TM.clock+.6,TM.clock+2)*Math.PI/2, sn=Math.sin(wa), cs=Math.cos(wa);
+  $('wedge').setAttribute('d','M800 410L800 280A130 130 0 0 1 '+(800+130*sn).toFixed(1)+' '+(410-130*cs).toFixed(1)+'Z');
+  $('hand').setAttribute('x2',(800+100*sn).toFixed(1)); $('hand').setAttribute('y2',(410-100*cs).toFixed(1));
+  rise($('st2'),p(u,TM.clock+3.8,TM.clock+4.3));
+
+  rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9)); rise($('qc'),p(u,TM.mirror+.8,TM.mirror+1.3));
+  rise($('mirr'),p(u,TM.mirror+1.2,TM.mirror+1.8)); rise($('begin'),p(u,TM.mirror+4.6,TM.mirror+5.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:118.67;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

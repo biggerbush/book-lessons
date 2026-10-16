@@ -1,0 +1,331 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dare to Lead Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Dare to Lead: Vulnerability is the uncertainty, risk and emotional exposure behind every act of courage, and the common myths about it, such as that it is weakness or oversharing, keep leaders stuck. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DARE TO LEAD · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Vulnerability is</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not weakness.</text>
+<text class="b" x="120" y="600" font-size="32">Why every brave act starts with feeling exposed</text>
+<g id="t_rays"></g>
+<g id="t_me"></g>
+<path id="t_heart" class="gain"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What vulnerability really is.</text>
+<text class="b" x="120" y="176" font-size="32">What we feel in moments of uncertainty, risk and emotional exposure.</text>
+<g id="s1c"></g><g id="s1b"></g><g id="s1o"></g>
+<g id="s1m"><text class="m" x="120" y="745" font-size="22">IN EACH MOMENT, YOU CANNOT CONTROL THE OUTCOME</text></g>
+<g id="s1s"><text class="d" x="120" y="822" font-size="44">That shaky feeling is vulnerability.</text><path id="s1w" class="s-gain" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The soldier test.</text>
+<text class="b" x="120" y="176" font-size="32">Brown’s question to a group of special forces soldiers.</text>
+<g id="s2sol"></g>
+<line id="s2arm" class="s-gain" x1="545" y1="590" x2="545" y2="590" stroke-width="10" stroke-linecap="round"/>
+<g id="s2q"><text class="m" x="180" y="700" font-size="22">THE ROOM WENT QUIET · · ·</text></g>
+<g id="s2bub"><path d="M630 376L590 430L680 376z" fill="var(--stage)" stroke="var(--gain)" stroke-width="4" stroke-linejoin="round"/><rect x="600" y="300" width="320" height="80" rx="16" fill="var(--stage)" stroke="var(--gain)" stroke-width="4"/><text class="d5" x="760" y="350" font-size="28" text-anchor="middle">“Not a single one.”</text></g>
+<g id="s2card"><rect class="s-ink" x="940" y="230" width="540" height="260" rx="18" fill="var(--stage)" stroke-width="4"/><text class="m" x="975" y="280" font-size="20">THE QUESTION</text><text class="d5" x="975" y="350" font-size="34">Name an act of courage</text><text class="d5" x="975" y="400" font-size="34">that did not involve</text><text class="d5" x="975" y="450" font-size="34" style="fill:var(--loss)">vulnerability.</text></g>
+<g id="s2zero"><rect class="s-line" x="940" y="540" width="540" height="230" rx="18" fill="var(--stage)" stroke-width="3"/><text class="d" x="985" y="720" font-size="150" style="fill:var(--gain)">0</text><text class="m" x="1100" y="610" font-size="22">EXAMPLES OFFERED</text><text class="m" x="1100" y="644" font-size="22">ACROSS YEARS OF</text><text class="m" x="1100" y="678" font-size="22">ASKING AUDIENCES</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Myth 1: It’s weakness.</text>
+<text class="b" x="120" y="176" font-size="32">If courage always needs vulnerability, it can’t be weakness.</text>
+<g id="s3sc">
+<rect class="ink" x="360" y="700" width="160" height="16" rx="6"/>
+<path class="s-ink" d="M440 700V340" stroke-width="8" stroke-linecap="round"/>
+<path id="s3beam" class="s-ink" d="M220 340H660" stroke-width="10" stroke-linecap="round"/>
+<circle class="ink" cx="440" cy="340" r="14"/>
+<g id="s3pL"><path class="s-ink" d="M0 0L-80 110M0 0L80 110" stroke-width="4"/><path class="s-ink" d="M-95 110h190a95 46 0 0 1-190 0z" fill="var(--stage)" stroke-width="6"/><rect class="gain" x="-50" y="66" width="100" height="44" rx="8"/><text class="m" x="0" y="196" font-size="22" text-anchor="middle">COURAGE</text></g>
+<g id="s3pR"><path class="s-ink" d="M0 0L-80 110M0 0L80 110" stroke-width="4"/><path class="s-ink" d="M-95 110h190a95 46 0 0 1-190 0z" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="-50" y="66" width="100" height="44" rx="8"/><text class="m" x="0" y="196" font-size="22" text-anchor="middle">VULNERABILITY</text></g>
+</g>
+<g id="s3w"><text class="m" x="120" y="745" font-size="22">VULNERABILITY IS NOT</text><text class="d" x="120" y="822" font-size="64" style="fill:var(--loss)">weakness</text></g>
+<line id="s3ws" class="s-ink" x1="112" y1="800" x2="112" y2="800" stroke-width="7" stroke-linecap="round"/>
+<g id="s3m">
+<polygon class="s-ink" points="880,720 1180,250 1460,720" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path class="gain" d="M1180 250V180l50 18-50 18z"/>
+<path class="s-ink" d="M1180 250V180" stroke-width="5"/>
+<path id="s3tr" class="s-gain" d="M1180 640L1120 530L1220 430L1160 340L1180 262" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<path class="s-gain" d="M1120 720V630h120V720" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<circle id="s3cl" class="ink" r="14"/>
+<text class="m" x="1180" y="762" font-size="22" text-anchor="middle">THE PRICE OF ENTRY</text>
+<text class="m" x="1180" y="794" font-size="22" text-anchor="middle">FOR EVERY BRAVE ACT</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Myth: Opting out, going alone.</text>
+<text class="b" x="120" y="176" font-size="32">Two ways people try to dodge vulnerability.</text>
+<g id="s4L"><rect class="s-line" x="120" y="220" width="640" height="540" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="270" font-size="22">“I DON’T DO VULNERABILITY”</text><g id="s4me"></g><path class="s-ink" d="M420 420h110v80q0 70-55 100q-55-30-55-100z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/></g>
+<g id="s4rain"></g>
+<g id="s4u"><text class="d5" x="150" y="695" font-size="30">Uncertainty comes for everyone.</text></g>
+<g id="s4c"><text class="m" x="150" y="738" font-size="20">THE ONLY CHOICE: FACE IT ON PURPOSE</text></g>
+<g id="s4R"><rect class="s-line" x="840" y="220" width="640" height="540" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="870" y="270" font-size="22">“I CAN GO IT ALONE”</text><rect x="1100" y="432" width="120" height="248" fill="var(--line)"/><g id="s4cl"></g></g>
+<g id="s4rope"></g><g id="s4sup"></g>
+<g id="s4w"><text class="d5" x="870" y="725" font-size="30">Wired for connection. Leaders too.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Myth: Engineer out the discomfort.</text>
+<text class="b" x="120" y="176" font-size="32">And its cousin: you need trust first.</text>
+<g id="s5bp"><rect x="120" y="230" width="600" height="400" rx="12" fill="var(--loss)" fill-opacity=".08" stroke="var(--loss)" stroke-width="3"/><g id="s5grid"></g><text class="m" x="150" y="270" font-size="20">THE PLAN</text><circle class="loss" cx="420" cy="430" r="56"/><text class="m" x="420" y="530" font-size="20" text-anchor="middle">DISCOMFORT</text>
+<g id="s5er"><rect x="-55" y="-25" width="110" height="50" rx="8" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><rect class="ink" x="-55" y="-25" width="34" height="50" rx="8"/></g></g>
+<g id="s5no"><rect x="470" y="560" width="220" height="52" rx="10" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="580" y="594" font-size="22" text-anchor="middle" style="fill:var(--loss)">YOU CANNOT.</text></g>
+<g id="s5d"><text class="d5" x="120" y="700" font-size="32">Feeling exposed is part of the deal.</text></g>
+<g id="s5r"><text class="m" x="860" y="270" font-size="20">TRUST AND VULNERABILITY GROW TOGETHER</text>
+<g id="s5bars"></g>
+<path class="s-ink" d="M860 660H1440" stroke-width="5" stroke-linecap="round"/>
+<rect class="ink" x="880" y="684" width="20" height="20" rx="4"/><text class="m" x="912" y="702" font-size="20">TRUST</text>
+<rect class="gain" x="1040" y="684" width="20" height="20" rx="4"/><text class="m" x="1072" y="702" font-size="20">VULNERABILITY</text></g>
+<g id="s5a"><text class="d5" x="860" y="770" font-size="30">A little at a time.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Myth: It means oversharing.</text>
+<text class="b" x="120" y="176" font-size="32">Vulnerability is not disclosure.</text>
+<g id="s6L"><path class="s-ink" d="M430 300c-60-30-160-30-220-10v200c60-20 160-20 220 10c60-30 160-30 220-10V290c-60-20-160-20-220 10z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><path class="s-ink" d="M430 300v200" stroke-width="4"/><path class="s-line" d="M250 340h140M250 380h140M250 420h110M470 340h140M470 380h140M470 420h110" stroke-width="5" stroke-linecap="round"/><g id="s6sp"></g></g>
+<g id="s6x"><path class="s-loss" d="M320 540L540 660M540 540L320 660" stroke-width="10" stroke-linecap="round"/></g>
+<g id="s6t"><text class="d5" x="120" y="730" font-size="32">Spilling every feeling</text><text class="d5" x="120" y="775" font-size="32">at work isn’t courage.</text></g>
+<g id="s6R"><rect x="900" y="270" width="540" height="340" rx="20" fill="none" stroke="var(--line)" stroke-width="4"/><rect x="900" y="270" width="540" height="340" rx="20" fill="none" stroke="var(--ink)" stroke-width="16" stroke-dasharray="8 24"/><g id="s6pp"></g><path class="gain" d="M1170 476C1135 452 1132 428 1150 422C1160 419 1167 425 1170 432C1173 425 1180 419 1190 422C1208 428 1205 452 1170 476Z"/><text class="m" x="1170" y="580" font-size="20" text-anchor="middle">BOUNDARIES</text></g>
+<g id="s6p"><rect class="gain" x="900" y="660" width="250" height="60" rx="30"/><text class="m" x="1025" y="698" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">PURPOSE</text><rect class="gain" x="1190" y="660" width="250" height="60" rx="30"/><text class="m" x="1315" y="698" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">RELATIONSHIP</text><text class="m" x="900" y="770" font-size="20">NOT DUMPING</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What it looks like at work.</text>
+<text class="b" x="120" y="176" font-size="32">Small moments of brave leadership.</text>
+<g id="s7tab"><ellipse class="s-ink" cx="460" cy="500" rx="230" ry="140" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M380 470h60M480 520h60M400 560h40" stroke-width="6" stroke-linecap="round"/></g>
+<circle id="s7ring" cx="460" cy="290" r="42" fill="none" stroke="var(--gain)" stroke-width="5"/>
+<g id="s7ppl"></g>
+<g id="s7c0"><rect class="s-line" x="860" y="230" width="620" height="140" rx="16" fill="var(--stage)" stroke-width="3"/><text class="d5" x="900" y="290" font-size="32">“I don’t know yet,</text><text class="d5" x="900" y="340" font-size="32">but I will find out.”</text></g>
+<g id="s7c1"><rect class="s-line" x="860" y="400" width="620" height="140" rx="16" fill="var(--stage)" stroke-width="3"/><text class="d5" x="900" y="482" font-size="32">“Can you help me with this?”</text></g>
+<g id="s7c2"><rect class="s-line" x="860" y="570" width="620" height="140" rx="16" fill="var(--stage)" stroke-width="3"/><text class="d5" x="900" y="652" font-size="32">“Poke holes in my idea.”</text><rect class="s-ink" x="1380" y="598" width="60" height="84" fill="none" stroke-width="5"/><polygon id="s7door" class="gain"/></g>
+<g id="s7s"><text class="d" x="120" y="830" font-size="52">Small. Risky. <tspan style="fill:var(--gain)">Real.</tspan></text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">This week, where will you</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">stop playing it safe</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">and <tspan style="fill:var(--gain)">show up anyway?</tspan></text></g>
+<g id="s8m"><text class="m" x="143" y="700" font-size="26">NAME THE UNCERTAINTY. SHOW UP ANYWAY.</text></g>
+<g id="s8cal"><rect class="s-ink" x="1180" y="620" width="260" height="200" rx="14" fill="var(--stage)" stroke-width="5"/><rect class="ink" x="1180" y="620" width="260" height="46" rx="14"/><g id="s8dots"></g></g>
+<circle id="s8ring" cx="1310" cy="740" r="20" fill="none" stroke="var(--gain)" stroke-width="6"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Vulnerability Is Not Weakness&rdquo;, from <em>Dare to Lead</em> by Brené Brown. The special forces soldiers&#x27; question and the six vulnerability myths are as reported in the book. The scale, mountain, fence and meeting drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 5.1], [5.1, 23.9], [23.9, 44.3], [44.3, 55.8], [55.8, 72.9], [72.9, 89.1], [89.1, 104.3], [104.3, 121.1], [121.1, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "What It Really Is", "The Soldier Test", "Myth One: Weakness", "Myth: Going Alone", "Myth: No Discomfort", "Myth: Oversharing", "At Work", "Your Challenge"];
+const TM={"brave_leader": 0.0, "three_clouds": 5.44, "speech_bubble": 12.72, "soldiers": 24.24, "question_card": 28.08, "raised_hand": 34.72, "scale": 44.64, "mountain": 52.48, "shield_person": 56.08, "lone_climber": 65.6, "blueprint": 73.2, "two_hands": 81.04, "diary": 89.36, "fence": 96.48, "meeting_table": 104.56, "i_dont_know": 107.52, "open_door": 113.68, "calendar": 121.36};
+const P=(g,x,y,r,c)=>{const e=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:c},e);mk('path',{d:`M${x-1.5*r} ${y+4.2*r}v${-1.3*r}a${1.5*r} ${1.5*r} 0 0 1 ${3*r} 0v${1.3*r}z`,class:c},e);return e};
+const T=(g,x,y,s,c,str,a)=>{const e=mk('text',{x:x,y:y,'font-size':s,class:c,'text-anchor':a||'start'},g);e.textContent=str;return e};
+const HEART='M0 30C-38 5-40-22-19-28C-9-30-2-23 0-17C2-23 9-30 19-28C40-22 38 5 0 30Z';
+$('t_heart').setAttribute('d',HEART);
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('line',{x1:1260+190*c,y1:440+190*s,x2:1260+220*c,y2:440+220*s,stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('t_rays'))}
+P($('t_me'),1260,330,50,'ink');
+const S1=[[330,'UNCERTAINTY','Ask for a raise'],[800,'RISK','Give hard news'],[1270,'EXPOSURE','Admit I was wrong']].map(([x,lab,ex])=>{
+  const c=mk('g',{},$('s1c'));mk('path',{d:`M${x-150} 380a50 50 0 0 1 20-95a70 70 0 0 1 130-20a60 60 0 0 1 110 30a45 45 0 0 1-10 85z`,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},c);T(c,x,338,22,'m',lab,'middle');
+  const b=mk('g',{},$('s1b'));mk('path',{d:`M${x-20} 516l10 32l30-32z`,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},b);mk('rect',{x:x-190,y:430,width:380,height:90,rx:20,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},b);T(b,x,486,30,'d5',ex,'middle');
+  const o=mk('g',{},$('s1o'));mk('path',{d:`M${x} 560V612`,stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'6 8'},o);mk('circle',{cx:x,cy:655,r:38,fill:'none',stroke:'var(--loss)','stroke-width':6},o);const q=T(o,x,672,48,'d','?','middle');q.setAttribute('style','fill:var(--loss)');
+  return [c,b,o]});
+const SOL=[];for(let i=0;i<6;i++){const x=180+i*110,g=P($('s2sol'),x,520,26,'ink');mk('path',{d:`M${x-32} 510a32 32 0 0 1 64 0h10`,fill:'none',stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round'},g);SOL.push(g)}
+const TR=$('s3tr');let TL=400;try{TL=TR.getTotalLength()}catch(e){}
+P($('s4me'),360,430,30,'ink');
+// rain: columns over the figure and shield stop short above them; open columns fall to the floor
+const RN=[];for(let i=0;i<16;i++){const x=170+i*36,cov=x>=280&&x<=570,bot=cov?392:640;
+  RN.push([mk('line',{x1:x,x2:x-8,stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round'},$('s4rain')),bot,i])}
+const SPS=[];[300,345,390,445,490,535].forEach(x=>SPS.push(mk('path',{d:`M${x-10} 404l-6-8M${x+10} 404l6-8`,stroke:'var(--loss)','stroke-width':3,'stroke-linecap':'round',fill:'none'},$('s4rain'))));
+const CLB=P($('s4cl'),1160,348,20,'ink');
+[920,1000,1320,1400].forEach(x=>{mk('path',{d:`M1160 400L${x} 580`,fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},$('s4rope'));P($('s4sup'),x,580,18,'gain')});
+for(let x=160;x<720;x+=40)mk('path',{d:`M${x} 232V628`,stroke:'var(--loss)','stroke-opacity':.25,'stroke-width':1},$('s5grid'));
+for(let y=270;y<630;y+=40)mk('path',{d:`M122 ${y}H718`,stroke:'var(--loss)','stroke-opacity':.25,'stroke-width':1},$('s5grid'));
+// paired step bars: trust and vulnerability rise together in equal steps
+const BARS=[];for(let k=0;k<4;k++){const x=890+k*140;
+  BARS.push([mk('rect',{x:x,width:50,rx:6,class:'ink',y:660,height:0},$('s5bars')),mk('rect',{x:x+56,width:50,rx:6,class:'gain',y:660,height:0},$('s5bars'))])}
+const SPL=[];for(let i=0;i<8;i++)SPL.push(mk('rect',{width:40,height:8,rx:4,class:'loss'},$('s6sp')));
+P($('s6pp'),1070,400,28,'ink');P($('s6pp'),1270,400,28,'ink');
+const PP=[];for(let i=0;i<7;i++){const a=-Math.PI/2+i*2*Math.PI/7;PP.push(mk('circle',{cx:460+300*Math.cos(a),cy:500+210*Math.sin(a),r:28,class:i?'ink':'gain'},$('s7ppl')))}
+for(let j=0;j<3;j++)for(let i=0;i<7;i++)mk('circle',{cx:1205+i*35,cy:700+j*40,r:7,class:'ink','fill-opacity':.4},$('s8dots'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(e,a,d=.5)=>rise(typeof e==='string'?$(e):e,p(u,a,a+d));
+const tl=TM.brave_leader;
+$('t_rays').setAttribute('opacity',p(u,tl,tl+1));$('t_rays').setAttribute('transform',`rotate(${((t*6)%360).toFixed(1)} 1260 440)`);
+const hb=p(u,tl+.8,tl+1.4),hk=1.4*(.5+.5*hb)*(1+.08*Math.pow(Math.abs(Math.sin(t*3)),6));
+$('t_heart').setAttribute('opacity',hb);$('t_heart').setAttribute('transform',`translate(1260 482) scale(${hk.toFixed(3)})`);
+
+S1.forEach((o,i)=>{R(o[0],TM.three_clouds+.6+i*1.2);R(o[1],TM.speech_bubble+i*1.6);R(o[2],TM.speech_bubble+5.8+i*.3)});
+R('s1m',TM.speech_bubble+5.8);R('s1s',TM.speech_bubble+9.2);
+let w='M120 850';for(let x=130;x<=990;x+=10)w+='L'+x+' '+(850+5*Math.sin(x/9+t*14)).toFixed(1);$('s1w').setAttribute('d',w);
+
+SOL.forEach((g,i)=>R(g,TM.soldiers+.3+i*.2));
+R('s2card',TM.question_card);R('s2q',TM.question_card+5);
+const ra=p(u,TM.raised_hand,TM.raised_hand+.6);
+$('s2arm').setAttribute('x2',(545+30*ra).toFixed(1));$('s2arm').setAttribute('y2',(590-140*ra).toFixed(1));$('s2arm').setAttribute('opacity',ra>0?1:0);
+[...SOL[3].children].slice(0,2).forEach(e=>e.setAttribute('class',u>=TM.raised_hand?'gain':'ink'));
+R('s2bub',TM.raised_hand+.6);R('s2zero',TM.raised_hand+5);
+
+const sc=TM.scale;R('s3sc',sc);
+const an=14*(1-p(u,sc+.6,sc+2.4)),rr=an*Math.PI/180,cc=220*Math.cos(rr),ss=220*Math.sin(rr);
+$('s3beam').setAttribute('transform',`rotate(${an.toFixed(2)} 440 340)`);
+$('s3pL').setAttribute('transform',`translate(${(440-cc).toFixed(1)} ${(340-ss).toFixed(1)})`);
+$('s3pR').setAttribute('transform',`translate(${(440+cc).toFixed(1)} ${(340+ss).toFixed(1)})`);
+R('s3w',sc+2.6);$('s3ws').setAttribute('x2',(112+300*p(u,sc+3.4,sc+4.2)).toFixed(1));
+R('s3m',TM.mountain);
+const pt=TR.getPointAtLength(TL*p(u,TM.mountain+.6,TM.mountain+3.2));$('s3cl').setAttribute('cx',pt.x.toFixed(1));$('s3cl').setAttribute('cy',pt.y.toFixed(1));
+
+R('s4L',TM.shield_person);
+const rn=p(u,TM.shield_person+3.8,TM.shield_person+4.6);$('s4rain').setAttribute('opacity',rn);
+RN.forEach(([l,bot,i])=>{const top=292,span=bot-top-24,y=top+((t*220+i*53)%span);l.setAttribute('y1',y.toFixed(1));l.setAttribute('y2',(y+24).toFixed(1))});
+SPS.forEach((s,i)=>s.setAttribute('opacity',(.3+.7*Math.abs(Math.sin(t*6+i*1.3))).toFixed(2)));
+R('s4u',TM.shield_person+3.8);R('s4c',TM.shield_person+5.5);
+R('s4R',TM.lone_climber);
+$('s4rope').setAttribute('opacity',p(u,TM.lone_climber+3,TM.lone_climber+4));R('s4sup',TM.lone_climber+3);
+[...CLB.children].forEach(e=>e.setAttribute('class',u>=TM.lone_climber+3?'gain':'ink'));
+R('s4w',TM.lone_climber+3.4);
+
+R('s5bp',TM.blueprint);
+$('s5er').setAttribute('transform',`translate(${(420+70*Math.sin(t*5)).toFixed(1)} ${(430+10*Math.sin(t*10)).toFixed(1)}) rotate(-12)`);
+R('s5no',TM.blueprint+3.8);R('s5d',TM.blueprint+4.8);
+R('s5r',TM.two_hands);
+BARS.forEach((pr,k)=>{const a=TM.two_hands+4.9+k*.9,h=70*(k+1)*p(u,a,a+.6);pr.forEach(b=>{b.setAttribute('y',(660-h).toFixed(1));b.setAttribute('height',h.toFixed(1))})});
+R('s5a',TM.two_hands+4.9);
+
+R('s6L',TM.diary);
+SPL.forEach((r,i)=>{const k=((t*90+i*37)%140)/140;r.setAttribute('x',(410+(i-3.5)*28*k).toFixed(1));r.setAttribute('y',(515+140*k).toFixed(1));r.setAttribute('opacity',(1-k).toFixed(2))});
+R('s6x',TM.diary+2.9);R('s6t',TM.diary+2.9);
+R('s6R',TM.fence);R('s6p',TM.fence+3);
+
+R('s7tab',TM.meeting_table);
+PP.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.meeting_table+.4+i*.15,TM.meeting_table+.8+i*.15)));
+$('s7ring').setAttribute('opacity',u>=TM.i_dont_know?(.4+.6*Math.abs(Math.sin(t*3))).toFixed(2):0);
+R('s7c0',TM.i_dont_know);R('s7c1',TM.i_dont_know+4.6);R('s7c2',TM.open_door);
+const dw=p(u,TM.open_door+.5,TM.open_door+1.3),dx=1380+60*(1-.6*dw);
+$('s7door').setAttribute('points',`1380,598 ${dx.toFixed(1)},${(598+12*dw).toFixed(1)} ${dx.toFixed(1)},${(682-12*dw).toFixed(1)} 1380,682`);
+R('s7s',TM.open_door+3.3);
+
+R('qa',TM.calendar);R('qb',TM.calendar+.4);R('qc',TM.calendar+.8);
+R('s8cal',TM.calendar+1.4);R('s8ring',TM.calendar+5);R('s8m',TM.calendar+5);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.99;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

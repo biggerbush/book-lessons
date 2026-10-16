@@ -1,0 +1,356 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Almanack of Naval Ravikant Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Almanack of Naval Ravikant: Seek wealth, meaning assets that earn while you sleep, rather than chasing a salary or status, because wealth creation is a positive-sum game anyone can learn. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE ALMANACK OF NAVAL RAVIKANT · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Getting rich is a skill,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not luck.</text>
+<text class="b" x="120" y="600" font-size="32">Why wealth is a learnable skill, not a lottery ticket</text>
+<g id="steps"><path class="s-ink" d="M1180 700h90v-60h90v-60h90" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="coin"><g transform="translate(1360 300)"><g id="spin">
+<circle class="gain" r="90"/><circle r="68" fill="none" stroke="var(--on-gain)" stroke-width="5"/>
+<text class="d" x="0" y="34" font-size="96" text-anchor="middle" style="fill:var(--on-gain)">$</text>
+</g></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Making money is a skill.</text>
+<text class="b" x="120" y="176" font-size="32">Naval Ravikant on getting rich without getting lucky.</text>
+<g id="naval"><g id="navF"></g>
+<text class="m" x="290" y="640" font-size="22" text-anchor="middle">NAVAL RAVIKANT</text>
+<text class="m" x="290" y="672" font-size="20" text-anchor="middle">INVESTOR · ANGELLIST</text></g>
+<g id="tw"><path class="s-line" d="M584 290V590" stroke-width="5"/><g id="thread"></g>
+<text class="m" x="540" y="710" font-size="22">A FAMOUS THREAD OF TWEETS</text></g>
+<g id="ladderG">
+<path class="s-ink" d="M1150 240V720M1330 240V720" stroke-width="8" stroke-linecap="round"/><g id="rungs"></g>
+<circle id="climb" class="gain" cx="1240" cy="700" r="24"/>
+<text class="m" x="1240" y="780" font-size="22" text-anchor="middle">SKILLS CAN BE LEARNED</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Money, status, wealth.</text>
+<text class="b" x="120" y="176" font-size="32">Three things people often blur together.</text>
+<g id="jars"></g>
+<g id="q3"><text class="d" x="1260" y="510" font-size="120" text-anchor="middle" style="fill:var(--muted)">?</text></g>
+<g id="bill"><g id="billM"><rect class="ink" x="260" y="420" width="160" height="84" rx="8"/>
+<text class="d" x="340" y="478" font-size="52" text-anchor="middle" style="fill:var(--stage)">$</text></g>
+<path class="s-muted" d="M270 560h140m-16-14 16 14-16 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="crownG"><path class="ink" d="M720 520l-14-90 50 40 44-64 44 64 50-40-14 90z"/><rect class="ink" x="720" y="532" width="160" height="16" rx="6"/></g>
+<g id="sub0"><text class="m" x="340" y="744" font-size="20" text-anchor="middle">MOVES TIME AND WEALTH</text></g>
+<g id="sub1"><text class="m" x="800" y="744" font-size="20" text-anchor="middle">RANK IN THE PECKING ORDER</text></g>
+<g id="sub2"><text class="m" x="1260" y="744" font-size="20" text-anchor="middle" style="fill:var(--gain)">THE ONE TO SEEK</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Wealth earns while you sleep.</text>
+<text class="b" x="120" y="176" font-size="32">Assets that keep earning, day and night.</text>
+<g id="moonG">
+<circle class="ink" cx="1400" cy="290" r="60"/><circle cx="1426" cy="270" r="52" fill="var(--stage)"/>
+<circle class="ink" cx="1290" cy="240" r="5"/><circle class="ink" cx="1250" cy="330" r="4"/><circle class="ink" cx="1460" cy="400" r="5"/>
+<rect class="ink" x="1200" y="560" width="16" height="110" rx="4"/><rect class="ink" x="1200" y="626" width="260" height="26" rx="6"/>
+<circle class="ink" cx="1252" cy="604" r="20"/><path class="s-ink" d="M1278 626q70-60 176 0z" fill="var(--stage)" stroke-width="5"/>
+<text id="zz" class="d" x="1300" y="540" font-size="34" style="fill:var(--muted)">Z z</text>
+<text class="m" x="1200" y="780" font-size="20">OWNER ASLEEP</text></g>
+<g id="factG">
+<path class="s-ink" d="M140 680V500l110-70v70l110-70v70l110-70v70h20V320h60v360z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="gain" x="180" y="570" width="60" height="50"/><rect class="gain" x="290" y="570" width="60" height="50"/><rect class="gain" x="400" y="570" width="60" height="50"/>
+<path class="s-ink" d="M140 722H680" stroke-width="5" stroke-linecap="round"/><g id="boxes"></g>
+<text class="m" x="140" y="780" font-size="20">FACTORIES AND ROBOTS</text></g>
+<g id="lapG">
+<rect class="s-ink" x="760" y="400" width="320" height="210" rx="10" fill="var(--stage)" stroke-width="6"/><g id="dots"></g>
+<path class="ink" d="M720 628h400l-30 34H750z"/>
+<text class="m" x="720" y="780" font-size="20">SOFTWARE AT MIDNIGHT</text></g>
+<g id="seek"><text class="d" x="120" y="850" font-size="46">“Seek <tspan style="fill:var(--gain)">wealth</tspan>, not money or status.”</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A salary rents out your hours.</text>
+<text class="b" x="120" y="176" font-size="32">Trade hours for pay, and the pay stops when you do.</text>
+<g id="clockG">
+<circle class="s-ink" cx="300" cy="430" r="130" fill="var(--stage)" stroke-width="7"/><g id="ticks"></g>
+<path id="minH" class="s-ink" d="M300 430V330" stroke-width="7" stroke-linecap="round"/>
+<path id="hrH" class="s-ink" d="M300 430h62" stroke-width="10" stroke-linecap="round"/>
+<path class="s-muted" d="M450 440h100m-18-16 18 16-18 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="coins"></g>
+<text class="m" x="300" y="620" font-size="22" text-anchor="middle">YOUR HOURS</text>
+<text class="m" x="650" y="620" font-size="22" text-anchor="middle">PAY</text></g>
+<g id="stopG"><g id="stopO"></g><text class="d" x="500" y="451" font-size="30" text-anchor="middle" style="fill:var(--stage)">STOP</text></g>
+<path class="s-line" d="M820 260V640" stroke-width="3" stroke-dasharray="8 10"/>
+<g id="pieW"><g id="pieS" transform="translate(1170 430) scale(.8)">
+<circle class="s-line" r="130" fill="none" stroke-width="6"/><path class="s-line" d="M0 0V-130M0 0L-112.6 65M0 0L112.6 65" stroke-width="4"/>
+<path class="gain" d="M6 -4L6 -134A130 130 0 0 1 118.6 -69z"/></g>
+<text class="m" x="1170" y="660" font-size="22" text-anchor="middle">OWN A PIECE · EQUITY</text>
+<text class="m" x="1170" y="692" font-size="22" text-anchor="middle" style="fill:var(--gain)">GROWS WITHOUT YOU</text></g>
+<g id="never"><text class="d" x="120" y="820" font-size="46">Renting out hours alone won’t make you rich.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Status is zero-sum. Wealth isn’t.</text>
+<text class="b" x="120" y="176" font-size="32">One game needs losers. The other can lift everyone.</text>
+<path class="s-line" d="M800 260V700" stroke-width="3" stroke-dasharray="8 10"/>
+<g id="sawG"><g id="plank"><rect class="ink" x="170" y="592" width="460" height="14" rx="7"/><g id="plk"></g></g>
+<polygon class="ink" points="400,606 355,680 445,680"/>
+<text class="m" x="400" y="740" font-size="22" text-anchor="middle">STATUS · ZERO-SUM</text></g>
+<g id="rr"><text class="m" x="400" y="780" font-size="22" text-anchor="middle" style="fill:var(--loss)">ONE RISES, ONE DROPS</text></g>
+<g id="gpie"><g id="gpS" transform="translate(1150 470) scale(.9)"><circle class="gain" r="100"/>
+<path d="M0 0V-100M0 0L87 50M0 0L-87 50" stroke="var(--stage)" stroke-width="5"/></g>
+<g id="ppl"></g>
+<text class="m" x="1150" y="740" font-size="22" text-anchor="middle">WEALTH · POSITIVE-SUM</text></g>
+<g id="win"><text class="m" x="1150" y="780" font-size="22" text-anchor="middle" style="fill:var(--gain)">YOU WIN, CUSTOMERS WIN</text></g>
+<g id="ups"><path class="s-gain" d="M920 400v-40m-14 14 14-14 14 14M1380 400v-40m-14 14 14-14 14 14M1440 400v-40m-14 14 14-14 14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="lift"><text class="d" x="120" y="842" font-size="40">Honest wealth creation can lift everyone.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Society pays for what it wants.</text>
+<text class="b" x="120" y="176" font-size="32">…but does not yet know how to get.</text>
+<g id="gift">
+<rect class="gain" x="180" y="434" width="260" height="200"/><rect class="gain" x="160" y="380" width="300" height="54" rx="6"/>
+<rect class="ink" x="296" y="380" width="28" height="254"/>
+<circle class="s-ink" cx="290" cy="360" r="18" fill="none" stroke-width="6"/><circle class="s-ink" cx="330" cy="360" r="18" fill="none" stroke-width="6"/>
+<text class="m" x="310" y="700" font-size="22" text-anchor="middle">WHAT IT WANTS</text></g>
+<g id="mapG">
+<polygon class="s-ink" points="560,320 700,290 860,320 1000,290 1000,620 860,650 700,620 560,650" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-line" d="M700 290V620M860 320V650" stroke-width="3"/>
+<path id="route" class="s-gain" d="M620 560C680 470 720 470 780 430S880 420 920 420" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<g id="pins"></g>
+<text class="m" x="780" y="700" font-size="22" text-anchor="middle">WHAT, WHO, WHEN</text></g>
+<g id="stu"><g id="stuF"></g>
+<rect class="ink" x="1120" y="480" width="320" height="14" rx="4"/>
+<path class="s-gain" d="M1222 476l58-22 58 22" fill="none" stroke-width="7" stroke-linejoin="round"/>
+<rect class="s-ink" x="1120" y="560" width="320" height="34" rx="17" fill="none" stroke-width="4"/>
+<rect id="skill" class="gain" x="1124" y="564" width="0" height="26" rx="13"/>
+<text class="m" x="1280" y="700" font-size="22" text-anchor="middle">PRACTICE, LIKE A CRAFT</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Audit your income tonight.</text>
+<text class="b" x="120" y="176" font-size="32">One page, two columns.</text>
+<g id="nb"><rect class="s-ink" x="220" y="220" width="1160" height="580" rx="16" fill="var(--stage)" stroke-width="6"/><g id="rings"></g></g>
+<line id="div" class="s-ink" x1="800" y1="240" x2="800" y2="240" stroke-width="5" stroke-linecap="round"/>
+<g id="hL"><text class="m" x="260" y="304" font-size="22" style="fill:var(--loss)">STOPS WHEN YOU STOP</text><g id="rowsL"></g></g>
+<g id="hR"><text class="m" x="840" y="304" font-size="22" style="fill:var(--gain)">EARNS WITHOUT YOU</text>
+<circle class="gain" cx="850" cy="380" r="10"/><path class="s-line" d="M880 380H1320" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/></g>
+<g id="sd"><g id="sdS"><path class="s-ink" d="M1010 720h160" stroke-width="6" stroke-linecap="round"/>
+<path class="s-gain" d="M1090 720V600" stroke-width="7" stroke-linecap="round"/>
+<path class="gain" d="M1090 650c-50 0-70-30-70-60 40 0 70 20 70 60zM1090 625c40 0 60-30 60-60-40 0-60 20-60 60z"/></g>
+<text class="m" x="1090" y="770" font-size="20" text-anchor="middle" style="fill:var(--gain)">ONE SMALL ASSET</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">What could you start</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2"><tspan style="fill:var(--gain)">owning</tspan> this year,</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">instead of only renting</text></g>
+<g id="qd"><text class="d" x="136" y="600" font-size="80" letter-spacing="-2">out your hours?</text></g>
+<g id="qlab"><text class="m" x="143" y="710" font-size="26">OWN A PIECE, DON’T ONLY RENT</text></g>
+<g id="qpie"><circle class="s-ink" cx="1340" cy="640" r="100" fill="none" stroke-width="6"/>
+<path id="qsl" class="gain" d="M1340 640V540A100 100 0 0 1 1426.6 590z"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Getting rich is a skill, not luck&rdquo;, from <em>The Almanack of Naval Ravikant</em> by Eric Jorgenson. The factory, robots and overnight computer program are Naval&#x27;s own examples, as reported in the book. The seesaw, growing pie and two-column page are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 5.0], [5.0, 19.7], [19.7, 32.3], [32.3, 50.7], [50.7, 67.5], [67.5, 89.4], [89.4, 105.3], [105.3, 120.7], [120.7, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Rich Without Luck", "The Big Claim", "Three Different Things", "Earns While You Sleep", "Renting Your Time", "Two Kinds of Games", "Why Anyone Can Learn", "Your First Step", "Your Challenge"];
+const TM={"title_coin": 0.0, "naval": 5.28, "tweet_thread": 10.48, "ladder": 15.04, "three_jars": 20.0, "money_bill": 24.16, "crown": 28.96, "moon": 32.56, "factory": 36.24, "laptop": 40.4, "clock": 50.96, "stop_sign": 53.72, "pie_slice": 61.2, "seesaw": 67.84, "growing_pie": 74.0, "handshake": 81.2, "gift_box": 89.68, "map": 95.84, "student": 101.36, "notebook": 105.64, "split_page": 108.32, "seedling": 116.72, "question": 121.04};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const txt=(g,a,s)=>{const e=mk('text',a,g);e.textContent=s;return e};
+fig($('navF'),290,380,50,'ink');
+const cards=[250,400,550].map((y,i)=>{const g=mk('g',{},$('thread'));mk('rect',{x:540,y:y,width:420,height:110,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('circle',{cx:584,cy:y+40,r:18,class:i?'ink':'gain'},g);mk('rect',{x:622,y:y+28,width:300,height:10,rx:5,fill:'var(--line)'},g);mk('rect',{x:622,y:y+58,width:i===2?160:240,height:10,rx:5,fill:'var(--line)'},g);return g});
+for(let i=0;i<6;i++)mk('path',{d:'M1150 '+(680-i*80)+'H1330',class:'s-ink','stroke-width':6},$('rungs'));
+const J=[340,800,1260].map((c,i)=>{const g=mk('g',{},$('jars'));mk('rect',{x:c-130,y:300,width:260,height:320,rx:36,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);mk('rect',{x:c-95,y:262,width:190,height:38,rx:10,class:'ink'},g);
+  txt(g,{x:c,y:700,'font-size':52,'text-anchor':'middle',class:'d',style:i===2?'fill:var(--gain)':''},['Money','Status','Wealth'][i]);return g});
+const BX=[0,1,2,3].map(()=>mk('rect',{x:560,y:694,width:26,height:26,rx:4,class:'gain'},$('boxes')));
+const DT=[];for(let i=0;i<15;i++)DT.push(mk('circle',{cx:810+(i%5)*55,cy:450+Math.floor(i/5)*50,r:14,fill:'var(--line)'},$('dots')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(300+108*c).toFixed(1)+' '+(430+108*s).toFixed(1)+'L'+(300+122*c).toFixed(1)+' '+(430+122*s).toFixed(1),class:'s-ink','stroke-width':i%3?3:6},$('ticks'))}
+const CN=[];for(let i=0;i<6;i++)CN.push(mk('ellipse',{cx:650,cy:560-i*26,rx:54,ry:16,class:'gain',stroke:'var(--stage)','stroke-width':3},$('coins')));
+let op='';for(let i=0;i<8;i++){const a=(i+.5)*Math.PI/4;op+=(500+62*Math.cos(a)).toFixed(1)+','+(440+62*Math.sin(a)).toFixed(1)+' '}
+mk('polygon',{points:op,class:'loss'},$('stopO'));
+fig($('plk'),210,500,22,'gain');fig($('plk'),590,500,22,'loss');
+fig($('ppl'),920,476,20,'gain');fig($('ppl'),1380,476,20,'ink');fig($('ppl'),1440,476,20,'ink');
+const PN=[[620,560,'WHAT'],[780,430,'WHO'],[920,420,'WHEN']].map(q=>{const g=mk('g',{},$('pins'));mk('circle',{cx:q[0],cy:q[1],r:16,class:'gain',stroke:'var(--ink)','stroke-width':4},g);txt(g,{x:q[0],y:q[1]-30,'font-size':22,'text-anchor':'middle',class:'m'},q[2]);return g});
+fig($('stuF'),1280,330,34,'ink');
+for(let i=0;i<12;i++)mk('circle',{cx:280+i*95,cy:220,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rings'));
+const RL=[380,460,540].map((y,i)=>{const g=mk('g',{},$('rowsL'));mk('circle',{cx:270,cy:y,r:10,class:'loss'},g);
+  if(i===0)txt(g,{x:300,y:y+11,'font-size':32,class:'d5'},'Salary');else mk('path',{d:'M300 '+y+'H720',class:'s-line','stroke-width':5,'stroke-linecap':'round'},g);return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const sw=Math.max(.05,Math.abs(Math.cos(t*2.2)));
+  $('spin').setAttribute('transform','scale('+sw.toFixed(3)+' 1)');
+  rise($('coin'),p(u,TM.title_coin,TM.title_coin+.6)); rise($('steps'),p(u,TM.title_coin+.4,TM.title_coin+1));
+
+  rise($('naval'),p(u,TM.naval,TM.naval+.5));
+  rise($('tw'),p(u,TM.tweet_thread,TM.tweet_thread+.4));
+  cards.forEach((c,i)=>{const a=TM.tweet_thread+i*.5;rise(c,p(u,a,a+.4))});
+  rise($('ladderG'),p(u,TM.ladder,TM.ladder+.5));
+  $('climb').setAttribute('cy',(700-420*p(u,TM.ladder+.5,TM.ladder+4)).toFixed(1));
+
+  J.forEach((g,i)=>{const a=TM.three_jars+i*.4;rise(g,p(u,a,a+.5))});
+  rise($('q3'),p(u,TM.three_jars+.8,TM.three_jars+1.3));
+  rise($('bill'),p(u,TM.money_bill,TM.money_bill+.5)); rise($('sub0'),p(u,TM.money_bill+.4,TM.money_bill+.9));
+  $('billM').setAttribute('transform','translate('+(14*Math.sin(t*2)).toFixed(1)+' 0)');
+  rise($('crownG'),p(u,TM.crown,TM.crown+.5)); rise($('sub1'),p(u,TM.crown+.4,TM.crown+.9)); rise($('sub2'),p(u,TM.crown+2,TM.crown+2.5));
+
+  rise($('moonG'),p(u,TM.moon,TM.moon+.6)); $('zz').setAttribute('y',(540-10*Math.abs(Math.sin(t*1.5))).toFixed(1));
+  rise($('factG'),p(u,TM.factory,TM.factory+.5));
+  BX.forEach((b,i)=>{const k=(t*.4+i/4)%1;b.setAttribute('x',(556+k*110).toFixed(1));b.setAttribute('opacity',(k<.8?1:(1-k)/.2).toFixed(2))});
+  rise($('lapG'),p(u,TM.laptop,TM.laptop+.5));
+  DT.forEach((d,i)=>d.setAttribute('fill',u>=TM.laptop&&((u-TM.laptop)*3)%18>i?'var(--gain)':'var(--line)'));
+  rise($('seek'),p(u,TM.clock-5.3,TM.clock-4.7));
+
+  const tw=Math.max(0,Math.min(u,TM.stop_sign)-TM.clock);
+  $('minH').setAttribute('transform','rotate('+(tw*120).toFixed(1)+' 300 430)'); $('hrH').setAttribute('transform','rotate('+(tw*10).toFixed(1)+' 300 430)');
+  rise($('clockG'),p(u,TM.clock,TM.clock+.5));
+  CN.forEach((c,i)=>{const a=TM.clock+.4+i*.45;c.setAttribute('opacity',u>=a&&a<TM.stop_sign?1:0)});
+  rise($('stopG'),p(u,TM.stop_sign,TM.stop_sign+.4));
+  rise($('never'),p(u,TM.stop_sign+3.3,TM.stop_sign+3.9));
+  rise($('pieW'),p(u,TM.pie_slice,TM.pie_slice+.5));
+  $('pieS').setAttribute('transform','translate(1170 430) scale('+(.8+.35*p(u,TM.pie_slice+.6,TM.pie_slice+4)).toFixed(3)+')');
+
+  rise($('sawG'),p(u,TM.seesaw,TM.seesaw+.5));
+  $('plank').setAttribute('transform','rotate('+(14*p(u,TM.seesaw+2,TM.seesaw+3)).toFixed(2)+' 400 600)');
+  rise($('rr'),p(u,TM.seesaw+2,TM.seesaw+2.5));
+  rise($('gpie'),p(u,TM.growing_pie,TM.growing_pie+.5));
+  $('gpS').setAttribute('transform','translate(1150 470) scale('+(.9+.8*p(u,TM.growing_pie+.3,TM.growing_pie+3)).toFixed(3)+')');
+  rise($('win'),p(u,TM.growing_pie+1.8,TM.growing_pie+2.3));
+  $('ppl').setAttribute('transform','translate(0 '+(-24*p(u,TM.handshake,TM.handshake+1.2)).toFixed(1)+')');
+  rise($('lift'),p(u,TM.handshake,TM.handshake+.6)); rise($('ups'),p(u,TM.handshake+5,TM.handshake+5.5));
+
+  rise($('gift'),p(u,TM.gift_box,TM.gift_box+.5));
+  rise($('mapG'),p(u,TM.map,TM.map+.5)); $('route').setAttribute('opacity',p(u,TM.map+.4,TM.map+2));
+  $('route').setAttribute('stroke-dashoffset',(-t*20).toFixed(1));
+  PN.forEach((g,i)=>{const a=TM.map+.6+i*.7;rise(g,p(u,a,a+.4))});
+  rise($('stu'),p(u,TM.student,TM.student+.5)); $('skill').setAttribute('width',(312*p(u,TM.student+.4,TM.student+3.8)).toFixed(1));
+
+  rise($('nb'),p(u,TM.notebook,TM.notebook+.6));
+  $('div').setAttribute('y2',(240+540*p(u,TM.split_page,TM.split_page+1)).toFixed(1));
+  rise($('hL'),p(u,TM.split_page+.4,TM.split_page+.9));
+  RL.forEach((g,i)=>{const a=TM.split_page+1+i*.7;rise(g,p(u,a,a+.4))});
+  rise($('hR'),p(u,TM.split_page+5.3,TM.split_page+5.9));
+  rise($('sd'),p(u,TM.seedling,TM.seedling+.4));
+  $('sdS').setAttribute('transform','translate(1090 720) scale('+(.2+.8*p(u,TM.seedling,TM.seedling+1.6)).toFixed(3)+') translate(-1090 -720)');
+
+  ['qa','qb','qc','qd'].forEach((k,i)=>rise($(k),p(u,TM.question+i*.4,TM.question+i*.4+.5)));
+  rise($('qlab'),p(u,TM.question+1.8,TM.question+2.3)); rise($('qpie'),p(u,TM.question+1.4,TM.question+1.9));
+  $('qsl').setAttribute('transform','rotate('+(t*20%360).toFixed(1)+' 1340 640)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.12;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

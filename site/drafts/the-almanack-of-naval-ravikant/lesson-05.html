@@ -1,0 +1,357 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Almanack of Naval Ravikant Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of The Almanack of Naval Ravikant: The biggest returns in money, relationships and reputation come from compounding over years with people you trust. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE ALMANACK OF NAVAL RAVIKANT · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Play long-term games</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">with long-term people.</text>
+<text class="b" x="120" y="600" font-size="32">Why the biggest rewards come from staying with the right people.</text>
+<g id="hg">
+<path class="s-ink" d="M1270 264H1430L1362 440L1430 616H1270L1338 440Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<polygon id="sandT" class="gain"/><polygon id="sandB" class="gain"/>
+<path id="stream" class="s-gain" stroke-width="5"/>
+<rect class="ink" x="1240" y="246" width="220" height="18" rx="6"/>
+<rect class="ink" x="1240" y="616" width="220" height="18" rx="6"/>
+</g>
+<g id="stay"><text class="m" x="1350" y="690" font-size="20" text-anchor="middle">STAY PUT LONG ENOUGH</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Gains build on gains.</text>
+<text class="b" x="120" y="176" font-size="32">Compounding works far beyond money.</text>
+<g id="late"><rect class="gain" x="620" y="240" width="240" height="500" fill-opacity=".14"/><text class="m" x="640" y="228" font-size="20">PAYOFF ARRIVES LATE</text></g>
+<g id="cbars"></g>
+<path class="s-ink" d="M160 240V740H860" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline id="crv" class="s-gain" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="180" y="264" font-size="20">VALUE</text>
+<text class="m" x="860" y="780" font-size="20" text-anchor="end">TIME</text>
+<g id="gog"><text class="m" x="180" y="700" font-size="20">GAINS ON GAINS</text></g>
+<g id="jars"></g>
+<g id="lateT"><text class="d" x="120" y="830" font-size="44">Most of the payoff arrives late.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One deal, or many?</text>
+<g id="pA"><rect class="s-line" x="120" y="220" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="270" font-size="22">PLAY ONCE</text><g id="pplA"></g>
+<circle class="gain" cx="420" cy="590" r="22"/><circle class="gain" cx="460" cy="590" r="22"/><circle class="gain" cx="440" cy="556" r="22"/></g>
+<g id="grab"><path class="s-loss" d="M400 480H320m22-20-22 20 22 20M480 480H560m-22-20 22 20-22 20" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d5" x="150" y="700" font-size="34">Grab and walk away.</text></g>
+<g id="pB"><rect class="s-line" x="840" y="220" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="270" font-size="22">PLAY FOR DECADES</text><g id="pplB"></g><g id="cal"></g><g id="deals"></g></g>
+<g id="hon"><text class="d5" x="870" y="700" font-size="34">Honesty pays.</text></g>
+<g id="shape"><text class="d" x="120" y="830" font-size="44">Every deal shapes the next one.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The short-term trap.</text>
+<text class="b" x="120" y="176" font-size="32">Repeated relationships are where real returns live.</text>
+<text class="m" x="140" y="252" font-size="20">REPEATED DEALS</text>
+<g id="sbars"></g><g id="chn"></g>
+<g id="zeroT"><text class="m" x="610" y="770" font-size="22" style="fill:var(--loss)">BACK TO ZERO</text></g>
+<g id="strg"><text class="m" x="1190" y="620" font-size="20">NEW PEOPLE, NO TRUST</text></g>
+<g id="cutT"><text class="d" x="120" y="830" font-size="40">Cutting corners resets compounding to zero.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Trust saves time.</text>
+<text class="b" x="120" y="176" font-size="32">After years together, you stop checking every detail.</text>
+<g id="pc"><text class="m" x="150" y="470" font-size="20">YEARS TOGETHER</text></g>
+<g id="chk4"></g>
+<g id="jt"><text class="d5" x="150" y="560" font-size="34">No checking every detail.</text>
+<text class="d5" x="150" y="610" font-size="34" style="fill:var(--gain)">Just trust.</text></g>
+<g id="lanes">
+<text class="m" x="720" y="316" font-size="20" style="fill:var(--gain)">WITH TRUST</text>
+<path id="fastA" class="s-gain" d="M720 360H1400" stroke-width="8" stroke-linecap="round"/>
+<polygon class="gain" points="1400,330 1450,360 1400,390"/>
+<text class="m" x="720" y="505" font-size="20">WITHOUT TRUST</text>
+<polyline id="zig" class="s-muted" fill="none" stroke-width="5" stroke-dasharray="12 10" stroke-linejoin="round"/>
+<circle id="fd" class="gain" cy="360" r="18"/><circle id="sd" class="loss" r="18"/>
+</g>
+<g id="frT"><text class="d" x="120" y="820" font-size="44">Saved friction is wealth that compounds.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Who should you play with?</text>
+<g id="crowd5"></g>
+<g id="mag"><g id="magm"><circle class="s-ink" cx="0" cy="262" r="46" fill="none" stroke-width="8"/><path class="s-ink" d="M33 295l36 36" stroke-width="12" stroke-linecap="round"/></g></g>
+<g id="c50"><rect id="cr0" x="120" y="400" width="420" height="300" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/>
+<circle class="s-ink" cx="330" cy="496" r="42" fill="none" stroke-width="7"/><path class="s-ink" d="M312 550h36M318 568h24" stroke-width="7" stroke-linecap="round"/>
+<text class="d5" x="160" y="650" font-size="40">Intelligence</text></g>
+<g id="c51"><rect id="cr1" x="590" y="400" width="420" height="300" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/>
+<path class="ink" d="M815 450L770 510H805L790 565L842 495H807Z"/>
+<text class="d5" x="630" y="650" font-size="40">Energy</text></g>
+<g id="c52"><rect id="intR" x="1060" y="400" width="420" height="300" rx="18" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/>
+<path id="intS" class="gain" d="M1270 450L1320 470V505C1320 535 1300 555 1270 565C1240 555 1220 535 1220 505V470Z"/>
+<text id="intN" class="d5" x="1100" y="650" font-size="40">Integrity</text></g>
+<path id="crack" class="s-loss" d="M1180 400L1250 480L1220 540L1300 600L1270 700" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<g id="agst"><text class="m" x="120" y="750" font-size="20" style="fill:var(--loss)">WITHOUT INTEGRITY, THE OTHER TWO WORK AGAINST YOU</text></g>
+<g id="possT"><text class="d" x="120" y="830" font-size="40">Integrity makes the long game possible.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A lifetime filter.</text>
+<g id="row1"><text class="m" x="120" y="296" font-size="22">CAN YOU PICTURE A LIFETIME TOGETHER?</text>
+<rect class="s-gain" x="120" y="320" width="860" height="56" rx="28" fill="none" stroke-width="4"/>
+<rect id="lifeB" class="gain" x="120" y="320" width="0" height="56" rx="28"/></g>
+<g id="lifeL"><text class="m" x="150" y="356" font-size="22" style="fill:var(--on-gain)">A LIFETIME</text></g>
+<g id="row2"><text class="m" x="120" y="470" font-size="22">IF NOT, DON’T WORK WITH THEM FOR EVEN A DAY</text>
+<rect class="loss" x="120" y="490" width="56" height="56" rx="12"/>
+<path d="M132 502l32 32M164 502l-32 32" stroke="var(--stage)" stroke-width="7" stroke-linecap="round"/>
+<text class="m" x="196" y="526" font-size="22">ONE DAY</text></g>
+<g id="fun"><polygon class="s-ink" points="1100,260 1440,260 1310,480 1310,600 1230,600 1230,480" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="1270" y="710" font-size="20" text-anchor="middle" style="fill:var(--gain)">LIFELONG PARTNERS</text><g id="drops"></g></g>
+<g id="savT"><text class="d" x="120" y="800" font-size="40">That saves you years with the wrong people.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your next move.</text>
+<text class="b" x="120" y="176" font-size="32">Choose the people you trust, and keep showing up.</text>
+<g id="card7"><rect class="s-line" x="120" y="220" width="520" height="520" rx="18" fill="var(--stage)" stroke-width="3"/></g>
+<g id="rows"></g>
+<g id="plant"><path class="s-ink" d="M760 700H1440" stroke-width="6" stroke-linecap="round"/>
+<path id="stem" class="s-gain" stroke-width="10" stroke-linecap="round"/><g id="leaves"></g><g id="ydots"></g>
+<text class="m" x="760" y="780" font-size="20">YEAR AFTER YEAR</text></g>
+<g id="qt"><text class="d" x="120" y="845" font-size="44">“Play long-term games with long-term people.”</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Who in your life is</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">worth a <tspan style="fill:var(--gain)">ten-year game?</tspan></text></g>
+<g id="qc"><text class="d" x="136" y="600" font-size="48">Would someone choose you for theirs?</text>
+<text class="m" x="143" y="700" font-size="26">PLAY THE LONG GAME</text></g>
+<g id="mir"><ellipse class="s-ink" cx="1360" cy="400" rx="100" ry="150" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M1360 550V640M1300 650H1420" stroke-width="8" stroke-linecap="round"/></g>
+<g id="refl"><g id="reflm"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="122" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:02</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Play long-term games with long-term people&rdquo;, from <em>The Almanack of Naval Ravikant</em> by Eric Jorgenson. Naval&#x27;s view of compounding across money, relationships and knowledge, his traits for choosing partners, and his work-for-life filter are as reported in the book. The rising curve, the two players and the broken chain are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=122, SC=[[0.0, 8.6], [8.6, 28.6], [28.6, 45.1], [45.1, 59.9], [59.9, 72.9], [72.9, 86.9], [86.9, 99.6], [99.6, 113.1], [113.1, 122.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The quiet payoff", "Compounding everywhere", "One deal or many", "The short-term trap", "Trust saves time", "Picking partners", "A lifetime filter", "Your next move", "Your challenge"];
+const TM={"hourglass": 0.0, "curve": 8.88, "three_jars": 18.56, "two_players": 28.88, "calendar": 37.2, "handshake": 45.36, "broken_chain": 51.44, "old_friends": 60.24, "fast_arrow": 64.64, "magnifier": 73.2, "three_traits": 75.44, "cracked_coin": 80.4, "lifetime_rule": 87.2, "day_vs_life": 89.52, "contact_list": 99.92, "seedling": 103.68, "mirror": 113.36};
+const pp=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-1.5*r)+' '+(y+4.2*r)+'v'+(-1.3*r)+'a'+1.5*r+' '+1.5*r+' 0 0 1 '+3*r+' 0v'+1.3*r+'z',class:cls},g);return g};
+const EX=s=>(Math.exp(4*s)-1)/(Math.exp(4)-1);
+const CP=[];for(let i=0;i<=60;i++){const s=i/60;CP.push((160+680*s).toFixed(1)+','+(740-480*EX(s)).toFixed(1))}
+const CB=[];for(let i=0;i<8;i++){const s=(i+1)/9,h=480*EX(s);CB.push(mk('rect',{x:(145+680*s).toFixed(1),y:(740-h).toFixed(1),width:30,height:h.toFixed(1),class:'gain','fill-opacity':.35},$('cbars')))}
+const JF=['MONEY','RELATIONSHIPS','KNOWLEDGE'].map((s,i)=>{const x=950+i*180,g=mk('g',{},$('jars'));
+  mk('rect',{x:x+30,y:372,width:80,height:28,rx:6,class:'ink'},g);
+  mk('rect',{x:x,y:400,width:140,height:280,rx:22,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);
+  const f=mk('rect',{x:x+10,y:670,width:120,height:0,rx:12,class:'gain'},g);
+  const tx=mk('text',{x:x+70,y:724,'font-size':18,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return [g,f]});
+const PA=[260,620].map(x=>pp(mk('g',{fill:'var(--ink)'},$('pplA')),x,400,30,''));
+const PB=[940,1380].map(x=>pp(mk('g',{fill:'var(--ink)'},$('pplB')),x,340,26,''));
+mk('rect',{x:1080,y:300,width:160,height:150,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('cal'));
+mk('rect',{x:1080,y:300,width:160,height:34,rx:8,class:'ink'},$('cal'));
+const CAL=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++)CAL.push(mk('rect',{x:1098+c*34,y:348+r*32,width:24,height:24,rx:4,fill:'var(--line)'},$('cal')));
+mk('path',{d:'M920 560H1400',stroke:'var(--line)','stroke-width':4},$('deals'));
+const DL=[];for(let i=0;i<9;i++)DL.push(mk('circle',{cx:920+i*60,cy:560,r:14,fill:'var(--line)'},$('deals')));
+const H=[],LKS=[],BR=[];for(let i=0;i<8;i++){H.push(40*Math.pow(1.3,i));
+  BR.push(mk('rect',{x:170+i*110,y:720,width:60,height:0,rx:6,class:'gain'},$('sbars')));
+  LKS.push(mk('ellipse',{cx:200+i*110,cy:320,rx:62,ry:28,fill:'none',stroke:'var(--ink)','stroke-width':8},$('chn')))}
+[1220,1320,1420].forEach(x=>{pp($('strg'),x,470,22,'ink');const q=mk('text',{x:x,y:430,'font-size':40,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},$('strg'));q.textContent='?'});
+[220,340].forEach(x=>pp($('pc'),x,300,30,'ink'));
+for(let i=0;i<4;i++){const y=498+i*60;mk('rect',{x:160,y:y,width:28,height:28,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':4},$('chk4'));
+  mk('rect',{x:210,y:y+8,width:260,height:12,rx:6,fill:'var(--line)'},$('chk4'));
+  mk('path',{d:'M165 '+(y+14)+'l7 8 14-16',fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-linecap':'round'},$('chk4'))}
+const zig=x=>{const q=((x-720)/90)%2;return 600+60*(1-2*Math.abs(q-1))};
+let zp='';for(let x=720;x<=1440;x+=90)zp+=x+','+zig(x)+' ';$('zig').setAttribute('points',zp);
+for(let i=0;i<8;i++)pp($('crowd5'),180+i*180,236,16,'ink');
+const DR=[];for(let k=0;k<6;k++)DR.push(mk('circle',{r:14,class:k%3===0?'gain':'loss'},$('drops')));
+const RW=[];for(let i=0;i<6;i++){const y=290+i*80,g=mk('g',{},$('rows'));const a=mk('circle',{cx:180,cy:y,r:24,class:'ink'},g);
+  mk('rect',{x:224,y:y-9,width:280-(i*37)%100,height:18,rx:9,fill:'var(--line)'},g);
+  const c=[0,2,3].includes(i)?mk('path',{d:'M560 '+y+'l12 12 22-26',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g):null;RW.push([g,a,c])}
+const LV=[];for(let j=0;j<6;j++){const s=j%2?1:-1,cy=640-60*j;LV.push(mk('ellipse',{cx:1100+s*42,cy:cy,rx:42,ry:16,class:'gain',transform:'rotate('+(-25*s)+' '+(1100+s*42)+' '+cy+')'},$('leaves')))}
+const YD=[];for(let i=0;i<10;i++)YD.push(mk('circle',{cx:800+i*66,cy:735,r:10,fill:'var(--line)'},$('ydots')));
+pp($('reflm'),1360,350,26,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const hf=p(u,TM.hourglass,TM.hourglass+11),L=300+136*hf,w=12+68*(440-L)/174,hb=8+120*hf;
+  rise($('hg'),p(u,TM.hourglass,TM.hourglass+.6));
+  $('sandT').setAttribute('points',(1350-w).toFixed(1)+','+L.toFixed(1)+' '+(1350+w).toFixed(1)+','+L.toFixed(1)+' 1350,438');
+  $('sandB').setAttribute('points','1278,608 1422,608 1350,'+(608-hb).toFixed(1));
+  $('stream').setAttribute('d','M1350 440V'+(608-hb).toFixed(1)); $('stream').setAttribute('opacity',hf>0&&hf<1?1:0);
+  rise($('stay'),p(u,TM.hourglass+5.8,TM.hourglass+6.4));
+
+  $('crv').setAttribute('points',CP.slice(0,1+Math.round(60*p(u,TM.curve,TM.curve+3))).join(' '));
+  CB.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.curve+4.6+i*.2,TM.curve+4.9+i*.2)));
+  rise($('gog'),p(u,TM.curve+4.6,TM.curve+5.1));
+  JF.forEach((j,i)=>{rise(j[0],p(u,TM.three_jars+i*.4,TM.three_jars+i*.4+.5));const h=250*EX(p(u,TM.three_jars+1.5,TM.three_jars+9))*[1,.9,.96][i];j[1].setAttribute('y',(670-h).toFixed(1));j[1].setAttribute('height',h.toFixed(1))});
+  rise($('late'),p(u,TM.three_jars+4.9,TM.three_jars+5.4)); rise($('lateT'),p(u,TM.three_jars+5.2,TM.three_jars+5.8));
+
+  rise($('pA'),p(u,TM.two_players,TM.two_players+.5));
+  const gr=p(u,TM.two_players+5,TM.two_players+5.5); rise($('grab'),gr); PA.forEach(g=>g.setAttribute('fill',gr>.5?'var(--loss)':'var(--ink)'));
+  rise($('pB'),p(u,TM.calendar,TM.calendar+.5));
+  CAL.forEach((c,i)=>c.setAttribute('fill',u>=TM.calendar+.6+i*.25?'var(--gain)':'var(--line)'));
+  const hn=TM.calendar+3.8; DL.forEach((d,i)=>d.setAttribute('fill',u>=hn+i*.15?'var(--gain)':'var(--line)'));
+  PB.forEach(g=>g.setAttribute('fill',u>=hn?'var(--gain)':'var(--ink)'));
+  rise($('hon'),p(u,hn,hn+.5)); rise($('shape'),p(u,hn+.6,hn+1.2));
+
+  const kb=p(u,TM.broken_chain,TM.broken_chain+1);
+  LKS.forEach((l,i)=>{const g=p(u,TM.handshake+i*.4,TM.handshake+i*.4+.5),b=i>=4?kb:0;
+    l.setAttribute('opacity',(g*(1-.65*b)).toFixed(2)); l.setAttribute('transform','translate('+(24*b).toFixed(1)+' '+(70*b).toFixed(1)+')'); l.style.stroke=b>0?'var(--loss)':'var(--ink)';
+    const h=(i<4?H[i]:H[i]+(H[i-4]-H[i])*kb)*g; BR[i].setAttribute('y',(720-h).toFixed(1)); BR[i].setAttribute('height',h.toFixed(1)); BR[i].setAttribute('class',b>0?'loss':'gain')});
+  rise($('zeroT'),p(u,TM.broken_chain+.5,TM.broken_chain+1)); rise($('cutT'),p(u,TM.broken_chain+.8,TM.broken_chain+1.4));
+  rise($('strg'),p(u,TM.broken_chain+5,TM.broken_chain+5.5));
+
+  rise($('pc'),p(u,TM.old_friends,TM.old_friends+.5));
+  $('chk4').setAttribute('opacity',(p(u,TM.old_friends+.4,TM.old_friends+1)*(1-p(u,TM.old_friends+3,TM.old_friends+3.8))).toFixed(2));
+  rise($('jt'),p(u,TM.old_friends+4,TM.old_friends+4.5));
+  rise($('lanes'),p(u,TM.fast_arrow,TM.fast_arrow+.5));
+  $('fastA').setAttribute('stroke-width',(8+8*p(u,TM.fast_arrow+1,TM.fast_arrow+2)).toFixed(1));
+  const sx=720+700*((t*.15)%1); $('fd').setAttribute('cx',(720+700*((t*.5)%1)).toFixed(1)); $('sd').setAttribute('cx',sx.toFixed(1)); $('sd').setAttribute('cy',zig(sx).toFixed(1));
+  rise($('frT'),p(u,TM.fast_arrow+4.2,TM.fast_arrow+4.8));
+
+  rise($('crowd5'),p(u,TM.magnifier-.4,TM.magnifier)); rise($('mag'),p(u,TM.magnifier,TM.magnifier+.4));
+  $('magm').setAttribute('transform','translate('+(180+1080*p(u,TM.magnifier,TM.magnifier+2.4)).toFixed(1)+' 0)');
+  [0,1,2].forEach(i=>rise($('c5'+i),p(u,TM.three_traits+i*.5,TM.three_traits+i*.5+.5)));
+  const ck=p(u,TM.cracked_coin,TM.cracked_coin+.5),ok=p(u,TM.cracked_coin+3.8,TM.cracked_coin+4.3);
+  $('crack').setAttribute('opacity',(ck*(1-ok)).toFixed(2));
+  ['cr0','cr1'].forEach(id=>$(id).setAttribute('stroke',ck>.5&&ok<.5?'var(--loss)':'var(--line)'));
+  rise($('agst'),ck*(1-ok));
+  $('intR').setAttribute('fill',ok>.5?'var(--gain)':'var(--stage)'); $('intN').style.fill=ok>.5?'var(--on-gain)':'var(--ink)'; $('intS').style.fill=ok>.5?'var(--on-gain)':'var(--gain)';
+  rise($('possT'),ok);
+
+  // lifetime filter: rejected (indigo) drops stop above the rim and bounce away; partners (amber) pass inside the funnel
+  const fv=p(u,TM.lifetime_rule,TM.lifetime_rule+.5); rise($('fun'),fv);
+  DR.forEach((d,k)=>{const ph=(t*.3+k/6)%1;let x,y,o;
+    if(k%3===0){x=1270;y=290+280*ph;o=lin(ph,0,.1)*(1-lin(ph,.85,1))}
+    else{const x0=1150+k*40,dir=x0<1270?-1:1;x=x0+dir*30*lin(ph,.4,.8);y=160+66*ease(cl(ph/.4))-20*Math.sin(Math.PI*lin(ph,.4,.8));o=lin(ph,0,.1)*(1-lin(ph,.5,.8))}
+    d.setAttribute('cx',x.toFixed(1));d.setAttribute('cy',y.toFixed(1));d.setAttribute('opacity',(fv*o).toFixed(2))});
+  rise($('row1'),p(u,TM.day_vs_life,TM.day_vs_life+.5)); $('lifeB').setAttribute('width',(860*p(u,TM.day_vs_life+.5,TM.day_vs_life+3)).toFixed(1));
+  rise($('lifeL'),p(u,TM.day_vs_life+3,TM.day_vs_life+3.4)); rise($('row2'),p(u,TM.day_vs_life+3.6,TM.day_vs_life+4.1));
+  rise($('savT'),p(u,TM.day_vs_life+7.4,TM.day_vs_life+8));
+
+  rise($('card7'),p(u,TM.contact_list-.3,TM.contact_list+.2));
+  RW.forEach((r,i)=>{rise(r[0],p(u,TM.contact_list+i*.3,TM.contact_list+i*.3+.4));const tr=!!r[2]&&u>=TM.seedling+i*.3;r[1].setAttribute('class',tr?'gain':'ink');if(r[2])r[2].setAttribute('opacity',tr?1:0)});
+  rise($('plant'),p(u,TM.seedling-.3,TM.seedling+.2));
+  const g7=p(u,TM.seedling,TM.seedling+5),tp7=700-380*g7; $('stem').setAttribute('d','M1100 700V'+tp7.toFixed(1));
+  LV.forEach((l,j)=>l.setAttribute('opacity',cl((700-tp7-60*(j+1))/30).toFixed(2)));
+  YD.forEach((d,i)=>d.setAttribute('fill',g7*10>i+.5?'var(--gain)':'var(--line)'));
+  rise($('qt'),p(u,TM.seedling+5.7,TM.seedling+6.3));
+
+  rise($('mir'),p(u,TM.mirror,TM.mirror+.5)); rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9));
+  rise($('refl'),p(u,TM.mirror+4.2,TM.mirror+4.7)); rise($('qc'),p(u,TM.mirror+4.2,TM.mirror+4.8));
+  $('reflm').setAttribute('transform','translate(0 '+(4*Math.sin(t*1.5)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:118.91;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

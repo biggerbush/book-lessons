@@ -1,0 +1,311 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Measure What Matters Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Measure What Matters: An objective says what you want to achieve, and a few measurable key results say how you will know you got there, a method Andy Grove built at Intel. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MEASURE WHAT MATTERS · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">What an OKR</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">actually is.</text>
+<text class="b" x="120" y="600" font-size="32">One clear goal, a few numbers, and no room for doubt.</text>
+<g id="tgt"></g>
+<g id="arw" opacity="0"><path class="s-ink" d="M0 0l130-80" stroke-width="8" stroke-linecap="round"/><path class="s-gain" d="M112-69l-4-30M112-69l30 2M124-76l-4-30M124-76l30 2" stroke-width="5" stroke-linecap="round"/></g>
+<g id="prv"><text class="m" x="1270" y="650" font-size="24" text-anchor="middle" style="fill:var(--loss)">PROVE IT WITH A NUMBER?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A class at Intel, 1975.</text>
+<text class="b" x="120" y="176" font-size="32">Andy Grove taught. A young John Doerr took notes.</text>
+<g id="doe"><rect class="ink" x="220" y="600" width="260" height="14" rx="4"/><path class="s-ink" d="M240 614v120M460 614v120" stroke-width="6" stroke-linecap="round"/><rect id="nb1" class="ink" x="395" y="576" width="64" height="24" rx="3"/><text class="m" x="330" y="790" font-size="22" text-anchor="middle">JOHN DOERR</text></g>
+<g id="grv"><rect class="s-ink" x="900" y="250" width="560" height="380" rx="10" fill="var(--stage)" stroke-width="6"/><g id="grvp"></g><path class="s-ink" d="M808 520L900 440" stroke-width="7" stroke-linecap="round"/><text class="m" x="760" y="650" font-size="22" text-anchor="middle">ANDY GROVE</text></g>
+<g id="wb"><text class="m" x="940" y="320" font-size="24" style="fill:var(--gain)">OBJECTIVE</text><path class="s-ink" d="M940 360h420" stroke-width="7" stroke-linecap="round"/><text class="m" x="940" y="430" font-size="24">KEY RESULTS</text>
+<circle class="gain" cx="950" cy="470" r="9"/><circle class="gain" cx="950" cy="518" r="9"/><circle class="gain" cx="950" cy="566" r="9"/><path class="s-line" d="M975 470h300M975 518h300M975 566h300" stroke-width="6" stroke-linecap="round"/></g>
+<path id="arc1" class="s-gain" d="M900 610Q650 800 428 570" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<g id="dec"><text class="m" x="650" y="800" font-size="22" text-anchor="middle" style="fill:var(--gain)">CARRIED FOR DECADES</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fixing an old idea.</text>
+<text class="b" x="120" y="176" font-size="32">Management by objectives, from the thinker Peter Drucker.</text>
+<g id="bk"><rect class="s-ink" x="120" y="300" width="210" height="270" rx="8" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="120" y="300" width="30" height="270"/><text class="d" x="240" y="452" font-size="48" text-anchor="middle">MBO</text><text class="m" x="225" y="620" font-size="20" text-anchor="middle">PETER DRUCKER</text><path class="s-muted" d="M360 440h80m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="gl"><path class="s-line" d="M480 560H1440" stroke-width="5" stroke-linecap="round"/><path class="s-ink" d="M960 560V320" stroke-width="7" stroke-linecap="round"/><path id="fl2" class="ink" d="M960 320l110 34-110 34z"/><text class="m" x="960" y="602" font-size="24" text-anchor="middle">GOAL</text></g>
+<g id="fog"></g>
+<g id="qm2"><text class="d" x="1200" y="460" font-size="140" style="fill:var(--loss)">?</text></g>
+<g id="tape"><rect id="tr" class="gain" x="480" y="630" width="0" height="60" rx="6"/></g>
+<rect id="tcs" class="ink" x="440" y="615" width="70" height="90" rx="14"/>
+<g id="tl"><text class="m" x="480" y="750" font-size="22" style="fill:var(--gain)">TIE EVERY GOAL TO RESULTS YOU CAN MEASURE</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Half one: the objective.</text>
+<g id="sub3"><text class="b" x="120" y="176" font-size="32">The what: the place you want to reach.</text></g>
+<polygon class="s-ink" points="120,700 380,300 470,420 540,360 700,700" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<g id="flg"><path class="s-ink" d="M380 300V200" stroke-width="7" stroke-linecap="round"/><path class="gain" d="M380 200l80 24-80 24z"/><text class="m" x="480" y="230" font-size="20">WHERE YOU WANT TO GO</text></g>
+<g id="tags"></g>
+<g id="bak"><text class="d" x="1010" y="284" font-size="36" text-anchor="middle">BAKERY</text><rect class="s-ink" x="820" y="360" width="380" height="300" fill="var(--stage)" stroke-width="6"/><rect class="gain" x="800" y="300" width="420" height="60"/><g id="awn"></g>
+<rect class="s-ink" x="870" y="420" width="150" height="120" fill="var(--stage)" stroke-width="5"/><ellipse class="gain" cx="912" cy="515" rx="26" ry="14"/><ellipse class="gain" cx="976" cy="515" rx="26" ry="14"/><rect class="ink" x="1060" y="500" width="90" height="160"/></g>
+<g id="obj3"><text class="m" x="820" y="720" font-size="22" style="fill:var(--gain)">OBJECTIVE</text><text class="d5" x="820" y="770" font-size="36">Become the favorite breakfast</text><text class="d5" x="820" y="815" font-size="36">spot in town.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Half two: the key results.</text>
+<g id="sub4"><text class="b" x="120" y="176" font-size="32">The how: measurable steps that show you are getting closer.</text></g>
+<g id="lad"><path class="s-ink" d="M200 780V300M340 780V300" stroke-width="7" stroke-linecap="round"/><g id="rungs"></g><path class="s-ink" d="M270 300V230" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M270 230l60 20-60 20z"/><text class="m" x="270" y="830" font-size="20" text-anchor="middle">MEASURABLE STEPS</text></g>
+<g id="chk"><rect class="s-ink" x="460" y="260" width="520" height="440" rx="16" fill="var(--stage)" stroke-width="5"/><text class="m" x="500" y="320" font-size="22">EACH KEY RESULT</text><g id="rows"></g></g>
+<text class="m" x="1060" y="300" font-size="22">WHEN TIME IS UP</text>
+<g id="yes1"><rect class="gain" x="1060" y="330" width="420" height="150" rx="18"/><text class="d" x="1090" y="420" font-size="44" style="fill:var(--on-gain)">Yes, we did it.</text></g>
+<g id="no1"><rect class="s-loss" x="1060" y="520" width="420" height="150" rx="18" fill="var(--stage)" stroke-width="5"/><text class="d" x="1090" y="610" font-size="44" style="fill:var(--loss)">No, we did not.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">It needs a number.</text>
+<g id="my"><g id="myp"></g><text class="m" x="120" y="520" font-size="20">MARISSA MAYER · GOOGLE</text>
+<path class="s-ink" d="M404 350L330 395L404 400" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<rect class="s-ink" x="400" y="230" width="900" height="210" rx="24" fill="var(--stage)" stroke-width="5"/>
+<text class="d5" x="440" y="320" font-size="44">“It’s not a key result unless</text><text class="d5" x="440" y="390" font-size="44">it has a <tspan style="fill:var(--gain)">number</tspan>.”</text></g>
+<g id="few"></g>
+<g id="fewl"><text class="m" x="120" y="800" font-size="22" style="fill:var(--gain)">OFTEN 3 TO 5 PER OBJECTIVE</text></g>
+<g id="many"></g>
+<g id="manyl"><text class="m" x="900" y="800" font-size="22" style="fill:var(--loss)">TOO MANY: THE GOAL LOSES SHAPE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Doerr’s formula.</text>
+<text class="b" x="120" y="176" font-size="32">One handy sentence.</text>
+<g id="fc"><rect class="s-ink" x="120" y="220" width="1360" height="260" rx="20" fill="var(--stage)" stroke-width="5"/>
+<text class="d5" x="170" y="322" font-size="48">I will achieve</text><rect id="sl1" x="550" y="274" width="400" height="64" rx="32" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/><text id="st1" class="m" x="750" y="315" font-size="24" text-anchor="middle">THIS OBJECTIVE</text><text class="d5" x="962" y="322" font-size="48">,</text>
+<text class="d5" x="170" y="432" font-size="48">as measured by</text><rect id="sl2" x="550" y="384" width="460" height="64" rx="32" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/><text id="st2" class="m" x="780" y="425" font-size="24" text-anchor="middle">THESE KEY RESULTS</text><text class="d5" x="1022" y="432" font-size="48">.</text></g>
+<g id="ex"><text class="m" x="120" y="545" font-size="20">FOR EXAMPLE</text>
+<text class="d5" x="120" y="590" font-size="34">I will <tspan style="fill:var(--gain)">delight our customers</tspan>,</text>
+<text class="d5" x="120" y="638" font-size="34">as measured by raising our</text>
+<text class="d5" x="120" y="686" font-size="34">satisfaction score from <tspan style="fill:var(--gain)">7 to 9</tspan></text>
+<text class="d5" x="120" y="734" font-size="34">this quarter.</text></g>
+<g id="gg"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Write your own.</text>
+<text class="b" x="120" y="176" font-size="32">Objective first, then the numbers.</text>
+<g id="nb7"><rect class="s-ink" x="120" y="230" width="640" height="560" rx="14" fill="var(--stage)" stroke-width="5"/><g id="rng"></g>
+<g id="ob7"><text class="m" x="170" y="310" font-size="22" style="fill:var(--gain)">OBJECTIVE</text><text class="d5" x="170" y="370" font-size="36">What truly matters</text><text class="m" x="170" y="450" font-size="22">KEY RESULTS</text></g>
+<g id="krs"></g></g>
+<g id="sk"><g id="skp"></g><text class="m" x="900" y="640" font-size="20" text-anchor="middle">A SKEPTIC</text><circle class="s-ink" cx="980" cy="300" r="44" fill="var(--stage)" stroke-width="5"/><text id="skq" class="d" x="980" y="320" font-size="56" text-anchor="middle" style="fill:var(--loss)">?</text><path id="skc" class="s-gain" d="M960 302l14 16 28-34" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="pen7"><path class="gain" d="M0 0l8 30 96 96 22-22-96-96z"/><path class="ink" d="M0 0l8 30 22-22z"/></g>
+<g id="fr"><rect class="s-ink" x="1100" y="240" width="360" height="500" rx="24" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M1100 420h360" stroke-width="5"/><path class="s-ink" d="M1130 290v80M1130 460v120" stroke-width="8" stroke-linecap="round"/><text class="m" x="1280" y="790" font-size="22" text-anchor="middle">WHERE YOU’LL SEE IT OFTEN</text></g>
+<g id="stk"><rect class="gain" x="1220" y="470" width="200" height="200" rx="6"/><text class="m" x="1240" y="515" font-size="20" style="fill:var(--on-gain)">OBJECTIVE</text><path d="M1240 550h150M1240 590h120M1240 630h140" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round"/></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="84" letter-spacing="-2">One goal you care about.</text></g>
+<g id="qb"><text class="d" x="136" y="420" font-size="84" letter-spacing="-2">Can you finish</text></g>
+<g id="qc"><text class="d" x="136" y="540" font-size="84" letter-spacing="-2"><tspan style="fill:var(--gain)">“as measured by …”</tspan></text></g>
+<g id="qd"><text class="d" x="136" y="660" font-size="84" letter-spacing="-2">with a real number?</text></g>
+<g id="qg"><circle class="gain" cx="1300" cy="560" r="120"/><text class="d" x="1300" y="612" font-size="150" text-anchor="middle" style="fill:var(--on-gain)">?</text></g>
+<g id="lbl8"><text class="m" x="143" y="780" font-size="26">OBJECTIVE · KEY RESULTS · A NUMBER</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;What an OKR Actually Is&rdquo;, from <em>Measure What Matters</em> by John Doerr. Andy Grove&#x27;s goal system at Intel and Marissa Mayer&#x27;s remark about numbers are as reported in the book. The bakery and customer examples are illustrations, not data from the book. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 6.5], [6.5, 22.5], [22.5, 39.0], [39.0, 55.0], [55.0, 71.2], [71.2, 85.1], [85.1, 99.8], [99.8, 110.8], [110.8, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Big Question", "A Class at Intel", "Fixing an Old Idea", "The Objective", "The Key Results", "It Needs a Number", "Doerr's Formula", "Writing Your Own", "Your Turn"];
+const TM={"title_card": 0.0, "young_doerr": 6.8, "andy_grove": 11.44, "whiteboard": 17.2, "drucker_book": 22.8, "foggy_goal": 28.64, "measure_tape": 34.92, "mountain_flag": 39.28, "bakery_shop": 50.16, "ladder_rungs": 55.31, "checklist": 62.52, "yes_no_sign": 65.52, "mayer": 71.47, "three_cards": 77.23, "formula_card": 85.39, "smiley_meter": 92.48, "notebook": 100.08, "pencil": 103.92, "sticky_note": 108.0, "question_mark": 111.09};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-1.6*r} ${y+3.9*r}v${-r}a${1.6*r} ${1.6*r} 0 0 1 ${3.2*r} 0v${r}z`,class:c},g)};
+const face=(g,x,y,c,h)=>{mk('circle',{cx:x,cy:y,r:24,fill:'var(--stage)',stroke:`var(--${c})`,'stroke-width':4},g);[-8,8].forEach(d=>mk('circle',{cx:x+d,cy:y-6,r:3,fill:`var(--${c})`},g));mk('path',{d:h?`M${x-10} ${y+6}q10 10 20 0`:`M${x-10} ${y+12}q10-10 20 0`,fill:'none',stroke:`var(--${c})`,'stroke-width':4,'stroke-linecap':'round'},g)};
+const txt=(g,s,a)=>{const e=mk('text',a,g);e.textContent=s;return e};
+[150,110,70,30].forEach((r,i)=>mk('circle',{cx:1270,cy:420,r:r,fill:i==3?'var(--gain)':'var(--stage)',stroke:'var(--ink)','stroke-width':6},$('tgt')));
+fig($('doe'),330,470,34,'gain');fig($('grvp'),760,430,40,'ink');
+[[880,420,140,60],[1000,400,120,55],[940,470,160,50],[860,360,100,45],[1040,470,110,45]].forEach(f=>mk('ellipse',{cx:f[0],cy:f[1],rx:f[2],ry:f[3],fill:'var(--muted)','fill-opacity':.35},$('fog')));
+const TK=[];for(let i=0;i<25;i++)TK.push(mk('path',{d:`M${530+i*36} 630v${i%5?16:30}`,stroke:'var(--on-gain)','stroke-width':4},$('tape')));
+const TG=['IMPORTANT','CONCRETE','EXCITING'].map((s,i)=>{const g=mk('g',{},$('tags'));mk('rect',{x:120+i*200,y:730,width:180,height:52,rx:26,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);txt(g,s,{x:210+i*200,y:763,'font-size':20,'text-anchor':'middle',class:'m'});return g});
+for(let i=0;i<10;i++)mk('circle',{cx:821+i*42,cy:360,r:21,class:'gain'},$('awn'));
+const RG=[];for(let i=0;i<5;i++){const y=740-i*90;RG.push(mk('path',{d:`M200 ${y}H340`,stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round'},$('rungs')))}
+const TKS=[];for(let i=0;i<3;i++){const y=380+i*100,g=$('rows');mk('rect',{x:500,y:y,width:44,height:44,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  TKS.push(mk('path',{d:`M510 ${y+22}l10 12 18-24`,fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g));
+  txt(g,'SPECIFIC',{x:570,y:y+30,'font-size':20,class:'m'});mk('rect',{x:780,y:y-2,width:180,height:48,rx:24,class:'gain'},g);
+  txt(g,'DEADLINE',{x:870,y:y+29,'font-size':21,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'})}
+fig($('myp'),230,320,36,'ink');
+const FEW=[0,1,2,3,4].map(i=>{const g=mk('g',{},$('few')),x=120+i*126;
+  if(i<3){mk('rect',{x:x,y:600,width:110,height:150,rx:10,class:'gain'},g);txt(g,'KR'+(i+1),{x:x+55,y:688,'font-size':34,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'})}
+  else mk('rect',{x:x,y:600,width:110,height:150,rx:10,fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'10 8'},g);return g});
+const MANY=[];for(let i=0;i<12;i++){const x=920+(i%6)*88+(i*13%20),y=550+Math.floor(i/6)*90+(i*7%16),g=mk('g',{transform:`rotate(${(i*37)%31-15} ${x+40} ${y+50})`},$('many'));
+  mk('rect',{x:x,y:y,width:80,height:100,rx:8,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);mk('path',{d:`M${x+16} ${y+34}h48M${x+16} ${y+58}h32`,stroke:'var(--line)','stroke-width':5,'stroke-linecap':'round'},g);MANY.push(g)}
+const GX=1160,GY=680,GR=180;
+const pt=(v,r)=>{const a=Math.PI*(1+v/10);return[GX+r*Math.cos(a),GY+r*Math.sin(a)]};
+const gg=$('gg');mk('path',{d:`M${GX-GR} ${GY}A${GR} ${GR} 0 0 1 ${GX+GR} ${GY}`,fill:'none',stroke:'var(--line)','stroke-width':16},gg);
+const A7=pt(7,GR),A9=pt(9,GR),GA=mk('path',{d:`M${A7[0]} ${A7[1]}A${GR} ${GR} 0 0 1 ${A9[0]} ${A9[1]}`,fill:'none',stroke:'var(--gain)','stroke-width':16},gg);
+for(let v=0;v<=10;v++){const a=pt(v,145),b=pt(v,165);mk('path',{d:`M${a[0]} ${a[1]}L${b[0]} ${b[1]}`,stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},gg)}
+const ND=mk('line',{x1:GX,y1:GY,x2:GX,y2:GY,stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},gg);
+mk('circle',{cx:GX,cy:GY,r:14,class:'ink'},gg);face(gg,GX-200,GY+50,'loss',0);face(gg,GX+200,GY+50,'gain',1);
+const GN=txt(gg,'7',{x:GX,y:GY+80,'font-size':60,'text-anchor':'middle',class:'d'});
+for(let i=0;i<10;i++)mk('circle',{cx:170+i*60,cy:230,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rng'));
+const LN=[],PL=[];for(let i=0;i<3;i++){const y=520+i*80;LN.push(mk('line',{x1:170,y1:y,x2:170,y2:y,stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},$('krs')));
+  const g=mk('g',{},$('krs'));mk('circle',{cx:620,cy:y-8,r:24,class:'gain'},g);txt(g,'#',{x:620,y:y+2,'font-size':28,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'});PL.push(g)}
+fig($('skp'),900,420,36,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const ar=p(u,TM.title_card+.2,TM.title_card+1.3);$('arw').setAttribute('transform',`translate(${(1350-80*ar).toFixed(1)} ${(340+80*ar).toFixed(1)})`);$('arw').setAttribute('opacity',cl(ar*5));
+rise($('prv'),p(u,TM.title_card+2.6,TM.title_card+3.1));
+
+rise($('doe'),p(u,TM.young_doerr,TM.young_doerr+.5));rise($('grv'),p(u,TM.andy_grove,TM.andy_grove+.5));rise($('wb'),p(u,TM.whiteboard,TM.whiteboard+.6));
+$('arc1').setAttribute('opacity',p(u,TM.whiteboard+2,TM.whiteboard+2.8));rise($('dec'),p(u,TM.whiteboard+2.4,TM.whiteboard+2.9));
+$('nb1').setAttribute('class',u>=TM.whiteboard+2.8?'gain':'ink');
+
+rise($('bk'),p(u,TM.drucker_book,TM.drucker_book+.5));rise($('gl'),p(u,TM.drucker_book+1.5,TM.drucker_book+2));
+const mt=p(u,TM.measure_tape,TM.measure_tape+1);
+$('fog').setAttribute('opacity',(p(u,TM.foggy_goal,TM.foggy_goal+1)*(1-mt)).toFixed(3));$('fog').setAttribute('transform',`translate(${(20*Math.sin(t*.7)).toFixed(1)} 0)`);
+rise($('qm2'),p(u,TM.foggy_goal+3.8,TM.foggy_goal+4.3)*(1-mt));
+const tp=p(u,TM.measure_tape,TM.measure_tape+1.5);$('tape').setAttribute('opacity',cl(tp*5));$('tr').setAttribute('width',(960*tp).toFixed(1));
+TK.forEach((k,i)=>k.setAttribute('opacity',tp*25>i?1:0));$('tcs').setAttribute('opacity',cl(tp*5));
+rise($('tl'),p(u,TM.measure_tape+1,TM.measure_tape+1.5));$('fl2').setAttribute('class',u>=TM.measure_tape+1?'gain':'ink');
+
+rise($('flg'),p(u,TM.mountain_flag,TM.mountain_flag+.5));rise($('sub3'),p(u,TM.mountain_flag+2.6,TM.mountain_flag+3.1));
+TG.forEach((g,i)=>{const a=TM.mountain_flag+6.7+i*.6;rise(g,p(u,a,a+.4))});
+rise($('bak'),p(u,TM.bakery_shop,TM.bakery_shop+.6));rise($('obj3'),p(u,TM.bakery_shop+1,TM.bakery_shop+1.5));
+
+rise($('lad'),p(u,TM.ladder_rungs,TM.ladder_rungs+.5));rise($('sub4'),p(u,TM.ladder_rungs+3,TM.ladder_rungs+3.5));
+RG.forEach((r,i)=>r.setAttribute('stroke',u>=TM.ladder_rungs+3.2+i*.5?'var(--gain)':'var(--line)'));
+rise($('chk'),p(u,TM.checklist,TM.checklist+.5));
+rise($('yes1'),p(u,TM.yes_no_sign,TM.yes_no_sign+.5));rise($('no1'),p(u,TM.yes_no_sign+1.4,TM.yes_no_sign+1.9));
+TKS.forEach((k,i)=>k.setAttribute('opacity',p(u,TM.yes_no_sign+.3+i*.3,TM.yes_no_sign+.6+i*.3)));
+
+rise($('my'),p(u,TM.mayer,TM.mayer+.6));
+FEW.forEach((g,i)=>{const a=TM.three_cards+i*.4;rise(g,p(u,a,a+.4))});rise($('fewl'),p(u,TM.three_cards+2,TM.three_cards+2.5));
+MANY.forEach((g,i)=>{const a=TM.three_cards+5+i*.12;g.setAttribute('opacity',p(u,a,a+.3))});rise($('manyl'),p(u,TM.three_cards+6.4,TM.three_cards+6.9));
+
+rise($('fc'),p(u,TM.formula_card,TM.formula_card+.5));
+const fl=u>=TM.formula_card+3.4;['1','2'].forEach(k=>{$('sl'+k).style.fill=fl?'var(--gain)':'var(--stage)';$('st'+k).style.fill=fl?'var(--on-gain)':'var(--muted)'});
+rise($('ex'),p(u,TM.smiley_meter,TM.smiley_meter+.6));rise($('gg'),p(u,TM.smiley_meter+.5,TM.smiley_meter+1));
+const sv=7+2*p(u,TM.smiley_meter+2,TM.smiley_meter+4),nq=pt(sv,130);ND.setAttribute('x2',nq[0].toFixed(1));ND.setAttribute('y2',nq[1].toFixed(1));
+GN.textContent=Math.round(sv);GA.setAttribute('opacity',p(u,TM.smiley_meter+2,TM.smiley_meter+4));
+
+rise($('nb7'),p(u,TM.notebook,TM.notebook+.5));rise($('ob7'),p(u,TM.notebook+.6,TM.notebook+1.1));
+let px=170,py=520;LN.forEach((l,i)=>{const a=TM.pencil+.4+i*1.2,k=lin(u,a,a+1);l.setAttribute('x2',(170+390*k).toFixed(1));PL[i].setAttribute('opacity',p(u,a+1,a+1.2));if(u>=a){px=170+390*k;py=520+i*80}});
+$('pen7').setAttribute('transform',`translate(${px.toFixed(1)} ${(py+4).toFixed(1)})`);$('pen7').setAttribute('opacity',p(u,TM.pencil,TM.pencil+.4));
+rise($('sk'),p(u,TM.pencil,TM.pencil+.5));const cv=p(u,TM.pencil+4.2,TM.pencil+4.6);$('skq').setAttribute('opacity',1-cv);$('skc').setAttribute('opacity',cv);
+rise($('fr'),p(u,TM.sticky_note,TM.sticky_note+.5));const sk=p(u,TM.sticky_note+.4,TM.sticky_note+1.1);
+$('stk').setAttribute('transform',`translate(0 ${(-80*(1-sk)).toFixed(1)}) rotate(-4 1320 570)`);$('stk').setAttribute('opacity',sk);
+
+rise($('qa'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qg'),p(u,TM.question_mark+.5,TM.question_mark+1));
+$('qg').setAttribute('transform',`translate(0 ${(8*Math.sin(t*2)).toFixed(1)})`);
+rise($('qb'),p(u,TM.question_mark+3.4,TM.question_mark+3.9));rise($('qc'),p(u,TM.question_mark+3.8,TM.question_mark+4.3));
+rise($('qd'),p(u,TM.question_mark+4.2,TM.question_mark+4.7));rise($('lbl8'),p(u,TM.question_mark+5,TM.question_mark+5.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.71;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

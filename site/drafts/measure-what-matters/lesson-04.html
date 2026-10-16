@@ -1,0 +1,333 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Measure What Matters Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Measure What Matters: Making everyone&#x27;s OKRs public, and letting goals flow both from leaders and from front-line teams, keeps an organization pulling in the same direction. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MEASURE WHAT MATTERS · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Align and connect</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">in the open.</text>
+<text class="b" x="120" y="600" font-size="32">Why shared, visible goals keep everyone rowing the same way.</text>
+<g id="flags"></g>
+<g id="boat"><path d="M1180 430Q1300 385 1420 430Q1300 475 1180 430Z" fill="var(--stage)" class="s-ink" stroke-width="6" stroke-linejoin="round"/><g id="oars"></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Goals live in hiding.</text>
+<text class="b" x="120" y="176" font-size="32">Private documents. Managers’ heads.</text>
+<g id="rooms"></g>
+<g id="ov"><path d="M500 370H720" stroke="var(--loss)" stroke-width="5" stroke-dasharray="10 8"/>
+<path d="M560 236V360" stroke="var(--loss)" stroke-width="3" stroke-dasharray="4 6" stroke-linecap="round"/>
+<rect x="240" y="345" width="260" height="50" rx="25" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/>
+<rect x="720" y="345" width="260" height="50" rx="25" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/>
+<text class="m" x="370" y="377" font-size="20" text-anchor="middle" style="fill:var(--loss)">SAME PROJECT</text>
+<text class="m" x="850" y="377" font-size="20" text-anchor="middle" style="fill:var(--loss)">SAME PROJECT</text>
+<text class="m" x="560" y="225" font-size="20" text-anchor="middle" style="fill:var(--loss)">UNSEEN OVERLAP</text>
+<text class="m" x="120" y="660" font-size="22">TWO TEAMS, SAME WORK, FOR MONTHS</text></g>
+<g id="blk"><g id="blkp"></g>
+<rect x="1250" y="268" width="60" height="54" rx="12" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/>
+<text class="d" x="1280" y="308" font-size="38" text-anchor="middle" style="fill:var(--loss)">?</text>
+<path d="M1400 268h50l-50 64h50z" fill="none" stroke="var(--loss)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="1480" y="660" font-size="22" text-anchor="end" style="fill:var(--loss)">WAITING FOR HELP NO ONE PLANNED</text></g>
+<g id="s1t"><text class="d" x="120" y="790" font-size="46">Nobody can see anyone else’s goals.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make every OKR public.</text>
+<text class="b" x="120" y="176" font-size="32">Open by default, all the way to the top.</text>
+<g id="lk"><rect class="ink" x="170" y="320" width="100" height="80" rx="10"/><path id="shk" d="M190 320v-30a30 30 0 0 1 60 0v30" fill="none" class="s-ink" stroke-width="10"/>
+<text class="m" x="220" y="450" font-size="22" text-anchor="middle" style="fill:var(--gain)">OPEN</text></g>
+<g id="mon"><rect x="360" y="220" width="880" height="480" rx="16" fill="var(--stage)" class="s-ink" stroke-width="7"/><path class="ink" d="M770 700l-20 66h100l-20-66z"/>
+<text class="m" x="400" y="264" font-size="20">COMPANY NETWORK · EVERYONE’S OKRS</text></g>
+<g id="cards"></g>
+<g id="ceo"><rect class="gain" x="640" y="290" width="320" height="96" rx="12"/><text class="m" x="800" y="346" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">TOP-LEVEL OKRS</text></g>
+<g id="view"></g>
+<g id="s2t"><text class="d" x="120" y="840" font-size="40">Anyone can see what leaders are aiming for.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Visible goals line up.</text>
+<text class="b" x="120" y="176" font-size="32">Overlaps and gaps jump out quickly.</text>
+<g id="tree"></g>
+<g id="thr"><path d="M740 590L830 470M830 410L560 310M700 650Q650 700 600 650" fill="none" stroke="var(--gain)" stroke-width="7" stroke-linecap="round"/></g>
+<g id="eyes"></g>
+<g id="mag"><circle r="56" fill="var(--stage)" fill-opacity=".35" class="s-ink" stroke-width="8"/><path d="M40 40l42 42" class="s-ink" stroke-width="14" stroke-linecap="round"/></g>
+<g id="w0"><circle cx="1096" cy="332" r="10" class="loss"/><text class="m" x="1120" y="340" font-size="22">OVERLAPS JUMP OUT</text></g>
+<g id="w1"><circle cx="1096" cy="412" r="10" fill="none" class="s-muted" stroke-width="4" stroke-dasharray="4 4"/><text class="m" x="1120" y="420" font-size="22">GAPS JUMP OUT</text></g>
+<g id="w2"><circle cx="1096" cy="492" r="10" class="gain"/><text class="m" x="1120" y="500" font-size="22">YOUR WORK LINKS UP</text><text class="m" x="1120" y="532" font-size="22">AND SIDEWAYS</text></g>
+<g id="w3"><circle cx="1096" cy="612" r="10" class="ink"/><text class="m" x="1120" y="620" font-size="22">OTHERS SEE IT, SO</text><text class="m" x="1120" y="652" font-size="22">YOU CHOOSE WITH CARE</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The cascade trap.</text>
+<text class="b" x="120" y="176" font-size="32">Goals copied strictly from the top down.</text>
+<g id="steps"></g>
+<g id="clk"><circle cx="1300" cy="370" r="110" fill="var(--stage)" class="s-ink" stroke-width="7"/><g id="tk"></g>
+<path id="hh" d="M1300 370v-50" class="s-ink" stroke-width="8" stroke-linecap="round"/><path id="mh" d="M1300 370v-80" class="s-loss" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1300" y="540" font-size="22" text-anchor="middle" style="fill:var(--loss)">RIGID AND SLOW</text></g>
+<g id="otk"><text class="m" x="1260" y="760" font-size="22" text-anchor="middle">ORDER TAKERS</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Let goals bubble up.</text>
+<text class="b" x="120" y="176" font-size="32">From the front line, closest to customers and problems.</text>
+<g id="lead5"><rect x="200" y="240" width="500" height="70" rx="14" fill="var(--stage)" class="s-ink" stroke-width="5"/><text class="m" x="450" y="284" font-size="22" text-anchor="middle">LEADERS</text></g>
+<g id="team"><path d="M150 710H760" class="s-line" stroke-width="5"/><text class="m" x="455" y="750" font-size="20" text-anchor="middle">FRONT LINE</text></g>
+<g id="bub"></g>
+<g id="cust"><path d="M720 650H1130" stroke="var(--gain)" stroke-width="5" stroke-dasharray="10 10"/>
+<text class="m" x="925" y="630" font-size="20" text-anchor="middle" style="fill:var(--gain)">BEST OPPORTUNITIES</text>
+<text class="m" x="1290" y="750" font-size="20" text-anchor="middle">CUSTOMERS</text></g>
+<g id="upa"><path d="M880 560V320" class="s-gain" stroke-width="18" stroke-linecap="round"/><path class="gain" d="M836 330l44-60 44 60z"/>
+<text class="d5" x="950" y="340" font-size="34">Help write your goals,</text><text class="d5" x="950" y="386" font-size="34">care more about them.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Down, up and sideways.</text>
+<text class="b" x="120" y="176" font-size="32">Leaders set the direction. Teams choose the route.</text>
+<g id="arr6"><path d="M150 260V700" class="s-ink" stroke-width="10" stroke-linecap="round"/><path class="ink" d="M126 690l24 34 24-34z"/>
+<path d="M216 724V290" class="s-gain" stroke-width="10" stroke-linecap="round"/><path class="gain" d="M192 294l24-34 24 34z"/>
+<text class="m" x="150" y="770" font-size="20" text-anchor="middle">DOWN</text><text class="m" x="216" y="770" font-size="20" text-anchor="middle" style="fill:var(--gain)">UP</text></g>
+<g id="lead6"><rect x="520" y="230" width="560" height="70" rx="14" class="ink"/><text class="m" x="800" y="274" font-size="22" text-anchor="middle" style="fill:var(--stage)">LEADERS · DIRECTION</text></g>
+<g id="teams6"></g>
+<g id="rts" fill="none" stroke="var(--gain)" stroke-width="5" stroke-dasharray="8 8" stroke-linecap="round"><path d="M390 640C300 520 520 420 700 300"/><path d="M800 640c60-60-60-120 0-180s-60-120 0-160"/><path d="M1210 640C1260 500 900 450 900 300"/></g>
+<g id="cmp"><circle cx="1370" cy="300" r="70" fill="var(--stage)" class="s-ink" stroke-width="6"/><text class="m" x="1370" y="252" font-size="18" text-anchor="middle">N</text>
+<g id="ndl"><path class="gain" d="M1370 262l12 38h-24z"/><path class="ink" d="M1370 338l12-38h-24z"/></g></g>
+<g id="side"><path d="M520 680H670M930 680H1080" class="s-gain" stroke-width="6" stroke-dasharray="4 10" stroke-linecap="round"/><g id="sdots"></g>
+<text class="m" x="800" y="790" font-size="22" text-anchor="middle">SHARED KEY RESULTS · NOBODY WAITS</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it this week.</text>
+<text class="b" x="120" y="176" font-size="32">Three small steps toward open goals.</text>
+<g id="c1"><rect x="120" y="230" width="420" height="500" rx="18" fill="var(--stage)" class="s-line" stroke-width="3"/><circle cx="170" cy="290" r="30" class="gain"/><text class="d" x="170" y="302" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">1</text>
+<rect x="250" y="360" width="160" height="190" rx="10" fill="var(--stage)" class="s-ink" stroke-width="6"/><path d="M280 410h100M280 450h100M280 490h70" class="s-line" stroke-width="7" stroke-linecap="round"/><circle cx="330" cy="360" r="12" class="gain"/>
+<text class="d5" x="150" y="640" font-size="28">Post your top goals</text><text class="d5" x="150" y="680" font-size="28">where the team sees.</text></g>
+<g id="c2"><rect x="590" y="230" width="420" height="500" rx="18" fill="var(--stage)" class="s-line" stroke-width="3"/><circle cx="640" cy="290" r="30" class="gain"/><text class="d" x="640" y="302" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">2</text>
+<g id="pp2"></g>
+<g id="ask"><rect x="680" y="350" width="180" height="60" rx="16" fill="var(--stage)" class="s-gain" stroke-width="5"/><path d="M712 410v24l24-24" fill="var(--stage)" class="s-gain" stroke-width="5" stroke-linejoin="round"/><text class="m" x="770" y="388" font-size="20" text-anchor="middle">YOUR GOALS?</text></g>
+<text class="d5" x="620" y="640" font-size="28">Ask one colleague</text><text class="d5" x="620" y="680" font-size="28">to share theirs too.</text></g>
+<g id="c3"><rect x="1060" y="230" width="420" height="500" rx="18" fill="var(--stage)" class="s-line" stroke-width="3"/><circle cx="1110" cy="290" r="30" class="gain"/><text class="d" x="1110" y="302" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">3</text>
+<path class="ink" transform="translate(1150 410)" d="M0 0h80v30a20 20 0 0 1 0 40v30h-80z"/>
+<path id="pb" class="gain" d="M0 0h100v100h-100v-30a20 20 0 0 0 0-40z"/>
+<g id="fit"><text class="m" x="1250" y="560" font-size="20" text-anchor="middle" style="fill:var(--gain)">FIT TOGETHER</text></g>
+<text class="d5" x="1090" y="640" font-size="28">Look for overlaps,</text><text class="d5" x="1090" y="680" font-size="28">gaps and ways to help.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which goals were handed</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">to you, and which did</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">you <tspan style="fill:var(--gain)">choose</tspan> yourself?</text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">COULD SOMEONE ACROSS THE HALL SEE THEM TODAY?</text>
+<path d="M1310 690Q1380 630 1450 690Q1380 750 1310 690Z" fill="var(--stage)" class="s-ink" stroke-width="6"/><circle id="pup" cx="1380" cy="690" r="18" class="gain"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Align and Connect in the Open&rdquo;, from <em>Measure What Matters</em> by John Doerr. The example of Google sharing OKRs openly on its internal network, including leaders&#x27; goals, is as reported in the book. The rowing crew, office scenes and arrows are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 9.4], [9.4, 24.7], [24.7, 42.0], [42.0, 55.7], [55.7, 70.7], [70.7, 86.5], [86.5, 103.2], [103.2, 117.5], [117.5, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Pulling Together", "The Hidden Goal Problem", "Open by Default", "Why Openness Works", "The Cascade Trap", "Goals From Below", "Alignment Plus Autonomy", "Try It This Week", "Your Turn"];
+const TM={"rowboat": 0.0, "office_floor": 9.68, "two_teams": 15.04, "blocked_team": 19.84, "glass_wall": 25.04, "intranet": 30.56, "ceo_card": 36.88, "magnifier": 42.32, "thread_link": 46.88, "waterfall": 56.0, "slow_clock": 65.44, "frontline": 71.04, "customer": 76.12, "up_arrow": 81.92, "two_arrows": 86.8, "compass": 92.16, "map_lines": 96.48, "notepad": 103.52, "ask_bubble": 107.56, "match_pieces": 112.48, "question": 117.76};
+const per=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const tx=(g,x,y,s,fs,a)=>{const e=mk('text',{x:x,y:y,'font-size':fs,'text-anchor':a||'start',class:'m'},g);e.textContent=s;return e};
+const G=par=>mk('g',{},par);
+const FL=[];for(let i=0;i<6;i++){const a=i*Math.PI/3+.6,x=(1300+165*Math.cos(a)).toFixed(0),y=430+165*Math.sin(a),g=G($('flags'));
+  mk('path',{d:`M${x} ${y}v-46`,class:'s-ink','stroke-width':4,'stroke-linecap':'round'},g);mk('path',{d:`M${x} ${y-46}l30 10-30 10z`,fill:['var(--gain)','var(--loss)','var(--ink)'][i%3]},g);FL.push(g)}
+[2.6,-.5,1.9,-2.2].forEach((a,i)=>{const x=1240+i*40;mk('path',{d:`M${x} 430l${(70*Math.cos(a)).toFixed(0)} ${(70*Math.sin(a)).toFixed(0)}`,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('oars'));mk('circle',{cx:x,cy:430,r:13,class:'ink'},$('oars'))});
+['TEAM A','TEAM B','TEAM C'].forEach((n,k)=>{const x=120+k*480,g=$('rooms');
+  mk('rect',{x:x,y:240,width:400,height:320,rx:14,fill:'var(--stage)',class:'s-ink','stroke-width':5},g);
+  mk('rect',{x:x+24,y:262,width:48,height:62,rx:4,fill:'var(--stage)',class:'s-ink','stroke-width':4},g);
+  mk('path',{d:`M${x+34} 282h28M${x+34} 296h20`,class:'s-line','stroke-width':4},g);
+  mk('rect',{x:x+54,y:304,width:26,height:20,rx:3,class:'ink'},g);
+  mk('path',{d:`M${x+59} 304v-7a8 8 0 0 1 16 0v7`,fill:'none',class:'s-ink','stroke-width':4},g);
+  [100,200,300].forEach(o=>per(g,x+o,430,20,'ink'));tx(g,x+200,600,n,22,'middle')});
+per($('blkp'),1280,430,20,'loss');
+const CD=[];for(let i=0;i<8;i++){const x=400+(i%4)*210,y=420+Math.floor(i/4)*130,g=G($('cards'));
+  mk('rect',{x:x,y:y,width:190,height:100,rx:10,fill:'var(--stage)',class:'s-ink','stroke-width':4},g);
+  mk('circle',{cx:x+30,cy:y+32,r:12,class:'ink'},g);mk('path',{d:`M${x+54} ${y+32}h110M${x+20} ${y+70}h150`,class:'s-line','stroke-width':6,'stroke-linecap':'round'},g);CD.push(g)}
+[190,290,1310,1410].forEach(x=>per($('view'),x,560,20,'gain'));
+const NP=[[560,280],[290,440],[560,440],[830,440],[200,620],[380,620],[560,620],[740,620],[920,620]],ED=[[0,1],[0,2],[0,3],[1,4],[1,5],[2,6],[3,7],[3,8]];
+ED.forEach(([a,b])=>mk('path',{d:`M${NP[a][0]} ${NP[a][1]+30}L${NP[b][0]} ${NP[b][1]-30}`,class:'s-line','stroke-width':4},$('tree')));
+const NR=NP.map(([x,y])=>mk('rect',{x:x-75,y:y-30,width:150,height:60,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('tree')));
+const NT=NP.map(([x,y])=>tx($('tree'),x,y+8,'',20,'middle'));
+[700,780].forEach(x=>{mk('path',{d:`M${x-24} 720Q${x} 696 ${x+24} 720Q${x} 744 ${x-24} 720Z`,fill:'var(--stage)',class:'s-ink','stroke-width':4},$('eyes'));mk('circle',{cx:x,cy:720,r:7,class:'ink'},$('eyes'))});
+const SG=[],PC=[],BR=[];
+['LEADERS','LAYER 2','LAYER 3','LAYER 4'].forEach((n,i)=>{const x=120+i*220,y=240+i*140,g=G($('steps'));
+  mk('rect',{x:x,y:y,width:300,height:96,rx:12,fill:'var(--stage)',class:'s-ink','stroke-width':5},g);tx(g,x+20,y+82,n,18);
+  if(i<3)mk('path',{d:`M${x+250} ${y+104}v30m-12-12 12 12 12-12`,fill:'none',class:'s-muted','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  const pg=G(g);for(let k=0;k<4;k++)if(i==0||k==i)BR.push(mk('rect',{x:x+20+k*66,y:y+16,width:54,height:30,rx:6,class:'gain'},i?pg:g));SG.push(g);PC.push(pg)});
+for(let k=0;k<12;k++){const a=k*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${(1300+92*c).toFixed(1)} ${(370+92*s).toFixed(1)}L${(1300+102*c).toFixed(1)} ${(370+102*s).toFixed(1)}`,class:'s-ink','stroke-width':4},$('tk'))}
+[1180,1260,1340].forEach(x=>{per($('otk'),x,640,16,'ink');mk('path',{d:`M${x-10} 596l10 10 10-10`,fill:'none',class:'s-loss','stroke-width':4,'stroke-linecap':'round'},$('otk'))});
+const TX=[200,320,440,560,680];TX.forEach(x=>per($('team'),x,600,20,'ink'));
+const BB=TX.map(x=>mk('circle',{cx:x,cy:560,r:14,class:'gain'},$('bub')));
+[1180,1290,1400].forEach(x=>{per($('cust'),x,600,20,'ink');mk('circle',{cx:x,cy:520,r:22,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},$('cust'));const e=tx($('cust'),x,531,'!',30,'middle');e.setAttribute('class','d');e.style.fill='var(--loss)'});
+[260,670,1080].forEach(x=>{mk('rect',{x:x,y:640,width:260,height:80,rx:14,fill:'var(--stage)',class:'s-ink','stroke-width':5},$('teams6'));tx($('teams6'),x+130,688,'TEAM',20,'middle')});
+const SD=[0,1,2,3].map(()=>mk('circle',{r:9,class:'gain',cy:680},$('sdots')));
+[700,900].forEach(x=>per($('pp2'),x,480,22,'ink'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+FL.forEach((f,i)=>rise(f,p(u,TM.rowboat+.3+i*.25,TM.rowboat+.7+i*.25)));
+const sp=Math.max(0,u-TM.rowboat-5.4);$('boat').setAttribute('transform',`rotate(${(sp*50+4*Math.sin(t*1.5)).toFixed(1)} 1300 430)`);
+
+rise($('rooms'),p(u,TM.office_floor,TM.office_floor+.5));rise($('ov'),p(u,TM.two_teams,TM.two_teams+.5));
+rise($('blk'),p(u,TM.blocked_team,TM.blocked_team+.5));rise($('s1t'),p(u,TM.blocked_team+1.6,TM.blocked_team+2.2));
+
+rise($('lk'),p(u,TM.glass_wall-.3,TM.glass_wall+.2));const ok=p(u,TM.glass_wall+.2,TM.glass_wall+1);
+$('shk').setAttribute('transform',`translate(0 ${(-22*ok).toFixed(1)}) rotate(${(-28*ok).toFixed(1)} 190 320)`);
+rise($('mon'),p(u,TM.glass_wall+.6,TM.glass_wall+1.1));
+CD.forEach((c,i)=>rise(c,p(u,TM.intranet+i*.2,TM.intranet+i*.2+.4)));
+rise($('ceo'),p(u,TM.ceo_card,TM.ceo_card+.5));rise($('view'),p(u,TM.ceo_card+.6,TM.ceo_card+1.1));rise($('s2t'),p(u,TM.ceo_card+1.2,TM.ceo_card+1.8));
+
+rise($('tree'),p(u,TM.magnifier-.4,TM.magnifier+.1));
+const mg=p(u,TM.magnifier+.3,TM.magnifier+3.5);$('mag').setAttribute('transform',`translate(${(200+720*mg).toFixed(1)} 600)`);
+$('mag').setAttribute('opacity',(p(u,TM.magnifier,TM.magnifier+.4)*(1-p(u,TM.thread_link-.4,TM.thread_link))).toFixed(2));
+const ov=u>=TM.magnifier+1.3,gp=u>=TM.magnifier+3.2,yo=u>=TM.thread_link;
+[4,5].forEach(i=>{NR[i].setAttribute('stroke',ov?'var(--loss)':'var(--ink)');NT[i].textContent=ov?'SAME':'';NT[i].style.fill='var(--loss)'});
+NR[8].setAttribute('stroke',gp?'var(--muted)':'var(--ink)');NR[8].setAttribute('stroke-dasharray',gp?'10 8':'none');NT[8].textContent=gp?'GAP':'';
+NR[7].setAttribute('fill',yo?'var(--gain)':'var(--stage)');NR[7].setAttribute('stroke',yo?'var(--gain)':'var(--ink)');NT[7].textContent=yo?'YOU':'';NT[7].style.fill='var(--on-gain)';
+rise($('w0'),p(u,TM.magnifier+1.3,TM.magnifier+1.7));rise($('w1'),p(u,TM.magnifier+3.2,TM.magnifier+3.6));
+rise($('thr'),p(u,TM.thread_link+.4,TM.thread_link+1));rise($('w2'),p(u,TM.thread_link+.6,TM.thread_link+1.1));
+rise($('eyes'),p(u,TM.thread_link+5.7,TM.thread_link+6.2));rise($('w3'),p(u,TM.thread_link+5.9,TM.thread_link+6.4));
+
+SG.forEach((g,i)=>rise(g,p(u,TM.waterfall+i*.5,TM.waterfall+i*.5+.4)));
+PC.forEach((g,i)=>{if(i)rise(g,p(u,TM.waterfall+5.4+i*.5,TM.waterfall+5.9+i*.5))});
+BR.forEach(b=>b.setAttribute('class',u>=TM.slow_clock?'loss':'gain'));
+rise($('clk'),p(u,TM.slow_clock,TM.slow_clock+.5));
+$('mh').setAttribute('transform',`rotate(${((t*12)%360).toFixed(1)} 1300 370)`);$('hh').setAttribute('transform',`rotate(${(t%360).toFixed(1)} 1300 370)`);
+rise($('otk'),p(u,TM.slow_clock+2,TM.slow_clock+2.5));
+
+rise($('lead5'),p(u,TM.frontline-.3,TM.frontline+.2));rise($('team'),p(u,TM.frontline,TM.frontline+.5));
+const bk=p(u,TM.frontline+.6,TM.frontline+1.2);
+BB.forEach((b,i)=>{const c=(t*.4+i*.23)%1;b.setAttribute('cx',(TX[i]+8*Math.sin(t*2+i)).toFixed(1));b.setAttribute('cy',(560-230*c).toFixed(1));b.setAttribute('opacity',(Math.min(1,c*5,(1-c)*5)*bk).toFixed(2))});
+rise($('cust'),p(u,TM.customer,TM.customer+.5));rise($('upa'),p(u,TM.up_arrow,TM.up_arrow+.6));
+
+rise($('lead6'),p(u,TM.two_arrows-.3,TM.two_arrows+.2));rise($('teams6'),p(u,TM.two_arrows-.1,TM.two_arrows+.4));rise($('arr6'),p(u,TM.two_arrows+.3,TM.two_arrows+.8));
+rise($('cmp'),p(u,TM.compass,TM.compass+.5));rise($('rts'),p(u,TM.compass+.8,TM.compass+1.4));
+$('ndl').setAttribute('transform',`rotate(${(40*Math.sin(t*2.5)*(1-p(u,TM.compass+.4,TM.compass+1.6))).toFixed(1)} 1370 300)`);
+rise($('side'),p(u,TM.map_lines,TM.map_lines+.6));
+SD.forEach((d,j)=>{const x0=j>>1?930:520;d.setAttribute('cx',(x0+150*((t*.6+j*.5)%1)).toFixed(1))});
+
+rise($('c1'),p(u,TM.notepad,TM.notepad+.5));rise($('c2'),p(u,TM.ask_bubble,TM.ask_bubble+.5));rise($('ask'),p(u,TM.ask_bubble+1,TM.ask_bubble+1.5));
+rise($('c3'),p(u,TM.match_pieces,TM.match_pieces+.5));const jn=p(u,TM.match_pieces+.6,TM.match_pieces+1.8);
+$('pb').setAttribute('transform',`translate(${(1250+80*(1-jn)).toFixed(1)} 410)`);rise($('fit'),p(u,TM.match_pieces+1.8,TM.match_pieces+2.3));
+
+rise($('qa'),p(u,TM.question,TM.question+.5));rise($('qb'),p(u,TM.question+.4,TM.question+.9));rise($('qc'),p(u,TM.question+.8,TM.question+1.3));
+rise($('qd'),p(u,TM.question+5.8,TM.question+6.4));$('pup').setAttribute('cx',(1380+14*Math.sin(t*1.2)).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.53;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

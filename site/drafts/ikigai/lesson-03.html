@@ -1,0 +1,430 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ikigai Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Ikigai: The Okinawan habit of hara hachi bu, stopping before you are full and eating a varied, plant-rich diet, is one simple pillar of a long life. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">IKIGAI · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Eat until you’re</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">80 percent full.</text>
+<text class="b" x="120" y="600" font-size="32">Why Okinawans stop eating before they feel full.</text>
+<g id="bowl0">
+<path id="stm0" class="s-muted" d="M1250 450q-14-20 0-40t0-40M1300 450q14-20 0-40t0-40M1350 450q-14-20 0-40t0-40" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path id="rice0" class="gain" d="M1140 540q150-150 300 0z"/>
+<path class="s-ink" d="M1110 540h360a180 170 0 0 1-360 0z" fill="var(--stage)" stroke-width="8" stroke-linejoin="round"/>
+<rect class="ink" x="1230" y="704" width="120" height="20" rx="6"/>
+</g>
+<g id="say0">
+<path class="s-ink" d="M1210 270l-30 60 70-56" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<rect class="s-ink" x="1060" y="190" width="420" height="96" rx="48" fill="var(--stage)" stroke-width="5"/>
+<text class="d5" x="1270" y="252" font-size="40" text-anchor="middle">“Hara hachi bu.”</text>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hara hachi bu.</text>
+<text class="b" x="120" y="176" font-size="32">Okinawan elders often say it before they eat.</text>
+<g id="eldA">
+<g id="eld"></g>
+<path class="gain" d="M370 556q50-50 100 0z"/>
+<path class="s-ink" d="M350 556h140a70 44 0 0 1-140 0z" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="180" y="600" width="560" height="18" rx="6"/>
+<path class="s-ink" d="M230 618v150M690 618v150" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g id="hhb">
+<path class="s-ink" d="M570 326l-60 54 100-44" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<rect class="s-ink" x="520" y="240" width="400" height="100" rx="50" fill="var(--stage)" stroke-width="5"/>
+<text class="d5" x="720" y="306" font-size="44" text-anchor="middle">Hara hachi bu</text>
+</g>
+<g id="meter">
+<text class="m" x="992" y="252" font-size="22">YOUR BELLY</text>
+<g id="segs"></g>
+<rect class="s-ink" x="992" y="272" width="196" height="496" rx="24" fill="none" stroke-width="6"/>
+</g>
+<g id="m80">
+<path class="s-ink" d="M960 378h250" stroke-width="4" stroke-dasharray="10 8"/>
+<text class="m" x="1220" y="386" font-size="20">STOP HERE</text>
+<text class="d" x="1216" y="480" font-size="96" style="fill:var(--gain)">80%</text>
+</g>
+<g id="room"><text class="m" x="1220" y="300" font-size="20">STILL ROOM</text><text class="m" x="1220" y="328" font-size="20">FOR A LITTLE MORE</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stop before you’re full.</text>
+<text class="b" x="120" y="176" font-size="32">Most of us eat until full. Okinawans leave a little room.</text>
+<g id="pL">
+<rect class="s-line" x="120" y="220" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path id="fl" class="loss" fill-opacity=".55"/>
+<g id="spill"><path class="loss" d="M306 292q134-66 268 0z" fill-opacity=".55"/></g>
+<path class="s-ink" d="M300 290V600a40 40 0 0 0 40 40H540a40 40 0 0 0 40-40V290" fill="none" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="440" y="690" font-size="22" text-anchor="middle">UNTIL COMPLETELY FULL</text>
+</g>
+<g id="pR">
+<rect class="s-line" x="840" y="220" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path id="fr" class="gain"/>
+<g id="room2">
+<path class="s-muted" d="M1032 300h256" stroke-width="4" stroke-dasharray="8 8"/>
+<text class="m" x="1160" y="338" font-size="20" text-anchor="middle">ROOM</text>
+<text class="d" x="1320" y="372" font-size="36" style="fill:var(--gain)">80%</text>
+</g>
+<path class="s-ink" d="M1020 290V600a40 40 0 0 0 40 40H1260a40 40 0 0 0 40-40V290" fill="none" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="1160" y="690" font-size="22" text-anchor="middle">80 PERCENT, A LITTLE ROOM</text>
+</g>
+<g id="hl"><text class="d" x="120" y="800" font-size="42">Eating a little less, linked to staying healthy longer.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Many small plates.</text>
+<text class="b" x="120" y="176" font-size="32">A practical trick from the book.</text>
+<g id="big">
+<circle class="s-ink" cx="340" cy="470" r="170" fill="var(--stage)" stroke-width="7"/>
+<circle class="s-line" cx="340" cy="470" r="124" fill="none" stroke-width="3"/>
+<path class="ink" d="M230 510q110-170 220 0z"/>
+<text class="m" x="340" y="690" font-size="20" text-anchor="middle">ONE BIG PLATE</text>
+</g>
+<path id="arr3" class="s-gain" d="M540 470h110m-26-26 26 26-26 26" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="tr">
+<rect class="s-ink" x="690" y="300" width="790" height="340" rx="24" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1085" y="690" font-size="20" text-anchor="middle">A TRAY OF LITTLE DISHES</text>
+</g>
+<g id="dishes"></g>
+<g id="eas"><text class="d" x="120" y="790" font-size="44">Smaller portions make it easier to stop at 80%.</text><text class="m" x="120" y="838" font-size="20" style="fill:var(--gain)">WITHOUT FEELING DEPRIVED</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Eat the rainbow.</text>
+<text class="b" x="120" y="176" font-size="32">What Okinawans eat matters as much as how much.</text>
+<g id="rb"></g>
+<g id="bk">
+<g id="prod"></g>
+<path class="s-ink" d="M240 480h440l-50 220H290z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-line" d="M262 560h396M280 640h360" stroke-width="4"/>
+</g>
+<g id="cnt">
+<g id="dots"></g>
+<text id="n206" class="d" x="1140" y="440" font-size="140" letter-spacing="-4" text-anchor="middle">206</text>
+<text class="m" x="1140" y="545" font-size="22" text-anchor="middle">DIFFERENT FOODS,</text>
+<text class="m" x="1140" y="577" font-size="22" text-anchor="middle">SPICES INCLUDED</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Okinawan staples.</text>
+<text class="b" x="120" y="176" font-size="32">Some foods come up again and again.</text>
+<g id="k0"><rect class="s-line" x="120" y="220" width="300" height="250" rx="18" fill="var(--stage)" stroke-width="3"/>
+<ellipse class="loss" cx="270" cy="320" rx="95" ry="46" transform="rotate(-15 270 320)"/><path class="s-loss" d="M356 292l40-18" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="270" y="440" font-size="20" text-anchor="middle">SWEET POTATO</text></g>
+<g id="k1"><rect class="s-line" x="460" y="220" width="300" height="250" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M545 300h110v80H545zM545 300l30-26h110l-30 26M655 380l30-26v-80" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="610" y="440" font-size="20" text-anchor="middle">TOFU</text></g>
+<g id="k2"><rect class="s-line" x="800" y="220" width="300" height="250" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M910 400q-24-40 0-80t0-80M990 400q-24-40 0-80t0-80" fill="none" stroke-width="12" stroke-linecap="round"/>
+<path class="s-gain" d="M950 400q24-40 0-80t0-80" fill="none" stroke-width="12" stroke-linecap="round"/>
+<text class="m" x="950" y="440" font-size="20" text-anchor="middle">SEAWEED</text></g>
+<g id="k3"><rect class="s-line" x="1140" y="220" width="300" height="250" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="gain" d="M1290 400c-46-30-46-110 0-140c46 30 46 110 0 140z"/>
+<path class="gain" fill-opacity=".6" d="M1290 400c-46-30-46-110 0-140c46 30 46 110 0 140z" transform="rotate(-38 1290 400)"/>
+<path class="gain" fill-opacity=".6" d="M1290 400c-46-30-46-110 0-140c46 30 46 110 0 140z" transform="rotate(38 1290 400)"/>
+<text class="m" x="1290" y="440" font-size="20" text-anchor="middle">LEAFY GREENS</text></g>
+<g id="tea">
+<path id="stm5" class="s-muted" d="M215 580q-12-20 0-40t0-40M255 580q12-20 0-40t0-40" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M310 620a30 30 0 0 1 0 60" fill="none" stroke-width="7"/>
+<path class="s-ink" d="M160 600h150v70a50 50 0 0 1-50 50h-50a50 50 0 0 1-50-50z" fill="var(--stage)" stroke-width="6"/>
+<ellipse class="gain" cx="235" cy="610" rx="66" ry="7"/>
+<path class="s-ink" d="M140 738h190" stroke-width="8" stroke-linecap="round"/>
+<text class="d5" x="380" y="650" font-size="36">Green tea,</text><text class="d5" x="380" y="700" font-size="36">every day.</text>
+<text class="m" x="380" y="750" font-size="18" style="fill:var(--gain)">A DAILY HABIT</text>
+</g>
+<g id="ss">
+<g id="jars">
+<rect class="s-ink" x="800" y="580" width="160" height="140" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="790" y="560" width="180" height="24" rx="8"/>
+<rect class="gain" x="826" y="664" width="32" height="32" rx="4"/>
+<rect class="gain" x="866" y="664" width="32" height="32" rx="4"/>
+<rect class="gain" x="906" y="664" width="32" height="32" rx="4"/>
+<rect class="gain" x="846" y="626" width="32" height="32" rx="4"/>
+<rect class="ink" x="1005" y="540" width="90" height="30" rx="8"/>
+<circle cx="1030" cy="555" r="4" fill="var(--stage)"/><circle cx="1050" cy="555" r="4" fill="var(--stage)"/><circle cx="1070" cy="555" r="4" fill="var(--stage)"/>
+<path class="s-ink" d="M1000 570h100l16 150h-132z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+</g>
+<text class="m" x="880" y="760" font-size="20" text-anchor="middle">SUGAR</text>
+<text class="m" x="1050" y="760" font-size="20" text-anchor="middle">SALT</text>
+<text class="d5" x="1170" y="620" font-size="36">Less sugar.</text><text class="d5" x="1170" y="670" font-size="36">Less salt.</text>
+<text class="m" x="1170" y="720" font-size="18">THAN MANY</text><text class="m" x="1170" y="746" font-size="18">WESTERN KITCHENS</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One pillar, not the whole story.</text>
+<text class="b" x="120" y="176" font-size="32">Food is one support for a long life, among others.</text>
+<g id="tmp">
+<path class="s-ink" d="M120 300L410 210L700 300z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<rect class="ink" x="140" y="300" width="540" height="30"/>
+<g id="plrs"></g>
+<rect class="ink" x="140" y="600" width="540" height="30"/>
+</g>
+<g id="foodL"><text class="m" x="335" y="668" font-size="22" text-anchor="middle" style="fill:var(--gain)">FOOD</text></g>
+<g id="bal">
+<path class="s-ink" d="M1140 300V500M1060 500h160" stroke-width="10" stroke-linecap="round"/>
+<g id="beam">
+<path class="s-ink" d="M880 290h520M880 290l-60 100M880 290l60 100M1400 290l-60 100M1400 290l60 100" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M800 390h160a80 30 0 0 1-160 0zM1320 390h160a80 30 0 0 1-160 0z" fill="var(--stage)" stroke-width="6"/>
+<path class="ink" d="M860 388a20 16 0 0 0 40 0z"/>
+<circle class="gain" cx="1360" cy="378" r="12"/><circle class="loss" cx="1390" cy="378" r="12"/><circle class="ink" cx="1420" cy="378" r="12"/><circle class="gain" cx="1450" cy="378" r="12" fill-opacity=".5"/>
+<circle class="ink" cx="1140" cy="290" r="12"/>
+</g>
+<text class="m" x="880" y="470" font-size="18" text-anchor="middle">A BIT LESS</text>
+<text class="m" x="1400" y="470" font-size="18" text-anchor="middle">A BIT MORE</text><text class="m" x="1400" y="494" font-size="18" text-anchor="middle">VARIETY</text>
+</g>
+<g id="easy"><text class="d5" x="1140" y="580" font-size="36" text-anchor="middle">Easy to start. Easy to keep.</text></g>
+<g id="daily">
+<text class="m" x="150" y="690" font-size="20">EVERY MEAL</text>
+<g id="meals"></g>
+</g>
+<g id="futG">
+<path class="s-gain" d="M960 740h150m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="fut"></g>
+<text class="m" x="1200" y="816" font-size="20" text-anchor="middle" style="fill:var(--gain)">YOUR FUTURE SELF</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it at your next meal.</text>
+<text class="b" x="120" y="176" font-size="32">Eat slowly. Pause halfway. Check in with yourself.</text>
+<g id="plt">
+<circle class="s-ink" cx="480" cy="500" r="220" fill="var(--stage)" stroke-width="7"/>
+<circle class="s-line" cx="480" cy="500" r="180" fill="none" stroke-width="3"/>
+<g id="bites"></g>
+<g id="fork"><rect class="ink" x="-7" y="0" width="14" height="170" rx="7"/><rect class="ink" x="-28" y="-20" width="56" height="20" rx="10"/><path class="s-ink" d="M-22-20v-60M-7-20v-60M7-20v-60M22-20v-60" stroke-width="7" stroke-linecap="round"/></g>
+</g>
+<g id="barg">
+<text class="m" x="880" y="270" font-size="20">YOUR MEAL</text>
+<rect x="880" y="290" width="580" height="26" rx="13" fill="var(--line)"/>
+<rect id="barf" class="gain" x="880" y="290" height="26" rx="13"/>
+<path class="s-ink" d="M1170 278v50" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="1170" y="360" font-size="18" text-anchor="middle">PAUSE HALFWAY</text>
+</g>
+<g id="chk">
+<rect class="s-ink" x="880" y="410" width="580" height="160" rx="24" fill="var(--stage)" stroke-width="5"/>
+<text class="d5" x="912" y="474" font-size="40">Still hungry?</text>
+<text class="b" x="912" y="530" font-size="28">Or eating because food is there?</text>
+</g>
+<g id="fd"><text class="d" x="880" y="660" font-size="44">Satisfied? Fork down.</text><text class="m" x="880" y="706" font-size="20" style="fill:var(--gain)">EVEN IF A FEW BITES REMAIN</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="ch"><text class="m" x="143" y="240" font-size="26" style="fill:var(--gain)">TONIGHT: TRY HARA HACHI BU ONCE.</text></g>
+<g id="qa"><text class="d" x="136" y="400" font-size="88" letter-spacing="-2">How many colours</text></g>
+<g id="qb"><text class="d" x="136" y="510" font-size="88" letter-spacing="-2">can you fit on your</text></g>
+<g id="qc"><text class="d" x="136" y="620" font-size="88" letter-spacing="-2">plate this week?</text></g>
+<g id="pl8"><circle class="s-ink" cx="1300" cy="480" r="160" fill="var(--stage)" stroke-width="7"/><g id="wedges"></g></g>
+<g id="tag8"><text class="m" x="143" y="760" font-size="26">EAT TO 80 PERCENT. EAT THE RAINBOW.</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Eat Until You&#x27;re 80 Percent Full&rdquo;, from <em>Ikigai</em> by Héctor García and Francesc Miralles. The hara hachi bu saying, the small-plates tip and the figure of 206 foods in the Okinawan diet are as reported in the book. The stomach meter, balance scale and rainbow plate are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 10.6], [10.6, 24.8], [24.8, 39.7], [39.7, 58.4], [58.4, 73.5], [73.5, 88.8], [88.8, 105.0], [105.0, 121.0], [121.0, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["A Simple Rule", "Hara Hachi Bu", "Why Stop Early", "Small Plates", "Eat the Rainbow", "Okinawan Staples", "One Pillar", "Try It Tonight", "Your Challenge"];
+const TM={"empty_bowl": 0.0, "elder_table": 10.88, "stomach_meter": 16.16, "full_plate": 25.12, "light_body": 30.56, "small_plates": 40.0, "tray": 45.6, "rainbow": 58.72, "veg_basket": 62.56, "count_206": 67.2, "sweet_potato": 73.76, "green_tea": 81.68, "sugar_salt": 84.6, "pillar": 89.12, "scale": 94.4, "daily_meal": 99.92, "fork_down": 105.28, "check_in": 109.76, "last_bite": 114.76, "challenge": 121.28};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const FC=i=>[['var(--gain)',1],['var(--loss)',1],['var(--ink)',1],['var(--gain)',.5],['var(--loss)',.5],['var(--muted)',1]][i%6];
+fig($('eld'),420,420,46,'ink');
+const SG=[];for(let i=0;i<10;i++)SG.push(mk('rect',{x:1004,y:718-i*48,width:172,height:40,rx:8,fill:i<8?'var(--line)':'none',stroke:i<8?'none':'var(--muted)','stroke-width':3,'stroke-dasharray':'8 6'},$('segs')));
+// container fill shape that stays inside the walls (inner bottom 636, inner corner radius 36)
+const cup=(x0,x1,y)=>{const r=36;if(y>=636)return 'M0 0';if(y>600)return 'M'+(x0+r)+' '+y.toFixed(1)+'H'+(x1-r)+'V636H'+(x0+r)+'Z';
+  return 'M'+x0+' '+y.toFixed(1)+'H'+x1+'V600a'+r+' '+r+' 0 0 1 -'+r+' '+r+'H'+(x0+r)+'a'+r+' '+r+' 0 0 1 -'+r+' -'+r+'Z'};
+const DS=['RICE','SOUP','VEGETABLES','FISH'].map((s,i)=>{const x=795+i*185,g=mk('g',{},$('dishes'));
+  mk('circle',{cx:x,cy:450,r:78,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  if(i==0)mk('circle',{cx:x,cy:450,r:50,fill:'var(--ice)',stroke:'var(--line)','stroke-width':3},g);
+  if(i==1)mk('circle',{cx:x,cy:450,r:52,class:'loss','fill-opacity':.35},g);
+  if(i==2)[-30,0,30].forEach(d=>mk('ellipse',{cx:x+d,cy:450,rx:16,ry:36,class:'gain',transform:'rotate('+d+' '+(x+d)+' 450)'},g));
+  if(i==3){mk('ellipse',{cx:x-8,cy:450,rx:44,ry:20,class:'ink'},g);mk('path',{d:'M'+(x+30)+' 450l26-18v36z',class:'ink'},g)}
+  mk('text',{x:x,y:590,'font-size':20,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+const RB=['var(--loss)','var(--gain)','var(--ink)','var(--gain)','var(--loss)'].map((c,i)=>{const r=260-i*30;
+  return mk('path',{d:'M'+(460-r)+' 470a'+r+' '+r+' 0 0 1 '+(2*r)+' 0',fill:'none',stroke:c,'stroke-opacity':i>2?.5:1,'stroke-width':24,pathLength:1,'stroke-dasharray':1,'stroke-dashoffset':1},$('rb'))});
+const PR=[[300,470,34],[360,445,30],[430,460,38],[500,440,30],[570,465,36],[630,470,30],[390,490,26],[530,490,28],[460,420,26]].map((q,i)=>{const c=FC(i);return mk('circle',{cx:q[0],cy:q[1],r:q[2],fill:c[0],'fill-opacity':c[1]},$('prod'))});
+// 206 dots on two rings around the number, centred on the illustration midline
+const DT=[];for(let i=0;i<206;i++){const ring=i<103?0:1,k=i%103,R=ring?214:250,a=-Math.PI/2+(k+ring*.5)*2*Math.PI/103,c=FC(i*7);
+  DT.push(mk('circle',{cx:(1140+R*Math.cos(a)).toFixed(1),cy:(455+R*Math.sin(a)).toFixed(1),r:ring?5.5:6,fill:c[0],'fill-opacity':c[1]},$('dots')))}
+const PL=[0,1,2,3].map(i=>mk('rect',{x:170+i*130,y:330,width:70,height:270,rx:6,fill:i==1?'var(--gain)':'none',stroke:i==1?'none':'var(--muted)','stroke-width':4,'stroke-dasharray':i==1?'none':'10 8'},$('plrs')));
+const ML=[];for(let i=0;i<7;i++){const x=180+i*120;mk('circle',{cx:x,cy:740,r:30,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('meals'));ML.push(mk('circle',{cx:x,cy:740,r:14,class:'gain'},$('meals')))}
+fig($('fut'),1200,690,22,'gain');
+const BT=[];for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,c=FC(i);BT.push(mk('circle',{cx:(480+125*Math.cos(a)).toFixed(1),cy:(500+125*Math.sin(a)).toFixed(1),r:34,fill:c[0],'fill-opacity':c[1]},$('bites')))}
+const pt=a=>(1300+130*Math.cos(a)).toFixed(1)+' '+(480+130*Math.sin(a)).toFixed(1);
+const WG=[];for(let i=0;i<6;i++){const a1=(i*60-90)*Math.PI/180,a2=((i+1)*60-90)*Math.PI/180,c=FC(i);WG.push(mk('path',{d:'M1300 480L'+pt(a1)+'A130 130 0 0 1 '+pt(a2)+'Z',fill:c[0],'fill-opacity':c[1],stroke:'var(--stage)','stroke-width':6},$('wedges')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const e0=TM.empty_bowl;
+  rise($('bowl0'),p(u,e0,e0+.6));
+  const rk=p(u,e0+1,e0+3); $('rice0').setAttribute('transform','translate(0 540) scale(1 '+(rk+.001).toFixed(3)+') translate(0 -540)');
+  $('stm0').setAttribute('opacity',(rk*(.55+.45*Math.sin(t*2))).toFixed(2));
+  rise($('say0'),p(u,e0+7.6,e0+8.2));
+
+  rise($('eldA'),p(u,TM.elder_table,TM.elder_table+.5)); rise($('hhb'),p(u,TM.elder_table+1.2,TM.elder_table+1.7));
+  const sm=TM.stomach_meter; rise($('meter'),p(u,sm-.4,sm+.1));
+  const nf=8*p(u,sm+.3,sm+2.3); SG.forEach((s,i)=>{if(i<8)s.setAttribute('fill',i<nf?'var(--gain)':'var(--line)')});
+  rise($('m80'),p(u,sm+2.2,sm+2.7)); rise($('room'),p(u,sm+3.8,sm+4.3));
+
+  rise($('pL'),p(u,TM.full_plate,TM.full_plate+.5));
+  const f1=p(u,TM.full_plate+.4,TM.full_plate+3); $('fl').setAttribute('d',cup(304,576,636-346*f1));
+  rise($('spill'),p(u,TM.full_plate+3,TM.full_plate+3.6));
+  rise($('pR'),p(u,TM.light_body,TM.light_body+.5));
+  const f2=p(u,TM.light_body+.4,TM.light_body+2.6); $('fr').setAttribute('d',cup(1024,1296,636-277*f2));
+  rise($('room2'),p(u,TM.light_body+2.6,TM.light_body+3.1)); rise($('hl'),p(u,TM.light_body+4.2,TM.light_body+4.8));
+
+  const s3=SC[3][0]/K; rise($('big'),p(u,s3+.3,s3+.9)*(1-.6*p(u,TM.small_plates+.6,TM.small_plates+1.2)));
+  rise($('arr3'),p(u,TM.small_plates,TM.small_plates+.5)); rise($('tr'),p(u,TM.small_plates+.6,TM.small_plates+1.1));
+  DS.forEach((g,i)=>{const a=TM.tray+i*.8; rise(g,p(u,a,a+.4))});
+  rise($('eas'),p(u,TM.tray+7.2,TM.tray+7.8));
+
+  RB.forEach((r,i)=>r.setAttribute('stroke-dashoffset',(1-p(u,TM.rainbow+i*.25,TM.rainbow+i*.25+.8)).toFixed(3)));
+  rise($('bk'),p(u,TM.veg_basket,TM.veg_basket+.5)); PR.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.veg_basket+.4+i*.2,TM.veg_basket+.6+i*.2)));
+  rise($('cnt'),p(u,TM.count_206,TM.count_206+.4));
+  const nd=Math.round(206*p(u,TM.count_206+.2,TM.count_206+2.6)); DT.forEach((d,i)=>d.setAttribute('opacity',i<nd?1:.12)); $('n206').textContent=nd;
+
+  rise($('k0'),p(u,TM.sweet_potato+.3,TM.sweet_potato+.8));
+  [1,2,3].forEach(i=>{const a=TM.sweet_potato+2.1+i*.8; rise($('k'+i),p(u,a,a+.5))});
+  rise($('tea'),p(u,TM.green_tea,TM.green_tea+.5)); $('stm5').setAttribute('opacity',(.55+.45*Math.sin(t*2.2)).toFixed(2));
+  rise($('ss'),p(u,TM.sugar_salt,TM.sugar_salt+.5));
+  const sc=1-.25*p(u,TM.sugar_salt+.8,TM.sugar_salt+2); $('jars').setAttribute('transform','translate(960 720) scale('+sc.toFixed(3)+') translate(-960 -720)');
+
+  rise($('tmp'),p(u,TM.pillar,TM.pillar+.5));
+  PL.forEach((r,i)=>r.setAttribute('opacity',i==1?p(u,TM.pillar+.3,TM.pillar+.8):p(u,TM.pillar+1.5+i*.2,TM.pillar+2+i*.2)));
+  rise($('foodL'),p(u,TM.pillar+.6,TM.pillar+1.1));
+  rise($('bal'),p(u,TM.scale,TM.scale+.5)); $('beam').setAttribute('transform','rotate('+(3*Math.sin(t*1.2)).toFixed(2)+' 1140 290)');
+  rise($('easy'),p(u,TM.scale+1.5,TM.scale+2));
+  rise($('daily'),p(u,TM.daily_meal,TM.daily_meal+.5)); ML.forEach((m,i)=>m.setAttribute('opacity',p(u,TM.daily_meal+.4+i*.3,TM.daily_meal+.6+i*.3)));
+  rise($('futG'),p(u,TM.daily_meal+2.6,TM.daily_meal+3.1));
+
+  const s7=SC[7][0]/K; rise($('plt'),p(u,s7+.3,s7+.8));
+  const n7=5*p(u,TM.fork_down+.5,TM.fork_down+3)+3*p(u,TM.last_bite,TM.last_bite+2);
+  BT.forEach((b,i)=>b.setAttribute('opacity',(1-cl(n7-i,0,1)).toFixed(2)));
+  $('barf').setAttribute('width',(580*n7/10).toFixed(1));
+  const fk=p(u,TM.last_bite+2,TM.last_bite+3), bob=(u>TM.fork_down&&u<TM.last_bite+2)?10*Math.sin(t*5):0;
+  $('fork').setAttribute('transform','translate('+(600+170*fk).toFixed(1)+' '+(520-70*fk+bob*(1-fk)).toFixed(1)+') rotate('+(-25+25*fk).toFixed(1)+')');
+  rise($('barg'),p(u,TM.fork_down,TM.fork_down+.5)); rise($('chk'),p(u,TM.check_in,TM.check_in+.5)); rise($('fd'),p(u,TM.last_bite+2,TM.last_bite+2.6));
+
+  const c8=TM.challenge; rise($('ch'),p(u,c8,c8+.5)); rise($('pl8'),p(u,c8+.4,c8+.9));
+  rise($('qa'),p(u,c8+2.6,c8+3.1)); rise($('qb'),p(u,c8+3,c8+3.5)); rise($('qc'),p(u,c8+3.4,c8+3.9));
+  WG.forEach((w,i)=>w.setAttribute('opacity',p(u,c8+2.8+i*.3,c8+3.1+i*.3)));
+  rise($('tag8'),p(u,c8+4.6,c8+5.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.2;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

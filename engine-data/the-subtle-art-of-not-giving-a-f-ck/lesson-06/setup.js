@@ -1,0 +1,21 @@
+const P=(g,x,y,r)=>{mk('circle',{cx:x,cy:y,r:r},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},g);return g};
+const L=el=>{const n=el.getTotalLength();el.style.strokeDasharray=n;el.style.strokeDashoffset=n;return n};
+const dr=(el,n,k)=>{el.style.strokeDashoffset=n*(1-k)};
+const WD=[0,1,2].map(i=>mk('circle',{cx:1320+i*36,cy:310,r:9,class:'gain'},$('wdots')));
+P($('pic'),330,440,36);P($('wom'),1110,440,36);P($('tch'),800,380,34);P($('stuP'),1200,580,30);P($('wr'),300,420,40);
+const DN=L($('doodle')),BN=L($('better')),VN=L($('vstr')),SCR=$('scrib'),SN=L(SCR);
+const PG=[];for(let i=0;i<40;i++){const x=120+(i%10)*126,y=230+Math.floor(i/10)*104,g=mk('g',{},$('pages'));
+  const r=mk('rect',{x:x,y:y,width:100,height:80,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  mk('path',{d:`M${x+16} ${y+30}q17-14 34 0t34 0M${x+16} ${y+52}h50`,fill:'none',stroke:'var(--line)','stroke-width':4,'stroke-linecap':'round'},g);
+  const X=mk('path',{d:`M${x+30} ${y+20}l40 40m0-40l-40 40`,stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},g);PG.push([g,r,X])}
+const C3=['INSPIRATION','MOTIVATION','ACTION'].map((s,i)=>{const x=120+i*440,g=mk('g',{},$('chain3'));
+  const r=mk('rect',{x:x,y:280,width:340,height:110,rx:18,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const tx=mk('text',{x:x+170,y:345,'font-size':26,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;
+  if(i<2)mk('path',{d:`M${x+355} 335h70m-18-18 18 18-18 18`,fill:'none',stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);return [g,r]});
+const N4=[['ACTION',-90],['INSPIRATION',30],['MOTIVATION',150]].map(([s,a])=>{const x=500+220*Math.cos(a*Math.PI/180),y=530+220*Math.sin(a*Math.PI/180),g=mk('g',{},$('nodes'));
+  const r=mk('rect',{x:x-110,y:y-32,width:220,height:64,rx:32,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const tx=mk('text',{x:x,y:y+8,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;return [g,r,tx]});
+const LW=[440,380,460,300,420,460,340,200];
+const LN=LW.map((w,k)=>{let d='M580 '+(300+k*60);for(let x=20;x<=w;x+=20)d+='L'+(580+x)+' '+(300+k*60+(k?Math.sin(x*.07+k)*2:Math.sin(x*.15)*7)).toFixed(1);
+  const e=mk('path',{d:d,fill:'none',stroke:k?'var(--ink)':'var(--muted)','stroke-width':k?6:7,'stroke-linecap':'round','stroke-linejoin':'round'},$('lines'));return [e,L(e)]});
+const LA=k=>k?TM.paragraph+(k-1)*.6:TM.one_sentence;

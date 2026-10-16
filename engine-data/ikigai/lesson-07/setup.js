@@ -1,0 +1,12 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const drw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const RN=[];for(let i=0;i<6;i++)RN.push(mk('path',{d:'M0 0v26',class:'s-loss','stroke-width':5,'stroke-linecap':'round'},$('rain')));
+fig($('who'),350,610,30,'ink');fig($('senF'),260,380,40,'ink');fig($('ic2f'),920,350,20,'ink');
+const DT=[];for(let i=0;i<12;i++)DT.push(mk('circle',{cy:300,r:9,fill:'var(--muted)','fill-opacity':.5},$('dots')));
+[600,720,880,1000].forEach(x=>{fig($('ppl'),x,460,28,'ink');mk('ellipse',{cx:x,cy:572,rx:34,ry:7,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},$('plates'))});
+fig($('pme'),1150,280,26,'ink');
+const PG=[],PR=[];[950,1150,1350].forEach((x,i)=>{const g=mk('g',{},$('pil'));PR.push(mk('rect',{x:x-30,y:430,width:60,height:250,rx:4,class:'gain'},g));const tx=mk('text',{x:x,y:720,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=['INCOME','FRIENDSHIP','JOY'][i];PG.push(g)});
+const CP=[];const chip=(s,x,y)=>{const g=mk('g',{},$('rl'));mk('path',{d:'M'+(x<800?x+400:x)+' '+(y+32)+'L800 480',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8',fill:'none'},g);mk('rect',{x:x,y:y,width:400,height:64,rx:32,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:x+200,y:y+40,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;CP.push(g)};
+['STAY ACTIVE, NEVER RETIRE','TAKE IT SLOW','STOP BEFORE FULL'].forEach((s,i)=>chip(s,120,310+i*90));
+['GOOD FRIENDS','GET IN SHAPE','SMILE','RECONNECT WITH NATURE','GIVE THANKS','LIVE IN THE MOMENT'].forEach((s,i)=>chip(s,1080,220+i*90));
+const SCR=[0,1,2].map(i=>mk('path',{d:'M1076 '+(410+i*60)+'q30-16 60 0t60 0t60 0'+(i<2?'t60 0':''),fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round',pathLength:1,'stroke-dasharray':1,'stroke-dashoffset':1},$('scr')));

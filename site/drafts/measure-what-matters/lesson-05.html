@@ -1,0 +1,316 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Measure What Matters Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Measure What Matters: Regular check-ins, honest scoring and a willingness to adjust or drop goals turn OKRs into a living tool rather than a forgotten plan. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MEASURE WHAT MATTERS · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Track progress and</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">stay accountable.</text>
+<text class="b" x="120" y="600" font-size="32">How regular check-ins and honest scores keep goals alive.</text>
+<g id="foldw"><g id="fold"><rect class="gain" x="1200" y="190" width="80" height="30" rx="6"/><rect class="gain" x="1200" y="210" width="200" height="140" rx="8"/><text class="m" x="1300" y="290" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">GOALS</text></g></g>
+<rect class="s-ink" x="1140" y="360" width="320" height="400" rx="10" fill="var(--stage)" stroke-width="7"/>
+<rect class="s-ink" x="1170" y="390" width="260" height="160" rx="8" fill="none" stroke-width="5"/>
+<rect class="s-ink" x="1170" y="580" width="260" height="150" rx="8" fill="none" stroke-width="5"/>
+<path class="s-ink" d="M1260 470h80M1260 655h80" stroke-width="8" stroke-linecap="round"/>
+<g id="dust"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The forgotten plan.</text>
+<text class="b" x="120" y="176" font-size="32">Bold goals in January. Forgotten by December.</text>
+<g id="mon"></g>
+<g id="card"><g id="cardm"><rect class="gain" x="120" y="230" width="260" height="110" rx="12"/><text class="m" x="250" y="294" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">BOLD GOALS</text></g></g>
+<g id="drw"><rect class="s-ink" x="110" y="560" width="280" height="140" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M210 630h80" stroke-width="8" stroke-linecap="round"/><text class="m" x="250" y="740" font-size="20" text-anchor="middle">FILED AWAY</text></g>
+<g id="qq"><circle class="s-ink" cx="1410" cy="290" r="56" fill="var(--stage)" stroke-width="5"/><circle class="s-ink" cx="1400" cy="362" r="9" fill="var(--stage)" stroke-width="4"/><text class="d" x="1410" y="314" font-size="72" text-anchor="middle" style="fill:var(--loss)">?</text><text class="m" x="1330" y="298" font-size="20" text-anchor="end">NOBODY REMEMBERS</text></g>
+<g id="b1"><text class="d5" x="460" y="610" font-size="40">Writing it down is only the beginning.</text></g>
+<g id="b2"><text class="d" x="460" y="690" font-size="44"><tspan style="fill:var(--gain)">Tracking</tspan> turns a plan into progress.</text><line id="prog" class="s-gain" x1="460" y1="730" x2="460" y2="730" stroke-width="8" stroke-linecap="round"/></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Check in often.</text>
+<text class="b" x="120" y="176" font-size="32">Short, frequent conversations beat one big verdict.</text>
+<g id="duo"><rect class="ink" x="140" y="470" width="400" height="14" rx="4"/><text class="m" x="220" y="520" font-size="20" text-anchor="middle">MANAGER</text><text class="m" x="460" y="520" font-size="20" text-anchor="middle">TEAM</text></g>
+<g id="bub2"><rect class="s-ink" x="160" y="206" width="120" height="64" rx="22" fill="var(--stage)" stroke-width="4"/><rect class="s-ink" x="400" y="206" width="120" height="64" rx="22" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M195 238h0M220 238h0M245 238h0M435 238h0M460 238h0M485 238h0" stroke-width="12" stroke-linecap="round"/></g>
+<g id="clkw"><circle class="s-ink" cx="760" cy="400" r="80" fill="var(--stage)" stroke-width="7"/><path class="s-muted" d="M760 330v12M760 458v12M690 400h12M818 400h12" stroke-width="4"/><line id="hand" class="s-gain" x1="760" y1="400" x2="760" y2="342" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="760" cy="400" r="8"/><text class="m" x="760" y="520" font-size="20" text-anchor="middle">WEEKLY</text></g>
+<g id="wkl"><text class="m" x="880" y="284" font-size="20">OFTEN WEEKLY</text></g>
+<g id="wk"></g>
+<g id="ann"><text class="m" x="880" y="404" font-size="20">ONE BIG VERDICT AT YEAR END</text><rect class="s-line" x="880" y="420" width="580" height="40" rx="6" fill="none" stroke-width="3"/><rect class="loss" x="1410" y="420" width="50" height="40" rx="6"/></g>
+<g id="q2a"><text class="m" x="120" y="610" font-size="22">EACH CHECK-IN ASKS ONE QUESTION</text></g>
+<g id="q2b"><text class="d" x="120" y="690" font-size="56">Are we actually moving</text><text class="d" x="120" y="760" font-size="56">toward our key results?</text></g>
+<g id="tgt"><circle class="s-ink" cx="1300" cy="690" r="100" fill="none" stroke-width="6"/><circle class="s-ink" cx="1300" cy="690" r="62" fill="none" stroke-width="6"/><circle class="gain" cx="1300" cy="690" r="24"/></g>
+<g id="arw"><path class="s-ink" d="M-140 0h130M-34-22l26 22-26 22" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Four choices for every goal.</text>
+<text class="b" x="120" y="176" font-size="32">At each check-in, pick one.</text>
+<g id="cards"></g>
+<g id="icw0"><g id="ic0" transform="translate(275 400)"><path class="s-gain" d="M-80 0h140M20-44l44 44-44 44" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<g id="icw1"><polygon class="ink" points="555,470 555,430 665,320 705,360 595,470"/><polygon class="gain" points="665,320 705,360 720,345 680,305"/><line id="pl" class="s-gain" x1="560" y1="495" x2="560" y2="495" stroke-width="8" stroke-linecap="round"/></g>
+<g id="icw2"><g id="ic2" transform="translate(975 470)"><path class="s-gain" d="M0 0V-110" stroke-width="10" stroke-linecap="round"/><path class="gain" d="M0-50c-50 0-70-30-70-60 40 0 70 20 70 60z"/><path class="gain" d="M0-80c45 0 65-30 65-55-40 0-65 20-65 55z"/></g><path class="s-ink" d="M895 470h160" stroke-width="6" stroke-linecap="round"/></g>
+<g id="icw3"><polygon class="loss" points="1357.5,321.5 1403.5,367.5 1403.5,432.5 1357.5,478.5 1292.5,478.5 1246.5,432.5 1246.5,367.5 1292.5,321.5"/><text class="d" x="1325" y="416" font-size="44" text-anchor="middle" style="fill:var(--stage)">STOP</text></g>
+<g id="four"><text class="d5" x="120" y="800" font-size="40">Every goal faces four options.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Dropping a goal is allowed.</text>
+<text class="b" x="120" y="176" font-size="32">Stop it in the open, so everyone knows.</text>
+<g id="def"><text class="d5" x="120" y="270" font-size="44" fill-opacity=".55">Feels like defeat?</text></g>
+<line id="defx" class="s-ink" x1="112" y1="256" x2="112" y2="256" stroke-width="5" stroke-linecap="round"/>
+<g id="isnt"><text class="d" x="620" y="270" font-size="44" style="fill:var(--gain)">Doerr: it isn’t.</text></g>
+<g id="board"><rect class="s-ink" x="120" y="330" width="640" height="410" rx="14" fill="var(--stage)" stroke-width="6"/><text class="m" x="150" y="372" font-size="20">TEAM OKR BOARD · VISIBLE TO ALL</text><g id="bcards"></g><line id="bx" class="s-loss" x1="170" y1="542" x2="170" y2="542" stroke-width="6" stroke-linecap="round"/></g>
+<g id="stamp"><g transform="rotate(-8 600 542)"><rect x="500" y="515" width="200" height="54" rx="6" fill="none" stroke="var(--loss)" stroke-width="5"/><text class="m" x="600" y="551" font-size="26" text-anchor="middle" style="fill:var(--loss)">STOPPED</text></g></g>
+<g id="crowd4"><text class="m" x="640" y="836" font-size="20">EVERYONE KNOWS</text></g>
+<g id="waste"><path class="s-ink" d="M990 520L1060 470" stroke-width="8" stroke-linecap="round"/><polygon class="ink" points="1050,440 1110,410 1140,470 1080,500"/><g id="drops"></g><rect class="s-ink" x="1150" y="540" width="300" height="160" rx="8" fill="var(--stage)" stroke-width="6"/><path class="s-loss" d="M1210 570L1390 670M1390 570L1210 670" stroke-width="8" stroke-linecap="round"/><text class="m" x="1300" y="735" font-size="22" text-anchor="middle">OLD GOAL</text><text class="m" x="1480" y="786" font-size="20" text-anchor="end">EFFORT THAT NO LONGER COUNTS</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Google scorecard.</text>
+<text class="b" x="120" y="176" font-size="32">Each key result is graded from zero to one.</text>
+<g id="tl">
+<rect class="s-ink" x="120" y="260" width="130" height="340" rx="34" fill="var(--stage)" stroke-width="7"/>
+<circle id="lg" class="gain" cx="185" cy="320" r="40"/>
+<circle id="lm" fill="var(--muted)" cx="185" cy="430" r="40"/>
+<circle id="lr" class="loss" cx="185" cy="540" r="40"/>
+<circle cx="185" cy="320" r="40" fill="none" stroke="var(--gain)" stroke-width="4"/>
+<circle cx="185" cy="430" r="40" fill="none" stroke="var(--muted)" stroke-width="4"/>
+<circle cx="185" cy="540" r="40" fill="none" stroke="var(--loss)" stroke-width="4"/>
+</g>
+<g id="zones"><rect class="loss" x="340" y="380" width="367" height="50"/><rect fill="var(--muted)" x="707" y="380" width="366" height="50"/><rect class="gain" x="1073" y="380" width="367" height="50"/><text class="m" x="523" y="360" font-size="20" text-anchor="middle">LOW</text><text class="m" x="890" y="360" font-size="20" text-anchor="middle">MIDDLE</text><text class="m" x="1257" y="360" font-size="20" text-anchor="middle" style="fill:var(--gain)">NEAR ONE</text></g>
+<g id="scale"><rect class="s-ink" x="340" y="380" width="1100" height="50" fill="none" stroke-width="5"/><g id="ticks"></g><text class="m" x="340" y="490" font-size="24" text-anchor="middle">0</text><text class="m" x="1440" y="490" font-size="24" text-anchor="middle">1</text></g>
+<g id="mk5w"><g id="mk5"><line id="mkl" x1="0" y1="366" x2="0" y2="450" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/><text id="val" class="d" x="0" y="550" font-size="48" text-anchor="middle">0.0</text></g></g>
+<g id="sw"><text class="m" x="120" y="660" font-size="22">ON AMBITIOUS GOALS</text><text class="d" x="120" y="730" font-size="48">Around <tspan style="fill:var(--gain)">0.7</tspan> is a healthy result, not a miss.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Score, then reflect.</text>
+<text class="b" x="120" y="176" font-size="32">Numbers alone never tell the whole story.</text>
+<g id="sc6"><rect class="s-line" x="120" y="260" width="340" height="300" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="310" font-size="20">KEY RESULT SCORE</text><text class="d" x="150" y="480" font-size="140">0.7</text></g>
+<g id="pad"><text class="d" x="510" y="430" font-size="60" text-anchor="middle" style="fill:var(--muted)">+</text><rect class="s-ink" x="560" y="260" width="360" height="300" rx="18" fill="var(--stage)" stroke-width="5"/><text class="m" x="590" y="310" font-size="18">HONEST SELF-ASSESSMENT</text><g id="nlines"></g></g>
+<g id="tb"><circle class="s-ink" cx="940" cy="530" r="9" fill="var(--stage)" stroke-width="4"/><circle class="s-ink" cx="965" cy="500" r="14" fill="var(--stage)" stroke-width="4"/><ellipse class="s-ink" cx="1230" cy="360" rx="240" ry="120" fill="var(--stage)" stroke-width="5"/></g>
+<g id="tq1"><text class="d5" x="1230" y="345" font-size="34" text-anchor="middle">Why did we hit it?</text></g>
+<g id="tq2"><text class="d5" x="1230" y="395" font-size="34" text-anchor="middle" style="fill:var(--loss)">What got in the way?</text></g>
+<path id="nxa" class="s-gain" d="M740 570C740 700 860 700 980 700" fill="none" stroke-width="6"/>
+<path id="nxh" class="s-gain" d="M962 682l18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="nxc"><rect class="gain" x="1000" y="640" width="480" height="120" rx="18"/><text class="d5" x="1240" y="712" font-size="36" text-anchor="middle" style="fill:var(--on-gain)">Next round of goals</text><text class="m" x="1240" y="810" font-size="20" text-anchor="middle">LESSONS FLOW STRAIGHT IN</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Tracking at scale.</text>
+<text class="b" x="120" y="176" font-size="32">The Gates Foundation set OKRs on enormous goals, like fighting disease.</text>
+<g id="globe"><circle class="s-ink" cx="330" cy="480" r="170" fill="var(--stage)" stroke-width="7"/><ellipse id="mer" class="s-line" cx="330" cy="480" rx="90" ry="170" fill="none" stroke-width="4"/><path class="s-line" d="M160 480h340M180 400h300M180 560h300" stroke-width="4"/></g>
+<g id="glab"><text class="m" x="330" y="710" font-size="20" text-anchor="middle">ENORMOUS GOAL</text><text class="d5" x="330" y="760" font-size="40" text-anchor="middle">Fighting disease</text></g>
+<g id="lk7"></g>
+<g id="bars"></g>
+<g id="big7"><text class="d" x="120" y="840" font-size="44">Huge missions need small, measurable steps.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="q1"><text class="d" x="136" y="300" font-size="72" letter-spacing="-2">Pick one goal from this year.</text></g>
+<g id="q2"><text class="d" x="136" y="400" font-size="72" letter-spacing="-2">Score it from <tspan style="fill:var(--gain)">zero to one</tspan>.</text></g>
+<g id="q3"><text class="d" x="136" y="500" font-size="72" letter-spacing="-2">Continue, update, start or stop?</text></g>
+<g id="chips8"></g>
+<text class="m" x="143" y="780" font-size="26">THIS WEEK · SCORE IT · DECIDE</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Track Progress and Stay Accountable&rdquo;, from <em>Measure What Matters</em> by John Doerr. Google&#x27;s zero-to-one scoring scale, the four mid-cycle choices and the Gates Foundation&#x27;s use of OKRs are as reported in the book. The team with forgotten goals and the score drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 4.8], [4.8, 21.1], [21.1, 39.5], [39.5, 56.0], [56.0, 69.0], [69.0, 86.1], [86.1, 99.3], [99.3, 114.5], [114.5, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Goals in a Drawer", "The Forgotten Plan", "Check In Often", "Four Choices", "Dropping Is Allowed", "The Google Scorecard", "Score, Then Reflect", "Tracking at Scale", "Your Turn"];
+const TM={"dusty_folder": 0.0, "drawer": 5.12, "calendar": 9.68, "one_on_one": 21.44, "weekly_clock": 26.96, "continue_arrow": 43.44, "pencil": 46.08, "new_seed": 49.6, "stop_sign": 52.8, "open_board": 61.2, "wasted_effort": 64.96, "score_scale": 69.28, "traffic_light": 75.0, "sweet_spot": 80.44, "self_review": 89.2, "thought_bubble": 92.96, "next_cycle": 96.0, "foundation": 99.6, "progress_bar": 106.4, "your_goal": 114.8};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const tx=(g,x,y,s,fs,cls,ex)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':fs,class:cls},ex||{}),g);e.textContent=s;return e};
+const DU=[];for(let i=0;i<12;i++)DU.push(mk('circle',{cx:1150+(i*53)%300,cy:300+(i*37)%50,r:3+(i%3)*2,fill:'var(--muted)'},$('dust')));
+const MO=[...'JFMAMJJASOND'].map((c,i)=>{const g=mk('g',{},$('mon')),r=mk('rect',{x:120+i*114,y:380,width:100,height:80,rx:10,fill:'var(--line)','fill-opacity':0,stroke:'var(--ink)','stroke-width':4},g);tx(g,170+i*114,432,c,26,'m',{'text-anchor':'middle'});return [g,r]});
+fig($('duo'),220,330,30,'ink');fig($('duo'),460,330,30,'ink');
+const WK=[];for(let i=0;i<52;i++)WK.push(mk('rect',{x:880+i*11.2,y:300,width:7,height:40,rx:2,class:'gain'},$('wk')));
+const CC=[['IF IT IS','ON TRACK'],['IF THE WORLD','HAS CHANGED'],['IF A FRESH','NEED APPEARS'],['IF IT NO LONGER','MATTERS']];
+const CD=['Continue','Update','Start','Stop'].map((w,i)=>{const x=120+i*350,g=mk('g',{},$('cards'));mk('rect',{x:x,y:240,width:310,height:480,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);tx(g,x+155,590,w,52,'d',{'text-anchor':'middle'});CC[i].forEach((s,k)=>tx(g,x+155,640+k*30,s,20,'m',{'text-anchor':'middle'}));return g});
+['A','B','C'].forEach((c,i)=>{mk('rect',{x:150,y:400+i*105,width:580,height:75,rx:10,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},$('bcards'));tx($('bcards'),180,446+i*105,'OBJECTIVE '+c,22,'m')});
+for(let i=0;i<4;i++)fig($('crowd4'),200+i*120,785,14,'ink');
+fig($('waste'),960,420,30,'ink');
+const DR=[];for(let i=0;i<5;i++)DR.push(mk('circle',{cx:1170+i*14,cy:500,r:7,class:'gain'},$('drops')));
+for(let i=0;i<=10;i++)mk('path',{d:'M'+(340+i*110)+' 438v14',class:'s-muted','stroke-width':3},$('ticks'));
+const NL=[0,1,2,3].map(i=>mk('line',{x1:590,y1:370+i*45,x2:590,y2:370+i*45,class:'s-line','stroke-width':8,'stroke-linecap':'round'},$('nlines')));
+const BR=[.8,.6,.25,.7].map((v,i)=>{const y=330+i*110,g=mk('g',{},$('bars')),ok=i!==2;tx(g,640,y-12,'STEP '+(i+1),20,'m');mk('rect',{x:640,y:y,width:800,height:40,rx:20,fill:'var(--line)'},g);const f=mk('rect',{x:640,y:y,width:0,height:40,rx:20},g);const tg=tx(g,1440,y-12,ok?'WORKING':'NOT WORKING',20,'m',{'text-anchor':'end',style:'fill:var('+(ok?'--gain':'--loss')+')'});mk('path',{d:'M500 480L630 '+(y+20),class:'s-line','stroke-width':3,'stroke-dasharray':'6 8'},$('lk7'));return {g:g,f:f,v:v,ok:ok,tg:tg}});
+const CP=['CONTINUE','UPDATE','START','STOP'].map((s,i)=>{const g=mk('g',{},$('chips8')),r=mk('rect',{x:136+i*250,y:620,width:230,height:70,rx:35,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g),e=tx(g,251+i*250,664,s,22,'m',{'text-anchor':'middle'});return [g,r,e]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const S=i=>SC[i][0]/K;
+  rise($('foldw'),p(u,TM.dusty_folder,TM.dusty_folder+.5));
+  $('fold').setAttribute('transform','translate(0 '+(230*p(u,TM.dusty_folder+2.6,TM.dusty_folder+3.8)).toFixed(1)+')');
+  DU.forEach((d,i)=>{d.setAttribute('opacity',(.6*p(u,TM.dusty_folder+3.4+i*.1,TM.dusty_folder+4+i*.1)).toFixed(2));d.setAttribute('transform','translate('+(6*Math.sin(t*.7+i)).toFixed(1)+' '+(-8*Math.abs(Math.sin(t*.5+i*1.7))).toFixed(1)+')')});
+
+  MO.forEach(([g,r],i)=>{rise(g,p(u,S(1)+.3+i*.06,S(1)+.6+i*.06));r.setAttribute('fill-opacity',p(u,TM.calendar+i*.2,TM.calendar+i*.2+.3).toFixed(2))});
+  rise($('card'),p(u,TM.drawer,TM.drawer+.5)); rise($('drw'),p(u,TM.drawer+1.6,TM.drawer+2.1));
+  $('cardm').setAttribute('transform','translate(0 '+(360*p(u,TM.drawer+2.6,TM.drawer+3.6)).toFixed(1)+')');
+  rise($('qq'),p(u,TM.calendar+2.6,TM.calendar+3.1));
+  rise($('b1'),p(u,TM.calendar+4.2,TM.calendar+4.8)); rise($('b2'),p(u,TM.calendar+8.4,TM.calendar+9));
+  $('prog').setAttribute('x2',(460+900*p(u,TM.calendar+8.8,TM.calendar+10.5)).toFixed(1));
+
+  rise($('duo'),p(u,TM.one_on_one,TM.one_on_one+.5)); rise($('bub2'),p(u,TM.one_on_one+1,TM.one_on_one+1.5));
+  rise($('clkw'),p(u,TM.weekly_clock,TM.weekly_clock+.5)); $('hand').setAttribute('transform','rotate('+((t*60)%360).toFixed(1)+' 760 400)');
+  rise($('wkl'),p(u,TM.weekly_clock+.4,TM.weekly_clock+.9));
+  WK.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.weekly_clock+.5+i*.05,TM.weekly_clock+.8+i*.05)));
+  rise($('ann'),p(u,TM.weekly_clock+3.5,TM.weekly_clock+4));
+  rise($('q2a'),p(u,TM.weekly_clock+6.9,TM.weekly_clock+7.4)); rise($('q2b'),p(u,TM.weekly_clock+9.5,TM.weekly_clock+10)); rise($('tgt'),p(u,TM.weekly_clock+9.5,TM.weekly_clock+10));
+  $('arw').setAttribute('transform','translate('+(1060+240*p(u,TM.weekly_clock+10.2,TM.weekly_clock+11)).toFixed(1)+' 690)'); $('arw').setAttribute('opacity',u>=TM.weekly_clock+10.2?1:0);
+
+  rise($('four'),p(u,S(3)+.5,S(3)+1.1));
+  [TM.continue_arrow,TM.pencil,TM.new_seed,TM.stop_sign].forEach((a,i)=>{rise(CD[i],p(u,a,a+.5));rise($('icw'+i),p(u,a+.2,a+.7))});
+  $('ic0').setAttribute('transform','translate('+(275+10*Math.sin(t*3)).toFixed(1)+' 400)');
+  $('pl').setAttribute('x2',(560+150*p(u,TM.pencil+.6,TM.pencil+1.6)).toFixed(1));
+  $('ic2').setAttribute('transform','translate(975 470) scale('+(.2+.8*p(u,TM.new_seed+.3,TM.new_seed+1.5)).toFixed(3)+')');
+
+  rise($('def'),p(u,S(4)+.5,S(4)+1)); $('defx').setAttribute('x2',(112+420*p(u,TM.open_board-2.4,TM.open_board-1.8)).toFixed(1));
+  rise($('isnt'),p(u,TM.open_board-2.2,TM.open_board-1.6));
+  rise($('board'),p(u,TM.open_board,TM.open_board+.5)); $('bx').setAttribute('x2',(170+530*p(u,TM.open_board+1,TM.open_board+1.6)).toFixed(1));
+  rise($('stamp'),p(u,TM.open_board+1.4,TM.open_board+1.8)); rise($('crowd4'),p(u,TM.open_board+2.5,TM.open_board+3));
+  rise($('waste'),p(u,TM.wasted_effort,TM.wasted_effort+.5));
+  DR.forEach((d,i)=>{const c=(t*1.2+i/5)%1;d.setAttribute('cy',(480+70*c).toFixed(1));d.setAttribute('opacity',u>=TM.wasted_effort+.5?(1-c*.5).toFixed(2):0)});
+
+  const v=p(u,TM.score_scale+.8,TM.score_scale+3.5)-.3*p(u,TM.sweet_spot+.3,TM.sweet_spot+1.5), z=v<1/3?0:v<2/3?1:2, tl=u>=TM.traffic_light;
+  rise($('scale'),p(u,TM.score_scale,TM.score_scale+.5)); rise($('mk5w'),p(u,TM.score_scale+.4,TM.score_scale+.9));
+  $('mk5').setAttribute('transform','translate('+(340+1100*v).toFixed(1)+' 0)'); $('val').textContent=v.toFixed(1);
+  $('mkl').setAttribute('stroke',u>=TM.sweet_spot+1.5?'var(--gain)':'var(--ink)');
+  rise($('zones'),p(u,TM.traffic_light,TM.traffic_light+.5)); rise($('tl'),p(u,TM.traffic_light,TM.traffic_light+.5));
+  // lamps: lr = low (bottom, indigo), lm = middle (grey), lg = near one (top, amber)
+  ['lr','lm','lg'].forEach((id,k)=>$(id).setAttribute('opacity',tl&&k===z?1:.25));
+  rise($('sw'),p(u,TM.sweet_spot,TM.sweet_spot+.6));
+
+  rise($('sc6'),p(u,S(6)+.5,S(6)+1)); rise($('pad'),p(u,TM.self_review,TM.self_review+.5));
+  NL.forEach((l,i)=>l.setAttribute('x2',(590+(i===3?170:270)*p(u,TM.self_review+.5+i*.5,TM.self_review+1+i*.5)).toFixed(1)));
+  rise($('tb'),p(u,TM.thought_bubble,TM.thought_bubble+.5)); rise($('tq1'),p(u,TM.thought_bubble+.3,TM.thought_bubble+.8)); rise($('tq2'),p(u,TM.thought_bubble+2.5,TM.thought_bubble+3));
+  const nk=p(u,TM.next_cycle,TM.next_cycle+1); $('nxa').setAttribute('stroke-dasharray',(360*nk).toFixed(0)+' 999'); $('nxh').setAttribute('opacity',nk>.95?1:0);
+  rise($('nxc'),p(u,TM.next_cycle+.8,TM.next_cycle+1.3));
+
+  rise($('globe'),p(u,TM.foundation,TM.foundation+.5)); $('mer').setAttribute('rx',(170*Math.abs(Math.cos(t*.6))).toFixed(1));
+  rise($('glab'),p(u,TM.foundation+1.5,TM.foundation+2));
+  $('lk7').setAttribute('opacity',p(u,TM.progress_bar,TM.progress_bar+.6)); rise($('big7'),p(u,TM.progress_bar+.8,TM.progress_bar+1.4));
+  const wk7=u>=TM.progress_bar+4.2;
+  BR.forEach((b,i)=>{rise(b.g,p(u,TM.progress_bar+i*.4,TM.progress_bar+i*.4+.4));b.f.setAttribute('width',(800*b.v*p(u,TM.progress_bar+.4+i*.4,TM.progress_bar+1.8+i*.4)).toFixed(1));b.f.setAttribute('fill',wk7?(b.ok?'var(--gain)':'var(--loss)'):'var(--ink)');rise(b.tg,p(u,TM.progress_bar+4.2+i*.2,TM.progress_bar+4.6+i*.2))});
+
+  rise($('q1'),p(u,TM.your_goal,TM.your_goal+.5)); rise($('q2'),p(u,TM.your_goal+3,TM.your_goal+3.5)); rise($('q3'),p(u,TM.your_goal+3.6,TM.your_goal+4.1));
+  const hi=u>=TM.your_goal+5.5?Math.floor(t/1.2)%4:-1;
+  CP.forEach(([g,r,e],i)=>{rise(g,p(u,TM.your_goal+4+i*.3,TM.your_goal+4.4+i*.3));r.setAttribute('fill',i===hi?'var(--gain)':'var(--stage)');r.setAttribute('stroke',i===hi?'var(--gain)':'var(--ink)');e.style.fill=i===hi?'var(--on-gain)':'var(--ink)'});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.79;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

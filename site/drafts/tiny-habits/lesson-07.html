@@ -1,0 +1,318 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiny Habits Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Tiny Habits: Tiny habits naturally grow and multiply, and the same design principles used in reverse help you dismantle unwanted habits. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">TINY HABITS · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Grow good habits,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">untangle bad ones.</text>
+<text class="b" x="120" y="600" font-size="32">How small wins grow, and how to unravel the habits you don’t want.</text>
+<g id="tpot"></g><g id="tpl"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Tiny habits rarely stay tiny.</text>
+<text id="sub1" class="b" x="120" y="176" font-size="32">Once it feels automatic, you often want to do a little more.</text>
+<g id="pot1"></g><g id="sp1"></g>
+<path id="arr1" class="s-muted" d="M450 520Q560 520 640 380M450 560Q560 560 640 640" fill="none" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<text id="lbt" class="m" x="680" y="300" font-size="22">MORE OFTEN</text>
+<g id="br1top"></g>
+<text id="lbb" class="m" x="680" y="580" font-size="22">A BIGGER VERSION</text>
+<g id="br1bot"></g>
+<text id="nat" class="d" x="120" y="800" font-size="44">Nobody forces it. Growth comes naturally.</text>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The push-up recipe.</text>
+<text class="b" x="120" y="176" font-size="32">Fogg gave himself an unusual recipe.</text>
+<g id="card"><rect class="s-line" x="120" y="230" width="600" height="300" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="156" y="290" font-size="22">FOGG’S RECIPE</text>
+<text class="d5" x="156" y="370" font-size="36">After I use the bathroom,</text>
+<g id="rc2"><text class="d" x="156" y="450" font-size="36" style="fill:var(--gain)">I will do two push-ups.</text></g></g>
+<path class="s-line" d="M780 620H1440" stroke-width="6" stroke-linecap="round"/>
+<g id="fig"><circle id="phd" r="28"/><path id="pbody" fill="none" stroke-width="12" stroke-linecap="round"/><path id="parm" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text id="x2" class="d" x="1200" y="440" font-size="64" style="fill:var(--gain)">×2</text>
+<text id="blbl" class="m" x="120" y="664" font-size="20" style="fill:var(--gain)">MORE PUSH-UPS EACH DAY, OVER TIME</text>
+<g id="bars"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Success spreads.</text>
+<text class="b" x="120" y="176" font-size="32">One win, and you see yourself as someone who can change.</text>
+<g id="rings"></g>
+<g id="core"><circle class="gain" cx="420" cy="480" r="60"/><path d="M392 482l20 20 34-40" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="ican"><text class="d" x="420" y="820" font-size="44" text-anchor="middle">“I can change.”</text></g>
+<g id="blocks"></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Untangle the knot.</text>
+<text class="b" x="120" y="176" font-size="32">Fogg compares an unwanted habit to a tangled knot.</text>
+<g id="kng"><g id="kn"></g>
+<path id="pullL" class="s-ink" d="M300 470H760M330 446l-30 24 30 24" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="pullR" class="s-ink" d="M840 470H1300M1270 446l30 24-30 24" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text id="tight" class="m" x="800" y="690" font-size="22" text-anchor="middle" style="fill:var(--loss)">YANK HARD AND IT GETS TIGHTER</text>
+<path id="loose" class="s-gain" d="M860 500C980 600 1080 520 1180 660S1320 760 1400 740" fill="none" stroke-width="8" stroke-linecap="round" stroke-dasharray="800"/>
+<g id="easy"><text class="d" x="120" y="790" font-size="44">Break it into behaviors.</text><text class="d" x="120" y="846" font-size="44" style="fill:var(--gain)">Loosen the easiest strand first.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start with new habits.</text>
+<text class="b" x="120" y="176" font-size="32">Build a few good new habits before you attack the old ones.</text>
+<g id="tro"><path class="gain" d="M340 250h120v40a60 60 0 0 1-120 0z"/><rect class="gain" x="392" y="348" width="16" height="28"/><rect class="gain" x="360" y="376" width="80" height="18" rx="4"/>
+<path class="s-gain" d="M340 266h-24v18q0 26 30 30M460 266h24v18q0 26-30 30" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="490" y="320" font-size="22">SKILLS + CONFIDENCE</text></g>
+<g id="pots5"></g>
+<text id="lbl5" class="m" x="400" y="760" font-size="22" text-anchor="middle">NEW HABITS FIRST</text>
+<path id="arr5" class="s-muted" d="M760 560H1060M1036 536l24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="old5"><g id="old5k"></g><text class="m" x="1220" y="700" font-size="22" text-anchor="middle">OLD HABITS, LATER</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Run the formula backwards.</text>
+<text class="b" x="120" y="176" font-size="32">Imagine you scroll your phone in bed every night.</text>
+<g id="bed"><rect class="ink" x="120" y="340" width="24" height="210" rx="6"/><rect class="ink" x="144" y="440" width="400" height="50" rx="8"/>
+<rect class="ink" x="160" y="490" width="16" height="50"/><rect class="ink" x="512" y="490" width="16" height="50"/>
+<ellipse cx="200" cy="430" rx="44" ry="12" fill="var(--line)"/><circle class="ink" cx="205" cy="402" r="26"/>
+<path d="M236 440q150-70 300 0z" fill="var(--line)"/><text class="m" x="120" y="610" font-size="22">EVERY NIGHT</text></g>
+<g id="ph6"><rect class="ink" x="270" y="318" width="34" height="58" rx="6"/><path id="glw" class="s-loss" d="M262 310l-14-14M312 310l14-14M287 300v-20" stroke-width="5" stroke-linecap="round"/></g>
+<text id="zz" class="d5" x="250" y="350" font-size="36" style="fill:var(--muted)">z z</text>
+<g id="cd0"><rect class="s-line" x="640" y="240" width="840" height="140" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="gain" cx="700" cy="310" r="32"/><text class="d" x="700" y="324" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">1</text>
+<rect class="ink" x="792" y="270" width="40" height="72" rx="8"/><path class="s-ink" d="M812 342q0 24 40 24" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="d5" x="900" y="306" font-size="36">Remove the prompt</text><text class="m" x="900" y="346" font-size="20">CHARGE THE PHONE IN THE KITCHEN</text></g>
+<g id="cd1"><rect class="s-line" x="640" y="410" width="840" height="140" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="gain" cx="700" cy="480" r="32"/><text class="d" x="700" y="494" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">2</text>
+<path class="s-ink" d="M798 470v-16a22 22 0 0 1 44 0v16" fill="none" stroke-width="8"/><rect class="ink" x="782" y="470" width="76" height="56" rx="8"/>
+<text class="d5" x="900" y="476" font-size="36">Make it harder to do</text><text class="m" x="900" y="516" font-size="20">IF REMOVING THE PROMPT FAILS</text></g>
+<g id="cd2"><rect class="s-line" x="640" y="580" width="840" height="140" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="gain" cx="700" cy="650" r="32"/><text class="d" x="700" y="664" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">3</text>
+<circle class="s-ink" cx="820" cy="650" r="40" fill="none" stroke-width="6"/><line id="ndl" class="s-gain" x1="820" y1="650" x2="820" y2="620" stroke-width="6" stroke-linecap="round"/>
+<text class="d5" x="900" y="646" font-size="36">Then lower motivation</text><text class="m" x="900" y="686" font-size="20">ONLY AFTER THAT</text></g>
+<g id="fm"><text class="d" x="120" y="770" font-size="64">B = MAP</text><text class="m" x="120" y="820" font-size="20">RUN IT BACKWARDS: PROMPT, ABILITY, MOTIVATION</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Swap it out.</text>
+<text class="b" x="120" y="176" font-size="32">Keep the old prompt. Attach a better tiny behavior.</text>
+<g id="pb"><rect class="s-ink" x="120" y="380" width="400" height="140" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="150" y="425" font-size="20">PROMPT</text><text class="d5" x="150" y="485" font-size="38">Climb into bed</text>
+<path class="s-muted" d="M540 450h150m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="oc"><g id="ocm"><rect x="720" y="380" width="480" height="140" rx="18" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/>
+<text class="m" x="750" y="425" font-size="20" style="fill:var(--loss)">OLD BEHAVIOR</text><text class="d5" x="750" y="485" font-size="38">Scroll the phone</text></g></g>
+<g id="nc"><g id="ncm"><rect class="gain" x="720" y="380" width="480" height="140" rx="18"/>
+<text class="m" x="750" y="425" font-size="20" style="fill:var(--on-gain)">NEW TINY BEHAVIOR</text><text class="d5" x="750" y="485" font-size="38" style="fill:var(--on-gain)">Read one page</text></g></g>
+<path id="swp" class="s-ink" d="M1250 470v220M1232 490l18-20 18 20M1232 670l18 20 18-20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="bk"><path class="gain" d="M1390 420l-80-22v104l80 22zM1390 420l80-22v104l-80 22z" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/></g>
+<g id="same"><text class="d" x="120" y="820" font-size="48">Same prompt. Better behavior.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pick one habit to loosen.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Tonight, find its prompt,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">and make it <tspan style="fill:var(--gain)">disappear</tspan>.</text></g>
+<text class="m" x="143" y="700" font-size="26">UNTANGLE THE EASIEST STRAND</text>
+<g id="g8"><circle id="pr8" class="s-muted" cx="1300" cy="740" r="110" fill="none" stroke-width="5" stroke-dasharray="12 10"/><g id="k8"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Grow Good Habits, Untangle Bad Ones&rdquo;, from <em>Tiny Habits</em> by BJ Fogg. The push-up habit is BJ Fogg&#x27;s own example as reported in the book. The phone-in-bed scenario, growth paths and ripple drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 9.5], [9.5, 29.1], [29.1, 45.1], [45.1, 57.9], [57.9, 74.5], [74.5, 87.1], [87.1, 106.0], [106.0, 117.3], [117.3, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Tiny to Big", "Small Seeds Grow", "The Push-Up Story", "Habits Multiply", "Untangle the Knot", "Start With New", "Run It in Reverse", "Swap It Out", "Your Challenge"];
+const TM={"seed": 0.0, "sprout": 9.84, "two_paths": 17.2, "bathroom": 29.36, "pushup": 36.0, "strong_arms": 40.32, "ripple": 45.44, "stack": 52.96, "knot": 58.24, "pull_hard": 64.72, "strand": 68.44, "seedlings": 74.8, "trophy": 82.56, "phone_bed": 87.36, "charger": 93.68, "locked_box": 98.08, "dial_down": 101.76, "swap_arrows": 106.32, "open_book": 113.28, "mirror": 117.6};
+const plant=g=>{mk('path',{d:'M0 0V-120',class:'s-gain','stroke-width':8,'stroke-linecap':'round'},g);mk('path',{d:'M0-50q-50-6-62-48q52-4 62 48z',class:'gain'},g);mk('path',{d:'M0-82q50-6 62-48q-52-4-62 48z',class:'gain'},g);mk('circle',{cx:0,cy:-128,r:14,class:'gain'},g);return g};
+const pot=(g,x,y)=>mk('path',{d:'M'+(x-50)+' '+y+'h100l-14 60h-72z',class:'ink'},g);
+const knot=(g,cx,cy,rx,ry,n,w)=>{for(let i=0;i<n;i++)mk('ellipse',{cx:cx,cy:cy,rx:rx,ry:ry,transform:'rotate('+(i*180/n)+' '+cx+' '+cy+')',fill:'none',class:'s-loss','stroke-width':w},g)};
+const grow=(el,x,y,s,r)=>el.setAttribute('transform','translate('+x+' '+y+') rotate('+(r||0).toFixed(2)+') scale('+s.toFixed(3)+')');
+const around=(el,x,y,s)=>el.setAttribute('transform','translate('+x+' '+y+') scale('+s.toFixed(3)+') translate('+(-x)+' '+(-y)+')');
+pot($('tpot'),1300,470); plant($('tpl'));
+pot($('pot1'),300,640); plant($('sp1'));
+const TD=[0,1,2,3,4,5,6].map(i=>mk('circle',{cx:700+i*90,cy:360,r:20,class:'gain'},$('br1top')));
+const BD=[12,22,34,48].map((r,i)=>mk('circle',{cx:[700,770,870,1010][i],cy:660,r:r,class:'gain'},$('br1bot')));
+// push-up bars: baseline y=780, tallest top y=690, last bar ends at x=1210
+const BR=[];for(let i=0;i<14;i++){const h=12+i*6;BR.push(mk('rect',{x:120+i*80,y:780-h,width:50,height:h,rx:6,class:'gain'},$('bars')))}
+const RG=[0,1,2,3].map(()=>mk('circle',{cx:420,cy:480,fill:'none',class:'s-gain','stroke-width':5},$('rings')));
+const BL=['FIRST TINY HABIT','NEXT HABIT','AND THE NEXT','AND THE NEXT'].map((s,i)=>{const g=mk('g',{},$('blocks')),y=680-i*104;mk('rect',{x:1000,y:y,width:400,height:84,rx:14,class:'gain'},g);const tx=mk('text',{x:1200,y:y+52,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},g);tx.textContent=s;return g});
+knot($('kn'),800,470,150,46,6,7);
+const PX=[220,400,580], SD=PX.map(x=>{pot($('pots5'),x,640);return plant(mk('g',{},$('pots5')))});
+knot($('old5k'),1220,540,110,36,4,6);
+knot($('k8'),1300,740,80,26,3,6);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+grow($('tpl'),1300,470,.15+1.85*p(u,TM.seed+.2,TM.seed+3),3*Math.sin(t*1.5));
+
+grow($('sp1'),300,640,.3+1.9*p(u,TM.sprout,TM.sprout+2.5),2*Math.sin(t*1.3));
+rise($('sub1'),p(u,TM.sprout+2.2,TM.sprout+2.7));
+$('arr1').setAttribute('opacity',p(u,TM.two_paths,TM.two_paths+.5));
+rise($('lbt'),p(u,TM.two_paths+.8,TM.two_paths+1.3));
+TD.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.two_paths+1+i*.25,TM.two_paths+1.3+i*.25)));
+rise($('lbb'),p(u,TM.two_paths+3,TM.two_paths+3.5));
+BD.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.two_paths+3.3+i*.4,TM.two_paths+3.7+i*.4)));
+rise($('nat'),p(u,TM.two_paths+6.6,TM.two_paths+7.2));
+
+rise($('card'),p(u,TM.bathroom,TM.bathroom+.5)); rise($('rc2'),p(u,TM.bathroom+2.5,TM.bathroom+3));
+rise($('fig'),p(u,TM.pushup,TM.pushup+.5)); rise($('x2'),p(u,TM.pushup+.4,TM.pushup+.9));
+const ph=u>=TM.pushup?.5-.5*Math.cos(t*3.2):0, ys=500+50*ph, strong=u>=TM.strong_arms;
+$('phd').setAttribute('cx',918); $('phd').setAttribute('cy',(ys-18).toFixed(1)); $('phd').setAttribute('class',strong?'gain':'ink');
+$('pbody').setAttribute('d','M960 '+ys.toFixed(1)+'L1290 604'); $('pbody').setAttribute('class',strong?'s-gain':'s-ink');
+$('parm').setAttribute('d','M960 '+ys.toFixed(1)+'L992 '+((ys+612)/2).toFixed(1)+'L960 612'); $('parm').setAttribute('class',strong?'s-gain':'s-ink');
+rise($('blbl'),p(u,TM.strong_arms,TM.strong_arms+.5));
+BR.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.strong_arms+.4+i*.15,TM.strong_arms+.7+i*.15)));
+
+const rv=p(u,TM.ripple,TM.ripple+.6);
+RG.forEach((c,i)=>{const r=60+((t*50+i*52.5)%210);c.setAttribute('r',r.toFixed(1));c.setAttribute('opacity',(rv*(1-(r-60)/210)).toFixed(2))});
+rise($('core'),rv); rise($('ican'),p(u,TM.ripple+1.4,TM.ripple+2));
+BL.forEach((g,i)=>rise(g,p(u,TM.stack+i*1.1,TM.stack+i*1.1+.5)));
+
+rise($('kng'),p(u,TM.knot+2.5,TM.knot+3.1));
+const pl=p(u,TM.pull_hard,TM.pull_hard+.8)-p(u,TM.strand,TM.strand+.8), st=p(u,TM.strand+.5,TM.strand+2);
+around($('kn'),800,470,1-.3*pl+.12*st);
+$('pullL').setAttribute('transform','translate('+(-70*pl).toFixed(1)+' 0)'); $('pullR').setAttribute('transform','translate('+(70*pl).toFixed(1)+' 0)');
+rise($('tight'),pl);
+$('loose').setAttribute('stroke-dashoffset',(800*(1-st)).toFixed(1)); $('loose').setAttribute('opacity',st>0?1:0);
+rise($('easy'),p(u,TM.strand+1,TM.strand+1.6));
+
+rise($('pots5'),p(u,TM.seedlings,TM.seedlings+.5));
+SD.forEach((g,i)=>grow(g,PX[i],640,.2+1.2*p(u,TM.seedlings+3+i*.6,TM.seedlings+4+i*.6),2*Math.sin(t*1.4+i)));
+rise($('lbl5'),p(u,TM.seedlings+3,TM.seedlings+3.5)); rise($('old5'),p(u,TM.seedlings+3.5,TM.seedlings+4));
+rise($('tro'),p(u,TM.trophy,TM.trophy+.5)); $('arr5').setAttribute('opacity',p(u,TM.trophy+1.5,TM.trophy+2));
+
+rise($('bed'),p(u,TM.phone_bed,TM.phone_bed+.5));
+rise($('ph6'),p(u,TM.phone_bed+.3,TM.phone_bed+.8)*(1-p(u,TM.charger,TM.charger+.6)));
+$('glw').setAttribute('opacity',(.5+.5*Math.sin(t*5)).toFixed(2));
+rise($('zz'),p(u,TM.charger+1,TM.charger+1.6)); rise($('fm'),p(u,TM.phone_bed+3.8,TM.phone_bed+4.4));
+rise($('cd0'),p(u,TM.charger,TM.charger+.5)); rise($('cd1'),p(u,TM.locked_box,TM.locked_box+.5)); rise($('cd2'),p(u,TM.dial_down,TM.dial_down+.5));
+$('ndl').setAttribute('transform','rotate('+(50-100*p(u,TM.dial_down+.5,TM.dial_down+1.8)).toFixed(1)+' 820 650)');
+
+const sk=p(u,TM.open_book,TM.open_book+1);
+rise($('pb'),p(u,TM.swap_arrows,TM.swap_arrows+.5)); rise($('oc'),p(u,TM.swap_arrows,TM.swap_arrows+.5));
+$('ocm').setAttribute('transform','translate(0 '+(240*sk).toFixed(1)+')'); $('ocm').setAttribute('opacity',(1-.65*sk).toFixed(2));
+rise($('swp'),p(u,TM.swap_arrows+.5,TM.swap_arrows+1)); rise($('nc'),p(u,TM.swap_arrows+3,TM.swap_arrows+3.5));
+$('ncm').setAttribute('transform','translate(0 '+(240*(1-sk)).toFixed(1)+')');
+rise($('bk'),p(u,TM.open_book,TM.open_book+.5)); rise($('same'),p(u,TM.open_book+1.5,TM.open_book+2.1));
+
+rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+3.4,TM.mirror+3.9)); rise($('qc'),p(u,TM.mirror+4.4,TM.mirror+4.9));
+rise($('g8'),p(u,TM.mirror+1,TM.mirror+1.6));
+const gp=p(u,TM.mirror+5.5,TM.mirror+7); around($('pr8'),1300,740,1+.5*gp); $('pr8').setAttribute('opacity',(1-gp).toFixed(2));
+$('k8').setAttribute('transform','rotate('+(4*Math.sin(t*1.2)).toFixed(2)+' 1300 740)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.6;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

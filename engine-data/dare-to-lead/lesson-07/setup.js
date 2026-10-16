@@ -1,0 +1,17 @@
+const P=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const R=(id,v,a,d=.5)=>rise(typeof id==='string'?$(id):id,p(v,a,a+d));
+P($('kneel'),560,520,24,'ink');
+const TG=['DISAPPOINTMENT','MISTAKES','HURT'].map((s,i)=>{const g=mk('g',{},$('tags')),x=140+i*260;
+  mk('rect',{x:x,y:262,width:240,height:50,rx:25,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  const tx=mk('text',{x:x+120,y:294,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--loss)'},g);tx.textContent=s;return g});
+[['swB','gain','BRENÉ'],['swS','ink','STEVE']].forEach(([id,c,n])=>{const g=$(id);mk('circle',{cx:0,cy:0,r:30,class:c},g);
+  mk('path',{d:'M-70 34q35-50 70-14',fill:'none',stroke:'var(--'+c+')','stroke-width':8,'stroke-linecap':'round'},g);
+  const tx=mk('text',{x:0,y:100,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=n});
+P($('hd3'),300,400,70,'ink');
+P($('ppl5'),260,520,34,'gain');P($('ppl5'),1340,520,34,'ink');
+const SY=[360,420,480], ST=SY.map((y,i)=>{let d='M200 '+y;const e=620-i*60;for(let x=220;x<=e;x+=20)d+='Q'+(x-10)+' '+(y+(x%40?-12:12))+' '+x+' '+y;
+  mk('path',{d:d,fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round'},$('scr6'));
+  return [mk('path',{d:'M196 '+y,stroke:'var(--loss)','stroke-width':7,'stroke-linecap':'round'},$('stk6')),e+4]});
+const SPK=[320,800,1280].map(x=>mk('path',{d:'M800 410L'+x+' 510',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-dasharray':'10 10'},$('spk')));
+for(let i=0;i<5;i++)mk('circle',{cx:1270+i*35,cy:600,r:9,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rings'));
+const NL=[[660,140],[700,140],[740,100]].map(([y,w])=>[mk('path',{d:'M1270 '+y+'h'+w,stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('nbl')),w]);

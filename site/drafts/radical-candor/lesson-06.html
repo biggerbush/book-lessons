@@ -1,0 +1,325 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Radical Candor Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Radical Candor: Every team needs both steady rock stars who want to master their role and fast-growing superstars who want new challenges, and a good boss learns which each person is. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">RADICAL CANDOR · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Rock stars and</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">superstars.</text>
+<text class="b" x="120" y="600" font-size="32">Why great bosses stop pushing everyone up the same ladder.</text>
+<path class="s-ink" d="M1260 220V820M1380 220V820" stroke-width="8" stroke-linecap="round"/>
+<g id="rungs"></g>
+<path id="push" class="s-gain" d="M1440 780V260m-22 26 22-26 22 26" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="climbers"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two growth paths.</text>
+<text class="b" x="120" y="176" font-size="32">Notice each person’s growth trajectory, right now.</text>
+<g id="chart"><path class="s-ink" d="M220 260V760H1140" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="240" y="280" font-size="20">GROWTH</text><text class="m" x="1140" y="800" font-size="20" text-anchor="end">TIME</text></g>
+<path id="steep" class="s-gain" d="M220 760C420 740 560 520 680 290" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="gentle" class="s-ink" d="M220 760C500 700 800 640 1100 610" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="stl"><circle class="gain" cx="680" cy="290" r="14"/><text class="d5" x="720" y="300" font-size="40" style="fill:var(--gain)">Steep</text><text class="m" x="720" y="340" font-size="20">HUNGRY FOR CHANGE AND NEW CHALLENGES</text></g>
+<g id="gtl"><circle class="ink" cx="1100" cy="610" r="14"/><text class="d5" x="1130" y="600" font-size="40">Gradual</text><text class="m" x="1130" y="640" font-size="20">MASTERING WHAT THEY DO</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rock stars.</text>
+<text class="b" x="120" y="176" font-size="32">Solid as a rock, not famous.</text>
+<g id="rockg"><polygon points="170,780 230,600 340,530 470,520 580,580 640,780" fill="var(--line)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><g id="rp" fill="var(--ink)"></g></g>
+<path id="waves" class="s-line" fill="none" stroke-width="5" stroke-linecap="round"/>
+<g id="nf"><path class="s-ink" d="M830 400L970 260" stroke-width="6" stroke-linecap="round"/><text class="m" x="1000" y="320" font-size="24">NOT FAMOUS</text><text class="m" x="1000" y="360" font-size="24" style="fill:var(--gain)">SOLID AS A ROCK</text></g>
+<g id="tr0"><rect x="820" y="450" width="640" height="84" rx="42" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><text class="d5" x="860" y="506" font-size="36">Reliable</text></g>
+<g id="tr1"><rect x="820" y="560" width="640" height="84" rx="42" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><text class="d5" x="860" y="616" font-size="36">Deeply skilled</text></g>
+<g id="tr2"><rect x="820" y="670" width="640" height="84" rx="42" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><text class="d5" x="860" y="726" font-size="36">Keeps the team steady</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Superstars.</text>
+<text class="b" x="120" y="176" font-size="32">On the steep path, hungry for new challenges.</text>
+<g id="rkw"><path id="trail" class="s-line" d="M220 800L520 300" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="rk"><path id="fl" fill="var(--ink)" fill-opacity=".5"/><path class="ink" d="M-24 30l-20 30h20zM24 30l20 30h-20z"/><path class="gain" d="M0-70C34-40 30 20 24 50H-24C-30 20-34-40 0-70Z"/><circle cx="0" cy="-15" r="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/></g></g>
+<g id="c0"><rect class="gain" x="760" y="240" width="700" height="90" rx="16"/><text class="d5" x="800" y="300" font-size="38" style="fill:var(--on-gain)">Stretch assignments</text></g>
+<g id="c1"><rect class="gain" x="760" y="350" width="700" height="90" rx="16"/><text class="d5" x="800" y="410" font-size="38" style="fill:var(--on-gain)">New problems</text></g>
+<g id="c2"><rect class="gain" x="760" y="460" width="700" height="90" rx="16"/><text class="d5" x="800" y="520" font-size="38" style="fill:var(--on-gain)">A bigger scope</text></g>
+<g id="bored"><text class="m" x="760" y="610" font-size="22" style="fill:var(--loss)">NO FRESH CHALLENGE:</text><text class="m" x="760" y="646" font-size="22" style="fill:var(--loss)">BORED, LOOKING ELSEWHERE</text><path class="s-loss" d="M1200 638h80m-18-18 18 18-18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="teach"><g id="tch" fill="var(--ink)"></g><text class="m" x="1000" y="740" font-size="22" style="fill:var(--gain)">KEEP THEM STRETCHED</text><text class="m" x="1000" y="780" font-size="22">TEACH OTHERS BEFORE MOVING ON</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A team needs both.</text>
+<text class="b" x="120" y="176" font-size="32">Neither group is better than the other.</text>
+<g id="scl"><path class="s-ink" d="M520 290V640" stroke-width="8"/><rect class="ink" x="420" y="640" width="200" height="16" rx="6"/>
+<g id="beam"><path class="s-ink" d="M260 290H780M260 290L180 450M260 290L340 450M780 290L700 450M780 290L860 450" fill="none" stroke-width="4" stroke-linecap="round"/><path class="s-ink" d="M260 290H780" stroke-width="8" stroke-linecap="round"/>
+<path class="ink" d="M160 450h200a100 44 0 0 1-200 0z"/><path class="ink" d="M680 450h200a100 44 0 0 1-200 0z"/>
+<polygon points="190,450 210,400 260,380 320,395 335,450" fill="var(--line)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/><polygon id="sstar" class="gain"/></g>
+<circle class="ink" cx="520" cy="290" r="12"/></g>
+<g id="lab"><text class="d5" x="260" y="540" font-size="32" text-anchor="middle">Rock stars</text><text class="m" x="260" y="578" font-size="20" text-anchor="middle">HOLD HARD-WON</text><text class="m" x="260" y="606" font-size="20" text-anchor="middle">KNOWLEDGE</text>
+<text class="d5" x="780" y="540" font-size="32" text-anchor="middle" style="fill:var(--gain)">Superstars</text><text class="m" x="780" y="578" font-size="20" text-anchor="middle">PUSH THE TEAM</text><text class="m" x="780" y="606" font-size="20" text-anchor="middle">FORWARD</text></g>
+<g id="team"><circle class="s-line" cx="1220" cy="450" r="180" fill="none" stroke-width="4" stroke-dasharray="12 10"/><g id="thd"></g><text class="d" x="1220" y="466" font-size="44" text-anchor="middle">BOTH</text></g>
+<g id="hlt"><text class="d" x="120" y="780" font-size="44">A healthy team needs both kinds of growth.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The classic mistake.</text>
+<text class="b" x="120" y="176" font-size="32">Rewarding a great rock star with a management job.</text>
+<path class="s-ink" d="M200 500h200" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="300" y="540" font-size="20" text-anchor="middle">ROCK STAR</text>
+<g id="ghost"><circle cx="300" cy="360" r="30" fill="none" stroke="var(--muted)" stroke-width="4" stroke-dasharray="8 8"/><path d="M255 486v-39a45 45 0 0 1 90 0v39z" fill="none" stroke="var(--muted)" stroke-width="4" stroke-dasharray="8 8"/></g>
+<rect class="s-ink" x="700" y="230" width="260" height="270" rx="16" fill="none" stroke-width="5"/>
+<text class="m" x="830" y="278" font-size="22" text-anchor="middle">MANAGER</text>
+<path id="parr" class="s-gain" d="M360 300Q520 190 680 290M680 290l-34-4M680 290l-12-32" fill="none" stroke-width="6" stroke-linecap="round" stroke-dasharray="1 0"/>
+<g id="mv"><g id="mvp" fill="var(--ink)"></g><g id="frown" opacity="0"><circle cx="290" cy="352" r="4" fill="var(--stage)"/><circle cx="310" cy="352" r="4" fill="var(--stage)"/><path d="M286 376q14-12 28 0" fill="none" stroke="var(--stage)" stroke-width="4" stroke-linecap="round"/></g></g>
+<g id="lost"><text class="m" x="1010" y="330" font-size="24" style="fill:var(--loss)">LOST: A GREAT EXPERT</text><text class="m" x="1010" y="380" font-size="24" style="fill:var(--loss)">GAINED: AN UNHAPPY MANAGER</text></g>
+<g id="rwh"><text class="m" x="120" y="600" font-size="22" style="fill:var(--gain)">INSTEAD, REWARD ROCK STARS WITH</text></g>
+<g id="rw0"><rect x="120" y="625" width="440" height="170" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="3"/><path class="gain" d="M175 680h50v20a25 25 0 0 1-50 0zM192 722h16v22h-16zM180 744h40v12h-40z"/><text class="d5" x="270" y="722" font-size="34">Recognition</text></g>
+<g id="rw1"><rect x="580" y="625" width="440" height="170" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="3"/><circle class="gain" cx="660" cy="710" r="34"/><circle cx="660" cy="710" r="20" fill="none" stroke="var(--on-gain)" stroke-width="4"/><text class="d5" x="730" y="722" font-size="34">Fair pay</text></g>
+<g id="rw2"><rect x="1040" y="625" width="440" height="170" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="3"/><path class="s-ink" d="M1090 750l40-40" stroke-width="10" stroke-linecap="round"/><path class="gain" d="M1118 676l30 30-16 16-30-30z"/><text class="d5" x="1190" y="700" font-size="30">Room to keep</text><text class="d5" x="1190" y="740" font-size="30">perfecting craft</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not a life sentence.</text>
+<text class="b" x="120" y="176" font-size="32">Labels describe where someone is now, not who they are forever.</text>
+<path id="axis6" class="s-line" d="M160 700H1440" stroke-width="4" stroke-linecap="round"/>
+<g id="evs"></g>
+<g id="segs"></g>
+<circle id="nowd" r="18" fill="var(--ink)" stroke="var(--stage)" stroke-width="5"/>
+<text id="nowt" class="m" font-size="20" text-anchor="middle">NOW</text>
+<g id="scott"><text class="m" x="160" y="290" font-size="22">SCOTT HAS BEEN ON BOTH PATHS</text></g>
+<g id="perf"><text class="d" x="120" y="820" font-size="40">Gradual growth does not mean low performance.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask, don’t guess.</text>
+<text class="b" x="120" y="176" font-size="32">The only way to know someone’s path is to ask, and listen.</text>
+<g id="conv"><g id="cvp"></g><rect x="150" y="280" width="220" height="90" rx="20" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><path d="M230 370l10 30 20-30" fill="var(--stage)" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/><text class="d" x="260" y="344" font-size="56" text-anchor="middle">?</text></g>
+<g id="bub1"><rect x="470" y="300" width="220" height="90" rx="20" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><path d="M590 390l-10 30-20-30" fill="var(--stage)" stroke="var(--ink)" stroke-width="4" stroke-linejoin="round"/><g id="bdots"></g></g>
+<g id="nb"><rect x="120" y="650" width="580" height="200" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path class="s-line" d="M160 745h500M160 820h500" stroke-width="3"/>
+<g id="nq0"><text class="d5" x="160" y="728" font-size="30">What do you want from work?</text></g><g id="nq1"><text class="d5" x="160" y="803" font-size="30">Where is your life heading?</text></g></g>
+<g id="cols"><rect x="800" y="240" width="310" height="560" rx="18" fill="var(--stage)" stroke="var(--gain)" stroke-width="4"/><rect x="1150" y="240" width="310" height="560" rx="18" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/>
+<text class="d5" x="955" y="300" font-size="34" text-anchor="middle" style="fill:var(--gain)">Challenge</text><text class="m" x="955" y="332" font-size="18" text-anchor="middle">FOR WHO CRAVES IT</text>
+<text class="d5" x="1305" y="300" font-size="34" text-anchor="middle">Stability</text><text class="m" x="1305" y="332" font-size="18" text-anchor="middle">FOR WHO THRIVES ON IT</text></g>
+<g id="tpl"></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="60" letter-spacing="-1">Pick one person</text></g>
+<g id="qb"><text class="d" x="136" y="380" font-size="60" letter-spacing="-1">on your team today.</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="60" letter-spacing="-1">Do you know</text><text class="d" x="136" y="580" font-size="60" letter-spacing="-1">their path,</text></g>
+<g id="qd"><text class="d" x="136" y="660" font-size="60" letter-spacing="-1" style="fill:var(--gain)">or are you guessing?</text></g>
+<g id="fork">
+<path class="s-line" d="M980 800H1220" stroke-width="7" stroke-linecap="round"/>
+<path id="fs" class="s-gain" d="M1220 800Q1300 780 1440 300" fill="none" stroke-width="9" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<path id="fg" class="s-ink" d="M1220 800Q1340 780 1470 700" fill="none" stroke-width="9" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<circle class="ink" cx="1220" cy="800" r="10"/>
+<g id="fkp" fill="var(--ink)"></g>
+<text class="m" x="1420" y="270" font-size="22" text-anchor="end" style="fill:var(--gain)">STEEP</text>
+<text class="m" x="1470" y="660" font-size="22" text-anchor="end">GRADUAL</text>
+<text id="qm" class="d" x="1170" y="700" font-size="140" text-anchor="middle" style="fill:var(--gain)">?</text>
+</g>
+<g id="fkl"><text class="m" x="140" y="770" font-size="24">WHICH PATH, RIGHT NOW?</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="117" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:57</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Rock Stars and Superstars&rdquo;, from <em>Radical Candor</em> by Kim Scott. The rock star and superstar growth paths, and the warning against promoting rock stars into management, are as reported in the book. The ladder, chart lines and scales are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=117, SC=[[0.0, 7.9], [7.9, 22.4], [22.4, 33.3], [33.3, 47.7], [47.7, 59.0], [59.0, 74.3], [74.3, 92.1], [92.1, 106.6], [106.6, 117.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Not Everyone Wants Up", "Two Growth Paths", "Rock Stars", "Superstars", "A Team Needs Both", "The Classic Mistake", "Not a Life Sentence", "Ask, Don't Guess", "Your Challenge"];
+const TM={"ladder": 0.0, "growth_chart": 8.16, "steep_line": 13.48, "gentle_line": 18.16, "rock": 22.72, "anchor": 28.72, "rocket": 33.6, "new_project": 35.92, "scales": 48.0, "team_circle": 56.24, "promotion": 59.31, "sad_face": 63.28, "trophy": 68.32, "calendar": 74.64, "life_events": 79.36, "conversation": 92.4, "notebook": 97.44, "team_map": 101.44, "one_person": 106.93};
+const fig=(g,x,y,r)=>{mk('circle',{cx:x,cy:y,r:r},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},g)};
+const starPts=(cx,cy,R,r)=>{let s='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r:R;s+=(cx+q*Math.cos(a)).toFixed(1)+','+(cy+q*Math.sin(a)).toFixed(1)+' '}return s};
+let rg='';for(let y=300;y<=780;y+=80)rg+='M1260 '+y+'h120';mk('path',{d:rg,class:'s-ink','stroke-width':6,'stroke-linecap':'round'},$('rungs'));
+const CL=[780,620,460,300].map(y=>{const o=mk('g',{},$('climbers')),i=mk('g',{fill:'var(--ink)'},o);fig(i,1320,y-67,16);return [o,i]});
+fig($('rp'),400,399,30);
+mk('polygon',{points:starPts(900,330,60,26),fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linejoin':'round'},$('nf'));
+[800,870,940].forEach(x=>fig($('tch'),x,720,16));
+$('sstar').setAttribute('points',starPts(780,405,45,20));
+const TH=[];for(let i=0;i<8;i++){const a=-Math.PI/2+i*Math.PI/4;TH.push(mk('circle',{cx:1220+130*Math.cos(a),cy:450+130*Math.sin(a),r:24,class:i%2?'ink':'gain'},$('thd')))}
+fig($('mvp'),300,360,30);
+const PT=[[160,660],[420,470],[780,430],[1100,260],[1440,225]],EVL=['NEW BABY','FRESH PASSION','ILLNESS'];
+const SG=[0,1,2,3].map(i=>mk('path',{d:'M'+PT[i]+'L'+PT[i+1],fill:'none',stroke:i%2?'var(--ink)':'var(--gain)','stroke-width':8,'stroke-linecap':'round',pathLength:1,'stroke-dasharray':1,'stroke-dashoffset':1},$('segs')));
+const EV=[1,2,3].map((k,j)=>{const g=mk('g',{},$('evs')),x=PT[k][0],y=PT[k][1];mk('path',{d:'M'+x+' '+y+'V700',class:'s-muted','stroke-width':3,'stroke-dasharray':'6 8'},g);mk('circle',{cx:x,cy:y,r:16,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);const e=mk('text',{x:x,y:740,'font-size':20,'text-anchor':'middle',class:'m'},g);e.textContent=EVL[j];return g});
+const along=x=>{for(let i=0;i<4;i++){const a=PT[i],b=PT[i+1];if(x<=b[0]||i===3)return a[1]+(b[1]-a[1])*cl((x-a[0])/(b[0]-a[0]))}};
+const cb=mk('g',{fill:'var(--ink)'},$('cvp'));fig(cb,240,470,32);const cm=mk('g',{fill:'var(--muted)'},$('cvp'));fig(cm,580,470,32);
+const BD=[540,580,620].map(x=>mk('circle',{cx:x,cy:345,r:9,class:'ink'},$('bdots')));
+const TP=[];[0,1].forEach(c=>[420,560,700].forEach(y=>{const x=c?1305:955,o=mk('g',{},$('tpl')),i=mk('g',{fill:c?'var(--ink)':'var(--gain)'},o);fig(i,x,y,20);TP.push([o,i,1130-x])}));
+fig($('fkp'),1050,674,30);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a)=>rise(typeof id==='string'?$(id):id,p(u,a,a+.5));
+const L0=TM.ladder;
+R('push',L0+.4);
+CL.forEach(([o,i],k)=>{R(o,L0+k*.3);const s=p(u,L0+5.8+k*.2,L0+6.6+k*.2);i.setAttribute('transform',k%2?'translate('+(-150*s).toFixed(1)+' 0)':'translate(0 '+(-80*s).toFixed(1)+')');i.setAttribute('fill',k%2&&s>.5?'var(--muted)':'var(--ink)')});
+
+R('chart',TM.growth_chart);
+$('steep').style.strokeDashoffset=1-p(u,TM.steep_line,TM.steep_line+1.5);R('stl',TM.steep_line+1);
+$('gentle').style.strokeDashoffset=1-p(u,TM.gentle_line,TM.gentle_line+1.5);R('gtl',TM.gentle_line+1);
+
+R('rockg',TM.rock);R('nf',TM.rock+2);
+[0,1,2].forEach(i=>R('tr'+i,TM.anchor+i*.6));
+let w='';[810,840].forEach((y,j)=>{w+='M120 '+y;for(let x=120;x<=700;x+=20)w+='L'+x+' '+(y+6*Math.sin(x/40+t*2+j)).toFixed(1)});
+$('waves').setAttribute('d',w);$('waves').setAttribute('opacity',p(u,TM.anchor,TM.anchor+.6));
+
+R('rkw',TM.rocket);
+const rs=.12+.88*p(u,TM.rocket,TM.rocket+2.2),fx=220+300*rs,fy=800-500*rs+4*Math.sin(t*3);
+$('rk').setAttribute('transform','translate('+fx.toFixed(1)+' '+fy.toFixed(1)+') rotate(31)');
+$('trail').style.strokeDashoffset=1-rs;
+$('fl').setAttribute('d','M-14 50L0 '+(84+10*Math.sin(t*20)).toFixed(1)+'L14 50Z');
+[0,1,2].forEach(i=>R('c'+i,TM.new_project+i*.6));
+R('bored',TM.new_project+4.2);R('teach',TM.new_project+7.9);
+
+R('scl',TM.scales);
+$('beam').setAttribute('transform','rotate('+(2*Math.sin(t*1.4)).toFixed(2)+' 520 290)');
+R('lab',TM.scales+3.8);R('team',TM.team_circle);
+TH.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.team_circle+.3+i*.12,TM.team_circle+.6+i*.12)));
+R('hlt',TM.team_circle+1.2);
+
+R('parr',TM.promotion);
+$('mv').setAttribute('transform','translate('+(530*p(u,TM.promotion+.4,TM.promotion+1.8)).toFixed(1)+' 0)');
+$('ghost').setAttribute('opacity',p(u,TM.promotion+1.2,TM.promotion+1.8));
+$('mvp').setAttribute('fill',u>=TM.sad_face?'var(--loss)':'var(--ink)');
+$('frown').setAttribute('opacity',p(u,TM.sad_face,TM.sad_face+.4));
+R('lost',TM.sad_face+.6);
+R('rwh',TM.trophy);[0,1,2].forEach(i=>R('rw'+i,TM.trophy+.4+i*.6));
+
+R('axis6',TM.calendar);
+const nx=160+260*p(u,TM.calendar,TM.calendar+1.5)+1020*p(u,TM.life_events,TM.life_events+6),ny=along(nx);
+SG.forEach((s,i)=>s.style.strokeDashoffset=1-cl((nx-PT[i][0])/(PT[i+1][0]-PT[i][0])));
+EV.forEach((g,j)=>rise(g,cl((nx-PT[j+1][0])/60)));
+const nv=p(u,TM.calendar,TM.calendar+.5);
+$('nowd').setAttribute('cx',nx.toFixed(1));$('nowd').setAttribute('cy',ny.toFixed(1));$('nowd').setAttribute('opacity',nv);
+$('nowt').setAttribute('x',nx.toFixed(1));$('nowt').setAttribute('y',(ny-32).toFixed(1));$('nowt').setAttribute('opacity',nv);
+R('scott',TM.life_events+7.4);R('perf',TM.life_events+12.8);
+
+R('conv',TM.conversation);R('bub1',TM.conversation+1.5);
+BD.forEach((c,i)=>c.setAttribute('cy',(345-6*Math.max(0,Math.sin(t*5-i*.8))).toFixed(1)));
+R('nb',TM.notebook);R('nq0',TM.notebook+.6);R('nq1',TM.notebook+3);
+R('cols',TM.team_map);
+TP.forEach(([o,i,dx],k)=>{const a=TM.team_map+.6+k*.3;rise(o,p(u,a,a+.3));i.setAttribute('transform','translate('+(dx*(1-p(u,a+.2,a+1.1))).toFixed(1)+' 0)')});
+
+const O=TM.one_person;
+R('qa',O);R('qb',O+.4);R('qc',O+3);R('qd',O+3.4);R('fork',O+.6);R('fkl',O+4);
+$('fs').style.strokeDashoffset=1-p(u,O+1,O+2.4);
+$('fg').style.strokeDashoffset=1-p(u,O+1.4,O+2.8);
+$('qm').setAttribute('opacity',p(u,O+2.6,O+3.1));
+$('qm').setAttribute('transform','translate(0 '+(-8*Math.abs(Math.sin(t*2.5))).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:113.4;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,354 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Almanack of Naval Ravikant Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of The Almanack of Naval Ravikant: Productize yourself to earn freedom from forced work, and build habits like meditation, reading and exercise to earn freedom from your own restless mind. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE ALMANACK OF NAVAL RAVIKANT · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Wealth and peace</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">both buy freedom.</text>
+<text class="b" x="120" y="600" font-size="32">Money frees your time, and inner peace frees your mind.</text>
+<g transform="translate(-40 -40)">
+<polygon id="dfloor" class="gain" points="1204,680 1416,680 1480,770 1140,770" opacity="0"/>
+<rect class="gain" x="1204" y="284" width="212" height="392"/>
+<polygon id="door" class="ink" points="1202,282 1418,282 1418,678 1202,678"/>
+<rect class="s-ink" x="1200" y="280" width="220" height="400" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<g id="dfree"><text class="m" x="1310" y="830" font-size="26" text-anchor="middle" style="fill:var(--gain)">FREEDOM</text></g>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two cages.</text>
+<text class="b" x="120" y="176" font-size="32">Freedom means getting out of both.</text>
+<g id="cg0">
+<rect class="s-ink" x="160" y="240" width="500" height="420" rx="24" fill="var(--stage)" stroke-width="7"/>
+<g id="p0"></g>
+<rect class="ink" x="300" y="556" width="220" height="16" rx="6"/>
+<g id="bills"><rect x="462" y="500" width="50" height="36" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><rect x="468" y="508" width="50" height="36" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><rect x="474" y="516" width="50" height="36" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="d" x="499" y="545" font-size="26" text-anchor="middle" style="fill:var(--loss)">$</text></g>
+<g id="bars0"></g>
+<text class="m" x="410" y="712" font-size="24" text-anchor="middle">FORCED WORK</text>
+</g>
+<g id="cg1">
+<rect class="s-ink" x="940" y="240" width="500" height="420" rx="24" fill="var(--stage)" stroke-width="7"/>
+<path id="sea" class="s-loss" fill="none" stroke-width="5" stroke-linecap="round"/>
+<g id="p1"></g>
+<path id="chat" class="s-loss" fill="none" stroke-width="4" stroke-linejoin="round"/>
+<g id="bars1"></g>
+<text class="m" x="1190" y="712" font-size="24" text-anchor="middle">RESTLESS MIND</text>
+</g>
+<g id="k0"><circle class="s-gain" cx="250" cy="800" r="22" fill="none" stroke-width="8"/><path class="s-gain" d="M272 800h70m-20 0v16m-20-16v12" fill="none" stroke-width="8" stroke-linecap="round"/><text class="d5" x="370" y="814" font-size="40">Wealth</text></g>
+<g id="k1"><circle class="s-gain" cx="1010" cy="800" r="22" fill="none" stroke-width="8"/><path class="s-gain" d="M1032 800h70m-20 0v16m-20-16v12" fill="none" stroke-width="8" stroke-linecap="round"/><text class="d5" x="1130" y="814" font-size="40">Inner peace</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Productize yourself.</text>
+<text class="b" x="120" y="176" font-size="32">Package what you uniquely do well, and sell it again and again.</text>
+<g id="mir">
+<ellipse class="s-ink" cx="290" cy="420" rx="110" ry="150" fill="var(--stage)" stroke-width="7"/>
+<g id="p2"></g><path id="mstar" class="gain"/>
+<path class="s-ink" d="M290 570v40M240 610h100" stroke-width="7" stroke-linecap="round"/>
+<text class="m" x="290" y="660" font-size="20" text-anchor="middle">WHAT YOU UNIQUELY DO WELL</text>
+</g>
+<path id="ar0" class="s-muted" d="M430 475h140m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="box">
+<rect class="gain" x="600" y="400" width="200" height="150" rx="10"/>
+<path d="M600 440h200" stroke="var(--stage)" stroke-width="5"/>
+<path id="bstar" fill="var(--on-gain)"/>
+<text class="m" x="700" y="600" font-size="20" text-anchor="middle">YOU, PACKAGED</text>
+</g>
+<path id="ar1" class="s-muted" d="M816 530h46m-14-14 14 14-14 14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="conv">
+<g id="cbx"></g>
+<rect class="s-ink" x="880" y="560" width="580" height="44" rx="22" fill="var(--stage)" stroke-width="6"/>
+<g id="whl"></g>
+<text class="m" x="880" y="660" font-size="20">SOLD AGAIN AND AGAIN, WITHOUT TRADING EVERY HOUR</text>
+</g>
+<g id="own"><text class="d" x="120" y="790" font-size="52">Skills: not rented, but <tspan style="fill:var(--gain)">owned.</tspan></text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Retirement, redefined.</text>
+<text class="b" x="120" y="176" font-size="32">Naval’s definition has nothing to do with the calendar.</text>
+<g id="cal"><rect class="s-ink" x="120" y="230" width="240" height="240" rx="16" fill="var(--stage)" stroke-width="5"/><path class="ink" d="M120 280V246a16 16 0 0 1 16-16h208a16 16 0 0 1 16 16v34z"/><text class="m" x="240" y="330" font-size="20" text-anchor="middle">AN AGE</text><text class="d" x="240" y="440" font-size="96" text-anchor="middle">?</text></g>
+<g id="bank"><rect class="s-ink" x="400" y="230" width="240" height="240" rx="16" fill="var(--stage)" stroke-width="5"/><path class="ink" d="M400 280V246a16 16 0 0 1 16-16h208a16 16 0 0 1 16 16v34z"/><text class="m" x="520" y="330" font-size="20" text-anchor="middle">IN THE BANK</text><text class="d" x="520" y="440" font-size="88" text-anchor="middle">$?</text></g>
+<path id="xx" class="s-loss" d="M150 260L330 440M330 260L150 440M430 260L610 440M610 260L430 440" stroke-width="9" stroke-linecap="round" opacity="0"/>
+<g id="tl">
+<circle class="s-muted" cx="1380" cy="400" r="50" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<text class="m" x="1380" y="500" font-size="22" text-anchor="middle">SOMEDAY</text>
+<g id="arrS"><path class="s-muted" d="M960 400H1316m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-dasharray="14 10" stroke-linecap="round"/></g>
+<text class="m" x="1140" y="364" font-size="22" text-anchor="middle" style="fill:var(--muted)">SACRIFICING TODAY</text>
+</g>
+<g id="sun"><g id="rays"></g><circle class="gain" cx="860" cy="400" r="50"/><text class="m" x="860" y="510" font-size="22" text-anchor="middle" style="fill:var(--gain)">TODAY</text></g>
+<g id="bench">
+<g id="p3"></g><g id="hts"></g>
+<rect class="ink" x="220" y="690" width="380" height="18" rx="6"/>
+<path class="s-ink" d="M250 708v90M570 708v90M480 684l44-44M512 628l24 24" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g id="love"><text class="d" x="720" y="690" font-size="44">Love what you do now,</text><text class="d" x="720" y="750" font-size="44">and you’re <tspan style="fill:var(--gain)">partly retired.</tspan></text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Money only solves money problems.</text>
+<g id="stk"></g>
+<g id="solved"><text class="m" x="120" y="752" font-size="22" style="fill:var(--gain)">MONEY PROBLEMS: SOLVED</text></g>
+<g id="rich"><path class="s-line" d="M720 700h300" stroke-width="5"/><g id="p4"></g><circle cx="848" cy="568" r="4" fill="var(--stage)"/><circle cx="872" cy="568" r="4" fill="var(--stage)"/><path d="M846 590q14-10 28 0" fill="none" stroke="var(--stage)" stroke-width="4" stroke-linecap="round"/></g>
+<g id="storm"><path id="rain" class="s-loss" d="M838 500v30M866 500v30M894 500v30" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/><circle class="loss" cx="830" cy="470" r="28"/><circle class="loss" cx="868" cy="458" r="36"/><circle class="loss" cx="904" cy="474" r="26"/><rect class="loss" x="830" y="470" width="76" height="30" rx="12"/></g>
+<g id="w0"><text class="d" x="980" y="470" font-size="44" style="fill:var(--loss)">Anxious.</text></g>
+<g id="w1"><text class="d" x="980" y="540" font-size="44" style="fill:var(--loss)">Angry.</text></g>
+<g id="w2"><text class="d" x="980" y="610" font-size="44" style="fill:var(--loss)">Empty.</text></g>
+<g id="cage2"><rect class="s-gain" x="1220" y="330" width="240" height="280" rx="20" fill="var(--stage)" stroke-width="7"/><path class="s-loss" d="M1300 470c20-40 60 40 80 0s-60-40-40 10 50 30 40-20" fill="none" stroke-width="5" stroke-linecap="round"/><path class="s-gain" d="M1280 340V600M1340 340V600M1400 340V600" stroke-width="5"/><text class="m" x="1340" y="660" font-size="20" text-anchor="middle">THE SECOND CAGE</text></g>
+<g id="eff"><text class="d" x="120" y="830" font-size="40">So Naval works just as hard on the second cage.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Sit quietly. Let thoughts pass.</text>
+<g transform="translate(0 -60)">
+<circle id="halo" class="s-gain" cx="420" cy="470" r="50" fill="none" stroke-width="5" opacity="0"/>
+<g id="th"></g>
+<g id="med"><ellipse class="gain" cx="420" cy="730" rx="170" ry="34"/><path class="ink" d="M350 690L372 560Q420 520 468 560L490 690Z"/><ellipse class="ink" cx="420" cy="692" rx="150" ry="30"/><circle class="ink" cx="420" cy="470" r="40"/><text class="m" x="420" y="800" font-size="20" text-anchor="middle">MEDITATION</text></g>
+<g id="inbox"><g id="cards"></g><rect class="ink" x="920" y="712" width="340" height="16" rx="6"/><text class="m" x="1090" y="780" font-size="22" text-anchor="middle">OLD WORRIES</text></g>
+</g>
+<g id="calm"><text class="d" x="120" y="846" font-size="40">Over time, the pile shrinks and the mind grows <tspan style="fill:var(--gain)">calmer.</tspan></text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Read what you love. Move every day.</text>
+<g id="pl"><rect class="s-line" x="120" y="220" width="640" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="270" font-size="22">READ WHATEVER YOU ENJOY</text></g>
+<g id="books"></g>
+<path id="rh" class="gain"/>
+<g id="dl"></g>
+<g id="pr"><rect class="s-line" x="840" y="220" width="640" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="870" y="270" font-size="22">EXERCISE: A TOP DAILY PRIORITY</text>
+<path id="spd" class="s-muted" d="M880 450h70M900 490h60M880 530h70" stroke-width="6" stroke-dasharray="20 14" stroke-linecap="round"/>
+<path class="ink" d="M1010 540V420h80l40 50c80 10 160 30 210 70z"/><rect class="gain" x="1000" y="540" width="360" height="34" rx="17"/>
+<path d="M1110 470l20-16M1150 480l20-16M1190 488l20-16" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/></g>
+<g id="badge"><circle class="gain" cx="1380" cy="350" r="46"/><text class="d" x="1380" y="364" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">#1</text></g>
+<g id="dr"></g>
+<g id="tired"><text class="d" x="120" y="800" font-size="40">A tired body makes a calm mind much harder to keep.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Earned, not bought.</text>
+<text class="b" x="120" y="176" font-size="32">“A calm mind, a fit body, and a house full of love.”</text>
+<g id="jars"></g>
+<g id="bt"><text class="d" x="120" y="670" font-size="44" style="fill:var(--loss)">Can’t be bought.</text></g>
+<g id="ea"><text class="d" x="560" y="670" font-size="44"><tspan style="fill:var(--gain)">Earned,</tspan> one daily habit at a time.</text></g>
+<g id="bal"><path class="s-ink" d="M1320 300V560M1260 560h120" stroke-width="8" stroke-linecap="round" fill="none"/>
+<g id="beam"><path class="s-ink" d="M1200 300h240M1200 300l-36 110M1200 300l36 110M1440 300l-36 110M1440 300l36 110" stroke-width="5" fill="none" stroke-linecap="round"/><path class="gain" d="M1160 410h80a40 24 0 0 1-80 0z"/><path class="gain" d="M1400 410h80a40 24 0 0 1-80 0z"/><circle class="ink" cx="1200" cy="396" r="13"/><path id="ph" class="ink"/></g>
+<circle class="ink" cx="1320" cy="300" r="10"/>
+<text class="m" x="1200" y="490" font-size="20" text-anchor="middle">WEALTH</text><text class="m" x="1440" y="490" font-size="20" text-anchor="middle">PEACE</text></g>
+<g id="balt"><text class="d" x="120" y="800" font-size="40">Together: freedom to live on <tspan style="fill:var(--gain)">your own terms.</tspan></text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Which cage holds you</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">tighter today: <tspan style="fill:var(--loss)">forced work</tspan></text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">or a <tspan style="fill:var(--gain)">restless mind?</tspan></text></g>
+<g id="step"><text class="m" x="143" y="660" font-size="26">PICK ONE HABIT · TEN MINUTES TOMORROW MORNING</text></g>
+<g id="clk"><circle class="s-ink" cx="1340" cy="740" r="70" fill="var(--stage)" stroke-width="6"/><path id="sect" class="gain"/><path class="s-ink" d="M1340 740V690" stroke-width="6" stroke-linecap="round"/><circle class="ink" cx="1340" cy="740" r="8"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="139" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:19</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Wealth and peace both buy freedom&rdquo;, from <em>The Almanack of Naval Ravikant</em> by Eric Jorgenson. Productizing yourself, the redefinition of retirement, and the meditation, reading and exercise habits are Naval&#x27;s ideas as reported in the book. The cages, keys, inbox and three jars are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=139, SC=[[0.0, 7.1], [7.1, 24.7], [24.7, 45.0], [45.0, 59.5], [59.5, 72.1], [72.1, 89.6], [89.6, 108.0], [108.0, 126.0], [126.0, 139.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Two Kinds of Freedom", "Two Cages", "Productize Yourself", "Retirement Redefined", "Money Has Limits", "Sitting Still", "Read and Move", "Earned, Not Bought", "Your First Step"];
+const TM={"open_door": 0.0, "cage_work": 7.36, "cage_mind": 13.04, "key_ring": 18.88, "product_box": 25.04, "mirror": 31.36, "conveyor": 34.72, "calendar": 45.28, "sun_today": 50.64, "workbench": 55.04, "money_stack": 59.84, "rich_frown": 62.88, "cushion": 72.4, "thought_cloud": 75.04, "clear_sky": 85.2, "book_stack": 89.92, "running_shoe": 98.4, "three_jars": 108.32, "balance": 121.44};
+const per=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const heart=(x,y,s)=>'M'+x+' '+(y+s)+'C'+(x-1.6*s)+' '+y+' '+(x-s)+' '+(y-s)+' '+x+' '+(y-.4*s)+'C'+(x+s)+' '+(y-s)+' '+(x+1.6*s)+' '+y+' '+x+' '+(y+s)+'Z';
+const star=(x,y,r)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r*.45:r;d+=(i?'L':'M')+(x+q*Math.cos(a)).toFixed(1)+' '+(y+q*Math.sin(a)).toFixed(1)}return d+'Z'};
+per($('p0'),410,430,30,'ink');per($('p1'),1190,440,30,'ink');per($('p2'),290,370,30,'ink');per($('p3'),400,590,26,'gain');per($('p4'),860,574,30,'ink');
+for(let i=0;i<10;i++){mk('path',{d:'M'+(185+i*50)+' 250V650',class:'s-ink','stroke-width':5},$('bars0'));mk('path',{d:'M'+(965+i*50)+' 250V650',class:'s-ink','stroke-width':5},$('bars1'))}
+$('mstar').setAttribute('d',star(290,300,26));$('bstar').setAttribute('d',star(700,500,36));
+const CB=[];for(let i=0;i<5;i++){const g=mk('g',{},$('cbx'));mk('rect',{x:0,y:0,width:70,height:56,rx:6,class:'gain'},g);mk('path',{d:'M0 18h70',stroke:'var(--stage)','stroke-width':4},g);CB.push(g)}
+for(let i=0;i<9;i++)mk('circle',{cx:910+i*65,cy:582,r:11,class:'ink'},$('whl'));
+for(let i=0;i<8;i++){const a=i*Math.PI/4;mk('path',{d:'M'+(860+62*Math.cos(a)).toFixed(1)+' '+(400+62*Math.sin(a)).toFixed(1)+'L'+(860+84*Math.cos(a)).toFixed(1)+' '+(400+84*Math.sin(a)).toFixed(1),class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+const HT=[0,1].map(()=>mk('path',{class:'gain'},$('hts')));
+const COL=[160,240,320,240,160].map((h,i)=>[mk('rect',{x:160+i*100,width:80,rx:8,class:'gain',stroke:'var(--stage)','stroke-width':3},$('stk')),h]);
+// thought bubbles: rise from the head and drift up and out across the open upper stage
+const THX=[-140,110,260,-60,420,560,180,680,340,760];
+const TH=THX.map(()=>mk('circle',{fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},$('th')));
+const CD=[];for(let i=0;i<10;i++)CD.push(mk('rect',{x:940+((i*37)%5-2)*6,y:690-i*22,width:300,height:18,rx:4,class:'loss'},$('cards')));
+const BK=[300,260,320,280,240].map((w,i)=>mk('rect',{x:440-w/2,y:600-(i+1)*42,width:w,height:38,rx:6,fill:['var(--ink)','var(--gain)','var(--muted)'][i%3]},$('books')));
+$('rh').setAttribute('d',heart(440,325,26));$('ph').setAttribute('d',heart(1440,394,12));
+const DL=[],DR=[];for(let i=0;i<10;i++){DL.push(mk('circle',{cx:200+i*48,cy:650,r:13},$('dl')));DR.push(mk('circle',{cx:920+i*48,cy:650,r:13},$('dr')))}
+const JN=['A CALM MIND','A FIT BODY','A HOUSE FULL OF LOVE'];
+const JF=JN.map((s,i)=>{const x=300+i*340,g=mk('g',{},$('jars'));
+  const f=mk('rect',{x:x-92,width:184,rx:14,class:'gain'},g);
+  mk('rect',{x:x-100,y:280,width:200,height:220,rx:24,fill:'none',stroke:'var(--ink)','stroke-width':6},g);
+  mk('rect',{x:x-80,y:250,width:160,height:30,rx:8,class:'ink'},g);
+  const ic=['M'+(x-34)+' 400a34 34 0 1 0 68 0a34 34 0 1 0-68 0M'+(x-18)+' 396q8 8 16 0M'+(x+2)+' 396q8 8 16 0','M'+(x-44)+' 400h88M'+(x-44)+' 380v40M'+(x-30)+' 384v32M'+(x+44)+' 380v40M'+(x+30)+' 384v32','M'+(x-40)+' 430v-36l40-34 40 34v36z'][i];
+  mk('path',{d:ic,fill:'none',stroke:'var(--ink)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  if(i===2)mk('path',{d:heart(x,408,10),class:'ink'},g);
+  const tx=mk('text',{x:x,y:550,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return [g,f]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const rv=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  const o=p(u,TM.open_door,TM.open_door+2.2),dw=216*(1-.8*o);
+  $('door').setAttribute('points','1202,282 '+(1202+dw).toFixed(1)+','+(282+40*o).toFixed(1)+' '+(1202+dw).toFixed(1)+','+(678-40*o).toFixed(1)+' 1202,678');
+  $('dfloor').setAttribute('opacity',(.35*o).toFixed(2)); rv('dfree',TM.open_door+5);
+
+  rv('cg0',TM.cage_work); rv('bills',TM.cage_work+1.4); rv('cg1',TM.cage_mind);
+  rv('k0',TM.key_ring); rv('k1',TM.key_ring+1.8);
+  $('bars0').setAttribute('opacity',1-.8*p(u,TM.key_ring+.8,TM.key_ring+1.8));
+  const cm=p(u,TM.key_ring+2.6,TM.key_ring+3.6); $('bars1').setAttribute('opacity',1-.8*cm);
+  let cd='';for(let k=0;k<44;k++){const a=k*.7,r=(40+20*Math.sin(k*1.3+t*6))*(1-.75*cm);cd+=(k?'L':'M')+(1190+r*1.6*Math.cos(a)).toFixed(1)+' '+(320+r*.7*Math.sin(a)).toFixed(1)} $('chat').setAttribute('d',cd);
+  let sd='';for(let x=960;x<=1420;x+=20)sd+=(x>960?'L':'M')+x+' '+(605+6*Math.sin(x/30+t*2)).toFixed(1); $('sea').setAttribute('d',sd);
+
+  rv('box',TM.product_box); rv('mir',TM.mirror); rv('ar0',TM.mirror+.8); rv('ar1',TM.conveyor); rv('conv',TM.conveyor+.2); rv('own',TM.conveyor+7.4);
+  $('mstar').setAttribute('opacity',(.75+.25*Math.sin(t*3)).toFixed(2));
+  CB.forEach((g,i)=>{const x=890+((i*100+t*70)%500);g.setAttribute('transform','translate('+x.toFixed(1)+' 500)');g.setAttribute('opacity',(cl((x-890)/40)*cl((1390-x)/40)).toFixed(2))});
+
+  rv('cal',TM.calendar); rv('bank',TM.calendar+.5); $('xx').setAttribute('opacity',p(u,TM.calendar+1.3,TM.calendar+1.8));
+  rv('tl',TM.sun_today); rv('sun',TM.sun_today+1.5); $('arrS').setAttribute('opacity',(1-.5*p(u,TM.sun_today+2.5,TM.sun_today+3.2)).toFixed(2));
+  $('rays').setAttribute('transform','rotate('+(t*20%360).toFixed(1)+' 860 400)');
+  rv('bench',TM.workbench); rv('love',TM.workbench+.8);
+  HT.forEach((h,i)=>{const ph=(t*.5+i*.5)%1;h.setAttribute('d',heart(440+i*50,560-80*ph,12));h.setAttribute('opacity',Math.sin(Math.PI*ph).toFixed(2))});
+
+  COL.forEach((c,i)=>{const k=p(u,TM.money_stack+i*.15,TM.money_stack+i*.15+.6);c[0].setAttribute('y',700-c[1]*k);c[0].setAttribute('height',c[1]*k)});
+  rv('solved',TM.money_stack+1.2); rv('rich',TM.rich_frown); rv('storm',TM.rich_frown+.4);
+  $('rain').style.strokeDashoffset=(-t*30%16).toFixed(1);
+  [0,1,2].forEach(i=>rv('w'+i,TM.rich_frown+.8+i*.6)); rv('cage2',TM.rich_frown+4.2); rv('eff',TM.rich_frown+4.6);
+
+  rv('med',TM.cushion);
+  const cs=p(u,TM.clear_sky,TM.clear_sky+2), tk=p(u,TM.thought_cloud,TM.thought_cloud+.6)*(1-.9*cs);
+  TH.forEach((c,i)=>{const ph=(t*.18+i/TH.length)%1;c.setAttribute('cx',(420+THX[i]*ph).toFixed(1));c.setAttribute('cy',(420-200*ph).toFixed(1));c.setAttribute('r',(14+22*ph).toFixed(1));c.setAttribute('opacity',(tk*cl(1.6*Math.sin(Math.PI*ph))).toFixed(2))});
+  rv('inbox',TM.thought_cloud+4.6);
+  const n=10*p(u,TM.thought_cloud+5,TM.thought_cloud+9.5)-8*p(u,TM.clear_sky,TM.clear_sky+3);
+  CD.forEach((c,i)=>c.setAttribute('opacity',cl(n-i).toFixed(2)));
+  $('halo').setAttribute('r',(50+20*cs+3*Math.sin(t*2)).toFixed(1)); $('halo').setAttribute('opacity',cs.toFixed(2)); rv('calm',TM.clear_sky+.6);
+
+  rv('pl',TM.book_stack); BK.forEach((b,i)=>rise(b,p(u,TM.book_stack+.3+i*.25,TM.book_stack+.6+i*.25))); rv('rh',TM.book_stack+1.4);
+  DL.forEach((c,i)=>c.setAttribute('fill',u>=TM.book_stack+1.6+i*.45?'var(--gain)':'var(--line)'));
+  rv('pr',TM.running_shoe); rv('badge',TM.running_shoe+1);
+  DR.forEach((c,i)=>c.setAttribute('fill',u>=TM.running_shoe+1.4+i*.3?'var(--gain)':'var(--line)'));
+  $('spd').style.strokeDashoffset=(t*60%34).toFixed(1); rv('tired',TM.running_shoe+4.6);
+
+  const jk=p(u,TM.three_jars+9.1,TM.three_jars+13);
+  JF.forEach((j,i)=>{rise(j[0],p(u,TM.three_jars+i*1.6,TM.three_jars+i*1.6+.5));const h=190*Math.floor(cl(jk*7-i*.3,0,7))/7;j[1].setAttribute('y',(492-h).toFixed(1));j[1].setAttribute('height',h.toFixed(1))});
+  rv('bt',TM.three_jars+6.5); rv('ea',TM.three_jars+9.1);
+  rv('bal',TM.balance); rv('balt',TM.balance+1);
+  $('beam').setAttribute('transform','rotate('+(-12*(1-p(u,TM.balance+.3,TM.balance+2))+1.5*Math.sin(t*2)).toFixed(2)+' 1320 300)');
+
+  const S8=SC[8][0]/K;
+  rv('qa',S8+.4); rv('qb',S8+.8); rv('qc',S8+1.2); rv('step',S8+5.2); rv('clk',S8+5.2);
+  const ca=Math.PI/3*p(u,S8+5.8,S8+8);
+  $('sect').setAttribute('d',ca>0?'M1340 740L1340 680A60 60 0 0 1 '+(1340+60*Math.sin(ca)).toFixed(1)+' '+(740-60*Math.cos(ca)).toFixed(1)+'Z':'');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:135.55;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,369 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Measure What Matters Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Measure What Matters: OKRs work best alongside ongoing conversations, feedback and recognition, which together build a culture where clear goals and real support drive great results. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MEASURE WHAT MATTERS · LESSON 7</text>
+<text class="d" x="116" y="370" font-size="84" letter-spacing="-2">Conversations, feedback</text>
+<text class="d" x="116" y="466" font-size="84" letter-spacing="-2">and recognition</text>
+<text class="d" x="116" y="562" font-size="84" letter-spacing="-2">complete it.</text>
+<text class="b" x="120" y="660" font-size="32">Goals need regular conversations, honest feedback and real recognition.</text>
+<g id="card">
+<rect class="s-ink" x="1236" y="216" width="244" height="254" rx="14" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1358" y="266" font-size="24" text-anchor="middle">SCORECARD</text>
+<path class="s-line" d="M1272 320h110M1272 375h110M1272 430h110" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1430" cy="320" r="12"/><circle class="ink" cx="1430" cy="375" r="12"/><circle class="ink" cx="1430" cy="430" r="12"/>
+</g>
+<g id="miss">
+<rect id="missR" class="s-gain" x="1170" y="496" width="310" height="112" rx="14" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<text class="m" x="1325" y="544" font-size="24" text-anchor="middle" style="fill:var(--gain)">HOW TO GET</text>
+<text class="m" x="1325" y="580" font-size="24" text-anchor="middle" style="fill:var(--gain)">BETTER?</text>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Judged once a year.</text>
+<text class="b" x="120" y="176" font-size="32">For decades: one single annual review.</text>
+<g id="tl">
+<path class="s-line" d="M160 300H1440" stroke-width="5" stroke-linecap="round"/>
+<g id="tld"></g>
+<text class="m" x="1440" y="256" font-size="20" text-anchor="end" style="fill:var(--loss)">ANNUAL REVIEW</text>
+</g>
+<g id="late">
+<path class="s-muted" d="M160 370Q800 520 1440 370" fill="none" stroke-width="4" stroke-dasharray="10 10"/>
+<path class="s-muted" d="M1414 366l26 4-18 20" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="120" y="424" font-size="20">GOALS SET</text>
+<text class="m" x="800" y="490" font-size="20" text-anchor="middle">FEEDBACK MONTHS LATE</text>
+<path class="s-ink" d="M680 600h80l20 20h140v140h-240z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="800" y="700" font-size="22" text-anchor="middle">REVIEW</text>
+<text class="m" x="800" y="800" font-size="20" text-anchor="middle">FORGOTTEN GOALS</text>
+</g>
+<g id="dread"></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet CFRs.</text>
+<text class="b" x="120" y="176" font-size="32">Doerr’s partner to OKRs.</text>
+<g id="tiles"></g>
+<g id="words"></g>
+<g id="gears"><g id="gA"></g><g id="gB"></g></g>
+<g id="coach"><text class="d" x="120" y="790" font-size="46">Continuous coaching, not a yearly verdict.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Conversations.</text>
+<text class="b" x="120" y="176" font-size="32">Regular one-on-ones between a manager and each team member.</text>
+<g id="pp3">
+<rect class="ink" x="490" y="610" width="320" height="18" rx="9"/>
+<text class="m" x="420" y="690" font-size="20" text-anchor="middle">MANAGER</text>
+<text class="m" x="880" y="690" font-size="20" text-anchor="middle">TEAM MEMBER</text>
+</g>
+<g id="chips3"></g>
+<g id="jg"><text class="m" x="1060" y="330" font-size="22">LESS LIKE A</text><text class="d" x="1060" y="410" font-size="64" style="fill:var(--loss)">Judge</text></g>
+<line id="js" class="s-ink" x1="1052" y1="388" x2="1052" y2="388" stroke-width="7" stroke-linecap="round"/>
+<g id="cg"><text class="m" x="1060" y="520" font-size="22">MORE LIKE A</text><text class="d" x="1060" y="600" font-size="64" style="fill:var(--gain)">Coach</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Feedback, both ways.</text>
+<text class="b" x="120" y="176" font-size="32">Up and down, close to the moment.</text>
+<g id="pp4"></g>
+<g id="arr">
+<path class="s-gain" d="M440 300V690M420 666l20 24 20-24M520 690V300M500 324l20-24 20 24" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="fd0" class="gain" cx="440" cy="300" r="10"/><circle id="fd1" class="gain" cx="520" cy="690" r="10"/>
+</g>
+<g id="clk">
+<circle class="s-ink" cx="880" cy="420" r="110" fill="var(--stage)" stroke-width="7"/>
+<g id="ticks"></g>
+<line id="hand" class="s-gain" x1="880" y1="420" x2="880" y2="336" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="880" cy="420" r="10"/>
+<text class="m" x="1040" y="380" font-size="22">CLOSE TO THE MOMENT</text>
+<text class="m" x="1040" y="420" font-size="22">STILL TIME TO CHANGE COURSE</text>
+<path class="s-loss" d="M1200 500h220" fill="none" stroke-width="5" stroke-dasharray="8 10"/>
+<path class="s-gain" d="M1040 500h160q50 0 80-50M1258 456l22-6 4 22" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="prob">
+<circle class="loss" cx="760" cy="720" r="14"/><circle class="loss" cx="880" cy="720" r="30" fill-opacity=".5"/><circle class="loss" cx="1040" cy="720" r="50" fill-opacity=".3"/>
+<path class="s-muted" d="M790 720h44M926 720h58" stroke-width="4" stroke-linecap="round"/>
+<circle id="ring" class="s-gain" cx="760" cy="720" r="28" fill="none" stroke-width="5"/>
+<text class="m" x="1120" y="728" font-size="20">FIX IT WHILE IT’S SMALL</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Recognition.</text>
+<text class="b" x="120" y="176" font-size="32">Given often, and for real contributions.</text>
+<g id="tro">
+<path class="s-gain" d="M220 300h-30a30 30 0 0 0 30 60M400 300h30a30 30 0 0 1-30 60" fill="none" stroke-width="8"/>
+<path class="gain" d="M220 280h180v70a90 90 0 0 1-180 0z"/>
+<rect class="gain" x="298" y="438" width="24" height="50"/>
+<rect class="ink" x="250" y="488" width="120" height="26" rx="6"/>
+<text class="m" x="310" y="570" font-size="20" text-anchor="middle">OFTEN · FOR REAL WORK</text>
+</g>
+<g id="peers"></g>
+<g id="thx"></g>
+<g id="lab5"><text class="m" x="760" y="710" font-size="20">FROM PEERS, NOT JUST BOSSES</text><text class="m" x="760" y="746" font-size="20" style="fill:var(--gain)">TIED TO THE GOALS THAT MATTER</text></g>
+<g id="seen"><text class="d" x="120" y="830" font-size="46">People who feel seen keep pushing.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Adobe scrapped annual reviews.</text>
+<text class="b" x="120" y="176" font-size="32">A change led by its people chief, Donna Morris.</text>
+<g id="oldr">
+<path class="s-ink" d="M140 280h80l20 20h120v140h-220z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-line" d="M180 340h140M180 375h140M180 410h90" stroke-width="7" stroke-linecap="round"/>
+<text class="m" x="250" y="494" font-size="22" text-anchor="middle" style="fill:var(--loss)">ANNUAL REVIEW</text>
+<path id="oldx" class="s-loss" d="M130 270L370 450M370 270L130 450" stroke-width="10" stroke-linecap="round"/>
+</g>
+<g id="yr">
+<path class="s-muted" d="M410 360h80M470 340l20 20-20 20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-line" d="M540 360H1440" stroke-width="5"/>
+<g id="yd"></g>
+<text class="m" x="540" y="414" font-size="20">FREQUENT CHECK-INS</text>
+</g>
+<g id="chips6">
+<text class="m" x="640" y="300" font-size="20" text-anchor="middle" style="fill:var(--gain)">EXPECTATIONS</text>
+<text class="m" x="990" y="300" font-size="20" text-anchor="middle" style="fill:var(--gain)">FEEDBACK</text>
+<text class="m" x="1340" y="300" font-size="20" text-anchor="middle" style="fill:var(--gain)">GROWTH</text>
+</g>
+<g id="team"><text class="m" x="960" y="780" font-size="22" text-anchor="middle">HONEST CONVERSATIONS ALL YEAR ROUND</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Keep OKR scores apart from pay.</text>
+<text class="b" x="120" y="176" font-size="32">If money rides on every number, people play it safe.</text>
+<rect class="s-ink" x="130" y="256" width="230" height="248" rx="14" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="245" y="306" font-size="24" text-anchor="middle">OKR SCORE</text>
+<path class="s-line" d="M165 366h160M165 414h160M165 462h100" stroke-width="8" stroke-linecap="round"/>
+<g id="payg">
+<path class="s-muted" d="M420 240V540" stroke-width="5" stroke-dasharray="10 10"/>
+<rect class="s-ink" x="500" y="300" width="220" height="150" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M500 300l110 80 110-80" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="610" y="496" font-size="22" text-anchor="middle">PAY AND BONUSES</text>
+</g>
+<g id="bars">
+<path class="s-line" d="M840 560H1440" stroke-width="5"/>
+<rect class="s-gain" x="1120" y="280" width="160" height="280" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<rect id="safe" class="loss" x="900" y="560" width="160" height="0"/>
+<text class="m" x="980" y="600" font-size="20" text-anchor="middle">SAFE GOAL</text>
+<text class="m" x="1200" y="600" font-size="20" text-anchor="middle" style="fill:var(--gain)">STRETCH</text>
+</g>
+<g id="sumA"><circle class="s-gain" cx="170" cy="722" r="30" fill="none" stroke-width="6"/><circle class="gain" cx="170" cy="722" r="10"/><text class="d" x="230" y="736" font-size="40">OKRs say what to aim for.</text></g>
+<g id="sumB"><path class="s-gain" d="M140 812h60M182 794l18 18-18 18" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text class="d" x="230" y="826" font-size="40">CFRs help people get there.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="330" font-size="88" letter-spacing="-2">Book a short check-in</text></g>
+<g id="qb"><text class="d" x="136" y="440" font-size="88" letter-spacing="-2">this <tspan style="fill:var(--gain)">week</tspan>.</text></g>
+<g id="cal"></g>
+<g id="asks0"><text class="d5" x="140" y="560" font-size="44">What is going well?</text></g>
+<g id="asks1"><text class="d5" x="140" y="630" font-size="44">What is stuck?</text></g>
+<g id="asks2"><text class="d5" x="140" y="700" font-size="44">What help would make the difference?</text></g>
+<text class="m" x="143" y="800" font-size="26">CONVERSATIONS · FEEDBACK · RECOGNITION</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Conversations, Feedback and Recognition Complete It&rdquo;, from <em>Measure What Matters</em> by John Doerr. Adobe&#x27;s move from annual reviews to regular check-ins is as reported in the book. The gears, trophy, clock and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 8.0], [8.0, 23.5], [23.5, 40.0], [40.0, 55.2], [55.2, 70.2], [70.2, 84.0], [84.0, 103.4], [103.4, 118.9], [118.9, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Missing Half", "The Dreaded Review", "Meet CFRs", "Conversations", "Feedback", "Recognition", "Adobe's Check-in", "Goals, Not Paychecks", "Your Next Step"];
+const TM={"report_card": 0.0, "annual_review": 8.32, "old_folder": 14.08, "stressed_pair": 19.2, "cfr_letters": 23.76, "two_gears": 32.92, "one_on_one": 40.32, "chat_bubbles": 46.08, "two_arrows": 55.52, "clock": 60.4, "trophy": 70.48, "peer_thanks": 75.68, "adobe_office": 84.32, "check_in": 90.88, "happy_team": 98.32, "pay_envelope": 103.68, "stretch_line": 108.8, "calendar": 119.2};
+const P=(g,x,y,r,c)=>[mk('circle',{cx:x,cy:y,r:r,class:c},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)];
+const face=(g,x,y,r,s)=>mk('path',{d:'M'+(x-r*.4)+' '+(y+r*(s?.25:.55))+'q'+(r*.4)+' '+(s?r*.4:-r*.4)+' '+(r*.8)+' 0',fill:'none',stroke:'var(--stage)','stroke-width':4,'stroke-linecap':'round'},g);
+const star=(x,y,R)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?R*.45:R;d+=(i?'L':'M')+(x+q*Math.cos(a)).toFixed(1)+' '+(y+q*Math.sin(a)).toFixed(1)}return d+'Z'};
+const T=(g,x,y,s,fs,a)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':fs||20,class:'m','text-anchor':'middle'},a||{}),g);e.textContent=s;return e};
+const strk=(id,x0,w,k)=>$(id).setAttribute('x2',x0+w*k);
+
+const MO='JFMAMJJASOND',TD=[];
+for(let i=0;i<12;i++){const x=160+i*1280/11;TD.push(mk('circle',{cx:x,cy:300,r:i<11?10:22,class:i<11?'ink':'loss'},$('tld')));T($('tld'),x,352,MO[i],20)}
+[[420,'MANAGER'],[1180,'EMPLOYEE']].forEach(([x,l])=>{const g=$('dread');P(g,x,600,36,'ink');face(g,x,600,36,0);mk('path',{d:'M'+(x+50)+' 560q11 17 0 24q-11-7 0-24z',class:'loss'},g);T(g,x,800,l)});
+
+const TL=['C','F','R'].map((c,i)=>{const x=120+i*240,g=mk('g',{},$('tiles'));mk('rect',{x:x,y:260,width:180,height:180,rx:20,class:'gain'},g);T(g,x+90,395,c,120,{class:'d',style:'fill:var(--on-gain)'});return g});
+const WD=['CONVERSATIONS','FEEDBACK','RECOGNITION'].map((s,i)=>{const g=mk('g',{},$('words'));T(g,210+i*240,490,s,22);return g});
+const gearD=(cx,cy,R,n)=>{let d='';for(let i=0;i<n*4;i++){const a=i*Math.PI*2/(n*4),q=(i%4<2)?R+22:R;d+=(i?'L':'M')+(cx+q*Math.cos(a)).toFixed(1)+' '+(cy+q*Math.sin(a)).toFixed(1)}return d+'Z'};
+const GA=mk('path',{d:gearD(1000,500,130,12),class:'ink'},$('gA')),GB=mk('path',{d:gearD(1265,500,110,10),class:'gain'},$('gB'));
+[[1000,'OKRs',$('gA')],[1265,'CFRs',$('gB')]].forEach(([x,s,g])=>{mk('circle',{cx:x,cy:500,r:58,fill:'var(--stage)'},g);T(g,x,513,s,36,{class:'d'})});
+
+const MG=P($('pp3'),420,470,40,'ink');P($('pp3'),880,470,40,'ink');face($('pp3'),420,470,40,1);face($('pp3'),880,470,40,1);
+const CP=['GOALS','PROGRESS','OBSTACLES','GROWTH'].map((s,i)=>{const x=440+(i%2)*220,y=240+Math.floor(i/2)*80,g=mk('g',{},$('chips3'));mk('rect',{x:x,y:y,width:200,height:60,rx:30,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);T(g,x+100,y+38,s,20);return g});
+
+P($('pp4'),300,290,34,'ink');P($('pp4'),300,600,34,'ink');T($('pp4'),300,474,'MANAGER');T($('pp4'),300,792,'TEAM MEMBER');
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(880+92*Math.cos(a)).toFixed(1)+' '+(420+92*Math.sin(a)).toFixed(1)+'L'+(880+104*Math.cos(a)).toFixed(1)+' '+(420+104*Math.sin(a)).toFixed(1),class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('ticks'))}
+
+mk('path',{d:star(310,345,32),style:'fill:var(--on-gain)'},$('tro'));
+const PR=[760,940,1120,1300].map(x=>{const e=P($('peers'),x,520,32,'ink');face($('peers'),x,520,32,1);return e});
+const AR=[0,1,2].map(i=>{const x=760+i*180,g=mk('g',{},$('thx'));mk('path',{d:'M'+(x+20)+' 470Q'+(x+90)+' 380 '+(x+160)+' 470',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-dasharray':'8 8'},g);mk('path',{d:star(x+90,422,18),class:'gain'},g);return g});
+
+const YD=[];for(let i=0;i<12;i++)YD.push(mk('circle',{cx:540+i*900/11,cy:360,r:13,class:'gain'},$('yd')));
+[760,960,1160].forEach(x=>{P($('team'),x,560,34,'gain');face($('team'),x,560,34,1)});
+
+const cg=$('cal');mk('rect',{x:1240,y:230,width:220,height:220,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':7},cg);
+mk('path',{d:'M1240 284v-38a16 16 0 0 1 16-16h188a16 16 0 0 1 16 16v38z',class:'ink'},cg);
+mk('path',{d:'M1290 214v32M1410 214v32',class:'s-ink','stroke-width':8,'stroke-linecap':'round'},cg);
+let CC;for(let r=0;r<3;r++)for(let c=0;c<5;c++){const e=mk('rect',{x:1262+c*38,y:306+r*42,width:28,height:28,rx:6,fill:r==1&&c==2?'var(--gain)':'var(--line)'},cg);if(r==1&&c==2)CC=e}
+mk('path',{d:'M1342 361l5 6 10-12',fill:'none',stroke:'var(--on-gain)','stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round'},cg);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('card'),p(u,TM.report_card,TM.report_card+.6));
+rise($('miss'),p(u,TM.report_card+6.6,TM.report_card+7.1)); $('missR').setAttribute('stroke-dashoffset',(-t*20).toFixed(1));
+
+rise($('tl'),p(u,TM.annual_review,TM.annual_review+.5));
+TD.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.annual_review+.3+i*.15,TM.annual_review+.6+i*.15)));
+TD[11].setAttribute('r',(22+(u>=TM.annual_review+2?4*Math.abs(Math.sin(t*3)):0)).toFixed(1));
+rise($('late'),p(u,TM.old_folder,TM.old_folder+.6)); rise($('dread'),p(u,TM.stressed_pair,TM.stressed_pair+.6));
+
+TL.forEach((g,i)=>rise(g,p(u,TM.cfr_letters+i*.4,TM.cfr_letters+i*.4+.5)));
+WD.forEach((g,i)=>rise(g,p(u,TM.cfr_letters+3.8+i*.5,TM.cfr_letters+4.3+i*.5)));
+rise($('gears'),p(u,TM.two_gears,TM.two_gears+.6));
+const ga=t*20; GA.setAttribute('transform','rotate('+(ga-3.75).toFixed(2)+' 1000 500)'); GB.setAttribute('transform','rotate('+(13.5-ga*1.2).toFixed(2)+' 1265 500)');
+rise($('coach'),p(u,TM.two_gears+3,TM.two_gears+3.6));
+
+rise($('pp3'),p(u,TM.one_on_one,TM.one_on_one+.6));
+CP.forEach((g,i)=>rise(g,p(u,TM.chat_bubbles+i*.5,TM.chat_bubbles+i*.5+.4)));
+rise($('jg'),p(u,TM.chat_bubbles+5.3,TM.chat_bubbles+5.7)); strk('js',1052,190,p(u,TM.chat_bubbles+5.9,TM.chat_bubbles+6.4));
+rise($('cg'),p(u,TM.chat_bubbles+6.3,TM.chat_bubbles+6.8));
+MG.forEach(e=>e.setAttribute('class',u>=TM.chat_bubbles+6.3?'gain':'ink'));
+
+rise($('pp4'),p(u,TM.two_arrows,TM.two_arrows+.5)); rise($('arr'),p(u,TM.two_arrows+.5,TM.two_arrows+1));
+const fk=(t*.5)%1; $('fd0').setAttribute('cy',(300+370*fk).toFixed(1)); $('fd1').setAttribute('cy',(690-370*fk).toFixed(1));
+rise($('clk'),p(u,TM.clock,TM.clock+.6)); $('hand').setAttribute('transform','rotate('+((t*90)%360).toFixed(1)+' 880 420)');
+rise($('prob'),p(u,TM.clock+5.7,TM.clock+6.2)); $('ring').setAttribute('opacity',p(u,TM.clock+6.5,TM.clock+7));
+
+rise($('tro'),p(u,TM.trophy,TM.trophy+.6));
+rise($('peers'),p(u,TM.peer_thanks,TM.peer_thanks+.5));
+AR.forEach((g,i)=>rise(g,p(u,TM.peer_thanks+.6+i*.5,TM.peer_thanks+1+i*.5)));
+rise($('lab5'),p(u,TM.peer_thanks+2,TM.peer_thanks+2.5)); rise($('seen'),p(u,TM.peer_thanks+6.6,TM.peer_thanks+7.1));
+PR.forEach(a=>a.forEach(e=>e.setAttribute('class',u>=TM.peer_thanks+6.6?'gain':'ink')));
+
+rise($('oldr'),p(u,TM.adobe_office,TM.adobe_office+.6)); $('oldx').setAttribute('opacity',p(u,TM.adobe_office+2,TM.adobe_office+2.5));
+rise($('yr'),p(u,TM.check_in,TM.check_in+.5));
+YD.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.check_in+.3+i*.15,TM.check_in+.6+i*.15)));
+rise($('chips6'),p(u,TM.check_in+2.5,TM.check_in+3)); rise($('team'),p(u,TM.happy_team,TM.happy_team+.6));
+
+rise($('payg'),p(u,TM.pay_envelope,TM.pay_envelope+.6)); rise($('bars'),p(u,TM.stretch_line,TM.stretch_line+.5));
+const sf=p(u,TM.stretch_line+1,TM.stretch_line+2.2); $('safe').setAttribute('height',(100*sf).toFixed(1)); $('safe').setAttribute('y',(560-100*sf).toFixed(1));
+rise($('sumA'),p(u,TM.stretch_line+5.4,TM.stretch_line+5.9)); rise($('sumB'),p(u,TM.stretch_line+6,TM.stretch_line+6.5));
+
+rise($('qa'),p(u,TM.calendar,TM.calendar+.5)); rise($('qb'),p(u,TM.calendar+.4,TM.calendar+.9)); rise($('cal'),p(u,TM.calendar+.8,TM.calendar+1.3));
+CC.setAttribute('opacity',(.75+.25*Math.sin(t*3)).toFixed(2));
+[0,1,2].forEach(i=>rise($('asks'+i),p(u,TM.calendar+6.6+i*.6,TM.calendar+7.1+i*.6)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.91;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

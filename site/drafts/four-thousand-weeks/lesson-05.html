@@ -1,0 +1,428 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Four Thousand Weeks Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Four Thousand Weeks: Treating every moment as a means to some future payoff robs you of life now, so value activities like rest and hobbies for their own sake. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">FOUR THOUSAND WEEKS · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Stop living</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">for the future.</text>
+<text class="b" x="120" y="600" font-size="32">Why life keeps waiting, and how to start living it now</text>
+<g id="clk">
+<circle class="s-ink" cx="1290" cy="390" r="140" fill="var(--stage)" stroke-width="8"/>
+<g id="cticks"></g>
+<line id="hh" class="s-ink" x1="1290" y1="390" x2="1290" y2="320" stroke-width="10" stroke-linecap="round"/>
+<line id="mh" class="s-loss" x1="1290" y1="390" x2="1290" y2="280" stroke-width="6" stroke-linecap="round"/>
+<circle class="gain" cx="1290" cy="390" r="12"/>
+</g>
+<g id="now"><text class="m" x="1290" y="590" font-size="22" text-anchor="middle" style="fill:var(--gain)">YOUR LIFE IS NOW</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Life as a stepping stone.</text>
+<text class="b" x="120" y="176" font-size="32">We treat each day as a way to reach a better future.</text>
+<g id="hz">
+<path class="s-line" d="M120 420H1480" stroke-width="5" stroke-linecap="round"/>
+<g id="sun"><path class="gain" d="M1150 420a50 50 0 0 1 100 0z"/><text class="m" x="1200" y="352" font-size="20" text-anchor="middle" style="fill:var(--gain)">SOMEDAY</text></g>
+</g>
+<g id="stones"></g>
+<g id="hopW"><g id="hop"></g></g>
+<g id="list">
+<rect class="s-ink" x="1140" y="470" width="320" height="300" rx="16" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="1170" y="508" font-size="20">THE LIST</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Jam tomorrow, never jam today.</text>
+<text class="b" x="120" y="176" font-size="32">Keynes on the restless, purposive person.</text>
+<g id="key">
+<text class="m" x="280" y="580" font-size="20" text-anchor="middle">JOHN MAYNARD KEYNES</text>
+<text class="m" x="280" y="612" font-size="20" text-anchor="middle">RESTLESS, PURPOSIVE</text>
+</g>
+<g id="jarD"></g>
+<line id="reach" class="s-gain" x1="840" y1="520" x2="840" y2="520" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/>
+<g id="jarT"><g id="jarTm"></g></g>
+<g id="never"><text class="d" x="120" y="800" font-size="50">Always promised. Never tasted.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Even rest gets put to work.</text>
+<text class="b" x="120" y="176" font-size="32">Naps and holidays turned into fuel for productivity.</text>
+<g id="sofa" stroke="var(--ink)" stroke-width="7" stroke-linejoin="round">
+<rect x="160" y="440" width="440" height="90" rx="20" fill="var(--stage)"/>
+<rect x="160" y="520" width="440" height="90" rx="16" fill="var(--stage)"/>
+<rect x="140" y="480" width="50" height="140" rx="16" fill="var(--stage)"/>
+<rect x="570" y="480" width="50" height="140" rx="16" fill="var(--stage)"/>
+<path d="M190 620v20M570 620v20" stroke-linecap="round"/>
+<circle class="gain" cx="230" cy="492" r="28" stroke="none"/>
+<rect class="gain" x="262" y="476" width="260" height="44" rx="22" stroke="none"/>
+<text class="d5" x="250" y="430" font-size="40" stroke="none" style="fill:var(--muted)">z z</text>
+<text class="m" x="380" y="680" font-size="22" text-anchor="middle" stroke="none" style="fill:var(--muted)">REST</text>
+</g>
+<g id="chainW">
+<g id="bat">
+<path class="s-muted" d="M630 520h100m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-ink" x="760" y="450" width="220" height="140" rx="14" fill="none" stroke-width="7"/>
+<rect class="ink" x="980" y="495" width="18" height="50" rx="4"/>
+<rect id="lvl" class="gain" x="776" y="466" width="0" height="108" rx="6"/>
+</g>
+<g id="brf">
+<path class="s-muted" d="M1015 520h100m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-loss" d="M1250 440v-30h100v30" fill="none" stroke-width="9" stroke-linejoin="round"/>
+<rect class="loss" x="1150" y="440" width="300" height="180" rx="16"/>
+<path d="M1150 510h300" stroke="var(--stage)" stroke-width="5"/>
+</g>
+</g>
+<g id="labB"><text class="m" x="870" y="680" font-size="22" text-anchor="middle" style="fill:var(--muted)">RECHARGE</text></g>
+<g id="labW"><text class="m" x="1300" y="680" font-size="22" text-anchor="middle" style="fill:var(--muted)">MORE WORK</text></g>
+<g id="task"><text class="m" x="120" y="752" font-size="22" style="fill:var(--loss)">LEISURE BECOMES ANOTHER TASK</text></g>
+<g id="free"><text class="d" x="120" y="830" font-size="50" style="fill:var(--gain)">Rest needs no justification at all.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of doing.</text>
+<g id="pan">
+<text class="b" x="120" y="176" font-size="32">A distinction from the philosopher Kieran Setiya.</text>
+<rect class="s-line" x="120" y="230" width="660" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-line" x="820" y="230" width="660" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="290" font-size="22">AIMS AT AN ENDPOINT</text>
+<text class="m" x="850" y="290" font-size="22" style="fill:var(--gain)">EXISTS FOR ITS OWN SAKE</text>
+</g>
+<g id="fin">
+<text class="m" x="150" y="324" font-size="20">LIKE FINISHING A REPORT</text>
+<path class="s-line" d="M160 600H680" stroke-width="5" stroke-dasharray="10 10"/>
+<path class="s-ink" d="M680 620V430" stroke-width="6" stroke-linecap="round"/>
+<path class="ink" d="M680 430h70l-16 25 16 25h-70z"/>
+<g id="doc"><rect class="s-ink" x="160" y="536" width="44" height="56" rx="4" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M170 552h24M170 564h24M170 576h14" stroke-width="3"/></g>
+</g>
+<g id="done"><text class="m" x="150" y="700" font-size="22">OVER ONCE YOU ARE DONE</text></g>
+<g id="wlk">
+<text class="m" x="850" y="324" font-size="20">LIKE A WALK IN THE COUNTRYSIDE</text>
+<ellipse class="s-gain" cx="1150" cy="500" rx="230" ry="130" fill="none" stroke-width="6" stroke-dasharray="14 10"/>
+<path class="ink" d="M1100 450l-30 70h60zM1200 430l-36 90h72z"/>
+<circle id="wd" class="gain" cx="1380" cy="500" r="18"/>
+<text class="m" x="850" y="700" font-size="22">NO FINISH LINE</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The point is the walk.</text>
+<text class="b" x="120" y="176" font-size="32">You are not racing to reach the end.</text>
+<path id="hills" class="s-line" d="M120 470Q360 300 600 450T1080 430T1480 440" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path id="cpath" d="M140 700C400 560 600 760 800 620S1200 480 1460 560" fill="none" stroke="var(--line)" stroke-width="34" stroke-linecap="round"/>
+<g id="fps"></g>
+<g id="wkW"><g id="wk"></g></g>
+<g id="more"><text class="d" x="120" y="830" font-size="46">A good life needs more of these, valued for themselves.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Be happily mediocre.</text>
+<text class="b" x="120" y="176" font-size="32">Hobbies you enjoy, not hobbies you perform.</text>
+<g id="gtr">
+<rect class="ink" x="316" y="250" width="28" height="230"/>
+<rect class="ink" x="304" y="220" width="52" height="44" rx="8"/>
+<circle class="gain" cx="330" cy="470" r="75"/><circle class="gain" cx="330" cy="590" r="100"/>
+<circle cx="330" cy="560" r="26" fill="var(--stage)"/>
+<rect class="ink" x="300" y="620" width="60" height="12" rx="4"/>
+<text class="m" x="330" y="760" font-size="22" text-anchor="middle">HAPPILY MEDIOCRE</text>
+</g>
+<g id="notes"></g>
+<g id="tro">
+<path class="s-loss" d="M720 400h-30a30 30 0 0 0 30 60M880 400h30a30 30 0 0 1-30 60" fill="none" stroke-width="8"/>
+<path class="loss" d="M720 380h160v50a80 80 0 0 1-160 0z"/>
+<rect class="loss" x="785" y="505" width="30" height="62"/><rect class="loss" x="740" y="565" width="120" height="30" rx="6"/>
+<text class="m" x="800" y="760" font-size="22" text-anchor="middle">ANOTHER PERFORMANCE</text>
+</g>
+<line id="tstr" class="s-ink" x1="700" y1="360" x2="700" y2="360" stroke-width="10" stroke-linecap="round"/>
+<g id="smile">
+<circle class="gain" cx="1270" cy="520" r="130"/>
+<circle cx="1225" cy="485" r="14" fill="var(--on-gain)"/><circle cx="1315" cy="485" r="14" fill="var(--on-gain)"/>
+<path d="M1200 550q70 70 140 0" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round"/>
+<text class="m" x="1270" y="760" font-size="22" text-anchor="middle" style="fill:var(--gain)">ENJOY THE DOING</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it this week.</text>
+<text class="b" x="120" y="176" font-size="32">One activity with no goal attached.</text>
+<g id="cal">
+<rect class="s-ink" x="120" y="240" width="440" height="400" rx="16" fill="var(--stage)" stroke-width="5"/>
+<rect class="ink" x="120" y="240" width="440" height="70" rx="16"/>
+<text class="m" x="150" y="285" font-size="22" style="fill:var(--stage)">THIS WEEK</text>
+<g id="days"></g>
+</g>
+<g id="slot"><text class="m" x="120" y="690" font-size="20" style="fill:var(--gain)">ONE SLOT, NO GOAL</text></g>
+<g id="easel">
+<path class="s-ink" d="M700 560l-30 100M960 560l30 100" stroke-width="6" stroke-linecap="round"/>
+<rect class="s-ink" x="640" y="260" width="380" height="300" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path id="paint" class="s-gain" d="M680 470C740 320 800 520 860 380S960 300 980 460" fill="none" stroke-width="12" stroke-linecap="round"/>
+<path class="s-ink" d="M1030 640l50-90" stroke-width="8" stroke-linecap="round"/><circle class="gain" cx="1030" cy="640" r="10"/>
+</g>
+<g id="labs"><text class="m" x="640" y="700" font-size="20">PAINT BADLY</text><text class="m" x="640" y="732" font-size="20">SING OFF KEY · WANDER</text></g>
+<g id="dev">
+<rect class="s-ink" x="1120" y="280" width="150" height="270" rx="22" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M1170 310h50" stroke-width="5" stroke-linecap="round"/><circle class="ink" cx="1195" cy="520" r="10"/>
+<rect class="ink" x="1330" y="362" width="50" height="24" rx="4"/><rect class="ink" x="1300" y="380" width="160" height="110" rx="14"/>
+<circle cx="1380" cy="435" r="34" fill="var(--stage)"/><circle class="ink" cx="1380" cy="435" r="16"/>
+<text class="m" x="1120" y="700" font-size="20">LEAVE THEM BEHIND</text>
+</g>
+<line id="slash" class="s-loss" x1="1100" y1="260" x2="1100" y2="260" stroke-width="12" stroke-linecap="round"/>
+<g id="cont"><text class="d" x="120" y="815" font-size="44">So the moment cannot become content or progress.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="120" y="300" font-size="64" letter-spacing="-1">What is one thing</text></g>
+<g id="qb"><text class="d" x="120" y="384" font-size="64" letter-spacing="-1">you love doing that</text></g>
+<g id="qc"><text class="d" x="120" y="468" font-size="64" letter-spacing="-1">you have been <tspan style="fill:var(--gain)">saving</tspan></text></g>
+<g id="qe"><text class="d" x="120" y="552" font-size="64" letter-spacing="-1">for later?</text></g>
+<g id="qd"><text class="m" x="122" y="680" font-size="24">DO IT FOR ITS OWN SAKE, THIS WEEK</text></g>
+<g id="qbox">
+<g id="qrays">
+<path class="s-gain" d="M1060 300l-30-26M1150 262v-40M1240 300l30-26M1046 380h-40" fill="none" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g id="qm"><circle class="gain" cx="1150" cy="360" r="56"/><text class="d" x="1150" y="390" font-size="80" text-anchor="middle" style="fill:var(--on-gain)">?</text></g>
+<rect class="s-ink" x="1040" y="518" width="340" height="240" rx="14" fill="var(--stage)" stroke-width="7"/>
+<path class="s-line" d="M1040 572h340" stroke-width="4"/>
+<text id="qlab" class="m" x="1210" y="660" font-size="32" text-anchor="middle">LATER</text>
+<line id="qstr" class="s-loss" x1="1130" y1="649" x2="1130" y2="649" stroke-width="7" stroke-linecap="round"/>
+<g id="qlid"><rect class="ink" x="1024" y="478" width="372" height="40" rx="10"/><rect class="ink" x="1180" y="464" width="60" height="18" rx="6"/></g>
+</g>
+<g id="qwk"><text class="m" x="1210" y="820" font-size="24" text-anchor="middle" style="fill:var(--gain)">THIS WEEK</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Stop Living for the Future&rdquo;, from <em>Four Thousand Weeks</em> by Oliver Burkeman. The ideas from economist John Maynard Keynes and philosopher Kieran Setiya are as reported in the book. The horizon, battery and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 8.9], [8.9, 24.8], [24.8, 41.6], [41.6, 60.0], [60.0, 77.2], [77.2, 90.5], [90.5, 105.5], [105.5, 120.3], [120.3, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Waiting to Live", "The Stepping Stones", "Jam Tomorrow", "Rest on Trial", "Two Kinds of Doing", "The Point Is the Walk", "Be Bad at Hobbies", "Try It This Week", "Your Turn"];
+const TM={"title_clock": 0.0, "stepping_stone": 9.2, "checklist": 13.84, "horizon": 19.12, "keynes": 25.12, "jam_jar": 32.16, "sofa": 41.92, "battery": 44.32, "briefcase": 49.6, "philosopher": 60.32, "finish_flag": 65.04, "walker": 71.36, "country_path": 77.52, "footprints": 81.68, "guitar": 90.8, "trophy": 94.48, "smile_face": 100.08, "calendar": 105.76, "paintbrush": 109.92, "phone_off": 114.56, "question_mark": 120.64};
+const man=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${(1290+108*c).toFixed(1)} ${(390+108*s).toFixed(1)}L${(1290+126*c).toFixed(1)} ${(390+126*s).toFixed(1)}`,stroke:'var(--ink)','stroke-width':i%3?4:8,'stroke-linecap':'round'},$('cticks'))}
+const ST=[0,1,2,3,4,5].map(i=>mk('ellipse',{cx:200+170*i,cy:720,rx:62,ry:18,fill:'var(--line)'},$('stones')));
+man($('hop'),0,0,22,'gain');
+const TK=[0,1,2,3].map(i=>{const y=540+60*i;mk('rect',{x:1170,y:y-24,width:30,height:30,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},$('list'));
+  mk('path',{d:`M1222 ${y-9}H${1420-i*30}`,stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round'},$('list'));
+  return mk('path',{d:`M1176 ${y-10}l8 9l16-18`,fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('list'))});
+man($('key'),280,380,34,'ink');
+const jar=(g,x,full,lab)=>{mk('rect',{x:x-90,y:400,width:180,height:240,rx:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':7},g);
+  if(full)mk('rect',{x:x-74,y:450,width:148,height:174,rx:18,class:'gain'},g);
+  mk('rect',{x:x-100,y:368,width:200,height:38,rx:8,class:'ink'},g);
+  const tx=mk('text',{x:x,y:690,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=lab};
+jar($('jarD'),720,0,'TODAY');jar($('jarTm'),1150,1,'TOMORROW');
+const cp=$('cpath'),CL=cp.getTotalLength();cp.setAttribute('stroke-dasharray',CL.toFixed(1));
+const FP=[];for(let i=0;i<14;i++){const l=(i+.5)/14*CL,a=cp.getPointAtLength(l),b=cp.getPointAtLength(Math.min(CL,l+2)),dx=b.x-a.x,dy=b.y-a.y,n=Math.hypot(dx,dy)||1,s=i%2?7:-7;
+  FP.push([l/CL,mk('ellipse',{cx:(a.x-dy/n*s).toFixed(1),cy:(a.y+dx/n*s).toFixed(1),rx:9,ry:6,fill:'var(--muted)'},$('fps'))])}
+man($('wk'),0,0,18,'ink');
+const NT=[0,1,2].map(()=>{const g=mk('g',{},$('notes'));mk('circle',{cx:0,cy:0,r:11,class:'ink'},g);mk('path',{d:'M10 0V-40l14 6',fill:'none',stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},g);return g});
+const CAL='MTWTFSS'.split('').map((d,k)=>{const x=140+104*(k%4),y=340+130*Math.floor(k/4);
+  const r=mk('rect',{x:x,y:y,width:92,height:110,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('days'));
+  const tx=mk('text',{x:x+46,y:y+40,'font-size':20,'text-anchor':'middle',class:'m'},$('days'));tx.textContent=d;return r});
+const pa=$('paint'),PL=pa.getTotalLength();pa.setAttribute('stroke-dasharray',PL.toFixed(1));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('mh').setAttribute('transform',`rotate(${((t*90)%360).toFixed(1)} 1290 390)`);
+$('hh').setAttribute('transform',`rotate(${((t*8)%360).toFixed(1)} 1290 390)`);
+rise($('clk'),p(u,TM.title_clock,TM.title_clock+.6));
+rise($('now'),p(u,TM.title_clock+4.6,TM.title_clock+5.2));
+
+ST.forEach((s,i)=>rise(s,p(u,TM.stepping_stone+i*.2,TM.stepping_stone+i*.2+.4)));
+rise($('hopW'),p(u,TM.stepping_stone,TM.stepping_stone+.5));
+const hs=5*p(u,TM.stepping_stone+.8,TM.horizon+5),hi=Math.min(4,Math.floor(hs)),hf=hs-hi;
+$('hop').setAttribute('transform',`translate(${(200+170*hs).toFixed(1)} ${(610-70*Math.sin(Math.PI*hf)).toFixed(1)})`);
+rise($('list'),p(u,TM.checklist,TM.checklist+.5));
+TK.forEach((k,i)=>k.setAttribute('opacity',i<3?p(u,TM.checklist+1+i*.8,TM.checklist+1.3+i*.8):0));
+rise($('hz'),p(u,TM.horizon,TM.horizon+.5));
+$('sun').setAttribute('transform',`translate(${(220*p(u,TM.horizon+.5,TM.horizon+6)).toFixed(1)} 0)`);
+
+rise($('key'),p(u,TM.keynes,TM.keynes+.5));
+rise($('jarD'),p(u,TM.jam_jar,TM.jam_jar+.5));
+rise($('jarT'),p(u,TM.jam_jar+.4,TM.jam_jar+.9));
+const rc=p(u,TM.jam_jar+4.5,TM.jam_jar+7);
+$('reach').setAttribute('x2',(840+180*rc).toFixed(1));$('reach').setAttribute('opacity',rc>0?1:0);
+$('jarTm').setAttribute('transform',`translate(${(180*rc).toFixed(1)} 0)`);
+rise($('never'),p(u,TM.jam_jar+5,TM.jam_jar+5.6));
+
+rise($('sofa'),p(u,TM.sofa,TM.sofa+.5));
+rise($('bat'),p(u,TM.battery,TM.battery+.5));
+rise($('labB'),p(u,TM.battery,TM.battery+.5));
+$('lvl').setAttribute('width',(188*p(u,TM.battery+.6,TM.battery+3.5)).toFixed(1));
+rise($('brf'),p(u,TM.briefcase,TM.briefcase+.5));
+rise($('labW'),p(u,TM.briefcase,TM.briefcase+.5));
+rise($('task'),p(u,TM.briefcase+.6,TM.briefcase+1.2));
+const fr=TM.briefcase+5.4;
+$('sofa').setAttribute('stroke',u>=fr?'var(--gain)':u>=TM.briefcase+.6?'var(--loss)':'var(--ink)');
+$('chainW').setAttribute('opacity',(1-.28*p(u,fr,fr+.8)).toFixed(2));
+rise($('free'),p(u,fr,fr+.6));
+
+rise($('pan'),p(u,TM.philosopher,TM.philosopher+.5));
+rise($('fin'),p(u,TM.finish_flag,TM.finish_flag+.5));
+$('doc').setAttribute('transform',`translate(${(460*p(u,TM.finish_flag+.6,TM.finish_flag+3.5)).toFixed(1)} 0)`);
+rise($('done'),p(u,TM.finish_flag+3.5,TM.finish_flag+4));
+rise($('wlk'),p(u,TM.walker,TM.walker+.5));
+$('wd').setAttribute('cx',(1150+230*Math.cos(t*.8)).toFixed(1));$('wd').setAttribute('cy',(500+130*Math.sin(t*.8)).toFixed(1));
+
+rise($('hills'),p(u,TM.country_path,TM.country_path+.5));
+cp.style.strokeDashoffset=(CL*(1-p(u,TM.country_path,TM.country_path+1.5))).toFixed(1);
+const cw=p(u,TM.country_path+.5,TM.footprints+9),pt=cp.getPointAtLength(CL*cw);
+rise($('wkW'),p(u,TM.country_path+.5,TM.country_path+1));
+$('wk').setAttribute('transform',`translate(${pt.x.toFixed(1)} ${(pt.y-76).toFixed(1)})`);
+FP.forEach(([f,e],i)=>{e.setAttribute('opacity',cw>=f?1:0);e.setAttribute('fill',u>=TM.footprints+i*.12?'var(--gain)':'var(--muted)')});
+rise($('more'),p(u,TM.footprints+2.6,TM.footprints+3.2));
+
+rise($('gtr'),p(u,TM.guitar,TM.guitar+.5));
+rise($('notes'),p(u,TM.guitar+.6,TM.guitar+1.1));
+NT.forEach((g,i)=>{const k=(t*.4+i/3)%1;g.setAttribute('transform',`translate(${(470+i*30+20*Math.sin(t*2+i)).toFixed(1)} ${(420-140*k).toFixed(1)})`);g.setAttribute('opacity',(1-k).toFixed(2))});
+rise($('tro'),p(u,TM.trophy,TM.trophy+.5));
+const sk=p(u,TM.smile_face,TM.smile_face+.6);
+$('tstr').setAttribute('x2',(700+200*sk).toFixed(1));$('tstr').setAttribute('y2',(360+260*sk).toFixed(1));$('tstr').setAttribute('opacity',sk>0?1:0);
+rise($('smile'),p(u,TM.smile_face+.3,TM.smile_face+.9));
+
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+CAL[5].setAttribute('fill',u>=TM.calendar+.8?'var(--gain)':'var(--stage)');
+rise($('slot'),p(u,TM.calendar+.8,TM.calendar+1.3));
+rise($('easel'),p(u,TM.paintbrush,TM.paintbrush+.5));
+pa.style.strokeDashoffset=(PL*(1-p(u,TM.paintbrush+.4,TM.paintbrush+2.4))).toFixed(1);
+rise($('labs'),p(u,TM.paintbrush+.6,TM.paintbrush+1.1));
+rise($('dev'),p(u,TM.phone_off,TM.phone_off+.5));
+const sl=p(u,TM.phone_off+.8,TM.phone_off+1.4);
+$('slash').setAttribute('x2',(1100+370*sl).toFixed(1));$('slash').setAttribute('y2',(260+320*sl).toFixed(1));$('slash').setAttribute('opacity',sl>0?1:0);
+rise($('cont'),p(u,TM.phone_off+2,TM.phone_off+2.6));
+
+// closing: the LATER box opens and the question rises out
+const Q=TM.question_mark;
+rise($('qa'),p(u,Q,Q+.5));
+rise($('qb'),p(u,Q+.4,Q+.9));
+rise($('qc'),p(u,Q+.8,Q+1.3));
+rise($('qe'),p(u,Q+1.2,Q+1.7));
+rise($('qbox'),p(u,Q+.6,Q+1.2));
+const lo=p(u,Q+1.8,Q+2.8);
+$('qlid').setAttribute('transform',`rotate(${(-70*lo).toFixed(1)} 1396 518)`);
+const qr=p(u,Q+2.4,Q+3.6);
+$('qm').setAttribute('transform',`translate(0 ${(260*(1-qr)+6*Math.sin(t*2)*qr).toFixed(1)})`);
+$('qm').setAttribute('opacity',u>=Q+2.4?1:0);
+$('qrays').setAttribute('opacity',p(u,Q+3.6,Q+4.2).toFixed(2));
+rise($('qd'),p(u,Q+5.8,Q+6.4));
+const qs=p(u,Q+6,Q+6.6);
+$('qstr').setAttribute('x2',(1130+160*qs).toFixed(1));$('qstr').setAttribute('opacity',qs>0?1:0);
+$('qlab').setAttribute('opacity',(1-.5*qs).toFixed(2));
+rise($('qwk'),p(u,Q+6.4,Q+7));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.13;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,326 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ikigai Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Ikigai: In Ogimi, the oldest residents stay busy, tend their gardens and belong to close-knit support groups called moai, showing that community and daily purpose go hand in hand. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">IKIGAI · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Inside the Village</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of Longevity.</text>
+<text class="b" x="120" y="600" font-size="32">How busy hands and close friends keep Ogimi's elders thriving.</text>
+<rect class="s-ink" x="1200" y="360" width="200" height="110" rx="14" fill="var(--stage)" stroke-width="6"/>
+<g id="tsprout"></g>
+<g id="tfriends"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A village up north.</text>
+<text class="b" x="120" y="176" font-size="32">Ogimi, on the Japanese island of Okinawa.</text>
+<g id="map">
+<rect class="loss" x="140" y="220" width="660" height="600" rx="18" fill-opacity=".1"/>
+<path class="s-ink" d="M240 770L300 720L340 650L420 600L470 520L540 470L600 390L660 320L720 260L760 280L720 350L680 420L620 500L560 560L500 640L420 700L340 780Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="170" y="560" font-size="20">OKINAWA, JAPAN</text>
+<path class="s-ink" d="M210 340V250M190 276l20-26 20 26" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="210" y="392" font-size="32" text-anchor="middle">N</text>
+</g>
+<path id="trail" class="s-muted" d="M320 730L420 650L500 560L600 450L660 370" fill="none" stroke-width="4" stroke-dasharray="8 10" stroke-linecap="round"/>
+<g id="pin"><path class="gain" d="M700 300c-20-26-34-40-34-58a34 34 0 0 1 68 0c0 18-14 32-34 58z"/><circle cx="700" cy="242" r="12" fill="var(--stage)"/><text class="d" x="650" y="262" font-size="44" text-anchor="end">Ogimi</text></g>
+<g id="walk"></g>
+<g id="authl"><text class="m" x="140" y="852" font-size="20">DASHED LINE: THE AUTHORS' TRIP TO MEET THE ELDERS</text></g>
+<g id="sign"><rect class="ink" x="1092" y="430" width="16" height="290"/><rect class="s-ink" x="890" y="250" width="420" height="180" rx="14" fill="var(--stage)" stroke-width="7"/><text id="cnum" class="d" x="1100" y="384" font-size="120" text-anchor="middle" style="fill:var(--gain)">100</text></g>
+<path class="s-line" d="M840 720h520" stroke-width="5"/>
+<g id="signt"><text class="m" x="1100" y="770" font-size="22" text-anchor="middle">A VILLAGE OF LONGEVITY</text><text class="m" x="1100" y="804" font-size="20" text-anchor="middle">REACHING 100 IS NOT UNUSUAL</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Nobody is idle.</text>
+<text class="b" x="120" y="176" font-size="32">Busy all day, but never rushed.</text>
+<g id="elder"></g>
+<g id="tasks"></g>
+<g id="clk"><circle class="s-ink" cx="1150" cy="470" r="190" fill="var(--stage)" stroke-width="8"/><g id="ticks"></g><path id="hh" class="s-ink" d="M1150 470V380" stroke-width="12" stroke-linecap="round"/><path id="mh" class="s-gain" d="M1150 470V340" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="1150" cy="470" r="12"/><text class="m" x="1150" y="710" font-size="20" text-anchor="middle">A FULL, UNHURRIED DAY</text></g>
+<g id="calm"><text class="d" x="960" y="800" font-size="48">Busy, never rushed.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A garden at every home.</text>
+<text class="b" x="120" y="176" font-size="32">A small reason to step outside, every single day.</text>
+<path class="s-line" d="M120 700h900" stroke-width="5"/>
+<rect class="ink" x="160" y="660" width="820" height="40" rx="8" fill-opacity=".2"/>
+<g id="plants"></g>
+<g id="drops"></g>
+<g id="can"><rect class="ink" x="-50" y="-40" width="80" height="60" rx="10"/><path class="s-ink" d="M30 10L80 30M-36-40q4-40 46 0" fill="none" stroke-width="8" stroke-linecap="round"/></g>
+<g id="tags"></g>
+<g id="week"></g>
+<text id="weekl" class="m" x="1060" y="700" font-size="22">WAITING FOR YOU EVERY DAY</text>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet the moai.</text>
+<text class="b" x="120" y="176" font-size="32">An informal group of people who look out for one another.</text>
+<circle id="mring" class="s-line" cx="640" cy="500" r="200" fill="none" stroke-width="4" stroke-dasharray="10 10"/>
+<g id="mppl"></g>
+<g id="jar"><rect class="s-ink" x="585" y="440" width="110" height="130" rx="18" fill="var(--stage)" stroke-width="6"/><rect id="jfill" class="gain" x="591" y="564" width="98" height="0"/><rect class="ink" x="575" y="424" width="130" height="20" rx="6"/><text class="m" x="640" y="616" font-size="22" text-anchor="middle">SHARED FUND</text></g>
+<g id="coins"></g>
+<path id="harr" class="s-gain" d="M700 520Q745 570 780 530M762 528l18 2-2 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="k0"><rect class="s-line" x="1000" y="300" width="480" height="160" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1030" y="350" font-size="22">EACH MONTH</text><text class="d5" x="1030" y="420" font-size="36">Everyone chips in.</text></g>
+<g id="k1"><rect class="s-line" x="1000" y="500" width="480" height="160" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1030" y="550" font-size="22">WHEN TIMES ARE HARD</text><text class="d5" x="1030" y="620" font-size="36">The fund helps out.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of security.</text>
+<text class="b" x="120" y="176" font-size="32">You count on others, and they count on you.</text>
+<g id="e0"><rect class="s-line" x="120" y="240" width="300" height="280" rx="18" fill="var(--stage)" stroke-width="3"/><path class="gain" transform="translate(270 380) scale(1.2)" d="M0 40C-70-10-70-70-30-75C-10-78 0-60 0-50C0-60 10-78 30-75C70-70 70-10 0 40Z"/><text class="m" x="270" y="490" font-size="22" text-anchor="middle">EMOTIONAL</text></g>
+<g id="e1"><rect class="s-line" x="460" y="240" width="300" height="280" rx="18" fill="var(--stage)" stroke-width="3"/><circle class="gain" cx="610" cy="370" r="60"/><circle cx="610" cy="370" r="38" fill="none" stroke="var(--on-gain)" stroke-width="6"/><text class="m" x="610" y="490" font-size="22" text-anchor="middle">FINANCIAL</text></g>
+<g id="cnt"><circle class="gain" cx="240" cy="670" r="54"/><text class="d" x="240" y="679" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">YOU</text><circle class="ink" cx="620" cy="670" r="24"/><circle class="ink" cx="670" cy="650" r="24"/><circle class="ink" cx="720" cy="670" r="24"/><path class="s-gain" d="M310 640Q445 585 585 635M566 620l19 15-22 9M585 700Q445 755 310 705M329 720l-19-15 22-9" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="120" y="800" font-size="20">YOU COUNT ON THEM · THEY COUNT ON YOU</text></g>
+<circle id="lring" class="s-line" cx="1180" cy="470" r="200" fill="none" stroke-width="4" stroke-dasharray="10 10"/>
+<g id="lone"></g>
+<g id="lfr"></g>
+<g id="alone"><text class="d" x="880" y="830" font-size="42">Nobody faces life alone.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Life is full of gatherings.</text>
+<text class="b" x="120" y="176" font-size="32">Festivals, birthdays, singing and dancing.</text>
+<g id="lan"><path class="s-ink" d="M140 230Q800 340 1460 230" fill="none" stroke-width="4"/></g>
+<path class="s-line" d="M120 720h1360" stroke-width="5"/>
+<g id="stage6"><circle class="ink" cx="300" cy="500" r="24"/><path class="s-ink" d="M300 524V720M260 720h80" stroke-width="7" stroke-linecap="round"/><g id="singer"></g></g>
+<g id="notes"></g>
+<g id="link"></g>
+<g id="dance"></g>
+<g id="joy"><text class="d" x="120" y="820" font-size="44">Joy is shared, not chased alone.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Purpose meets people.</text>
+<text class="b" x="120" y="176" font-size="32">A daily task, plus a circle that cares.</text>
+<g id="lens"><path class="gain" d="M800 326.5A250 250 0 0 1 800 673.5A250 250 0 0 1 800 326.5Z"/><text class="m" x="800" y="508" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">PURPOSE</text></g>
+<g id="vA"><g id="vAi"><circle class="s-ink" cx="620" cy="500" r="250" fill="none" stroke-width="7"/><path class="s-gain" d="M470 470v-50" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="460" cy="420" r="11"/><circle class="gain" cx="480" cy="410" r="11"/><text class="d5" x="470" y="530" font-size="44" text-anchor="middle">Garden</text><text class="m" x="470" y="570" font-size="20" text-anchor="middle">A DAILY TASK</text></g></g>
+<g id="vB"><g id="vBi"><circle class="s-ink" cx="980" cy="500" r="250" fill="none" stroke-width="7"/><circle class="ink" cx="1050" cy="440" r="14"/><circle class="ink" cx="1080" cy="424" r="14"/><circle class="ink" cx="1110" cy="440" r="14"/><text class="d5" x="1080" y="530" font-size="44" text-anchor="middle">Moai</text><text class="m" x="1080" y="570" font-size="20" text-anchor="middle">A CIRCLE THAT CARES</text></g></g>
+<g id="copy"><text class="d5" x="120" y="830" font-size="36">No village needed: a few people, one small routine.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="360" font-size="88" letter-spacing="-2">Who could be in</text></g>
+<g id="qb"><text class="d" x="136" y="470" font-size="88" letter-spacing="-2">your <tspan style="fill:var(--gain)">moai</tspan>?</text></g>
+<g id="qc"><text class="m" x="143" y="600" font-size="26">INVITE TWO OR THREE PEOPLE · MEET REGULARLY</text><text class="m" x="143" y="644" font-size="26">CHOOSE ONE SMALL DAILY TASK THAT'S YOURS</text></g>
+<g id="qg"><circle class="s-line" cx="1280" cy="440" r="150" fill="none" stroke-width="5"/><text class="d" x="1280" y="495" font-size="160" text-anchor="middle" style="fill:var(--gain)">?</text><g id="seats"></g><text class="m" x="1280" y="598" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">YOU</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Inside the Village of Longevity&rdquo;, from <em>Ikigai</em> by Héctor García and Francesc Miralles. Examples are drawn from the authors&#x27; visit to Ogimi and their description of moai groups, as reported in the book. The map, people, garden and coin jar are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 9.5], [9.5, 26.0], [26.0, 41.8], [41.8, 56.3], [56.3, 70.9], [70.9, 83.3], [83.3, 95.7], [95.7, 111.1], [111.1, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Secret Village", "A Village Up North", "Always Busy", "The Garden", "Meet the Moai", "Why It Matters", "Time to Celebrate", "Purpose Meets People", "Your Challenge"];
+const TM={"title_garden": 0.0, "map_okinawa": 9.84, "authors": 15.92, "century_sign": 19.6, "elder_woman": 26.32, "slow_clock": 36.2, "veg_garden": 42.08, "watering_can": 45.36, "friend_circle": 56.64, "coin_jar": 62.64, "helping_hand": 66.4, "two_hands": 71.2, "lone_figure": 79.24, "lanterns": 83.56, "karaoke_mic": 86.16, "two_circles": 96.0, "overlap": 101.2, "question_mark": 111.44};
+const fig=(par,x,y,r,cls)=>{const g=mk('g',{},par);mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const recl=(g,c)=>[...g.children].forEach(e=>e.setAttribute('class',c));
+const ring=(n,cx,cy,R,a0=-Math.PI/2)=>Array.from({length:n},(_,i)=>{const a=a0+i*2*Math.PI/n;return [cx+R*Math.cos(a),cy+R*Math.sin(a)]});
+const sprout=(par,x,y)=>{const g=mk('g',{},par);mk('path',{d:'M'+x+' '+y+'v-26',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},g);mk('circle',{cx:x-8,cy:y-26,r:8,class:'gain'},g);mk('circle',{cx:x+8,cy:y-32,r:8,class:'gain'},g);return g};
+const TS=[];for(let r=0;r<2;r++)for(let i=0;i<4;i++)TS.push(sprout($('tsprout'),1230+i*47,410+r*48));
+const TF=ring(7,1300,415,150).map((q,i)=>mk('circle',{cx:q[0],cy:q[1],r:24,class:i===3?'gain':'ink'},$('tfriends')));
+const TR=[[320,730],[420,650],[500,560],[600,450],[660,370]];
+const along=(P,k)=>{const n=P.length-1,f=cl(k)*n,i=Math.min(n-1,Math.floor(f)),s=f-i;return [P[i][0]+(P[i+1][0]-P[i][0])*s,P[i][1]+(P[i+1][1]-P[i][1])*s]};
+[-14,14].forEach(dx=>fig($('walk'),dx,-46,10,'ink'));
+fig($('elder'),420,400,46,'ink');mk('circle',{cx:420,cy:344,r:16,class:'ink'},$('elder'));mk('path',{d:'M500 500L520 596',class:'s-ink','stroke-width':7,'stroke-linecap':'round'},$('elder'));
+const TK=[['CHORES','M-20-30L4 4M-8 10L14-10L30 24L10 32Z'],['COOKING','M-30-6h60v26a12 12 0 0 1-12 12h-36a12 12 0 0 1-12-12zM-38-6h76M-8-18h16'],['MENDING','M-26 26L26-26M18-26a6 6 0 1 1 8 8M-26 26q10-20 20 0t20 0'],['NEIGHBOURS','M-24-14a10 10 0 1 0 .1 0M4-14a10 10 0 1 0 .1 0M-30 26q16-24 32 0M-2 26q16-24 32 0']].map((d,i)=>{const x=i%2?640:200,y=i<2?320:620,g=mk('g',{},$('tasks'));
+  mk('circle',{cx:x,cy:y,r:60,fill:'var(--stage)',class:'s-ink','stroke-width':5},g);
+  mk('path',{d:d[1],transform:'translate('+x+' '+y+')',fill:'none',class:'s-ink','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  mk('text',{x:x,y:y+96,'font-size':20,'text-anchor':'middle',class:'m'},g).textContent=d[0];return g});
+const TI=ring(12,1150,470,160).map(q=>mk('circle',{cx:q[0],cy:q[1],r:11,fill:'var(--line)'},$('ticks')));
+const PL=[];for(let i=0;i<8;i++){const g=mk('g',{},$('plants'));mk('path',{d:'M0 0V-130M0-60q-40-10-50-44q40 0 50 30M0-90q40-10 50-44q-40 0-50 30',class:'s-ink','stroke-width':5,fill:'none','stroke-linecap':'round','stroke-linejoin':'round'},g);
+  if(i%3===1)[[-18,-130],[16,-118]].forEach(c=>mk('circle',{cx:c[0],cy:c[1],r:13,class:'gain'},g));PL.push([g,220+i*105])}
+const DR=[0,1,2].map(()=>mk('circle',{r:6,class:'loss'},$('drops')));
+const TG=["Water the plants","Pull the weeds","Pick what's ready"].map((s,i)=>{const g=mk('g',{},$('tags')),y=250+i*100;
+  mk('rect',{x:1060,y:y,width:420,height:76,rx:38,fill:'var(--stage)',class:'s-ink','stroke-width':4},g);mk('circle',{cx:1100,cy:y+38,r:12,class:'gain'},g);
+  mk('text',{x:1130,y:y+49,'font-size':32,class:'d5'},g).textContent=s;return g});
+const WK=[...'MTWTFSS'].map((c,i)=>{const x=1084+i*60,g=mk('g',{},$('week'));const r=mk('circle',{cx:x,cy:620,r:24,fill:'var(--line)'},g);
+  const tx=mk('text',{x:x,y:627,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=c;return [r,tx]});
+const MQ=ring(6,640,500,200),MW=MQ.map(()=>mk('g',{},$('mppl'))),MF=MQ.map((q,i)=>fig(MW[i],q[0],q[1],24,'ink'));
+const CO=MQ.map(()=>mk('circle',{r:12,class:'gain',stroke:'var(--ink)','stroke-width':3},$('coins')));
+fig($('lone'),1180,430,30,'ink');
+const LF=ring(6,1180,470,200).map(q=>[fig($('lfr'),0,0,20,'ink'),q]);
+const LN=[];for(let i=0;i<9;i++){const s=(i+1)/10,x=140+1320*s,y=230+220*s*(1-s),g=mk('g',{},$('lan'));
+  mk('path',{d:'M'+x+' '+y+'v14',class:'s-ink','stroke-width':3},g);mk('rect',{x:x-22,y:y+14,width:44,height:60,rx:18,class:i%2?'loss':'gain'},g);
+  mk('path',{d:'M'+(x-12)+' '+(y+14)+'h24M'+(x-12)+' '+(y+74)+'h24',class:'s-ink','stroke-width':4},g);LN.push([g,x,y])}
+fig($('singer'),400,500,28,'ink');
+const DN=[];for(let i=0;i<6;i++){const g=mk('g',{},$('dance'));fig(g,640+i*140,520,28,'ink');DN.push(g)}
+for(let i=0;i<5;i++)mk('path',{d:'M'+(682+i*140)+' 600q28 30 56 0',class:'s-gain','stroke-width':7,fill:'none','stroke-linecap':'round'},$('link'));
+const NT=[0,1,2].map(()=>{const g=mk('g',{},$('notes'));mk('circle',{cx:0,cy:0,r:10,class:'gain'},g);mk('path',{d:'M9 0V-36h14',class:'s-gain','stroke-width':5,fill:'none'},g);return g});
+const ST=ring(4,1280,440,150,Math.PI/2).map((q,i)=>mk('circle',{cx:q[0],cy:q[1],r:i?34:48,'stroke-width':5,'stroke-dasharray':i?'8 8':'none',fill:i?'var(--stage)':'var(--gain)',stroke:i?'var(--ink)':'var(--gain)'},$('seats')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+TS.forEach((g,i)=>rise(g,p(u,TM.title_garden+i*.15,TM.title_garden+i*.15+.5)));
+TF.forEach((c,i)=>{const a=TM.title_garden+4+i*.3;c.setAttribute('opacity',p(u,a,a+.4));c.setAttribute('transform','translate(0 '+(3*Math.sin(t*2+i)).toFixed(1)+')')});
+
+rise($('map'),p(u,TM.map_okinawa,TM.map_okinawa+.6));rise($('pin'),p(u,TM.map_okinawa+2,TM.map_okinawa+2.5));
+const wp=along(TR,p(u,TM.authors,TM.authors+3));$('walk').setAttribute('transform','translate('+wp[0].toFixed(1)+' '+wp[1].toFixed(1)+')');
+$('walk').setAttribute('opacity',p(u,TM.authors,TM.authors+.4));$('trail').setAttribute('opacity',p(u,TM.authors,TM.authors+.6));rise($('authl'),p(u,TM.authors,TM.authors+.5));
+rise($('sign'),p(u,TM.century_sign,TM.century_sign+.5));$('cnum').textContent=Math.round(100*p(u,TM.century_sign+.2,TM.century_sign+1.6));rise($('signt'),p(u,TM.century_sign+1,TM.century_sign+1.5));
+
+rise($('elder'),p(u,TM.elder_woman,TM.elder_woman+.5));
+TK.forEach((g,i)=>{const a=TM.elder_woman+5+i*.5;rise(g,p(u,a,a+.4))});
+rise($('clk'),p(u,TM.slow_clock,TM.slow_clock+.5));
+const dk=p(u,TM.slow_clock+.3,TM.slow_clock+3.5);TI.forEach((c,i)=>c.setAttribute('fill',dk*12>i+.5?'var(--gain)':'var(--line)'));
+$('mh').setAttribute('transform','rotate('+(t*10%360).toFixed(1)+' 1150 470)');$('hh').setAttribute('transform','rotate('+(t*.8%360+120).toFixed(1)+' 1150 470)');
+rise($('calm'),p(u,TM.slow_clock+2.9,TM.slow_clock+3.4));
+
+PL.forEach(([g,x],i)=>{const k=p(u,TM.veg_garden+i*.15,TM.veg_garden+i*.15+.8);g.setAttribute('transform','translate('+x+' 660) scale('+Math.max(k,.001).toFixed(3)+')');g.setAttribute('opacity',k>0?1:0)});
+const cw=p(u,TM.watering_can,TM.watering_can+5);$('can').setAttribute('transform','translate('+(260+640*cw).toFixed(1)+' 440)');$('can').setAttribute('opacity',p(u,TM.watering_can,TM.watering_can+.4));
+DR.forEach((d,i)=>{const k=(t*1.2+i/3)%1;d.setAttribute('cx',(340+640*cw+6*i).toFixed(1));d.setAttribute('cy',(476+90*k).toFixed(1));d.setAttribute('opacity',u>=TM.watering_can&&cw<1?(1-k).toFixed(2):0)});
+TG.forEach((g,i)=>{const a=TM.watering_can+i*1.8;rise(g,p(u,a,a+.4))});
+rise($('week'),p(u,TM.veg_garden+8.4,TM.veg_garden+8.9));rise($('weekl'),p(u,TM.veg_garden+9,TM.veg_garden+9.5));
+WK.forEach(([r,tx],i)=>{const on=u>=TM.veg_garden+8.7+i*.3;r.setAttribute('fill',on?'var(--gain)':'var(--line)');tx.style.fill=on?'var(--on-gain)':'var(--muted)'});
+
+rise($('mring'),p(u,TM.friend_circle,TM.friend_circle+.6));
+MW.forEach((g,i)=>{const a=TM.friend_circle+.3+i*.25;rise(g,p(u,a,a+.4))});
+rise($('jar'),p(u,TM.friend_circle+2,TM.friend_circle+2.5));
+CO.forEach((c,i)=>{const a=TM.coin_jar+.3+i*.35,k=p(u,a,a+.7),q=MQ[i];c.setAttribute('cx',(q[0]+(640-q[0])*k).toFixed(1));c.setAttribute('cy',(q[1]+(430-q[1])*k).toFixed(1));c.setAttribute('opacity',u<a?0:1-p(u,a+.6,a+.8))});
+const jf=100*p(u,TM.coin_jar+.8,TM.coin_jar+3);$('jfill').setAttribute('y',(564-jf).toFixed(1));$('jfill').setAttribute('height',jf.toFixed(1));
+const fall=p(u,TM.helping_hand,TM.helping_hand+.6)-p(u,TM.helping_hand+2.2,TM.helping_hand+3);MF[1].setAttribute('transform','translate(0 '+(50*fall).toFixed(1)+')');
+recl(MF[1],u>=TM.helping_hand+2.2?'gain':u>=TM.helping_hand?'loss':'ink');
+$('harr').setAttribute('opacity',p(u,TM.helping_hand+1,TM.helping_hand+1.5));
+rise($('k0'),p(u,TM.coin_jar,TM.coin_jar+.5));rise($('k1'),p(u,TM.helping_hand,TM.helping_hand+.5));
+
+rise($('e0'),p(u,TM.two_hands,TM.two_hands+.5));rise($('e1'),p(u,TM.two_hands+.6,TM.two_hands+1.1));
+rise($('cnt'),p(u,TM.two_hands+3.3,TM.two_hands+3.8));
+rise($('lone'),p(u,TM.lone_figure,TM.lone_figure+.5));
+const lr=p(u,TM.lone_figure+1,TM.lone_figure+2.2);$('lring').setAttribute('opacity',lr);
+LF.forEach(([g,q])=>{const a=Math.atan2(q[1]-470,q[0]-1180),o=80*(1-lr);g.setAttribute('transform','translate('+(q[0]+o*Math.cos(a)).toFixed(1)+' '+(q[1]+o*Math.sin(a)).toFixed(1)+')');g.setAttribute('opacity',lr)});
+recl($('lone').firstChild,lr>=1?'gain':'ink');
+rise($('alone'),p(u,TM.lone_figure+2,TM.lone_figure+2.5));
+
+rise($('lan'),p(u,TM.lanterns,TM.lanterns+.6));
+LN.forEach(([g,x,y],i)=>g.setAttribute('transform','rotate('+(6*Math.sin(t*2+i)).toFixed(2)+' '+x+' '+y.toFixed(1)+')'));
+rise($('stage6'),p(u,TM.karaoke_mic,TM.karaoke_mic+.5));
+NT.forEach((g,i)=>{const k=(t*.5+i/3)%1;g.setAttribute('transform','translate('+(255-100*k).toFixed(1)+' '+(415-90*k).toFixed(1)+')');g.setAttribute('opacity',u>=TM.karaoke_mic?Math.sin(Math.PI*k).toFixed(2):0)});
+const sh=u>=TM.karaoke_mic+4.2;
+DN.forEach((g,i)=>{const a=TM.karaoke_mic+.6+i*.25;rise(g,p(u,a,a+.4));g.firstChild.setAttribute('transform','translate(0 '+(-10*Math.abs(Math.sin(t*3+i))).toFixed(1)+')');recl(g.firstChild,sh?'gain':'ink')});
+rise($('link'),p(u,TM.karaoke_mic+4.2,TM.karaoke_mic+4.7));rise($('joy'),p(u,TM.karaoke_mic+4.4,TM.karaoke_mic+4.9));
+
+rise($('vA'),p(u,TM.two_circles,TM.two_circles+.5));rise($('vB'),p(u,TM.two_circles+3,TM.two_circles+3.5));
+const ov=p(u,TM.overlap,TM.overlap+1.2);$('vAi').setAttribute('transform','translate('+(-120*(1-ov)).toFixed(1)+' 0)');$('vBi').setAttribute('transform','translate('+(120*(1-ov)).toFixed(1)+' 0)');
+const lk=p(u,TM.overlap+1,TM.overlap+1.5),ps=1+.05*Math.sin(t*3)*lk;$('lens').setAttribute('opacity',lk);$('lens').setAttribute('transform','translate(800 500) scale('+ps.toFixed(3)+') translate(-800 -500)');
+rise($('copy'),p(u,TM.overlap+4.6,TM.overlap+5.1));
+
+rise($('qa'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qb'),p(u,TM.question_mark+.4,TM.question_mark+.9));
+rise($('qg'),p(u,TM.question_mark+.2,TM.question_mark+.8));rise($('qc'),p(u,TM.question_mark+2.6,TM.question_mark+3.1));
+ST.forEach((c,i)=>{if(!i)return;const on=u>=TM.question_mark+3+i*.5;c.setAttribute('fill',on?'var(--gain)':'var(--stage)');c.setAttribute('stroke',on?'var(--gain)':'var(--ink)');c.setAttribute('stroke-dasharray',on?'none':'8 8')});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.61;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

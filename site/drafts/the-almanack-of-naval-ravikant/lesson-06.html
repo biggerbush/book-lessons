@@ -1,0 +1,423 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Almanack of Naval Ravikant Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of The Almanack of Naval Ravikant: Happiness is mostly a state of peace you can cultivate, and every desire is a contract you make with yourself to be unhappy until you get it. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE ALMANACK OF NAVAL RAVIKANT · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Happiness is a skill</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">you can train.</text>
+<text class="b" x="120" y="600" font-size="32">Why every desire quietly costs you a little peace.</text>
+<g id="t_fig">
+<g id="t_db"><rect class="ink" x="1240" y="254" width="200" height="12" rx="6"/><rect class="gain" x="1222" y="220" width="30" height="80" rx="8"/><rect class="gain" x="1428" y="220" width="30" height="80" rx="8"/></g>
+<circle class="s-ink" cx="1340" cy="420" r="70" fill="var(--stage)" stroke-width="7"/>
+<circle class="ink" cx="1315" cy="405" r="7"/><circle class="ink" cx="1365" cy="405" r="7"/>
+<path class="s-gain" d="M1305 440q35 30 70 0" fill="none" stroke-width="7" stroke-linecap="round"/>
+<path class="ink" d="M1230 660v-50a110 110 0 0 1 220 0v50z"/>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Happiness is a skill.</text>
+<text class="b" x="120" y="176" font-size="32">Naval treats it the way he treats getting rich.</text>
+<g id="a_nav">
+<g id="a_p"></g>
+<circle class="s-ink" cx="420" cy="350" r="60" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="420" y="372" font-size="64" text-anchor="middle" style="fill:var(--gain)">$</text>
+<text class="d" x="520" y="370" font-size="56" text-anchor="middle" style="fill:var(--muted)">=</text>
+<circle class="gain" cx="620" cy="350" r="60"/>
+<circle cx="600" cy="335" r="6" fill="var(--on-gain)"/><circle cx="640" cy="335" r="6" fill="var(--on-gain)"/>
+<path d="M592 365q28 24 56 0" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="420" y="450" font-size="20" text-anchor="middle">GETTING RICH</text>
+<text class="m" x="620" y="450" font-size="20" text-anchor="middle">HAPPINESS</text>
+</g>
+<g id="a_gym">
+<rect class="ink" x="790" y="344" width="220" height="12" rx="6"/>
+<rect class="gain" x="800" y="305" width="30" height="90" rx="6"/><rect class="gain" x="970" y="305" width="30" height="90" rx="6"/>
+<rect class="gain" x="776" y="320" width="22" height="60" rx="6"/><rect class="gain" x="1002" y="320" width="22" height="60" rx="6"/>
+<text class="m" x="900" y="450" font-size="20" text-anchor="middle">PRACTICE, LIKE FITNESS</text>
+</g>
+<g id="a_yrs">
+<g id="a_bars"></g>
+<path class="s-ink" d="M140 790H900" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="120" y="840" font-size="20">WORKED ON IT FOR YEARS · STEADILY HAPPIER</text>
+</g>
+<g id="a_sign">
+<rect class="ink" x="1272" y="300" width="16" height="390"/>
+<path class="s-ink" d="M1190 690h180" stroke-width="6" stroke-linecap="round"/>
+<path class="gain" d="M1180 340h220l40 35-40 35h-220z"/>
+<text class="d" x="1290" y="388" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">HAPPY</text>
+<path class="s-ink" d="M1400 450h-220l-40 35 40 35h220z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="1290" y="493" font-size="22" text-anchor="middle">UNHAPPY</text>
+<g id="a_days"></g>
+<text class="m" x="1120" y="790" font-size="20">CHOSEN AGAIN EACH DAY</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Happiness is mostly peace.</text>
+<text class="b" x="120" y="176" font-size="32">Not a thrill. A quiet state where nothing feels missing.</text>
+<g id="b_fw"><g id="b_fwi">
+<rect class="s-line" x="120" y="230" width="640" height="440" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="20">WHAT WE PICTURE</text>
+<g id="b_bursts"></g>
+<text class="m" x="150" y="640" font-size="20">EXCITEMENT · BIG WINS</text>
+</g></g>
+<g id="b_lake">
+<rect class="s-line" x="840" y="230" width="640" height="440" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="280" font-size="20">WHAT NAVAL MEANS</text>
+<path class="gain" d="M1090 520a70 70 0 0 1 140 0z"/>
+<path class="s-ink" d="M870 520H1450" stroke-width="5" stroke-linecap="round"/>
+<path id="b_wv" class="s-muted" d="M930 570h140M1230 570h160M1020 610h200" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="870" y="650" font-size="20">PEACE · NOTHING MISSING</text>
+</g>
+<g id="b_hole"><circle id="b_hc" class="s-loss" cx="1330" cy="390" r="56" fill="none" stroke-width="5" stroke-dasharray="10 8"/><text id="b_ht" class="m" x="1330" y="397" font-size="20" text-anchor="middle" style="fill:var(--loss)">LACK</text></g>
+<g id="b_cap"><text class="d" x="120" y="790" font-size="46">When the lack goes, happiness remains.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every desire is a contract.</text>
+<text class="b" x="120" y="176" font-size="32">One you sign with yourself.</text>
+<g id="c_who"><g id="c_ppl"></g>
+<text class="m" x="270" y="600" font-size="22" text-anchor="middle">YOU</text>
+<text class="m" x="1330" y="600" font-size="22" text-anchor="middle">ALSO YOU</text></g>
+<g id="c_doc">
+<rect class="s-ink" x="480" y="220" width="640" height="580" rx="12" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="800" y="300" font-size="52" text-anchor="middle">CONTRACT</text>
+<g id="c_par"><text class="m" x="800" y="352" font-size="22" text-anchor="middle">BETWEEN YOU AND YOU</text></g>
+<g id="c_terms">
+<text class="d5" x="540" y="450" font-size="38">I agree to be <tspan style="fill:var(--loss)">unhappy</tspan></text>
+<text class="d5" x="540" y="505" font-size="38">until I get what I want.</text>
+<path class="s-line" d="M540 570h520M540 610h380" stroke-width="5" stroke-linecap="round"/>
+</g>
+<path class="s-ink" d="M540 720h400" stroke-width="4"/>
+<text class="m" x="540" y="760" font-size="22">SIGNATURE</text>
+<path id="c_sig" class="s-ink" d="M560 700c20-40 30-40 20 0s10-30 30-10 20 20 40-10 30 30 50 0 40-20 60 0 30-10 60-6" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="c_cap"><text class="d5" x="800" y="852" font-size="34" text-anchor="middle">You may not even notice you signed it.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A simple picture.</text>
+<text class="b" x="120" y="176" font-size="32">Imagine you suddenly want the newest phone.</text>
+<g id="d_who"><g id="d_p"></g></g>
+<g id="d_old"><rect class="s-ink" x="240" y="560" width="56" height="96" rx="10" fill="var(--stage)" stroke-width="5"/><text class="m" x="268" y="694" font-size="22" text-anchor="middle">OLD PHONE</text></g>
+<text id="d_st" class="m" x="420" y="740" font-size="24" text-anchor="middle">CALM</text>
+<g id="d_cl">
+<rect class="loss" x="346" y="310" width="154" height="44" rx="22" fill-opacity=".55"/><circle class="loss" cx="385" cy="315" r="34" fill-opacity=".55"/><circle class="loss" cx="425" cy="300" r="44" fill-opacity=".55"/><circle class="loss" cx="465" cy="318" r="32" fill-opacity=".55"/>
+<path class="s-loss" d="M390 372v18M425 372v18M460 372v18" stroke-width="5" stroke-linecap="round"/>
+<path class="s-loss" d="M506 318h22" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="538" y="325" font-size="20" style="fill:var(--loss)">SOMETHING MISSING</text>
+</g>
+<g id="d_arr"><path class="s-gain" d="M560 470H1040" stroke-width="5" stroke-dasharray="14 10" fill="none"/><path class="s-gain" d="M1020 450l20 20-20 20" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="800" y="440" font-size="20" text-anchor="middle">I WANT IT</text></g>
+<g id="d_ph"><rect class="s-gain" x="1080" y="300" width="170" height="300" rx="24" fill="var(--stage)" stroke-width="7"/><rect class="gain" x="1100" y="330" width="130" height="230" rx="8" fill-opacity=".3"/>
+<path class="s-gain" d="M1290 290v40M1270 310h40M1060 260v24M1048 272h24" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="1165" y="650" font-size="20" text-anchor="middle">THE NEWEST PHONE</text></g>
+<g id="d_bag"><path class="s-gain" d="M590 600v-20a25 25 0 0 1 50 0v20" fill="none" stroke-width="6"/><rect class="gain" x="560" y="595" width="110" height="100" rx="8"/></g>
+<g id="d_rel"><path class="s-gain" d="M684 645h30" stroke-width="5" stroke-linecap="round"/><text class="m" x="726" y="653" font-size="24" style="fill:var(--gain)">RELIEF, BRIEFLY</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A new desire takes its place.</text>
+<text class="b" x="120" y="176" font-size="32">So the peace keeps slipping ahead of you.</text>
+<g id="e_qw"><text class="m" x="120" y="232" font-size="20">ONE WANT REPLACES THE LAST</text><g id="e_q"></g></g>
+<g id="e_tm">
+<rect class="s-ink" x="300" y="650" width="600" height="40" rx="20" fill="none" stroke-width="6"/>
+<path id="e_belt" class="s-muted" d="M330 670H870" stroke-width="4" stroke-dasharray="20 20"/>
+<path class="s-ink" d="M860 650L890 540h40" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="e_l1" class="s-ink" stroke-width="8" stroke-linecap="round"/><path id="e_l2" class="s-ink" stroke-width="8" stroke-linecap="round"/>
+<g id="e_rb"><circle class="ink" cx="600" cy="470" r="30"/><path class="ink" d="M555 600v-30a45 45 0 0 1 90 0v30z"/></g>
+<g id="e_pc"><path class="s-gain" d="M660 500H1120" stroke-width="4" stroke-dasharray="10 10"/><circle class="gain" cx="1180" cy="500" r="50"/>
+<text class="m" x="1180" y="507" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">PEACE</text>
+<text class="m" x="1180" y="590" font-size="20" text-anchor="middle">ALWAYS AHEAD</text></g>
+</g>
+<g id="e_t1"><text class="d5" x="120" y="780" font-size="40">Wanting things isn’t wrong.</text></g>
+<g id="e_t2"><text class="d" x="120" y="840" font-size="44">Each want has a hidden cost in calm.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Be picky about desires.</text>
+<text class="b" x="120" y="176" font-size="32">Choose one big thing. Let the smaller cravings go.</text>
+<g id="f_you"><g id="f_yp"></g><text class="m" x="220" y="660" font-size="22" text-anchor="middle">YOU</text></g>
+<g id="f_tg"><circle class="s-ink" cx="1300" cy="470" r="130" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="1300" cy="470" r="85" fill="none" stroke-width="6"/><circle class="gain" cx="1300" cy="470" r="40"/></g>
+<g id="f_one"><text class="m" x="1300" y="650" font-size="22" text-anchor="middle" style="fill:var(--gain)">ONE BIG THING</text></g>
+<g id="f_crl"><text class="m" x="440" y="266" font-size="20">SMALL CRAVINGS</text></g>
+<g id="f_lgl"><text class="m" x="1140" y="266" font-size="20" text-anchor="end" style="fill:var(--loss)">LET GO</text></g>
+<g id="f_cr"></g>
+<path id="f_path" class="s-gain" d="M290 470H1160" stroke-width="8" stroke-linecap="round" fill="none"/>
+<g id="f_fc"><text class="m" x="725" y="520" font-size="22" text-anchor="middle">FEWER CONTRACTS</text></g>
+<g id="f_cap"><text class="d" x="120" y="800" font-size="44">Still pursue goals. Sign far fewer contracts.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Catch the contract.</text>
+<text class="b" x="120" y="176" font-size="32">Notice the unsettled feeling. Look underneath.</text>
+<g id="h_un"><text class="m" x="160" y="222" font-size="20" style="fill:var(--loss)">UNSETTLED</text>
+<polyline id="h_jag" class="s-loss" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></g>
+<g id="h_card">
+<g id="h_L"><path id="h_Lp" class="s-ink" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><text class="d5" x="240" y="500" font-size="32">DESIRE</text><path class="s-line" d="M240 560h140M240 610h120" stroke-width="5" stroke-linecap="round"/></g>
+<g id="h_R"><path id="h_Rp" class="s-ink" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><text class="d5" x="440" y="500" font-size="32">CONTRACT</text><path class="s-line" d="M445 560h150M445 610h110" stroke-width="5" stroke-linecap="round"/></g>
+</g>
+<g id="h_mag"><circle class="s-ink" cx="0" cy="0" r="60" fill="var(--stage)" fill-opacity=".5" stroke-width="10"/><path class="s-ink" d="M42 42l50 50" stroke-width="16" stroke-linecap="round"/></g>
+<g id="h_sc">
+<path class="s-ink" d="M1160 330V760M1060 760h200" stroke-width="8" stroke-linecap="round"/>
+<path id="h_beam" class="s-ink" d="M920 330H1400" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1160" cy="330" r="14"/>
+<g id="h_p0"><path class="s-muted" d="M-80 120L0 0L80 120" fill="none" stroke-width="3"/><path class="loss" d="M-90 120h180l-25 40h-130z"/><text class="m" x="0" y="200" font-size="20" text-anchor="middle" style="fill:var(--loss)">THE WANT</text></g>
+<g id="h_p1"><path class="s-muted" d="M-80 120L0 0L80 120" fill="none" stroke-width="3"/><path class="gain" d="M-90 120h180l-25 40h-130z"/><text class="m" x="0" y="200" font-size="20" text-anchor="middle" style="fill:var(--gain)">YOUR PEACE</text></g>
+</g>
+<g id="h_cap"><text class="d" x="120" y="830" font-size="44">Often it isn’t worth it. Tear it up.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="n_a"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which desire is quietly</text></g>
+<g id="n_b"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">stealing your calm?</text></g>
+<g id="n_c"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">Is it worth the <tspan style="fill:var(--gain)">price</tspan>?</text></g>
+<g id="n_m"><text class="m" x="143" y="700" font-size="26" style="fill:var(--gain)">IF NOT, LET IT GO</text></g>
+<g id="n_nb">
+<rect class="s-ink" x="1270" y="520" width="190" height="240" rx="12" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1270" y="520" width="190" height="26" rx="8"/>
+<path class="s-line" d="M1300 590h130M1300 630h130M1300 670h90" stroke-width="5" stroke-linecap="round"/>
+<rect class="s-gain" x="1300" y="696" width="34" height="34" rx="4" fill="none" stroke-width="4"/>
+<path id="n_tick" class="s-gain" d="M1306 712l10 10 22-26" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Happiness is a skill you can train&rdquo;, from <em>The Almanack of Naval Ravikant</em> by Eric Jorgenson. Naval&#x27;s view of happiness as a trainable skill and his idea of desire as a contract are as reported in the book. The phone scenario and all drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 5.0], [5.0, 24.5], [24.5, 43.8], [43.8, 57.7], [57.7, 72.3], [72.3, 88.9], [88.9, 106.5], [106.5, 123.5], [123.5, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "A Skill, Not a Mood", "Peace, Not Thrills", "The Desire Contract", "A Simple Picture", "The Endless Line", "Pick One Desire", "Catch the Contract", "Your Challenge"];
+const TM={"smiling_mind": 0.0, "naval": 5.28, "gym_weights": 9.76, "choice_sign": 19.36, "fireworks": 24.8, "calm_lake": 32.24, "empty_hole": 38.4, "contract": 44.08, "signature": 50.16, "new_phone": 58.0, "storm_cloud": 60.8, "shopping_bag": 68.96, "queue": 72.56, "treadmill": 76.88, "single_target": 89.2, "let_go_hands": 97.44, "clear_path": 102.0, "magnifier": 106.8, "torn_paper": 114.4, "balance_scale": 119.2, "notebook": 123.84};
+const guy=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const dl=el=>{let L=0;try{L=el.getTotalLength()}catch(e){}el._L=L||1200;el.setAttribute('stroke-dasharray',el._L);el.setAttribute('stroke-dashoffset',el._L);return el};
+const drw=(el,k)=>el.setAttribute('stroke-dashoffset',(el._L*(1-k)).toFixed(1));
+guy($('a_p'),200,290,34,'ink');
+const bars=[];for(let i=0;i<8;i++)bars.push(mk('rect',{x:170+i*90,y:790-(40+i*32),width:56,height:40+i*32,rx:6,class:'gain'},$('a_bars')));
+const days=[];for(let i=0;i<7;i++)days.push(mk('circle',{cx:1140+i*48,cy:740,r:14},$('a_days')));
+const bursts=[[300,430],[470,370],[610,470]].map(([x,y])=>{const g=mk('g',{},$('b_bursts'));for(let j=0;j<12;j++){const a=j*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(22*c).toFixed(1)+' '+(22*s).toFixed(1)+'L'+(66*c).toFixed(1)+' '+(66*s).toFixed(1),stroke:j%2?'var(--gain)':'var(--ink)','stroke-width':6,'stroke-linecap':'round'},g)}return [g,x,y]});
+guy($('c_ppl'),270,380,40,'ink');guy($('c_ppl'),1330,380,40,'ink');
+const sig=dl($('c_sig'));
+guy($('d_p'),420,470,50,'ink');
+const cards=[];for(let i=0;i<7;i++){const g=mk('g',{},$('e_q'));mk('rect',{width:100,height:120,rx:10,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);const tx=mk('text',{x:50,y:62,'font-size':18,'text-anchor':'middle',class:'m',style:'fill:var(--loss)'},g);tx.textContent='WANT';mk('path',{d:'M22 88h56',stroke:'var(--line)','stroke-width':4,'stroke-linecap':'round'},g);cards.push(g)}
+guy($('f_yp'),220,440,40,'ink');
+// small craving cards around the path: they get crossed out, drop and fade
+const cr=[[420,290],[580,340],[740,290],[900,340],[1040,290],[460,560],[640,610],[830,560],[1010,610]].map(([x,y])=>{const g=mk('g',{},$('f_cr'));
+  mk('rect',{x:0,y:0,width:90,height:60,rx:10,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  const tx=mk('text',{x:45,y:37,'font-size':18,'text-anchor':'middle',class:'m',style:'fill:var(--loss)'},g);tx.textContent='WANT';
+  const xl=mk('path',{d:'M8 8L82 52M82 8L8 52',fill:'none',stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round',opacity:0},g);
+  return [g,x,y,xl]});
+const fpath=dl($('f_path'));
+const Z=[[420,440],[405,480],[432,520],[408,560],[430,600],[410,640],[428,680],[420,700]];
+$('h_Lp').setAttribute('d','M220 440L'+Z.map(q=>q.join(' ')).join('L')+'H220Z');
+$('h_Rp').setAttribute('d','M620 440V700L'+Z.slice().reverse().map(q=>q.join(' ')).join('L')+'Z');
+let jp='';for(let x=160;x<=720;x+=20)jp+=x+','+(300+((x/20)%2?-18:18))+' ';$('h_jag').setAttribute('points',jp);
+const tick=dl($('n_tick'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('t_fig'),p(u,TM.smiling_mind,TM.smiling_mind+.6));
+$('t_db').setAttribute('transform','translate(0 '+(-24*Math.abs(Math.sin(t*1.6))).toFixed(1)+')');
+
+rise($('a_nav'),p(u,TM.naval,TM.naval+.5));
+rise($('a_gym'),p(u,TM.gym_weights,TM.gym_weights+.5));
+const yr=TM.gym_weights+4.2;rise($('a_yrs'),p(u,yr,yr+.5));
+bars.forEach((b,i)=>b.setAttribute('opacity',p(u,yr+.3+i*.3,yr+.6+i*.3).toFixed(2)));
+rise($('a_sign'),p(u,TM.choice_sign,TM.choice_sign+.5));
+days.forEach((d,i)=>d.setAttribute('fill',u>=TM.choice_sign+.8+i*.5?'var(--gain)':'var(--line)'));
+
+rise($('b_fw'),p(u,TM.fireworks,TM.fireworks+.5));
+$('b_fwi').setAttribute('opacity',(1-.6*p(u,TM.fireworks+5.8,TM.fireworks+6.6)).toFixed(2));
+bursts.forEach(([g,x,y],k)=>g.setAttribute('transform','translate('+x+' '+y+') scale('+(.7+.4*Math.abs(Math.sin(t*1.5+k*1.3))).toFixed(3)+')'));
+rise($('b_lake'),p(u,TM.calm_lake,TM.calm_lake+.5));
+$('b_wv').setAttribute('transform','translate('+(12*Math.sin(t)).toFixed(1)+' 0)');
+const hs=p(u,TM.empty_hole+.8,TM.empty_hole+2.4);
+rise($('b_hole'),p(u,TM.empty_hole,TM.empty_hole+.4));
+$('b_hc').setAttribute('r',Math.max(.1,56*(1-hs)).toFixed(1));$('b_ht').setAttribute('opacity',(1-hs).toFixed(2));
+rise($('b_cap'),p(u,TM.empty_hole+1.8,TM.empty_hole+2.4));
+
+rise($('c_doc'),p(u,TM.contract,TM.contract+.5));
+rise($('c_who'),p(u,TM.contract+2.1,TM.contract+2.6));rise($('c_par'),p(u,TM.contract+2.1,TM.contract+2.6));
+rise($('c_terms'),p(u,TM.signature,TM.signature+.5));
+drw(sig,p(u,TM.signature+1.5,TM.signature+3.5));
+rise($('c_cap'),p(u,TM.signature+6.2,TM.signature+6.8));
+
+// phone: calm -> cloud follows you -> buy -> cloud lifts briefly -> drifts back
+rise($('d_who'),p(u,TM.new_phone,TM.new_phone+.5));
+rise($('d_ph'),p(u,TM.new_phone+.6,TM.new_phone+1.1));
+rise($('d_old'),p(u,TM.storm_cloud,TM.storm_cloud+.5));
+const cw=Math.min(TM.storm_cloud+3,(TM.storm_cloud+TM.shopping_bag)/2);
+const lift=p(u,TM.shopping_bag+.2,TM.shopping_bag+1.2)-p(u,TM.shopping_bag+4.5,TM.shopping_bag+5.5);
+$('d_cl').setAttribute('opacity',(p(u,cw,cw+.6)*(1-.85*lift)).toFixed(2));
+$('d_cl').setAttribute('transform','translate('+(6*Math.sin(t*1.3)).toFixed(1)+' '+(4*Math.sin(t*2)-80*lift).toFixed(1)+')');
+rise($('d_arr'),p(u,cw,cw+.6));
+rise($('d_bag'),p(u,TM.shopping_bag,TM.shopping_bag+.5));
+rise($('d_rel'),p(u,TM.shopping_bag+.6,TM.shopping_bag+1.1));
+const stS=u>=TM.shopping_bag+.6?2:(u>=cw?1:0);
+$('d_st').textContent=['CALM','UNSETTLED','CALM, BRIEFLY'][stS];
+$('d_st').style.fill=['','var(--loss)','var(--gain)'][stS];
+$('d_st').setAttribute('opacity',p(u,TM.storm_cloud,TM.storm_cloud+.5).toFixed(2));
+
+rise($('e_qw'),p(u,TM.queue,TM.queue+.5));
+cards.forEach((g,i)=>{const x=120+(((i*180-t*50)%1260)+1260)%1260;g.setAttribute('transform','translate('+x.toFixed(1)+' 250)');g.setAttribute('opacity',cl(Math.min((x-120)/120,(1380-x)/120)).toFixed(2))});
+rise($('e_tm'),p(u,TM.treadmill,TM.treadmill+.5));
+$('e_belt').setAttribute('stroke-dashoffset',(t*120%40).toFixed(1));
+const sw=Math.sin(t*8)*40;
+$('e_l1').setAttribute('d','M600 600L'+(600+sw).toFixed(1)+' 646');$('e_l2').setAttribute('d','M600 600L'+(600-sw).toFixed(1)+' 646');
+$('e_rb').setAttribute('transform','translate(0 '+(-6*Math.abs(Math.sin(t*8))).toFixed(1)+')');
+$('e_pc').setAttribute('transform','translate('+(20*Math.sin(t*.9)).toFixed(1)+' 0)');
+rise($('e_t1'),p(u,TM.treadmill+5.4,TM.treadmill+6));
+rise($('e_t2'),p(u,TM.treadmill+9.2,TM.treadmill+9.8));
+
+// picky: one big target, small wants crossed out and released
+rise($('f_you'),p(u,TM.single_target,TM.single_target+.5));
+rise($('f_tg'),p(u,TM.single_target+.3,TM.single_target+.8));
+rise($('f_one'),p(u,TM.single_target+3.8,TM.single_target+4.3));
+const lg=p(u,TM.let_go_hands,TM.let_go_hands+1.2);
+$('f_crl').setAttribute('opacity',(p(u,TM.single_target+1,TM.single_target+1.5)*(1-.6*lg)).toFixed(2));
+rise($('f_lgl'),p(u,TM.let_go_hands,TM.let_go_hands+.5));
+cr.forEach(([g,x,y,xl],i)=>{const a=TM.single_target+1+i*.15,f=p(u,TM.let_go_hands+i*.2,TM.let_go_hands+i*.2+1.2),xo=p(u,TM.let_go_hands+i*.2-.3,TM.let_go_hands+i*.2+.2);
+  g.setAttribute('opacity',(p(u,a,a+.4)*(1-.72*f)).toFixed(2));
+  xl.setAttribute('opacity',xo.toFixed(2));
+  g.setAttribute('transform','translate('+(x+6*Math.sin(t*2+i)*(1-f)).toFixed(1)+' '+(y+45*f).toFixed(1)+') rotate('+((i%2?1:-1)*12*f).toFixed(1)+' 45 30)')});
+drw(fpath,p(u,TM.clear_path,TM.clear_path+1.2));
+rise($('f_fc'),p(u,TM.clear_path+.8,TM.clear_path+1.3));
+rise($('f_cap'),p(u,TM.clear_path+1.2,TM.clear_path+1.8));
+
+rise($('h_un'),p(u,TM.magnifier,TM.magnifier+.5));
+rise($('h_mag'),p(u,TM.magnifier+.2,TM.magnifier+.7));
+$('h_mag').setAttribute('transform','translate('+(200+400*p(u,TM.magnifier+.3,TM.magnifier+3.5)).toFixed(1)+' 300)');
+rise($('h_card'),p(u,TM.magnifier+4.1,TM.magnifier+4.6));
+rise($('h_sc'),p(u,TM.torn_paper,TM.torn_paper+.5));
+const ang=10*p(u,TM.balance_scale,TM.balance_scale+1.2),rd=ang*Math.PI/180;
+$('h_beam').setAttribute('transform','rotate('+ang.toFixed(2)+' 1160 330)');
+[-1,1].forEach((s,i)=>$('h_p'+i).setAttribute('transform','translate('+(1160+s*240*Math.cos(rd)).toFixed(1)+' '+(330+s*240*Math.sin(rd)).toFixed(1)+')'));
+const tk=p(u,TM.balance_scale+.6,TM.balance_scale+1.6);
+$('h_L').setAttribute('transform','translate('+(-40*tk).toFixed(1)+' '+(20*tk).toFixed(1)+') rotate('+(-8*tk).toFixed(2)+' 220 700)');
+$('h_R').setAttribute('transform','translate('+(40*tk).toFixed(1)+' '+(20*tk).toFixed(1)+') rotate('+(8*tk).toFixed(2)+' 620 700)');
+rise($('h_cap'),p(u,TM.balance_scale+.4,TM.balance_scale+1));
+
+rise($('n_nb'),p(u,TM.notebook,TM.notebook+.5));
+rise($('n_a'),p(u,TM.notebook+.2,TM.notebook+.7));
+rise($('n_b'),p(u,TM.notebook+.6,TM.notebook+1.1));
+rise($('n_c'),p(u,TM.notebook+4.2,TM.notebook+4.7));
+rise($('n_m'),p(u,TM.notebook+4.8,TM.notebook+5.3));
+drw(tick,p(u,TM.notebook+5,TM.notebook+5.6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.6;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

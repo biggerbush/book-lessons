@@ -1,0 +1,371 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Measure What Matters Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Measure What Matters: Most organizations fail not from bad ideas but from poor execution, and Doerr brought OKRs to an early Google to fix exactly that. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MEASURE WHAT MATTERS · LESSON 1</text>
+<text class="d" x="116" y="330" font-size="84" letter-spacing="-2">Ideas are easy.</text>
+<text class="d" x="116" y="426" font-size="84" letter-spacing="-2">Execution is</text>
+<text class="d" x="116" y="522" font-size="84" letter-spacing="-2" style="fill:var(--gain)">everything.</text>
+<text class="b" x="120" y="620" font-size="32">Why great ideas fail, and the simple fix Google adopted</text>
+<g id="rays"></g>
+<circle id="bulb0" cx="1100" cy="320" r="80" stroke="var(--ink)" stroke-width="7" fill="var(--stage)"/>
+<rect class="ink" x="1070" y="392" width="60" height="50" rx="8"/>
+<path id="after" class="s-muted" d="M1100 452V540H1400" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="q0"><text class="d" x="1250" y="518" font-size="60" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="flag0"><path class="s-ink" d="M1400 540V420" stroke-width="7" stroke-linecap="round"/><path class="gain" d="M1400 420L1470 445L1400 470Z"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The idea graveyard.</text>
+<text class="b" x="120" y="176" font-size="32">Brilliant ideas, gathering dust.</text>
+<g id="pile"></g>
+<g id="dust"></g>
+<g id="pileL"><text class="m" x="450" y="840" font-size="22" text-anchor="middle">BRILLIANT IDEAS</text></g>
+<text class="m" x="880" y="300" font-size="20">STARTUPS WITH SMART PLANS</text>
+<g id="gi"><text class="m" x="880" y="360" font-size="20" style="fill:var(--gain)">GOOD IDEAS ✓</text><g id="sbul"></g></g>
+<g id="sups"></g>
+<g id="na"><text class="m" x="880" y="790" font-size="22" style="fill:var(--loss)">NO STEADY, COORDINATED ACTION</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The book’s motto.</text>
+<g id="card">
+<rect class="s-line" x="120" y="200" width="1360" height="240" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="170" y="300" font-size="72">“Ideas are easy.</text>
+<text class="d" x="170" y="390" font-size="72" style="fill:var(--gain)">Execution is everything.”</text>
+<text class="m" x="1440" y="410" font-size="22" text-anchor="end">JOHN DOERR</text>
+</g>
+<g id="gearsG"><text class="m" x="140" y="510" font-size="20" style="fill:var(--gain)">ALIGNED: EVERYONE KNOWS THE NEXT STEP</text></g>
+<g id="tang"><text class="m" x="880" y="510" font-size="20" style="fill:var(--loss)">BUSY, BUT PULLING APART</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Lessons from Intel.</text>
+<text class="b" x="120" y="176" font-size="32">Where Doerr learned the fix, in the 1970s.</text>
+<g id="chip">
+<g id="pins"></g>
+<rect class="s-ink" x="180" y="300" width="280" height="280" rx="16" fill="var(--stage)" stroke-width="7"/>
+<rect class="s-line" x="240" y="360" width="160" height="160" rx="10" fill="none" stroke-width="4"/>
+<text class="d" x="320" y="455" font-size="40" text-anchor="middle">INTEL</text>
+<text class="m" x="320" y="670" font-size="24" text-anchor="middle">1970s</text>
+</g>
+<g id="grove"><text class="m" x="760" y="610" font-size="22" text-anchor="middle">ANDY GROVE</text></g>
+<g id="gsys"><text class="d5" x="120" y="780" font-size="40">He ran Intel with a simple goal-setting system.</text></g>
+<g id="badge">
+<path class="s-muted" d="M880 440h90m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="gain" x="1000" y="280" width="480" height="320" rx="24"/>
+<text class="d" x="1240" y="430" font-size="110" text-anchor="middle" style="fill:var(--on-gain)">OKRs</text>
+<text class="m" x="1240" y="500" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">OBJECTIVES AND</text>
+<text class="m" x="1240" y="540" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">KEY RESULTS</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A tiny Google.</text>
+<text class="b" x="120" y="176" font-size="32">1999: Doerr invests in a young startup.</text>
+<g id="gar">
+<path class="s-ink" d="M140 410L420 270L700 410" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<rect class="s-ink" x="170" y="410" width="500" height="350" fill="var(--stage)" stroke-width="7"/>
+<text class="m" x="420" y="465" font-size="26" text-anchor="middle">1999</text>
+</g>
+<g id="fnd"></g>
+<g id="desk">
+<rect class="ink" x="230" y="650" width="380" height="16" rx="4"/>
+<path class="s-ink" d="M260 666V756M580 666V756" stroke-width="7" stroke-linecap="round"/>
+<rect class="gain" x="390" y="614" width="60" height="36" rx="4"/>
+</g>
+<g id="fndT">
+<text class="m" x="800" y="290" font-size="22">LARRY PAGE · SERGEY BRIN</text>
+<text class="m" x="800" y="362" font-size="20">BOLD IDEA</text>
+<rect id="barI" class="gain" x="800" y="376" height="44" rx="10"/>
+<text class="m" x="800" y="472" font-size="20">STRUCTURE</text>
+<rect class="s-line" x="800" y="486" width="640" height="44" rx="10" fill="none" stroke-width="4"/>
+<rect id="barS" class="loss" x="800" y="486" height="44" rx="10"/>
+</g>
+<g id="team"></g>
+<g id="teamL"><text class="m" x="800" y="780" font-size="22">STILL SMALL: A FEW DOZEN PEOPLE</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The slide show.</text>
+<text class="b" x="120" y="176" font-size="32">Doerr walks the team through OKRs.</text>
+<g id="proj">
+<polygon class="gain" points="360,610 560,240 560,600" fill-opacity=".18"/>
+<rect class="ink" x="150" y="560" width="190" height="100" rx="14"/>
+<circle class="s-ink" cx="340" cy="610" r="26" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="560" y="220" width="900" height="400" rx="10" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="600" y="272" font-size="24">OKRs</text>
+</g>
+<g id="obj">
+<rect class="gain" x="600" y="296" width="820" height="70" rx="10"/>
+<text class="m" x="630" y="340" font-size="24" style="fill:var(--on-gain)">OBJECTIVE: A CLEAR GOAL</text>
+<g id="krs"></g>
+</g>
+<g id="aud"></g>
+<g id="look"></g>
+<g id="yes">
+<circle class="gain" cx="210" cy="770" r="44"/>
+<path d="M188 770l16 16 28-30" fill="none" stroke="var(--on-gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d5" x="280" y="784" font-size="40">Let’s give it a try.</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Growing with OKRs.</text>
+<text class="b" x="120" y="176" font-size="32">As Google grew, OKRs grew right along with it.</text>
+<g id="axis">
+<path class="s-ink" d="M180 250V720H900" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="200" y="270" font-size="20">SIZE</text>
+<text class="m" x="900" y="756" font-size="20" text-anchor="end">TIME</text>
+</g>
+<path id="gcurve" class="s-gain" d="M180 700C500 690 700 600 880 270" pathLength="1" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="tags"></g>
+<g id="tree"></g>
+<g id="root">
+<rect class="gain" x="1130" y="250" width="200" height="64" rx="12"/>
+<text class="m" x="1230" y="290" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">COMPANY OKRs</text>
+<text class="m" x="1230" y="640" font-size="20" text-anchor="middle">THOUSANDS OF PEOPLE, ONE SHARED VIEW</text>
+</g>
+<g id="deliv"><text class="d" x="120" y="830" font-size="44">A great idea became a company that delivered.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it matters to you.</text>
+<text class="b" x="120" y="176" font-size="32">The same gap shows up in small teams and personal projects.</text>
+<g id="isl">
+<rect class="ink" x="120" y="580" width="300" height="24" rx="6"/>
+<rect class="ink" x="1180" y="580" width="300" height="24" rx="6"/>
+<circle class="gain" cx="220" cy="450" r="40" stroke="var(--ink)" stroke-width="5"/>
+<rect class="ink" x="205" y="490" width="30" height="18" rx="3"/>
+<text class="m" x="270" y="650" font-size="22" text-anchor="middle">IDEA</text>
+</g>
+<g id="gapT">
+<path class="s-loss" d="M460 540H1140" stroke-width="4" stroke-dasharray="10 10"/>
+<text class="m" x="800" y="640" font-size="26" text-anchor="middle" style="fill:var(--loss)">THE GAP</text>
+</g>
+<g id="stones"></g>
+<g id="stL"><text class="m" x="800" y="690" font-size="22" text-anchor="middle" style="fill:var(--gain)">CLEAR, SHARED STEPS</text></g>
+<g id="flag7">
+<path class="s-ink" d="M1330 580V390" stroke-width="7" stroke-linecap="round"/>
+<path class="gain" d="M1330 390L1440 420L1330 450Z"/>
+<text class="m" x="1330" y="650" font-size="20" text-anchor="middle">WHAT DONE LOOKS LIKE</text>
+</g>
+<circle id="trav" class="ink" cy="536" r="16"/>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">One idea you’ve sat on</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="88" letter-spacing="-2">for months?</text></g>
+<g id="qc"><text class="d" x="136" y="540" font-size="88" letter-spacing="-2" style="fill:var(--gain)">Write its next step.</text></g>
+<g id="qd"><text class="d" x="136" y="640" font-size="88" letter-spacing="-2">Do it this week.</text></g>
+<g id="box"><rect class="s-ink" x="1290" y="540" width="150" height="150" rx="18" fill="var(--stage)" stroke-width="8"/></g>
+<path id="tick" class="s-gain" d="M1318 612l36 36 66-80" pathLength="1" fill="none" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="qm"><text class="m" x="143" y="760" font-size="26">PROVE YOU ARE MOVING</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="133" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:13</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Ideas Are Easy, Execution Is Everything&rdquo;, from <em>Measure What Matters</em> by John Doerr. Examples from Intel and Doerr&#x27;s 1999 OKR presentation at an early Google, as reported in the book. The idea pile, tangled arrows and growth line are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=133, SC=[[0.0, 8.5], [8.5, 30.3], [30.3, 46.7], [46.7, 61.1], [61.1, 76.6], [76.6, 90.3], [90.3, 105.1], [105.1, 121.1], [121.1, 133.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Ideas Are Easy", "The Idea Graveyard", "The Book's Motto", "Lessons from Intel", "A Tiny Google", "The Slide Show", "Growing with OKRs", "Why It Matters to You", "Your Challenge"];
+const TM={"lightbulb": 0.0, "idea_pile": 8.84, "startups": 13.76, "motto_card": 30.64, "gears": 37.6, "tangled": 42.64, "intel_chip": 46.96, "andy_grove": 51.36, "okr_badge": 56.0, "garage_desk": 61.36, "founders": 66.96, "small_team": 73.28, "projector": 76.88, "handshake": 88.0, "growth_line": 90.64, "many_teams": 95.52, "mirror": 105.36, "checklist": 111.39};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const bulb=(g,x,y,r,f)=>{const c=mk('circle',{cx:x,cy:y,r:r,fill:f,stroke:'var(--ink)','stroke-width':Math.max(3,r/8)},g);mk('rect',{x:x-r*.4,y:y+r*.85,width:r*.8,height:r*.45,rx:3,class:'ink'},g);return c};
+const drw=(el,k)=>{el.setAttribute('stroke-dasharray','1 1');el.setAttribute('stroke-dashoffset',(1-k).toFixed(3))};
+for(let i=0;i<8;i++){const a=i*Math.PI/4-Math.PI/2+.39,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1100+104*c)+' '+(320+104*s)+'L'+(1100+136*c)+' '+(320+136*s),class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+const PL=[];[6,5,4,3,2,1].forEach((n,r)=>{for(let i=0;i<n;i++){const g=mk('g',{},$('pile'));bulb(g,450+(i-(n-1)/2)*64,760-r*56,26,'var(--stage)');PL.push(g)}});
+const DU=[];for(let i=0;i<14;i++)DU.push(mk('circle',{cx:290+(i*97)%330,r:4,class:'ink','fill-opacity':.35},$('dust')));
+mk('path',{d:'M880 700H1420',class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('sups'));
+// cards fan outward (left pair tips left, right pair tips right) so neighbours never intersect
+const ANG=[-14,-6,6,14],SU=[940,1080,1220,1360].map(x=>{const o=mk('g',{},$('sups')),g=mk('g',{},o),r=mk('rect',{x:x-50,y:500,width:100,height:200,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);for(let k=0;k<3;k++)mk('path',{d:'M'+(x-26)+' '+(540+k*50)+'h52',class:'s-line','stroke-width':6,'stroke-linecap':'round'},g);bulb($('sbul'),x,420,28,'var(--gain)');return [o,g,r,x]});
+const gp=(r,n)=>{let d='';for(let i=0;i<n*4;i++){const a=i*Math.PI*2/(n*4),R=(i%4<2)?r:r+14;d+=(i?'L':'M')+(R*Math.cos(a)).toFixed(1)+' '+(R*Math.sin(a)).toFixed(1)}return d+'Z'};
+const GR=[[300,670,80,12,'gain',1],[456,670,64,10,'ink',-1.25],[552,606,44,7,'gain',1.82]].map(q=>{const g=mk('g',{},$('gearsG'));mk('path',{d:gp(q[2],q[3]),class:q[4]},g);mk('circle',{r:14,fill:'var(--stage)'},g);return [g,q]});
+[[940,620],[1400,620],[1170,760]].forEach(q=>fig($('tang'),q[0],q[1],22,'ink'));
+const RP=[[972,690],[1368,690],[1170,734]].map(e=>[mk('path',{fill:'none',class:'s-loss','stroke-width':6,'stroke-linecap':'round'},$('tang')),e]);
+mk('circle',{cx:1170,cy:650,r:16,class:'loss'},$('tang'));
+for(let i=0;i<5;i++){const v=212+i*54,w=332+i*54;[[v-6,268,12,32],[v-6,580,12,32],[148,w-6,32,12],[460,w-6,32,12]].forEach(q=>mk('rect',{x:q[0],y:q[1],width:q[2],height:q[3],class:'ink'},$('pins')))}
+fig($('grove'),760,380,40,'ink');
+fig($('fnd'),350,560,26,'ink');fig($('fnd'),490,560,26,'ink');
+const TD=[];for(let i=0;i<36;i++)TD.push(mk('circle',{cx:820+(i%12)*52,cy:600+Math.floor(i/12)*50,r:16,class:'ink'},$('team')));
+const KR=[.8,.55,.95].map((w,i)=>{const y=408+i*70,tx=mk('text',{x:600,y:y+22,'font-size':20,class:'m'},$('krs'));tx.textContent='KEY RESULT '+(i+1);mk('rect',{x:820,y:y,width:600,height:28,rx:14,fill:'var(--line)'},$('krs'));return [mk('rect',{x:820,y:y,height:28,rx:14,class:'gain'},$('krs')),w]});
+for(let i=0;i<6;i++){const x=760+i*128;fig($('aud'),x,700,18,'ink');mk('path',{d:'M'+x+' 668V636m-10 10l10-10 10 10',fill:'none',class:'s-gain','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('look'))}
+const bz=s=>{const m=1-s;return [m*m*m*180+3*m*m*s*500+3*m*s*s*700+s*s*s*880,m*m*m*700+3*m*m*s*690+3*m*s*s*600+s*s*s*270]};
+const TG=[.2,.4,.6,.8,1].map((s,i)=>{const q=bz(s);return [mk('circle',{cx:q[0],cy:q[1],r:8+i*4,class:'gain',stroke:'var(--stage)','stroke-width':4},$('tags')),s]});
+const LV=[];[1060,1230,1400].forEach(c=>{mk('path',{d:'M1230 314L'+c+' 420',class:'s-line','stroke-width':4},$('tree'));mk('rect',{x:c-70,y:420,width:140,height:56,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('tree'));const tx=mk('text',{x:c,y:456,'font-size':20,'text-anchor':'middle',class:'m'},$('tree'));tx.textContent='TEAM';[-44,0,44].forEach(o=>{mk('path',{d:'M'+c+' 476L'+(c+o)+' 546',class:'s-line','stroke-width':3},$('tree'));LV.push(mk('circle',{cx:c+o,cy:560,r:14,class:'ink'},$('tree')))})});
+fig($('isl'),320,480,18,'ink');fig($('isl'),380,490,18,'ink');
+// stepping stones: larger pills with 24px labels
+const ST=[0,1,2,3].map(i=>{const g=mk('g',{},$('stones')),x=462+i*174;mk('rect',{x:x,y:560,width:154,height:48,rx:12,class:'gain'},g);const tx=mk('text',{x:x+77,y:593,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},g);tx.textContent='STEP '+(i+1);return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const L=TM.lightbulb;
+  $('bulb0').style.fill=u>=L+.3?'var(--gain)':'var(--stage)';
+  $('rays').setAttribute('opacity',(p(u,L+.3,L+.8)*(.7+.3*Math.sin(t*3))).toFixed(2));
+  drw($('after'),p(u,L+5,L+6.5)); rise($('q0'),p(u,L+6,L+6.5)); rise($('flag0'),p(u,L+6.3,L+6.8));
+
+  PL.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.idea_pile+i*.06,TM.idea_pile+i*.06+.3)));
+  rise($('pileL'),p(u,TM.idea_pile+1,TM.idea_pile+1.5));
+  $('dust').setAttribute('opacity',p(u,TM.idea_pile+1.5,TM.idea_pile+2.5));
+  DU.forEach((d,i)=>d.setAttribute('cy',(400+((t*14+i*53)%380)).toFixed(1)));
+  const S=TM.startups;
+  SU.forEach((s,i)=>{rise(s[0],p(u,S+i*.3,S+i*.3+.4)); const f=p(u,S+10.8+i*.2,S+11.6+i*.2);
+    s[1].setAttribute('transform','rotate('+(ANG[i]*f).toFixed(1)+' '+s[3]+' 700)'); s[2].setAttribute('stroke',f>.5?'var(--loss)':'var(--ink)')});
+  rise($('gi'),p(u,S+6,S+6.6)); rise($('na'),p(u,S+10.8,S+11.4));
+
+  rise($('card'),p(u,TM.motto_card,TM.motto_card+.6)); rise($('gearsG'),p(u,TM.gears,TM.gears+.5)); rise($('tang'),p(u,TM.tangled,TM.tangled+.5));
+  GR.forEach(([g,q])=>g.setAttribute('transform','translate('+q[0]+' '+q[1]+') rotate('+(t*30*q[5]).toFixed(1)+')'));
+  RP.forEach(([e,q],i)=>{const m=Math.sin(t*3+i*2)*14; e.setAttribute('d','M1170 650Q'+((1170+q[0])/2+m).toFixed(1)+' '+((650+q[1])/2-m).toFixed(1)+' '+q[0]+' '+q[1])});
+
+  rise($('chip'),p(u,TM.intel_chip,TM.intel_chip+.5)); rise($('grove'),p(u,TM.andy_grove,TM.andy_grove+.5));
+  rise($('gsys'),p(u,TM.andy_grove+.8,TM.andy_grove+1.4)); rise($('badge'),p(u,TM.okr_badge,TM.okr_badge+.6));
+
+  const G=TM.garage_desk,F=TM.founders;
+  rise($('gar'),p(u,G,G+.5)); rise($('desk'),p(u,G+.3,G+.8)); rise($('fnd'),p(u,F,F+.5)); rise($('fndT'),p(u,F+.3,F+.8));
+  $('barI').setAttribute('width',(640*p(u,F+.6,F+1.8)).toFixed(1)); $('barS').setAttribute('width',(60*p(u,F+2,F+2.8)).toFixed(1));
+  TD.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.small_team+i*.03,TM.small_team+i*.03+.3)));
+  rise($('teamL'),p(u,TM.small_team+.8,TM.small_team+1.3));
+
+  const P=TM.projector;
+  rise($('proj'),p(u,P,P+.6)); rise($('aud'),p(u,P+.8,P+1.3)); rise($('obj'),p(u,P+5.4,P+5.9));
+  KR.forEach(([r,w],i)=>r.setAttribute('width',(600*w*p(u,P+6+i*.4,P+7.2+i*.4)).toFixed(1)));
+  $('look').setAttribute('opacity',p(u,P+7,P+7.6)*(.6+.4*Math.sin(t*4)));
+  rise($('yes'),p(u,TM.handshake,TM.handshake+.5));
+
+  const gc=p(u,TM.growth_line,TM.growth_line+3);
+  rise($('axis'),p(u,TM.growth_line-.6,TM.growth_line)); drw($('gcurve'),gc);
+  TG.forEach(([c,s])=>c.setAttribute('opacity',gc>=s-.02?1:0));
+  rise($('tree'),p(u,TM.many_teams,TM.many_teams+.6)); rise($('root'),p(u,TM.many_teams,TM.many_teams+.6));
+  LV.forEach((c,i)=>c.setAttribute('class',u>=TM.many_teams+1.5+i*.1?'gain':'ink'));
+  rise($('deliv'),p(u,TM.many_teams+5.4,TM.many_teams+6));
+
+  const M=TM.mirror,C=TM.checklist;
+  rise($('isl'),p(u,M,M+.6)); rise($('gapT'),p(u,M+1,M+1.6)*(1-p(u,C,C+.5)));
+  ST.forEach((g,i)=>rise(g,p(u,C+i*.4,C+i*.4+.4))); rise($('stL'),p(u,C+1.6,C+2.1));
+  rise($('flag7'),p(u,C+4.6,C+5.1));
+  const tv=p(u,C+5,C+7.5); $('trav').setAttribute('cx',(440+850*tv).toFixed(1)); $('trav').setAttribute('opacity',u>=C+5?1:0);
+  $('trav').setAttribute('class',tv>=1?'gain':'ink');
+
+  const Q=SC[8][0]/K;
+  rise($('qa'),p(u,Q+.4,Q+.9)); rise($('qb'),p(u,Q+.8,Q+1.3)); rise($('box'),p(u,Q+1.2,Q+1.7));
+  rise($('qc'),p(u,Q+4.6,Q+5.1)); rise($('qd'),p(u,Q+5.2,Q+5.7));
+  drw($('tick'),p(u,Q+6,Q+6.8)); rise($('qm'),p(u,Q+6.6,Q+7.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:129.65;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

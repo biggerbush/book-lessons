@@ -1,0 +1,404 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Almanack of Naval Ravikant Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of The Almanack of Naval Ravikant: Putting your name on your work and owning the results earns trust and rewards, and with leverage, good judgment becomes the most valuable skill you can have. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE ALMANACK OF NAVAL RAVIKANT · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Take accountability</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">and build judgment.</text>
+<text class="b" x="120" y="600" font-size="32">Own your results, and let your judgment become your edge.</text>
+<rect class="s-ink" x="1180" y="250" width="270" height="350" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1215 310h200M1215 360h200M1215 410h140" stroke-width="8" stroke-linecap="round"/>
+<path class="s-line" d="M1215 540h200" stroke-width="4"/>
+<g id="sg0"></g>
+<g id="seal"><circle class="gain" cx="1430" cy="590" r="50"/><path d="M1408 590l16 16 28-32" fill="none" stroke="var(--on-gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Take risks under your own name.</text>
+<text class="b" x="120" y="176" font-size="32">Naval’s advice is simple, but most people hide.</text>
+<g id="me">
+<rect class="s-ink" x="220" y="590" width="240" height="100" rx="10" fill="var(--stage)" stroke-width="5"/>
+<g id="sg1"></g>
+<text class="m" x="340" y="730" font-size="20" text-anchor="middle">YOUR NAME, YOUR RISK</text>
+</g>
+<g id="co">
+<rect class="s-line" x="760" y="260" width="720" height="440" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="760" y="238" font-size="20">THE TEAM · THE COMPANY</text>
+<g id="cp"></g>
+</g>
+<g id="bars"></g>
+<g id="blame"><text class="m" x="790" y="760" font-size="22">IF IT FAILS, NOBODY POINTS AT THEM</text></g>
+<g id="trap"><text class="d" x="790" y="835" font-size="44" style="fill:var(--loss)">That safety is a trap.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Credit and blame travel together.</text>
+<text class="b" x="120" y="176" font-size="32">Accountability means standing in the spotlight.</text>
+<rect class="ink" x="400" y="220" width="80" height="40" rx="8"/>
+<polygon id="cone" class="gain" points="410,260 470,260 600,700 280,700" fill-opacity=".2"/>
+<path class="s-ink" d="M200 700h480" stroke-width="6" stroke-linecap="round"/>
+<g id="actor"></g>
+<g id="oops"><text class="d" x="560" y="520" font-size="64" style="fill:var(--loss)">!</text><text class="d" x="300" y="540" font-size="64" style="fill:var(--loss)">!</text></g>
+<text class="m" x="440" y="745" font-size="20" text-anchor="middle">IN THE SPOTLIGHT</text>
+<g id="hide">
+<g id="hp2"></g>
+<rect x="900" y="260" width="300" height="420" rx="8" fill="var(--line)"/>
+<path class="s-muted" d="M975 280v380M1050 280v380M1125 280v380" stroke-width="4"/>
+<text class="m" x="1050" y="730" font-size="20" text-anchor="middle">HIDING: NO BLAME, NO CREDIT</text>
+</g>
+<g id="tog">
+<rect class="gain" x="480" y="770" width="280" height="64" rx="32"/>
+<text class="m" x="620" y="811" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">CREDIT</text>
+<circle class="s-ink" cx="785" cy="802" r="16" fill="none" stroke-width="6"/><circle class="s-ink" cx="815" cy="802" r="16" fill="none" stroke-width="6"/>
+<rect class="s-loss" x="840" y="770" width="280" height="64" rx="32" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="980" y="811" font-size="24" text-anchor="middle" style="fill:var(--loss)">BLAME</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Own the outcome. Earn the trust.</text>
+<text class="b" x="120" y="176" font-size="32">Society rewards people who own their outcomes.</text>
+<g id="hs">
+<path class="s-gain" d="M350 250v-22M308 262l-14-14M392 262l14-14" stroke-width="6" stroke-linecap="round"/>
+<rect class="s-line" x="170" y="440" width="100" height="50" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-line" x="430" y="440" width="100" height="50" fill="var(--stage)" stroke-width="5"/>
+<rect class="ink" x="270" y="400" width="160" height="90"/>
+<text class="d" x="350" y="465" font-size="44" text-anchor="middle" style="fill:var(--stage)">1</text>
+<circle class="gain" cx="350" cy="300" r="26"/>
+<path class="gain" d="M311 400v-34a39 39 0 0 1 78 0v34z"/>
+<g id="arm"><path class="s-ink" d="M130 370h96" stroke-width="22" stroke-linecap="round"/><circle class="ink" cx="236" cy="370" r="18"/></g>
+<path id="ribbon" d="M334 330L350 360L366 330" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="medal"><circle cx="350" cy="372" r="15" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><circle class="gain" cx="350" cy="372" r="6"/></g>
+<text class="m" x="350" y="530" font-size="22" text-anchor="middle">SOCIETY REWARDS OWNERS</text>
+</g>
+<g id="gb">
+<rect class="s-ink" x="655" y="380" width="210" height="170" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="640" y="330" width="240" height="50" rx="6"/>
+<rect class="gain" x="745" y="330" width="30" height="220"/>
+<circle class="s-gain" cx="735" cy="314" r="16" fill="none" stroke-width="6"/><circle class="s-gain" cx="785" cy="314" r="16" fill="none" stroke-width="6"/>
+</g>
+<g id="tg"></g>
+<g id="trk">
+<rect class="s-line" x="120" y="600" width="600" height="230" rx="16" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="150" y="660" font-size="40">Your name</text>
+<g id="ck"></g>
+<text class="m" x="150" y="800" font-size="20">TRACK RECORD</text>
+</g>
+<g id="opp"><text class="m" x="840" y="600" font-size="20">BIGGER OPPORTUNITIES</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Where do you point your leverage?</text>
+<text class="b" x="120" y="176" font-size="32">Leverage only multiplies what you aim at, good or bad.</text>
+<g id="cmp">
+<circle class="s-ink" cx="330" cy="460" r="150" fill="var(--stage)" stroke-width="7"/>
+<path class="s-line" d="M330 322v24M330 574v24M192 460h24M444 460h24" stroke-width="5"/>
+<path id="ndl" class="ink" d="M210 460L330 444L450 460L330 476Z"/>
+<circle class="gain" cx="330" cy="460" r="12"/>
+</g>
+<g id="tgt">
+<path id="la" class="s-gain" d="M480 405L679 335" stroke-width="10" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="lb" class="s-loss" d="M479 517L679 594" stroke-width="10" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<circle class="gain" cx="720" cy="320" r="40"/><circle class="loss" cx="720" cy="610" r="40"/>
+<text class="m" x="780" y="328" font-size="22" style="fill:var(--gain)">GOOD</text>
+<text class="m" x="780" y="618" font-size="22" style="fill:var(--loss)">BAD</text>
+</g>
+<g id="lev"><text class="m" x="120" y="730" font-size="22">LEVERAGE MULTIPLIES WHAT YOU AIM AT</text></g>
+<g id="hg">
+<polygon id="sTop" class="gain"/><polygon id="sBot" class="gain"/>
+<path id="sStr" class="s-gain" stroke-width="4"/>
+<path class="s-ink" d="M920 310H1060L1000 470L1060 630H920L980 470Z" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M900 300h180M900 640h180" stroke-width="12" stroke-linecap="round"/>
+</g>
+<g id="wis"><text class="d" x="1110" y="360" font-size="44">Wisdom</text><text class="b" x="1110" y="405" font-size="26">knowing the long-term</text><text class="b" x="1110" y="440" font-size="26">consequences of actions</text></g>
+<g id="jud"><text class="d" x="1110" y="560" font-size="44" style="fill:var(--gain)">Judgment</text><text class="b" x="1110" y="605" font-size="26">that wisdom, applied to</text><text class="b" x="1110" y="640" font-size="26">real decisions</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Small turns end up miles apart.</text>
+<text class="b" x="120" y="176" font-size="32">A captain steering a giant ship.</text>
+<path id="wv" class="s-loss" fill="none" stroke-width="4" stroke-linecap="round"/>
+<g id="shp">
+<path class="ink" d="M140 470h200l-30 44H170z"/>
+<path class="s-ink" d="M240 470V330" stroke-width="6" stroke-linecap="round"/>
+<path class="gain" d="M248 340l70 110h-70z"/>
+</g>
+<path id="cA" class="s-muted" d="M360 470L1400 540" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="cB" class="s-gain" d="M360 470L1400 300" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<text class="m" x="430" y="400" font-size="20" style="fill:var(--gain)">TINY CHANGE</text>
+<g id="gap">
+<circle class="ink" cx="1400" cy="540" r="14"/><circle class="gain" cx="1400" cy="300" r="14"/>
+<path class="s-ink" d="M1430 300h20v240h-20" fill="none" stroke-width="5"/>
+<text class="m" x="1450" y="590" font-size="20" text-anchor="end">MILES APART</text>
+</g>
+<g id="mag"><text class="m" x="700" y="610" font-size="20">LEVERAGE MAGNIFIES EVERY SMALL CHOICE</text></g>
+<g id="qt">
+<rect class="gain" x="120" y="640" width="1360" height="200" rx="18"/>
+<text class="d" x="160" y="720" font-size="44" style="fill:var(--on-gain)">“In an age of leverage, one correct decision</text>
+<text class="d" x="160" y="785" font-size="44" style="fill:var(--on-gain)">can win everything.”</text>
+<text class="m" x="1440" y="815" font-size="22" text-anchor="end" style="fill:var(--on-gain)">— NAVAL</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Warren Buffett.</text>
+<text class="b" x="120" y="176" font-size="32">People trust his judgment and his name.</text>
+<g id="inv">
+<g id="invp"></g>
+<rect class="s-ink" x="250" y="610" width="220" height="56" rx="10" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="360" y="646" font-size="24" text-anchor="middle">BUFFETT</text>
+</g>
+<g id="givers"><text class="m" x="1100" y="560" font-size="20">THEY TRUST HIM</text></g>
+<g id="pile"></g>
+<g id="fly"></g>
+<g id="tl">
+<path class="s-line" d="M120 760h1360" stroke-width="5"/>
+<text class="m" x="120" y="820" font-size="22">DECADES OF ACCOUNTABLE CALLS</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Judgment is not a shortcut.</text>
+<text class="b" x="120" y="176" font-size="32">Hard work builds both judgment and leverage.</text>
+<g id="wb">
+<path id="cut" class="s-muted" d="M160 420Q340 260 520 420" fill="none" stroke-width="5" stroke-dasharray="12 12"/>
+<path class="s-loss" d="M310 300l60 60M370 300l-60 60" stroke-width="8" stroke-linecap="round"/>
+<rect class="gain" x="380" y="524" width="120" height="36" rx="4"/>
+<path class="s-ink" d="M200 545l150-8" stroke-width="12" stroke-linecap="round"/>
+<rect class="ink" x="345" y="508" width="30" height="56" rx="4"/>
+<rect class="ink" x="140" y="560" width="380" height="24" rx="6"/>
+<path class="s-ink" d="M170 584v116M490 584v116" stroke-width="10" stroke-linecap="round"/>
+<text class="m" x="340" y="760" font-size="20" text-anchor="middle">NO SHORTCUT</text>
+</g>
+<g id="gr"></g>
+<g id="gl">
+<text class="m" x="720" y="600" font-size="20" text-anchor="middle" style="fill:var(--gain)">JUDGMENT</text>
+<text class="m" x="895" y="600" font-size="20" text-anchor="middle">LEVERAGE</text>
+<text class="m" x="808" y="660" font-size="20" text-anchor="middle">HARD WORK BUILDS BOTH</text>
+</g>
+<g id="nb">
+<rect class="s-ink" x="1120" y="240" width="340" height="440" rx="12" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1160 240v440" stroke-width="4"/>
+<g id="nck"></g>
+<rect class="s-line" x="1120" y="720" width="340" height="20" rx="10" fill="none" stroke-width="3"/>
+<rect id="sharp" class="gain" x="1120" y="720" width="0" height="20" rx="10"/>
+<text class="m" x="1120" y="780" font-size="20">SHARPER EACH TIME</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Put <tspan style="fill:var(--gain)">your name</tspan> on one</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">piece of work you</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">would normally hide.</text></g>
+<g id="wr1"><text class="m" x="143" y="660" font-size="26">THEN WRITE DOWN WHAT YOU DECIDED</text></g>
+<g id="wr2"><text class="m" x="143" y="710" font-size="26">AND CHECK LATER IF YOU JUDGED IT WELL</text></g>
+<path class="s-line" d="M1080 790h360" stroke-width="5" stroke-linecap="round"/>
+<g id="sg8"></g>
+<g id="pen"><path class="ink" d="M0 0l-9-26h18z"/><rect class="gain" x="-11" y="-136" width="22" height="110" rx="6"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Take accountability and build judgment&rdquo;, from <em>The Almanack of Naval Ravikant</em> by Eric Jorgenson. Naval&#x27;s advice on accountability and judgment, and the Warren Buffett example, are as reported in the book. The ship and course drawing is an illustration, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 6.8], [6.8, 22.0], [22.0, 37.5], [37.5, 52.6], [52.6, 70.2], [70.2, 88.2], [88.2, 99.7], [99.7, 111.7], [111.7, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Sign Your Name", "Your Name on the Line", "The Price of Exposure", "Trust Pays", "What Judgment Is", "One Decision Wins", "The Buffett Example", "Earn It With Work", "Your Challenge"];
+const TM={"name_tag": 0.0, "signature": 7.12, "crowd": 12.24, "spotlight": 22.32, "stumble": 26.4, "handshake": 37.8, "gift_box": 41.12, "compass": 52.88, "hourglass": 61.24, "ship": 70.48, "course_line": 73.36, "quote_card": 82.56, "investor": 88.48, "money_pile": 91.52, "workbench": 100.0, "gears": 102.8, "notebook": 107.4, "pen": 112.0};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const sig=(g,x,y,w)=>mk('path',{d:'M'+x+' '+y+'c12-36 30-40 24 0s24-40 42-12 12 24 30-8 24 14 42 0 28-18 50-6',fill:'none',stroke:'var(--gain)','stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':1},g);
+const draw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const S0=sig($('sg0'),1222,515,6),S1=sig($('sg1'),250,650,6),S8=sig($('sg8'),1150,770,7);
+let L8=188;try{L8=S8.getTotalLength()||188}catch(e){}
+fig($('me'),340,380,40,'gain');
+for(let i=0;i<8;i++)fig($('cp'),860+(i%4)*170,360+Math.floor(i/4)*160,26,'ink');
+const BR=[];for(let i=0;i<9;i++)BR.push(mk('path',{d:'M'+(800+i*80)+' 260V700',class:'s-loss','stroke-width':6,'stroke-linecap':'round',pathLength:1,'stroke-dasharray':'1 1'},$('bars')));
+const AC=mk('g',{},$('actor'));fig(AC,440,560,30,'ink');
+fig($('hp2'),1215,440,30,'ink');
+const TG=['RESPONSIBILITY','EQUITY','LEVERAGE'].map((s,i)=>{const g=mk('g',{},$('tg'));mk('rect',{x:940,y:300+i*90,width:360,height:64,rx:32,class:'gain'},g);const tx=mk('text',{x:970,y:341+i*90,'font-size':24,class:'m',style:'fill:var(--on-gain)'},g);tx.textContent=s;return g});
+const CK=[];for(let i=0;i<6;i++)CK.push(mk('path',{d:'M'+(160+i*90)+' 715l14 14 28-30',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('ck')));
+const OB=[];for(let i=0;i<6;i++)OB.push(mk('rect',{x:840+i*110,y:830,width:70,height:0,rx:6,class:'gain','fill-opacity':(.35+i*.13).toFixed(2)},$('opp')));
+fig($('invp'),360,380,50,'ink');
+const GV=[];for(let i=0;i<5;i++){fig($('givers'),1100+i*85,400,24,'ink');GV.push(1100+i*85)}
+const PL=[];for(let c=0;c<8;c++)for(let s=0;s<4;s++)PL.push(mk('ellipse',{cx:650+s*62,cy:650-c*14,rx:26,ry:9,class:'gain',stroke:'var(--stage)','stroke-width':2},$('pile')));
+const FC=GV.map(()=>mk('circle',{r:10,class:'gain'},$('fly')));
+const TD=[];for(let i=0;i<12;i++)TD.push(mk('circle',{cx:160+i*110,cy:760,r:12,class:'gain'},$('tl')));
+const gear=(cx,cy,c)=>{const g=mk('g',{},$('gr'));let pts='';for(let i=0;i<56;i++){const a=i*Math.PI/28,R=i%4<2?96:78;pts+=(cx+R*Math.cos(a)).toFixed(1)+','+(cy+R*Math.sin(a)).toFixed(1)+' '}mk('polygon',{points:pts,class:c},g);mk('circle',{cx:cx,cy:cy,r:26,fill:'var(--stage)'},g);return g};
+const G1=gear(720,450,'gain'),G2=gear(895,450,'ink');
+const NC=[];for(let i=0;i<5;i++){const y=310+i*80;mk('path',{d:'M1190 '+y+'h170',class:'s-line','stroke-width':8,'stroke-linecap':'round'},$('nck'));NC.push(mk('path',{d:'M1396 '+(y-8)+'l12 12 24-26',fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('nck')))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('sg0'),p(u,TM.name_tag,TM.name_tag+.3));draw(S0,p(u,TM.name_tag+.3,TM.name_tag+2));
+rise($('seal'),p(u,TM.name_tag+3.8,TM.name_tag+4.3));
+
+rise($('me'),p(u,TM.signature,TM.signature+.5));draw(S1,p(u,TM.signature+.6,TM.signature+1.8));
+rise($('co'),p(u,TM.crowd,TM.crowd+.5));rise($('blame'),p(u,TM.crowd+4.6,TM.crowd+5.1));
+BR.forEach((b,i)=>draw(b,p(u,TM.crowd+8.3+i*.08,TM.crowd+8.9+i*.08)));rise($('trap'),p(u,TM.crowd+8.6,TM.crowd+9.1));
+
+$('cone').setAttribute('opacity',(p(u,TM.spotlight,TM.spotlight+.6)*(.85+.15*Math.sin(t*5))).toFixed(2));
+rise($('actor'),p(u,TM.spotlight+.3,TM.spotlight+.8));
+const sb=p(u,TM.stumble,TM.stumble+.6);AC.setAttribute('transform','rotate('+(-18*sb+(sb>0?3*Math.sin(t*6):0)).toFixed(1)+' 440 690)');
+rise($('oops'),p(u,TM.stumble+.4,TM.stumble+.8));rise($('hide'),p(u,TM.stumble+3.7,TM.stumble+4.2));rise($('tog'),p(u,TM.stumble+8.3,TM.stumble+8.8));
+
+rise($('hs'),p(u,TM.handshake,TM.handshake+.5));
+const md=p(u,TM.handshake+.6,TM.handshake+1.6);
+$('medal').setAttribute('transform','translate('+(-90*(1-md)).toFixed(1)+' 0)');
+$('ribbon').setAttribute('opacity',p(u,TM.handshake+1.5,TM.handshake+1.8).toFixed(2));
+$('arm').setAttribute('transform','translate('+(-30*p(u,TM.handshake+1.6,TM.handshake+2.2)).toFixed(1)+' 0)');
+rise($('gb'),p(u,TM.gift_box,TM.gift_box+.5));
+TG.forEach((g,i)=>rise(g,p(u,TM.gift_box+.6+i*.6,TM.gift_box+1.1+i*.6)));
+rise($('trk'),p(u,TM.gift_box+3.4,TM.gift_box+3.9));CK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.gift_box+3.9+i*.3,TM.gift_box+4.2+i*.3)));
+rise($('opp'),p(u,TM.gift_box+8.4,TM.gift_box+8.8));OB.forEach((b,i)=>{const h=(40+i*40)*p(u,TM.gift_box+8.6+i*.2,TM.gift_box+9.4+i*.2);b.setAttribute('y',(830-h).toFixed(1));b.setAttribute('height',h.toFixed(1))});
+
+rise($('cmp'),p(u,TM.compass,TM.compass+.5));$('ndl').setAttribute('transform','rotate('+(22*Math.sin(t*1.2)).toFixed(1)+' 330 460)');
+rise($('tgt'),p(u,TM.compass+5,TM.compass+5.4));draw($('la'),p(u,TM.compass+5.2,TM.compass+6));draw($('lb'),p(u,TM.compass+5.6,TM.compass+6.4));
+rise($('lev'),p(u,TM.compass+5.8,TM.compass+6.3));
+rise($('hg'),p(u,TM.hourglass,TM.hourglass+.5));
+const f=cl((u-TM.hourglass-.5)/9),yt=310+160*f,yb=630-150*f,dt=60*(yt-310)/160,db=60*(630-yb)/160;
+$('sTop').setAttribute('points',(920+dt)+','+yt+' '+(1060-dt)+','+yt+' 1000,470 980,470');
+$('sBot').setAttribute('points','920,630 1060,630 '+(1060-db)+','+yb+' '+(920+db)+','+yb);
+$('sStr').setAttribute('d','M990 470V'+yb.toFixed(1));$('sStr').setAttribute('opacity',f>0&&f<1?1:0);
+rise($('wis'),p(u,TM.hourglass+.3,TM.hourglass+.8));rise($('jud'),p(u,TM.hourglass+4.6,TM.hourglass+5.1));
+
+$('shp').setAttribute('opacity',p(u,TM.ship,TM.ship+.5));$('shp').setAttribute('transform','translate(0 '+(5*Math.sin(t*2)).toFixed(1)+')');
+let wd='M120 535';for(let x=140;x<=380;x+=20)wd+='L'+x+' '+(535+5*Math.sin(x/25+t*3)).toFixed(1);$('wv').setAttribute('d',wd);$('wv').setAttribute('opacity',p(u,TM.ship,TM.ship+.5));
+draw($('cA'),p(u,TM.course_line,TM.course_line+2));draw($('cB'),p(u,TM.course_line+.3,TM.course_line+2.3));
+rise($('gap'),p(u,TM.course_line+2.4,TM.course_line+2.9));rise($('mag'),p(u,TM.course_line+5,TM.course_line+5.5));
+rise($('qt'),p(u,TM.quote_card,TM.quote_card+.6));
+
+rise($('inv'),p(u,TM.investor,TM.investor+.5));
+const mp=p(u,TM.money_pile,TM.money_pile+.5);rise($('givers'),mp);
+FC.forEach((c,i)=>{const k=(t*.5+i*.2)%1,x0=GV[i];c.setAttribute('cx',(x0+(750-x0)*k).toFixed(1));c.setAttribute('cy',(340+200*k-160*Math.sin(Math.PI*k)).toFixed(1));c.setAttribute('opacity',(mp*Math.min(1,k*10,(1-k)*10)).toFixed(2))});
+const n=Math.round(32*p(u,TM.money_pile+.5,TM.money_pile+5));PL.forEach((e,i)=>e.setAttribute('opacity',i<n?1:0));
+rise($('tl'),p(u,TM.money_pile+5.4,TM.money_pile+5.9));TD.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.money_pile+5.8+i*.2,TM.money_pile+6+i*.2)));
+
+rise($('wb'),p(u,TM.workbench,TM.workbench+.5));
+rise($('gr'),p(u,TM.gears,TM.gears+.5));rise($('gl'),p(u,TM.gears+.6,TM.gears+1.1));
+const ga=t*30;G1.setAttribute('transform','rotate('+ga.toFixed(1)+' 720 450)');G2.setAttribute('transform','rotate('+(-ga+6.43).toFixed(1)+' 895 450)');
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));NC.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.notebook+.6+i*.5,TM.notebook+.9+i*.5)));
+$('sharp').setAttribute('width',(340*p(u,TM.notebook+.6,TM.notebook+3.4)).toFixed(1));
+
+rise($('qa'),p(u,TM.pen,TM.pen+.5));rise($('qb'),p(u,TM.pen+.4,TM.pen+.9));rise($('qc'),p(u,TM.pen+.8,TM.pen+1.3));
+const pk=p(u,TM.pen+1.4,TM.pen+3.2);draw(S8,pk);
+let pt={x:1150,y:770};try{pt=S8.getPointAtLength(L8*pk)}catch(e){}
+$('pen').setAttribute('transform','translate('+pt.x.toFixed(1)+' '+pt.y.toFixed(1)+') rotate(28)');$('pen').setAttribute('opacity',p(u,TM.pen+1.1,TM.pen+1.4));
+rise($('wr1'),p(u,TM.pen+5.8,TM.pen+6.3));rise($('wr2'),p(u,TM.pen+6.3,TM.pen+6.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.76;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

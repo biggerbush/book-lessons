@@ -1,0 +1,425 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tiny Habits Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Tiny Habits: A quick moment of celebration right after the behavior creates a feeling of success, and that feeling is what makes a habit stick. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">TINY HABITS · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Celebrate to</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">wire it in.</text>
+<text class="b" x="120" y="600" font-size="32">A tiny celebration turns a small action into a lasting habit.</text>
+<path class="s-line" d="M1200 540h280" stroke-width="5" stroke-linecap="round"/>
+<g id="t_fig"></g>
+<g id="t_arm"><path class="s-ink" d="M1370 420L1420 310" stroke-width="18" stroke-linecap="round"/><circle class="gain" cx="1420" cy="300" r="24"/><g id="t_rays"></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The repetition myth.</text>
+<text class="b" x="120" y="176" font-size="32">We count the days and wait for it to become automatic.</text>
+<g id="r_cal">
+<rect class="s-ink" x="120" y="240" width="520" height="480" rx="16" fill="var(--stage)" stroke-width="6"/>
+<path class="loss" d="M120 310V256a16 16 0 0 1 16-16h488a16 16 0 0 1 16 16v54z"/>
+<rect class="ink" x="212" y="222" width="16" height="40" rx="8"/><rect class="ink" x="532" y="222" width="16" height="40" rx="8"/>
+<text class="m" x="380" y="284" font-size="22" text-anchor="middle" style="fill:var(--stage)">DAY AFTER DAY</text>
+<g id="r_x"></g>
+</g>
+<g id="r_tal"></g>
+<g id="r_auto"><rect x="780" y="610" width="700" height="90" rx="14" fill="none" stroke="var(--muted)" stroke-width="4" stroke-dasharray="10 10"/><text class="m" x="1130" y="664" font-size="22" text-anchor="middle">STILL WAITING FOR “AUTOMATIC”…</text></g>
+<g id="r_not"><text class="d" x="120" y="820" font-size="50">Repetition is <tspan style="fill:var(--loss)">not</tspan> the main thing.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Feelings do the work.</text>
+<text class="b" x="120" y="176" font-size="32">Your brain learns from how a behavior makes you feel.</text>
+<g id="f_brain">
+<g id="f_glow"></g>
+<g transform="translate(400 460)">
+<path id="f_bo" d="M-150 40C-190 0-170-80-110-95C-90-150-10-160 20-120C60-160 150-140 155-70C200-40 190 40 140 60C130 110 60 120 20 95C-20 130-110 120-120 70C-140 65-150 55-150 40Z" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-ink" d="M-80-60c30 10 30 50 0 60M20-110c-10 40 30 60 10 100M90-60c-30 20-20 60 20 70" fill="none" stroke-width="5" stroke-linecap="round"/>
+</g>
+<text class="m" x="400" y="618" font-size="22" text-anchor="middle">YOUR BRAIN</text>
+</g>
+<g id="f_quote">
+<rect class="s-line" x="760" y="250" width="720" height="330" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="760" y="250" width="14" height="330"/>
+<text class="d5" x="810" y="350" font-size="44">“Emotions create habits.</text>
+<text class="d5" x="810" y="420" font-size="44">Not repetition.</text>
+<text class="d5" x="810" y="490" font-size="44">Not frequency.”</text>
+<text class="m" x="810" y="545" font-size="20">— BJ FOGG</text>
+</g>
+<g id="f_pills"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet Shine.</text>
+<text class="b" x="120" y="176" font-size="32">Fogg’s name for the feeling of success.</text>
+<g id="sh_fw"><g id="sh_rays"></g><g id="sh_face"></g></g>
+<g id="sh_word"><text class="d" x="400" y="790" font-size="110" text-anchor="middle" style="fill:var(--gain)">Shine</text></g>
+<g id="sh_paper">
+<rect class="s-ink" x="820" y="250" width="280" height="360" rx="10" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="860" y="340" font-size="72" style="fill:var(--gain)">A+</text>
+<path class="s-line" d="M860 400h200M860 450h200M860 500h160M860 550h200" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="960" y="650" font-size="20" text-anchor="middle">ACE A TEST</text>
+</g>
+<g id="sh_clap"><text class="m" x="1320" y="650" font-size="20" text-anchor="middle">HEAR APPLAUSE</text></g>
+<g id="sh_cel"><text class="d" x="820" y="760" font-size="48">Celebration = Shine</text><text class="m" x="820" y="810" font-size="22" style="fill:var(--gain)">CREATED ON PURPOSE</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Timing is everything.</text>
+<text class="b" x="120" y="176" font-size="32">Celebrate right after the behavior, or even during it.</text>
+<g id="tm_sw">
+<rect class="ink" x="340" y="300" width="40" height="28" rx="6"/>
+<circle class="s-ink" cx="360" cy="480" r="150" fill="var(--stage)" stroke-width="8"/>
+<g id="tm_ticks"></g>
+<path id="tm_hand" class="s-gain" d="M360 480V362" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="360" cy="480" r="12"/>
+<text class="m" x="360" y="690" font-size="22" text-anchor="middle">INSTANTLY</text>
+</g>
+<g id="tm_beh">
+<path class="s-muted" d="M680 460H1450m-18-18 18 18-18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="ink" x="700" y="410" width="200" height="50" rx="8"/>
+<text class="m" x="800" y="395" font-size="20" text-anchor="middle">BEHAVIOR</text>
+</g>
+<g id="tm_cel"><circle id="tm_dot" class="gain" cx="950" cy="460" r="24"/><text class="m" x="950" y="520" font-size="20" text-anchor="middle" style="fill:var(--gain)">CELEBRATE</text></g>
+<g id="tm_chain">
+<rect x="740" y="580" width="150" height="64" rx="32" fill="none" stroke="var(--ink)" stroke-width="10"/>
+<rect x="850" y="580" width="150" height="64" rx="32" fill="none" stroke="var(--gain)" stroke-width="10"/>
+<text class="m" x="870" y="690" font-size="20" text-anchor="middle" style="fill:var(--gain)">FEELING LINKED TO ACTION</text>
+</g>
+<g id="tm_late">
+<circle class="loss" cx="1360" cy="460" r="24"/>
+<text class="m" x="1360" y="520" font-size="20" text-anchor="middle">AN HOUR LATER</text>
+<rect x="1230" y="580" width="110" height="64" rx="32" fill="none" stroke="var(--loss)" stroke-width="10"/>
+<rect x="1376" y="580" width="100" height="64" rx="32" fill="none" stroke="var(--loss)" stroke-width="10"/>
+<text class="m" x="1355" y="690" font-size="20" text-anchor="middle" style="fill:var(--loss)">TOO LATE</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One tooth, one cheer.</text>
+<text class="b" x="120" y="176" font-size="32">The book’s classic example.</text>
+<g id="tb_panel">
+<rect class="s-line" x="120" y="230" width="620" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-loss" d="M150 300H710" stroke-width="10" stroke-linecap="round"/>
+<g id="tb_teeth"></g>
+<path id="tb_floss" class="s-gain" d="M340 262V418Q385 446 430 418V262" fill="none" stroke-width="5" stroke-linecap="round"/>
+<g id="tb_brush">
+<path class="s-ink" d="M234 500v-16M252 500v-16M270 500v-16M288 500v-16M306 500v-16" stroke-width="5" stroke-linecap="round"/>
+<rect class="s-ink" x="220" y="500" width="100" height="44" rx="10" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="320" y="510" width="300" height="24" rx="12"/>
+</g>
+<text class="m" x="150" y="650" font-size="20">AFTER I BRUSH, I FLOSS ONE TOOTH</text>
+</g>
+<g id="mr">
+<ellipse class="s-ink" cx="1140" cy="430" rx="170" ry="190" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M1140 620v40M1060 660h160" stroke-width="8" stroke-linecap="round"/>
+<g id="mr_rays"></g><g id="mr_face"></g>
+</g>
+<g id="mr_v"><text class="d" x="1140" y="740" font-size="64" text-anchor="middle" style="fill:var(--gain)">Victory!</text></g>
+<g id="mr_s"><text class="m" x="1140" y="800" font-size="22" text-anchor="middle">A LITTLE SILLY? THAT’S FINE.</text></g>
+<g id="mr_k"><text class="d" x="120" y="800" font-size="40">Shine says: keep this habit.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Find your celebration.</text>
+<text class="b" x="120" y="176" font-size="32">A word, a gesture, or a big smile.</text>
+<g id="c6_0">
+<rect id="c6r0" x="120" y="240" width="440" height="400" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/>
+<rect class="s-ink" x="160" y="280" width="220" height="100" rx="40" fill="var(--stage)" stroke-width="6"/>
+<path class="ink" d="M200 383l-14 36 46-36z"/>
+<text class="d" x="270" y="348" font-size="48" text-anchor="middle">Yes!</text>
+<rect class="gain" x="260" y="430" width="260" height="100" rx="40"/>
+<path class="gain" d="M480 528l14 36-46-36z"/>
+<text class="d" x="390" y="494" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">Nailed it!</text>
+<text class="m" x="150" y="610" font-size="22">A WORD</text>
+</g>
+<g id="c6_1">
+<rect id="c6r1" x="580" y="240" width="440" height="400" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/>
+<g id="fc_p"></g>
+<g id="fc_arm"><path class="s-ink" d="M795 470L850 360" stroke-width="14" stroke-linecap="round"/><circle class="gain" cx="850" cy="350" r="20"/></g>
+<text class="m" x="610" y="610" font-size="22">A GESTURE</text>
+</g>
+<g id="c6_2">
+<rect id="c6r2" x="1040" y="240" width="440" height="400" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/>
+<g id="fc_smile"></g>
+<text class="m" x="1070" y="610" font-size="22">A BIG SMILE</text>
+</g>
+<g id="c6_t"><text class="d" x="120" y="770" font-size="52">The only test: does it <tspan style="fill:var(--gain)">feel good?</tspan></text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Practice the feeling.</text>
+<text class="b" x="120" y="176" font-size="32">Awkward at first? Treat celebrating as a skill.</text>
+<g id="lp">
+<circle class="s-line" cx="400" cy="470" r="140" fill="none" stroke-width="8"/>
+<circle id="lp_arc" cx="400" cy="470" r="140" fill="none" stroke="var(--gain)" stroke-width="10" stroke-linecap="round" stroke-dasharray="200 680"/>
+<text class="m" x="400" y="479" font-size="26" text-anchor="middle">PRACTICE</text>
+<text class="m" x="400" y="680" font-size="22" text-anchor="middle">TREAT IT AS A SKILL</text>
+</g>
+<g id="lp_hd">
+<text class="m" x="800" y="290" font-size="22">TRY IT A FEW TIMES TODAY</text>
+<text class="m" x="840" y="490" font-size="20" text-anchor="middle">AWKWARD</text>
+<text class="m" x="1440" y="490" font-size="20" text-anchor="middle" style="fill:var(--gain)">EASY</text>
+</g>
+<g id="lp_faces"></g>
+<g id="su"><g id="su_rays"></g><circle class="gain" r="50"/></g>
+<g id="su_l"><path class="s-line" d="M820 700H1460" stroke-width="5" stroke-linecap="round"/><text class="m" x="1140" y="770" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE SHINE ARRIVES QUICKLY</text></g>
+<g id="su_t"><text class="d" x="120" y="800" font-size="46">Your new habits start to stick.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="290" font-size="52" letter-spacing="-1">Pick one tiny habit.</text></g>
+<g id="qb"><text class="d" x="136" y="360" font-size="52" letter-spacing="-1">Choose a celebration.</text></g>
+<g id="qc"><text class="d" x="136" y="470" font-size="52" letter-spacing="-1">Tonight: do it,</text></g>
+<g id="qd"><text class="d" x="136" y="540" font-size="52" letter-spacing="-1">celebrate, and notice</text></g>
+<g id="qe"><text class="d" x="136" y="610" font-size="52" letter-spacing="-1">your <tspan style="fill:var(--gain)">Shine</tspan>.</text></g>
+<text class="m" x="139" y="720" font-size="24">CELEBRATE INSTANTLY</text>
+<path class="s-line" d="M860 230V790" stroke-width="3" stroke-dasharray="6 10"/>
+
+<g id="q8_st0">
+<circle cx="1000" cy="272" r="75" fill="var(--stage)" stroke="var(--line)" stroke-width="5"/>
+<path id="q8_tooth" d="M972 238Q1000 224 1028 238Q1042 246 1036 272L1026 312Q1021 324 1016 312L1008 288L992 288L984 312Q979 324 974 312L964 272Q958 246 972 238Z" fill="var(--stage)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="1110" y="256" font-size="20">STEP 1</text>
+<text class="d5" x="1110" y="300" font-size="34">Do one tiny habit</text>
+</g>
+<path id="q8_a1" class="s-muted" d="M1000 360v42m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="q8_st1">
+<circle cx="1000" cy="490" r="75" fill="var(--stage)" stroke="var(--line)" stroke-width="5"/>
+<g id="q8_fig"></g>
+<g id="q8_arm"><path class="s-ink" d="M1004 504L1032 452" stroke-width="10" stroke-linecap="round"/><circle class="gain" cx="1034" cy="446" r="12"/></g>
+<text class="m" x="1110" y="474" font-size="20">STEP 2</text>
+<text class="d5" x="1110" y="518" font-size="34">Celebrate</text>
+</g>
+<path id="q8_a2" class="s-muted" d="M1000 578v42m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="q8_st2">
+<g id="q8_sunr"></g>
+<circle class="gain" cx="1000" cy="708" r="40"/>
+<text class="m" x="1110" y="692" font-size="20">STEP 3</text>
+<text class="d5" x="1110" y="736" font-size="34" style="fill:var(--gain)">Feel the Shine</text>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Celebrate to Wire It In&rdquo;, from <em>Tiny Habits</em> by BJ Fogg. The flossing example, the idea that emotions create habits, and the term Shine are as reported in the book. The calendar, tally marks, exam paper, and timing link are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 9.6], [9.6, 22.8], [22.8, 38.3], [38.3, 51.4], [51.4, 64.8], [64.8, 83.5], [83.5, 96.6], [96.6, 110.3], [110.3, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Victory!", "The Repetition Myth", "Feelings Do the Work", "Meet Shine", "Timing Is Everything", "One Tooth, One Cheer", "Find Your Celebration", "Practice the Feeling", "Your Challenge"];
+const TM={"fist_pump": 0.0, "calendar": 9.92, "tally_marks": 13.97, "brain": 23.08, "quote_card": 27.92, "glowing_face": 38.56, "exam_paper": 43.76, "stopwatch": 51.68, "link_chain": 56.4, "toothbrush": 65.12, "mirror": 70.48, "speech_bubble": 83.79, "gesture_hand": 88.36, "rehearse_loop": 96.88, "sun": 105.71, "checkmark": 110.64};
+const person=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const rays=(g,x,y,r1,r2,n,a0,a1,w)=>{const full=a0===undefined;a0=full?0:a0;a1=full?2*Math.PI:a1;for(let i=0;i<n;i++){const a=a0+(a1-a0)*(full?i/n:i/(n-1)),c=Math.cos(a),s=Math.sin(a);
+  mk('path',{d:'M'+(x+r1*c).toFixed(1)+' '+(y+r1*s).toFixed(1)+'L'+(x+r2*c).toFixed(1)+' '+(y+r2*s).toFixed(1),stroke:'var(--gain)','stroke-width':w||6,'stroke-linecap':'round'},g)}return g};
+const face=(g,x,y,r,s,on)=>{mk('circle',{cx:x,cy:y,r:r,fill:on?'var(--gain)':'var(--stage)',stroke:on?'var(--gain)':'var(--ink)','stroke-width':5},g);const c=on?'var(--on-gain)':'var(--ink)';
+  [-1,1].forEach(k=>mk('circle',{cx:x+k*r*.35,cy:y-r*.2,r:r*.1,fill:c},g));
+  mk('path',{d:'M'+(x-r*.45)+' '+(y+r*.3)+'Q'+x+' '+(y+r*.3+s*r*.6)+' '+(x+r*.45)+' '+(y+r*.3),fill:'none',stroke:c,'stroke-width':Math.max(4,r*.1),'stroke-linecap':'round'},g)};
+
+person($('t_fig'),1320,330,40,'ink'); rays($('t_rays'),1420,300,36,52,6,-Math.PI,.3);
+
+const CX=[];for(let r=0;r<5;r++)for(let c=0;c<7;c++){const x=146+c*68,y=336+r*72;
+  mk('rect',{x:x+4,y:y+4,width:60,height:64,rx:8,fill:'none',stroke:'var(--line)','stroke-width':3},$('r_x'));
+  CX.push(mk('path',{d:'M'+(x+18)+' '+(y+20)+'l32 32m0-32l-32 32',class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('r_x')))}
+const TL=[];mk('text',{x:780,y:250,'font-size':22,class:'m'},$('r_tal')).textContent='REPETITIONS';
+for(let g=0;g<10;g++){const gx=780+(g%5)*140,gy=270+Math.floor(g/5)*160;
+  for(let i=0;i<4;i++)TL.push(mk('path',{d:'M'+(gx+i*22)+' '+gy+'v120',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},$('r_tal')));
+  TL.push(mk('path',{d:'M'+(gx-10)+' '+(gy+95)+'L'+(gx+80)+' '+(gy+25),class:'s-loss','stroke-width':6,'stroke-linecap':'round'},$('r_tal')))}
+
+rays($('f_glow'),400,460,205,230,9,-Math.PI+.25,-.25);
+const PL=['ACTION','FEEL SUCCESS','DO IT AGAIN'].map((s,i)=>{const x=120+i*490,g=mk('g',{},$('f_pills')),on=i===1;
+  mk('rect',{x:x,y:660,width:380,height:90,rx:45,fill:on?'var(--gain)':'var(--stage)',stroke:on?'var(--gain)':'var(--ink)','stroke-width':5},g);
+  const tx=mk('text',{x:x+190,y:715,'font-size':24,'text-anchor':'middle',class:'m'},g);tx.textContent=s;if(on)tx.style.fill='var(--on-gain)';
+  if(i<2)mk('path',{d:'M'+(x+400)+' 705h70m-18-18 18 18-18 18',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+
+face($('sh_face'),400,470,120,1,true); rays($('sh_rays'),400,470,150,195,12,undefined,undefined,8);
+const CB=[];for(let i=0;i<5;i++){const x=1200+i*60;person($('sh_clap'),x,450,16,'ink');
+  CB.push(mk('path',{d:'M'+(x-10)+' 412l-8-14M'+(x+10)+' 412l8-14',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},$('sh_clap')))}
+
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(360+124*c).toFixed(1)+' '+(480+124*s).toFixed(1)+'L'+(360+138*c).toFixed(1)+' '+(480+138*s).toFixed(1),class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('tm_ticks'))}
+
+const TE=[];for(let i=0;i<6;i++)TE.push(mk('rect',{x:170+i*90,y:300,width:70,height:110,rx:22,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('tb_teeth')));
+face($('mr_face'),1140,410,70,1,true); rays($('mr_rays'),1140,410,92,122,10);
+
+person($('fc_p'),760,400,30,'ink'); face($('fc_smile'),1260,420,100,1.2,true);
+
+const FS=[];for(let i=0;i<5;i++){const g=mk('g',{},$('lp_faces'));face(g,840+i*150,400,40,-.3+i*.35,i===4);FS.push(g)}
+rays($('su_rays'),0,0,62,90,10);
+
+// closing: three-step sequence
+person($('q8_fig'),988,466,16,'ink');
+rays($('q8_sunr'),1000,708,52,72,10,undefined,undefined,7);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const fp=p(u,TM.fist_pump,TM.fist_pump+.4),pump=Math.abs(Math.sin(u*4));
+  $('t_arm').setAttribute('transform','rotate('+(-22*pump*fp).toFixed(1)+' 1370 420)');
+  $('t_rays').setAttribute('opacity',(fp*(.4+.6*pump)).toFixed(2));
+
+  rise($('r_cal'),p(u,TM.calendar,TM.calendar+.5));
+  CX.forEach((x,i)=>x.setAttribute('opacity',p(u,TM.calendar+.6+i*.11,TM.calendar+.8+i*.11)));
+  rise($('r_tal'),p(u,TM.tally_marks,TM.tally_marks+.4));
+  TL.forEach((x,i)=>x.setAttribute('opacity',p(u,TM.tally_marks+.2+i*.07,TM.tally_marks+.35+i*.07)));
+  rise($('r_auto'),p(u,TM.tally_marks+3.4,TM.tally_marks+3.9)); rise($('r_not'),p(u,TM.tally_marks+5.4,TM.tally_marks+6));
+
+  rise($('f_brain'),p(u,TM.brain,TM.brain+.5)); rise($('f_quote'),p(u,TM.quote_card,TM.quote_card+.5));
+  const lg=p(u,TM.quote_card+4.2,TM.quote_card+4.8);
+  $('f_glow').setAttribute('opacity',(lg*(.6+.4*Math.sin(t*4))).toFixed(2)); $('f_bo').setAttribute('stroke',lg>.5?'var(--gain)':'var(--ink)');
+  PL.forEach((g,i)=>rise(g,p(u,TM.quote_card+4.2+i*.6,TM.quote_card+4.7+i*.6)));
+
+  rise($('sh_fw'),p(u,TM.glowing_face,TM.glowing_face+.5)); $('sh_rays').setAttribute('transform','rotate('+((t*12)%360).toFixed(1)+' 400 470)');
+  rise($('sh_word'),p(u,TM.glowing_face+4.2,TM.glowing_face+4.8));
+  rise($('sh_paper'),p(u,TM.exam_paper,TM.exam_paper+.5)); rise($('sh_clap'),p(u,TM.exam_paper+2,TM.exam_paper+2.5));
+  CB.forEach((g,i)=>g.setAttribute('opacity',(.5+.5*Math.sin(t*8+i*1.3)).toFixed(2)));
+  rise($('sh_cel'),p(u,TM.exam_paper+5.8,TM.exam_paper+6.4));
+
+  rise($('tm_sw'),p(u,TM.stopwatch,TM.stopwatch+.5)); $('tm_hand').setAttribute('transform','rotate('+((t*120)%360).toFixed(1)+' 360 480)');
+  rise($('tm_beh'),p(u,TM.stopwatch+.6,TM.stopwatch+1.1)); rise($('tm_cel'),p(u,TM.stopwatch+1.4,TM.stopwatch+1.9));
+  $('tm_dot').setAttribute('r',(24+4*Math.sin(t*5)).toFixed(1));
+  rise($('tm_chain'),p(u,TM.link_chain,TM.link_chain+.5)); rise($('tm_late'),p(u,TM.link_chain+5.4,TM.link_chain+5.9));
+
+  rise($('tb_panel'),p(u,TM.toothbrush,TM.toothbrush+.5));
+  const fl=p(u,TM.toothbrush+2.5,TM.toothbrush+3.1);
+  $('tb_brush').setAttribute('transform','translate('+(60*Math.sin(t*5)*(1-fl)).toFixed(1)+' 0)'); $('tb_brush').setAttribute('opacity',(1-fl).toFixed(2));
+  $('tb_floss').setAttribute('opacity',fl); TE[2].setAttribute('fill',fl>.5?'var(--gain)':'var(--stage)'); TE[2].setAttribute('stroke',fl>.5?'var(--gain)':'var(--ink)');
+  rise($('mr'),p(u,TM.mirror,TM.mirror+.5)); rise($('mr_v'),p(u,TM.mirror+1.2,TM.mirror+1.7)); rise($('mr_s'),p(u,TM.mirror+4.6,TM.mirror+5.1));
+  const kp=p(u,TM.mirror+9.2,TM.mirror+9.8); $('mr_rays').setAttribute('opacity',(kp*(.6+.4*Math.sin(t*4))).toFixed(2)); rise($('mr_k'),kp);
+
+  [TM.speech_bubble,TM.gesture_hand,TM.gesture_hand+2.6].forEach((a,i)=>rise($('c6_'+i),p(u,a,a+.5)));
+  $('fc_arm').setAttribute('transform','rotate('+(-20*Math.abs(Math.sin(t*4))).toFixed(1)+' 795 470)');
+  const ts=TM.gesture_hand+5.8; rise($('c6_t'),p(u,ts,ts+.6));
+  [0,1,2].forEach(i=>$('c6r'+i).setAttribute('stroke',u>=ts+.4?'var(--gain)':'var(--line)'));
+
+  rise($('lp'),p(u,TM.rehearse_loop,TM.rehearse_loop+.5)); $('lp_arc').setAttribute('transform','rotate('+((t*90)%360).toFixed(1)+' 400 470)');
+  rise($('lp_hd'),p(u,TM.rehearse_loop+5.8,TM.rehearse_loop+6.3));
+  FS.forEach((g,i)=>rise(g,p(u,TM.rehearse_loop+6.2+i*.6,TM.rehearse_loop+6.7+i*.6)));
+  const sk=p(u,TM.sun,TM.sun+1.2);
+  $('su').setAttribute('transform','translate(1140 '+(700-80*sk).toFixed(1)+')'); $('su').setAttribute('opacity',sk);
+  $('su_rays').setAttribute('transform','rotate('+((t*15)%360).toFixed(1)+')');
+  rise($('su_l'),p(u,TM.sun,TM.sun+.5)); rise($('su_t'),p(u,TM.sun+2,TM.sun+2.6));
+
+  // closing: text on the left, three-step sequence on the right
+  const C=TM.checkmark;
+  rise($('qa'),p(u,C,C+.5)); rise($('qb'),p(u,C+.6,C+1.1));
+  rise($('qc'),p(u,C+5,C+5.5)); rise($('qd'),p(u,C+5.6,C+6.1)); rise($('qe'),p(u,C+6.2,C+6.7));
+  rise($('q8_st0'),p(u,C+.2,C+.7));
+  $('q8_a1').setAttribute('opacity',p(u,C+.7,C+1.1)); rise($('q8_st1'),p(u,C+.8,C+1.3));
+  $('q8_a2').setAttribute('opacity',p(u,C+5.4,C+5.8)); rise($('q8_st2'),p(u,C+5.6,C+6.2));
+  const tg=u>=C+5.2; $('q8_tooth').setAttribute('fill',tg?'var(--gain)':'var(--stage)'); $('q8_tooth').setAttribute('stroke',tg?'var(--gain)':'var(--ink)');
+  $('q8_arm').setAttribute('transform','rotate('+(-18*Math.abs(Math.sin(t*4))).toFixed(1)+' 1004 504)');
+  $('q8_sunr').setAttribute('transform','rotate('+((t*15)%360).toFixed(1)+' 1000 708)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.45;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

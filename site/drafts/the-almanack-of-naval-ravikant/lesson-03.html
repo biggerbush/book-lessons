@@ -1,0 +1,334 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Almanack of Naval Ravikant Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of The Almanack of Naval Ravikant: Code and media multiply your effort without anyone&#x27;s permission, letting one person&#x27;s work reach millions while they sleep. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE ALMANACK OF NAVAL RAVIKANT · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Use leverage that</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">needs no permission.</text>
+<text class="b" x="120" y="600" font-size="32">Code and media let your work run while you sleep.</text>
+<path class="gain" d="M1420 196A44 44 0 1 0 1464 240A36 36 0 0 1 1420 196z"/>
+<rect class="s-ink" x="1200" y="330" width="240" height="160" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1170 506h300" stroke-width="10" stroke-linecap="round"/>
+<g id="gear"></g>
+<rect class="ink" x="1150" y="640" width="16" height="96" rx="4"/>
+<rect class="ink" x="1160" y="700" width="320" height="36" rx="8"/>
+<circle class="gain" cx="1215" cy="680" r="22"/>
+<path d="M1238 700c40-46 190-46 236 0z" fill="var(--line)" stroke="var(--ink)" stroke-width="4"/>
+<g id="zz0"><text class="d" x="1250" y="640" font-size="28" style="fill:var(--gain)">Z</text><text class="d" x="1278" y="610" font-size="34" style="fill:var(--gain)">Z</text><text class="d" x="1310" y="575" font-size="40" style="fill:var(--gain)">Z</text></g>
+<g id="stw"><text class="m" x="1320" y="790" font-size="20" text-anchor="middle" style="fill:var(--gain)">STILL WORKING</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Leverage multiplies effort.</text>
+<text class="b" x="120" y="176" font-size="32">Anything that multiplies the effect of your effort.</text>
+<path class="s-line" d="M140 700H900" stroke-width="5"/>
+<path class="ink" d="M640 612L596 700H684z"/>
+<g id="beam"><path class="s-ink" d="M200 606H820" stroke-width="12" stroke-linecap="round"/><circle class="loss" cx="740" cy="530" r="70"/></g>
+<g id="eff"><text class="m" x="230" y="400" font-size="22" text-anchor="middle">EFFORT</text><path class="s-ink" d="M230 420v120m-20-20 20 20 20-20" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="res"><text class="m" x="740" y="410" font-size="22" text-anchor="middle" style="fill:var(--gain)">BIG RESULT</text></g>
+<g id="qcard"><rect class="s-line" x="960" y="240" width="520" height="260" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d5" x="1000" y="340" font-size="44">“Fortunes require</text>
+<text class="d5" x="1000" y="400" font-size="44" style="fill:var(--gain)">leverage.”</text>
+<text class="m" x="1000" y="460" font-size="20">— NAVAL RAVIKANT</text></g>
+<g id="th"><g id="bars"></g><path class="s-line" d="M960 740h210M1200 740h240" stroke-width="4"/>
+<text class="m" x="970" y="780" font-size="18">HANDS ADD</text><text class="m" x="1200" y="780" font-size="18" style="fill:var(--gain)">LEVERAGE MULTIPLIES</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Labor.</text>
+<text class="b" x="120" y="176" font-size="32">Other people working for you.</text>
+<g id="lk2"></g>
+<g id="mgr"><text class="m" x="860" y="320" font-size="20">NEEDS FOLLOWERS</text></g>
+<g id="wk"></g>
+<path id="tangle" class="s-loss" d="M440 470C620 700 700 420 860 640S1100 440 1180 700 760 820 520 640" fill="none" stroke-width="4" stroke-dasharray="10 8"/>
+<g id="mess"><text class="d" x="120" y="830" font-size="44" style="fill:var(--loss)">Messy: the worst form of leverage.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Capital.</text>
+<text class="b" x="120" y="176" font-size="32">Money that does the work.</text>
+<g id="bag"><path class="gain" d="M290 400h80l-20 40c80 20 110 90 110 150 0 60-50 80-140 80s-140-20-140-80c0-60 30-130 110-150z"/>
+<text class="d" x="330" y="620" font-size="90" text-anchor="middle" style="fill:var(--on-gain)">$</text>
+<path class="s-muted" d="M486 600h36m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="540" y="710" font-size="20">MONEY THAT WORKS</text></g>
+<g id="coins"></g>
+<g id="bnk"><g id="bkf"></g><rect class="s-ink" x="1000" y="520" width="300" height="90" fill="var(--stage)" stroke-width="6"/><text class="m" x="1150" y="650" font-size="20" text-anchor="middle">INVESTOR</text></g>
+<g id="bub"><rect class="s-ink" x="1230" y="220" width="200" height="80" rx="16" fill="var(--stage)" stroke-width="4"/><text class="m" x="1330" y="268" font-size="22" text-anchor="middle">TRUST YOU?</text></g>
+<g id="perm"><rect class="loss" x="120" y="780" width="48" height="40" rx="6"/><path class="s-loss" d="M132 780v-14a12 12 0 0 1 24 0v14" fill="none" stroke-width="6"/>
+<text class="d" x="196" y="820" font-size="44">Both need someone else’s permission.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Code and media.</text>
+<text class="b" x="120" y="176" font-size="32">Products that cost almost nothing to copy.</text>
+<g id="lap"><rect class="s-ink" x="140" y="300" width="320" height="210" rx="12" fill="var(--stage)" stroke-width="7"/>
+<path class="s-gain" d="M180 350h120M200 390h160M200 430h100M180 470h80" stroke-width="8" stroke-linecap="round"/>
+<path class="s-ink" d="M110 530h380" stroke-width="12" stroke-linecap="round"/>
+<text class="m" x="300" y="580" font-size="20" text-anchor="middle">CODE · MEDIA</text></g>
+<g id="cps"></g>
+<g id="cpl"><text class="m" x="580" y="630" font-size="20">ALMOST FREE TO COPY</text></g>
+<g id="door">
+<rect class="gain" x="1124" y="274" width="232" height="372"/>
+<path d="M1190 460h110m-30-30 30 30-30 30" fill="none" stroke="var(--on-gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-ink" x="1120" y="270" width="240" height="380" fill="none" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-ink" d="M1090 654h300" stroke-width="8" stroke-linecap="round"/>
+<polygon id="pnl" fill="var(--stage)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round" points="1124,274 1356,274 1356,646 1124,646"/>
+<circle id="hdl" class="ink" cx="1332" cy="470" r="11"/>
+<text class="m" x="1240" y="700" font-size="20" text-anchor="middle">NOBODY HAS TO SAY YES</text></g>
+<g id="pl"><text class="d" x="120" y="800" font-size="56" style="fill:var(--gain)">Permissionless leverage.</text>
+<text class="m" x="120" y="848" font-size="20">BEHIND MANY OF TODAY’S NEW FORTUNES</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Code: an army of robots.</text>
+<text class="b" x="120" y="176" font-size="32">Write it once. It keeps running while you sleep.</text>
+<g id="rob"></g>
+<g id="night"><path class="gain" transform="translate(-630 60)" d="M1420 196A44 44 0 1 0 1464 240A36 36 0 0 1 1420 196z"/>
+<path class="s-ink" d="M680 620H900" stroke-width="6" stroke-linecap="round"/><circle class="ink" cx="710" cy="598" r="20"/>
+<path d="M735 620c30-34 130-34 160 0z" fill="var(--line)" stroke="var(--ink)" stroke-width="4"/>
+<g id="zz5"><text class="d" x="740" y="560" font-size="24" style="fill:var(--gain)">Z</text><text class="d" x="765" y="530" font-size="30" style="fill:var(--gain)">Z</text><text class="d" x="795" y="495" font-size="36" style="fill:var(--gain)">Z</text></g>
+<text class="m" x="790" y="680" font-size="20" text-anchor="middle">WHILE THEY SLEEP</text></g>
+<g id="usr"></g>
+<g id="tile"><rect class="gain" x="1200" y="440" width="80" height="80" rx="16"/><text class="m" x="1240" y="488" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">APP</text></g>
+<g id="nohire"><text class="d" x="120" y="810" font-size="44">One app. Millions of people. No new hires.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Media works the same way.</text>
+<text class="b" x="120" y="176" font-size="32">Writing, podcasts and videos.</text>
+<g id="ic0"><rect class="s-ink" x="160" y="262" width="72" height="92" rx="6" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M174 290h44M174 312h44M174 334h28" stroke-width="5"/><text class="m" x="196" y="400" font-size="18" text-anchor="middle">WRITING</text></g>
+<g id="ic1"><rect class="ink" x="340" y="258" width="40" height="70" rx="20"/><path class="s-ink" d="M326 300a34 34 0 0 0 68 0M360 334v26M340 360h40" fill="none" stroke-width="6" stroke-linecap="round"/><text class="m" x="360" y="400" font-size="18" text-anchor="middle">PODCASTS</text></g>
+<g id="ic2"><circle class="s-ink" cx="540" cy="308" r="46" fill="var(--stage)" stroke-width="6"/><path class="gain" d="M526 286l36 22-36 22z"/><text class="m" x="540" y="400" font-size="18" text-anchor="middle">VIDEOS</text></g>
+<g id="cmp"><circle cx="150" cy="540" r="14" fill="var(--muted)"/><circle cx="190" cy="540" r="14" fill="var(--muted)"/><circle cx="230" cy="540" r="14" fill="var(--muted)"/>
+<text class="m" x="120" y="610" font-size="18">LIFETIME OF</text><text class="m" x="120" y="634" font-size="18">SPEECHES</text>
+<g id="aud"></g><text class="m" x="318" y="650" font-size="18" style="fill:var(--gain)">ONE EPISODE</text></g>
+<g id="ph"><rect class="s-ink" x="800" y="250" width="190" height="400" rx="26" fill="var(--stage)" stroke-width="7"/><g id="tw"></g>
+<text class="m" x="895" y="690" font-size="18" text-anchor="middle">HOW TO GET RICH</text></g>
+<path id="arc6" class="s-gain" d="M990 330C1060 250 1140 260 1180 330" fill="none" stroke-width="5" stroke-dasharray="10 8"/>
+<g id="gl"><circle class="s-ink" cx="1270" cy="460" r="160" fill="var(--stage)" stroke-width="6"/>
+<ellipse class="s-line" cx="1270" cy="460" rx="70" ry="160" fill="none" stroke-width="4"/>
+<path class="s-line" d="M1110 460h320M1130 380h280M1130 540h280" stroke-width="4"/><g id="gd"></g></g>
+<g id="bk"><rect class="gain" x="120" y="762" width="48" height="56" rx="4"/><path d="M132 762v56" stroke="var(--stage)" stroke-width="4"/>
+<text class="d" x="196" y="808" font-size="40">Its ideas later helped shape this book.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start small.</text>
+<text class="b" x="120" y="176" font-size="32">You don’t need a team or investors to begin.</text>
+<g id="nb"><text class="m" x="120" y="300" font-size="20">NO TEAM · NO INVESTORS</text><path class="s-line" d="M140 500H780" stroke-width="6" stroke-linecap="round"/></g>
+<g id="cards7"></g>
+<g id="fk"><path class="s-ink" d="M780 500L980 330M780 500L980 560" fill="none" stroke-width="6" stroke-linecap="round"/>
+<rect class="gain" x="990" y="300" width="240" height="60" rx="10"/><text class="m" x="1110" y="338" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">WRITE CODE</text>
+<rect class="gain" x="990" y="530" width="240" height="60" rx="10"/><text class="m" x="1110" y="568" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">TELL STORIES</text></g>
+<g id="sb"><g id="loop7"><path class="s-gain" d="M167 808A25 25 0 1 1 152 785" fill="none" stroke-width="7" stroke-linecap="round"/><path class="gain" d="M146 772l18 12-18 12z"/></g>
+<text class="d" x="196" y="820" font-size="36">Keeps working after you stop typing.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">This week, make one thing</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">that can be copied for free.</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2" style="fill:var(--gain)">Could it reach a million?</text></g>
+<g id="docs"></g>
+<g id="ql"><text class="m" x="143" y="760" font-size="24">WHAT WOULD IT TAKE TO REACH A MILLION PEOPLE?</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Use leverage that needs no permission&rdquo;, from <em>The Almanack of Naval Ravikant</em> by Eric Jorgenson. Naval&#x27;s three kinds of leverage and his tweetstorm on getting rich are as reported in the book. The robot army, the copy machine and the podcast comparison are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 7.5], [7.5, 21.8], [21.8, 35.8], [35.8, 48.3], [48.3, 65.6], [65.6, 79.1], [79.1, 99.2], [99.2, 118.2], [118.2, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Your Effort, Multiplied", "Fortunes Need Leverage", "Labor", "Capital", "The New Leverage", "Code", "Media", "Start Small", "Your Challenge"];
+const TM={"sleeping": 0.0, "lever": 7.84, "quote_card": 12.08, "two_hands": 16.24, "crowd": 22.08, "manager": 26.96, "messy_team": 30.72, "money_bag": 36.08, "banker": 40.24, "laptop": 48.64, "copy_machine": 52.4, "open_door": 56.64, "robot_army": 65.88, "night_moon": 70.16, "users_map": 74.92, "microphone": 79.36, "podcast_ear": 84.16, "phone_tweet": 89.4, "world_globe": 94.0, "notebook": 99.52, "first_post": 102.88, "skill_fork": 108.64, "snowball": 113.84, "question": 118.48};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const zz=(g,on,t)=>[...g.children].forEach((z,i)=>z.setAttribute('opacity',on?(.3+.7*(.5+.5*Math.sin(t*2.5-i*1.3))).toFixed(2):0));
+const st=(k)=>({fill:'none',stroke:'var(--'+k+')','stroke-linecap':'round','stroke-linejoin':'round'});
+const G=$('gear');mk('circle',Object.assign(st('gain'),{cx:1320,cy:410,r:30,'stroke-width':10}),G);
+for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',Object.assign(st('gain'),{d:'M'+(1320+36*c).toFixed(1)+' '+(410+36*s).toFixed(1)+'L'+(1320+50*c).toFixed(1)+' '+(410+50*s).toFixed(1),'stroke-width':12}),G)}
+const BASE1=740;
+const BR=[0,1,2,3].map(i=>[mk('rect',{x:972+i*50,width:36,height:0,class:'ink'},$('bars')),35*(i+1)]).concat([0,1,2,3,4].map(i=>[mk('rect',{x:1210+i*44,width:34,height:0,class:'gain'},$('bars')),10*2**i]));
+fig($('mgr'),800,300,30,'gain');
+const WK=[];for(let j=0;j<2;j++)for(let i=0;i<6;i++){const x=450+i*140,y=500+j*160;WK.push(fig(mk('g',{},$('wk')),x,y,22,'ink'));if(!j)mk('path',{d:'M800 432L'+x+' '+(y-26),class:'s-line','stroke-width':3},$('lk2'))}
+const CN=[];[0,1,2].forEach(s=>{for(let j=0;j<3*(s+1);j++)CN.push(mk('rect',{x:540+s*110,y:654-j*20,width:80,height:16,rx:8,class:'gain'},$('coins')))});
+fig($('bkf'),1150,380,34,'ink');
+const CP=[];for(let r=0;r<3;r++)for(let i=0;i<4;i++){const x=580+i*84,y=300+r*100,g=mk('g',{},$('cps'));mk('rect',{x:x,y:y,width:60,height:76,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',Object.assign(st('gain'),{d:'M'+(x+12)+' '+(y+24)+'h36M'+(x+12)+' '+(y+42)+'h24','stroke-width':5}),g);CP.push([g,270-x,362-y])}
+const RB=[];for(let r=0;r<3;r++)for(let i=0;i<5;i++){const x=185+i*90,y=270+r*110,g=mk('g',{},$('rob'));mk('path',{d:'M'+x+' '+y+'v-14',class:'s-ink','stroke-width':4},g);mk('rect',{x:x-25,y:y,width:50,height:40,rx:8,class:'ink'},g);[-10,10].forEach(d=>mk('circle',{cx:x+d,cy:y+20,r:5,class:'gain'},g));mk('rect',{x:x-20,y:y+46,width:40,height:34,rx:6,class:'ink'},g);RB.push(g)}
+const US=[];for(let i=0;i<48;i++){const a=i*2.4,r=110+(i*37)%130,x=(1240+r*Math.cos(a)).toFixed(0),y=(480+r*Math.sin(a)*.95).toFixed(0);US.push([mk('path',{d:'M1240 480L'+x+' '+y,class:'s-line','stroke-width':2},$('usr')),mk('circle',{cx:x,cy:y,r:9,class:'ink'},$('usr'))])}
+const AU=[];for(let j=0;j<4;j++)for(let i=0;i<8;i++)AU.push(mk('circle',{cx:330+i*36,cy:480+j*40,r:12,class:'gain'},$('aud')));
+const TW=[0,1,2].map(k=>{const y=290+k*110,g=mk('g',{},$('tw'));mk('rect',{x:822,y:y,width:146,height:80,rx:10,fill:'none',stroke:'var(--line)','stroke-width':4},g);mk('circle',{cx:842,cy:y+22,r:10,class:'gain'},g);mk('path',Object.assign(st('ink'),{d:'M862 '+(y+24)+'h88M842 '+(y+52)+'h108','stroke-width':5}),g);if(k)mk('path',{d:'M842 '+(y-30)+'v30',class:'s-gain','stroke-width':4},g);return g});
+const GD=[];for(let i=0;i<20;i++){const a=i*2.4,r=30+(i*53)%120;GD.push(mk('circle',{cx:(1270+r*Math.cos(a)).toFixed(0),cy:(460+r*Math.sin(a)).toFixed(0),r:9,class:'gain'},$('gd')))}
+const C7=['ARTICLE','VIDEO','TOOL'].map((s,i)=>{const x=300+i*160,g=mk('g',{},$('cards7'));mk('rect',{x:x,y:360,width:130,height:110,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+if(i==1)mk('path',{d:'M'+(x+52)+' 388l34 27-34 27z',class:'gain'},g);else mk('path',Object.assign(st('gain'),{d:i?'M'+(x+50)+' 390l-22 25 22 25M'+(x+80)+' 390l22 25-22 25':'M'+(x+24)+' 390h82M'+(x+24)+' 414h82M'+(x+24)+' 438h50','stroke-width':6}),g);
+mk('text',{x:x+65,y:540,'font-size':18,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+fig($('nb'),200,380,26,'gain');
+const DC=[];for(let i=0;i<12;i++)DC.push(mk('rect',{x:136+i*72,y:600,width:48,height:62,rx:6,fill:i==11?'var(--gain)':'var(--stage)',stroke:i==11?'var(--gain)':'var(--ink)','stroke-width':4},$('docs')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const m0=TM.sleeping+3.8;
+$('gear').setAttribute('transform','rotate('+(t*40+720*p(u,m0,m0+2.5)).toFixed(1)+' 1320 410)');
+zz($('zz0'),u>=TM.sleeping,t); rise($('stw'),p(u,m0,m0+.6));
+
+const lv=p(u,TM.lever,TM.lever+1); $('beam').setAttribute('transform','rotate('+(-10*lv).toFixed(2)+' 640 606)');
+rise($('eff'),p(u,TM.lever,TM.lever+.5)); rise($('res'),p(u,TM.lever+.8,TM.lever+1.3));
+rise($('qcard'),p(u,TM.quote_card,TM.quote_card+.5)); rise($('th'),p(u,TM.two_hands,TM.two_hands+.5));
+BR.forEach(([r,h],i)=>{const k=p(u,TM.two_hands+.3+i*.2,TM.two_hands+.8+i*.2);r.setAttribute('height',(h*k).toFixed(1));r.setAttribute('y',(BASE1-h*k).toFixed(1))});
+
+const ms=p(u,TM.messy_team,TM.messy_team+.6);
+WK.forEach((g,i)=>{const a=TM.crowd+i*.15;g.setAttribute('opacity',p(u,a,a+.4));g.setAttribute('transform','translate('+(ms*8*Math.sin(t*5+i)).toFixed(1)+' '+(ms*6*Math.cos(t*4+i*2)).toFixed(1)+')')});
+rise($('mgr'),p(u,TM.manager,TM.manager+.5)); $('lk2').setAttribute('opacity',p(u,TM.manager+.4,TM.manager+1));
+$('tangle').setAttribute('opacity',ms); rise($('mess'),p(u,TM.messy_team+.6,TM.messy_team+1.2));
+
+rise($('bag'),p(u,TM.money_bag,TM.money_bag+.5));
+CN.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.money_bag+.5+i*.12,TM.money_bag+.7+i*.12)));
+rise($('bnk'),p(u,TM.banker,TM.banker+.5)); rise($('bub'),p(u,TM.banker+.6,TM.banker+1.1)); rise($('perm'),p(u,TM.banker+5,TM.banker+5.6));
+
+rise($('lap'),p(u,TM.laptop,TM.laptop+.5));
+CP.forEach(([g,dx,dy],i)=>{const a=TM.copy_machine+i*.25,k=p(u,a,a+.6);g.setAttribute('transform','translate('+(dx*(1-k)).toFixed(1)+' '+(dy*(1-k)).toFixed(1)+')');g.setAttribute('opacity',k)});
+rise($('cpl'),p(u,TM.copy_machine+3,TM.copy_machine+3.5));
+rise($('door'),p(u,TM.open_door-.2,TM.open_door+.3));
+const dk=p(u,TM.open_door+.4,TM.open_door+1.4),dw=232-172*dk,ddy=20*dk,dxr=1124+dw;
+$('pnl').setAttribute('points','1124,274 '+dxr.toFixed(1)+','+(274-ddy).toFixed(1)+' '+dxr.toFixed(1)+','+(646+ddy).toFixed(1)+' 1124,646');
+$('hdl').setAttribute('cx',(dxr-22*(1-.5*dk)).toFixed(1));
+rise($('pl'),p(u,TM.open_door+3.8,TM.open_door+4.4));
+
+RB.forEach((g,i)=>{const a=TM.robot_army+i*.1;g.setAttribute('opacity',p(u,a,a+.3));g.setAttribute('transform','translate(0 '+(4*Math.sin(t*4+i*.7)).toFixed(1)+')')});
+rise($('night'),p(u,TM.night_moon,TM.night_moon+.5)); zz($('zz5'),u>=TM.night_moon,t);
+US.forEach(([l,c],i)=>{const a=TM.users_map+i*.06,k=p(u,a,a+.3);l.setAttribute('opacity',k);c.setAttribute('opacity',k)});
+rise($('tile'),p(u,TM.users_map-.2,TM.users_map+.3)); rise($('nohire'),p(u,TM.users_map+1.5,TM.users_map+2.1));
+
+[0,1,2].forEach(i=>{const a=TM.microphone+i*.6;rise($('ic'+i),p(u,a,a+.4))});
+rise($('cmp'),p(u,TM.podcast_ear,TM.podcast_ear+.5));
+AU.forEach((c,i)=>{const a=TM.podcast_ear+.8+i*.05;c.setAttribute('opacity',p(u,a,a+.2))});
+rise($('ph'),p(u,TM.phone_tweet,TM.phone_tweet+.5));
+TW.forEach((g,i)=>{const a=TM.phone_tweet+.5+i*.5;rise(g,p(u,a,a+.4))});
+rise($('gl'),p(u,TM.world_globe,TM.world_globe+.5)); $('arc6').setAttribute('opacity',p(u,TM.world_globe,TM.world_globe+.6));
+GD.forEach((c,i)=>{const a=TM.world_globe+.5+i*.08;c.setAttribute('opacity',p(u,a,a+.2))});
+rise($('bk'),p(u,TM.world_globe+2,TM.world_globe+2.6));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));
+C7.forEach((g,i)=>{const a=TM.first_post+i*1.5;rise(g,p(u,a,a+.5))});
+rise($('fk'),p(u,TM.skill_fork,TM.skill_fork+.5)); rise($('sb'),p(u,TM.snowball,TM.snowball+.5));
+$('loop7').setAttribute('transform','rotate('+(u>=TM.snowball?(t*90)%360:0).toFixed(1)+' 145 808)');
+
+rise($('qa'),p(u,TM.question,TM.question+.5)); rise($('qb'),p(u,TM.question+.4,TM.question+.9));
+DC.forEach((d,i)=>{const a=TM.question+1.2+i*.2;d.setAttribute('opacity',p(u,a,a+.3))});
+rise($('qc'),p(u,TM.question+4.6,TM.question+5.1)); rise($('ql'),p(u,TM.question+5,TM.question+5.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

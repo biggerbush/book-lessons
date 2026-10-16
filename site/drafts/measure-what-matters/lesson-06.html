@@ -1,0 +1,371 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Measure What Matters Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Measure What Matters: Separating committed goals from aspirational stretch goals pushes teams beyond what feels possible, as YouTube did by aiming for a billion hours of daily watch time. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MEASURE WHAT MATTERS · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Stretch for</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">amazing goals.</text>
+<text class="b" x="120" y="600" font-size="32">Why aiming past what feels possible gets you further</text>
+<path id="tstar" class="gain"/>
+<rect class="s-ink" x="1300" y="290" width="80" height="440" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect id="tfill" class="gain" x="1306" y="724" width="68" height="0" rx="10"/>
+<path class="s-muted" d="M1270 422h140" stroke-width="3" stroke-dasharray="8 8"/>
+<text class="m" x="1258" y="430" font-size="20" text-anchor="end">70%</text>
+<g id="play"><rect class="loss" x="1090" y="620" width="150" height="104" rx="26"/><path d="M1148 646v52l44-26z" fill="var(--stage)"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of goals.</text>
+<text class="b" x="120" y="176" font-size="32">Doerr says OKRs come in two flavors.</text>
+<g id="jars">
+<rect class="s-ink" x="200" y="236" width="380" height="36" rx="10" fill="var(--line)" stroke-width="6"/>
+<rect class="s-ink" x="160" y="272" width="460" height="400" rx="40" fill="var(--stage)" stroke-width="7"/>
+<rect class="s-ink" x="1020" y="236" width="380" height="36" rx="10" fill="var(--line)" stroke-width="6"/>
+<rect class="s-ink" x="980" y="272" width="460" height="400" rx="40" fill="var(--stage)" stroke-width="7"/>
+<text class="d" x="390" y="740" font-size="48" text-anchor="middle">Committed</text>
+<text class="m" x="390" y="780" font-size="20" text-anchor="middle">PROMISES</text>
+<text class="d" x="1210" y="740" font-size="48" text-anchor="middle">Aspirational</text>
+<text class="m" x="1210" y="780" font-size="20" text-anchor="middle">MOONSHOTS</text>
+</g>
+<g id="cr0"><rect class="s-ink" x="200" y="330" width="44" height="44" rx="8" fill="none" stroke-width="5"/><path class="s-gain" d="M210 352l10 12 18-24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="264" y="362" font-size="30">Hit sales target</text></g>
+<g id="cr1"><rect class="s-ink" x="200" y="440" width="44" height="44" rx="8" fill="none" stroke-width="5"/><path class="s-gain" d="M210 462l10 12 18-24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="264" y="472" font-size="30">Ship on time</text><text class="m" x="390" y="600" font-size="20" text-anchor="middle">MUST BE MET</text></g>
+<g id="rkt">
+<circle class="s-ink" cx="1370" cy="330" r="34" fill="none" stroke-width="6"/>
+<text class="d" x="1030" y="380" font-size="64" style="fill:var(--muted)">?</text>
+<path id="trail" class="s-gain" d="M1240 400Q1280 340 1334 336" fill="none" stroke-width="5" stroke-dasharray="8 10" stroke-linecap="round"/>
+<g id="rk"><path class="loss" d="M-16 24l16 36 16-36z"/><path class="ink" d="M-30 0l-24 34h24zM30 0l24 34h-24z"/><path class="gain" d="M0-110c30 30 36 80 30 134h-60c-6-54 0-104 30-134z"/><circle cx="0" cy="-40" r="12" fill="var(--stage)"/></g>
+</g>
+<g id="mix"><text class="d" x="800" y="850" font-size="40" text-anchor="middle">Reliable <tspan style="fill:var(--gain)">and</tspan> bold.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Scored on different curves.</text>
+<text class="m" x="120" y="250" font-size="22">COMMITTED · MEET IT IN FULL</text>
+<rect class="s-ink" x="120" y="270" width="1060" height="80" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect id="f1" class="gain" x="128" y="278" width="0" height="64" rx="10"/>
+<text id="v1" class="d" x="1220" y="334" font-size="60">0%</text>
+<g id="miss"><path class="loss" d="M146 388l28 50h-56z"/><text class="m" x="190" y="430" font-size="22" style="fill:var(--loss)">MISSED IT? STOP AND ASK WHAT WENT WRONG</text></g>
+<g id="asp">
+<text class="m" x="120" y="530" font-size="22">ASPIRATIONAL · GRADED ON A CURVE</text>
+<rect class="s-ink" x="120" y="550" width="1060" height="80" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect id="f2" class="gain" x="128" y="558" width="0" height="64" rx="10"/>
+<path class="s-ink" d="M859 540v100" stroke-width="4" stroke-dasharray="8 6"/>
+<text id="v2" class="d" x="1220" y="614" font-size="60">0%</text>
+</g>
+<g id="succ"><text class="m" x="859" y="676" font-size="22" text-anchor="middle" style="fill:var(--gain)">70% = REAL SUCCESS</text></g>
+<g id="timid"><rect x="120" y="730" width="360" height="50" rx="10" fill="var(--muted)"/><text class="m" x="120" y="816" font-size="20">TIMID TARGET · 100% HIT</text><text class="d" x="560" y="768" font-size="38">70% of a bold goal goes further.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The old scoreboard.</text>
+<text class="b" x="120" y="176" font-size="32">Around 2012, YouTube mostly counted video views.</text>
+<g id="board">
+<rect class="s-loss" x="120" y="240" width="500" height="220" rx="18" fill="var(--stage)" stroke-width="7"/>
+<text class="m" x="150" y="290" font-size="22">VIDEO VIEWS</text>
+<text id="views" class="d" x="150" y="400" font-size="64" style="fill:var(--loss)">0</text>
+<path class="ink" transform="translate(568 384)" d="M0 0v52l14-14 10 22 10-4-10-22h20z"/>
+</g>
+<g id="goodrow"><g id="gperson"></g>
+<text class="m" x="760" y="490" font-size="20" text-anchor="middle">CRISTOS GOODROW</text>
+<path class="s-ink" d="M870 320l-44 24 44 4" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<rect class="s-ink" x="870" y="240" width="590" height="150" rx="20" fill="var(--stage)" stroke-width="5"/>
+<text class="d5" x="900" y="302" font-size="38">Views reward clicks,</text>
+<text class="d5" x="900" y="356" font-size="38">not enjoyment.</text>
+</g>
+<g id="sw">
+<path class="s-gain" d="M370 490C370 640 600 660 870 650M850 632l20 18-22 16" fill="none" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<rect class="ink" x="985" y="526" width="30" height="24" rx="6"/>
+<circle class="s-ink" cx="1000" cy="650" r="100" fill="var(--stage)" stroke-width="8"/>
+<path id="swh" class="s-gain" d="M1000 650V572" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="1000" cy="650" r="10"/>
+<text class="d" x="1150" y="640" font-size="48">Watch time</text>
+<text class="m" x="1150" y="685" font-size="20">SHOWS WHAT PEOPLE VALUE</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A billion hours.</text>
+<text class="b" x="120" y="176" font-size="32">So the team set an audacious objective.</text>
+<g id="bill"><text id="bn" class="d" x="116" y="380" font-size="120" letter-spacing="-3" style="fill:var(--gain)">0</text><text class="m" x="120" y="440" font-size="24">HOURS OF WATCH TIME · EVERY DAY</text></g>
+<g id="cal">
+<rect class="loss" x="1150" y="230" width="290" height="70" rx="18"/><rect class="loss" x="1150" y="270" width="290" height="30"/>
+<rect class="s-ink" x="1150" y="230" width="290" height="270" rx="18" fill="none" stroke-width="7"/>
+<rect class="ink" x="1205" y="212" width="16" height="40" rx="8"/><rect class="ink" x="1369" y="212" width="16" height="40" rx="8"/>
+<text class="m" x="1295" y="276" font-size="22" text-anchor="middle" style="fill:var(--stage)">DEADLINE</text>
+<text class="d" x="1295" y="400" font-size="84" text-anchor="middle">2016</text>
+<text class="m" x="1295" y="470" font-size="20" text-anchor="middle">END OF YEAR</text>
+</g>
+<g id="gap">
+<rect class="s-line" x="120" y="590" width="1300" height="60" rx="30" fill="none" stroke-width="4" stroke-dasharray="12 10"/>
+<rect class="ink" x="120" y="590" width="160" height="60" rx="30"/>
+<path id="garr" class="s-gain" d="M300 620H1360" stroke-width="5" stroke-dasharray="16 14"/>
+<path class="s-ink" d="M1440 540V680" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1440 540h-56l14 16-14 16h56z"/>
+<text class="m" x="120" y="690" font-size="20">WHERE THEY STOOD</text>
+<text class="m" x="1440" y="710" font-size="20" text-anchor="end">1 BILLION</text>
+</g>
+<g id="gtx"><text class="d" x="800" y="800" font-size="44" text-anchor="middle">Far beyond reach. That was the point.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rebuilding around it.</text>
+<text class="b" x="120" y="176" font-size="32">The goal reshaped daily work.</text>
+<g id="gears"><g id="ga"></g><g id="gb"></g><text class="m" x="340" y="700" font-size="20" text-anchor="middle">DAILY WORK</text></g>
+<g id="cards"><text class="m" x="640" y="232" font-size="20">RECOMMENDATIONS</text></g>
+<g id="woj"><g id="wperson"></g><text class="m" x="1300" y="460" font-size="20" text-anchor="middle">SUSAN WOJCICKI</text><text class="m" x="1300" y="490" font-size="20" text-anchor="middle" style="fill:var(--gain)">CEO FROM 2014</text></g>
+<g id="stairs"></g>
+<g id="flag1"><path class="s-ink" d="M1430 820V560" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1430 560h46l-12 16 12 16h-46z"/><text class="m" x="1430" y="545" font-size="20" text-anchor="middle">1B</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The finish line.</text>
+<text class="b" x="120" y="176" font-size="32">A steady climb, with some slower stretches.</text>
+<path class="s-gain" d="M160 300H1340" stroke-width="4" stroke-dasharray="12 10"/>
+<text class="m" x="180" y="286" font-size="20">GOAL · 1 BILLION HOURS A DAY</text>
+<path class="s-muted" d="M1300 260V760" stroke-width="3" stroke-dasharray="8 8"/>
+<path class="s-ink" d="M160 260V760H1340" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="160" y="795" font-size="20">START</text>
+<text class="m" x="1300" y="795" font-size="20" text-anchor="middle">END OF 2016</text>
+<polyline id="prog" class="s-ink" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<circle id="pdot" class="gain" r="12"/>
+<g id="conf"></g>
+<g id="done"><text class="d" x="120" y="852" font-size="40">Reached in late 2016, just ahead of the deadline.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stretch with care.</text>
+<text class="b" x="120" y="176" font-size="32">Stretch goals need balance.</text>
+<g id="scale">
+<path class="s-ink" d="M800 260V560M700 560h200" fill="none" stroke-width="8" stroke-linecap="round"/>
+<line id="beam" class="s-ink" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="800" cy="260" r="14"/>
+<g id="panL"></g><g id="panR"></g>
+</g>
+<g id="tired"></g>
+<g id="lab"><text class="d" x="800" y="855" font-size="40" text-anchor="middle">Label every goal so everyone knows how to judge it.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pick one goal.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Write a bolder version.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">Count <tspan style="fill:var(--gain)">70%</tspan> as a win.</text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">LABEL IT ASPIRATIONAL</text></g>
+<g id="nb">
+<rect class="s-ink" x="1140" y="610" width="300" height="230" rx="14" fill="var(--stage)" stroke-width="6"/>
+<g id="rings"></g>
+<path class="s-muted" d="M1170 680h200" stroke-width="8" stroke-linecap="round"/>
+<path class="s-loss" d="M1160 680h220" stroke-width="4" stroke-linecap="round"/>
+<path id="nbl" class="s-gain" d="M1170 730h240" stroke-width="14" stroke-linecap="round" stroke-dasharray="240" stroke-dashoffset="240"/>
+<g id="pill"><rect class="gain" x="1170" y="766" width="240" height="50" rx="25"/><text class="d" x="1290" y="800" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">70% = WIN</text></g>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Stretch for Amazing Goals&rdquo;, from <em>Measure What Matters</em> by John Doerr. The YouTube billion-hours goal and Google&#x27;s approach to scoring stretch goals are as reported in the book. Drawings of jars, meters, gears and progress lines are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 9.5], [9.5, 29.3], [29.3, 49.3], [49.3, 66.2], [66.2, 81.5], [81.5, 100.1], [100.1, 110.3], [110.3, 125.1], [125.1, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Missing on Purpose", "Two Kinds of Goals", "Scoring Them Differently", "The Old Scoreboard", "A Billion Hours", "Rebuilding Around It", "The Finish Line", "Stretch With Care", "Your Moonshot"];
+const TM={"title_card": 0.0, "play_button": 3.84, "two_jars": 9.76, "committed_box": 13.04, "rocket": 18.88, "full_meter": 29.56, "seventy_mark": 36.08, "counter": 49.56, "goodrow": 54.64, "stopwatch": 60.64, "billion_sign": 66.48, "calendar": 73.04, "gears": 81.76, "recommend": 84.24, "wojcicki": 90.16, "graph_up": 100.36, "confetti": 104.88, "balance": 110.64, "tired_team": 113.96, "notebook": 125.44};
+const fig6=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const star6=(x,y,r)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r*.45:r;d+=(i?'L':'M')+(x+q*Math.cos(a)).toFixed(1)+' '+(y+q*Math.sin(a)).toFixed(1)}return d+'Z'};
+const numFmt6=n=>String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+$('tstar').setAttribute('d',star6(1340,232,38));
+fig6($('gperson'),760,320,30,'ink');
+fig6($('wperson'),1300,290,30,'gain');
+const gear6=(r,n)=>{let d='';for(let i=0;i<n*2;i++){const a0=i*Math.PI/n,a1=(i+1)*Math.PI/n,q=i%2?r:r+18;d+=(i?'L':'M')+(q*Math.cos(a0)).toFixed(1)+' '+(q*Math.sin(a0)).toFixed(1)+'L'+(q*Math.cos(a1)).toFixed(1)+' '+(q*Math.sin(a1)).toFixed(1)}return d+'Z'};
+[['ga',100,12,'ink'],['gb',70,8,'gain']].forEach(([id,r,n,c])=>{mk('path',{d:gear6(r,n),class:c},$(id));mk('circle',{r:r*.35,fill:'var(--stage)'},$(id))});
+const FRC6=[.3,.95,.5],cards6=FRC6.map(f=>{const g=mk('g',{},$('cards')),top=f>.9;
+  mk('rect',{x:640,y:0,width:440,height:96,rx:14,fill:'var(--stage)',stroke:top?'var(--gain)':'var(--line)','stroke-width':top?6:4},g);
+  mk('rect',{x:652,y:12,width:130,height:72,rx:8,class:'loss'},g);mk('path',{d:'M704 32v32l28-16z',fill:'var(--stage)'},g);
+  mk('path',{d:'M806 36h180',class:'s-line','stroke-width':8,'stroke-linecap':'round'},g);
+  mk('path',{d:'M806 66h250',class:'s-line','stroke-width':8,'stroke-linecap':'round'},g);
+  mk('path',{d:'M806 66h'+(250*f).toFixed(0),class:'s-gain','stroke-width':8,'stroke-linecap':'round'},g);return g});
+const steps6=['Q1','Q2','Q3','Q4'].map((s,i)=>{const g=mk('g',{},$('stairs')),y=760-i*40;
+  mk('rect',{x:640+i*190,y:y,width:180,height:820-y,rx:8,fill:'var(--line)'},g);
+  const tx=mk('text',{x:730+i*190,y:y+34,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const GP6=[[0,0],[.1,.08],[.2,.15],[.3,.3],[.38,.34],[.48,.37],[.58,.52],[.68,.66],[.76,.69],[.86,.8],[.95,1]],gx6=f=>160+f*1140,gy6=f=>760-f*460;
+const CF6=[];for(let i=0;i<26;i++)CF6.push([mk('rect',{width:12,height:18,rx:3,fill:i%3===0?'var(--loss)':i%3===1?'var(--gain)':'var(--ink)'},$('conf')),(i*137%360)*Math.PI/180,160+(i*53%140)]);
+const pan6=(g,tag,id)=>{mk('path',{d:'M-120 120L0 0L120 120',fill:'none',class:'s-ink','stroke-width':4},g);mk('path',{d:'M-130 120h260q0 46-130 46t-130-46z',class:'ink'},g);const tx=mk('text',{id:id,x:0,y:200,'font-size':20,'text-anchor':'middle',class:'m',opacity:0},g);tx.textContent=tag};
+pan6($('panL'),'COMMITTED','tagL');pan6($('panR'),'ASPIRATIONAL','tagR');
+[-55,5].forEach(x=>mk('rect',{x:x,y:70,width:50,height:50,rx:6,fill:'var(--stage)',class:'s-ink','stroke-width':5},$('panL')));
+mk('path',{d:star6(0,92,28),class:'gain'},$('panR'));
+const xs6=mk('g',{opacity:0},$('panR'));[[-66,100],[66,100],[0,36]].forEach(q=>mk('path',{d:star6(q[0],q[1],22),class:'loss'},xs6));
+[640,800,960].forEach(x=>{mk('circle',{cx:x+16,cy:668,r:26,class:'loss'},$('tired'));mk('path',{d:'M'+(x-39)+' 770v-30a39 39 0 0 1 78 0v30z',class:'loss'},$('tired'))});
+const tired6=mk('text',{x:800,y:806,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--loss)'},$('tired'));tired6.textContent='EVERY MISS FEELS LIKE FAILURE';
+for(let i=0;i<5;i++)mk('circle',{cx:1180+i*55,cy:610,r:9,class:'ink'},$('rings'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const th=300*p(u,TM.title_card+.3,TM.title_card+2.2);$('tfill').setAttribute('y',(724-th).toFixed(1));$('tfill').setAttribute('height',th.toFixed(1));
+rise($('play'),p(u,TM.play_button,TM.play_button+.5));
+
+rise($('jars'),p(u,TM.two_jars,TM.two_jars+.5));
+[0,1].forEach(i=>rise($('cr'+i),p(u,TM.committed_box+i*.8,TM.committed_box+i*.8+.5)));
+rise($('rkt'),p(u,TM.rocket,TM.rocket+.5));const rf=p(u,TM.rocket+.3,TM.rocket+2);
+$('rk').setAttribute('transform','translate('+(1130+40*rf).toFixed(1)+' '+(610-90*rf+4*Math.sin(t*3)).toFixed(1)+') rotate(30)');
+$('trail').setAttribute('opacity',rf.toFixed(2));
+rise($('mix'),p(u,TM.rocket+6.2,TM.rocket+6.7));
+
+const pa1=p(u,TM.full_meter,TM.full_meter+1.5);$('f1').setAttribute('width',(1044*pa1).toFixed(1));$('v1').textContent=Math.round(100*pa1)+'%';
+rise($('miss'),p(u,TM.full_meter+3.4,TM.full_meter+3.9));
+rise($('asp'),p(u,TM.seventy_mark,TM.seventy_mark+.5));
+const pa2=.7*p(u,TM.seventy_mark+3.8,TM.seventy_mark+5.6);$('f2').setAttribute('width',(1044*pa2).toFixed(1));$('v2').textContent=Math.round(100*pa2)+'%';
+rise($('succ'),p(u,TM.seventy_mark+5.4,TM.seventy_mark+5.9));rise($('timid'),p(u,TM.seventy_mark+10,TM.seventy_mark+10.5));
+
+rise($('board'),p(u,TM.counter,TM.counter+.5));$('views').textContent=numFmt6(Math.floor(lin(u,TM.counter,TM.counter+20)*9e6));
+$('views').setAttribute('fill-opacity',(1-.6*p(u,TM.stopwatch,TM.stopwatch+1)).toFixed(2));
+rise($('goodrow'),p(u,TM.goodrow,TM.goodrow+.5));
+rise($('sw'),p(u,TM.stopwatch,TM.stopwatch+.5));$('swh').setAttribute('transform','rotate('+((u*120)%360).toFixed(1)+' 1000 650)');
+
+rise($('bill'),p(u,TM.billion_sign,TM.billion_sign+.5));$('bn').textContent=numFmt6(Math.round(1e9*p(u,TM.billion_sign+.2,TM.billion_sign+2.4)));
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+rise($('gap'),p(u,TM.calendar+4.2,TM.calendar+4.7));rise($('gtx'),p(u,TM.calendar+5,TM.calendar+5.5));
+$('garr').setAttribute('stroke-dashoffset',(-t*60).toFixed(0));
+
+rise($('gears'),p(u,TM.gears,TM.gears+.5));
+$('ga').setAttribute('transform','translate(280 400) rotate('+(t*30).toFixed(1)+')');
+$('gb').setAttribute('transform','translate(430 540) rotate('+(11-t*45).toFixed(1)+')');
+rise($('cards'),p(u,TM.gears+.8,TM.gears+1.3));const rr=p(u,TM.recommend+.5,TM.recommend+2);
+cards6.forEach((g,i)=>g.setAttribute('transform','translate(0 '+(250+120*(i+[2,-1,-1][i]*rr)).toFixed(1)+')'));
+rise($('woj'),p(u,TM.wojcicki,TM.wojcicki+.5));
+steps6.forEach((g,i)=>{const a=TM.wojcicki+7+i*.4;rise(g,p(u,a,a+.4))});rise($('flag1'),p(u,TM.wojcicki+8.8,TM.wojcicki+9.3));
+
+const xf=.95*p(u,TM.graph_up,TM.graph_up+4.3),pts=[];let hx=gx6(0),hy=gy6(0);
+for(let i=0;i<GP6.length;i++){const a=GP6[i];if(a[0]<=xf){hx=gx6(a[0]);hy=gy6(a[1]);pts.push(hx.toFixed(1)+','+hy.toFixed(1))}else{const b=GP6[i-1],f=(xf-b[0])/(a[0]-b[0]);hx=gx6(xf);hy=gy6(b[1]+(a[1]-b[1])*f);pts.push(hx.toFixed(1)+','+hy.toFixed(1));break}}
+$('prog').setAttribute('points',pts.join(' '));$('pdot').setAttribute('cx',hx.toFixed(1));$('pdot').setAttribute('cy',hy.toFixed(1));
+$('pdot').setAttribute('opacity',p(u,TM.graph_up,TM.graph_up+.3).toFixed(2));
+const ck=u-TM.confetti,cc=ck>0?ck%1.8:0;
+CF6.forEach(([el,a,v])=>{el.setAttribute('x',(1243+Math.cos(a)*v*cc*.4).toFixed(1));el.setAttribute('y',(300-Math.abs(Math.sin(a))*v*cc+180*cc*cc).toFixed(1));el.setAttribute('opacity',ck>0?(1-p(cc,1.1,1.7)).toFixed(2):0)});
+rise($('done'),p(u,TM.confetti,TM.confetti+.6));
+
+rise($('scale'),p(u,TM.balance,TM.balance+.5));
+const T7=TM.tired_team+6.1,tl=p(u,TM.tired_team,TM.tired_team+1)*(1-p(u,T7,T7+1)),an=12*tl*Math.PI/180,cs=300*Math.cos(an),sn=300*Math.sin(an);
+$('beam').setAttribute('x1',(800-cs).toFixed(1));$('beam').setAttribute('y1',(260-sn).toFixed(1));$('beam').setAttribute('x2',(800+cs).toFixed(1));$('beam').setAttribute('y2',(260+sn).toFixed(1));
+$('panL').setAttribute('transform','translate('+(800-cs).toFixed(1)+' '+(260-sn).toFixed(1)+')');
+$('panR').setAttribute('transform','translate('+(800+cs).toFixed(1)+' '+(260+sn).toFixed(1)+')');
+xs6.setAttribute('opacity',tl.toFixed(2));
+rise($('tired'),p(u,TM.tired_team,TM.tired_team+.5));
+['tagL','tagR'].forEach(k=>$(k).setAttribute('opacity',p(u,T7,T7+.5).toFixed(2)));rise($('lab'),p(u,T7+.3,T7+.8));
+
+rise($('qa'),p(u,TM.notebook,TM.notebook+.5));rise($('qb'),p(u,TM.notebook+.5,TM.notebook+1));
+rise($('nb'),p(u,TM.notebook+.3,TM.notebook+.8));$('nbl').setAttribute('stroke-dashoffset',(240*(1-p(u,TM.notebook+1,TM.notebook+2))).toFixed(1));
+rise($('qc'),p(u,TM.notebook+5,TM.notebook+5.5));rise($('qd'),p(u,TM.notebook+5.5,TM.notebook+6));rise($('pill'),p(u,TM.notebook+5.3,TM.notebook+5.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.91;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

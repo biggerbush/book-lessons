@@ -1,0 +1,417 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ikigai Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Ikigai: Ikigai is the personal sense of purpose that gives each day meaning, and the authors argue it is linked to living longer and happier. 8 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">IKIGAI · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Find your reason</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">to get up.</text>
+<text class="b" x="120" y="600" font-size="32">The Japanese idea of a reason</text>
+<text class="b" x="120" y="644" font-size="32">to get up each morning.</text>
+<g id="room0">
+<text class="m" x="1180" y="200" font-size="20">MONDAY MORNING</text>
+<rect class="s-ink" x="1180" y="220" width="260" height="200" rx="6" fill="var(--line)" stroke-width="6"/>
+<g id="rain0"></g>
+<rect x="1206" y="276" width="84" height="24" rx="12" fill="var(--stage)"/>
+<circle cx="1230" cy="278" r="16" fill="var(--stage)"/><circle cx="1256" cy="268" r="22" fill="var(--stage)"/>
+<path class="s-ink" d="M1310 220v200M1180 320h260" stroke-width="5" stroke-linecap="round"/>
+<rect class="ink" x="1160" y="560" width="24" height="230" rx="6"/>
+<rect class="s-ink" x="1160" y="680" width="320" height="50" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1190 730v56M1456 730v56" stroke-width="8" stroke-linecap="round"/>
+<ellipse class="s-ink" cx="1226" cy="666" rx="38" ry="16" fill="var(--stage)" stroke-width="5"/>
+<circle class="ink" cx="1232" cy="640" r="26"/>
+<path class="loss" d="M1250 684v-26q0-22 30-28h170q30 0 30 30v24z"/>
+<rect class="s-ink" x="1010" y="680" width="120" height="110" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1010 730h120M1060 706h20" stroke-width="5" stroke-linecap="round"/>
+<g id="think">
+<circle class="s-ink" cx="1262" cy="598" r="7" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-ink" cx="1288" cy="574" r="11" fill="var(--stage)" stroke-width="4"/>
+<ellipse class="s-ink" cx="1350" cy="510" rx="80" ry="52" fill="var(--stage)" stroke-width="5"/>
+<text id="qm" class="d" x="1350" y="542" font-size="88" text-anchor="middle" style="fill:var(--gain)">?</text>
+</g>
+</g>
+<g id="clockw"><g id="clock">
+<path class="s-ink" d="M1044 648l-14 28M1096 648l14 28" stroke-width="8" stroke-linecap="round"/>
+<circle class="gain" cx="1030" cy="548" r="18"/><circle class="gain" cx="1110" cy="548" r="18"/>
+<path class="s-ink" d="M1070 544v-16M1056 528h28" stroke-width="6" stroke-linecap="round"/>
+<circle class="s-ink" cx="1070" cy="600" r="56" fill="var(--stage)" stroke-width="6"/>
+<g id="ticks"></g>
+<path class="s-ink" d="M1070 600v-34M1070 600h26" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="1070" cy="600" r="6"/>
+</g></g>
+<path id="ring" class="s-gain" d="M998 582q-10 20 0 40M980 568q-18 32 0 64M1142 582q10 20 0 40M1160 568q18 32 0 64" fill="none" stroke-width="6" stroke-linecap="round"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">An island of 100-year-olds.</text>
+<text class="b" x="120" y="176" font-size="32">Okinawa, Japan: an unusual number of people live past 100.</text>
+<g id="map1">
+<rect class="s-line" x="120" y="230" width="480" height="480" rx="18" fill="var(--ice)" stroke-width="3"/>
+<path class="ink" d="M200 660C240 610 300 590 330 540C360 490 420 440 460 400C490 370 520 330 545 295C565 315 540 360 510 400C480 440 440 500 410 550C380 600 300 650 230 680Z"/>
+<text class="m" x="150" y="280" font-size="22">OKINAWA, JAPAN</text>
+<g id="pins"></g>
+<text class="d" x="360" y="690" font-size="72" style="fill:var(--gain)">100+</text>
+</g>
+<g id="elder"></g>
+<g id="tg0"><text class="d5" x="940" y="380" font-size="36">Cheerful</text></g>
+<g id="tg1"><text class="d5" x="940" y="440" font-size="36">Busy</text></g>
+<g id="tg2"><text class="d5" x="940" y="500" font-size="36">Engaged</text></g>
+<g id="auth"></g>
+<g id="ans"><text class="d" x="120" y="810" font-size="50">Their answer: one Japanese word.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The word is ikigai.</text>
+<text class="b" x="120" y="176" font-size="32">Pronounced ee-key-guy: your reason for being.</text>
+<g id="win">
+<rect class="s-line" x="120" y="230" width="580" height="330" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="rays"></g>
+<circle id="sun" class="gain" cx="380" cy="520" r="50"/>
+<rect x="124" y="472" width="572" height="84" fill="var(--stage)"/>
+<path class="s-ink" d="M140 470h540" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="140" y="520" font-size="20">YOUR REASON TO GET UP</text>
+<g id="riser"></g>
+</g>
+<g id="quote">
+<rect class="s-line" x="760" y="230" width="720" height="330" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="760" y="230" width="14" height="330"/>
+<text class="m" x="810" y="290" font-size="20">THE AUTHORS DESCRIBE IT AS</text>
+<text class="d5" x="810" y="390" font-size="48">“The happiness of</text>
+<text class="d5" x="810" y="456" font-size="48">always being busy.”</text>
+</g>
+<g id="faces"></g>
+<g id="fl"><text class="m" x="120" y="840" font-size="20">EVERYONE HAS AN IKIGAI · EACH ONE IS PERSONAL</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Four overlapping circles.</text>
+<circle id="vc0" cx="800" cy="370" r="0" fill="var(--gain)" fill-opacity=".14" stroke="var(--ink)" stroke-width="5"/>
+<circle id="vc1" cx="670" cy="500" r="0" fill="var(--gain)" fill-opacity=".14" stroke="var(--ink)" stroke-width="5"/>
+<circle id="vc2" cx="930" cy="500" r="0" fill="var(--gain)" fill-opacity=".14" stroke="var(--ink)" stroke-width="5"/>
+<circle id="vc3" cx="800" cy="630" r="0" fill="var(--gain)" fill-opacity=".14" stroke="var(--ink)" stroke-width="5"/>
+<g id="vl0"><text class="d5" x="1000" y="250" font-size="40">What you love</text></g>
+<g id="vl1"><text class="d5" x="120" y="480" font-size="40">What you are</text><text class="d5" x="120" y="530" font-size="40">good at</text></g>
+<g id="vl2"><text class="d5" x="1130" y="480" font-size="40">What the world</text><text class="d5" x="1130" y="530" font-size="40">needs</text></g>
+<g id="vl3"><text class="d5" x="1000" y="760" font-size="40">What you can be</text><text class="d5" x="1000" y="810" font-size="40">paid for</text></g>
+<g id="ctr"><path id="star" class="gain" stroke="var(--ink)" stroke-width="3"/></g>
+<g id="ikl">
+<path class="s-ink" d="M420 288L758 466" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10"/>
+<circle class="ink" cx="758" cy="466" r="6"/>
+<rect class="gain" x="160" y="250" width="260" height="76" rx="38"/>
+<text class="d" x="290" y="302" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">IKIGAI</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No word for retiring.</text>
+<text class="b" x="120" y="176" font-size="32">Japanese has no word for stopping work for good.</text>
+<g id="cal">
+<rect class="s-ink" x="120" y="240" width="400" height="420" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="loss" x="120" y="240" width="400" height="80" rx="14"/>
+<text class="m" x="320" y="290" font-size="22" text-anchor="middle" style="fill:var(--stage)">RETIREMENT DAY</text>
+<g id="cells"></g>
+</g>
+<path id="x1" class="s-ink" d="M140 260L500 640" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" stroke-width="12" stroke-linecap="round"/>
+<path id="x2" class="s-ink" d="M500 260L140 640" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" stroke-width="12" stroke-linecap="round"/>
+<g id="gard">
+<path class="s-ink" d="M820 680h640" stroke-width="5" stroke-linecap="round"/>
+<g id="gman"></g>
+<path class="gain" d="M840 450h120v-8h-25q-35-45-70 0h-25z"/>
+<rect class="gain" x="960" y="560" width="70" height="50" rx="8"/>
+<path class="s-gain" d="M1028 578L1115 532" stroke-width="8" stroke-linecap="round"/>
+<g id="plants"></g>
+<g id="drops"></g>
+<text class="m" x="820" y="730" font-size="20">KEEP DOING WHAT YOU LOVE</text>
+</g>
+<g id="fixed"><text class="d" x="120" y="810" font-size="48">Their purpose doesn’t end on a fixed date.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Purpose and a long life.</text>
+<text class="b" x="120" y="176" font-size="32">Okinawa is one of the Blue Zones: places of unusually long lives.</text>
+<g id="globe">
+<circle class="s-ink" cx="380" cy="500" r="220" fill="var(--ice)" stroke-width="6"/>
+<ellipse id="mer" class="s-line" cx="380" cy="500" rx="110" ry="220" fill="none" stroke-width="3"/>
+<path class="s-line" d="M160 500h440M190 400h380M190 600h380M380 280v440" fill="none" stroke-width="3"/>
+<g id="zones">
+<circle cx="260" cy="400" r="12" fill="var(--muted)"/><circle cx="300" cy="530" r="12" fill="var(--muted)"/><circle cx="210" cy="470" r="12" fill="var(--muted)"/><circle cx="340" cy="610" r="12" fill="var(--muted)"/>
+<circle id="okr" cx="500" cy="420" r="20" fill="none" stroke="var(--gain)" stroke-width="4"/>
+<circle class="gain" cx="500" cy="420" r="14"/>
+<path class="s-gain" d="M510 408L555 312" stroke-width="3"/>
+<text class="m" x="560" y="300" font-size="20" style="fill:var(--gain)">OKINAWA</text>
+</g>
+<text class="m" x="380" y="770" font-size="20" text-anchor="middle">BLUE ZONES</text>
+</g>
+<g id="heart"><g id="hp"><path class="gain" d="M0 110C-140 20-150-80-70-100C-30-110-8-85 0-62C8-85 30-110 70-100C150-80 140 20 0 110Z"/></g>
+<text class="m" x="880" y="650" font-size="20" text-anchor="middle">A CLEAR IKIGAI</text></g>
+<g id="pl0"><path class="s-line" d="M1030 480L1140 360" stroke-width="4"/><rect x="1140" y="320" width="330" height="80" rx="40" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/><text class="d5" x="1305" y="372" font-size="36" text-anchor="middle">Active</text></g>
+<g id="pl1"><path class="s-line" d="M1030 480L1140 480" stroke-width="4"/><rect x="1140" y="440" width="330" height="80" rx="40" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/><text class="d5" x="1305" y="492" font-size="36" text-anchor="middle">Curious</text></g>
+<g id="pl2"><path class="s-line" d="M1030 480L1140 600" stroke-width="4"/><rect x="1140" y="560" width="330" height="80" rx="40" fill="var(--stage)" stroke="var(--gain)" stroke-width="5"/><text class="d5" x="1305" y="612" font-size="36" text-anchor="middle">Connected</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your ikigai is hidden deep.</text>
+<text class="b" x="120" y="176" font-size="32">Finding it takes patience.</text>
+<g id="dig">
+<path class="s-line" d="M120 430h540M120 530h540" stroke-width="3" stroke-dasharray="12 10"/>
+<rect id="shaft" x="380" y="334" width="60" height="0" fill="var(--line)"/>
+<path class="s-ink" d="M120 330h540" stroke-width="6" stroke-linecap="round"/>
+<g id="digger"></g>
+<path class="s-ink" d="M290 282L335 318" stroke-width="6" stroke-linecap="round"/>
+<path class="ink" d="M330 312l18-6 6 18-18 6z"/>
+</g>
+<g id="chest">
+<circle id="glow" class="gain" cx="410" cy="665" r="110" fill-opacity=".2"/>
+<rect class="ink" x="320" y="630" width="180" height="90" rx="8"/>
+<path class="ink" d="M320 626v-16q90-50 180 0v16z"/>
+<path d="M320 650h180" stroke="var(--stage)" stroke-width="4"/>
+<rect class="gain" x="398" y="636" width="24" height="30" rx="4"/>
+</g>
+<g id="nb">
+<rect class="s-ink" x="760" y="230" width="720" height="530" rx="16" fill="var(--stage)" stroke-width="6"/>
+<g id="rings"></g>
+<text class="m" x="830" y="282" font-size="22">MY FOUR CIRCLES</text>
+<circle id="nc0" cx="1120" cy="400" r="135" fill="none" stroke="var(--ink)" stroke-width="5" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<circle id="nc1" cx="1025" cy="495" r="135" fill="none" stroke="var(--ink)" stroke-width="5" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<circle id="nc2" cx="1215" cy="495" r="135" fill="none" stroke="var(--ink)" stroke-width="5" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<circle id="nc3" cx="1120" cy="590" r="135" fill="none" stroke="var(--ink)" stroke-width="5" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<text id="nl0" class="m" x="1120" y="338" font-size="24" text-anchor="middle">LOVE</text>
+<text id="nl1" class="m" x="956" y="504" font-size="24" text-anchor="middle">SKILL</text>
+<text id="nl2" class="m" x="1284" y="504" font-size="24" text-anchor="middle">NEED</text>
+<text id="nl3" class="m" x="1120" y="672" font-size="24" text-anchor="middle">PAID</text>
+<circle id="ovl" class="gain" cx="1120" cy="495" r="24"/>
+</g>
+<g id="ovt"><text class="d5" x="120" y="820" font-size="36">Notice where your answers overlap.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<g id="ph"><text class="m" x="143" y="230" font-size="26">TOMORROW, BEFORE YOU CHECK YOUR PHONE, ASK:</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What is one thing</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">I am glad to get up</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">for today?</text></g>
+<g id="sun7w">
+<g id="sun7"><circle class="gain" cx="1340" cy="700" r="60"/><g id="r7"></g></g>
+<rect x="1140" y="704" width="345" height="90" fill="var(--stage)"/>
+<path class="s-ink" d="M1150 704h330" stroke-width="6" stroke-linecap="round"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Find Your Reason to Get Up&rdquo;, from <em>Ikigai</em> by Héctor García and Francesc Miralles. As reported in the book: Okinawa as a Blue Zone, the four-circle ikigai diagram, and the note that Japanese has no word for retiring for good. The alarm clock, gardener and notebook drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 6.2], [6.2, 25.9], [25.9, 45.8], [45.8, 65.9], [65.9, 80.3], [80.3, 98.8], [98.8, 113.1], [113.1, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Why Get Up?", "An Island Mystery", "The Word Ikigai", "Four Circles", "No Real Retirement", "Purpose and Long Life", "A Patient Search", "Your Challenge"];
+const TM={"alarm_clock": 0.0, "okinawa_map": 6.48, "elder_smiling": 12.28, "two_authors": 17.12, "ikigai_word": 26.16, "quote_card": 35.44, "many_faces": 40.48, "circle_love": 46.08, "circle_skill": 52.08, "circle_need": 54.48, "circle_paid": 57.2, "center_star": 60.24, "calendar_page": 66.24, "gardener_old": 72.48, "world_map": 80.64, "heart_icon": 87.12, "treasure_box": 99.12, "notebook": 105.36};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const T=(g,x,y,fs,cls,s,a)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:cls,'text-anchor':a||'start'},g);e.textContent=s;return e};
+const starD=(cx,cy,R,r)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r:R;d+=(i?'L':'M')+(cx+q*Math.cos(a)).toFixed(1)+' '+(cy+q*Math.sin(a)).toFixed(1)}return d+'Z'};
+const rayset=(g,cx,cy,r1,r2,n)=>{for(let i=0;i<n;i++){const a=i*2*Math.PI/n;mk('path',{d:'M'+(cx+r1*Math.cos(a)).toFixed(1)+' '+(cy+r1*Math.sin(a)).toFixed(1)+'L'+(cx+r2*Math.cos(a)).toFixed(1)+' '+(cy+r2*Math.sin(a)).toFixed(1),class:'s-gain','stroke-width':6,'stroke-linecap':'round'},g)}};
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(1070+42*Math.cos(a)).toFixed(1)+' '+(600+42*Math.sin(a)).toFixed(1)+'L'+(1070+50*Math.cos(a)).toFixed(1)+' '+(600+50*Math.sin(a)).toFixed(1),class:'s-ink','stroke-width':i%3?2:4,'stroke-linecap':'round'},$('ticks'))}
+const RX0=[1200,1232,1262,1292,1330,1362,1394,1422];
+const RN0=RX0.map(x=>mk('path',{class:'s-muted','stroke-width':3,'stroke-linecap':'round',fill:'none'},$('rain0')));
+const PN=[[230,660],[290,610],[340,560],[390,490],[450,430],[500,375],[535,320]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:10,class:'gain',stroke:'var(--ink)','stroke-width':3},$('pins')));
+fig($('elder'),820,400,50,'ink');
+mk('path',{d:'M795 410q25 24 50 0M793 388q9-9 18 0M829 388q9-9 18 0',fill:'none',stroke:'var(--stage)','stroke-width':6,'stroke-linecap':'round'},$('elder'));
+const AU=[[1250,'GARCÍA'],[1390,'MIRALLES']].map((q,i)=>{const g=mk('g',{},$('auth'));fig(g,q[0],420,30,i?'gain':'ink');T(g,q[0],600,20,'m',q[1],'middle');return g});
+rayset($('rays'),380,400,66,88,8);
+fig($('riser'),620,380,22,'ink');
+const FC=[];for(let i=0;i<10;i++){const x=190+i*136,g=fig(mk('g',{},$('faces')),x,680,22,'ink'),k=i%4;
+  if(k===0)mk('circle',{cx:x,cy:630,r:12,class:'gain'},g);else if(k===1)mk('rect',{x:x-10,y:620,width:20,height:20,class:'gain'},g);
+  else if(k===2)mk('path',{d:'M'+(x-12)+' 640h24l-12-22z',class:'gain'},g);else mk('path',{d:starD(x,630,14,6),class:'gain'},g);FC.push(g)}
+$('star').setAttribute('d',starD(800,492,34,15));
+for(let r=0;r<4;r++)for(let c=0;c<5;c++){const on=r===2&&c===3;mk('rect',{x:150+c*72,y:350+r*72,width:60,height:60,rx:8,fill:on?'var(--loss)':'none',stroke:on?'var(--loss)':'var(--line)','stroke-width':3},$('cells'))}
+fig($('gman'),900,480,40,'ink');
+const PL=[1150,1240,1330,1420].map(x=>[mk('path',{class:'s-ink','stroke-width':6,'stroke-linecap':'round',fill:'none'},$('plants')),mk('circle',{cx:x,r:0,class:'gain'},$('plants')),x]);
+const DR=[0,1,2].map(()=>mk('circle',{r:6,class:'gain'},$('drops')));
+fig($('digger'),250,256,18,'ink');
+for(let i=0;i<9;i++)mk('circle',{cx:790,cy:280+i*55,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rings'));
+rayset($('r7'),1340,700,76,100,10);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const ac=TM.alarm_clock,rg=u>=ac&&u<ac+3.2;
+  rise($('room0'),p(t,.1,.7));
+  RN0.forEach((l,i)=>{const y=306+((t*110+i*37)%88);l.setAttribute('d','M'+RX0[i]+' '+y.toFixed(1)+'l-4 18')});
+  rise($('clockw'),p(u,ac,ac+.5));
+  $('clock').setAttribute('transform','rotate('+(rg?6*Math.sin(t*38):0).toFixed(2)+' 1070 600)');
+  $('ring').setAttribute('opacity',rg?(Math.sin(t*20)>0?1:.3):0);
+  rise($('think'),p(u,ac+3.4,ac+3.9));
+  $('qm').setAttribute('transform','rotate('+(6*Math.sin(t*1.6)).toFixed(2)+' 1350 510)');
+
+  rise($('map1'),p(u,TM.okinawa_map,TM.okinawa_map+.5));
+  PN.forEach((c,i)=>{const a=TM.okinawa_map+1+i*.3;c.setAttribute('opacity',p(u,a,a+.3))});
+  rise($('elder'),p(u,TM.elder_smiling,TM.elder_smiling+.5));
+  [0,1,2].forEach(i=>{const a=TM.elder_smiling+1.2+i*.7;rise($('tg'+i),p(u,a,a+.4))});
+  rise($('auth'),p(u,TM.two_authors,TM.two_authors+.5));
+  AU.forEach((g,i)=>g.setAttribute('transform','translate('+(160*(1-p(u,TM.two_authors,TM.two_authors+1.4+i*.3))).toFixed(1)+' 0)'));
+  rise($('ans'),p(u,TM.two_authors+4.9,TM.two_authors+5.5));
+
+  const w0=TM.ikigai_word;
+  rise($('win'),p(u,w0,w0+.5));
+  $('sun').setAttribute('cy',(520-120*p(u,w0+2.6,w0+4.6)).toFixed(1));
+  $('rays').setAttribute('opacity',p(u,w0+4.2,w0+4.8));
+  rise($('riser'),p(u,w0+4,w0+4.6));
+  rise($('quote'),p(u,TM.quote_card,TM.quote_card+.5));
+  FC.forEach((g,i)=>{const a=TM.many_faces+i*.15;rise(g,p(u,a,a+.4))});
+  rise($('fl'),p(u,TM.many_faces+1.6,TM.many_faces+2.1));
+
+  [TM.circle_love,TM.circle_skill,TM.circle_need,TM.circle_paid].forEach((a,i)=>{$('vc'+i).setAttribute('r',(170*p(u,a,a+.7)).toFixed(1));rise($('vl'+i),p(u,a+.3,a+.8))});
+  rise($('ctr'),p(u,TM.center_star,TM.center_star+.5));
+  rise($('ikl'),p(u,TM.center_star+.4,TM.center_star+.9));
+  $('star').setAttribute('transform','rotate('+((t*30)%360).toFixed(1)+' 800 492)');
+
+  const cp=TM.calendar_page;
+  rise($('cal'),p(u,cp,cp+.5));
+  $('x1').setAttribute('stroke-dashoffset',1-p(u,cp+2,cp+2.6));
+  $('x2').setAttribute('stroke-dashoffset',1-p(u,cp+2.5,cp+3.1));
+  const go=TM.gardener_old;
+  rise($('gard'),p(u,go,go+.5));
+  PL.forEach((q,i)=>{const h=(70+i*30)*p(u,go+.6+i*.4,go+2+i*.4);q[0].setAttribute('d','M'+q[2]+' 680V'+(680-h).toFixed(1));q[1].setAttribute('cy',(680-h).toFixed(1));q[1].setAttribute('r',h>4?16:0)});
+  DR.forEach((d,i)=>{const c=(t*1.2+i/3)%1;d.setAttribute('cx',(1118+i*14+c*20).toFixed(1));d.setAttribute('cy',(540+c*130).toFixed(1));d.setAttribute('opacity',(1-c).toFixed(2))});
+  rise($('fixed'),p(u,go+5.8,go+6.4));
+
+  rise($('globe'),p(u,TM.world_map,TM.world_map+.5));
+  $('mer').setAttribute('rx',(220*Math.abs(Math.cos(t*.6))).toFixed(1));
+  rise($('zones'),p(u,TM.world_map+1.5,TM.world_map+2));
+  const oc=(t*1.2)%1; $('okr').setAttribute('r',(14+16*oc).toFixed(1)); $('okr').setAttribute('opacity',(1-oc).toFixed(2));
+  rise($('heart'),p(u,TM.heart_icon,TM.heart_icon+.5));
+  const beat=1+.07*Math.pow(Math.abs(Math.sin(t*3.6)),6);
+  $('hp').setAttribute('transform','translate(880 480) scale('+beat.toFixed(3)+')');
+  [0,1,2].forEach(i=>{const a=TM.heart_icon+7.3+i*.5;rise($('pl'+i),p(u,a,a+.4))});
+
+  const tb=TM.treasure_box;
+  rise($('dig'),p(u,tb,tb+.5));
+  $('shaft').setAttribute('height',(266*p(u,tb+.5,tb+4)).toFixed(1));
+  rise($('chest'),p(u,tb+3.5,tb+4.1));
+  $('glow').setAttribute('r',(100+14*Math.sin(t*2.4)).toFixed(1));
+  const nb=TM.notebook;
+  rise($('nb'),p(u,nb,nb+.5));
+  [0,1,2,3].forEach(i=>{const a=nb+.8+i*.9;$('nc'+i).setAttribute('stroke-dashoffset',(1-p(u,a,a+.8)).toFixed(3));$('nl'+i).setAttribute('opacity',p(u,a+.5,a+.9))});
+  rise($('ovl'),p(u,nb+5.7,nb+6.2));
+  $('ovl').setAttribute('r',(24+5*Math.sin(t*4)).toFixed(1));
+  rise($('ovt'),p(u,nb+5.9,nb+6.5));
+
+  const s7=SC[7][0]/K;
+  rise($('ph'),p(u,s7+.3,s7+.8));
+  rise($('qa'),p(u,s7+4.3,s7+4.8)); rise($('qb'),p(u,s7+4.7,s7+5.2)); rise($('qc'),p(u,s7+5.1,s7+5.6));
+  rise($('sun7w'),p(u,s7+5.5,s7+6));
+  $('sun7').setAttribute('transform','translate(0 '+(-60*p(u,s7+5.5,s7+7.5)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.81;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

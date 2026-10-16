@@ -1,0 +1,20 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const L=(d,g,c,w)=>mk('path',{d:d,fill:'none',stroke:`var(--${c})`,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+const sprout=(g,x,y)=>L(`M${x} ${y}V${y-30}M${x} ${y-18}Q${x-14} ${y-20} ${x-18} ${y-34}M${x} ${y-18}Q${x+14} ${y-20} ${x+18} ${y-34}`,g,'gain',5);
+const arm=(el,x,y,len,deg,dir)=>{const a=deg*Math.PI/180;el.setAttribute('d',`M${x} ${y}L${(x+dir*len*Math.cos(a)).toFixed(1)} ${(y-len*Math.sin(a)).toFixed(1)}`)};
+fig($('gfig'),1300,330,34,'ink');
+const SPR=[1150,1185,1220].map(x=>sprout($('sprouts'),x,476));
+const DT=[0,1,2,3,4,5].map(i=>mk('circle',{cx:860+i*104,cy:520,r:9},$('dots')));
+const WK=mk('g',{},$('walker'));fig(WK,0,436,18,'ink');
+fig($('a0'),400,560,18,'ink');L('M425 600L470 636',$('a0'),'ink',6);[500,540,580].forEach(x=>sprout($('a0'),x,640));
+fig($('a1'),740,560,18,'ink');fig($('a2'),1220,560,18,'ink');
+fig($('o0f'),230,360,24,'ink');fig($('o2f'),1220,400,22,'ink');
+const WV=[0,1,2].map(i=>L(`M${400+i*28} ${330-i*12}q${24+i*8} ${40+i*12} 0 ${80+i*24}`,$('waves'),'gain',6));
+const ARM=[0,1,2,3,4].map(i=>{const x=600+i*190,g=$('crew');fig(g,x,330,26,'ink');[-34,34].forEach(d=>mk('circle',{cx:x+d,cy:395,r:9,class:'gain'},$('jts')));return [L('',g,'ink',10),L('',g,'ink',10),x]});
+fig($('p0f'),327,420,26,'ink');fig($('p1f'),780,420,26,'ink');fig($('p2f'),1273,420,26,'ink');
+let sd='M1180 440';for(let i=1;i<30;i++){const a=i*2.39,r=25+(i*37)%70;sd+=`L${(1180+r*Math.cos(a)).toFixed(0)} ${(440+r*Math.sin(a)).toFixed(0)}`}$('scr').setAttribute('d',sd);
+let st='M140 640';for(let k=0;k<6;k++)st+='h70'+(k<5?'v-55':'');L(st,$('stairs'),'ink',7);
+const CL=mk('g',{},$('stairs'));fig(CL,0,-72,16,'gain');
+const CHP=['TAKE THE STAIRS','WALK TO THE SHOP','PLAY WITH YOUR KIDS'].map((s,i)=>{const g=mk('g',{},$('chips7')),y=300+i*80;mk('rect',{x:640,y:y,width:380,height:56,rx:28,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);const tx=mk('text',{x:830,y:y+35,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const BR=[];for(let i=0;i<20;i++){const h=300*Math.pow((i+1)/20,1.6);BR.push(mk('rect',{x:1112+i*17,y:(640-h).toFixed(1),width:12,height:h.toFixed(1),class:'gain'},$('bars')))}
+fig($('qf'),1360,640,28,'gain');const QA=[L('',$('qf'),'gain',10),L('',$('qf'),'gain',10)];

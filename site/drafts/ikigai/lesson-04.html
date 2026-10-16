@@ -1,0 +1,395 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ikigai Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Ikigai: Fully absorbing yourself in a challenging activity you enjoy creates flow, and seeking flow in work and hobbies is a practical path toward your ikigai. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">IKIGAI · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Lose yourself</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">in flow.</text>
+<text class="b" x="120" y="600" font-size="32">Why losing track of time may point to your purpose.</text>
+<circle id="ring" cx="1300" cy="420" r="160" fill="none" stroke="var(--gain)" stroke-width="6" stroke-dasharray="12 12"/>
+<circle class="s-ink" cx="1300" cy="420" r="130" fill="var(--stage)" stroke-width="8"/>
+<g id="ticks"></g>
+<line id="hh" x1="1300" y1="420" x2="1300" y2="355" stroke="var(--ink)" stroke-width="12" stroke-linecap="round"/>
+<line id="mh" x1="1300" y1="420" x2="1300" y2="315" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>
+<circle class="gain" cx="1300" cy="420" r="11"/>
+<g id="gone"><text class="m" x="1300" y="640" font-size="22" text-anchor="middle">3 HOURS, GONE</text></g>
+<g id="clue"><text class="m" x="1300" y="680" font-size="22" text-anchor="middle" style="fill:var(--gain)">A CLUE TO YOUR IKIGAI</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What flow feels like.</text>
+<text class="b" x="120" y="176" font-size="32">So absorbed that time, worry and self fade away.</text>
+<g id="easel">
+<path class="s-ink" d="M320 480L250 720M320 480L390 720M320 260V230" fill="none" stroke-width="7" stroke-linecap="round"/>
+<rect class="s-ink" x="180" y="260" width="280" height="220" rx="6" fill="var(--stage)" stroke-width="7"/>
+<g id="paint"></g>
+</g>
+<g id="pntr"><g id="pfig"></g>
+<g id="brush"><path class="s-ink" d="M590 478L478 408" stroke-width="10" stroke-linecap="round"/><path class="s-muted" d="M478 408L460 397" stroke-width="7" stroke-linecap="round"/><circle class="gain" cx="453" cy="393" r="8"/></g>
+<path class="s-ink" d="M662 482L706 492" stroke-width="10" stroke-linecap="round"/>
+<path class="s-ink" d="M690 470c20-26 80-26 95 0c12 22-10 44-45 46c-35 2-65-20-50-46z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<circle class="gain" cx="722" cy="478" r="8"/><circle class="loss" cx="748" cy="472" r="8"/><circle class="ink" cx="768" cy="490" r="7"/><circle cx="740" cy="500" r="7" fill="var(--muted)"/>
+</g>
+<g id="plate1"><ellipse class="s-ink" cx="640" cy="650" rx="80" ry="18" fill="var(--stage)" stroke-width="5"/><circle class="gain" cx="620" cy="638" r="11"/><circle class="loss" cx="656" cy="640" r="9"/>
+<text class="m" x="640" y="702" font-size="20" text-anchor="middle">FORGETS TO EAT</text></g>
+<g id="cloud">
+<path class="s-ink" d="M1040 470a60 60 0 0 1 20-110a80 80 0 0 1 140-50a70 70 0 0 1 130 30a70 70 0 0 1 10 130z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<circle class="s-ink" cx="985" cy="500" r="13" fill="var(--stage)" stroke-width="5"/><circle class="s-ink" cx="955" cy="528" r="8" fill="var(--stage)" stroke-width="4"/>
+<g id="worries"><text class="m" x="1190" y="400" font-size="26" text-anchor="middle">WORRIES</text><text class="m" x="1190" y="445" font-size="26" text-anchor="middle">SELF</text></g>
+</g>
+<g id="flowT"><text class="d" x="1000" y="650" font-size="110" style="fill:var(--gain)">Flow.</text>
+<text class="m" x="1004" y="710" font-size="24">A KEY TO A HAPPY LIFE</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Naming the state.</text>
+<text class="b" x="120" y="176" font-size="32">Psychologist Mihaly Csikszentmihalyi studied engagement.</text>
+<g id="psy"><g id="pfig2"></g>
+<rect class="s-ink" x="380" y="460" width="90" height="120" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M398 500h54M398 530h54M398 560h34" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="300" y="640" font-size="22" text-anchor="middle" style="fill:var(--gain)">PSYCHOLOGIST</text>
+<text class="m" x="300" y="675" font-size="22" text-anchor="middle">MIHALY</text>
+<text class="m" x="300" y="705" font-size="22" text-anchor="middle">CSIKSZENTMIHALYI</text></g>
+<g id="chart"><path class="s-ink" d="M680 260V720H1400" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="700" y="275" font-size="20">HAPPINESS</text>
+<text class="m" x="1400" y="760" font-size="20" text-anchor="end">ABSORPTION · SCHEMATIC</text></g>
+<path id="curve" d="M700 690C900 680 1100 520 1300 330" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="hface"></g>
+<g id="most"><text class="d" x="120" y="830" font-size="48">Fully absorbed, often happiest.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The sweet spot.</text>
+<text class="b" x="120" y="176" font-size="32">Flow lives in the balance between challenge and skill.</text>
+<g id="sees">
+<path class="s-line" d="M600 700H1000" stroke-width="5" stroke-linecap="round"/>
+<polygon class="ink" points="800,598 745,700 855,700"/>
+<g id="beam">
+<rect class="ink" x="420" y="582" width="760" height="16" rx="8"/>
+<rect x="440" y="500" width="160" height="80" rx="10" fill="var(--stage)" stroke="var(--loss)" stroke-width="6"/>
+<text class="m" x="520" y="547" font-size="20" text-anchor="middle" style="fill:var(--loss)">CHALLENGE</text>
+<rect class="s-ink" x="1000" y="500" width="160" height="80" rx="10" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1080" y="547" font-size="20" text-anchor="middle" style="fill:var(--ink)">SKILL</text>
+</g></g>
+<g id="bore"><g id="bf"></g><text class="m" x="240" y="520" font-size="20" text-anchor="middle">TOO EASY</text><text class="d" x="240" y="565" font-size="34" text-anchor="middle">Boredom</text></g>
+<g id="anx"><g id="af"></g><text class="m" x="1360" y="520" font-size="20" text-anchor="middle">TOO HARD</text><text class="d" x="1360" y="565" font-size="34" text-anchor="middle" style="fill:var(--loss)">Anxiety</text></g>
+<g id="pill"><rect class="gain" x="700" y="330" width="200" height="70" rx="35"/><text class="d" x="800" y="379" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">FLOW</text>
+<path class="s-gain" d="M800 412V470" stroke-width="5" stroke-dasharray="8 8" stroke-linecap="round"/></g>
+<g id="aim"><text class="d" x="120" y="810" font-size="48">Aim just a little beyond comfortable.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Know your target.</text>
+<text class="b" x="120" y="176" font-size="32">Flow needs a clear goal.</text>
+<g id="youdot"><circle class="ink" cx="220" cy="480" r="22"/><text class="m" x="220" y="545" font-size="20" text-anchor="middle">YOU</text></g>
+<g id="tgt"><circle class="s-ink" cx="1260" cy="480" r="150" fill="var(--stage)" stroke-width="8"/><circle class="s-ink" cx="1260" cy="480" r="100" fill="none" stroke-width="8"/><circle class="gain" cx="1260" cy="480" r="50"/></g>
+<g id="wandG">
+<path id="wander" d="M220 480C320 300 420 700 520 420S700 260 760 560S900 700 960 420S1060 300 1080 640" fill="none" stroke="var(--loss)" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="qm"><text class="d" x="1080" y="730" font-size="70" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+</g>
+<path id="straight" d="M248 480H1205" fill="none" stroke="var(--gain)" stroke-width="10" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="arrowhd" class="ink" d="M1200 452L1256 480L1200 508z"/>
+<g id="lbl1"><text class="m" x="120" y="790" font-size="22" style="fill:var(--loss)">VAGUE PLAN: ROOM FOR DOUBT</text></g>
+<g id="lbl2"><text class="m" x="120" y="832" font-size="22" style="fill:var(--gain)">CLEAR OBJECTIVE: IT PULLS YOU IN</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One thing at a time.</text>
+<text class="b" x="120" y="176" font-size="32">Multitasking scatters your attention.</text>
+<g id="pa"><rect class="s-line" x="120" y="230" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="jf"></g><path class="s-ink" d="M300 525L250 440M360 525L410 440" fill="none" stroke-width="9" stroke-linecap="round"/>
+<g id="balls"></g>
+<text class="d5" x="330" y="680" font-size="30" text-anchor="middle">Scattered attention</text></g>
+<g id="pb"><rect class="s-line" x="590" y="230" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="645" y="355" width="150" height="100" rx="6" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M665 385h100M665 415h70" stroke-width="6" stroke-linecap="round"/>
+<path class="ink" d="M630 470L645 455H795L810 470z"/>
+<rect class="ink" x="620" y="470" width="360" height="16"/>
+<path class="s-ink" d="M650 486V600" stroke-width="7"/>
+<path d="M835 530L850 506H930L945 530z" fill="var(--line)"/>
+<g id="plab"><text class="m" x="890" y="264" font-size="18" text-anchor="middle">PHONE</text></g>
+<g id="phoneG"><rect class="ink" x="865" y="280" width="50" height="90" rx="9"/><rect x="871" y="290" width="38" height="62" rx="3" fill="var(--stage)"/><circle cx="890" cy="361" r="4" fill="var(--stage)"/></g>
+<rect class="s-ink" x="820" y="530" width="140" height="70" rx="6" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M870 565h40" stroke-width="7" stroke-linecap="round"/>
+<g id="parr"><path class="s-gain" d="M935 300q45 90 8 175" fill="none" stroke-width="5" stroke-dasharray="8 8" stroke-linecap="round"/><path class="s-gain" d="M928 463l15 14 10-19" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text class="d5" x="800" y="680" font-size="30" text-anchor="middle">Phone out of sight</text></g>
+<g id="pc"><rect class="s-line" x="1060" y="230" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle id="glow" class="gain" cx="1270" cy="400" r="90" fill-opacity=".15"/>
+<path id="flame" class="gain" d="M1270 350C1302 395 1298 430 1270 435C1242 430 1238 395 1270 350z"/>
+<path class="s-ink" d="M1270 435V445" stroke-width="5"/>
+<rect class="s-ink" x="1240" y="445" width="60" height="160" rx="6" fill="var(--stage)" stroke-width="6"/>
+<text class="d5" x="1270" y="680" font-size="30" text-anchor="middle">One task, full focus</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The sushi master.</text>
+<text class="b" x="120" y="176" font-size="32">Jiro Ono, a Tokyo sushi chef, devoted most of his life to his craft.</text>
+<g id="chef"><g id="cf"></g><path d="M262 378h76" stroke="var(--gain)" stroke-width="9" stroke-linecap="round"/>
+<rect class="ink" x="140" y="590" width="440" height="24" rx="4"/>
+<text class="m" x="360" y="665" font-size="22" text-anchor="middle">JIRO ONO · TOKYO</text></g>
+<g id="plate"><ellipse class="s-ink" cx="800" cy="550" rx="150" ry="26" fill="var(--stage)" stroke-width="6"/><g id="nigiri"></g>
+<g id="days"></g>
+<text class="m" x="800" y="680" font-size="22" text-anchor="middle">SAME DISHES, DAY AFTER DAY</text>
+<text class="m" x="800" y="712" font-size="22" text-anchor="middle" style="fill:var(--gain)">WELL INTO HIS NINETIES</text></g>
+<g id="shop"><g id="arts"></g>
+<path class="gain" d="M1125 505a25 25 0 0 0 50 0z"/><rect class="gain" x="1250" y="505" width="60" height="22" rx="4"/><path class="s-gain" d="M1390 535L1430 495" stroke-width="7" stroke-linecap="round"/>
+<rect class="ink" x="1090" y="538" width="390" height="16" rx="4"/>
+<text class="m" x="1285" y="610" font-size="22" text-anchor="middle">JAPANESE ARTISANS</text>
+<text class="d5" x="1285" y="655" font-size="34" text-anchor="middle" style="fill:var(--gain)">Joy in one skill</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Flow points to ikigai.</text>
+<text class="b" x="120" y="176" font-size="32">What absorbs you is a strong hint.</text>
+<g id="comp"><circle class="s-ink" cx="330" cy="470" r="140" fill="var(--stage)" stroke-width="8"/>
+<text class="m" x="330" y="362" font-size="22" text-anchor="middle">N</text>
+<path class="s-line" d="M330 590v-14M450 470h-14M210 470h14" stroke-width="5"/>
+<g id="needle"><path class="gain" d="M330 375L347 470H313z"/><path class="ink" d="M330 565L347 470H313z"/></g>
+<circle class="ink" cx="330" cy="470" r="9"/></g>
+<g id="hint"><text class="m" x="330" y="670" font-size="22" text-anchor="middle" style="fill:var(--gain)">YOUR FLOW = A HINT</text><text class="m" x="330" y="705" font-size="22" text-anchor="middle">TOWARD YOUR IKIGAI</text></g>
+<g id="cards"></g>
+<g id="wk"></g>
+<g id="mean"><text class="m" x="620" y="790" font-size="22">MORE TIME IN FLOW, MORE MEANINGFUL DAYS</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">When did time</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">vanish for you</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">this week?</text></g>
+<g id="notes"><rect class="s-ink" x="1180" y="260" width="260" height="320" rx="12" fill="var(--stage)" stroke-width="7"/><g id="nl"></g></g>
+<g id="hour"><text class="m" x="143" y="700" font-size="26">THEN CLEAR ONE DISTRACTION-FREE HOUR</text>
+<rect class="ink" x="1298" y="596" width="24" height="12" rx="3"/><path class="s-ink" d="M1310 608V620" stroke-width="6"/>
+<circle class="s-ink" cx="1310" cy="690" r="70" fill="var(--stage)" stroke-width="6"/>
+<path id="pie" class="gain"/>
+<g id="tticks"></g>
+<line id="thand" x1="1310" y1="690" x2="1310" y2="638" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="1310" cy="690" r="7"/>
+<text class="m" x="1310" y="800" font-size="20" text-anchor="middle" style="fill:var(--gain)">60 MINUTES</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="117" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:57</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Lose Yourself in Flow&rdquo;, from <em>Ikigai</em> by Héctor García and Francesc Miralles. Mihaly Csikszentmihalyi&#x27;s research on flow and the example of sushi chef Jiro Ono are as reported in the book. The painter, the challenge and skill seesaw, and the hobby drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=117, SC=[[0.0, 8.7], [8.7, 21.5], [21.5, 33.3], [33.3, 47.5], [47.5, 60.2], [60.2, 72.6], [72.6, 91.5], [91.5, 105.5], [105.5, 117.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Hours That Vanish", "What Flow Feels Like", "Naming the State", "The Sweet Spot", "Know Your Target", "One Thing at a Time", "The Sushi Master", "Flow Points to Ikigai", "Your Flow Hunt"];
+const TM={"clock_spin": 0.0, "painter": 8.96, "thought_cloud": 12.56, "psychologist": 21.76, "happy_face": 28.32, "seesaw": 33.6, "yawn_face": 36.96, "sweat_face": 40.32, "target": 47.84, "map_route": 50.24, "juggler": 60.48, "phone_drawer": 64.64, "single_candle": 68.24, "sushi_chef": 72.88, "sushi_plate": 79.36, "workshop": 84.64, "compass": 91.76, "hobby_board": 96.16, "notebook": 105.84};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const face=(g,x,y,r,k,col)=>{mk('circle',{cx:x,cy:y,r:r,fill:'var(--stage)',stroke:col,'stroke-width':6},g);
+  [-1,1].forEach(s=>mk('circle',{cx:x+s*r*.35,cy:y-r*.2,r:r*.1,class:'ink'},g));
+  const my=y+r*.4,st={fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'};
+  if(k==0)mk('path',Object.assign({d:`M${x-r*.45} ${my-r*.1}q${r*.45} ${r*.4} ${r*.9} 0`},st),g);
+  if(k==1)mk('ellipse',{cx:x,cy:my,rx:r*.18,ry:r*.24,class:'ink'},g);
+  if(k==2){mk('path',Object.assign({d:`M${x-r*.45} ${my}q${r*.15} ${-r*.15} ${r*.3} 0t${r*.3} 0t${r*.3} 0`},st),g);
+    const dx=x+r*.78,dy=y-r*.6;mk('path',{d:`M${dx} ${dy}q${r*.14} ${r*.2} 0 ${r*.3}q${-r*.14} ${-r*.1} 0 ${-r*.3}z`,fill:'var(--loss)'},g)}};
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('line',{x1:1300+108*c,y1:420+108*s,x2:1300+122*c,y2:420+122*s,stroke:'var(--ink)','stroke-width':i%3?3:6,'stroke-linecap':'round'},$('ticks'))}
+// painting on the canvas: hills, sun, birds, ground
+const PG=$('paint');
+const PB=[
+  mk('path',{d:'M190 470Q265 360 340 470z',class:'loss','fill-opacity':.8},PG),
+  mk('path',{d:'M280 470Q370 380 450 470z',fill:'var(--muted)'},PG),
+  mk('circle',{cx:395,cy:318,r:26,class:'gain'},PG),
+  mk('path',{d:'M215 320q12-12 24 0q12-12 24 0',fill:'none',stroke:'var(--ink)','stroke-width':4,'stroke-linecap':'round'},PG),
+  mk('path',{d:'M190 470H450',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},PG)];
+fig($('pfig'),620,360,36,'ink');
+fig($('pfig2'),300,400,44,'ink');
+face($('hface'),1350,280,40,0,'var(--gain)');
+face($('bf'),240,420,60,1,'var(--ink)');
+face($('af'),1360,420,60,2,'var(--loss)');
+fig($('jf'),330,470,30,'ink');
+const BL=[0,1,2,3].map(i=>mk('circle',{r:14,class:i%2?'loss':'gain'},$('balls')));
+fig($('cf'),300,400,44,'ink');
+[730,800,870].forEach(x=>{mk('rect',{x:x-26,y:518,width:52,height:26,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nigiri'));mk('rect',{x:x-30,y:504,width:60,height:18,rx:9,class:'gain'},$('nigiri'))});
+const DT=[];for(let i=0;i<12;i++)DT.push(mk('circle',{cx:657+i*26,cy:620,r:8},$('days')));
+[1150,1280,1410].forEach(x=>fig($('arts'),x,380,22,'ink'));
+const CD=[['WORK','Your job'],['HOBBY','Cooking'],['HOBBY','Carpentry'],['HOBBY','Music']].map((c,i)=>{const x=620+(i%2)*450,y=250+Math.floor(i/2)*180,g=mk('g',{},$('cards'));
+  mk('rect',{x:x,y:y,width:410,height:150,rx:16,fill:'var(--stage)',stroke:i?'var(--ink)':'var(--gain)','stroke-width':5},g);
+  mk('text',{x:x+40,y:y+48,'font-size':20,class:'m'},g).textContent=c[0];
+  mk('text',{x:x+40,y:y+108,'font-size':42,class:'d5'},g).textContent=c[1];
+  mk('circle',{cx:x+360,cy:y+75,r:18,class:'gain'},g);return g});
+const WK=[];for(let i=0;i<7;i++)WK.push(mk('rect',{x:620+i*126,y:640,width:100,height:80,rx:12},$('wk')));
+const CK=[];for(let i=0;i<4;i++){const y=330+i*65;mk('path',{d:`M1250 ${y}h160`,stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},$('nl'));
+  mk('circle',{cx:1222,cy:y-10,r:11,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nl'));
+  CK.push(mk('path',{d:`M1215 ${y-11}l6 6 12-14`,fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('nl')))}
+// one-hour timer: full sweep = 60 minutes
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.sin(a),s=-Math.cos(a);mk('line',{x1:1310+57*c,y1:690+57*s,x2:1310+64*c,y2:690+64*s,stroke:'var(--ink)','stroke-width':i%3?3:5,'stroke-linecap':'round'},$('tticks'))}
+const pie=k=>{if(k<.001)return '';if(k>.999)return 'M1310 634a56 56 0 1 1 0 112a56 56 0 1 1 0-112z';const a=k*2*Math.PI;return `M1310 690V634A56 56 0 ${k>.5?1:0} 1 ${(1310+56*Math.sin(a)).toFixed(1)} ${(690-56*Math.cos(a)).toFixed(1)}Z`};
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const ck=p(u,TM.clock_spin,TM.clock_spin+4);
+  $('mh').setAttribute('transform',`rotate(${(1080*ck).toFixed(1)} 1300 420)`); $('hh').setAttribute('transform',`rotate(${(90*ck).toFixed(1)} 1300 420)`);
+  rise($('gone'),p(u,TM.clock_spin+3.5,TM.clock_spin+4)); rise($('ring'),p(u,TM.clock_spin+5.4,TM.clock_spin+6)); rise($('clue'),p(u,TM.clock_spin+5.6,TM.clock_spin+6.2));
+
+  // painter at the easel
+  rise($('easel'),p(u,TM.painter,TM.painter+.5)); rise($('pntr'),p(u,TM.painter+.3,TM.painter+.8));
+  $('brush').setAttribute('transform',`rotate(${(2.5*Math.sin(t*4)).toFixed(2)} 590 478)`);
+  PB.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.painter+.6+i*.5,TM.painter+1.1+i*.5).toFixed(3)));
+  rise($('plate1'),p(u,TM.painter+2,TM.painter+2.5));
+  rise($('cloud'),p(u,TM.thought_cloud,TM.thought_cloud+.5)); $('worries').setAttribute('opacity',(1-.85*p(u,TM.thought_cloud+1.2,TM.thought_cloud+3.2)).toFixed(2));
+  rise($('flowT'),p(u,TM.thought_cloud+4.6,TM.thought_cloud+5.2));
+
+  rise($('psy'),p(u,TM.psychologist,TM.psychologist+.5)); rise($('chart'),p(u,TM.psychologist+1,TM.psychologist+1.5));
+  $('curve').setAttribute('stroke-dashoffset',(1-p(u,TM.happy_face,TM.happy_face+2)).toFixed(3));
+  rise($('hface'),p(u,TM.happy_face+1.6,TM.happy_face+2.1)); rise($('most'),p(u,TM.happy_face+2,TM.happy_face+2.6));
+
+  // seesaw: tips to boredom, then anxiety, then settles level for flow
+  rise($('sees'),p(u,TM.seesaw,TM.seesaw+.5));
+  const fl=p(u,TM.sweat_face+1.6,TM.sweat_face+2.8), ang=10*p(u,TM.yawn_face,TM.yawn_face+1)-20*p(u,TM.sweat_face,TM.sweat_face+1)+10*fl+.6*fl*Math.sin(t*1.5);
+  $('beam').setAttribute('transform',`rotate(${ang.toFixed(2)} 800 590)`);
+  rise($('bore'),p(u,TM.yawn_face,TM.yawn_face+.5)); rise($('anx'),p(u,TM.sweat_face,TM.sweat_face+.5));
+  rise($('pill'),p(u,TM.sweat_face+2.8,TM.sweat_face+3.4)); rise($('aim'),p(u,TM.sweat_face+3.8,TM.sweat_face+4.4));
+
+  // target: wandering path fizzles out, straight line hits
+  rise($('youdot'),p(u,TM.target,TM.target+.5)); rise($('tgt'),p(u,TM.target+.3,TM.target+.8));
+  $('wander').setAttribute('stroke-dashoffset',(1-p(u,TM.map_route,TM.map_route+2.2)).toFixed(3));
+  rise($('qm'),p(u,TM.map_route+2,TM.map_route+2.4));
+  $('wandG').setAttribute('opacity',(1-.75*p(u,TM.map_route+2.8,TM.map_route+3.8)).toFixed(2));
+  $('straight').setAttribute('stroke-dashoffset',(1-p(u,TM.map_route+2.8,TM.map_route+4)).toFixed(3));
+  rise($('arrowhd'),p(u,TM.map_route+3.8,TM.map_route+4.2));
+  rise($('lbl1'),p(u,TM.map_route+6.9,TM.map_route+7.4)); rise($('lbl2'),p(u,TM.map_route+7.6,TM.map_route+8.1));
+
+  // focus panels
+  rise($('pa'),p(u,TM.juggler,TM.juggler+.5)); rise($('pb'),p(u,TM.phone_drawer,TM.phone_drawer+.5)); rise($('pc'),p(u,TM.single_candle,TM.single_candle+.5));
+  BL.forEach((b,i)=>{const a=t*2.4+i*Math.PI/2; b.setAttribute('cx',(330+120*Math.cos(a)).toFixed(1)); b.setAttribute('cy',(330+60*Math.sin(a)).toFixed(1))});
+  const pd=p(u,TM.phone_drawer+.8,TM.phone_drawer+2);
+  $('phoneG').setAttribute('transform',`translate(0 ${(198*pd).toFixed(1)})`);
+  $('parr').setAttribute('opacity',p(u,TM.phone_drawer+.4,TM.phone_drawer+.8).toFixed(2));
+  $('plab').setAttribute('opacity',(1-pd).toFixed(2));
+  $('flame').setAttribute('transform',`translate(1270 435) scale(1 ${(1+.07*Math.sin(t*9)).toFixed(3)}) translate(-1270 -435)`);
+  $('glow').setAttribute('fill-opacity',(.15+.05*Math.sin(t*3)).toFixed(3));
+
+  rise($('chef'),p(u,TM.sushi_chef,TM.sushi_chef+.5)); rise($('plate'),p(u,TM.sushi_plate,TM.sushi_plate+.5)); rise($('shop'),p(u,TM.workshop,TM.workshop+.5));
+  const dn=Math.floor(t*4)%14; DT.forEach((c,i)=>c.setAttribute('fill',u>=TM.sushi_plate&&i<dn?'var(--gain)':'var(--line)'));
+
+  rise($('comp'),p(u,TM.compass,TM.compass+.5));
+  $('needle').setAttribute('transform',`rotate(${(-30+120*p(u,TM.compass+.6,TM.compass+2)+5*Math.sin(t*2.5)).toFixed(1)} 330 470)`);
+  rise($('hint'),p(u,TM.compass+1.8,TM.compass+2.4));
+  CD.forEach((c,i)=>rise(c,p(u,TM.hobby_board+i*.7,TM.hobby_board+i*.7+.5)));
+  WK.forEach((r,i)=>r.setAttribute('fill',u>=TM.hobby_board+6.2+i*.3?'var(--gain)':'var(--line)'));
+  rise($('wk'),p(u,TM.hobby_board+5.8,TM.hobby_board+6.2)); rise($('mean'),p(u,TM.hobby_board+6.4,TM.hobby_board+7));
+
+  rise($('qa'),p(u,TM.notebook,TM.notebook+.5)); rise($('qb'),p(u,TM.notebook+.4,TM.notebook+.9)); rise($('qc'),p(u,TM.notebook+.8,TM.notebook+1.3));
+  rise($('notes'),p(u,TM.notebook+.6,TM.notebook+1.1)); CK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.notebook+1.4+i*.6,TM.notebook+1.7+i*.6)));
+  rise($('hour'),p(u,TM.notebook+4.2,TM.notebook+4.7));
+  const hk=p(u,TM.notebook+4.6,TM.notebook+6.6);
+  $('pie').setAttribute('d',pie(hk)); $('thand').setAttribute('transform',`rotate(${(360*hk).toFixed(1)} 1310 690)`);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:113.87;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

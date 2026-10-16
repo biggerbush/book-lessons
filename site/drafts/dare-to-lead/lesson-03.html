@@ -1,0 +1,446 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dare to Lead Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Dare to Lead: Leaders often protect themselves with armor like perfectionism, cynicism and needing to be the knower, and swapping it for daring behaviors is what unlocks trust and innovation. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DARE TO LEAD · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Take off</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the armor.</text>
+<text class="b" x="120" y="600" font-size="32">Why the armor that protects leaders also holds teams back.</text>
+<circle id="ring" class="s-line" cx="1280" cy="460" r="200" fill="none" stroke-width="6" stroke-dasharray="14 12"/>
+<g id="knight"></g>
+<g id="reach"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why we armor up.</text>
+<text class="b" x="120" y="176" font-size="32">Armor starts early, and it follows us to work.</text>
+<path class="s-line" d="M140 700h380M610 700h380M1080 700h380" stroke-width="4" stroke-linecap="round"/>
+<g id="p1">
+<g id="kid"></g>
+<path class="s-ink" d="M350 610h50v30q0 30-25 42q-25-12-25-42z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<g id="darts"></g>
+<text class="m" x="140" y="760" font-size="20">AS KIDS</text>
+<text class="m" x="140" y="790" font-size="20">AGAINST HURT AND SHAME</text>
+</g>
+<g id="p2">
+<path class="s-muted" d="M545 560h40m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="690" y="480" font-size="48" style="fill:var(--loss)">?</text>
+<text class="d" x="895" y="450" font-size="48" style="fill:var(--loss)">?</text>
+<g id="adult"></g>
+<g id="helm2"></g>
+<text class="m" x="610" y="760" font-size="20">AT WORK</text>
+<text class="m" x="610" y="790" font-size="20">WHEN WE FEEL EXPOSED</text>
+</g>
+<g id="p3">
+<path class="s-muted" d="M1015 560h40m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="darr" class="s-loss" d="M1210 380v60m-14-14 14 14 14-14M1270 370v60m-14-14 14 14 14-14M1330 380v60m-14-14 14 14 14-14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="heavy"></g>
+<path class="s-ink" d="M1360 470q50-40 100 0q-50 40-100 0z" fill="none" stroke-width="5"/>
+<circle class="ink" cx="1410" cy="470" r="12"/>
+<path class="s-loss" d="M1370 510L1450 430" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1080" y="760" font-size="20">ARMOR IS HEAVY</text>
+<text class="m" x="1080" y="790" font-size="20">AND HIDES US</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Perfectionism.</text>
+<g id="sub2"><text class="b" x="120" y="176" font-size="32">It is not the same as doing great work.</text></g>
+<g id="shield2">
+<path class="s-ink" d="M230 410h200v110q0 120-100 160q-100-40-100-160z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<g id="glints"></g>
+<rect id="cloth" class="ink" width="60" height="34" rx="10"/>
+</g>
+<g id="neq"><text class="m" x="120" y="750" font-size="22">PERFECTIONISM ≠ GREAT WORK</text></g>
+<g id="cloud">
+<ellipse class="s-loss" cx="600" cy="320" rx="190" ry="80" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-loss" cx="520" cy="428" r="12" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-loss" cx="482" cy="460" r="8" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="600" y="312" font-size="30" text-anchor="middle">What will people</text>
+<text class="d5" x="600" y="352" font-size="30" text-anchor="middle">think of me?</text>
+</g>
+<path class="s-line" d="M840 240V760" stroke-width="3" stroke-dasharray="8 10"/>
+<g id="climb">
+<g id="lad"></g>
+<g id="climber"></g>
+<text class="m" x="1140" y="390" font-size="22">HEALTHY STRIVING</text>
+<text class="d" x="1140" y="460" font-size="48">How can I</text>
+<text class="d" x="1140" y="520" font-size="48" style="fill:var(--gain)">improve?</text>
+<path class="s-gain" d="M1160 640V570m-18 18 18-18 18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Being the knower.</text>
+<text class="b" x="120" y="176" font-size="32">The person with every answer.</text>
+<g id="spot">
+<polygon class="loss" points="315,230 365,230 500,640 180,640" fill-opacity=".18"/>
+<rect class="ink" x="300" y="210" width="80" height="24" rx="6"/>
+<ellipse class="loss" cx="340" cy="640" rx="160" ry="18" fill-opacity=".3"/>
+<g id="knower"></g>
+<text class="m" x="340" y="700" font-size="22" text-anchor="middle">THE KNOWER</text>
+<text class="m" x="340" y="732" font-size="20" text-anchor="middle">EVERY ANSWER</text>
+</g>
+<g id="learn">
+<g id="learner"></g>
+<g id="mag"><circle class="s-ink" cx="800" cy="470" r="36" fill="none" stroke-width="8"/><path class="s-ink" d="M826 496l30 32" stroke-width="10" stroke-linecap="round"/></g>
+<text class="m" x="750" y="700" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE LEARNER</text>
+<text class="m" x="750" y="732" font-size="20" text-anchor="middle">ALWAYS LEARNING</text>
+</g>
+<g id="scl">
+<path class="s-ink" d="M1230 370V700M1170 700h120" stroke-width="8" stroke-linecap="round"/>
+<g id="beam"><path class="s-ink" d="M1060 360H1400" stroke-width="8" stroke-linecap="round"/></g>
+<circle class="gain" cx="1230" cy="360" r="12"/>
+<g id="panL"></g><g id="panR"></g>
+<text class="m" x="1060" y="760" font-size="18" text-anchor="middle">BE RIGHT</text>
+<text class="m" x="1400" y="760" font-size="18" text-anchor="middle" style="fill:var(--gain)">GET IT RIGHT</text>
+<text class="m" x="1400" y="790" font-size="18" text-anchor="middle" style="fill:var(--gain)">TOGETHER</text>
+</g>
+<g id="tog"><text class="d" x="120" y="840" font-size="40">Don’t fight to be right. Get it right, together.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Cynicism.</text>
+<text class="b" x="120" y="176" font-size="32">The eye roll that mocks ideas before they can hurt us.</text>
+<g id="face">
+<circle class="s-loss" cx="380" cy="470" r="150" fill="var(--stage)" stroke-width="8"/>
+<circle class="s-ink" cx="325" cy="430" r="32" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="435" cy="430" r="32" fill="var(--stage)" stroke-width="6"/>
+<circle id="pl" class="ink" cx="325" cy="430" r="13"/>
+<circle id="pr" class="ink" cx="435" cy="430" r="13"/>
+<path id="mouth" class="s-ink" d="M320 540h120" fill="none" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="380" y="680" font-size="22" text-anchor="middle">THE EYE ROLL</text>
+</g>
+<g id="ideaW"><g id="idea">
+<path class="s-muted" d="M640 376q-20 30 0 70" fill="none" stroke-width="3"/>
+<circle class="gain" cx="640" cy="330" r="46"/>
+<text class="m" x="640" y="337" font-size="18" text-anchor="middle" style="fill:var(--on-gain)">IDEA</text>
+</g></g>
+<g id="safe"><text class="m" x="380" y="716" font-size="22" text-anchor="middle" style="fill:var(--loss)">FEELS CLEVER AND SAFE</text></g>
+<g id="sunG">
+<path class="s-muted" d="M760 470h100m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<clipPath id="sky"><rect x="900" y="200" width="580" height="400"/></clipPath>
+<g clip-path="url(#sky)"><g id="sun"><circle class="gain" cx="1190" cy="560" r="80"/><g id="rays"></g></g></g>
+<path class="s-ink" d="M920 600H1460" stroke-width="6" stroke-linecap="round"/>
+<g id="kind">
+<text class="d" x="1190" y="680" font-size="46" text-anchor="middle">Kindness and hope</text>
+<text class="m" x="1190" y="730" font-size="22" text-anchor="middle" style="fill:var(--gain)">TAKE FAR MORE COURAGE</text>
+</g>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hidden cost.</text>
+<text class="b" x="120" y="176" font-size="32">What armor does to the people around you.</text>
+<g id="lead5"></g>
+<g id="team5"></g>
+<g id="th"></g>
+<g id="tl"><text class="m" x="440" y="700" font-size="20" text-anchor="middle">THE TEAM ARMORS UP TOO</text></g>
+<g id="bulb">
+<path id="brays" class="s-gain" d="M860 340v-30M790 362l-22-22M930 362l22-22M780 420h-30M940 420h30" stroke-width="6" stroke-linecap="round"/>
+<circle id="bulbC" class="gain" cx="860" cy="420" r="64"/>
+<path d="M840 440l10-20 10 20 10-20 10 20" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linejoin="round"/>
+<rect class="ink" x="834" y="488" width="52" height="40" rx="6"/>
+<text class="m" x="860" y="700" font-size="20" text-anchor="middle">ROUGH IDEAS STOP</text>
+</g>
+<g id="brg">
+<path class="s-line" d="M1060 640h400" stroke-width="4" stroke-linecap="round"/>
+<g id="pair5"></g>
+<g id="tline"></g>
+<text class="m" x="1260" y="700" font-size="20" text-anchor="middle">TRUST FADES</text>
+</g>
+<g id="cost"><text class="d" x="120" y="800" font-size="42">Armor protects the wearer, but it costs everyone else.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Swap armor for daring.</text>
+<text class="b" x="120" y="176" font-size="32">Armored behaviors, side by side with daring ones.</text>
+<g id="cols">
+<text class="m" x="120" y="275" font-size="24" style="fill:var(--loss)">ARMORED</text>
+<text class="m" x="860" y="275" font-size="24" style="fill:var(--gain)">DARING</text>
+</g>
+<g id="a0">
+<rect class="s-loss" x="120" y="300" width="580" height="160" rx="18" fill="var(--stage)" stroke-width="4"/>
+<g transform="rotate(-30 205 383)"><rect class="s-ink" x="160" y="365" width="90" height="36" rx="18" fill="var(--stage)" stroke-width="5"/><path class="loss" d="M178 367h27v32h-27a16 16 0 0 1 0-32z"/></g>
+<text class="d5" x="280" y="395" font-size="40">Numbing out.</text>
+</g>
+<g id="d0">
+<path class="s-gain" d="M720 380h110m-18-18 18 18-18 18" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-gain" x="860" y="300" width="620" height="160" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="900" y="370" font-size="36">Setting boundaries,</text>
+<text class="d5" x="900" y="420" font-size="36">finding real comfort.</text>
+</g>
+<g id="a1">
+<rect class="s-loss" x="120" y="500" width="580" height="160" rx="18" fill="var(--stage)" stroke-width="4"/>
+<path class="s-muted" d="M240 535V625" stroke-width="4" stroke-dasharray="8 8"/>
+<circle class="ink" cx="195" cy="580" r="16"/>
+<text class="d5" x="280" y="570" font-size="38">Criticizing from</text>
+<text class="d5" x="280" y="620" font-size="38">the sidelines.</text>
+</g>
+<g id="d1">
+<path class="s-gain" d="M720 580h110m-18-18 18 18-18 18" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-gain" x="860" y="500" width="620" height="160" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="900" y="570" font-size="36">Making contributions,</text>
+<text class="d5" x="900" y="620" font-size="36">taking risks.</text>
+</g>
+<g id="each"><text class="d" x="120" y="770" font-size="44">Each swap is a small, specific choice.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<g id="quote">
+<text class="d" x="120" y="124" font-size="68">“Who we are is how we lead.”</text>
+<text class="b" x="120" y="176" font-size="32">Brené Brown</text>
+</g>
+<g id="mir">
+<ellipse class="s-ink" cx="400" cy="500" rx="150" ry="200" fill="var(--stage)" stroke-width="8"/>
+<g id="refl"></g>
+<path class="s-line" d="M450 370l30-30" stroke-width="6" stroke-linecap="round"/>
+<path class="s-ink" d="M400 700V760M330 760h140" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="400" y="805" font-size="22" text-anchor="middle">WHO WE ARE</text>
+</g>
+<g id="note">
+<rect class="s-ink" x="700" y="260" width="760" height="460" rx="16" fill="var(--stage)" stroke-width="6"/>
+<g id="rings"></g>
+<text class="m" x="750" y="340" font-size="22">TRY THIS WEEK</text>
+</g>
+<g id="r0"><rect class="s-ink" x="750" y="396" width="40" height="40" rx="6" fill="none" stroke-width="5"/><text class="d5" x="820" y="430" font-size="36">Notice when you reach for armor.</text></g>
+<g id="r1"><rect class="s-ink" x="750" y="496" width="40" height="40" rx="6" fill="none" stroke-width="5"/><text class="d5" x="820" y="530" font-size="36">Name the piece.</text></g>
+<g id="r2"><rect class="s-ink" x="750" y="596" width="40" height="40" rx="6" fill="none" stroke-width="5"/><text class="d5" x="820" y="630" font-size="36">Swap in a daring behavior.</text></g>
+<path id="ck0" class="s-gain" d="M756 414l12 14 24-30" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="ck1" class="s-gain" d="M756 514l12 14 24-30" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="ck2" class="s-gain" d="M756 614l12 14 24-30" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Which piece of <tspan style="fill:var(--gain)">armor</tspan></text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">do you reach for first</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">when you feel exposed?</text></g>
+<g id="qd"><text class="m" x="143" y="690" font-size="26">WHAT IF YOU SET IT DOWN, JUST ONCE?</text></g>
+<path class="s-line" d="M1220 760h240" stroke-width="5" stroke-linecap="round"/>
+<g id="hdown"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Take Off the Armor&rdquo;, from <em>Dare to Lead</em> by Brené Brown. The pairings of armored and daring behaviors, and perfectionism versus healthy striving, are as reported in the book. The knight, team and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 8.3], [8.3, 25.0], [25.0, 40.8], [40.8, 54.4], [54.4, 67.8], [67.8, 85.2], [85.2, 102.7], [102.7, 116.0], [116.0, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Take Off the Armor", "Why We Armor Up", "Perfectionism", "The Knower", "Cynicism", "The Hidden Cost", "Swap the Pairs", "Who We Are", "Your Armor"];
+const TM={"knight": 0.0, "child": 8.64, "helmet": 15.28, "weight": 20.48, "polish": 25.28, "thought_cloud": 32.56, "ladder": 36.08, "spotlight": 41.12, "magnifier": 46.16, "scale": 49.04, "smirk": 54.72, "sunrise": 62.72, "team": 68.12, "lightbulb": 72.08, "bridge": 76.8, "two_columns": 85.52, "numb_pill": 89.88, "critic": 94.4, "mirror": 102.96, "notebook": 107.4, "question": 116.28};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const helm=(g,x,y,h,cls)=>{const e=mk('g',{},g);mk('path',{d:`M${x-h} ${y+h}V${y}a${h} ${h} 0 0 1 ${2*h} 0V${y+h}z`,class:cls},e);mk('path',{d:`M${x-h*.6} ${y+h*.15}h${h*1.2}M${x} ${y+h*.45}v${h*.55}`,stroke:'var(--stage)','stroke-width':(h*.16).toFixed(1),'stroke-linecap':'round',fill:'none'},e);return e};
+const star=(g,cls)=>mk('path',{d:'M0 -20Q0 0 20 0Q0 0 0 20Q0 0 -20 0Q0 0 0 -20z',class:cls},g);
+const KN=$('knight');fig(KN,1280,380,50,'ink');helm(KN,1280,380,62,'ink');mk('path',{d:'M1280 318q30-44 76-34q-34 12-56 42z',class:'gain'},KN);const GL=star(KN,'gain');
+const RA=[180,245,115].map(d=>d*Math.PI/180),RD=RA.map(()=>mk('circle',{r:16,class:'ink'},$('reach')));
+fig($('kid'),300,608,22,'ink');
+const DT=[625,645,665].map(y=>mk('path',{d:`M490 ${y}h30`,class:'s-loss','stroke-width':6,'stroke-linecap':'round'},$('darts')));
+fig($('adult'),800,557,34,'ink');helm($('helm2'),800,557,42,'ink');
+fig($('heavy'),1270,557,34,'loss');helm($('heavy'),1270,557,42,'ink');
+let lp='M960 260V740M1080 260V740';for(let y=300;y<=700;y+=50)lp+=`M960 ${y}h120`;
+mk('path',{d:lp,class:'s-ink','stroke-width':7,'stroke-linecap':'round',fill:'none'},$('lad'));
+fig($('climber'),1020,650,16,'gain');
+const G2=[[380,460],[280,560]].map(q=>[star($('glints'),'gain'),q]);
+fig($('knower'),340,514,30,'ink');fig($('learner'),720,514,30,'gain');
+const mkPan=(g,n,cls)=>{mk('path',{d:'M0 0v100',class:'s-ink','stroke-width':4},g);mk('path',{d:'M-60 100h120a60 30 0 0 1-120 0z',class:'ink'},g);for(let i=0;i<n;i++)mk('circle',{cx:(i-(n-1)/2)*34,cy:84,r:16,class:cls},g)};
+mkPan($('panL'),1,'loss');mkPan($('panR'),3,'gain');
+let rp='';for(let a=-170;a<=-10;a+=20){const r=a*Math.PI/180;rp+=`M${(1190+100*Math.cos(r)).toFixed(1)} ${(560+100*Math.sin(r)).toFixed(1)}L${(1190+140*Math.cos(r)).toFixed(1)} ${(560+140*Math.sin(r)).toFixed(1)}`}
+mk('path',{d:rp,class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'));
+fig($('lead5'),240,449,36,'loss');helm($('lead5'),240,449,44,'ink');
+const TB=[],TH=[];[400,480,560,640].forEach(x=>{TB.push(fig($('team5'),x,508,22,'ink'));TH.push(helm($('th'),x,508,27,'ink'))});
+// trust fades: two armored people facing each other, a dashed line of trust between them
+const P5=$('pair5');fig(P5,1110,520,26,'ink');helm(P5,1110,520,32,'ink');fig(P5,1410,520,26,'ink');helm(P5,1410,520,32,'ink');
+const TL=[];for(let i=0;i<6;i++)TL.push(mk('path',{d:`M${1164+i*36} 590h22`,class:'s-gain','stroke-width':8,'stroke-linecap':'round'},$('tline')));
+fig($('refl'),400,430,40,'gain');
+for(let x=760;x<=1400;x+=80)mk('circle',{cx:x,cy:260,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+helm($('hdown'),1340,700,60,'ink');mk('path',{d:'M1340 640q30-44 76-34q-34 12-56 42z',class:'gain'},$('hdown'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const tk=TM.knight;
+  rise($('knight'),p(t,tk,tk+.8));
+  GL.setAttribute('transform','translate(1326 350) scale('+(.5+.5*Math.abs(Math.sin(t*2.2))).toFixed(3)+')');
+  const rk=p(u,tk+5.8,tk+6.4); $('ring').setAttribute('opacity',rk); rise($('reach'),rk);
+  RD.forEach((c,i)=>{const r=222+26*Math.abs(Math.sin(t*2+i*1.3)); c.setAttribute('cx',(1280+r*Math.cos(RA[i])).toFixed(1)); c.setAttribute('cy',(460+r*Math.sin(RA[i])).toFixed(1))});
+
+  rise($('p1'),p(u,TM.child,TM.child+.5));
+  DT.forEach((l,i)=>{const f=(t*.7+i*.33)%1; l.setAttribute('transform','translate('+(-80*f).toFixed(1)+' 0)'); l.setAttribute('opacity',u>=TM.child+.6&&f<.9?1:0)});
+  rise($('p2'),p(u,TM.helmet,TM.helmet+.5));
+  $('helm2').setAttribute('transform','translate(0 '+(-260*(1-p(u,TM.helmet+.5,TM.helmet+1.3))).toFixed(1)+')');
+  rise($('p3'),p(u,TM.weight,TM.weight+.5));
+  const hw=p(u,TM.weight+.5,TM.weight+1.5);
+  $('heavy').setAttribute('transform','translate(1270 700) scale('+(1+.05*hw).toFixed(3)+' '+(1-.08*hw).toFixed(3)+') translate(-1270 -700)');
+  $('darr').setAttribute('transform','translate(0 '+(8*Math.abs(Math.sin(t*3))).toFixed(1)+')');
+
+  rise($('shield2'),p(u,TM.polish,TM.polish+.5));
+  $('cloth').setAttribute('x',(300+50*Math.cos(t*3)).toFixed(1)); $('cloth').setAttribute('y',(503+30*Math.sin(t*3)).toFixed(1));
+  G2.forEach(([s,q],i)=>s.setAttribute('transform','translate('+q[0]+' '+q[1]+') scale('+(.4+.6*Math.abs(Math.sin(t*2+i*1.7))).toFixed(3)+')'));
+  const nq=p(u,TM.polish+2.2,TM.polish+2.7); rise($('sub2'),nq); rise($('neq'),nq);
+  rise($('cloud'),p(u,TM.thought_cloud,TM.thought_cloud+.5));
+  rise($('climb'),p(u,TM.ladder,TM.ladder+.5));
+  $('climber').setAttribute('transform','translate(0 '+(-320*p(u,TM.ladder+.4,TM.ladder+3)).toFixed(1)+')');
+
+  rise($('spot'),p(u,TM.spotlight,TM.spotlight+.5));
+  rise($('learn'),p(u,TM.magnifier,TM.magnifier+.5));
+  $('mag').setAttribute('transform','translate('+(12*Math.sin(t*1.6)).toFixed(1)+' '+(8*Math.sin(t*2.3)).toFixed(1)+')');
+  rise($('scl'),p(u,TM.scale,TM.scale+.5));
+  const ang=-8+20*p(u,TM.scale+.5,TM.scale+2), ra=ang*Math.PI/180, cx=170*Math.cos(ra), cy=170*Math.sin(ra);
+  $('beam').setAttribute('transform','rotate('+ang.toFixed(2)+' 1230 360)');
+  $('panL').setAttribute('transform','translate('+(1230-cx).toFixed(1)+' '+(360-cy).toFixed(1)+')');
+  $('panR').setAttribute('transform','translate('+(1230+cx).toFixed(1)+' '+(360+cy).toFixed(1)+')');
+  rise($('tog'),p(u,TM.scale+1.5,TM.scale+2.1));
+
+  const sm=TM.smirk, ro=p(u,sm+.6,sm+1.2);
+  rise($('face'),p(u,sm,sm+.5));
+  $('pl').setAttribute('cy',(430-18*ro).toFixed(1)); $('pr').setAttribute('cy',(430-18*ro).toFixed(1));
+  $('mouth').setAttribute('d',u>=sm+.6?'M310 545Q390 555 450 510':'M320 540h120');
+  rise($('ideaW'),p(u,sm,sm+.4));
+  const shr=p(u,sm+1.2,sm+2.2), ik=1-.85*shr;
+  $('idea').setAttribute('transform','translate(640 330) scale('+ik.toFixed(3)+') translate(-640 -330)');
+  $('idea').setAttribute('opacity',(1-p(u,sm+1.6,sm+2.4)).toFixed(3));
+  rise($('safe'),p(u,sm+6.5,sm+7));
+  rise($('sunG'),p(u,TM.sunrise,TM.sunrise+.5));
+  $('sun').setAttribute('transform','translate(0 '+(140*(1-p(u,TM.sunrise+.3,TM.sunrise+2.2))).toFixed(1)+')');
+  $('rays').setAttribute('opacity',p(u,TM.sunrise+1.6,TM.sunrise+2.4));
+  rise($('kind'),p(u,TM.sunrise+1,TM.sunrise+1.6));
+
+  rise($('team5'),p(u,TM.team,TM.team+.5)); rise($('tl'),p(u,TM.team,TM.team+.5));
+  TB.forEach((e,i)=>{const a=TM.team+.8+i*.3, c=u>=a?'loss':'ink'; e[0].setAttribute('class',c); e[1].setAttribute('class',c); rise(TH[i],p(u,a,a+.4))});
+  rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.5));
+  const fk=p(u,TM.lightbulb+1,TM.lightbulb+3); $('bulbC').setAttribute('fill-opacity',(1-.85*fk).toFixed(2)); $('brays').setAttribute('opacity',(1-fk).toFixed(2));
+  rise($('brg'),p(u,TM.bridge,TM.bridge+.5));
+  TL.forEach((k,i)=>{const d=Math.abs(i-2.5)-.5, a=TM.bridge+.8+d*.5, f=p(u,a,a+1.2); k.setAttribute('opacity',(1-.85*f).toFixed(2))});
+  rise($('cost'),p(u,TM.bridge+5.4,TM.bridge+6));
+
+  rise($('cols'),p(u,TM.two_columns,TM.two_columns+.5));
+  rise($('a0'),p(u,TM.numb_pill,TM.numb_pill+.5)); rise($('d0'),p(u,TM.numb_pill+1,TM.numb_pill+1.5));
+  rise($('a1'),p(u,TM.critic,TM.critic+.5)); rise($('d1'),p(u,TM.critic+1,TM.critic+1.5));
+  rise($('each'),p(u,TM.critic+4.6,TM.critic+5.2));
+
+  rise($('quote'),p(u,TM.mirror,TM.mirror+.5)); rise($('mir'),p(u,TM.mirror+.3,TM.mirror+.8));
+  rise($('note'),p(u,TM.notebook,TM.notebook+.5));
+  [.4,4.6,5.4].forEach((d,i)=>{const a=TM.notebook+d; rise($('r'+i),p(u,a,a+.5)); $('ck'+i).setAttribute('opacity',p(u,a+1,a+1.3))});
+
+  const q=TM.question;
+  rise($('qa'),p(u,q,q+.5)); rise($('qb'),p(u,q+.4,q+.9)); rise($('qc'),p(u,q+.8,q+1.3));
+  rise($('qd'),p(u,q+5.4,q+6));
+  $('hdown').setAttribute('transform','translate(0 '+(-100*(1-p(u,q+5.4,q+6.4))).toFixed(1)+')');
+  $('hdown').setAttribute('opacity',p(u,q+1,q+1.6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.32;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

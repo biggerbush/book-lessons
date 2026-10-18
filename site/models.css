@@ -226,35 +226,35 @@ body.vg-story{overflow:hidden}
 .vs-s{grid-template-rows:auto auto;align-content:center}
 @media (min-width:900px){.vs-s{grid-template-rows:1fr}}
 
-/* v3: headline above the drawing, richer explanation below; a slide can be taller than the screen */
-.vs-s{height:auto;min-height:100vh;min-height:100dvh;grid-template-rows:none;grid-template-areas:"head" "stage" "text";align-content:center;gap:14px;
-  padding:calc(70px + env(safe-area-inset-top)) 18px calc(40px + env(safe-area-inset-bottom))}
-.vs-head{grid-area:head}.vs-stage{grid-area:stage}.vs-text{grid-area:text}
-.vs-head .vs-k{margin-bottom:8px}
-.vs-head h2{font:800 clamp(27px,7.4vw,38px)/1.06 var(--display);letter-spacing:-.028em;margin:0;text-wrap:balance}
-.vs-head h2.q{font-size:clamp(24px,6.4vw,32px);line-height:1.16}
-.vs-text{max-width:60ch}
-.vs-text p{margin:0 0 12px;font-size:16px;line-height:1.6;opacity:.82}
-.vs-text p.lead{font-size:clamp(17.5px,4.8vw,20px);line-height:1.45;opacity:1;font-weight:500}
-.vs-text strong{color:var(--gain);font-weight:700}
-:root[data-theme="light"] .vs-text strong{color:#9A5B00}
-.vs-pts{list-style:none;margin:4px 0 14px;padding:0;display:grid;gap:8px}
-.vs-pts li{position:relative;padding:10px 12px 10px 34px;background:var(--panel);border:1px solid var(--line);border-radius:12px;font-size:15px;line-height:1.45}
-.vs-pts li::before{content:"";position:absolute;left:13px;top:16px;width:9px;height:9px;border-radius:50%;background:var(--gain)}
-.vs-pts li strong{color:var(--ink)}
-.vs-ex{margin-top:4px;font-size:15px;line-height:1.5}
-.vs-ex span{display:block;font:500 10px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--gain);margin-bottom:4px}
-.vs-text{opacity:1;transform:none}
-.vs-text>*{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
-.vs-s.now .vs-text>*{opacity:1;transform:none}
-.vs-s.now .vs-text>*:nth-child(2){transition-delay:.12s}.vs-s.now .vs-text>*:nth-child(3){transition-delay:.24s}.vs-s.now .vs-text>*:nth-child(4){transition-delay:.36s}
-.vs-s.first .vs-text{padding-bottom:20px}
-.vs-s.last .vs-text .acts{margin-top:0}
+/* v4: one card per flick: words on top, the drawing fills the rest */
+.vs-s{grid-template-rows:none;display:flex;align-items:center;justify-content:center;padding:calc(64px + env(safe-area-inset-top)) 14px calc(30px + env(safe-area-inset-bottom))}
+.vs-card{width:100%;max-width:640px;height:100%;max-height:820px;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:26px;overflow:hidden;
+  box-shadow:0 18px 50px -24px rgba(0,0,0,.45)}
+.vs-copy{padding:20px 20px 6px;flex:none}
+.vs-copy .vs-k{margin-bottom:10px}
+.vs-copy h2{font:800 clamp(25px,6.6vw,34px)/1.08 var(--display);letter-spacing:-.025em;margin:0 0 10px;text-wrap:balance}
+.vs-copy h2.q{font-size:clamp(23px,6vw,30px);line-height:1.18}
+.vs-copy p{margin:0;font-size:clamp(15.5px,4.2vw,17px);line-height:1.5;opacity:.86;text-wrap:pretty}
+.vs-copy strong{color:var(--gain);font-weight:700}
+:root[data-theme="light"] .vs-copy strong{color:#9A5B00}
+.vs-copy .vs-ex{margin-top:12px;padding:9px 12px;border-left:3px solid var(--gain);background:var(--panel2);border-radius:0 10px 10px 0;font-size:14px;line-height:1.45}
+.vs-card .vs-stage{flex:1;min-height:0;width:auto;max-height:none;aspect-ratio:auto;margin:6px 10px 10px;border:0;border-radius:18px;background-color:var(--panel2);padding:6px;display:flex;align-items:center;justify-content:center}
+.vs-card .vs-stage .scene{width:100%;height:100%}
+.vs-copy>*{opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .45s ease}
+.vs-s.now .vs-copy>*{opacity:1;transform:none}
+.vs-s.now .vs-copy>*:nth-child(2){transition-delay:.08s}.vs-s.now .vs-copy>*:nth-child(3){transition-delay:.16s}.vs-s.now .vs-copy>*:nth-child(n+4){transition-delay:.24s}
+.vs-card .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.vs-card .vs-rel{padding:0 20px 18px;margin:0}
+.vs-hint{bottom:calc(2px + env(safe-area-inset-bottom))}
+.vs-s.first{padding-bottom:calc(40px + env(safe-area-inset-bottom))}
 @media (min-width:900px){
-  .vs-s{grid-template-columns:1.1fr 1fr;grid-template-areas:"head text" "stage text";align-content:center;align-items:start;column-gap:56px;row-gap:18px;padding:110px 48px 60px}
-  .vs-head h2{font-size:42px}
-  .vs-text{align-self:center}
-  .vs-text p.lead{font-size:21px}
-  .vs-stage{max-height:min(60vh,520px)}
+  .vs-s{padding:84px 40px 36px}
+  .vs-card{max-width:760px;max-height:min(860px,100%)}
+  .vs-copy{padding:28px 32px 8px}
+  .vs-copy h2{font-size:38px}
+  .vs-copy p{font-size:18px}
+  .vs-card .vs-stage{margin:8px 16px 16px}
 }
-@media (prefers-reduced-motion:reduce){.vs-text>*{opacity:1!important;transform:none!important;transition:none!important}}
+@media (max-height:700px){.vs-copy{padding:14px 16px 4px}.vs-copy h2{font-size:24px;margin-bottom:6px}.vs-copy p{font-size:14.5px}.vs-copy .vs-ex{margin-top:8px;font-size:13px}}
+@media (prefers-reduced-motion:reduce){.vs-copy>*{opacity:1!important;transform:none!important;transition:none!important}}
+.vs-card .vs-stage{align-self:stretch;justify-self:stretch;width:auto!important;height:auto!important;max-height:none!important}

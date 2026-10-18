@@ -140,11 +140,8 @@ function detailView(m){
   const kick=x=>'<div class="vs-k"><span>'+esc(x.k)+'</span>'+(x.step?'<i class="vs-steps" aria-label="step '+x.step[0]+' of '+x.step[1]+'">'+Array.from({length:x.step[1]},(_,k)=>'<b'+(k<x.step[0]?' class="on"':'')+'></b>').join("")+'</i>':"")+'</div>';
   const rich=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
   const slide=(x,n)=>'<section class="vs-s'+(n===0?' first':'')+'" aria-roledescription="slide" aria-label="'+(n+1)+' of '+N+'">'+
-    '<div class="vs-head">'+kick(x)+'<h2>'+esc(x.h)+'</h2></div>'+
-    '<div class="vs-stage">'+scene(x.svg,x.auto)+'</div>'+
-    '<div class="vs-text"><p class="lead">'+rich(x.t)+'</p>'+(x.more?'<p>'+rich(x.more)+'</p>':"")+
-      (x.pts&&x.pts.length?'<ul class="vs-pts">'+x.pts.map(p=>'<li>'+rich(p)+'</li>').join("")+'</ul>':"")+
-      (x.ex?'<div class="vs-ex"><span>Example</span>'+rich(x.ex)+'</div>':"")+'</div>'+
+    '<div class="vs-card"><div class="vs-copy">'+kick(x)+'<h2>'+esc(x.h)+'</h2><p>'+rich(x.t)+'</p>'+(x.ex?'<div class="vs-ex">'+rich(x.ex)+'</div>':"")+'</div>'+
+    '<div class="vs-stage">'+scene(x.svg,x.auto)+'</div></div>'+
     (n===0?'<div class="vs-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>Swipe up</div>':"")+
     '</section>';
   document.body.classList.add("vg-story");
@@ -154,13 +151,12 @@ function detailView(m){
      '<div class="vs-title"><b>'+esc(m.name)+'</b><span id="vsn">1 / '+N+'</span></div>'+
      '<button class="sx" id="sbook" type="button" aria-label="Revisit later"></button></div></div>'+
    sl.map(slide).join("")+
-   '<section class="vs-s last" aria-roledescription="slide" aria-label="'+N+' of '+N+'"><div class="vs-head"><div class="vs-k"><span>Ask yourself</span></div><h2 class="q">'+esc(m.cards[4].t)+'</h2></div>'+
-     '<div class="vs-stage">'+scene(ASK_SVG)+'</div>'+
-     '<div class="vs-text">'+
+   '<section class="vs-s last" aria-roledescription="slide" aria-label="'+N+' of '+N+'"><div class="vs-card"><div class="vs-copy"><div class="vs-k"><span>Ask yourself</span></div><h2 class="q">'+esc(m.cards[4].t)+'</h2>'+
      '<div class="acts"><button class="btn" id="lrn" type="button"></button>'+(next?'<a class="btn primary" href="#/models/'+next.id+'">Next: '+esc(next.name)+' '+ICON.next.replace("<svg",'<svg width="14" height="14"')+'</a>':'<a class="btn primary" href="#/models">All models</a>')+'</div>'+
      (m.video?'<a class="vs-more" href="#/models/'+m.id+'">'+ICON.play+' Watch the animated explainer</a>':"")+
-     (rel.length?'<div class="vs-rel"><span>More in '+esc(m.category)+'</span>'+rel.map(x=>'<a href="#/models/'+x.id+'">'+esc(x.name)+'</a>').join("")+'</div>':"")+
      (cbt?'<p class="note">An educational overview of a thinking tool, not therapy or medical advice. If you are struggling, a qualified professional can help.</p>':"")+
+     '</div><div class="vs-stage">'+scene(ASK_SVG)+'</div>'+
+     (rel.length?'<div class="vs-rel"><span>More in '+esc(m.category)+'</span>'+rel.map(x=>'<a href="#/models/'+x.id+'">'+esc(x.name)+'</a>').join("")+'</div>':"")+
    '</div></section>'+
    '<div class="vs-nav"><button class="circ" id="cp" type="button" aria-label="Previous">'+ICON.prev+'</button><button class="circ big" id="cn" type="button" aria-label="Next">'+ICON.next+'</button></div>'+
    '</div>';

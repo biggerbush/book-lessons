@@ -1,0 +1,313 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surrounded by Idiots Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Surrounded by Idiots: Each color sees the others&#x27; strengths as weaknesses, which is why fast-and-bold types and slow-and-careful types so often frustrate each other. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SURROUNDED BY IDIOTS · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Why the colors</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">clash.</text>
+<text class="b" x="120" y="600" font-size="32">Why your colleague’s best quality might be driving you crazy.</text>
+<g id="tPer"></g>
+<path class="s-ink" d="M1360 530v40M1310 570h100" stroke-width="7" stroke-linecap="round"/>
+<ellipse class="s-ink" cx="1360" cy="380" rx="100" ry="150" fill="var(--stage)" stroke-width="7"/>
+<path id="tZig" class="s-loss" d="M1300 380l20-30 20 60 20-60 20 60 20-30" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="tStar" class="gain"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Strength or flaw?</text>
+<text class="b" x="120" y="176" font-size="32">It depends on who is looking.</text>
+<g id="lens"></g>
+<g id="coinW"><g id="coin">
+<g id="coinS"><circle class="gain" r="130"/><circle class="s-ink" r="130" fill="none" stroke-width="6"/><text class="d" y="12" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">STRENGTH</text></g>
+<g id="coinF"><circle class="loss" r="130"/><circle class="s-ink" r="130" fill="none" stroke-width="6"/><text class="d" y="12" font-size="34" text-anchor="middle" style="fill:var(--stage)">FLAW</text></g>
+</g></g>
+<g id="bubA"><rect class="s-gain" x="170" y="250" width="220" height="70" rx="35" fill="var(--stage)" stroke-width="5"/><text class="m" x="280" y="293" font-size="22" text-anchor="middle" style="fill:var(--gain)">ADMIRES</text></g>
+<g id="bubB"><rect class="s-loss" x="1190" y="250" width="260" height="70" rx="35" fill="var(--stage)" stroke-width="5"/><text class="m" x="1320" y="293" font-size="22" text-anchor="middle" style="fill:var(--loss)">IRRITATED</text></g>
+<g id="fric"><text class="d" x="120" y="770" font-size="44">That twist explains a lot of workplace friction.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two big dividers.</text>
+<g id="axS"><path id="axV" class="s-ink" d="M800 250V800" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<text class="m" x="820" y="270" font-size="20">FAST · OUTGOING</text><text class="m" x="820" y="795" font-size="20">SLOWER · RESERVED</text></g>
+<g id="axF"><path id="axH" class="s-ink" d="M360 525H1240" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<text class="m" x="340" y="532" font-size="20" text-anchor="end">TASKS</text><text class="m" x="1260" y="532" font-size="20">PEOPLE</text></g>
+<g id="diag"><path id="dg" class="s-loss" d="M633 424L967 626M967 424L633 626" stroke-width="6" stroke-dasharray="14 10" stroke-linecap="round"/><path id="dStar" class="loss"/></g>
+<g id="quad"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Red meets Green.</text>
+<rect class="s-line" x="120" y="220" width="640" height="380" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-line" x="840" y="220" width="640" height="380" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="rr"><text class="m" x="150" y="270" font-size="20">RED · A DECISION, NOW</text>
+<path id="spd" class="s-line" d="M190 400h70M170 440h90M200 480h60" stroke-width="6" stroke-linecap="round" stroke-dasharray="20 12"/>
+<g id="rP"></g>
+<path class="s-gain" d="M440 430h240m-30-30 30 30-30 30" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="gc"><text class="m" x="870" y="270" font-size="20">GREEN · IS EVERYONE ON BOARD?</text>
+<path class="s-ink" d="M935 370v170M935 490h130M1055 490v50" fill="none" stroke-width="7" stroke-linecap="round"/>
+<g id="gP"></g><g id="crew"></g></g>
+<g id="jR"><text class="m" x="870" y="660" font-size="20">THROUGH RED’S EYES</text><text class="d" x="870" y="720" font-size="48" style="fill:var(--loss)">Slow. Passive.</text></g>
+<g id="jG"><text class="m" x="150" y="660" font-size="20">THROUGH GREEN’S EYES</text><text class="d" x="150" y="720" font-size="48" style="fill:var(--loss)">Pushy. Careless.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Yellow meets Blue.</text>
+<rect class="s-line" x="120" y="220" width="640" height="380" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-line" x="840" y="220" width="640" height="380" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="yb"><text class="m" x="150" y="270" font-size="20">YELLOW · A BOLD IDEA</text><g id="yP"></g>
+<g id="bRay"></g><circle id="bulbC" class="gain" cx="520" cy="390" r="55"/><rect class="ink" x="500" y="440" width="40" height="30" rx="6"/></g>
+<g id="bc"><text class="m" x="870" y="270" font-size="20">BLUE · SHOW ME THE FACTS</text>
+<rect class="s-ink" x="900" y="300" width="220" height="260" rx="10" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="970" y="288" width="80" height="26" rx="6"/>
+<text id="bq0" class="m" x="925" y="380" font-size="22" style="fill:var(--ink)">NUMBERS?</text><text id="bq1" class="m" x="925" y="440" font-size="22" style="fill:var(--ink)">SOURCES?</text><text id="bq2" class="m" x="925" y="500" font-size="22" style="fill:var(--ink)">RISKS?</text>
+<g id="bP"></g></g>
+<g id="jY"><text class="m" x="150" y="660" font-size="20">YELLOW HEARS</text><text class="d" x="150" y="720" font-size="48" style="fill:var(--loss)">Negativity.</text></g>
+<g id="jB"><text class="m" x="870" y="660" font-size="20">BLUE HEARS</text><text class="d" x="870" y="720" font-size="48" style="fill:var(--loss)">Hot air.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Same trait, new label.</text>
+<text class="b" x="120" y="176" font-size="32">Nobody here is describing a real defect.</text>
+<g id="rows"></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Neighbors clash too.</text>
+<text class="b" x="120" y="176" font-size="32">Less sharply, but they still rub.</text>
+<g id="tk"><rect class="s-line" x="300" y="220" width="1000" height="70" rx="35" fill="var(--stage)" stroke-width="4"/><text class="m" x="800" y="263" font-size="22" text-anchor="middle">BOTH LOVE TASKS</text></g>
+<g id="nb"><g id="nR"></g><g id="nB"></g><path id="rub" class="s-loss" d="M740 400l15-20 15 40 15-40 15 40 15-40 15 40 15-40 15 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="sp"><circle class="s-ink" cx="500" cy="610" r="90" fill="var(--stage)" stroke-width="7"/><g id="ticks"></g>
+<path id="clkH" class="s-gain" d="M500 610V545" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="500" cy="610" r="9"/>
+<text class="d" x="500" y="780" font-size="44" text-anchor="middle">SPEED</text></g>
+<g id="ac"><rect class="s-ink" x="1030" y="530" width="140" height="170" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1055 570h90M1055 605h90M1055 640h90M1055 675h60" stroke-width="6" stroke-linecap="round"/>
+<g id="mag"><circle class="s-gain" r="34" fill="none" stroke-width="7"/><path class="s-gain" d="M24 24l26 26" stroke-width="9" stroke-linecap="round"/></g>
+<text class="d" x="1100" y="780" font-size="44" text-anchor="middle">ACCURACY</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rename the flaw.</text>
+<g id="c1"><circle id="pRing" class="s-line" cx="330" cy="430" r="110" fill="none" stroke-width="4"/><circle class="s-ink" cx="330" cy="430" r="110" fill="var(--stage)" stroke-width="8"/>
+<rect class="ink" x="290" y="380" width="26" height="100" rx="6"/><rect class="ink" x="344" y="380" width="26" height="100" rx="6"/>
+<text class="m" x="330" y="620" font-size="24" text-anchor="middle">1 · PAUSE</text></g>
+<path id="ar1" class="s-muted" d="M465 430h70m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="c2"><text class="d" x="800" y="360" font-size="120" text-anchor="middle" style="fill:var(--gain)">?</text>
+<rect class="s-loss" x="670" y="400" width="260" height="90" rx="45" fill="var(--stage)" stroke-width="5"/><text class="d" x="800" y="462" font-size="48" text-anchor="middle" style="fill:var(--loss)">Slow</text>
+<text class="m" x="800" y="620" font-size="24" text-anchor="middle">2 · ASK</text></g>
+<path id="ar2" class="s-muted" d="M965 430h70m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="c3"><rect class="s-line" x="1180" y="300" width="180" height="64" rx="32" fill="var(--stage)" stroke-width="4"/><text class="d5" x="1270" y="344" font-size="36" text-anchor="middle" style="fill:var(--muted)">Slow</text>
+<line id="strk" class="s-ink" x1="1170" y1="332" x2="1170" y2="332" stroke-width="5" stroke-linecap="round"/>
+<path class="s-muted" d="M1270 380v40m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="gtag"><rect class="gain" x="1120" y="440" width="300" height="100" rx="50"/><text class="d" x="1270" y="506" font-size="48" text-anchor="middle" style="fill:var(--on-gain)">Careful</text></g>
+<text class="m" x="1270" y="620" font-size="24" text-anchor="middle">3 · RENAME</text></g>
+<g id="fair"><text class="d" x="120" y="770" font-size="44">Careful, not slow. Give it a fairer name.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="cA"><g id="cP"></g><text class="m" x="143" y="700" font-size="26">THE COLLEAGUE WHO FRUSTRATES YOU MOST</text>
+<rect id="tagR" x="1250" y="650" width="180" height="56" rx="28" stroke-width="5"/><text id="tagT" class="m" x="1340" y="686" font-size="22" text-anchor="middle">FLAW</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What strength of theirs</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">have you been calling</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">a <tspan style="fill:var(--loss)">flaw</tspan>?</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Why the Colors Clash&rdquo;, from <em>Surrounded by Idiots</em> by Thomas Erikson. The four-color quadrant and the opposite pairings of Red with Green and Yellow with Blue are as reported in the book. The workplace scenes and the speed and focus axes are drawn as illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 5.0], [5.0, 21.2], [21.2, 44.7], [44.7, 60.3], [60.3, 77.0], [77.0, 96.5], [96.5, 112.2], [112.2, 125.1], [125.1, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Opening", "Strength or Flaw", "Two Big Dividers", "Red Meets Green", "Yellow Meets Blue", "Same Trait, New Label", "Neighbors Clash Too", "Rename the Flaw", "Your Turn"];
+const TM={"mirror": 0.0, "two_lenses": 5.28, "coin": 8.96, "axis_speed": 21.52, "axis_focus": 29.68, "diagonal": 40.0, "red_runner": 44.96, "green_chair": 48.96, "yellow_bulb": 60.64, "blue_clip": 64.24, "word_flip": 77.28, "red_blue": 96.8, "clock_check": 108.0, "pause_btn": 112.48, "new_label": 120.64, "colleague": 125.44};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const tx=(g,x,y,fs,cls,s,a,st)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:cls,'text-anchor':a||'start'},g);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const starD=R=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?R*.45:R;d+=(i?'L':'M')+(r*Math.cos(a)).toFixed(1)+' '+(r*Math.sin(a)).toFixed(1)}return d+'Z'};
+const badge=(g,x,y,r,name,fast)=>{mk('circle',{cx:x,cy:y,r:r,class:fast?'gain':'ink'},g);tx(g,x,y+11,32,'d',name,'middle','fill:var('+(fast?'--on-gain':'--stage')+')')};
+person($('tPer'),1170,330,34,'ink');$('tStar').setAttribute('d',starD(70));
+[280,1320].forEach((x,i)=>{person($('lens'),x,400,40,'ink');mk('path',{d:i?'M1270 410L940 450':'M330 410L660 450',class:'s-muted','stroke-width':3,'stroke-dasharray':'6 8'},$('lens'))});
+const Q=[['Red',560,380,1],['Yellow',1040,380,1],['Blue',560,670,0],['Green',1040,670,0]].map(q=>{const g=mk('g',{},$('quad'));badge(g,q[1],q[2],75,q[0],q[3]);return g});
+$('dStar').setAttribute('d',starD(34));
+person($('rP'),340,350,34,'gain');person($('gP'),1000,360,30,'ink');
+[1180,1290,1400].forEach(x=>{person($('crew'),x,400,18,'ink');tx($('crew'),x,368,22,'m','?','middle')});
+person($('yP'),300,380,34,'gain');person($('bP'),1300,380,34,'ink');
+for(let i=0;i<7;i++){const a=Math.PI+i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(520+70*c).toFixed(1)+' '+(390+70*s).toFixed(1)+'L'+(520+95*c).toFixed(1)+' '+(390+95*s).toFixed(1),class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('bRay'))}
+const RW=[['Decisive','GREEN’S','Reckless'],['Careful','RED’S','Stubborn'],['Enthusiasm','BLUE’S','Sloppiness'],['Thoroughness','YELLOW’S','Nitpicking']].map((w,i)=>{const y=230+i*140,c=y+50,a=mk('g',{},$('rows')),b=mk('g',{},$('rows'));
+mk('rect',{x:120,y:y,width:400,height:100,rx:50,class:'gain'},a);tx(a,320,c+14,40,'d5',w[0],'middle','fill:var(--on-gain)');
+mk('path',{d:'M606 '+c+'q34-30 68 0q-34 30-68 0z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},b);mk('circle',{cx:640,cy:c,r:9,class:'ink'},b);
+tx(b,692,c+8,20,'m',w[1]+' EYES');
+mk('path',{d:'M900 '+c+'h130m-18-18 18 18-18 18',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},b);
+mk('rect',{x:1080,y:y,width:400,height:100,rx:50,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},b);tx(b,1280,c+14,40,'d5',w[2],'middle','fill:var(--loss)');return [a,b]});
+badge($('nR'),500,400,70,'Red',1);badge($('nB'),1100,400,70,'Blue',0);
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(500+72*c).toFixed(1)+' '+(610+72*s).toFixed(1)+'L'+(500+82*c).toFixed(1)+' '+(610+82*s).toFixed(1),class:'s-ink','stroke-width':4,'stroke-linecap':'round'},$('ticks'))}
+person($('cP'),1340,500,30,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const k0=p(u,TM.mirror+2,TM.mirror+3);
+  $('tZig').setAttribute('opacity',(1-k0).toFixed(2));
+  $('tStar').setAttribute('opacity',k0.toFixed(2));
+  $('tStar').setAttribute('transform','translate(1360 380) scale('+(.2+.8*k0).toFixed(3)+') rotate('+((t*20)%360).toFixed(1)+')');
+
+  rise($('lens'),p(u,TM.two_lenses,TM.two_lenses+.5));
+  rise($('coinW'),p(u,TM.coin,TM.coin+.5));
+  const sx=Math.cos(Math.max(0,u-TM.coin-.5)*1.8);
+  $('coin').setAttribute('transform','translate(800 460) scale('+Math.max(.03,Math.abs(sx)).toFixed(3)+' 1)');
+  $('coinS').setAttribute('opacity',sx>=0?1:0); $('coinF').setAttribute('opacity',sx<0?1:0);
+  rise($('bubA'),p(u,TM.coin+4.6,TM.coin+5.1)); rise($('bubB'),p(u,TM.coin+5.2,TM.coin+5.7));
+  rise($('fric'),p(u,TM.coin+8,TM.coin+8.6));
+
+  rise($('axS'),p(u,TM.axis_speed,TM.axis_speed+.4)); $('axV').setAttribute('stroke-dashoffset',(1-p(u,TM.axis_speed+.2,TM.axis_speed+3.4)).toFixed(3));
+  rise($('axF'),p(u,TM.axis_focus,TM.axis_focus+.4)); $('axH').setAttribute('stroke-dashoffset',(1-p(u,TM.axis_focus+.2,TM.axis_focus+2.4)).toFixed(3));
+  Q.forEach((g,i)=>{const a=TM.axis_focus+(i<2?4.5:7)+(i%2)*.4; rise(g,p(u,a,a+.5))});
+  rise($('diag'),p(u,TM.diagonal,TM.diagonal+.5)); $('dg').setAttribute('stroke-dashoffset',(-t*30).toFixed(1));
+  $('dStar').setAttribute('transform','translate(800 525) scale('+(1+.15*Math.sin(t*5)).toFixed(3)+')');
+
+  rise($('rr'),p(u,TM.red_runner,TM.red_runner+.5)); rise($('gc'),p(u,TM.green_chair,TM.green_chair+.5));
+  $('rP').setAttribute('transform','translate(0 '+(-6*Math.abs(Math.sin(t*6))).toFixed(1)+')'); $('spd').setAttribute('stroke-dashoffset',(t*60).toFixed(1));
+  rise($('jR'),p(u,TM.green_chair+4.6,TM.green_chair+5.1)); rise($('jG'),p(u,TM.green_chair+8.4,TM.green_chair+8.9));
+
+  rise($('yb'),p(u,TM.yellow_bulb,TM.yellow_bulb+.5)); rise($('bc'),p(u,TM.blue_clip,TM.blue_clip+.5));
+  [0,1,2].forEach(i=>rise($('bq'+i),p(u,TM.blue_clip+.6+i*.6,TM.blue_clip+1+i*.6)));
+  const dm=p(u,TM.blue_clip+3.8,TM.blue_clip+4.6);
+  $('bulbC').setAttribute('fill-opacity',(1-.75*dm).toFixed(2)); $('bRay').setAttribute('opacity',((1-dm)*(.7+.3*Math.sin(t*4))).toFixed(2));
+  rise($('jY'),p(u,TM.blue_clip+3.8,TM.blue_clip+4.3)); rise($('jB'),p(u,TM.blue_clip+8,TM.blue_clip+8.5));
+
+  const FL=[3.8,7.1,10.5,13.9];
+  RW.forEach((r,i)=>{const a=TM.word_flip+i*.3; rise(r[0],p(u,a,a+.4)); rise(r[1],p(u,TM.word_flip+FL[i],TM.word_flip+FL[i]+.5))});
+
+  rise($('nb'),p(u,TM.red_blue,TM.red_blue+.5)); $('rub').setAttribute('transform','translate(0 '+(3*Math.sin(t*20)).toFixed(1)+')');
+  rise($('tk'),p(u,TM.red_blue+5.4,TM.red_blue+5.9)); rise($('sp'),p(u,TM.red_blue+6,TM.red_blue+6.5)); rise($('ac'),p(u,TM.red_blue+6.6,TM.red_blue+7.1));
+  const ck=Math.max(0,u-TM.clock_check);
+  $('clkH').setAttribute('transform','rotate('+((ck*180)%360).toFixed(1)+' 500 610)');
+  $('mag').setAttribute('transform','translate('+(1100+(ck>0?40*Math.sin(ck*2.5):0)).toFixed(1)+' '+(615+(ck>0?50*Math.sin(ck*1.1):0)).toFixed(1)+')');
+
+  rise($('c1'),p(u,TM.pause_btn,TM.pause_btn+.5));
+  const ph=(t%2)/2; $('pRing').setAttribute('r',(110+24*ph).toFixed(1)); $('pRing').setAttribute('opacity',(1-ph).toFixed(2));
+  rise($('ar1'),p(u,TM.pause_btn+4.6,TM.pause_btn+5)); rise($('c2'),p(u,TM.pause_btn+5,TM.pause_btn+5.5));
+  rise($('ar2'),p(u,TM.new_label-.3,TM.new_label)); rise($('c3'),p(u,TM.new_label,TM.new_label+.5));
+  $('strk').setAttribute('x2',(1170+200*p(u,TM.new_label+.6,TM.new_label+1.1)).toFixed(1));
+  rise($('gtag'),p(u,TM.new_label+1,TM.new_label+1.5)); rise($('fair'),p(u,TM.new_label+1.6,TM.new_label+2.2));
+
+  rise($('cA'),p(u,TM.colleague,TM.colleague+.5));
+  [0,1,2].forEach(i=>{const a=TM.colleague+4.2+i*.4; rise($(['qa','qb','qc'][i]),p(u,a,a+.5))});
+  const fl=u>=TM.colleague+6;
+  $('tagR').setAttribute('fill',fl?'var(--gain)':'var(--stage)'); $('tagR').setAttribute('stroke',fl?'var(--gain)':'var(--loss)');
+  $('tagT').textContent=fl?'STRENGTH':'FLAW'; $('tagT').style.fill=fl?'var(--on-gain)':'var(--loss)';
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.4;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

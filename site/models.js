@@ -68,10 +68,12 @@ function toggle(k,id){
 const byId=id=>DATA.models.find(m=>m.id===id);
 
 /* ------------------------------------------------------------------ views */
+function cover(m){return m.story?'<div class="artbox story-cover"><svg class="scene on" viewBox="0 0 360 280" aria-hidden="true">'+m.story[0].svg+'</svg></div>':'<div class="artbox">'+art(m.art)+'</div>'}
 function card(m){
-  return '<a class="mcard" href="#/models/'+m.id+'">'+(has("learned",m.id)?'<span class="mark" title="Learned">'+ICON.check+'</span>':"")+
-    '<div class="artbox">'+art(m.art)+'</div><div class="mcard-b"><h3>'+esc(m.name)+'</h3><p>'+esc(m.tagline)+'</p>'+
-    '<div class="foot"><span>'+esc(m.category)+'</span><span>5 cards</span></div></div></a>';
+  const n=m.story?m.story.length+1:5;
+  return '<a class="mcard'+(m.story?" has-story":"")+'" href="#/models/'+m.id+'">'+(has("learned",m.id)?'<span class="mark" title="Learned">'+ICON.check+'</span>':"")+
+    (m.story?'<span class="anim">Animated</span>':"")+cover(m)+'<div class="mcard-b"><h3>'+esc(m.name)+'</h3><p>'+esc(m.tagline)+'</p>'+
+    '<div class="foot"><span>'+esc(m.category)+'</span><span>'+n+' swipes</span></div></div></a>';
 }
 function homeView(){
   VG.stopWatcher();VG.removeBar();
@@ -80,15 +82,15 @@ function homeView(){
   const learned=S().learned.length;
   const filtering=filt.cat||filt.q;
   const list=DATA.models.filter(m=>(!filt.cat||m.categorySlug===filt.cat)&&(!filt.q||(m.name+" "+m.tagline+" "+m.category).toLowerCase().includes(filt.q.toLowerCase())));
-  const day=new Date(),f=DATA.models[(day.getFullYear()*372+day.getMonth()*31+day.getDate())%DATA.models.length];
+  const day=new Date(),pool=DATA.models.filter(x=>x.story).length?DATA.models.filter(x=>x.story):DATA.models,f=pool[(day.getFullYear()*372+day.getMonth()*31+day.getDate())%pool.length];
   VG.app.innerHTML=
    '<section class="mh"><div class="eyebrow">Mental models</div><h1>Think with better <em>tools</em>.</h1>'+
-   '<p>'+DATA.models.length+' mental models, each in five quick cards. Animated explainers are on the way.</p></section>'+
+   '<p>'+DATA.models.length+' mental models you can swipe through, each explained step by step with moving graphics.</p></section>'+
    '<div class="mtools"><label class="search"><span class="sr">Search models</span>'+ICON.search+'<input id="msearch" type="search" placeholder="Search models" value="'+esc(filt.q)+'" autocomplete="off"></label>'+
    '<a class="btn" href="#/models/saved">'+ICON.check.replace("<svg",'<svg width="16" height="16"')+' '+learned+' learned</a></div>'+
    '<div class="chips" role="group" aria-label="Categories"><button class="chip" type="button" data-c="" aria-pressed="'+(!filt.cat)+'">All<small>'+DATA.models.length+'</small></button>'+
    DATA.categories.map(c=>'<button class="chip" type="button" data-c="'+c.slug+'" aria-pressed="'+(filt.cat===c.slug)+'">'+esc(c.name)+'<small>'+c.count+'</small></button>').join("")+'</div>'+
-   (!filtering?'<a class="feat" href="#/models/'+f.id+'"><div class="artbox">'+art(f.art)+'</div><div class="feat-b"><span class="catag">Model of the day · '+esc(f.category)+'</span><h2>'+esc(f.name)+'</h2><p>'+esc(f.tagline)+'</p><span class="btn primary" style="align-self:flex-start;border-radius:999px">Open the cards</span></div></a>':"")+
+   (!filtering?'<a class="feat" href="#/models/'+f.id+'">'+cover(f)+'<div class="feat-b"><span class="catag">Model of the day · '+esc(f.category)+'</span><h2>'+esc(f.name)+'</h2><p>'+esc(f.tagline)+'</p><span class="btn primary" style="align-self:flex-start;border-radius:999px">'+ICON.play+' Start</span></div></a>':"")+
    (list.length?'<div class="mgrid">'+list.map(card).join("")+'</div>':'<p class="empty">No models match that search yet.</p>');
   $("#msearch").addEventListener("input",e=>{
     filt.q=e.target.value;const pos=e.target.selectionStart;homeView();const i=$("#msearch");i.focus();try{i.setSelectionRange(pos,pos)}catch(x){}
@@ -97,6 +99,36 @@ function homeView(){
   window.scrollTo(0,0);
 }
 
+/* ------------------------------------------------------------------ story player */
+const KIND_ICON={      // visuals for models that do not have a hand-built story yet
+  ex:'<g class="fx-pop" style="--d:.1s"><circle cx="180" cy="128" r="62" class="glow"/></g>'+
+     '<path pathLength="1" class="la fat fx-draw" style="--d:.2s" d="M180 70a42 42 0 0 1 24 76v18h-48v-18a42 42 0 0 1 24-76z"/>'+
+     '<path pathLength="1" class="la fx-draw" style="--d:.9s" d="M160 184h40M166 200h28"/>'+
+     '<g class="fx-pop" style="--d:1.2s"><path class="la" d="M180 44v-14M128 66l-10-10M232 66l10-10M110 120H96M250 120h14"/></g>',
+  when:'<g class="fx-pop" style="--d:.1s"><circle cx="180" cy="136" r="70" class="pa"/></g>'+
+     '<path pathLength="1" class="lk fat fx-draw" style="--d:.6s" d="M180 136V96M180 136l30 18"/>'+
+     '<g class="fx-pop" style="--d:1s"><circle cx="180" cy="136" r="7" class="af"/></g>'+
+     '<g class="fx-fade" style="--d:1.2s"><circle cx="180" cy="136" r="88" class="glow fx-pulse"/></g>',
+  mis:'<g class="fx-pop" style="--d:.1s"><path class="pi" d="M180 52l84 148H96z"/></g>'+
+     '<path pathLength="1" class="li fat fx-draw" style="--d:.6s" d="M180 102v52"/>'+
+     '<g class="fx-pop" style="--d:1s"><circle cx="180" cy="176" r="6" class="if"/></g>'
+};
+function slidesFor(m){
+  if(m.story&&m.story.length)return m.story.map(x=>({k:x.k,h:x.h,t:x.t,svg:x.svg}));
+  const c=m.cards;
+  return [
+    {k:"The idea",h:m.name,t:c[0].t,svg:ART[m.art]||ART.first,auto:true},
+    {k:"Example",h:"A simple example",t:c[1].t,svg:KIND_ICON.ex},
+    {k:"When to use it",h:"When it helps",t:c[2].t,svg:KIND_ICON.when},
+    {k:"Common mistake",h:"Watch out for this",t:c[3].t,svg:KIND_ICON.mis}
+  ];
+}
+const ASK_SVG='<g class="fx-fade"><circle cx="180" cy="134" r="96" class="glow"/></g>'+
+  '<g class="fx-pop" style="--d:.15s"><circle cx="180" cy="134" r="64" class="cA"/></g>'+
+  '<g class="fx-pop" style="--d:.5s"><g class="fx-bob" style="--d:1.2s"><text x="180" y="160" class="fd" font-size="76" text-anchor="middle" fill="var(--on-gain)">?</text></g></g>';
+const scene=(svg,auto)=>auto?'<svg class="scene auto art" viewBox="-10 -12 180 124" aria-hidden="true">'+svg+'</svg>':'<svg class="scene" viewBox="0 0 360 280" aria-hidden="true">'+svg+'</svg>';
+
+let keyHandler=null;
 function detailView(m){
   VG.stopWatcher();VG.removeBar();
   document.title=m.name+" · Models · VisualGrowth";
@@ -104,37 +136,71 @@ function detailView(m){
   const i=DATA.models.indexOf(m),prev=DATA.models[i-1],next=DATA.models[i+1];
   const rel=DATA.models.filter(x=>x.categorySlug===m.categorySlug&&x.id!==m.id).slice(0,3);
   const cbt=m.categorySlug==="emotions-cbt";
-  VG.app.innerHTML='<div class="mdet">'+
-   '<a class="back" href="#/models">'+ICON.prev.replace("<svg",'<svg width="12" height="12"')+' Models</a>'+
-   '<div class="mtop"><span class="catag">'+esc(m.category)+'</span><h1>'+esc(m.name)+'</h1><p class="sub">'+esc(m.tagline)+'</p></div>'+
-   '<div class="mhero">'+art(m.art)+'</div>'+
-   (m.flow?'<div class="flow" role="list" aria-label="How it works">'+m.flow.map(s=>'<div class="fstep" role="listitem"><b>'+esc(s.k)+'</b><span>'+esc(s.t)+'</span></div>').join("")+'</div>':"")+
-   '<div class="car" id="car" tabindex="0" aria-label="Cards for '+esc(m.name)+'. Swipe or use the arrow keys.">'+
-   m.cards.map((c,n)=>'<section class="slide'+(n===4?" q":"")+'" aria-label="Card '+(n+1)+' of 5"><div class="k"><span>'+esc(c.k)+'</span><span>'+(n+1)+' / 5</span></div><div class="tx">'+esc(c.t)+'</div></section>').join("")+'</div>'+
-   '<div class="cnav"><button class="circ" id="cp" type="button" aria-label="Previous card">'+ICON.prev+'</button><div class="dots">'+m.cards.map((c,n)=>'<button class="dot" type="button" data-n="'+n+'" aria-label="Card '+(n+1)+': '+esc(c.k)+'"></button>').join("")+'</div><button class="circ" id="cn" type="button" aria-label="Next card">'+ICON.next+'</button></div>'+
-   '<div class="acts"><span class="btn soonbtn" aria-disabled="true">'+ICON.play+' Watch the animation · soon</span>'+
-   '<button class="btn" id="lrn" type="button"></button><button class="btn" id="rev" type="button"></button></div>'+
-   (cbt?'<p class="note">An educational overview of a thinking tool, not therapy or medical advice. If you are struggling, a qualified professional can help.</p>':"")+
+  const sl=slidesFor(m), N=sl.length+1;
+  const slideHtml=(x,n)=>'<section class="st" aria-roledescription="slide" aria-label="'+(n+1)+' of '+N+'">'+
+    '<div class="stage">'+scene(x.svg,x.auto)+'</div>'+
+    '<div class="stext"><div class="sk"><span>'+esc(x.k)+'</span><span>'+(n+1)+' / '+N+'</span></div><h2>'+esc(x.h)+'</h2><p>'+esc(x.t)+'</p></div></section>';
+  VG.app.innerHTML='<div class="story" id="story">'+
+   '<div class="shead"><a class="sx" href="#/models" aria-label="Back to models">'+ICON.prev+'</a>'+
+     '<div class="stitle"><span class="catag">'+esc(m.category)+'</span><b>'+esc(m.name)+'</b></div>'+
+     '<button class="sx" id="sbook" type="button" aria-label="Revisit later"></button></div>'+
+   '<div class="segs" aria-hidden="true">'+Array.from({length:N},()=>'<i></i>').join("")+'</div>'+
+   '<div class="strack" id="track" tabindex="0" aria-label="'+esc(m.name)+'. Swipe, tap, or use the arrow keys.">'+
+     sl.map(slideHtml).join("")+
+     '<section class="st last" aria-roledescription="slide" aria-label="'+N+' of '+N+'"><div class="stage">'+scene(ASK_SVG)+'</div>'+
+       '<div class="stext"><div class="sk"><span>Ask yourself</span><span>'+N+' / '+N+'</span></div><h2 class="q">'+esc(m.cards[4].t)+'</h2>'+
+       '<div class="acts"><button class="btn" id="lrn" type="button"></button>'+(next?'<a class="btn primary" href="#/models/'+next.id+'">Next: '+esc(next.name)+' '+ICON.next.replace("<svg",'<svg width="14" height="14"')+'</a>':'<a class="btn primary" href="#/models">All models</a>')+'</div>'+
+       '<span class="soonline">'+ICON.play+' Narrated animation coming soon</span>'+
+       (cbt?'<p class="note">An educational overview of a thinking tool, not therapy or medical advice. If you are struggling, a qualified professional can help.</p>':"")+
+     '</div></section></div>'+
+   '<div class="snav"><button class="circ" id="cp" type="button" aria-label="Previous">'+ICON.prev+'</button><span class="hint" id="hint">Swipe or tap to continue</span><button class="circ big" id="cn" type="button" aria-label="Next">'+ICON.next+'</button></div>'+
+   '</div>'+
+   '<div class="mdet">'+
    (rel.length?'<div class="related"><h2>More in '+esc(m.category)+'</h2><div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">'+rel.map(card).join("")+'</div></div>':"")+
    '<div class="pn">'+(prev?'<a href="#/models/'+prev.id+'"><small>Previous</small><b>'+esc(prev.name)+'</b></a>':'<span style="flex:1"></span>')+(next?'<a class="nx" href="#/models/'+next.id+'"><small>Next</small><b>'+esc(next.name)+'</b></a>':'<span style="flex:1"></span>')+'</div></div>';
-  const car=$("#car"),dots=[...VG.app.querySelectorAll(".dot")];
-  const idx=()=>Math.max(0,Math.min(4,Math.round(car.scrollLeft/(car.clientWidth+12))));
-  let cur=0,lock=0;
-  const go=n=>{n=Math.max(0,Math.min(4,n));cur=n;lock=Date.now()+700;car.scrollTo({left:n*(car.clientWidth+12),behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"})};
-  const sync=()=>{if(Date.now()>=lock)cur=idx();const n=cur;dots.forEach((d,k)=>d.setAttribute("aria-current",k===n));$("#cp").disabled=n===0;$("#cn").disabled=n===4};
-  car.addEventListener("scroll",()=>requestAnimationFrame(sync),{passive:true});
-  if("onscrollend" in window)car.addEventListener("scrollend",()=>{lock=0;sync()});else car.addEventListener("scroll",()=>{clearTimeout(car._t);car._t=setTimeout(()=>{lock=0;sync()},160)},{passive:true});
-  dots.forEach(d=>d.addEventListener("click",()=>go(+d.dataset.n)));
-  $("#cp").addEventListener("click",()=>go(cur-1));$("#cn").addEventListener("click",()=>go(cur+1));
-  car.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();go(cur+1)}else if(e.key==="ArrowLeft"){e.preventDefault();go(cur-1)}});
-  sync();
+
+  const track=$("#track"), segs=[...VG.app.querySelectorAll(".segs i")], scenes=[...track.querySelectorAll(".scene")];
+  let cur=-1, lock=0;
+  const width=()=>track.clientWidth;
+  const idx=()=>Math.max(0,Math.min(N-1,Math.round(track.scrollLeft/width())));
+  function activate(n){
+    if(n===cur)return;
+    if(cur>=0&&scenes[cur])scenes[cur].classList.remove("on");
+    cur=n;
+    const sc=scenes[n]; sc.classList.remove("on"); void sc.getBoundingClientRect(); sc.classList.add("on");
+    segs.forEach((s,k)=>{s.className=k<n?"done":k===n?"now":""});
+    $("#cp").disabled=n===0; $("#cn").disabled=n===N-1;
+    if(n>0){const h=$("#hint");if(h)h.style.opacity="0"}
+    if(n===N-1&&!has("learned",m.id)){/* reaching the end counts as viewed, not learned */}
+  }
+  function go(n){
+    n=Math.max(0,Math.min(N-1,n)); lock=Date.now()+650; activate(n);
+    track.scrollTo({left:n*width(),behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
+  }
+  track.addEventListener("scroll",()=>{if(Date.now()>lock)requestAnimationFrame(()=>activate(idx()))},{passive:true});
+  track.addEventListener("scrollend",()=>{lock=0;activate(idx())});
+  $("#cp").addEventListener("click",()=>go(cur-1)); $("#cn").addEventListener("click",()=>go(cur+1));
+  track.querySelectorAll(".stage").forEach(st=>st.addEventListener("click",e=>{
+    const r=st.getBoundingClientRect(); go(e.clientX-r.left<r.width*.3?cur-1:cur+1);
+  }));
+  if(keyHandler)document.removeEventListener("keydown",keyHandler);
+  keyHandler=e=>{
+    if(!document.body.contains(track)){document.removeEventListener("keydown",keyHandler);keyHandler=null;return}
+    if(e.target.closest&&e.target.closest("input,textarea"))return;
+    if(e.key==="ArrowRight"){e.preventDefault();go(cur+1)}else if(e.key==="ArrowLeft"){e.preventDefault();go(cur-1)}
+  };
+  document.addEventListener("keydown",keyHandler);
+  addEventListener("resize",()=>{if(document.body.contains(track))track.scrollLeft=cur*width()},{passive:true});
+  activate(0);
+
   const marks=()=>{
     const l=has("learned",m.id),r=has("revisit",m.id);
-    $("#lrn").textContent=l?"Learned ✓":"Mark as learned";$("#lrn").className="btn"+(l?" on":"");$("#lrn").setAttribute("aria-pressed",l);
-    $("#rev").textContent=r?"Saved to revisit ✓":"Revisit later";$("#rev").className="btn"+(r?" on":"");$("#rev").setAttribute("aria-pressed",r);
+    $("#lrn").innerHTML=l?ICON.check.replace("<svg",'<svg width="16" height="16"')+" Learned":"Mark as learned";$("#lrn").className="btn"+(l?" on":"");$("#lrn").setAttribute("aria-pressed",l);
+    $("#sbook").innerHTML=r?'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z" fill="currentColor"/></svg>':'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+    $("#sbook").setAttribute("aria-pressed",r);$("#sbook").classList.toggle("on",r);
   };
   $("#lrn").addEventListener("click",()=>{toggle("learned",m.id);marks()});
-  $("#rev").addEventListener("click",()=>{toggle("revisit",m.id);marks()});
+  $("#sbook").addEventListener("click",()=>{toggle("revisit",m.id);marks()});
   marks();window.scrollTo(0,0);
 }
 
@@ -154,6 +220,7 @@ function savedView(){
 }
 
 /* ------------------------------------------------------------------ entry */
+(function(){if(!document.querySelector('link[href="models-motion.css"]')){const l=document.createElement("link");l.rel="stylesheet";l.href="models-motion.css";document.head.appendChild(l)}})();
 window.VGModels={
   async show(parts){                      // parts = ["models", ...]
     if(!DATA){

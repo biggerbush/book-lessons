@@ -1,0 +1,371 @@
+"""Hand-built animated stories for showcase models.
+
+Writes a "story" array into site/models.json for each model defined here:
+  story = [{"k": kicker, "h": headline, "t": body text, "svg": inner SVG for viewBox 0 0 360 280}, ...]
+The player (site/models.js) adds the closing "Ask yourself" slide itself.
+Animation classes are documented in site/models-motion.css.
+
+Run:  python3 tools/model_stories.py
+"""
+from __future__ import annotations
+import json
+from html import escape
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+# ------------------------------------------------------------------ helpers
+def F(kind, d, inner, at=None):
+    """Animated group. `at` = (x, y) to position the content without clashing with the animation transform."""
+    if at:
+        inner = f'<g transform="translate({at[0]} {at[1]})">{inner}</g>'
+    return f'<g class="fx-{kind}" style="--d:{d}s">{inner}</g>'
+
+def D(d, cls, delay=0.0, extra=""):
+    """A path that draws itself."""
+    return f'<path pathLength="1" class="{cls} fx-draw" style="--d:{delay}s" d="{d}"{extra}/>'
+
+def P(d, cls, extra=""):
+    return f'<path class="{cls}" d="{d}"{extra}/>'
+
+def T(x, y, s, size=16, c="tk", font="fd", anchor="middle", extra=""):
+    return f'<text x="{x}" y="{y}" class="{font} {c}" font-size="{size}" text-anchor="{anchor}"{extra}>{escape(s)}</text>'
+
+def R(x, y, w, h, cls="pf", r=12):
+    return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" class="{cls}"/>'
+
+def C(x, y, r, cls):
+    return f'<circle cx="{x}" cy="{y}" r="{r}" class="{cls}"/>'
+
+CHIP = {"a": ("ca", "ta"), "i": ("ci", "ti"), "m": ("cm", "tk"), "A": ("cA", "tw"), "I": ("cI", "tw")}
+def chip_w(s, size=13):
+    return round(len(s) * size * 0.56 + 26)
+
+def chip(x, y, s, c="a", size=13, center=True):
+    """Pill with text; (x, y) is the centre if center else the left edge (vertical centre)."""
+    w, h = chip_w(s, size), size + 17
+    x0 = x - w / 2 if center else x
+    box, txt = CHIP[c]
+    return R(round(x0, 1), y - h / 2, w, h, box, h / 2) + T(round(x0 + w / 2, 1), y + size * 0.36, s, size, txt, "fb")
+
+def check(x, y, r=11, solid=True):
+    return (C(x, y, r, "af") + P(f"M{x-5} {y}l3.6 3.8 7-7.6", "lk thin", ' style="stroke:var(--on-gain)"')) if solid else \
+           (C(x, y, r, "pa") + P(f"M{x-5} {y}l3.6 3.8 7-7.6", "la thin"))
+
+def cross(x, y, r=11):
+    return C(x, y, r, "if") + P(f"M{x-4.5} {y-4.5}l9 9m0-9-9 9", "lk thin", ' style="stroke:var(--on-gain)"')
+
+def person(s=1.0, body="k", legs="af", arms=True):
+    """Simple figure standing on (0,0), about 72*s tall."""
+    a = f'<path class="lk fat" d="M-15 -45l-7 20M15 -45l7 20" style="stroke:var(--ink)"/>' if arms else ""
+    return (f'<g transform="scale({s})">{a}<circle class="{body}" cx="0" cy="-63" r="10"/>'
+            f'<path class="{body}" d="M-13 -50h26a5 5 0 0 1 5 5v22h-36v-22a5 5 0 0 1 5-5z"/>'
+            f'<path class="{legs}" d="M-13 -24h12v24h-12zM1 -24h12v24h-12z"/></g>')
+
+def arrow(x1, y1, x2, y2, cls="la", delay=0.0, head=9):
+    import math
+    ang = math.atan2(y2 - y1, x2 - x1)
+    hx1, hy1 = x2 - head * math.cos(ang - 0.5), y2 - head * math.sin(ang - 0.5)
+    hx2, hy2 = x2 - head * math.cos(ang + 0.5), y2 - head * math.sin(ang + 0.5)
+    return D(f"M{x1} {y1}L{x2} {y2}M{hx1:.1f} {hy1:.1f}L{x2} {y2}L{hx2:.1f} {hy2:.1f}", cls, delay)
+
+def tile(x, y, w, h, icon, label, d, c="a"):
+    box = "pa" if c == "a" else ("pi" if c == "i" else "pf")
+    txt = {"a": "ta", "i": "ti"}.get(c, "tk")
+    return F("pop", d, R(x, y, w, h, box, 14) + icon + T(x + w / 2, y + h - 18, label, 14, txt, "fb"))
+
+def S(k, h, t, *parts):
+    return {"k": k, "h": h, "t": t, "svg": "".join(parts)}
+
+GROUND = lambda y=250, d=0.0: D(f"M24 {y}H336", "ll", d)
+
+# ------------------------------------------------------------------ Inversion
+inversion = [
+ S("The idea", "Solve it backwards.",
+   "Instead of asking how to win, ask what would guarantee you lose. Then avoid those things.",
+   F("fade", 0, C(268, 196, 80, "glow")),
+   D("M104 52C140 14 210 14 248 48", "la", .5), F("fade", 1.2, P("M238 50l11 0-2-11", "la")),
+   F("up", .1, R(20, 60, 150, 84, "pf", 14) + T(95, 96, "How do I", 19) + T(95, 121, "succeed?", 19)),
+   F("pop", .9, R(190, 60, 150, 84, "pa", 14) + T(265, 96, "What would", 19, "ta") + T(265, 121, "make me fail?", 19, "ta")),
+   GROUND(252, .2),
+   F("up", 1.2, person(.85, "mf", "mf"), (95, 252)),
+   D("M214 176H322", "la", 1.3),
+   F("fade", 1.6, '<g transform="translate(268 176) rotate(180)">' + person(.85, "k", "af") + "</g>")),
+ S("Forward thinking", "Big goals are foggy.",
+   "Ask \"how do I build a great career?\" and the answers are vague: work hard, network, get lucky.",
+   F("up", 0, P("M20 252L150 64l46 70 34-40 110 158z", "pf")),
+   F("fade", .2, P("M150 64l-22 32 14-4 8 10 10-12 12 6z", "p2f")),
+   F("fade", .4, P("M62 248C96 220 70 196 110 180S100 140 124 128", "lm dash fx-march")),
+   F("fade", .6, P("M62 248C110 236 150 214 170 196S200 160 214 150", "lm dash fx-march")),
+   F("fade", .8, P("M62 248C70 214 40 190 56 164S82 132 92 120", "lm dash fx-march")),
+   F("fade", .9, F("float", 0, '<ellipse cx="170" cy="124" rx="150" ry="16" class="fog"/><ellipse cx="200" cy="156" rx="110" ry="12" class="fog"/>')),
+   F("fade", 1.1, F("float", .8, '<ellipse cx="120" cy="104" rx="90" ry="10" class="fog"/>')),
+   F("pop", 1.4, P("M150 64V34l20 8-20 8", "la") + T(182, 40, "?", 26, "ta")),
+   F("up", .2, person(.7), (60, 252))),
+ S("Flip it", "Now flip the question.",
+   "\"How would I wreck my career?\" Suddenly the answers are sharp and specific.",
+   F("out", .7, R(50, 34, 260, 212, "pf", 18) + T(180, 128, "How do I build a", 20, "tm") + T(180, 156, "great career?", 20, "tm")),
+   F("flipin", .9, R(50, 34, 260, 212, "pa", 18) + T(180, 76, "How would I wreck", 20, "ta") + T(180, 102, "my career?", 20, "ta")),
+   F("left", 1.4, cross(92, 140) + T(114, 145, "Burn bridges", 15, "tk", "fb", "start")),
+   F("left", 1.6, cross(92, 178) + T(114, 183, "Stop learning", 15, "tk", "fb", "start")),
+   F("left", 1.8, cross(92, 216) + T(114, 221, "Miss every deadline", 15, "tk", "fb", "start"))),
+ S("Make rules", "Turn each failure into a rule.",
+   "Every way to fail becomes something to avoid. Avoiding mistakes is often easier than chasing brilliance.",
+   T(80, 40, "FAILURE", 11, "ti", "fm"), T(268, 40, "RULE", 11, "ta", "fm"),
+   F("pop", .1, chip(80, 80, "Burn bridges", "i")), F("pop", .3, chip(80, 140, "Stop learning", "i")), F("pop", .5, chip(80, 200, "Miss deadlines", "i")),
+   arrow(144, 80, 186, 80, "lm", .8), arrow(144, 140, 186, 140, "lm", 1.0), arrow(144, 200, 186, 200, "lm", 1.2),
+   F("pop", 1.1, chip(268, 80, "Keep promises", "A")), F("pop", 1.3, chip(268, 140, "Learn every week", "A")), F("pop", 1.5, chip(268, 200, "Pad every deadline", "A"))),
+ S("In practice", "Steer around the potholes.",
+   "You don't need the perfect route if you avoid the holes that sink most people.",
+   P("M10 262C120 250 150 130 350 96", "ll", ' style="stroke-width:58;stroke:var(--panel)"'),
+   P("M10 262C120 250 150 130 350 96", "ll", ' style="stroke-width:62;stroke:var(--line);opacity:.5"'),
+   P("M10 262C120 250 150 130 350 96", "ll", ' style="stroke-width:56;stroke:var(--panel)"'),
+   P("M10 262C120 250 150 130 350 96", "lm thin dash fx-march"),
+   F("pop", .3, '<ellipse cx="96" cy="244" rx="15" ry="7" class="if"/>'),
+   F("pop", .5, '<ellipse cx="170" cy="182" rx="15" ry="7" class="if"/>'),
+   F("pop", .7, '<ellipse cx="258" cy="124" rx="15" ry="7" class="if"/>'),
+   D("M20 252C60 252 70 230 96 228S128 208 150 196 180 160 196 166 226 140 250 140 290 110 330 104", "la fat", 1.0),
+   F("pop", 2.0, P("M330 104V70l22 9-22 9", "la") + C(330, 104, 5, "af"))),
+ S("Where it helps", "Use it whenever advice feels vague.",
+   "Planning a project, managing money, keeping a relationship healthy: ask what would ruin it first.",
+   tile(16, 64, 100, 150, P("M44 98h44v40H44zM44 110h44M56 92v12M76 92v12", "la") + C(80, 128, 4, "af"), "Plans", .1),
+   tile(130, 64, 100, 150, P("M156 140l16-18 14 10 24-28", "la") + P("M200 104h10v10", "la"), "Money", .3),
+   tile(244, 64, 100, 150, P("M294 140c-16-10-26-18-26-30 0-8 6-14 13-14 6 0 10 4 13 8 3-4 7-8 13-8 7 0 13 6 13 14 0 12-10 20-26 30z", "la"), "People", .5)),
+ S("Common mistake", "Don't stop at the list.",
+   "A list of fears isn't a plan. Turn each one into a specific rule or check you will actually follow.",
+   F("up", 0, R(70, 40, 160, 200, "pf", 14) + P("M120 34h60v14h-60z", "mf")),
+   F("fade", .3, cross(100, 92, 9) + P("M118 92h86", "lm") + cross(100, 132, 9) + P("M118 132h70", "lm") +
+     cross(100, 172, 9) + P("M118 172h80", "lm") + cross(100, 212, 9) + P("M118 212h56", "lm")),
+   F("pop", 1.0, '<g transform="rotate(-10 250 150)">' + R(176, 124, 156, 52, "cA", 10) + T(254, 157, "MAKE IT A RULE", 14, "tw", "fm") + "</g>")),
+]
+
+# ------------------------------------------------------------------ First principles
+fp = [
+ S("The idea", "Break it down. Build it up.",
+   "Strip a problem back to what you know is true, then rebuild your answer from those facts.",
+   F("fade", 0, C(260, 160, 86, "glow")),
+   F("up", .1, R(40, 108, 40, 40, "pf", 4) + R(84, 108, 40, 40, "pf", 4) + R(40, 152, 40, 40, "pf", 4) + R(84, 152, 40, 40, "pf", 4) +
+     R(40, 196, 40, 40, "pf", 4) + R(84, 196, 40, 40, "pf", 4) + R(62, 64, 40, 40, "pf", 4)),
+   arrow(140, 166, 186, 166, "lk", .6),
+   F("pop", .9, R(206, 196, 30, 30, "cA", 5)), F("pop", 1.0, R(242, 196, 30, 30, "cA", 5)), F("pop", 1.1, R(278, 196, 30, 30, "cA", 5)),
+   D("M214 186V120l44-40 44 40v66", "la dash", 1.3),
+   F("fade", 1.6, T(258, 252, "REBUILT FROM BASICS", 10, "ta", "fm"))),
+ S("How we usually think", "Most of us copy.",
+   "We reason by analogy: we do what others do. It's quick, but it copies their limits too.",
+   *[F("up", .1 + i * .15, R(22 + i * 84, 96, 64, 64, "pf", 12) + C(54 + i * 84, 120, 8, "mf") + P(f"M{40+i*84} 142h28", "lm"))
+     for i in range(4)],
+   *[arrow(88 + i * 84, 128, 104 + i * 84, 128, "lm", .8 + i * .2, 6) for i in range(3)],
+   F("fade", 1.4, T(180, 200, "“that's how it's done”", 16, "tm", "fb")),
+   F("fade", 1.6, T(180, 226, "× 4", 22, "ti"))),
+ S("Step 1", "Question every assumption.",
+   "Ask of each belief: how do I know this is true? Is it a fact, or just a habit?",
+   F("up", 0, R(60, 70, 200, 110, "pf", 14) + T(160, 118, "Batteries are", 20) + T(160, 146, "always expensive", 20)),
+   D("M150 70l10 26-14 14 16 22-10 18 8 30", "li fat", 1.2),
+   F("pop", .6, F("float", 0, C(256, 176, 34, "pa") + C(256, 176, 34, "glow") + P("M281 201l30 30", "la fat") + T(256, 186, "?", 30, "ta")))),
+ S("Step 2", "Find the raw facts.",
+   "One team priced a battery's raw materials and found they cost a fraction of the finished pack.",
+   F("pop", 0, R(140, 104, 80, 72, "pf", 10) + P("M166 98h28v8h-28z", "mf") + P("M172 128l-6 16h12l-6 16", "la")),
+   arrow(140, 120, 96, 82, "lm", .4, 7), arrow(220, 120, 264, 82, "lm", .5, 7), arrow(140, 160, 96, 198, "lm", .6, 7), arrow(220, 160, 264, 198, "lm", .7, 7),
+   F("pop", .8, chip(64, 66, "Cobalt", "a")), F("pop", 1.0, chip(296, 66, "Nickel", "a")),
+   F("pop", 1.2, chip(64, 214, "Carbon", "a")), F("pop", 1.4, chip(296, 214, "Aluminium", "a")),
+   F("fade", 1.8, T(180, 254, "THE PARTS ARE CHEAP", 11, "ta", "fm"))),
+ S("Step 3", "Rebuild from the ground up.",
+   "The cost was in how packs were made, not what they were made of. So the process can change.",
+   P("M40 236H320", "ll"),
+   F("growy", .2, R(80, 66, 70, 170, "if", 6)), F("growy", .6, R(210, 186, 70, 50, "af", 6)),
+   T(115, 258, "USUAL PRICE", 10, "tm", "fm"), T(245, 258, "RAW FACTS", 10, "tm", "fm"),
+   F("fade", 1.1, P("M150 66H292", "la thin dash")),
+   arrow(260, 132, 260, 74, "la", 1.3, 8), arrow(260, 132, 260, 180, "la", 1.3, 8),
+   F("pop", 1.8, chip(260, 128, "the gap = opportunity", "A", 12))),
+ S("When to use it", "Use it when you're stuck.",
+   "Especially when the only reason for something is \"that's how it's always done\".",
+   tile(16, 60, 100, 160, P("M48 112c0-14 36-14 36 0s-36 14-36 28 36 14 36 0", "la"), "Stuck", .1),
+   tile(130, 60, 100, 160, P("M180 92a26 26 0 1 1-24 16", "la") + P("M150 102l6 7 8-4", "la"), "Habits", .3),
+   tile(244, 60, 100, 160, P("M276 118h36v30h-36zM282 118v-10a12 12 0 0 1 24 0v10", "la"), "Fixed costs", .5)),
+ S("Common mistake", "Don't confuse assumptions with facts.",
+   "If you can't say how you know it, it isn't a first principle yet. Keep digging.",
+   F("out", .9, R(70, 72, 220, 120, "pa", 16) + T(180, 144, "FACT", 34, "ta")),
+   F("flipin", 1.1, R(70, 72, 220, 120, "pi", 16) + T(180, 130, "ASSUMPTION", 28, "ti") + T(180, 160, "dressed up as a fact", 14, "tm", "fb")),
+   F("pop", 1.7, F("float", 0, C(300, 206, 24, "pa") + P("M317 223l18 18", "la fat") + T(300, 214, "?", 22, "ta")))),
+]
+
+# ------------------------------------------------------------------ Dichotomy of control
+RING = C(180, 142, 118, "li dash")
+dc = [
+ S("The idea", "Some things are up to you.",
+   "A Stoic idea: separate what you control from what you don't, and put your energy into the first.",
+   F("fade", 0, C(180, 142, 70, "glow")),
+   F("pop", .1, C(180, 142, 118, "li dash fx-spin") ),
+   F("pop", .5, C(180, 142, 54, "pa")),
+   F("up", .9, T(180, 140, "YOU", 22, "ta") + T(180, 162, "in control", 12, "tm", "fb")),
+   F("fade", 1.2, T(180, 14, "NOT IN YOUR CONTROL", 10, "ti", "fm")),
+   *[F("pop", 1.3 + i * .12, F("float", i * .4, C(x, y, 6, "if"))) for i, (x, y) in enumerate([(72, 70), (300, 92), (64, 210), (292, 224), (120, 262)])]),
+ S("Outside", "What you can't control.",
+   "Other people's choices, the economy, the past, the weather, even the final result.",
+   C(180, 142, 118, "li dash"), C(180, 142, 54, "pf"),
+   *[F("pop", .2 + i * .18, F("float", i * .5, chip(x, y, s, "I", 13))) for i, (x, y, s) in enumerate(
+       [(84, 52, "Other people"), (284, 68, "The economy"), (60, 150, "The past"), (304, 168, "Weather"), (120, 246, "Outcomes"), (262, 240, "Luck")])],
+   T(180, 147, "?", 26, "tm")),
+ S("Inside", "What you can control.",
+   "Your effort, your choices, your attitude and how you respond. That's where your power is.",
+   C(180, 142, 118, "li dash"),
+   F("fade", 0, C(180, 142, 100, "glow")),
+   F("pop", .1, C(180, 142, 96, "pa")),
+   F("pop", .5, chip(180, 96, "Your effort", "A")), F("pop", .7, chip(180, 128, "Your choices", "A")),
+   F("pop", .9, chip(180, 160, "Your attitude", "A")), F("pop", 1.1, chip(180, 192, "How you respond", "A"))),
+ S("Energy", "Worry leaks energy.",
+   "Energy spent on what you can't change is simply lost. Pull it back to what you can.",
+   F("pop", 0, chip(70, 56, "Opinions", "i")), F("pop", .1, chip(290, 56, "Traffic", "i")), F("pop", .2, chip(70, 160, "The past", "i")), F("pop", .3, chip(290, 160, "Results", "i")),
+   F("out", 1.6, P("M180 170L92 70M180 170L268 70M180 186L104 162M180 186L256 162", "li dash fx-march")),
+   F("pop", 1.8, C(180, 196, 60, "glow")), F("pop", 2.0, C(180, 196, 58, "la fx-pulse")),
+   F("up", .3, person(.9), (180, 238))),
+ S("Example", "The job interview.",
+   "You can't decide whether they hire you. You can prepare, answer well and handle the result.",
+   F("left", 0, R(16, 40, 156, 200, "pi", 16) + T(94, 72, "NOT YOURS", 11, "ti", "fm")),
+   F("right", .2, R(188, 40, 156, 200, "pa", 16) + T(266, 72, "YOURS", 11, "ta", "fm")),
+   F("up", .6, T(94, 112, "Their decision", 14, "tk", "fb") + T(94, 146, "Other candidates", 14, "tk", "fb") + T(94, 180, "Their mood", 14, "tk", "fb")),
+   F("pop", .9, check(214, 108, 9) + T(230, 113, "Preparation", 14, "tk", "fb", "start")),
+   F("pop", 1.1, check(214, 142, 9) + T(230, 147, "Your answers", 14, "tk", "fb", "start")),
+   F("pop", 1.3, check(214, 176, 9) + T(230, 181, "Follow-up", 14, "tk", "fb", "start")),
+   F("pop", 1.5, check(214, 210, 9) + T(230, 215, "Your reaction", 14, "tk", "fb", "start"))),
+ S("A useful twist", "Some things you can influence.",
+   "Plenty sits in between. Do your part well, then let go of how it turns out.",
+   D("M180 24a118 118 0 1 1 0 236a118 118 0 1 1 0-236", "li dash", 0),
+   D("M180 62a80 80 0 1 1 0 160a80 80 0 1 1 0-160", "la dash", .5),
+   F("pop", 1.0, C(180, 142, 40, "cA")),
+   F("fade", 1.2, T(180, 147, "Control", 13, "tw", "fb")),
+   F("fade", 1.4, T(180, 88, "Influence", 13, "ta", "fb")),
+   F("fade", 1.6, T(180, 46, "Concern", 13, "ti", "fb"))),
+ S("Common mistake", "Don't use it as an excuse.",
+   "\"Out of my control\" can become a cop-out. Be honest about what you could actually change.",
+   F("up", 0, person(1.0, "k", "mf"), (110, 244)),
+   F("pop", .5, chip(110, 102, "Not my problem", "i", 15)),
+   D("M50 102H170", "li fat", 1.1),
+   arrow(184, 150, 220, 150, "lm", 1.3),
+   F("pop", 1.6, chip(282, 150, "What's my part?", "A", 15))),
+]
+
+# ------------------------------------------------------------------ Compounding
+AX = lambda d=0: D("M36 28V240H332", "lk", d)
+cp = [
+ S("The idea", "Small gains, huge results.",
+   "When each gain builds on the last, growth stops being a straight line and starts to curve upward.",
+   AX(0), F("fade", .3, T(330, 260, "TIME", 10, "tm", "fm", "end") + T(44, 24, "RESULTS", 10, "tm", "fm", "start")),
+   D("M36 238C140 232 230 200 322 40", "la fat", .5),
+   F("pop", 1.5, C(322, 40, 9, "af")), F("pop", 1.5, C(322, 40, 18, "glow fx-pulse"))),
+ S("The maths", "1% a day adds up.",
+   "Get 1% better every day for a year and you're about 38 times better. Get 1% worse and you're close to zero.",
+   F("up", .1, R(20, 44, 152, 180, "pa", 18)), F("up", .3, R(188, 44, 152, 180, "pi", 18)),
+   F("fade", .5, T(96, 96, "1.01", 30, "tk") + T(130, 76, "365", 13, "tm", "fb", "start")),
+   F("fade", .7, T(264, 96, "0.99", 30, "tk") + T(298, 76, "365", 13, "tm", "fb", "start")),
+   F("pop", 1.1, T(96, 168, "37.8", 44, "ta")), F("pop", 1.4, T(264, 168, "0.03", 44, "ti")),
+   F("fade", 1.6, T(96, 200, "BETTER", 10, "ta", "fm") + T(264, 200, "WORSE", 10, "ti", "fm"))),
+ S("A picture", "Like a snowball.",
+   "Each roll picks up more snow, because the ball is already bigger than it was.",
+   D("M20 70C120 110 230 180 344 236", "ll fat", 0),
+   *[F("pop", .3 + i * .25, C(x, y, r, "pf" if i < 4 else "pa")) for i, (x, y, r) in
+     enumerate([(48, 74 - 9, 7), (92, 90 - 12, 11), (148, 116 - 17, 16), (214, 150 - 24, 23), (290, 196 - 34, 34)])],
+   F("pop", 1.7, C(290, 162, 46, "glow"))),
+ S("Patience", "Slow, then sudden.",
+   "For a long time, compounding looks worse than steady effort. Then it overtakes everything.",
+   AX(0),
+   D("M36 238L322 112", "lm", .3),
+   D("M36 238C160 236 230 210 322 34", "la fat", .7),
+   F("pop", 1.6, C(252, 146, 8, "if")), F("pop", 1.6, C(252, 146, 18, "glowi fx-pulse")),
+   F("fade", 1.9, chip(176, 112, "overtakes here", "I", 12)),
+   F("fade", .6, T(330, 148, "steady", 11, "tm", "fb", "end")), F("fade", 1.4, T(300, 30, "compound", 11, "ta", "fb", "end"))),
+ S("Where it works", "It works on almost everything.",
+   "Savings, skills, habits, reputation and relationships all compound over time.",
+   F("fade", 0, C(180, 140, 54, "glow")),
+   D("M150 160c18-2 34-12 60-50", "la fat", .2), F("pop", .9, C(210, 110, 6, "af")),
+   *[F("pop", .6 + i * .15, chip(x, y, s, "a")) for i, (x, y, s) in
+     enumerate([(80, 60, "Money"), (280, 60, "Skills"), (56, 150, "Habits"), (300, 150, "Reputation"), (180, 236, "Relationships")])]),
+ S("Common mistake", "Most people quit too early.",
+   "The flat start feels like nothing is happening. That's exactly where most people give up.",
+   AX(0),
+   D("M36 238C140 236 230 210 322 34", "la fat", .3),
+   F("fade", .8, C(226, 86, 44, "glow") + T(226, 90, "most growth", 12, "ta", "fb")),
+   F("up", 1.0, person(.6, "k", "mf"), (110, 234)),
+   F("pop", 1.5, cross(110, 168, 12)), F("fade", 1.7, T(110, 146, "quits here", 12, "ti", "fb"))),
+ S("Watch out", "It cuts both ways.",
+   "Debt, bad habits and neglect compound too. Small negatives grow just as quietly.",
+   AX(0),
+   D("M36 238C140 234 230 206 322 46", "la fat", .3),
+   D("M36 238C150 236 240 218 322 102", "li fat", .7),
+   F("fade", 1.4, chip(200, 60, "good habits", "a", 12)), F("fade", 1.6, chip(132, 168, "debt, bad habits", "i", 12))),
+]
+
+# ------------------------------------------------------------------ Cognitive distortions
+CLOUD = "M88 176c-34-2-40-52-4-58 2-40 56-48 78-16 22-26 74-18 76 18 36-2 46 52 6 56z"
+cd = [
+ S("The idea", "Thinking traps.",
+   "Habitual patterns that bend how we read events, and make us feel worse than the facts justify.",
+   F("fade", 0, C(180, 130, 90, "glowi")),
+   F("pop", .1, P(CLOUD, "pf")),
+   D("M126 140l20-20 20 30 20-30 20 20 20-26", "la fat", .6),
+   F("pop", 1.1, C(108, 198, 8, "pf")), F("pop", 1.2, C(92, 222, 5, "pf")),
+   F("up", 1.3, person(.7), (74, 270))),
+ S("How it works", "Thoughts shape feelings.",
+   "It's often our reading of an event, not the event itself, that drives how we feel and what we do.",
+   F("pop", .1, R(20, 40, 140, 80, "pf", 14) + T(90, 70, "EVENT", 10, "ta", "fm") + T(90, 98, "No reply", 15, "tk", "fb")),
+   F("pop", .5, R(200, 40, 140, 80, "pi", 14) + T(270, 70, "THOUGHT", 10, "ti", "fm") + T(270, 98, "“They hate me”", 15, "tk", "fb")),
+   F("pop", .9, R(200, 172, 140, 80, "pf", 14) + T(270, 202, "FEELING", 10, "ta", "fm") + T(270, 230, "Anxious, hurt", 15, "tk", "fb")),
+   F("pop", 1.3, R(20, 172, 140, 80, "pf", 14) + T(90, 202, "BEHAVIOUR", 10, "ta", "fm") + T(90, 230, "Withdraws", 15, "tk", "fb")),
+   arrow(164, 80, 194, 80, "lm", .4, 7), arrow(270, 124, 270, 166, "lm", .8, 7), arrow(196, 212, 166, 212, "lm", 1.2, 7), arrow(90, 166, 90, 126, "lm", 1.6, 7)),
+ S("Trap 1", "All-or-nothing thinking.",
+   "\"If it isn't perfect, it's a failure.\" Real life happens in the shades in between.",
+   '<defs><linearGradient id="cd-aon" x1="0" x2="1"><stop offset="0" stop-color="var(--loss)"/><stop offset="1" stop-color="var(--gain)"/></linearGradient></defs>',
+   F("pop", .1, C(40, 140, 22, "if")), F("pop", .3, C(320, 140, 22, "af")),
+   T(40, 190, "FAILURE", 10, "ti", "fm"), T(320, 190, "PERFECT", 10, "ta", "fm"),
+   F("growx", .7, R(66, 130, 228, 20, "x", 10).replace('class="x"', 'fill="url(#cd-aon)"')),
+   F("pop", 1.5, chip(180, 96, "most of real life", "m", 13)), D("M180 112v14", "lm", 1.7)),
+ S("Trap 2", "Mind-reading.",
+   "Assuming you know what others think, without evidence. A missing reply usually just means busy.",
+   F("up", 0, R(36, 40, 120, 212, "pf", 20) + R(48, 62, 96, 168, "p2f", 8)),
+   F("pop", .4, R(70, 86, 66, 34, "cA", 12) + T(103, 108, "Drinks Fri?", 11, "tw", "fb")),
+   F("fade", .8, C(70, 142, 4, "mf fx-blink") + C(82, 142, 4, "mf fx-blink").replace('fx-blink"', 'fx-blink" style="--d:.2s"') + C(94, 142, 4, "mf fx-blink").replace('fx-blink"', 'fx-blink" style="--d:.4s"')),
+   F("pop", 1.1, P("M196 128c-28-2-32-42 0-46 2-30 50-36 64-10 16-16 58-10 58 14 28 0 32 40 2 42z", "pi")),
+   F("fade", 1.3, T(256, 102, "“They're annoyed", 13, "ti", "fb") + T(256, 120, "with me”", 13, "ti", "fb")),
+   F("pop", 1.9, chip(256, 196, "or... they're busy", "A", 13))),
+ S("Trap 3", "Catastrophising.",
+   "Jumping from a small setback straight to the worst possible outcome.",
+   P("M20 246H340", "ll"),
+   F("pop", .1, P("M40 246l18-22 18 22z", "af")),
+   F("growy", .5, P("M118 246L230 52l100 194z", "pi")),
+   F("pop", .9, chip(70, 200, "One typo", "a", 12)), arrow(110, 196, 150, 160, "lm", 1.1, 7),
+   F("pop", 1.3, chip(186, 144, "Fired", "i", 12)), arrow(206, 124, 222, 96, "lm", 1.5, 7),
+   F("pop", 1.7, chip(232, 70, "Lose home", "I", 12))),
+ S("Traps 4 and 5", "\"Shoulds\" and feelings as facts.",
+   "Rigid rules for yourself, and treating a feeling as proof, both keep you stuck.",
+   F("down", .1, P("M70 70h52l12 60H58z", "k") + P("M84 70a12 12 0 0 1 24 0", "lk") + T(96, 112, "SHOULD", 10, "tw", "fm").replace('class="fm tw"', 'class="fm" fill="var(--bg)"')),
+   F("up", .4, person(.8, "k", "mf"), (96, 246)),
+   F("fade", .7, P("M180 40v200", "ll")),
+   F("pop", 1.0, T(270, 120, "Feeling", 26) + T(270, 186, "Fact", 26)),
+   F("pop", 1.4, T(270, 158, "≠", 38, "ta"))),
+ S("What to do", "Catch it, check it, change it.",
+   "Notice the thought, name the trap, weigh the evidence for and against, then find a fairer view.",
+   D("M70 140H290", "ll fat", 0),
+   F("pop", .2, C(70, 140, 38, "pa") + C(64, 134, 13, "la") + P("M73 143l12 12", "la")),
+   F("pop", .6, C(180, 140, 38, "pa") + P("M180 118v40M160 126h40M160 126l-8 16h16zM200 126l-8 16h16z", "la")),
+   F("pop", 1.0, C(290, 140, 38, "cA") + P("M276 136a14 14 0 0 1 26-6M304 144a14 14 0 0 1-26 6", "lk") + P("M302 122v8h-8M278 158v-8h8", "lk")),
+   F("fade", 1.3, T(70, 206, "CATCH", 11, "ta", "fm") + T(180, 206, "CHECK", 11, "ta", "fm") + T(290, 206, "CHANGE", 11, "ta", "fm"))),
+ S("Keep in mind", "Not every worry is wrong.",
+   "Some concerns are accurate. The aim is balanced thinking, not forced positivity.",
+   P("M180 60V230M130 230h100", "lk"),
+   F("tilt", .3, P("M70 76H290", "lk fat") + P("M70 76l-30 60h60zM290 76l-30 60h60z", "lk") +
+     chip(70, 156, "Worry", "i", 13) + chip(290, 156, "Evidence", "a", 13)),
+   F("pop", 0, C(180, 60, 8, "af"))),
+]
+
+STORIES = {"inversion": inversion, "first-principles": fp, "dichotomy-of-control": dc, "compounding": cp, "cognitive-distortions": cd}
+
+if __name__ == "__main__":
+    p = ROOT / "site" / "models.json"
+    data = json.loads(p.read_text(encoding="utf8"))
+    n = 0
+    for m in data["models"]:
+        if m["id"] in STORIES:
+            m["story"] = STORIES[m["id"]]
+            n += 1
+    p.write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf8")
+    print(f"wrote stories for {n} models ({sum(len(s) for s in STORIES.values())} slides)")

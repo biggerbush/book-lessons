@@ -1,0 +1,26 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+r*1.5+' '+r*1.5+' 0 0 1 '+r*3+' 0v'+r*1.3+'z',class:c},g)};
+const tx=(g,x,y,s,str,a)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s},a),g);e.textContent=str;return e};
+const ck=(g,d,w)=>mk('path',{d:d,fill:'none',stroke:'var(--gain)','stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+fig($('hero'),1300,320,48,'loss');
+const QS=[[1150,300],[1180,215],[1300,225],[1425,215],[1455,310],[1450,420],[1150,420],[1180,520],[1425,525]].map(q=>tx($('qs'),q[0],q[1],46,'?',{class:'d','text-anchor':'middle'}));
+const BL=[['RED',90],['YELLOW',120],['GREEN',70],['BLUE',240]].map((b,i)=>{const y=300+i*60;tx($('blend'),640,y+26,20,b[0],{class:'m',style:i==3?'fill:var(--loss)':''});return [mk('rect',{x:770,y:y,width:0,height:36,rx:6,fill:i==3?'var(--loss)':'var(--muted)','fill-opacity':i==3?1:.4},$('blend')),b[1]]});
+const gear=(cx,cy,r)=>{const G=mk('g',{},$('gears'));mk('circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:'var(--ink)','stroke-width':18,'stroke-dasharray':'14 12'},G);mk('circle',{cx:cx,cy:cy,r:r-10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},G);mk('circle',{cx:cx,cy:cy,r:r*.28,class:'gain'},G);return G};
+const G1=gear(1240,380,70),G2=gear(1345,465,50);
+fig($('deskf'),320,382,40,'loss');
+const CK=['READ','CHECK DETAILS','PLAN','ACT'].map((s,i)=>{const y=370+i*80;tx($('man'),690,y,22,s,{class:'m'});mk('rect',{x:630,y:y-28,width:36,height:36,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':5},$('man'));return ck($('man'),'M637 '+(y-12)+'l10 10 18-22',7)});
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1240+128*c).toFixed(1)+' '+(440+128*s).toFixed(1)+'L'+(1240+142*c).toFixed(1)+' '+(440+142*s).toFixed(1),class:'s-ink','stroke-width':i%3?3:6,'stroke-linecap':'round'},$('tk2'))}
+fig($('qblue'),220,420,44,'loss'); fig($('you3'),720,420,44,'ink');
+const QQ=[[330,330],[410,270],[470,370],[380,430],[300,250]].map(q=>tx($('qq'),q[0],q[1],56,'?',{class:'d','text-anchor':'middle'}));
+const BM=mk('path',{class:'s-ink','stroke-width':10,'stroke-linecap':'round'},$('scl'));
+const pan=(c,l)=>{const G=mk('g',{},$('scl'));mk('path',{d:'M0 0v80',class:'s-ink','stroke-width':4},G);mk('path',{d:'M-70 80h140a70 34 0 0 1-140 0z',class:c},G);tx(G,0,150,20,l,{class:'m','text-anchor':'middle'});return G};
+const PL=pan('gain','STRENGTH'),PR=pan('loss','DOWNSIDE');mk('circle',{cx:340,cy:300,r:14,class:'ink'},$('scl'));
+const PP=[];for(let i=0;i<14;i++)PP.push(mk('rect',{x:720+(i%2?8:-6),y:620-i*20,width:240,height:14,rx:3,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('papers')));
+fig($('p0f'),480,380,26,'loss');
+const TK=[0,1,2,3].map(i=>ck($('ticks'),'M278 '+(390+i*35)+'l7 7 13-16',5));
+const BR=[90,140,180,230].map((h,i)=>[mk('rect',{x:1130+i*80,y:560,width:56,height:0,fill:i==3?'var(--gain)':'var(--ink)'},$('bars')),h]);
+fig($('hsL'),210,380,40,'loss');mk('path',{d:'M250 470L320 500',stroke:'var(--loss)','stroke-width':14,'stroke-linecap':'round'},$('hsL'));
+fig($('hsR'),430,380,40,'ink');mk('path',{d:'M390 470L320 500',stroke:'var(--ink)','stroke-width':14,'stroke-linecap':'round'},$('hsR'));
+let gd='';for(let x=1118;x<1460;x+=38)gd+='M'+x+' 260V600';for(let y=298;y<600;y+=38)gd+='M1080 '+y+'H1460';
+mk('path',{d:gd,stroke:'var(--loss)','stroke-opacity':.3,'stroke-width':1.5},$('bpg'));
+const FL=[[1190,380],[1360,490],[1220,500]].map(q=>{mk('path',{d:'M'+(q[0]-10)+' '+(q[1]-10)+'l20 20m0-20l-20 20',class:'s-loss','stroke-width':5,'stroke-linecap':'round'},$('bp'));return mk('circle',{cx:q[0],cy:q[1],r:30,fill:'none',stroke:'var(--gain)','stroke-width':6},$('bp'))});
+const hwT=y=>10+(440-y)*55/140;

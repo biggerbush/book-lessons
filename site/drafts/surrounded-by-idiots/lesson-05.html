@@ -1,0 +1,393 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surrounded by Idiots Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Surrounded by Idiots: Blues care about accuracy, quality and logic, so bring them facts, details and time to think. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SURROUNDED BY IDIOTS · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Blue: the careful</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">analyst.</text>
+<text class="b" x="120" y="600" font-size="32">Why the quiet questioner wants facts, details and time.</text>
+<g id="hero"></g><g id="qs"></g>
+<g id="metb"><text class="m" x="1480" y="670" font-size="24" text-anchor="end" style="fill:var(--loss)">YOU MAY HAVE JUST MET A BLUE</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Who Blues are.</text>
+<text class="b" x="120" y="176" font-size="32">The careful analysts in Erikson’s colour model.</text>
+<g id="mag">
+<path class="s-line" d="M220 350h160M220 385h120M220 420h150" stroke-width="8" stroke-linecap="round"/>
+<rect class="gain" x="346" y="377" width="34" height="16" rx="4"/>
+<g id="lens"><circle class="s-ink" cx="300" cy="380" r="110" fill="var(--stage)" fill-opacity=".25" stroke-width="10"/><path class="s-ink" d="M378 458L470 550" stroke-width="24" stroke-linecap="round"/></g>
+<text class="m" x="300" y="620" font-size="22" text-anchor="middle">CAREFUL ANALYST</text>
+</g>
+<g id="blend"><text class="m" x="640" y="270" font-size="20">MOST PEOPLE ARE A BLEND</text></g>
+<g id="gears">
+<text class="m" x="1290" y="600" font-size="22" text-anchor="middle">LOGIC + EVIDENCE</text>
+<text class="m" x="1290" y="636" font-size="20" text-anchor="middle">NOT GUT FEELING OR HYPE</text>
+</g>
+<g id="ch0"><rect class="gain" x="120" y="700" width="400" height="90" rx="45"/><text class="d5" x="320" y="758" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">Accuracy</text></g>
+<g id="ch1"><rect class="gain" x="560" y="700" width="400" height="90" rx="45"/><text class="d5" x="760" y="758" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">Quality</text></g>
+<g id="ch2"><rect class="gain" x="1000" y="700" width="400" height="90" rx="45"/><text class="d5" x="1200" y="758" font-size="38" text-anchor="middle" style="fill:var(--on-gain)">Done properly</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">How Blues work.</text>
+<text class="b" x="120" y="176" font-size="32">Quietly, carefully, and never in a rush.</text>
+<g id="desk"><g id="deskf"></g>
+<rect class="gain" x="400" y="512" width="70" height="28" rx="4"/>
+<rect class="ink" x="150" y="540" width="340" height="16" rx="4"/>
+<path class="s-ink" d="M180 556v100M460 556v100" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="320" y="720" font-size="22" text-anchor="middle">QUIET AND RESERVED</text>
+</g>
+<g id="man"><rect class="s-ink" x="600" y="250" width="320" height="420" rx="12" fill="var(--stage)" stroke-width="6"/><text class="m" x="630" y="300" font-size="20">THE INSTRUCTIONS</text></g>
+<g id="clk"><circle class="s-ink" cx="1240" cy="440" r="150" fill="var(--stage)" stroke-width="8"/><g id="tk2"></g>
+<path id="hh2" class="s-ink" d="M1240 440V370" stroke-width="10" stroke-linecap="round"/>
+<path id="mh2" class="s-gain" d="M1240 440V330" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="1240" cy="440" r="12"/>
+<text class="d5" x="1240" y="680" font-size="40" text-anchor="middle">Right beats fast.</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">All those questions.</text>
+<text class="b" x="120" y="176" font-size="32">Blues ask a lot. It usually isn’t personal.</text>
+<g id="qblue"><text class="m" x="220" y="660" font-size="22" text-anchor="middle" style="fill:var(--loss)">BLUE</text></g>
+<g id="qq"></g>
+<g id="you3"><text class="m" x="720" y="660" font-size="22" text-anchor="middle">YOU</text></g>
+<g id="thought">
+<rect x="560" y="225" width="320" height="74" rx="37" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/>
+<text class="d5" x="720" y="272" font-size="30" text-anchor="middle">“They doubt me.”</text>
+<circle class="loss" cx="720" cy="322" r="8"/><circle class="loss" cx="720" cy="350" r="5"/>
+<path d="M704 446q16-14 32 0" fill="none" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="plan"><rect class="s-ink" x="1060" y="260" width="340" height="340" rx="12" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1090" y="310" font-size="20">THE PLAN</text>
+<path class="s-line" d="M1090 360h260M1090 410h220M1090 460h240M1090 510h160" stroke-width="10" stroke-linecap="round"/></g>
+<g id="badge"><circle class="gain" cx="1380" cy="580" r="56"/><path d="M1356 580l16 16 30-34" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1230" y="680" font-size="20" text-anchor="middle" style="fill:var(--gain)">QUALITY CHECK, NOT CRITICISM</text></g>
+<g id="ans"><text class="d" x="120" y="790" font-size="48">Answer calmly and specifically.</text><rect class="gain" x="124" y="812" width="160" height="10"/></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Where Blues struggle.</text>
+<text class="b" x="120" y="176" font-size="32">Their strengths have a downside.</text>
+<g id="scl"><path class="s-ink" d="M340 300V600M260 600h160" stroke-width="8" stroke-linecap="round"/></g>
+<g id="papers"></g>
+<g id="plab"><text class="m" x="840" y="690" font-size="20" text-anchor="middle">MORE INFORMATION, PLEASE</text></g>
+<g id="stk">
+<path class="s-line" d="M1060 460H1440" stroke-width="4" stroke-dasharray="10 10"/>
+<path class="s-ink" d="M1430 470V330" stroke-width="6" stroke-linecap="round"/>
+<path class="gain" d="M1430 330h-60l16 22-16 22h60z"/>
+<text class="m" x="1400" y="310" font-size="20" text-anchor="middle">DONE</text>
+<rect class="loss" x="1310" y="380" width="16" height="160" rx="4"/>
+<text class="m" x="1318" y="580" font-size="20" text-anchor="middle" style="fill:var(--loss)">PERFECTIONISM</text>
+<text class="m" x="1180" y="540" font-size="20" text-anchor="middle">DECISION STALLS</text>
+<path id="sarr" class="ink" d="M-40 -14h40v-16l30 30-30 30v-16h-40z"/>
+</g>
+<g id="cold"><text class="d5" x="120" y="790" font-size="40">They may also come across as cold or overly critical.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meeting a Blue.</text>
+<text class="b" x="120" y="176" font-size="32">Prepare before, arrive on time, bring the data.</text>
+<g id="p0"><rect class="s-line" x="120" y="230" width="440" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="20">BEFORE THE MEETING</text>
+<rect class="s-ink" x="170" y="320" width="140" height="200" rx="8" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="240" y="355" font-size="18" text-anchor="middle">AGENDA</text>
+<path class="s-line" d="M190 395h70M190 430h75M190 465h60M190 500h72" stroke-width="7" stroke-linecap="round"/>
+<g id="ticks"></g><g id="p0f"></g>
+<g id="env"><rect class="gain" x="-25" y="-17" width="50" height="34" rx="4"/><path d="M-25 -17l25 20 25-20" fill="none" stroke="var(--stage)" stroke-width="3"/></g>
+<text class="d5" x="150" y="670" font-size="30">Send it in advance.</text></g>
+<g id="p1"><rect class="s-line" x="600" y="230" width="400" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="630" y="280" font-size="20">ARRIVE ON TIME</text>
+<circle class="s-ink" cx="800" cy="440" r="105" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M800 440h50" stroke-width="9" stroke-linecap="round"/>
+<path id="mh" class="s-gain" d="M800 440V355" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="800" cy="440" r="10"/>
+<g id="prep"><rect class="gain" x="670" y="575" width="260" height="48" rx="24"/><text class="m" x="800" y="606" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">WELL PREPARED</text></g>
+<text class="d5" x="630" y="670" font-size="30">Be on time.</text></g>
+<g id="p2"><rect class="s-line" x="1040" y="230" width="440" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1070" y="280" font-size="20">FACTS, NOT PROMISES</text>
+<g id="bars"></g>
+<path class="s-ink" d="M1100 330V560H1450" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="d5" x="1070" y="670" font-size="28">Clear, logical structure.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What to avoid.</text>
+<text class="b" x="120" y="176" font-size="32">No hype, no fluff, no bluffing, no rush.</text>
+<g id="tl0"><rect class="s-line" x="120" y="230" width="310" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path id="bstr" class="s-muted" d="M275 510q-20 40 0 90" fill="none" stroke-width="4"/>
+<g id="bal"><ellipse cx="275" cy="400" rx="90" ry="110" fill="var(--loss)" fill-opacity=".15" stroke="var(--loss)" stroke-width="7"/><text class="d" x="275" y="414" font-size="40" text-anchor="middle" style="fill:var(--loss)">HYPE!</text></g>
+<path id="burst" class="s-loss" d="M275 290v-30M275 510v30M165 400h-30M385 400h30M200 325l-22-22M350 325l22-22M200 475l-22 22M350 475l22 22" stroke-width="6" stroke-linecap="round"/>
+<g id="brk">
+<g id="xb"><circle class="loss" cx="275" cy="320" r="38"/><path d="M259 304l32 32M291 304l-32 32" fill="none" stroke="var(--stage)" stroke-width="8" stroke-linecap="round"/></g>
+<g id="lkL"><rect x="160" y="410" width="100" height="56" rx="28" fill="none" stroke="var(--loss)" stroke-width="8"/><path class="s-loss" d="M196 438h28" stroke-width="8" stroke-linecap="round"/></g>
+<g id="lkR"><rect x="290" y="410" width="100" height="56" rx="28" fill="none" stroke="var(--loss)" stroke-width="8"/><path class="s-loss" d="M326 438h28" stroke-width="8" stroke-linecap="round"/></g>
+<path id="spk" class="s-muted" d="M275 396v-18M275 480v18M262 402l-10-10M288 402l10-10M262 474l-10 10M288 474l10 10" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="275" y="540" font-size="18" text-anchor="middle">BROKEN LINK</text>
+</g>
+<g id="tlost"><text class="m" x="275" y="610" font-size="24" text-anchor="middle" style="fill:var(--loss)">TRUST LOST</text></g>
+<text class="d5" x="140" y="680" font-size="30">Don’t exaggerate.</text></g>
+<g id="tl1"><rect class="s-line" x="463" y="230" width="310" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="sm"><rect class="s-muted" x="485" y="290" width="220" height="60" rx="30" fill="none" stroke-width="4"/><text class="b" x="595" y="328" font-size="24" text-anchor="middle">…the weather?</text>
+<rect class="s-muted" x="535" y="370" width="220" height="60" rx="30" fill="none" stroke-width="4"/><text class="b" x="645" y="408" font-size="24" text-anchor="middle">…your weekend?</text></g>
+<g id="sub"><rect class="gain" x="488" y="470" width="260" height="110" rx="24"/><text class="d" x="618" y="537" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">Substance</text></g>
+<text class="d5" x="483" y="680" font-size="30">Short small talk.</text></g>
+<g id="tl2"><rect class="s-line" x="806" y="230" width="310" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-gain" x="826" y="290" width="270" height="150" rx="20" fill="none" stroke-width="5"/>
+<path class="s-gain" d="M886 440l-6 40 34-40" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="d5" x="961" y="355" font-size="26" text-anchor="middle">I don’t know yet.</text>
+<text class="d5" x="961" y="400" font-size="26" text-anchor="middle">I’ll find out.</text>
+<g id="fck"><circle class="gain" cx="961" cy="570" r="44"/><path d="M941 570l14 14 26-30" fill="none" stroke="var(--on-gain)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text class="d5" x="826" y="680" font-size="30">Don’t bluff.</text></g>
+<g id="tl3"><rect class="s-line" x="1149" y="230" width="310" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<polygon id="sTop" class="gain"/><polygon id="sBot" class="gain"/>
+<path id="sStr" class="s-gain" d="M1304 440V578" stroke-width="4"/>
+<path class="s-ink" d="M1239 300H1369L1314 440L1369 580H1239L1294 440Z" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-ink" d="M1224 290h160M1224 590h160" stroke-width="10" stroke-linecap="round"/>
+<g id="t3c"><text class="d5" x="1169" y="680" font-size="30">Give them time.</text></g></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The payoff.</text>
+<text class="b" x="120" y="176" font-size="32">Skepticism turns into trust.</text>
+<g id="hsL"></g><g id="hsR"></g>
+<g id="hlab"><text class="m" x="320" y="620" font-size="22" text-anchor="middle" style="fill:var(--gain)">PARTNERS</text></g>
+<g id="gau"><path class="s-line" d="M620 520A180 180 0 0 1 980 520" fill="none" stroke-width="22" stroke-linecap="round"/>
+<path class="s-gain" d="M913 380A180 180 0 0 1 980 520" fill="none" stroke-width="22" stroke-linecap="round"/>
+<path id="ndl" class="s-ink" d="M800 520V370" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="800" cy="520" r="16"/>
+<text class="m" x="640" y="570" font-size="20" text-anchor="middle" style="fill:var(--loss)">SKEPTICISM</text>
+<text class="m" x="960" y="570" font-size="20" text-anchor="middle" style="fill:var(--gain)">TRUST</text></g>
+<g id="bp"><rect x="1080" y="260" width="380" height="340" rx="8" fill="var(--loss)" fill-opacity=".12" stroke="var(--loss)" stroke-width="4"/><g id="bpg"></g>
+<path class="s-ink" d="M1130 540V320h280v220zM1270 320v120h140" fill="none" stroke-width="5"/>
+<text class="m" x="1270" y="650" font-size="20" text-anchor="middle">FLAWS FOUND EARLY</text></g>
+<g id="pay"><text class="d5" x="120" y="790" font-size="40">A partner who spots flaws before they get expensive.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="thk"><text class="m" x="143" y="260" font-size="26" style="fill:var(--loss)">THINK OF A BLUE IN YOUR LIFE</text></g>
+<g id="qa"><text class="d" x="136" y="400" font-size="76" letter-spacing="-2">Before your next conversation,</text></g>
+<g id="qb"><text class="d" x="136" y="495" font-size="76" letter-spacing="-2">what fact or detail could you</text></g>
+<g id="qc"><text class="d" x="136" y="590" font-size="76" letter-spacing="-2">send them <tspan style="fill:var(--gain)">ahead of time</tspan>?</text></g>
+<g id="envc"><text class="m" x="143" y="720" font-size="26">SEND IT IN ADVANCE</text>
+<path class="s-muted" d="M1110 715h90" stroke-width="6" stroke-linecap="round" stroke-dasharray="4 14"/>
+<g id="env8"><rect class="gain" x="1240" y="660" width="160" height="110" rx="10"/><path d="M1240 660l80 60 80-60" fill="none" stroke="var(--stage)" stroke-width="6" stroke-linejoin="round"/></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Blue: The Careful Analyst&rdquo;, from <em>Surrounded by Idiots</em> by Thomas Erikson. Traits and meeting advice are as reported in the book, based on Erikson&#x27;s description of Blue behavior. All scenes and characters are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 7.0], [7.0, 24.0], [24.0, 37.5], [37.5, 52.4], [52.4, 67.9], [67.9, 87.2], [87.2, 103.3], [103.3, 114.4], [114.4, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Quiet Questioner", "Who Blues Are", "How They Work", "All Those Questions", "Where They Struggle", "Meeting a Blue", "What to Avoid", "The Payoff", "Your Challenge"];
+const TM={"blue_figure": 0.0, "magnifier": 7.28, "color_blend": 11.04, "logic_gears": 19.36, "desk_quiet": 24.32, "manual": 28.04, "clock": 32.72, "question_mark": 37.84, "frown_face": 40.4, "quality_badge": 43.8, "scale_tilt": 52.68, "paper_stack": 54.88, "stuck_arrow": 59.28, "agenda": 68.16, "punctual": 78.56, "data_chart": 81.36, "balloon": 87.48, "chat_bubbles": 91.84, "hourglass": 99.12, "handshake": 103.56, "trust_meter": 106.72, "blueprint": 109.44};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+r*1.5+' '+r*1.5+' 0 0 1 '+r*3+' 0v'+r*1.3+'z',class:c},g)};
+const tx=(g,x,y,s,str,a)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s},a),g);e.textContent=str;return e};
+const ck=(g,d,w)=>mk('path',{d:d,fill:'none',stroke:'var(--gain)','stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+fig($('hero'),1300,320,48,'loss');
+const QS=[[1150,300],[1180,215],[1300,225],[1425,215],[1455,310],[1450,420],[1150,420],[1180,520],[1425,525]].map(q=>tx($('qs'),q[0],q[1],46,'?',{class:'d','text-anchor':'middle'}));
+const BL=[['RED',90],['YELLOW',120],['GREEN',70],['BLUE',240]].map((b,i)=>{const y=300+i*60;tx($('blend'),640,y+26,20,b[0],{class:'m',style:i==3?'fill:var(--loss)':''});return [mk('rect',{x:770,y:y,width:0,height:36,rx:6,fill:i==3?'var(--loss)':'var(--muted)','fill-opacity':i==3?1:.4},$('blend')),b[1]]});
+const gear=(cx,cy,r)=>{const G=mk('g',{},$('gears'));mk('circle',{cx:cx,cy:cy,r:r,fill:'none',stroke:'var(--ink)','stroke-width':18,'stroke-dasharray':'14 12'},G);mk('circle',{cx:cx,cy:cy,r:r-10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},G);mk('circle',{cx:cx,cy:cy,r:r*.28,class:'gain'},G);return G};
+const G1=gear(1240,380,70),G2=gear(1345,465,50);
+fig($('deskf'),320,382,40,'loss');
+const CK=['READ','CHECK DETAILS','PLAN','ACT'].map((s,i)=>{const y=370+i*80;tx($('man'),690,y,22,s,{class:'m'});mk('rect',{x:630,y:y-28,width:36,height:36,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':5},$('man'));return ck($('man'),'M637 '+(y-12)+'l10 10 18-22',7)});
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1240+128*c).toFixed(1)+' '+(440+128*s).toFixed(1)+'L'+(1240+142*c).toFixed(1)+' '+(440+142*s).toFixed(1),class:'s-ink','stroke-width':i%3?3:6,'stroke-linecap':'round'},$('tk2'))}
+fig($('qblue'),220,420,44,'loss'); fig($('you3'),720,420,44,'ink');
+const QQ=[[330,330],[410,270],[470,370],[380,430],[300,250]].map(q=>tx($('qq'),q[0],q[1],56,'?',{class:'d','text-anchor':'middle'}));
+const BM=mk('path',{class:'s-ink','stroke-width':10,'stroke-linecap':'round'},$('scl'));
+const pan=(c,l)=>{const G=mk('g',{},$('scl'));mk('path',{d:'M0 0v80',class:'s-ink','stroke-width':4},G);mk('path',{d:'M-70 80h140a70 34 0 0 1-140 0z',class:c},G);tx(G,0,150,20,l,{class:'m','text-anchor':'middle'});return G};
+const PL=pan('gain','STRENGTH'),PR=pan('loss','DOWNSIDE');mk('circle',{cx:340,cy:300,r:14,class:'ink'},$('scl'));
+const PP=[];for(let i=0;i<14;i++)PP.push(mk('rect',{x:720+(i%2?8:-6),y:620-i*20,width:240,height:14,rx:3,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('papers')));
+fig($('p0f'),480,380,26,'loss');
+const TK=[0,1,2,3].map(i=>ck($('ticks'),'M278 '+(390+i*35)+'l7 7 13-16',5));
+const BR=[90,140,180,230].map((h,i)=>[mk('rect',{x:1130+i*80,y:560,width:56,height:0,fill:i==3?'var(--gain)':'var(--ink)'},$('bars')),h]);
+fig($('hsL'),210,380,40,'loss');mk('path',{d:'M250 470L320 500',stroke:'var(--loss)','stroke-width':14,'stroke-linecap':'round'},$('hsL'));
+fig($('hsR'),430,380,40,'ink');mk('path',{d:'M390 470L320 500',stroke:'var(--ink)','stroke-width':14,'stroke-linecap':'round'},$('hsR'));
+let gd='';for(let x=1118;x<1460;x+=38)gd+='M'+x+' 260V600';for(let y=298;y<600;y+=38)gd+='M1080 '+y+'H1460';
+mk('path',{d:gd,stroke:'var(--loss)','stroke-opacity':.3,'stroke-width':1.5},$('bpg'));
+const FL=[[1190,380],[1360,490],[1220,500]].map(q=>{mk('path',{d:'M'+(q[0]-10)+' '+(q[1]-10)+'l20 20m0-20l-20 20',class:'s-loss','stroke-width':5,'stroke-linecap':'round'},$('bp'));return mk('circle',{cx:q[0],cy:q[1],r:30,fill:'none',stroke:'var(--gain)','stroke-width':6},$('bp'))});
+const hwT=y=>10+(440-y)*55/140;
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+R('hero',TM.blue_figure);
+QS.forEach((q,i)=>{const a=TM.blue_figure+.6+i*.45;q.setAttribute('opacity',p(u,a,a+.3));q.setAttribute('transform','translate(0 '+(5*Math.sin(t*2+i)).toFixed(1)+')')});
+R('metb',TM.blue_figure+5.8);
+
+R('mag',TM.magnifier);$('lens').setAttribute('transform','translate('+(16*Math.sin(t*1.2)).toFixed(1)+' '+(10*Math.sin(t*.9)).toFixed(1)+')');
+R('blend',TM.color_blend);BL.forEach((b,i)=>b[0].setAttribute('width',(b[1]*p(u,TM.color_blend+.3+i*.3,TM.color_blend+1.2+i*.3)).toFixed(1)));
+[0,1,2].forEach(i=>R('ch'+i,TM.logic_gears-3.8+i*.6));
+R('gears',TM.logic_gears);const ga=(u*40)%360;G1.setAttribute('transform','rotate('+ga.toFixed(1)+' 1240 380)');G2.setAttribute('transform','rotate('+(-ga*1.4).toFixed(1)+' 1345 465)');
+
+R('desk',TM.desk_quiet);R('man',TM.manual);
+CK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.manual+.6+i,TM.manual+.9+i)));
+R('clk',TM.clock);$('mh2').setAttribute('transform','rotate('+((t*24)%360).toFixed(1)+' 1240 440)');$('hh2').setAttribute('transform','rotate('+((t*2)%360).toFixed(1)+' 1240 440)');
+
+R('you3',SC[3][0]/K+.3);R('qblue',TM.question_mark);R('plan',TM.question_mark+.4);
+const okQ=u>=TM.quality_badge+2.6;
+QQ.forEach((q,i)=>{const a=TM.question_mark+.3+i*.35;q.setAttribute('opacity',p(u,a,a+.3));q.style.fill=okQ?'var(--gain)':'var(--loss)';q.setAttribute('transform','translate(0 '+(4*Math.sin(t*2.4+i)).toFixed(1)+')')});
+rise($('thought'),p(u,TM.frown_face,TM.frown_face+.5)*(1-.7*p(u,TM.quality_badge,TM.quality_badge+.6)));
+R('badge',TM.quality_badge,.6);R('ans',TM.quality_badge+6.4);
+
+R('scl',TM.scale_tilt);
+const ra=12*p(u,TM.scale_tilt+.4,TM.scale_tilt+1.4)*Math.PI/180,bx=180*Math.cos(ra),by=180*Math.sin(ra);
+BM.setAttribute('d','M'+(340-bx).toFixed(1)+' '+(300-by).toFixed(1)+'L'+(340+bx).toFixed(1)+' '+(300+by).toFixed(1));
+PL.setAttribute('transform','translate('+(340-bx).toFixed(1)+' '+(300-by).toFixed(1)+')');PR.setAttribute('transform','translate('+(340+bx).toFixed(1)+' '+(300+by).toFixed(1)+')');
+PP.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.paper_stack+i*.3,TM.paper_stack+i*.3+.2)));R('plab',TM.paper_stack+1);
+R('stk',TM.stuck_arrow);const sx=1080+190*p(u,TM.stuck_arrow+.4,TM.stuck_arrow+2.2)-(u>TM.stuck_arrow+2.2?12*Math.abs(Math.sin(t*5)):0);
+$('sarr').setAttribute('transform','translate('+sx.toFixed(1)+' 460)');
+R('cold',TM.stuck_arrow+5.4);
+
+R('p0',TM.agenda);const ev=p(u,TM.agenda+4.2,TM.agenda+5.4);
+$('env').setAttribute('transform','translate('+(240+230*ev).toFixed(1)+' 575)');$('env').setAttribute('opacity',p(u,TM.agenda+4,TM.agenda+4.3));
+TK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.agenda+7.9+i*.4,TM.agenda+8.2+i*.4)));
+R('p1',TM.punctual);$('mh').setAttribute('transform','rotate('+(-150*(1-p(u,TM.punctual+.3,TM.punctual+1.8))).toFixed(1)+' 800 440)');R('prep',TM.punctual+1.8);
+R('p2',TM.data_chart);BR.forEach((b,i)=>{const h=b[1]*p(u,TM.data_chart+.5+i*.3,TM.data_chart+1.3+i*.3);b[0].setAttribute('y',(560-h).toFixed(1));b[0].setAttribute('height',h.toFixed(1))});
+
+R('tl0',TM.balloon);const pk=p(u,TM.balloon+2.2,TM.balloon+2.6),bs=(1+.04*Math.sin(t*2))*(1-pk)+.001;
+$('bal').setAttribute('transform','translate(275 400) scale('+bs.toFixed(3)+') translate(-275 -400)');
+$('bal').setAttribute('opacity',(1-pk).toFixed(2));$('bal').style.display=pk>=1?'none':'';
+$('bstr').setAttribute('opacity',(1-pk).toFixed(2));
+$('burst').setAttribute('opacity',Math.sin(Math.PI*p(u,TM.balloon+2.2,TM.balloon+3.2)).toFixed(2));R('tlost',TM.balloon+2.8);
+const bk=p(u,TM.balloon+2.5,TM.balloon+3.0),bsp=p(u,TM.balloon+2.7,TM.balloon+3.8);
+$('brk').setAttribute('opacity',bk.toFixed(2));
+$('lkL').setAttribute('transform','translate('+(12-14*bsp).toFixed(1)+' 0) rotate('+(-8*bsp).toFixed(1)+' 210 438)');
+$('lkR').setAttribute('transform','translate('+(-12+14*bsp).toFixed(1)+' 0) rotate('+(8*bsp).toFixed(1)+' 340 438)');
+$('spk').setAttribute('opacity',(bsp*(.6+.4*Math.sin(t*4))).toFixed(2));
+$('xb').setAttribute('transform','translate(0 '+(3*Math.sin(t*2)).toFixed(1)+')');
+R('tl1',TM.chat_bubbles);$('sm').setAttribute('opacity',(1-.7*p(u,TM.chat_bubbles+1.2,TM.chat_bubbles+1.8)).toFixed(2));R('sub',TM.chat_bubbles+1.4);
+R('tl2',TM.chat_bubbles+3.8);R('fck',TM.chat_bubbles+5.2);
+R('tl3',TM.hourglass);R('t3c',TM.hourglass+3);
+const hk=p(u,TM.hourglass,TM.hourglass+7),y0=440-110*(1-hk),w0=hwT(y0);
+$('sTop').setAttribute('points','1294,440 1314,440 '+(1304+w0).toFixed(1)+','+y0.toFixed(1)+' '+(1304-w0).toFixed(1)+','+y0.toFixed(1));
+$('sBot').setAttribute('points','1242,578 1366,578 1304,'+(578-110*hk).toFixed(1));$('sStr').setAttribute('opacity',hk>0&&hk<1?1:0);
+
+const hs=p(u,TM.handshake,TM.handshake+1.2),sh=hs>=1?5*Math.sin(t*9)*(1-p(u,TM.handshake+1.2,TM.handshake+2.6)):0,ho=p(u,TM.handshake-.3,TM.handshake+.2);
+$('hsL').setAttribute('transform','translate('+(-70*(1-hs)).toFixed(1)+' '+sh.toFixed(1)+')');$('hsR').setAttribute('transform','translate('+(70*(1-hs)).toFixed(1)+' '+sh.toFixed(1)+')');
+$('hsL').setAttribute('opacity',ho);$('hsR').setAttribute('opacity',ho);R('hlab',TM.handshake+1.2);
+R('gau',TM.trust_meter);const na=-70+140*p(u,TM.trust_meter+.4,TM.trust_meter+1.8)+2*Math.sin(t*3);
+$('ndl').setAttribute('transform','rotate('+na.toFixed(1)+' 800 520)');
+R('bp',TM.blueprint);FL.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.blueprint+1+i*.6,TM.blueprint+1.3+i*.6)));R('pay',TM.blueprint+1.5);
+
+const S8=SC[8][0]/K;R('thk',S8+.4);R('qa',S8+3);R('qb',S8+3.4);R('qc',S8+3.8);R('envc',S8+4.4);
+$('env8').setAttribute('transform','translate('+(6*Math.sin(t*1.6)).toFixed(1)+' '+(5*Math.sin(t*2.2)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.31;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -330,6 +330,64 @@ fp = (
  ])
 )
 
+
+# richer text under each First Principles drawing: lead (t), a fuller paragraph (more), key points (pts), example (ex).
+# **double stars** mark words the player highlights.
+FP_RICH = [
+ dict(t="We usually solve problems **by analogy**: we look at how something is already done and do the same.",
+      more="That's not a bad thing. Copying lets you cook dinner, drive to work and do your job without rethinking everything from zero. Your brain saves energy by reusing answers that worked before.",
+      pts=["**Fast:** no need to think from scratch", "**Safe:** it worked for someone else", "**Limited:** you can only ever match the original"]),
+ dict(t="Look inside the usual answer and you'll find **beliefs nobody has checked** in years.",
+      more="Some were true once and aren't any more. Some were never true at all, just repeated until they sounded like facts. When you copy the answer, you copy every one of them without noticing.",
+      pts=["“That's the rule”: whose rule, and is it still needed?", "“It's too expensive”: compared with what?", "“The experts say so”: based on what evidence?"],
+      ex="Each block in the tower is a belief, not a fact, until you test it."),
+ dict(t="First principles thinking breaks the answer into its pieces and **tests each one**.",
+      more="For every piece, ask: is this actually true, or just believed? Can I prove it, measure it, or see it for myself? Anything that fails the test gets set aside, however familiar it feels.",
+      pts=["**Fact:** you can show it's true", "**Assumption:** it's true because people say so", "**Habit:** it's true because it's always been done"]),
+ dict(t="Now build a new answer using **only what's left**: the facts.",
+      more="Because you're no longer copying, the new answer can look completely different from the old one. That's where breakthroughs come from: not from working harder on the usual answer, but from building a better one.",
+      pts=["Start from the facts, not the old solution", "Ask what's possible, not what's normal", "Expect the result to look unfamiliar"]),
+ dict(t="Aristotle described a first principle as **“the first basis from which a thing is known”**.",
+      more="In other words, a truth you can't break down any further. Thinkers, scientists and engineers have leaned on the idea ever since: find the bedrock, then build everything else on top of it.",
+      pts=["**Science:** start from what you can measure", "**Maths:** start from what you can prove", "**Your life:** start from what you know is true for you"]),
+ dict(t="In a 2012 interview, Elon Musk said battery packs cost around **$600 per kilowatt-hour**.",
+      more="That price made electric cars expensive, and most people treated it as a fixed fact of life. If batteries cost that much, the reasoning went, they always would.",
+      pts=["**The usual answer:** batteries are expensive", "**The analogy:** they've always been expensive", "**The conclusion:** electric cars can't be cheap"]),
+ dict(t="Instead of accepting the price, he asked: **what does a battery actually contain?**",
+      more="Strip away the brand, the packaging and the factory, and a battery pack is a short list of raw materials: cobalt, nickel, aluminium, carbon, some polymers and a steel can.",
+      ex="The first-principles question: what is this made of, and what do those parts cost?"),
+ dict(t="He priced those materials on the metals market.",
+      more="Bought as raw ingredients, they came to roughly **$80 per kilowatt-hour**. The materials were only a small fraction of what a finished pack cost."),
+ dict(t="The high price wasn't about **what** batteries are made of. It was about **how** they were made.",
+      more="And how something is made can be redesigned. Smarter ways of putting the same materials together could make batteries far cheaper. The problem moved from “impossible” to “an engineering challenge”.",
+      pts=["**Old view:** batteries are expensive", "**New view:** making batteries is expensive", "Only the second one is something you can work on"]),
+ dict(t="Pick something you're stuck on and **write it in one line**.",
+      more="Then list every belief behind it, even the ones that feel too obvious to write down. The obvious ones are often the assumptions that have gone unchecked the longest.",
+      pts=["Keep the problem short and specific", "Write each belief as a plain statement", "Aim for at least three"]),
+ dict(t="Challenge each belief with one question: **how do I know this is true?**",
+      more="Does getting fit really need a gym? No. Do you need a membership, or equipment? Not to start. Each belief turns out to be a **habit** (what people normally do), not a **fact** (what must be true)."),
+ dict(t="Underneath the habits, **a few things are certain**.",
+      more="Muscles grow when they work against resistance. Stamina grows with regular effort. And you have 30 minutes a day. None of these needs a gym, a fee or any equipment.",
+      pts=["A fact is something you could prove to a sceptic", "Keep each one short", "If in doubt, it isn't a fact yet"]),
+ dict(t="Build a new plan **using only those facts**.",
+      more="Push-ups, squats and a run near home, 30 minutes a day. It costs nothing, because the goal was never “join a gym”. The goal was “get fit”, and the facts show many ways to get there."),
+ dict(t="Keep asking until you reach something you can **measure or prove**.",
+      more="Opinions sit on top, assumptions underneath, beliefs below that. Each good question digs down a layer, until you hit bedrock: a fact that stays true whoever you ask.",
+      pts=["How do I know this is true?", "What's the evidence, and who says so?", "What would I do if I were starting from scratch?"]),
+ dict(t="It's most powerful when **progress has stalled**.",
+      more="Reach for it when the only reason given is “that's how it's always done”, or when a cost, a rule or a limit seems impossible to move. Those are signs you're standing on assumptions.",
+      pts=["**Stuck:** more effort isn't working", "**Always done:** nobody remembers why", "**Fixed costs:** “it just costs that much”"]),
+ dict(t="Thinking from scratch is **slow**.",
+      more="For everyday choices, like what to cook or which route to take, copying what works is the smart move. Save first principles for the problems that really matter, or the ones you can't solve any other way.",
+      pts=["**Small, everyday decision:** copy what works", "**Big, costly or stuck:** go back to first principles"]),
+ dict(t="The trap is treating **a belief as a fact**.",
+      more="“Customers won't pay more.” “I'm not a numbers person.” “We can't change suppliers.” They sound certain, but each one is an assumption until it's tested. If you can't say how you know it, keep digging.",
+      ex="A quick test: could you prove it to someone who disagrees?"),
+]
+assert len(FP_RICH) == len(fp), (len(FP_RICH), len(fp))
+for _slide, _r in zip(fp, FP_RICH):
+    _slide.update(_r)
+
 # ------------------------------------------------------------------ Dichotomy of control
 RING = C(180, 142, 118, "li dash")
 dc = [

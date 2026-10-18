@@ -140,7 +140,7 @@ function detailView(m){
   const kick=x=>'<div class="vs-k"><span>'+esc(x.k)+'</span>'+(x.step?'<i class="vs-steps" aria-label="step '+x.step[0]+' of '+x.step[1]+'">'+Array.from({length:x.step[1]},(_,k)=>'<b'+(k<x.step[0]?' class="on"':'')+'></b>').join("")+'</i>':"")+'</div>';
   const rich=t=>esc(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>");
   const slide=(x,n)=>'<section class="vs-s'+(n===0?' first':'')+'" aria-roledescription="slide" aria-label="'+(n+1)+' of '+N+'">'+
-    '<div class="vs-card"><div class="vs-copy">'+kick(x)+'<h2>'+esc(x.h)+'</h2><p>'+rich(x.t)+'</p>'+(x.ex?'<div class="vs-ex">'+rich(x.ex)+'</div>':"")+'</div>'+
+    '<div class="vs-card"><div class="vs-copy">'+kick(x)+'<h2>'+esc(x.h)+'</h2><p>'+rich(x.t)+'</p>'+'</div>'+
     '<div class="vs-stage">'+scene(x.svg,x.auto)+'</div></div>'+
     (n===0?'<div class="vs-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>Swipe up</div>':"")+
     '</section>';

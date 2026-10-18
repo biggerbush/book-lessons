@@ -114,7 +114,7 @@ const KIND_ICON={      // visuals for models that do not have a hand-built story
      '<g class="fx-pop" style="--d:1s"><circle cx="180" cy="176" r="6" class="if"/></g>'
 };
 function slidesFor(m){
-  if(m.story&&m.story.length)return m.story.map(x=>({k:x.k,h:x.h,t:x.t,svg:x.svg}));
+  if(m.story&&m.story.length)return m.story.map(x=>({k:x.k,h:x.h,t:x.t,svg:x.svg,ex:x.ex,step:x.step}));
   const c=m.cards;
   return [
     {k:"The idea",h:m.name,t:c[0].t,svg:ART[m.art]||ART.first,auto:true},
@@ -133,65 +133,58 @@ function detailView(m){
   VG.stopWatcher();VG.removeBar();
   document.title=m.name+" · Models · VisualGrowth";
   VG.setCrumb([{label:"Models",href:"#/models"},{label:m.name}]);
-  const i=DATA.models.indexOf(m),prev=DATA.models[i-1],next=DATA.models[i+1];
+  const i=DATA.models.indexOf(m),next=DATA.models[i+1];
   const rel=DATA.models.filter(x=>x.categorySlug===m.categorySlug&&x.id!==m.id).slice(0,3);
   const cbt=m.categorySlug==="emotions-cbt";
   const sl=slidesFor(m), N=sl.length+1;
-  const slideHtml=(x,n)=>'<section class="st" aria-roledescription="slide" aria-label="'+(n+1)+' of '+N+'">'+
-    '<div class="stage">'+scene(x.svg,x.auto)+'</div>'+
-    '<div class="stext"><div class="sk"><span>'+esc(x.k)+'</span><span>'+(n+1)+' / '+N+'</span></div><h2>'+esc(x.h)+'</h2><p>'+esc(x.t)+'</p></div></section>';
-  VG.app.innerHTML='<div class="story" id="story">'+
-   '<div class="shead"><a class="sx" href="#/models" aria-label="Back to models">'+ICON.prev+'</a>'+
-     '<div class="stitle"><span class="catag">'+esc(m.category)+'</span><b>'+esc(m.name)+'</b></div>'+
-     '<button class="sx" id="sbook" type="button" aria-label="Revisit later"></button></div>'+
-   '<div class="segs" aria-hidden="true">'+Array.from({length:N},()=>'<i></i>').join("")+'</div>'+
-   '<div class="strack" id="track" tabindex="0" aria-label="'+esc(m.name)+'. Swipe, tap, or use the arrow keys.">'+
-     sl.map(slideHtml).join("")+
-     '<section class="st last" aria-roledescription="slide" aria-label="'+N+' of '+N+'"><div class="stage">'+scene(ASK_SVG)+'</div>'+
-       '<div class="stext"><div class="sk"><span>Ask yourself</span><span>'+N+' / '+N+'</span></div><h2 class="q">'+esc(m.cards[4].t)+'</h2>'+
-       '<div class="acts"><button class="btn" id="lrn" type="button"></button>'+(next?'<a class="btn primary" href="#/models/'+next.id+'">Next: '+esc(next.name)+' '+ICON.next.replace("<svg",'<svg width="14" height="14"')+'</a>':'<a class="btn primary" href="#/models">All models</a>')+'</div>'+
-       '<span class="soonline">'+ICON.play+' Narrated animation coming soon</span>'+
-       (cbt?'<p class="note">An educational overview of a thinking tool, not therapy or medical advice. If you are struggling, a qualified professional can help.</p>':"")+
-     '</div></section></div>'+
-   '<div class="snav"><button class="circ" id="cp" type="button" aria-label="Previous">'+ICON.prev+'</button><span class="hint" id="hint">Swipe or tap to continue</span><button class="circ big" id="cn" type="button" aria-label="Next">'+ICON.next+'</button></div>'+
-   '</div>'+
-   '<div class="mdet">'+
-   (rel.length?'<div class="related"><h2>More in '+esc(m.category)+'</h2><div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">'+rel.map(card).join("")+'</div></div>':"")+
-   '<div class="pn">'+(prev?'<a href="#/models/'+prev.id+'"><small>Previous</small><b>'+esc(prev.name)+'</b></a>':'<span style="flex:1"></span>')+(next?'<a class="nx" href="#/models/'+next.id+'"><small>Next</small><b>'+esc(next.name)+'</b></a>':'<span style="flex:1"></span>')+'</div></div>';
+  const kick=x=>'<div class="vs-k"><span>'+esc(x.k)+'</span>'+(x.step?'<i class="vs-steps" aria-label="step '+x.step[0]+' of '+x.step[1]+'">'+Array.from({length:x.step[1]},(_,k)=>'<b'+(k<x.step[0]?' class="on"':'')+'></b>').join("")+'</i>':"")+'</div>';
+  const slide=(x,n)=>'<section class="vs-s'+(n===0?' first':'')+'" aria-roledescription="slide" aria-label="'+(n+1)+' of '+N+'">'+
+    '<div class="vs-stage">'+scene(x.svg,x.auto)+'</div>'+
+    '<div class="vs-text">'+kick(x)+'<h2>'+esc(x.h)+'</h2><p>'+esc(x.t)+'</p>'+(x.ex?'<div class="vs-ex">'+esc(x.ex)+'</div>':"")+'</div>'+
+    (n===0?'<div class="vs-hint" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg>Swipe up</div>':"")+
+    '</section>';
+  document.body.classList.add("vg-story");
+  VG.app.innerHTML='<div class="vs" id="vs" tabindex="0" aria-label="'+esc(m.name)+'. Scroll or use the arrow keys.">'+
+   '<div class="vs-top"><div class="vs-bar"><i id="vsbar"></i></div><div class="vs-row">'+
+     '<a class="sx" href="#/models" aria-label="Close">'+'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>'+'</a>'+
+     '<div class="vs-title"><b>'+esc(m.name)+'</b><span id="vsn">1 / '+N+'</span></div>'+
+     '<button class="sx" id="sbook" type="button" aria-label="Revisit later"></button></div></div>'+
+   sl.map(slide).join("")+
+   '<section class="vs-s last" aria-roledescription="slide" aria-label="'+N+' of '+N+'"><div class="vs-stage">'+scene(ASK_SVG)+'</div>'+
+     '<div class="vs-text"><div class="vs-k"><span>Ask yourself</span></div><h2 class="q">'+esc(m.cards[4].t)+'</h2>'+
+     '<div class="acts"><button class="btn" id="lrn" type="button"></button>'+(next?'<a class="btn primary" href="#/models/'+next.id+'">Next: '+esc(next.name)+' '+ICON.next.replace("<svg",'<svg width="14" height="14"')+'</a>':'<a class="btn primary" href="#/models">All models</a>')+'</div>'+
+     (m.video?'<a class="vs-more" href="#/models/'+m.id+'">'+ICON.play+' Watch the animated explainer</a>':"")+
+     (rel.length?'<div class="vs-rel"><span>More in '+esc(m.category)+'</span>'+rel.map(x=>'<a href="#/models/'+x.id+'">'+esc(x.name)+'</a>').join("")+'</div>':"")+
+     (cbt?'<p class="note">An educational overview of a thinking tool, not therapy or medical advice. If you are struggling, a qualified professional can help.</p>':"")+
+   '</div></section>'+
+   '<div class="vs-nav"><button class="circ" id="cp" type="button" aria-label="Previous">'+ICON.prev+'</button><button class="circ big" id="cn" type="button" aria-label="Next">'+ICON.next+'</button></div>'+
+   '</div>';
 
-  const track=$("#track"), segs=[...VG.app.querySelectorAll(".segs i")], scenes=[...track.querySelectorAll(".scene")];
-  let cur=-1, lock=0;
-  const width=()=>track.clientWidth;
-  const idx=()=>Math.max(0,Math.min(N-1,Math.round(track.scrollLeft/width())));
+  const vs=$("#vs"), secs=[...vs.querySelectorAll(".vs-s")], scenes=secs.map(x=>x.querySelector(".scene"));
+  let cur=-1;
   function activate(n){
-    if(n===cur)return;
+    if(n===cur||n<0||n>=N)return;
     if(cur>=0&&scenes[cur])scenes[cur].classList.remove("on");
     cur=n;
     const sc=scenes[n]; sc.classList.remove("on"); void sc.getBoundingClientRect(); sc.classList.add("on");
-    segs.forEach((s,k)=>{s.className=k<n?"done":k===n?"now":""});
+    secs.forEach((x,k)=>x.classList.toggle("now",k===n));
+    $("#vsbar").style.width=((n+1)/N*100).toFixed(2)+"%"; $("#vsn").textContent=(n+1)+" / "+N;
     $("#cp").disabled=n===0; $("#cn").disabled=n===N-1;
-    if(n>0){const h=$("#hint");if(h)h.style.opacity="0"}
-    if(n===N-1&&!has("learned",m.id)){/* reaching the end counts as viewed, not learned */}
   }
-  function go(n){
-    n=Math.max(0,Math.min(N-1,n)); lock=Date.now()+650; activate(n);
-    track.scrollTo({left:n*width(),behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"});
-  }
-  track.addEventListener("scroll",()=>{if(Date.now()>lock)requestAnimationFrame(()=>activate(idx()))},{passive:true});
-  track.addEventListener("scrollend",()=>{lock=0;activate(idx())});
+  const go=n=>{n=Math.max(0,Math.min(N-1,n));secs[n].scrollIntoView({behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"})};
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting&&e.intersectionRatio>=.6)activate(secs.indexOf(e.target))})},{root:vs,threshold:[.6]});
+  secs.forEach(x=>io.observe(x));
   $("#cp").addEventListener("click",()=>go(cur-1)); $("#cn").addEventListener("click",()=>go(cur+1));
-  track.querySelectorAll(".stage").forEach(st=>st.addEventListener("click",e=>{
-    const r=st.getBoundingClientRect(); go(e.clientX-r.left<r.width*.3?cur-1:cur+1);
-  }));
   if(keyHandler)document.removeEventListener("keydown",keyHandler);
   keyHandler=e=>{
-    if(!document.body.contains(track)){document.removeEventListener("keydown",keyHandler);keyHandler=null;return}
+    if(!document.body.contains(vs)){document.removeEventListener("keydown",keyHandler);keyHandler=null;return}
     if(e.target.closest&&e.target.closest("input,textarea"))return;
-    if(e.key==="ArrowRight"){e.preventDefault();go(cur+1)}else if(e.key==="ArrowLeft"){e.preventDefault();go(cur-1)}
+    if(e.key==="ArrowDown"||e.key==="ArrowRight"||e.key==="PageDown"||e.key===" "){e.preventDefault();go(cur+1)}
+    else if(e.key==="ArrowUp"||e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(cur-1)}
+    else if(e.key==="Escape"){location.hash="#/models"}
   };
   document.addEventListener("keydown",keyHandler);
-  addEventListener("resize",()=>{if(document.body.contains(track))track.scrollLeft=cur*width()},{passive:true});
-  activate(0);
+  activate(0); vs.focus({preventScroll:true});
 
   const marks=()=>{
     const l=has("learned",m.id),r=has("revisit",m.id);
@@ -201,7 +194,7 @@ function detailView(m){
   };
   $("#lrn").addEventListener("click",()=>{toggle("learned",m.id);marks()});
   $("#sbook").addEventListener("click",()=>{toggle("revisit",m.id);marks()});
-  marks();window.scrollTo(0,0);
+  marks();
 }
 
 /* a model with a narrated animated explainer: watch first, key points below, slides optional */
@@ -266,6 +259,7 @@ function savedView(){
 (function(){if(!document.querySelector('link[href="models-motion.css"]')){const l=document.createElement("link");l.rel="stylesheet";l.href="models-motion.css";document.head.appendChild(l)}})();
 window.VGModels={
   async show(parts){                      // parts = ["models", ...]
+    document.body.classList.remove("vg-story");
     if(!DATA){
       try{const r=await fetch("models.json",{cache:"no-store"});if(!r.ok)throw 0;DATA=await r.json()}
       catch(e){VG.app.innerHTML='<section class="mh"><h1>Models unavailable</h1><p>Could not load models.json.</p></section>';return}

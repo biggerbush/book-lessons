@@ -139,55 +139,196 @@ inversion = [
    F("pop", 1.0, '<g transform="rotate(-10 250 150)">' + R(176, 124, 156, 52, "cA", 10) + T(254, 157, "MAKE IT A RULE", 14, "tw", "fm") + "</g>")),
 ]
 
+# ------------------------------------------------------------------ chapters: one drawing that builds up over several flicks
+def still(*parts, dim=False):
+    """Layers from earlier flicks, shown finished (no entry animation)."""
+    return f'<g class="still{" dim" if dim else ""}">' + "".join(parts) + "</g>"
+
+def chapter(name, steps):
+    """steps: dicts with h, t, svg and optional ex (example callout). Adds the chapter name and step number."""
+    out = []
+    for i, st in enumerate(steps):
+        d = {"k": name, "h": st["h"], "t": st["t"], "svg": st["svg"]}
+        if st.get("ex"):
+            d["ex"] = st["ex"]
+        if len(steps) > 1:
+            d["step"] = [i + 1, len(steps)]
+        out.append(d)
+    return out
+
+def X(h, t, svg, ex=None):
+    return {"h": h, "t": t, "svg": svg, "ex": ex}
+
 # ------------------------------------------------------------------ First principles
-fp = [
- S("The idea", "Break it down. Build it up.",
-   "Strip a problem back to what you know is true, then rebuild your answer from those facts.",
-   F("fade", 0, C(260, 160, 86, "glow")),
-   F("up", .1, R(40, 108, 40, 40, "pf", 4) + R(84, 108, 40, 40, "pf", 4) + R(40, 152, 40, 40, "pf", 4) + R(84, 152, 40, 40, "pf", 4) +
-     R(40, 196, 40, 40, "pf", 4) + R(84, 196, 40, 40, "pf", 4) + R(62, 64, 40, 40, "pf", 4)),
-   arrow(140, 166, 186, 166, "lk", .6),
-   F("pop", .9, R(206, 196, 30, 30, "cA", 5)), F("pop", 1.0, R(242, 196, 30, 30, "cA", 5)), F("pop", 1.1, R(278, 196, 30, 30, "cA", 5)),
-   D("M214 186V120l44-40 44 40v66", "la dash", 1.3),
-   F("fade", 1.6, T(258, 252, "REBUILT FROM BASICS", 10, "ta", "fm"))),
- S("How we usually think", "Most of us copy.",
-   "We reason by analogy: we do what others do. It's quick, but it copies their limits too.",
-   *[F("up", .1 + i * .15, R(22 + i * 84, 96, 64, 64, "pf", 12) + C(54 + i * 84, 120, 8, "mf") + P(f"M{40+i*84} 142h28", "lm"))
-     for i in range(4)],
-   *[arrow(88 + i * 84, 128, 104 + i * 84, 128, "lm", .8 + i * .2, 6) for i in range(3)],
-   F("fade", 1.4, T(180, 200, "“that's how it's done”", 16, "tm", "fb")),
-   F("fade", 1.6, T(180, 226, "× 4", 22, "ti"))),
- S("Step 1", "Question every assumption.",
-   "Ask of each belief: how do I know this is true? Is it a fact, or just a habit?",
-   F("up", 0, R(60, 70, 200, 110, "pf", 14) + T(160, 118, "Batteries are", 20) + T(160, 146, "always expensive", 20)),
-   D("M150 70l10 26-14 14 16 22-10 18 8 30", "li fat", 1.2),
-   F("pop", .6, F("float", 0, C(256, 176, 34, "pa") + C(256, 176, 34, "glow") + P("M281 201l30 30", "la fat") + T(256, 186, "?", 30, "ta")))),
- S("Step 2", "Find the raw facts.",
-   "One team priced a battery's raw materials and found they cost a fraction of the finished pack.",
-   F("pop", 0, R(140, 104, 80, 72, "pf", 10) + P("M166 98h28v8h-28z", "mf") + P("M172 128l-6 16h12l-6 16", "la")),
-   arrow(140, 120, 96, 82, "lm", .4, 7), arrow(220, 120, 264, 82, "lm", .5, 7), arrow(140, 160, 96, 198, "lm", .6, 7), arrow(220, 160, 264, 198, "lm", .7, 7),
-   F("pop", .8, chip(64, 66, "Cobalt", "a")), F("pop", 1.0, chip(296, 66, "Nickel", "a")),
-   F("pop", 1.2, chip(64, 214, "Carbon", "a")), F("pop", 1.4, chip(296, 214, "Aluminium", "a")),
-   F("fade", 1.8, T(180, 254, "THE PARTS ARE CHEAP", 11, "ta", "fm"))),
- S("Step 3", "Rebuild from the ground up.",
-   "The cost was in how packs were made, not what they were made of. So the process can change.",
-   P("M40 236H320", "ll"),
-   F("growy", .2, R(80, 66, 70, 170, "if", 6)), F("growy", .6, R(210, 186, 70, 50, "af", 6)),
-   T(115, 258, "USUAL PRICE", 10, "tm", "fm"), T(245, 258, "RAW FACTS", 10, "tm", "fm"),
-   F("fade", 1.1, P("M150 66H292", "la thin dash")),
-   arrow(260, 132, 260, 74, "la", 1.3, 8), arrow(260, 132, 260, 180, "la", 1.3, 8),
-   F("pop", 1.8, chip(260, 128, "the gap = opportunity", "A", 12))),
- S("When to use it", "Use it when you're stuck.",
-   "Especially when the only reason for something is \"that's how it's always done\".",
-   tile(16, 60, 100, 160, P("M48 112c0-14 36-14 36 0s-36 14-36 28 36 14 36 0", "la"), "Stuck", .1),
-   tile(130, 60, 100, 160, P("M180 92a26 26 0 1 1-24 16", "la") + P("M150 102l6 7 8-4", "la"), "Habits", .3),
-   tile(244, 60, 100, 160, P("M276 118h36v30h-36zM282 118v-10a12 12 0 0 1 24 0v10", "la"), "Fixed costs", .5)),
- S("Common mistake", "Don't confuse assumptions with facts.",
-   "If you can't say how you know it, it isn't a first principle yet. Keep digging.",
-   F("out", .9, R(70, 72, 220, 120, "pa", 16) + T(180, 144, "FACT", 34, "ta")),
-   F("flipin", 1.1, R(70, 72, 220, 120, "pi", 16) + T(180, 130, "ASSUMPTION", 28, "ti") + T(180, 160, "dressed up as a fact", 14, "tm", "fb")),
-   F("pop", 1.7, F("float", 0, C(300, 206, 24, "pa") + P("M317 223l18 18", "la fat") + T(300, 214, "?", 22, "ta")))),
-]
+FP_GROUND = P("M24 250H336", "ll")
+FP_LABELS = ["Rules say", "Can't change", "Too costly", "Experts say", "Always done"]
+def fp_tower(labels=False, anim=True):
+    out = []
+    for k in range(5):
+        y = 218 - k * 33
+        blk = R(52, y, 112, 30, "pf", 6) + (T(108, y + 20, FP_LABELS[k], 12, "tk", "fb") if labels else "")
+        out.append(F("up", .1 + k * .12, blk) if anim else blk)
+    return "".join(out)
+FP_TOWER_LABEL = T(108, 40, "THE USUAL WAY", 10, "tm", "fm")
+FP_PERSON = F("up", .8, person(.8, "k", "mf"), (272, 250)) + F("pop", 1.2, chip(272, 150, "That's how it's done", "m", 11))
+FP_LABEL_LAYER = "".join(F("fade", .2 + k * .18, T(108, 238 - k * 33, FP_LABELS[4 - k] if False else FP_LABELS[k], 12, "tk", "fb"))
+                         for k in range(5))
+FP_QMARKS = "".join(F("pop", 1.2 + k * .12, C(176, 233 - k * 33, 9, "pi") + T(176, 237 - k * 33, "?", 12, "ti")) for k in range(5))
+
+FP_GROUND_BLOCKS = [("Fact", True), ("Rules say", False), ("Fact", True), ("Too costly", False), ("Fact", True), ("Always done", False)]
+def fp_rubble(anim=True, facts_only=False):
+    out = []
+    for k, (lab, ok) in enumerate(FP_GROUND_BLOCKS):
+        if facts_only and not ok:
+            continue
+        x = 26 + k * 52
+        blk = (R(x, 218, 48, 30, "pa" if ok else "pf", 6) + (check(x + 24, 233, 9) if ok else
+               T(x + 24, 238, "✕", 14, "ti", "fb")))
+        out.append(F("down", .7 + k * .1, blk) if anim else blk)
+    return "".join(out)
+FP_RUBBLE_LABELS = (F("fade", 1.5, T(102, 206, "ASSUMPTIONS: OUT", 9, "ti", "fm") ) )
+
+def fp_arch():
+    blocks = [(70, 218), (70, 186), (70, 154), (238, 218), (238, 186), (238, 154)]
+    out = [F("up", .2 + k * .1, R(x, y, 52, 30, "pa", 6)) for k, (x, y) in enumerate(blocks)]
+    out.append(F("pop", .9, P("M70 152C110 92 250 92 290 152h-24c-26-34-82-34-108 0z", "af")))
+    out.append(F("fade", 1.3, T(180, 76, "A NEW ANSWER", 11, "ta", "fm")))
+    out.append(F("fade", 1.0, C(180, 160, 80, "glow")))
+    return "".join(out)
+
+# battery example
+PACK = (R(136, 104, 88, 92, "pf", 10) + P("M156 98h14v8h-14zM190 98h14v8h-14z", "mf") +
+        P("M184 126l-12 22h16l-12 22", "la fat"))
+MATS = [(60, 100, "Cobalt"), (60, 145, "Nickel"), (60, 190, "Aluminium"), (300, 100, "Carbon"), (300, 145, "Polymers"), (300, 190, "Steel can")]
+def bars(anim=True):
+    tall = R(76, 60, 76, 170, "if", 8)
+    short = R(208, 207, 76, 23, "af", 8)
+    out = (F("growy", .2, tall) if anim else tall) + (F("growy", .7, short) if anim else short)
+    out += T(114, 50, "$600", 20, "ti") + T(246, 197, "$80", 20, "ta")
+    out += T(114, 252, "PACK PRICE", 10, "tm", "fm") + T(246, 252, "RAW MATERIALS", 10, "tm", "fm") + P("M40 232H320", "ll")
+    return F("fade", 0, out) if anim else out
+
+# gym example
+GYM_CARD = (R(20, 18, 320, 74, "pf", 14) + T(38, 42, "THE PROBLEM", 10, "tm", "fm", "start") +
+            T(38, 66, "I want to get fit, but the gym", 16, "tk", "fb", "start") + T(38, 84, "costs £50 a month.", 16, "tk", "fb", "start"))
+GYM_ASSUME = ["Fitness needs a gym", "Gyms need a membership", "I need equipment"]
+GYM_FACTS = ["Resistance builds muscle", "Effort builds stamina", "I have 30 min a day"]
+def gym_chips(items, c, anim=True, size=13):
+    out = []
+    for k, s in enumerate(items):
+        ch = chip(26, 140 + k * 42, s, c, size, center=False)
+        out.append(F("left", .2 + k * .2, ch) if anim else ch)
+    return "".join(out)
+
+fp = (
+ chapter("The idea", [
+  X("Most answers are copies.",
+    "We usually solve problems by analogy: we look at how something is already done and do the same. It's quick, and most of the time it works.",
+    FP_GROUND + F("fade", 0, FP_TOWER_LABEL) + fp_tower() + FP_PERSON,
+    "Reasoning by analogy: “Everyone does it this way, so I will too.”"),
+  X("Every copy hides assumptions.",
+    "Look inside the usual answer and you'll find beliefs nobody has checked in years: the rules, the cost, what the experts say. Copy the answer and you copy all of them.",
+    still(FP_GROUND, FP_TOWER_LABEL, fp_tower(anim=False), '<g transform="translate(272 250)">' + person(.8, "k", "mf") + "</g>", chip(272, 150, "That's how it's done", "m", 11)) +
+    FP_LABEL_LAYER + FP_QMARKS),
+  X("Take it apart.",
+    "First principles thinking breaks the answer into its pieces and tests each one. Is this actually true, or just believed? Anything you can't prove gets thrown out.",
+    still(FP_GROUND) + F("out", 0, FP_TOWER_LABEL + fp_tower(True, False)) + fp_rubble() +
+    F("fade", 1.6, T(180, 120, "Keep only what's", 18) + T(180, 144, "certainly true", 18, "ta")),
+    "Ask of every piece: how do I know this is true?"),
+  X("Rebuild from the facts.",
+    "Now build a new answer using only what's left. It often looks nothing like the old one, and that's where breakthroughs come from.",
+    still(FP_GROUND) + F("out", 0, fp_rubble(False)) + fp_arch()),
+ ]) +
+ chapter("Where it comes from", [
+  X("A 2,000-year-old idea.",
+    "Aristotle described a first principle as “the first basis from which a thing is known”: a truth you can't break down any further. Everything else is built on top of it.",
+    F("fade", 0, C(180, 150, 90, "glow")) +
+    F("up", .1, R(130, 214, 100, 18, "pf", 3) + R(120, 232, 120, 18, "pf", 3)) +
+    "".join(F("growy", .3 + k * .08, R(140 + k * 20, 92, 12, 122, "pf", 3)) for k in range(4)) +
+    F("down", .7, R(124, 72, 112, 20, "pf", 3) + P("M118 72h124l-14-16h-96z", "pf")) +
+    F("pop", 1.2, chip(180, 34, "ARISTOTLE · 4TH CENTURY BC", "a", 11)) +
+    F("fade", 1.4, P("M40 250H120M240 250H320", "ll"))),
+ ]) +
+ chapter("Example: batteries", [
+  X("The battery problem.",
+    "In a 2012 interview, Elon Musk said battery packs cost around $600 per kilowatt-hour. Most people concluded that electric cars would always be expensive.",
+    F("fade", 0, C(180, 150, 80, "glowi")) + F("pop", .1, PACK) +
+    F("pop", .7, chip(180, 66, "$600 per kWh", "I", 14)) +
+    F("fade", 1.2, T(180, 236, "“Batteries are just expensive.”", 15, "tm", "fb")),
+    "The assumption everyone made: batteries are expensive, and always will be."),
+  X("What is it actually made of?",
+    "Instead of accepting the price, he asked a first-principles question: what does a battery contain? Strip away the pack and the brand, and it's a short list of raw materials.",
+    still(PACK, chip(180, 66, "$600 per kWh", "I", 14), dim=True) +
+    "".join(arrow(136 if x < 180 else 224, 150, 112 if x < 180 else 248, y, "lm", .3 + k * .08, 6) for k, (x, y, _) in enumerate(MATS)) +
+    "".join(F("pop", .6 + k * .12, chip(x, y, s, "a")) for k, (x, y, s) in enumerate(MATS))),
+  X("Price the raw materials.",
+    "He priced those materials on the metals market. Bought as raw ingredients, they came to roughly $80 per kilowatt-hour, a fraction of the pack price.",
+    bars(),
+    "Figures as Musk described them; they're approximate and from 2012."),
+  X("The gap is the opportunity.",
+    "So the high price wasn't about what batteries are made of. It was about how they were made, and that can be redesigned. Smarter ways of putting those materials together could make batteries far cheaper.",
+    still(bars(False)) +
+    F("fade", .2, P("M152 60H300", "la thin dash")) + arrow(262, 132, 262, 66, "la", .5, 8) + arrow(262, 132, 262, 200, "la", .5, 8) +
+    F("pop", 1.0, chip(262, 132, "how it's made", "A", 12))),
+ ]) +
+ chapter("Try it yourself", [
+  X("Write down the problem.",
+    "Pick something you're stuck on. Write the problem in one line, then list every belief behind it, even the ones that feel obvious.",
+    F("up", 0, GYM_CARD) + F("fade", .4, T(26, 114, "WHAT I'M ASSUMING", 10, "tm", "fm", "start")) + gym_chips(GYM_ASSUME, "m"),
+    "Example: “I want to get fit, but the gym costs £50 a month.”"),
+  X("Ask: how do I know?",
+    "Challenge each belief. Does getting fit really need a gym? No. Do you need a membership, or equipment? Not to start. Each one turns out to be a habit, not a fact.",
+    still(GYM_CARD, T(26, 114, "WHAT I'M ASSUMING", 10, "tm", "fm", "start"), gym_chips(GYM_ASSUME, "m", False)) +
+    "".join(F("pop", .4 + k * .3, cross(250 + (k == 1) * 22, 140 + k * 42)) for k in range(3)) +
+    "".join(F("fade", .6 + k * .3, T(270 + (k == 1) * 22, 144 + k * 42, "habit", 11, "ti", "fm", "start")) for k in range(3))),
+  X("Find what's certainly true.",
+    "Underneath, a few things are certain: muscles grow when they work against resistance, stamina grows with effort, and you have 30 minutes a day.",
+    still(GYM_CARD) + F("out", 0, T(26, 114, "WHAT I'M ASSUMING", 10, "tm", "fm", "start") + gym_chips(GYM_ASSUME, "m", False)) +
+    F("fade", .4, T(26, 114, "WHAT'S TRUE", 10, "ta", "fm", "start")) +
+    "".join(F("left", .5 + k * .2, chip(26, 140 + k * 42, s, "a", 13, center=False)) for k, s in enumerate(GYM_FACTS))),
+  X("Rebuild a new answer.",
+    "Build only on those facts: push-ups, squats and a run at home, 30 minutes a day. It costs nothing, because the goal was never “join a gym”. The goal was “get fit”.",
+    still(GYM_CARD, T(26, 114, "WHAT'S TRUE", 10, "ta", "fm", "start"),
+          "".join(chip(26, 140 + k * 42, s, "a", 13, center=False) for k, s in enumerate(GYM_FACTS)), dim=True) +
+    arrow(232, 182, 252, 182, "la", .2, 7) +
+    F("pop", .5, R(256, 118, 88, 128, "pa", 14) + T(300, 142, "NEW PLAN", 9, "ta", "fm") + T(300, 168, "Push-ups", 13, "tk", "fb") +
+      T(300, 188, "Squats", 13, "tk", "fb") + T(300, 208, "Runs", 13, "tk", "fb") + T(300, 234, "£0", 18, "ta")),
+    "No gym, no fee, and no excuse."),
+ ]) +
+ chapter("How to dig", [
+  X("Keep asking until you hit bedrock.",
+    "Good questions: How do I know this is true? What's the evidence? What would I do if I were starting from scratch? Stop when the answer is something you can measure or prove.",
+    F("fade", 0, R(24, 50, 186, 40, "pf", 6) + T(117, 75, "OPINION", 11, "tm", "fm")) +
+    F("fade", .15, R(24, 94, 186, 40, "pf", 6) + T(117, 119, "ASSUMPTION", 11, "tm", "fm")) +
+    F("fade", .3, R(24, 138, 186, 40, "pf", 6) + T(117, 163, "BELIEF", 11, "tm", "fm")) +
+    F("fade", .45, R(24, 182, 186, 64, "pa", 6) + T(117, 220, "FACT · BEDROCK", 12, "ta", "fm")) +
+    D("M200 30V200", "la fat", .6) + F("pop", 1.5, P("M192 196l8 14 8-14z", "af")) +
+    F("left", 1.0, chip(282, 70, "How do I know?", "a", 11)) +
+    F("left", 1.2, chip(282, 120, "What's the evidence?", "a", 11)) +
+    F("left", 1.4, chip(282, 170, "From scratch?", "a", 11))),
+ ]) +
+ chapter("When to use it", [
+  X("Use it when you're stuck.",
+    "It's most powerful when progress has stalled, when the only reason given is “that's how it's always done”, or when a cost or a rule seems impossible to move.",
+    tile(16, 60, 100, 160, P("M48 112c0-14 36-14 36 0s-36 14-36 28 36 14 36 0", "la"), "Stuck", .1) +
+    tile(130, 60, 100, 160, P("M180 92a26 26 0 1 1-24 16", "la") + P("M150 102l6 7 8-4", "la"), "Always done", .3) +
+    tile(244, 60, 100, 160, P("M276 118h36v30h-36zM282 118v-10a12 12 0 0 1 24 0v10", "la"), "Fixed costs", .5)),
+  X("But not for everything.",
+    "Thinking from scratch is slow. For everyday choices, like what to cook or which route to take, copying what works is the smart move. Save first principles for problems that matter.",
+    F("up", .1, R(20, 50, 150, 190, "pf", 16) + T(95, 80, "EVERYDAY", 11, "tm", "fm") +
+      P("M70 110h50v60H70z", "lm") + P("M80 100h50v60", "lm thin") + T(95, 200, "Copy what", 15, "tk", "fb") + T(95, 220, "works", 15, "tk", "fb")) +
+    F("up", .4, R(190, 50, 150, 190, "pa", 16) + T(265, 80, "BIG OR STUCK", 11, "ta", "fm") +
+      R(241, 142, 22, 22, "cA", 4) + R(267, 142, 22, 22, "cA", 4) + R(254, 116, 22, 22, "cA", 4) +
+      T(265, 200, "First", 15, "ta", "fb") + T(265, 220, "principles", 15, "ta", "fb"))),
+ ]) +
+ chapter("Common mistake", [
+  X("An assumption in disguise.",
+    "The trap is treating a belief as a fact. “Customers won't pay more” or “I'm not a numbers person” sound certain, but they're assumptions. If you can't say how you know it, keep digging.",
+    F("out", .9, R(70, 72, 220, 120, "pa", 16) + T(180, 144, "FACT", 34, "ta")) +
+    F("flipin", 1.1, R(70, 72, 220, 120, "pi", 16) + T(180, 130, "ASSUMPTION", 28, "ti") + T(180, 160, "dressed up as a fact", 14, "tm", "fb")) +
+    F("pop", 1.7, F("float", 0, C(300, 206, 24, "pa") + P("M317 223l18 18", "la fat") + T(300, 214, "?", 22, "ta")))),
+ ])
+)
 
 # ------------------------------------------------------------------ Dichotomy of control
 RING = C(180, 142, 118, "li dash")

@@ -1,0 +1,405 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>First Principles Thinking · Mental model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated explainer of the First Principles Thinking mental model: When a cost or rule seems fixed, strip it back to what you know is certainly true and rebuild from there, as the battery pack example shows when raw materials cost far less than the finished pack. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MENTAL MODEL · THINKING TOOLS</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Break it down,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">then rebuild.</text>
+<text class="b" x="120" y="600" font-size="32">Strip a problem to what is truly known, then rebuild.</text>
+<g id="tagw"><g id="tag">
+<path class="s-muted" d="M1120 220Q1130 330 1185 400" fill="none" stroke-width="4"/>
+<circle class="ink" cx="1120" cy="220" r="7"/>
+<path class="s-ink" d="M1140 400L1200 300H1440V500H1200Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<circle class="s-ink" cx="1185" cy="400" r="12" fill="none" stroke-width="5"/>
+<text class="d" x="1280" y="440" font-size="110" text-anchor="middle">$</text>
+<text id="tq" class="d" x="1370" y="440" font-size="110" text-anchor="middle" style="fill:var(--gain)">?</text>
+</g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">We think by analogy.</text>
+<text class="b" x="120" y="176" font-size="32">We copy what was done before, and everything that came with it.</text>
+<g id="lead"><text class="m" x="300" y="540" font-size="20" text-anchor="middle">THEM</text></g>
+<g id="foll"><path class="s-muted" d="M380 440h70m-16-16 16 16-16 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="540" y="540" font-size="20" text-anchor="middle">YOU</text></g>
+<g id="map">
+<rect class="s-ink" x="760" y="240" width="560" height="340" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M947 240V580M1133 240V580" stroke-width="3"/>
+<path class="s-ink" d="M800 520C860 440 900 480 960 400S1080 300 1140 360S1240 300 1270 290" fill="none" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/>
+<path class="s-loss" d="M1258 262l36 36M1294 262l-36 36" stroke-width="7" stroke-linecap="round"/>
+<text class="m" x="760" y="620" font-size="20">THE WAY IT’S ALWAYS DONE</text>
+</g>
+<g id="fast"><path class="s-gain" d="M240 620l24 24 48-48" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="330" y="640" font-size="22">FAST, AND IT OFTEN WORKS</text></g>
+<rect id="bag" class="loss" x="610" y="400" width="56" height="90" rx="14"/>
+<g id="pack"></g>
+<g id="inh"><text class="d" x="120" y="780" font-size="44">Copy the method, inherit the assumptions.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">First principles thinking.</text>
+<text class="b" x="120" y="176" font-size="32">Break it down to what is certainly true. Build up from there.</text>
+<path class="s-ink" d="M120 640H1000" stroke-width="6" stroke-linecap="round"/>
+<g id="blk"></g>
+<g id="nb"></g>
+<g id="true2"><text class="m" x="120" y="690" font-size="22" style="fill:var(--gain)">WHAT IS DEFINITELY TRUE</text></g>
+<g id="up"><path class="s-gain" d="M930 600V440m-22 22 22-22 22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="930" y="410" font-size="20" text-anchor="middle">BUILD UP</text></g>
+<g id="ari">
+<rect class="s-line" x="1060" y="230" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="ink" d="M1190 470v-30a80 80 0 0 1 160 0v30z"/>
+<circle class="ink" cx="1270" cy="330" r="46"/>
+<path class="s-gain" d="M1212 296a62 62 0 0 0 22 74M1328 296a62 62 0 0 1-22 74" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1270" y="520" font-size="22" text-anchor="middle">ARISTOTLE</text>
+<text class="d5" x="1270" y="580" font-size="30" text-anchor="middle">“The first basis</text>
+<text class="d5" x="1270" y="620" font-size="30" text-anchor="middle">from which a thing</text>
+<text class="d5" x="1270" y="660" font-size="30" text-anchor="middle">is known.”</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The battery pack problem.</text>
+<text class="b" x="120" y="176" font-size="32">Elon Musk, in a 2012 interview.</text>
+<g id="bat">
+<rect class="s-ink" x="120" y="260" width="500" height="260" rx="20" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="620" y="350" width="30" height="80" rx="6"/>
+<g id="cells"></g>
+<text class="m" x="120" y="560" font-size="22">BATTERY PACK</text>
+</g>
+<g id="p600">
+<text class="m" x="760" y="290" font-size="22">BATTERY PACK COST</text>
+<text id="v600" class="d" x="752" y="440" font-size="130" letter-spacing="-4" style="fill:var(--loss)">$600</text>
+<text class="m" x="760" y="528" font-size="22">AROUND · PER KILOWATT HOUR</text>
+</g>
+<g id="lock">
+<path class="s-ink" d="M1270 400v-40a40 40 0 0 1 80 0v40" fill="none" stroke-width="12"/>
+<rect class="loss" x="1250" y="400" width="120" height="100" rx="12"/>
+<text class="m" x="1310" y="540" font-size="22" text-anchor="middle">FIXED FACT?</text>
+</g>
+<g id="crowd3"></g>
+<g id="bub3">
+<rect class="s-ink" x="760" y="620" width="720" height="100" rx="24" fill="var(--stage)" stroke-width="4"/>
+<path class="s-ink" d="M760 664l-50 26 50-6" fill="var(--stage)" stroke-width="4" stroke-linejoin="round"/>
+<text class="d5" x="790" y="682" font-size="34">“They will always be expensive.”</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What is it actually made of?</text>
+<text class="b" x="120" y="176" font-size="32">Musk listed the raw materials and priced them on the open market.</text>
+<g id="bat4">
+<rect class="s-ink" x="120" y="260" width="300" height="160" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="420" y="310" width="20" height="60" rx="4"/>
+<g id="cells4"></g>
+<text class="m" x="120" y="460" font-size="20">BATTERY PACK</text>
+</g>
+<g id="mag"><circle class="s-ink" r="64" fill="var(--stage)" fill-opacity=".35" stroke-width="10"/><path class="s-ink" d="M46 46l50 50" stroke-width="16" stroke-linecap="round"/></g>
+<g id="arr4"><path class="s-muted" d="M456 340h44m-16-16 16 16-16 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="chips4"></g>
+<path id="brk" class="s-gain" d="M630 400V430H1350V400M990 430V470" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="p80">
+<text class="m" x="990" y="510" font-size="22" text-anchor="middle">OPEN-MARKET PRICE</text>
+<text id="v80" class="d" x="990" y="660" font-size="130" letter-spacing="-4" text-anchor="middle" style="fill:var(--gain)">$80</text>
+<text class="m" x="990" y="740" font-size="22" text-anchor="middle">AROUND · PER KILOWATT HOUR</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The gap is in the making.</text>
+<text class="b" x="120" y="176" font-size="32">A design challenge, not a law of nature.</text>
+<rect id="barP" class="loss" x="200" y="760" width="200" height="0"/>
+<rect id="barM" class="gain" x="500" y="760" width="200" height="0"/>
+<path class="s-ink" d="M160 760H740" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="300" y="800" font-size="22" text-anchor="middle">PACK · $600</text>
+<text class="m" x="600" y="800" font-size="22" text-anchor="middle">MATERIALS · $80</text>
+<g id="gap">
+<path class="s-muted" d="M400 280H780M700 696H780" stroke-width="3" stroke-dasharray="6 8"/>
+<path class="s-ink" d="M760 292V684M744 308l16-16 16 16M744 668l16 16 16-16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="800" y="470" font-size="48">The gap</text>
+</g>
+<g id="how"><text class="m" x="800" y="520" font-size="22">HOW THE PACKS</text><text class="m" x="800" y="552" font-size="22">WERE MADE</text></g>
+<g id="fac">
+<path class="ink" d="M1100 620V440l80-60v60l80-60v60l80-60v60h20V300h50v320z"/>
+<g id="gear"></g>
+<text class="m" x="1255" y="670" font-size="22" text-anchor="middle" style="fill:var(--gain)">DESIGN CHALLENGE</text>
+<text class="m" x="1255" y="702" font-size="22" text-anchor="middle">NOT A LAW OF NATURE</text>
+</g>
+<g id="work"><text class="m" x="1255" y="744" font-size="22" text-anchor="middle" style="fill:var(--gain)">NOW YOU CAN WORK ON IT</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Sort, question, rebuild.</text>
+<text class="b" x="120" y="176" font-size="32">Keep what is certain. Cross out what is only assumed.</text>
+<g id="col6">
+<text class="m" x="120" y="250" font-size="22" style="fill:var(--gain)">KNOWN FOR CERTAIN</text>
+<text class="m" x="1080" y="250" font-size="22" style="fill:var(--loss)">ONLY ASSUMED</text>
+</g>
+<g id="lad">
+<text class="m" x="800" y="250" font-size="22" text-anchor="middle">ASK WHY</text>
+<path class="s-ink" d="M720 270V570M880 270V570" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="rungs"></g>
+<g id="true6"><text class="d5" x="800" y="606" font-size="26" text-anchor="middle" style="fill:var(--gain)">TRUE</text></g>
+<g id="cc"></g>
+<g id="ac"></g>
+<g id="beam"><rect class="gain" x="120" y="630" width="1360" height="60" rx="12"/><text class="d5" x="800" y="670" font-size="30" text-anchor="middle" style="fill:var(--on-gain)">Your answer, rebuilt</text>
+<text class="m" x="120" y="830" font-size="20">THE CERTAIN FACTS BECOME THE FOUNDATION</text></g>
+<g id="fnd"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it this week.</text>
+<text class="b" x="120" y="176" font-size="32">Pick one cost or rule at work that seems fixed.</text>
+<g id="cal">
+<rect class="s-ink" x="120" y="240" width="360" height="360" rx="16" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M180 280H340L380 320V560H180Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M340 280V320H380" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<rect class="ink" x="205" y="326" width="100" height="14" rx="4"/>
+<path class="s-line" d="M205 380H355M205 415H340M205 450H355M205 485H320" stroke-width="7" stroke-linecap="round"/>
+<text class="d" x="210" y="540" font-size="48">$</text>
+<text class="m" x="120" y="640" font-size="20">ONE FIXED COST OR RULE</text>
+</g>
+<g id="lockw"><g id="lockin">
+<path class="s-ink" d="M360 480v-30a36 36 0 0 1 72 0v30" fill="none" stroke-width="10"/>
+<rect class="gain" x="340" y="478" width="112" height="90" rx="12"/>
+<circle cx="396" cy="515" r="10" fill="var(--stage)"/>
+<rect x="392" y="515" width="8" height="26" rx="3" fill="var(--stage)"/>
+</g></g>
+<g id="qcard">
+<rect class="s-ink" x="560" y="240" width="440" height="360" rx="16" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="780" y="460" font-size="200" text-anchor="middle" style="fill:var(--gain)">?</text>
+<text class="m" x="780" y="520" font-size="22" text-anchor="middle">WHAT IS IT MADE OF?</text>
+<text class="m" x="780" y="556" font-size="22" text-anchor="middle">WHAT MUST BE TRUE?</text>
+</g>
+<g id="pad">
+<rect class="s-ink" x="1080" y="240" width="400" height="360" rx="12" fill="var(--stage)" stroke-width="5"/>
+<g id="spir"></g>
+<text class="m" x="1110" y="300" font-size="20">ASSUMPTIONS</text>
+<text class="m" x="1080" y="640" font-size="20">WRITE THEM ALL · TEST ONE</text>
+</g>
+<g id="items"></g>
+<g id="tick"><path class="s-gain" d="M1112 452l10 10 18-22" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1460" y="466" font-size="20" text-anchor="end" style="fill:var(--gain)">TEST</text></g>
+<g id="noth"><text class="d" x="120" y="780" font-size="44">You may find the rule rests on nothing at all.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What is one thing</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">you accept only because</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">everyone else <tspan style="fill:var(--gain)">does?</tspan></text></g>
+<g id="mir">
+<ellipse class="s-ink" cx="1380" cy="360" rx="80" ry="120" fill="var(--stage)" stroke-width="7"/>
+<g id="mref"></g>
+<path class="s-ink" d="M1380 480v80M1330 560h100" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g id="br8">
+<rect class="gain" x="1310" y="600" width="40" height="40" rx="6"/><rect class="gain" x="1360" y="600" width="40" height="40" rx="6"/><rect class="gain" x="1410" y="600" width="40" height="40" rx="6"/>
+<text class="m" x="143" y="700" font-size="26">BREAK IT DOWN THIS WEEK</text>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">An animated explainer of the First Principles Thinking mental model. Uses the battery cost example from Elon Musk&#x27;s 2012 interview, as widely reported, with figures given as approximate. The price tags and gap arrow are illustrations, not data charts. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 7.7], [7.7, 21.0], [21.0, 37.9], [37.9, 53.2], [53.2, 68.3], [68.3, 81.9], [81.9, 98.7], [98.7, 114.3], [114.3, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Why Is It So Pricey", "Copying By Default", "The Other Way", "The Battery Problem", "Strip It Back", "Where The Gap Lives", "Rebuild From Truth", "Try It This Week", "Your Challenge"];
+const TM={"price_tag": 0.0, "two_people": 8.0, "old_map": 10.32, "backpack": 17.2, "blocks": 21.28, "ground_floor": 28.0, "aristotle": 30.88, "battery_pack": 38.24, "price_600": 42.56, "shrug": 48.88, "magnifier": 53.52, "raw_metals": 58.72, "price_80": 64.0, "gap_arrow": 68.64, "factory": 74.8, "two_columns": 82.16, "why_ladder": 88.08, "cross_out": 92.88, "rebuild": 94.8, "calendar": 99.04, "question": 102.72, "notepad": 107.2, "mirror": 114.56};
+const fig=(g,x,y,r,f)=>{mk('circle',{cx:x,cy:y,r:r,fill:f},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',fill:f},g)};
+fig($('lead'),300,330,40,'var(--ink)');fig($('foll'),540,330,40,'var(--muted)');
+const BX=[0,1,2,3].map(i=>mk('rect',{x:608,y:360-i*40,width:60,height:32,rx:6,class:'loss','fill-opacity':.85-i*.15},$('pack')));
+const B=[];for(let i=0;i<6;i++)B.push(mk('rect',{width:100,height:70,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('blk')));
+const NB=[[320,500],[440,500],[560,500],[440,430]].map(q=>mk('rect',{x:q[0],y:q[1],width:100,height:70,rx:8,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},$('nb')));
+for(let i=0;i<4;i++)for(let j=0;j<2;j++)mk('rect',{x:150+i*115,y:285+j*115,width:95,height:95,rx:8,fill:'var(--line)'},$('cells'));
+const CR=[];for(let i=0;i<5;i++){const x=180+i*110,g=mk('g',{},$('crowd3'));fig(g,x,650,22,'var(--muted)');mk('path',{d:'M'+(x-33)+' 724l-22-26M'+(x+33)+' 724l22-26',class:'s-muted','stroke-width':6,'stroke-linecap':'round'},g);CR.push(g)}
+for(let i=0;i<4;i++)mk('rect',{x:140+i*68,y:280,width:52,height:120,rx:6,fill:'var(--line)'},$('cells4'));
+const CH4=['COBALT','NICKEL','ALUMINIUM','CARBON'].map((s,i)=>{const x=520+i*240,g=mk('g',{},$('chips4'));mk('rect',{x:x,y:290,width:220,height:90,rx:45,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:x+110,y:343,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;return g});
+let gp='';for(let k=0;k<32;k++){const a=k*Math.PI/16,R=k%4<2?44:32;gp+=(k?'L':'M')+(R*Math.cos(a)).toFixed(1)+' '+(R*Math.sin(a)).toFixed(1)}
+const GR=mk('g',{},$('gear'));mk('path',{d:gp+'Z',class:'gain'},GR);mk('circle',{r:12,fill:'var(--ink)'},GR);
+const RG=[310,390,470,550].map((y,k)=>{const g=mk('g',{},$('rungs'));mk('path',{d:'M720 '+y+'H880',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},g);if(k<3){const tx=mk('text',{x:800,y:y+48,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent='WHY?'}return g});
+const card=(par,s,i,x,cert)=>{const o=mk('g',{},par),g=mk('g',{},o),y=280+i*80;const r=mk('rect',cert?{x:x,y:y,width:400,height:64,rx:12,class:'gain'}:{x:x,y:y,width:400,height:64,rx:12,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  const tx=mk('text',{x:x+200,y:y+41,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var('+(cert?'--on-gain':'--ink')+')'},g);tx.textContent=s;
+  const ln=cert?null:mk('line',{x1:x+16,y1:y+32,x2:x+16,y2:y+32,stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},g);return [o,g,ln,y,tx,r]};
+const CTX=['WHAT IT IS MADE OF','WHAT MATERIALS COST','WHAT IT MUST DO'];
+const CC=CTX.map((s,i)=>card($('cc'),s,i,120,1));
+const FD=CTX.map((s,i)=>card($('fnd'),s,i,120,1));
+const AC=['ALWAYS EXPENSIVE','MUST BE MADE THIS WAY','EVERYONE SAYS SO'].map((s,i)=>card($('ac'),s,i,1080,0));
+for(let i=0;i<6;i++)mk('circle',{cx:1120+i*64,cy:240,r:10,class:'ink'},$('spir'));
+const IT=[200,240,150,210].map((w,i)=>{const y=340+i*60,g=mk('g',{},$('items'));mk('rect',{x:1110,y:y-20,width:28,height:28,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M1160 '+(y-6)+'h'+w,class:'s-line','stroke-width':8,'stroke-linecap':'round'},g);return g});
+fig($('mref'),1380,320,24,'var(--muted)');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('tag').setAttribute('transform','rotate('+(4*Math.sin(t*1.4)).toFixed(2)+' 1120 220)');
+rise($('tagw'),p(u,TM.price_tag,TM.price_tag+.5)); rise($('tq'),p(u,TM.price_tag+2.5,TM.price_tag+3.2));
+
+rise($('lead'),p(u,TM.two_people,TM.two_people+.5)); rise($('foll'),p(u,TM.two_people+.6,TM.two_people+1.1));
+rise($('map'),p(u,TM.old_map,TM.old_map+.5)); rise($('fast'),p(u,TM.old_map+4,TM.old_map+4.5));
+rise($('bag'),p(u,TM.backpack,TM.backpack+.4));
+BX.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.backpack+.4+i*.35,TM.backpack+.7+i*.35)));
+rise($('inh'),p(u,TM.backpack+1.8,TM.backpack+2.4));
+
+const br=p(u,TM.blocks+2.2,TM.blocks+3.4), gd=u>=TM.blocks+3.4;
+B.forEach((b,i)=>{const x=440+(140+i*120-440)*br,y=570-i*70*(1-br)-40*Math.sin(Math.PI*br)*(i%2);b.setAttribute('x',x.toFixed(1));b.setAttribute('y',y.toFixed(1));
+  b.setAttribute('opacity',p(u,TM.blocks+i*.15,TM.blocks+i*.15+.3));b.style.fill=gd?'var(--gain)':'var(--stage)';b.style.stroke=gd?'var(--gain)':'var(--ink)'});
+rise($('true2'),p(u,TM.blocks+3.2,TM.blocks+3.7));
+NB.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.ground_floor+.3+i*.4,TM.ground_floor+.6+i*.4)));
+rise($('up'),p(u,TM.ground_floor,TM.ground_floor+.5)); rise($('ari'),p(u,TM.aristotle,TM.aristotle+.6));
+
+rise($('bat'),p(u,TM.battery_pack,TM.battery_pack+.5)); rise($('p600'),p(u,TM.price_600,TM.price_600+.5));
+$('v600').textContent='$'+Math.round(600*p(u,TM.price_600+.2,TM.price_600+1.6));
+rise($('lock'),p(u,TM.price_600+3.4,TM.price_600+3.9));
+CR.forEach((g,i)=>rise(g,p(u,TM.shrug+i*.15,TM.shrug+i*.15+.4))); rise($('bub3'),p(u,TM.shrug+.8,TM.shrug+1.3));
+
+rise($('bat4'),p(u,TM.magnifier-.8,TM.magnifier-.3));
+$('mag').setAttribute('opacity',p(u,TM.magnifier,TM.magnifier+.5));
+$('mag').setAttribute('transform','translate('+(270+70*Math.sin(t*1.2)).toFixed(1)+' '+(340+20*Math.sin(t*2)).toFixed(1)+')');
+rise($('arr4'),p(u,TM.raw_metals,TM.raw_metals+.4));
+CH4.forEach((g,i)=>rise(g,p(u,TM.raw_metals+i*.6,TM.raw_metals+i*.6+.4)));
+$('brk').setAttribute('opacity',p(u,TM.price_80,TM.price_80+.5)); rise($('p80'),p(u,TM.price_80+.3,TM.price_80+.8));
+$('v80').textContent='$'+Math.round(80*p(u,TM.price_80+.4,TM.price_80+1.6));
+
+const g5=p(u,SC[5][0]/K+.2,SC[5][0]/K+1.4), hP=480*g5, hM=64*g5;
+$('barP').setAttribute('y',(760-hP).toFixed(1)); $('barP').setAttribute('height',hP.toFixed(1));
+$('barM').setAttribute('y',(760-hM).toFixed(1)); $('barM').setAttribute('height',hM.toFixed(1));
+rise($('gap'),p(u,TM.gap_arrow,TM.gap_arrow+.5)); rise($('how'),p(u,TM.gap_arrow+3.4,TM.gap_arrow+3.9));
+rise($('fac'),p(u,TM.factory,TM.factory+.5)); rise($('work'),p(u,TM.factory+4.6,TM.factory+5.1));
+GR.setAttribute('transform','translate(1200 540) rotate('+(t*20+360*p(u,TM.factory+4.6,TM.factory+8)).toFixed(1)+')');
+
+rise($('col6'),p(u,TM.two_columns,TM.two_columns+.5));
+CC.forEach((c,i)=>{rise(c[1],p(u,TM.two_columns+2+i*.3,TM.two_columns+2.4+i*.3));
+  const st=u>=TM.rebuild+i*.25; c[5].style.fill=st?'var(--stage)':'var(--gain)'; c[5].style.stroke=st?'var(--gain)':'none'; c[5].style.strokeWidth=st?'4':'0';
+  c[4].style.fill=st?'var(--gain)':'var(--on-gain)'});
+FD.forEach((c,i)=>{const k=p(u,TM.rebuild+i*.25,TM.rebuild+i*.25+.8);
+  c[0].setAttribute('opacity',u>=TM.rebuild+i*.25?1:0);
+  c[0].setAttribute('transform','translate('+(480*i*k).toFixed(1)+' '+((710-c[3])*k).toFixed(1)+')')});
+AC.forEach((c,i)=>{rise(c[1],p(u,TM.two_columns+2.6+i*.3,TM.two_columns+3+i*.3));c[0].setAttribute('opacity',(1-.3*p(u,TM.rebuild,TM.rebuild+.6)).toFixed(2));
+  const xo=p(u,TM.cross_out+i*.4,TM.cross_out+i*.4+.4); c[2].setAttribute('x2',(1096+368*xo).toFixed(1));
+  c[4].style.fill=xo>0?'var(--muted)':'var(--ink)'});
+rise($('lad'),p(u,TM.why_ladder,TM.why_ladder+.4));
+RG.forEach((g,k)=>rise(g,p(u,TM.why_ladder+.3+k*.6,TM.why_ladder+.7+k*.6))); rise($('true6'),p(u,TM.why_ladder+2.8,TM.why_ladder+3.3));
+rise($('beam'),p(u,TM.rebuild+1.2,TM.rebuild+1.8));
+
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5)); rise($('lockw'),p(u,TM.calendar+1,TM.calendar+1.4));
+$('lockin').setAttribute('transform','rotate('+(u>=TM.calendar+1?4*Math.sin(t*3):0).toFixed(2)+' 396 478)');
+rise($('qcard'),p(u,TM.question,TM.question+.5)); rise($('pad'),p(u,TM.notepad,TM.notepad+.5));
+IT.forEach((g,i)=>rise(g,p(u,TM.notepad+.4+i*.4,TM.notepad+.8+i*.4))); rise($('tick'),p(u,TM.notepad+2.8,TM.notepad+3.2));
+rise($('noth'),p(u,TM.notepad+4.9,TM.notepad+5.5));
+
+rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9)); rise($('qc'),p(u,TM.mirror+.8,TM.mirror+1.3));
+rise($('mir'),p(u,TM.mirror+1.2,TM.mirror+1.8)); rise($('br8'),p(u,TM.mirror+4.6,TM.mirror+5.2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.89;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,38 @@
+name: Set categories
+run-name: "Set categories (${{ github.run_number }})"
+
+# Started from the admin page ("Save categories"). Writes each book's "categories" into site/books.json
+# and rebuilds the category index at the top of that file, which the app reads for its filters.
+
+on:
+  workflow_dispatch:
+    inputs:
+      changes:
+        description: 'JSON object: {"book-id": ["Category A", "Category B"], ...}'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: book-review
+  cancel-in-progress: false
+
+jobs:
+  categories:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply
+        env:
+          CHANGES: ${{ inputs.changes }}
+        run: python -m engine.categories apply "$CHANGES" --commit
+      - name: Redeploy the site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main

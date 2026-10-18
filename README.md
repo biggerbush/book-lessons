@@ -59,3 +59,17 @@ voice-over (one ElevenLabs generation per lesson) and builds a **draft**. Nothin
 
 **Layout**: `engine/` (pipeline), `engine-data/<slug>/` (scripts, scene code, MP3s, state), `site/drafts/` (drafts),
 `.github/workflows/create-book.yml` and `review-book.yml`, `tests/` (offline tests: `python -m tests.test_timing` etc.).
+
+## Categories (for the app's filters)
+
+`site/books.json` carries each book's categories and a ready-made index:
+
+```json
+{ "books": [ { "id": "atomic-habits", "categories": ["Habits & Productivity", "Personal Growth"], ... } ],
+  "categories": [ { "name": "Personal Growth", "slug": "personal-growth", "count": 20 }, ... ],
+  "updated": "2026-10-18T13:00:00+00:00" }
+```
+
+Edit them any time after publishing: admin page → **Published** → tap categories (or type a new one) → **Save categories**.
+That runs the *Set categories* workflow (`python -m engine.categories apply ...`), commits `books.json` and redeploys.
+Newly approved books start with no categories; publishing never overwrites a book's existing categories.

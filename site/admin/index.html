@@ -49,6 +49,13 @@ textarea{min-height:90px;resize:vertical}
 .item:first-child{border-top:0;padding-top:4px}
 .item .t{font:800 18px/1.2 var(--display);letter-spacing:-.01em;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .item .m{color:var(--muted);font-size:14px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pill{font:500 13px var(--body);border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:transparent;color:var(--muted);cursor:pointer}
+.pill:hover{border-color:var(--ink);color:var(--ink)}
+.pill.on{background:var(--gain);border-color:var(--gain);color:var(--on-gain);font-weight:600}
+.pill.add{padding:0;border-style:dashed}
+.pill.add input{border:0;background:transparent;min-height:0;width:130px;padding:5px 11px;border-radius:999px;font:500 13px var(--body)}
+.pub.changed{border-left:3px solid var(--gain);padding-left:10px}
 .msg{font-size:14px;margin:6px 0 0;padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg)}
 .msg.err{border-color:rgba(255,138,128,.5);color:var(--bad)}.msg.good{border-color:rgba(127,214,164,.5);color:var(--ok)}
 .empty{color:var(--muted);font-size:15px;padding:6px 0}
@@ -140,7 +147,8 @@ The 48 Laws of Power | Robert Greene</textarea>
   </section>
 
   <section class="card" id="published" hidden>
-    <h2>Published</h2>
+    <div class="chead"><h2>Published</h2><span style="display:flex;gap:8px;align-items:center"><span class="hint" id="catmsg" style="margin:0"></span><button class="btn sm primary" id="catsave" type="button" disabled>Save categories</button></span></div>
+    <p class="hint">Tap a category to add or remove it, or type a new one. Your app reads these from <code>books.json</code> (<code>categories</code> on each book, plus a ready-made list with counts at the top of the file).</p>
     <div id="publist"></div>
   </section>
 </main>
@@ -325,7 +333,7 @@ async function loadRuns(){
   try{
     const r=await gh("/actions/runs?per_page=30&event=workflow_dispatch");
     if(!r.ok)throw new Error(r.status);
-    const runs=(await r.json()).workflow_runs.filter(x=>/^(Create|Review) book/.test(x.name||"")).slice(0,8);
+    const runs=(await r.json()).workflow_runs.filter(x=>/^(Create|Review) book|^Set categories/.test(x.name||"")).slice(0,8);
     if(!runs.length){el.innerHTML='<p class="empty">Nothing has run yet.</p>'}
     else el.innerHTML=runs.map(x=>{const b=RB(x);return '<div class="item"><div class="t">'+esc(x.display_title||x.name)+' <span class="badge '+b[0]+'">'+b[1]+'</span></div>'+
       '<div class="m">Started '+esc(ago(x.created_at))+' · <a href="'+esc(x.html_url)+'" target="_blank" rel="noopener">View log on GitHub</a></div></div>'}).join("");
@@ -335,11 +343,59 @@ async function loadRuns(){
 }
 
 /* ---------------------------------------------------------------- published */
+let pubBooks=[],pubAll=[],catEdits={};
+function catKey(a){return a.map(x=>x.toLowerCase()).join("|")}
 async function loadPublished(){
   const j=await fetchJson(["../books.json"]);
-  const rows=(j&&j.books||[]).filter(b=>b.lessons&&b.lessons.length);
-  $("#publist").innerHTML=rows.length?rows.map(b=>'<div class="item"><div class="t"><a href="../#/'+esc(b.id)+'" style="text-decoration:none">'+esc(b.title)+'</a></div><div class="m">'+esc(b.author)+" · "+b.lessons.length+" lessons</div></div>").join(""):'<p class="empty">Nothing published yet.</p>';
+  pubBooks=(j&&j.books||[]).filter(b=>b.lessons&&b.lessons.length);
+  const names=new Map();
+  (j&&j.books||[]).forEach(b=>(b.categories||[]).forEach(c=>{if(!names.has(c.toLowerCase()))names.set(c.toLowerCase(),c)}));
+  pubAll=[...names.values()].sort((a,b)=>a.localeCompare(b));
+  catEdits={};renderPublished();
 }
+function curCats(b){return catEdits[b.id]||b.categories||[]}
+function renderPublished(){
+  const el=$("#publist");
+  if(!pubBooks.length){el.innerHTML='<p class="empty">Nothing published yet.</p>';return}
+  const all=[...new Set([...pubAll,...Object.values(catEdits).flat()])].sort((a,b)=>a.localeCompare(b));
+  el.innerHTML=pubBooks.map(b=>{
+    const cur=curCats(b),on=new Set(cur.map(x=>x.toLowerCase()));
+    const changed=catEdits[b.id]&&catKey(catEdits[b.id])!==catKey(b.categories||[]);
+    return '<div class="item pub'+(changed?" changed":"")+'" data-id="'+esc(b.id)+'"><div class="t"><a href="../#/'+esc(b.id)+'" style="text-decoration:none">'+esc(b.title)+'</a></div><div class="m">'+esc(b.author)+" · "+b.lessons.length+' lessons</div>'+
+      '<div class="pills">'+all.map(c=>'<button type="button" class="pill'+(on.has(c.toLowerCase())?" on":"")+'" data-c="'+esc(c)+'">'+esc(c)+'</button>').join("")+
+      '<span class="pill add"><input type="text" placeholder="+ new category" maxlength="40" aria-label="New category for '+esc(b.title)+'"></span></div></div>';
+  }).join("");
+  el.querySelectorAll(".pub").forEach(row=>{
+    const b=pubBooks.find(x=>x.id===row.dataset.id);
+    const set=list=>{
+      const seen=new Set(),out=[];list.forEach(x=>{x=x.replace(/\s+/g," ").trim().slice(0,40);if(x&&!seen.has(x.toLowerCase())){seen.add(x.toLowerCase());out.push(x)}});
+      catEdits[b.id]=out.slice(0,8);
+      if(catKey(out)===catKey(b.categories||[]))delete catEdits[b.id];
+      renderPublished();updateCatSave();
+    };
+    row.querySelectorAll(".pill[data-c]").forEach(p=>p.onclick=()=>{
+      const c=p.dataset.c,cur=curCats(b).slice(),i=cur.findIndex(x=>x.toLowerCase()===c.toLowerCase());
+      if(i>=0)cur.splice(i,1);else cur.push(c);set(cur);
+    });
+    const inp=row.querySelector(".add input");
+    inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();const v=inp.value.trim();if(v)set(curCats(b).concat(v.split(",")))}});
+    inp.addEventListener("change",()=>{const v=inp.value.trim();if(v)set(curCats(b).concat(v.split(",")))});
+  });
+  updateCatSave();
+}
+function updateCatSave(){
+  const n=Object.keys(catEdits).length,btn=$("#catsave");
+  btn.disabled=!n;btn.textContent=n?"Save categories ("+n+")":"Save categories";
+}
+$("#catsave").addEventListener("click",async e=>{
+  const btn=e.currentTarget,n=Object.keys(catEdits).length;if(!n)return;
+  try{
+    btn.disabled=true;await dispatch("set-categories.yml",{changes:JSON.stringify(catEdits)});
+    $("#catmsg").textContent="Saving "+n+" book"+(n>1?"s":"")+"… live in about 2 minutes.";
+    setTimeout(loadRuns,4000);
+    setTimeout(()=>{loadPublished();$("#catmsg").textContent=""},120000);
+  }catch(err){alert(err.message);btn.disabled=false}
+});
 
 function loadAll(){loadDrafts();loadRuns();loadPublished()}
 renderConnect();wireForm();wireBulk();

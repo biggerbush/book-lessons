@@ -128,9 +128,12 @@ def approve(slug: str) -> None:
     new = {"id": book_id, "dir": dest.name, "title": book["title"], "author": book["author"], "blurb": book["blurb"],
            "planned": book["planned"], "lessons": lessons}
     if entry:
-        entry.update(new)
+        entry.update(new)                       # keeps the book's categories
     else:
+        new["categories"] = []                  # set later from the admin page
         data["books"].append(new)
+    from .categories import reindex
+    reindex(data)
     books_path.write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf8")
     update_drafts_index()
     log(f"Published '{book['title']}' ({len(lessons)} lessons) as site/{dest.name}/")

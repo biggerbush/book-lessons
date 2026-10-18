@@ -187,3 +187,40 @@ final frame of each scene, in order, with the narration of that scene. Look for 
 Do not nitpick taste. Answer with ONLY a JSON object:
 {"ok": true|false, "issues": [{"scene": <0-based scene index>, "problem": "what is wrong", "fix": "concrete fix"}]}
 ok is true when there are no real defects."""
+
+# ---------------------------------------------------------------- mental models (Models section)
+
+MODEL_WRITER_NOTE = """
+
+This lesson is NOT a book summary. The subject is a mental model (a thinking tool). Explain the idea itself: what it is, why
+our default thinking misses it, one concrete and well-known real example, and how the listener can use it this week.
+Attribute an origin (a person, a school of thought) only if you are certain. Use only facts given in the notes or that are
+widely documented; no invented studies or numbers."""
+
+MODEL_PLAN_PROMPT = """Plan a single two-minute animated explainer of the mental model "{title}" (category: {category}).
+
+Return ONLY a JSON object, no other text:
+{{
+ "title": "{title}",
+ "author": "Mental model",
+ "knows_book_well": true,
+ "confidence_note": "",
+ "one_liner": "hook under 20 words",
+ "summary": "80-120 word overview of the model, in your own words",
+ "lessons": [ {{"title": "short lesson title, max 8 words", "key_idea": "one sentence: the single idea this explainer teaches"}} ]   (exactly 1)
+}}
+
+Use these notes as the primary reference:
+<source_notes>
+{notes}
+</source_notes>"""
+
+
+def for_model(prompt: str, plan: dict) -> str:
+    """Turn a book-lesson prompt into a mental-model prompt."""
+    head = f'Book: "{plan["title"]}" by {plan["author"]}'
+    new = (f'Mental model: "{plan["title"]}" (category: {plan.get("category", "")}). '
+           "A standalone explainer of a thinking tool, not a book summary")
+    return (prompt.replace(head, new)
+            .replace("a concrete example from the book", "one concrete, well-known real example")
+            .replace("'as reported in the book'", "'as widely reported'"))

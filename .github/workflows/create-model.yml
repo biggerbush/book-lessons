@@ -1,0 +1,100 @@
+name: Create model explainer
+run-name: "Create model explainer${{ inputs.id && format(': {0}', inputs.id) || '' }}"
+
+# Makes a two-minute narrated, animated explainer for one entry in site/models.json, as a DRAFT (approve it like a book).
+# Start it from the Actions tab (model id), or by committing a request file model-requests/<id>.json:
+#   {"id": "first-principles", "notes": "key points to cover (optional)", "mode": "real"}
+
+on:
+  workflow_dispatch:
+    inputs:
+      id: {description: "Model id from site/models.json (e.g. first-principles)", required: true, type: string}
+      notes: {description: "Extra notes (optional)", required: false, type: string, default: ""}
+      mode: {description: "real or dry", required: false, type: choice, options: [real, dry], default: real}
+  push:
+    branches: [main]
+    paths: ["model-requests/*.json"]
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: model-engine
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 2}
+
+      - name: Which models
+        id: which
+        env:
+          IN_ID: ${{ inputs.id }}
+          IN_NOTES: ${{ inputs.notes }}
+          IN_MODE: ${{ inputs.mode }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/req"
+          if [ -n "$IN_ID" ]; then
+            python3 -c 'import json,os;print(json.dumps({"id":os.environ["IN_ID"],"notes":os.environ["IN_NOTES"],"mode":os.environ["IN_MODE"] or "real"}))' > "$RUNNER_TEMP/req/$IN_ID.json"
+          else
+            for f in $(git diff --name-only --diff-filter=AM "$BEFORE" HEAD -- 'model-requests/*.json' 2>/dev/null || ls model-requests/*.json); do
+              cp "$f" "$RUNNER_TEMP/req/"
+            done
+          fi
+          ls "$RUNNER_TEMP/req"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: engine/requirements.txt
+
+      - name: Install
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          pip install -r engine/requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Run the engine
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          rc=0
+          for f in "$RUNNER_TEMP"/req/*.json; do
+            [ -e "$f" ] || continue
+            mapfile -t a < <(python3 - "$f" <<'PY'
+          import json, sys
+          r = json.load(open(sys.argv[1]))
+          d = json.load(open("site/models.json"))
+          m = next((x for x in d["models"] if x["id"] == r["id"]), None)
+          if m is None:
+              sys.exit(f"no model {r['id']} in site/models.json")
+          notes = "\n".join(f"{c['k']}: {c['t']}" for c in m["cards"])
+          if m.get("flow"):
+              notes += "\nSteps: " + " | ".join(f"{s['k']}: {s['t']}" for s in m["flow"])
+          if r.get("notes"):
+              notes += "\n\nMore notes:\n" + r["notes"]
+          for v in (m["id"], m["name"], m["category"], r.get("mode", "real"), m["tagline"] + "\n" + notes):
+              print(v.replace("\n", "\\n"))
+          PY
+            ) || { rc=1; continue; }
+            args=(--model-id "${a[0]}" --title "${a[1]}" --category "${a[2]}" --notes "$(printf '%b' "${a[4]}")" --commit --max-cost 6)
+            [ "${a[3]}" = "dry" ] && args+=(--dry-run)
+            python -m engine.run_book "${args[@]}" || rc=1
+          done
+          exit $rc
+
+      - name: Publish the draft preview to the site
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main

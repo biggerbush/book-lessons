@@ -358,7 +358,7 @@ function onFrameLoad(f,b,n){
   let doc; try{doc=f.contentDocument}catch(e){doc=null}
   if(!doc)return;
   try{doc.documentElement.setAttribute("data-theme",theme)}catch(e){}
-  const fit=()=>{try{f.style.height=Math.ceil(doc.documentElement.scrollHeight)+"px"}catch(e){}};
+  const fit=()=>{try{f.style.height=Math.ceil(doc.documentElement.getBoundingClientRect().height)+"px"}catch(e){}};
   fit();
   try{new f.contentWindow.ResizeObserver(fit).observe(doc.documentElement)}catch(e){window.addEventListener("resize",fit)}
   if(wantPlay){

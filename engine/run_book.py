@@ -36,13 +36,19 @@ def build_html(plan: dict, n: int, lesson: dict, meta: dict, script: timing.Scri
         audio = f'<audio id="vo" preload="auto" src="lesson-{n:02d}.mp3"></audio>'
     else:
         audio = '<audio id="vo" preload="none"></audio>'
-    note = (f"A paraphrased summary of &ldquo;{e(lesson['title'])}&rdquo;, from <em>{e(book)}</em> by {e(author)}. "
-            f"{e(meta.get('note_extra', '').strip())} Drawings are illustrative. "
-            + ("Narration is an AI voice generated with ElevenLabs." if mp3 is not None else "This preview is silent."))
-    aria = (f"Animated summary of lesson {n} of {book}: {lesson['key_idea'].rstrip('.')}. "
+    if plan.get("kind") == "model":
+        note = (f"An animated explainer of the {e(book)} mental model. {e(meta.get('note_extra', '').strip())} Drawings are illustrative. "
+                + ("Narration is an AI voice generated with ElevenLabs." if mp3 is not None else "This preview is silent."))
+    else:
+        note = (f"A paraphrased summary of &ldquo;{e(lesson['title'])}&rdquo;, from <em>{e(book)}</em> by {e(author)}. "
+                f"{e(meta.get('note_extra', '').strip())} Drawings are illustrative. "
+                + ("Narration is an AI voice generated with ElevenLabs." if mp3 is not None else "This preview is silent."))
+    aria = (f"Animated explainer of the {book} mental model: {lesson['key_idea'].rstrip('.')}. "
+            f"{len(script.scenes)} scenes{' with narration' if mp3 is not None else ''}.") if plan.get("kind") == "model" else (
+            f"Animated summary of lesson {n} of {book}: {lesson['key_idea'].rstrip('.')}. "
             f"{len(script.scenes)} scenes{' with narration' if mp3 is not None else ''}.")
     p = {
-        "title": e(f"{book} Lesson {n}"), "aria": e(aria, quote=True), "scenes": parts["scenes"].strip("\n"),
+        "title": e(f"{book} · Mental model" if plan.get("kind") == "model" else f"{book} Lesson {n}"), "aria": e(aria, quote=True), "scenes": parts["scenes"].strip("\n"),
         "note": note, "audio": audio, "muted_hidden": mp3 is None,
         **timing.cfg_to_parts(cfg),
         "setup": parts["setup"].strip("\n") + "\n\n" if parts["setup"].strip() else "\n",
@@ -163,17 +169,23 @@ def process_lesson(ctx: dict, state: dict, L: dict) -> None:
 
 # ---------------------------------------------------------------- one book
 
-def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: bool, max_cost: float) -> int:
-    slug = ("dry-" if dry else "") + slugify(title)
+def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: bool, max_cost: float,
+        model_id: str = "", category: str = "") -> int:
+    is_model = bool(model_id)
+    if is_model:
+        n_lessons = 1
+    slug = ("dry-" if dry else "") + ("model-" + slugify(model_id) if is_model else slugify(title))
     if not slug:
         sys.exit("empty title")
-    if not dry and (SITE / "books.json").exists():
+    if not dry and not is_model and (SITE / "books.json").exists():
         for b in json.loads((SITE / "books.json").read_text(encoding="utf8"))["books"]:
             if b["lessons"] and slugify(b["title"]) == slug:
                 log(f"'{b['title']}' is already published ({len(b['lessons'])} lessons). Delete it first if you want it rebuilt.")
                 return 0
     state = publish.load_state(slug) or {"slug": slug, "title": title, "author": author, "dry": dry, "status": "planning",
                                          "usage": new_usage(), "lessons": [], "created": publish.now()}
+    if is_model:
+        state.update(kind="model", model_id=slugify(model_id), category=category)
     state.update(dry=dry)
     if state.get("plan"):
         state["plan"]["title"] = title                   # the title the user typed, not a long subtitle from an earlier plan
@@ -203,7 +215,7 @@ def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: 
             state.pop("plan", None)                          # notes were supplied: plan again with them
             state.update(status="planning", lessons=[], message="")
         if not state.get("plan"):
-            plan = brain.plan(title, author, n_lessons, notes)
+            plan = brain.plan_model(title, category, notes) if is_model else brain.plan(title, author, n_lessons, notes)
             state["plan"] = plan
             if not plan.get("knows_book_well") and not notes:
                 state.update(status="needs_source", lessons=[],
@@ -259,12 +271,15 @@ def main() -> None:
     ap.add_argument("--lessons", type=int, default=CONFIG.get("lessons_per_book", 10))
     ap.add_argument("--notes", default="")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--model-id", default="", help="make a Models-section explainer (one lesson) for this model id in site/models.json")
+    ap.add_argument("--category", default="")
     ap.add_argument("--commit", action="store_true", help="commit and push after each lesson (used in GitHub Actions)")
     ap.add_argument("--max-cost", type=float, default=float(os.environ.get("BOOK_MAX_COST", "30")))
     a = ap.parse_args()
     if not 1 <= a.lessons <= 12:
         sys.exit("--lessons must be 1 to 12")
-    sys.exit(run(a.title.strip()[:120], a.author.strip()[:120], a.lessons, a.notes.strip()[:20000], a.dry_run, a.commit, a.max_cost))
+    sys.exit(run(a.title.strip()[:120], a.author.strip()[:120], a.lessons, a.notes.strip()[:20000], a.dry_run, a.commit, a.max_cost,
+            a.model_id.strip()[:80], a.category.strip()[:60]))
 
 
 if __name__ == "__main__":

@@ -68,6 +68,8 @@ def write_draft(state: dict) -> None:
         "message": state.get("message", ""), "dry": bool(state.get("dry")), "input_title": state["title"],
         "cost_usd": cost_usd(state.get("usage", {})), "updated": state.get("updated", now()),
     }
+    if state.get("kind") == "model":
+        book.update(kind="model", model_id=state.get("model_id", ""), category=state.get("category", ""))
     (d / "book.json").write_text(json.dumps(book, indent=1, ensure_ascii=False), encoding="utf8")
     update_drafts_index()
 
@@ -113,6 +115,9 @@ def approve(slug: str) -> None:
     if book["status"] != "ready":
         sys.exit(f"Draft is '{book['status']}', not 'ready'; finish or re-run it before approving.")
 
+    if book.get("kind") == "model":
+        return approve_model(src, book)
+
     books_path = SITE / "books.json"
     data = json.loads(books_path.read_text(encoding="utf8"))
     entry = next((b for b in data["books"] if norm_title(b["title"]) == norm_title(book["title"])), None)
@@ -137,6 +142,28 @@ def approve(slug: str) -> None:
     books_path.write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf8")
     update_drafts_index()
     log(f"Published '{book['title']}' ({len(lessons)} lessons) as site/{dest.name}/")
+
+
+def approve_model(src, book: dict) -> None:
+    """A Models-section explainer: move it to site/models/<id>/ and point the model at it in models.json."""
+    mid = book["model_id"]
+    path = SITE / "models.json"
+    data = json.loads(path.read_text(encoding="utf8"))
+    m = next((x for x in data["models"] if x["id"] == mid), None)
+    if m is None:
+        sys.exit(f"No model '{mid}' in site/models.json")
+    dest = SITE / "models" / mid
+    if dest.exists():
+        shutil.rmtree(dest)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.move(str(src), str(dest))
+    externalize_audio(dest)
+    (dest / "book.json").unlink(missing_ok=True)
+    m["video"] = {"src": f"models/{mid}/lesson-01.html", "thumb": f"models/{mid}/thumb-01.jpg", "d": book["lessons"][0]["d"]}
+    data["updated"] = now()
+    path.write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf8")
+    update_drafts_index()
+    log(f"Published the animated explainer for '{m['name']}' as site/models/{mid}/")
 
 
 def approve_all() -> None:

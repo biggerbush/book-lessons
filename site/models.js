@@ -68,12 +68,12 @@ function toggle(k,id){
 const byId=id=>DATA.models.find(m=>m.id===id);
 
 /* ------------------------------------------------------------------ views */
-function cover(m){return m.story?'<div class="artbox story-cover"><svg class="scene on" viewBox="0 0 360 280" aria-hidden="true">'+m.story[0].svg+'</svg></div>':'<div class="artbox">'+art(m.art)+'</div>'}
+function cover(m){if(m.video&&m.video.thumb)return '<div class="artbox vthumb"><img src="'+esc(m.video.thumb)+'" alt="" loading="lazy"><span class="vplay">'+ICON.play+'</span></div>';return m.story?'<div class="artbox story-cover"><svg class="scene on" viewBox="0 0 360 280" aria-hidden="true">'+m.story[0].svg+'</svg></div>':'<div class="artbox">'+art(m.art)+'</div>'}
 function card(m){
   const n=m.story?m.story.length+1:5;
   return '<a class="mcard'+(m.story?" has-story":"")+'" href="#/models/'+m.id+'">'+(has("learned",m.id)?'<span class="mark" title="Learned">'+ICON.check+'</span>':"")+
-    (m.story?'<span class="anim">Animated</span>':"")+cover(m)+'<div class="mcard-b"><h3>'+esc(m.name)+'</h3><p>'+esc(m.tagline)+'</p>'+
-    '<div class="foot"><span>'+esc(m.category)+'</span><span>'+n+' swipes</span></div></div></a>';
+    (m.video?'<span class="anim">Watch</span>':m.story?'<span class="anim">Animated</span>':"")+cover(m)+'<div class="mcard-b"><h3>'+esc(m.name)+'</h3><p>'+esc(m.tagline)+'</p>'+
+    '<div class="foot"><span>'+esc(m.category)+'</span><span>'+(m.video?Math.max(1,Math.round((m.video.d||120)/60))+' min video':n+' swipes')+'</span></div></div></a>';
 }
 function homeView(){
   VG.stopWatcher();VG.removeBar();
@@ -204,6 +204,49 @@ function detailView(m){
   marks();window.scrollTo(0,0);
 }
 
+/* a model with a narrated animated explainer: watch first, key points below, slides optional */
+function videoView(m){
+  VG.stopWatcher();VG.removeBar();
+  document.title=m.name+" · Models · VisualGrowth";
+  VG.setCrumb([{label:"Models",href:"#/models"},{label:m.name}]);
+  const i=DATA.models.indexOf(m),prev=DATA.models[i-1],next=DATA.models[i+1];
+  const rel=DATA.models.filter(x=>x.categorySlug===m.categorySlug&&x.id!==m.id).slice(0,3);
+  const cbt=m.categorySlug==="emotions-cbt", mins=Math.max(1,Math.round((m.video.d||120)/60));
+  VG.app.innerHTML='<div class="mdet vwatch">'+
+   '<div class="vhead"><a class="back" href="#/models">'+ICON.prev.replace("<svg",'<svg width="12" height="12"')+' Models</a>'+
+     '<button class="sx" id="sbook" type="button" aria-label="Revisit later"></button></div>'+
+   '<div class="ptitle"><div class="eyebrow">'+esc(m.category)+' · '+mins+' min animated explainer</div><h2>'+esc(m.name)+'</h2><p class="vsub">'+esc(m.tagline)+'</p></div>'+
+   '<div class="frame"><div class="loading" id="ld" role="status"><span class="spin" aria-hidden="true"></span><span>Loading…</span></div>'+
+     '<iframe id="lf" title="'+esc(m.name)+', animated explainer" allow="autoplay; fullscreen" allowfullscreen></iframe></div>'+
+   '<div class="vkeys"><h2 class="mh2">Key points</h2><ol>'+m.cards.slice(0,4).map(c=>'<li><b>'+esc(c.k)+'</b><p>'+esc(c.t)+'</p></li>').join("")+'</ol>'+
+     '<div class="vask"><span>Ask yourself</span><p>'+esc(m.cards[4].t)+'</p>'+
+     '<div class="acts"><button class="btn" id="lrn" type="button"></button>'+(next?'<a class="btn primary" href="#/models/'+next.id+'">Next: '+esc(next.name)+' '+ICON.next.replace("<svg",'<svg width="14" height="14"')+'</a>':'<a class="btn primary" href="#/models">All models</a>')+'</div></div>'+
+     (cbt?'<p class="note">An educational overview of a thinking tool, not therapy or medical advice. If you are struggling, a qualified professional can help.</p>':"")+
+     (m.story?'<p class="vslides"><a href="#/models/'+m.id+'/slides">Prefer to read? Swipe through the slides</a></p>':"")+'</div>'+
+   (rel.length?'<div class="related"><h2>More in '+esc(m.category)+'</h2><div class="mgrid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))">'+rel.map(card).join("")+'</div></div>':"")+
+   '<div class="pn">'+(prev?'<a href="#/models/'+prev.id+'"><small>Previous</small><b>'+esc(prev.name)+'</b></a>':'<span style="flex:1"></span>')+(next?'<a class="nx" href="#/models/'+next.id+'"><small>Next</small><b>'+esc(next.name)+'</b></a>':'<span style="flex:1"></span>')+'</div></div>';
+  const f=$("#lf");
+  f.addEventListener("load",()=>{
+    const ld=$("#ld");if(ld)ld.remove();
+    let doc;try{doc=f.contentDocument}catch(e){return}
+    if(!doc)return;
+    const th=document.documentElement.getAttribute("data-theme");
+    try{if(th)doc.documentElement.setAttribute("data-theme",th)}catch(e){}
+    const fit=()=>{try{f.style.height=Math.ceil(doc.documentElement.getBoundingClientRect().height)+"px"}catch(e){}};
+    fit();try{new f.contentWindow.ResizeObserver(fit).observe(doc.documentElement)}catch(e){addEventListener("resize",fit)}
+  });
+  f.src=m.video.src;
+  const marks=()=>{
+    const l=has("learned",m.id),r=has("revisit",m.id);
+    $("#lrn").innerHTML=l?ICON.check.replace("<svg",'<svg width="16" height="16"')+" Learned":"Mark as learned";$("#lrn").className="btn"+(l?" on":"");$("#lrn").setAttribute("aria-pressed",l);
+    $("#sbook").innerHTML=r?'<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z" fill="currentColor"/></svg>':'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+    $("#sbook").setAttribute("aria-pressed",r);$("#sbook").classList.toggle("on",r);
+  };
+  $("#lrn").addEventListener("click",()=>{toggle("learned",m.id);marks()});
+  $("#sbook").addEventListener("click",()=>{toggle("revisit",m.id);marks()});
+  marks();window.scrollTo(0,0);
+}
+
 function savedView(){
   VG.stopWatcher();VG.removeBar();
   document.title="Saved models · VisualGrowth";
@@ -232,7 +275,7 @@ window.VGModels={
     const id=parts[1];
     if(id==="saved")return savedView();
     const m=id&&byId(id);
-    if(m)return detailView(m);
+    if(m)return m.video&&parts[2]!=="slides"?videoView(m):detailView(m);
     homeView();
   }
 };

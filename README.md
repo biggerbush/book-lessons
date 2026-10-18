@@ -73,3 +73,12 @@ voice-over (one ElevenLabs generation per lesson) and builds a **draft**. Nothin
 Edit them any time after publishing: admin page → **Published** → tap categories (or type a new one) → **Save categories**.
 That runs the *Set categories* workflow (`python -m engine.categories apply ...`), commits `books.json` and redeploys.
 Newly approved books start with no categories; publishing never overwrites a book's existing categories.
+
+## Models: narrated animated explainers
+
+Any entry in `site/models.json` can get a two-minute narrated, animated explainer, made by the same engine as the books
+(one lesson, one ElevenLabs generation). Start it from the Actions tab (*Create model explainer*, model id) or by
+committing `model-requests/<id>.json` (`{"id": "...", "notes": "optional extra points", "mode": "real"}`).
+The draft shows in the admin page as `model-<id>`; *Approve* moves it to `site/models/<id>/` and adds
+`"video": {"src", "thumb", "d"}` to that model in `models.json`. Models with a video open on the player
+(`#/models/<id>`); the swipe slides stay at `#/models/<id>/slides`.

@@ -107,6 +107,14 @@ class RealBrain:
             plan["author"] = author
         return plan
 
+    def plan_model(self, title: str, category: str, notes: str) -> dict:
+        text = self.llm.ask(P.WRITER_SYSTEM + P.MODEL_WRITER_NOTE,
+                            P.MODEL_PLAN_PROMPT.format(title=title, category=category, notes=notes), 3000, "plan the model")
+        plan = parse_json(text)
+        plan["lessons"] = plan["lessons"][:1]
+        plan.update(title=title, author="Mental model", kind="model", category=category, knows_book_well=True)
+        return plan
+
     def extend(self, plan: dict, done: list[dict], n: int, notes: str) -> list[dict]:
         outline = "\n".join(f"{i + 1}. {l['title']}: {l['key_idea']}" for i, l in enumerate(done))
         nt = f"\n\nSource notes:\n<source_notes>\n{notes}\n</source_notes>" if notes else ""
@@ -122,10 +130,14 @@ class RealBrain:
         outline = "\n".join(f"{i + 1}. {l['title']}: {l['key_idea']}" for i, l in enumerate(plan["lessons"]))
         redo = ""
         for attempt in range(3):
-            text = self.llm.ask(P.WRITER_SYSTEM, P.SCRIPT_PROMPT.format(
+            prompt = P.SCRIPT_PROMPT.format(
                 title=plan["title"], author=plan["author"], summary=plan["summary"], outline=outline, n=n,
                 ltitle=lesson["title"], key_idea=lesson["key_idea"], scenes=scenes, words=CONFIG.get("words_per_lesson", 310),
-                redo=redo), 5000, f"write script for lesson {n}")
+                redo=redo)
+            system = P.WRITER_SYSTEM
+            if plan.get("kind") == "model":
+                prompt, system = P.for_model(prompt, plan), system + P.MODEL_WRITER_NOTE
+            text = self.llm.ask(system, prompt, 5000, f"write script for lesson {n}")
             try:
                 meta, script_text = parse_script_response(text)
                 script = parse_script(script_text)
@@ -149,8 +161,11 @@ class RealBrain:
                     k += 1
             prompt = P.DESIGN_PROMPT.format(
                 title=plan["title"], author=plan["author"], n=n, total=total, ltitle=lesson["title"], key_idea=lesson["key_idea"],
-                label=f"{plan['title'].upper()} · LESSON {n}", subtitle=meta.get("subtitle", ""), scene_count=len(script.scenes),
+                label=(f"MENTAL MODEL · {plan.get('category', '').upper()}" if plan.get("kind") == "model"
+                       else f"{plan['title'].upper()} · LESSON {n}"), subtitle=meta.get("subtitle", ""), scene_count=len(script.scenes),
                 last=len(script.scenes) - 1, script="\n".join(lines))
+            if plan.get("kind") == "model":
+                prompt = P.for_model(prompt, plan)
         else:
             prompt = P.FIX_PROMPT.format(issues="\n".join("- " + i for i in (issues or [])), scenes=previous["scenes"],
                                          setup=previous["setup"], render=previous["render"])
@@ -174,6 +189,11 @@ class MockBrain:
 
     def plan(self, title: str, author: str, n: int, notes: str) -> dict:
         return mock.plan(title, n)
+
+    def plan_model(self, title, category, notes):
+        plan = mock.plan(title, 1)
+        plan.update(title=title, author="Mental model", kind="model", category=category, knows_book_well=True)
+        return plan
 
     def extend(self, plan, done, n, notes):
         return [{"title": f"Dry run lesson {i + 1}", "key_idea": "Filler idea for the pipeline test."} for i in range(len(done), n)]

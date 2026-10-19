@@ -432,15 +432,82 @@ COVERS = {
 COVERS["never-split-the-difference"] = negotiation
 
 
+# ---------------------------------------------------------------- book jackets (the cover shown in the library)
+# Our own jacket design: one colour per book from our palette, author + title in our type, our illustration as the
+# picture. Deliberately NOT based on the publisher's cover art or colours.
+JACKETS = [  # (book colour, tile colour, text colour)
+    ("#F26B3A", "#FFD6C6", "#FFFFFF"), ("#1C4466", "#C4E6F5", "#FFFFFF"), ("#F4C430", "#FFF1B8", "#1E3553"),
+    ("#E04B4B", "#F8C9C9", "#FFFFFF"), ("#4B4C7E", "#D7D6EA", "#FFFFFF"), ("#1F8A84", "#CBEBE6", "#FFFFFF"),
+    ("#2F6FD6", "#CCDDF8", "#FFFFFF"), ("#3E8F5A", "#D3ECDA", "#FFFFFF"), ("#F0A23B", "#FCE4BC", "#1E3553"),
+    ("#7A4E8C", "#E5D5EC", "#FFFFFF"),
+]
+FONT = "'Helvetica Neue', Helvetica, Arial, sans-serif"
+
+
+def _wrap(text: str, size: float, width: float, k: float = .6) -> list[str]:
+    per = max(4, int(width / (size * k)))
+    lines, cur = [], ""
+    for w in text.split():
+        if cur and len(cur) + 1 + len(w) > per:
+            lines.append(cur)
+            cur = w
+        else:
+            cur = (cur + " " + w).strip()
+    return lines + [cur] if cur else lines
+
+
+def _author(a: str) -> str:
+    import re
+    first = re.split(r",| and | with | \(", a)[0].strip()
+    return first + (" et al." if "," in a and " and " in a else "")
+
+
+def _esc(t: str) -> str:
+    from html import escape
+    return escape(t)
+
+
+def jacket(book: dict, n: int) -> str:
+    col, tile, ink = JACKETS[n % len(JACKETS)]
+    x, y, w, h = 112, 28, 176, 264
+    title = book["title"]
+    for size in (27, 24, 21, 19, 17, 15.5, 14):
+        lines = _wrap(title, size, w - 30, .62)
+        if len(lines) <= (3 if size >= 19 else 4) and all(len(l) * size * .62 <= w - 28 for l in lines):
+            break
+    ty = y + 40
+    text = "".join(f'<text x="{x + 18}" y="{ty + size * (i + 1) + (i * size * .12):.1f}" font-family="{FONT}" font-weight="800" '
+                   f'font-size="{size}" fill="{ink}" letter-spacing="-.2">{_esc(l)}</text>' for i, l in enumerate(lines))
+    auth = _author(book.get("author", "")).upper()
+    asize = 8.2 if len(auth) <= 24 else 7
+    text += (f'<text x="{x + 18}" y="{y + 26}" font-family="{FONT}" font-weight="700" font-size="{asize}" letter-spacing="1.1" '
+             f'fill="{ink}" opacity=".85">{_esc(auth)}</text>')
+    # the picture: our illustration for this book in a panel on the lower half of the jacket
+    ill = COVERS[book["id"]]()
+    inner = ill[ill.index("</defs>") + 7:ill.rindex("</svg>")]
+    py = y + 150
+    pic = (f'<clipPath id="pc"><rect x="{x + 10}" y="{py}" width="{w - 18}" height="{h - 146}" rx="7"/></clipPath>'
+           f'<g clip-path="url(#pc)"><rect x="{x + 10}" y="{py}" width="{w - 18}" height="{h - 146}" fill="#F6F1E8"/>'
+           f'<svg x="{x + 10}" y="{py}" width="{w - 18}" height="{h - 146}" viewBox="20 30 360 260" preserveAspectRatio="xMidYMid slice">{inner}</svg></g>')
+    book_svg = (rect(x + 5, y + 7, w, h, "#000", 5, ' opacity=".12"') +                      # shadow
+                rect(x, y, w, h, col, 5) + rect(x, y, 7, h, "#000", 3, ' opacity=".16"') +  # jacket + spine
+                rect(x + 7, y, 1.5, h, "#FFF", 0, ' opacity=".18"') + text + pic +
+                circ(x + w - 15, y + h - 12, 0, "none"))
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}">'
+            f'<defs><radialGradient id="g" cx="50%" cy="38%" r="75%"><stop offset="0" stop-color="#FBF8F2"/><stop offset="1" stop-color="{CREAM2}"/></radialGradient></defs>'
+            f'<rect width="{W}" height="{H}" fill="{tile}"/><circle cx="200" cy="330" r="170" fill="#FFFFFF" opacity=".55"/>'
+            f'{book_svg}</svg>')
+
+
 def main() -> None:
     data = json.loads((SITE / "books.json").read_text(encoding="utf8"))
     missing = [b["id"] for b in data["books"] if b["id"] not in COVERS]
     if missing:
         sys.exit("no cover drawing for: " + ", ".join(missing))
-    for b in data["books"]:
+    for n, b in enumerate(data["books"]):
         d = SITE / b["dir"]
         d.mkdir(parents=True, exist_ok=True)
-        (d / "cover.svg").write_text(COVERS[b["id"]](), encoding="utf8")
+        (d / "cover.svg").write_text(jacket(b, n), encoding="utf8")
         b["cover"] = f"{b['dir']}/cover.svg"
         b["cover_png"] = f"{b['dir']}/cover.png"
     render_png([SITE / b["dir"] / "cover.svg" for b in data["books"]])

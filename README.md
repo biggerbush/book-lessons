@@ -85,6 +85,6 @@ The draft shows in the admin page as `model-<id>`; *Approve* moves it to `site/m
 
 ## Book covers
 
-Each book has an illustrated cover (`site/<dir>/cover.svg`, plus `cover.png` 800x640 for apps), drawn by
+Each book has an illustrated book-jacket cover (our own design: palette colour, title, author and the book's illustration; `site/<dir>/cover.svg`, plus `cover.png` 800x640 for apps), drawn by
 `python3 tools/make_covers.py` (add a drawing to `COVERS` for a new book). `books.json` carries `cover` and `cover_png`.
 A book without a cover falls back to its first lesson frame. The site draws the play button on top.

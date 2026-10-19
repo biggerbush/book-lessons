@@ -82,3 +82,9 @@ committing `model-requests/<id>.json` (`{"id": "...", "notes": "optional extra p
 The draft shows in the admin page as `model-<id>`; *Approve* moves it to `site/models/<id>/` and adds
 `"video": {"src", "thumb", "d"}` to that model in `models.json`. Models with a video open on the player
 (`#/models/<id>`); the swipe slides stay at `#/models/<id>/slides`.
+
+## Book covers
+
+Each book has an illustrated cover (`site/<dir>/cover.svg`, plus `cover.png` 800x640 for apps), drawn by
+`python3 tools/make_covers.py` (add a drawing to `COVERS` for a new book). `books.json` carries `cover` and `cover_png`.
+A book without a cover falls back to its first lesson frame. The site draws the play button on top.

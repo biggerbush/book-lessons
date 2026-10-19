@@ -85,6 +85,15 @@ a.card:hover{border-color:var(--gain);transform:translateY(-2px)}
 .card.locked h3,.card.locked .by{opacity:.78}
 .soon{display:inline-block;margin-top:12px;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--loss);border:1px solid var(--loss);border-radius:4px;padding:4px 8px}
 .section-h{margin:46px 0 16px}
+/* section headings: large, wide-tracked amber caps */
+.section-h.eyebrow,.all-h.eyebrow{font:800 clamp(22px,5.6vw,30px)/1.1 var(--display);letter-spacing:.2em;color:var(--gain);margin-top:52px}
+/* artwork fades softly into the card; a round amber play button sits in the middle */
+.grid a.card .cover::after,.mcard .artbox::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--panel) 26%,transparent) 0%,color-mix(in srgb,var(--panel) 4%,transparent) 40%,color-mix(in srgb,var(--panel) 62%,transparent) 84%,var(--panel) 100%)}
+.playbtn{position:absolute;left:50%;top:50%;z-index:2;width:clamp(56px,17%,76px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:var(--gain);color:var(--on-gain);
+  display:grid;place-items:center;box-shadow:0 0 0 7px color-mix(in srgb,var(--gain) 22%,transparent),0 10px 26px -6px color-mix(in srgb,var(--gain) 70%,transparent);transition:transform .18s}
+.playbtn svg{width:36%;height:36%;margin-left:7%;fill:currentColor}
+a.card:hover .playbtn,.mcard:hover .playbtn{transform:translate(-50%,-50%) scale(1.07)}
 
 /* book */
 .back{display:inline-flex;align-items:center;gap:6px;margin:22px 0 16px;background:none;border:0;padding:6px 0;color:var(--muted);font:500 13px var(--mono);letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
@@ -241,7 +250,7 @@ function libraryView(){
    '<div class="grid">'+rdy.map(b=>{
       const run=b.lessons.reduce((a,l)=>a+l.d,0);
       return '<a class="card" href="#/'+b.id+'"><div class="cover"><img src="'+thumbUrl(b,1)+'" alt="" loading="lazy" decoding="async">'+
-        '</div>'+
+        '<span class="playbtn" aria-hidden="true">'+ICON.play+'</span></div>'+
         '<div class="card-b"><h3>'+esc(b.title)+'</h3><div class="by">'+esc(b.author)+'</div>'+
         '<div class="cmeta">'+b.lessons.length+' lessons · '+mins(run)+' min</div></div></a>';
    }).join("")+'</div>'+

@@ -68,7 +68,8 @@ function toggle(k,id){
 const byId=id=>DATA.models.find(m=>m.id===id);
 
 /* ------------------------------------------------------------------ views */
-function cover(m){if(m.video&&m.video.thumb)return '<div class="artbox vthumb"><img src="'+esc(m.video.thumb)+'" alt="" loading="lazy"><span class="vplay">'+ICON.play+'</span></div>';return m.story?'<div class="artbox story-cover"><svg class="scene on" viewBox="0 0 360 280" aria-hidden="true">'+m.story[0].svg+'</svg></div>':'<div class="artbox">'+art(m.art)+'</div>'}
+const PLAY='<span class="playbtn" aria-hidden="true">'+ICON.play+'</span>';
+function cover(m){if(m.video&&m.video.thumb)return '<div class="artbox vthumb"><img src="'+esc(m.video.thumb)+'" alt="" loading="lazy">'+PLAY+'</div>';return m.story?'<div class="artbox story-cover"><svg class="scene on" viewBox="0 0 360 280" aria-hidden="true">'+m.story[0].svg+'</svg>'+PLAY+'</div>':'<div class="artbox">'+art(m.art)+PLAY+'</div>'}
 function card(m){
   const n=m.story?m.story.length+1:5;
   return '<a class="mcard'+(m.story?" has-story":"")+'" href="#/models/'+m.id+'">'+(has("learned",m.id)?'<span class="mark" title="Learned">'+ICON.check+'</span>':"")+

@@ -97,7 +97,10 @@ a.card:hover .playbtn,.mcard:hover .playbtn{transform:translate(-50%,-50%) scale
 .cover.art{aspect-ratio:5/4;background:#F6F1E8}
 .cover.art .playbtn{top:71%;width:clamp(46px,16%,58px);background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   box-shadow:0 0 0 5px rgba(255,255,255,.35),0 8px 20px -6px rgba(30,53,83,.4);transition:transform .18s,background .18s}
-a.card:hover .cover.art .playbtn{background:rgba(255,255,255,.92);transform:translate(-50%,-50%) scale(1.08)}
+.bhero a.cover{display:block;text-decoration:none}
+.bhero .cover.art .playbtn{width:clamp(54px,13%,80px)}
+@media (min-width:761px){.bhero a.cover.art{aspect-ratio:auto;height:100%;min-height:100%}.bhero a.cover.art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}}
+.bhero a.cover:hover .playbtn,a.card:hover .cover.art .playbtn{background:rgba(255,255,255,.92);transform:translate(-50%,-50%) scale(1.08)}
 .grid a.card .cover.art::after{display:none}
 .bhero .cover.art{background:#F6F1E8;min-height:0;aspect-ratio:5/4}
 .bhero .cover.art img{object-fit:cover;height:100%}
@@ -283,7 +286,7 @@ function bookView(b){
   const cont=last&&last.book===b.id&&last.n>1&&last.n<=b.lessons.length?last.n:0;
   app.innerHTML=draftBanner(b)+
    '<a class="back" href="#/">'+ICON.prev.replace('<svg','<svg width="12" height="12"')+' Library</a>'+
-   '<section class="bhero"><div class="cover'+(b.cover?' art':'')+'"><img src="'+coverUrl(b)+'" alt=""></div><div class="bhero-b">'+
+   '<section class="bhero"><a class="cover'+(b.cover?' art':'')+'" href="#/'+b.id+'/'+(cont||1)+'" data-play="1" aria-label="'+(cont?'Continue lesson '+cont:'Play lesson 1')+'"><img src="'+coverUrl(b)+'" alt=""><span class="playbtn" aria-hidden="true">'+ICON.play+'</span></a><div class="bhero-b">'+
      '<div class="eyebrow">Book</div><h1>'+esc(b.title)+'</h1><div class="by">'+esc(b.author)+'</div>'+
      '<p class="blurb">'+esc(b.blurb||"")+'</p>'+
      '<div class="stats"><div class="stat"><b>'+b.lessons.length+'</b><span>Lessons</span></div>'+

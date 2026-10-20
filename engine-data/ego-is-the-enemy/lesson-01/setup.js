@@ -1,0 +1,20 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const star=(cx,cy,R)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?R*.45:R;d+=(i?'L':'M')+(cx+rr*Math.cos(a)).toFixed(1)+' '+(cy+rr*Math.sin(a)).toFixed(1)}return d+'Z'};
+fig($('me'),300,420,50,'ink');fig($('refl'),640,420,50,'ink');
+const BB=['I deserve more.','I know enough.','I matter most.'].map((s,i)=>{const g=mk('g',{},$('bubs'));mk('rect',{x:920,y:290+i*120,width:540,height:90,rx:45,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);const tx=mk('text',{x:960,y:348+i*120,'font-size':40,class:'d5'},g);tx.textContent='“'+s+'”';return g});
+const SPK=[];for(let i=0;i<7;i++){const x=180+i*120;fig($('crowd'),x,400,32,i===3?'loss':'ink');SPK.push(mk('circle',{cx:x,cy:500,r:9,class:'gain'},$('sparks')))}
+for(let r=0;r<7;r++)for(let c=0;c<3;c++)mk('rect',{x:1020+c*48,y:350+r*56,width:28,height:30,fill:'var(--line)'},$('wins'));
+const PR=[[900,260],[1250,250],[1400,330],[1300,620],[1420,700]].map(q=>mk('path',{d:star(q[0],q[1],22),class:'gain'},$('praise')));
+fig($('ryan'),0,0,26,'gain');
+mk('path',{d:star(0,0,40),class:'loss'},$('fsg'));
+fig($('tme'),1250,410,40,'ink');
+fig($('aspme'),260,668,27,'ink');
+mk('path',{d:star(260,420,50),class:'gain'},$('dstar'));
+const TG=[0,1,2].map(k=>{const g=mk('g',{},$('tgt'));[150,100,50].forEach(r=>mk('circle',{cx:1150,cy:430,r:r,fill:'none',stroke:k?'var(--muted)':'var(--ink)','stroke-width':8},g));mk('circle',{cx:1150,cy:430,r:20,fill:k?'var(--muted)':'var(--gain)'},g);return g});
+const LO=['STOP LEARNING','LOSE FOCUS','PROTECT THE IMAGE'].map((s,i)=>{const g=mk('g',{},$('lose'));mk('rect',{x:120+i*470,y:680,width:420,height:70,rx:35,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);const tx=mk('text',{x:330+i*470,y:723,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const RN=[];for(let i=0;i<6;i++)RN.push(mk('path',{class:'s-loss','stroke-width':5,'stroke-linecap':'round'},$('rain')));
+fig($('fp'),360,470,36,'ink');fig($('others'),620,560,20,'ink');fig($('others'),710,560,20,'ink');
+[['ASPIRE',-90],['SUCCEED',30],['FAIL',150]].forEach(([s,a])=>{const x=1150+190*Math.cos(a*Math.PI/180),y=500+190*Math.sin(a*Math.PI/180);mk('rect',{x:x-85,y:y-26,width:170,height:52,rx:26,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('cyc'));const tx=mk('text',{x:x,y:y+7,'font-size':20,'text-anchor':'middle',class:'m'},$('cyc'));tx.textContent=s});
+const EGD=mk('g',{},$('cyc'));mk('circle',{cx:0,cy:0,r:30,class:'loss'},EGD);const egt=mk('text',{x:0,y:6,'font-size':18,'text-anchor':'middle',class:'m',style:'fill:var(--stage)'},EGD);egt.textContent='EGO';
+for(let i=0;i<7;i++)mk('circle',{cx:1150+i*40,cy:560,r:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('spir'));
+const NL=[0,1,2,3].map(i=>mk('line',{x1:1150,y1:666+i*40,x2:1150,y2:666+i*40,class:'s-line','stroke-width':5,'stroke-linecap':'round'},$('nbl')));

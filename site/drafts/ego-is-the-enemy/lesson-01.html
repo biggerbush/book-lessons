@@ -1,0 +1,332 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ego Is the Enemy Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Ego Is the Enemy: Ego, an unhealthy belief in our own importance, undermines us at every stage, whether we are aspiring, succeeding or failing. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">EGO IS THE ENEMY · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Meet the enemy</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">inside you.</text>
+<text class="b" x="120" y="600" font-size="32">The quiet saboteur that follows you</text>
+<text class="b" x="120" y="644" font-size="32">through every stage of life</text>
+<circle class="s-ink" cx="1280" cy="390" r="170" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M1090 800v-50a190 130 0 0 1 380 0v50" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="shadow"><circle class="loss" cx="1280" cy="350" r="34"/><path class="loss" d="M1230 460v-20a50 50 0 0 1 100 0v20z"/><circle cx="1268" cy="346" r="5" fill="var(--stage)"/><circle cx="1292" cy="346" r="5" fill="var(--stage)"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What is ego?</text>
+<g id="def"><text class="b" x="120" y="176" font-size="32">“An unhealthy belief in our own importance.” — Ryan Holiday</text></g>
+<g id="me"></g>
+<g id="mir"><ellipse class="s-ink" cx="640" cy="480" rx="190" ry="250" fill="var(--stage)" stroke-width="8"/><g id="refl"></g></g>
+<g id="blind"><rect class="loss" x="236" y="402" width="128" height="28" rx="8"/><path class="s-loss" d="M364 416l30 18M364 416l26-14" stroke-width="6" stroke-linecap="round"/></g>
+<g id="bubs"></g>
+<g id="blcap"><text class="d" x="120" y="810" font-size="46">It quietly blinds us to how things really are.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ego lives in all of us.</text>
+<text class="b" x="120" y="176" font-size="32">Not only in the loud and arrogant. Even the shy and the kind.</text>
+<g id="crowd"></g>
+<g id="loud"><path class="s-loss" d="M580 372l28-16M584 400h30M580 428l28 16" stroke-width="6" stroke-linecap="round"/></g>
+<g id="sparks"></g>
+<g id="mom"><rect x="120" y="610" width="380" height="70" rx="35" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="310" y="653" font-size="22" text-anchor="middle">NEEDING TO BE RIGHT</text>
+<rect x="530" y="610" width="320" height="70" rx="35" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="690" y="653" font-size="22" text-anchor="middle">WANTING CREDIT</text>
+<text class="m" x="120" y="740" font-size="20">EGO HIDES IN SMALL MOMENTS</text></g>
+<g id="stoic">
+<circle class="ink" cx="1250" cy="350" r="56"/>
+<path class="ink" d="M1160 514v-22a90 62 0 0 1 180 0v22z"/>
+<rect class="ink" x="1146" y="522" width="208" height="22" rx="4"/>
+<rect class="s-ink" x="1180" y="544" width="140" height="124" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1215 558v96M1250 558v96M1285 558v96" stroke-width="5" stroke-linecap="round"/>
+<rect class="ink" x="1146" y="668" width="208" height="22" rx="4"/>
+<text class="m" x="1250" y="738" font-size="20" text-anchor="middle">STOIC PHILOSOPHERS</text>
+<text class="m" x="1250" y="770" font-size="20" text-anchor="middle" style="fill:var(--loss)">PRIDE = CONSTANT DANGER</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A fast rise.</text>
+<text class="b" x="120" y="176" font-size="32">Holiday knows this personally.</text>
+<path class="s-line" d="M120 760H1480" stroke-width="4"/>
+<path id="climb" class="s-gain" d="M250 740C390 740 440 720 570 720S880 440 990 330" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<g id="door"><rect class="s-ink" x="510" y="520" width="120" height="240" fill="var(--stage)" stroke-width="6"/><circle class="ink" cx="610" cy="640" r="7"/><text class="m" x="570" y="500" font-size="20" text-anchor="middle">LEFT COLLEGE AT 19</text></g>
+<g id="tower"><rect class="s-ink" x="1000" y="320" width="160" height="440" fill="var(--stage)" stroke-width="7"/><g id="wins"></g>
+<text class="m" x="1190" y="450" font-size="20">AMERICAN APPAREL</text><text class="m" x="1190" y="482" font-size="20">DIRECTOR OF</text><text class="m" x="1190" y="514" font-size="20">MARKETING</text><text class="m" x="1190" y="546" font-size="20" style="fill:var(--gain)">EARLY TWENTIES</text></g>
+<g id="praise"></g>
+<g id="ryan"></g>
+<g id="prcap"><text class="m" x="120" y="830" font-size="22">SUCCESS CAME FAST. SO DID THE PRAISE.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then came the crash.</text>
+<text class="b" x="120" y="176" font-size="32">Powerful people he looked up to made reckless choices.</text>
+<line id="trail" class="s-muted" x1="240" y1="260" x2="240" y2="260" stroke-width="4" stroke-dasharray="6 10"/>
+<g id="fsg"></g>
+<text class="m" x="330" y="720" font-size="22" text-anchor="middle">RECKLESS CHOICES</text>
+<g id="crown"><path id="crL" class="ink" d="M640 540V400L700 460L760 380L790 450L770 480L800 510V540Z"/><path id="crR" class="ink" d="M800 540V510L770 480L790 450L840 380L900 460L960 400V540Z"/></g>
+<g id="lost"><text class="m" x="800" y="620" font-size="24" text-anchor="middle">COMPANIES</text><text class="m" x="800" y="660" font-size="24" text-anchor="middle">FORTUNES</text><text class="m" x="800" y="700" font-size="24" text-anchor="middle">REPUTATIONS</text></g>
+<g id="tired"><g id="tme"></g><path id="scrib" class="s-loss" d="M1190 320c20-30 40 30 60 0s40 30 60 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path d="M1232 410h12M1256 410h12" stroke="var(--stage)" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="1250" y="630" font-size="22" text-anchor="middle">STRESSED · BURNED OUT</text></g>
+<g id="egocap"><text class="d" x="120" y="800" font-size="48">His answer kept pointing to one thing: <tspan style="fill:var(--loss)">ego.</tspan></text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stage one: Aspire.</text>
+<text class="b" x="120" y="176" font-size="32">We are always in one of three stages.</text>
+<g id="stages"><rect class="gain" x="1000" y="280" width="480" height="84" rx="42"/><text class="d5" x="1050" y="336" font-size="40" style="fill:var(--on-gain)">1  Aspire</text>
+<rect class="s-line" x="1000" y="390" width="480" height="84" rx="42" fill="var(--stage)" stroke-width="4"/><text class="d5" x="1050" y="446" font-size="40">2  Succeed</text>
+<rect class="s-line" x="1000" y="500" width="480" height="84" rx="42" fill="var(--stage)" stroke-width="4"/><text class="d5" x="1050" y="556" font-size="40">3  Fail</text></g>
+<g id="lad"><path class="s-muted" d="M420 400h120M420 460h120M420 520h120M420 580h120M420 640h120M420 700h120M420 760h120" stroke-width="6" stroke-dasharray="8 10"/><path class="s-ink" d="M420 340V780M540 340V780" stroke-width="8" stroke-linecap="round"/></g>
+<g id="skip"><text class="m" x="570" y="586" font-size="20">HARD, HUMBLE WORK</text><text class="m" x="570" y="616" font-size="20" style="fill:var(--loss)">SKIPPED</text></g>
+<g id="aspme"></g>
+<g id="dream"><circle class="s-ink" cx="268" cy="562" r="14" fill="var(--stage)" stroke-width="4"/><circle class="s-ink" cx="262" cy="602" r="9" fill="var(--stage)" stroke-width="4"/><ellipse class="s-ink" cx="260" cy="420" rx="130" ry="80" fill="var(--stage)" stroke-width="5"/><g id="dstar"></g></g>
+<g id="pin"><g id="pinb"><path class="loss" d="M480 335C455 300 446 290 446 280a34 34 0 0 1 68 0c0 10-9 20-34 55z"/><circle cx="480" cy="280" r="12" fill="var(--stage)"/><text class="m" x="530" y="288" font-size="22" style="fill:var(--loss)">ARRIVED?</text></g></g>
+<g id="here"><text class="m" x="260" y="830" font-size="20" text-anchor="middle">YOU ARE HERE</text></g>
+<g id="asc"><text class="d" x="1000" y="700" font-size="40">Dreaming big,</text><text class="d" x="1000" y="752" font-size="40">skipping the work.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stage two: Success.</text>
+<text class="b" x="120" y="176" font-size="32">Ego says you are special and the rules no longer apply.</text>
+<g id="troph"><path class="s-gain" d="M260 300h-40v40a40 40 0 0 0 50 38M460 300h40v40a40 40 0 0 1-50 38" fill="none" stroke-width="8"/><path class="gain" d="M260 280h200v80a100 100 0 0 1-200 0z"/>
+<rect class="gain" x="345" y="455" width="30" height="80"/><rect class="ink" x="290" y="535" width="140" height="30" rx="6"/><text class="m" x="360" y="610" font-size="22" text-anchor="middle">“I’M SPECIAL”</text></g>
+<g id="rules"><rect class="s-ink" x="580" y="300" width="300" height="180" rx="12" fill="var(--stage)" stroke-width="6"/><text class="m" x="730" y="350" font-size="26" text-anchor="middle">THE RULES</text><path class="s-line" d="M620 400h220M620 440h160" stroke-width="6" stroke-linecap="round"/>
+<line id="rstrike" class="s-loss" x1="570" y1="490" x2="890" y2="290" stroke-width="10" stroke-linecap="round" stroke-dasharray="380"/></g>
+<g id="tgt"></g>
+<g id="lose"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stage three: Failure.</text>
+<text class="b" x="120" y="176" font-size="32">Ego turns a setback into a story about unfairness.</text>
+<g id="rain"></g>
+<g id="cloud"><circle class="loss" cx="300" cy="300" r="50"/><circle class="loss" cx="370" cy="280" r="64"/><circle class="loss" cx="440" cy="305" r="46"/><rect class="loss" x="300" y="300" width="140" height="50"/></g>
+<g id="fp"></g>
+<g id="unfair"><rect x="470" y="380" width="290" height="70" rx="35" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/><text class="m" x="615" y="423" font-size="22" text-anchor="middle">IT’S NOT FAIR!</text></g>
+<g id="blame"><g id="others"></g><path class="s-loss" d="M420 560L570 575M552 560l18 15-20 12" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="665" y="690" font-size="22" text-anchor="middle" style="fill:var(--loss)">BLAME</text></g>
+<g id="pity"><text class="m" x="360" y="720" font-size="22" text-anchor="middle">SELF-PITY</text></g>
+<g id="cyc"><circle class="s-line" cx="1150" cy="500" r="190" fill="none" stroke-width="5" stroke-dasharray="14 10"/></g>
+<g id="never"><text class="d" x="120" y="810" font-size="46">Life keeps cycling. Ego never stops showing up.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Which stage are you in:</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">aspiring</tspan>, succeeding,</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="88" letter-spacing="-2">or failing?</text></g>
+<g id="nlab"><text class="m" x="143" y="700" font-size="26">WRITE DOWN WHERE EGO IS STEERING YOU</text><text class="m" x="143" y="740" font-size="26" style="fill:var(--gain)">AND NAME IT PLAINLY</text></g>
+<g id="nb"><rect class="s-ink" x="1120" y="560" width="300" height="260" rx="14" fill="var(--stage)" stroke-width="6"/><g id="spir"></g><text class="m" x="1145" y="618" font-size="18" style="fill:var(--loss)">EGO IS STEERING:</text><g id="nbl"></g><path id="pen" class="gain" d="M0 0l8-24 50-50 16 16-50 50z"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Meet the Enemy Inside You&rdquo;, from <em>Ego Is the Enemy</em> by Ryan Holiday. Ryan Holiday&#x27;s own rise and burnout is as reported in the book. The ladder, trophy, rain cloud and cycle drawings are illustrations of ideas, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 6.4], [6.4, 21.1], [21.1, 40.6], [40.6, 56.7], [56.7, 77.0], [77.0, 91.1], [91.1, 102.2], [102.2, 117.6], [117.6, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Hidden Opponent", "What Ego Means", "Not Just Narcissists", "A Fast Rise", "The Crash", "Stage One: Aspire", "Stage Two: Success", "Stage Three: Failure", "Your Challenge"];
+const TM={"shadow_figure": 0.0, "mirror": 6.72, "puffed_chest": 12.32, "blindfold": 17.6, "crowd": 21.36, "small_spark": 25.52, "stoic_bust": 35.36, "young_ryan": 40.88, "college_door": 43.04, "office_tower": 47.32, "falling_star": 57.04, "broken_crown": 61.76, "tired_ryan": 67.28, "ladder": 77.28, "map_pin": 86.72, "trophy": 91.36, "blur_target": 96.72, "rain_cloud": 102.48, "pointing_hand": 107.44, "circle_arrows": 112.0, "notebook": 123.52};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const star=(cx,cy,R)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?R*.45:R;d+=(i?'L':'M')+(cx+rr*Math.cos(a)).toFixed(1)+' '+(cy+rr*Math.sin(a)).toFixed(1)}return d+'Z'};
+fig($('me'),300,420,50,'ink');fig($('refl'),640,420,50,'ink');
+const BB=['I deserve more.','I know enough.','I matter most.'].map((s,i)=>{const g=mk('g',{},$('bubs'));mk('rect',{x:920,y:290+i*120,width:540,height:90,rx:45,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);const tx=mk('text',{x:960,y:348+i*120,'font-size':40,class:'d5'},g);tx.textContent='“'+s+'”';return g});
+const SPK=[];for(let i=0;i<7;i++){const x=180+i*120;fig($('crowd'),x,400,32,i===3?'loss':'ink');SPK.push(mk('circle',{cx:x,cy:500,r:9,class:'gain'},$('sparks')))}
+for(let r=0;r<7;r++)for(let c=0;c<3;c++)mk('rect',{x:1020+c*48,y:350+r*56,width:28,height:30,fill:'var(--line)'},$('wins'));
+const PR=[[900,260],[1250,250],[1400,330],[1300,620],[1420,700]].map(q=>mk('path',{d:star(q[0],q[1],22),class:'gain'},$('praise')));
+fig($('ryan'),0,0,26,'gain');
+mk('path',{d:star(0,0,40),class:'loss'},$('fsg'));
+fig($('tme'),1250,410,40,'ink');
+fig($('aspme'),260,668,27,'ink');
+mk('path',{d:star(260,420,50),class:'gain'},$('dstar'));
+const TG=[0,1,2].map(k=>{const g=mk('g',{},$('tgt'));[150,100,50].forEach(r=>mk('circle',{cx:1150,cy:430,r:r,fill:'none',stroke:k?'var(--muted)':'var(--ink)','stroke-width':8},g));mk('circle',{cx:1150,cy:430,r:20,fill:k?'var(--muted)':'var(--gain)'},g);return g});
+const LO=['STOP LEARNING','LOSE FOCUS','PROTECT THE IMAGE'].map((s,i)=>{const g=mk('g',{},$('lose'));mk('rect',{x:120+i*470,y:680,width:420,height:70,rx:35,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);const tx=mk('text',{x:330+i*470,y:723,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const RN=[];for(let i=0;i<6;i++)RN.push(mk('path',{class:'s-loss','stroke-width':5,'stroke-linecap':'round'},$('rain')));
+fig($('fp'),360,470,36,'ink');fig($('others'),620,560,20,'ink');fig($('others'),710,560,20,'ink');
+[['ASPIRE',-90],['SUCCEED',30],['FAIL',150]].forEach(([s,a])=>{const x=1150+190*Math.cos(a*Math.PI/180),y=500+190*Math.sin(a*Math.PI/180);mk('rect',{x:x-85,y:y-26,width:170,height:52,rx:26,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('cyc'));const tx=mk('text',{x:x,y:y+7,'font-size':20,'text-anchor':'middle',class:'m'},$('cyc'));tx.textContent=s});
+const EGD=mk('g',{},$('cyc'));mk('circle',{cx:0,cy:0,r:30,class:'loss'},EGD);const egt=mk('text',{x:0,y:6,'font-size':18,'text-anchor':'middle',class:'m',style:'fill:var(--stage)'},EGD);egt.textContent='EGO';
+for(let i=0;i<7;i++)mk('circle',{cx:1150+i*40,cy:560,r:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('spir'));
+const NL=[0,1,2,3].map(i=>mk('line',{x1:1150,y1:666+i*40,x2:1150,y2:666+i*40,class:'s-line','stroke-width':5,'stroke-linecap':'round'},$('nbl')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const sf=p(u,TM.shadow_figure,TM.shadow_figure+1.5);
+$('shadow').setAttribute('opacity',sf);
+$('shadow').setAttribute('transform','translate('+(14*Math.sin(t*1.2)).toFixed(1)+' '+(30*(1-sf)).toFixed(1)+')');
+
+rise($('def'),p(u,TM.mirror,TM.mirror+.5)); rise($('mir'),p(u,TM.mirror+.4,TM.mirror+.9));
+const pf=p(u,TM.puffed_chest,TM.puffed_chest+1.2), sc=1+.35*pf+.02*pf*Math.sin(t*3);
+$('refl').setAttribute('transform','translate(640 520) scale('+sc.toFixed(3)+') translate(-640 -520)');
+BB.forEach((b,i)=>rise(b,p(u,TM.puffed_chest+i*1.4,TM.puffed_chest+i*1.4+.5)));
+rise($('blind'),p(u,TM.blindfold,TM.blindfold+.5)); rise($('blcap'),p(u,TM.blindfold+.4,TM.blindfold+1));
+
+rise($('crowd'),p(u,TM.crowd,TM.crowd+.5)); rise($('loud'),p(u,TM.crowd+.8,TM.crowd+1.2));
+SPK.forEach((c,i)=>{const a=TM.small_spark+i*.2,k=p(u,a,a+.4);c.setAttribute('opacity',k);c.setAttribute('r',(9+3*k*Math.sin(t*4+i)).toFixed(1))});
+const mm=(TM.small_spark+TM.stoic_bust)/2; rise($('mom'),p(u,mm,mm+.5));
+rise($('stoic'),p(u,TM.stoic_bust,TM.stoic_bust+.6));
+
+const k1=p(u,TM.college_door,TM.college_door+1.2),k2=p(u,TM.office_tower,TM.office_tower+1.8);
+$('ryan').setAttribute('transform','translate('+(220+350*k1+510*k2).toFixed(1)+' '+(651-440*k2).toFixed(1)+')');
+$('ryan').setAttribute('opacity',p(u,TM.young_ryan,TM.young_ryan+.5));
+rise($('door'),p(u,TM.college_door,TM.college_door+.5)); rise($('tower'),p(u,TM.office_tower,TM.office_tower+.5));
+$('climb').setAttribute('opacity',p(u,TM.college_door,TM.college_door+.8));
+const pr=TM.office_tower+(TM.falling_star-TM.office_tower)*.6;
+PR.forEach((s,i)=>s.setAttribute('opacity',p(u,pr+i*.25,pr+i*.25+.4)*(.75+.25*Math.sin(t*3+i))));
+rise($('prcap'),p(u,pr,pr+.5));
+
+const fs=p(u,TM.falling_star,TM.falling_star+1.6),fx=240+180*fs,fy=260+340*fs;
+$('fsg').setAttribute('transform','translate('+fx.toFixed(1)+' '+fy.toFixed(1)+') rotate('+(200*fs).toFixed(1)+')');
+$('fsg').setAttribute('opacity',p(u,TM.falling_star,TM.falling_star+.3));
+$('trail').setAttribute('x2',fx.toFixed(1)); $('trail').setAttribute('y2',fy.toFixed(1));
+rise($('crown'),p(u,TM.broken_crown,TM.broken_crown+.4));
+const bk=p(u,TM.broken_crown+.5,TM.broken_crown+1.5);
+$('crL').setAttribute('transform','translate('+(-30*bk)+' '+(10*bk)+') rotate('+(-14*bk)+' 720 540)');
+$('crR').setAttribute('transform','translate('+(30*bk)+' '+(10*bk)+') rotate('+(14*bk)+' 880 540)');
+rise($('lost'),p(u,TM.broken_crown+1,TM.broken_crown+1.5));
+rise($('tired'),p(u,TM.tired_ryan,TM.tired_ryan+.5));
+$('scrib').setAttribute('transform','translate('+(6*Math.sin(t*5)).toFixed(1)+' 0)');
+const eg=TM.tired_ryan+(TM.ladder-TM.tired_ryan)*.5; rise($('egocap'),p(u,eg,eg+.6));
+
+rise($('stages'),p(u,TM.ladder,TM.ladder+.5)); rise($('lad'),p(u,TM.ladder+.3,TM.ladder+.8));
+const as=(TM.ladder+TM.map_pin)/2;
+rise($('dream'),p(u,as,as+.6)); rise($('asc'),p(u,as+.5,as+1)); rise($('skip'),p(u,as+1,as+1.5));
+rise($('pin'),p(u,TM.map_pin,TM.map_pin+.5)); $('pinb').setAttribute('transform','translate(0 '+(6*Math.sin(t*2.5)).toFixed(1)+')');
+rise($('here'),p(u,TM.map_pin+.6,TM.map_pin+1.1));
+
+rise($('troph'),p(u,TM.trophy,TM.trophy+.5)); rise($('rules'),p(u,TM.trophy+1,TM.trophy+1.5));
+$('rstrike').setAttribute('stroke-dashoffset',(380*(1-p(u,TM.trophy+2,TM.trophy+2.6))).toFixed(1));
+rise($('tgt'),p(u,TM.trophy+3,TM.trophy+3.5));
+const bl=p(u,TM.blur_target,TM.blur_target+1.5);
+[1,2].forEach(k=>{const s=k===1?1:-1;TG[k].setAttribute('opacity',(.45*bl).toFixed(2));TG[k].setAttribute('transform','translate('+(s*bl*(18+6*Math.sin(t*2+k))).toFixed(1)+' '+(s*bl*(-10+5*Math.cos(t*1.7))).toFixed(1)+')')});
+LO.forEach((g,i)=>rise(g,p(u,TM.blur_target+i*1.2,TM.blur_target+i*1.2+.5)));
+
+rise($('cloud'),p(u,TM.rain_cloud,TM.rain_cloud+.5)); $('rain').setAttribute('opacity',p(u,TM.rain_cloud+.3,TM.rain_cloud+.8));
+RN.forEach((r,i)=>{const o=(t*120+i*17)%50;r.setAttribute('d','M'+(290+i*32)+' '+(370+o).toFixed(1)+'v14')});
+rise($('unfair'),p(u,TM.rain_cloud+1,TM.rain_cloud+1.5));
+rise($('blame'),p(u,TM.pointing_hand,TM.pointing_hand+.5));
+$('fp').setAttribute('transform','translate(0 '+(40*p(u,TM.pointing_hand+1.5,TM.pointing_hand+3)).toFixed(1)+')');
+rise($('pity'),p(u,TM.pointing_hand+1.5,TM.pointing_hand+2));
+rise($('cyc'),p(u,TM.circle_arrows,TM.circle_arrows+.6));
+const ea=-Math.PI/2+t*.9; EGD.setAttribute('transform','translate('+(1150+190*Math.cos(ea)).toFixed(1)+' '+(500+190*Math.sin(ea)).toFixed(1)+')');
+rise($('never'),p(u,TM.circle_arrows+1.5,TM.circle_arrows+2.1));
+
+const q0=SC[8][0]/K+.3;
+rise($('qa'),p(u,q0,q0+.5)); rise($('qb'),p(u,q0+.4,q0+.9)); rise($('qc'),p(u,q0+.8,q0+1.3));
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5)); rise($('nlab'),p(u,TM.notebook+.3,TM.notebook+.8));
+let px=1150,py=666; NL.forEach((l,i)=>{const a=TM.notebook+.6+i*.8,k=p(u,a,a+.8);l.setAttribute('x2',(1150+240*k).toFixed(1));if(k>0){px=1150+240*k;py=666+i*40}});
+$('pen').setAttribute('transform','translate('+px.toFixed(1)+' '+(py-2*Math.abs(Math.sin(t*9))).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.76;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

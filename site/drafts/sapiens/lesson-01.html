@@ -1,0 +1,320 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapiens Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Sapiens: Homo sapiens once shared the Earth with other human species such as Neanderthals, and we are the only ones left. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAPIENS · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">We were once one human</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">among many.</text>
+<text class="b" x="120" y="600" font-size="32">Why there was a time when we had human cousins</text>
+<path class="s-line" d="M1190 722h290" stroke-width="5" stroke-linecap="round"/>
+<g id="t1"></g>
+<g id="t0w"><g id="t0"></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What does “human” mean?</text>
+<text class="b" x="120" y="176" font-size="32">To a biologist: any animal in the genus Homo, not just us.</text>
+<g id="brs"></g>
+<g id="tree"><path class="s-ink" d="M830 800V620" stroke-width="10" stroke-linecap="round"/><text class="m" x="860" y="780" font-size="24">GENUS HOMO</text></g>
+<g id="sap"><path class="s-gain" d="M280 520V660" stroke-width="4" stroke-dasharray="8 8"/><rect class="gain" x="120" y="660" width="560" height="170" rx="18"/><text class="d" x="156" y="736" font-size="52" style="fill:var(--on-gain)">Homo sapiens</text><text class="m" x="158" y="796" font-size="28" style="fill:var(--on-gain)">MEANING “WISE MAN”</text></g>
+<g id="sibs"></g>
+<g id="sibt"><text class="m" x="1480" y="780" font-size="22" text-anchor="end">MANY HUMAN SIBLINGS</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A crowded planet.</text>
+<text class="b" x="120" y="176" font-size="32">About 2 million to 10,000 years ago: several human species at once.</text>
+<g id="map">
+<ellipse cx="240" cy="340" rx="90" ry="70" fill="var(--line)"/><ellipse cx="300" cy="530" rx="55" ry="95" fill="var(--line)"/>
+<ellipse cx="560" cy="320" rx="70" ry="50" fill="var(--line)"/><ellipse cx="590" cy="520" rx="80" ry="120" fill="var(--line)"/>
+<ellipse cx="800" cy="340" rx="160" ry="95" fill="var(--line)"/><ellipse cx="880" cy="600" rx="70" ry="45" fill="var(--line)"/>
+<g id="stripes"></g>
+<text class="m" x="120" y="812" font-size="20">2 MILLION YEARS AGO</text><text class="m" x="1480" y="812" font-size="20" text-anchor="end">10,000 YEARS AGO</text>
+</g>
+<g id="nea"><path class="s-muted" d="M594 316L1040 330" stroke-width="3" stroke-dasharray="6 8"/><circle class="ink" cx="570" cy="315" r="14"/><circle class="s-ink" cx="570" cy="315" r="24" fill="none" stroke-width="3"/>
+<rect class="s-ink" x="1040" y="230" width="440" height="200" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="1070" y="292" font-size="40">Neanderthals</text><text class="m" x="1070" y="336" font-size="20">EUROPE &amp; WESTERN ASIA</text><text class="m" x="1070" y="368" font-size="20">BULKIER, MORE MUSCULAR</text><text class="m" x="1070" y="400" font-size="20">BUILT FOR ICE AGE COLD</text></g>
+<g id="ere"><path class="s-muted" d="M888 376L1040 560" stroke-width="3" stroke-dasharray="6 8"/><circle class="ink" cx="870" cy="360" r="14"/><circle class="s-ink" cx="870" cy="360" r="24" fill="none" stroke-width="3"/>
+<rect class="s-ink" x="1040" y="470" width="440" height="200" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="1070" y="532" font-size="40">Homo erectus</text><text class="m" x="1070" y="576" font-size="20">EASTERN ASIA</text><text class="m" x="1070" y="608" font-size="20">SURVIVED CLOSE TO</text><text class="m" x="1070" y="640" font-size="20" style="fill:var(--gain)">2 MILLION YEARS</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Island dwarfs.</text>
+<text class="b" x="120" y="176" font-size="32">Homo floresiensis, on the Indonesian island of Flores.</text>
+<g id="isl"><rect class="loss" x="120" y="640" width="520" height="120" rx="16" fill-opacity=".12"/>
+<path class="s-loss" d="M170 690q25-14 50 0t50 0t50 0t50 0t50 0t50 0t50 0t50 0M195 730q25-14 50 0t50 0t50 0t50 0t50 0t50 0t50 0" fill="none" stroke-width="4" stroke-linecap="round"/>
+<path class="s-ink" d="M170 640Q380 520 590 640Z" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="380" y="810" font-size="24" text-anchor="middle">FLORES, INDONESIA</text></g>
+<path class="s-ink" d="M700 762H1480" stroke-width="5" stroke-linecap="round"/>
+<g id="tape"><rect class="gain" x="790" y="330" width="50" height="430"/></g>
+<g id="m1"><path class="s-ink" d="M780 460H1060" stroke-width="4" stroke-dasharray="10 8"/><text class="d" x="1090" y="478" font-size="52">≈ 1 metre</text></g>
+<g id="shr"><path class="s-muted" d="M1110 580H1410m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1480" y="812" font-size="22" text-anchor="end">SCARCE FOOD, SMALLER BODIES</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A finger bone.</text>
+<text class="b" x="120" y="176" font-size="32">2010: scientists study a fossil from a Siberian cave.</text>
+<g id="cave"><path class="s-ink" d="M140 720Q140 300 350 300Q560 300 560 720" fill="var(--stage)" stroke-width="8" stroke-linecap="round"/><path class="s-ink" d="M120 722H640" stroke-width="5" stroke-linecap="round"/><text class="m" x="350" y="772" font-size="22" text-anchor="middle">SIBERIAN CAVE</text></g>
+<g id="bone"><text class="d" x="350" y="470" font-size="64" text-anchor="middle">2010</text><circle id="ring" class="s-gain" cx="350" cy="640" r="70" fill="none" stroke-width="4" stroke-dasharray="8 8"/>
+<rect class="ink" x="300" y="630" width="100" height="20" rx="10"/><circle class="ink" cx="300" cy="630" r="12"/><circle class="ink" cx="300" cy="650" r="12"/><circle class="ink" cx="400" cy="630" r="12"/><circle class="ink" cx="400" cy="650" r="12"/></g>
+<g id="dna"><g id="rungs"></g><path id="hx1" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round"/><path id="hx2" class="s-gain" fill="none" stroke-width="6" stroke-linecap="round"/><path class="s-muted" d="M1070 470h40m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="newsp"><rect class="gain" x="1120" y="380" width="360" height="180" rx="18"/><text class="m" x="1150" y="432" font-size="20" style="fill:var(--on-gain)">NEW HUMAN SPECIES</text><text class="d" x="1150" y="510" font-size="52" style="fill:var(--on-gain)">Denisovans</text></g>
+<g id="cous"></g>
+<g id="cousl"><text class="m" x="760" y="790" font-size="22">HOW MANY MORE LOST COUSINS?</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then there was one.</text>
+<text class="b" x="120" y="176" font-size="32">Around 70,000 years ago, Sapiens spread out of East Africa.</text>
+<path class="s-ink" d="M120 522H1480" stroke-width="5" stroke-linecap="round"/>
+<g id="oth"><text class="m" x="704" y="566" font-size="20">OTHER HUMANS</text></g>
+<g id="walkw"><g id="walk"></g><text class="m" x="120" y="566" font-size="20" style="fill:var(--gain)">SAPIENS · OUT OF EAST AFRICA</text></g>
+<g id="qm"><text class="d" x="120" y="760" font-size="140" style="fill:var(--gain)">?</text><text class="d5" x="230" y="680" font-size="44">Breed with them,</text><text class="d5" x="230" y="740" font-size="44">or replace them?</text></g>
+<g id="quo"><rect class="s-ink" x="840" y="600" width="640" height="200" rx="18" fill="var(--stage)" stroke-width="4"/><text class="d" x="880" y="672" font-size="40">“Tolerance is not a</text><text class="d" x="880" y="724" font-size="40">Sapiens trademark.”</text><text class="m" x="880" y="772" font-size="20">— YUVAL NOAH HARARI</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Mixed ancestry.</text>
+<text class="b" x="120" y="176" font-size="32">Our DNA still carries traces of lost cousins.</text>
+<g id="l0"><text class="m" x="120" y="270" font-size="20">MODERN EUROPEANS &amp; MIDDLE EASTERNERS</text><rect id="b0" class="gain" x="120" y="290" width="0" height="70"/></g>
+<g id="x0"><rect class="ink" x="850" y="290" width="50" height="70"/><text class="m" x="900" y="392" font-size="20" text-anchor="end">A FEW % NEANDERTHAL</text></g>
+<g id="l1"><text class="m" x="120" y="470" font-size="20">SOME MELANESIANS &amp; ABORIGINAL AUSTRALIANS</text><rect id="b1" class="gain" x="120" y="490" width="0" height="70"/></g>
+<g id="x1"><rect class="ink" x="860" y="490" width="40" height="70"/><text class="m" x="900" y="592" font-size="20" text-anchor="end">DENISOVAN DNA TOO</text></g>
+<g id="scl"><path class="s-ink" d="M1240 340V780" stroke-width="8" stroke-linecap="round"/><rect class="ink" x="1160" y="780" width="160" height="16" rx="8"/>
+<path id="beam" class="s-ink" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1240" cy="340" r="12"/>
+<g id="pl"><path class="s-ink" d="M0 0L-60 120M0 0L60 120" stroke-width="4"/><path class="s-ink" d="M-70 120h140a70 36 0 0 1-140 0z" fill="var(--stage)" stroke-width="5"/><circle class="ink" cx="0" cy="106" r="14"/><text class="m" x="0" y="196" font-size="20" text-anchor="middle">SOME MIXING</text></g>
+<g id="pr"><path class="s-ink" d="M0 0L-60 120M0 0L60 120" stroke-width="4"/><path class="s-ink" d="M-70 120h140a70 36 0 0 1-140 0z" fill="var(--stage)" stroke-width="5"/>
+<circle class="loss" cx="-42" cy="106" r="14"/><circle class="loss" cx="-14" cy="106" r="14"/><circle class="loss" cx="14" cy="106" r="14"/><circle class="loss" cx="42" cy="106" r="14"/><circle class="loss" cx="-28" cy="80" r="14"/><circle class="loss" cx="0" cy="80" r="14"/><circle class="loss" cx="28" cy="80" r="14"/>
+<text class="m" x="0" y="196" font-size="20" text-anchor="middle">REPLACEMENT</text></g></g>
+<g id="cap6"><text class="d" x="120" y="760" font-size="44">Some mixing, mostly replacement.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it matters.</text>
+<text class="b" x="120" y="176" font-size="32">We are one surviving branch of a once bushy family tree.</text>
+<g id="pa"><rect class="s-line" x="120" y="230" width="413" height="500" rx="18" fill="var(--stage)" stroke-width="3"/><g id="me"></g>
+<path class="gain" d="M300 296l7 17 17 7-17 7-7 17-7-17-17-7 17-7z"/>
+<ellipse class="s-ink" cx="420" cy="440" rx="60" ry="120" fill="var(--stage)" stroke-width="7"/><g id="refl"></g>
+<path class="s-ink" d="M420 560V620M380 620h80" stroke-width="7" stroke-linecap="round"/>
+<text class="m" x="156" y="670" font-size="20">“WE ARE SPECIAL,</text><text class="m" x="156" y="702" font-size="20">SEPARATE FROM ANIMALS”</text></g>
+<g id="pb"><rect class="s-line" x="593" y="230" width="413" height="500" rx="18" fill="var(--stage)" stroke-width="3"/><g id="brs7"></g>
+<path class="s-ink" d="M800 640V540" stroke-width="10" stroke-linecap="round"/><circle id="leaf" class="gain" cx="850" cy="300" r="16"/>
+<text class="m" x="629" y="670" font-size="20">ONE BRANCH SURVIVES</text><text class="m" x="629" y="702" font-size="20">THE REST ARE GONE</text></g>
+<g id="pc"><rect class="s-line" x="1067" y="230" width="413" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<polygon id="sandT" class="gain"/><polygon id="sandB" class="gain"/><path id="stream" class="s-gain" d="M1273 450V596" stroke-width="3"/>
+<path class="s-ink" d="M1203 300h140l-62 150 62 150h-140l62-150z" fill="none" stroke-width="6" stroke-linejoin="round"/><path class="s-ink" d="M1188 300h170M1188 600h170" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="1097" y="670" font-size="20">ERECTUS: ~2 MILLION YEARS</text><text class="m" x="1097" y="702" font-size="20" style="fill:var(--gain)">WILL WE LAST THAT LONG?</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="top8"><text class="m" x="143" y="240" font-size="26">NEXT TIME YOU FEEL APART FROM NATURE…</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What changes if you see</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">yourself as one survivor</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">among <tspan style="fill:var(--gain)">many cousins</tspan>?</text></g>
+<g id="lab8"><text class="m" x="143" y="700" font-size="26">ONE SURVIVOR AMONG MANY</text></g>
+<g id="pair"><path class="s-line" d="M1220 764h260" stroke-width="5" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="140" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:20</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;We Were Once One Human Among Many&rdquo;, from <em>Sapiens</em> by Yuval Noah Harari. The Neanderthals, Homo erectus, the Flores humans, the Denisovan finger bone and the DNA studies are as reported in the book. Maps, figures, the family tree and the balance scale are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=140, SC=[[0.0, 6.8], [6.8, 20.8], [20.8, 41.5], [41.5, 55.6], [55.6, 70.6], [70.6, 90.6], [90.6, 109.1], [109.1, 125.8], [125.8, 140.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Not Alone", "What Human Means", "A Crowded Planet", "Island Dwarfs", "A Finger Bone", "Then There Was One", "Mixed Ancestry", "Why It Matters", "Your Turn"];
+const TM={"lone_figure": 0.0, "family_tree": 7.12, "sapiens_tag": 12.8, "sibling_icons": 17.4, "world_map": 21.12, "neanderthal": 28.56, "erectus": 36.08, "flores_island": 41.76, "tape_measure": 47.84, "finger_bone": 55.92, "dna_helix": 61.12, "sapiens_walk": 70.92, "fading_figures": 76.56, "question_mark": 81.39, "quote_card": 84.24, "dna_chart": 90.92, "melanesia_map": 98.64, "balance_scale": 103.6, "mirror": 109.44, "tree_branch": 114.4, "hourglass": 119.89, "side_by_side": 126.08};
+const CG='var(--gain)',CI='var(--ink)';
+const fig=(g,x,y,r,c,w=1.5)=>{const q=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,fill:c},q);mk('path',{d:'M'+(x-r*w)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*w)+' '+(r*1.5)+' 0 0 1 '+(2*r*w)+' 0v'+(r*1.3)+'z',fill:c},q);return q};
+fig($('t0'),1290,600,28,CG);fig($('t1'),1410,604,27,CI,2);fig($('t1'),1220,653,16,CI);
+const BR=[],SB=[];
+[280,500,720,940,1160,1380].forEach((x,i)=>{BR.push(mk('path',{d:'M830 620C830 530 '+x+' 530 '+x+' 440',fill:'none',stroke:CI,'stroke-width':6,'stroke-linecap':'round'},$('brs')));mk('circle',{cx:x,cy:440,r:10,fill:CI},$('tree'));if(i)SB.push(fig($('sibs'),x,330,18,CI,1.4+(i%3)*.2))});
+fig($('sap'),280,330,18,CG);
+const ST=[0,1,2,3].map(i=>mk('line',{x1:120,y1:710+i*18,x2:120,y2:710+i*18,stroke:i%2?'var(--muted)':CI,'stroke-width':8,'stroke-linecap':'round'},$('stripes')));
+fig($('isl'),380,535,12,CI);
+for(let i=0;i<=14;i++){const y=760-i*30;mk('line',{x1:790,y1:y,x2:790+(i%5?16:30),y2:y,stroke:CI,'stroke-width':3},$('tape'))}
+fig($('tape'),960,518,58,CI);
+const SH=[[1140,30],[1270,22],[1390,15]].map(([x,r])=>fig($('shr'),x,760-4.2*r,r,CI));
+const RG=[];for(let i=0;i<10;i++)RG.push(mk('line',{stroke:'var(--muted)','stroke-width':4},$('rungs')));
+const CO=[800,960,1120,1280,1440].map(x=>{const g=mk('g',{},$('cous'));mk('circle',{cx:x,cy:680,r:40,fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'8 8'},g);mk('text',{x:x,y:694,'font-size':40,'text-anchor':'middle',class:'d'},g).textContent='?';return g});
+const OT=[[760,28,2],[900,22,1.5],[1030,14,1.5],[1160,26,1.6],[1320,24,1.7]].map(([x,r,w])=>fig($('oth'),x,520-4.2*r,r,CI,w));
+[300,420,540].forEach(x=>fig($('walk'),x,419.2,24,CG));
+fig($('me'),240,400,30,CG);fig($('refl'),420,410,18,'var(--muted)');
+const BT=[650,700,750,800,850,900,950].map((x,i)=>mk('path',{d:'M800 540C800 440 '+x+' 420 '+x+' '+(300+(i%2)*40),fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-dasharray':'10 8','stroke-linecap':'round'},$('brs7')));
+fig($('pair'),1300,650,26,CG);fig($('pair'),1410,652,26,CI,2);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+$('t0').setAttribute('transform','translate(0 '+(Math.sin(t*2)*4).toFixed(1)+')');
+R('t0w',TM.lone_figure,.6); R('t1',TM.lone_figure+5.8,.8);
+
+R('tree',TM.family_tree);
+BR.forEach((b,i)=>{const a=TM.family_tree+i*.15;b.setAttribute('opacity',p(u,a,a+.4));b.setAttribute('stroke',i===0&&u>=TM.sapiens_tag?CG:CI)});
+R('sap',TM.sapiens_tag);
+SB.forEach((g,i)=>rise(g,p(u,TM.sibling_icons+i*.25,TM.sibling_icons+i*.25+.4)));
+R('sibt',TM.sibling_icons+1.2);
+
+R('map',TM.world_map,.6);
+ST.forEach((s,i)=>s.setAttribute('x2',(120+1360*p(u,TM.world_map+.5+i*.3,TM.world_map+3+i*.3)).toFixed(1)));
+R('nea',TM.neanderthal); R('ere',TM.erectus);
+
+R('isl',TM.flores_island); R('tape',TM.tape_measure); R('m1',TM.tape_measure+.6);
+R('shr',TM.tape_measure+2.9);
+SH.forEach((g,i)=>g.setAttribute('opacity',p(u,TM.tape_measure+3+i*.6,TM.tape_measure+3.4+i*.6)));
+
+R('cave',TM.finger_bone); R('bone',TM.finger_bone+.6);
+$('ring').setAttribute('r',(70+6*Math.sin(t*3)).toFixed(1));
+const ph=t*2;let ha='',hb='';
+for(let x=640;x<=1060;x+=10){const s=60*Math.sin((x-640)/50+ph);ha+=(x==640?'M':'L')+x+' '+(470+s).toFixed(1);hb+=(x==640?'M':'L')+x+' '+(470-s).toFixed(1)}
+$('hx1').setAttribute('d',ha);$('hx2').setAttribute('d',hb);
+RG.forEach((r,i)=>{const x=652+i*44,s=60*Math.sin((x-640)/50+ph);r.setAttribute('x1',x);r.setAttribute('x2',x);r.setAttribute('y1',(470+s).toFixed(1));r.setAttribute('y2',(470-s).toFixed(1))});
+R('dna',TM.dna_helix); R('newsp',TM.dna_helix+1.2);
+CO.forEach((g,i)=>rise(g,p(u,TM.dna_helix+4.9+i*.3,TM.dna_helix+5.3+i*.3)));
+R('cousl',TM.dna_helix+5);
+
+R('oth',SC[5][0]/K+.4);
+R('walkw',TM.sapiens_walk);
+const wk=p(u,TM.sapiens_walk,TM.sapiens_walk+3);
+$('walk').setAttribute('transform','translate('+(-140+140*wk).toFixed(1)+' '+(wk<1&&wk>0?-6*Math.abs(Math.sin(t*6)):0).toFixed(1)+')');
+OT.forEach((g,i)=>g.setAttribute('opacity',(1-.88*p(u,TM.fading_figures+i*.6,TM.fading_figures+i*.6+1.2)).toFixed(2)));
+R('qm',TM.question_mark); R('quo',TM.quote_card,.6);
+
+R('l0',TM.dna_chart); $('b0').setAttribute('width',(780*p(u,TM.dna_chart,TM.dna_chart+1.2)).toFixed(1)); R('x0',TM.dna_chart+1.3);
+R('l1',TM.melanesia_map); $('b1').setAttribute('width',(780*p(u,TM.melanesia_map,TM.melanesia_map+1.2)).toFixed(1)); R('x1',TM.melanesia_map+1.3);
+R('scl',TM.balance_scale);
+const ba=.2*p(u,TM.balance_scale+.6,TM.balance_scale+1.8),bx=160*Math.cos(ba),by=160*Math.sin(ba);
+$('beam').setAttribute('d','M'+(1240-bx).toFixed(1)+' '+(340-by).toFixed(1)+'L'+(1240+bx).toFixed(1)+' '+(340+by).toFixed(1));
+$('pl').setAttribute('transform','translate('+(1240-bx).toFixed(1)+' '+(340-by).toFixed(1)+')');
+$('pr').setAttribute('transform','translate('+(1240+bx).toFixed(1)+' '+(340+by).toFixed(1)+')');
+R('cap6',TM.balance_scale+1.6,.6);
+
+R('pa',TM.mirror); R('pb',TM.tree_branch); R('pc',TM.hourglass);
+const lv=u>=TM.tree_branch+1.5;
+BT[4].setAttribute('stroke',lv?CG:'var(--muted)');BT[4].setAttribute('stroke-width',lv?8:5);BT[4].setAttribute('stroke-dasharray',lv?'none':'10 8');
+$('leaf').setAttribute('opacity',lv?1:0);
+const sk=p(u,TM.hourglass+.5,TM.hourglass+6),L=310+138*sk,hw=Math.max(0,66-62*(L-300)/150);
+$('sandT').setAttribute('points',(1273-hw)+','+L+' '+(1273+hw)+','+L+' 1277,450 1269,450');
+$('sandB').setAttribute('points','1209,596 1337,596 1273,'+(596-110*sk).toFixed(1));
+$('stream').setAttribute('opacity',sk>0&&sk<1?1:0);
+
+R('pair',TM.side_by_side,.6); R('top8',TM.side_by_side+.3);
+R('qa',TM.side_by_side+6.2); R('qb',TM.side_by_side+6.6); R('qc',TM.side_by_side+7); R('lab8',TM.side_by_side+7.6);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:136.28;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

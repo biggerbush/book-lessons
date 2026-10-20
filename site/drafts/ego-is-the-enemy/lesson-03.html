@@ -1,0 +1,309 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ego Is the Enemy Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Ego Is the Enemy: Through the story of military strategist John Boyd, Holiday asks whether we want to be someone important or to do something that matters, because the two often conflict. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">EGO IS THE ENEMY · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">To be someone,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">or to do something?</text>
+<text class="b" x="120" y="600" font-size="32">Choosing between looking important and doing work that matters.</text>
+<path class="s-ink" d="M1300 820V600" stroke-width="10" stroke-linecap="round"/>
+<path id="bL" d="M1300 600Q1300 480 1180 340" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/>
+<path id="bR" d="M1300 600Q1300 480 1430 340" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/>
+<g id="lb0"><text class="d" x="1180" y="310" font-size="40" text-anchor="middle" style="fill:var(--loss)">BE</text><text class="d" x="1430" y="310" font-size="40" text-anchor="middle" style="fill:var(--gain)">DO</text></g>
+<circle id="walker" class="gain" cx="1300" cy="800" r="18"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet John Boyd.</text>
+<text class="b" x="120" y="176" font-size="32">Fighter pilot. Brilliant military strategist.</text>
+<g id="jet1"><g id="jetb"></g><text class="m" x="380" y="580" font-size="22" text-anchor="middle">FIGHTER PILOT</text></g>
+<g id="bp">
+<rect x="700" y="240" width="740" height="360" rx="12" fill="var(--stage)" stroke="var(--line)" stroke-width="3"/>
+<g id="bpg"></g>
+<path class="s-muted" d="M740 570C820 470 760 330 860 280M1290 570C1380 500 1410 360 1400 270" fill="none" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+<text class="m" x="700" y="640" font-size="22">HOW PLANES MOVE AND FIGHT</text>
+</g>
+<g id="clash1">
+<g id="clashP"></g>
+<path id="bolt1" class="loss" d="M440 700l-24 40h20l-16 44 40-54h-22l18-30z"/>
+<text class="m" x="300" y="844" font-size="22" text-anchor="middle">BOYD</text>
+<text class="m" x="560" y="844" font-size="22" text-anchor="middle">BOSS</text>
+<text class="d5" x="700" y="780" font-size="36">Stubborn. Blunt. Clashed with bosses.</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The young officer.</text>
+<text class="b" x="120" y="176" font-size="32">Boyd mentored officers who wanted to make a real difference.</text>
+<path class="s-line" d="M120 730H1480" stroke-width="4"/>
+<g id="boyd2"><rect class="ink" x="1180" y="596" width="260" height="18"/><path class="s-ink" d="M1200 614V730M1420 614V730" stroke-width="6"/><text class="m" x="1310" y="676" font-size="22" text-anchor="middle">BOYD</text></g>
+<g id="door2"><rect x="900" y="300" width="200" height="430" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><rect id="dpanel" x="900" y="300" width="200" height="430" fill="var(--line)"/></g>
+<g id="off2"><g id="offm2"><text class="m" x="0" y="772" font-size="22" text-anchor="middle">THE YOUNG OFFICER</text></g></g>
+<g id="test2"><text class="d" x="120" y="852" font-size="48">That promise would soon be tested.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two paths, one question.</text>
+<text class="b" x="120" y="176" font-size="32">Boyd sketched it out for the officer.</text>
+<g id="board3"><rect x="120" y="240" width="520" height="460" rx="16" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<path id="pa3" d="M380 660V520" pathLength="1" fill="none" stroke="var(--ink)" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 1"/>
+<path id="pb3" d="M380 520Q380 420 230 330" pathLength="1" fill="none" stroke="var(--loss)" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 1"/>
+<path id="pc3" d="M380 520Q380 420 530 330" pathLength="1" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 1"/>
+<g id="lb3"><text class="d" x="230" y="300" font-size="40" text-anchor="middle" style="fill:var(--loss)">BE</text><text class="d" x="530" y="300" font-size="40" text-anchor="middle" style="fill:var(--gain)">DO</text></g></g>
+<g id="boyd3"><text class="m" x="790" y="730" font-size="20" text-anchor="middle">BOYD</text></g>
+<g id="bub3"><rect x="920" y="280" width="540" height="200" rx="30" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path d="M960 478L880 540L1020 478" fill="var(--stage)" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d" x="1190" y="365" font-size="56" text-anchor="middle">To be</text><text class="d" x="1190" y="440" font-size="56" text-anchor="middle">or <tspan style="fill:var(--gain)">to do?</tspan></text>
+<text class="m" x="920" y="600" font-size="20">IN BOYD’S WORDS, AS HOLIDAY TELLS IT</text></g>
+<g id="ans3"><text class="d" x="120" y="810" font-size="44">Every ambitious person has to answer it.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Path one: to be somebody.</text>
+<text class="b" x="120" y="176" font-size="32">Climb toward promotions and good assignments.</text>
+<g id="med4"></g>
+<g id="lad4"><path class="s-ink" d="M300 770V260M420 770V260" stroke-width="7" stroke-linecap="round"/><g id="rg4"></g></g>
+<g id="lab4"><text class="m" x="440" y="658" font-size="20">GO ALONG</text><text class="m" x="440" y="518" font-size="20">PLAY POLITICS</text><text class="m" x="440" y="378" font-size="20">PROMOTIONS</text></g>
+<g id="clm4"><g id="clmm4"></g></g>
+<g id="work4"><g id="wk4in"><rect id="wrect" x="1000" y="620" width="360" height="140" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><text class="d5" x="1180" y="702" font-size="40" text-anchor="middle">The work</text></g></g>
+<g id="cmp4"><text class="d" x="860" y="400" font-size="44">You compromise.</text><text class="d" x="860" y="456" font-size="44">You turn your back</text><text class="d" x="860" y="512" font-size="44" style="fill:var(--loss)">on the work.</text></g>
+<g id="many4"><text class="m" x="120" y="840" font-size="22">MANY TALENTED PEOPLE TAKE THIS ROAD WITHOUT NOTICING</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Path two: to do something.</text>
+<text class="b" x="120" y="176" font-size="32">Something that truly counts.</text>
+<g id="do5"><rect class="ink" x="220" y="640" width="160" height="90" rx="10"/><path class="s-ink" d="M270 640v-20h60v20" fill="none" stroke-width="6"/></g>
+<g id="brk5"></g>
+<text class="m" x="616" y="756" font-size="20" text-anchor="middle">THE WORK</text>
+<g id="boss5"></g>
+<g id="ls0"><text class="m" x="1080" y="420" font-size="22" style="fill:var(--loss)">ANNOYED BOSSES</text></g>
+<g id="ls1"><text class="m" x="1080" y="470" font-size="22" style="fill:var(--loss)">MISSED PROMOTIONS</text></g>
+<g id="ls2"><text class="m" x="1080" y="520" font-size="22" style="fill:var(--loss)">LOST FAVOR</text></g>
+<g id="chk5"><path class="s-gain" d="M540 400l40 40 80-90" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="fth5"><text class="d" x="120" y="840" font-size="44">You keep faith with yourself and the work.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Boyd chose to do.</text>
+<text class="b" x="120" y="176" font-size="32">He never rose beyond the rank of colonel.</text>
+<g id="bdg6"><path class="s-loss" d="M160 290H520" stroke-width="5" stroke-dasharray="12 10"/><text class="m" x="340" y="270" font-size="20" text-anchor="middle" style="fill:var(--loss)">RANK CEILING</text>
+<circle cx="340" cy="470" r="130" fill="var(--stage)" stroke="var(--ink)" stroke-width="8"/><circle class="s-line" cx="340" cy="470" r="100" fill="none" stroke-width="3"/><g id="bst6"></g>
+<text class="m" x="340" y="505" font-size="26" text-anchor="middle">COLONEL</text></g>
+<g id="rip6"></g><g id="nd6"></g>
+<g id="rc6"><circle class="ink" cx="1050" cy="480" r="22"/><path class="s-muted" d="M1330 480h-0" stroke-width="0"/><text class="m" x="1340" y="487" font-size="22">IDEAS</text></g>
+<g id="mat6"><text class="d" x="120" y="830" font-size="40">Missing rank didn’t stop his work mattering.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why ego picks “be”.</text>
+<text class="b" x="120" y="176" font-size="32">Titles and applause feel like proof that we matter.</text>
+<g id="mir7"><ellipse cx="360" cy="420" rx="150" ry="180" fill="var(--stage)" stroke="var(--ink)" stroke-width="8"/><path class="s-ink" d="M360 600V640M300 648h120" stroke-width="8" stroke-linecap="round"/><g id="mp7"></g><g id="spk7"></g>
+<text class="m" x="360" y="690" font-size="20" text-anchor="middle">TITLES · APPLAUSE</text></g>
+<g id="cmp7"><circle cx="1100" cy="420" r="170" fill="var(--stage)" stroke="var(--ink)" stroke-width="8"/><g id="tk7"></g>
+<g id="ndl7"><polygon class="gain" points="0,-140 16,0 -16,0"/><polygon class="ink" points="0,140 16,0 -16,0"/><circle cx="0" cy="0" r="8" fill="var(--stage)"/></g>
+<text class="d" x="910" y="434" font-size="40" text-anchor="end" style="fill:var(--loss)">BE</text><text class="d" x="1290" y="434" font-size="40" style="fill:var(--gain)">DO</text>
+<text class="m" x="1100" y="640" font-size="20" text-anchor="middle">PURPOSE</text></g>
+<g id="pur7"><text class="d" x="120" y="770" font-size="40">Purpose, not status, should guide our choices.</text></g>
+<g id="eas7"><text class="m" x="120" y="836" font-size="22" style="fill:var(--gain)">KNOW YOUR PURPOSE: RECOGNITION OR RESULTS GETS MUCH EASIER</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Where do looking good</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">and <tspan style="fill:var(--gain)">doing good</tspan> pull</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">apart this week?</text></g>
+<g id="fk8"><path class="s-ink" d="M1380 800V720" stroke-width="10" stroke-linecap="round"/><path class="s-loss" d="M1380 720Q1380 680 1320 630" fill="none" stroke-width="10" stroke-linecap="round"/><path class="s-gain" d="M1380 720Q1380 680 1440 630" fill="none" stroke-width="10" stroke-linecap="round"/></g>
+<g id="wr8"><text class="m" x="143" y="700" font-size="26">WRITE DOWN WHAT YOU ARE TRYING TO DO</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="122" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:02</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;To Be or To Do&rdquo;, from <em>Ego Is the Enemy</em> by Ryan Holiday. The story of military strategist John Boyd and his &#x27;to be or to do&#x27; talk is as reported in the book. The fork in the road, ladder, ripple and compass drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=122, SC=[[0.0, 7.5], [7.5, 22.2], [22.2, 34.3], [34.3, 47.9], [47.9, 63.9], [63.9, 75.6], [75.6, 89.1], [89.1, 109.7], [109.7, 122.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["To Be or To Do", "Meet John Boyd", "The Young Officer", "The Speech", "The Path to Be", "The Path to Do", "Boyd's Own Choice", "Why Ego Picks Be", "Your Fork"];
+const TM={"fork_road": 0.0, "fighter_jet": 7.84, "blueprint": 12.08, "young_officer": 22.48, "office_door": 26.72, "two_paths": 34.64, "speech_bubble": 38.56, "medals": 48.16, "ladder": 51.16, "toolbox": 64.16, "frown_boss": 68.16, "colonel_badge": 75.92, "ripple": 80.4, "mirror": 89.36, "compass": 94.88};
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const ST=(x,y,r)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,q=i%2?r*.45:r;d+=(i?'L':'M')+(x+q*Math.cos(a)).toFixed(1)+' '+(y+q*Math.sin(a)).toFixed(1)}return d+'Z'};
+const JET='M160 0L40-20L-20-90L-50-90L-30-20L-120-14L-150-50L-170-50L-160 0L-170 50L-150 50L-120 14L-30 20L-50 90L-20 90L40 20Z';
+mk('path',{d:JET,class:'ink',transform:'translate(380 420)'},$('jetb'));
+for(let x=740;x<=1400;x+=60)mk('path',{d:'M'+x+' 260V580',stroke:'var(--line)','stroke-width':1.5},$('bpg'));
+for(let y=280;y<=560;y+=40)mk('path',{d:'M720 '+y+'H1420',stroke:'var(--line)','stroke-width':1.5},$('bpg'));
+mk('path',{d:JET,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4,'stroke-linejoin':'round',transform:'translate(1070 420) scale(1.3)'},$('bpg'));
+P($('clashP'),300,720,20,'ink');P($('clashP'),560,720,20,'ink');
+P($('boyd2'),1310,470,30,'ink');
+P($('offm2'),0,570,34,'gain');const st2=mk('path',{d:ST(0,500,22),class:'gain'},$('offm2'));
+P($('boyd3'),790,520,40,'ink');
+const R4=[];for(let i=0;i<7;i++){const y=720-i*70;R4.push(mk('path',{d:'M300 '+y+'H420',class:'s-ink','stroke-width':7,'stroke-linecap':'round'},$('rg4')))}
+P($('clmm4'),360,0,22,'gain');
+[560,650,740].forEach(x=>{mk('polygon',{points:(x-16)+',230 '+(x+16)+',230 '+(x+8)+',280 '+(x-8)+',280',class:'loss'},$('med4'));mk('circle',{cx:x,cy:300,r:26,class:'gain'},$('med4'))});
+P($('do5'),300,470,30,'gain');
+const B5=[];for(let r=0;r<4;r++)for(let c=0;c<3;c++)B5.push(mk('rect',{x:480+c*92,y:650-r*60,width:84,height:52,rx:6,class:'gain'},$('brk5')));
+P($('boss5'),1000,450,30,'ink');
+[990,1010].forEach(x=>mk('circle',{cx:x,cy:442,r:3,fill:'var(--stage)'},$('boss5')));
+mk('path',{d:'M985 468q15-12 30 0',fill:'none',stroke:'var(--stage)','stroke-width':4,'stroke-linecap':'round'},$('boss5'));
+mk('path',{d:ST(340,425,30),class:'gain'},$('bst6'));
+const RP=[0,1,2].map(()=>mk('circle',{cx:1050,cy:480,r:30,fill:'none',stroke:'var(--gain)','stroke-width':4},$('rip6')));
+const ND=[];for(let i=0;i<8;i++){const a=i*Math.PI/4+.4;ND.push(mk('circle',{cx:(1050+250*Math.cos(a)).toFixed(1),cy:(480+250*Math.sin(a)).toFixed(1),r:16},$('nd6')))}
+P($('mp7'),360,350,34,'ink');
+const SK=[[272,312,16],[465,320,14],[455,520,12],[265,540,10]].map(q=>mk('path',{d:ST(q[0],q[1],q[2]),class:'gain'},$('spk7')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1100+150*c).toFixed(1)+' '+(420+150*s).toFixed(1)+'L'+(1100+164*c).toFixed(1)+' '+(420+164*s).toFixed(1),class:'s-muted','stroke-width':4,'stroke-linecap':'round'},$('tk7'))}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+const wp=p(u,TM.fork_road,TM.fork_road+3);$('walker').setAttribute('cy',(800-200*wp).toFixed(1));
+const f0=u>=TM.fork_road+3.8;$('bL').style.stroke=f0?'var(--loss)':'var(--line)';$('bR').style.stroke=f0?'var(--gain)':'var(--line)';R('lb0',TM.fork_road+3.8);
+
+R('jet1',TM.fighter_jet);$('jetb').setAttribute('transform','translate(0 '+(8*Math.sin(t*1.6)).toFixed(1)+')');
+R('bp',TM.blueprint);R('clash1',TM.blueprint+5.4);$('bolt1').setAttribute('opacity',(.6+.4*Math.sin(t*9)).toFixed(2));
+
+R('boyd2',TM.young_officer);R('off2',TM.young_officer);R('door2',TM.office_door);
+$('dpanel').setAttribute('width',(200-164*p(u,TM.office_door+.3,TM.office_door+1.3)).toFixed(1));
+$('offm2').setAttribute('transform','translate('+(300+480*p(u,TM.office_door+.8,TM.office_door+3)).toFixed(1)+' 0)');
+const ts=u>=TM.office_door+7;st2.setAttribute('opacity',ts?(.4+.6*Math.abs(Math.sin(t*4))).toFixed(2):1);R('test2',TM.office_door+7);
+
+R('boyd3',SC[3][0]/K+.4);R('board3',TM.two_paths);
+$('pa3').style.strokeDashoffset=1-p(u,TM.two_paths+.3,TM.two_paths+1);
+['pb3','pc3'].forEach(k=>$(k).style.strokeDashoffset=1-p(u,TM.two_paths+1,TM.two_paths+2));
+R('lb3',TM.two_paths+1.8);R('bub3',TM.speech_bubble);R('ans3',TM.speech_bubble+6.1);
+
+R('med4',TM.medals);R('work4',TM.medals+.5);R('lad4',TM.ladder);R('lab4',TM.ladder+2);
+R4.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.ladder+i*.2,TM.ladder+i*.2+.3)));
+R('clm4',TM.ladder);$('clmm4').setAttribute('transform','translate(0 '+(670-440*p(u,TM.ladder+.5,TM.ladder+5)).toFixed(1)+')');
+const cm=u>=TM.ladder+6.1;$('wk4in').setAttribute('opacity',cm?.3:1);$('wrect').setAttribute('stroke-dasharray',cm?'12 10':'none');
+R('cmp4',TM.ladder+6.1);R('many4',TM.ladder+10.7);
+
+R('do5',TM.toolbox);B5.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.toolbox+.4+i*.25,TM.toolbox+.7+i*.25)));
+R('boss5',TM.frown_boss);[0,1,2].forEach(i=>R('ls'+i,TM.frown_boss+i*1.2));
+R('chk5',TM.frown_boss+4.2);R('fth5',TM.frown_boss+4.2);
+
+R('bdg6',TM.colonel_badge);R('rc6',TM.ripple);
+const rv=p(u,TM.ripple,TM.ripple+.5);RP.forEach((c,i)=>{const k=(t*.4+i/3)%1;c.setAttribute('r',(30+230*k).toFixed(1));c.setAttribute('opacity',((1-k)*rv).toFixed(2))});
+ND.forEach((n,i)=>{const a=TM.ripple+.3+i*.3;n.setAttribute('fill',u>=a?'var(--gain)':'var(--line)');n.setAttribute('opacity',rv)});
+R('mat6',TM.ripple+5.8);
+
+R('mir7',TM.mirror);SK.forEach((s,i)=>s.setAttribute('opacity',(.3+.7*Math.abs(Math.sin(t*2+i))).toFixed(2)));
+R('cmp7',TM.compass);const sw=p(u,TM.compass+5.4,TM.compass+6.6);
+$('ndl7').setAttribute('transform','translate(1100 420) rotate('+(-90+180*sw+(1-sw)*15*Math.sin(t*3)).toFixed(1)+')');
+R('pur7',TM.compass+5.4);R('eas7',TM.compass+9.6);
+
+const S8=SC[8][0]/K;R('qa',S8+.3);R('qb',S8+.7);R('qc',S8+1.1);R('fk8',S8+1.6);R('wr8',S8+5.8);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:118.75;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

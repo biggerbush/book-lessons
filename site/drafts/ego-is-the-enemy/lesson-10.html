@@ -1,0 +1,370 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ego Is the Enemy Lesson 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 10 of Ego Is the Enemy: Ego is a recurring cycle, and the lasting cure is to judge ourselves by our own standards of effort and integrity rather than outside praise or results. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">EGO IS THE ENEMY · LESSON 10</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Keep your own</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">scorecard.</text>
+<text class="b" x="120" y="600" font-size="32">Measure yourself by your standards, not the crowd’s applause.</text>
+<g id="sb">
+<rect class="s-ink" x="1080" y="230" width="380" height="250" rx="18" fill="var(--stage)" stroke-width="7"/>
+<text class="m" x="1270" y="276" font-size="20" text-anchor="middle">WHO KEEPS SCORE?</text>
+<path class="s-line" d="M1270 296v160" stroke-width="4"/>
+<text id="lyou" class="m" x="1175" y="322" font-size="22" text-anchor="middle">YOU</text>
+<text class="m" x="1365" y="322" font-size="22" text-anchor="middle">CROWD</text>
+<rect id="byou" x="1120" y="340" width="110" height="110" rx="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/>
+<rect id="bcrowd" x="1310" y="340" width="110" height="110" rx="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/>
+<path id="ck0" d="M1148 398l20 20 36-44" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<text id="qcrowd" class="d" x="1365" y="420" font-size="72" text-anchor="middle">?</text>
+</g>
+<g id="fan0"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ego comes in seasons.</text>
+<text class="b" x="120" y="176" font-size="32">Aspiring, succeeding, failing, and around again.</text>
+<g id="whl"><circle class="s-line" cx="520" cy="500" r="200" fill="none" stroke-width="6"/></g>
+<circle id="ring" cx="520" cy="500" r="200" fill="none" stroke="var(--gain)" stroke-width="8" stroke-dasharray="1257" transform="rotate(-90 520 500)"/>
+<g id="nodes"></g>
+<path id="runner" class="gain" d="M-14 -16L16 0L-14 16z"/>
+<g id="clm">
+<path class="s-ink" d="M900 760L1040 440L1120 580L1260 360L1340 520L1460 300" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="1180" y="820" font-size="22" text-anchor="middle">NEVER JUST ONCE</text>
+</g>
+<circle id="clb" class="gain" r="20"/>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The outside score.</text>
+<text class="b" x="120" y="176" font-size="32">We measure ourselves by what others can see.</text>
+<g id="chips2"></g>
+<g id="arw2"><path class="s-muted" d="M700 320H850m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="crowd2"></g>
+<g id="meter">
+<rect class="s-line" x="880" y="260" width="140" height="380" rx="12" fill="none" stroke-width="5"/>
+<rect id="bar2" class="ink" x="896" y="452" width="108" height="180" rx="6"/>
+<text class="m" x="950" y="684" font-size="20" text-anchor="middle">OUTSIDE SCORE</text>
+</g>
+<g id="luck"><text class="m" x="120" y="800" font-size="22">IT DEPENDS ON LUCK, TIMING AND OTHER PEOPLE</text></g>
+<g id="ego2"><circle id="bal" class="loss" cx="1320" cy="450" r="75"/><text class="d" x="1320" y="464" font-size="40" text-anchor="middle" style="fill:var(--stage)">EGO</text><text id="egot" class="m" x="1320" y="640" font-size="22" text-anchor="middle">SWELLS</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Winning is not enough.</text>
+<text class="b" x="120" y="176" font-size="32">Coach Bill Belichick, New England Patriots.</text>
+<g id="board3">
+<rect class="s-ink" x="120" y="240" width="520" height="200" rx="16" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="160" y="290" font-size="22">RESULT ON THE BOARD</text>
+<text id="win3" class="d" x="160" y="400" font-size="96" style="fill:var(--gain)">WIN</text>
+</g>
+<line id="st3" class="s-loss" x1="150" y1="366" x2="150" y2="366" stroke-width="10" stroke-linecap="round"/>
+<g id="coach3"><rect class="s-ink" x="360" y="580" width="64" height="84" rx="6" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M374 604h36M374 624h36M374 644h22" stroke-width="5" stroke-linecap="round"/></g>
+<g id="film">
+<rect class="s-ink" x="760" y="240" width="720" height="400" rx="12" fill="var(--stage)" stroke-width="6"/>
+<g id="holes"></g>
+<text class="m" x="790" y="320" font-size="20">GAME FILM</text>
+<path class="s-line" d="M790 495H1450" stroke-width="3" stroke-dasharray="8 8"/>
+<g id="play"></g>
+</g>
+<g id="errs"></g>
+<g id="std3"><text class="d5" x="120" y="790" font-size="40">The real question: did we play to our standard?</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of score.</text>
+<text class="b" x="120" y="176" font-size="32">You can win badly, and lose well.</text>
+<g id="pan">
+<rect class="s-line" x="120" y="230" width="640" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-line" x="840" y="230" width="640" height="560" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="160" y="290" font-size="24">A LUCKY WIN</text>
+<text class="m" x="880" y="290" font-size="24">AN HONEST LOSS</text>
+</g>
+<g id="pl">
+<text class="m" x="160" y="360" font-size="22">RESULT</text>
+<rect class="ink" x="160" y="380" width="240" height="90" rx="14"/>
+<text class="d" x="280" y="447" font-size="56" text-anchor="middle" style="fill:var(--stage)">WIN</text>
+<text class="m" x="160" y="540" font-size="22">OWN STANDARD</text>
+<rect class="s-line" x="160" y="560" width="560" height="44" rx="22" fill="none" stroke-width="4"/>
+<rect id="barL" class="loss" x="160" y="560" width="0" height="44" rx="22"/>
+<text class="d5" x="160" y="700" font-size="36">Celebrate it, learn nothing.</text>
+</g>
+<g id="pr">
+<text class="m" x="880" y="360" font-size="22">RESULT</text>
+<rect class="s-ink" x="880" y="380" width="240" height="90" rx="14" fill="none" stroke-width="5"/>
+<text class="d" x="1000" y="447" font-size="56" text-anchor="middle">LOSS</text>
+<text class="m" x="880" y="540" font-size="22">OWN STANDARD</text>
+<rect class="s-line" x="880" y="560" width="560" height="44" rx="22" fill="none" stroke-width="4"/>
+<rect id="barR" class="gain" x="880" y="560" width="0" height="44" rx="22"/>
+<text class="d5" x="880" y="700" font-size="36">A success by your measure.</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Inner vs outer scorecard.</text>
+<text class="b" x="120" y="176" font-size="32">An idea from investor Warren Buffett.</text>
+<g id="outerW"><g id="outer">
+<rect class="s-ink" x="160" y="260" width="540" height="460" rx="20" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="200" y="320" font-size="24" style="fill:var(--muted)">OUTER SCORECARD</text>
+<g id="oc"><text class="m" x="200" y="370" font-size="22" style="fill:var(--muted)">WHAT THE WORLD THINKS</text></g>
+</g></g>
+<g id="inner">
+<rect x="900" y="260" width="540" height="460" rx="20" fill="var(--stage)" stroke="var(--gain)" stroke-width="7"/>
+<text class="m" x="940" y="320" font-size="24" style="fill:var(--gain)">INNER SCORECARD</text>
+<g id="ic"><text class="m" x="940" y="370" font-size="20">DID I LIVE UP TO MY STANDARDS?</text></g>
+<g id="most"><rect class="gain" x="1000" y="630" width="340" height="60" rx="30"/><text class="m" x="1170" y="668" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">MATTERS MOST</text></g>
+</g>
+<g id="buf"><text class="m" x="800" y="560" font-size="18" text-anchor="middle">BUFFETT</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What goes on your card.</text>
+<text class="b" x="120" y="176" font-size="32">Only things you can actually control.</text>
+<g id="card6">
+<rect class="s-ink" x="120" y="230" width="660" height="530" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="160" y="290" font-size="22">MY CARD</text>
+<rect class="s-ink" x="160" y="340" width="70" height="70" rx="10" fill="none" stroke-width="5"/>
+<rect class="s-ink" x="160" y="500" width="70" height="70" rx="10" fill="none" stroke-width="5"/>
+<text class="m" x="160" y="700" font-size="20">NOT: APPLAUSE, RESULTS, LUCK</text>
+</g>
+<g id="r1">
+<path class="gain" d="M300 336c-14 22-30 40-30 62a30 30 0 0 0 60 0c0-22-16-40-30-62z"/>
+<text class="d5" x="370" y="392" font-size="44">Real effort</text>
+<path id="ck1" d="M172 378l18 18 32-40" fill="none" stroke="var(--gain)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="100"/>
+</g>
+<g id="r2">
+<rect class="ink" x="250" y="522" width="46" height="26" rx="13"/><rect class="gain" x="284" y="522" width="46" height="26" rx="13"/>
+<text class="d5" x="370" y="552" font-size="44">Integrity</text>
+<text class="m" x="370" y="592" font-size="20">EVEN WHEN NOBODY WATCHES</text>
+<path id="ck2" d="M172 538l18 18 32-40" fill="none" stroke="var(--gain)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="100"/>
+</g>
+<g id="guard">
+<path class="s-ink" d="M840 260V760" stroke-width="10" stroke-linecap="round"/>
+<path class="s-loss" d="M1010 380H880m22-20-22 20 22 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-muted" d="M1080 600H880m22-20-22 20 22 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="900" y="470" font-size="20">RIVALS CAN’T TAKE THEM</text>
+<text class="m" x="900" y="700" font-size="20">CROWDS CAN’T HAND THEM OUT</text>
+<g id="foes"></g>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A steady practice.</text>
+<text class="b" x="120" y="176" font-size="32">Review each day. Return a little more honest.</text>
+<g id="days"></g>
+<g id="lamp">
+<polygon id="cone" class="gain" points="410,535 465,515 720,756 440,756" fill-opacity="0"/>
+<path class="s-ink" d="M160 760H760" stroke-width="6" stroke-linecap="round"/>
+<rect class="ink" x="200" y="744" width="140" height="16" rx="4"/>
+<path class="s-ink" d="M270 744L230 580L380 480" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon class="ink" points="350,460 430,430 470,520 400,540"/>
+<rect class="s-ink" x="470" y="712" width="220" height="40" rx="4" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M490 726H670M490 740H610" stroke-width="4"/>
+</g>
+<g id="tmr">
+<path class="s-gain" d="M780 620C900 520 1000 520 1150 590" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<path class="s-gain" d="M1126 570l26 22-34 6" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="sun" class="gain" cx="1310" cy="610" r="40"/>
+<path class="s-ink" d="M1190 600H1440" stroke-width="5" stroke-linecap="round"/>
+<text class="d5" x="900" y="700" font-size="40">Back to work tomorrow,</text>
+<text class="d5" x="900" y="754" font-size="40">a little more honest.</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="84" letter-spacing="-2">Write down three standards</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="84" letter-spacing="-2">that define a good day.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="84" letter-spacing="-2">Then score <tspan style="fill:var(--gain)">only by those.</tspan></text></g>
+<text class="m" x="143" y="700" font-size="26">NOTHING ELSE COUNTS</text>
+<g id="rows8"></g>
+<g id="penW"><g id="pen8"><path class="ink" d="M0 0l10-30 64-64 20 20-64 64z"/><path class="gain" d="M0 0l10-30 20 20z"/></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="128" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:08</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Keep Your Own Scorecard&rdquo;, from <em>Ego Is the Enemy</em> by Ryan Holiday. Examples of coach Bill Belichick and investor Warren Buffett&#x27;s inner scorecard idea are as reported in the book. Scoreboards, cards, checklists and loops are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-10.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=128, SC=[[0.0, 5.7], [5.7, 21.7], [21.7, 39.3], [39.3, 57.1], [57.1, 70.4], [70.4, 89.1], [89.1, 103.4], [103.4, 117.0], [117.0, 128.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Keep Your Own Scorecard", "The Ego Cycle", "The Outside Score", "Winning Is Not Enough", "Two Kinds of Score", "The Inner Scorecard", "What Goes on Your Card", "Making It a Habit", "Your Challenge"];
+const TM={"scoreboard": 0.0, "cycle_wheel": 6.0, "arrow_loop": 13.2, "climber": 18.8, "crowd": 22.0, "trophy": 25.44, "coach": 39.6, "game_film": 44.24, "split_screen": 57.44, "lucky_win": 62.4, "honest_loss": 66.16, "investor": 70.72, "two_cards": 78.24, "checklist": 89.36, "sweat_drop": 92.72, "handshake": 94.88, "notebook": 103.68, "evening_lamp": 108.8, "pencil": 117.28};
+const fig=(g,x,y,r,f)=>{mk('circle',{cx:x,cy:y,r:r,fill:f},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',fill:f},g)};
+const T=(g,s,a)=>{const e=mk('text',a,g);e.textContent=s;return e};
+const RC=(g,a)=>mk('path',Object.assign({fill:'none','stroke-linecap':'round','stroke-linejoin':'round'},a),g);
+[1330,1390,1450].forEach(x=>fig($('fan0'),x,540,16,'var(--muted)'));
+// cycle nodes; labels sit OUTSIDE the ring so the runner never crosses them
+const ND=[['ASPIRING',520,300,520,236,'middle'],['SUCCEEDING',693,600,754,608,'start'],['FAILING',347,600,286,608,'end']].map(q=>{const g=mk('g',{},$('nodes'));mk('circle',{cx:q[1],cy:q[2],r:44,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);mk('circle',{cx:q[1],cy:q[2],r:16,fill:'var(--loss)'},g);T(g,q[0],{x:q[3],y:q[4],class:'m','font-size':24,'text-anchor':q[5]});return g});
+const MP=[[900,760],[1040,440],[1120,580],[1260,360],[1340,520],[1460,300]];
+const along=k=>{const n=MP.length-1,f=cl(k)*n,i=Math.min(n-1,Math.floor(f)),r=f-i;return [MP[i][0]+(MP[i+1][0]-MP[i][0])*r,MP[i][1]+(MP[i+1][1]-MP[i][1])*r]};
+const CH2=['APPLAUSE','PROMOTIONS','WINS','FOLLOWERS'].map((s,i)=>{const x=120+(i%2)*290,y=250+Math.floor(i/2)*80,g=mk('g',{},$('chips2'));mk('rect',{x:x,y:y,width:270,height:60,rx:30,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);T(g,s,{x:x+135,y:y+39,class:'m','font-size':22,'text-anchor':'middle',style:'fill:var(--ink)'});return g});
+const CR2=[0,1,2,3,4].map(i=>{const g=mk('g',{},$('crowd2'));fig(g,170+i*100,560,22,'var(--ink)');return g});
+fig($('coach3'),300,540,28,'var(--ink)');
+for(let x=784;x<=1440;x+=48){mk('rect',{x:x,y:252,width:24,height:14,rx:3,fill:'var(--line)'},$('holes'));mk('rect',{x:x,y:614,width:24,height:14,rx:3,fill:'var(--line)'},$('holes'))}
+for(let i=0;i<5;i++){const x=880+i*120;mk('circle',{cx:x,cy:450,r:22,fill:'none',stroke:'var(--ink)','stroke-width':5},$('play'));RC($('play'),{d:'M'+(x+44)+' 524l32 32m0-32l-32 32',stroke:'var(--ink)','stroke-width':5})}
+const ER=[[1000,450],[1180,540],[1360,450]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:44,fill:'none',stroke:'var(--loss)','stroke-width':6},$('errs')));
+const ICK=[];[430,510,590].forEach(y=>{mk('circle',{cx:230,cy:y,r:18,class:'ink'},$('oc'));RC($('oc'),{d:'M270 '+y+'H640',stroke:'var(--muted)','stroke-width':8,'stroke-dasharray':'2 18'});
+  mk('rect',{x:940,y:y-20,width:40,height:40,rx:8,fill:'none',stroke:'var(--gain)','stroke-width':5},$('ic'));RC($('ic'),{d:'M1000 '+y+'H1380',stroke:'var(--line)','stroke-width':8});
+  ICK.push(RC($('ic'),{d:'M948 '+y+'l9 9 17-20',stroke:'var(--gain)','stroke-width':6}))});
+fig($('buf'),800,440,20,'var(--ink)');
+fig($('foes'),1060,300,24,'var(--loss)');[1120,1200,1280].forEach(x=>fig($('foes'),x,550,20,'var(--muted)'));
+const DK=['M','T','W','T','F','S','S'].map((s,i)=>{const x=120+i*190;mk('rect',{x:x,y:240,width:160,height:110,rx:12,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},$('days'));T($('days'),s,{x:x+20,y:278,class:'m','font-size':20});return RC($('days'),{d:'M'+(x+56)+' 306l20 20 36-42',stroke:'var(--gain)','stroke-width':8})});
+const RY=[690,750,810],RL=[380,320,350],LN=RY.map((y,i)=>{mk('rect',{x:900,y:y-28,width:36,height:36,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':5},$('rows8'));return RC($('rows8'),{d:'M960 '+(y-10)+'H961',stroke:'var(--gain)','stroke-width':8})});
+const BK=RY.map(y=>RC($('rows8'),{d:'M906 '+(y-12)+'l8 8 16-18',stroke:'var(--gain)','stroke-width':6}));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const a0=TM.scoreboard,y0=p(u,a0+2.6,a0+3.2);
+rise($('sb'),p(u,a0,a0+.5)); $('fan0').setAttribute('opacity',(p(u,a0+.4,a0+.9)*(1-.65*y0)).toFixed(2));
+$('byou').setAttribute('fill',y0>.5?'var(--gain)':'var(--stage)'); $('byou').setAttribute('stroke',y0>.5?'var(--gain)':'var(--ink)');
+$('ck0').setAttribute('opacity',y0); $('lyou').style.fill=y0>.5?'var(--gain)':''; $('bcrowd').setAttribute('opacity',1-.6*y0); $('qcrowd').setAttribute('opacity',1-.7*y0);
+
+const cw=TM.cycle_wheel,al=TM.arrow_loop; rise($('whl'),p(u,cw,cw+.5)); ND.forEach((g,i)=>rise(g,p(u,cw+2+i*1.1,cw+2.5+i*1.1)));
+const rk=p(u,al,al+2.2); $('ring').setAttribute('stroke-dashoffset',(1257*(1-rk)).toFixed(1));
+const ra=-Math.PI/2+2*Math.PI*rk+Math.max(0,u-al-2.2)*1.5;
+$('runner').setAttribute('transform','translate('+(520+200*Math.cos(ra)).toFixed(1)+' '+(500+200*Math.sin(ra)).toFixed(1)+') rotate('+(ra*180/Math.PI+90).toFixed(1)+')'); $('runner').setAttribute('opacity',p(u,al,al+.3));
+const ck=TM.climber,cp=along(p(u,ck+.4,ck+3.2)); rise($('clm'),p(u,ck,ck+.5)); $('clb').setAttribute('cx',cp[0].toFixed(1)); $('clb').setAttribute('cy',(cp[1]-24).toFixed(1)); $('clb').setAttribute('opacity',p(u,ck,ck+.5));
+
+const cr=TM.crowd,tr=TM.trophy; CR2.forEach((g,i)=>rise(g,p(u,cr+i*.2,cr+.5+i*.2))); CH2.forEach((g,i)=>rise(g,p(u,tr+i*.5,tr+.5+i*.5)));
+rise($('arw2'),p(u,tr+2,tr+2.5)); rise($('meter'),p(u,tr+2,tr+2.5)); rise($('luck'),p(u,tr+3.4,tr+3.9));
+const ek=p(u,tr+7.1,tr+7.6),sw=Math.sin(u*1.6)*ek,jt=8*Math.sin(u*9)*p(u,tr+3.4,tr+4)*(1-ek),h=Math.max(0,180*p(u,tr+2,tr+3)+140*sw+jt);
+$('bar2').setAttribute('y',(632-h).toFixed(1)); $('bar2').setAttribute('height',h.toFixed(1));
+rise($('ego2'),ek); $('bal').setAttribute('r',(75+35*sw).toFixed(1)); $('egot').textContent=Math.cos(u*1.6)>0?'SWELLS':'SULKS';
+
+const co=TM.coach,gf=TM.game_film; rise($('board3'),p(u,co,co+.5)); rise($('coach3'),p(u,co+.6,co+1.1)); rise($('film'),p(u,gf,gf+.5));
+ER.forEach((e,i)=>{e.setAttribute('opacity',p(u,gf+1.5+i*.8,gf+1.9+i*.8)); e.setAttribute('r',(44+4*Math.sin(t*4+i)).toFixed(1))});
+const sk=p(u,gf+6.9,gf+7.6); $('st3').setAttribute('x2',(150+240*sk).toFixed(1)); $('win3').setAttribute('fill-opacity',1-.5*sk); rise($('std3'),p(u,gf+11.9,gf+12.5));
+
+const ss=TM.split_screen,lw=TM.lucky_win,hl=TM.honest_loss; rise($('pan'),p(u,ss,ss+.5)); rise($('pl'),p(u,lw,lw+.5)); rise($('pr'),p(u,hl,hl+.5));
+$('barL').setAttribute('width',(110*p(u,lw+.6,lw+1.4)).toFixed(1)); $('barR').setAttribute('width',(560*p(u,hl+.6,hl+1.8)).toFixed(1));
+
+const iv=TM.investor,tc=TM.two_cards,mm=p(u,tc+9.2,tc+9.8); rise($('buf'),p(u,iv,iv+.5)); rise($('outer'),p(u,iv+1,iv+1.5)); rise($('inner'),p(u,iv+1.5,iv+2));
+$('outerW').setAttribute('opacity',(1-.32*mm).toFixed(2)); rise($('oc'),p(u,tc,tc+.5)); rise($('ic'),p(u,tc+4.2,tc+4.7));
+ICK.forEach((c,i)=>c.setAttribute('opacity',p(u,tc+4.8+i*.4,tc+5.1+i*.4))); rise($('most'),mm);
+
+const c6=TM.checklist,sd=TM.sweat_drop,hs=TM.handshake; rise($('card6'),p(u,c6,c6+.5)); rise($('r1'),p(u,sd,sd+.5)); rise($('r2'),p(u,hs,hs+.5));
+$('ck1').setAttribute('stroke-dashoffset',(100*(1-p(u,sd+.8,sd+1.3))).toFixed(1)); $('ck2').setAttribute('stroke-dashoffset',(100*(1-p(u,hs+.8,hs+1.3))).toFixed(1)); rise($('guard'),p(u,hs+4.1,hs+4.6));
+
+const nb=TM.notebook,el=TM.evening_lamp; rise($('days'),p(u,nb,nb+.5)); DK.forEach((c,i)=>c.setAttribute('opacity',p(u,nb+1+i*1.4,nb+1.4+i*1.4)));
+rise($('lamp'),p(u,el,el+.5)); $('cone').setAttribute('fill-opacity',(.22*p(u,el+.4,el+1)).toFixed(2));
+rise($('tmr'),p(u,el+4.5,el+5.1)); $('sun').setAttribute('cy',(610-50*p(u,el+4.8,el+6)).toFixed(1));
+
+const pc=TM.pencil; rise($('qa'),p(u,pc,pc+.5)); rise($('qb'),p(u,pc+.4,pc+.9)); rise($('qc'),p(u,pc+4.9,pc+5.4)); rise($('rows8'),p(u,pc+.6,pc+1)); rise($('pen8'),p(u,pc+.6,pc+1));
+let px=960,py=RY[0]-10; LN.forEach((l,i)=>{const k=p(u,pc+1+i,pc+1.8+i),x=960+RL[i]*k; l.setAttribute('d','M960 '+(RY[i]-10)+'H'+(x+1).toFixed(1)); if(u>=pc+1+i){px=x;py=RY[i]-10}});
+$('penW').setAttribute('transform','translate('+px.toFixed(1)+' '+py+')'); BK.forEach((b,i)=>b.setAttribute('opacity',p(u,pc+4.9+i*.3,pc+5.2+i*.3)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:124.53;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

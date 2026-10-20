@@ -1,0 +1,298 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ego Is the Enemy Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Ego Is the Enemy: Early on, helping others succeed and clearing paths for them builds skill and relationships far faster than demanding credit. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">EGO IS THE ENEMY · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The Canvas</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Strategy.</text>
+<text class="b" x="120" y="600" font-size="32">Rise faster by helping others look good first.</text>
+<path class="s-ink" d="M1210 460L1170 660M1410 460L1450 660M1310 460V640" stroke-width="8" stroke-linecap="round"/>
+<rect class="s-ink" x="1180" y="260" width="260" height="200" rx="6" fill="var(--stage)" stroke-width="7"/>
+<g id="paint" fill="none" stroke-linecap="round"><path d="M1210 420C1260 320 1320 320 1360 400" stroke="var(--gain)" stroke-width="14" pathLength="1" stroke-dasharray="1 1"/><path d="M1220 300Q1300 350 1410 290" stroke="var(--loss)" stroke-width="10" pathLength="1" stroke-dasharray="1 1"/><path d="M1250 440L1410 428" stroke="var(--ink)" stroke-width="7" pathLength="1" stroke-dasharray="1 1"/></g>
+<g id="tw"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The anteambulo.</text>
+<text class="b" x="120" y="176" font-size="32">In Rome, someone walked ahead to clear the way.</text>
+<g id="street"><rect x="120" y="300" width="1360" height="420" rx="24" fill="var(--line)" fill-opacity=".35"/><g id="crowd"></g>
+<g id="patw"><g id="pat"><text class="m" x="220" y="770" font-size="20" text-anchor="middle">PATRON</text></g></g></g>
+<g id="antw"><g id="ant"><text class="m" x="380" y="770" font-size="20" text-anchor="middle" style="fill:var(--gain)">ANTEAMBULO</text></g></g>
+<g id="ret"><text class="m" x="120" y="840" font-size="22" style="fill:var(--gain)">IN RETURN: SUPPORT AND CONNECTIONS</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Find canvases for others.</text>
+<text class="b" x="120" y="176" font-size="32">Holiday’s advice for when you are starting out.</text>
+<g id="cyou"><path class="s-ink" d="M444 500L600 470" stroke-width="8" stroke-linecap="round"/><text class="m" x="400" y="620" font-size="20" text-anchor="middle">YOU: SPACE + SUPPORT</text></g>
+<g id="cv"><path class="s-ink" d="M640 540L600 760M960 540L1000 760M800 540V740" stroke-width="8" stroke-linecap="round"/><rect class="s-ink" x="600" y="240" width="400" height="300" rx="6" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="580" y="536" width="440" height="14" rx="4"/></g>
+<g id="strokes" fill="none" stroke-linecap="round"><path d="M640 470C720 300 800 300 880 420" stroke="var(--gain)" stroke-width="16" pathLength="1" stroke-dasharray="1 1"/><path d="M650 300Q760 360 960 280" stroke="var(--loss)" stroke-width="10" pathLength="1" stroke-dasharray="1 1"/><path d="M700 495L960 470" stroke="var(--ink)" stroke-width="8" pathLength="1" stroke-dasharray="1 1"/></g>
+<g id="sig"><text class="m" x="972" y="520" font-size="22" text-anchor="end" style="fill:var(--gain)">THEIR NAME</text></g>
+<g id="cpt"><path class="s-gain" d="M1158 500L1014 410" stroke-width="8" stroke-linecap="round"/><circle class="gain" cx="1014" cy="410" r="9"/><text class="m" x="1200" y="620" font-size="20" text-anchor="middle" style="fill:var(--gain)">THEM: THE ART</text></g>
+<g id="cred"><text class="d5" x="120" y="830" font-size="36">Your name may not be on it. That’s fine for now.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The ego trap.</text>
+<text class="b" x="120" y="176" font-size="32">Demanding credit too early closes doors.</text>
+<g id="newb"><text class="m" x="300" y="690" font-size="20" text-anchor="middle" style="fill:var(--loss)">BEGINNER’S EGO</text></g>
+<g id="chips"></g>
+<g id="dw"><rect class="s-ink" x="900" y="260" width="240" height="440" fill="var(--line)" fill-opacity=".3" stroke-width="6"/><g id="mentor"></g><rect id="door" x="900" y="260" width="40" height="440" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><circle id="knob" class="ink" cy="480" r="10"/><text class="m" x="1020" y="750" font-size="22" text-anchor="middle">DOORS CLOSE</text></g>
+<g id="steps"></g>
+<g id="skip"><text class="m" x="1340" y="750" font-size="18" text-anchor="middle" style="fill:var(--loss)">HUMBLE WORK SKIPPED</text></g>
+<g id="hum"><text class="d5" x="120" y="830" font-size="36">Meanwhile, you skip the humble work where skill is built.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Belichick’s start.</text>
+<text class="b" x="120" y="176" font-size="32">One of the most successful coaches in American football.</text>
+<g id="field"><rect class="s-ink" x="120" y="260" width="340" height="240" rx="8" fill="none" stroke-width="6"/><path class="s-line" d="M177 260v240M234 260v240M290 260v240M347 260v240M404 260v240" stroke-width="4"/><ellipse class="gain" cx="290" cy="380" rx="56" ry="32"/><path d="M265 380h50M275 370v20M290 370v20M305 370v20" stroke="var(--stage)" stroke-width="4" stroke-linecap="round"/><text class="m" x="120" y="540" font-size="20">AMERICAN FOOTBALL</text></g>
+<g id="reelg"><text class="m" x="640" y="270" font-size="20" text-anchor="middle">BREAKING DOWN GAME FILM</text><path id="strip" d="M640 470C640 600 760 640 880 636" fill="none" stroke="var(--ink)" stroke-width="16" stroke-dasharray="16 10"/><g id="reel"><circle class="s-ink" cx="640" cy="380" r="90" fill="var(--stage)" stroke-width="8"/><circle class="ink" cx="640" cy="380" r="14"/></g></g>
+<g id="bel"><g id="belp"></g><rect class="ink" x="880" y="630" width="240" height="16" rx="4"/><path class="s-ink" d="M900 646v60M1100 646v60" stroke-width="6"/><text class="m" x="1000" y="740" font-size="20" text-anchor="middle" style="fill:var(--gain)">BELICHICK</text></g>
+<g id="relied" opacity="0"></g>
+<g id="coaches" opacity="0"><text class="m" x="1350" y="560" font-size="20" text-anchor="middle">SENIOR COACHES</text></g>
+<g id="nowant"><text class="m" x="1350" y="596" font-size="18" text-anchor="middle" style="fill:var(--loss)">NOBODY ELSE WANTED IT</text></g>
+<g id="learn"><text class="d" x="120" y="820" font-size="42">He learned the game deeply and became relied on.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it works.</text>
+<text class="b" x="120" y="176" font-size="32">Credit fades. Skills and relationships compound.</text>
+<g id="pa"><rect class="s-line" x="120" y="240" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="290" font-size="22">SKILL</text><rect class="s-ink" x="280" y="330" width="100" height="360" rx="12" fill="none" stroke-width="5"/><rect id="mfill" class="gain" x="286" y="686" width="88" height="0" rx="8"/><text class="m" x="330" y="730" font-size="18" text-anchor="middle">SEE GOOD WORK UP CLOSE</text></g>
+<g id="pb"><rect class="s-line" x="590" y="240" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="620" y="290" font-size="22">TRUST</text><g id="net"></g><text class="m" x="800" y="730" font-size="18" text-anchor="middle">THEY REMEMBER WHO HELPED</text></g>
+<g id="pc"><rect class="s-line" x="1060" y="240" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1090" y="290" font-size="22">OVER TIME</text><path class="s-muted" d="M1100 330V690H1450" fill="none" stroke-width="4"/>
+<path id="ccred" d="M1100 684C1130 420 1170 400 1210 520C1250 640 1320 670 1450 676" fill="none" stroke="var(--loss)" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="cskill" d="M1100 680C1260 670 1390 600 1450 340" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<text class="m" x="1100" y="740" font-size="18" style="fill:var(--loss)">CREDIT</text><text class="m" x="1450" y="740" font-size="18" text-anchor="end" style="fill:var(--gain)">SKILL + TRUST</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not a doormat. A strategy.</text>
+<text class="b" x="120" y="176" font-size="32">Trade short-term recognition for long-term growth.</text>
+<g id="strat"><text class="m" x="120" y="280" font-size="22" style="fill:var(--gain)">A DELIBERATE STRATEGY</text></g>
+<g id="figs"><g id="fg"></g><text class="m" x="330" y="570" font-size="20" text-anchor="middle">STANDING TALL, SIDE BY SIDE</text></g>
+<g id="mat"><rect class="s-muted" x="150" y="610" width="340" height="50" rx="8" fill="none" stroke-width="4"/><path class="s-loss" d="M170 590L470 680M470 590L170 680" stroke-width="7" stroke-linecap="round"/><text class="m" x="150" y="730" font-size="20">NOT A DOORMAT</text></g>
+<g id="roadw"><path id="road" d="M640 740C900 740 1000 540 1160 480S1400 360 1460 300" fill="none" stroke="var(--line)" stroke-width="36" stroke-linecap="round"/><path d="M640 740C900 740 1000 540 1160 480S1400 360 1460 300" fill="none" stroke="var(--stage)" stroke-width="4" stroke-dasharray="14 14"/><path id="rec" fill="var(--muted)"/><text class="m" x="640" y="800" font-size="18">SHORT-TERM RECOGNITION</text><g id="favs"></g><circle id="walker" class="gain" r="14"/></g>
+<g id="favl"><text class="m" x="640" y="470" font-size="20" style="fill:var(--gain)">EACH FAVOR: MORE CAPABLE</text></g>
+<g id="grow"><path id="gstar" class="gain"/><text class="m" x="1390" y="244" font-size="20" text-anchor="end" style="fill:var(--gain)">LONG-TERM GROWTH</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try it today.</text>
+<text class="b" x="120" y="176" font-size="32">Three small moves that help others win.</text>
+<g id="k0"><rect class="s-line" x="120" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="280" font-size="22">01 · ASK</text><rect class="s-ink" x="250" y="320" width="160" height="200" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M280 320v-14M310 320v-14M340 320v-14M370 320v-14" stroke-width="6" stroke-linecap="round"/><text class="d" x="330" y="470" font-size="110" text-anchor="middle" style="fill:var(--gain)">?</text><text class="d5" x="150" y="640" font-size="30">Ask what would</text><text class="d5" x="150" y="682" font-size="30">help them succeed.</text></g>
+<g id="k1"><rect class="s-line" x="590" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="620" y="280" font-size="22">02 · DO</text><rect class="s-ink" x="650" y="330" width="44" height="44" rx="6" fill="none" stroke-width="5"/><rect class="s-ink" x="650" y="410" width="44" height="44" rx="6" fill="none" stroke-width="5"/><rect class="s-ink" x="650" y="490" width="44" height="44" rx="6" fill="none" stroke-width="5"/><path class="s-line" d="M720 352h230M720 512h230" stroke-width="10" stroke-linecap="round"/><text class="m" x="720" y="440" font-size="20" style="fill:var(--gain)">THE DULL TASK</text><path id="chk" d="M658 430l12 14 28-34" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1"/><text class="d5" x="620" y="640" font-size="30">Do the dull task</text><text class="d5" x="620" y="682" font-size="30">nobody wants, well.</text></g>
+<g id="k2"><rect class="s-line" x="1060" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1090" y="280" font-size="22">03 · SHARE</text><g id="rays"></g><circle class="gain" cx="1270" cy="400" r="70"/><rect class="ink" x="1245" y="468" width="50" height="36" rx="6"/><text class="d5" x="1090" y="640" font-size="30">Share ideas freely,</text><text class="d5" x="1090" y="682" font-size="30">even without applause.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Whose path could you</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">clear <tspan style="fill:var(--gain)">this week?</tspan></text></g>
+<g id="qm"><text class="m" x="143" y="580" font-size="26">AND WHAT MIGHT YOU LEARN BY WALKING JUST AHEAD?</text></g>
+<g id="qg"><path class="s-gain" d="M960 760H1460" stroke-width="6" stroke-dasharray="14 12" stroke-linecap="round"/><g id="qp"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Canvas Strategy&rdquo;, from <em>Ego Is the Enemy</em> by Ryan Holiday. The Roman anteambulo and Bill Belichick&#x27;s early film work are examples as reported in the book. The canvas, skill meter, network and road drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 8.4], [8.4, 26.3], [26.3, 42.3], [42.3, 57.1], [57.1, 75.9], [75.9, 92.1], [92.1, 106.8], [106.8, 121.9], [121.9, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Canvas Strategy", "The Anteambulo", "Clear the Path", "The Ego Trap", "Belichick's Start", "Why It Works", "Not Self-Erasure", "Try It Today", "Your Challenge"];
+const TM={"young_worker": 0.0, "roman_street": 8.72, "anteambulo": 12.4, "open_path": 17.68, "canvas": 30.88, "paintbrush": 35.12, "proud_newbie": 42.64, "closed_door": 48.64, "football": 57.36, "film_reel": 62.96, "coach_desk": 71.04, "skill_meter": 76.24, "network": 82.24, "two_figures": 92.4, "long_road": 99.6, "notebook": 107.12, "task_list": 112.8, "light_bulb": 117.52};
+const P=(g,x,y,r,f)=>{mk('circle',{cx:x,cy:y,r:r,fill:f},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',fill:f},g);return g};
+const DR=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const star=(cx,cy,R)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?R*.45:R;d+=(i?'L':'M')+(cx+rr*Math.cos(a)).toFixed(1)+' '+(cy+rr*Math.sin(a)).toFixed(1)}return d+'Z'};
+const INK='var(--ink)',GN='var(--gain)';
+P($('tw'),1060,420,26,INK);mk('path',{d:'M1096 488L1180 448',stroke:INK,'stroke-width':8,'stroke-linecap':'round'},$('tw'));
+const PT=[...$('paint').children];
+const CR=[];for(let i=0;i<8;i++)for(let r=0;r<3;r++){const g=mk('g',{},$('crowd'));P(g,680+i*105,360+r*110,16,'var(--muted)');CR.push([g,i,r])}
+P($('pat'),220,460,20,INK);P($('ant'),380,470,16,GN);
+P($('cyou'),400,420,30,INK);P($('cpt'),1200,420,30,GN);
+const STK=[...$('strokes').children];
+P($('newb'),300,460,40,'var(--loss)');
+const CP=['CREDIT','RESPECT','THE INTERESTING TASKS'].map((s,i)=>{const g=mk('g',{},$('chips'));mk('rect',{x:420,y:300+i*80,width:s.length*15+44,height:56,rx:28,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);const tx=mk('text',{x:442,y:337+i*80,'font-size':22,class:'m'},g);tx.textContent=s;return g});
+P($('mentor'),1020,400,28,INK);
+const ST=[0,1,2,3].map(i=>mk('rect',{x:1220+i*60,y:700-(i+1)*80,width:60,height:(i+1)*80,'stroke-width':4},$('steps')));
+for(let i=0;i<5;i++){const a=i*2*Math.PI/5;mk('circle',{cx:640+50*Math.cos(a),cy:380+50*Math.sin(a),r:16,fill:'var(--line)'},$('reel'))}
+P($('belp'),1000,520,26,GN);
+[1260,1350,1440].forEach(x=>{P($('coaches'),x,420,24,INK);mk('path',{d:'M'+x+' 396Q'+((x+1000)/2)+' 300 1000 494',fill:'none',stroke:GN,'stroke-width':4,'stroke-dasharray':'8 8'},$('relied'))});
+const NL=[],NN=[];for(let i=0;i<6;i++){const a=i*Math.PI/3-Math.PI/2,x=(800+150*Math.cos(a)).toFixed(1),y=(500+150*Math.sin(a)).toFixed(1);NL.push(mk('path',{d:'M800 500L'+x+' '+y,stroke:GN,'stroke-width':5},$('net')));NN.push(mk('circle',{cx:x,cy:y,r:18,fill:INK},$('net')))}
+mk('circle',{cx:800,cy:500,r:30,fill:GN},$('net'));
+P($('fg'),240,400,30,GN);P($('fg'),420,400,30,INK);
+const RD=$('road'),RL=RD.getTotalLength()||1500;
+const FV=[.2,.35,.5,.65,.8].map(f=>{const q=RD.getPointAtLength(f*RL);return [f,mk('circle',{cx:q.x,cy:q.y,r:9,fill:'var(--muted)'},$('favs'))]});
+$('rec').setAttribute('d',star(690,680,24));$('gstar').setAttribute('d',star(1440,236,34));
+for(let i=0;i<7;i++){const a=Math.PI*(1+i/6),c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1270+86*c).toFixed(1)+' '+(400+86*s).toFixed(1)+'L'+(1270+108*c).toFixed(1)+' '+(400+108*s).toFixed(1),stroke:GN,'stroke-width':6,'stroke-linecap':'round'},$('rays'))}
+P($('qp'),1180,640,22,INK);P($('qp'),1340,630,26,GN);
+const S0=i=>SC[i][0]/K;
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('tw'),p(u,TM.young_worker,TM.young_worker+.6));
+  PT.forEach((e,i)=>DR(e,p(u,TM.young_worker+.8+i*.6,TM.young_worker+1.6+i*.6)));
+
+  rise($('street'),p(u,TM.roman_street,TM.roman_street+.6)); rise($('antw'),p(u,TM.anteambulo,TM.anteambulo+.6));
+  const op=p(u,TM.open_path,TM.open_path+1.2);
+  CR.forEach(c=>{if(c[2]===1)c[0].setAttribute('transform','translate('+(-52*op).toFixed(1)+' '+((c[1]%2?110:-110)*op).toFixed(1)+')')});
+  const wk=700*p(u,TM.open_path+.8,TM.open_path+4.5);
+  ['pat','ant'].forEach(k=>$(k).setAttribute('transform','translate('+wk.toFixed(1)+' 0)'));
+  rise($('ret'),p(u,TM.open_path+4,TM.open_path+4.6));
+
+  rise($('cyou'),p(u,S0(2)+.5,S0(2)+1.1)); rise($('cv'),p(u,TM.canvas,TM.canvas+.6)); rise($('cpt'),p(u,TM.paintbrush,TM.paintbrush+.6));
+  STK.forEach((e,i)=>DR(e,p(u,TM.paintbrush+.6+i*.7,TM.paintbrush+1.3+i*.7)));
+  rise($('sig'),p(u,TM.paintbrush+2.8,TM.paintbrush+3.3)); rise($('cred'),p(u,TM.paintbrush+4.6,TM.paintbrush+5.2));
+
+  rise($('newb'),p(u,TM.proud_newbie,TM.proud_newbie+.6));
+  CP.forEach((g,i)=>rise(g,p(u,TM.proud_newbie+.8+i*.6,TM.proud_newbie+1.3+i*.6)));
+  rise($('dw'),p(u,TM.proud_newbie+2.6,TM.proud_newbie+3.2));
+  const dwd=40+200*p(u,TM.closed_door+.3,TM.closed_door+.9); $('door').setAttribute('width',dwd.toFixed(1)); $('knob').setAttribute('cx',(900+dwd-22).toFixed(1));
+  rise($('steps'),p(u,TM.closed_door+4.4,TM.closed_door+5)); rise($('hum'),p(u,TM.closed_door+4.6,TM.closed_door+5.2)); rise($('skip'),p(u,TM.closed_door+5.2,TM.closed_door+5.7));
+  const sk=u>=TM.closed_door+5.2;
+  ST.forEach((s,i)=>{const d=sk&&i<2; s.setAttribute('fill',d?'none':'var(--ink)'); s.setAttribute('stroke',d?'var(--loss)':'var(--ink)'); s.setAttribute('stroke-dasharray',d?'10 8':'none')});
+
+  rise($('field'),p(u,TM.football,TM.football+.6)); rise($('reelg'),p(u,TM.film_reel,TM.film_reel+.6));
+  $('reel').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 640 380)'); $('strip').setAttribute('stroke-dashoffset',(-t*40).toFixed(1));
+  rise($('bel'),p(u,TM.film_reel+.6,TM.film_reel+1.2));
+  const cw=p(u,TM.film_reel+5.4,TM.film_reel+6); $('coaches').setAttribute('opacity',(cw*(u>=TM.coach_desk?1:.45)).toFixed(2));
+  rise($('nowant'),cw); $('relied').setAttribute('opacity',p(u,TM.coach_desk,TM.coach_desk+.8).toFixed(2)); rise($('learn'),p(u,TM.coach_desk+.6,TM.coach_desk+1.2));
+
+  rise($('pa'),p(u,TM.skill_meter,TM.skill_meter+.6));
+  const mh=340*p(u,TM.skill_meter+.4,TM.skill_meter+5); $('mfill').setAttribute('y',(686-mh).toFixed(1)); $('mfill').setAttribute('height',mh.toFixed(1));
+  rise($('pb'),p(u,TM.network,TM.network+.6));
+  NL.forEach((l,i)=>{const k=p(u,TM.network+.6+i*.4,TM.network+.9+i*.4); l.setAttribute('opacity',k.toFixed(2)); NN[i].setAttribute('fill',k>.5?'var(--gain)':'var(--ink)')});
+  rise($('pc'),p(u,TM.network+5,TM.network+5.6)); DR($('ccred'),p(u,TM.network+5.4,TM.network+6.6)); DR($('cskill'),p(u,TM.network+5.8,TM.network+7.4));
+
+  rise($('figs'),p(u,TM.two_figures,TM.two_figures+.6)); rise($('mat'),p(u,TM.two_figures+.6,TM.two_figures+1.2)); rise($('strat'),p(u,TM.two_figures+3,TM.two_figures+3.6));
+  rise($('roadw'),p(u,TM.long_road,TM.long_road+.6));
+  const w=p(u,TM.long_road+.4,TM.long_road+7), q=RD.getPointAtLength(w*RL); let n=0;
+  FV.forEach(f=>{const on=w>=f[0]; if(on)n++; f[1].setAttribute('fill',on?'var(--gain)':'var(--muted)')});
+  $('walker').setAttribute('cx',q.x.toFixed(1)); $('walker').setAttribute('cy',q.y.toFixed(1)); $('walker').setAttribute('r',14+n*3);
+  $('rec').setAttribute('opacity',(1-.75*w).toFixed(2));
+  rise($('favl'),p(u,TM.long_road+3.3,TM.long_road+3.9)); rise($('grow'),p(u,TM.long_road+5,TM.long_road+5.6));
+
+  rise($('k0'),p(u,TM.notebook,TM.notebook+.6)); rise($('k1'),p(u,TM.task_list,TM.task_list+.6)); rise($('k2'),p(u,TM.light_bulb,TM.light_bulb+.6));
+  DR($('chk'),p(u,TM.task_list+.8,TM.task_list+1.4));
+  $('rays').setAttribute('opacity',(p(u,TM.light_bulb+.6,TM.light_bulb+1)*(.6+.4*Math.sin(t*4))).toFixed(2));
+
+  const q8=S0(8);
+  rise($('qa'),p(u,q8+.3,q8+.8)); rise($('qb'),p(u,q8+.7,q8+1.2)); rise($('qg'),p(u,q8+1,q8+1.6)); rise($('qm'),p(u,q8+2.9,q8+3.5));
+  $('qp').setAttribute('transform','translate('+(12*Math.sin(t*1.5)).toFixed(1)+' 0)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.56;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

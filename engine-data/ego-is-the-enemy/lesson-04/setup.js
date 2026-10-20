@@ -1,0 +1,21 @@
+const egoFig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+const egoTxt=(g,x,y,s,c,txt)=>{const e=mk('text',{x:x,y:y,'font-size':s,class:c,'text-anchor':'middle'},g);e.textContent=txt;return e};
+egoFig($('t_me'),1320,330,44,'ink');
+const egoKQ=[[520,460],[640,400],[760,340]].map(q=>egoTxt($('k_q'),q[0],q[1],56,'d','?'));
+const egoKW=[];for(let r=0;r<9;r++){const g=mk('g',{},$('k_wall')),y=580-r*40;(r%2?[[900,20],[920,40],[960,20]]:[[900,40],[940,40]]).forEach(b=>mk('rect',{x:b[0],y:y,width:b[1],height:40,class:'loss',stroke:'var(--stage)','stroke-width':4},g));egoKW.push(g)}
+$('k_line').setAttribute('stroke-dasharray','466 466');
+egoFig($('k_epp'),1220,320,40,'ink');
+egoFig($('f_body'),300,360,46,'ink');
+const egoFP=[[760,36,'gain','+','BETTER'],[1020,32,'ink','=','EQUAL'],[1280,26,'ink','−','LESS SKILLED']].map(a=>{const g=mk('g',{},$('f_parts'));egoFig(g,a[0],554-a[1]*4.2,a[1],a[2]);mk('circle',{cx:a[0],cy:630,r:34,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);egoTxt(g,a[0],646,44,'d',a[3]);egoTxt(g,a[0],694,20,'m',a[4]);return g});
+egoFig($('pl_ppl'),760,392,40,'ink');egoFig($('pl_ppl'),1020,497,34,'gain');
+egoFig($('eq_ppl'),760,397,36,'gain');egoFig($('eq_ppl'),1200,397,36,'ink');
+const egoEG=[830,1130].map(x=>mk('circle',{cx:x,cy:470,r:18,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('eq_ppl')));
+egoFig($('mi_ppl'),1200,500,38,'gain');egoFig($('mi_ppl'),820,602,28,'ink');
+let egoMC;const egoMS=[660,820,980].map((x,i)=>{const g=mk('g',{},$('mi_steps'));const c=mk('circle',{cx:x,cy:390,r:44,fill:'none',stroke:'var(--ink)','stroke-width':6},g);if(i===1)egoMC=c;
+  if(i<2)mk('path',{d:'M'+(x+54)+' 390h52m-14-14 14 14-14 14',fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+const egoWN=[[440,290,'+',500,262,'LEARN FROM ABOVE'],[630,480,'=',690,488,'TEST SIDEWAYS'],[440,670,'−',500,712,'PASS IT ON']].map(a=>{const g=mk('g',{},$('w_nodes'));mk('circle',{cx:a[0],cy:a[1],r:40,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);egoTxt(g,a[0],a[1]+15,44,'d',a[2]);egoTxt(g,a[3],a[4],20,'m',a[5]).setAttribute('text-anchor','start');return g});
+const egoLad=$('w_lad');mk('path',{d:'M1000 300V760M1160 300V760',stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},egoLad);mk('path',{d:'M1000 230V290M1160 230V290',stroke:'var(--ink)','stroke-width':8,'stroke-dasharray':'8 12'},egoLad);
+for(let y=340;y<=740;y+=50)mk('path',{d:'M1000 '+y+'H1160',stroke:'var(--ink)','stroke-width':6},egoLad);
+const egoWUP=egoFig(mk('g',{},egoLad),1080,0,20,'ink'),egoWME=egoFig(mk('g',{},egoLad),1080,0,20,'gain');
+for(let i=0;i<6;i++)mk('circle',{cx:230+i*90,cy:240,r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('n_book'));
+const egoScr=[385,505,625].map(y=>mk('path',{d:'M360 '+y+'q20-28 40 0t40 0t40 0t40 0t40 0t40 0t40 0',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-dasharray':'420 420'},$('n_scr')));

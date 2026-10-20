@@ -1,0 +1,370 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapiens Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Sapiens: Sapiens came to dominate because we can believe in shared fictions like gods, nations and companies, which let huge numbers of strangers cooperate. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAPIENS · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The superpower of</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">shared stories.</text>
+<text class="b" x="120" y="600" font-size="32">How believing in stories let strangers cooperate by the millions</text>
+<g id="t_ape"></g>
+<g id="t_fl"><g id="t_bub">
+<circle class="s-ink" cx="1292" cy="420" r="9" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-ink" cx="1316" cy="388" r="14" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-ink" cx="1372" cy="280" r="100" fill="var(--stage)" stroke-width="5"/>
+<text id="t_q" class="d" x="1372" y="322" font-size="120" text-anchor="middle" style="fill:var(--muted)">?</text>
+<g id="t_lion"></g>
+</g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ants, chimps and us.</text>
+<text class="b" x="120" y="176" font-size="32">Who cooperates, how flexibly, and with how many?</text>
+<g id="p0"><rect class="s-line" x="120" y="230" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="280" font-size="22">ANTS &amp; BEES</text><g id="ants"></g><text class="m" x="150" y="715" font-size="20">HUGE NUMBERS · RIGID</text></g>
+<g id="p1"><rect class="s-line" x="590" y="230" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="620" y="280" font-size="22">CHIMPANZEES</text><g id="chimps"></g><text class="m" x="620" y="715" font-size="20">FLEXIBLE · A FEW</text></g>
+<g id="p2"><rect class="s-gain" x="1060" y="230" width="420" height="520" rx="18" fill="var(--stage)" stroke-width="4"/><text class="m" x="1090" y="280" font-size="22">SAPIENS</text><g id="manyL"></g><g id="many"></g><text class="m" x="1090" y="715" font-size="20" style="fill:var(--gain)">FLEXIBLE · COUNTLESS</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The gossip limit.</text>
+<text class="b" x="120" y="176" font-size="32">Early humans bonded by gossip: who to trust, and who cheats.</text>
+<g id="gos"></g>
+<path class="s-ink" d="M410 600l100 30M410 630l100-30" stroke-width="10" stroke-linecap="round"/>
+<path id="flame" class="gain" d="M460 610c-46 0-56-50-30-80 4 20 14 24 18 20-6-30 10-60 30-76 0 30 30 46 30 80 0 32-22 56-48 56z"/>
+<g id="camp"></g>
+<g id="r150">
+<text id="n150" class="d" x="880" y="370" font-size="170" letter-spacing="-4">0</text>
+<text class="m" x="890" y="466" font-size="22">PEOPLE YOU CAN REALLY KNOW</text>
+<g id="grid"></g>
+</g>
+<g id="lk"><text class="m" x="892" y="770" font-size="20">ABOUT 150 KNOWN</text></g>
+<g id="lst"><path class="s-muted" d="M1226 495V730" stroke-width="3" stroke-dasharray="6 6"/><text class="m" x="1240" y="770" font-size="20" style="fill:var(--loss)">STRANGERS</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Talking about the unreal.</text>
+<text class="b" x="120" y="176" font-size="32">Around 70,000 years ago, Sapiens began to imagine.</text>
+<g id="talker"></g>
+<g id="bub3"><path class="s-ink" d="M380 240H840q40 0 40 40V580q0 40-40 40H380q-40 0-40-40V560L268 568 340 520V280q0-40 40-40z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="610" y="300" font-size="22" text-anchor="middle">THINGS THAT DON’T EXIST</text></g>
+<g id="sl"><circle id="halo" class="s-gain" cx="610" cy="440" r="110" fill="none" stroke-width="4" stroke-dasharray="12 10"/></g>
+<g id="spk"></g>
+<g id="gs"><text class="m" x="610" y="585" font-size="20" text-anchor="middle" style="fill:var(--gain)">GUARDIAN SPIRIT OF OUR TRIBE</text></g>
+<g id="lm">
+<path class="s-ink" d="M1140 420l-30 150M1260 420l30 150" stroke-width="22" stroke-linecap="round"/>
+<rect class="s-ink" x="1150" y="600" width="40" height="150" rx="18" fill="var(--ice)" stroke-width="6"/>
+<rect class="s-ink" x="1210" y="600" width="40" height="150" rx="18" fill="var(--ice)" stroke-width="6"/>
+<rect class="s-ink" x="1140" y="380" width="120" height="240" rx="50" fill="var(--ice)" stroke-width="6"/>
+<g id="lmh"></g>
+</g>
+<g id="lml"><text class="m" x="1200" y="800" font-size="22" text-anchor="middle">LION-MAN</text><text class="m" x="1200" y="835" font-size="20" text-anchor="middle">CARVED IVORY · FOUND IN GERMANY</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A car company is a myth.</text>
+<text class="b" x="120" y="176" font-size="32">Harari’s favourite example: Peugeot, the French car company.</text>
+<g id="logo"><circle id="bdg" class="s-ink" cx="380" cy="450" r="160" fill="var(--stage)" stroke-width="8"/><g id="plion"></g><text class="d" x="380" y="575" font-size="40" text-anchor="middle">PEUGEOT</text></g>
+<g id="still"><text class="m" x="380" y="670" font-size="22" text-anchor="middle" style="fill:var(--gain)">STILL EXISTS</text></g>
+<g id="fac"><g id="facIn">
+<rect class="ink" x="950" y="290" width="40" height="120"/>
+<path class="s-ink" d="M640 580V420l90-60v60l90-60v60l90-60v60l90-60V580z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-line" d="M680 460h60v50h-60zM780 460h60v50h-60zM880 460h60v50h-60z" fill="none" stroke-width="5"/>
+<g id="wk"></g>
+</g></g>
+<g id="gone"><text class="m" x="820" y="730" font-size="20" text-anchor="middle" style="fill:var(--loss)">EVERY FACTORY AND WORKER GONE</text></g>
+<g id="doc"><rect class="s-ink" x="1140" y="290" width="320" height="360" rx="10" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1300" y="345" font-size="20" text-anchor="middle" style="fill:var(--ink)">LIMITED LIABILITY</text>
+<text class="m" x="1300" y="375" font-size="20" text-anchor="middle" style="fill:var(--ink)">COMPANY</text>
+<path class="s-line" d="M1180 430h240M1180 480h240M1180 530h160" stroke-width="6" stroke-linecap="round"/>
+<circle class="gain" cx="1400" cy="600" r="30"/></g>
+<g id="docl"><text class="m" x="1300" y="700" font-size="20" text-anchor="middle">A STORY TOLD BY LAWYERS</text></g>
+<g id="quote"><text class="d" x="120" y="810" font-size="44">It exists because we all believe the story.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Strangers who cooperate.</text>
+<text class="b" x="120" y="176" font-size="32">Trust between people who have never met.</text>
+<g id="cath"><path class="s-ink" d="M220 296v-48M204 264h32M520 296v-48M504 264h32" stroke-width="7" stroke-linecap="round"/></g>
+<path id="tie" class="s-gain" d="M220 300Q370 230 520 300" fill="none" stroke-width="5" stroke-dasharray="10 8"/>
+<g id="hosp"><rect class="s-ink" x="270" y="560" width="200" height="180" fill="var(--stage)" stroke-width="6"/><path class="s-gain" d="M370 595v60M340 625h60" stroke-width="14"/><rect class="ink" x="350" y="690" width="40" height="50"/></g>
+<circle id="coin0" class="gain" r="12" opacity="0"/><circle id="coin1" class="gain" r="12" opacity="0"/>
+<g id="hl"><text class="m" x="370" y="800" font-size="20" text-anchor="middle">TWO STRANGERS, ONE HOSPITAL</text></g>
+<g id="flagG"><path class="s-ink" d="M800 260V560" stroke-width="8" stroke-linecap="round"/><path id="flg" class="gain"/></g>
+<g id="nat"></g>
+<g id="nl5"><text class="m" x="1116" y="800" font-size="20" text-anchor="middle">MILLIONS FIGHT FOR ONE NATION</text></g>
+<g id="same"><text class="d" x="120" y="848" font-size="40">They trust each other: they believe the same story.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stories can change fast.</text>
+<text class="b" x="120" y="176" font-size="32">Genes change slowly. Stories can change overnight.</text>
+<g id="dnaG"><g id="rungs"></g><path id="dna1" class="s-ink" fill="none" stroke-width="6"/><path id="dna2" class="s-muted" fill="none" stroke-width="6"/>
+<text class="m" x="160" y="600" font-size="22">OTHER ANIMALS: GENES</text><text class="m" x="160" y="632" font-size="22">CHANGE SLOWLY</text>
+<rect class="s-line" x="160" y="660" width="540" height="16" rx="8" fill="none" stroke-width="3"/><rect id="slowbar" class="loss" x="160" y="660" width="0" height="16" rx="8"/></g>
+<g id="crw"><g id="crwI"><path class="loss" d="M1000 440l-20-130 80 60 60-90 60 90 80-60-20 130z"/><rect class="loss" x="1000" y="440" width="240" height="30"/></g></g>
+<g id="ppl"></g>
+<g id="oldS"><text class="m" x="1120" y="540" font-size="24" text-anchor="middle" style="fill:var(--loss)">DIVINE RIGHT OF KINGS</text></g>
+<line id="stk" class="s-ink" x1="950" y1="532" x2="950" y2="532" stroke-width="5" stroke-linecap="round"/>
+<g id="newS"><text class="m" x="1120" y="590" font-size="24" text-anchor="middle" style="fill:var(--gain)">SOVEREIGNTY OF THE PEOPLE</text></g>
+<g id="yr"><text class="d" x="1120" y="740" font-size="110" text-anchor="middle">1789</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fiction is not a lie.</text>
+<text class="b" x="120" y="176" font-size="32">It is the glue that lets millions of people work as one.</text>
+<g id="hs"><path class="s-ink" d="M140 560L360 480M760 560L540 480" stroke-width="36" stroke-linecap="round"/>
+<rect class="ink" x="340" y="445" width="220" height="70" rx="35"/><path d="M410 452v56M450 452v56M490 452v56" stroke="var(--stage)" stroke-width="4"/></g>
+<ellipse id="ring" class="s-gain" cx="450" cy="480" rx="160" ry="70" fill="none" stroke-width="6" stroke-dasharray="14 10"/>
+<g id="gl7"><text class="m" x="450" y="380" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE GLUE</text></g>
+<g id="nl7"><text class="m" x="450" y="640" font-size="24" text-anchor="middle">NOT A LIE</text><text class="m" x="450" y="680" font-size="24" text-anchor="middle">NOT A MISTAKE</text></g>
+<g id="glb"><circle class="s-ink" cx="1060" cy="470" r="190" fill="var(--stage)" stroke-width="6"/>
+<ellipse id="mer" class="s-line" cx="1060" cy="470" rx="90" ry="190" fill="none" stroke-width="4"/>
+<path class="s-line" d="M870 470h380M900 375h320M900 565h320" stroke-width="4"/><g id="net7"></g></g>
+<g id="ic0"><circle class="s-ink" cx="1380" cy="300" r="52" fill="var(--stage)" stroke-width="4"/><path class="ink" d="M1354 320v-30h14v30zM1372 320v-44h14v44zM1390 320v-24h14v24z"/></g>
+<g id="ic1"><circle class="s-ink" cx="1380" cy="470" r="52" fill="var(--stage)" stroke-width="4"/><path class="s-gain" d="M1380 450v40M1360 470h40" stroke-width="12"/></g>
+<g id="ic2"><circle class="s-ink" cx="1380" cy="640" r="52" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M1352 642h56M1384 642l-14-22M1384 642l-14 22M1358 642l-6-10M1358 642l-6 10" stroke-width="6" stroke-linecap="round"/></g>
+<g id="nogl"><text class="m" x="120" y="800" font-size="20">WITHOUT THEM: NO CITIES, NO HOSPITALS, NO AIRLINES</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="chips8"></g>
+<g id="qm"><circle class="gain" cx="1380" cy="230" r="60"/><text class="d" x="1380" y="258" font-size="80" text-anchor="middle" style="fill:var(--on-gain)">?</text></g>
+<g id="qa"><text class="d" x="136" y="440" font-size="88" letter-spacing="-2">How many strangers</text></g>
+<g id="qb"><text class="d" x="136" y="550" font-size="88" letter-spacing="-2">do your stories let you</text></g>
+<g id="qc"><text class="d" x="136" y="660" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">cooperate</tspan> with?</text></g>
+<g id="q8l"><text class="m" x="143" y="780" font-size="26">SPOT THE STORIES YOU RELY ON</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Superpower of Shared Stories&rdquo;, from <em>Sapiens</em> by Yuval Noah Harari. The Peugeot example, the lion-man figurine, the group limit of about 150 people and the French Revolution are as reported in the book. Drawings of ants, chimps, crowds and pilgrims are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 8.9], [8.9, 26.8], [26.8, 41.4], [41.4, 59.7], [59.7, 76.7], [76.7, 90.3], [90.3, 106.9], [106.9, 119.9], [119.9, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Our Hidden Superpower", "Ants, Chimps and Us", "The Gossip Limit", "Talking About the Unreal", "A Car Company Is a Myth", "Strangers Who Cooperate", "Stories Can Change Fast", "Fiction Is Not a Lie", "Spot the Stories"];
+const TM={"title_lion": 0.0, "ant_colony": 9.2, "chimp_troop": 15.12, "crowd": 20.64, "campfire": 27.12, "number_150": 32.56, "speech_bubble": 41.68, "spirit_lion": 48.0, "lion_man": 52.32, "peugeot_logo": 60.0, "factory": 64.4, "lawyer": 70.08, "two_strangers": 76.96, "flag": 82.0, "dna_strand": 90.64, "crown": 95.28, "revolution": 99.76, "handshake": 107.2, "glue_globe": 114.64, "question_mark": 120.16};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const lion=(g,x,y,R)=>{let pts='';for(let i=0;i<36;i++){const a=i*Math.PI/18,rr=i%2?R*.78:R;pts+=(x+rr*Math.cos(a)).toFixed(1)+','+(y+rr*Math.sin(a)).toFixed(1)+' '}
+  mk('polygon',{points:pts,class:'gain'},g);mk('circle',{cx:x,cy:y,r:R*.6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  [-1,1].forEach(s=>mk('circle',{cx:x+s*R*.22,cy:y-R*.12,r:R*.07,class:'ink'},g));
+  mk('path',{d:'M'+(x-R*.12)+' '+(y+R*.12)+'h'+(R*.24)+'l-'+(R*.12)+' '+(R*.14)+'z',class:'ink'},g)};
+const star=(g,x,y)=>mk('path',{d:'M'+x+' '+(y-14)+'l4 10 10 4-10 4-4 10-4-10-10-4 10-4z',class:'gain'},g);
+const ln=(a,b,attrs,g)=>mk('path',Object.assign({d:'M'+a[0].toFixed(1)+' '+a[1].toFixed(1)+'L'+b[0].toFixed(1)+' '+b[1].toFixed(1)},attrs),g);
+
+fig($('t_ape'),1250,470,28,'ink');lion($('t_lion'),1372,280,64);
+
+for(let r=0;r<6;r++)for(let c=0;c<7;c++){const x=175+c*48,y=340+r*56;[[-10,5],[0,6],[13,7]].forEach(q=>mk('circle',{cx:x+q[0],cy:y,r:q[1],class:'ink'},$('ants')))}
+const CHP=[0,1,2,3,4].map(k=>{const a=(-90+72*k)*Math.PI/180;return[800+110*Math.cos(a),450+110*Math.sin(a)]});
+CHP.forEach((a,i)=>CHP.forEach((b,j)=>{if(j>i)ln(a,b,{class:'s-line','stroke-width':4},$('chimps'))}));CHP.forEach(q=>fig($('chimps'),q[0],q[1],18,'ink'));
+const MP=[...Array(70)].map((_,i)=>[1095+(i*137)%350,325+(i*89)%330]);
+const ML=MP.map((a,i)=>{let bj=0,bd=1e9;MP.forEach((b,j)=>{const d=(a[0]-b[0])**2+(a[1]-b[1])**2;if(j!==i&&d<bd){bd=d;bj=j}});return ln(a,MP[bj],{class:'s-gain','stroke-width':2},$('manyL'))});
+const MD=MP.map(q=>mk('circle',{cx:q[0],cy:q[1],r:7,class:'gain'},$('many')));
+
+const CAMP=[...Array(8)].map((_,k)=>{const a=(-67.5+45*k)*Math.PI/180;return[460+200*Math.cos(a),560+190*Math.sin(a)]});
+const CG=CAMP.map(q=>{const g=mk('g',{},$('camp'));fig(g,q[0],q[1],16,'ink');return g});
+const GL=[[0,3],[1,5],[2,6],[4,7],[0,5],[3,6]].map(([a,b])=>mk('path',{d:'M'+CAMP[a][0].toFixed(1)+' '+CAMP[a][1].toFixed(1)+'Q460 560 '+CAMP[b][0].toFixed(1)+' '+CAMP[b][1].toFixed(1),fill:'none',class:'s-muted','stroke-width':3,'stroke-dasharray':'8 8'},$('gos')));
+const GD=[];for(let r=0;r<10;r++)for(let c=0;c<25;c++)GD.push({c:c,k:r*15+c,el:mk('circle',{cx:892+c*23,cy:510+r*23,r:7,class:c<15?'ink':'loss'},$('grid'))});
+
+fig($('talker'),220,560,28,'ink');lion($('sl'),610,440,85);
+[0,40,-40,180,140,220].forEach(d=>{const a=d*Math.PI/180;star($('spk'),610+130*Math.cos(a),440+130*Math.sin(a))});
+lion($('lmh'),1200,320,60);
+
+lion($('plion'),380,430,90);[690,780,870,960].forEach(x=>fig($('wk'),x,605,15,'ink'));
+
+[220,520].forEach(x=>fig($('cath'),x,340,26,'ink'));
+const NP=[];for(let r=0;r<3;r++)for(let i=0;i<13;i++){const g=mk('g',{},$('nat'));fig(g,780+i*56,600+r*60,10,'ink');NP.push(g)}
+
+const RG=[...Array(18)].map(()=>mk('path',{class:'s-line','stroke-width':4},$('rungs')));
+[1040,1120,1200].forEach((x,i)=>fig($('ppl'),x,i===1?290:310,i===1?32:26,'gain'));
+
+const NP7=[...Array(12)].map((_,i)=>{const a=i*2.4,r=40+(i*37)%120;return[1060+r*Math.cos(a),470+r*Math.sin(a)]});
+const NL=[];NP7.forEach((a,i)=>{NL.push(ln(a,NP7[(i+1)%12],{class:'s-gain','stroke-width':3},$('net7')));NL.push(ln(a,NP7[(i+5)%12],{class:'s-gain','stroke-width':3},$('net7')))});
+NP7.forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:8,class:'ink'},$('net7')));
+
+const CH8=['YOUR COUNTRY','YOUR EMPLOYER','YOUR FAVOURITE BRAND'].map((s,i)=>{const x=120+i*360,g=mk('g',{},$('chips8'));
+  mk('rect',{x:x,y:200,width:330,height:64,rx:32,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);
+  const tx=mk('text',{x:x+165,y:240,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+
+  // title
+  R('t_ape',TM.title_lion);R('t_bub',TM.title_lion+.6);
+  const lz=p(u,TM.title_lion+5,TM.title_lion+5.6);$('t_q').setAttribute('opacity',(1-lz).toFixed(2));rise($('t_lion'),lz);
+  $('t_fl').setAttribute('transform','translate(0 '+(6*Math.sin(t*1.5)).toFixed(1)+')');
+
+  // ants, chimps, us
+  R('p0',TM.ant_colony);$('ants').setAttribute('transform','translate('+(8*Math.sin(t*2)).toFixed(1)+' 0)');
+  R('p1',TM.chimp_troop);R('p2',TM.crowd);
+  MD.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.crowd+.3+i*.03,TM.crowd+.6+i*.03)));
+  ML.forEach(l=>l.setAttribute('opacity',(.6*p(u,TM.crowd+1.5,TM.crowd+2.5)).toFixed(2)));
+
+  // gossip limit
+  CG.forEach((g,i)=>rise(g,p(u,TM.campfire+i*.15,TM.campfire+i*.15+.4)));
+  GL.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.campfire+1.5+i*.4,TM.campfire+1.9+i*.4)));
+  $('flame').setAttribute('transform','translate(460 610) scale(1 '+(1+.08*Math.sin(t*9)).toFixed(3)+') translate(-460 -610)');
+  R('r150',TM.number_150);const nk=150*p(u,TM.number_150,TM.number_150+2);$('n150').textContent=Math.round(nk);
+  GD.forEach(g=>g.el.setAttribute('opacity',g.c<15?(g.k<nk?1:.12):(.5*p(u,TM.number_150+6.2+(g.c-15)*.08,TM.number_150+6.6+(g.c-15)*.08)).toFixed(2)));
+  R('lk',TM.number_150+2);R('lst',TM.number_150+6.2);
+
+  // unreal
+  R('talker',TM.speech_bubble);R('bub3',TM.speech_bubble+.4);R('sl',TM.spirit_lion);R('gs',TM.spirit_lion+.8);
+  $('spk').setAttribute('opacity',(p(u,TM.spirit_lion+.4,TM.spirit_lion+1)*(.6+.4*Math.sin(t*4))).toFixed(2));
+  $('halo').setAttribute('stroke-dashoffset',(t*20).toFixed(1));
+  R('lm',TM.lion_man);R('lml',TM.lion_man+.6);
+
+  // Peugeot
+  R('logo',TM.peugeot_logo);R('fac',TM.factory);
+  $('facIn').setAttribute('opacity',(1-.85*p(u,TM.factory+2,TM.factory+3.5)).toFixed(2));
+  R('gone',TM.factory+2.5);R('still',TM.factory+3.5);
+  $('bdg').setAttribute('stroke-width',(8+(u>TM.factory+3.5?3*Math.abs(Math.sin(t*3)):0)).toFixed(1));
+  R('doc',TM.lawyer);R('docl',TM.lawyer+.6);R('quote',TM.lawyer+2.5);
+
+  // strangers
+  R('cath',TM.two_strangers);R('hosp',TM.two_strangers+1.5);R('hl',TM.two_strangers+2);
+  const on=p(u,TM.two_strangers+2,TM.two_strangers+2.5),ck=(t*.6)%1,ce=ease(ck),fo=on*(ck<.85?1:(1-ck)/.15);
+  [[220,350],[520,390]].forEach((q,i)=>{const c=$('coin'+i);c.setAttribute('cx',(q[0]+(q[1]-q[0])*ce).toFixed(1));c.setAttribute('cy',(470+90*ce).toFixed(1));c.setAttribute('opacity',fo.toFixed(2))});
+  R('flagG',TM.flag);NP.forEach((g,i)=>rise(g,p(u,TM.flag+.5+i*.04,TM.flag+.9+i*.04)));R('nl5',TM.flag+1.5);
+  let ft='',fb='';for(let x=0;x<=300;x+=20){const w=x/300*12*Math.sin(x/50-t*3);ft+='L'+(800+x)+' '+(270+w).toFixed(1);fb='L'+(800+x)+' '+(440+w).toFixed(1)+fb}
+  $('flg').setAttribute('d','M800 270'+ft+fb+'z');
+  R('same',TM.flag+5.7);R('tie',TM.flag+5.9);
+
+  // stories change fast
+  R('dnaG',TM.dna_strand);const d1=[],d2=[];
+  for(let x=160;x<=700;x+=10){const s=80*Math.sin(x/45+t*.6);d1.push(x+' '+(440+s).toFixed(1));d2.push(x+' '+(440-s).toFixed(1))}
+  $('dna1').setAttribute('d','M'+d1.join('L'));$('dna2').setAttribute('d','M'+d2.join('L'));
+  RG.forEach((r,i)=>{const x=170+i*30,s=80*Math.sin(x/45+t*.6);r.setAttribute('d','M'+x+' '+(440+s).toFixed(1)+'V'+(440-s).toFixed(1))});
+  $('slowbar').setAttribute('width',(540*lin(u,TM.dna_strand,TM.dna_strand+120)).toFixed(1));
+  R('crw',TM.crown);R('oldS',TM.crown+.4);
+  const v=p(u,TM.revolution+.8,TM.revolution+1.8);$('crwI').setAttribute('transform','translate(0 '+(-80*v).toFixed(1)+')');$('crwI').setAttribute('opacity',(1-v).toFixed(2));
+  $('stk').setAttribute('x2',(950+340*p(u,TM.revolution+.8,TM.revolution+1.4)).toFixed(1));$('stk').setAttribute('opacity',u>TM.revolution+.8?1:0);
+  R('yr',TM.revolution);R('ppl',TM.revolution+1.4);R('newS',TM.revolution+1.8);
+
+  // fiction is glue
+  R('hs',TM.handshake);R('nl7',TM.handshake+1);R('ring',TM.handshake+3.7);R('gl7',TM.handshake+3.7);R('glb',TM.handshake+3.7);
+  $('ring').setAttribute('rx',(160+8*Math.sin(t*3)).toFixed(1));
+  NL.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.handshake+4.2+i*.08,TM.handshake+4.6+i*.08)));
+  $('mer').setAttribute('rx',(190*Math.abs(Math.cos(t*.5))).toFixed(1));
+  [0,1,2].forEach(i=>R('ic'+i,TM.glue_globe+i*1.2));R('nogl',TM.glue_globe+.3);
+
+  // close
+  CH8.forEach((g,i)=>rise(g,p(u,TM.question_mark+i*1.4,TM.question_mark+i*1.4+.5)));R('qm',TM.question_mark);
+  ['qa','qb','qc'].forEach((id,i)=>R(id,TM.question_mark+6.6+i*.4));R('q8l',TM.question_mark+8);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.32;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

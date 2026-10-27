@@ -1,0 +1,369 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Principles Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Principles: People are wired differently, so give more weight to the views of those with a strong track record and a clear explanation for their reasoning. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">PRINCIPLES · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Weigh opinions</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">by believability.</text>
+<text class="b" x="120" y="600" font-size="32">Not every opinion deserves an equal vote, including yours.</text>
+<g id="waves"></g>
+<g id="mtg"></g>
+<g id="loudx"><text class="m" x="1310" y="720" font-size="22" text-anchor="middle" style="fill:var(--loss)">LOUDEST ≠ RIGHT</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">People are wired differently.</text>
+<text class="b" x="120" y="176" font-size="32">Each mind notices different things.</text>
+<g id="hA"></g><g id="hB"></g>
+<g id="bp">
+<circle class="gain" cx="300" cy="330" r="16"/>
+<path class="s-gain" d="M270 450L320 370L360 420L410 340L450 450" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="360" y="770" font-size="20" text-anchor="middle">SEES THE BIG PICTURE</text>
+<text class="m" x="360" y="802" font-size="20" text-anchor="middle" style="fill:var(--loss)">MISSES THE DETAILS</text>
+</g>
+<g id="dl">
+<g id="mg"><circle class="gain" cx="1205" cy="372" r="7"/><circle class="gain" cx="1240" cy="366" r="7"/><circle class="gain" cx="1222" cy="400" r="7"/><circle class="gain" cx="1250" cy="402" r="7"/>
+<circle class="s-ink" cx="1225" cy="385" r="55" fill="none" stroke-width="8"/><path class="s-ink" d="M1264 424L1300 460" stroke-width="12" stroke-linecap="round"/></g>
+<text class="m" x="1240" y="770" font-size="20" text-anchor="middle">CATCHES EVERY DETAIL</text>
+<text class="m" x="1240" y="802" font-size="20" text-anchor="middle" style="fill:var(--loss)">LOSES THE BIG PICTURE</text>
+</g>
+<g id="yy"><g id="hY"></g>
+<text class="d" x="800" y="455" font-size="150" text-anchor="middle" style="fill:var(--gain)">?</text>
+<text class="m" x="800" y="770" font-size="20" text-anchor="middle">NO MIND SEES IT ALL</text>
+<text class="m" x="800" y="802" font-size="20" text-anchor="middle" style="fill:var(--gain)">INCLUDING YOURS</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not all votes are equal.</text>
+<g id="sub2"><text class="b" x="120" y="176" font-size="32">Weigh each opinion by how believable the person is.</text></g>
+<g id="voters"></g>
+<g id="cards"></g>
+<g id="box">
+<rect class="s-ink" x="230" y="520" width="260" height="200" rx="10" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="320" y="514" width="80" height="10" rx="4"/>
+<text class="m" x="360" y="610" font-size="22" text-anchor="middle">ONE PERSON,</text>
+<text class="m" x="360" y="642" font-size="22" text-anchor="middle">ONE VOTE</text>
+</g>
+<g id="ign">
+<text class="m" x="480" y="250" font-size="24" text-anchor="middle" style="fill:var(--gain)">KNOWS</text>
+<text class="m" x="120" y="790" font-size="22" style="fill:var(--loss)">IGNORES WHO ACTUALLY KNOWS</text>
+</g>
+<g id="scl">
+<path class="s-ink" d="M1100 420V740" stroke-width="8"/>
+<rect class="ink" x="1010" y="740" width="180" height="16" rx="6"/>
+<line id="beam" class="s-ink" stroke-width="10" stroke-linecap="round"/>
+<circle class="ink" cx="1100" cy="420" r="12"/>
+<g id="panL"></g><g id="panR"></g>
+<text class="m" x="826" y="800" font-size="20" text-anchor="middle" style="fill:var(--gain)">MORE BELIEVABLE</text>
+<text class="m" x="1374" y="800" font-size="20" text-anchor="middle">LESS BELIEVABLE</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two tests of believability.</text>
+<g id="c1">
+<rect class="s-line" x="120" y="220" width="640" height="400" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="tro"></g>
+<text class="m" x="160" y="460" font-size="22" style="fill:var(--gain)">1 · TRACK RECORD</text>
+<text class="d5" x="160" y="525" font-size="36">Done it successfully,</text>
+<text class="d5" x="160" y="575" font-size="36">at least three times.</text>
+</g>
+<g id="c2">
+<rect class="s-line" x="840" y="220" width="640" height="400" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="880" y="300" font-size="20">CAUSE</text>
+<text class="m" x="1420" y="300" font-size="20" text-anchor="end">EFFECT</text>
+<g id="chn"></g>
+<text class="m" x="880" y="460" font-size="22" style="fill:var(--gain)">2 · CLEAR REASONING</text>
+<text class="d5" x="880" y="525" font-size="36">Explains the cause</text>
+<text class="d5" x="880" y="575" font-size="36">and effect behind it.</text>
+</g>
+<g id="luck"><text class="m" x="120" y="700" font-size="22">RECORD, NO REASONING</text><text class="d" x="120" y="770" font-size="48" style="fill:var(--loss)">Maybe just luck.</text></g>
+<g id="theo"><text class="m" x="840" y="700" font-size="22">REASONING, NO RECORD</text><text class="d" x="840" y="770" font-size="48" style="fill:var(--loss)">Just a theory.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A frightening diagnosis.</text>
+<text class="b" x="120" y="176" font-size="32">Dalio’s own health scare.</text>
+<g id="pat"></g>
+<g id="clip">
+<rect class="s-ink" x="360" y="440" width="100" height="130" rx="8" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M380 478h60M380 503h60" stroke-width="6" stroke-linecap="round"/>
+<text class="d" x="410" y="558" font-size="44" text-anchor="middle" style="fill:var(--loss)">!</text>
+</g>
+<g id="talk" fill="none" stroke="var(--muted)" stroke-width="4" stroke-dasharray="8 10">
+<path d="M800 612Q940 700 1080 612M1080 612Q1220 700 1360 612M800 612Q1080 760 1360 612"/>
+</g>
+<g id="docs"><text class="m" x="1080" y="256" font-size="20" text-anchor="middle">SPECIALISTS DISAGREED</text></g>
+<g id="bb0"><rect id="bbr0" class="s-ink" x="720" y="290" width="160" height="90" rx="16" fill="var(--stage)" stroke-width="5"/><text id="bbt0" class="d" x="800" y="355" font-size="52" text-anchor="middle">A</text></g>
+<g id="bb1"><rect id="bbr1" class="s-ink" x="1000" y="290" width="160" height="90" rx="16" fill="var(--stage)" stroke-width="5"/><text id="bbt1" class="d" x="1080" y="355" font-size="52" text-anchor="middle">B</text></g>
+<g id="bb2"><rect id="bbr2" class="s-ink" x="1280" y="290" width="160" height="90" rx="16" fill="var(--stage)" stroke-width="5"/><text id="bbt2" class="d" x="1360" y="355" font-size="52" text-anchor="middle">C</text></g>
+<g id="probe"><text class="m" x="1080" y="790" font-size="20" text-anchor="middle">THEY TEST EACH OTHER’S REASONING</text></g>
+<g id="arw"><path class="s-gain" d="M740 470H520m24-24-24 24 24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="okk">
+<circle class="gain" cx="260" cy="320" r="32"/>
+<path d="M244 320l11 11 20-22" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="120" y="680" font-size="22" style="fill:var(--gain)">A FAR BETTER DECISION</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Have you earned your opinion?</text>
+<g id="mir">
+<ellipse class="s-ink" cx="420" cy="480" rx="180" ry="250" fill="var(--line)" stroke-width="8"/>
+<g id="refl"></g>
+<path class="s-ink" d="M420 730V800M330 800h180" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="720" y="250" font-size="20" style="fill:var(--gain)">THE SAME TEST APPLIES TO YOU</text>
+</g>
+<g id="quote">
+<text class="m" x="720" y="320" font-size="20">DALIO PUTS IT BLUNTLY</text>
+<text class="d5" x="720" y="390" font-size="44">“Ask yourself whether</text>
+<text class="d5" x="720" y="450" font-size="44">you have earned the</text>
+<text class="d5" x="720" y="510" font-size="44">right to have an opinion.”</text>
+</g>
+<g id="argue">
+<rect class="s-loss" x="720" y="600" width="180" height="110" rx="20" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="810" y="680" font-size="72" text-anchor="middle" style="fill:var(--loss)">!</text>
+<text class="m" x="810" y="770" font-size="20" text-anchor="middle">ARGUE</text>
+</g>
+<path id="xs" class="s-ink" d="M705 590L915 720" stroke-width="8" stroke-linecap="round"/>
+<g id="ask">
+<rect class="gain" x="980" y="600" width="180" height="110" rx="20"/>
+<text class="d" x="1070" y="682" font-size="72" text-anchor="middle" style="fill:var(--on-gain)">?</text>
+<text class="m" x="1070" y="770" font-size="20" text-anchor="middle" style="fill:var(--gain)">ASK</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask, then listen.</text>
+<text class="b" x="120" y="176" font-size="32">How you treat an opinion depends on who holds it.</text>
+<g id="p0"><rect class="s-line" x="120" y="220" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="270" font-size="20" style="fill:var(--gain)">MORE BELIEVABLE</text><g id="pp0"></g>
+<text class="d5" x="150" y="730" font-size="30">Understand them.</text></g>
+<g id="p1"><rect class="s-line" x="590" y="220" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="620" y="270" font-size="20">EQUALLY BELIEVABLE</text><g id="pp1"></g>
+<text class="d5" x="620" y="730" font-size="30">Debate as peers.</text></g>
+<g id="p2"><rect class="s-line" x="1060" y="220" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1090" y="270" font-size="20">LESS EXPERIENCED</text><g id="pp2"></g>
+<text class="d5" x="1090" y="730" font-size="30">Check the reasoning.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Build your believability panel.</text>
+<text class="b" x="120" y="176" font-size="32">Three people who have done it successfully before.</text>
+<g id="adv"><text class="m" x="120" y="525" font-size="20">DONE IT BEFORE</text></g>
+<g id="whys"></g>
+<g id="wts"><text class="m" x="120" y="592" font-size="20">WEIGHT</text></g>
+<g id="dec"><path class="gain" d="M800 690l50 50-50 50-50-50z"/><text class="m" x="870" y="748" font-size="22">YOUR DECISION</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="ql"><text class="m" x="143" y="280" font-size="26">THINK OF A DECISION YOU’RE STUCK ON</text></g>
+<g id="door">
+<rect class="s-ink" x="1260" y="300" width="180" height="400" fill="var(--gain)" fill-opacity=".3" stroke-width="6"/>
+<polygon id="leaf" class="s-ink" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M1220 700h240" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="q1"><text class="d" x="136" y="420" font-size="88" letter-spacing="-2">Whose opinion are you</text></g>
+<g id="q2"><text class="d" x="136" y="525" font-size="88" letter-spacing="-2">trusting, and have</text></g>
+<g id="q3"><text class="d" x="136" y="630" font-size="88" letter-spacing="-2">they <tspan style="fill:var(--gain)">earned it?</tspan></text></g>
+<g id="qm"><text class="m" x="143" y="760" font-size="26">WEIGH OPINIONS BY BELIEVABILITY</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Weigh Opinions by Believability&rdquo;, from <em>Principles</em> by Ray Dalio. The health scare story and the three-successes test are as reported in the book. The scales, ballot box and panel drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 8.7], [8.7, 24.5], [24.5, 37.5], [37.5, 56.7], [56.7, 79.3], [79.3, 91.1], [91.1, 106.9], [106.9, 121.0], [121.0, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Loudest Voice", "Wired Differently", "Not All Votes Equal", "Two Tests", "The Health Scare", "Earn Your Opinion", "Ask, Then Listen", "Build Your Panel", "Your Turn"];
+const TM={"meeting_room": 0.0, "brain_pair": 9.0, "big_picture": 12.48, "detail_lens": 16.32, "ballot_box": 24.8, "scale": 32.64, "trophy_three": 37.76, "chain_links": 43.52, "doctor_desk": 57.0, "three_doctors": 61.8, "phone_call": 66.72, "mirror": 79.6, "question_mark": 87.56, "student_desk": 91.36, "equal_chairs": 97.28, "small_voice": 101.36, "three_chairs": 107.2, "open_door": 121.28};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g);return g};
+const MT=$('mtg');[1170,1240,1380,1450].forEach(x=>fig(MT,x,490,20,'ink'));fig(MT,1310,458,28,'loss');mk('ellipse',{cx:1310,cy:600,rx:170,ry:46,fill:'var(--line)'},MT);
+const WV=[46,70,94].map(r=>mk('path',{d:`M${1310-r*.87} ${458-r*.5}A${r} ${r} 0 0 1 ${1310+r*.87} ${458-r*.5}`,class:'s-loss',fill:'none','stroke-width':6,'stroke-linecap':'round'},$('waves')));
+const head=(id,x,dash)=>{const g=$(id);mk('circle',{cx:x,cy:400,r:120,fill:'var(--stage)',stroke:dash?'var(--gain)':'var(--ink)','stroke-width':6,'stroke-dasharray':dash?'14 12':'none'},g);mk('path',{d:`M${x-160} 720v-40a160 120 0 0 1 320 0v40z`,fill:'var(--line)'},g)};
+head('hA',360);head('hB',1240);head('hY',800,1);
+const VX=[240,320,400,480];VX.forEach((x,i)=>fig($('voters'),x,300,18,i==3?'gain':'ink'));
+const cards=VX.map(()=>mk('rect',{width:30,height:20,rx:3,fill:'var(--ink)'},$('cards')));
+const pan=(id,heavy)=>{const g=$(id);mk('path',{d:'M0 0L-80 120M0 0L80 120',class:'s-muted','stroke-width':3},g);mk('path',{d:'M-90 120a90 36 0 0 0 180 0z',fill:'var(--ink)'},g);if(heavy)fig(g,0,62,14,'gain');else[-40,0,40].forEach(x=>fig(g,x,84,9,'ink'))};
+pan('panL',1);pan('panR');
+const TR=[260,450,640].map(x=>{const g=mk('g',{},$('tro'));mk('path',{d:`M${x-40} 270h80v30a40 40 0 0 1-80 0z`,class:'gain'},g);mk('path',{d:`M${x-40} 285h-16v14a16 16 0 0 0 16 16M${x+40} 285h16v14a16 16 0 0 1-16 16`,fill:'none',class:'s-gain','stroke-width':6},g);mk('rect',{x:x-8,y:340,width:16,height:30,class:'gain'},g);mk('rect',{x:x-32,y:370,width:64,height:14,rx:4,class:'gain'},g);return g});
+const LN=[0,1,2,3,4].map(i=>mk('rect',{x:880+i*100,y:i%2?352:336,width:140,height:i%2?32:64,rx:i%2?16:32,fill:'none',stroke:'var(--ink)','stroke-width':8},$('chn')));
+fig($('pat'),260,420,40,'ink');
+[800,1080,1360].forEach(x=>{fig($('docs'),x,470,32,'ink');mk('path',{d:`M${x} 540V604`,stroke:'var(--stage)','stroke-width':6},$('docs'))});
+fig($('refl'),420,410,50,'ink');
+[[60,180],[120,120],[180,60]].forEach((h,i)=>{const X=120+i*470,g=$('pp'+i),xs=[X+120,X+300],cy=h.map(v=>640-v-101);
+  mk('path',{d:`M${X+40} 640H${X+380}`,class:'s-ink','stroke-width':5},g);
+  h.forEach((v,j)=>{mk('rect',{x:xs[j]-50,y:640-v,width:100,height:v,fill:'var(--line)'},g);fig(g,xs[j],cy[j],24,j&&!i?'gain':'ink')});
+  mk('text',{x:xs[0],y:676,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g).textContent='YOU';
+  if(i<2){const c=i?'var(--ink)':'var(--gain)';mk('path',{d:`M${xs[1]-34} ${cy[1]}L${xs[0]+34} ${cy[0]}`,stroke:c,'stroke-width':4,'stroke-dasharray':'8 8'},g);mk('circle',{cx:xs[0]+34,cy:cy[0],r:7,fill:c},g);if(i)mk('circle',{cx:xs[1]-34,cy:cy[1],r:7,fill:c},g)}
+  else{const k=mk('g',{id:'chk'},g);mk('circle',{cx:xs[1]+44,cy:cy[1]-54,r:24,class:'gain'},k);mk('path',{d:`M${xs[1]+32} ${cy[1]-54}l9 9 16-18`,fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},k)}});
+const AX=[400,800,1200],WT=[.55,1,.75],WHY=[],BAR=[],LNS=[];
+AX.forEach((x,i)=>{fig($('adv'),x,330,34,'ink');[-36,0,36].forEach(d=>mk('circle',{cx:x+d,cy:518,r:10,class:'gain'},$('adv')));
+  const w=mk('g',{},$('whys'));mk('rect',{x:x-62,y:212,width:124,height:52,rx:26,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},w);
+  mk('text',{x:x,y:246,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--gain)'},w).textContent='WHY?';WHY.push(w);
+  LNS.push(mk('path',{d:`M${x} 612L800 688`,class:'s-line','stroke-width':4},$('wts')));
+  BAR.push(mk('rect',{x:x-130,y:568,height:30,rx:6,width:0,fill:i==1?'var(--gain)':'var(--ink)'},$('wts')))});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  R('mtg',TM.meeting_room);
+  WV.forEach((w,i)=>w.setAttribute('opacity',(p(u,TM.meeting_room+.4,TM.meeting_room+1)*(.35+.65*Math.abs(Math.sin(t*3-i*.8)))).toFixed(2)));
+  R('loudx',TM.meeting_room+4.2);
+
+  R('hA',TM.brain_pair);R('hB',TM.brain_pair+.3);R('bp',TM.big_picture);R('dl',TM.detail_lens);R('yy',TM.detail_lens+4.6);
+  $('mg').setAttribute('transform','translate('+(10*Math.sin(t*1.2)).toFixed(1)+' '+(6*Math.cos(t*1.5)).toFixed(1)+')');
+
+  R('voters',TM.ballot_box);R('box',TM.ballot_box);
+  cards.forEach((c,i)=>{const a=TM.ballot_box+.5+i*.4,k=p(u,a,a+.7);c.setAttribute('x',(VX[i]-15+(345-VX[i])*k).toFixed(1));c.setAttribute('y',(384+112*k).toFixed(1));c.setAttribute('opacity',u<a||k>=1?0:1)});
+  R('ign',TM.ballot_box+3.4);
+  R('scl',TM.scale);R('sub2',TM.scale+.3);
+  const an=(12*p(u,TM.scale+.5,TM.scale+2)+.8*Math.sin(t*2)*p(u,TM.scale+2,TM.scale+3))*Math.PI/180,bc=Math.cos(an)*280,bs=Math.sin(an)*280;
+  const bm=$('beam');bm.setAttribute('x1',(1100-bc).toFixed(1));bm.setAttribute('y1',(420+bs).toFixed(1));bm.setAttribute('x2',(1100+bc).toFixed(1));bm.setAttribute('y2',(420-bs).toFixed(1));
+  $('panL').setAttribute('transform','translate('+(1100-bc).toFixed(1)+' '+(420+bs).toFixed(1)+')');
+  $('panR').setAttribute('transform','translate('+(1100+bc).toFixed(1)+' '+(420-bs).toFixed(1)+')');
+
+  R('c1',TM.trophy_three);TR.forEach((g,i)=>{const a=TM.trophy_three+.5+i*.5;rise(g,p(u,a,a+.4))});
+  R('c2',TM.chain_links);LN.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.chain_links+.4+i*.3,TM.chain_links+.7+i*.3)));
+  R('luck',TM.chain_links+5.4);R('theo',TM.chain_links+9.6);
+
+  R('pat',TM.doctor_desk);R('clip',TM.doctor_desk+.6);R('docs',TM.three_doctors);
+  const hu=p(u,TM.phone_call+5,TM.phone_call+5.6);
+  [0,1,2].forEach(i=>{const a=TM.three_doctors+.6+i*.4;rise($('bb'+i),p(u,a,a+.4)*(i==1?1:1-.65*hu))});
+  $('bbr1').style.fill=hu>.5?'var(--gain)':'var(--stage)';$('bbr1').style.stroke=hu>.5?'var(--gain)':'var(--ink)';$('bbt1').style.fill=hu>.5?'var(--on-gain)':'var(--ink)';
+  $('talk').setAttribute('opacity',p(u,TM.phone_call,TM.phone_call+.8));$('talk').setAttribute('stroke-dashoffset',(-t*30).toFixed(0));
+  R('probe',TM.phone_call+.4);R('arw',TM.phone_call+10);R('okk',TM.phone_call+10.4);
+
+  R('mir',TM.mirror);R('quote',TM.mirror+2.6);R('argue',TM.question_mark);
+  $('xs').setAttribute('opacity',p(u,TM.question_mark+.4,TM.question_mark+.8));R('ask',TM.question_mark+.6);
+
+  R('p0',TM.student_desk);R('p1',TM.equal_chairs);R('p2',TM.small_voice);R('chk',TM.small_voice+2);
+
+  R('adv',TM.three_chairs);R('dec',TM.three_chairs+.6);
+  WHY.forEach((w,i)=>{const a=TM.three_chairs+5.8+i*.4;rise(w,p(u,a,a+.4))});
+  const wk=p(u,TM.three_chairs+9.5,TM.three_chairs+11);R('wts',TM.three_chairs+9.5);
+  BAR.forEach((b,i)=>b.setAttribute('width',(260*WT[i]*wk).toFixed(1)));LNS.forEach(l=>l.setAttribute('opacity',wk));
+
+  R('ql',TM.open_door);R('door',TM.open_door);
+  const o=p(u,TM.open_door+.4,TM.open_door+1.9),dx=(1440-110*o).toFixed(1);
+  $('leaf').setAttribute('points','1260,300 '+dx+','+(300+30*o).toFixed(1)+' '+dx+','+(700-30*o).toFixed(1)+' 1260,700');
+  R('q1',TM.open_door+4.1);R('q2',TM.open_door+4.5);R('q3',TM.open_door+4.9);R('qm',TM.open_door+5.5);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

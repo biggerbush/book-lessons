@@ -1,0 +1,361 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Intelligent Investor Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of The Intelligent Investor: What separates the two types of investor is how much time and effort you are willing to put in, not how much risk you take. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE INTELLIGENT INVESTOR · LESSON 4</text>
+<text class="d" x="116" y="330" font-size="84" letter-spacing="-2">Defensive or</text>
+<text class="d" x="116" y="426" font-size="84" letter-spacing="-2">Enterprising:</text>
+<text class="d" x="116" y="522" font-size="84" letter-spacing="-2" style="fill:var(--gain)">Pick your path.</text>
+<text class="b" x="120" y="610" font-size="32">Your effort, not your appetite for risk, decides your path.</text>
+<path class="s-line" d="M1100 600H1480" stroke-width="5" stroke-linecap="round"/>
+<rect class="s-ink" x="1125" y="300" width="150" height="300" fill="var(--line)" stroke-width="7"/>
+<rect class="s-ink" x="1315" y="300" width="150" height="300" fill="var(--line)" stroke-width="7"/>
+<rect id="dp0" class="gain" x="1125" y="300" width="150" height="300"/>
+<rect id="dp1" class="ink" x="1315" y="300" width="150" height="300"/>
+<g id="sg0"><rect class="s-ink" x="1115" y="236" width="170" height="46" rx="8" fill="var(--stage)" stroke-width="4"/><text class="m" x="1200" y="266" font-size="18" text-anchor="middle">LESS EFFORT</text></g>
+<g id="sg1"><rect class="s-ink" x="1305" y="236" width="170" height="46" rx="8" fill="var(--stage)" stroke-width="4"/><text class="m" x="1390" y="266" font-size="18" text-anchor="middle">MORE EFFORT</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Bigger risk, bigger reward?</text>
+<text class="b" x="120" y="176" font-size="32">The picture most people carry in their heads.</text>
+<g id="dial">
+<path class="s-line" d="M160 580A200 200 0 0 1 560 580" fill="none" stroke-width="24"/>
+<path class="s-loss" d="M501 439A200 200 0 0 1 560 580" fill="none" stroke-width="24"/>
+<path id="ndl" class="s-ink" d="M360 580V410" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="360" cy="580" r="16"/>
+<text class="m" x="160" y="625" font-size="20" text-anchor="middle">LOW</text>
+<text class="m" x="560" y="625" font-size="20" text-anchor="middle">HIGH</text>
+<text class="m" x="360" y="665" font-size="22" text-anchor="middle">RISK</text>
+</g>
+<g id="gam"><g id="gamP"></g><g id="hrt"><path class="loss" d="M0 18C-30 0-30-22-15-24C-8-25-2-20 0-14C2-20 8-25 15-24C30-22 30 0 0 18Z"/></g>
+<rect class="s-ink" x="960" y="440" width="64" height="64" rx="10" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="1000" y="512" width="56" height="56" rx="10" fill="var(--stage)" stroke-width="5"/>
+<circle class="ink" cx="980" cy="460" r="6"/><circle class="ink" cx="1004" cy="484" r="6"/><circle class="ink" cx="1028" cy="540" r="6"/>
+<text class="m" x="910" y="690" font-size="20" text-anchor="middle">THE BOLD GAMBLER</text></g>
+<path id="rx" class="s-loss" d="M150 330L1060 600M150 600L1060 330" pathLength="1" fill="none" stroke-width="12" stroke-linecap="round"/>
+<g id="hurt"><path class="s-line" d="M1140 640H1460M1140 340V640" stroke-width="4" fill="none"/>
+<path id="hl" class="s-loss" d="M1150 380L1230 420L1290 400L1350 520L1400 500L1450 620" pathLength="1" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="1140" y="690" font-size="20">CHASING RISK</text>
+<text class="d" x="120" y="790" font-size="44">Graham: chasing risk is how people get hurt.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Reward follows effort, not risk.</text>
+<text class="b" x="120" y="176" font-size="32">Aim for the return that matches the work you’ll do.</text>
+<polygon class="ink" points="600,600 530,710 670,710"/>
+<path class="s-line" d="M480 712H720" stroke-width="6" stroke-linecap="round"/>
+<rect class="ink" x="200" y="584" width="800" height="16" rx="8"/>
+<g id="clk"><circle class="s-ink" cx="290" cy="514" r="66" fill="var(--stage)" stroke-width="7"/><path id="hnd" class="s-ink" d="M290 514V464" stroke-width="7" stroke-linecap="round"/><path class="s-ink" d="M290 514h30" stroke-width="7" stroke-linecap="round"/></g>
+<g id="tbx"><rect class="ink" x="380" y="470" width="90" height="114" rx="6"/><path d="M400 500h50M400 524h50M400 548h30" stroke="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M535 522v-22h60v22" fill="none" stroke-width="6"/><rect class="gain" x="500" y="520" width="130" height="64" rx="6"/>
+<text class="m" x="200" y="770" font-size="20">TIME · STUDY · JUDGMENT</text></g>
+<g id="cns"></g>
+<g id="retL"><text class="m" x="840" y="770" font-size="20" text-anchor="middle">RETURN</text></g>
+<g id="rsk"><path class="s-line" d="M1080 230V740" stroke-width="3" stroke-dasharray="8 8"/>
+<g transform="translate(0 -50)">
+<text class="m" x="1300" y="300" font-size="20" text-anchor="middle">RISK ALONE</text>
+<rect class="loss" x="1240" y="330" width="120" height="120" rx="18"/>
+<circle cx="1270" cy="360" r="9" fill="var(--stage)"/><circle cx="1300" cy="390" r="9" fill="var(--stage)"/><circle cx="1330" cy="420" r="9" fill="var(--stage)"/>
+<path class="s-muted" d="M1300 470v70m-18-18 18 18 18-18" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="loss" d="M1220 640a40 40 0 0 1 30-60a50 50 0 0 1 95 0a40 40 0 0 1 35 60z"/>
+<path class="s-loss" d="M1300 652l-20 36h32l-20 40" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d5" x="1300" y="790" font-size="36" text-anchor="middle">Nothing but</text>
+<text class="d5" x="1300" y="836" font-size="36" text-anchor="middle">trouble.</text></g></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The defensive investor.</text>
+<text class="b" x="120" y="176" font-size="32">Safety first, and freedom from effort.</text>
+<circle id="shd" class="s-gain" cx="370" cy="520" r="200" fill="none" stroke-width="6" stroke-dasharray="14 10"/>
+<g id="chr"><rect class="s-ink" x="270" y="400" width="200" height="170" rx="30" fill="var(--stage)" stroke-width="7"/><g id="sitP"></g>
+<rect class="s-ink" x="250" y="550" width="240" height="60" rx="14" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="226" y="500" width="48" height="120" rx="20"/><rect class="ink" x="466" y="500" width="48" height="120" rx="20"/>
+<path class="s-ink" d="M270 610v50M470 610v50" stroke-width="8" stroke-linecap="round"/></g>
+<g id="thr"><text class="m" x="620" y="420" font-size="20">SERIOUS MISTAKES</text><text class="m" x="620" y="600" font-size="20">LOSSES</text>
+<path class="s-loss" d="M800 450H600m24-20-24 20 24 20M800 630H600m24-20-24 20 24 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="cal"><rect class="s-ink" x="920" y="300" width="460" height="340" rx="14" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="920" y="300" width="460" height="56"/><g id="cgrid"></g>
+<text class="m" x="920" y="690" font-size="18">FREEDOM FROM EFFORT, WORRY AND DECISIONS</text></g>
+<g id="ns0"><text class="d" x="120" y="770" font-size="44">Not a weaker choice.</text></g>
+<g id="ns1"><text class="d" x="120" y="836" font-size="44">A <tspan style="fill:var(--gain)">sensible</tspan> one for busy people.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A simple recipe.</text>
+<text class="b" x="120" y="176" font-size="32">Solid companies or funds, then the same sum every month.</text>
+<g id="bk"></g>
+<g id="bsk"><path class="s-ink" d="M140 470H460L430 620H170Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-line" d="M152 520H448M162 570H438" stroke-width="4"/>
+<text class="m" x="120" y="670" font-size="18">LARGE, ESTABLISHED</text><text class="m" x="120" y="700" font-size="18">COMPANIES OR FUNDS</text></g>
+<g id="coinG"><text class="m" x="490" y="540" font-size="18">SAME SUM</text></g>
+<g id="plG"><text class="m" x="490" y="360" font-size="18">PRICE</text><path id="pl" class="s-ink" pathLength="1" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/></g>
+<g id="barG"><text class="m" x="490" y="740" font-size="18">SHARES</text></g>
+<g id="udL"><text class="m" x="640" y="830" font-size="20" style="fill:var(--gain)">LOWER PRICE → MORE SHARES FOR THE SAME SUM</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The enterprising investor.</text>
+<text class="b" x="120" y="176" font-size="32">Real time and care, close to running a business.</text>
+<g id="cards"></g>
+<g id="mag"><circle class="s-ink" r="60" fill="none" stroke-width="10"/><path class="s-ink" d="M44 44L95 95" stroke-width="16" stroke-linecap="round"/></g>
+<g id="gl"><text class="m" x="760" y="680" font-size="20" style="fill:var(--gain)">SOUND · MORE ATTRACTIVE THAN AVERAGE</text></g>
+<g id="desk"><g id="dskP"></g><rect class="ink" x="420" y="520" width="140" height="80" rx="6"/><circle class="gain" cx="490" cy="560" r="10"/>
+<rect class="s-ink" x="170" y="570" width="80" height="30" fill="var(--stage)" stroke-width="4"/>
+<rect class="ink" x="140" y="600" width="460" height="18"/><path class="s-ink" d="M170 618V740M570 618V740" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="120" y="790" font-size="20">CLOSE TO RUNNING A BUSINESS</text></g>
+<g id="fin"><text class="d" x="120" y="850" font-size="40">Better results, but only through skill and work.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hunting bargains.</text>
+<text class="b" x="120" y="176" font-size="32">Bargain issues: priced below current assets minus all debts.</text>
+<path class="s-line" d="M140 700H680" stroke-width="4"/>
+<g id="b0"><rect class="ink" x="160" y="320" width="120" height="380"/><text class="m" x="220" y="740" font-size="18" text-anchor="middle">ASSETS</text></g>
+<g id="b1"><rect class="loss" x="160" y="320" width="120" height="120"/><text class="m" x="220" y="388" font-size="18" text-anchor="middle" style="fill:var(--stage)">DEBTS</text></g>
+<g id="b2"><rect class="s-gain" x="340" y="440" width="120" height="260" fill="none" stroke-width="6" stroke-dasharray="12 8"/><text class="m" x="400" y="740" font-size="18" text-anchor="middle">MINUS DEBTS</text>
+<rect class="gain" x="520" y="580" width="120" height="120"/><text class="m" x="580" y="740" font-size="18" text-anchor="middle">PRICE</text>
+<path class="s-gain" d="M490 446V574M476 560l14 14 14-14M476 460l14-14 14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="tag"><polygon class="s-ink" points="560,490 640,490 640,550 560,550 530,520" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><circle class="ink" cx="550" cy="520" r="6"/><text class="d" x="600" y="532" font-size="32" text-anchor="middle">$</text></g>
+<g id="map"><text class="m" x="840" y="236" font-size="20">DIGGING MOST PEOPLE WON’T DO</text>
+<rect class="s-ink" x="840" y="260" width="620" height="440" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1047 260V700M1253 260V700" stroke-width="3" stroke-dasharray="10 8"/>
+<path id="trl" class="s-gain" d="M880 660C980 640 960 520 1060 500S1220 560 1260 440S1360 320 1420 320" pathLength="1" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="xm" class="s-gain" d="M1400 300l40 40M1440 300l-40 40" stroke-width="8" stroke-linecap="round"/>
+<g id="det"><circle class="s-ink" r="16" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M12 12l14 14" stroke-width="7" stroke-linecap="round"/></g></g>
+<g id="pn0"><circle class="gain" cx="1000" cy="380" r="22"/><text class="d" x="1000" y="389" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">1</text><text class="m" x="840" y="750" font-size="20">1 · SPECIAL SITUATIONS</text></g>
+<g id="pn1"><circle class="gain" cx="1240" cy="620" r="22"/><text class="d" x="1240" y="629" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">2</text><text class="m" x="840" y="790" font-size="20">2 · OVERLOOKED SECONDARY COMPANIES</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No halfway house.</text>
+<text class="b" x="120" y="176" font-size="32">Drifting between the two paths can leave you worse off.</text>
+<g id="road"></g>
+<text class="m" x="420" y="250" font-size="22" text-anchor="middle">DEFENSIVE</text>
+<text class="m" x="1180" y="250" font-size="22" text-anchor="middle">ENTERPRISING</text>
+<g id="pit"><ellipse class="loss" cx="800" cy="420" rx="100" ry="34"/><text class="m" x="800" y="370" font-size="20" text-anchor="middle">WORSE OFF</text></g>
+<circle id="dr" class="ink" r="22"/>
+<circle id="cm" class="gain" r="24"/>
+<g id="sp"><path class="s-ink" d="M1100 620V840" stroke-width="8" stroke-linecap="round"/>
+<polygon class="gain" points="1100,630 960,630 935,655 960,680 1100,680"/><text class="m" x="1025" y="662" font-size="18" text-anchor="middle" style="fill:var(--on-gain)">DEFENSIVE</text>
+<polygon class="s-ink" points="1100,700 1280,700 1305,725 1280,750 1100,750" fill="var(--stage)" stroke-width="5"/><text class="m" x="1190" y="732" font-size="18" text-anchor="middle">ENTERPRISING</text></g>
+<g id="cmT"><text class="d" x="120" y="700" font-size="56">Decide.</text><text class="d" x="120" y="770" font-size="56" style="fill:var(--gain)">Then commit.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">How many hours</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">a week will you give</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">to <tspan style="fill:var(--gain)">investing?</tspan></text></g>
+<g id="stw"><rect class="ink" x="1310" y="306" width="40" height="26" rx="6"/><circle class="s-ink" cx="1330" cy="450" r="110" fill="var(--stage)" stroke-width="10"/>
+<path id="swh" class="s-gain" d="M1330 450V370" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1330" cy="450" r="10"/></g>
+<g id="ans"><text class="m" x="143" y="700" font-size="26" style="fill:var(--gain)">FEW? CHOOSE THE DEFENSIVE DOOR, AND FEEL GOOD ABOUT IT.</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Defensive or Enterprising: Pick Your Path&rdquo;, from <em>The Intelligent Investor</em> by Benjamin Graham. Dollar-cost averaging, bargain issues, special situations and secondary companies are described as reported in the book. The doors, risk dial, gambler, fork in the road and price drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 7.6], [7.6, 23.0], [23.0, 36.3], [36.3, 50.9], [50.9, 70.6], [70.6, 90.4], [90.4, 109.7], [109.7, 122.9], [122.9, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Two Kinds of Investor", "The Common Myth", "Effort, Not Risk", "The Defensive Path", "A Simple Recipe", "The Enterprising Path", "Hunting Bargains", "No Halfway House", "Choose Your Door"];
+const TM={"two_doors": 0.0, "risk_dial": 7.92, "gambler": 12.0, "clock": 23.28, "toolbox": 28.88, "armchair": 36.56, "calendar": 41.84, "basket": 51.2, "coins": 58.56, "up_down": 66.36, "magnifier": 70.88, "desk": 75.84, "price_tag": 90.72, "detective": 100.0, "map": 104.0, "fork_road": 110.0, "signpost": 119.2, "stopwatch": 123.2};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const drw=(el,k)=>{el.setAttribute('stroke-dasharray','1 1');el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));el.setAttribute('opacity',k>0?1:0)};
+fig($('gamP'),860,380,40,'ink');fig($('sitP'),370,440,34,'gain');fig($('dskP'),330,470,40,'ink');
+const CN=[0,1,2,3,4,5].map(i=>mk('ellipse',{cx:840,cy:566-i*22,rx:70,ry:16,class:'gain',stroke:'var(--stage)','stroke-width':3},$('cns')));
+for(let r=0;r<4;r++)for(let c=0;c<7;c++){const on=r===1&&c===2;mk('rect',{x:942+c*62,y:374+r*64,width:56,height:58,rx:6,fill:on?'var(--gain)':'none',stroke:on?'var(--gain)':'var(--line)','stroke-width':3},$('cgrid'))}
+const BL=[[160,90,140,'ink'],[262,96,190,'gain'],[370,80,120,'ink']].map(([x,w,h,c])=>mk('rect',{x:x,y:560-h,width:w,height:h,class:c},$('bk')));
+const PR=[1,.8,.6,.5,.7,.9,.6,1],X=i=>640+i*110,PY=v=>300+(1-v)*240;
+const CO=PR.map((v,i)=>{const g=mk('g',{},$('coinG'));mk('circle',{cx:X(i),cy:535,r:22,class:'gain'},g);const s=mk('text',{x:X(i),y:544,'font-size':24,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'},g);s.textContent='$';return g});
+$('pl').setAttribute('d','M'+PR.map((v,i)=>X(i)+' '+PY(v)).join('L'));
+const PD=PR.map((v,i)=>mk('circle',{cx:X(i),cy:PY(v),r:8,class:'ink'},$('plG')));
+const BR=PR.map((v,i)=>mk('rect',{x:X(i)-25,width:50,rx:6,fill:v<.7?'var(--gain)':'var(--ink)'},$('barG')));
+const CD=[];for(let i=0;i<12;i++){const x=760+(i%4)*175,y=260+Math.floor(i/4)*125,g=mk('g',{},$('cards'));
+const r=mk('rect',{x:x,y:y,width:150,height:100,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+mk('path',{d:'M'+(x+20)+' '+(y+40)+'h110M'+(x+20)+' '+(y+66)+'h70',stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},g);CD.push([g,r,[1,6,11].includes(i)])}
+const RDS=['M800 830V620C800 480 420 460 420 300','M800 620C800 480 1180 460 1180 300'];
+const RP=RDS.map(d=>mk('path',{d:d,fill:'none',stroke:'var(--line)','stroke-width':64,'stroke-linecap':'round'},$('road')));
+RDS.forEach(d=>mk('path',{d:d,fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'16 14'},$('road')));
+let TL=600,LT=700;try{TL=$('trl').getTotalLength();LT=RP[0].getTotalLength()}catch(e){}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const o=p(u,TM.two_doors+.3,TM.two_doors+1.5);
+  $('dp0').setAttribute('width',(150-110*o).toFixed(1));$('dp1').setAttribute('width',(150-110*o).toFixed(1));
+  rise($('sg0'),p(u,TM.two_doors+4.6,TM.two_doors+5.1));rise($('sg1'),p(u,TM.two_doors+4.9,TM.two_doors+5.4));
+
+  const dk=p(u,TM.risk_dial+.3,TM.risk_dial+2);
+  rise($('dial'),p(u,TM.risk_dial,TM.risk_dial+.5));
+  $('ndl').setAttribute('transform','rotate('+(-80+150*dk+3*dk*Math.sin(t*9)).toFixed(1)+' 360 580)');
+  rise($('gam'),p(u,TM.gambler,TM.gambler+.5));
+  $('hrt').setAttribute('transform','translate(880 490) scale('+(1+.18*Math.pow(Math.abs(Math.sin(t*5)),4)).toFixed(3)+')');
+  drw($('rx'),p(u,TM.gambler+5.4,TM.gambler+6.2));
+  rise($('hurt'),p(u,TM.gambler+7.5,TM.gambler+8));drw($('hl'),p(u,TM.gambler+7.7,TM.gambler+9));
+
+  rise($('clk'),p(u,TM.clock,TM.clock+.5));rise($('retL'),p(u,TM.clock,TM.clock+.5));
+  $('hnd').setAttribute('transform','rotate('+(t*90%360).toFixed(1)+' 290 514)');
+  rise($('tbx'),p(u,TM.toolbox,TM.toolbox+.5));
+  CN.forEach((c,i)=>{const a=i<2?TM.clock+.4+i*.3:TM.toolbox+.4+(i-2)*.3;c.setAttribute('opacity',p(u,a,a+.3))});
+  rise($('rsk'),p(u,TM.toolbox+4.5,TM.toolbox+5));
+
+  rise($('chr'),p(u,TM.armchair,TM.armchair+.5));$('shd').setAttribute('opacity',p(u,TM.armchair+.5,TM.armchair+1.2));
+  rise($('thr'),p(u,TM.armchair+1.2,TM.armchair+1.7));
+  rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+  rise($('ns0'),p(u,TM.calendar+4.2,TM.calendar+4.7));rise($('ns1'),p(u,TM.calendar+6.8,TM.calendar+7.3));
+
+  rise($('bsk'),p(u,TM.basket,TM.basket+.5));
+  BL.forEach((b,i)=>{const k=p(u,TM.basket+.4+i*.4,TM.basket+1+i*.4);b.setAttribute('transform','translate(0 '+(-160*(1-k)).toFixed(1)+')');b.setAttribute('opacity',k)});
+  $('coinG').setAttribute('opacity',p(u,TM.coins,TM.coins+.4));
+  CO.forEach((c,i)=>rise(c,p(u,TM.coins+.3+i*.3,TM.coins+.6+i*.3)));
+  const pk=p(u,TM.coins+3,TM.coins+4.5);$('plG').setAttribute('opacity',p(u,TM.coins+3,TM.coins+3.3));drw($('pl'),pk);
+  PD.forEach((d,i)=>d.setAttribute('opacity',pk>=i/7?1:0));
+  $('barG').setAttribute('opacity',p(u,TM.up_down,TM.up_down+.3));
+  BR.forEach((b,i)=>{const h=60/PR[i]*p(u,TM.up_down+i*.2,TM.up_down+.5+i*.2);b.setAttribute('y',(780-h).toFixed(1));b.setAttribute('height',h.toFixed(1))});
+  rise($('udL'),p(u,TM.up_down+2,TM.up_down+2.5));
+
+  rise($('cards'),p(u,TM.magnifier,TM.magnifier+.5));
+  $('mag').setAttribute('transform','translate('+(1100+260*Math.sin(t*.7)).toFixed(1)+' '+(440+120*Math.sin(t*1.1)).toFixed(1)+')');
+  $('mag').setAttribute('opacity',p(u,TM.magnifier+.3,TM.magnifier+.8));
+  const gl=u>=TM.magnifier+9.6;
+  CD.forEach(([g,r,h])=>{r.setAttribute('fill',gl&&h?'var(--gain)':'var(--stage)');r.setAttribute('stroke',gl&&h?'var(--gain)':'var(--ink)');g.setAttribute('opacity',gl&&!h?.35:1)});
+  rise($('gl'),p(u,TM.magnifier+9.6,TM.magnifier+10.1));
+  rise($('desk'),p(u,TM.desk,TM.desk+.5));rise($('fin'),p(u,TM.magnifier+15,TM.magnifier+15.6));
+
+  rise($('tag'),p(u,TM.price_tag,TM.price_tag+.5));
+  [3,4,5].forEach((d,i)=>rise($('b'+i),p(u,TM.price_tag+d,TM.price_tag+d+.5)));
+  rise($('map'),p(u,TM.detective,TM.detective+.5));
+  const tk=p(u,TM.detective+.3,TM.detective+3);drw($('trl'),tk);
+  const dp=$('trl').getPointAtLength(TL*tk);$('det').setAttribute('transform','translate('+dp.x.toFixed(1)+' '+dp.y.toFixed(1)+')');
+  $('xm').setAttribute('opacity',p(u,TM.detective+3,TM.detective+3.4));
+  rise($('pn0'),p(u,TM.map,TM.map+.5));rise($('pn1'),p(u,TM.map+1,TM.map+1.5));
+
+  const a=p(u,TM.fork_road+.3,TM.fork_road+3),b=p(u,TM.fork_road+3.3,TM.fork_road+4.8);
+  $('dr').setAttribute('cx',(800+70*Math.sin(a*4*Math.PI)).toFixed(1));$('dr').setAttribute('cy',(800-210*a-170*b).toFixed(1));
+  $('dr').setAttribute('r',(22*(1-.5*b)).toFixed(1));$('dr').setAttribute('opacity',u>=TM.fork_road?1-.5*b:0);
+  rise($('pit'),p(u,TM.fork_road+3.3,TM.fork_road+3.8));
+  rise($('sp'),p(u,TM.signpost,TM.signpost+.5));
+  const ck=p(u,TM.signpost+.6,TM.signpost+2.6),cp=RP[0].getPointAtLength(LT*(.03+.94*ck));
+  $('cm').setAttribute('cx',cp.x.toFixed(1));$('cm').setAttribute('cy',cp.y.toFixed(1));$('cm').setAttribute('opacity',p(u,TM.signpost+.3,TM.signpost+.6));
+  rise($('cmT'),p(u,TM.signpost+1,TM.signpost+1.5));
+
+  rise($('qa'),p(u,TM.stopwatch,TM.stopwatch+.5));rise($('qb'),p(u,TM.stopwatch+.4,TM.stopwatch+.9));rise($('qc'),p(u,TM.stopwatch+.8,TM.stopwatch+1.3));
+  rise($('stw'),p(u,TM.stopwatch+.3,TM.stopwatch+.8));
+  $('swh').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 1330 450)');
+  rise($('ans'),p(u,TM.stopwatch+5.4,TM.stopwatch+6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.24;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

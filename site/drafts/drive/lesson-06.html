@@ -1,0 +1,405 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drive Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Drive: Motivation deepens when work connects to a cause larger than ourselves, so purpose should sit alongside profit, not behind it. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DRIVE · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Purpose: working for</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">something bigger.</text>
+<text class="b" x="120" y="600" font-size="32">Why meaningful goals beat money goals for lasting motivation.</text>
+<g id="t_ring"><circle id="t_rc" class="s-gain" cx="1330" cy="380" r="130" fill="none" stroke-width="8" stroke-dasharray="20 16" stroke-linecap="round"/></g>
+<g id="t_fig"></g>
+<g id="t_ticks"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Purpose is the third partner.</text>
+<text class="b" x="120" y="176" font-size="32">Autonomy and mastery work best alongside it.</text>
+<g id="stw"><g id="stool">
+<path class="s-ink" d="M300 360L270 640M480 360V640" stroke-width="14" stroke-linecap="round"/>
+<g id="leg3"><path class="s-gain" d="M660 360L690 640" stroke-width="14" stroke-linecap="round"/><text class="m" x="690" y="690" font-size="22" text-anchor="middle" style="fill:var(--gain)">PURPOSE</text></g>
+<rect class="ink" x="240" y="320" width="480" height="40" rx="12"/>
+<text class="m" x="270" y="690" font-size="22" text-anchor="middle">AUTONOMY</text>
+<text class="m" x="480" y="690" font-size="22" text-anchor="middle">MASTERY</text>
+</g></g>
+<g id="cmp"><circle class="s-ink" cx="480" cy="250" r="44" fill="var(--stage)" stroke-width="6"/><path id="ndl" class="gain" d="M480 214l12 36-12 36-12-36z"/></g>
+<g id="carz">
+<circle class="s-line" cx="1180" cy="490" r="170" fill="none" stroke-width="5" stroke-dasharray="12 12"/>
+<text class="d" x="1180" y="520" font-size="90" text-anchor="middle" style="fill:var(--muted)">?</text>
+<g id="car"><circle class="ink" cx="-22" cy="-20" r="7"/><circle class="ink" cx="22" cy="-20" r="7"/><circle class="ink" cx="-22" cy="20" r="7"/><circle class="ink" cx="22" cy="20" r="7"/><rect class="loss" x="-36" y="-18" width="72" height="36" rx="10"/></g>
+<text class="m" x="1180" y="730" font-size="20" text-anchor="middle">FREEDOM + SKILL, NOWHERE TO GO</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What has my work meant?</text>
+<text class="b" x="120" y="176" font-size="32">As large generations grow older, many people look back.</text>
+<g id="clkg">
+<circle class="s-ink" cx="340" cy="480" r="150" fill="var(--stage)" stroke-width="8"/>
+<g id="ticks"></g>
+<path id="hh" class="s-ink" d="M340 480V395" stroke-width="10" stroke-linecap="round"/>
+<path id="hm" class="s-gain" d="M340 480V365" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="340" cy="480" r="10"/>
+<text class="m" x="340" y="690" font-size="22" text-anchor="middle">LOOKING BACK</text>
+</g>
+<g id="cards">
+<rect class="s-ink" x="600" y="320" width="300" height="140" rx="12" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="630" y="362" font-size="22">PAYCHECK</text>
+<path class="s-line" d="M630 400h150M630 430h100" stroke-width="6" stroke-linecap="round"/>
+<text class="d" x="850" y="430" font-size="60" text-anchor="middle">$</text>
+<rect class="s-ink" x="600" y="500" width="300" height="140" rx="12" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="630" y="542" font-size="22">TITLE</text>
+<path class="s-line" d="M630 580h120M630 610h80" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="850" cy="550" r="16"/><path class="ink" d="M826 616v-20a24 24 0 0 1 48 0v20z"/>
+</g>
+<text id="qm" class="d" x="1010" y="610" font-size="240" text-anchor="middle" style="fill:var(--loss)">?</text>
+<g id="stk"></g>
+<g id="stl"><text class="m" x="1310" y="750" font-size="22" text-anchor="middle" style="fill:var(--gain)">IT ADDED UP TO SOMETHING</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of goals.</text>
+<text class="b" x="120" y="176" font-size="32">University of Rochester graduates, followed after college.</text>
+<g id="grads"><text class="m" x="290" y="650" font-size="20" text-anchor="middle">RECENT GRADUATES</text></g>
+<path id="pm" class="s-loss" d="M440 500Q700 330 960 330" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<path id="ph" class="s-gain" d="M440 500Q700 670 960 670" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<circle id="wm" class="loss" r="10"/><circle id="wh" class="gain" r="10"/>
+<g id="gm">
+<circle class="s-loss" cx="1000" cy="330" r="38" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="1000" y="346" font-size="44" text-anchor="middle" style="fill:var(--loss)">$</text>
+<rect class="s-line" x="1060" y="270" width="420" height="120" rx="16" fill="var(--stage)" stroke-width="3"/>
+<text class="d5" x="1090" y="325" font-size="40">Profit goals</text>
+<text class="m" x="1090" y="365" font-size="20">WEALTH · FAME</text>
+</g>
+<g id="gh">
+<path class="gain" d="M1000 700c-40-26-48-52-30-66 14-10 26-4 30 6 4-10 16-16 30-6 18 14 10 40-30 66z"/>
+<rect class="s-line" x="1060" y="610" width="420" height="120" rx="16" fill="var(--stage)" stroke-width="3"/>
+<text class="d5" x="1090" y="665" font-size="40">Purpose goals</text>
+<text class="m" x="1090" y="705" font-size="20">HELPING · LEARNING · GROWING</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A surprising result.</text>
+<text class="b" x="120" y="176" font-size="32">What happened when the graduates reached their goals.</text>
+<g id="rl">
+<rect class="s-line" x="120" y="230" width="640" height="460" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="gain" cx="290" cy="440" r="80"/>
+<circle cx="262" cy="420" r="9" fill="var(--on-gain)"/><circle cx="318" cy="420" r="9" fill="var(--on-gain)"/>
+<path d="M250 462q40 38 80 0" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round"/>
+<text class="d" x="410" y="440" font-size="40">Purpose goals</text>
+<text class="m" x="410" y="480" font-size="20">REACHED</text>
+<path class="s-gain" d="M170 578v-32m-12 12 12-12 12 12" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="200" y="568" font-size="22">MORE SATISFACTION AND WELL-BEING</text>
+<path class="s-gain" d="M170 612v32m-12-12 12 12 12-12" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="200" y="638" font-size="22">LESS ANXIETY AND DEPRESSION</text>
+</g>
+<g id="rr">
+<rect class="s-line" x="840" y="230" width="640" height="460" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="ink" d="M940 380h100v40a50 50 0 0 1-100 0z"/>
+<path class="s-ink" d="M940 395h-22v12a24 24 0 0 0 26 22M1040 395h22v12a24 24 0 0 1-26 22" fill="none" stroke-width="6"/>
+<rect class="ink" x="982" y="468" width="16" height="32"/><rect class="ink" x="955" y="500" width="70" height="16" rx="4"/>
+<text class="d" x="1110" y="440" font-size="40">Profit goals</text>
+<text class="m" x="1110" y="480" font-size="20">REACHED</text>
+<path class="s-muted" d="M876 562h28" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="920" y="568" font-size="22">NO MORE SATISFIED THAN BEFORE</text>
+</g>
+<g id="rc">
+<g id="cld"><path class="loss" d="M930 320a28 28 0 0 1 20-48a38 38 0 0 1 70-4a28 28 0 0 1 30 52z"/>
+<path class="s-loss" d="M960 334l-8 18M990 334l-8 18M1020 334l-8 18" stroke-width="5" stroke-linecap="round"/></g>
+<path class="s-loss" d="M890 648v-32m-12 12 12-12 12 12" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="920" y="638" font-size="22" style="fill:var(--loss)">SOME: MORE ANXIETY AND DEPRESSION</text>
+</g>
+<g id="rx"><text class="d" x="120" y="790" font-size="44">Reaching profit goals didn’t bring satisfaction.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Profit beside purpose, not in front.</text>
+<text class="b" x="120" y="176" font-size="32">Money is fuel for the mission, not the mission itself.</text>
+<g id="scl">
+<path class="s-ink" d="M440 400V700" stroke-width="10" stroke-linecap="round"/>
+<path class="ink" d="M440 690L500 740H380z"/>
+<path class="s-ink" d="M220 400H660" stroke-width="10" stroke-linecap="round"/>
+<g id="bpu"><rect class="gain" x="460" y="310" width="160" height="80" rx="10"/><text class="m" x="540" y="358" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">PURPOSE</text></g>
+<g id="bpr"><rect class="ink" x="250" y="310" width="160" height="80" rx="10"/><text class="m" x="330" y="358" font-size="22" text-anchor="middle" style="fill:var(--stage)">PROFIT</text></g>
+<text id="sl" class="m" x="440" y="790" font-size="22" text-anchor="middle">PROFIT IN FRONT</text>
+</g>
+<g id="fuel">
+<path class="s-ink" d="M860 480h110v170H860z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-ink" d="M970 500l40-30" stroke-width="10" stroke-linecap="round"/>
+<text class="d" x="915" y="600" font-size="60" text-anchor="middle">$</text>
+<text class="m" x="915" y="700" font-size="22" text-anchor="middle">MONEY = FUEL</text>
+<path id="flm" class="gain" d="M1270 575q30 70 60 0z" fill-opacity=".5"/>
+<path class="gain" d="M1300 290c55 70 65 170 50 280h-100c-15-110-5-210 50-280zM1252 520l-37 60h37zM1348 520l37 60h-37z"/>
+<circle cx="1300" cy="420" r="22" fill="var(--stage)"/>
+<text class="m" x="1300" y="700" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE MISSION</text>
+<g id="drops"></g>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Listen for “we” or “they”.</text>
+<text class="b" x="120" y="176" font-size="32">Purpose shows up in everyday language.</text>
+<g id="org">
+<circle class="s-line" cx="560" cy="540" r="230" fill="none" stroke-width="4"/>
+<g id="mem"></g>
+<rect class="s-gain" x="420" y="400" width="180" height="90" rx="22" fill="var(--stage)" stroke-width="5"/>
+<path class="s-gain" d="M500 488l12 36 14-36" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text id="wet" class="d" x="510" y="463" font-size="48" text-anchor="middle" style="fill:var(--gain)">…</text>
+<text class="m" x="560" y="820" font-size="22" text-anchor="middle">INSIDE THE MISSION</text>
+</g>
+<g id="outw"><g id="out">
+<g id="outp"></g>
+<rect class="s-loss" x="680" y="400" width="200" height="90" rx="22" fill="var(--stage)" stroke-width="5"/>
+<path class="s-loss" d="M766 488l12 36 14-36" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text id="theyt" class="d" x="780" y="463" font-size="48" text-anchor="middle" style="fill:var(--loss)">…</text>
+</g></g>
+<g id="outl"><text class="m" x="1180" y="700" font-size="22" text-anchor="middle" style="fill:var(--loss)">OUTSIDER: SOMEONE ELSE’S GOAL</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Money with meaning.</text>
+<text class="b" x="120" y="176" font-size="32">Purpose even changes how money feels.</text>
+<g id="cash"><g id="cashi">
+<rect class="s-ink" x="160" y="410" width="260" height="130" rx="10" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="290" cy="475" r="36" fill="none" stroke-width="5"/>
+<text class="d" x="290" y="491" font-size="44" text-anchor="middle">$</text>
+</g><text class="m" x="290" y="600" font-size="22" text-anchor="middle">SPEND IT ON…</text></g>
+<g id="gift">
+<path class="s-muted" d="M430 450Q520 340 610 330" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="s-gain" d="M430 500Q520 600 610 610" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="640" y="290" font-size="22">ON YOURSELF</text>
+<g id="selfp"></g>
+<rect class="s-ink" x="740" y="370" width="40" height="44" rx="4" fill="none" stroke-width="5"/>
+<path class="s-ink" d="M748 370a12 12 0 0 1 24 0" fill="none" stroke-width="4"/>
+<circle class="s-ink" cx="900" cy="360" r="34" fill="none" stroke-width="5"/>
+<circle class="ink" cx="888" cy="350" r="5"/><circle class="ink" cx="912" cy="350" r="5"/>
+<path class="s-ink" d="M884 376h32" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="640" y="560" font-size="22">ON OTHERS</text>
+<g id="givep"></g><g id="recvp"></g>
+<rect class="gain" x="745" y="640" width="40" height="40" rx="4"/>
+<path d="M765 640v40M745 660h40" stroke="var(--on-gain)" stroke-width="4"/>
+<circle class="gain" cx="950" cy="620" r="34"/>
+<circle cx="938" cy="610" r="5" fill="var(--on-gain)"/><circle cx="962" cy="610" r="5" fill="var(--on-gain)"/>
+<path d="M934 628q16 16 32 0" fill="none" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="950" y="690" font-size="22" text-anchor="middle" style="fill:var(--gain)">HAPPIER</text>
+<text class="m" x="640" y="770" font-size="20">ELIZABETH DUNN’S RESEARCH</text>
+</g>
+<g id="note">
+<rect class="gain" x="1100" y="300" width="320" height="320" rx="6"/>
+<text class="m" x="1130" y="350" font-size="22" style="fill:var(--on-gain)">THIS WEEK</text>
+<text class="d5" x="1130" y="403" font-size="30" style="fill:var(--on-gain)">One routine task</text>
+<text class="d5" x="1130" y="453" font-size="30" style="fill:var(--on-gain)">helps someone:</text>
+<g id="notep"></g>
+<path id="nl" d="M1210 570h170" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">If your life’s work had to</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">fit into <tspan style="fill:var(--gain)">one sentence</tspan>,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">what would it say?</text></g>
+<g id="q2"><text class="m" x="143" y="700" font-size="26">AND WHAT COULD YOU DO TOMORROW TO LIVE UP TO IT?</text></g>
+<g id="pen">
+<path id="sl8" class="s-ink" d="M1150 760H1430" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="pn"><path class="gain" d="M0 0l6-22 34-50 14 10-34 50z"/></g>
+</g>
+<circle id="dt8" class="gain" cx="1452" cy="758" r="9"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Purpose: Working for Something Bigger&rdquo;, from <em>Drive</em> by Daniel H. Pink. Examples as reported in the book: the University of Rochester study of recent graduates&#x27; goals and Elizabeth Dunn&#x27;s research on spending money on others. Faces, clouds, scales and paths are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 8.5], [8.5, 25.7], [25.7, 37.7], [37.7, 54.4], [54.4, 72.7], [72.7, 85.8], [85.8, 100.5], [100.5, 116.1], [116.1, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Something Bigger", "The Third Partner", "Asking What Matters", "Two Kinds of Goals", "A Surprising Result", "Alongside Profit", "Listen for We", "Money With Meaning", "Your Sentence"];
+const TM={"hook": 0.0, "three_legs": 8.76, "compass": 14.88, "fast_car": 20.84, "clock": 26.0, "question_mark": 32.48, "grads": 38.0, "money_path": 44.76, "heart_path": 49.04, "happy_face": 54.72, "trophy": 61.96, "storm_cloud": 66.68, "scale": 73.04, "fuel_can": 79.84, "speech_bubble": 86.08, "pronouns": 88.6, "outsider": 95.12, "cash": 100.8, "gift_box": 103.84, "sticky_note": 110.56, "sentence": 116.36};
+const fig=(g,x,y,r,a)=>{a=typeof a==='string'?{class:a}:a;return [mk('circle',Object.assign({cx:x,cy:y,r:r},a),g),mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)]};
+const TF=fig($('t_fig'),1330,330,26,'ink');
+const TK=[0,1,2].map(i=>{const g=mk('g',{},$('t_ticks')),x=1240+i*90;mk('circle',{cx:x,cy:570,r:22,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('path',{d:'M'+(x-10)+' 570l7 8 13-15',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(340+122*c).toFixed(1)+' '+(480+122*s).toFixed(1)+'L'+(340+138*c).toFixed(1)+' '+(480+138*s).toFixed(1),stroke:'var(--ink)','stroke-width':i%3?3:6,'stroke-linecap':'round'},$('ticks'))}
+const BL=[];for(let i=0;i<7;i++)BL.push(mk('rect',{x:1180,y:656-i*52,width:260,height:44,rx:8,class:'gain','fill-opacity':(.4+i*.1).toFixed(2)},$('stk')));
+[[200,400],[290,400],[380,400],[245,520],[335,520]].forEach(q=>{fig($('grads'),q[0],q[1],20,'ink');mk('path',{d:'M'+(q[0]-28)+' '+(q[1]-22)+'l28-12 28 12-28 12z',class:'ink'},$('grads'))});
+[[450,620],[560,650],[670,620]].forEach(q=>fig($('mem'),q[0],q[1],18,'ink'));
+fig($('outp'),780,560,18,'loss');
+fig($('selfp'),700,330,20,'ink');fig($('givep'),700,600,20,'gain');fig($('recvp'),830,600,20,'ink');
+fig($('notep'),1170,500,18,{fill:'var(--on-gain)'});
+const DR=[0,1,2].map(()=>mk('circle',{r:9,class:'ink'},$('drops')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('t_fig'),p(u,TM.hook,TM.hook+.5));
+TK.forEach((g,i)=>rise(g,p(u,TM.hook+.6+i*.6,TM.hook+1+i*.6)));
+TF.forEach(e=>e.setAttribute('class',u>=TM.hook+4.6?'gain':'ink'));
+rise($('t_ring'),p(u,TM.hook+4.6,TM.hook+5.2));
+$('t_rc').setAttribute('transform','rotate('+(t*12).toFixed(1)+' 1330 380)');
+
+rise($('stw'),p(u,TM.three_legs,TM.three_legs+.5));
+const ct=p(u,TM.compass,TM.compass+1);
+$('stool').setAttribute('transform','rotate('+(9*(1-ct)).toFixed(2)+' 270 640)');
+rise($('leg3'),p(u,TM.compass,TM.compass+.5));rise($('cmp'),p(u,TM.compass,TM.compass+.5));
+$('ndl').setAttribute('transform','rotate('+(30*Math.sin(t*2.4)*(1-ct)).toFixed(1)+' 480 250)');
+rise($('carz'),p(u,TM.fast_car,TM.fast_car+.5));
+const ca=t*1.4;$('car').setAttribute('transform','translate('+(1180+170*Math.cos(ca)).toFixed(1)+' '+(490+170*Math.sin(ca)).toFixed(1)+') rotate('+(ca*180/Math.PI+90).toFixed(1)+')');
+
+rise($('clkg'),p(u,TM.clock,TM.clock+.5));
+const cs=p(u,TM.clock,TM.clock+5);
+$('hm').setAttribute('transform','rotate('+(-720*cs).toFixed(1)+' 340 480)');$('hh').setAttribute('transform','rotate('+(-60*cs).toFixed(1)+' 340 480)');
+rise($('cards'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qm'),p(u,TM.question_mark+.6,TM.question_mark+1.1));
+BL.forEach((b,i)=>rise(b,p(u,TM.question_mark+3.8+i*.25,TM.question_mark+4.1+i*.25)));
+rise($('stl'),p(u,TM.question_mark+5.6,TM.question_mark+6.1));
+
+rise($('grads'),p(u,TM.grads,TM.grads+.6));
+const GA=[TM.money_path,TM.heart_path];
+[['pm','gm','wm',330],['ph','gh','wh',670]].forEach((q,i)=>{const k=p(u,GA[i],GA[i]+1.2),e=$(q[0]);e.setAttribute('stroke-dashoffset',(1-k).toFixed(3));e.setAttribute('opacity',k>0?1:0);rise($(q[1]),p(u,GA[i]+.8,GA[i]+1.3));
+  const f=(t*.3+i*.5)%1,g=1-f,w=$(q[2]);w.setAttribute('cx',(g*g*440+2*g*f*700+f*f*960).toFixed(1));w.setAttribute('cy',(g*g*500+(2*g*f+f*f)*q[3]).toFixed(1));w.setAttribute('opacity',u>=GA[i]+1.2?1:0)});
+
+rise($('rl'),p(u,TM.happy_face,TM.happy_face+.6));rise($('rr'),p(u,TM.trophy,TM.trophy+.6));
+rise($('rc'),p(u,TM.storm_cloud,TM.storm_cloud+.6));rise($('rx'),p(u,TM.storm_cloud+1.5,TM.storm_cloud+2.1));
+$('cld').setAttribute('transform','translate('+(10*Math.sin(t*1.2)).toFixed(1)+' 0)');
+
+rise($('scl'),p(u,TM.scale,TM.scale+.6));
+// profit starts stacked on top of purpose (in front), slides left, then drops beside it: never overlapping
+const sp1=p(u,TM.scale+2.9,TM.scale+3.5), sp2=p(u,TM.scale+3.5,TM.scale+3.9);
+$('bpr').setAttribute('transform','translate('+(210*(1-sp1)).toFixed(1)+' '+(-90*(1-sp2)).toFixed(1)+')');
+$('sl').textContent=sp2>.5?'PROFIT BESIDE PURPOSE':'PROFIT IN FRONT';
+rise($('fuel'),p(u,TM.fuel_can,TM.fuel_can+.6));
+DR.forEach((d,i)=>{const f=(t*.7+i/3)%1;d.setAttribute('cx',(1010+230*f).toFixed(1));d.setAttribute('cy',(470-90*Math.sin(Math.PI*f)).toFixed(1));d.setAttribute('opacity',u>=TM.fuel_can+.6?1:0)});
+$('flm').setAttribute('transform','translate(1300 575) scale(1 '+(u>=TM.fuel_can+1?1+.3*Math.sin(t*9):.4).toFixed(2)+') translate(-1300 -575)');
+
+rise($('org'),p(u,TM.speech_bubble,TM.speech_bubble+.6));rise($('outw'),p(u,TM.speech_bubble+.6,TM.speech_bubble+1.2));
+$('wet').textContent=u>=TM.pronouns?'WE':'…';$('theyt').textContent=u>=TM.pronouns+1.5?'THEY':'…';
+$('out').setAttribute('transform','translate('+(400*p(u,TM.outsider,TM.outsider+1.4)).toFixed(1)+' 0)');
+rise($('outl'),p(u,TM.outsider+1,TM.outsider+1.6));
+
+rise($('cash'),p(u,TM.cash,TM.cash+.6));
+$('cashi').setAttribute('transform','rotate('+(3*Math.sin(t*2)).toFixed(2)+' 290 475)');
+rise($('gift'),p(u,TM.gift_box,TM.gift_box+.6));
+rise($('note'),p(u,TM.sticky_note,TM.sticky_note+.6));
+$('nl').setAttribute('stroke-dashoffset',(1-p(u,TM.sticky_note+.8,TM.sticky_note+1.8)).toFixed(3));
+
+rise($('qa'),p(u,TM.sentence,TM.sentence+.5));rise($('qb'),p(u,TM.sentence+.4,TM.sentence+.9));rise($('qc'),p(u,TM.sentence+.8,TM.sentence+1.3));
+rise($('q2'),p(u,TM.sentence+5.8,TM.sentence+6.4));
+rise($('pen'),p(u,TM.sentence+1.4,TM.sentence+1.9));
+const lp=p(u,TM.sentence+1.6,TM.sentence+4);
+$('sl8').setAttribute('stroke-dashoffset',(1-lp).toFixed(3));
+$('pn').setAttribute('transform','translate('+(1150+280*lp).toFixed(1)+' '+(760+3*Math.sin(t*14)*(lp>0&&lp<1?1:0)).toFixed(1)+')');
+rise($('dt8'),p(u,TM.sentence+4,TM.sentence+4.4));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.28;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

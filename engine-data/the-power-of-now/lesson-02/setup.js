@@ -1,0 +1,14 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const wav=(x0,x1,y,a,f,ph)=>{let d='M'+x0+' '+y.toFixed(1);for(let x=x0;x<=x1;x+=8)d+='L'+x+' '+(y+a*Math.sin(x*f+ph)).toFixed(1);return d};
+const TD=[0,1,2,3,4,5].map(i=>mk('circle',{r:10+i%3*3,class:i%2?'loss':'ink'},$('t0dots')));
+fig($('t0watch'),1420,300,24,'gain');
+const SPN=$('s1spin');mk('circle',{cx:1230,cy:470,r:200,class:'ink'},SPN);
+[180,160,140,120,100,80].forEach(r=>mk('circle',{cx:1230,cy:470,r:r,fill:'none',stroke:'var(--muted)','stroke-width':2},SPN));
+mk('path',{d:'M1230 300A170 170 0 0 1 1377 385',fill:'none',stroke:'var(--stage)','stroke-width':6,'stroke-linecap':'round'},SPN);
+mk('circle',{cx:1230,cy:470,r:56,class:'gain'},SPN);mk('circle',{cx:1230,cy:470,r:8,fill:'var(--stage)'},SPN);
+fig($('s4man'),400,540,40,'ink');const MAN=[...$('s4man').children];
+const BL=[];for(let i=0;i<12;i++)BL.push(mk('rect',{y:360,width:110,height:70,rx:14,class:'ink'},$('s6str')));
+const DR=[0,1,2].map(()=>mk('circle',{cx:470,r:7,fill:'var(--ice)',stroke:'var(--ink)','stroke-width':2},$('s7drops')));
+fig($('s7man'),0,-67,16,'gain');
+const ZN=[[380,520],[800,940],[1180,1320]];ZN.forEach(z=>mk('path',{d:'M'+z[0]+' 740H'+z[1],stroke:'var(--gain)','stroke-width':9,'stroke-linecap':'round'},$('s7flat')));
+const PZ=[1220,1320,1420].map(x=>{const g=mk('g',{},$('s8pz'));mk('circle',{cx:x,cy:700,r:40,class:'gain'},g);[-14,6].forEach(o=>mk('rect',{x:x+o,y:680,width:8,height:40,rx:3,fill:'var(--on-gain)'},g));return g});

@@ -1,0 +1,407 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drive Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Drive: People do their best work when they have control over their task, time, technique, and team, as seen in Atlassian&#x27;s FedEx Days and results-only work environments. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DRIVE · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Autonomy: control</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">over your work.</text>
+<text class="b" x="120" y="600" font-size="32">Why freedom over your work unlocks your best effort</text>
+<g id="wheelG"><g id="whl">
+<circle class="s-ink" cx="1290" cy="430" r="150" fill="none" stroke-width="18"/>
+<path class="s-ink" d="M1290 470V580M1250 430H1140M1330 430H1440" stroke-width="14" stroke-linecap="round"/>
+<circle class="gain" cx="1290" cy="430" r="40"/>
+</g></g>
+<g id="who">
+<text class="m" x="1290" y="650" font-size="24" text-anchor="middle" style="fill:var(--gain)">YOU</text>
+<text class="m" x="1290" y="690" font-size="22" text-anchor="middle">OR SOMEONE ELSE?</text>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Autonomy is real choice.</text>
+<text class="b" x="120" y="176" font-size="32">Pink: people are naturally curious and self-directed.</text>
+<g id="k1"><g id="kidP"></g>
+<text class="d" x="390" y="370" font-size="56" style="fill:var(--gain)">?</text>
+<text class="d" x="210" y="350" font-size="44" style="fill:var(--gain)">?</text>
+<text class="m" x="310" y="690" font-size="20" text-anchor="middle">CURIOUS · SELF-DIRECTED</text></g>
+<g id="k2"><g id="deskP"></g>
+<rect class="ink" x="650" y="520" width="260" height="14"/>
+<path class="s-ink" d="M670 534v80M890 534v80" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="780" y="690" font-size="20" text-anchor="middle">AUTONOMY ≠ WORKING ALONE</text></g>
+<path id="x2" class="s-loss" d="M650 330L910 620M910 330L650 620" stroke-width="10" stroke-linecap="round"/>
+<g id="k3"><g id="chP"></g>
+<text class="m" x="1280" y="690" font-size="20" text-anchor="middle">REAL CHOICE, WITH OTHERS</text></g>
+<g id="k4">
+<path class="s-loss" d="M120 790q40-36 80 0q-40 36-80 0z" fill="none" stroke-width="5"/>
+<circle id="pup" class="loss" cx="160" cy="790" r="9"/>
+<text class="d5" x="230" y="805" font-size="40">Old management: people must be watched.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The FedEx Day.</text>
+<text class="b" x="120" y="176" font-size="32">An experiment at Atlassian, an Australian software company.</text>
+<path class="s-line" d="M120 710h1360" stroke-width="4"/>
+<g id="bld">
+<rect class="s-ink" x="150" y="330" width="240" height="380" fill="var(--stage)" stroke-width="6"/>
+<g id="win"></g>
+<text class="m" x="270" y="760" font-size="22" text-anchor="middle">ATLASSIAN</text></g>
+<g id="clk">
+<circle class="s-ink" cx="760" cy="500" r="170" fill="var(--stage)" stroke-width="8"/>
+<path id="wedge" class="gain" fill-opacity=".35"/>
+<g id="ticks"></g>
+<g id="hand">
+<line class="s-ink" x1="760" y1="384" x2="760" y2="342" stroke-width="8" stroke-linecap="round"/>
+<circle class="gain" cx="760" cy="342" r="9"/>
+</g>
+<text class="d" x="760" y="490" font-size="96" text-anchor="middle">24</text>
+<text class="m" x="760" y="584" font-size="22" text-anchor="middle">HOURS</text>
+<text class="m" x="760" y="760" font-size="20" text-anchor="middle">ONCE A QUARTER · ANY PROJECT</text></g>
+<g id="pkg">
+<path class="s-muted" d="M955 500h120m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="box">
+<rect class="s-ink" x="1120" y="400" width="240" height="200" fill="var(--stage)" stroke-width="7"/>
+<rect class="gain" x="1225" y="400" width="30" height="200"/>
+<path class="s-ink" d="M1120 450h240" stroke-width="5"/>
+<circle class="gain" cx="1400" cy="290" r="30"/><circle cx="1414" cy="280" r="26" fill="var(--stage)"/></g>
+<text class="m" x="1240" y="760" font-size="20" text-anchor="middle">DELIVER OVERNIGHT</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What came out.</text>
+<text class="b" x="120" y="176" font-size="32">Fixes, fresh ideas, and a show-and-tell.</text>
+<g id="bulbs"></g>
+<g id="blbl"><text class="m" x="120" y="430" font-size="20">SOFTWARE FIXES · NEW PRODUCT IDEAS</text></g>
+<g id="demo">
+<rect class="s-ink" x="140" y="470" width="280" height="160" rx="8" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="180" y="560" width="40" height="50"/><rect class="gain" x="250" y="530" width="40" height="80"/><rect class="gain" x="320" y="500" width="40" height="110"/>
+<g id="pres"></g><g id="aud"></g>
+<text class="m" x="120" y="800" font-size="20">SHOWN TO THE WHOLE COMPANY</text></g>
+<g id="pie">
+<circle cx="1190" cy="460" r="180" fill="var(--line)"/>
+<path id="pw" class="gain"/>
+<circle class="s-ink" cx="1190" cy="460" r="180" fill="none" stroke-width="6"/>
+<text id="pct" class="d" x="1190" y="760" font-size="96" text-anchor="middle" style="fill:var(--gain)">20%</text>
+<text class="m" x="1190" y="810" font-size="20" text-anchor="middle">OF TIME FOR THEIR OWN PROJECTS</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Autonomy has four Ts.</text>
+<text class="b" x="120" y="176" font-size="32">Pink breaks control over work into four parts.</text>
+<g id="t0">
+<rect class="s-ink" x="225" y="290" width="100" height="130" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-gain" d="M245 330h60" stroke-width="6" stroke-linecap="round"/>
+<path class="s-line" d="M245 365h60M245 400h40" stroke-width="6" stroke-linecap="round"/></g>
+<g id="t1">
+<circle class="s-ink" cx="625" cy="355" r="62" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M625 355l30 18" stroke-width="6" stroke-linecap="round"/>
+<path id="th" class="s-gain" d="M625 355V305" stroke-width="6" stroke-linecap="round"/></g>
+<g id="t2">
+<path class="s-ink" d="M945 340v-24h60v24" fill="none" stroke-width="8"/>
+<rect class="ink" x="905" y="340" width="140" height="80" rx="8"/>
+<rect class="gain" x="960" y="360" width="30" height="14"/></g>
+<g id="t3">
+<path class="s-line" d="M1325 360L1269 320M1325 360L1381 320M1325 360L1269 400M1325 360L1381 400" stroke-width="4"/>
+<circle class="ink" cx="1269" cy="320" r="18"/><circle class="ink" cx="1381" cy="320" r="18"/><circle class="ink" cx="1269" cy="400" r="18"/><circle class="ink" cx="1381" cy="400" r="18"/>
+<circle class="gain" cx="1325" cy="360" r="24"/></g>
+<g id="meterG"></g>
+<g id="best"><text class="d" x="120" y="800" font-size="46">Control more Ts, bring more of your best.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Results only.</text>
+<text class="b" x="120" y="176" font-size="32">Judge the work, not the hours.</text>
+<path class="s-line" d="M120 710h1360" stroke-width="4"/>
+<g id="sign">
+<rect class="ink" x="312" y="420" width="16" height="290"/>
+<rect class="gain" x="130" y="290" width="380" height="130" rx="14"/>
+<text class="d" x="320" y="372" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">RESULTS ONLY</text>
+<text class="m" x="320" y="760" font-size="20" text-anchor="middle">A RESULTS-ONLY WORKPLACE</text></g>
+<g id="desk">
+<circle class="s-ink" cx="790" cy="380" r="70" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M790 380V335M790 380l28 16" stroke-width="6" stroke-linecap="round"/>
+<path class="s-loss" d="M730 320l120 120M850 320l-120 120" stroke-width="10" stroke-linecap="round"/>
+<rect class="ink" x="620" y="560" width="340" height="14"/>
+<path class="s-ink" d="M640 574v136M940 574v136" stroke-width="8"/>
+<text class="m" x="790" y="760" font-size="20" text-anchor="middle">NO FIXED HOURS · NO DESK TIME</text></g>
+<g id="flag">
+<path class="s-ink" d="M1360 300V710" stroke-width="8" stroke-linecap="round"/>
+<g id="chk"></g><g id="walk"></g>
+<text class="m" x="1250" y="760" font-size="20" text-anchor="middle">AS LONG AS THE WORK GETS DONE</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Control or engagement?</text>
+<text id="sub6" class="b" x="120" y="176" font-size="32">Pink puts the trade-off simply.</text>
+<g id="lft">
+<rect class="s-line" x="120" y="230" width="620" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="mgr"></g>
+<path class="s-ink" d="M310 450Q430 540 560 455" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="d5" x="160" y="630" font-size="40">Compliance</text>
+<text class="m" x="160" y="680" font-size="20">WORKS FOR FOLLOWING INSTRUCTIONS</text></g>
+<g id="rgt">
+<rect class="s-line" x="860" y="230" width="620" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="own"></g>
+<path id="star" class="gain"/>
+<rect class="s-ink" x="1180" y="420" width="220" height="110" rx="10" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="1290" y="482" font-size="20" text-anchor="middle">THE WORK</text>
+<path class="s-ink" d="M1290 420V320" stroke-width="6" stroke-linecap="round"/>
+<path class="gain" d="M1290 320l70 25-70 25z"/>
+<text class="d5" x="900" y="630" font-size="40">Engagement</text>
+<text class="m" x="900" y="680" font-size="20" style="fill:var(--gain)">COMES FROM OWNERSHIP</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start small.</text>
+<text class="b" x="120" y="176" font-size="32">You don’t need permission from above.</text>
+<g id="cal">
+<rect class="s-ink" x="120" y="240" width="600" height="440" rx="12" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M120 300h600" stroke-width="4"/>
+<g id="cols"></g>
+<rect id="blk" class="gain" x="368" y="380" width="104" height="0" rx="8"/>
+<g id="blkT">
+<text class="m" x="420" y="453" font-size="18" text-anchor="middle" style="fill:var(--on-gain)">MY</text>
+<text class="m" x="420" y="479" font-size="18" text-anchor="middle" style="fill:var(--on-gain)">HOURS</text>
+</g>
+<text class="m" x="120" y="730" font-size="20">BLOCK A FEW HOURS</text></g>
+<g id="mini">
+<path class="s-muted" d="M760 460h80m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-gain" x="880" y="250" width="280" height="60" rx="30" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="1020" y="287" font-size="20" text-anchor="middle">MY OWN TASK</text>
+<rect class="s-gain" x="1190" y="250" width="280" height="60" rx="30" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="1330" y="287" font-size="20" text-anchor="middle">MY OWN TECHNIQUE</text></g>
+<g id="stack"></g>
+<g id="share">
+<rect class="ink" x="1000" y="560" width="350" height="12"/>
+<path class="s-ink" d="M1030 572v110M1320 572v110" stroke-width="6"/>
+<g id="shP"></g>
+<text class="m" x="880" y="740" font-size="20">THEN SHARE IT, LIKE THE ATLASSIAN ENGINEERS</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="330" font-size="88" letter-spacing="-2">Which of the four Ts</text></g>
+<g id="qb"><text class="d" x="136" y="440" font-size="88" letter-spacing="-2">do you control least</text></g>
+<g id="qc"><text class="d" x="136" y="550" font-size="88" letter-spacing="-2">right <tspan style="fill:var(--gain)">now?</tspan></text></g>
+<g id="qd"><text class="d5" x="140" y="670" font-size="44">What one small step could win back</text>
+<text class="d5" x="140" y="730" font-size="44">a little of it this week?</text></g>
+<text class="m" x="143" y="820" font-size="24">TASK · TIME · TECHNIQUE · TEAM</text>
+<g id="tiles"></g>
+<g id="qm"><text class="d" x="1365" y="770" font-size="140" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="120" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:00</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Autonomy: Control Over Your Work&rdquo;, from <em>Drive</em> by Daniel H. Pink. Atlassian&#x27;s FedEx Days and results-only work environments are described as reported in the book. The steering wheel, desks, clocks and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=120, SC=[[0.0, 6.7], [6.7, 23.7], [23.7, 39.3], [39.3, 54.5], [54.5, 71.1], [71.1, 84.7], [84.7, 97.1], [97.1, 108.7], [108.7, 120.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Who Holds the Wheel", "Autonomy Is Choice", "The FedEx Day", "What Came Out", "The Four Ts", "Results Only", "Control or Engage", "Start Small", "Your Four Ts"];
+const TM={"steering_wheel": 0.0, "curious_kid": 6.96, "lone_desk": 11.44, "choice_paths": 14.56, "atlassian": 24.0, "clock_24": 29.6, "package": 34.8, "lightbulbs": 39.6, "team_demo": 44.32, "pie_twenty": 48.08, "task_card": 57.92, "time_clock": 60.32, "toolbox": 62.24, "team_circle": 64.72, "rowe_sign": 71.36, "empty_desk": 76.72, "finish_flag": 80.96, "leash": 87.2, "spark": 91.68, "calendar": 97.44, "mini_project": 100.48, "share_table": 104.64, "question_mark": 109.04};
+const pp=(g,x,y,r,c)=>{const e=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:c},e);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},e);return e};
+const wdg=(cx,cy,r,a)=>{if(a<=0)return 'M0 0';a=Math.min(a,359.9)*Math.PI/180;return 'M'+cx+' '+cy+'L'+cx+' '+(cy-r)+'A'+r+' '+r+' 0 '+(a>Math.PI?1:0)+' 1 '+(cx+r*Math.sin(a)).toFixed(1)+' '+(cy-r*Math.cos(a)).toFixed(1)+'Z'};
+const tx=(g,a,s)=>{const e=mk('text',a,g);e.textContent=s;return e};
+
+pp($('kidP'),310,400,34,'gain');pp($('deskP'),780,400,28,'ink');pp($('chP'),1140,450,26,'gain');
+[320,470,620].forEach((y,i)=>{mk('path',{d:'M1185 510L1398 '+y,fill:'none',stroke:i?'var(--muted)':'var(--gain)','stroke-width':i?4:6,'stroke-dasharray':i?'8 8':'none','stroke-linecap':'round'},$('chP'));mk('circle',{cx:1420,cy:y,r:22,class:'ink'},$('chP'))});
+
+for(let r=0;r<5;r++)for(let c=0;c<3;c++)mk('rect',{x:175+c*70,y:360+r*65,width:50,height:40,fill:(r+c)%2?'var(--gain)':'var(--line)'},$('win'));
+for(let i=0;i<24;i++){const a=i*Math.PI/12,l=i%6?150:138;mk('line',{x1:760+l*Math.sin(a),y1:500-l*Math.cos(a),x2:760+164*Math.sin(a),y2:500-164*Math.cos(a),stroke:'var(--ink)','stroke-width':i%6?3:6},$('ticks'))}
+
+const BU=[];for(let i=0;i<5;i++){const x=170+i*120;BU.push(mk('circle',{cx:x,cy:320,r:36},$('bulbs')));mk('rect',{x:x-16,y:360,width:32,height:22,class:'ink'},$('bulbs'))}
+pp($('pres'),500,500,22,'gain');for(let i=0;i<6;i++)pp($('aud'),180+i*90,680,16,'ink');
+
+const TN=[['Task','WHAT YOU WORK ON'],['Time','WHEN YOU DO IT'],['Technique','HOW YOU DO IT'],['Team','WHO YOU DO IT WITH']];
+const FR=TN.map((n,i)=>{const g=$('t'+i),x=120+i*350,r=mk('rect',{x:x,y:230,width:310,height:410,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);g.insertBefore(r,g.firstChild);
+  tx(g,{x:x+30,y:530,'font-size':46,class:'d'},n[0]);tx(g,{x:x+30,y:580,'font-size':20,class:'m'},n[1]);return r});
+const SEG=TN.map((n,i)=>mk('rect',{x:120+i*350,y:680,width:310,height:20,rx:10},$('meterG')));
+
+for(let r=0;r<3;r++)for(let c=0;c<4;c++)mk('rect',{x:1360+c*25,y:300+r*25,width:25,height:25,fill:(r+c)%2?'var(--ink)':'var(--stage)',stroke:'var(--ink)','stroke-width':1},$('chk'));
+const WK=[0,1,2,3].map(i=>{const g=mk('g',{},$('walk'));pp(g,0,600,16,i%2?'ink':'gain');return g});
+
+pp($('mgr'),250,360,30,'ink');pp($('mgr'),590,420,22,'loss');pp($('own'),1000,400,30,'gain');
+let sp='';for(let i=0;i<10;i++){const a=i*Math.PI/5,r=i%2?15:36;sp+=(i?'L':'M')+(1000+r*Math.sin(a)).toFixed(1)+' '+(310-r*Math.cos(a)).toFixed(1)}$('star').setAttribute('d',sp+'Z');
+
+['MON','TUE','WED','THU','FRI'].forEach((d,i)=>{tx($('cols'),{x:180+i*120,y:280,'font-size':20,class:'m','text-anchor':'middle'},d);if(i)mk('path',{d:'M'+(120+i*120)+' 300V680',stroke:'var(--line)','stroke-width':3},$('cols'))});
+const SB=[[160,520,'ink'],[120,480,'gain'],[80,440,'ink']].map(b=>mk('rect',{x:1175-b[0]/2,y:b[1],width:b[0],height:40,rx:6,class:b[2]},$('stack')));
+pp($('shP'),920,480,26,'gain');pp($('shP'),1430,480,26,'ink');
+
+const TL=['TASK','TIME','TECHNIQUE','TEAM'].map((s,i)=>{const g=mk('g',{},$('tiles'));const r=mk('rect',{x:1260,y:240+i*90,width:210,height:70,rx:14,'stroke-width':4},g);const e=tx(g,{x:1365,y:282+i*90,'font-size':20,'text-anchor':'middle',style:'font-family:var(--mono);letter-spacing:.04em'},s);return [r,e]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('wheelG'),p(u,TM.steering_wheel,TM.steering_wheel+.6));
+$('whl').setAttribute('transform','rotate('+(25*Math.sin(t*.9)).toFixed(1)+' 1290 430)');
+rise($('who'),p(u,TM.steering_wheel+2.6,TM.steering_wheel+3.1));
+
+rise($('k1'),p(u,TM.curious_kid,TM.curious_kid+.5));
+rise($('k2'),p(u,TM.lone_desk,TM.lone_desk+.5));
+$('x2').setAttribute('opacity',p(u,TM.lone_desk+1.2,TM.lone_desk+1.6));
+rise($('k3'),p(u,TM.choice_paths,TM.choice_paths+.5));
+rise($('k4'),p(u,TM.choice_paths+5,TM.choice_paths+5.5));
+$('pup').setAttribute('cx',(160+8*Math.sin(t*1.5)).toFixed(1));
+
+rise($('bld'),p(u,TM.atlassian,TM.atlassian+.5));
+rise($('clk'),p(u,TM.clock_24,TM.clock_24+.5));
+const ca=360*p(u,TM.clock_24+.5,TM.clock_24+4);
+$('wedge').setAttribute('d',wdg(760,500,170,ca));
+$('hand').setAttribute('transform','rotate('+ca.toFixed(1)+' 760 500)');
+rise($('pkg'),p(u,TM.package,TM.package+.5));
+$('box').setAttribute('transform','translate('+(160*(1-p(u,TM.package,TM.package+1))).toFixed(1)+' 0)');
+
+rise($('bulbs'),p(u,TM.lightbulbs,TM.lightbulbs+.4));
+BU.forEach((b,i)=>b.setAttribute('fill',u>=TM.lightbulbs+.4+i*.5?'var(--gain)':'var(--line)'));
+rise($('blbl'),p(u,TM.lightbulbs+1,TM.lightbulbs+1.5));
+rise($('demo'),p(u,TM.team_demo,TM.team_demo+.5));
+rise($('pie'),p(u,TM.pie_twenty,TM.pie_twenty+.5));
+const pk=p(u,TM.pie_twenty+.5,TM.pie_twenty+2);
+$('pw').setAttribute('d',wdg(1190,460,180,72*pk));
+$('pct').textContent=Math.round(20*pk)+'%';
+
+rise($('meterG'),p(u,SC[4][0]/K+.5,SC[4][0]/K+1));
+[TM.task_card,TM.time_clock,TM.toolbox,TM.team_circle].forEach((a,i)=>{rise($('t'+i),p(u,a,a+.5));const on=u>=a+.3;FR[i].setAttribute('stroke',on?'var(--gain)':'var(--line)');SEG[i].setAttribute('fill',on?'var(--gain)':'var(--line)')});
+$('th').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 625 355)');
+rise($('best'),p(u,TM.team_circle+3,TM.team_circle+3.6));
+
+rise($('sign'),p(u,TM.rowe_sign,TM.rowe_sign+.5));
+rise($('desk'),p(u,TM.empty_desk,TM.empty_desk+.5));
+rise($('flag'),p(u,TM.finish_flag,TM.finish_flag+.5));
+WK.forEach((g,i)=>{let k=(t*.22+i/4)%1;if(i%2)k=1-k;g.setAttribute('transform','translate('+(1080+250*k).toFixed(1)+' 0)');g.setAttribute('opacity',Math.min(1,k*5,(1-k)*5).toFixed(2))});
+
+rise($('sub6'),p(u,SC[6][0]/K+.3,SC[6][0]/K+.8));
+rise($('lft'),p(u,TM.leash,TM.leash+.5));
+rise($('rgt'),p(u,TM.spark,TM.spark+.5));
+const sc=1+.15*Math.abs(Math.sin(t*3));
+$('star').setAttribute('transform','translate(1000 310) scale('+sc.toFixed(3)+') translate(-1000 -310)');
+
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+$('blk').setAttribute('height',(160*p(u,TM.calendar+.8,TM.calendar+1.8)).toFixed(1));
+$('blkT').setAttribute('opacity',p(u,TM.calendar+1.6,TM.calendar+2));
+rise($('mini'),p(u,TM.mini_project,TM.mini_project+.5));
+SB.forEach((b,i)=>rise(b,p(u,TM.mini_project+1+i*.6,TM.mini_project+1.4+i*.6)));
+rise($('share'),p(u,TM.share_table,TM.share_table+.5));
+
+rise($('qa'),p(u,TM.question_mark,TM.question_mark+.5));
+rise($('qb'),p(u,TM.question_mark+.4,TM.question_mark+.9));
+rise($('qc'),p(u,TM.question_mark+.8,TM.question_mark+1.3));
+rise($('tiles'),p(u,TM.question_mark+1,TM.question_mark+1.5));
+const hi=Math.floor(t*.8)%4;
+TL.forEach((q,i)=>{const on=i===hi;q[0].setAttribute('fill',on?'var(--gain)':'var(--stage)');q[0].setAttribute('stroke',on?'var(--gain)':'var(--ink)');q[1].style.fill=on?'var(--on-gain)':'var(--ink)'});
+rise($('qm'),p(u,TM.question_mark+1.4,TM.question_mark+1.9));
+rise($('qd'),p(u,TM.question_mark+4.5,TM.question_mark+5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:116.32;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

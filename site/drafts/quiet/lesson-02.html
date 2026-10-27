@@ -1,0 +1,398 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiet Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Quiet: Constant teamwork and group brainstorming often produce worse ideas than focused time alone, as shown by Steve Wozniak building the first Apple computer working by himself. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">QUIET · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Why solitude sparks</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">creativity.</text>
+<text class="b" x="120" y="600" font-size="32">Why your best ideas may need an empty room.</text>
+<path class="s-line" d="M1480 470V260H1140V660H1480V600" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="leave"></g>
+<g id="lone"></g>
+<rect class="ink" x="1220" y="560" width="180" height="16" rx="4"/>
+<path class="s-ink" d="M1236 576v60M1384 576v60" stroke-width="6" stroke-linecap="round"/>
+<g id="rays"></g>
+<g id="bulb"><circle class="gain" cx="1310" cy="360" r="30"/><rect class="ink" x="1298" y="390" width="24" height="14" rx="3"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The New Groupthink.</text>
+<text class="b" x="120" y="176" font-size="32">Teamwork everywhere, from offices to classrooms.</text>
+<g id="off">
+<rect class="s-line" x="120" y="240" width="640" height="440" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="290" font-size="20">LONG TABLES, NO WALLS</text>
+<g id="offp"></g>
+<rect class="ink" x="170" y="470" width="540" height="24" rx="6"/>
+<g id="offq"></g>
+</g>
+<g id="cls">
+<rect class="s-line" x="840" y="240" width="640" height="440" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="290" font-size="20">DESKS PUSHED INTO CLUSTERS</text>
+<g id="desks"></g>
+</g>
+<g id="ng"><text class="d" x="120" y="790" font-size="52">Cain calls it the <tspan style="fill:var(--loss)">New Groupthink</tspan>.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Brainstorming is born.</text>
+<text class="b" x="120" y="176" font-size="32">Alex Osborn, an advertising executive, in the 1940s.</text>
+<g id="osb"><g id="osbf"></g>
+<text class="m" x="260" y="570" font-size="20" text-anchor="middle">ALEX OSBORN</text>
+<text class="m" x="260" y="602" font-size="20" text-anchor="middle">ADVERTISING · 1940S</text></g>
+<g id="storm">
+<circle cx="760" cy="300" r="50" fill="var(--line)"/><circle cx="825" cy="268" r="60" fill="var(--line)"/><circle cx="890" cy="300" r="50" fill="var(--line)"/>
+<rect x="715" y="300" width="220" height="50" rx="25" fill="var(--line)"/>
+<path class="gain" d="M830 350l-20 48h24l-14 46l40-62h-24l16-32z"/>
+<g id="spk"></g><g id="sprk"></g>
+</g>
+<text class="m" x="1080" y="300" font-size="20">THE RULES</text>
+<g id="rule0"><rect x="1080" y="330" width="400" height="90" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><text class="d5" x="1104" y="386" font-size="28">1. Shout out every idea</text></g>
+<g id="rule1"><rect x="1080" y="450" width="400" height="90" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><text class="d5" x="1104" y="506" font-size="28">2. Never criticise</text></g>
+<g id="mach"><text class="d" x="120" y="790" font-size="46">It sounded like the perfect creativity machine.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What the studies found.</text>
+<text class="b" x="120" y="176" font-size="32">Decades of research put brainstorming to the test.</text>
+<g id="lab">
+<text class="m" x="120" y="250" font-size="20">SAME PEOPLE, TWO WAYS (SCHEMATIC)</text>
+<rect id="bar0" class="gain" x="200" y="700" width="180" height="0"/>
+<rect id="bar1" class="loss" x="440" y="700" width="180" height="0"/>
+<path class="s-ink" d="M160 700H680" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="290" y="740" font-size="20" text-anchor="middle">ALONE,</text><text class="m" x="290" y="768" font-size="20" text-anchor="middle">THEN POOLED</text>
+<text class="m" x="530" y="740" font-size="20" text-anchor="middle">BRAINSTORMING</text><text class="m" x="530" y="768" font-size="20" text-anchor="middle">TOGETHER</text>
+<g id="b0t"><text class="d5" x="290" y="320" font-size="28" text-anchor="middle" style="fill:var(--gain)">More, better ideas</text></g>
+</g>
+<g id="shr">
+<text class="m" x="820" y="250" font-size="20">BIGGER GROUP, WORSE RESULTS</text>
+<path class="s-line" d="M860 700H1460" stroke-width="4"/>
+<text class="m" x="1460" y="740" font-size="20" text-anchor="end">GROUP SIZE →</text>
+<g id="gdots"></g>
+<path id="perf" class="s-loss" d="M900 360L1130 440L1360 540" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="500"/>
+<g id="pvs"></g>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why groups stall.</text>
+<text class="b" x="120" y="176" font-size="32">Cain explains a few reasons why.</text>
+<g id="w0"><rect class="s-line" x="120" y="240" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="290" font-size="20">REASON 1</text><g id="w0f"></g>
+<rect class="ink" x="190" y="572" width="170" height="48" rx="6"/><text class="m" x="275" y="603" font-size="18" text-anchor="middle" style="fill:var(--stage)">THE WORK</text>
+<g id="slk" transform="rotate(-18 450 560)"></g>
+<g id="zz"><text class="d5" x="482" y="410" font-size="28">z</text><text class="d5" x="505" y="378" font-size="22">z</text></g>
+<text class="d5" x="150" y="690" font-size="28">Some sit back.</text></g>
+<g id="w1"><rect class="s-line" x="590" y="240" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="620" y="290" font-size="20">REASON 2</text><g id="w1f"></g>
+<rect x="680" y="360" width="80" height="56" rx="14" fill="var(--stage)" stroke="var(--gain)" stroke-width="4"/>
+<circle class="gain" cx="704" cy="388" r="5"/><circle class="gain" cx="720" cy="388" r="5"/><circle class="gain" cx="736" cy="388" r="5"/>
+<text class="d5" x="620" y="690" font-size="28">Ideas wait, and fade.</text></g>
+<g id="w2"><rect class="s-line" x="1060" y="240" width="420" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1090" y="290" font-size="20">REASON 3</text><g id="w2f"></g>
+<text class="d5" x="1090" y="690" font-size="28">Fear of looking foolish.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet Steve Wozniak.</text>
+<text class="b" x="120" y="176" font-size="32">A shy young engineer in the 1970s.</text>
+<g id="wz"><g id="wzf"></g>
+<text class="m" x="300" y="650" font-size="20" text-anchor="middle">STEVE WOZNIAK</text>
+<text class="m" x="300" y="682" font-size="20" text-anchor="middle">ENGINEER · 1970S</text></g>
+<g id="club"><circle cx="1100" cy="470" r="70" fill="var(--line)"/><g id="links"></g><g id="mem"></g>
+<text class="m" x="1100" y="730" font-size="20" text-anchor="middle">HOMEBREW COMPUTER CLUB</text>
+<text class="m" x="1100" y="762" font-size="20" text-anchor="middle">HOBBYISTS SWAPPING IDEAS</text></g>
+<g id="insp">
+<path class="s-gain" d="M900 360Q780 220 646 288" fill="none" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<path class="s-gain" d="M670 270l-24 18 28 8" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="s-gain" cx="350" cy="370" r="8" fill="var(--stage)" stroke-width="4"/><circle class="s-gain" cx="372" cy="342" r="12" fill="var(--stage)" stroke-width="4"/>
+<rect class="s-gain" x="390" y="220" width="240" height="140" rx="24" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="450" y="242" width="120" height="74" rx="6" fill="none" stroke-width="5"/>
+<path class="s-ink" d="M440 338h140" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="wcap"><text class="d" x="120" y="830" font-size="44">The meetings inspired him to design his own.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Building it alone.</text>
+<text class="b" x="120" y="176" font-size="32">After his day job at Hewlett-Packard, late into the night.</text>
+<g id="cub">
+<circle class="gain" cx="520" cy="230" r="28"/><circle cx="534" cy="220" r="24" fill="var(--stage)"/>
+<path class="s-line" d="M140 300V700H600V300" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="cubf"></g>
+<rect class="ink" x="200" y="580" width="340" height="16" rx="4"/>
+<text class="m" x="370" y="660" font-size="20" text-anchor="middle">QUIET CUBICLE</text></g>
+<g id="brd">
+<rect class="s-ink" x="700" y="260" width="360" height="340" rx="12" fill="var(--stage)" stroke-width="5"/>
+<g id="trc"></g><g id="chips"></g>
+<text class="m" x="880" y="640" font-size="20" text-anchor="middle">SKETCHED AND WIRED, ALONE</text></g>
+<g id="mon">
+<rect class="s-ink" x="1140" y="260" width="320" height="230" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1165" y="285" width="270" height="180" rx="6"/>
+<text id="typed" class="m" x="1185" y="340" font-size="34" style="fill:var(--gain)"></text>
+<path class="s-ink" d="M1300 490v30M1260 522h80" stroke-width="6" stroke-linecap="round"/>
+<rect class="s-ink" x="1160" y="545" width="280" height="36" rx="8" fill="none" stroke-width="5"/>
+<text class="m" x="1300" y="640" font-size="20" text-anchor="middle">ONE NIGHT IN 1975</text></g>
+<g id="apl"><text class="d" x="120" y="800" font-size="44">That machine became the <tspan style="fill:var(--gain)">first Apple computer</tspan>.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Solitude plus sharing.</text>
+<text class="b" x="120" y="176" font-size="32">Wozniak’s blunt advice to aspiring inventors.</text>
+<g id="adv"><g transform="rotate(-2 370 335)">
+<rect class="s-ink" x="120" y="240" width="500" height="190" rx="14" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="156" y="345" font-size="56">“Work alone.”</text>
+<text class="m" x="160" y="398" font-size="20">STEVE WOZNIAK</text></g></g>
+<g id="nota"><text class="b" x="120" y="500" font-size="30">Cain is not against teamwork.</text></g>
+<g id="scl">
+<path class="s-ink" d="M1090 330V660" stroke-width="8" stroke-linecap="round"/>
+<rect class="ink" x="1010" y="660" width="160" height="14" rx="4"/>
+<path id="beam" class="s-ink" d="M850 330H1330" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1090" cy="330" r="12"/>
+<g id="panL"><path class="s-muted" d="M0 -110L-90 0M0 -110L90 0" stroke-width="3"/><circle class="ink" cx="-45" cy="-22" r="16"/><circle class="ink" cx="0" cy="-26" r="16"/><circle class="ink" cx="45" cy="-22" r="16"/><path class="ink" d="M-100 0h200a100 34 0 0 1 -200 0z"/>
+<text class="m" x="0" y="70" font-size="20" text-anchor="middle">THE CLUB</text><text class="m" x="0" y="100" font-size="20" text-anchor="middle">INSPIRATION</text></g>
+<g id="panR"><path class="s-muted" d="M0 -110L-90 0M0 -110L90 0" stroke-width="3"/><circle class="gain" cx="0" cy="-28" r="22"/><path class="ink" d="M-100 0h200a100 34 0 0 1 -200 0z"/>
+<text class="m" x="0" y="70" font-size="20" text-anchor="middle" style="fill:var(--gain)">SOLITUDE</text><text class="m" x="0" y="100" font-size="20" text-anchor="middle">THE BUILDING</text></g>
+</g>
+<g id="swp"><text class="d" x="120" y="810" font-size="42">Swap ideas together. Do your deepest thinking <tspan style="fill:var(--gain)">alone</tspan>.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="120" y="300" font-size="66" letter-spacing="-1">Block one hour alone</text></g>
+<g id="qb"><text class="d" x="120" y="390" font-size="66" letter-spacing="-1">with a problem</text></g>
+<g id="qc"><text class="d" x="120" y="480" font-size="66" letter-spacing="-1">before you take it</text></g>
+<g id="qd"><text class="d" x="120" y="570" font-size="66" letter-spacing="-1">to a <tspan style="fill:var(--gain)">meeting</tspan>.</text></g>
+<g id="qn"><text class="m" x="124" y="690" font-size="22">NOTICE WHAT YOU BRING</text><text class="m" x="124" y="726" font-size="22">THAT THE GROUP NEVER WOULD</text></g>
+<g id="cal">
+<rect class="s-ink" x="1040" y="210" width="420" height="600" rx="18" fill="var(--stage)" stroke-width="6"/>
+<path class="ink" d="M1040 228a18 18 0 0 1 18-18h384a18 18 0 0 1 18 18v52h-420z"/>
+<text class="m" x="1250" y="254" font-size="22" text-anchor="middle" style="fill:var(--stage)">YOUR DAY</text>
+<rect class="ink" x="1110" y="190" width="14" height="40" rx="6"/><rect class="ink" x="1376" y="190" width="14" height="40" rx="6"/>
+<path class="s-line" d="M1120 380H1440M1120 480H1440M1120 580H1440M1120 680H1440M1120 780H1440" stroke-width="3" stroke-linecap="round"/>
+<path class="s-muted" d="M1070 380H1100M1070 480H1100M1070 580H1100M1070 680H1100M1070 780H1100" stroke-width="5" stroke-linecap="round"/>
+<rect class="s-line" x="1130" y="590" width="300" height="80" rx="12" fill="none" stroke-width="3" stroke-dasharray="8 8"/>
+</g>
+<rect id="blkA" class="gain" x="1130" y="388" width="0" height="84" rx="12"/>
+<g id="blkAt"><text class="m" x="1154" y="440" font-size="24" style="fill:var(--on-gain)">ALONE</text><g id="soloF"></g></g>
+<g id="blkM"><rect class="s-ink" x="1130" y="488" width="300" height="84" rx="12" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="1154" y="540" font-size="24" style="fill:var(--ink)">MEETING</text><g id="meetF"></g></g>
+<g id="nowM"><path class="gain" d="M1060 0l26 14l-26 14z"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Why Solitude Sparks Creativity&rdquo;, from <em>Quiet</em> by Susan Cain. Examples as reported in the book: Alex Osborn&#x27;s brainstorming rules, research comparing solo and group brainstorming, and Steve Wozniak building the first Apple computer. Offices, crowds, shrinking groups and calendars are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 7.3], [7.3, 22.7], [22.7, 39.1], [39.1, 54.8], [54.8, 71.1], [71.1, 86.5], [86.5, 106.5], [106.5, 124.5], [124.5, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Alone With an Idea", "The New Groupthink", "Brainstorming Is Born", "What Studies Found", "Why Groups Stall", "Meet Steve Wozniak", "Building It Alone", "Solitude Plus Sharing", "Your Challenge"];
+const TM={"lone_bulb": 0.0, "open_office": 7.6, "group_desks": 12.56, "adman": 22.96, "idea_storm": 29.68, "research_lab": 39.44, "group_shrink": 51.44, "slacker": 57.92, "idea_queue": 61.2, "judge_eyes": 66.4, "woz": 71.36, "homebrew": 76.8, "cubicle": 86.8, "circuit": 93.2, "screen_text": 97.2, "advice_card": 106.8, "balance_scale": 114.88, "swap_table": 119.76, "calendar": 124.8};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const figF=(g,x,y,r,f)=>{mk('circle',{cx:x,cy:y,r:r,fill:f},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',fill:f},g);return g};
+const G=id=>mk('g',{},$(id));
+fig($('lone'),1310,480,24,'ink');
+let rd='';for(let i=0;i<7;i++){const a=Math.PI*(-1+i/6),c=Math.cos(a),s=Math.sin(a);rd+='M'+(1310+42*c).toFixed(1)+' '+(360+42*s).toFixed(1)+'L'+(1310+60*c).toFixed(1)+' '+(360+60*s).toFixed(1)}
+mk('path',{d:rd,class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('rays'));
+const LV=[[1180,590],[1420,590],[1200,400]].map(q=>[fig(G('leave'),q[0],q[1],15,'ink'),q[0],q[1]]);
+for(let i=0;i<6;i++){const x=210+i*92;fig($('offp'),x,410,18,'ink');fig($('offq'),x,545,18,'ink')}
+const DK=[];[960,1160,1360].forEach(cx=>[[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>{
+  DK.push([mk('rect',{width:50,height:50,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('desks')),cx,480,a*28,b*28,0]);
+  DK.push([mk('circle',{r:14,class:'ink'},$('desks')),cx,480,a*70,b*28,1])}));
+fig($('osbf'),260,380,34,'ink');
+const SPK=[];for(let i=0;i<5;i++){fig($('spk'),660+i*80,520,22,'ink');SPK.push(mk('circle',{r:7,class:'gain'},$('sprk')))}
+const GD=[[900,2],[1130,4],[1360,8]].map(([gx,n])=>{const g=G('gdots'),w=Math.min(n,4);for(let i=0;i<n;i++)mk('circle',{cx:gx+((i%4)-(w-1)/2)*28,cy:640+Math.floor(i/4)*28,r:10,class:'ink'},g);return g});
+const PV=[[900,360],[1130,440],[1360,540]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:10,class:'loss'},$('pvs')));
+fig($('w0f'),220,460,22,'ink');fig($('w0f'),320,460,22,'ink');fig($('slk'),450,470,22,'loss');
+fig($('w1f'),650,470,22,'gain');
+const QB=[790,850,910,970].map(x=>{fig($('w1f'),x,500,16,'ink');return mk('circle',{cx:x,cy:450,r:12,class:'gain'},$('w1f'))});
+fig($('w2f'),1270,470,26,'loss');
+const EY=[];for(let k=0;k<5;k++){const a=Math.PI*(-165+k*37.5)/180,ex=1270+160*Math.cos(a),ey=500+160*Math.sin(a),g=G('w2f'),n=Math.hypot(1270-ex,500-ey);
+  [-16,16].forEach(o=>{mk('ellipse',{cx:ex+o,cy:ey,rx:13,ry:9,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},g);mk('circle',{cx:ex+o+(1270-ex)/n*4,cy:ey+(500-ey)/n*4,r:4,class:'ink'},g)});EY.push(g)}
+fig($('wzf'),300,430,40,'gain');
+const MP=[];for(let i=0;i<7;i++){const a=i*2*Math.PI/7-Math.PI/2;MP.push([1100+150*Math.cos(a),470+150*Math.sin(a)])}
+const LKS=MP.map((q,i)=>{const r=MP[(i+2)%7];return mk('path',{d:'M'+q[0].toFixed(0)+' '+q[1].toFixed(0)+'L'+r[0].toFixed(0)+' '+r[1].toFixed(0),class:'s-gain','stroke-width':3,'stroke-dasharray':'6 10'},$('links'))});
+MP.forEach(q=>fig($('mem'),q[0],q[1],16,'ink'));
+fig($('cubf'),370,450,30,'gain');
+for(let r=0;r<3;r++)for(let c=0;c<2;c++)mk('rect',{x:760+c*160,y:300+r*105,width:80,height:50,rx:4,class:'ink'},$('chips'));
+const TR=['M840 325H920','M800 350V405','M960 350V405','M840 430H920','M800 455V510','M960 455V510','M840 455L920 510','M840 535H920'].map(d=>mk('path',{d:d,class:'s-gain','stroke-width':5,'stroke-linecap':'round'},$('trc')));
+// closing day planner: solo figure in the amber hour, a group in the meeting
+figF($('soloF'),1396,404,10,'var(--on-gain)');
+const MF=[1336,1368,1400].map(x=>figF(G('meetF'),x,506,9,'var(--ink)'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const lk=p(u,TM.lone_bulb+1,TM.lone_bulb+4);
+  LV.forEach(([g,x,y],i)=>{const k=cl(lk*1.5-i*.25);g.setAttribute('transform','translate('+((1440-x)*k).toFixed(1)+' '+((520-y)*k).toFixed(1)+')');g.setAttribute('opacity',(1-cl((k-.6)/.4)).toFixed(2))});
+  const lb=p(u,TM.lone_bulb+4,TM.lone_bulb+4.6);
+  $('bulb').setAttribute('opacity',(.2+.8*lb).toFixed(2)); $('rays').setAttribute('opacity',(lb*(.75+.25*Math.sin(t*4))).toFixed(2));
+
+  rise($('off'),p(u,TM.open_office,TM.open_office+.5)); rise($('cls'),p(u,TM.group_desks,TM.group_desks+.5));
+  const s=1+.7*(1-p(u,TM.group_desks+.6,TM.group_desks+2.2)), sk=1+(s-1)*.6;
+  DK.forEach(([e,cx,cy,dx,dy,k])=>{if(k){e.setAttribute('cx',(cx+dx*sk).toFixed(1));e.setAttribute('cy',(cy+dy*sk).toFixed(1))}else{e.setAttribute('x',(cx+dx*s-25).toFixed(1));e.setAttribute('y',(cy+dy*s-25).toFixed(1))}});
+  rise($('ng'),p(u,TM.group_desks+4.6,TM.group_desks+5.2));
+
+  rise($('osb'),p(u,TM.adman,TM.adman+.5)); rise($('storm'),p(u,TM.idea_storm,TM.idea_storm+.5));
+  SPK.forEach((c,i)=>{const k=(t*.9+i*.37)%1;c.setAttribute('cx',(660+i*80+10*Math.sin(t*2+i)).toFixed(1));c.setAttribute('cy',(480-110*k).toFixed(1));c.setAttribute('opacity',(1-k).toFixed(2))});
+  rise($('rule0'),p(u,TM.idea_storm+1.8,TM.idea_storm+2.3)); rise($('rule1'),p(u,TM.idea_storm+2.8,TM.idea_storm+3.3));
+  rise($('mach'),p(u,TM.idea_storm+5.5,TM.idea_storm+6.1));
+
+  rise($('lab'),p(u,TM.research_lab,TM.research_lab+.5));
+  const h0=360*p(u,TM.research_lab+3.3,TM.research_lab+4.6), h1=220*p(u,TM.research_lab+3.6,TM.research_lab+4.9);
+  $('bar0').setAttribute('y',(700-h0).toFixed(1)); $('bar0').setAttribute('height',h0.toFixed(1));
+  $('bar1').setAttribute('y',(700-h1).toFixed(1)); $('bar1').setAttribute('height',h1.toFixed(1));
+  rise($('b0t'),p(u,TM.research_lab+4.6,TM.research_lab+5.1));
+  rise($('shr'),p(u,TM.group_shrink,TM.group_shrink+.5));
+  GD.forEach((g,i)=>rise(g,p(u,TM.group_shrink+.4+i*.5,TM.group_shrink+.8+i*.5)));
+  $('perf').setAttribute('stroke-dashoffset',(500*(1-p(u,TM.group_shrink+.6,TM.group_shrink+2))).toFixed(1));
+  PV.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.group_shrink+.6+i*.7,TM.group_shrink+.9+i*.7)));
+
+  rise($('w0'),p(u,TM.slacker,TM.slacker+.5)); $('zz').setAttribute('transform','translate(0 '+(-6*Math.sin(t*2)).toFixed(1)+')');
+  rise($('w1'),p(u,TM.idea_queue,TM.idea_queue+.5));
+  QB.forEach((b,i)=>b.setAttribute('opacity',(1-.85*p(u,TM.idea_queue+1.5+i*.6,TM.idea_queue+3.5+i*.6)).toFixed(2)));
+  rise($('w2'),p(u,TM.judge_eyes,TM.judge_eyes+.5));
+  EY.forEach((e,i)=>rise(e,p(u,TM.judge_eyes+.5+i*.25,TM.judge_eyes+.9+i*.25)));
+
+  rise($('wz'),p(u,TM.woz,TM.woz+.5)); rise($('club'),p(u,TM.homebrew,TM.homebrew+.5));
+  LKS.forEach(l=>l.setAttribute('stroke-dashoffset',(-t*20).toFixed(1)));
+  rise($('insp'),p(u,TM.homebrew+6.2,TM.homebrew+6.8)); rise($('wcap'),p(u,TM.homebrew+6.6,TM.homebrew+7.2));
+
+  rise($('cub'),p(u,TM.cubicle,TM.cubicle+.5)); rise($('brd'),p(u,TM.circuit,TM.circuit+.5));
+  TR.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.circuit+.4+i*.3,TM.circuit+.7+i*.3)));
+  rise($('mon'),p(u,TM.screen_text,TM.screen_text+.5));
+  const n=Math.floor(8*p(u,TM.screen_text+.8,TM.screen_text+3.4)); $('typed').textContent='ABCDEFGH'.slice(0,n)+(Math.sin(t*6)>0?'_':'');
+  rise($('apl'),p(u,TM.screen_text+6.2,TM.screen_text+6.8));
+
+  rise($('adv'),p(u,TM.advice_card,TM.advice_card+.5)); rise($('nota'),p(u,TM.advice_card+3.8,TM.advice_card+4.3));
+  rise($('scl'),p(u,TM.balance_scale,TM.balance_scale+.5));
+  const ang=2.5*Math.sin(t*1.2), dy=240*Math.sin(ang*Math.PI/180);
+  $('beam').setAttribute('transform','rotate('+ang.toFixed(2)+' 1090 330)');
+  $('panL').setAttribute('transform','translate(850 '+(440-dy).toFixed(1)+')'); $('panR').setAttribute('transform','translate(1330 '+(440+dy).toFixed(1)+')');
+  rise($('swp'),p(u,TM.swap_table,TM.swap_table+.6));
+
+  // close: block the hour, then the meeting
+  rise($('qa'),p(u,TM.calendar,TM.calendar+.5)); rise($('qb'),p(u,TM.calendar+.4,TM.calendar+.9));
+  rise($('qc'),p(u,TM.calendar+.8,TM.calendar+1.3)); rise($('qd'),p(u,TM.calendar+1.2,TM.calendar+1.7));
+  rise($('cal'),p(u,TM.calendar+.2,TM.calendar+.7));
+  const bw=300*p(u,TM.calendar+1,TM.calendar+2); $('blkA').setAttribute('width',bw.toFixed(1)); $('blkA').setAttribute('opacity',bw>1?1:0);
+  rise($('blkAt'),p(u,TM.calendar+1.8,TM.calendar+2.3));
+  rise($('blkM'),p(u,TM.calendar+2.8,TM.calendar+3.3));
+  const nm=p(u,TM.calendar+.8,TM.calendar+2.2)*96+p(u,TM.calendar+4.5,TM.calendar+5.7)*100;
+  $('nowM').setAttribute('transform','translate(0 '+(402+nm).toFixed(1)+')'); $('nowM').setAttribute('opacity',(p(u,TM.calendar+.6,TM.calendar+1)*(.75+.25*Math.sin(t*3))).toFixed(2));
+  rise($('qn'),p(u,TM.calendar+6.5,TM.calendar+7.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.64;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

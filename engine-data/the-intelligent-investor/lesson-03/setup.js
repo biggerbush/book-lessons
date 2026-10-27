@@ -1,0 +1,13 @@
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const T=(g,x,y,s,c,txt,o)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s,class:c},o||{}),g);e.textContent=txt;return e};
+const draw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const pts=(f,a,b,n)=>{let d='';for(let i=0;i<=n;i++){const x=a+(b-a)*i/n;d+=(i?'L':'M')+x.toFixed(1)+' '+f(x,i/n).toFixed(1)}return d};
+const CH1=[['FINANCE',120,160],['ACCOUNTING',300,210],['MARKET LORE',530,230]].map(([s,x,w])=>{const g=mk('g',{},$('chips1'));mk('rect',{x:x,y:230,width:w,height:46,rx:23,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);T(g,x+w/2,260,20,'m',s,{'text-anchor':'middle'});return g});
+$('up3').setAttribute('d',pts((x,k)=>720-400*Math.pow(k,1.5)+(k>0&&k<1?14*Math.sin(k*70):0),180,1060,40));
+const CR3=[[1200,470],[1290,470],[1380,470],[1245,560],[1335,560],[1425,560]].map(q=>{const g=mk('g',{},$('cr3'));P(g,q[0],q[1],16,'loss');return g});
+$('dn4').setAttribute('d',pts((x,k)=>290+390*(1-Math.pow(1-k,2.2))+(k>0&&k<1?12*Math.sin(k*60):0),180,1020,40));
+const TG4=[560,720,880].map(x=>{const g=mk('g',{},$('tg4'));mk('rect',{x:x,y:740,width:140,height:44,rx:22,class:'gain'},g);T(g,x+70,769,18,'m','BARGAIN',{'text-anchor':'middle',style:'fill:var(--on-gain)'});return g});
+$('wv5').setAttribute('d',pts(x=>470-170*Math.cos((x-480)/560*Math.PI),160,1440,64));
+const TR6=['PATIENT','DISCIPLINED','KEEPS LEARNING'].map((s,i)=>{const g=mk('g',{},$('tr6')),y=280+i*90;mk('rect',{x:120,y:y,width:380,height:64,rx:32,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);T(g,310,y+41,22,'m',s,{'text-anchor':'middle',style:'fill:var(--ink)'});return g});
+for(let i=0;i<5;i++)mk('circle',{cx:1170+i*60,cy:540,r:14,class:'ink'},$('cr6'));
+for(let i=0;i<9;i++)mk('circle',{cx:172,cy:270+i*64,r:10,fill:'none',stroke:'var(--line)','stroke-width':4},$('rg7'));

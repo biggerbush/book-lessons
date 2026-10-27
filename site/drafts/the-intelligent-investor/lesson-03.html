@@ -1,0 +1,349 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Intelligent Investor Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of The Intelligent Investor: Success in investing depends far more on emotional discipline than on intelligence, because fear and greed drive people to buy high and sell low. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE INTELLIGENT INVESTOR · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Your worst enemy</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">is you.</text>
+<text class="b" x="120" y="600" font-size="32">Why a calm temperament beats raw brainpower in investing.</text>
+<g id="mir">
+<ellipse class="s-ink" cx="1310" cy="400" rx="130" ry="190" fill="var(--stage)" stroke-width="8"/>
+<path id="shine" class="s-line" d="M1220 300l40-40M1232 344l70-70" stroke-width="6" stroke-linecap="round"/>
+<path class="s-ink" d="M1310 590v90M1230 690h160" stroke-width="8" stroke-linecap="round"/>
+<g id="refl"><circle class="loss" cx="1310" cy="330" r="40"/><path class="loss" d="M1250 498v-52a60 60 0 0 1 120 0v52z"/></g>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Brains are not enough.</text>
+<text class="b" x="120" y="176" font-size="32">What Graham saw over decades on Wall Street.</text>
+<g id="chips1"></g>
+<g id="b1x"><circle class="ink" cx="330" cy="480" r="44"/><path class="ink" d="M264 665v-57a66 66 0 0 1 132 0v57z"/><text class="m" x="330" y="740" font-size="20" text-anchor="middle">EXPERT</text></g>
+<g id="brn"><ellipse class="s-ink" cx="330" cy="390" rx="62" ry="36" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M330 358v64M292 378q14 10 0 24M368 378q-14 10 0 24" fill="none" stroke-width="4" stroke-linecap="round"/></g>
+<g id="b1c"><circle class="gain" cx="950" cy="480" r="44"/><path class="gain" d="M884 665v-57a66 66 0 0 1 132 0v57z"/><text class="m" x="950" y="740" font-size="20" text-anchor="middle">CALM TEMPERAMENT</text></g>
+<path class="s-line" d="M440 700h160M1100 700h160" stroke-width="4"/>
+<rect id="barE" class="ink" x="470" y="700" width="90" height="0"/>
+<rect id="barC" class="gain" x="1130" y="700" width="90" height="0"/>
+<g id="bl1"><text class="m" x="515" y="740" font-size="20" text-anchor="middle">WEALTH KEPT</text><text class="m" x="1175" y="740" font-size="20" text-anchor="middle">WEALTH KEPT</text></g>
+<path id="bolt" class="s-loss" d="M450 290l-34 64h30l-26 70" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="imp"><text class="d5" x="120" y="820" font-size="36">Knowledge didn’t protect them from their own impulses.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Graham’s warning.</text>
+<g id="qc2">
+<rect class="s-line" x="120" y="210" width="1360" height="230" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="120" y="210" width="12" height="230"/>
+<g id="qt2">
+<text class="d5" x="170" y="300" font-size="40">“The investor’s chief problem, and even his worst</text>
+<text class="d5" x="170" y="356" font-size="40">enemy, is likely to be himself.”</text>
+<text class="m" x="170" y="410" font-size="20">— BENJAMIN GRAHAM</text>
+</g>
+</g>
+<g id="sc2">
+<path class="s-ink" d="M800 560V790" stroke-width="8" stroke-linecap="round"/>
+<rect class="ink" x="700" y="790" width="200" height="16" rx="8"/>
+<line id="beam" class="s-ink" x1="460" y1="560" x2="1140" y2="560" stroke-width="8" stroke-linecap="round"/>
+<g id="panL"><path class="s-ink" d="M0 0V60" stroke-width="4"/><rect class="gain" x="-120" y="60" width="240" height="70" rx="12"/><text class="m" x="0" y="103" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">TEMPERAMENT</text></g>
+<g id="panR"><path class="s-ink" d="M0 0V60" stroke-width="4"/><rect class="s-ink" x="-120" y="60" width="240" height="70" rx="12" fill="var(--stage)" stroke-width="5"/><text class="m" x="0" y="103" font-size="22" text-anchor="middle">INTELLIGENCE</text></g>
+<circle class="ink" cx="800" cy="560" r="14"/>
+</g>
+<g id="mk2a"><text class="b" x="120" y="790" font-size="32">The market is not your main threat.</text></g>
+<g id="mk2b"><text class="d" x="120" y="842" font-size="44" style="fill:var(--gain)">Your reactions to it are.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Greed at the top.</text>
+<text class="b" x="120" y="176" font-size="32">The late 1920s: prices climbed year after year.</text>
+<path class="s-line" d="M160 250V760H1100" fill="none" stroke-width="4"/>
+<text class="m" x="180" y="270" font-size="20">STOCK PRICES</text>
+<text class="m" x="1100" y="792" font-size="20" text-anchor="end">LATE 1920s</text>
+<path id="up3" class="s-ink" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="cr3"></g>
+<g id="br3"><path class="s-loss" d="M1440 650H1160M1180 630l-20 20 20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1150" y="700" font-size="20">MANY BOUGHT</text><text class="m" x="1150" y="728" font-size="20">WITH BORROWED MONEY</text></g>
+<g id="ne3">
+<rect class="s-ink" x="1150" y="240" width="330" height="130" rx="20" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M1250 368v40l40-38" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d" x="1180" y="300" font-size="40">“A new era!”</text>
+<text class="m" x="1180" y="332" font-size="18">OLD RULES</text>
+<text class="m" x="1180" y="356" font-size="18">NO LONGER APPLY</text>
+</g>
+<g id="gr3"><text class="d" x="120" y="840" font-size="36">Greed felt like confidence. Rising prices felt like proof.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fear at the bottom.</text>
+<text class="b" x="120" y="176" font-size="32">The crash of 1929, then years of falling prices.</text>
+<path class="s-line" d="M160 250V720H1040" fill="none" stroke-width="4"/>
+<text class="m" x="180" y="270" font-size="20">STOCK PRICES</text>
+<path id="dn4" class="s-loss" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="sb4">
+<g id="btn4"><rect class="loss" x="1140" y="260" width="300" height="120" rx="60"/><text class="d" x="1290" y="340" font-size="56" text-anchor="middle" style="fill:var(--stage)">SELL</text></g>
+<text class="m" x="1290" y="430" font-size="20" text-anchor="middle">SOLD AT THE WORST MOMENTS</text>
+<text class="m" x="1290" y="462" font-size="20" text-anchor="middle" style="fill:var(--loss)">LOSSES LOCKED IN</text>
+<g id="fp4"><circle class="loss" cx="1290" cy="540" r="22"/><path class="loss" d="M1257 632v-29a33 33 0 0 1 66 0v29z"/></g>
+</g>
+<g id="tg4"></g>
+<g id="sw4"><text class="d" x="120" y="840" font-size="36">Many swore off stocks, just when bargains were everywhere.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Exactly backwards.</text>
+<text class="b" x="120" y="176" font-size="32">Greed buys after the rise. Fear sells after the fall.</text>
+<path id="wv5" class="s-ink" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="lp5"><g id="lp5r"><path class="s-loss" d="M1364 270A64 64 0 1 1 1300 206" fill="none" stroke-width="8" stroke-linecap="round"/><path class="s-loss" d="M1286 188l18 18-18 18" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+<g id="bh5"><circle class="loss" cx="480" cy="300" r="18"/><text class="m" x="480" y="262" font-size="22" text-anchor="middle" style="fill:var(--loss)">GREED: BUY HIGH</text></g>
+<g id="sl5"><circle class="loss" cx="1040" cy="640" r="18"/><text class="m" x="1040" y="692" font-size="22" text-anchor="middle" style="fill:var(--loss)">FEAR: SELL LOW</text></g>
+<g id="bw5">
+<path class="s-muted" d="M504 300H1040" stroke-width="3" stroke-dasharray="8 10"/>
+<path class="s-loss" d="M1040 312V612M1016 588l24 24 24-24" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1064" y="470" font-size="22" style="fill:var(--loss)">LOSS</text>
+<text class="d" x="120" y="790" font-size="44">Buy high, sell low: exactly backwards.</text>
+</g>
+<g id="cv5"><text class="m" x="120" y="846" font-size="22">IT HAPPENS TO CLEVER PEOPLE JUST AS OFTEN</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Intelligent is not genius.</text>
+<text class="b" x="120" y="176" font-size="32">Graham’s intelligent investor is calm, not brilliant.</text>
+<g id="pp6"><circle class="gain" cx="800" cy="400" r="46"/><path class="gain" d="M731 593v-60a69 69 0 0 1 138 0v60z"/><text class="m" x="800" y="630" font-size="20" text-anchor="middle">THE INTELLIGENT INVESTOR</text></g>
+<g id="fc6"><circle cx="784" cy="392" r="5" fill="var(--on-gain)"/><circle cx="816" cy="392" r="5" fill="var(--on-gain)"/><path d="M780 414q20 14 40 0" fill="none" stroke="var(--on-gain)" stroke-width="4" stroke-linecap="round"/></g>
+<g id="tr6"></g>
+<g id="cp6">
+<circle class="s-ink" cx="1290" cy="340" r="90" fill="var(--stage)" stroke-width="6"/>
+<g id="nd6"><polygon class="gain" points="1290,270 1306,340 1274,340"/><polygon points="1290,410 1306,340 1274,340" fill="var(--line)"/><circle class="ink" cx="1290" cy="340" r="8"/></g>
+<text class="m" x="1290" y="470" font-size="20" text-anchor="middle">THINKS FOR THEMSELVES</text>
+<g id="cr6"></g>
+<path class="s-muted" d="M1440 580H1150M1168 562l-18 18 18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1290" y="630" font-size="18" text-anchor="middle">NOT THE CROWD</text>
+</g>
+<g id="sg6"><text class="m" x="120" y="660" font-size="20">PRICES SWING</text><polyline id="sw6" class="s-loss" fill="none" stroke-width="5" stroke-linejoin="round"/></g>
+<g id="st6"><text class="d" x="120" y="840" font-size="44">Above all: steady when prices swing.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rules before moods.</text>
+<text class="b" x="120" y="176" font-size="32">Decide your plan while you are calm.</text>
+<g id="nb7">
+<rect class="s-ink" x="140" y="230" width="600" height="580" rx="16" fill="var(--stage)" stroke-width="6"/>
+<g id="rg7"></g>
+<text class="m" x="220" y="290" font-size="20" style="fill:var(--gain)">MY PLAN</text>
+<text class="m" x="220" y="380" font-size="22">WHAT I WILL BUY</text>
+<text class="m" x="220" y="520" font-size="22">HOW MUCH</text>
+<text class="m" x="220" y="660" font-size="22">WHY</text>
+</g>
+<path id="ul0" class="s-gain" d="M220 430H700" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<path id="ul1" class="s-gain" d="M220 570H700" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<path id="ul2" class="s-gain" d="M220 710H700" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="pn7"><path class="gain" d="M0 0l8-30 80-80 22 22-80 80z"/></g>
+<g id="lb7"><text class="m" x="840" y="240" font-size="20">PRICES SOAR OR SINK</text></g>
+<path id="zz7" class="s-loss" d="M840 360L940 290L1020 420L1110 270L1200 430L1290 300L1380 440L1460 280" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="fe7"><rect class="s-loss" x="840" y="500" width="640" height="110" rx="18" fill="var(--stage)" stroke-width="5"/><text class="d5" x="880" y="570" font-size="40">Your feelings</text></g>
+<path id="fx7" class="s-loss" d="M870 556H1150" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="ru7"><rect class="gain" x="840" y="650" width="640" height="110" rx="18"/><text class="d" x="880" y="720" font-size="40" style="fill:var(--on-gain)">Your written rules</text><path d="M1380 705l22 22 42-46" fill="none" stroke="var(--on-gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="320" font-size="88" letter-spacing="-2">Your last money decision:</text></g>
+<g id="qb"><text class="d" x="136" y="440" font-size="88" letter-spacing="-2" style="fill:var(--gain)">careful thought,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">or fear and greed?</text></g>
+<text class="m" x="143" y="700" font-size="26">TEMPERAMENT BEATS INTELLIGENCE</text>
+<g id="sc8"><g transform="translate(1340 520)">
+<path class="s-ink" d="M0 0V130" stroke-width="8" stroke-linecap="round"/>
+<rect class="ink" x="-60" y="130" width="120" height="12" rx="6"/>
+<g id="bm8"><path class="s-ink" d="M-110 0H110M-110 0v20M110 0v20" fill="none" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="-110" cy="46" r="26"/><circle class="loss" cx="110" cy="46" r="26"/></g>
+<circle class="ink" cx="0" cy="0" r="10"/>
+</g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="146" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:26</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Your Worst Enemy Is You&rdquo;, from <em>The Intelligent Investor</em> by Benjamin Graham. The late 1920s boom and 1929 crash, and Graham&#x27;s observation that calm ordinary investors often outdid experts, are as reported in the book. The mirror, loop arrow and price charts are illustrations, not real data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=146, SC=[[0.0, 8.0], [8.0, 31.1], [31.1, 49.0], [49.0, 69.2], [69.2, 84.5], [84.5, 103.9], [103.9, 121.3], [121.3, 135.6], [135.6, 146.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Your Worst Enemy", "Brains Are Not Enough", "Graham's Warning", "Greed at the Top", "Fear at the Bottom", "The Backwards Loop", "What Intelligent Means", "Rules Before Moods", "Your Challenge"];
+const TM={"mirror": 0.0, "brain": 8.32, "ordinary_folk": 12.32, "expert": 22.48, "quote_card": 31.44, "scale": 40.56, "rising_chart": 49.28, "crowd": 54.56, "new_era": 59.12, "crash": 69.52, "sell_button": 74.48, "swear_off": 79.68, "loop_arrow": 84.8, "buy_high": 87.76, "sell_low": 91.76, "patience": 104.24, "own_compass": 112.48, "calm_face": 116.72, "notebook": 121.6, "pen": 126.48, "rule_list": 130.24, "question": 135.92};
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const T=(g,x,y,s,c,txt,o)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s,class:c},o||{}),g);e.textContent=txt;return e};
+const draw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const pts=(f,a,b,n)=>{let d='';for(let i=0;i<=n;i++){const x=a+(b-a)*i/n;d+=(i?'L':'M')+x.toFixed(1)+' '+f(x,i/n).toFixed(1)}return d};
+const CH1=[['FINANCE',120,160],['ACCOUNTING',300,210],['MARKET LORE',530,230]].map(([s,x,w])=>{const g=mk('g',{},$('chips1'));mk('rect',{x:x,y:230,width:w,height:46,rx:23,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);T(g,x+w/2,260,20,'m',s,{'text-anchor':'middle'});return g});
+$('up3').setAttribute('d',pts((x,k)=>720-400*Math.pow(k,1.5)+(k>0&&k<1?14*Math.sin(k*70):0),180,1060,40));
+const CR3=[[1200,470],[1290,470],[1380,470],[1245,560],[1335,560],[1425,560]].map(q=>{const g=mk('g',{},$('cr3'));P(g,q[0],q[1],16,'loss');return g});
+$('dn4').setAttribute('d',pts((x,k)=>290+390*(1-Math.pow(1-k,2.2))+(k>0&&k<1?12*Math.sin(k*60):0),180,1020,40));
+const TG4=[560,720,880].map(x=>{const g=mk('g',{},$('tg4'));mk('rect',{x:x,y:740,width:140,height:44,rx:22,class:'gain'},g);T(g,x+70,769,18,'m','BARGAIN',{'text-anchor':'middle',style:'fill:var(--on-gain)'});return g});
+$('wv5').setAttribute('d',pts(x=>470-170*Math.cos((x-480)/560*Math.PI),160,1440,64));
+const TR6=['PATIENT','DISCIPLINED','KEEPS LEARNING'].map((s,i)=>{const g=mk('g',{},$('tr6')),y=280+i*90;mk('rect',{x:120,y:y,width:380,height:64,rx:32,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);T(g,310,y+41,22,'m',s,{'text-anchor':'middle',style:'fill:var(--ink)'});return g});
+for(let i=0;i<5;i++)mk('circle',{cx:1170+i*60,cy:540,r:14,class:'ink'},$('cr6'));
+for(let i=0;i<9;i++)mk('circle',{cx:172,cy:270+i*64,r:10,fill:'none',stroke:'var(--line)','stroke-width':4},$('rg7'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('mir'),p(u,TM.mirror,TM.mirror+.6)); rise($('refl'),p(u,TM.mirror+3.8,TM.mirror+4.6));
+$('shine').setAttribute('opacity',(.5+.5*Math.sin(t*2)).toFixed(2));
+
+rise($('b1x'),p(u,TM.brain,TM.brain+.5)); rise($('brn'),p(u,TM.brain+.4,TM.brain+.9));
+rise($('b1c'),p(u,TM.ordinary_folk,TM.ordinary_folk+.5));
+const g1=p(u,TM.ordinary_folk+3.8,TM.ordinary_folk+5.3), hit=p(u,TM.expert+4.5,TM.expert+5.5), hE=300*g1-190*hit, hC=380*g1;
+$('barE').setAttribute('y',(700-hE).toFixed(1)); $('barE').setAttribute('height',Math.max(0,hE).toFixed(1)); $('barE').setAttribute('class',hit>0?'loss':'ink');
+$('barC').setAttribute('y',(700-hC).toFixed(1)); $('barC').setAttribute('height',hC.toFixed(1));
+rise($('bl1'),g1); CH1.forEach((c,i)=>rise(c,p(u,TM.expert+i*.6,TM.expert+i*.6+.4)));
+rise($('bolt'),hit); rise($('imp'),p(u,TM.expert+4.8,TM.expert+5.4));
+
+rise($('qc2'),p(u,TM.quote_card,TM.quote_card+.5)); rise($('qt2'),p(u,TM.quote_card+3.3,TM.quote_card+4));
+rise($('sc2'),p(u,TM.scale,TM.scale+.5));
+const a2=-.16*p(u,TM.scale+.4,TM.scale+1.8)+.01*Math.sin(t*2), bx=340*Math.cos(a2), by=340*Math.sin(a2);
+$('beam').setAttribute('x1',(800-bx).toFixed(1)); $('beam').setAttribute('y1',(560-by).toFixed(1)); $('beam').setAttribute('x2',(800+bx).toFixed(1)); $('beam').setAttribute('y2',(560+by).toFixed(1));
+$('panL').setAttribute('transform','translate('+(800-bx).toFixed(1)+' '+(560-by).toFixed(1)+')'); $('panR').setAttribute('transform','translate('+(800+bx).toFixed(1)+' '+(560+by).toFixed(1)+')');
+rise($('mk2a'),p(u,TM.scale+2.6,TM.scale+3.2)); rise($('mk2b'),p(u,TM.scale+5.6,TM.scale+6.2));
+
+draw($('up3'),p(u,TM.rising_chart,TM.rising_chart+3.5));
+CR3.forEach((g,i)=>rise(g,p(u,TM.crowd+i*.3,TM.crowd+i*.3+.4))); rise($('br3'),p(u,TM.crowd+1.5,TM.crowd+2));
+rise($('ne3'),p(u,TM.new_era,TM.new_era+.5)); rise($('gr3'),p(u,TM.new_era+5.8,TM.new_era+6.4));
+
+draw($('dn4'),p(u,TM.crash,TM.crash+3)); rise($('sb4'),p(u,TM.sell_button,TM.sell_button+.5));
+$('btn4').setAttribute('transform','translate(0 '+(6*Math.pow(Math.abs(Math.sin(t*2.5)),8)).toFixed(1)+')');
+$('fp4').setAttribute('transform','translate('+(3*Math.sin(t*30)).toFixed(1)+' 0)');
+TG4.forEach((g,i)=>rise(g,p(u,TM.swear_off+i*.3,TM.swear_off+i*.3+.4))); rise($('sw4'),p(u,TM.swear_off+.4,TM.swear_off+1));
+
+draw($('wv5'),p(u,TM.loop_arrow,TM.loop_arrow+2)); rise($('lp5'),p(u,TM.loop_arrow,TM.loop_arrow+.5));
+$('lp5r').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 1300 270)');
+rise($('bh5'),p(u,TM.buy_high,TM.buy_high+.5)); rise($('sl5'),p(u,TM.sell_low,TM.sell_low+.5));
+rise($('bw5'),p(u,TM.sell_low+3.8,TM.sell_low+4.4)); rise($('cv5'),p(u,TM.sell_low+7.6,TM.sell_low+8.2));
+
+rise($('pp6'),p(u,TM.patience,TM.patience+.5)); TR6.forEach((g,i)=>rise(g,p(u,TM.patience+3.8+i*.5,TM.patience+4.2+i*.5)));
+rise($('cp6'),p(u,TM.own_compass,TM.own_compass+.5));
+$('nd6').setAttribute('transform','rotate('+(-60+150*p(u,TM.own_compass+.5,TM.own_compass+2)+4*Math.sin(t*3)).toFixed(1)+' 1290 340)');
+rise($('fc6'),p(u,TM.calm_face,TM.calm_face+.5)); rise($('sg6'),p(u,TM.calm_face,TM.calm_face+.5));
+const am=45*p(u,TM.calm_face,TM.calm_face+1.2); let sw='';for(let x=120;x<=1480;x+=20)sw+=x+','+(720+am*Math.sin(x/60+t*3)*Math.sin(x/230)).toFixed(1)+' ';
+$('sw6').setAttribute('points',sw); rise($('st6'),p(u,TM.calm_face+.8,TM.calm_face+1.4));
+
+rise($('nb7'),p(u,TM.notebook,TM.notebook+.5));
+let pi=0;[0,1,2].forEach(i=>{draw($('ul'+i),p(u,TM.pen+i*1.3,TM.pen+i*1.3+1.2));if(u>=TM.pen+i*1.3)pi=i});
+const pk=p(u,TM.pen+pi*1.3,TM.pen+pi*1.3+1.2);
+$('pn7').setAttribute('transform','translate('+(220+480*pk).toFixed(1)+' '+(430+pi*140)+')');
+$('pn7').setAttribute('opacity',(p(u,TM.pen-.3,TM.pen)*(1-p(u,TM.pen+4,TM.pen+4.5))).toFixed(2));
+rise($('lb7'),p(u,TM.rule_list,TM.rule_list+.5)); draw($('zz7'),p(u,TM.rule_list,TM.rule_list+1.2));
+rise($('fe7'),p(u,TM.rule_list+.6,TM.rule_list+1.1)); draw($('fx7'),p(u,TM.rule_list+1.6,TM.rule_list+2.1)); rise($('ru7'),p(u,TM.rule_list+2.2,TM.rule_list+2.8));
+
+rise($('qa'),p(u,TM.question,TM.question+.5)); rise($('qb'),p(u,TM.question+3.4,TM.question+3.9)); rise($('qc'),p(u,TM.question+3.8,TM.question+4.3));
+rise($('sc8'),p(u,TM.question+.5,TM.question+1)); $('bm8').setAttribute('transform','rotate('+(11*Math.sin(t*1.5)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:142.4;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,11 @@
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.6} ${y+r*3.4}v${-r*.6}a${r*1.6} ${r*1.4} 0 0 1 ${r*3.2} 0v${r*.6}z`,class:c},g)};
+P($('tugP'),1140,490,28,'ink');P($('rp'),330,360,40,'ink');P($('cfP'),360,400,44,'ink');
+const FL=[420,480,540].map(y=>mk('path',{d:`M680 ${y}H1420`,stroke:'var(--muted)','stroke-width':5,'stroke-dasharray':'40 30','stroke-linecap':'round'},$('flow')));
+const CHP=['GRIEF','FEAR','ANGER'].map((s,i)=>{const g=mk('g',{},$('chips')),y=440+i*76;mk('rect',{x:1300,y:y,width:180,height:56,rx:28,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);const tx=mk('text',{x:1390,y:y+36,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},g);tx.textContent=s;return g});
+const ARG=[[180,300,'NO'],[460,270,'BUT'],[500,390,'WHY?']].map(([x,y,s])=>{const g=mk('g',{},$('args'));mk('rect',{x:x-44,y:y-24,width:88,height:48,rx:14,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);const tx=mk('text',{x:x,y:y+7,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--loss)'},g);tx.textContent=s;return g});
+for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${(840+100*c).toFixed(1)} ${(380+100*s).toFixed(1)}L${(840+130*c).toFixed(1)} ${(380+130*s).toFixed(1)}`,class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('rays'))}
+const PZ=[['WATCH','THOUGHTS'],['COME BACK','TO NOW'],['FEEL THE','INNER BODY'],null].map((L,i)=>{const x=320+(i%2)*230,y=250+(i>>1)*230,g=mk('g',{},$('pz'));
+  mk('rect',{x:x,y:y,width:220,height:220,rx:16,fill:L?'var(--stage)':'var(--gain)',stroke:L?'var(--ink)':'var(--gain)','stroke-width':5},g);
+  (L||['YES']).forEach((s,j)=>{const tx=mk('text',{x:x+110,y:L?y+104+j*32:y+134,'font-size':L?20:64,'text-anchor':'middle',class:L?'m':'d',style:L?'fill:var(--ink)':'fill:var(--on-gain)'},g);tx.textContent=s});return g});
+const OFF=[[-100,0],[0,-100],[0,100],[100,0]];
+const pin=(el,k,dx,dy)=>{el.setAttribute('opacity',k.toFixed(3));el.setAttribute('transform',`translate(${(dx*(1-k)).toFixed(1)} ${(dy*(1-k)).toFixed(1)})`)};

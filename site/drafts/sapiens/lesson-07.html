@@ -1,0 +1,296 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapiens Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Sapiens: Empires and universal religions, often through violence and conquest, steadily merged countless small cultures into ever larger shared ones. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAPIENS · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Empires and religions</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">unify the world.</text>
+<text class="b" x="120" y="600" font-size="32">How conquest and faith merged tiny cultures into one world.</text>
+<g id="t_glob" opacity="0"><circle class="s-ink" cx="1340" cy="420" r="130" fill="none" stroke-width="6"/><ellipse class="s-line" cx="1340" cy="420" rx="54" ry="130" fill="none" stroke-width="4"/><path class="s-line" d="M1210 420h260" stroke-width="4"/></g>
+<g id="t_dots"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Small worlds keep merging.</text>
+<text class="b" x="120" y="176" font-size="32">History moves in one direction: from many groups to fewer, larger ones.</text>
+<g id="m_tree"></g>
+<g id="m_arrow"><path class="s-ink" d="M200 760H1060" stroke-width="6" stroke-linecap="round"/><path class="s-ink" d="M1036 736l24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="200" y="820" font-size="20">BIG CULTURES ABSORB SMALL ONES · THEY RARELY SPLIT BACK</text></g>
+<g id="m_money"><text class="m" x="1180" y="310" font-size="20">BESIDES MONEY</text></g>
+<g id="m_f0"><rect class="gain" x="1180" y="340" width="300" height="84" rx="42"/><text class="d5" x="1330" y="394" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">Empires</text><path class="s-gain" d="M1180 382L1110 440" stroke-width="5" stroke-linecap="round"/></g>
+<g id="m_f1"><rect class="gain" x="1180" y="520" width="300" height="84" rx="42"/><text class="d5" x="1330" y="574" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">Religions</text><path class="s-gain" d="M1180 562L1110 500" stroke-width="5" stroke-linecap="round"/></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What an empire is.</text>
+<text class="b" x="120" y="176" font-size="32">One political order ruling over many different peoples.</text>
+<g id="e_crown"><path class="gain" d="M500 280l-10-60 40 30 30-46 30 46 40-30-10 60z"/><rect class="gain" x="500" y="286" width="120" height="14"/></g>
+<g id="e_bg"><rect id="e_bord" class="s-ink" rx="70" fill="none" stroke-width="6" stroke-dasharray="16 12"/></g>
+<g id="e_ppl"></g>
+<g id="e_new"></g>
+<g id="e_lab"><text class="m" x="560" y="740" font-size="20" text-anchor="middle">BORDERS STRETCH · THE SHAPE STAYS</text></g>
+<g id="e_time"><text class="m" x="1000" y="300" font-size="20">EMPIRE AFTER EMPIRE</text><path class="s-ink" d="M1000 680H1450M1430 664l20 16-20 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1000" y="720" font-size="20">HISTORY</text></g>
+<g id="e_bars"></g>
+<g id="e_stab"><text class="d5" x="120" y="820" font-size="40">Among history’s most common and stable political forms.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The siege of Numantia.</text>
+<text class="b" x="120" y="176" font-size="32">Ancient Spain: a small town resists Rome.</text>
+<g id="n_town"><path d="M560 640Q800 520 1040 640Z" fill="var(--line)"/>
+<g id="n_house"><rect class="s-ink" x="690" y="500" width="220" height="80" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="676" y="470" width="30" height="110"/><rect class="ink" x="894" y="470" width="30" height="110"/><path class="ink" d="M724 500l30-40 30 40zM796 500l30-50 30 50z"/></g>
+<text class="m" x="800" y="690" font-size="20" text-anchor="middle">NUMANTIA</text></g>
+<g id="n_ring"><circle class="s-loss" cx="800" cy="515" r="270" fill="none" stroke-width="4" stroke-dasharray="12 10"/><g id="n_tents"></g><text class="m" x="1110" y="300" font-size="20" style="fill:var(--loss)">ROMAN LEGIONS</text></g>
+<g id="n_food"><rect class="s-ink" x="170" y="320" width="70" height="360" rx="8" fill="none" stroke-width="5"/><rect id="n_fill" class="gain" x="178" width="54" rx="4"/><text class="m" x="205" y="720" font-size="20" text-anchor="middle">FOOD</text></g>
+<g id="n_end"><text class="d" x="120" y="850" font-size="44">Rather than surrender, many chose death.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The twist.</text>
+<text class="b" x="120" y="176" font-size="32">Centuries later, the conquered told the story in the conquerors’ language.</text>
+<g id="k0"><rect class="s-line" x="120" y="230" width="414" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="ink" d="M327 330c-30-20-80-20-110-10v120c30-10 80-10 110 10 30-20 80-20 110-10V320c-30-10-80-10-110 10z"/><path d="M327 330v120" stroke="var(--stage)" stroke-width="4"/>
+<text class="d5" x="160" y="540" font-size="44">Latin</text>
+<g id="k0s"><path class="s-muted" d="M180 560v46M166 592l14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d" x="160" y="670" font-size="52" style="fill:var(--gain)">Spanish</text><text class="m" x="160" y="730" font-size="18">THE CONQUERORS’ TONGUE</text></g></g>
+<g id="k1"><rect class="s-line" x="593" y="230" width="414" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="650" y="300" width="300" height="160" rx="12" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M690 350h220M690 390h220M690 430h140" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="629" y="560" font-size="20">STORY TOLD BY</text><text class="d5" x="629" y="620" font-size="44">Roman</text><text class="d5" x="629" y="680" font-size="44">historians.</text></g>
+<g id="k2"><rect class="s-line" x="1066" y="230" width="414" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="1110" y="300" width="326" height="170" fill="var(--stage)" stroke-width="6"/><path class="loss" d="M1110 300h60q-20 85 0 170h-60zM1436 300h-60q20 85 0 170h60z"/><g id="k2f"></g>
+<text class="m" x="1102" y="560" font-size="20">CERVANTES WROTE A PLAY</text><text class="d5" x="1102" y="620" font-size="40">Its heroes,</text><text class="d" x="1102" y="690" font-size="48" style="fill:var(--gain)">in Spanish.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Conquered, then absorbed.</text>
+<text class="b" x="120" y="176" font-size="32">A repeating pattern, over many generations.</text>
+<g id="c_ring"><circle class="s-line" cx="800" cy="513" r="213" fill="none" stroke-width="4" stroke-dasharray="10 12"/><circle id="c_dot" class="gain" r="12"/></g>
+<g id="c_a"><circle class="s-ink" cx="800" cy="300" r="80" fill="var(--stage)" stroke-width="6"/><g id="c_af"></g><path class="s-ink" d="M838 266V340" stroke-width="5" stroke-linecap="round"/><path class="loss" d="M838 248l-9 18h18z"/><text class="m" x="900" y="308" font-size="22">1 · CONQUEST</text></g>
+<g id="c_b"><circle class="s-ink" cx="984" cy="620" r="80" fill="var(--stage)" stroke-width="6"/><g id="c_bf"></g><text class="m" x="984" y="740" font-size="22" text-anchor="middle">2 · ADOPTION</text></g>
+<g id="c_c"><circle class="s-ink" cx="616" cy="620" r="80" fill="var(--stage)" stroke-width="6"/><g id="c_cf"></g><path class="s-ink" d="M607 612h18M607 624h18" stroke-width="4" stroke-linecap="round"/><text class="m" x="616" y="740" font-size="22" text-anchor="middle">3 · EQUAL STATUS</text></g>
+<g id="c_end"><text class="d" x="120" y="830" font-size="44">In the end, the empire belongs to everyone.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Universal religions.</text>
+<text class="b" x="120" y="176" font-size="32">From gods of one place to truths for every person, everywhere.</text>
+<g id="r_loc"><text class="m" x="120" y="240" font-size="22">LOCAL GODS</text><g id="r_isl"></g><text class="m" x="120" y="740" font-size="20">ONE TRIBE · ONE PLACE</text></g>
+<g id="r_glb"><text class="m" x="850" y="240" font-size="22">UNIVERSAL FAITHS</text><circle class="s-ink" cx="1080" cy="490" r="220" fill="none" stroke-width="5"/><ellipse class="s-line" cx="1080" cy="490" rx="90" ry="220" fill="none" stroke-width="4"/><path class="s-line" d="M860 490h440" stroke-width="4"/></g>
+<g id="r_rays"></g>
+<g id="r_pil"></g>
+<g id="r_star"><circle class="gain" cx="1080" cy="490" r="34"/></g>
+<g id="r_faith"><text class="m" x="1080" y="760" font-size="22" text-anchor="middle">BUDDHISM · CHRISTIANITY · ISLAM</text></g>
+<g id="r_ways"><text class="m" x="1080" y="800" font-size="20" text-anchor="middle" style="fill:var(--gain)">MISSIONARIES · TRADE · SOMETIMES THE SWORD</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No clean split.</text>
+<text class="b" x="120" y="176" font-size="32">This history can’t be sorted neatly into good and bad.</text>
+<g id="x_scale"><path class="s-ink" d="M400 300V560" stroke-width="8"/><path class="s-ink" d="M330 566h140" stroke-width="10" stroke-linecap="round"/>
+<g id="x_beam"><path class="s-ink" d="M220 300h360" stroke-width="8" stroke-linecap="round"/><path class="s-ink" d="M240 300L195 420M240 300L285 420M560 300L515 420M560 300L605 420" stroke-width="3"/><path class="ink" d="M185 420h110a55 36 0 0 1-110 0zM505 420h110a55 36 0 0 1-110 0z"/><text class="m" x="240" y="500" font-size="20" text-anchor="middle">GOOD?</text><text class="m" x="560" y="500" font-size="20" text-anchor="middle">BAD?</text></g>
+<circle class="gain" cx="400" cy="300" r="12"/></g>
+<g id="x_rope"><text class="m" x="760" y="360" font-size="22" style="fill:var(--loss)">VIOLENCE</text><text class="m" x="760" y="540" font-size="22" style="fill:var(--gain)">SHARED CULTURE</text>
+<path id="x_r0" class="s-loss" fill="none" stroke-width="12" stroke-linecap="round"/><path id="x_r1" class="s-gain" fill="none" stroke-width="12" stroke-linecap="round"/></g>
+<g id="x_ws"></g>
+<g id="x_end"><text class="d" x="120" y="810" font-size="44">Likely inherited from long-gone empires and faiths.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="z_a"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Pick one thing you value.</text></g>
+<g id="z_v"><text class="m" x="143" y="370" font-size="26" style="fill:var(--gain)">A WORD · A HOLIDAY · AN IDEA</text></g>
+<g id="z_b"><text class="d" x="136" y="500" font-size="88" letter-spacing="-2">Which empire or religion</text></g>
+<g id="z_c"><text class="d" x="136" y="610" font-size="88" letter-spacing="-2">carried it to you?</text></g>
+<g id="z_you"><circle class="gain" cx="170" cy="740" r="34"/><text class="m" x="170" y="747" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">YOU</text><text class="m" x="120" y="830" font-size="20">TRACE IT BACK</text></g>
+<g id="z_trail"></g>
+<g id="z_q"><text class="d" x="1070" y="785" font-size="120" style="fill:var(--gain)">?</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="138" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:18</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Empires and Religions Unify the World&rdquo;, from <em>Sapiens</em> by Yuval Noah Harari. The siege of Numantia, its later Spanish remembrance and the spread of Buddhism, Christianity and Islam are as reported in the book. The globe, cycle, scales and rope drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=138, SC=[[0.0, 11.0], [11.0, 30.5], [30.5, 46.5], [46.5, 57.9], [57.9, 72.6], [72.6, 89.4], [89.4, 109.2], [109.2, 124.6], [124.6, 138.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Many Worlds to One", "A Long Merger", "What an Empire Is", "The Siege of Numantia", "The Twist", "Conquered, Then Absorbed", "Universal Religions", "No Clean Split", "Your Challenge"];
+const TM={"small_worlds": 0.0, "globe": 6.44, "tribes": 11.28, "arrow": 18.56, "two_forces": 23.76, "crown": 30.8, "map_border": 35.52, "timeline": 40.92, "spain_town": 46.8, "roman_camp": 50.88, "latin_book": 58.16, "historian": 64.4, "stage_play": 68.12, "cycle": 72.88, "soldier": 75.68, "shared_culture": 79.8, "equal_claim": 84.32, "local_gods": 89.68, "missionary": 95.28, "pilgrims": 102.76, "scales": 109.48, "tangled_rope": 114.24, "your_words": 118.92, "your_value": 124.92, "question_mark": 130.32};
+const fig=(g,x,y,r,c)=>{const a=c?{fill:c}:{};mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g);return g};
+const V=n=>'var(--'+n+')',CC=[V('ink'),V('loss'),V('muted')];
+const TD=[];for(let i=0;i<18;i++){const a=i*2.4,rr=22+(i%4)*28;TD.push({e:mk('circle',{r:9,fill:CC[i%3]},$('t_dots')),x0:1220+(i*137)%250,y0:250+(i*89)%320,x1:1340+rr*Math.cos(a),y1:420+rr*Math.sin(a)})}
+const LVD=[[8,200,18,60,260],[4,480,30,120,290],[2,760,46,240,350],[1,1040,70,0,470]],LG=LVD.map(()=>mk('g',{},$('m_tree')));
+LVD.forEach((L,l)=>{for(let j=0;j<L[0];j++){const y=L[4]+j*L[3];if(l<3){const N=LVD[l+1],y1=N[4]+Math.floor(j/2)*N[3];mk('path',{d:'M'+(L[1]+L[2])+' '+y+'L'+(N[1]-N[2])+' '+y1,stroke:V('line'),'stroke-width':4},LG[l+1])}mk('circle',{cx:L[1],cy:y,r:L[2],fill:l==3?V('gain'):l==0?CC[j%3]:V('ink')},LG[l])}});
+[[420,430],[520,400],[620,430],[470,540],[600,540]].forEach((q,i)=>fig($('e_ppl'),q[0],q[1],16,[V('ink'),V('loss'),V('gain')][i%3]));
+const EN=[[300,460],[830,440],[830,560]].map(q=>{const g=mk('g',{fill:V('muted')},$('e_new'));fig(g,q[0],q[1],16);return g});
+const EB=[];for(let i=0;i<6;i++)EB.push(mk('rect',{x:1000+i*50,y:330+i*56,width:160+(i%2)*50,height:36,rx:18,fill:V('gain')},$('e_bars')));
+for(let i=0;i<14;i++){const a=i*2*Math.PI/14,x=800+270*Math.cos(a),y=515+270*Math.sin(a);mk('path',{d:'M'+(x-16).toFixed(0)+' '+(y+12).toFixed(0)+'l16-28 16 28z',fill:V('loss')},$('n_tents'))}
+fig($('k2f'),1230,380,14,V('gain'));fig($('k2f'),1310,380,14,V('gain'));
+fig($('c_af'),800,262,14,V('loss'));
+const FB=[954,984,1014].map(x=>{const g=mk('g',{fill:V('loss')},$('c_bf'));fig(g,x,590,12);return g});
+fig($('c_cf'),586,590,12,V('gain'));fig($('c_cf'),646,590,12,V('gain'));
+[[250,380],[430,500],[250,620]].forEach((q,i)=>{mk('circle',{cx:q[0],cy:q[1],r:64,fill:V('stage'),stroke:V('ink'),'stroke-width':5},$('r_isl'));mk('path',{d:'M'+(q[0]-22)+' '+(q[1]+24)+'v-26l22-20 22 20v26z',fill:CC[i]},$('r_isl'))});
+const GY=490;
+const RA=[],RP=[],RM=[];for(let i=0;i<10;i++){const a=i*Math.PI/5+.3,c=Math.cos(a),s=Math.sin(a);RA.push([c,s]);
+mk('path',{d:'M'+(1080+40*c).toFixed(0)+' '+(GY+40*s).toFixed(0)+'L'+(1080+176*c).toFixed(0)+' '+(GY+176*s).toFixed(0),stroke:V('gain'),'stroke-width':4,'stroke-dasharray':'6 8'},$('r_rays'));
+RP.push(mk('circle',{cx:1080+190*c,cy:GY+190*s,r:14,fill:V('muted')},$('r_rays')));RM.push(mk('circle',{r:8,fill:V('gain')},$('r_pil')))}
+const XW=['Language','Laws','Beliefs'].map((w,i)=>{const g=mk('g',{},$('x_ws')),x=120+i*460;mk('rect',{x:x,y:620,width:420,height:84,rx:42,fill:V('stage'),stroke:V('gain'),'stroke-width':5},g);const tx=mk('text',{x:x+210,y:674,'font-size':36,'text-anchor':'middle',class:'d5'},g);tx.textContent=w;return g});
+const ZT=[];for(let i=0;i<12;i++)ZT.push(mk('circle',{cx:260+i*70,cy:740,r:8,fill:V('gain')},$('z_trail')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const gm=p(u,TM.globe+.3,TM.globe+1.8);
+TD.forEach((d,i)=>{const a=TM.small_worlds+i*.15,j=(1-gm)*4;d.e.setAttribute('opacity',p(u,a,a+.4));d.e.setAttribute('cx',(d.x0+(d.x1-d.x0)*gm+j*Math.sin(t*2+i)).toFixed(1));d.e.setAttribute('cy',(d.y0+(d.y1-d.y0)*gm+j*Math.cos(t*1.7+i)).toFixed(1));d.e.setAttribute('fill',gm>.95?V('gain'):CC[i%3])});
+$('t_glob').setAttribute('opacity',p(u,TM.globe,TM.globe+.8));
+
+LG.forEach((g,i)=>{const a=TM.tribes+i*1.3;rise(g,p(u,a,a+.5))});
+rise($('m_arrow'),p(u,TM.arrow,TM.arrow+.5));rise($('m_money'),p(u,TM.two_forces,TM.two_forces+.5));
+rise($('m_f0'),p(u,TM.two_forces+1.5,TM.two_forces+2));rise($('m_f1'),p(u,TM.two_forces+2.5,TM.two_forces+3));
+
+rise($('e_crown'),p(u,TM.crown,TM.crown+.5));rise($('e_ppl'),p(u,TM.crown+.4,TM.crown+.9));rise($('e_bg'),p(u,TM.crown+.4,TM.crown+.9));
+const eb=p(u,TM.map_border+.5,TM.map_border+2),ew=440+260*eb,eh=280+100*eb,bd=$('e_bord');
+bd.setAttribute('x',560-ew/2);bd.setAttribute('y',500-eh/2);bd.setAttribute('width',ew);bd.setAttribute('height',eh);
+EN.forEach((g,i)=>{rise(g,p(u,TM.map_border,TM.map_border+.5));g.setAttribute('fill',eb>.9?V(['loss','ink','gain'][i]):V('muted'))});
+rise($('e_lab'),p(u,TM.map_border+1.5,TM.map_border+2));rise($('e_time'),p(u,TM.timeline,TM.timeline+.5));
+EB.forEach((b,i)=>{const a=TM.timeline+.4+i*.3;b.setAttribute('opacity',p(u,a,a+.3))});rise($('e_stab'),p(u,TM.timeline+1,TM.timeline+1.6));
+
+rise($('n_town'),p(u,TM.spain_town,TM.spain_town+.5));rise($('n_ring'),p(u,TM.roman_camp,TM.roman_camp+.6));rise($('n_food'),p(u,TM.roman_camp,TM.roman_camp+.5));
+const nf=1-p(u,TM.roman_camp+.8,TM.roman_camp+3.2);$('n_fill').setAttribute('height',(344*nf).toFixed(1));$('n_fill').setAttribute('y',(328+344*(1-nf)).toFixed(1));
+const nd=p(u,TM.roman_camp+3.3,TM.roman_camp+4.3);$('n_house').setAttribute('opacity',(1-.65*nd).toFixed(2));rise($('n_end'),nd);
+
+rise($('k0'),p(u,TM.latin_book,TM.latin_book+.5));rise($('k0s'),p(u,TM.latin_book+1.2,TM.latin_book+1.7));
+rise($('k1'),p(u,TM.historian,TM.historian+.5));rise($('k2'),p(u,TM.stage_play,TM.stage_play+.5));
+
+rise($('c_ring'),p(u,TM.cycle,TM.cycle+.5));const ca=(-90+(t*40)%360)*Math.PI/180;
+$('c_dot').setAttribute('cx',(800+213*Math.cos(ca)).toFixed(1));$('c_dot').setAttribute('cy',(513+213*Math.sin(ca)).toFixed(1));
+rise($('c_a'),p(u,TM.soldier,TM.soldier+.5));rise($('c_b'),p(u,TM.shared_culture,TM.shared_culture+.5));
+FB.forEach((g,i)=>g.setAttribute('fill',u>=TM.shared_culture+.8+i*.6?V('gain'):V('loss')));
+rise($('c_c'),p(u,TM.equal_claim,TM.equal_claim+.5));rise($('c_end'),p(u,TM.equal_claim+1.2,TM.equal_claim+1.8));
+
+rise($('r_loc'),p(u,TM.local_gods,TM.local_gods+.5));rise($('r_glb'),p(u,TM.missionary,TM.missionary+.5));rise($('r_star'),p(u,TM.missionary+.5,TM.missionary+1));
+$('r_rays').setAttribute('opacity',p(u,TM.missionary+1,TM.missionary+2));rise($('r_faith'),p(u,TM.missionary+1.5,TM.missionary+2));
+const rp=p(u,TM.pilgrims,TM.pilgrims+.5);
+RM.forEach((m,i)=>{const r=40+150*((t*.4+i*.1)%1);m.setAttribute('cx',(1080+r*RA[i][0]).toFixed(1));m.setAttribute('cy',(GY+r*RA[i][1]).toFixed(1));m.setAttribute('opacity',rp)});
+RP.forEach((c,i)=>c.setAttribute('fill',u>=TM.pilgrims+1+i*.2?V('gain'):V('muted')));rise($('r_ways'),p(u,TM.pilgrims+.5,TM.pilgrims+1));
+
+rise($('x_scale'),p(u,TM.scales,TM.scales+.5));$('x_beam').setAttribute('transform','rotate('+(6*Math.sin(t*1.3)).toFixed(2)+' 400 300)');
+let r0='',r1='';for(let x=760;x<=1460;x+=10){const s=44*Math.sin(x/50+t*1.5);r0+=(x==760?'M':'L')+x+' '+(440+s).toFixed(1);r1+=(x==760?'M':'L')+x+' '+(440-s).toFixed(1)}
+$('x_r0').setAttribute('d',r0);$('x_r1').setAttribute('d',r1);rise($('x_rope'),p(u,TM.tangled_rope,TM.tangled_rope+.6));
+XW.forEach((g,i)=>{const a=TM.your_words+i*.5;rise(g,p(u,a,a+.4))});rise($('x_end'),p(u,TM.your_words+1.8,TM.your_words+2.4));
+
+rise($('z_a'),p(u,TM.your_value,TM.your_value+.5));rise($('z_you'),p(u,TM.your_value+.4,TM.your_value+.9));rise($('z_v'),p(u,TM.your_value+.8,TM.your_value+1.3));
+rise($('z_b'),p(u,TM.question_mark,TM.question_mark+.5));rise($('z_c'),p(u,TM.question_mark+.4,TM.question_mark+.9));
+ZT.forEach((c,i)=>{const a=TM.question_mark+.8+i*.12;c.setAttribute('opacity',p(u,a,a+.3))});rise($('z_q'),p(u,TM.question_mark+2.4,TM.question_mark+2.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:134.72;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

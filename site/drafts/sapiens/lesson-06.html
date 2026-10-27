@@ -1,0 +1,370 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapiens Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Sapiens: Money works not because of what it is made of, but because everyone trusts that everyone else will accept it. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAPIENS · LESSON 6</text>
+<text class="d" x="116" y="330" font-size="84" letter-spacing="-2">Money: the most</text>
+<text class="d" x="116" y="426" font-size="84" letter-spacing="-2">universal trust</text>
+<text class="d" x="116" y="522" font-size="84" letter-spacing="-2">system.</text>
+<text class="b" x="120" y="620" font-size="32">Why strangers happily swap real goods for paper and numbers.</text>
+<g id="note0"><g id="noteF">
+<rect class="s-ink" x="1040" y="230" width="400" height="200" rx="14" fill="var(--stage)" stroke-width="7"/>
+<rect class="s-line" x="1064" y="254" width="352" height="152" rx="8" fill="none" stroke-width="4"/>
+<circle class="s-ink" cx="1240" cy="330" r="50" fill="none" stroke-width="6"/>
+<text class="d" x="1240" y="352" font-size="60" text-anchor="middle">1</text>
+</g></g>
+<g id="meal0">
+<path class="s-muted" d="M1200 460v170m-16-16 16 16 16-16M1290 630v-170m-16 16 16-16 16 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-muted" d="M1210 700q-12-16 0-32M1250 700q-12-16 0-32M1290 700q-12-16 0-32" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="gain" d="M1140 720h210a105 70 0 0 1-210 0z"/>
+</g>
+<text id="qm0" class="d" x="1400" y="600" font-size="80" style="fill:var(--loss)">?</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Barter gets messy, fast.</text>
+<text class="b" x="120" y="176" font-size="32">Nobody has exactly what you want.</text>
+<g id="farm1">
+<rect class="s-ink" x="180" y="230" width="160" height="90" rx="18" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-ink" cx="250" cy="340" r="8" fill="var(--stage)" stroke-width="4"/>
+<path class="ink" d="M215 300v-38h30l15 18h45a10 10 0 0 1 10 10v10z"/>
+<g id="farmF"></g>
+<circle class="gain" cx="168" cy="556" r="14"/><circle class="gain" cx="196" cy="556" r="14"/><circle class="gain" cx="182" cy="532" r="14"/>
+<text class="m" x="260" y="630" font-size="20" text-anchor="middle">APPLE GROWER</text>
+</g>
+<g id="shoe1">
+<rect class="s-ink" x="560" y="230" width="160" height="90" rx="18" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-ink" cx="630" cy="340" r="8" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-ink" cx="608" cy="296" r="12" fill="none" stroke-width="5"/><circle class="s-ink" cx="642" cy="296" r="12" fill="none" stroke-width="5"/>
+<path class="s-ink" d="M614 285L686 250M636 285L586 250" stroke-width="5" stroke-linecap="round"/>
+<g id="shoeF"></g>
+<text class="m" x="640" y="630" font-size="20" text-anchor="middle">SHOEMAKER</text>
+</g>
+<g id="apl"><circle class="gain" cx="0" cy="0" r="20"/><path class="s-ink" d="M0-20v-10" stroke-width="4" stroke-linecap="round"/></g>
+<g id="nox"><path class="s-loss" d="M425 475l50 50M475 475l-50 50" stroke-width="8" stroke-linecap="round"/><text class="m" x="450" y="580" font-size="20" text-anchor="middle" style="fill:var(--loss)">NO DEAL</text></g>
+<g id="net1"><g id="chords"></g><g id="nodes"></g><text class="m" x="1200" y="212" font-size="20" text-anchor="middle">100 GOODS</text></g>
+<g id="rn1"><text id="rnum" class="d" x="1200" y="750" font-size="110" text-anchor="middle" style="fill:var(--loss)">4,950</text><text class="m" x="1200" y="800" font-size="20" text-anchor="middle">SEPARATE EXCHANGE RATES</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One thing everyone accepts.</text>
+<text class="b" x="120" y="176" font-size="32">Cowry shells served as money for about 4,000 years.</text>
+<g id="shell2"><g transform="translate(330 450)">
+<ellipse class="s-ink" cx="0" cy="0" rx="150" ry="100" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M-110 0q110-24 220 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path class="s-ink" d="M-80-8v18M-50-14v18M-20-16v18M10-16v18M40-14v18M70-10v18" stroke-width="4" stroke-linecap="round"/>
+</g><text class="m" x="330" y="600" font-size="20" text-anchor="middle">COWRY SHELL</text></g>
+<g id="regs"></g>
+<g id="str2"><path class="s-ink" d="M600 450Q1030 510 1460 450" fill="none" stroke-width="4"/><g id="shls"></g></g>
+<text id="use2" class="m" x="330" y="640" font-size="20" text-anchor="middle" style="fill:var(--loss)">LITTLE PRACTICAL USE</text>
+<g id="bx0"><rect class="s-line" x="600" y="590" width="270" height="190" rx="16" fill="var(--stage)" stroke-width="3"/><path class="s-muted" d="M735 500v70m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round"/><path class="ink" d="M685 650h100a50 40 0 0 1-100 0z"/><text class="m" x="735" y="755" font-size="20" text-anchor="middle">FOOD</text></g>
+<g id="bx1"><rect class="s-line" x="893" y="590" width="270" height="190" rx="16" fill="var(--stage)" stroke-width="3"/><path class="s-muted" d="M1028 500v70m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round"/><rect class="s-ink" x="978" y="615" width="100" height="80" fill="none" stroke-width="5"/><path class="s-line" d="M978 637h100M978 657h100M978 677h100" stroke-width="4"/><text class="m" x="1028" y="755" font-size="20" text-anchor="middle">CLOTH</text></g>
+<g id="bx2"><rect class="s-line" x="1186" y="590" width="270" height="190" rx="16" fill="var(--stage)" stroke-width="3"/><path class="s-muted" d="M1321 500v70m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round"/><path class="s-ink" d="M1321 638v70" stroke-width="10" stroke-linecap="round"/><rect class="ink" x="1291" y="612" width="60" height="26" rx="4"/><text class="m" x="1321" y="755" font-size="20" text-anchor="middle">LABOUR</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">From barley to silver.</text>
+<text class="b" x="120" y="176" font-size="32">Ancient Sumer’s early money, then the silver shekel.</text>
+<g id="barl">
+<path class="s-ink" d="M200 520q-30-150 50-210l-20-40h140l-20 40q80 60 50 210z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-ink" d="M240 300h120" stroke-width="6" stroke-linecap="round"/>
+<path class="s-gain" d="M300 490v-130" stroke-width="6" stroke-linecap="round"/>
+<ellipse class="gain" cx="286" cy="390" rx="10" ry="18"/><ellipse class="gain" cx="314" cy="390" rx="10" ry="18"/><ellipse class="gain" cx="286" cy="430" rx="10" ry="18"/><ellipse class="gain" cx="314" cy="430" rx="10" ry="18"/><ellipse class="gain" cx="300" cy="356" rx="10" ry="18"/>
+<text class="d5" x="300" y="580" font-size="40" text-anchor="middle">Barley</text>
+</g>
+<text id="eat3" class="m" x="300" y="630" font-size="20" text-anchor="middle" style="fill:var(--gain)">COULD BE EATEN</text>
+<path id="arr3" class="s-muted" d="M480 430h100m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="silv"><polygon points="640,460 680,390 880,390 920,460" fill="var(--muted)" fill-opacity=".3"/><polygon class="s-ink" points="640,460 680,390 880,390 920,460" fill="none" stroke-width="6" stroke-linejoin="round"/><text class="d5" x="780" y="520" font-size="40" text-anchor="middle">Silver</text></g>
+<text id="noeat" class="m" x="780" y="570" font-size="20" text-anchor="middle" style="fill:var(--loss)">USELESS FOR EATING OR FARMING</text>
+<g id="scale3">
+<rect class="ink" x="1150" y="680" width="160" height="20" rx="6"/>
+<path class="s-ink" d="M1230 680V310" stroke-width="8" stroke-linecap="round"/>
+<g id="beam"><path class="s-ink" d="M1050 320h360" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1230" cy="320" r="12"/></g>
+<g id="panL"><path class="s-ink" d="M1050 320L1010 460M1050 320L1090 460" stroke-width="3"/><path class="ink" d="M1000 460h100a50 24 0 0 1-100 0z"/><polygon points="1020,460 1030,440 1070,440 1080,460" fill="var(--stage)"/><polygon points="1020,460 1030,440 1070,440 1080,460" fill="var(--muted)" fill-opacity=".3"/><polygon class="s-ink" points="1020,460 1030,440 1070,440 1080,460" fill="none" stroke-width="3"/></g>
+<g id="panR"><path class="s-ink" d="M1410 320L1370 460M1410 320L1450 460" stroke-width="3"/><path class="ink" d="M1360 460h100a50 24 0 0 1-100 0z"/><rect class="ink" x="1388" y="432" width="44" height="28" rx="4"/></g>
+<text class="m" x="1230" y="740" font-size="20" text-anchor="middle">WEIGHED IN SHEKELS</text>
+</g>
+<g id="want3"><text class="d" x="120" y="820" font-size="44">Valued because everyone believed others wanted it.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Cigarettes as cash.</text>
+<text class="b" x="120" y="176" font-size="32">In prisons and prisoner of war camps.</text>
+<g id="cell4">
+<rect class="s-ink" x="160" y="240" width="440" height="450" rx="6" fill="var(--stage)" stroke-width="7"/>
+<g id="inmate"></g><g id="bars"></g>
+<text class="m" x="380" y="740" font-size="20" text-anchor="middle">PRISON · POW CAMP</text>
+</g>
+<g id="chain4"><g id="chainP"></g>
+<path class="s-muted" d="M850 650q60 30 120 0M1030 650q60 30 120 0M1210 650q60 30 120 0" fill="none" stroke-width="4" stroke-dasharray="8 8"/>
+<text class="m" x="1000" y="620" font-size="20" text-anchor="middle" style="fill:var(--gain)">NEVER SMOKED</text>
+</g>
+<g id="cig"><rect x="-40" y="-7" width="80" height="14" rx="3" fill="var(--stage)" stroke="var(--ink)" stroke-width="3"/><rect class="gain" x="-40" y="-7" width="18" height="14" rx="3"/></g>
+<g id="pass4"><text class="d" x="120" y="820" font-size="44">Accepted because they could pass them on.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Most money is just data.</text>
+<text class="b" x="120" y="176" font-size="32">Not coins and notes, but numbers on servers.</text>
+<g id="pc5">
+<rect class="s-ink" x="160" y="250" width="340" height="220" rx="12" fill="var(--stage)" stroke-width="7"/>
+<g id="digits"></g>
+<path class="s-ink" d="M330 470v50M270 530h120" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g id="srv5"><rect class="s-ink" x="180" y="580" width="300" height="190" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M200 640h260M200 705h260" stroke-width="4"/><g id="lights"></g></g>
+<g id="pie5"><circle class="loss" cx="880" cy="500" r="200"/><path id="slice" class="gain" stroke="var(--stage)" stroke-width="4"/></g>
+<g id="lab0"><text class="m" x="1120" y="340" font-size="20">ALL MONEY, ROUGHLY</text><text id="tot" class="d" x="1120" y="400" font-size="44">$60 trillion</text></g>
+<g id="lab1"><text class="m" x="1120" y="500" font-size="20" style="fill:var(--gain)">COINS AND NOTES</text><text class="d" x="1120" y="560" font-size="44" style="fill:var(--gain)">&lt; $6 trillion</text></g>
+<g id="lab2"><text class="m" x="1120" y="650" font-size="20" style="fill:var(--loss)">THE REST: NUMBERS</text><text class="m" x="1120" y="680" font-size="20" style="fill:var(--loss)">ON COMPUTER SERVERS</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Money is built on trust.</text>
+<text class="b" x="120" y="176" font-size="32">Its value comes from trust, not from its material.</text>
+<g id="web6"><g id="wl"></g><rect id="cnote" x="440" y="492" width="120" height="56" rx="8" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><circle id="cnoteC" cx="500" cy="520" r="14" fill="none" stroke="var(--ink)" stroke-width="4"/><g id="wn"></g>
+<text class="m" x="500" y="254" font-size="20" text-anchor="middle" style="fill:var(--gain)">YOU</text>
+<text class="m" x="500" y="800" font-size="20" text-anchor="middle">STRANGERS WHO TRUST EACH OTHER</text></g>
+<g id="tok"><rect class="gain" x="-26" y="-16" width="52" height="32" rx="5"/><rect x="-20" y="-10" width="40" height="20" rx="3" fill="none" stroke="var(--on-gain)" stroke-width="2"/><circle cx="0" cy="0" r="6" fill="none" stroke="var(--on-gain)" stroke-width="2.5"/></g>
+<g id="qc6"><rect class="s-line" x="860" y="260" width="620" height="460" rx="18" fill="var(--stage)" stroke-width="3"/><text class="d" x="896" y="380" font-size="120" style="fill:var(--gain)">“</text></g>
+<g id="ql0"><text class="d5" x="900" y="440" font-size="40">the most universal and</text></g>
+<g id="ql1"><text class="d5" x="900" y="500" font-size="40">most efficient system</text></g>
+<g id="ql2"><text class="d5" x="900" y="560" font-size="40">of mutual trust</text></g>
+<g id="ql3"><text class="d5" x="900" y="620" font-size="40">ever devised.”</text><text class="m" x="900" y="680" font-size="20">YUVAL NOAH HARARI</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Trust crosses borders.</text>
+<text class="b" x="120" y="176" font-size="32">Bitter religious rivals took the same gold and silver coins.</text>
+<path class="s-muted" d="M800 230V630" stroke-width="4" stroke-dasharray="12 10"/>
+<g id="flg7"><path class="s-ink" d="M260 640V260M1340 640V260" stroke-width="7" stroke-linecap="round"/><rect class="loss" x="260" y="260" width="160" height="100"/><rect class="ink" x="1180" y="260" width="160" height="100"/></g>
+<g id="ppl7"><g id="pplL"></g><g id="pplR"></g></g>
+<path id="clash" class="s-loss" d="M680 330l30-30 30 30 30-30 30 30 30-30 30 30" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="coinG"><circle class="gain" r="28" stroke="var(--ink)" stroke-width="4"/><circle r="17" fill="none" stroke="var(--ink)" stroke-width="3"/></g>
+<g id="coinS"><circle class="gain" r="28" stroke="var(--ink)" stroke-width="4"/><circle r="17" fill="none" stroke="var(--ink)" stroke-width="3"/></g>
+<text id="same7" class="m" x="800" y="680" font-size="20" text-anchor="middle">THE SAME COINS ON BOTH SIDES</text>
+<g id="coop7"><text class="d" x="120" y="800" font-size="40">Strangers cooperate without knowing or liking each other.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="pw"></g>
+<g id="card8"><rect class="s-ink" x="1200" y="360" width="220" height="140" rx="14" fill="var(--stage)" stroke-width="6"/><rect class="gain" x="1225" y="395" width="40" height="30" rx="4"/><path class="s-line" d="M1225 465h170" stroke-width="6" stroke-linecap="round"/></g>
+<g id="qa8"><text class="d" x="136" y="300" font-size="76" letter-spacing="-2">What else in your life</text></g>
+<g id="qb8"><text class="d" x="136" y="392" font-size="76" letter-spacing="-2">works only because</text></g>
+<g id="qc8"><text class="d" x="136" y="484" font-size="76" letter-spacing="-2">everyone agrees</text></g>
+<g id="qd8"><text class="d" x="136" y="576" font-size="76" letter-spacing="-2" style="fill:var(--gain)">to believe in it?</text></g>
+<text id="lb8" class="m" x="143" y="700" font-size="26">NOTICE THE INVISIBLE WEB OF TRUST</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Money: The Most Universal Trust System&rdquo;, from <em>Sapiens</em> by Yuval Noah Harari. The barter exchange-rate figure, cowry shells, Sumerian barley and silver shekels, prison cigarettes and the share of digital money are as reported in the book. The apple grower, shoemaker and web of trust are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 6.5], [6.5, 26.1], [26.1, 44.6], [44.6, 64.6], [64.6, 75.1], [75.1, 90.0], [90.0, 107.2], [107.2, 121.9], [121.9, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Paper Puzzle", "The Barter Headache", "Shells as Cash", "Barley and Silver", "Cigarette Money", "Money as Data", "Built on Trust", "Enemies Agree", "Your Turn"];
+const TM={"paper_note": 0.0, "apple_farmer": 6.8, "shoemaker": 10.48, "rate_table": 18.72, "cowry_shell": 26.4, "shell_string": 39.6, "barley_sack": 44.88, "silver_bar": 54.96, "balance_scale": 59.68, "prison_cell": 64.88, "cigarette": 70.72, "computer": 75.36, "pie_chart": 79.04, "trust_web": 90.32, "quote_card": 100.72, "two_flags": 107.52, "gold_coin": 117.04, "pay_moment": 122.24};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+fig($('farmF'),260,420,36,'ink');fig($('shoeF'),640,420,36,'ink');
+const NN=[];for(let i=0;i<24;i++){const a=i*Math.PI/12;NN.push([1200+190*Math.cos(a),430+190*Math.sin(a)])}
+const CHD=[];for(let i=0;i<24;i++)for(let j=i+1;j<24;j++)CHD.push(mk('line',{x1:NN[i][0].toFixed(1),y1:NN[i][1].toFixed(1),x2:NN[j][0].toFixed(1),y2:NN[j][1].toFixed(1),stroke:'var(--loss)','stroke-width':1.5,'stroke-opacity':.55},$('chords')));
+NN.forEach(q=>mk('circle',{cx:q[0].toFixed(1),cy:q[1].toFixed(1),r:9,class:'ink'},$('nodes')));
+const RG=['AFRICA','SOUTH ASIA','EAST ASIA','OCEANIA'].map((s,i)=>{const x=600+(i%2)*440,y=240+Math.floor(i/2)*80,g=mk('g',{},$('regs'));
+  mk('rect',{x:x,y:y,width:420,height:60,rx:30,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:x+210,y:y+39,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const SH=[];for(let i=0;i<10;i++){const s=(i+.5)/10,x=600+860*s,y=450+120*s*(1-s),g=mk('g',{},$('shls'));
+  mk('ellipse',{cx:x.toFixed(1),cy:(y+4).toFixed(1),rx:24,ry:16,class:'gain'},g);mk('path',{d:'M'+(x-14).toFixed(1)+' '+(y+4).toFixed(1)+'h28',stroke:'var(--on-gain)','stroke-width':3,'stroke-linecap':'round'},g);SH.push(g)}
+fig($('inmate'),380,400,40,'ink');
+for(let i=0;i<7;i++)mk('path',{d:'M'+(215+i*55)+' 240V690',stroke:'var(--ink)','stroke-width':6},$('bars'));
+const CX=[820,1000,1180,1360];CX.forEach((x,i)=>fig($('chainP'),x,440,30,i===1?'gain':'ink'));
+const DG=[0,1,2,3].map(i=>mk('text',{x:190,y:310+i*44,'font-size':26,class:'m',style:'fill:var(--gain)'},$('digits')));
+const LT=[610,672,737].map(y=>mk('circle',{cx:440,cy:y,r:8,class:'gain'},$('lights')));
+const WN=[];for(let i=0;i<8;i++){const a=-Math.PI/2+i*Math.PI/4;WN.push([500+230*Math.cos(a),520+230*Math.sin(a)])}
+const WL=[];for(let i=0;i<8;i++)for(let j=i+1;j<8;j++)WL.push(mk('line',{x1:WN[i][0].toFixed(1),y1:WN[i][1].toFixed(1),x2:WN[j][0].toFixed(1),y2:WN[j][1].toFixed(1),class:'s-line','stroke-width':3},$('wl')));
+WN.forEach((q,i)=>mk('circle',{cx:q[0].toFixed(1),cy:q[1].toFixed(1),r:26,class:i?'ink':'gain'},$('wn')));
+// banknote route: around every stranger, back to YOU, then home into the central note
+const TR=[0,1,2,3,4,5,6,7,0].map(i=>WN[i]).concat([[500,520]]);
+fig($('pplL'),440,440,34,'ink');fig($('pplR'),1160,440,34,'ink');
+const PW=[];for(let i=0;i<10;i++){const a=i*Math.PI/5+.3,x=1310+160*Math.cos(a),y=430+160*Math.sin(a),g=mk('g',{},$('pw'));
+  mk('path',{d:'M1310 430L'+x.toFixed(1)+' '+y.toFixed(1),class:'s-line','stroke-width':3,'stroke-dasharray':'6 6'},g);mk('circle',{cx:x.toFixed(1),cy:y.toFixed(1),r:12,class:'ink'},g);PW.push(g)}
+const arcXY=(f,x0,x1,y0,h)=>[x0+(x1-x0)*f,y0-h*Math.sin(Math.PI*f)];
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('note0'),p(u,TM.paper_note,TM.paper_note+.6));$('noteF').setAttribute('transform','translate(0 '+(6*Math.sin(t*1.5)).toFixed(1)+')');
+rise($('meal0'),p(u,TM.paper_note+3,TM.paper_note+3.6));rise($('qm0'),p(u,TM.paper_note+3.6,TM.paper_note+4.2));
+
+rise($('farm1'),p(u,TM.apple_farmer,TM.apple_farmer+.5));rise($('shoe1'),p(u,TM.shoemaker,TM.shoemaker+.5));
+const ak=p(u,TM.shoemaker+1,TM.shoemaker+2),ab=p(u,TM.shoemaker+3,TM.shoemaker+3.8);
+$('apl').setAttribute('transform','translate('+(330+210*ak-210*ab).toFixed(1)+' 500)');$('apl').setAttribute('opacity',p(u,TM.apple_farmer+.5,TM.apple_farmer+1).toFixed(2));
+rise($('nox'),p(u,TM.shoemaker+2,TM.shoemaker+2.5));
+rise($('net1'),p(u,TM.rate_table,TM.rate_table+.5));
+CHD.forEach((l,i)=>{const a=TM.rate_table+i/CHD.length*2.5;l.setAttribute('opacity',p(u,a,a+.3).toFixed(2))});
+rise($('rn1'),p(u,TM.rate_table+.3,TM.rate_table+.8));$('rnum').textContent=Math.round(4950*p(u,TM.rate_table+.3,TM.rate_table+2.8)).toLocaleString('en-US');
+
+rise($('shell2'),p(u,TM.cowry_shell,TM.cowry_shell+.5));
+RG.forEach((g,i)=>{const a=TM.cowry_shell+4.6+i*.5;rise(g,p(u,a,a+.4))});
+rise($('str2'),p(u,TM.shell_string,TM.shell_string+.4));SH.forEach((g,i)=>{const a=TM.shell_string+i*.08;rise(g,p(u,a,a+.3))});
+rise($('use2'),p(u,TM.shell_string+.4,TM.shell_string+.9));
+[0,1,2].forEach(i=>{const a=TM.shell_string+1.8+i*.7;rise($('bx'+i),p(u,a,a+.4))});
+
+rise($('barl'),p(u,TM.barley_sack,TM.barley_sack+.5));rise($('eat3'),p(u,TM.barley_sack+6.6,TM.barley_sack+7.1));
+rise($('arr3'),p(u,TM.silver_bar,TM.silver_bar+.4));rise($('silv'),p(u,TM.silver_bar+.3,TM.silver_bar+.8));
+rise($('scale3'),p(u,TM.balance_scale,TM.balance_scale+.5));
+const ta=-8+3*Math.sin(t*1.5),dy=180*Math.sin(ta*Math.PI/180);
+$('beam').setAttribute('transform','rotate('+ta.toFixed(2)+' 1230 320)');$('panL').setAttribute('transform','translate(0 '+(-dy).toFixed(1)+')');$('panR').setAttribute('transform','translate(0 '+dy.toFixed(1)+')');
+rise($('noeat'),p(u,TM.balance_scale+.5,TM.balance_scale+1));rise($('want3'),p(u,TM.balance_scale+1.5,TM.balance_scale+2.1));
+
+rise($('cell4'),p(u,TM.prison_cell,TM.prison_cell+.5));rise($('chain4'),p(u,TM.cigarette,TM.cigarette+.5));
+const cp=Math.max(0,u-TM.cigarette)*.7%3,cs=Math.floor(cp),cf=ease(cl((cp-cs)*1.4)),cq=arcXY(cf,CX[cs],CX[cs+1],380,50);
+$('cig').setAttribute('transform','translate('+cq[0].toFixed(1)+' '+cq[1].toFixed(1)+')');$('cig').setAttribute('opacity',p(u,TM.cigarette+.5,TM.cigarette+1).toFixed(2));
+rise($('pass4'),p(u,TM.cigarette+1.2,TM.cigarette+1.8));
+
+rise($('pc5'),p(u,TM.computer,TM.computer+.5));rise($('srv5'),p(u,TM.computer+.8,TM.computer+1.3));
+DG.forEach((d,i)=>{let s='';const k=Math.floor(t*5)+i*13;for(let j=0;j<14;j++)s+=((k*31+j*17+i*7+j*k)%10);d.textContent=s});
+LT.forEach((l,i)=>l.setAttribute('opacity',(.3+.7*(Math.sin(t*4+i*2)>0)).toFixed(2)));
+rise($('pie5'),p(u,TM.pie_chart,TM.pie_chart+.5));
+const sw=.09*2*Math.PI*p(u,TM.pie_chart+3,TM.pie_chart+4),ex=880+200*Math.sin(sw),ey=500-200*Math.cos(sw);
+$('slice').setAttribute('d',sw>.001?'M880 500L880 300A200 200 0 0 1 '+ex.toFixed(1)+' '+ey.toFixed(1)+'Z':'M880 500');
+rise($('lab0'),p(u,TM.pie_chart,TM.pie_chart+.5));$('tot').textContent='$'+Math.round(60*p(u,TM.pie_chart,TM.pie_chart+1.5))+' trillion';
+rise($('lab1'),p(u,TM.pie_chart+3,TM.pie_chart+3.5));rise($('lab2'),p(u,TM.pie_chart+7.8,TM.pie_chart+8.3));
+
+rise($('web6'),p(u,TM.trust_web,TM.trust_web+.5));
+WL.forEach((l,i)=>{const a=TM.trust_web+.5+i*.05;l.setAttribute('opacity',p(u,a,a+.3).toFixed(2))});
+// banknote passes once around the web, then settles into the central note
+const t0=TM.trust_web+4.6,hs=Math.max(0,(u-t0)/.65),hn=TR.length-1,hk=Math.min(Math.floor(hs),hn-1),hf=hs>=hn?1:ease(cl((hs-hk)*1.35));
+const HA=TR[hk],HB=TR[hk+1],hx=HA[0]+(HB[0]-HA[0])*hf,hy=HA[1]+(HB[1]-HA[1])*hf,lift=hk===hn-1?0:-14*Math.sin(Math.PI*hf);
+const home=cl((hs-hn)/.8),tsc=1-.35*ease(home);
+$('tok').setAttribute('transform','translate('+hx.toFixed(1)+' '+(hy+lift).toFixed(1)+') scale('+tsc.toFixed(3)+')');
+$('tok').setAttribute('opacity',(p(u,t0,t0+.4)*(1-home)).toFixed(2));
+const lit=hs>=hn;$('cnote').style.stroke=lit?'var(--gain)':'var(--ink)';$('cnoteC').style.stroke=lit?'var(--gain)':'var(--ink)';
+rise($('qc6'),p(u,TM.quote_card,TM.quote_card+.5));[0,1,2,3].forEach(i=>{const a=TM.quote_card+.5+i*.5;rise($('ql'+i),p(u,a,a+.4))});
+
+rise($('flg7'),p(u,TM.two_flags,TM.two_flags+.5));rise($('ppl7'),p(u,TM.two_flags+.4,TM.two_flags+.9));
+rise($('clash'),p(u,TM.two_flags+2.6,TM.two_flags+3.1));rise($('same7'),p(u,TM.two_flags+3.2,TM.two_flags+3.7));
+const co=p(u,TM.two_flags+3,TM.two_flags+3.5);
+// identical coins travel back and forth across the dashed border
+[['coinG',0],['coinS',1]].forEach(([id,o])=>{const s=(t*.5+o)%2,f=s<1?ease(s):1-ease(s-1),q=arcXY(f,500,1100,520,90);
+  $(id).setAttribute('transform','translate('+q[0].toFixed(1)+' '+q[1].toFixed(1)+')');$(id).setAttribute('opacity',co.toFixed(2))});
+rise($('coop7'),p(u,TM.gold_coin,TM.gold_coin+.6));
+
+rise($('card8'),p(u,TM.pay_moment,TM.pay_moment+.5));PW.forEach((g,i)=>{const a=TM.pay_moment+.6+i*.25;rise(g,p(u,a,a+.4))});
+['qa8','qb8','qc8','qd8'].forEach((id,i)=>{const a=TM.pay_moment+6.2+i*.4;rise($(id),p(u,a,a+.5))});
+rise($('lb8'),p(u,TM.pay_moment+2,TM.pay_moment+2.6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.0;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

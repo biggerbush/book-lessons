@@ -1,0 +1,412 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Intelligent Investor Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of The Intelligent Investor: A share is a piece of a real company, so judge it by its size, financial strength, steady earnings, dividend history, and a sensible price compared with earnings. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE INTELLIGENT INVESTOR · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Buy a business,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not a ticker.</text>
+<text class="b" x="120" y="600" font-size="32">Judge every stock as if you were buying the whole company.</text>
+<clipPath id="tclip"><rect x="1060" y="220" width="420" height="120" rx="12"/></clipPath>
+<rect class="ink" x="1060" y="220" width="420" height="120" rx="12"/>
+<g clip-path="url(#tclip)"><g id="tick"></g></g>
+<g id="shop0">
+<path class="s-muted" d="M1270 352v44m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-ink" x="1160" y="446" width="220" height="94" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="1150" y="410" width="240" height="36" rx="6"/>
+<rect class="s-ink" x="1185" y="470" width="80" height="44" fill="none" stroke-width="4"/>
+<rect class="ink" x="1300" y="480" width="50" height="60"/>
+<rect id="sl0" class="gain" x="1160" y="410" width="44" height="130"/>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A share is a slice of a business.</text>
+<text class="b" x="120" y="176" font-size="32">Picture a bakery on your street.</text>
+<path class="s-ink" d="M140 760h680" stroke-width="6" stroke-linecap="round"/>
+<g id="bk">
+<rect class="s-ink" x="220" y="250" width="360" height="70" rx="10" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="400" y="301" font-size="44" text-anchor="middle">BAKERY</text>
+<rect class="s-ink" x="160" y="390" width="480" height="370" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="150" y="340" width="500" height="44" rx="6"/>
+<g id="awn"></g>
+<rect class="s-ink" x="190" y="440" width="250" height="180" fill="none" stroke-width="5"/>
+<rect class="ink" x="210" y="530" width="120" height="80" rx="6"/>
+<rect x="228" y="550" width="84" height="40" rx="4" fill="var(--stage)"/>
+<rect class="ink" x="480" y="540" width="120" height="220"/>
+</g>
+<g id="cust"></g>
+<g id="cuts"></g>
+<rect id="slc" class="gain" x="580" y="390" width="60" height="370"/>
+<g id="lbl1"><text class="d" x="1030" y="470" font-size="64">1 share</text><text class="m" x="1030" y="512" font-size="22">A SMALL SLICE OF THE BAKERY</text></g>
+<g id="q1"><text class="d" x="1030" y="640" font-size="46">Would you want</text><text class="d" x="1030" y="696" font-size="46">to own this</text><text class="d" x="1030" y="752" font-size="46" style="fill:var(--gain)">business?</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Think like an owner.</text>
+<text class="b" x="120" y="176" font-size="32">Graham’s checklist for careful investors.</text>
+<g id="quote">
+<rect class="s-line" x="120" y="240" width="680" height="400" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="150" y="380" font-size="160" style="fill:var(--gain)">“</text>
+<text class="d5" x="160" y="430" font-size="42">Investment is most</text>
+<text class="d5" x="160" y="486" font-size="42">intelligent when it is</text>
+<text class="d5" x="160" y="542" font-size="42">most businesslike.</text>
+<text class="m" x="160" y="604" font-size="22">— BENJAMIN GRAHAM</text>
+</g>
+<g id="board2">
+<rect class="s-ink" x="900" y="250" width="520" height="560" rx="18" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1080" y="228" width="160" height="44" rx="10"/>
+</g>
+<g id="cks"></g>
+<g id="one"><text class="d" x="120" y="760" font-size="46">One test at a time.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Big enough.</text>
+<text class="b" x="120" y="176" font-size="32">Large, established companies that can survive a bad year.</text>
+<path class="s-ink" d="M180 760h760" stroke-width="6" stroke-linecap="round"/>
+<g id="bars">
+<rect id="small" class="ink" x="260" y="640" width="160" height="120"/>
+<rect class="gain" x="560" y="360" width="200" height="400"/>
+<text class="m" x="340" y="800" font-size="20" text-anchor="middle">SMALL FIRM</text>
+<text class="m" x="660" y="800" font-size="20" text-anchor="middle">LARGE, ESTABLISHED</text>
+</g>
+<g id="frag"><text class="m" x="340" y="610" font-size="20" text-anchor="middle" style="fill:var(--loss)">ONE BAD YEAR COULD SINK IT</text></g>
+<g id="thr">
+<path class="s-ink" d="M200 520h720" stroke-width="4" stroke-dasharray="12 10"/>
+<text class="d" x="960" y="540" font-size="64">$100 million</text>
+<text class="m" x="966" y="584" font-size="20">IN YEARLY SALES, AT LEAST</text>
+<text class="m" x="966" y="616" font-size="20">GRAHAM’S DAY · INDUSTRIAL FIRMS</text>
+</g>
+<g id="infl">
+<g id="infl_l"><path class="s-gain" d="M200 290h720" stroke-width="5" stroke-dasharray="12 10"/></g>
+<path class="s-gain" d="M880 500V312m-16 16 16-16 16 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="infl_t"><text class="d" x="960" y="306" font-size="48" style="fill:var(--gain)">Today: far higher</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Strong finances.</text>
+<text class="b" x="120" y="176" font-size="32">Can it pay its bills, with room to spare?</text>
+<g id="scale">
+<path class="s-ink" d="M490 380V740" stroke-width="8" stroke-linecap="round"/>
+<path class="ink" d="M430 780h120l-60-44z"/>
+<g id="beam"><path class="s-ink" d="M250 380h480" stroke-width="10" stroke-linecap="round"/></g>
+<circle class="ink" cx="490" cy="380" r="14"/>
+<g id="pL"><path class="s-ink" d="M0 0L-120 170M0 0L120 170" fill="none" stroke-width="4"/><path class="s-ink" d="M-130 170h260" stroke-width="8" stroke-linecap="round"/><rect class="gain" x="-78" y="120" width="74" height="46" rx="6"/><rect class="gain" x="4" y="120" width="74" height="46" rx="6"/><text class="m" x="0" y="214" font-size="20" text-anchor="middle">CASH + INVENTORY</text></g>
+<g id="pR"><path class="s-ink" d="M0 0L-120 170M0 0L120 170" fill="none" stroke-width="4"/><path class="s-ink" d="M-130 170h260" stroke-width="8" stroke-linecap="round"/><rect class="loss" x="-37" y="120" width="74" height="46" rx="6"/><text class="m" x="0" y="214" font-size="20" text-anchor="middle">BILLS DUE IN A YEAR</text></g>
+</g>
+<g id="two"><text class="d" x="490" y="300" font-size="64" text-anchor="middle" style="fill:var(--gain)">≥ 2×</text></g>
+<g id="debt">
+<text class="m" x="940" y="390" font-size="20">WHAT’S LEFT AFTER THE BILLS</text>
+<rect class="gain" x="940" y="410" width="500" height="70" rx="8"/>
+<text class="m" x="940" y="560" font-size="20">LONG-TERM DEBT</text>
+<rect id="debtb" class="loss" x="940" y="580" width="0" height="70" rx="8"/>
+</g>
+<g id="dsm"><text class="d" x="940" y="760" font-size="44">Debt must be smaller.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Steady earnings.</text>
+<text class="b" x="120" y="176" font-size="32">A profit in each of the past 10 years.</text>
+<text id="yrs" class="d" x="120" y="290" font-size="48">0 of 10 years in profit</text>
+<g id="zone">
+<rect class="loss" x="140" y="724" width="1110" height="60" fill-opacity=".14"/>
+<text class="m" x="160" y="762" font-size="20" style="fill:var(--loss)">LOSS YEARS: NONE</text>
+<text class="m" x="196" y="824" font-size="20" text-anchor="middle">YEAR 1</text>
+<text class="m" x="1204" y="824" font-size="20" text-anchor="middle">YEAR 10</text>
+</g>
+<g id="ebar"></g>
+<path class="s-ink" d="M140 720h1110" stroke-width="5" stroke-linecap="round"/>
+<g id="grw">
+<path class="s-ink" d="M196 490L1204 420" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/>
+<path class="s-ink" d="M1178 404l26 16-22 20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="1270" y="440" font-size="72" style="fill:var(--gain)">+1/3</text>
+<text class="m" x="1272" y="490" font-size="20">EARNINGS</text>
+<text class="m" x="1272" y="520" font-size="20">PER SHARE</text>
+<text class="m" x="1272" y="550" font-size="20">OVER 10 YEARS</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">4. Reliable dividends.</text>
+<text class="b" x="120" y="176" font-size="32">Paid to shareholders without a break.</text>
+<g id="co">
+<path class="gain" d="M130 290L220 236L310 290z"/>
+<rect class="s-ink" x="145" y="290" width="150" height="130" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M185 310v90M220 310v90M255 310v90" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="220" y="456" font-size="20" text-anchor="middle">COMPANY</text>
+<path class="s-line" d="M330 360H1280" stroke-width="3" stroke-dasharray="6 10"/>
+<g id="holder"></g>
+<text class="m" x="1380" y="456" font-size="20" text-anchor="middle">SHAREHOLDER</text>
+</g>
+<g id="cn"></g>
+<g id="wvg">
+<path id="wv" class="s-muted" fill="none" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="942" y="470" font-size="18" text-anchor="middle" style="fill:var(--gain)">GOOD TIMES</text>
+<text class="m" x="565" y="470" font-size="18" text-anchor="middle" style="fill:var(--loss)">BAD TIMES</text>
+<text class="m" x="120" y="790" font-size="22">THROUGH GOOD TIMES AND BAD</text>
+</g>
+<g id="cal"><g id="cells"></g><text id="cnt" class="d" x="120" y="720" font-size="56">0 years, no break</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">5. A fair price.</text>
+<text class="b" x="120" y="176" font-size="32">Even a wonderful business can cost too much.</text>
+<g id="tag"><g id="tagr">
+<path class="s-ink" d="M140 250C170 290 200 320 225 358" fill="none" stroke-width="4"/>
+<polygon class="s-ink" points="180,370 240,300 500,300 500,440 240,440" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<circle class="s-ink" cx="228" cy="370" r="12" fill="none" stroke-width="4"/>
+<text id="tagt" class="d" x="270" y="392" font-size="60">PRICE</text>
+</g></g>
+<g id="much"><text class="d5" x="120" y="540" font-size="34">Pay far too much,</text><text class="d5" x="120" y="584" font-size="34">and even a great</text><text class="d5" x="120" y="628" font-size="34" style="fill:var(--loss)">bakery is a bad buy.</text></g>
+<g id="gauge">
+<path class="s-gain" d="M680 580A220 220 0 0 1 900 360" fill="none" stroke-width="28"/>
+<path class="s-loss" d="M900 360A220 220 0 0 1 1120 580" fill="none" stroke-width="28"/>
+<path class="s-ink" d="M900 340v44" stroke-width="5"/>
+<text class="d" x="900" y="326" font-size="36" text-anchor="middle">15×</text>
+<g id="ndl"><path class="s-ink" d="M0 0h190" stroke-width="8" stroke-linecap="round"/></g>
+<circle class="ink" cx="900" cy="580" r="18"/>
+</g>
+<g id="pel"><text class="m" x="900" y="640" font-size="20" text-anchor="middle">PRICE ÷ AVERAGE EARNINGS, 3 YEARS</text><text class="d" x="900" y="704" font-size="44" text-anchor="middle">No more than 15×</text></g>
+<g id="bv">
+<path class="s-loss" d="M1190 460h270" stroke-width="4" stroke-dasharray="10 8"/>
+<text class="m" x="1190" y="444" font-size="20" style="fill:var(--loss)">1.5 × NET ASSETS</text>
+<rect class="ink" x="1200" y="540" width="100" height="160"/>
+<rect id="pbar" class="gain" x="1340" y="700" width="100" height="0"/>
+<path class="s-ink" d="M1180 700h290" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="1250" y="740" font-size="20" text-anchor="middle">NET ASSETS</text>
+<text class="m" x="1390" y="740" font-size="20" text-anchor="middle">PRICE</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<text class="m" x="120" y="160" font-size="26">YOUR TURN</text>
+<g id="pills"></g>
+<g id="mag"><circle class="s-ink" r="30" fill="var(--stage)" stroke-width="8"/><path class="s-ink" d="M22 22l30 30" stroke-width="12" stroke-linecap="round"/></g>
+<g id="pick"><text class="b" x="120" y="440" font-size="32">Pick one stock you own or want, and run it through these five tests.</text></g>
+<g id="qa"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">Am I buying a <tspan style="fill:var(--gain)">business</tspan>,</text></g>
+<g id="qb"><text class="d" x="136" y="668" font-size="88" letter-spacing="-2">or just a <tspan style="fill:var(--loss)">ticker</tspan>?</text></g>
+<g id="qn"><text class="m" x="143" y="770" font-size="26">BUY THE BUSINESS, NOT THE TICKER</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="119" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:59</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Buy a Business, Not a Ticker&rdquo;, from <em>The Intelligent Investor</em> by Benjamin Graham. The five-part checklist and its thresholds come from Graham&#x27;s criteria for defensive investors, as reported in the book; the 100 million dollar sales figure is from his era. The bakery, scales, coins and meters are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=119, SC=[[0.0, 8.3], [8.3, 21.6], [21.6, 34.2], [34.2, 50.9], [50.9, 64.5], [64.5, 75.8], [75.8, 88.6], [88.6, 105.4], [105.4, 119.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "A Share Is a Shop", "Think Like an Owner", "Big Enough", "Strong Finances", "Steady Profits", "Reliable Dividends", "A Fair Price", "Your Turn"];
+const TM={"ticker_tape": 0.0, "corner_shop": 8.6, "share_slice": 13.52, "graham": 21.92, "checklist": 27.12, "size_bar": 34.52, "inflation_up": 48.67, "scales": 51.2, "debt_weight": 60.0, "timeline": 64.76, "growth_arrow": 70.8, "coins": 76.08, "calendar": 83.12, "price_tag": 88.88, "pe_meter": 94.88, "book_value": 100.48, "magnify": 105.68};
+const man=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const TK=['BUY ▲','SELL ▼','HOT ▲','NOW ▼','BUY ▲','SELL ▼','HOT ▲','NOW ▼'].map((s,i)=>{const e=mk('text',{x:1200,y:292,'font-size':32,class:'m',opacity:0,style:'fill:var('+(i%2?'--stage':'--gain')+')'},$('tick'));e.textContent=s;return e});
+for(let i=0;i<10;i++)mk('circle',{cx:175+50*i,cy:384,r:25,class:'gain'},$('awn'));
+man($('bk'),390,480,18,'ink');
+man($('cust'),710,680,18,'ink');man($('cust'),780,680,18,'ink');
+for(let i=1;i<8;i++)mk('path',{d:'M'+(160+60*i)+' 410V760',class:'s-muted','stroke-width':3,'stroke-dasharray':'8 8'},$('cuts'));
+const CK=['Size','Financial strength','Steady earnings','Dividend record','Fair price'].map((s,i)=>{const y=340+i*96,g=mk('g',{},$('cks'));
+  const c=mk('circle',{cx:960,cy:y,r:26,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const n=mk('text',{x:960,y:y+9,'font-size':26,'text-anchor':'middle',class:'d'},g);n.textContent=i+1;
+  const l=mk('text',{x:1010,y:y+12,'font-size':36,class:'d5'},g);l.textContent=s;return [g,c,n]});
+const H=[],EB=[];for(let i=0;i<10;i++){H.push(180*(1+i/27)+(i%3)*8);EB.push(mk('rect',{x:160+i*112,y:720,width:72,height:0,class:'gain'},$('ebar')))}
+man($('holder'),1380,290,30,'ink');
+const CN=[];for(let i=0;i<6;i++)CN.push(mk('circle',{r:20,fill:'var(--gain)',stroke:'var(--ink)','stroke-width':4},$('cn')));
+const CELL=[];for(let i=0;i<20;i++)CELL.push(mk('rect',{x:120+i*68,y:570,width:56,height:56,rx:8,stroke:'var(--ink)','stroke-width':4,fill:'var(--stage)'},$('cells')));
+let wd='M120 '+(510-22*Math.sin(1)).toFixed(1);for(let x=130;x<=1480;x+=10)wd+='L'+x+' '+(510-22*Math.sin(x/120)).toFixed(1);$('wv').setAttribute('d',wd);
+const PL=['SIZE','FINANCES','EARNINGS','DIVIDENDS','PRICE'].map((s,i)=>{const x=120+i*272;
+  const r=mk('rect',{x:x,y:210,width:248,height:70,rx:35,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('pills'));
+  const e=mk('text',{x:x+124,y:254,'font-size':24,'text-anchor':'middle',class:'m'},$('pills'));e.textContent=s;return r});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+TK.forEach((e,i)=>{const x=900+((i*150-t*90)%1200+1200)%1200;
+    const k=Math.min(cl((x-1070)/40),cl((1340-x)/40));
+    if(k<=0){e.setAttribute('x',1200);e.setAttribute('opacity',0)}
+    else{e.setAttribute('x',x.toFixed(1));e.setAttribute('opacity',k.toFixed(2))}});
+  rise($('shop0'),p(u,TM.ticker_tape+5.4,TM.ticker_tape+6));
+  $('sl0').setAttribute('opacity',(.55+.35*Math.sin(t*3)).toFixed(2));
+
+  rise($('bk'),p(u,TM.corner_shop,TM.corner_shop+.6));
+  rise($('cust'),p(u,TM.corner_shop+2,TM.corner_shop+2.6));
+  $('cuts').setAttribute('opacity',p(u,TM.share_slice,TM.share_slice+.6));
+  const sm=p(u,TM.share_slice+.8,TM.share_slice+2.2);
+  $('slc').setAttribute('opacity',p(u,TM.share_slice,TM.share_slice+.5));
+  $('slc').setAttribute('transform','translate('+(360*sm).toFixed(1)+' '+(-30*Math.sin(Math.PI*sm)).toFixed(1)+')');
+  rise($('lbl1'),p(u,TM.share_slice+1.8,TM.share_slice+2.4));
+  rise($('q1'),p(u,TM.share_slice+4.6,TM.share_slice+5.2));
+
+  rise($('quote'),p(u,TM.graham,TM.graham+.6));
+  rise($('board2'),p(u,TM.checklist,TM.checklist+.5));
+  CK.forEach((c,i)=>{const a=TM.checklist+.6+i*.4;rise(c[0],p(u,a,a+.4));const on=u>=TM.checklist+4.6+i*.8;
+    c[1].setAttribute('fill',on?'var(--gain)':'var(--stage)');c[1].setAttribute('stroke',on?'var(--gain)':'var(--ink)');c[2].style.fill=on?'var(--on-gain)':'var(--ink)'});
+  rise($('one'),p(u,TM.checklist+4.6,TM.checklist+5.2));
+
+  rise($('bars'),p(u,TM.size_bar,TM.size_bar+.5));
+  const fr=u>=TM.size_bar+1.2;$('small').setAttribute('class',fr?'loss':'ink');
+  $('small').setAttribute('transform',fr?'rotate('+(4*Math.sin(t*5)).toFixed(2)+' 340 760)':'');
+  rise($('frag'),p(u,TM.size_bar+1.2,TM.size_bar+1.7));
+  rise($('thr'),p(u,TM.size_bar+6.8,TM.size_bar+7.4));
+  $('infl').setAttribute('opacity',p(u,TM.inflation_up,TM.inflation_up+.4));
+  $('infl_l').setAttribute('transform','translate(0 '+(230*(1-p(u,TM.inflation_up,TM.inflation_up+1.2))).toFixed(1)+')');
+  rise($('infl_t'),p(u,TM.inflation_up+.9,TM.inflation_up+1.5));
+
+  rise($('scale'),p(u,TM.scales,TM.scales+.5));
+  const ta=10*p(u,TM.scales+2,TM.scales+3.2),tr=ta*Math.PI/180,bx=240*Math.cos(tr),by=240*Math.sin(tr);
+  $('beam').setAttribute('transform','rotate('+(-ta).toFixed(2)+' 490 380)');
+  $('pL').setAttribute('transform','translate('+(490-bx).toFixed(1)+' '+(380+by).toFixed(1)+')');
+  $('pR').setAttribute('transform','translate('+(490+bx).toFixed(1)+' '+(380-by).toFixed(1)+')');
+  rise($('two'),p(u,TM.scales+2.8,TM.scales+3.4));
+  rise($('debt'),p(u,TM.debt_weight,TM.debt_weight+.5));
+  $('debtb').setAttribute('width',(320*p(u,TM.debt_weight+.6,TM.debt_weight+1.8)).toFixed(1));
+  rise($('dsm'),p(u,TM.debt_weight+2,TM.debt_weight+2.5));
+
+  rise($('zone'),p(u,TM.timeline,TM.timeline+.5));
+  let ny=0;EB.forEach((b,i)=>{const a=TM.timeline+1.3+i*.45,k=p(u,a,a+.4);b.setAttribute('y',(720-H[i]*k).toFixed(1));b.setAttribute('height',(H[i]*k).toFixed(1));if(k>.5)ny++});
+  $('yrs').textContent=ny+' of 10 years in profit';
+  rise($('grw'),p(u,TM.growth_arrow,TM.growth_arrow+.6));
+
+  rise($('co'),p(u,TM.coins,TM.coins+.5));
+  const cv=p(u,TM.coins+.4,TM.coins+.9);
+  CN.forEach((c,i)=>{const f=(t*.25+i/6)%1;c.setAttribute('cx',(330+920*f).toFixed(1));c.setAttribute('cy',(360-30*Math.sin(Math.PI*f)).toFixed(1));c.setAttribute('opacity',(cv*Math.min(1,f*6,(1-f)*6)).toFixed(2))});
+  rise($('cal'),p(u,TM.coins+1,TM.coins+1.5));
+  let nd=0;CELL.forEach((e,i)=>{const on=u>=TM.coins+1.2+i*.22;e.setAttribute('fill',on?'var(--gain)':'var(--stage)');if(on)nd++});
+  $('cnt').textContent=nd+(nd===20?'+':'')+' years, no break';
+  rise($('wvg'),p(u,TM.calendar,TM.calendar+.6));
+
+  $('tagr').setAttribute('transform','rotate('+(4*Math.sin(t*1.6)).toFixed(2)+' 140 250)');
+  rise($('tag'),p(u,TM.price_tag,TM.price_tag+.5));
+  $('tagt').style.fill=(u>=TM.price_tag+1&&u<TM.pe_meter+.4)?'var(--loss)':'var(--ink)';
+  rise($('much'),p(u,TM.price_tag+1,TM.price_tag+1.5));
+  rise($('gauge'),p(u,TM.price_tag+1,TM.price_tag+1.5));
+  const pv=27-15*p(u,TM.pe_meter+.4,TM.pe_meter+1.6);
+  $('ndl').setAttribute('transform','translate(900 580) rotate('+(-180+6*pv*p(u,TM.price_tag+1.2,TM.price_tag+2.2)).toFixed(1)+')');
+  rise($('pel'),p(u,TM.pe_meter,TM.pe_meter+.5));
+  rise($('bv'),p(u,TM.book_value,TM.book_value+.5));
+  const bh=200*p(u,TM.book_value+.6,TM.book_value+1.6);$('pbar').setAttribute('y',(700-bh).toFixed(1));$('pbar').setAttribute('height',bh.toFixed(1));
+
+  rise($('pills'),p(u,TM.magnify,TM.magnify+.5));
+  const mx=244+1088*p(u,TM.magnify+.6,TM.magnify+4.6);
+  $('mag').setAttribute('transform','translate('+mx.toFixed(1)+' 334)');
+  $('mag').setAttribute('opacity',p(u,TM.magnify+.3,TM.magnify+.7));
+  PL.forEach((r,i)=>r.setAttribute('stroke',(u>=TM.magnify+.6&&mx>=234+272*i)?'var(--gain)':'var(--ink)'));
+  rise($('pick'),p(u,TM.magnify+.4,TM.magnify+1));
+  rise($('qa'),p(u,TM.magnify+5.8,TM.magnify+6.3));
+  rise($('qb'),p(u,TM.magnify+6.2,TM.magnify+6.7));
+  rise($('qn'),p(u,TM.magnify+6.8,TM.magnify+7.3));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:115.6;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

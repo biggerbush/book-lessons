@@ -1,0 +1,23 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:cls},g);return g};
+const rp0=$('road0'),L0=rp0.getTotalLength(),pt0=f=>rp0.getPointAtLength(f*L0);
+const W0=[.3,.82].map((f,i)=>{const o=pt0(f);return mk('rect',{x:o.x-15,y:o.y-66,width:30,height:70,rx:4,class:i?'loss':'ink'},$('w0'))});
+fig(mk('g',{},$('run1')),300,540,22,'ink');
+const WL1=[0,1,2].map(i=>mk('rect',{x:700+i*240,y:490-i*30,width:50,height:150+i*30,rx:6,class:'loss'},$('walls1')));
+const rp2=$('rt2'),L2=rp2.getTotalLength();
+const CL2=[.28,.52,.76].map(f=>{const o=rp2.getPointAtLength(f*L2),g=mk('g',{},$('storm2')),x=o.x,y=o.y-180;
+  [[-30,0,26],[5,-14,32],[38,0,24]].forEach(c=>mk('circle',{cx:x+c[0],cy:y+c[1],r:c[2],class:'loss'},g));
+  mk('path',{d:`M${x} ${y+24}l-12 26h20l-12 26`,fill:'none',class:'s-loss','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+const ck3=$('ck3'),CK3=ck3.getTotalLength();ck3.setAttribute('stroke-dasharray',CK3);
+const CC3=[],YD3=[];for(let i=0;i<12;i++)CC3.push(mk('rect',{x:900+(i%4)*135,y:350+Math.floor(i/4)*100,width:115,height:80,rx:8,stroke:'var(--ink)','stroke-width':4},$('cal3')));
+for(let i=0;i<15;i++)YD3.push(mk('circle',{cx:900+i*34,cy:672,r:9},$('yd3')));
+const C4=[[800,330],[1040,640],[560,640]],LK4=C4.map((a,i)=>{const b=C4[(i+1)%3],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy),ux=dx/l*128,uy=dy/l*128;
+  return mk('path',{d:`M${a[0]+ux} ${a[1]+uy}L${b[0]-ux} ${b[1]-uy}`,stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-dasharray':'14 14'},$('lk4'))});
+const ST5=['TRICKS','PATIENCE','SELF-TRUST'].map((s,i)=>{const g=mk('g',{},$('st5')),x=520+i*300,y=640-i*120;
+  mk('rect',{x:x,y:y,width:300,height:760-y,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);
+  mk('text',{x:x+150,y:y+56,'font-size':22,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+const CB5=mk('g',{},$('cl5'));fig(CB5,0,-101,24,'gain');
+const BK6=[],RB6=[[0,590,0],[-110,590,-8],[110,590,6],[-55,538,-5],[60,538,10]];
+for(let i=0;i<5;i++)BK6.push(mk('rect',{x:250,y:590-i*52,width:100,height:50,rx:4,class:'ink',stroke:'var(--stage)','stroke-width':3},$('blk6')));
+for(let i=0;i<8;i++){const a=i*Math.PI/4;mk('path',{d:`M${900+112*Math.cos(a)} ${760+112*Math.sin(a)}L${900+148*Math.cos(a)} ${760+148*Math.sin(a)}`,stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round'},$('rays6'))}
+for(let i=0;i<6;i++)mk('circle',{cx:260,cy:280+i*100,r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rg7'));
+const SC7=[0,1,2].map(i=>{const y=366+i*160,e=mk('path',{d:'M340 '+y+' q20 -18 40 0'+' t40 0'.repeat(19),fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('r7'+i)),l=e.getTotalLength();e.setAttribute('stroke-dasharray',l);e.setAttribute('stroke-dashoffset',l);return [e,l,y]});

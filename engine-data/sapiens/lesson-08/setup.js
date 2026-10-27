@@ -1,0 +1,16 @@
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const mon=(par,x,y,s)=>{const o=mk('g',{},par),g=mk('g',{},o),h=`q${12*s} ${-30*s} ${24*s} 0`;
+  mk('path',{d:`M${x} ${y}${h}${h}${h}l${16*s} ${-10*s}`,fill:'none',class:'s-loss','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  mk('circle',{cx:x-6*s,cy:y-12*s,r:10*s,class:'loss'},g);mk('circle',{cx:x-8*s,cy:y-14*s,r:2.5*s,fill:'var(--stage)'},g);
+  mk('path',{d:`M${x-20*s} ${y+6*s}h${110*s}`,class:'s-muted','stroke-width':3},o);return [o,g]};
+const ship=par=>{const g=mk('g',{},par);mk('path',{d:'M-60 0h120l-24 34h-72z',class:'ink'},g);mk('path',{d:'M0 0v-90',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},g);mk('path',{d:'M6 -86L56 -16H6z',class:'gain'},g);return g};
+const strk=(id,x,w,k)=>$(id).setAttribute('x2',(x+w*k).toFixed(1));
+for(let i=0;i<6;i++)mk('path',{d:'M200 '+(320+i*36)+'h'+(260-(i%3)*50),class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('scrl'));
+person($('sagep'),820,380,40,'ink');person($('villp'),1240,400,30,'ink');person($('vespp'),260,380,40,'ink');
+for(let i=0;i<6;i++)mk('path',{d:'M170 '+(310+i*40)+'h'+(180-(i%2)*60),class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('nbl'));
+const M3=[[240,320,1.6],[1000,280,1.2],[1180,650,1.6]].map(a=>mon($('mons3'),...a));
+const SH4=ship($('ship4')),SH5=ship($('ship5'));
+const M8=mon($('mon8'),1290,740,1);
+const FD=['VOYAGES','OBSERVATIONS','EXPERIMENTS'].map((s,i)=>{const tx=mk('text',{x:800,y:610+i*30,'font-size':20,'text-anchor':'middle',class:'m'},$('fund'));tx.textContent=s;return tx});
+const CO=[0,1,2,3].map(()=>mk('circle',{r:12,class:'gain',cx:800},$('coins')));
+const SP=[[1200,370,1180,350],[1440,370,1460,350],[1200,560,1180,580],[1440,560,1460,580]].map(q=>mk('path',{d:`M${q[0]} ${q[1]}L${q[2]} ${q[3]}`,class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('sp7')));

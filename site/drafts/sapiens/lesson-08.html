@@ -1,0 +1,296 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapiens Lesson 8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 8 of Sapiens: The Scientific Revolution began when people admitted how much they did not know and started investing in finding out. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAPIENS · LESSON 8</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The Discovery</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of Ignorance.</text>
+<text class="b" x="120" y="600" font-size="32">How saying we do not know launched the modern world.</text>
+<rect class="s-ink" x="1080" y="230" width="380" height="330" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path id="t_land" d="M1086 236H1190C1220 300 1170 340 1200 400C1230 460 1180 500 1210 554H1086Z" fill="var(--line)" class="s-ink" stroke-width="5" stroke-linejoin="round"/>
+<g id="t_blank"><rect class="s-muted" x="1250" y="256" width="186" height="280" rx="8" fill="none" stroke-width="4" stroke-dasharray="12 10"/><text id="t_q" class="d" x="1343" y="450" font-size="150" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="t_words"><text class="m" x="1270" y="620" font-size="28" text-anchor="middle" style="fill:var(--gain)">WE DO NOT KNOW.</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Everything was already known.</text>
+<text class="b" x="120" y="176" font-size="32">Answers lived in sacred texts and the words of ancient sages.</text>
+<g id="scr">
+<rect class="s-ink" x="160" y="260" width="340" height="300" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="140" y="240" width="380" height="32" rx="16"/><rect class="ink" x="140" y="548" width="380" height="32" rx="16"/>
+<g id="scrl"></g>
+<text class="m" x="330" y="620" font-size="20" text-anchor="middle">SACRED TEXTS</text>
+</g>
+<g id="silent"><text class="m" x="140" y="680" font-size="20" style="fill:var(--loss)">IF THE TEXTS WERE SILENT,</text><text class="m" x="140" y="712" font-size="20" style="fill:var(--loss)">THE QUESTION DIDN’T MATTER</text></g>
+<g id="sage"><g id="sagep"></g><path class="s-ink" d="M910 300V560" stroke-width="7" stroke-linecap="round"/><text class="m" x="820" y="600" font-size="20" text-anchor="middle">PRIEST · SCHOLAR</text></g>
+<g id="vill"><g id="villp"></g><circle class="s-ink" cx="1316" cy="314" r="36" fill="var(--stage)" stroke-width="5"/><text id="vq" class="d" x="1316" y="330" font-size="44" text-anchor="middle">?</text><text class="m" x="1240" y="600" font-size="20" text-anchor="middle">VILLAGER</text></g>
+<g id="varr"><path class="s-muted" d="M1190 640Q1030 740 870 640" fill="none" stroke-width="5" stroke-dasharray="10 10"/><path class="s-muted" d="M894 636L870 640L882 662" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1030" y="740" font-size="20" text-anchor="middle">ASKS</text></g>
+<g id="flask"><g transform="translate(-60 -80)"><path class="s-ink" d="M1385 700v40l-30 60h90l-30-60v-40z" fill="none" stroke-width="5" stroke-linejoin="round"/><path class="s-loss" d="M1345 705L1455 815M1455 705L1345 815" stroke-width="7" stroke-linecap="round"/><text class="m" x="1480" y="850" font-size="20" text-anchor="end">NO EXPERIMENT</text></g></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Science starts the other way.</text>
+<text class="b" x="120" y="176" font-size="32">It admits we do not know the most important things.</text>
+<g id="nb"><rect class="s-ink" x="140" y="260" width="480" height="340" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M380 260v340" stroke-width="5"/><g id="nbl"></g><text class="m" x="140" y="640" font-size="20">MODERN SCIENCE</text></g>
+<g id="nbw"><text class="d" x="404" y="400" font-size="40" style="fill:var(--gain)">We do</text><text class="d" x="404" y="450" font-size="40" style="fill:var(--gain)">not know.</text></g>
+<g id="qmw"><text id="qmt" class="d" x="800" y="580" font-size="300" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="thy"><rect class="s-ink" x="980" y="270" width="460" height="170" rx="16" fill="var(--stage)" stroke-width="5" stroke-dasharray="14 10"/><text class="m" x="1010" y="330" font-size="22">FAVOURITE THEORY</text><text class="d5" x="1010" y="400" font-size="40">Open to challenge</text></g>
+<g id="evd"><path class="s-gain" d="M1210 560V460m-18 18 18-18 18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1210" y="600" font-size="20" text-anchor="middle">NEW EVIDENCE</text></g>
+<g id="emb"><text class="d5" x="140" y="770" font-size="44" style="fill:var(--loss)">Embarrassment</text></g>
+<line id="embS" class="s-ink" x1="130" y1="755" x2="130" y2="755" stroke-width="5" stroke-linecap="round"/>
+<g id="inv"><path class="s-muted" d="M500 755h80m-20-20 20 20-20 20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d" x="620" y="775" font-size="56" style="fill:var(--gain)">Invitation.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Old maps were never empty.</text>
+<text class="b" x="120" y="176" font-size="32">Harari shows the shift through maps.</text>
+<g id="m3"><rect class="s-ink" x="160" y="220" width="1280" height="480" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M680 380C740 320 880 330 920 390C960 450 900 560 820 570C720 580 640 450 680 380Z" fill="var(--line)" stroke-width="5"/>
+<text class="m" x="800" y="472" font-size="24" text-anchor="middle" style="fill:var(--ink)">KNOWN</text></g>
+<g id="l3a"><path class="loss" d="M190 560c60-30 120 0 140 60l-10 60H190z" fill-opacity=".35"/><path class="loss" d="M1300 240h120v120c-40 10-90-20-110-60z" fill-opacity=".35"/><path class="loss" d="M560 690c20-50 120-60 160 0z" fill-opacity=".35"/></g>
+<g id="mons3"></g>
+<g id="cap3"><text class="m" x="120" y="790" font-size="22">WHERE KNOWLEDGE RAN OUT, THEY FILLED THE EDGES</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then came the blank spaces.</text>
+<text class="b" x="120" y="176" font-size="32">From the 15th century, European mapmakers left areas empty.</text>
+<rect class="s-ink" x="160" y="220" width="1280" height="500" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M166 226H520C560 320 480 400 540 480C600 560 520 640 560 714H166Z" fill="var(--line)" stroke-width="5" stroke-linejoin="round"/>
+<g id="blank4"><rect class="s-muted" x="760" y="260" width="640" height="420" rx="10" fill="none" stroke-width="4" stroke-dasharray="12 12"/></g>
+<g id="conf4"><text class="m" x="1080" y="400" font-size="24" text-anchor="middle">WE HAVE NOT</text><text class="m" x="1080" y="436" font-size="24" text-anchor="middle">BEEN THERE YET</text></g>
+<path id="wake" class="s-gain" fill="none" stroke-width="4" stroke-dasharray="8 10"/>
+<g id="ship4"></g>
+<g id="beg4"><text class="d" x="120" y="800" font-size="44">An empty space begs to be filled.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Columbus got it wrong.</text>
+<text class="b" x="120" y="176" font-size="32">In 1492 he crossed the Atlantic and believed he had reached Asia.</text>
+<rect class="loss" x="160" y="300" width="1280" height="300" fill-opacity=".12"/>
+<path class="s-ink" d="M160 300h150c30 60-20 100 20 160s-10 100 10 140H160z" fill="var(--line)" stroke-width="5"/>
+<path class="s-ink" d="M1440 300h-160c-40 60 20 120-30 170s40 90 20 130h170z" fill="var(--line)" stroke-width="5"/>
+<text class="m" x="180" y="462" font-size="22" style="fill:var(--ink)">EUROPE</text>
+<g id="route5"><path class="s-gain" d="M330 450Q800 300 1260 450" fill="none" stroke-width="5" stroke-dasharray="10 10"/><text class="d" x="800" y="560" font-size="40" text-anchor="middle">1492</text></g>
+<g id="ship5"></g>
+<g id="asia"><text class="d" x="1360" y="272" font-size="40" text-anchor="middle" style="fill:var(--gain)">“Asia”</text></g>
+<g id="lock5"><rect class="ink" x="1218" y="246" width="44" height="34" rx="6"/><path class="s-ink" d="M1228 248v-12a12 12 0 0 1 24 0v12" fill="none" stroke-width="6"/><text class="m" x="1440" y="640" font-size="20" text-anchor="end">FOR THE REST OF HIS LIFE</text></g>
+<g id="room5"><text class="d" x="120" y="740" font-size="40">No room for a continent</text><text class="d" x="120" y="795" font-size="40">nobody had predicted.</text>
+<rect class="s-ink" x="1060" y="664" width="380" height="126" rx="10" fill="var(--stage)" stroke-width="5"/>
+<path class="ink" d="M1066 670h64c-10 36 10 64 0 114h-64z"/><path class="ink" d="M1434 670h-64c10 36-10 64 0 114h64z"/>
+<text class="m" x="1250" y="734" font-size="20" text-anchor="middle" style="fill:var(--ink)">HIS MENTAL MAP</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Named for a doubter.</text>
+<text class="b" x="120" y="176" font-size="32">Amerigo Vespucci suggested an entirely unknown continent.</text>
+<g id="vesp"><g id="vespp"></g><text class="m" x="260" y="600" font-size="20" text-anchor="middle">AMERIGO VESPUCCI</text></g>
+<g id="bub6"><rect class="s-ink" x="380" y="240" width="340" height="90" rx="20" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M410 330l-40 40 70-40" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><text class="m" x="550" y="278" font-size="22" text-anchor="middle">AN UNKNOWN</text><text class="m" x="550" y="310" font-size="22" text-anchor="middle">CONTINENT?</text></g>
+<g id="map6"><rect class="s-ink" x="800" y="240" width="640" height="420" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M1180 600q30-14 60 0t60 0M1260 300q30-14 60 0t60 0" fill="none" stroke-width="4"/></g>
+<g id="amer"><path class="gain" d="M900 300L1080 290L1110 360L1020 450L990 480L950 430L880 360Z"/><path class="gain" d="M1020 500L1090 520L1110 580L1060 640L1040 640L1010 560Z"/></g>
+<g id="lab6"><text class="d" x="1180" y="460" font-size="44">America</text><text class="m" x="1180" y="505" font-size="24">1507</text></g>
+<g id="hon6"><text class="d" x="120" y="760" font-size="44">A whole continent honours a man</text><text class="d" x="120" y="815" font-size="44">who admitted, <tspan style="fill:var(--gain)">we did not know.</tspan></text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then they paid to find out.</text>
+<text class="b" x="120" y="176" font-size="32">Rulers, merchants and scholars hoped new knowledge meant new power.</text>
+<g id="st1"><path class="s-ink" d="M280 420L230 560M280 420L330 560M280 420V560" stroke-width="6" stroke-linecap="round"/><g transform="rotate(-25 280 400)"><rect class="ink" x="200" y="380" width="170" height="40" rx="8"/><rect class="ink" x="180" y="388" width="24" height="24" rx="4"/></g><text class="m" x="280" y="620" font-size="20" text-anchor="middle">ADMIT IGNORANCE</text></g>
+<g id="st2"><path class="s-muted" d="M420 440h120m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="gain" d="M760 330h80l-20 30c70 30 90 160 30 190h-100c-60-30-40-160 30-190z"/><g id="coins"></g><g id="fund"></g></g>
+<g id="st3"><path class="s-muted" d="M1000 440h120m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="s-ink" d="M1280 400v-30h80v30" fill="none" stroke-width="8" stroke-linejoin="round"/><rect class="ink" x="1220" y="400" width="200" height="130" rx="10"/><rect class="gain" x="1300" y="440" width="40" height="24" rx="4"/><g id="sp7"></g><text class="m" x="1320" y="620" font-size="20" text-anchor="middle">NEW ABILITIES</text></g>
+<g id="ask7"><text class="d5" x="120" y="770" font-size="40" style="fill:var(--muted)">What is true?</text><path class="s-muted" d="M420 757h70m-18-18 18 18-18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><text class="d" x="530" y="772" font-size="48" style="fill:var(--gain)">What can discovery unlock?</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="330" font-size="88" letter-spacing="-2">Where are you filling</text></g>
+<g id="qb"><text class="d" x="136" y="440" font-size="88" letter-spacing="-2">the blank edges with</text></g>
+<g id="qc"><text class="d" x="136" y="550" font-size="88" letter-spacing="-2">confident <tspan style="fill:var(--loss)">monsters</tspan>?</text></g>
+<g id="go8"><text class="m" x="143" y="660" font-size="26">THIS WEEK: SAY “I DO NOT KNOW” OUT LOUD,</text><text class="m" x="143" y="700" font-size="26" style="fill:var(--gain)">THEN GO AND FIND OUT.</text></g>
+<g id="fo8"><g transform="translate(0 -70)"><rect class="s-ink" x="1100" y="600" width="360" height="240" rx="10" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M1106 606h90c-20 60 20 140-10 228h-80z" fill="var(--line)" stroke-width="4"/><rect class="s-muted" x="1240" y="620" width="200" height="200" rx="8" fill="none" stroke-width="4" stroke-dasharray="10 10"/><g id="mon8"></g><text id="q8" class="d" x="1340" y="770" font-size="120" text-anchor="middle" style="fill:var(--gain)">?</text></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="140" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:20</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Discovery of Ignorance&rdquo;, from <em>Sapiens</em> by Yuval Noah Harari. Examples as reported in the book: early maps filled with imagined lands, later European maps with blank spaces, Columbus, and Amerigo Vespucci. Drawings of maps, monsters, ships and money bags are illustrations, not historical data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-08.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=140, SC=[[0.0, 7.9], [7.9, 27.8], [27.8, 44.8], [44.8, 56.4], [56.4, 71.4], [71.4, 85.2], [85.2, 107.0], [107.0, 125.7], [125.7, 140.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Power of Not Knowing", "Answers Already Written", "Three Small Words", "Monsters at the Edge", "The Blank Space", "Columbus Got It Wrong", "Named for a Doubter", "Paying to Find Out", "Your Blank Space"];
+const TM={"blank_map": 0.0, "old_scroll": 8.24, "wise_sage": 13.16, "villager": 22.88, "lab_notebook": 28.08, "question_mark": 35.08, "old_map": 45.08, "sea_monster": 50.96, "empty_region": 56.67, "sailing_ship": 67.08, "columbus": 71.71, "vespucci": 85.49, "world_map": 94.48, "telescope": 107.28, "money_bag": 110.4, "toolbox": 118.96, "your_map": 126.0};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const mon=(par,x,y,s)=>{const o=mk('g',{},par),g=mk('g',{},o),h=`q${12*s} ${-30*s} ${24*s} 0`;
+  mk('path',{d:`M${x} ${y}${h}${h}${h}l${16*s} ${-10*s}`,fill:'none',class:'s-loss','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+  mk('circle',{cx:x-6*s,cy:y-12*s,r:10*s,class:'loss'},g);mk('circle',{cx:x-8*s,cy:y-14*s,r:2.5*s,fill:'var(--stage)'},g);
+  mk('path',{d:`M${x-20*s} ${y+6*s}h${110*s}`,class:'s-muted','stroke-width':3},o);return [o,g]};
+const ship=par=>{const g=mk('g',{},par);mk('path',{d:'M-60 0h120l-24 34h-72z',class:'ink'},g);mk('path',{d:'M0 0v-90',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},g);mk('path',{d:'M6 -86L56 -16H6z',class:'gain'},g);return g};
+const strk=(id,x,w,k)=>$(id).setAttribute('x2',(x+w*k).toFixed(1));
+for(let i=0;i<6;i++)mk('path',{d:'M200 '+(320+i*36)+'h'+(260-(i%3)*50),class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('scrl'));
+person($('sagep'),820,380,40,'ink');person($('villp'),1240,400,30,'ink');person($('vespp'),260,380,40,'ink');
+for(let i=0;i<6;i++)mk('path',{d:'M170 '+(310+i*40)+'h'+(180-(i%2)*60),class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('nbl'));
+const M3=[[240,320,1.6],[1000,280,1.2],[1180,650,1.6]].map(a=>mon($('mons3'),...a));
+const SH4=ship($('ship4')),SH5=ship($('ship5'));
+const M8=mon($('mon8'),1290,740,1);
+const FD=['VOYAGES','OBSERVATIONS','EXPERIMENTS'].map((s,i)=>{const tx=mk('text',{x:800,y:610+i*30,'font-size':20,'text-anchor':'middle',class:'m'},$('fund'));tx.textContent=s;return tx});
+const CO=[0,1,2,3].map(()=>mk('circle',{r:12,class:'gain',cx:800},$('coins')));
+const SP=[[1200,370,1180,350],[1440,370,1460,350],[1200,560,1180,580],[1440,560,1460,580]].map(q=>mk('path',{d:`M${q[0]} ${q[1]}L${q[2]} ${q[3]}`,class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('sp7')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('t_land'),p(u,TM.blank_map,TM.blank_map+.6)); rise($('t_blank'),p(u,TM.blank_map+1.5,TM.blank_map+2.1));
+$('t_q').setAttribute('opacity',(.75+.25*Math.sin(t*3)).toFixed(2)); rise($('t_words'),p(u,TM.blank_map+5.4,TM.blank_map+6));
+
+rise($('scr'),p(u,TM.old_scroll,TM.old_scroll+.6)); rise($('sage'),p(u,TM.wise_sage,TM.wise_sage+.6)); rise($('silent'),p(u,TM.wise_sage+5,TM.wise_sage+5.6));
+rise($('vill'),p(u,TM.villager,TM.villager+.6)); rise($('varr'),p(u,TM.villager+1.5,TM.villager+2.1)); rise($('flask'),p(u,TM.villager+2.8,TM.villager+3.4));
+$('vq').setAttribute('transform','translate(0 '+(4*Math.sin(t*3)).toFixed(1)+')');
+
+rise($('nb'),p(u,TM.lab_notebook,TM.lab_notebook+.6)); rise($('nbw'),p(u,TM.lab_notebook+3,TM.lab_notebook+3.6));
+rise($('qmw'),p(u,TM.question_mark,TM.question_mark+.6)); const sc=1+.05*Math.sin(t*3); $('qmt').setAttribute('transform',`translate(800 480) scale(${sc.toFixed(3)}) translate(-800 -480)`);
+rise($('thy'),p(u,TM.question_mark+.6,TM.question_mark+1.2)); rise($('evd'),p(u,TM.question_mark+1.8,TM.question_mark+2.4));
+const hit=p(u,TM.question_mark+2.2,TM.question_mark+2.5)*(1-p(u,TM.question_mark+2.5,TM.question_mark+3.3)); $('thy').firstElementChild.setAttribute('transform','translate('+(6*hit*Math.sin(t*30)).toFixed(1)+' 0)');
+rise($('emb'),p(u,TM.question_mark+5.4,TM.question_mark+5.9)); strk('embS',130,330,p(u,TM.question_mark+6.2,TM.question_mark+6.8)); rise($('inv'),p(u,TM.question_mark+6.8,TM.question_mark+7.4));
+
+rise($('m3'),p(u,TM.old_map,TM.old_map+.6)); rise($('l3a'),p(u,TM.old_map+2.6,TM.old_map+3.2));
+M3.forEach(([o,g],i)=>{rise(o,p(u,TM.sea_monster+i*.6,TM.sea_monster+i*.6+.5)); g.setAttribute('transform','translate(0 '+(5*Math.sin(t*2+i)).toFixed(1)+')')});
+rise($('cap3'),p(u,TM.sea_monster+2,TM.sea_monster+2.6));
+
+rise($('blank4'),p(u,TM.empty_region,TM.empty_region+.8)); rise($('conf4'),p(u,TM.empty_region+4.6,TM.empty_region+5.2));
+const sv=p(u,TM.sailing_ship,TM.sailing_ship+3), sx=620+440*sv, sy=610+4*Math.sin(t*2);
+SH4.setAttribute('transform',`translate(${sx.toFixed(1)} ${sy.toFixed(1)})`); $('ship4').setAttribute('opacity',p(u,TM.sailing_ship,TM.sailing_ship+.4));
+$('wake').setAttribute('d',`M560 640H${(sx-62).toFixed(1)}`); $('wake').setAttribute('opacity',sv>0?1:0);
+rise($('beg4'),p(u,TM.sailing_ship+1.5,TM.sailing_ship+2.1));
+
+rise($('route5'),p(u,TM.columbus,TM.columbus+.6)); const k5=p(u,TM.columbus+.3,TM.columbus+3.5), m5=1-k5;
+SH5.setAttribute('transform',`translate(${(m5*m5*330+2*k5*m5*800+k5*k5*1260).toFixed(1)} ${(m5*m5*450+2*k5*m5*300+k5*k5*450-12).toFixed(1)}) scale(.45)`); $('ship5').setAttribute('opacity',p(u,TM.columbus,TM.columbus+.4));
+rise($('asia'),p(u,TM.columbus+3,TM.columbus+3.6)); rise($('lock5'),p(u,TM.columbus+7,TM.columbus+7.6)); rise($('room5'),p(u,TM.columbus+11.6,TM.columbus+12.2));
+
+rise($('vesp'),p(u,TM.vespucci,TM.vespucci+.6)); rise($('map6'),p(u,TM.vespucci+.6,TM.vespucci+1.2)); rise($('bub6'),p(u,TM.vespucci+3.8,TM.vespucci+4.4));
+rise($('amer'),p(u,TM.world_map,TM.world_map+.6)); rise($('lab6'),p(u,TM.world_map+.8,TM.world_map+1.4)); rise($('hon6'),p(u,TM.world_map+4.6,TM.world_map+5.2));
+
+rise($('st1'),p(u,TM.telescope,TM.telescope+.6)); rise($('st2'),p(u,TM.money_bag,TM.money_bag+.6));
+FD.forEach((f,i)=>rise(f,p(u,TM.money_bag+1+i*.8,TM.money_bag+1.5+i*.8)));
+CO.forEach((c,i)=>{const f=(t*.7+i/4)%1; c.setAttribute('cy',(230+f*110).toFixed(1)); c.setAttribute('opacity',(f<.8?1:(1-f)*5).toFixed(2))});
+rise($('st3'),p(u,TM.toolbox,TM.toolbox+.6)); SP.forEach((s,i)=>s.setAttribute('opacity',(.5+.5*Math.sin(t*4+i*1.6)).toFixed(2)));
+rise($('ask7'),p(u,TM.toolbox+1,TM.toolbox+1.6));
+
+rise($('qa'),p(u,TM.your_map,TM.your_map+.5)); rise($('qb'),p(u,TM.your_map+.4,TM.your_map+.9)); rise($('qc'),p(u,TM.your_map+.8,TM.your_map+1.3));
+rise($('fo8'),p(u,TM.your_map+1.4,TM.your_map+2)); const fx=p(u,TM.your_map+5.8,TM.your_map+6.6);
+M8[0].setAttribute('opacity',(1-fx).toFixed(2)); M8[1].setAttribute('transform','translate(0 '+(4*Math.sin(t*2)).toFixed(1)+')'); $('q8').setAttribute('opacity',fx.toFixed(2));
+rise($('go8'),p(u,TM.your_map+5.8,TM.your_map+6.4));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:136.4;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

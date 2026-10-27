@@ -1,0 +1,311 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Intelligent Investor Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Intelligent Investor: Graham defines investing as an operation that, after careful analysis, promises safety of your money and a fair return, and anything else is speculation. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE INTELLIGENT INVESTOR · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Investing is</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">not speculating.</text>
+<text class="b" x="120" y="600" font-size="32">Graham’s simple test for telling an investment from a bet.</text>
+<ellipse cx="1300" cy="560" rx="100" ry="14" fill="var(--line)"/>
+<g id="coinW"><g id="coin"><circle id="coinF" r="110" class="gain"/><circle r="84" fill="none" stroke="var(--stage)" stroke-width="6"/><text id="coinT" class="d" y="34" font-size="96" text-anchor="middle">$</text></g></g>
+<g id="coinL"><text class="m" x="1300" y="640" font-size="22" text-anchor="middle">INVESTOR OR GAMBLER?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Graham’s test.</text>
+<text class="b" x="120" y="176" font-size="32">Investing has a strict definition with three parts.</text>
+<g id="gr"></g>
+<g id="cards"></g>
+<g id="ic0"><g id="mag"><circle class="s-ink" cx="590" cy="420" r="58" fill="none" stroke-width="10"/><path class="s-ink" d="M632 462l50 50" stroke-width="16" stroke-linecap="round"/></g></g>
+<g id="ic1"><path class="gain" d="M960 340l90 34v60c0 70-44 104-90 126c-46-22-90-56-90-126v-60z"/><path d="M920 440l28 28 54-58" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="ic2"><g id="coinsS"></g></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Tick all three boxes.</text>
+<text class="b" x="120" y="176" font-size="32">Graham’s checklist for an investment.</text>
+<g id="clip"><rect class="s-ink" x="120" y="230" width="560" height="500" rx="20" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="320" y="212" width="160" height="40" rx="10"/><g id="rows"></g></g>
+<path id="arr2" class="s-muted" d="M710 480h90m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="verd"><text id="vlab" class="m" x="1140" y="390" font-size="22" text-anchor="middle">ALL THREE TICKED</text><rect id="vbox" x="840" y="410" width="600" height="150" rx="20" fill="none" stroke-width="8"/><text id="vtxt" class="d" x="1140" y="508" font-size="68" text-anchor="middle">Investment</text></g>
+<g id="quote"><text class="d5" x="120" y="806" font-size="40">“Safety of principal and an adequate return.”</text><text class="m" x="120" y="848" font-size="20">BENJAMIN GRAHAM</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Same stock, two moves.</text>
+<text class="b" x="120" y="176" font-size="32">The label depends on you, not on the stock.</text>
+<g id="cert"><rect class="s-ink" x="640" y="220" width="320" height="190" rx="12" fill="var(--stage)" stroke-width="6"/><rect class="s-line" x="660" y="240" width="280" height="150" rx="6" fill="none" stroke-width="3" stroke-dasharray="8 6"/><text class="d" x="800" y="322" font-size="52" text-anchor="middle">SHARE</text><text class="m" x="800" y="364" font-size="18" text-anchor="middle">ONE COMPANY</text></g>
+<path id="ar3a" d="M700 410C620 450 420 420 370 452" fill="none" stroke="var(--muted)" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 2"/>
+<path id="ar3b" d="M900 410C980 450 1180 420 1220 452" fill="none" stroke="var(--muted)" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 2"/>
+<g id="a3"></g>
+<g id="c3"><g id="crowd3" opacity=".45"></g><g id="bb"></g></g>
+<g id="v3a"><text class="d" x="360" y="780" font-size="52" text-anchor="middle" style="fill:var(--gain)">Investing.</text></g>
+<g id="v3b"><text class="d" x="1290" y="780" font-size="52" text-anchor="middle" style="fill:var(--loss)">Speculating.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The late 1920s.</text>
+<text class="b" x="120" y="176" font-size="32">Crowds called themselves investors.</text>
+<g id="cal"><rect class="s-ink" x="120" y="240" width="280" height="240" rx="14" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="120" y="240" width="280" height="60" rx="14"/><text class="d" x="260" y="420" font-size="84" text-anchor="middle">1929</text></g>
+<g id="cash"><rect class="gain" x="120" y="540" width="280" height="130" rx="12"/><circle cx="260" cy="605" r="44" fill="none" stroke="var(--on-gain)" stroke-width="4"/><text class="d" x="260" y="628" font-size="64" text-anchor="middle" style="fill:var(--on-gain)">$</text><text class="m" x="260" y="712" font-size="20" text-anchor="middle">BORROWED MONEY</text></g>
+<path id="axes" class="s-line" d="M520 250V740H1470" fill="none" stroke-width="4"/>
+<path id="rp" d="M540 700L640 650L720 670L820 580L900 600L1000 480L1080 500L1180 330" fill="none" stroke="var(--ink)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 2"/>
+<path id="cp" d="M1180 330L1240 520L1280 480L1340 690L1460 720" fill="none" stroke="var(--loss)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 2"/>
+<g id="crl"><text class="m" x="1200" y="300" font-size="22" style="fill:var(--loss)">1929 CRASH</text></g>
+<g id="sav"><text class="d" x="120" y="820" font-size="44">Savings collapsed along with them.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Speculating isn’t wicked.</text>
+<g id="sub5"><text class="b" x="120" y="176" font-size="32">But it turns dangerous in three situations.</text></g>
+<g id="bal"><path class="s-ink" d="M330 300V600M250 600h160" stroke-width="8" stroke-linecap="round" fill="none"/>
+<g id="beam"><path class="s-ink" d="M190 300h280M190 300l-40 110M190 300l40 110M470 300l-40 110M470 300l40 110" stroke-width="5" fill="none" stroke-linecap="round"/><path class="gain" d="M140 410h100a50 50 0 0 1-100 0z"/><path class="loss" d="M420 410h100a50 50 0 0 1-100 0z"/></g>
+<circle class="ink" cx="330" cy="300" r="14"/><text class="m" x="190" y="500" font-size="20" text-anchor="middle">INVEST</text><text class="m" x="470" y="500" font-size="20" text-anchor="middle">SPECULATE</text><text class="m" x="330" y="680" font-size="22" text-anchor="middle">BOTH ARE ALLOWED</text></g>
+<g id="dang"></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Keep two separate pots.</text>
+<text class="b" x="120" y="176" font-size="32">Speculation lives in its own small pot. Everything else is tested.</text>
+<g id="jars">
+<g id="sj"><rect id="sf" class="loss" x="172" y="748" width="136" height="0" rx="8"/><rect class="s-ink" x="160" y="560" width="160" height="200" rx="18" fill="none" stroke-width="7"/><rect class="ink" x="180" y="530" width="120" height="26" rx="6"/></g>
+<rect id="bf" class="gain" x="454" y="748" width="332" height="0" rx="12"/><rect class="s-ink" x="440" y="300" width="360" height="460" rx="26" fill="none" stroke-width="7"/><rect class="ink" x="480" y="268" width="280" height="28" rx="6"/>
+</g>
+<g id="lab6a"><text class="m" x="240" y="806" font-size="20" text-anchor="middle">SPECULATION</text><text class="m" x="240" y="836" font-size="20" text-anchor="middle" style="fill:var(--loss)">KEEP IT SMALL</text></g>
+<g id="lab6b"><text class="m" x="620" y="806" font-size="20" text-anchor="middle">INVESTMENTS</text><text class="m" x="620" y="836" font-size="20" text-anchor="middle" style="fill:var(--gain)">HELD TO THE TEST</text></g>
+<g id="t6"><text class="d" x="900" y="460" font-size="42">A bad bet can sting,</text><text class="d" x="900" y="520" font-size="42">but it cannot sink you.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask before you buy.</text>
+<text class="b" x="120" y="176" font-size="32">Three questions, every single time.</text>
+<g id="card7"><rect class="s-ink" x="120" y="220" width="960" height="500" rx="20" fill="var(--stage)" stroke-width="6"/><text class="m" x="160" y="284" font-size="22">BEFORE ANY PURCHASE</text></g>
+<g id="qs"></g>
+<g id="ver7a"><text class="m" x="1140" y="370" font-size="22">THREE YESES</text><text class="d" x="1140" y="444" font-size="56" style="fill:var(--gain)">Investing.</text></g>
+<g id="ver7b"><text class="m" x="1140" y="570" font-size="22">ANYTHING LESS</text><text class="d" x="1140" y="644" font-size="56" style="fill:var(--loss)">A bet.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Look at one thing you own.</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">Does it pass the test,</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">or is it secretly <tspan style="fill:var(--loss)">a bet?</tspan></text></g>
+<g id="qg"><g id="qbx"></g><text class="m" x="143" y="760" font-size="24">ANALYSIS · SAFETY · RETURN</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="143" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:23</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Investing Is Not Speculating&rdquo;, from <em>The Intelligent Investor</em> by Benjamin Graham. The 1920s borrowed-money buying and the 1929 crash are as reported in the book. The checklist, jars, buyers and crash chart are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=143, SC=[[0.0, 8.5], [8.5, 25.8], [25.8, 43.7], [43.7, 61.5], [61.5, 78.7], [78.7, 96.7], [96.7, 114.5], [114.5, 132.2], [132.2, 143.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Investor or Gambler?", "Graham's Test", "Three Boxes", "Same Stock, Two Moves", "The Roaring Twenties", "Speculation Is Allowed", "Keep Two Pots", "Ask Before You Buy", "Your Challenge"];
+const TM={"title_coin": 0.0, "graham": 8.8, "magnifier": 13.0, "shield": 16.72, "coins_return": 20.8, "checkboxes": 26.08, "red_cross": 33.8, "stock_cert": 44.0, "analyst": 49.52, "tip_crowd": 53.28, "calendar_1929": 61.76, "borrowed_cash": 67.04, "crash_chart": 72.0, "balance": 79.04, "mask": 85.36, "blindfold": 88.88, "empty_wallet": 93.04, "two_jars": 97.04, "small_jar": 101.84, "big_jar": 105.84, "question_card": 114.8, "green_tick": 127.84, "your_holdings": 132.48};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const draw=(el,k)=>{el.style.strokeDashoffset=(1-k).toFixed(3);el.setAttribute('opacity',k>0?1:0)};
+const ln=(d,c,w,g)=>mk('path',{d:d,fill:'none',stroke:c,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1,'stroke-dasharray':'1 2'},g);
+const tx=(s,a,g)=>{const e=mk('text',a,g);e.textContent=s;return e};
+
+fig($('gr'),260,400,44,'ink');tx('BENJAMIN GRAHAM',{x:260,y:640,'font-size':20,'text-anchor':'middle',class:'m'},$('gr'));
+const CD=[['Analysis','STUDY FIRST'],['Safety','MONEY STAYS SAFE'],['Return','FAIR, NOT A FORTUNE']].map((c,i)=>{const x=440+i*360,g=mk('g',{},$('cards'));
+  mk('rect',{x:x,y:250,width:320,height:470,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  tx('0'+(i+1),{x:x+28,y:296,'font-size':22,class:'m'},g);
+  tx(c[0],{x:x+160,y:630,'font-size':44,'text-anchor':'middle',class:'d5'},g);
+  tx(c[1],{x:x+160,y:680,'font-size':20,'text-anchor':'middle',class:'m'},g);return g});
+const CS=[0,1,2,3].map(i=>mk('rect',{x:1260,y:520-i*32,width:120,height:26,rx:13,class:'gain',stroke:'var(--ink)','stroke-width':4},$('coinsS')));
+
+const RW=['Analysis','Safety','Return'].map((s,i)=>{const y=290+i*140,g=mk('g',{},$('rows'));
+  mk('rect',{x:180,y:y,width:90,height:90,rx:12,fill:'none',stroke:'var(--ink)','stroke-width':6},g);
+  tx(s,{x:310,y:y+62,'font-size':48,class:'d5'},g);
+  return {g:g,tk:ln('M200 '+(y+48)+'l22 22 46-52','var(--gain)',12,g)}});
+const XX=ln('M200 590l50 50m0-50l-50 50','var(--loss)',12,$('rows'));
+
+// scene 3: figure row shifted up 40px to clear the brand mark
+fig($('a3'),360,500,34,'ink');
+mk('rect',{x:430,y:560,width:70,height:90,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('a3'));
+mk('path',{d:'M444 584h42M444 604h42M444 624h28',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round'},$('a3'));
+tx('STUDIES · SENSIBLE PRICE',{x:360,y:702,'font-size':20,'text-anchor':'middle',class:'m'},$('a3'));
+fig($('c3'),1220,500,34,'ink');[1330,1430].forEach(x=>fig($('crowd3'),x,520,22,'ink'));
+[[1330,'SOAR!'],[1430,'BUY!']].forEach(b=>{mk('rect',{x:b[0]-42,y:428,width:84,height:46,rx:12,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},$('bb'));tx(b[1],{x:b[0],y:458,'font-size':18,'text-anchor':'middle',class:'m',style:'fill:var(--loss)'},$('bb'))});
+tx('BUYS ON A HOT TIP',{x:1290,y:702,'font-size':20,'text-anchor':'middle',class:'m'},$('c3'));
+
+const DG=[['Calling a bet an investment','FOOLING YOURSELF'],['No real knowledge or skill','SPECULATING BLIND'],['Risking more than you can lose','MONEY YOU CAN’T SPARE']].map((c,i)=>{const y=240+i*170,cy=y+70,g=mk('g',{},$('dang'));
+  mk('rect',{x:640,y:y,width:840,height:140,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  if(i==0){mk('ellipse',{cx:720,cy:cy,rx:54,ry:30,class:'loss'},g);[-22,22].forEach(d=>mk('ellipse',{cx:720+d,cy:cy-4,rx:12,ry:8,fill:'var(--stage)'},g))}
+  else if(i==1){mk('circle',{cx:720,cy:cy,r:36,class:'ink'},g);mk('rect',{x:676,y:cy-16,width:88,height:20,rx:6,class:'loss'},g)}
+  else{mk('rect',{x:670,y:cy-32,width:100,height:64,rx:10,fill:'none',stroke:'var(--ink)','stroke-width':6},g);mk('rect',{x:730,y:cy-14,width:40,height:28,rx:6,class:'loss'},g)}
+  tx(c[0],{x:800,y:y+62,'font-size':36,class:'d5'},g);tx(c[1],{x:800,y:y+104,'font-size':20,class:'m',style:'fill:var(--loss)'},g);return g});
+
+const Q7=['Have I analysed this properly?','Is my money reasonably safe?','Is the return fair, not fantastic?'].map((s,i)=>{const y=380+i*120,g=mk('g',{},$('qs'));
+  const c=mk('circle',{cx:190,cy:y-14,r:30,fill:'none',stroke:'var(--ink)','stroke-width':5},g);
+  tx(s,{x:250,y:y,'font-size':40,class:'d5'},g);
+  return {g:g,c:c,tk:ln('M175 '+(y-14)+'l11 12 22-26','var(--on-gain)',7,g)}});
+
+const QB=[0,1,2].map(i=>{const g=mk('g',{},$('qbx'));mk('rect',{x:143+i*100,y:620,width:70,height:70,rx:10,fill:'none',stroke:'var(--ink)','stroke-width':5},g);tx('?',{x:178+i*100,y:670,'font-size':40,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},g);return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const cc=Math.cos(t*2.4),fr=cc>=0;
+  $('coin').setAttribute('transform','translate(1300 '+(400-10*Math.abs(Math.sin(t*1.2))).toFixed(1)+') scale('+Math.max(Math.abs(cc),.04).toFixed(3)+' 1)');
+  $('coinF').setAttribute('class',fr?'gain':'loss');$('coinT').textContent=fr?'$':'?';$('coinT').style.fill=fr?'var(--on-gain)':'var(--stage)';
+  rise($('coinW'),p(u,TM.title_coin,TM.title_coin+.5));rise($('coinL'),p(u,TM.title_coin+3.8,TM.title_coin+4.3));
+
+  rise($('gr'),p(u,TM.graham,TM.graham+.5));
+  [TM.magnifier,TM.shield,TM.coins_return].forEach((a,i)=>{rise(CD[i],p(u,a,a+.5));rise($('ic'+i),p(u,a+.2,a+.7))});
+  $('mag').setAttribute('transform','translate('+(12*Math.sin(t*1.6)).toFixed(1)+' '+(8*Math.sin(t*2.3)).toFixed(1)+')');
+  CS.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.coins_return+.4+i*.3,TM.coins_return+.7+i*.3)));
+
+  rise($('clip'),p(u,TM.checkboxes,TM.checkboxes+.5));
+  const rc=p(u,TM.red_cross,TM.red_cross+.3);
+  RW.forEach((r,i)=>{rise(r.g,p(u,TM.checkboxes+.6+i*.5,TM.checkboxes+1.1+i*.5));const a=TM.checkboxes+4.2+i*.4,k=p(u,a,a+.4);draw(r.tk,i<2?k:k*(1-rc))});
+  draw(XX,p(u,TM.red_cross+.3,TM.red_cross+.7));
+  $('arr2').setAttribute('opacity',p(u,TM.checkboxes+4.4,TM.checkboxes+4.8));rise($('verd'),p(u,TM.checkboxes+4.6,TM.checkboxes+5.1));
+  const sp=u>=TM.red_cross+.5;
+  $('vbox').style.stroke=sp?'var(--loss)':'var(--gain)';$('vtxt').textContent=sp?'Speculation':'Investment';$('vtxt').style.fill=sp?'var(--loss)':'var(--gain)';$('vlab').textContent=sp?'ONE BOX MISSED':'ALL THREE TICKED';
+  rise($('quote'),p(u,TM.red_cross+4.2,TM.red_cross+4.8));
+
+  rise($('cert'),p(u,TM.stock_cert,TM.stock_cert+.5));
+  draw($('ar3a'),p(u,TM.analyst,TM.analyst+.6));rise($('a3'),p(u,TM.analyst+.3,TM.analyst+.8));
+  draw($('ar3b'),p(u,TM.tip_crowd,TM.tip_crowd+.6));rise($('c3'),p(u,TM.tip_crowd+.3,TM.tip_crowd+.8));
+  $('bb').setAttribute('transform','translate(0 '+(6*Math.sin(t*5)).toFixed(1)+')');
+  rise($('v3a'),p(u,TM.tip_crowd+4.6,TM.tip_crowd+5.1));rise($('v3b'),p(u,TM.tip_crowd+6.4,TM.tip_crowd+6.9));
+
+  rise($('cal'),p(u,TM.calendar_1929,TM.calendar_1929+.5));rise($('axes'),p(u,TM.calendar_1929+.4,TM.calendar_1929+.9));
+  rise($('cash'),p(u,TM.borrowed_cash,TM.borrowed_cash+.5));draw($('rp'),p(u,TM.borrowed_cash+.4,TM.borrowed_cash+3.5));
+  draw($('cp'),p(u,TM.crash_chart,TM.crash_chart+1.2));rise($('crl'),p(u,TM.crash_chart+.3,TM.crash_chart+.8));rise($('sav'),p(u,TM.crash_chart+3,TM.crash_chart+3.6));
+
+  rise($('bal'),p(u,TM.balance,TM.balance+.5));$('beam').setAttribute('transform','rotate('+(3*Math.sin(t*1.5)).toFixed(2)+' 330 300)');
+  rise($('sub5'),p(u,TM.balance+3,TM.balance+3.5));
+  [TM.mask,TM.blindfold,TM.empty_wallet].forEach((a,i)=>rise(DG[i],p(u,a,a+.5)));
+
+  rise($('jars'),p(u,TM.two_jars,TM.two_jars+.5));
+  const st=p(u,TM.big_jar+5,TM.big_jar+5.6),sfh=90*p(u,TM.small_jar,TM.small_jar+1.2)*(1-.6*st),bfh=380*p(u,TM.big_jar,TM.big_jar+1.6);
+  $('sf').setAttribute('y',(748-sfh).toFixed(1));$('sf').setAttribute('height',sfh.toFixed(1));
+  $('bf').setAttribute('y',(748-bfh).toFixed(1));$('bf').setAttribute('height',bfh.toFixed(1));
+  $('sj').setAttribute('transform','translate('+(st>0&&st<1?6*Math.sin(t*40)*(1-st):0).toFixed(1)+' 0)');
+  rise($('lab6a'),p(u,TM.small_jar,TM.small_jar+.5));rise($('lab6b'),p(u,TM.big_jar,TM.big_jar+.5));rise($('t6'),p(u,TM.big_jar+5,TM.big_jar+5.6));
+
+  rise($('card7'),p(u,TM.question_card,TM.question_card+.5));
+  [3.4,5.6,7.7].forEach((o,i)=>{const q=Q7[i];rise(q.g,p(u,TM.question_card+o,TM.question_card+o+.5));const a=TM.green_tick+i*.3,k=p(u,a,a+.4);
+    q.c.setAttribute('fill',k>.3?'var(--gain)':'none');q.c.setAttribute('stroke',k>.3?'var(--gain)':'var(--ink)');draw(q.tk,k)});
+  rise($('ver7a'),p(u,TM.green_tick+.6,TM.green_tick+1.1));rise($('ver7b'),p(u,TM.green_tick+1.8,TM.green_tick+2.3));
+
+  rise($('qa'),p(u,TM.your_holdings,TM.your_holdings+.5));rise($('qg'),p(u,TM.your_holdings+.4,TM.your_holdings+.9));
+  rise($('qb'),p(u,TM.your_holdings+3.4,TM.your_holdings+3.9));rise($('qc'),p(u,TM.your_holdings+3.9,TM.your_holdings+4.4));
+  QB.forEach((b,i)=>b.setAttribute('transform','translate(0 '+(-8*Math.max(0,Math.sin(t*3-i*.8))).toFixed(1)+')'));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:139.2;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

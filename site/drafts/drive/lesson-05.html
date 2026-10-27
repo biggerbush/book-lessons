@@ -1,0 +1,383 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drive Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Drive: Mastery grows from Goldilocks tasks that are neither too easy nor too hard, a growth mindset, and effortful practice toward a goal we never fully reach. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DRIVE · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Mastery: the joy</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of getting better.</text>
+<text class="b" x="120" y="600" font-size="32">Why getting better is its own reward, and how to keep growing.</text>
+<path class="s-ink" d="M1180 560h56v-60h56v-60h56v-60h56v-60h56V560z" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/>
+<g id="flag"><path class="s-ink" d="M1458 320V230" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1458 232l22 14-22 14z"/></g>
+<g id="climbw"><g id="climb"><circle class="gain" cx="0" cy="-44" r="13"/><path class="gain" d="M-18 0v-12a18 18 0 0 1 36 0v12z"/></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The flow zone.</text>
+<text class="b" x="120" y="176" font-size="32">Mihaly Csikszentmihalyi studied when people feel most alive.</text>
+<g id="res">
+<rect class="s-ink" x="320" y="430" width="90" height="120" rx="8" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M338 470h54M338 500h54M338 530h34" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="160" y="610" font-size="20">PSYCHOLOGIST</text>
+<text class="m" x="160" y="642" font-size="20">M. CSIKSZENTMIHALYI</text>
+</g>
+<g id="flow">
+<polygon points="604,660 1340,264 1440,264 1440,330 720,736 604,736" fill="var(--gain)" fill-opacity=".25"/>
+<path class="s-ink" d="M600 260V740H1440" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="620" y="290" font-size="20">CHALLENGE</text>
+<text class="m" x="1440" y="780" font-size="20" text-anchor="end">SKILL</text>
+<text class="m" x="660" y="380" font-size="20" style="fill:var(--loss)">ANXIETY</text>
+<text class="m" x="1180" y="700" font-size="20" style="fill:var(--loss)">BOREDOM</text>
+<text class="d" x="960" y="440" font-size="40" text-anchor="middle" style="fill:var(--gain)" transform="rotate(-28 960 440)">FLOW</text>
+<path id="fwave" class="s-gain" fill="none" stroke-width="6" stroke-linecap="round"/>
+<circle id="fdot" class="gain" r="14"/>
+</g>
+<g id="flowtxt"><text class="d" x="120" y="830" font-size="46">Flow is where mastery begins.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Goldilocks tasks.</text>
+<text class="b" x="120" y="176" font-size="32">Not too easy, not too hard: just slightly beyond what we can do.</text>
+<g id="gold"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Mastery is a mindset.</text>
+<text class="b" x="120" y="176" font-size="32">Psychologist Carol Dweck: mastery starts in our heads.</text>
+<g id="dw">
+<g id="dwf"></g>
+<path class="s-muted" d="M720 440H580m22-22-22 22 22 22M880 440H1020m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="800" y="560" font-size="20" text-anchor="middle">WHAT DO YOU BELIEVE?</text>
+</g>
+<g id="fixL">
+<g id="fxbox">
+<path class="s-ink" d="M220 400l50-50h260l-50 50zM480 400l50-50v240l-50 50z" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="s-ink" x="220" y="400" width="260" height="240" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="350" y="530" font-size="26" text-anchor="middle" style="fill:var(--ink)">ABILITY</text>
+</g>
+<text class="d5" x="220" y="710" font-size="40">Fixed</text>
+<text class="m" x="220" y="750" font-size="20">A BOX YOU WERE HANDED AT BIRTH</text>
+</g>
+<g id="grL">
+<path class="s-line" d="M1040 640h320" stroke-width="5" stroke-linecap="round"/>
+<g id="tr">
+<path d="M0 0V-210M0-120l-60-50M0-150l60-40" stroke="var(--ink)" stroke-width="12" stroke-linecap="round" fill="none"/>
+<circle class="gain" cx="0" cy="-240" r="80"/><circle class="gain" cx="-80" cy="-170" r="55"/><circle class="gain" cx="80" cy="-180" r="55"/>
+</g>
+<text class="d5" x="1040" y="710" font-size="40" style="fill:var(--gain)">Growth</text>
+<text class="m" x="1040" y="750" font-size="20">A TREE YOU KEEP TENDING</text>
+</g>
+<g id="only"><text class="d" x="120" y="830" font-size="46">Only growth makes practice feel worthwhile.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Mastery is a pain.</text>
+<text class="b" x="120" y="176" font-size="32">Long, effortful practice, and much of it is not fun.</text>
+<g id="pno">
+<g id="keys"></g>
+<g id="loop"><path class="s-gain" d="M1030 350A70 70 0 1 1 960 280" fill="none" stroke-width="8" stroke-linecap="round"/><path class="gain" d="M960 262l24 18-24 18z"/></g>
+<text class="m" x="1080" y="340" font-size="22">THE SAME HARD PASSAGE</text>
+<text class="m" x="1080" y="376" font-size="22">AGAIN AND AGAIN</text>
+</g>
+<g id="road">
+<path id="rpath" class="s-muted" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="300" y="810" font-size="20" text-anchor="middle">GRIND</text>
+<text class="m" x="690" y="810" font-size="20" text-anchor="middle">GRIND</text>
+<text class="m" x="1100" y="810" font-size="20" text-anchor="middle">GRIND</text>
+<circle id="walker" class="gain" r="14"/>
+</g>
+<g id="peaks"></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The grit test.</text>
+<text class="b" x="120" y="176" font-size="32">Angela Duckworth’s research with new West Point cadets.</text>
+<g id="gauge">
+<path d="M200 560A200 200 0 0 1 600 560" fill="none" stroke="var(--line)" stroke-width="26"/>
+<path id="garc" d="M200 560A200 200 0 0 1 600 560" fill="none" stroke="var(--gain)" stroke-width="26" stroke-dasharray="628" stroke-dashoffset="628"/>
+<path id="needle" class="s-ink" d="M400 560V390" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="400" cy="560" r="16"/>
+<text class="d" x="400" y="640" font-size="48" text-anchor="middle">GRIT</text>
+<text class="m" x="400" y="686" font-size="20" text-anchor="middle">PASSION + PERSEVERANCE</text>
+<text class="m" x="400" y="716" font-size="20" text-anchor="middle">TOWARD LONG-TERM GOALS</text>
+</g>
+<g id="wp"><text class="m" x="720" y="262" font-size="20">NEW CADETS</text><g id="lanes"></g><g id="cads"></g></g>
+<g id="fin"><path class="s-ink" d="M1400 280V740" stroke-width="6" stroke-dasharray="14 10"/><text class="m" x="1400" y="770" font-size="20" text-anchor="middle">FIRST SUMMER</text></g>
+<g id="gtxt"><text class="d" x="120" y="830" font-size="44">Grit predicted who made it through.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Never quite there.</text>
+<text class="b" x="120" y="176" font-size="32">Getting closer and closer, but never quite touching.</text>
+<g id="ach">
+<path class="s-ink" d="M160 270V760H980" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="s-gain" d="M160 320H980" stroke-width="4" stroke-dasharray="12 10"/>
+<text class="m" x="176" y="302" font-size="20" style="fill:var(--gain)">MASTERY</text>
+<text class="m" x="980" y="800" font-size="20" text-anchor="end">PRACTICE OVER TIME</text>
+<path id="acurve" class="s-ink" fill="none" stroke-width="7" stroke-linecap="round"/>
+<circle id="arun" class="gain" r="14"/>
+<text id="ayou" class="m" font-size="20" text-anchor="middle" style="fill:var(--gain)">YOU</text>
+</g>
+<g id="qcard">
+<rect class="gain" x="1060" y="300" width="420" height="260" rx="18"/>
+<text class="d" x="1090" y="400" font-size="44" style="fill:var(--on-gain)">“Mastery is</text>
+<text class="d" x="1090" y="458" font-size="44" style="fill:var(--on-gain)">an asymptote.”</text>
+<text class="m" x="1090" y="520" font-size="20" style="fill:var(--on-gain)">DANIEL H. PINK</text>
+</g>
+<g id="joy"><text class="d" x="1060" y="680" font-size="40">The joy lives</text><text class="d" x="1060" y="730" font-size="40" style="fill:var(--gain)">in the pursuit.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your next step.</text>
+<text class="b" x="120" y="176" font-size="32">Three moves to keep growing.</text>
+<g id="st0">
+<rect class="s-line" x="120" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="230" y="290" width="200" height="200" rx="12" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="230" y="290" width="200" height="50"/>
+<path class="s-ink" d="M275 272v34M385 272v34" stroke-width="8" stroke-linecap="round"/>
+<g id="calg"></g>
+<text class="m" x="150" y="600" font-size="22">STEP 1</text>
+<text class="d5" x="150" y="650" font-size="34">Pick one skill</text>
+<text class="d5" x="150" y="694" font-size="34">that truly matters.</text>
+</g>
+<g id="st1">
+<rect class="s-line" x="590" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M740 540V280M860 540V280" stroke-width="8" stroke-linecap="round"/>
+<g id="rungs"></g>
+<circle id="lyou" class="gain" cx="800" cy="432" r="16"/>
+<text class="m" x="620" y="600" font-size="22">STEP 2</text>
+<text class="d5" x="620" y="650" font-size="34">One rung above</text>
+<text class="d5" x="620" y="694" font-size="34">your current level.</text>
+</g>
+<g id="st2">
+<rect class="s-line" x="1060" y="230" width="420" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="1180" y="290" width="180" height="230" rx="10" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M1250 345h85M1250 400h85M1250 455h85" stroke-width="5" stroke-linecap="round"/>
+<path id="nm0" class="s-gain" d="M1204 342l10 10 20-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="nm1" class="s-loss" d="M1206 390l20 20M1226 390l-20 20" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="nm2" class="s-gain" d="M1204 452l10 10 20-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="gain" d="M1380 500l40-120 18 6-40 120-22 14z"/>
+<text class="m" x="1090" y="600" font-size="22">STEP 3</text>
+<text class="d5" x="1090" y="650" font-size="34">Practice, notice,</text>
+<text class="d5" x="1090" y="694" font-size="34">and adjust.</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">What skill would you</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">keep practicing, even if</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">you could <tspan style="fill:var(--gain)">never perfect it?</tspan></text></g>
+<g id="chal"><text class="m" x="143" y="700" font-size="26">THIS WEEK: GIVE IT 20 FOCUSED MINUTES</text></g>
+<g id="tmr">
+<circle class="s-line" cx="1340" cy="680" r="64" fill="none" stroke-width="12"/>
+<circle id="ring" cx="1340" cy="680" r="64" fill="none" stroke="var(--gain)" stroke-width="12" stroke-dasharray="402" stroke-dashoffset="402" stroke-linecap="round" transform="rotate(-90 1340 680)"/>
+<text class="d" x="1340" y="696" font-size="48" text-anchor="middle">20</text>
+<text class="m" x="1340" y="724" font-size="18" text-anchor="middle">MIN</text>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Mastery: The Joy of Getting Better&rdquo;, from <em>Drive</em> by Daniel H. Pink. Mihaly Csikszentmihalyi&#x27;s flow research, Carol Dweck&#x27;s mindset work, and Angela Duckworth&#x27;s West Point grit study are as reported in the book. The pianist, grit gauge, and asymptote curve are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 8.8], [8.8, 23.9], [23.9, 35.9], [35.9, 54.9], [54.9, 70.6], [70.6, 87.2], [87.2, 108.3], [108.3, 119.7], [119.7, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Getting Better", "The Flow Zone", "Goldilocks Tasks", "Mastery Is a Mindset", "Mastery Is a Pain", "The Grit Test", "Never Quite There", "Your Next Step", "Your Challenge"];
+const TM={"climber": 0.0, "researcher": 9.12, "flow_wave": 14.51, "easy_task": 24.16, "hard_task": 27.04, "just_right": 30.16, "dweck": 36.16, "fixed_box": 41.8, "growing_tree": 46.4, "practice": 55.23, "scales": 60.88, "west_point": 70.88, "grit_gauge": 76.72, "finish_line": 82.0, "curve": 87.52, "quote_card": 93.68, "runner": 97.72, "calendar": 108.56, "ladder": 111.52, "notebook": 115.08};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);return mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const tx=(g,a,s)=>{const e=mk('text',a,g);e.textContent=s;return e};
+fig($('res'),260,400,30,'ink');
+fig($('dwf'),800,330,40,'ink');
+const GD=[[120,'TOO EASY','Bored',620,'var(--loss)','var(--muted)'],[590,'FAR TOO HARD','Anxious',320,'var(--loss)','var(--loss)'],[1060,'JUST RIGHT','Goldilocks',470,'var(--gain)','var(--gain)']];
+const GC=GD.map((d,i)=>{const x=d[0],g=mk('g',{},$('gold'));
+  const r=mk('rect',{x:x,y:230,width:420,height:530,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  tx(g,{x:x+30,y:280,'font-size':22,class:'m',style:i==2?'fill:var(--gain)':'fill:var(--muted)'},d[1]);
+  tx(g,{x:x+30,y:730,'font-size':40,class:'d5',style:'fill:'+d[5]},d[2]);
+  mk('path',{d:'M'+(x+30)+' 660h360',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},g);
+  mk('path',{d:'M'+(x+30)+' 510h360',stroke:'var(--muted)','stroke-width':2,'stroke-dasharray':'6 8'},g);
+  mk('path',{d:'M'+(x+230)+' 660V'+d[3]+'M'+(x+350)+' 660V'+d[3],stroke:'var(--ink)','stroke-width':5},g);
+  mk('path',{d:'M'+(x+215)+' '+d[3]+'h150',stroke:d[4],'stroke-width':12,'stroke-linecap':'round'},g);
+  const pg=mk('g',{},g);fig(pg,x+120,551,26,i==2?'gain':'ink');return [g,r,pg]});
+const WK=[];for(let i=0;i<14;i++)WK.push(mk('rect',{x:120+i*46,y:250,width:46,height:200,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('keys')));
+[0,1,3,4,5,7,8,10,11,12].forEach(i=>mk('rect',{x:120+46*(i+1)-14,y:250,width:28,height:120,fill:'var(--ink)'},$('keys')));
+const PK=[480,900,1300],rf=x=>740+5*Math.sin(x*.05)+4*Math.sin(x*.017)-110*PK.reduce((s,c)=>s+Math.exp(-(((x-c)/40)**2)),0);
+let rd='',RL=0,py=0;for(let x=120;x<=1480;x+=10){const y=rf(x);rd+=(x==120?'M':'L')+x+' '+y.toFixed(1);if(x>120)RL+=Math.hypot(10,y-py);py=y}
+$('rpath').setAttribute('d',rd);$('rpath').setAttribute('stroke-dasharray',RL.toFixed(1));
+PK.forEach(c=>{mk('circle',{cx:c,cy:rf(c)-34,r:14,class:'gain'},$('peaks'));tx($('peaks'),{x:c,y:rf(c)-64,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--gain)'},'FLOW')});
+const G5=[1,.55,1,.7,1],CD=G5.map((g,i)=>{const y=310+90*i;mk('path',{d:'M720 '+(y+66)+'H1400',stroke:'var(--line)','stroke-width':3},$('lanes'));
+  const gg=mk('g',{},$('cads')),b=fig(gg,760,y,14,'ink');return [gg,gg.firstChild,b]});
+const RG=[500,450,400,350,300].map(y=>mk('path',{d:'M740 '+y+'H860',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},$('rungs')));
+let CS;for(let r=0;r<3;r++)for(let c=0;c<4;c++){const e=mk('circle',{cx:260+c*47,cy:375+r*42,r:10,fill:'var(--muted)'},$('calg'));if(r==1&&c==2)CS=e}
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const ck=4*p(u,TM.climber+.5,TM.climber+7.3),kf=Math.min(Math.floor(ck),3),fr=ck-kf;
+  $('climb').setAttribute('transform','translate('+(1208+56*(kf+fr)).toFixed(1)+' '+(560-60*(kf+fr)-30*Math.sin(Math.PI*fr)).toFixed(1)+')');
+  rise($('climbw'),p(u,TM.climber,TM.climber+.4)); rise($('flag'),p(u,TM.climber+7.6,TM.climber+8.2));
+
+  rise($('res'),p(u,TM.researcher,TM.researcher+.5)); rise($('flow'),p(u,TM.flow_wave,TM.flow_wave+.5));
+  const fw=p(u,TM.flow_wave+.4,TM.flow_wave+4);let wd='',wx=650,wy=0;
+  for(let i=0;i<=60;i++){wx=650+740*fw*i/60;wy=1063.5-.551*wx+18*Math.sin(wx/40-t*3);wd+=(i?'L':'M')+wx.toFixed(1)+' '+wy.toFixed(1)}
+  $('fwave').setAttribute('d',wd); $('fdot').setAttribute('cx',wx.toFixed(1)); $('fdot').setAttribute('cy',wy.toFixed(1));
+  rise($('flowtxt'),p(u,TM.flow_wave+7,TM.flow_wave+7.6));
+
+  [TM.easy_task,TM.hard_task,TM.just_right].forEach((a,i)=>rise(GC[i][0],p(u,a,a+.5)));
+  const jr=u>=TM.just_right+.5; GC[2][1].setAttribute('stroke',jr?'var(--gain)':'var(--line)'); GC[2][1].setAttribute('stroke-width',jr?5:3);
+  GC[2][2].setAttribute('transform','translate(0 '+(u>=TM.just_right+.8?-34*Math.pow(Math.max(0,Math.sin(t*3)),2):0).toFixed(1)+')');
+
+  rise($('dw'),p(u,TM.dweck,TM.dweck+.5)); rise($('fixL'),p(u,TM.fixed_box,TM.fixed_box+.5));
+  $('fxbox').setAttribute('opacity',(1-.6*p(u,TM.growing_tree+5.4,TM.growing_tree+6)).toFixed(2));
+  rise($('grL'),p(u,TM.growing_tree,TM.growing_tree+.5)); const ts=.2+.8*p(u,TM.growing_tree+.3,TM.growing_tree+3.5);
+  $('tr').setAttribute('transform','translate(1200 640) scale('+ts.toFixed(3)+') rotate('+(1.5*Math.sin(t*1.2)).toFixed(2)+')');
+  rise($('only'),p(u,TM.growing_tree+5.4,TM.growing_tree+6));
+
+  rise($('road'),p(u,TM.practice,TM.practice+.3)); $('rpath').setAttribute('stroke-dashoffset',(RL*(1-p(u,TM.practice,TM.practice+3))).toFixed(1));
+  const wr=120+1360*p(u,TM.practice+1,TM.scales+10); $('walker').setAttribute('cx',wr.toFixed(1)); $('walker').setAttribute('cy',(rf(wr)-14).toFixed(1));
+  rise($('pno'),p(u,TM.scales,TM.scales+.5)); const ak=4+Math.floor(t*4)%4;
+  WK.forEach((k,i)=>k.setAttribute('fill',(u>=TM.scales+.5&&i===ak)?'var(--gain)':'var(--stage)'));
+  $('loop').setAttribute('transform','rotate('+((t*120)%360).toFixed(1)+' 960 350)');
+  rise($('peaks'),p(u,TM.scales+5,TM.scales+5.6));
+
+  rise($('wp'),p(u,TM.west_point,TM.west_point+.5)); rise($('gauge'),p(u,TM.grit_gauge,TM.grit_gauge+.5));
+  const gp=p(u,TM.grit_gauge+.3,TM.grit_gauge+2.3); $('garc').setAttribute('stroke-dashoffset',(628*(1-.85*gp)).toFixed(1));
+  $('needle').setAttribute('transform','rotate('+(-90+153*gp).toFixed(1)+' 400 560)');
+  const gc=u>=TM.grit_gauge+1,fp=p(u,TM.finish_line,TM.finish_line+3);
+  CD.forEach((c,i)=>{const k=G5[i]===1&&gc?'gain':'ink';c[1].setAttribute('class',k);c[2].setAttribute('class',k);c[0].setAttribute('transform','translate('+(600*G5[i]*fp).toFixed(1)+' 0)')});
+  rise($('fin'),p(u,TM.finish_line,TM.finish_line+.5)); rise($('gtxt'),p(u,TM.finish_line+3,TM.finish_line+3.6));
+
+  // asymptote: curve tops out ~373, dot max radius 18 -> top ~355, a clear 35px gap below the line at 320
+  rise($('ach'),p(u,TM.curve,TM.curve+.5));
+  const ap=p(u,TM.curve+.3,TM.curve+5);let ad='',ax=160,ay=760;
+  for(let i=0;i<=80;i++){const s=ap*i/80;ax=160+800*s;ay=760-400*(1-Math.exp(-3.4*s));ad+=(i?'L':'M')+ax.toFixed(1)+' '+ay.toFixed(1)}
+  $('acurve').setAttribute('d',ad); $('arun').setAttribute('cx',ax.toFixed(1)); $('arun').setAttribute('cy',ay.toFixed(1));
+  $('arun').setAttribute('r',(14+(u>=TM.runner?4*Math.abs(Math.sin(t*4)):0)).toFixed(1));
+  $('ayou').setAttribute('x',ax.toFixed(1)); $('ayou').setAttribute('y',(ay+46).toFixed(1)); $('ayou').setAttribute('opacity',p(u,TM.runner,TM.runner+.5));
+  rise($('qcard'),p(u,TM.quote_card,TM.quote_card+.5)); rise($('joy'),p(u,TM.runner+5.4,TM.runner+6));
+
+  rise($('st0'),p(u,TM.calendar,TM.calendar+.5)); const cs=u>=TM.calendar+.8;
+  CS.setAttribute('r',cs?16:10); CS.setAttribute('fill',cs?'var(--gain)':'var(--muted)');
+  rise($('st1'),p(u,TM.ladder,TM.ladder+.5)); RG[2].setAttribute('stroke',u>=TM.ladder+.6?'var(--gain)':'var(--ink)'); RG[2].setAttribute('stroke-width',u>=TM.ladder+.6?9:6);
+  $('lyou').setAttribute('cy',(432-50*p(u,TM.ladder+1,TM.ladder+2)).toFixed(1));
+  rise($('st2'),p(u,TM.notebook,TM.notebook+.5)); [0,1,2].forEach(i=>rise($('nm'+i),p(u,TM.notebook+.6+i*.8,TM.notebook+1+i*.8)));
+
+  const S8=SC[8][0]/K;
+  rise($('qa'),p(u,S8+.4,S8+.9)); rise($('qb'),p(u,S8+.8,S8+1.3)); rise($('qc'),p(u,S8+1.2,S8+1.7));
+  rise($('tmr'),p(u,S8+1.6,S8+2.1)); rise($('chal'),p(u,S8+6.2,S8+6.8));
+  $('ring').setAttribute('stroke-dashoffset',(402*(1-p(u,S8+6.4,S8+9))).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.68;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

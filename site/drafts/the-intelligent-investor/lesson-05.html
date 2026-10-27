@@ -1,0 +1,358 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Intelligent Investor Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of The Intelligent Investor: Graham suggests keeping between 25 and 75 percent in stocks, often starting at an even split, and rebalancing to stay steady as markets swing. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE INTELLIGENT INVESTOR · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Balancing stocks</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">and bonds.</text>
+<text class="b" x="120" y="600" font-size="32">A simple split between stocks and bonds keeps you steady.</text>
+<g id="tsc"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two buckets.</text>
+<text class="b" x="120" y="176" font-size="32">Stocks are pieces of companies. Bonds are loans.</text>
+<path class="s-line" d="M160 640H1440" stroke-width="6" stroke-linecap="round"/>
+<g id="bk0">
+<path class="s-ink" d="M330 400L630 400L590 640L370 640Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<text class="d" x="480" y="700" font-size="44" text-anchor="middle">Stocks</text>
+<text class="m" x="480" y="736" font-size="20" text-anchor="middle">PIECES OF COMPANIES</text>
+</g>
+<g id="stk"></g>
+<g id="bk1">
+<path class="s-ink" d="M970 400L1270 400L1230 640L1010 640Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<text class="d" x="1120" y="700" font-size="44" text-anchor="middle">Bonds</text>
+<text class="m" x="1120" y="736" font-size="20" text-anchor="middle">LOANS THAT PAY STEADY INTEREST</text>
+</g>
+<g id="bnd"></g>
+<g id="sw0">
+<polyline class="s-gain" points="330,320 360,263 390,306 420,249 450,292 480,235 510,278 540,221 570,264 600,207 630,250" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="480" y="365" font-size="20" text-anchor="middle" style="fill:var(--gain)">GROWS MORE, BUT SWINGS</text>
+</g>
+<g id="sw1">
+<path class="s-ink" d="M970 320L1270 270" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1120" y="365" font-size="20" text-anchor="middle">GROWS SLOWLY, HOLDS STEADY</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<defs><clipPath id="barClip"><rect x="160" y="400" width="1280" height="120" rx="14"/></clipPath></defs>
+<text class="d" x="120" y="124" font-size="68">Keep 25% to 75% in stocks.</text>
+<g id="rbb"><text class="b" x="120" y="176" font-size="32">Whatever is left goes into bonds.</text>
+<text class="m" x="1440" y="382" font-size="24" text-anchor="end" style="fill:var(--loss)">BONDS</text></g>
+<g id="rb">
+<rect x="160" y="400" width="1280" height="120" rx="14" fill="var(--stage)"/>
+<g clip-path="url(#barClip)">
+<rect id="bR" x="800" y="400" width="640" height="120" class="loss"/>
+<rect id="sR" x="160" y="400" width="640" height="120" class="gain"/>
+</g>
+<rect x="160" y="400" width="1280" height="120" rx="14" fill="none" class="s-ink" stroke-width="6"/>
+<g id="tk"></g>
+</g>
+<g id="brk"><path class="s-gain" d="M480 382V360H1120V382" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="800" y="340" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE SAFE RANGE</text></g>
+<g id="nz">
+<path class="s-loss" d="M166 616H474M1126 616H1434" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/>
+<text class="m" x="320" y="656" font-size="22" text-anchor="middle" style="fill:var(--loss)">NEVER 0% STOCKS</text>
+<text class="m" x="1280" y="656" font-size="22" text-anchor="middle" style="fill:var(--loss)">NEVER 100% STOCKS</text></g>
+<g id="rbs"><text class="m" x="190" y="470" font-size="24" style="fill:var(--on-gain)">STOCKS</text></g>
+<g id="nall"><text class="d" x="120" y="790" font-size="52">Never all in. Never all out.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start at fifty-fifty.</text>
+<text class="b" x="120" y="176" font-size="32">Half in stocks, half in bonds.</text>
+<g id="sc3"></g>
+<g id="cb"><circle class="s-ink" cx="1160" cy="420" r="110" fill="var(--stage)" stroke-width="7"/>
+<path class="ink" d="M1090 560L1110 528H1210L1230 560Z"/>
+<text class="d" x="1160" y="465" font-size="130" text-anchor="middle" style="fill:var(--muted)">?</text></g>
+<g id="nocb"><circle class="s-loss" cx="1160" cy="420" r="150" fill="none" stroke-width="10"/>
+<path class="s-loss" d="M1054 314L1266 526" stroke-width="10" stroke-linecap="round"/>
+<text class="m" x="1160" y="650" font-size="24" text-anchor="middle">NO GUESSING THE MARKET</text></g>
+<g id="dflt"><text class="d" x="120" y="800" font-size="48">A sensible default for most people.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">When stocks run up, trim.</text>
+<text id="pS" class="d" x="400" y="250" font-size="56" text-anchor="middle" style="fill:var(--gain)">50%</text>
+<text id="pB" class="d" x="720" y="250" font-size="56" text-anchor="middle">50%</text>
+<rect class="gain" x="300" y="320" width="200" height="400"/>
+<rect id="bM" class="ink" x="620" y="320" width="200" height="400"/>
+<rect id="sl" class="gain" x="300" y="320" width="200" height="0" stroke-width="5" stroke-dasharray="10 8"/>
+<path class="s-ink" d="M260 720H860" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="400" y="770" font-size="24" text-anchor="middle">STOCKS</text>
+<text class="m" x="720" y="770" font-size="24" text-anchor="middle">BONDS</text>
+<g id="ra"><path class="s-gain" d="M220 620V330M198 352L220 330L242 352" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="r1"><text class="m" x="980" y="310" font-size="24">SELL ABOUT</text>
+<text class="d" x="972" y="440" font-size="130" style="fill:var(--gain)">1/11</text>
+<text class="m" x="980" y="530" font-size="24">OF YOUR STOCKS</text></g>
+<g id="r2"><text class="d" x="980" y="640" font-size="64">55% → 50%</text></g>
+<g id="r3"><text class="d5" x="980" y="720" font-size="40">Back to fifty-fifty.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">When stocks fall, buy more.</text>
+<path class="s-line" d="M160 260V680H900" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path id="pl" class="s-loss" d="M180 300L260 340L320 310L400 400L470 370L560 470L630 440L720 540L780 520L860 610" pathLength="1" stroke-dasharray="1 1" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="tg"><path class="s-ink" d="M860 600V440" stroke-width="3"/>
+<polygon class="gain" points="660,380 860,380 885,410 860,440 660,440"/>
+<text class="m" x="760" y="418" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">LOWER PRICES</text></g>
+<rect id="bnd5" class="ink" x="1060" y="300" width="200" height="200"/>
+<rect id="stk5" class="gain" x="1060" y="500" width="200" height="200"/>
+<path class="s-muted" d="M1030 500H1290" stroke-width="3" stroke-dasharray="8 8"/>
+<text class="m" x="1300" y="340" font-size="22">BONDS</text>
+<text class="m" x="1300" y="507" font-size="20">HALF</text>
+<text class="m" x="1300" y="690" font-size="22">STOCKS</text>
+<g id="sh5"><path class="s-gain" d="M1040 360C980 420 980 560 1040 620M1014 614L1040 620L1036 594" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="auto5"><text class="d" x="120" y="800" font-size="46">Buying low, almost automatically.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Lean a little, inside the limits.</text>
+<g id="dial">
+<path class="s-line" d="M460 640A340 340 0 0 1 1140 640" fill="none" stroke-width="30"/>
+<text class="m" x="460" y="700" font-size="22" text-anchor="middle">25%</text>
+<text class="m" x="800" y="262" font-size="22" text-anchor="middle">50%</text>
+<text class="m" x="1140" y="700" font-size="22" text-anchor="middle">75%</text>
+<g id="nd"><path class="s-ink" d="M800 640V380" stroke-width="10" stroke-linecap="round"/><circle class="ink" cx="800" cy="640" r="26"/></g>
+</g>
+<g id="lh"><text class="m" x="120" y="420" font-size="22" style="fill:var(--loss)">PRICES LOOK</text>
+<text class="m" x="120" y="452" font-size="22" style="fill:var(--loss)">DANGEROUSLY HIGH</text>
+<text class="m" x="120" y="494" font-size="22">LEAN TOWARD 25%</text></g>
+<g id="rb6"><text class="m" x="1480" y="420" font-size="22" text-anchor="end" style="fill:var(--gain)">GENUINE</text>
+<text class="m" x="1480" y="452" font-size="22" text-anchor="end" style="fill:var(--gain)">BARGAINS</text>
+<text class="m" x="1480" y="494" font-size="22" text-anchor="end">LEAN TOWARD 75%</text></g>
+<g id="stp"><path class="s-loss" d="M420 652H500M1100 652H1180" stroke-width="14" stroke-linecap="round"/></g>
+<g id="nob"><text class="d" x="120" y="800" font-size="44">Nobody predicts the market reliably.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Peace of mind, either way.</text>
+<g id="fc"><circle class="s-ink" cx="800" cy="400" r="80" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M760 392q12 10 24 0M816 392q12 10 24 0M768 428q32 26 64 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path class="gain" d="M680 660v-40a120 120 0 0 1 240 0v40z"/></g>
+<g id="c7a"><rect class="s-line" x="120" y="240" width="500" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="290" font-size="22">STOCKS SOAR</text>
+<polyline class="s-gain" points="160,560 230,510 290,530 360,450 420,470 490,380 580,330" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="d5" x="150" y="630" font-size="34">Glad you own some.</text></g>
+<g id="c7b"><rect class="s-line" x="980" y="240" width="500" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1010" y="290" font-size="22">STOCKS CRASH</text>
+<g id="rain"></g>
+<path class="gain" d="M1110 450a120 110 0 0 1 240 0z"/>
+<path class="s-ink" d="M1230 450V566a14 14 0 0 1-28 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<rect class="ink" x="1130" y="520" width="60" height="60" rx="6"/><rect class="ink" x="1260" y="520" width="60" height="60" rx="6"/>
+<text class="d5" x="1010" y="630" font-size="34">Bonds still standing.</text></g>
+<g id="job"><text class="d" x="120" y="800" font-size="46">A clear job to do, instead of panic.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">What share of your</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">savings is in stocks?</text></g>
+<g id="qc"><text class="d" x="136" y="540" font-size="80" letter-spacing="-2">What one move</text></g>
+<g id="qd"><text class="d" x="136" y="640" font-size="80" letter-spacing="-2">would bring it <tspan style="fill:var(--gain)">back?</tspan></text></g>
+<g id="pie"><circle class="ink" cx="1300" cy="460" r="140" fill-opacity=".2"/>
+<path id="wd" class="gain"/>
+<circle class="s-ink" cx="1300" cy="460" r="140" fill="none" stroke-width="5"/>
+<path class="s-ink" d="M1300 320V600" stroke-width="4" stroke-dasharray="10 8"/>
+<text class="m" x="1300" y="650" font-size="20" text-anchor="middle">YOUR TARGET</text></g>
+<text class="m" x="143" y="760" font-size="26">REBALANCE TOWARD YOUR TARGET</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Balancing Stocks and Bonds&rdquo;, from <em>The Intelligent Investor</em> by Benjamin Graham. The 50-50 starting split and the example of selling one eleventh of stocks when they reach 55 percent are as reported in the book. Buckets, arrows, scales and umbrellas are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 8.7], [8.7, 27.0], [27.0, 40.7], [40.7, 53.1], [53.1, 69.9], [69.9, 82.0], [82.0, 100.0], [100.0, 114.3], [114.3, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["A Simple Rule", "Two Buckets", "The 25 to 75 Range", "Start at Fifty-Fifty", "When Stocks Run Up", "When Stocks Fall", "Leaning, Carefully", "Why It Feels Good", "Your Turn"];
+const TM={"title_card": 0.0, "stock_bucket": 8.96, "bond_bucket": 15.52, "range_bar": 27.28, "never_zero": 36.24, "even_scale": 41.04, "no_crystal": 46.24, "rising_arrow": 53.36, "one_eleventh": 58.88, "move_money": 66.4, "falling_arrow": 70.24, "cheap_tag": 77.76, "tilt_dial": 82.32, "bargain_sign": 91.04, "calm_face": 100.32, "umbrella": 106.4, "your_pie": 114.64};
+const tx=(g,x,y,s,cls,fs,o)=>{const e=mk('text',Object.assign({x:x,y:y,class:cls,'font-size':fs,'text-anchor':'middle'},o||{}),g);e.textContent=s;return e};
+const mkScale=(g,cx,by,hw,dr,base,a)=>{mk('path',{d:'M'+cx+' '+by+'V'+base,class:'s-ink','stroke-width':8},g);mk('rect',{x:cx-80,y:base,width:160,height:16,rx:8,class:'ink'},g);
+  const b=mk('g',{},g);mk('path',{d:'M'+(cx-hw)+' '+by+'H'+(cx+hw),class:'s-ink','stroke-width':8,'stroke-linecap':'round'},b);mk('circle',{cx:cx,cy:by,r:12,class:'gain'},b);
+  const pan=()=>{const q=mk('g',{},g);mk('path',{d:'M'+(-a*.9)+' '+dr+'L0 0L'+(a*.9)+' '+dr,class:'s-ink',fill:'none','stroke-width':4,'stroke-linejoin':'round'},q);mk('path',{d:'M'+(-a)+' '+dr+'a'+a+' '+(a*.5)+' 0 0 0 '+(2*a)+' 0z',class:'ink'},q);return q};
+  return {b:b,L:pan(),R:pan(),cx:cx,by:by,hw:hw}};
+const setScale=(S,ang)=>{S.b.setAttribute('transform','rotate('+ang.toFixed(2)+' '+S.cx+' '+S.by+')');const r=ang*Math.PI/180,dx=S.hw*Math.cos(r),dy=S.hw*Math.sin(r);
+  S.L.setAttribute('transform','translate('+(S.cx-dx).toFixed(1)+' '+(S.by-dy).toFixed(1)+')');S.R.setAttribute('transform','translate('+(S.cx+dx).toFixed(1)+' '+(S.by+dy).toFixed(1)+')')};
+const blk=(g,x,y,w,h,gain)=>mk('rect',gain?{x:x,y:y,width:w,height:h,rx:5,class:'gain'}:{x:x,y:y,width:w,height:h,rx:5,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+
+const T=mkScale($('tsc'),1270,300,170,110,600,70);
+for(let k=0;k<2;k++){blk(T.L,-28,88-k*24,56,22,1);blk(T.R,-28,88-k*24,56,22,0)}
+tx(T.L,0,185,'STOCKS','m',20);tx(T.R,0,185,'BONDS','m',20);
+
+const S3=mkScale($('sc3'),480,300,240,130,700,100);
+blk(S3.L,-40,74,80,56,1);blk(S3.R,-40,74,80,56,0);
+const LB=[S3.L,S3.R].map((q,i)=>{const g=mk('g',{},q);tx(g,0,240,'50%','d',52,i?{}:{style:'fill:var(--gain)'});tx(g,0,276,i?'BONDS':'STOCKS','m',22);return g});
+
+const SQ=[];for(let j=0;j<3;j++)for(let i=0;i<4;i++)SQ.push(mk('rect',{x:395+i*50,y:500+j*46,width:36,height:36,rx:6,class:'gain'},$('stk')));
+for(let k=0;k<4;k++){const y=598-k*40;mk('rect',{x:1030,y:y,width:180,height:32,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('bnd'));
+  mk('path',{d:'M1050 '+(y+16)+'H1150',class:'s-line','stroke-width':4,'stroke-linecap':'round'},$('bnd'));mk('circle',{cx:1185,cy:y+16,r:8,class:'gain'},$('bnd'))}
+
+[0,25,50,75,100].forEach(v=>{const x=160+12.8*v;mk('path',{d:'M'+x+' 530v18',class:'s-ink','stroke-width':4},$('tk'));tx($('tk'),x,584,v+'%','m',22)});
+
+const DR=[1020,1050,1080,1380,1410,1440,1150,1230,1310].map((x,i)=>{const y1=i<6?580:450-110*Math.sqrt(1-Math.pow((x-1230)/120,2))-22;
+  return [mk('path',{d:'M'+x+' 0v18',class:'s-loss','stroke-width':4,'stroke-linecap':'round'},$('rain')),310,y1]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+
+  setScale(T,10*Math.sin(t*2.2)*Math.exp(-t*.35)); R('tsc',TM.title_card,.8);
+
+  R('bk0',TM.stock_bucket); R('stk',TM.stock_bucket+2.6); R('bk1',TM.bond_bucket); R('bnd',TM.bond_bucket+.6);
+  R('sw0',TM.bond_bucket+5.8); R('sw1',TM.bond_bucket+8.7);
+  const sw=u>=TM.bond_bucket+5.8; SQ.forEach((q,i)=>q.setAttribute('transform','translate(0 '+(sw?(5*Math.sin(t*5+i*1.7)).toFixed(1):0)+')'));
+
+  // range bar: stocks share swings inside 25-75%, bonds fill exactly the remainder
+  R('rb',TM.range_bar); R('rbs',TM.range_bar+.3); R('brk',TM.range_bar+1); R('rbb',TM.range_bar+6.1);
+  const sv=50+22*Math.sin(t*.9), sw2=12.8*sv;
+  $('sR').setAttribute('width',sw2.toFixed(1));
+  $('bR').setAttribute('x',(160+sw2).toFixed(1)); $('bR').setAttribute('width',(1280-sw2).toFixed(1));
+  $('bR').setAttribute('opacity',p(u,TM.range_bar+6.1,TM.range_bar+6.8));
+  R('nz',TM.never_zero); R('nall',TM.never_zero+1.2);
+
+  const e3=p(u,TM.even_scale,TM.even_scale+1.6); setScale(S3,(-14+2*Math.sin(t*2))*(1-e3));
+  LB.forEach(g=>rise(g,p(u,TM.even_scale+1,TM.even_scale+1.6)));
+  R('cb',TM.no_crystal); R('nocb',TM.no_crystal+.9); R('dflt',TM.no_crystal+5);
+
+  const g4=p(u,TM.rising_arrow,TM.rising_arrow+1.5), d4=p(u,TM.one_eleventh+4.2,TM.one_eleventh+5), m4=p(u,TM.move_money,TM.move_money+1.5), h4=40*g4, sl=$('sl');
+  sl.setAttribute('height',h4.toFixed(1)); sl.setAttribute('x',(300+320*m4).toFixed(1));
+  sl.setAttribute('y',(320-h4+40*m4-60*Math.sin(Math.PI*m4)).toFixed(1));
+  sl.style.stroke=u>=TM.one_eleventh&&m4<1?'var(--ink)':'none'; sl.style.fill=m4>.5?'var(--ink)':'var(--gain)'; sl.style.fillOpacity=m4>.5?1:1-.5*d4;
+  const bh=400-40*g4; $('bM').setAttribute('height',bh.toFixed(1)); $('bM').setAttribute('y',(720-bh).toFixed(1));
+  $('pS').textContent=Math.round(50+5*g4-5*d4)+'%'; $('pB').textContent=Math.round(50-5*g4+5*m4)+'%';
+  R('ra',TM.rising_arrow); R('r1',TM.one_eleventh); R('r2',TM.one_eleventh+4.2); R('r3',TM.move_money+1);
+
+  $('pl').style.strokeDashoffset=(1-p(u,TM.falling_arrow,TM.falling_arrow+2.5)).toFixed(3);
+  const h5=200-50*p(u,TM.falling_arrow+1.8,TM.falling_arrow+3)+50*p(u,TM.falling_arrow+4.5,TM.falling_arrow+6);
+  $('stk5').setAttribute('y',(700-h5).toFixed(1)); $('stk5').setAttribute('height',h5.toFixed(1)); $('bnd5').setAttribute('height',(400-h5).toFixed(1));
+  R('sh5',TM.falling_arrow+4.5); R('tg',TM.cheap_tag); R('auto5',TM.cheap_tag+.8);
+
+  R('dial',TM.tilt_dial);
+  const a1=p(u,TM.tilt_dial+3,TM.tilt_dial+4.5), a2=p(u,TM.bargain_sign,TM.bargain_sign+1.5), a3=p(u,TM.bargain_sign+4.1,TM.bargain_sign+5.6);
+  const s6=50+3*Math.sin(t*1.5)-20*a1+40*a2-20*a3; $('nd').setAttribute('transform','rotate('+((s6-50)*3.6).toFixed(1)+' 800 640)');
+  R('lh',TM.tilt_dial+3); R('rb6',TM.bargain_sign); R('stp',TM.bargain_sign+4.1); R('nob',TM.bargain_sign+4.4);
+
+  R('fc',TM.calm_face); R('c7a',TM.calm_face+3.4); R('c7b',TM.umbrella); R('job',TM.umbrella+4.6);
+  DR.forEach((d,i)=>{const f=(t*.9+i*.37)%1; d[0].setAttribute('transform','translate(0 '+(d[1]+(d[2]-d[1])*f).toFixed(1)+')')});
+
+  R('qa',TM.your_pie); R('qb',TM.your_pie+.4); R('pie',TM.your_pie+.8); R('qc',TM.your_pie+4.6); R('qd',TM.your_pie+5);
+  const f8=.5+.14*Math.sin(t*.8)*(1-p(u,TM.your_pie+4.6,TM.your_pie+6.5)), A8=f8*2*Math.PI-Math.PI/2;
+  $('wd').setAttribute('d','M1300 460V320A140 140 0 '+(f8>.5?1:0)+' 1 '+(1300+140*Math.cos(A8)).toFixed(1)+' '+(460+140*Math.sin(A8)).toFixed(1)+'Z');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.12;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

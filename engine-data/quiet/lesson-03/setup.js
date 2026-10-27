@@ -1,0 +1,24 @@
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const baby=(g,x,y,r,c,calm)=>{mk('path',{d:`M${x-r*.9} ${y+r*2.6}v-${r*.6}a${r*.9} ${r*.9} 0 0 1 ${r*1.8} 0v${r*.6}z`,fill:c},g);mk('circle',{cx:x,cy:y,r:r,fill:'var(--stage)',stroke:c,'stroke-width':6},g);[-1,1].forEach(s=>calm?mk('path',{d:`M${x+s*r*.35-r*.15} ${y-r*.1}q${r*.15} ${r*.15} ${r*.3} 0`,fill:'none',stroke:c,'stroke-width':4,'stroke-linecap':'round'},g):mk('circle',{cx:x+s*r*.35,cy:y-r*.1,r:Math.max(3,r*.1),fill:c},g));return g};
+const arc2=(cx,cy,R)=>{const a=Math.round(R*.8),b=Math.round(R*.6),q=Math.round(R);return `M${cx+a} ${cy-b}A${q} ${q} 0 0 1 ${cx+a} ${cy+b}M${cx-a} ${cy-b}A${q} ${q} 0 0 0 ${cx-a} ${cy+b}`};
+baby($('tb'),1280,360,80,'var(--ink)');
+const TA=[120,150,180].map(R=>mk('path',{d:arc2(1280,360,R),fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},$('tarcs')));
+person($('kg'),240,380,40,'ink');
+mk('rect',{x:270,y:470,width:44,height:56,rx:6,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},$('kg'));
+const BB=[];for(let j=0;j<5;j++)for(let i=0;i<12;i++)BB.push(mk('circle',{cx:510+i*52,cy:330+j*60,r:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('bg')));
+[300,410,520].forEach(y=>{person($('ob'),1300,y,18,'ink');mk('rect',{x:1322,y:y+44,width:24,height:30,rx:4,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},$('ob'));mk('path',{d:`M1270 ${y}H1120`,stroke:'var(--muted)','stroke-width':3,'stroke-dasharray':'6 8'},$('sight'))});
+for(let i=0;i<10;i++){const a=i*Math.PI/5,c=Math.cos(a),s=Math.sin(a);mk('path',{d:`M${(330+60*c).toFixed(0)} ${(400+60*s).toFixed(0)}L${(330+110*c).toFixed(0)} ${(400+110*s).toFixed(0)}`,stroke:'var(--loss)','stroke-width':7,'stroke-linecap':'round'},$('burst'))}
+baby($('b3hf'),256,320,60,'var(--loss)');baby($('b3mf'),664,320,60,'var(--muted)');baby($('b3lf'),1208,320,60,'var(--ink)',1);
+mk('ellipse',{cx:256,cy:350,rx:14,ry:10,fill:'var(--loss)'},$('b3hf'));
+const LIMB=[0,1,2,3].map(()=>mk('path',{fill:'none',stroke:'var(--loss)','stroke-width':8,'stroke-linecap':'round'},$('b3hf')));
+const TEAR=[0,1].map(()=>mk('circle',{r:6,fill:'var(--loss)'},$('b3hf')));
+baby($('p4b1'),230,300,40,'var(--loss)');baby($('p4b2'),230,530,40,'var(--ink)',1);
+person($('p4k1'),1240,300,26,'loss');person($('p4k2'),1240,530,26,'ink');
+mk('path',{d:'M1210 615l-30-50M1270 615l26-45',fill:'none',stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('p4k2'));
+const AX=[2,4,7,11].map(a=>420+(a-2)/9*980);
+const AG=AX.map((x,i)=>{const g=mk('g',{},$('ages'));mk('circle',{cx:x,cy:300,r:12,class:'ink'},g);mk('text',{x:x,y:270,'font-size':36,'text-anchor':'middle',class:'d5'},g).textContent='Age '+[2,4,7,11][i];return g});
+const KD=[[],[]];AX.forEach((x,i)=>{const r=16+i*4;[540,760].forEach((b,l)=>{const g=mk('g',{},$('k'+(l+1)));person(g,x,b-r*4.2,r,l?'ink':'loss');KD[l].push(g)})});
+const WV=[120,160,200].map(()=>mk('path',{fill:'none',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},$('wvs')));
+for(let i=0;i<12;i++)mk('circle',{cx:150+i*50,cy:i%2?780:740,r:16,fill:i==6?'var(--gain)':'var(--muted)','fill-opacity':i==6?1:.5},$('crowd'));
+person($('twf'),200,320,30,'ink');person($('twf'),320,320,30,'ink');
+baby($('mirb'),1370,182,22,'var(--gain)');

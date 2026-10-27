@@ -1,0 +1,21 @@
+const fig=(g,x,y,r,f)=>{const q=mk('g',{fill:f},g);mk('circle',{cx:x,cy:y,r:r},q);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`},q);return q};
+const txt=(g,a,s)=>{const e=mk('text',a,g);e.textContent=s;return e};
+fig($('you0'),1300,418,17,'var(--loss)');
+fig($('child'),220,440,30,'var(--ink)');
+const RL=['HOW TO LOOK','HOW TO ACT','HOW TO FEEL'].map((s,i)=>{const g=mk('g',{},$('rules'));txt(g,{x:470,y:340+i*120,class:'m','font-size':20},s);mk('path',{d:`M470 ${370+i*120}h250M470 ${400+i*120}h190`,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},g);return g});
+const RP=[];for(let i=0;i<9;i++)RP.push(mk('path',{d:`M790 ${320+i*42}h${260-(i*37%90)}`,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('rp')));
+fig($('jdg'),450,330,50,'var(--loss)');
+const ROW=['WHAT YOU SAY','WHAT YOU DO','WHAT YOU THINK'].map((s,i)=>{const y=260+i*110,g=mk('g',{},$('rows'));const r=mk('rect',{x:860,y:y,width:620,height:80,rx:14,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);txt(g,{x:890,y:y+50,class:'m','font-size':24},s);
+  const m=mk('path',{d:i<2?`M1414 ${y+40}l14 14 26-28`:`M1416 ${y+26}l28 28M1444 ${y+26}l-28 28`,fill:'none',stroke:i<2?'var(--gain)':'var(--loss)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g);return [g,r,m]});
+fig($('vic'),400,500,40,'var(--loss)');
+const BL=['GUILT','BLAME','SHAME'].map((s,i)=>{const g=mk('g',{},$('blk')),y=400-i*60;mk('rect',{x:320,y:y,width:160,height:50,rx:8,class:'loss'},g);txt(g,{x:400,y:y+33,class:'m','font-size':22,'text-anchor':'middle',style:'fill:var(--stage)'},s);return g});
+const me=fig($('pair'),380,440,44,'var(--ink)');fig($('pair'),880,440,44,'var(--muted)');
+fig($('hum'),250,540,30,'var(--ink)');
+const MK=[];for(let i=0;i<30;i++)MK.push(mk('circle',{cx:460+i*32,cy:640,r:10,class:'loss'},$('mks')));
+fig($('ptF'),230,430,36,'var(--muted)');fig($('ptF'),560,430,36,'var(--ink)');
+const CO=[];for(let i=0;i<8;i++)CO.push(mk('ellipse',{cx:0,cy:130-i*14,rx:40,ry:9,fill:'var(--gain)',stroke:'var(--ink)','stroke-width':3},$('coinsG')));
+fig($('mirF'),220,430,34,'var(--ink)');fig($('mirF'),440,430,34,'var(--loss)');
+mk('path',{d:'M422 418l12 7M458 418l-12 7',stroke:'var(--stage)','stroke-width':4,'stroke-linecap':'round'},$('mirF'));
+fig($('limF'),840,550,30,'var(--ink)');fig($('limF'),1400,550,30,'var(--muted)');
+const PK=[];for(let i=0;i<3;i++)PK.push(mk('rect',{x:1080+i*26,y:560,width:18,height:120,rx:4},$('pk')));
+const AR=[];for(let i=0;i<3;i++){const g=mk('g',{},$('arrs'));mk('path',{d:'M0 0h50M0 0l14-12M0 0l14 12',fill:'none',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},g);AR.push(g)}

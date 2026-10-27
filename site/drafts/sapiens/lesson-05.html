@@ -1,0 +1,302 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapiens Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Sapiens: Laws, hierarchies and rights exist because many people believe in them, and writing helped these imagined orders grow far beyond village size. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAPIENS · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Imagined orders hold</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">societies together.</text>
+<text class="b" x="120" y="600" font-size="32">Why laws and rights work only because we believe in them</text>
+<g id="t_beams"></g>
+<g id="t_ppl"></g>
+<g id="t_rule"><g id="t_ruleIn"><rect class="gain" x="1180" y="250" width="260" height="130" rx="14"/><text class="m" x="1310" y="296" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">THE RULES</text><path d="M1220 326h180M1220 352h120" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round"/></g></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two famous codes.</text>
+<text class="b" x="120" y="176" font-size="32">Thousands of years apart, side by side.</text>
+<g id="st1"><path class="s-ink" d="M300 760V360a130 130 0 0 1 260 0V760z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/><rect class="ink" x="280" y="760" width="300" height="20" rx="6"/><g id="st1l"></g><text class="m" x="430" y="820" font-size="20" text-anchor="middle">BABYLON · NEARLY 4,000 YEARS AGO</text></g>
+<g id="pa1"><rect class="s-ink" x="1010" y="300" width="280" height="440" fill="var(--stage)" stroke-width="6"/><rect class="s-ink" x="990" y="280" width="320" height="34" rx="17" fill="var(--stage)" stroke-width="6"/><rect class="s-ink" x="990" y="726" width="320" height="34" rx="17" fill="var(--stage)" stroke-width="6"/><g id="pa1l"></g><text class="m" x="1150" y="820" font-size="20" text-anchor="middle">AMERICA · 1776</text></g>
+<g id="sb1"><path class="s-gain" d="M690 520h220M716 496l-26 24 26 24M884 496l26 24-26 24" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="800" y="480" font-size="20" text-anchor="middle">SIDE BY SIDE</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hammurabi’s order.</text>
+<text class="b" x="120" y="176" font-size="32">A king who said the gods had appointed him.</text>
+<g id="k2"><path class="s-gain" d="M290 232v40M215 248l26 34M365 248l-26 34" stroke-width="6" stroke-linecap="round"/><circle class="ink" cx="290" cy="380" r="50"/><path class="gain" d="M245 340l8-50 37 30 37-30 8 50z"/><path class="ink" d="M215 560v-60a75 75 0 0 1 150 0v60z"/><text class="m" x="290" y="610" font-size="20" text-anchor="middle">KING HAMMURABI</text><text class="m" x="290" y="644" font-size="20" text-anchor="middle" style="fill:var(--gain)">APPOINTED BY THE GODS</text></g>
+<g id="t2_0"><rect class="gain" x="680" y="300" width="240" height="120" rx="8"/><text class="m" x="800" y="368" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">SUPERIORS</text></g>
+<g id="t2_1"><rect class="s-ink" x="640" y="440" width="320" height="120" rx="8" fill="var(--stage)" stroke-width="5"/><text class="m" x="800" y="508" font-size="20" text-anchor="middle" style="fill:var(--ink)">COMMONERS</text></g>
+<g id="t2_2"><rect class="s-loss" x="560" y="580" width="480" height="120" rx="8" fill="var(--stage)" stroke-width="5"/><text class="m" x="800" y="648" font-size="20" text-anchor="middle" style="fill:var(--loss)">SLAVES</text></g>
+<g id="sc2"><path class="s-ink" d="M1260 330V700M1170 700h180" stroke-width="8" stroke-linecap="round"/><path id="beam2" class="s-ink" d="M1120 330h280" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1260" cy="324" r="12"/>
+<g id="pl2"><path class="s-ink" d="M0 0L-45 100M0 0L45 100" stroke-width="3" fill="none"/><rect class="gain" x="-14" y="78" width="28" height="22"/><path class="ink" d="M-55 100h110a55 26 0 0 1-110 0z"/></g>
+<g id="pr2"><path class="s-ink" d="M0 0L-45 100M0 0L45 100" stroke-width="3" fill="none"/><rect class="loss" x="-30" y="52" width="60" height="48"/><path class="ink" d="M-55 100h110a55 26 0 0 1-110 0z"/></g>
+<text class="m" x="1260" y="760" font-size="20" text-anchor="middle">PENALTIES CHANGE BY CLASS</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The American order.</text>
+<text class="b" x="120" y="176" font-size="32">“All men are created equal.”</text>
+<g id="f3"><g id="fp3"></g><path class="s-ink" d="M160 520H680" stroke-width="6" stroke-linecap="round"/></g>
+<g id="eq3"><path class="s-gain" d="M170 385H670" stroke-width="4" stroke-dasharray="10 8"/><text class="m" x="420" y="580" font-size="20" text-anchor="middle" style="fill:var(--gain)">ALL CREATED EQUAL</text></g>
+<g id="d3"><rect class="s-ink" x="820" y="240" width="580" height="460" rx="14" fill="var(--stage)" stroke-width="6"/><text class="m" x="860" y="300" font-size="20">THE DECLARATION · 1776</text></g>
+<g id="r3_0"><rect class="s-gain" x="860" y="376" width="44" height="44" rx="6" fill="none" stroke-width="5"/><path class="s-gain" d="M870 398l10 10 18-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="930" y="410" font-size="36">Life</text></g>
+<g id="r3_1"><rect class="s-gain" x="860" y="476" width="44" height="44" rx="6" fill="none" stroke-width="5"/><path class="s-gain" d="M870 498l10 10 18-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="930" y="510" font-size="36">Liberty</text></g>
+<g id="r3_2"><rect class="s-gain" x="860" y="576" width="44" height="44" rx="6" fill="none" stroke-width="5"/><path class="s-gain" d="M870 598l10 10 18-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="d5" x="930" y="610" font-size="36">Pursuit of happiness</text></g>
+<g id="e3"><text class="d" x="120" y="800" font-size="44">Both called their principles natural and eternal.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Imagined, not fake.</text>
+<text class="b" x="120" y="176" font-size="32">Biology contains no nobles and no equal rights.</text>
+<g id="hx4"><g id="rg4"></g><polyline id="h4a" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round"/><polyline id="h4b" class="s-gain" fill="none" stroke-width="6" stroke-linecap="round"/><text class="m" x="300" y="750" font-size="22" text-anchor="middle">BIOLOGY</text></g>
+<g id="no4"><text class="m" x="430" y="460" font-size="22" style="fill:var(--loss)">NO RANKS</text><text class="m" x="430" y="500" font-size="22" style="fill:var(--loss)">NO RIGHTS</text></g>
+<g id="ln4"></g>
+<g id="cr4"></g>
+<g id="ob4"><g id="ob4in"><rect class="gain" x="940" y="240" width="300" height="70" rx="14"/><text class="m" x="1090" y="283" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">THE ORDER</text></g></g>
+<g id="dt4"><text class="m" x="1310" y="752" font-size="20" text-anchor="middle" style="fill:var(--loss)">ONE DOUBTER</text></g>
+<g id="sd4"><text class="d" x="120" y="830" font-size="44">That is why imagined orders are so sturdy.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The memory problem.</text>
+<text class="b" x="120" y="176" font-size="32">A small band remembers. A kingdom cannot.</text>
+<g id="v5"><ellipse class="s-ink" cx="320" cy="285" rx="110" ry="40" fill="var(--stage)" stroke-width="4"/><text class="m" x="320" y="292" font-size="20" text-anchor="middle">CUSTOMS</text><path class="gain" d="M300 510l20-50 20 50z"/><g id="vp5"></g><text class="m" x="320" y="730" font-size="20" text-anchor="middle">A SMALL BAND</text></g>
+<g id="kd5"></g>
+<g id="kl5"><text class="m" x="800" y="730" font-size="20" text-anchor="middle">A KINGDOM</text></g>
+<g id="c5_0"><rect class="s-ink" x="1020" y="280" width="160" height="56" rx="10" fill="var(--stage)" stroke-width="4"/><text class="m" x="1100" y="315" font-size="20" text-anchor="middle">TAXES</text></g>
+<g id="c5_1"><rect class="s-ink" x="1020" y="360" width="160" height="56" rx="10" fill="var(--stage)" stroke-width="4"/><text class="m" x="1100" y="395" font-size="20" text-anchor="middle">DEBTS</text></g>
+<g id="c5_2"><rect class="s-ink" x="1020" y="440" width="160" height="56" rx="10" fill="var(--stage)" stroke-width="4"/><text class="m" x="1100" y="475" font-size="20" text-anchor="middle">PROPERTY</text></g>
+<g id="c5_3"><rect class="s-ink" x="1020" y="520" width="160" height="56" rx="10" fill="var(--stage)" stroke-width="4"/><text class="m" x="1100" y="555" font-size="20" text-anchor="middle">LAWS</text></g>
+<path id="ar5" class="s-muted" d="M1188 308L1246 395M1188 388L1240 420M1188 468L1240 445M1188 548L1246 475" stroke-width="4" stroke-linecap="round"/>
+<g id="b5"><g id="b5in"><circle id="b5c" cx="1340" cy="430" r="100" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/><path class="s-ink" d="M1340 340v180M1290 380q30 20 0 50t0 50M1390 380q-30 20 0 50t0 50" fill="none" stroke-width="5" stroke-linecap="round"/></g></g>
+<g id="tm5"><text class="m" x="1340" y="600" font-size="22" text-anchor="middle" style="fill:var(--loss)">TOO MUCH DATA</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Sumer invents writing.</text>
+<text class="b" x="120" y="176" font-size="32">Mesopotamia, around 5,000 years ago.</text>
+<g id="tb6"><rect class="s-ink" x="160" y="240" width="480" height="480" rx="40" fill="var(--line)" fill-opacity=".5" stroke-width="7"/><path class="s-muted" d="M200 560H600" stroke-width="3"/></g>
+<g id="w6"></g>
+<g id="n6"></g>
+<g id="k6"><text class="d" x="400" y="660" font-size="56" text-anchor="middle" style="fill:var(--gain)">KUSHIM</text></g>
+<g id="br6"><g id="brs6"></g><text class="m" x="1060" y="420" font-size="22">AMOUNTS OF BARLEY</text><text class="m" x="1060" y="456" font-size="22">OWED OR DELIVERED</text></g>
+<g id="kr6"><text class="d" x="760" y="690" font-size="72">Kushim</text><text class="m" x="760" y="740" font-size="20">POSSIBLY ONE OF THE FIRST NAMES IN HISTORY</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Archives build empires.</text>
+<text class="b" x="120" y="176" font-size="32">Writing stored information outside human heads.</text>
+<g id="sh7"><rect class="s-ink" x="140" y="240" width="360" height="460" fill="none" stroke-width="6"/><path class="s-ink" d="M140 355h360M140 470h360M140 585h360" stroke-width="6"/><g id="tl7"></g><text class="m" x="320" y="750" font-size="20" text-anchor="middle">ARCHIVE</text></g>
+<g id="em7"><path class="s-ink" d="M770 300Q930 230 1100 255T1430 310Q1475 480 1420 650Q1250 725 1080 705T780 650Q735 470 770 300z" fill="none" stroke-width="5" stroke-dasharray="14 10"/><g id="st7"></g><g id="cl7"></g><g id="ck7"></g><path class="gain" d="M1040 450L1090 415L1140 450z"/><rect class="gain" x="1050" y="450" width="80" height="70"/><text class="m" x="1440" y="760" font-size="20" text-anchor="end">EMPIRE</text></g>
+<g id="cs7"><text class="d" x="120" y="830" font-size="40">Strangers taxed, judged and ranked by the same rules.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="320" font-size="88" letter-spacing="-2">What keeps your rules real?</text></g>
+<g id="qb"><text class="d" x="136" y="430" font-size="88" letter-spacing="-2">Nature itself, or millions</text></g>
+<g id="qc"><text class="d" x="136" y="540" font-size="88" letter-spacing="-2">of us <tspan style="fill:var(--gain)">believing together</tspan>?</text></g>
+<g id="qm"><text class="m" x="143" y="700" font-size="26">PICK ONE RULE YOU FOLLOW TODAY</text></g>
+<g id="g8"><rect class="gain" x="1220" y="610" width="230" height="70" rx="12"/><text class="m" x="1335" y="653" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">A RULE</text></g>
+<g id="dt8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="140" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:20</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Imagined Orders Hold Societies Together&rdquo;, from <em>Sapiens</em> by Yuval Noah Harari. Examples as reported in the book: the Code of Hammurabi, the American Declaration of Independence, and early Sumerian clay tablets including the name Kushim. The social pyramid, crowd, brain and archive drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=140, SC=[[0.0, 11.1], [11.1, 26.2], [26.2, 40.7], [40.7, 55.5], [55.5, 77.1], [77.1, 90.7], [90.7, 107.5], [107.5, 124.7], [124.7, 140.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Two Famous Codes", "Hammurabi's Order", "The American Order", "Imagined, Not Fake", "The Memory Problem", "Sumer Invents Writing", "Archives Build Empires", "Your Turn"];
+const TM={"title_card": 0.0, "clay_stele": 11.44, "parchment": 17.36, "king": 26.48, "pyramid": 32.0, "scales": 36.08, "founders": 40.96, "rights_list": 46.48, "dna_helix": 55.84, "crowd": 61.44, "lone_doubter": 67.2, "village": 77.36, "big_kingdom": 80.96, "brain": 87.04, "clay_tablet": 91.04, "barley": 97.52, "name_kushim": 102.72, "shelves": 107.76, "scribes": 112.08, "census": 119.12, "mirror": 125.04};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const TP=[0,1,2,3,4].map(i=>{const x=1170+i*65;mk('path',{d:`M${x} 618L${1250+i*30} 382`,class:'s-line','stroke-width':3,'stroke-dasharray':'6 8'},$('t_beams'));const g=mk('g',{},$('t_ppl'));fig(g,x,640,18,i===2?'gain':'ink');return g});
+for(let y=400;y<=720;y+=40)mk('path',{d:`M340 ${y}h180`,class:'s-muted','stroke-width':5,'stroke-dasharray':'14 8','stroke-linecap':'round'},$('st1l'));
+for(let i=0;i<9;i++)mk('path',{d:`M1050 ${360+i*40}h${i?180-(i%3)*30:200}`,class:i?'s-line':'s-ink','stroke-width':i?5:8,'stroke-linecap':'round'},$('pa1l'));
+for(let i=0;i<5;i++)fig($('fp3'),200+i*110,420,22,'ink');
+const RG=[];for(let i=0;i<15;i++){const y=265+i*30;RG.push(mk('line',{x1:300,x2:300,y1:y,y2:y,class:'s-line','stroke-width':4},$('rg4')))}
+const CP=[],CL=[],D=19;for(let r=0;r<3;r++)for(let c=0;c<7;c++){const x=760+c*110,y=440+r*100;CL.push(mk('path',{d:`M1090 310L${x} ${y-16}`,class:'s-line','stroke-width':2},$('ln4')));const g=mk('g',{},$('cr4'));CP.push([g,...fig(g,x,y,16,'ink')])}
+for(let i=0;i<5;i++){const a=-Math.PI/2+i*2*Math.PI/5;fig($('vp5'),320+120*Math.cos(a),480+120*Math.sin(a),16,'ink')}
+const KD=[];for(let i=0;i<81;i++)KD.push(mk('circle',{cx:640+(i%9)*40,cy:290+Math.floor(i/9)*40,r:9,class:'ink'},$('kd5')));
+const W6=[];for(let i=0;i<12;i++)W6.push(mk('path',{d:`M${220+(i%6)*66} ${290+Math.floor(i/6)*80}l36 0l-18 44z`,class:'ink'},$('w6')));
+const C6=[];for(let i=0;i<5;i++)C6.push(mk('circle',{cx:240+i*70,cy:480,r:22,class:'s-ink',fill:'none','stroke-width':6},$('n6')));
+for(let k=0;k<3;k++){const x=820+k*80;mk('path',{d:`M${x} 560V320`,class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('brs6'));for(let j=0;j<5;j++)mk('ellipse',{cx:x+(j%2?12:-12),cy:340+j*36,rx:10,ry:18,class:'gain'},$('brs6'))}
+const T7=[];for(let s=0;s<4;s++)for(let i=0;i<6;i++)T7.push(mk('rect',{x:165+i*55,y:355+s*115-90,width:40,height:80,rx:6,fill:(i+s)%3?'var(--ink)':'var(--gain)'},$('tl7')));
+// empire network: spokes stop short of the building and of each person icon
+const K7=[],IC=[];
+for(let j=0;j<8;j++){const a=(j*45+22.5)*Math.PI/180,ix=1090+250*Math.cos(a),iy=475+160*Math.sin(a);
+  const dx=ix-1090,dy=iy-470,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+  const x1=1090+ux*75,y1=470+uy*75,x2=ix-ux*44,y2=iy-uy*44;
+  const l=mk('path',{d:`M${x1.toFixed(0)} ${y1.toFixed(0)}L${x2.toFixed(0)} ${y2.toFixed(0)}`,class:'s-gain','stroke-width':4,'stroke-linecap':'round'},$('cl7'));
+  const g=mk('g',{},$('ck7'));fig(g,ix,iy-19,12,'gain');K7.push([l,g]);IC.push([ix,iy,x1,y1,x2,y2])}
+const segD=(px,py,x1,y1,x2,y2)=>{const vx=x2-x1,vy=y2-y1,k=cl(((px-x1)*vx+(py-y1)*vy)/(vx*vx+vy*vy));return Math.hypot(px-x1-k*vx,py-y1-k*vy)};
+const S7=[];
+for(let r=0;r<8;r++)for(let c=0;c<11;c++){const x=800+c*60+(r%2?30:0),y=285+r*56;
+  if(((x-1090)/300)**2+((y-475)/195)**2>.9)continue;
+  if(x>1010&&x<1170&&y>390&&y<545)continue;
+  let ok=true;IC.forEach(q=>{const ddx=Math.max(q[0]-18-x,0,x-q[0]-18),ddy=Math.max(q[1]-31-y,0,y-q[1]-31);if(Math.hypot(ddx,ddy)<30)ok=false;if(segD(x,y,q[2],q[3],q[4],q[5])<22)ok=false});
+  if(ok)S7.push(mk('circle',{cx:x,cy:y,r:8,fill:'var(--muted)','fill-opacity':.35},$('st7')))}
+const D8=[];for(let i=0;i<24;i++)D8.push(mk('circle',{cx:1230+(i%8)*30,cy:740+Math.floor(i/8)*36,r:9,class:i===13?'gain':'ink'},$('dt8')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+R('t_rule',TM.title_card);$('t_ruleIn').setAttribute('transform','translate(0 '+(6*Math.sin(t*1.5)).toFixed(1)+')');
+TP.forEach((g,i)=>rise(g,p(u,TM.title_card+.6+i*.25,TM.title_card+1.1+i*.25)));
+$('t_beams').setAttribute('opacity',p(u,TM.title_card+5.4,TM.title_card+6.2));
+
+R('st1',TM.clay_stele);R('pa1',TM.parchment);R('sb1',TM.parchment+3.8);
+
+R('k2',TM.king);[0,1,2].forEach(i=>R('t2_'+i,TM.pyramid+i*.5));R('sc2',TM.scales);
+const ang=p(u,TM.scales+.4,TM.scales+1.4)*(12+3*Math.sin(t*1.4)),ar=ang*Math.PI/180,bx=140*Math.cos(ar),by=140*Math.sin(ar);
+$('beam2').setAttribute('transform','rotate('+ang.toFixed(2)+' 1260 330)');
+$('pl2').setAttribute('transform','translate('+(1260-bx).toFixed(1)+' '+(330-by).toFixed(1)+')');
+$('pr2').setAttribute('transform','translate('+(1260+bx).toFixed(1)+' '+(330+by).toFixed(1)+')');
+
+R('f3',TM.founders);R('eq3',TM.founders+1.5);R('d3',TM.rights_list-.3);[0,1,2].forEach(i=>R('r3_'+i,TM.rights_list+i*.8));R('e3',TM.rights_list+5.3);
+
+R('hx4',TM.dna_helix);R('no4',TM.dna_helix+1.5);
+let ha='',hb='';for(let y=250;y<=710;y+=10){const s=Math.sin(y/45+t*1.5)*90;ha+=(300+s).toFixed(1)+','+y+' ';hb+=(300-s).toFixed(1)+','+y+' '}
+$('h4a').setAttribute('points',ha);$('h4b').setAttribute('points',hb);
+RG.forEach((l,i)=>{const s=Math.sin((265+i*30)/45+t*1.5)*90;l.setAttribute('x1',(300+s).toFixed(1));l.setAttribute('x2',(300-s).toFixed(1))});
+R('ob4',TM.crowd);
+const dd=u>=TM.lone_doubter;
+CP.forEach((c,i)=>{const a=TM.crowd+.3+i*.06;rise(c[0],p(u,a,a+.4));const k=i===D&&dd?'loss':'ink';c[1].setAttribute('class',k);c[2].setAttribute('class',k);
+ CL[i].setAttribute('opacity',(p(u,a,a+.6)*(i===D?1-p(u,TM.lone_doubter,TM.lone_doubter+.6):1)).toFixed(2))});
+const dw=dd?4*Math.sin((u-TM.lone_doubter)*12)*Math.max(0,1-(u-TM.lone_doubter)):0;$('ob4in').setAttribute('transform','translate('+dw.toFixed(1)+' 0)');
+R('dt4',TM.lone_doubter);R('sd4',TM.lone_doubter+6.6);
+
+R('v5',TM.village);
+KD.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.big_kingdom+i*.02,TM.big_kingdom+i*.02+.3)));
+R('kl5',TM.big_kingdom);[0,1,2,3].forEach(i=>R('c5_'+i,TM.big_kingdom+1.2+i*.7));
+R('b5',TM.brain);$('ar5').setAttribute('opacity',p(u,TM.brain+.5,TM.brain+1));
+const ov=p(u,TM.brain+1,TM.brain+1.5);$('b5c').style.stroke=ov>0?'var(--loss)':'var(--ink)';
+$('b5in').setAttribute('transform','translate('+(3*ov*Math.sin(t*30)).toFixed(1)+' 0)');R('tm5',TM.brain+1);
+
+R('tb6',TM.clay_tablet);
+W6.forEach((w,i)=>w.setAttribute('opacity',p(u,TM.clay_tablet+.6+i*.2,TM.clay_tablet+.9+i*.2)));
+C6.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.barley+.4+i*.3,TM.barley+.7+i*.3)));
+R('br6',TM.barley);R('k6',TM.name_kushim);R('kr6',TM.name_kushim+.6);
+
+R('sh7',TM.shelves);T7.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.shelves+.3+i*.08,TM.shelves+.6+i*.08)));
+R('em7',TM.scribes);K7.forEach((k,i)=>{const a=TM.scribes+.5+i*.3;k[0].setAttribute('opacity',p(u,a,a+.4));rise(k[1],p(u,a+.2,a+.6))});
+S7.forEach((s,i)=>{const on=u>=TM.census+.3+i*.1;s.setAttribute('fill',on?'var(--gain)':'var(--muted)');s.setAttribute('fill-opacity',on?.45:.3)});R('cs7',TM.census+.5);
+
+R('qa',TM.mirror);R('qm',TM.mirror+.8);R('g8',TM.mirror+1.2);R('qb',TM.mirror+6.6);R('qc',TM.mirror+7);
+D8.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.mirror+7+i*.06,TM.mirror+7.3+i*.06)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:136.8;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

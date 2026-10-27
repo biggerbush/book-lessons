@@ -88,3 +88,6 @@ The draft shows in the admin page as `model-<id>`; *Approve* moves it to `site/m
 Each book has an illustrated book-jacket cover (our own design: palette colour, title, author and the book's illustration; `site/<dir>/cover.svg`, plus `cover.png` 800x640 for apps), drawn by
 `python3 tools/make_covers.py` (add a drawing to `COVERS` for a new book). `books.json` carries `cover` and `cover_png`.
 A book without a cover falls back to its first lesson frame. The site draws the play button on top.
+
+### Covers for new books
+Approving a book now makes its jacket cover automatically (`engine/publish.py` → `tools/make_covers.ensure`). Claude draws the picture when the draft finishes (`engine/cover_art.py`, stored as `cover_art` in the draft); drafts without one are drawn at approval; if that fails the book gets a generic illustration. To hand-draw one, add a function to `COVERS` in `tools/make_covers.py`. `python3 tools/make_covers.py` fills in any book that has no cover yet.

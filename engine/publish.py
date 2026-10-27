@@ -13,6 +13,7 @@ CLI (used by the approve-book workflow):
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -68,6 +69,8 @@ def write_draft(state: dict) -> None:
         "message": state.get("message", ""), "dry": bool(state.get("dry")), "input_title": state["title"],
         "cost_usd": cost_usd(state.get("usage", {})), "updated": state.get("updated", now()),
     }
+    if state.get("cover_art"):
+        book["cover_art"] = state["cover_art"]
     if state.get("kind") == "model":
         book.update(kind="model", model_id=state.get("model_id", ""), category=state.get("category", ""))
     (d / "book.json").write_text(json.dumps(book, indent=1, ensure_ascii=False), encoding="utf8")
@@ -139,9 +142,27 @@ def approve(slug: str) -> None:
         data["books"].append(new)
     from .categories import reindex
     reindex(data)
+    _make_cover(data, book_id, book)
     books_path.write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf8")
     update_drafts_index()
     log(f"Published '{book['title']}' ({len(lessons)} lessons) as site/{dest.name}/")
+
+
+def _make_cover(data: dict, book_id: str, book: dict) -> None:
+    """Give the newly published book its jacket cover (never blocks publishing)."""
+    try:
+        from tools import make_covers
+        entry = next(b for b in data["books"] if b["id"] == book_id)
+        art = book.get("cover_art")
+        if not art and book_id not in make_covers.COVERS and os.environ.get("ANTHROPIC_API_KEY"):
+            from . import cover_art
+            from .llm import LLM, new_usage
+            art = cover_art.design(LLM(new_usage()), entry["title"], entry.get("author", ""), entry.get("blurb", ""))
+        entry.pop("cover", None)
+        make_covers.ensure(data, {book_id: art} if art else None)
+        log(f"Cover made for '{entry['title']}'")
+    except Exception as exc:
+        log(f"Cover skipped for '{book_id}': {type(exc).__name__}: {str(exc)[:160]}")
 
 
 def approve_model(src, book: dict) -> None:

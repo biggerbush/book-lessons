@@ -32,10 +32,17 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Tools for book covers
+        if: ${{ inputs.action == 'approve' }}
+        run: |
+          pip install -r engine/requirements.txt pillow
+          python -m playwright install --with-deps chromium
       - name: Apply
         env:
           SLUG: ${{ inputs.slug }}
           ACTION: ${{ inputs.action }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
         run: python -m engine.publish "$ACTION" "$SLUG" --commit
       - name: Redeploy the site
         env:

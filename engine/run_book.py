@@ -249,6 +249,9 @@ def run(title: str, author: str, n_lessons: int, notes: str, dry: bool, commit: 
                 checkpoint(f"Draft '{title}': lesson {L['n']} failed")
                 raise
             checkpoint(f"Draft '{state['plan']['title']}': lesson {L['n']} of {len(state['lessons'])}")
+        if not dry and not is_model and not state.get("cover_art"):
+            from . import cover_art
+            state["cover_art"] = cover_art.design(brain.llm, state["plan"]["title"], state["plan"].get("author", ""), state["plan"].get("summary", ""))
         state.update(status="ready", message="")
         checkpoint(f"Draft '{state['plan']['title']}' ready for review")
         log(f"Done. Estimated cost ${cost_usd(state['usage']):.2f}. Review the draft, then approve it.")

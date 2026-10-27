@@ -1,7 +1,11 @@
 """Illustrated book covers for the library: one flat illustration per book on a warm cream ground, no text.
 
-    python3 tools/make_covers.py            # writes site/<dir>/cover.svg (+ cover.png for the app) and books.json fields
+    python3 tools/make_covers.py            # covers for any book that has none yet (site/<dir>/cover.svg + cover.png, books.json fields)
+    python3 tools/make_covers.py --all      # redraw every book's cover
     python3 tools/make_covers.py --sheet    # also writes a contact sheet to check them
+
+The engine calls ensure() when a book is approved, so new books get a jacket automatically. A book with no hand-drawn
+illustration in COVERS uses the art Claude designed for it (see engine/cover_art.py), else a generic one.
 
 Covers are 400x320 (5:4). The play button is NOT part of the image: the site draws it on top, centred, so every
 illustration keeps its centre fairly open or lets the button sit on a quiet shape.
@@ -409,6 +413,36 @@ def four_people():
     return svg(prof(SLATE, .9, 116, 290) + prof(PEACH, .86, 182, 290) + prof(ORANGE, .95, 246, 290, True) + prof(TEAL, .86, 306, 290, True) +
                bubble(70, 40, 64, 40, WHITE, TEAL) + bubble(170, 28, 64, 40, WHITE, ORANGE) + bubble(270, 50, 64, 40, WHITE, TEAL, True, "right"))
 
+def ego_balloon():
+    string = ln("M262 214C240 240 190 244 150 226", NAVY, 1.8)
+    ego = circ(262, 140, 76, PEACH) + ell(240, 112, 22, 14, WHITE, ' opacity=".5"') + ln("M286 78l-8 20 14 10-10 18", ORANGE, 2.6)
+    pin = ln("M348 52L304 96", NAVY, 3.6) + circ(352, 48, 8, AMBER)
+    return svg(ground(284) + string + ego + pin + bust(TEAL, .8, 112, 284))
+
+def investor_chart():
+    bars = "".join(rect(64 + k * 54, 280 - h, 36, h, SLATE_L if k % 2 else MIST, 4) for k, h in enumerate((60, 96, 76, 130, 168)))
+    line = ln("M70 232C100 200 118 230 150 188S214 214 250 150S300 120 330 96", NAVY, 3.2)
+    lens = circ(284, 128, 50, WHITE, ' opacity=".55"') + ring(284, 128, 50, NAVY, 5) + ln("M320 164L356 202", NAVY, 9) + coin(284, 128, 26)
+    return svg(ground(282) + bars + line + lens)
+
+def obstacle_steps():
+    steps = rect(60, 238, 96, 44, SLATE_L, 4) + rect(156, 196, 96, 86, SLATE, 4) + rect(252, 154, 96, 128, NAVY, 4)
+    rock = ell(104, 222, 34, 26, GREY) + ell(94, 212, 12, 7, WHITE, ' opacity=".6"') + ln("M112 226l8-10", SLATE, 2)
+    path = ln("M64 200C110 120 210 100 300 118", AMBER, 3.4, ' stroke-dasharray="7 8"') + arrow(280, 112, 316, 124, AMBER, 3.4, 11)
+    flag = ln("M318 154V102", NAVY, 3) + fl("M320 102l30 12-30 12z", AMBER)
+    return svg(sun(318, 66, 34, AMBER_L) + steps + rock + path + flag + ground(282))
+
+def now_lotus():
+    water = "".join(ell(200, 262, rx, ry, "none", f' stroke="{SLATE_L}" stroke-width="2.4"') for rx, ry in ((70, 14), (116, 24), (162, 34)))
+    petals = "".join(leaf(200, 250, l, a, c) for l, a, c in ((92, -150, TEAL_L), (92, -30, TEAL_L), (100, -125, PEACH), (100, -55, PEACH), (108, -90, ORANGE)))
+    return svg(sun(200, 160, 70, AMBER_L) + hill("M0 270H400V320H0Z", "#E2E8EE") + water + petals + circ(200, 252, 6, AMBER))
+
+def ziggurat():
+    tiers = (rect(96, 232, 208, 46, PEACH, 4) + rect(128, 192, 144, 40, "#EBC48E", 4) + rect(160, 154, 80, 38, PEACH, 4) + rect(184, 122, 32, 32, AMBER_L, 4) +
+             "".join(ln(f"M{x} 232V278M{x + 6} 192V232", "#D9B98C", 2) for x in (130, 270)))
+    return svg(sun(318, 82, 36, AMBER_L) + cloud(78, 96, .9) + tiers + coins(66, 280, 4, 40, 9) + coins(338, 280, 3, 40, 9) + ground(280))
+
+
 # book id -> cover drawing
 COVERS = {
     "atomic-habits": atom, "rich-dad-poor-dad": money_tree, "never-split-the-difference": two_bubbles,
@@ -428,8 +462,69 @@ COVERS = {
     "measure-what-matters": gauge, "the-almanack-of-naval-ravikant": sailboat, "the-subtle-art-of-not-giving-a-f-ck": balloons,
     "four-thousand-weeks": weeks_grid, "radical-candor": quadrant, "tiny-habits": dominoes, "the-mountain-is-you": figure_mountain,
     "awaken-the-giant-within": mountain_flag, "surrounded-by-idiots": four_people,
+    "ego-is-the-enemy": ego_balloon, "the-intelligent-investor": investor_chart, "the-obstacle-is-the-way": obstacle_steps,
+    "the-power-of-now": now_lotus, "the-richest-man-in-babylon": ziggurat,
 }
 COVERS["never-split-the-difference"] = negotiation
+
+
+
+# ---------------------------------------------------------------- books without a hand-drawn cover
+def open_book():
+    pages = fl("M200 120C160 96 110 98 76 112V242C110 228 160 230 200 254Z", WHITE, f' stroke="{NAVY}" stroke-width="3" stroke-linejoin="round"') + \
+            fl("M200 120C240 96 290 98 324 112V242C290 228 240 230 200 254Z", "#FBF8F2", f' stroke="{NAVY}" stroke-width="3" stroke-linejoin="round"')
+    lines = "".join(ln(f"M{96} {140 + k * 18}C130 {132 + k * 18} 160 {138 + k * 18} 184 {152 + k * 18}", SLATE_L, 2.4) for k in range(3))
+    return svg(sun(200, 90, 40, AMBER_L) + pages + lines + star(268, 70, 12) + star(132, 60, 8, ORANGE) + ground(268, 60, 340))
+
+def book_stack():
+    stack = (rect(110, 236, 180, 36, SLATE, 5) + rect(126, 198, 156, 36, TEAL, 5) + rect(100, 160, 170, 36, ORANGE, 5) +
+             "".join(ln(f"M{x} {y}h40", WHITE, 2.4, ' opacity=".7"') for x, y in ((128, 254), (144, 216), (118, 178))))
+    return svg(sun(300, 100, 40, AMBER_L) + cloud(92, 96, 1.0) + stack + star(214, 128, 16) + ground(274, 70, 330))
+
+GENERIC = [open_book, book_stack]
+ART_TAGS = {"g", "path", "circle", "ellipse", "rect", "line", "polyline", "polygon"}
+ART_ATTRS = {"d", "cx", "cy", "r", "rx", "ry", "x", "y", "x1", "x2", "y1", "y2", "width", "height", "points", "fill", "stroke",
+             "stroke-width", "stroke-linecap", "stroke-linejoin", "stroke-dasharray", "opacity", "fill-opacity", "stroke-opacity", "transform"}
+
+
+def clean_art(markup: str) -> str | None:
+    """Make model-written SVG shapes safe to publish: only plain shapes and presentation attributes. None if unusable."""
+    import re
+    import xml.etree.ElementTree as ET
+    try:
+        root = ET.fromstring('<svg xmlns="http://www.w3.org/2000/svg">' + re.sub(r"<\?xml[^>]*\?>|</?svg[^>]*>", "", markup) + "</svg>")
+    except ET.ParseError:
+        return None
+    count = 0
+
+    def walk(el, out):
+        nonlocal count
+        for ch in el:
+            tag = ch.tag.split("}")[-1]
+            if tag not in ART_TAGS:
+                continue
+            attrs = {k: v for k, v in ch.attrib.items() if k in ART_ATTRS and "url(" not in v.lower() and "javascript" not in v.lower()}
+            count += 1
+            a = "".join(f' {k}="{_esc(v)}"' for k, v in attrs.items())
+            if tag == "g":
+                inner = []
+                walk(ch, inner)
+                out.append(f"<g{a}>{''.join(inner)}</g>")
+            else:
+                out.append(f"<{tag}{a}/>")
+    parts: list[str] = []
+    walk(root, parts)
+    return "".join(parts) if 4 <= count <= 400 and len(markup) < 30000 else None
+
+
+def art_svg(book: dict, art: str | None = None) -> str:
+    """The illustration for a book: our hand-drawn one, else the model-designed art given, else a generic one."""
+    if book["id"] in COVERS:
+        return COVERS[book["id"]]()
+    cleaned = clean_art(art) if art else None
+    if cleaned:
+        return svg(cleaned)
+    return GENERIC[sum(map(ord, book["id"])) % len(GENERIC)]()
 
 
 # ---------------------------------------------------------------- book jackets (the cover shown in the library)
@@ -467,7 +562,7 @@ def _esc(t: str) -> str:
     return escape(t)
 
 
-def jacket(book: dict, n: int) -> str:
+def jacket(book: dict, n: int, art: str | None = None) -> str:
     col, tile, ink = JACKETS[n % len(JACKETS)]
     x, y, w, h = 112, 28, 176, 264
     title = book["title"]
@@ -483,7 +578,7 @@ def jacket(book: dict, n: int) -> str:
     text += (f'<text x="{x + 18}" y="{y + 26}" font-family="{FONT}" font-weight="700" font-size="{asize}" letter-spacing="1.1" '
              f'fill="{ink}" opacity=".85">{_esc(auth)}</text>')
     # the picture: our illustration for this book in a panel on the lower half of the jacket
-    ill = COVERS[book["id"]]()
+    ill = art_svg(book, art)
     inner = ill[ill.index("</defs>") + 7:ill.rindex("</svg>")]
     py = y + 150
     pic = (f'<clipPath id="pc"><rect x="{x + 10}" y="{py}" width="{w - 18}" height="{h - 146}" rx="7"/></clipPath>'
@@ -499,27 +594,42 @@ def jacket(book: dict, n: int) -> str:
             f'{book_svg}</svg>')
 
 
-def main() -> None:
-    data = json.loads((SITE / "books.json").read_text(encoding="utf8"))
-    missing = [b["id"] for b in data["books"] if b["id"] not in COVERS]
-    if missing:
-        sys.exit("no cover drawing for: " + ", ".join(missing))
+def ensure(data: dict, art: dict | None = None, only_missing: bool = True) -> list[str]:
+    """Give every book without a cover one (all of them with only_missing=False). `art` maps book id -> model-designed SVG shapes.
+    Updates the cover fields in `data` and writes cover.svg + cover.png; returns the ids it made."""
+    art = art or {}
+    made = []
     for n, b in enumerate(data["books"]):
         d = SITE / b["dir"]
+        if only_missing and b.get("cover") and (d / "cover.svg").exists():
+            continue
         d.mkdir(parents=True, exist_ok=True)
-        (d / "cover.svg").write_text(jacket(b, n), encoding="utf8")
+        (d / "cover.svg").write_text(jacket(b, n, art.get(b["id"])), encoding="utf8")
         b["cover"] = f"{b['dir']}/cover.svg"
         b["cover_png"] = f"{b['dir']}/cover.png"
-    render_png([SITE / b["dir"] / "cover.svg" for b in data["books"]])
+        made.append(b["id"])
+    render_png([SITE / next(b["dir"] for b in data["books"] if b["id"] == i) / "cover.svg" for i in made])
+    return made
+
+
+def main() -> None:
+    data = json.loads((SITE / "books.json").read_text(encoding="utf8"))
+    made = ensure(data, only_missing="--all" not in sys.argv)
     (SITE / "books.json").write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf8")
-    print(f"wrote {len(data['books'])} covers")
+    print(f"wrote {len(made)} cover(s): {', '.join(made) or 'none needed'}")
     if "--sheet" in sys.argv:
         sheet(data["books"])
 
 
 def render_png(paths: list[Path]) -> None:
     """800x640 PNG next to each SVG, for apps that don't draw SVG."""
-    from playwright.sync_api import sync_playwright
+    if not paths:
+        return
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("playwright not installed: skipped the PNG copies (the SVG covers still work)")
+        return
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page(viewport={"width": 800, "height": 640})

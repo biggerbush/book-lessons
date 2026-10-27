@@ -1,0 +1,297 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quiet Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Quiet: Introverts can act like extroverts for work or causes they care about, as professor Brian Little does when lecturing, but they need restorative niches to recharge afterward. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">QUIET · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Stretching beyond</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">your nature.</text>
+<text class="b" x="120" y="600" font-size="32">How quiet people perform boldly,</text>
+<text class="b" x="120" y="644" font-size="32">and how they recover afterward.</text>
+<path id="cone" class="gain" d="M1185 230L1080 560H1320L1215 230z" fill-opacity=".22"/>
+<rect class="ink" x="1170" y="200" width="60" height="32" rx="6"/>
+<rect class="ink" x="1060" y="560" width="290" height="24" rx="4"/>
+<g id="aud0"></g>
+<g id="lect"></g>
+<g id="stall0"><text class="m" x="1480" y="340" font-size="20" text-anchor="end">MINUTES LATER</text><rect x="1380" y="360" width="100" height="224" rx="6" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><circle class="ink" cx="1398" cy="470" r="6"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet Brian Little.</text>
+<text class="b" x="120" y="176" font-size="32">A psychology professor who taught at Harvard.</text>
+<g id="prof"><g id="profp"></g><path class="ink" d="M220 480H380L360 650H240z"/><text class="m" x="300" y="700" font-size="20" text-anchor="middle">PROFESSOR · HARVARD</text></g>
+<circle id="halo" cx="300" cy="420" r="130" fill="none" stroke="var(--loss)" stroke-width="5" stroke-dasharray="12 10"/>
+<g id="audw"><g id="aud1"></g><text class="m" x="620" y="700" font-size="20">LIVELY · FUNNY · PACKED</text></g>
+<g id="award"><path class="loss" d="M1322 370l-24 110 26-12 16 24 14-110zM1378 370l24 110-26-12-16 24-14-110z"/><circle class="gain" cx="1350" cy="330" r="60"/><circle cx="1350" cy="330" r="38" fill="none" stroke="var(--on-gain)" stroke-width="5"/><text class="m" x="1350" y="550" font-size="20" text-anchor="middle">MUCH ADMIRED</text><text class="m" x="1350" y="580" font-size="20" text-anchor="middle">TEACHER</text></g>
+<g id="intro"><text class="d" x="120" y="800" font-size="48">Yet he calls himself a <tspan style="fill:var(--loss)">deep introvert</tspan>.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Free Trait Theory.</text>
+<text class="b" x="120" y="176" font-size="32">Born with traits, but free to act beyond them.</text>
+<g id="seed"><ellipse id="band" cx="420" cy="500" rx="150" ry="150" fill="var(--ice)" stroke="var(--ink)" stroke-width="6"/><g id="me2"></g><text class="m" x="420" y="700" font-size="20" text-anchor="middle">BORN TRAIT: INTROVERSION</text></g>
+<g id="arr2"><path class="s-gain" d="M540 300H1210M1186 282l24 18-24 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="875" y="278" font-size="20" text-anchor="middle">STRETCH WHEN IT MATTERS</text><path class="s-ink" d="M1300 380V640" stroke-width="7" stroke-linecap="round"/><path class="gain" d="M1304 384L1400 414L1304 444z"/><text class="m" x="1300" y="680" font-size="20" text-anchor="middle">A GOAL THAT MATTERS</text></g>
+<g id="ff1"><text class="d" x="120" y="790" font-size="48">Not fake.</text></g>
+<g id="ff2"><text class="d5" x="120" y="846" font-size="36">It’s his <tspan style="fill:var(--gain)">real self</tspan>, stretching toward a goal.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Core personal projects.</text>
+<text class="b" x="120" y="176" font-size="32">Deep goals that make the stretch worth it.</text>
+<g id="tgt"><circle class="s-line" cx="380" cy="470" r="170" fill="none" stroke-width="5"/><circle class="s-line" cx="380" cy="470" r="115" fill="none" stroke-width="5"/><circle class="s-ink" cx="380" cy="470" r="60" fill="var(--stage)" stroke-width="5"/><path class="gain" d="M380 500C330 470 325 435 350 428C365 424 376 434 380 444C384 434 395 424 410 428C435 435 430 470 380 500Z"/></g>
+<g id="links3"></g>
+<g id="cards3"></g>
+<g id="mic3"><rect class="ink" x="136" y="700" width="36" height="60" rx="18"/><path class="s-ink" d="M124 740a30 30 0 0 0 60 0M154 772V800M136 800H172" fill="none" stroke-width="5" stroke-linecap="round"/><text class="d" x="220" y="790" font-size="44">For Little: teaching well is worth performing.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="60">Acting out of character costs energy.</text>
+<text class="b" x="120" y="176" font-size="32">Like a battery running down.</text>
+<g id="bat4"><rect x="140" y="300" width="560" height="220" rx="24" fill="none" stroke="var(--ink)" stroke-width="8"/><rect class="ink" x="704" y="370" width="28" height="80" rx="6"/><rect id="bfill" x="164" y="324" width="512" height="172" rx="10"/></g>
+<g id="low4"><text class="m" x="140" y="580" font-size="20">AFTER A BIG LECTURE: SPENT, NOT BUZZING</text></g>
+<g id="me4"></g>
+<g id="stim4"><g id="spk"></g><text class="m" x="1160" y="740" font-size="20" text-anchor="middle">TOO MUCH STIMULATION, FOR TOO LONG</text></g>
+<g id="st4"></g>
+<g id="drain4"><text class="d" x="120" y="810" font-size="44">Chatting with strangers drains him further.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Restorative niches.</text>
+<text class="b" x="120" y="176" font-size="32">Where you return to your true self and refill your energy.</text>
+<rect x="200" y="250" width="340" height="470" rx="8" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<g id="me5"></g>
+<g id="door5"><rect x="214" y="264" width="312" height="420" rx="6" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><circle class="gain" cx="246" cy="470" r="10"/></g>
+<g id="away5"><text class="m" x="200" y="770" font-size="20">AWAY FROM CONVERSATION</text></g>
+<g id="niche5"><path d="M900 640V420a150 150 0 0 1 300 0V640" fill="var(--ice)" stroke="var(--ink)" stroke-width="8" stroke-linejoin="round"/><g id="np5"></g><text class="m" x="1050" y="690" font-size="22" text-anchor="middle">RESTORATIVE NICHE</text></g>
+<g id="refill5"><rect x="1300" y="330" width="120" height="310" rx="16" fill="none" stroke="var(--ink)" stroke-width="7"/><rect class="ink" x="1335" y="304" width="50" height="22" rx="5"/><rect id="bf5" class="gain" x="1316" width="88" rx="8"/><text class="m" x="1360" y="690" font-size="20" text-anchor="middle">REFILL</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="64">A niche can be a place, or a time.</text>
+<text class="b" x="120" y="176" font-size="32">Any pocket of quiet where you can recharge.</text>
+<g id="pn0"><rect class="s-line" x="120" y="230" width="420" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="ink" d="M250 330h160a20 20 0 0 1 20 20v100H230V350a20 20 0 0 1 20-20z"/><rect class="gain" x="250" y="440" width="160" height="50" rx="10"/><rect class="ink" x="214" y="410" width="40" height="110" rx="14"/><rect class="ink" x="406" y="410" width="40" height="110" rx="14"/><rect class="ink" x="230" y="496" width="200" height="30" rx="8"/><path class="s-ink" d="M250 526v30M410 526v30" stroke-width="8" stroke-linecap="round"/>
+<text class="d5" x="330" y="640" font-size="36" text-anchor="middle">A favorite chair</text><text class="m" x="330" y="690" font-size="20" text-anchor="middle">A PLACE</text></g>
+<g id="pn1"><rect class="s-line" x="590" y="230" width="420" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="s-ink" cx="800" cy="440" r="110" fill="var(--stage)" stroke-width="8"/><g id="tk"></g><path id="hh" class="s-ink" d="M800 440V385" stroke-width="9" stroke-linecap="round"/><path id="hm" class="s-gain" d="M800 440V355" stroke-width="6" stroke-linecap="round"/><circle class="ink" cx="800" cy="440" r="9"/>
+<text class="d5" x="800" y="640" font-size="36" text-anchor="middle">A solo walk</text><text class="m" x="800" y="690" font-size="20" text-anchor="middle">A TIME</text></g>
+<g id="pn2"><rect class="s-line" x="1060" y="230" width="420" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect x="1160" y="330" width="220" height="210" rx="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><rect class="ink" x="1160" y="330" width="220" height="44" rx="10"/><g id="cal6"></g>
+<text class="d5" x="1270" y="640" font-size="36" text-anchor="middle">A free evening</text><text class="m" x="1270" y="690" font-size="20" text-anchor="middle">AFTER A BUSY SOCIAL DAY</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stretch, then recover.</text>
+<text class="b" x="120" y="176" font-size="32">Cain’s point is balance.</text>
+<path class="ink" d="M480 410L420 580H540z"/><rect class="ink" x="360" y="580" width="240" height="14" rx="7"/>
+<g id="beam"><path class="s-ink" d="M220 400H740" stroke-width="10" stroke-linecap="round"/><rect class="ink" x="140" y="320" width="170" height="70" rx="12"/><text class="m" x="225" y="364" font-size="22" text-anchor="middle" style="fill:var(--stage)">STRETCH</text><g id="rec7"><rect class="gain" x="650" y="320" width="170" height="70" rx="12"/><text class="m" x="735" y="364" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">RECOVER</text></g></g>
+<g id="face7"><circle cx="1020" cy="420" r="100" fill="var(--stage)" stroke="var(--loss)" stroke-width="7"/><path class="s-loss" d="M975 405h30M1035 405h30M980 480q40-30 80 0" fill="none" stroke-width="7" stroke-linecap="round"/><text class="d" x="1110" y="330" font-size="40" style="fill:var(--loss)">z</text><text class="m" x="1020" y="570" font-size="20" text-anchor="middle">TOO LONG, NO REST: EXHAUSTED</text></g>
+<g id="note7"><rect class="gain" x="1230" y="300" width="230" height="230" rx="8" transform="rotate(3 1345 415)"/><text class="m" x="1260" y="370" font-size="22" style="fill:var(--on-gain)">PLAN YOUR</text><text class="m" x="1260" y="405" font-size="22" style="fill:var(--on-gain)">RECOVERY</text><text class="m" x="1260" y="440" font-size="22" style="fill:var(--on-gain)">BEFORE THE</text><text class="m" x="1260" y="475" font-size="22" style="fill:var(--on-gain)">BIG EVENT</text></g>
+<g id="bal7"><text class="d" x="120" y="790" font-size="40">Stretch for what matters, then make room to recover.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">What is one project</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">worth stretching for</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2" style="fill:var(--gain)">this month?</text></g>
+<g id="qd"><text class="d5" x="140" y="640" font-size="40">And where will your <tspan style="fill:var(--gain)">restorative niche</tspan> be when it’s done?</text></g>
+<g id="qg"><path d="M1250 500V390a90 90 0 0 1 180 0V500" fill="var(--ice)" stroke="var(--ink)" stroke-width="8" stroke-linejoin="round"/><g id="qp"></g></g>
+<text class="m" x="143" y="760" font-size="26">STRETCH, THEN RECOVER</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Stretching Beyond Your Nature&rdquo;, from <em>Quiet</em> by Susan Cain. Brian Little&#x27;s lecturing, his escapes to a restroom stall, and his Free Trait Theory are as reported in the book. Batteries, arrows, clocks and other icons are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 10.7], [10.7, 27.0], [27.0, 44.7], [44.7, 58.6], [58.6, 76.1], [76.1, 89.9], [89.9, 102.7], [102.7, 119.2], [119.2, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Puzzle", "Meet Brian Little", "Free Trait Theory", "Core Projects", "The Hidden Cost", "Restorative Niches", "Many Kinds of Niche", "Stretch Wisely", "Your Turn"];
+const TM={"stage_spot": 0.0, "professor": 10.96, "audience": 14.8, "award": 19.68, "seed": 27.28, "stretch_arrow": 33.68, "heart_target": 45.04, "family": 49.28, "mic": 54.32, "battery_full": 58.88, "battery_low": 63.92, "small_talk": 72.48, "stall_door": 76.4, "niche_icon": 82.16, "reading_chair": 90.2, "clock": 94.88, "calendar": 99.04, "balance": 102.96, "tired_face": 109.04, "plan_note": 115.12, "question": 119.52};
+const pers=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const lect=mk('g',{},$('lect'));pers(lect,0,0,26,'ink');
+const A0=[];for(let i=0;i<6;i++){const g=mk('g',{},$('aud0'));pers(g,1090+i*46,615,11,'ink');A0.push(g)}
+pers($('profp'),300,360,40,'ink');
+const A1=[];for(let r=0;r<3;r++)for(let c=0;c<6;c++){const g=mk('g',{},$('aud1'));pers(g,620+c*110,330+r*120,18,'ink');A1.push(g)}
+const me2=mk('g',{},$('me2'));const M2=pers(me2,0,450,28,'ink');
+const PJ=['Work you love','People you care about','A cause you believe in'];
+const cards=PJ.map((s,i)=>{const y=240+i*130,g=mk('g',{},$('cards3'));
+  mk('rect',{x:760,y:y,width:720,height:104,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  if(i===0){mk('rect',{x:790,y:y+36,width:52,height:38,rx:6,class:'ink'},g);mk('path',{d:'M804 '+(y+36)+'v-8h24v8',fill:'none',stroke:'var(--ink)','stroke-width':5},g)}
+  if(i===1){pers(g,800,y+30,9,'ink');pers(g,832,y+30,9,'gain')}
+  if(i===2){mk('path',{d:'M800 '+(y+24)+'v58',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},g);mk('path',{d:'M803 '+(y+26)+'l40 14-40 14z',class:'gain'},g)}
+  const tx=mk('text',{x:880,y:y+66,'font-size':36,class:'d5'},g);tx.textContent=s;
+  const l=mk('path',{d:'M550 470L760 '+(y+52),fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},$('links3'));return [g,l]});
+pers($('me4'),1160,330,34,'ink');
+for(let i=0;i<8;i++){const a=-Math.PI+(i+.5)*Math.PI/8,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1160+62*c).toFixed(0)+' '+(330+62*s).toFixed(0)+'L'+(1160+96*c).toFixed(0)+' '+(330+96*s).toFixed(0),stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},$('spk'))}
+[960,1360].forEach(x=>{const g=$('st4');pers(g,x,580,26,'ink');mk('rect',{x:x-55,y:470,width:110,height:56,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);[-22,0,22].forEach(d=>mk('circle',{cx:x+d,cy:498,r:5,class:'ink'},g))});
+const me5=mk('g',{},$('me5'));pers(me5,0,420,32,'ink');
+pers($('np5'),1050,470,26,'gain');
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(800+88*c).toFixed(0)+' '+(440+88*s).toFixed(0)+'L'+(800+100*c).toFixed(0)+' '+(440+100*s).toFixed(0),stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('tk'))}
+const CAL=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++)CAL.push(mk('rect',{x:1180+c*50,y:392+r*46,width:36,height:36,rx:6,fill:'var(--line)'},$('cal6')));
+pers($('qp'),1340,400,18,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const hide=p(u,TM.stage_spot+5.6,TM.stage_spot+6.8);
+  lect.setAttribute('transform','translate('+(1200+60*Math.sin(t*2)*(1-hide)+230*hide).toFixed(1)+' '+(445-18*Math.abs(Math.sin(t*4))*(1-hide)).toFixed(1)+')');
+  $('cone').setAttribute('opacity',(p(u,TM.stage_spot,TM.stage_spot+.6)*(1-.85*hide)).toFixed(2));
+  A0.forEach((g,i)=>g.setAttribute('transform','translate(0 '+(-6*Math.abs(Math.sin(t*5+i))*(1-hide)).toFixed(1)+')'));
+  rise($('stall0'),p(u,TM.stage_spot+5.4,TM.stage_spot+5.9));
+
+  rise($('prof'),p(u,TM.professor,TM.professor+.5)); rise($('audw'),p(u,TM.audience,TM.audience+.5));
+  A1.forEach((g,i)=>g.setAttribute('transform','translate(0 '+(-5*Math.abs(Math.sin(t*4+i*.7))).toFixed(1)+')'));
+  rise($('award'),p(u,TM.award,TM.award+.5));
+  const iv=TM.award+3.7; rise($('intro'),p(u,iv,iv+.5)); $('halo').setAttribute('opacity',p(u,iv,iv+.6)); $('halo').setAttribute('stroke-dashoffset',((t*20)%22).toFixed(1));
+
+  rise($('seed'),p(u,TM.seed,TM.seed+.5)); rise($('arr2'),p(u,TM.stretch_arrow,TM.stretch_arrow+.5));
+  const k=p(u,TM.stretch_arrow+.6,TM.stretch_arrow+2.4);
+  $('band').setAttribute('cx',(420+300*k).toFixed(1)); $('band').setAttribute('rx',(150+300*k).toFixed(1)); $('band').setAttribute('ry',(150-30*k).toFixed(1));
+  me2.setAttribute('transform','translate('+(420+580*k).toFixed(1)+' 0)');
+  const f2=TM.stretch_arrow+8.3; rise($('ff1'),p(u,TM.stretch_arrow+5.3,TM.stretch_arrow+5.8)); rise($('ff2'),p(u,f2,f2+.5));
+  M2.forEach(e=>e.setAttribute('class',u>=f2?'gain':'ink'));
+
+  rise($('tgt'),p(u,TM.heart_target,TM.heart_target+.5));
+  cards.forEach((c,i)=>{const a=TM.family+i*2.2; rise(c[0],p(u,a,a+.5)); c[1].setAttribute('opacity',p(u,a,a+.5))});
+  rise($('mic3'),p(u,TM.mic,TM.mic+.5));
+
+  rise($('bat4'),p(u,TM.battery_full,TM.battery_full+.5)); rise($('me4'),p(u,TM.battery_full,TM.battery_full+.5));
+  const lv=1-.1*p(u,TM.battery_full+1,TM.battery_low)-.55*p(u,TM.battery_low,TM.battery_low+1.5)-.23*p(u,TM.small_talk,TM.small_talk+1.5);
+  $('bfill').setAttribute('width',(512*lv).toFixed(1)); $('bfill').setAttribute('fill',lv>.4?'var(--gain)':'var(--loss)');
+  rise($('low4'),p(u,TM.battery_low,TM.battery_low+.5));
+  rise($('stim4'),p(u,TM.battery_low+3.8,TM.battery_low+4.3)); $('spk').setAttribute('opacity',(.55+.45*Math.sin(t*6)).toFixed(2));
+  rise($('st4'),p(u,TM.small_talk,TM.small_talk+.5)); rise($('drain4'),p(u,TM.small_talk+.6,TM.small_talk+1.1));
+
+  const w=p(u,TM.stall_door+.3,TM.stall_door+2);
+  me5.setAttribute('transform','translate('+(760-390*w).toFixed(1)+' 0)'); me5.setAttribute('opacity',p(u,TM.stall_door,TM.stall_door+.4));
+  rise($('door5'),p(u,TM.stall_door+1.6,TM.stall_door+2.1)); rise($('away5'),p(u,TM.stall_door+1.8,TM.stall_door+2.3));
+  rise($('niche5'),p(u,TM.niche_icon,TM.niche_icon+.5)); rise($('refill5'),p(u,TM.niche_icon+3,TM.niche_icon+3.5));
+  const bh=278*(.15+.85*p(u,TM.niche_icon+3.3,TM.niche_icon+5.5)); $('bf5').setAttribute('height',bh.toFixed(1)); $('bf5').setAttribute('y',(624-bh).toFixed(1));
+
+  rise($('pn0'),p(u,TM.reading_chair,TM.reading_chair+.5)); rise($('pn1'),p(u,TM.clock,TM.clock+.5)); rise($('pn2'),p(u,TM.calendar,TM.calendar+.5));
+  $('hm').setAttribute('transform','rotate('+((t*60)%360).toFixed(1)+' 800 440)'); $('hh').setAttribute('transform','rotate('+((t*5)%360).toFixed(1)+' 800 440)');
+  CAL.forEach((c,i)=>c.setAttribute('fill',i===10&&u>=TM.calendar+.8?'var(--gain)':'var(--line)'));
+
+  const a1=p(u,TM.balance,TM.balance+1),a2=p(u,TM.tired_face,TM.tired_face+1),a3=p(u,TM.plan_note,TM.plan_note+1);
+  $('beam').setAttribute('transform','rotate('+(-14+14*a1-16*a2+16*a3).toFixed(2)+' 480 400)');
+  $('rec7').setAttribute('opacity',(1-.7*a2+.7*a3).toFixed(2));
+  rise($('bal7'),p(u,TM.balance+1.8,TM.balance+2.4)); rise($('face7'),p(u,TM.tired_face,TM.tired_face+.5)); rise($('note7'),p(u,TM.plan_note,TM.plan_note+.5));
+
+  rise($('qa'),p(u,TM.question,TM.question+.5)); rise($('qb'),p(u,TM.question+.4,TM.question+.9)); rise($('qc'),p(u,TM.question+.8,TM.question+1.3));
+  rise($('qg'),p(u,TM.question+1,TM.question+1.5)); rise($('qd'),p(u,TM.question+3.7,TM.question+4.2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.92;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

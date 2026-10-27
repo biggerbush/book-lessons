@@ -1,0 +1,391 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Principles Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Principles: Set clear goals, spot the problems in the way, diagnose their root causes, design a plan, and then push it through to results, over and over. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">PRINCIPLES · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The five-step loop</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">to your goals.</text>
+<text class="b" x="120" y="600" font-size="32">Five steps that turn any goal into steady progress.</text>
+<circle id="tdot" class="gain" r="14"/>
+<g id="tl"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step one: choose clear goals.</text>
+<text class="b" x="120" y="176" font-size="32">Goals are what you truly want. Desires pull you away.</text>
+<g id="tg">
+<circle class="s-ink" cx="360" cy="480" r="150" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="360" cy="480" r="100" fill="none" stroke-width="6"/>
+<circle class="gain" cx="360" cy="480" r="50"/>
+<g id="dart"><path class="s-ink" d="M366 474L520 320" stroke-width="8" stroke-linecap="round"/><path class="s-ink" d="M498 318l22 2 2-22M484 332l22 2 2-22" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+<text class="m" x="360" y="680" font-size="22" text-anchor="middle">CLEAR GOAL</text>
+</g>
+<g id="fk">
+<path class="s-gain" d="M800 610C800 520 640 500 530 495" fill="none" stroke-width="7" stroke-linecap="round"/>
+<path class="s-loss" d="M800 610C800 520 900 470 950 420" fill="none" stroke-width="7" stroke-linecap="round" stroke-dasharray="12 12"/>
+<g id="fkp"></g>
+</g>
+<g id="ds"><g id="dsb">
+<circle class="loss" cx="960" cy="372" r="18"/><circle class="loss" cx="1012" cy="400" r="14"/><circle class="loss" cx="1004" cy="340" r="12"/>
+</g><text class="m" x="985" y="300" font-size="22" text-anchor="middle" style="fill:var(--loss)">DESIRES</text></g>
+<g id="mn">
+<rect class="s-ink" x="1110" y="240" width="370" height="440" rx="16" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="1295" y="288" font-size="22" text-anchor="middle">PRIORITIZE</text>
+<g id="mnI"></g>
+</g>
+<g id="mnc"><text class="d5" x="120" y="800" font-size="40">You can have almost anything, but not everything.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step two: spot the problems.</text>
+<text class="b" x="120" y="176" font-size="32">What stands between you and your goal?</text>
+<path class="s-line" d="M120 520H1480M120 600H1480" stroke-width="6"/>
+<path class="s-line" d="M120 560H1480" stroke-width="4" stroke-dasharray="20 20"/>
+<g id="rp"></g>
+<path class="s-ink" d="M1400 600V380" stroke-width="6" stroke-linecap="round"/>
+<path class="gain" d="M1400 380L1470 405L1400 430Z"/>
+<text class="m" x="1400" y="640" font-size="20" text-anchor="middle">GOAL</text>
+<g id="rb">
+<path class="s-ink" d="M660 510V600M780 510V600" stroke-width="6" stroke-linecap="round"/>
+<rect class="loss" x="630" y="470" width="180" height="44" rx="6"/>
+<path d="M666 470l-22 44M716 470l-22 44M766 470l-22 44M806 476l-18 38" stroke="var(--stage)" stroke-width="10"/>
+<text class="m" x="720" y="450" font-size="20" text-anchor="middle" style="fill:var(--loss)">PROBLEM</text>
+</g>
+<g id="fl">
+<polygon class="gain" points="510,746 1200,680 1200,820 510,778" fill-opacity=".18"/>
+<rect class="ink" x="380" y="742" width="110" height="40" rx="8"/>
+<path class="ink" d="M490 734h20v56h-20z"/>
+</g>
+<g id="rk"></g>
+<g id="rf"><path class="s-ink" d="M1140 766V700" stroke-width="4"/><path class="loss" d="M1140 700l46 16-46 16z"/></g>
+<g id="rft"><text class="m" x="560" y="680" font-size="20">DON'T TOLERATE EVEN SMALL ONES</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step three: diagnose.</text>
+<text class="b" x="120" y="176" font-size="32">Ask why, then ask why again.</text>
+<path class="s-ink" d="M120 402H560" stroke-width="5"/>
+<g id="trn"><g id="trm">
+<rect class="ink" x="190" y="300" width="220" height="80" rx="14"/>
+<rect x="214" y="318" width="40" height="28" rx="4" fill="var(--stage)"/><rect x="274" y="318" width="40" height="28" rx="4" fill="var(--stage)"/><rect x="334" y="318" width="40" height="28" rx="4" fill="var(--stage)"/>
+<circle class="s-ink" cx="240" cy="388" r="12" fill="var(--stage)" stroke-width="5"/><circle class="s-ink" cx="360" cy="388" r="12" fill="var(--stage)" stroke-width="5"/>
+</g></g>
+<g id="trp"><text class="m" x="120" y="444" font-size="20">MISSED IT</text></g>
+<g id="tt">
+<rect class="s-ink" x="120" y="480" width="440" height="240" rx="12" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="150" y="522" font-size="20">SCHEDULE</text>
+<g id="ttr"></g>
+<text class="m" x="340" y="702" font-size="22" text-anchor="middle" style="fill:var(--loss)">NOT CHECKED</text>
+</g>
+<g id="tre">
+<path class="s-line" d="M640 560H1480" stroke-width="5"/>
+<rect class="ink" x="1015" y="390" width="50" height="170"/>
+<circle cx="1040" cy="300" r="100" fill="var(--line)"/>
+<g id="pd"></g>
+<text class="m" x="1170" y="306" font-size="20">PROBLEM: MISSED TRAIN</text>
+</g>
+<path id="lk" class="s-muted" d="M570 600C720 600 880 470 1000 470" fill="none" stroke-width="4" stroke-dasharray="8 8"/>
+<g id="px"><text class="m" x="1110" y="440" font-size="20">PROXIMATE CAUSE</text><text class="d5" x="1110" y="490" font-size="38">didn't check</text></g>
+<g id="pv"><text class="m" x="1110" y="526" font-size="20" style="fill:var(--gain)">USUALLY A VERB</text></g>
+<g id="why"><text class="d" x="640" y="690" font-size="60" style="fill:var(--loss)">Why?</text></g>
+<g id="rts" fill="none" stroke-width="8" stroke-linecap="round"><path d="M1040 560C1040 620 960 640 920 720"/><path d="M1040 560V740"/><path d="M1040 560C1040 620 1120 640 1150 710"/></g>
+<g id="rc"><text class="m" x="1180" y="640" font-size="20">ROOT CAUSE</text><text class="d5" x="1180" y="690" font-size="38" style="fill:var(--loss)">forgetful</text></g>
+<g id="rv"><text class="m" x="1180" y="726" font-size="20" style="fill:var(--gain)">USUALLY AN ADJECTIVE</text></g>
+<g id="fx"><text class="d" x="120" y="830" font-size="44">Fix the root, and a family of problems disappears.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step four: design a plan.</text>
+<text class="b" x="120" y="176" font-size="32">Work around the root cause.</text>
+<g id="bp">
+<rect class="s-ink" x="120" y="230" width="440" height="440" rx="12" fill="var(--stage)" stroke-width="5"/>
+<g id="bpg"></g>
+<rect class="loss" x="300" y="420" width="120" height="90" rx="8"/>
+<text class="m" x="360" y="472" font-size="20" text-anchor="middle" style="fill:var(--stage)">ROOT</text>
+<path id="route" class="s-gain" d="M170 620H240V340H500V290" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+<circle class="ink" cx="170" cy="620" r="10"/><circle class="gain" cx="500" cy="280" r="16"/>
+<text class="m" x="120" y="710" font-size="20">PLAN AROUND THE ROOT</text>
+</g>
+<g id="fs"></g>
+<g id="fsl"><text class="m" x="640" y="478" font-size="20">LIKE A MOVIE SCRIPT</text></g>
+<g id="nb">
+<rect class="s-ink" x="640" y="510" width="840" height="260" rx="12" fill="var(--stage)" stroke-width="5"/>
+<g id="nbI"></g>
+<text class="m" x="1220" y="580" font-size="20">PROGRESS</text>
+<rect class="s-ink" x="1220" y="600" width="220" height="28" rx="14" fill="none" stroke-width="4"/>
+<rect id="pg" class="gain" x="1220" y="600" height="28" rx="14" width="0"/>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Step five: push it through.</text>
+<text class="b" x="120" y="176" font-size="32">Turn the plan into results.</text>
+<path class="s-ink" d="M120 620H900" stroke-width="6" stroke-linecap="round"/>
+<path class="s-ink" d="M880 620V400" stroke-width="6" stroke-linecap="round"/>
+<path class="gain" d="M880 400l70 24-70 24z"/>
+<text class="m" x="880" y="660" font-size="20" text-anchor="middle">RESULTS</text>
+<g id="rg0"><g id="rg">
+<path class="s-line" d="M140 500h50M120 540h60" stroke-width="5" stroke-linecap="round"/>
+<rect class="gain" x="300" y="520" width="140" height="100" rx="10"/>
+<text class="m" x="370" y="580" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">PLAN</text>
+<path class="s-ink" d="M268 520L300 548" stroke-width="8" stroke-linecap="round"/>
+</g></g>
+<g id="ga">
+<path class="s-line" d="M1060 620A200 200 0 0 1 1460 620" fill="none" stroke-width="30"/>
+<path class="s-gain" d="M1350.8 441.8A200 200 0 0 1 1460 620" fill="none" stroke-width="30"/>
+<line id="ndl" class="s-ink" x1="1260" y1="620" x2="1090" y2="620" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1260" cy="620" r="16"/>
+<text class="m" x="1060" y="670" font-size="20" text-anchor="middle">OFF TRACK</text>
+<text class="m" x="1475" y="670" font-size="20" text-anchor="end" style="fill:var(--gain)">ON TRACK</text>
+</g>
+<g id="gal"><text class="m" x="1260" y="730" font-size="22" text-anchor="middle">CLEAR METRICS</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then run it again.</text>
+<text class="b" x="120" y="176" font-size="32">Each pass makes the loop sharper.</text>
+<circle id="lpd" class="gain" r="14"/>
+<g id="lp"></g>
+<g id="tg0"><text class="m" x="660" y="420" font-size="24" style="fill:var(--gain)">+ SHARPER GOALS</text></g>
+<g id="tg1"><text class="m" x="660" y="490" font-size="24" style="fill:var(--gain)">+ NEW PROBLEMS</text></g>
+<g id="tg2"><text class="m" x="660" y="560" font-size="24" style="fill:var(--gain)">+ BETTER PLANS</text></g>
+<g id="st"><path class="s-ink" d="M1230 260V744" stroke-width="8" stroke-linecap="round"/></g>
+<circle id="clb" class="gain" r="14"/>
+<g id="stl"><text class="m" x="1230" y="790" font-size="20" text-anchor="middle">EVERY CYCLE, A LITTLE HIGHER</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Know your weak step.</text>
+<text class="b" x="120" y="176" font-size="32">Very few people are strong at all five steps.</text>
+<g id="bx"></g>
+<g id="bars"></g>
+<g id="ba">
+<path class="s-loss" d="M245 680H800" stroke-width="8" stroke-linecap="round"/>
+<path class="s-loss" d="M800 666l14 14-14 14M860 666l-14 14 14 14" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="s-loss" d="M860 680H1330M1330 664l24 16-24 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-dasharray="4 14" opacity=".5"/>
+<text class="m" x="120" y="730" font-size="20" style="fill:var(--loss)">BOLD GOALS, NO FOLLOW-THROUGH</text>
+</g>
+<g id="lgd">
+<rect class="ink" x="120" y="756" width="22" height="22"/><text class="m" x="152" y="775" font-size="20">YOU</text>
+<rect class="gain" x="230" y="756" width="22" height="22"/><text class="m" x="262" y="775" font-size="20">TEAMMATE</text>
+</g>
+<g id="tcap"><text class="d" x="120" y="840" font-size="40">Find people strong where you are weak.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pick one goal this week.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Which step do you skip,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">and who could <tspan style="fill:var(--gain)">help</tspan>?</text></g>
+<text class="m" x="143" y="700" font-size="26">RUN THE FIVE-STEP LOOP</text>
+<g id="cl"></g>
+<circle id="hlp" class="gain" r="14"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Five-Step Loop to Your Goals&rdquo;, from <em>Principles</em> by Ray Dalio. The missed-train example of proximate versus root causes and the movie-script approach to planning are as reported in the book. The spiral staircase, the people, and the other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 11.1], [11.1, 28.6], [28.6, 42.3], [42.3, 72.5], [72.5, 86.8], [86.8, 93.6], [93.6, 105.9], [105.9, 118.1], [118.1, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Loop", "Step One: Goals", "Step Two: Problems", "Step Three: Diagnose", "Step Four: Design", "Step Five: Do It", "Run It Again", "Know Your Weak Step", "Your Turn"];
+const TM={"spiral": 0.0, "target": 11.44, "two_paths": 14.4, "menu_board": 22.72, "roadblock": 28.88, "flashlight": 33.56, "red_flag": 38.12, "train": 42.56, "timetable": 49.36, "tree_roots": 57.68, "blueprint": 72.8, "film_script": 77.28, "notebook": 82.72, "runner": 87.12, "gauge": 90.56, "loop_arrow": 93.92, "staircase": 101.0, "five_boxes": 106.24, "broken_arrow": 110.64, "team_pair": 113.84, "mirror": 118.4};
+const T=(g,x,y,s,fs,cls,a,st)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:cls||'m'},g);if(a)e.setAttribute('text-anchor',a);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const loopG=(g,cx,cy,R,r)=>{mk('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:'var(--line)','stroke-width':6},g);return [0,1,2,3,4].map(i=>{const a=-Math.PI/2+i*2*Math.PI/5,x=cx+R*Math.cos(a),y=cy+R*Math.sin(a),n=mk('g',{},g),c=mk('circle',{cx:x,cy:y,r:r,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},n);T(n,x,y+r*.33,i+1,Math.max(18,Math.round(r*.9)),'d','middle');return [n,c,x,y]})};
+const dotAt=(el,cx,cy,R,a)=>{el.setAttribute('cx',(cx+R*Math.cos(a)).toFixed(1));el.setAttribute('cy',(cy+R*Math.sin(a)).toFixed(1))};
+const N0=loopG($('tl'),1300,440,140,34);T($('tl'),1300,450,'5 STEPS',24,'m','middle');
+const N6=loopG($('lp'),420,500,160,34);
+const L8=[1310,700,112];
+const N8=loopG($('cl'),L8[0],L8[1],L8[2],29);
+fig($('fkp'),800,640,20,'ink');
+const MI=[0,1,2,3,4,5].map(i=>{const y=330+i*56,g=mk('g',{},$('mnI'));mk('rect',{x:1140,y:y-22,width:28,height:28,rx:5,fill:'none',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M1192 '+(y-8)+'h'+(170+(i*37)%90),stroke:'var(--line)','stroke-width':14,'stroke-linecap':'round'},g);const ck=mk('path',{d:'M1144 '+(y-10)+'l8 10 16-20',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);return [g,ck]});
+fig($('rp'),200,430,20,'ink');
+const RK=[[880,760,28],[1040,720,22],[1140,780,16]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],class:'loss'},$('rk')));
+fig($('trp'),150,300,16,'ink');
+for(let i=0;i<3;i++){const y=565+i*40;mk('path',{d:'M150 '+y+'h150M340 '+y+'h180',stroke:'var(--line)','stroke-width':12,'stroke-linecap':'round'},$('ttr'))}
+const PD=[[995,265],[1070,260],[1040,315],[980,330],[1095,330]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:14,class:'loss'},$('pd')));
+for(let k=1;k<11;k++)mk('path',{d:'M'+(120+k*40)+' 230v440M120 '+(230+k*40)+'h440',stroke:'var(--line)','stroke-width':1.5},$('bpg'));
+const FR=['WHO','WHAT','WHEN'].map((s,i)=>{const x=640+i*290,g=mk('g',{},$('fs'));mk('rect',{x:x,y:230,width:260,height:200,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);T(g,x+130,410,s,22,'m','middle');return g});
+fig(FR[0],770,270,22,'ink');
+mk('rect',{x:1000,y:280,width:80,height:70,rx:8,class:'gain'},FR[1]);mk('path',{d:'M1092 315h50m-14-14 14 14-14 14',fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},FR[1]);
+mk('circle',{cx:1350,cy:320,r:52,fill:'none',stroke:'var(--ink)','stroke-width':5},FR[2]);mk('path',{d:'M1350 320V285M1350 320h26',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},FR[2]);
+for(let k=0;k<8;k++)mk('circle',{cx:720+k*100,cy:510,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nbI'));
+const NC=[380,300,420,260].map((w,i)=>{const y=570+i*50;mk('rect',{x:680,y:y-20,width:24,height:24,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':4},$('nbI'));mk('path',{d:'M730 '+(y-8)+'h'+w,stroke:'var(--line)','stroke-width':12,'stroke-linecap':'round'},$('nbI'));return mk('path',{d:'M684 '+(y-10)+'l7 9 14-18',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('nbI'))});
+fig($('rg'),250,470,22,'ink');
+const LG=mk('path',{fill:'none',stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('rg'));
+// spiral staircase: treads alternate left and right around the pole, rising evenly
+const TR=[];for(let i=0;i<12;i++){const y=730-i*38,L=i%2===0,x1=L?1220:1240,x2=L?1110:1350;TR.push([mk('path',{d:'M'+x1+' '+y+'H'+x2,stroke:'var(--line)','stroke-width':12,'stroke-linecap':'round'},$('st')),(x1+x2)/2,y])}
+const HY=[210,150,110,70,30],BX=[],BY=[],BT=[];
+['GOALS','PROBLEMS','DIAGNOSE','DESIGN','DO'].forEach((s,i)=>{const x=120+i*276,cx=x+125,g=mk('g',{},$('bx'));mk('rect',{x:x,y:220,width:250,height:100,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);T(g,x+24,286,i+1,40,'d');T(g,x+66,280,s,22,'m');BX.push(g);
+  mk('rect',{x:cx-55,y:400,width:110,height:220,fill:'none',stroke:'var(--line)','stroke-width':3,'stroke-dasharray':'8 8'},$('bars'));BY.push(mk('rect',{x:cx-55,y:620,width:110,height:0,class:'ink'},$('bars')));BT.push(mk('rect',{x:cx-55,y:620,width:110,height:0,class:'gain'},$('bars')))});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  R('tl',TM.spiral,.6); N0.forEach((n,i)=>{const a=TM.spiral+6.6+i*.35; rise(n[0],p(u,a,a+.35))});
+  dotAt($('tdot'),1300,440,140,-Math.PI/2+t*.9); $('tdot').setAttribute('opacity',p(u,TM.spiral,TM.spiral+.6));
+
+  R('tg',TM.target); const dk=p(u,TM.target+.3,TM.target+1); $('dart').setAttribute('transform','translate('+(140*(1-dk)).toFixed(1)+' '+(-140*(1-dk)).toFixed(1)+')'); $('dart').setAttribute('opacity',dk);
+  R('fk',TM.two_paths); R('ds',TM.two_paths+3); $('dsb').setAttribute('transform','translate('+(6*Math.sin(t*2.4)).toFixed(1)+' '+(5*Math.cos(t*1.9)).toFixed(1)+')');
+  R('mn',TM.menu_board); MI.forEach((m,i)=>{const a=TM.menu_board+i*.15, ch=i===0||i===3, d=p(u,TM.menu_board+2,TM.menu_board+2.6); rise(m[0],p(u,a,a+.4)*(ch?1:1-.6*d)); m[1].setAttribute('opacity',ch?d:0)});
+  R('mnc',TM.menu_board+1.5,.6);
+
+  R('rb',TM.roadblock); R('fl',TM.flashlight);
+  RK.forEach((c,i)=>{const a=TM.flashlight+.6+i*.3; c.setAttribute('opacity',(.12+.88*p(u,a,a+.4)).toFixed(2))});
+  R('rf',TM.red_flag); R('rft',TM.red_flag+.4);
+
+  R('trn',TM.train); const tk=p(u,TM.train+4.1,TM.train+5.5); $('trm').setAttribute('transform','translate('+(130*tk).toFixed(1)+' 0)'); $('trm').setAttribute('opacity',(1-.6*tk).toFixed(2));
+  R('trp',TM.train+4.1); R('tre',TM.train+.6); R('tt',TM.timetable);
+  $('lk').setAttribute('opacity',p(u,TM.timetable+3.8,TM.timetable+4.4)); R('px',TM.timetable+3.8); R('why',TM.timetable+8);
+  const fx=p(u,TM.tree_roots+10.3,TM.tree_roots+11.3);
+  R('rts',TM.tree_roots); $('rts').setAttribute('style','stroke:'+(fx>.5?'var(--gain)':'var(--loss)'));
+  R('rc',TM.tree_roots+.4); R('pv',TM.tree_roots+4.5); R('rv',TM.tree_roots+5);
+  PD.forEach(c=>c.setAttribute('r',(14*(1-fx)).toFixed(1))); R('fx',TM.tree_roots+10.3,.6);
+
+  R('bp',TM.blueprint); $('route').setAttribute('stroke-dashoffset',(100*(1-p(u,TM.blueprint+.6,TM.blueprint+2.2))).toFixed(1));
+  FR.forEach((g,i)=>{const a=TM.film_script+i*.5; rise(g,p(u,a,a+.4))}); R('fsl',TM.film_script+1.5);
+  R('nb',TM.notebook); NC.forEach((c,i)=>{const a=TM.notebook+1+i*.7; c.setAttribute('opacity',i<3?p(u,a,a+.3):0)});
+  $('pg').setAttribute('width',(165*p(u,TM.notebook+1,TM.notebook+3.4)).toFixed(1));
+
+  R('rg0',TM.runner); const rk=p(u,TM.runner+.3,TM.runner+4), sw=rk>0&&rk<1?20*Math.sin(t*12):0;
+  $('rg').setAttribute('transform','translate('+(380*rk).toFixed(1)+' 0)');
+  LG.setAttribute('d','M250 562L'+(228+sw).toFixed(1)+' 618M250 562L'+(272-sw).toFixed(1)+' 618');
+  R('ga',TM.gauge); const th=Math.PI*(.12+.7*p(u,TM.gauge+.5,TM.gauge+2))+.03*Math.sin(t*3);
+  $('ndl').setAttribute('x2',(1260-170*Math.cos(th)).toFixed(1)); $('ndl').setAttribute('y2',(620-170*Math.sin(th)).toFixed(1));
+  R('gal',TM.gauge+2);
+
+  R('lp',TM.loop_arrow); dotAt($('lpd'),420,500,160,-Math.PI/2+t*1.2); $('lpd').setAttribute('opacity',p(u,TM.loop_arrow,TM.loop_arrow+.5));
+  ['tg0','tg1','tg2'].forEach((id,i)=>R(id,TM.loop_arrow+2.1+i*.6));
+  R('st',TM.staircase); const sk=p(u,TM.staircase+.5,TM.staircase+5.5), si=Math.round(sk*(TR.length-1));
+  TR.forEach((q,i)=>q[0].setAttribute('stroke',i<=si?'var(--gain)':'var(--line)'));
+  $('clb').setAttribute('cx',TR[si][1].toFixed(1)); $('clb').setAttribute('cy',(TR[si][2]-20).toFixed(1)); $('clb').setAttribute('opacity',p(u,TM.staircase+.3,TM.staircase+.6));
+  R('stl',TM.staircase+1);
+
+  BX.forEach((g,i)=>{const a=TM.five_boxes+i*.25; rise(g,p(u,a,a+.4));
+    const h=HY[i]*p(u,a+.4,a+1.2), ht=(220-HY[i])*p(u,TM.team_pair+.3+i*.2,TM.team_pair+1+i*.2);
+    BY[i].setAttribute('y',(620-h).toFixed(1)); BY[i].setAttribute('height',h.toFixed(1));
+    BT[i].setAttribute('y',(620-h-ht).toFixed(1)); BT[i].setAttribute('height',ht.toFixed(1))});
+  R('ba',TM.broken_arrow); R('lgd',TM.team_pair); R('tcap',TM.team_pair+.8,.6);
+
+  R('qa',TM.mirror); R('qb',TM.mirror+3.4); R('qc',TM.mirror+3.8); R('cl',TM.mirror+.4);
+  N8[4][1].setAttribute('fill',u>=TM.mirror+3.4?'var(--loss)':'var(--stage)');
+  const hk=p(u,TM.mirror+4.2,TM.mirror+5.4), ha=162*Math.PI/180, hx=L8[0]+L8[2]*Math.cos(ha), hy=L8[1]+L8[2]*Math.sin(ha);
+  $('hlp').setAttribute('cx',(1050+(hx-1050)*hk).toFixed(1)); $('hlp').setAttribute('cy',(590+(hy-590)*hk).toFixed(1)); $('hlp').setAttribute('opacity',p(u,TM.mirror+4.2,TM.mirror+4.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.12;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

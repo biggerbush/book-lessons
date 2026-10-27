@@ -1,0 +1,17 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+[['rp',300,560,30,'ink'],['tp',1180,560,30,'ink'],['lp',600,560,28,'ink'],['jp',1040,420,36,'ink'],['mp',700,520,30,'gain'],['up',1000,520,30,'ink'],['pcp',310,480,30,'ink'],['swp',1300,470,32,'gain'],['cip',260,540,34,'ink']].forEach(a=>fig($(a[0]),a[1],a[2],a[3],a[4]));
+[700,1000].forEach((x,i)=>mk('ellipse',{cx:x,cy:650,rx:62,ry:16,class:i?'ink':'gain'},$(i?'up':'mp')));
+const RN=[0,1,2,3].map(i=>mk('path',{d:'M'+(560+i*28)+' 440v70',class:'s-loss','stroke-width':4,'stroke-dasharray':'12 14','stroke-linecap':'round'},$('rain')));
+const XS=['MON','TUE','WED','THU','FRI'].map((s,i)=>{const x=580+i*120,g=$('cal');
+  mk('rect',{x:x,y:420,width:100,height:100,rx:12,fill:'var(--stage)',stroke:i<4?'var(--ink)':'var(--gain)','stroke-width':5},g);
+  const tx=mk('text',{x:x+50,y:458,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=s;
+  return i<4?mk('path',{d:'M'+(x+30)+' 472l40 36M'+(x+70)+' 472l-40 36',class:'s-loss','stroke-width':6,'stroke-linecap':'round'},g):null}).filter(Boolean);
+const ST=['WORD','PERSONAL','ASSUME'].map((s,i)=>{const x=1060+i*127,g=mk('g',{},$('stones'));
+  mk('rect',{x:x,y:466,width:126,height:84,rx:18,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const tx=mk('text',{x:x+63,y:516,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return [g,x+63]});
+const arc=(a0,a1,c)=>{const P=a=>[(800+190*Math.cos(a*Math.PI/180)).toFixed(1),(620+190*Math.sin(a*Math.PI/180)).toFixed(1)],s=P(a0),e=P(a1);
+  mk('path',{d:'M'+s[0]+' '+s[1]+'A190 190 0 0 1 '+e[0]+' '+e[1],fill:'none',stroke:c,'stroke-width':30},$('arcs'))};
+arc(180,238,'var(--loss)');arc(242,298,'var(--gain)');arc(302,360,'var(--loss)');
+const bar=(id,b,h)=>{$(id).setAttribute('y',(b-h).toFixed(1));$(id).setAttribute('height',Math.max(0,h).toFixed(1))};
+const draw=(id,k)=>$(id).setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const rot=(id,a,x,y)=>$(id).setAttribute('transform','rotate('+a.toFixed(2)+' '+x+' '+y+')');

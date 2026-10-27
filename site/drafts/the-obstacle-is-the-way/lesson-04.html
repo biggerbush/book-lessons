@@ -1,0 +1,330 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Obstacle Is the Way Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of The Obstacle Is the Way: The second discipline is action: keep trying, testing and adjusting, one small step at a time, until the problem gives way. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE OBSTACLE IS THE WAY · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Act with persistence</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">and iteration.</text>
+<text class="b" x="120" y="600" font-size="32">Keep trying, keep adjusting, until the problem finally gives way.</text>
+<g id="wall"></g>
+<circle id="push" class="gain" r="26"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Action is a discipline.</text>
+<text class="b" x="120" y="176" font-size="32">See the problem clearly, then move on it.</text>
+<g id="disc"></g>
+<g id="move"><text class="m" x="760" y="306" font-size="22">SEE IT CLEARLY</text><path class="s-gain" d="M970 298h90m-20-18 20 18-20 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1090" y="306" font-size="22" style="fill:var(--gain)">MOVE ON IT</text></g>
+<path class="s-line" d="M120 780H1480" stroke-width="4"/>
+<g id="leap"><path class="s-loss" d="M290 660Q744 340 1269 415" fill="none" stroke-width="5" stroke-dasharray="14 12" stroke-linecap="round"/></g>
+<g id="leapL"><text class="m" x="810" y="362" font-size="22" text-anchor="middle" style="fill:var(--muted)">ONE HEROIC LEAP</text></g>
+<path id="lx" class="s-loss" d="M780 395l60 60m0-60l-60 60" stroke-width="10" stroke-linecap="round"/>
+<g id="steps"></g>
+<g id="climbW"><g id="climber"></g></g>
+<g id="ssl"><text class="m" x="1480" y="830" font-size="22" text-anchor="end" style="fill:var(--gain)">SMALL STEPS, REPEATED</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Grant at Vicksburg.</text>
+<text class="b" x="120" y="176" font-size="32">American Civil War. One city stood in the way.</text>
+<g id="gr"></g>
+<g id="army"></g>
+<g id="halfL"><rect class="loss" x="554" y="230" width="386" height="600" rx="16" fill-opacity=".1"/><text class="m" x="574" y="270" font-size="20">CONFEDERACY</text></g>
+<g id="halfR"><rect class="loss" x="940" y="230" width="526" height="600" rx="16" fill-opacity=".1"/><text class="m" x="1446" y="270" font-size="20" text-anchor="end" style="fill:var(--gain)">SPLIT IN TWO</text></g>
+<path id="riv" d="M940 230C860 330 1010 420 930 520S880 720 950 830" fill="none" stroke="var(--ice)" stroke-width="34" stroke-linecap="round"/>
+<g id="city"><polygon class="ink" points="990,520 1000,450 1150,440 1160,520"/><rect class="ink" x="1015" y="410" width="30" height="40"/><rect class="ink" x="1055" y="395" width="36" height="50"/><rect class="ink" x="1100" y="412" width="30" height="34"/><circle class="loss" cx="1018" cy="475" r="10"/><circle class="loss" cx="1018" cy="502" r="10"/><text class="m" x="1180" y="470" font-size="22">VICKSBURG</text><text class="m" x="850" y="760" font-size="20" text-anchor="end">MISSISSIPPI</text></g>
+<g id="swamp"></g>
+<g id="swl"><text class="m" x="1460" y="810" font-size="20" text-anchor="end">SWAMPS AND WATER ON EVERY SIDE</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try. Fail. Try again.</text>
+<text class="b" x="120" y="176" font-size="32">Grant tried one route after another.</text>
+<g id="cards"></g>
+<g id="xs"></g>
+<g id="crit"><g id="crowd3"></g><rect x="380" y="630" width="250" height="64" rx="14" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><path d="M380 676l-24 14 26-2" fill="var(--stage)" stroke="var(--loss)" stroke-width="4" stroke-linejoin="round"/><text class="m" x="505" y="670" font-size="22" text-anchor="middle" style="fill:var(--loss)">REMOVE HIM!</text><text class="m" x="120" y="800" font-size="20">CRITICS BACK HOME</text></g>
+<g id="kept"><text class="d" x="720" y="720" font-size="44">He kept trying the next thing.</text><rect class="gain" x="724" y="746" width="200" height="10"/></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The breakthrough.</text>
+<text class="b" x="120" y="176" font-size="32">One more new approach, and the city fell.</text>
+<rect x="120" y="220" width="700" height="620" rx="16" fill="none" stroke="var(--line)" stroke-width="3"/>
+<path id="riv2" d="M470 252C420 390 530 520 460 680S445 770 475 806" fill="none" stroke="var(--ice)" stroke-width="36" stroke-linecap="butt"/>
+<polygon class="ink" points="520,450 530,390 680,380 690,450"/>
+<rect class="ink" x="545" y="350" width="28" height="40"/><rect class="ink" x="585" y="335" width="34" height="50"/><rect class="ink" x="630" y="355" width="28" height="28"/>
+<circle class="loss" cx="545" cy="412" r="9"/><circle class="loss" cx="545" cy="436" r="9"/>
+<text class="m" x="696" y="445" font-size="20">VICKSBURG</text>
+<g id="moon"><circle class="gain" cx="200" cy="290" r="28"/><circle cx="214" cy="280" r="24" fill="var(--stage)"/><text class="m" x="244" y="298" font-size="20">NIGHT</text></g>
+<g id="boats"></g>
+<path id="march" d="M380 260C340 420 420 560 380 720C420 800 560 790 600 700L610 470" fill="none" stroke="var(--gain)" stroke-width="6" stroke-linecap="round"/>
+<circle id="lead" class="gain" r="12"/>
+<g id="siege"></g>
+<g id="flag"><path class="s-ink" d="M605 335V262" stroke-width="5"/><path class="gain" d="M605 262h56l-14 15 14 15h-56z"/><text class="m" x="680" y="290" font-size="20" style="fill:var(--gain)">SURRENDER</text></g>
+<g id="funnel"><text class="m" x="900" y="250" font-size="20">EACH FAILURE NARROWS WHAT MIGHT WORK</text><path class="s-line" d="M900 290L1300 480H1460M900 750L1300 540H1460" fill="none" stroke-width="5" stroke-linejoin="round"/><g id="fun"></g></g>
+<g id="stop"><text class="m" x="900" y="820" font-size="22">MONTHS OF SETBACKS DID NOT STOP HIM</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Failure is feedback.</text>
+<text class="b" x="120" y="176" font-size="32">Ship a rough version, watch what breaks, improve it.</text>
+<g id="team"><g id="ppl"></g><path class="s-ink" d="M150 400H450" stroke-width="6" stroke-linecap="round"/><text class="m" x="300" y="440" font-size="20" text-anchor="middle">STARTUP TEAM</text></g>
+<g id="mvp"><rect x="160" y="500" width="280" height="150" rx="10" fill="var(--stage)" stroke="var(--ink)" stroke-width="5" stroke-dasharray="14 8"/><text class="d" x="300" y="600" font-size="64" text-anchor="middle">MVP</text><text class="m" x="300" y="694" font-size="22" text-anchor="middle">MINIMUM VIABLE PRODUCT</text></g>
+<g id="loop"><circle cx="880" cy="470" r="180" fill="none" stroke="var(--line)" stroke-width="6"/></g>
+<g id="doors"><rect x="1220" y="360" width="100" height="190" fill="none" stroke="var(--loss)" stroke-width="5"/><rect class="loss" x="1256" y="455" width="28" height="22" rx="3"/><path d="M1262 455v-8a8 8 0 0 1 16 0v8" fill="none" stroke="var(--loss)" stroke-width="4"/><rect x="1350" y="360" width="100" height="190" fill="none" stroke="var(--gain)" stroke-width="5"/><path class="gain" d="M1350 360l56 22v146l-56 22z"/><text class="m" x="1268" y="594" font-size="20" text-anchor="middle" style="fill:var(--loss)">LOCKED</text><text class="m" x="1404" y="594" font-size="20" text-anchor="middle" style="fill:var(--gain)">TRY ANOTHER</text></g>
+<g id="verd"><text class="d" x="120" y="800" font-size="44">Each failure is information, not a verdict.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Don’t wait for the perfect plan.</text>
+<text class="b" x="120" y="176" font-size="32">Momentum beats a flawless first move.</text>
+<g id="cal"><rect x="120" y="240" width="400" height="320" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><rect class="ink" x="120" y="240" width="400" height="50" rx="14"/><text class="m" x="120" y="600" font-size="20">WAITING FOR THE PERFECT PLAN</text></g>
+<g id="clk"><circle cx="770" cy="400" r="130" fill="var(--stage)" stroke="var(--ink)" stroke-width="8"/><path id="hh" class="s-ink" d="M770 400V330" stroke-width="10" stroke-linecap="round"/><path id="hm" class="s-gain" d="M770 400V300" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="770" cy="400" r="10"/><text class="m" x="770" y="600" font-size="20" text-anchor="middle">MOMENTUM MATTERS MORE</text></g>
+<g id="chart"><path class="s-ink" d="M1000 260V560H1460" fill="none" stroke-width="4"/><path id="plan" class="s-muted" d="M1000 540H1440" stroke-width="6" stroke-linecap="round"/><polyline id="act" class="s-gain" points="1000,540 1060,500 1100,520 1160,460 1200,480 1260,410 1300,430 1360,350 1400,370 1440,290" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><text class="m" x="1440" y="524" font-size="20" text-anchor="end">ENDLESS PLANNING</text><text class="m" x="1440" y="272" font-size="20" text-anchor="end" style="fill:var(--gain)">ACTION</text><text class="m" x="1460" y="592" font-size="20" text-anchor="end">TIME</text></g>
+<g id="c4"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Take one small step today.</text>
+<text class="b" x="120" y="176" font-size="32">Act, notice what happens, choose the next step.</text>
+<g id="nb"><rect x="120" y="240" width="460" height="520" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><text class="m" x="160" y="330" font-size="22">ONE STALLED PROBLEM</text><path id="sc1" d="M160 390q20-18 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path class="s-line" d="M160 640H540M160 700H540" stroke-width="3"/></g>
+<g id="fs"><text class="m" x="160" y="470" font-size="22">SMALLEST ACTION TODAY</text><rect x="160" y="500" width="50" height="50" rx="8" fill="none" stroke="var(--ink)" stroke-width="5"/><path id="sc2" d="M240 525q20-18 40 0t40 0t40 0t40 0t40 0t40 0t40 0" fill="none" stroke="var(--ink)" stroke-width="5" stroke-linecap="round"/><path id="tick" d="M170 524l14 14 24-30" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="stones"></g>
+<g id="hopW"><g id="hop"></g></g>
+<g id="days"><text class="m" x="720" y="740" font-size="20">AGAIN TOMORROW</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What problem have you</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">tried only <tspan style="fill:var(--loss)">once</tspan>?</text></g>
+<g id="qc"><text class="m" x="143" y="580" font-size="26">THIS WEEK, TRY IT THREE MORE WAYS</text></g>
+<rect class="ink" x="1400" y="560" width="36" height="260" rx="6"/>
+<g id="tries"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Act With Persistence and Iteration&rdquo;, from <em>The Obstacle Is the Way</em> by Ryan Holiday. Examples as reported in the book: General Grant&#x27;s campaign to take Vicksburg and the startup practice of building a minimum viable product. Maps, boats, and feedback loops are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 7.9], [7.9, 24.3], [24.3, 41.1], [41.1, 57.5], [57.5, 73.5], [73.5, 93.1], [93.1, 110.7], [110.7, 123.5], [123.5, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Wall", "Action Is a Discipline", "Grant at Vicksburg", "Try, Fail, Try Again", "The Breakthrough", "Failure as Feedback", "Do Not Wait", "One Small Step", "Your Challenge"];
+const TM={"brick_wall": 0.0, "action_icon": 8.24, "thinking_man": 15.92, "small_steps": 20.4, "grant": 24.64, "union_army": 30.0, "river_city": 33.2, "canal_dig": 41.44, "failed_x": 45.52, "gunboats": 57.76, "victory_flag": 64.08, "startup_team": 73.84, "mvp_label": 78.04, "feedback_loop": 86.4, "calendar": 93.36, "clock": 97.76, "notebook": 111.04, "first_step": 113.56, "question": 123.84};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const tx=(g,x,y,s,fs,cls,a)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':fs,class:cls},a||{}),g);e.textContent=s;return e};
+const LEN=(e,d)=>{try{return e.getTotalLength()||d}catch(x){return d}};
+const draw=(e,L,k)=>{e.style.strokeDasharray=L;e.style.strokeDashoffset=(L*(1-k)).toFixed(1)};
+const tr=(e,x,y)=>e.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');
+const BR=[];for(let r=0;r<7;r++)for(let c=-1;c<4;c++){const xs=1240+c*70+(r%2?35:0),x1=Math.max(1240,xs),x2=Math.min(1460,xs+66);if(x2-x1>8)BR.push(mk('rect',{x:x1,y:250+r*40,width:x2-x1,height:36,rx:3,class:'loss'},$('wall')))}
+[180,300,420].forEach((x,i)=>{mk('circle',{cx:x,cy:290,r:40,fill:i==1?'var(--gain)':'none',stroke:i==1?'var(--gain)':'var(--line)','stroke-width':5},$('disc'));tx($('disc'),x,304,String(i+1),40,'d',{'text-anchor':'middle',style:i==1?'fill:var(--on-gain)':'fill:var(--muted)'})});
+tx($('disc'),490,308,'Action',52,'d',{style:'fill:var(--gain)'});
+const ST=[];for(let i=0;i<8;i++)ST.push(mk('rect',{x:400+i*125,y:780-(i+1)*40,width:125,height:(i+1)*40,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('steps')));
+fig($('climber'),260,696,20,'ink');
+fig($('gr'),290,320,40,'gain');tx($('gr'),290,540,'GEN. ULYSSES GRANT',20,'m',{'text-anchor':'middle'});
+for(let i=0;i<18;i++)mk('circle',{cx:170+(i%6)*48,cy:600+Math.floor(i/6)*40,r:12,class:'gain'},$('army'));
+tx($('army'),290,730,'UNION ARMY',20,'m',{'text-anchor':'middle'});
+[[660,390],[700,640],[1230,680],[1330,340],[1290,580]].forEach(q=>{mk('ellipse',{cx:q[0],cy:q[1],rx:54,ry:16,class:'loss','fill-opacity':.3},$('swamp'));mk('path',{d:'M'+(q[0]-20)+' '+(q[1]-6)+'l-6-24M'+q[0]+' '+(q[1]-6)+'v-30M'+(q[0]+20)+' '+(q[1]-6)+'l6-24',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round',fill:'none'},$('swamp'))});
+const RL=LEN($('riv'),700),RL2=LEN($('riv2'),600),ML=LEN($('march'),900),AL=LEN($('act'),620),S1=LEN($('sc1'),420),S2=LEN($('sc2'),330);
+const cards=[],xs=[];
+['DIG CANALS','BOATS THROUGH BAYOUS','ANOTHER ROUTE','THE NEXT THING'].forEach((s,i)=>{const x=120+i*350,g=mk('g',{},$('cards')),G=i==3;
+ mk('rect',{x:x,y:240,width:310,height:300,rx:16,fill:'var(--stage)',stroke:G?'var(--gain)':'var(--line)','stroke-width':G?5:3},g);
+ tx(g,x+155,515,s,20,'m',{'text-anchor':'middle',style:G?'fill:var(--gain)':''});
+ [[['M'+(x+30)+' 300C'+(x+150)+' 280 '+(x+170)+' 470 '+(x+280)+' 450','var(--ice)',16],['M'+(x+30)+' 300L'+(x+280)+' 450','var(--ink)',6,'12 10']],
+  [['M'+(x+90)+' 410h130l-22 30h-86z','var(--ink)',6],['M'+(x+155)+' 410v-80l40 60z','var(--ink)',5],['M'+(x+40)+' 460q30-12 60 0t60 0t60 0t60 0','var(--muted)',4],['M'+(x+40)+' 440v-60M'+(x+270)+' 440v-60','var(--muted)',4]],
+  [['M'+(x+40)+' 460Q'+(x+120)+' 300 '+(x+220)+' 380','var(--ink)',6,'12 10'],['M'+(x+240)+' 320v130','var(--loss)',20]],
+  [['M'+(x+60)+' 390h180m-40-40 40 40-40 40','var(--gain)',12]]][i].forEach(a=>mk('path',{d:a[0],fill:'none',stroke:a[1],'stroke-width':a[2],'stroke-dasharray':a[3]||'none','stroke-linecap':'round','stroke-linejoin':'round'},g));
+ cards.push(g);
+ if(i<3)xs.push(mk('path',{d:'M'+(x+100)+' 325l110 110m0-110l-110 110',stroke:'var(--loss)','stroke-width':12,'stroke-linecap':'round'},$('xs')))});
+[180,250,320].forEach(x=>fig($('crowd3'),x,680,16,'ink'));
+const BT=[0,1,2].map(()=>mk('path',{d:'M-22 -8h44l-10 16h-24z',class:'gain'},$('boats')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6,x=605+120*Math.cos(a),y=410+120*Math.sin(a);if(x>515&&y>330)mk('circle',{cx:x,cy:y,r:10,class:'gain'},$('siege'))}
+const FD=[0,1,2,3,4].map(i=>mk('circle',{cx:960,cy:360+i*85,r:14,class:i==2?'gain':'ink'},$('fun')));
+[200,290,380].forEach(x=>fig($('ppl'),x,290,20,'ink'));
+const LP=[['RELEASE',880,290],['WATCH',1036,560],['IMPROVE',724,560]].map(a=>{const g=mk('g',{},$('loop'));const r=mk('rect',{x:a[1]-95,y:a[2]-28,width:190,height:56,rx:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);tx(g,a[1],a[2]+7,a[0],20,'m',{'text-anchor':'middle',style:'fill:var(--ink)'});return r});
+const LD=mk('circle',{r:14,class:'gain'},$('loop'));
+const CX=[];for(let i=0;i<28;i++){const x=140+(i%7)*54,y=310+Math.floor(i/7)*58;mk('rect',{x:x,y:y,width:46,height:46,rx:6,fill:'none',stroke:'var(--line)','stroke-width':3},$('cal'));CX.push(mk('path',{d:'M'+(x+10)+' '+(y+10)+'l26 26m0-26l-26 26',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round'},$('cal')))}
+for(let i=0;i<12;i++){const a=i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(770+105*c).toFixed(1)+' '+(400+105*s).toFixed(1)+'L'+(770+118*c).toFixed(1)+' '+(400+118*s).toFixed(1),stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('clk'))}
+const C4=['START NOW','TEST','ADJUST','REPEAT'].map((s,i)=>{const x=120+i*340,g=mk('g',{},$('c4'));mk('rect',{x:x,y:690,width:280,height:70,rx:35,class:'gain'},g);tx(g,x+140,736,s,30,'d5',{'text-anchor':'middle',style:'fill:var(--on-gain)'});if(i<3)mk('path',{d:'M'+(x+292)+' 725h36m-12-12 12 12-12 12',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+for(let i=0;i<5;i++)mk('circle',{cx:180+i*80,cy:240,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('nb'));
+const SN=[[780,640],[930,560],[1080,480],[1230,400],[1380,320]],STN=SN.map(q=>mk('ellipse',{cx:q[0],cy:q[1],rx:60,ry:20,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('stones')));
+['TAKE IT','NOTICE','CHOOSE NEXT'].forEach((s,i)=>tx($('stones'),SN[i][0],SN[i][1]+52,s,20,'m',{'text-anchor':'middle'}));
+fig($('hop'),0,-63,14,'gain');
+const DY=[0,1,2,3,4,5,6].map(i=>mk('rect',{x:720+i*100,y:760,width:56,height:56,rx:8,fill:'none',stroke:'var(--ink)','stroke-width':4},$('days')));
+const TRY=[590,660,730,800].map((y,i)=>mk('path',{d:'M'+(i?1060:1200)+' '+y+'H1370m-24-20 24 20-24 20',fill:'none',stroke:i?'var(--gain)':'var(--loss)','stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round'},$('tries')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+BR.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.brick_wall+i*.03,TM.brick_wall+i*.03+.3)));
+const pc=(t%1.6)/1.6,pk=Math.floor(t/1.6),pd=pc<.5?ease(pc*2):1-ease((pc-.5)*2);
+$('push').setAttribute('cx',(1120+92*pd).toFixed(1));$('push').setAttribute('cy',290+(pk*97)%210);$('push').setAttribute('opacity',p(u,TM.brick_wall+1,TM.brick_wall+1.5));
+
+rise($('disc'),p(u,TM.action_icon,TM.action_icon+.5));rise($('move'),p(u,TM.action_icon+3.4,TM.action_icon+3.9));
+const fade=1-.7*p(u,TM.small_steps,TM.small_steps+.5);
+rise($('climbW'),p(u,TM.thinking_man,TM.thinking_man+.5));rise($('leap'),p(u,TM.thinking_man+.4,TM.thinking_man+.9)*fade);
+rise($('leapL'),p(u,TM.thinking_man+.4,TM.thinking_man+.9)*(1-.4*p(u,TM.small_steps,TM.small_steps+.5)));
+$('lx').setAttribute('opacity',p(u,TM.thinking_man+1.6,TM.thinking_man+2)*fade);
+const cs=8*p(u,TM.small_steps+.2,TM.small_steps+2.6),cf=cs-Math.min(7,Math.floor(cs)),CXp=cs<1?260+cs*202:462+(cs-1)*125;
+tr($('climber'),CXp-260,-cs*40-18*Math.sin(Math.PI*cf));
+ST.forEach((s,i)=>{s.setAttribute('opacity',p(u,TM.thinking_man+1.6+i*.12,TM.thinking_man+1.9+i*.12));s.setAttribute('fill',cs>i+.5?'var(--gain)':'var(--stage)')});
+rise($('ssl'),p(u,TM.small_steps,TM.small_steps+.5));
+
+rise($('gr'),p(u,TM.grant,TM.grant+.5));rise($('army'),p(u,TM.union_army,TM.union_army+.5));
+const sp=p(u,TM.union_army+.3,TM.union_army+1.3),ho=p(u,TM.union_army,TM.union_army+.5);
+$('halfL').setAttribute('transform','translate('+(-14*sp).toFixed(1)+' 0)');$('halfR').setAttribute('transform','translate('+(14*sp).toFixed(1)+' 0)');
+$('halfL').setAttribute('opacity',ho);$('halfR').setAttribute('opacity',ho);
+draw($('riv'),RL,p(u,TM.river_city,TM.river_city+1.2));rise($('city'),p(u,TM.river_city+.6,TM.river_city+1.1));
+rise($('swamp'),p(u,TM.river_city+5,TM.river_city+5.5));rise($('swl'),p(u,TM.river_city+5.2,TM.river_city+5.7));
+
+cards.forEach((g,i)=>{const a=[TM.canal_dig,TM.failed_x,TM.failed_x+3.8,TM.failed_x+8.8][i];rise(g,p(u,a,a+.5))});
+xs.forEach((x,i)=>x.setAttribute('opacity',p(u,TM.failed_x+3.8+i*.5,TM.failed_x+4.1+i*.5)));
+rise($('crit'),p(u,TM.failed_x+5.4,TM.failed_x+5.9));rise($('kept'),p(u,TM.failed_x+8.8,TM.failed_x+9.3));
+
+rise($('moon'),p(u,TM.gunboats,TM.gunboats+.5));
+BT.forEach((b,i)=>{const a=TM.gunboats+.4+i*.5,q=$('riv2').getPointAtLength((.04+.84*p(u,a,a+3))*RL2);tr(b,q.x,q.y);b.setAttribute('opacity',u>=a?1:0)});
+const mp=p(u,TM.gunboats+3,TM.gunboats+7.4),mq=$('march').getPointAtLength(mp*ML);draw($('march'),ML,mp);
+$('lead').setAttribute('cx',mq.x.toFixed(1));$('lead').setAttribute('cy',mq.y.toFixed(1));$('lead').setAttribute('opacity',u>=TM.gunboats+3?1:0);
+rise($('siege'),p(u,TM.victory_flag,TM.victory_flag+.5));rise($('flag'),p(u,TM.victory_flag+.6,TM.victory_flag+1.1));
+rise($('stop'),p(u,TM.victory_flag+2.6,TM.victory_flag+3.1));rise($('funnel'),p(u,TM.victory_flag+5.6,TM.victory_flag+6.1));
+FD.forEach((d,i)=>{if(i==2){const f=p(u,TM.victory_flag+7.6,TM.victory_flag+9);d.setAttribute('cx',(960+480*f).toFixed(1));d.setAttribute('cy',(530-20*f).toFixed(1))}else{const o=u>=TM.victory_flag+6.2+i*.3;d.setAttribute('class',o?'loss':'ink');d.setAttribute('fill-opacity',o?.3:1)}});
+
+rise($('team'),p(u,TM.startup_team,TM.startup_team+.5));rise($('mvp'),p(u,TM.mvp_label,TM.mvp_label+.5));
+rise($('loop'),p(u,TM.mvp_label+3.7,TM.mvp_label+4.2));
+const la=-Math.PI/2+Math.max(0,u-TM.mvp_label-3.7)*1.3;
+LD.setAttribute('cx',(880+180*Math.cos(la)).toFixed(1));LD.setAttribute('cy',(470+180*Math.sin(la)).toFixed(1));
+LP.forEach((r,i)=>{const d=Math.abs(((la+Math.PI/2-i*2*Math.PI/3)%(2*Math.PI)+3*Math.PI)%(2*Math.PI)-Math.PI);r.setAttribute('stroke',d<.5?'var(--gain)':'var(--ink)')});
+rise($('verd'),p(u,TM.feedback_loop,TM.feedback_loop+.5));rise($('doors'),p(u,TM.feedback_loop+3,TM.feedback_loop+3.5));
+
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5));CX.forEach((c,i)=>c.setAttribute('opacity',u>=TM.calendar+.6+i*.12?1:0));
+rise($('clk'),p(u,TM.clock,TM.clock+.5));
+$('hm').setAttribute('transform','rotate('+((t*120)%360).toFixed(1)+' 770 400)');$('hh').setAttribute('transform','rotate('+((t*10)%360).toFixed(1)+' 770 400)');
+rise($('chart'),p(u,TM.clock+4.6,TM.clock+5.1));draw($('act'),AL,p(u,TM.clock+5,TM.clock+6.5));draw($('plan'),440,p(u,TM.clock+5,TM.clock+6.5));
+C4.forEach((g,i)=>rise(g,p(u,TM.clock+7.6+i*.5,TM.clock+8.1+i*.5)));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));draw($('sc1'),S1,p(u,TM.notebook+.8,TM.notebook+2));
+rise($('fs'),p(u,TM.first_step,TM.first_step+.5));draw($('sc2'),S2,p(u,TM.first_step+.6,TM.first_step+1.8));draw($('tick'),60,p(u,TM.first_step+3.8,TM.first_step+4.2));
+rise($('stones'),p(u,TM.first_step+3.8,TM.first_step+4.3));rise($('hopW'),p(u,TM.first_step+3.8,TM.first_step+4.3));
+const hs=4*p(u,TM.first_step+4.3,TM.first_step+8.5),hj=Math.min(3,Math.floor(hs)),hf=hs-hj,HA=SN[hj],HB=SN[hj+1];
+tr($('hop'),HA[0]+(HB[0]-HA[0])*hf,HA[1]+(HB[1]-HA[1])*hf-40*Math.sin(Math.PI*hf));
+STN.forEach((s,i)=>s.setAttribute('stroke',hs>=i-.05?'var(--gain)':'var(--ink)'));
+rise($('days'),p(u,TM.first_step+9.2,TM.first_step+9.6));DY.forEach((d,i)=>d.setAttribute('fill',u>=TM.first_step+9.4+i*.3?'var(--gain)':'none'));
+
+rise($('qa'),p(u,TM.question,TM.question+.5));rise($('qb'),p(u,TM.question+.4,TM.question+.9));rise($('qc'),p(u,TM.question+3,TM.question+3.5));
+TRY.forEach((a,i)=>{const s=i?TM.question+3.2+i*.4:TM.question+.8,k=p(u,s,s+.6);a.setAttribute('opacity',k);a.setAttribute('transform','translate('+(-60*(1-k)+(i?6*Math.sin(t*3+i):0)).toFixed(1)+' 0)')});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.96;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

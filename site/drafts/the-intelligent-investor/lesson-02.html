@@ -1,0 +1,320 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Intelligent Investor Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of The Intelligent Investor: The market is like an emotional business partner who offers you a different price every day, and you should take advantage of his moods rather than be ruled by them. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE INTELLIGENT INVESTOR · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Meet your moody</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">partner, Mr. Market.</text>
+<text class="b" x="120" y="600" font-size="32">Why daily stock prices are offers, not orders.</text>
+<g id="tBub"><rect class="s-ink" x="1240" y="220" width="230" height="110" rx="18" fill="var(--stage)" stroke-width="5"/><path class="ink" d="M1345 328l35 0-12 22z"/><polyline id="tSpark" class="s-gain" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></g>
+<g id="tMM"></g>
+<g id="tYou"><text class="m" x="1200" y="636" font-size="18" text-anchor="middle">YOU DECIDE</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The partnership.</text>
+<text class="b" x="120" y="176" font-size="32">Picture a small private business, shared by partners.</text>
+<g id="shop">
+<polygon class="s-ink" points="180,380 220,300 640,300 680,380" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="430" y="350" font-size="22" text-anchor="middle">THE BUSINESS</text>
+<rect class="s-ink" x="200" y="380" width="460" height="360" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="219" y="440" width="76" height="90" fill="none" stroke-width="5"/>
+<rect class="s-ink" x="334" y="440" width="76" height="90" fill="none" stroke-width="5"/>
+<rect class="s-ink" x="564" y="440" width="76" height="90" fill="none" stroke-width="5"/>
+<rect class="s-ink" x="452" y="560" width="70" height="180" fill="none" stroke-width="5"/>
+</g>
+<g id="slice">
+<rect class="gain" x="203" y="383" width="112" height="354" fill-opacity=".4"/>
+<path class="s-ink" d="M315 380V740M430 380V740M545 380V740" stroke-width="4" stroke-dasharray="10 8"/>
+<text class="m" x="257" y="776" font-size="20" text-anchor="middle" style="fill:var(--gain)">YOUR SHARE</text>
+</g>
+<g id="stake"><text class="m" x="760" y="400" font-size="22">YOUR SHARE COST</text><text id="stakeV" class="d" x="752" y="510" font-size="110" style="fill:var(--gain)">$1,000</text></g>
+<g id="pMM"><text class="m" x="1300" y="545" font-size="22" text-anchor="middle">MR. MARKET</text></g>
+<g id="cal"></g>
+<g id="calL"><text class="m" x="1090" y="700" font-size="20">NEVER MISSES A DAY</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Every day, a new offer.</text>
+<text class="b" x="120" y="176" font-size="32">He names a price, then offers to buy or sell at it.</text>
+<g id="dMM"><text class="m" x="300" y="610" font-size="20" text-anchor="middle">MR. MARKET</text></g>
+<g id="dYou"><text class="m" x="1300" y="610" font-size="20" text-anchor="middle" style="fill:var(--gain)">YOU</text></g>
+<g id="note"><rect class="s-ink" x="640" y="230" width="320" height="160" rx="10" fill="var(--stage)" stroke-width="5"/><text class="m" x="800" y="280" font-size="22" text-anchor="middle">TODAY’S PRICE</text><text class="d" x="800" y="362" font-size="72" text-anchor="middle">$ ???</text></g>
+<g id="bArr"><text class="m" x="800" y="510" font-size="22" text-anchor="middle">HE BUYS YOU OUT</text><path class="s-ink" d="M1180 540H424m22-20-22 20 22 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect id="tokB" class="gain" y="522" width="36" height="36" rx="6"/></g>
+<g id="sArr"><text class="m" x="800" y="630" font-size="22" text-anchor="middle">HE SELLS YOU MORE</text><path class="s-ink" d="M420 660H1176m-22-20 22 20-22 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect id="tokS" class="gain" y="642" width="36" height="36" rx="6"/></g>
+<g id="same2"><text class="d" x="120" y="790" font-size="44">Same price, either way.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">His calm days.</text>
+<text class="b" x="120" y="176" font-size="32">Sometimes his price makes perfect sense.</text>
+<path id="ax3" class="s-ink" d="M160 260V720H900" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="bars3"></g>
+<polyline id="line3" class="s-gain" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="leg3"><text class="m" x="160" y="780" font-size="20">BARS: BUSINESS RESULTS</text><text class="m" x="560" y="780" font-size="20" style="fill:var(--gain)">LINE: HIS PRICE</text></g>
+<g id="calm"><g id="nod3"></g><text class="m" x="1210" y="650" font-size="22" text-anchor="middle">NOTHING TO GET EXCITED ABOUT</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">His wild days.</text>
+<text class="b" x="120" y="176" font-size="32">Often his feelings run away with him.</text>
+<g id="val4"><path class="s-muted" d="M160 480H1080" stroke-width="4" stroke-dasharray="12 10"/><text class="m" x="170" y="512" font-size="20">BUSINESS VALUE</text></g>
+<polyline id="pc4" class="s-ink" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="hpl"><text class="m" x="560" y="330" font-size="20">HIS PRICE</text></g>
+<g id="hat4"><path class="gain" d="M365 288L390 218L415 288Z"/><circle class="gain" cx="390" cy="212" r="9"/></g>
+<g id="cloud4"><circle class="loss" cx="825" cy="712" r="22"/><circle class="loss" cx="855" cy="700" r="28"/><circle class="loss" cx="885" cy="714" r="20"/><rect class="loss" x="815" y="712" width="75" height="24" rx="12"/><path class="s-loss" d="M830 750l-8 22M860 752l-8 22M890 750l-8 22" stroke-width="5" stroke-linecap="round"/></g>
+<g id="mood4"><g id="f4g"></g><text class="m" x="1300" y="610" font-size="22" text-anchor="middle">HIS MOOD</text></g>
+<g id="bz0"><text class="d" x="120" y="830" font-size="44">The business didn’t change.</text></g>
+<g id="bz1"><text class="d" x="800" y="830" font-size="44" style="fill:var(--gain)">Only his mood did.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">You can say no.</text>
+<text class="b" x="120" y="176" font-size="32">You are never forced to trade with him.</text>
+<g id="nOff"><rect class="s-ink" x="130" y="220" width="260" height="76" rx="16" fill="var(--stage)" stroke-width="5"/><path class="ink" d="M220 294h30l-14 22z"/><text class="m" x="260" y="267" font-size="22" text-anchor="middle">BUY? SELL?</text></g>
+<rect class="s-ink" x="400" y="260" width="200" height="460" fill="none" stroke-width="6"/>
+<rect id="dPan" class="s-ink" x="400" y="260" width="40" height="460" fill="var(--line)" stroke-width="5"/>
+<circle id="dKnob" class="ink" cy="500" r="9"/>
+<g id="ign"><text class="m" x="500" y="758" font-size="22" text-anchor="middle">IGNORED</text></g>
+<g id="nYou"></g>
+<path class="s-ink" d="M760 600H1440" stroke-width="8" stroke-linecap="round"/>
+<g id="rep"><path class="s-gain" d="M915 400L1090 470" stroke-width="4" stroke-dasharray="8 8"/><path class="ink" d="M1150 490c-30-20-80-20-110-10v100c30-10 80-10 110 10 30-20 80-20 110-10V480c-30-10-80-10-110 10z"/><path d="M1150 490v100" stroke="var(--stage)" stroke-width="4"/><text class="m" x="1150" y="650" font-size="20" text-anchor="middle">COMPANY REPORTS AND RESULTS</text></g>
+<g id="info"><text class="d" x="120" y="840" font-size="44">His quote is information, not an instruction.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Sell to his euphoria.</text>
+<text class="b" x="120" y="176" font-size="32">A ridiculously high price? You can happily sell.</text>
+<g id="scale6"><path class="s-ink" d="M300 240V728M290 300h20M290 400h20M290 500h20M290 700h20" stroke-width="6" stroke-linecap="round"/><path class="s-ink" d="M270 600H330" stroke-width="8" stroke-linecap="round"/><text class="m" x="255" y="607" font-size="20" text-anchor="end">VALUE</text></g>
+<g id="hTagW"><g id="hTag"><polygon class="gain" points="330,0 362,-36 640,-36 640,36 362,36"/><text class="m" x="500" y="8" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">HIS OFFER</text></g></g>
+<g id="far6"><path class="s-gain" d="M680 590V300m-14 20 14-20 14 20" fill="none" stroke-width="5" stroke-dasharray="10 8" stroke-linecap="round"/><text class="m" x="700" y="450" font-size="20" style="fill:var(--gain)">FAR ABOVE VALUE</text></g>
+<g id="sh6"><rect class="ink" x="960" y="420" width="140" height="140" rx="8"/><text class="m" x="1030" y="498" font-size="20" text-anchor="middle" style="fill:var(--stage)">SHARE</text></g>
+<g id="bag6"><path class="s-muted" d="M1130 490h100m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="gain" d="M1310 380h80l-20 40c80 30 100 180 0 200h-40c-100-20-80-170 0-200z"/><text class="d" x="1350" y="560" font-size="64" text-anchor="middle" style="fill:var(--on-gain)">$</text><text class="m" x="1350" y="670" font-size="20" text-anchor="middle">CASH</text></g>
+<g id="hold6"><text class="d" x="120" y="800" font-size="44">Or simply hold on, and let him rave.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Buy from his despair.</text>
+<text class="b" x="120" y="176" font-size="32">A silly low price? Buy a bigger piece for less.</text>
+<g id="scale7"><path class="s-ink" d="M260 240V740M250 300h20M250 460h20M250 560h20M250 700h20" stroke-width="6" stroke-linecap="round"/><path class="s-ink" d="M230 360H290" stroke-width="8" stroke-linecap="round"/><text class="m" x="220" y="367" font-size="20" text-anchor="end">VALUE</text></g>
+<g id="lTagW"><g id="lTag"><polygon class="loss" points="290,0 322,-36 530,-36 530,36 322,36"/><text class="m" x="426" y="8" font-size="22" text-anchor="middle" style="fill:var(--stage)">HIS OFFER</text></g></g>
+<g id="cart7"><path class="s-ink" d="M544 460h26l30 40h320l-30 130H630z" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><circle class="ink" cx="660" cy="665" r="18"/><circle class="ink" cx="860" cy="665" r="18"/><text class="m" x="760" y="730" font-size="20" text-anchor="middle">MORE SHARES, SAME BUSINESS</text></g>
+<g id="blk7"></g>
+<g id="scr7"><rect class="s-ink" x="1000" y="250" width="460" height="330" rx="14" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M1230 580v50M1160 640h140" stroke-width="6" stroke-linecap="round"/><polyline id="spk7" class="s-ink" fill="none" stroke-width="5" stroke-linejoin="round"/><g id="mini7"></g><text class="m" x="1230" y="700" font-size="20" text-anchor="middle">EVERY PRICE ON YOUR SCREEN</text></g>
+<g id="lo7"><text class="d" x="1230" y="770" font-size="40" text-anchor="middle" style="fill:var(--gain)">= his latest offer</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="q0"><text class="m" x="143" y="230" font-size="26">NEXT TIME PRICES LEAP OR CRASH, ASK:</text></g>
+<g id="qa"><text class="d" x="136" y="360" font-size="88" letter-spacing="-2">Has the business</text></g>
+<g id="qb"><text class="d" x="136" y="470" font-size="88" letter-spacing="-2">really changed, or just</text></g>
+<g id="qc"><text class="d" x="136" y="580" font-size="88" letter-spacing="-2">Mr. Market’s <tspan style="fill:var(--gain)">mood?</tspan></text></g>
+<g id="f8g"></g>
+<text class="m" x="143" y="720" font-size="26">OFFERS, NOT ORDERS</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="113" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 1:53</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Meet Your Moody Partner, Mr. Market&rdquo;, from <em>The Intelligent Investor</em> by Benjamin Graham. The example is Graham&#x27;s Mr. Market parable, with its 1,000 dollar stake in a private business, as reported in the book. The drawings of Mr. Market&#x27;s moods, the sales chart and the price tags are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=113, SC=[[0.0, 11.1], [11.1, 24.1], [24.1, 34.9], [34.9, 43.8], [43.8, 59.2], [59.2, 75.0], [75.0, 85.2], [85.2, 101.5], [101.5, 113.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Mr. Market", "The Partnership", "The Daily Offer", "His Calm Days", "His Wild Days", "You Can Say No", "Sell to Euphoria", "Buy from Despair", "Your Move"];
+const TM={"title_card": 0.0, "small_shop": 11.44, "stake_1000": 13.92, "mr_market": 17.6, "price_note": 24.4, "buy_arrow": 28.16, "sell_arrow": 30.8, "sales_chart": 37.84, "nod_face": 40.64, "party_hat": 46.96, "rain_cloud": 51.44, "closed_door": 63.88, "report_book": 66.64, "high_tag": 75.28, "coins_bag": 79.6, "low_tag": 85.52, "cart_shares": 90.0, "stock_screen": 93.52};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const hat=(g,x,y,r)=>{mk('rect',{x:x-r*1.05,y:y-r*.95,width:r*2.1,height:r*.28,rx:r*.1,class:'ink'},g);mk('rect',{x:x-r*.65,y:y-r*1.95,width:r*1.3,height:r*1.1,class:'ink'},g);mk('rect',{x:x-r*.65,y:y-r*1.15,width:r*1.3,height:r*.16,class:'gain'},g)};
+const mm=(g,x,y,r)=>{fig(g,x,y,r,'ink');hat(g,x,y,r)};
+const mouth=(cx,cy,r,k)=>'M'+(cx-r*.45)+' '+(cy+r*.35)+'Q'+cx+' '+(cy+r*.35+k*r*.4).toFixed(1)+' '+(cx+r*.45)+' '+(cy+r*.35);
+const face=(g,cx,cy,r)=>{const c=mk('circle',{cx:cx,cy:cy,r:r,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);[-1,1].forEach(s=>mk('circle',{cx:cx+s*r*.35,cy:cy-r*.15,r:r*.09,class:'ink'},g));const m=mk('path',{fill:'none',stroke:'var(--ink)','stroke-width':Math.max(5,r*.06),'stroke-linecap':'round'},g);return {c:c,m:m,cx:cx,cy:cy,r:r}};
+const setFace=(f,k)=>f.m.setAttribute('d',mouth(f.cx,f.cy,f.r,k));
+
+mm($('tMM'),1390,430,40);
+const tMouth=mk('path',{fill:'none',stroke:'var(--stage)','stroke-width':5,'stroke-linecap':'round'},$('tMM'));
+fig($('tYou'),1200,470,30,'gain');
+
+mm($('pMM'),1300,330,40);
+const cal=[];for(let i=0;i<7;i++){const g=mk('g',{},$('cal'));mk('rect',{x:1090+i*56,y:600,width:48,height:48,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M'+(1102+i*56)+' 624l8 9 16-18',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);cal.push(g)}
+
+mm($('dMM'),300,380,44);fig($('dYou'),1300,380,44,'gain');
+
+const B3=[],L3=[];for(let i=0;i<6;i++){const x=210+i*115,h=160+i*30;B3.push([mk('rect',{x:x,y:720-h,width:64,height:h,rx:4,class:'ink'},$('bars3')),h]);L3.push((x+32)+','+(720-h-34+(i%2?10:-6)))}
+$('line3').setAttribute('points',L3.join(' '));
+const f3=face($('nod3'),1210,440,140);setFace(f3,.1);
+
+const cv4=f=>{let s='';for(let x=160;x<=160+920*f+.1;x+=8)s+=x+','+(480-180*Math.sin(2*Math.PI*(x-160)/920)).toFixed(1)+' ';return s||'160,480'};
+const f4=face($('f4g'),1300,440,120);
+
+mm($('nOff'),230,400,36);fig($('nYou'),880,400,34,'gain');
+
+const BK=[[650,560],[730,560],[810,560],[690,495],[770,495]].map(q=>[mk('rect',{x:q[0],y:q[1],width:70,height:60,rx:6,class:'gain'},$('blk7')),q[1]]);
+mk('circle',{cx:0,cy:0,r:14,class:'ink'},$('mini7'));hat($('mini7'),0,0,14);
+
+const f8=face($('f8g'),1320,640,80);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const S=i=>SC[i][0]/K;
+rise($('tMM'),p(u,TM.title_card,TM.title_card+.6));rise($('tBub'),p(u,TM.title_card+.8,TM.title_card+1.3));
+let sp='';for(let x=1265;x<=1445;x+=6)sp+=x+','+(275+22*Math.sin(x/18+t*2)+8*Math.sin(x/7-t*3)).toFixed(1)+' ';$('tSpark').setAttribute('points',sp);
+tMouth.setAttribute('d','M1374 444Q1390 '+(444+12*Math.sin(t*1.7)).toFixed(1)+' 1406 444');
+rise($('tYou'),p(u,TM.title_card+5.8,TM.title_card+6.4));
+
+rise($('shop'),p(u,TM.small_shop,TM.small_shop+.6));rise($('slice'),p(u,TM.stake_1000,TM.stake_1000+.5));rise($('stake'),p(u,TM.stake_1000+.3,TM.stake_1000+.8));
+const sv=Math.round(1000*p(u,TM.stake_1000+.3,TM.stake_1000+1.6));$('stakeV').textContent='$'+(sv>=1000?'1,000':sv);
+rise($('pMM'),p(u,TM.mr_market,TM.mr_market+.6));rise($('calL'),p(u,TM.mr_market+4.1,TM.mr_market+4.6));
+cal.forEach((g,i)=>rise(g,p(u,TM.mr_market+4.1+i*.25,TM.mr_market+4.4+i*.25)));
+
+rise($('dMM'),p(u,S(2)+.3,S(2)+.8));rise($('dYou'),p(u,S(2)+.6,S(2)+1.1));rise($('note'),p(u,TM.price_note,TM.price_note+.6));
+rise($('bArr'),p(u,TM.buy_arrow,TM.buy_arrow+.5));rise($('sArr'),p(u,TM.sell_arrow,TM.sell_arrow+.5));
+$('tokB').setAttribute('x',(1132-700*((t*.45)%1)).toFixed(1));$('tokS').setAttribute('x',(432+700*((t*.45+.5)%1)).toFixed(1));
+rise($('same2'),p(u,TM.sell_arrow+2,TM.sell_arrow+2.6));
+
+rise($('ax3'),p(u,S(3)+.4,S(3)+1));
+B3.forEach((b,i)=>{const k=p(u,TM.sales_chart+i*.2,TM.sales_chart+i*.2+.5);b[0].setAttribute('y',(720-b[1]*k).toFixed(1));b[0].setAttribute('height',(b[1]*k).toFixed(1))});
+$('line3').setAttribute('opacity',p(u,TM.sales_chart+1.4,TM.sales_chart+2));rise($('leg3'),p(u,TM.sales_chart+.4,TM.sales_chart+1));
+rise($('calm'),p(u,TM.nod_face,TM.nod_face+.6));$('nod3').setAttribute('transform','rotate('+(5*Math.sin(t*2.5)).toFixed(2)+' 1210 580)');
+
+rise($('val4'),p(u,S(4)+.4,S(4)+1));rise($('mood4'),p(u,S(4)+.6,S(4)+1.2));
+$('pc4').setAttribute('points',cv4(.5*p(u,TM.party_hat-.4,TM.party_hat+1.2)+.5*p(u,TM.rain_cloud-.4,TM.rain_cloud+1.2)));
+rise($('hpl'),p(u,TM.party_hat,TM.party_hat+.5));rise($('hat4'),p(u,TM.party_hat+.6,TM.party_hat+1.1));rise($('cloud4'),p(u,TM.rain_cloud+.6,TM.rain_cloud+1.1));
+const md=u<TM.party_hat?0:u<TM.rain_cloud?1:-1;setFace(f4,md);f4.c.style.fill=md>0?'var(--gain)':md<0?'var(--loss)':'var(--stage)';
+rise($('bz0'),p(u,TM.rain_cloud+4.2,TM.rain_cloud+4.8));rise($('bz1'),p(u,TM.rain_cloud+6.8,TM.rain_cloud+7.4));
+
+rise($('nOff'),p(u,S(5)+.4,S(5)+1));rise($('nYou'),p(u,TM.closed_door-3.4,TM.closed_door-2.8));
+const dw=40+160*p(u,TM.closed_door,TM.closed_door+.6);$('dPan').setAttribute('width',dw.toFixed(1));$('dKnob').setAttribute('cx',(400+dw-22).toFixed(1));
+rise($('ign'),p(u,TM.closed_door+.5,TM.closed_door+1));rise($('rep'),p(u,TM.report_book,TM.report_book+.6));rise($('info'),p(u,TM.report_book+4.9,TM.report_book+5.5));
+
+rise($('scale6'),p(u,S(6)+.3,S(6)+.8));rise($('hTagW'),p(u,TM.high_tag,TM.high_tag+.4));
+$('hTag').setAttribute('transform','translate(0 '+(600-320*p(u,TM.high_tag+.2,TM.high_tag+1.4)).toFixed(1)+')');
+rise($('far6'),p(u,TM.high_tag+1.4,TM.high_tag+1.9));rise($('sh6'),p(u,TM.high_tag+2,TM.high_tag+2.5));
+rise($('bag6'),p(u,TM.coins_bag,TM.coins_bag+.6));rise($('hold6'),p(u,TM.coins_bag+2.6,TM.coins_bag+3.2));
+
+rise($('scale7'),p(u,S(7)+.3,S(7)+.8));rise($('lTagW'),p(u,TM.low_tag,TM.low_tag+.4));
+$('lTag').setAttribute('transform','translate(0 '+(360+300*p(u,TM.low_tag+.2,TM.low_tag+1.4)).toFixed(1)+')');
+rise($('cart7'),p(u,TM.cart_shares-.3,TM.cart_shares+.2));
+BK.forEach((b,i)=>{const k=p(u,TM.cart_shares+.4+i*.35,TM.cart_shares+.8+i*.35);b[0].setAttribute('y',(b[1]-220*(1-k)).toFixed(1));b[0].setAttribute('opacity',k)});
+rise($('scr7'),p(u,TM.stock_screen,TM.stock_screen+.6));
+let sk='',ly=430;for(let x=1030;x<=1430;x+=10){ly=430+70*Math.sin(x/45+t*1.5)+30*Math.sin(x/17-t*2.3);sk+=x+','+ly.toFixed(1)+' '}
+$('spk7').setAttribute('points',sk);$('mini7').setAttribute('transform','translate(1430 '+ly.toFixed(1)+')');
+rise($('lo7'),p(u,TM.stock_screen+5,TM.stock_screen+5.6));
+
+rise($('q0'),p(u,S(8)+.4,S(8)+1));rise($('qa'),p(u,S(8)+4.2,S(8)+4.7));rise($('qb'),p(u,S(8)+4.6,S(8)+5.1));rise($('qc'),p(u,S(8)+5,S(8)+5.5));
+rise($('f8g'),p(u,S(8)+.8,S(8)+1.4));setFace(f8,Math.sin(t*1.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:109.84;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

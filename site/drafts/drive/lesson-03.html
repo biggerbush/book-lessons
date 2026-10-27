@@ -1,0 +1,390 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drive Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Drive: If-then rewards help with routine, algorithmic tasks but can narrow focus and damage creativity on heuristic work, as Sam Glucksberg&#x27;s candle problem shows. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DRIVE · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">When carrots and</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">sticks backfire.</text>
+<text class="b" x="120" y="600" font-size="32">Why a cash prize can make clever thinking slower.</text>
+<path class="s-line" d="M1040 740H1460" stroke-width="5" stroke-linecap="round"/>
+<g id="t_fig"></g>
+<path class="s-ink" d="M1200 650L1400 250" stroke-width="8" stroke-linecap="round"/>
+<g id="carrotW"><g id="carrot">
+<path class="s-ink" d="M1400 250V400" stroke-width="4"/>
+<path class="gain" d="M1372 400H1428L1404 540Q1400 552 1396 540Z"/>
+<path class="s-ink" d="M1400 400l-18-30M1400 400v-34M1400 400l18-30" stroke-width="5" stroke-linecap="round"/>
+</g></g>
+<g id="t_q"><circle class="s-ink" cx="1150" cy="430" r="46" fill="var(--stage)" stroke-width="5"/><text class="d" x="1150" y="450" font-size="56" text-anchor="middle">?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of work.</text>
+<text class="b" x="120" y="176" font-size="32">Algorithmic work follows a path. Heuristic work needs invention.</text>
+<g id="pA">
+<rect class="s-line" x="120" y="220" width="640" height="580" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="270" font-size="22">ALGORITHMIC</text>
+<g id="chk"></g>
+</g>
+<g id="path1"><text class="m" x="150" y="580" font-size="20">ONE SET PATH, ONE ANSWER</text></g>
+<g id="belt"><rect class="ink" x="160" y="690" width="560" height="14" rx="7"/>
+<text class="m" x="150" y="770" font-size="20">ADD UP INVOICES · STACK BOXES</text></g>
+<g id="boxes"></g>
+<g id="pB">
+<rect class="s-line" x="840" y="220" width="640" height="580" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="270" font-size="22">HEURISTIC</text>
+<path class="s-ink" d="M900 310H1400V600M1400 680V690H900V400M900 330V310M950 420V690M1060 310V450M1060 560H1240M1220 310V350M1220 460V690M1360 310V580" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="sol" class="s-gain" d="M900 360H1000V500H1150V400H1300V640H1400" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="980"/>
+<text class="m" x="870" y="770" font-size="20">NO SCRIPT · INVENT A SOLUTION</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The candle puzzle.</text>
+<text class="b" x="120" y="176" font-size="32">Fix the candle to the wall so no wax drips on the table.</text>
+<g id="wall"><rect x="900" y="220" width="500" height="400" rx="8" fill="var(--stage)"/><rect x="900" y="220" width="500" height="400" rx="8" fill="var(--loss)" fill-opacity=".12" stroke="var(--ink)" stroke-width="5"/><text class="m" x="1400" y="655" font-size="20" text-anchor="end">WALL</text></g>
+<g id="tbl">
+<rect class="ink" x="140" y="700" width="1320" height="16" rx="8"/>
+<path class="s-ink" d="M220 716V840M1380 716V840" stroke-width="8" stroke-linecap="round"/>
+<rect x="300" y="560" width="40" height="140" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/>
+<path class="gain" d="M320 526q16 20 0 32q-16-12 0-32z"/>
+<rect x="420" y="630" width="140" height="70" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/>
+<circle class="ink" cx="450" cy="665" r="6"/><circle class="ink" cx="480" cy="655" r="6"/><circle class="ink" cx="510" cy="668" r="6"/><circle class="ink" cx="535" cy="655" r="6"/>
+<rect class="ink" x="620" y="660" width="8" height="40"/><rect class="ink" x="640" y="660" width="8" height="40"/><rect class="ink" x="660" y="660" width="8" height="40"/>
+<circle class="gain" cx="624" cy="658" r="7"/><circle class="gain" cx="644" cy="658" r="7"/><circle class="gain" cx="664" cy="658" r="7"/>
+<text class="m" x="320" y="750" font-size="20" text-anchor="middle">CANDLE</text>
+<text class="m" x="490" y="750" font-size="20" text-anchor="middle">TACKS</text>
+<text class="m" x="644" y="750" font-size="20" text-anchor="middle">MATCHES</text>
+</g>
+<g id="ask"><path class="s-muted" d="M360 550Q600 380 870 400" fill="none" stroke-width="4" stroke-dasharray="10 10"/><path class="s-muted" d="M852 384l20 16-22 12" fill="none" stroke-width="4" stroke-linecap="round"/><text class="d" x="620" y="360" font-size="60" text-anchor="middle">?</text></g>
+<g id="fail">
+<g transform="rotate(-20 1020 400)"><rect x="1000" y="330" width="40" height="140" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path class="gain" d="M1020 296q16 20 0 32q-16-12 0-32z"/><circle class="loss" cx="1020" cy="400" r="8"/></g>
+<rect x="1240" y="330" width="40" height="140" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path class="gain" d="M1260 296q16 20 0 32q-16-12 0-32z"/>
+<ellipse class="loss" cx="1260" cy="476" rx="30" ry="10"/>
+<text class="m" x="1020" y="280" font-size="20" text-anchor="middle" style="fill:var(--loss)">TACK IT ON?</text>
+<text class="m" x="1260" y="280" font-size="20" text-anchor="middle" style="fill:var(--loss)">MELT IT ON?</text>
+<g id="drips"></g>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hidden answer.</text>
+<text class="b" x="120" y="176" font-size="32">Empty the tack box and pin it to the wall.</text>
+<rect x="760" y="220" width="580" height="460" rx="8" fill="var(--stage)"/>
+<rect x="760" y="220" width="580" height="460" rx="8" fill="var(--loss)" fill-opacity=".12" stroke="var(--ink)" stroke-width="5"/>
+<text class="m" x="790" y="256" font-size="20">WALL</text>
+<rect class="ink" x="140" y="740" width="1320" height="16" rx="8"/>
+<g id="tk"></g>
+<g id="bx"><rect x="0" y="0" width="160" height="80" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><text class="m" x="80" y="50" font-size="18" text-anchor="middle">TACKS</text></g>
+<g id="pins"><circle class="ink" cx="995" cy="500" r="9"/><circle class="ink" cx="1105" cy="500" r="9"/></g>
+<g id="cdl"><rect x="0" y="0" width="40" height="140" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path class="gain" d="M20 -34q16 20 0 32q-16-12 0-32z"/></g>
+<g id="shl"><text class="m" x="1050" y="620" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE BOX BECOMES A SHELF</text></g>
+<g id="hard"><text class="d" x="120" y="830" font-size="44">The hard part: seeing more than a container.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Adding a prize.</text>
+<text class="b" x="120" y="176" font-size="32">Psychologist Sam Glucksberg tested two groups.</text>
+<g id="sci"><g id="sci_p"></g>
+<rect x="300" y="520" width="50" height="66" rx="6" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/>
+<text class="m" x="280" y="660" font-size="20" text-anchor="middle">SAM GLUCKSBERG</text>
+<text class="m" x="280" y="690" font-size="20" text-anchor="middle">PSYCHOLOGIST</text>
+<path class="s-line" d="M370 470L490 360M370 500L490 640" stroke-width="4" stroke-dasharray="8 8" fill="none"/></g>
+<g id="gA"><rect class="s-line" x="500" y="220" width="980" height="260" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="530" y="262" font-size="20">GROUP 1 · TIMED TO SEE HOW LONG IT USUALLY TAKES</text>
+<g id="gA_p"></g>
+<circle cx="1300" cy="370" r="70" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<rect class="ink" x="1288" y="282" width="24" height="18"/>
+<line id="hand" x1="1300" y1="370" x2="1300" y2="318" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/></g>
+<g id="gB"><rect class="s-line" x="500" y="520" width="980" height="260" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="530" y="562" font-size="20">GROUP 2 · CASH IF AMONG THE FASTEST SOLVERS</text>
+<g id="gB_p"></g><g id="cash"></g></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The slow winners.</text>
+<text class="b" x="120" y="176" font-size="32">Average time to solve the candle puzzle (illustrative scale).</text>
+<text class="m" x="120" y="310" font-size="22">TIMED ONLY</text>
+<text class="m" x="120" y="460" font-size="22">CASH OFFERED</text>
+<path id="dl" class="s-muted" d="M900 240V408" stroke-width="3" stroke-dasharray="6 8"/>
+<rect id="b1" class="ink" x="420" y="260" height="80" width="0" rx="6"/>
+<rect id="b2" class="loss" x="420" y="410" height="80" width="0" rx="6"/>
+<g id="shp"><text class="m" x="120" y="494" font-size="18" style="fill:var(--gain)">MEANT TO SHARPEN THEM</text></g>
+<g id="brk"><path class="s-loss" d="M900 520v16H1300v-16" fill="none" stroke-width="4"/><text class="m" x="1100" y="575" font-size="22" text-anchor="middle" style="fill:var(--loss)">ABOUT 3.5 MINUTES LONGER</text></g>
+<g id="blk">
+<polygon points="350,705 900,690 900,770 350,755" fill="var(--line)" fill-opacity=".5"/>
+<circle class="ink" cx="300" cy="730" r="50"/>
+<path class="s-loss" d="M330 690L430 676M330 770L430 784" stroke-width="10" stroke-linecap="round"/>
+<rect x="800" y="705" width="20" height="50" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><path class="gain" d="M810 680q10 13 0 22q-10-9 0-22z"/>
+<text class="m" x="810" y="800" font-size="18" text-anchor="middle">THE OBVIOUS</text>
+<rect class="s-muted" x="760" y="600" width="100" height="50" fill="none" stroke-width="4" stroke-dasharray="8 8"/>
+<text class="m" x="880" y="632" font-size="18">CLEVER ANSWER?</text>
+</g>
+<g id="nar"><text class="d" x="1060" y="720" font-size="46">Reward narrowed</text><text class="d" x="1060" y="776" font-size="46">their focus.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Flip the puzzle.</text>
+<text class="b" x="120" y="176" font-size="32">Tacks beside the empty box: the answer is easy to spot.</text>
+<g id="lt">
+<rect class="ink" x="120" y="600" width="580" height="14" rx="7"/>
+<rect x="160" y="460" width="40" height="140" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><path class="gain" d="M180 426q16 20 0 32q-16-12 0-32z"/>
+<rect x="260" y="520" width="160" height="80" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/>
+<g id="lt_t"></g>
+</g>
+<g id="rtn"><path class="s-gain" d="M290 470l24 24l46-50" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="120" y="680" font-size="22" style="fill:var(--gain)">EASY TO SPOT · ROUTINE</text></g>
+<g id="race">
+<text class="m" x="780" y="300" font-size="22">TIMED ONLY</text>
+<text class="m" x="780" y="450" font-size="22">CASH OFFERED</text>
+<rect id="r1" class="ink" x="780" y="320" height="50" width="0" rx="6"/>
+<rect id="r2" class="gain" x="780" y="470" height="50" width="0" rx="6"/>
+<path class="s-ink" d="M780 270V560H1420" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-ink" d="M1402 546l18 14-18 14" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="780" y="598" font-size="20">AVERAGE TIME TO SOLVE (ILLUSTRATIVE)</text>
+</g>
+<g id="fstr"><text class="m" x="1236" y="503" font-size="22" style="fill:var(--gain)">FASTER</text></g>
+<g id="fst"><text class="d" x="780" y="670" font-size="40">The cash group finished faster.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What it means.</text>
+<text class="b" x="120" y="176" font-size="32">If-then rewards: do this, get that.</text>
+<g id="c7_0"><rect class="s-line" x="120" y="220" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect x="200" y="300" width="260" height="100" rx="10" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<text class="d" x="330" y="365" font-size="36" text-anchor="middle">IF → THEN</text>
+<rect class="ink" x="322" y="400" width="16" height="200"/><path class="s-ink" d="M260 600H400" stroke-width="8" stroke-linecap="round"/>
+<text class="d5" x="150" y="670" font-size="34">Suits simple,</text><text class="d5" x="150" y="714" font-size="34">routine work.</text></g>
+<g id="c7_1"><rect class="s-line" x="590" y="220" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle cx="800" cy="400" r="80" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<circle id="glow" class="gain" cx="800" cy="400" r="50"/>
+<rect class="ink" x="770" y="478" width="60" height="46" rx="6"/>
+<path class="s-ink" d="M800 524V570" stroke-width="4"/>
+<rect class="loss" x="755" y="570" width="90" height="50" rx="8"/>
+<text class="d" x="800" y="607" font-size="36" text-anchor="middle" style="fill:var(--stage)">$</text>
+<text class="d5" x="620" y="670" font-size="34">Can hold creative</text><text class="d5" x="620" y="714" font-size="34">work back.</text></g>
+<g id="c7_2"><rect class="s-line" x="1060" y="220" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="spk"><path class="s-gain" d="M1170 300v30M1155 315h30M1370 290v30M1355 305h30M1400 380v24M1388 392h24" stroke-width="5" stroke-linecap="round"/></g>
+<rect class="gain" x="1190" y="424" width="160" height="140"/><rect x="1262" y="424" width="16" height="140" fill="var(--stage)"/>
+<g id="lid"><rect class="gain" x="1175" y="390" width="190" height="34" rx="6"/><circle cx="1254" cy="372" r="16" fill="none" stroke="var(--gain)" stroke-width="6"/><circle cx="1286" cy="372" r="16" fill="none" stroke="var(--gain)" stroke-width="6"/></g>
+<text class="d5" x="1090" y="670" font-size="34">A surprise,</text><text class="d5" x="1090" y="714" font-size="34">afterwards.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Could you drop the deal</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">and give someone room</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">to explore instead?</text></g>
+<g id="q8l"><text class="m" x="143" y="700" font-size="26">THIS WEEK: ONE CREATIVE TASK, NO PRIZE</text></g>
+<g transform="translate(-100 -140)">
+<g id="q8g">
+<path class="s-ink" d="M1240 840L1440 640" stroke-width="8" stroke-linecap="round"/>
+<path id="q8s" class="s-ink" d="M1440 640V700" stroke-width="4"/>
+<g id="q8c"><polygon class="gain" points="1414,700 1466,700 1444,820 1436,820"/><path class="s-ink" d="M1440 700l-14-22M1440 700l14-22" stroke-width="4" stroke-linecap="round"/></g>
+</g>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;When Carrots and Sticks Backfire&rdquo;, from <em>Drive</em> by Daniel H. Pink. Examples as reported in the book: Sam Glucksberg&#x27;s experiments using Karl Duncker&#x27;s candle problem. The puzzle scenes are illustrations, and the bar chart shows the reported average gap, not exact data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 8.3], [8.3, 24.7], [24.7, 39.4], [39.4, 51.8], [51.8, 65.1], [65.1, 78.9], [78.9, 92.0], [92.0, 109.2], [109.2, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Prize That Hurts", "Two Kinds of Work", "The Candle Puzzle", "The Hidden Answer", "Adding a Prize", "The Slow Winners", "Flip the Puzzle", "What It Means", "Your Turn"];
+const TM={"golden_carrot": 0.0, "checklist": 8.64, "assembly_line": 14.4, "maze_map": 18.8, "candle_table": 24.96, "cork_wall": 29.76, "empty_box": 39.68, "candle_shelf": 43.76, "scientist": 52.08, "stopwatch": 56.08, "cash_stack": 60.8, "bar_chart": 65.44, "blinkers": 73.28, "loose_tacks": 79.2, "finish_flag": 88.32, "if_then_sign": 92.32, "lightbulb": 98.64, "gift_box": 102.0};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const mid=(a,b,f)=>a+(b-a)*f, L=(a,b,k)=>a+(b-a)*k;
+fig($('t_fig'),1150,589,36,'ink');
+const CK=[];for(let i=0;i<4;i++){const y=310+i*56,g=$('chk');mk('rect',{x:160,y:y,width:32,height:32,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M210 '+(y+16)+'H'+(600-i*60),class:'s-line','stroke-width':6,'stroke-linecap':'round'},g);CK.push(mk('path',{d:'M166 '+(y+16)+'l9 9l16-20',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g))}
+for(let x=180;x<=700;x+=104)mk('circle',{cx:x,cy:716,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('belt'));
+const BXS=[0,1,2,3].map(()=>mk('rect',{y:632,width:56,height:56,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('boxes')));
+const DR=[0,1,2,3,4,5].map(i=>mk('circle',{cx:i<3?1044:1260,r:6,class:'loss'},$('drips')));
+const T0=[[250,690],[280,680],[310,695],[340,682],[300,705]],T1=[[140,732],[170,732],[410,732],[440,732],[470,732]];
+const TK=T0.map(q=>mk('circle',{cx:q[0],cy:q[1],r:7,class:'ink'},$('tk')));
+fig($('sci_p'),280,420,44,'ink');
+for(let i=0;i<4;i++){fig($('gA_p'),600+i*100,330,22,'ink');fig($('gB_p'),600+i*100,630,22,'ink')}
+const CS=[0,1,2,3].map(i=>{const g=mk('g',{},$('cash'));mk('rect',{x:1220,y:720-i*36,width:160,height:30,rx:4,class:'gain'},g);const tx=mk('text',{x:1300,y:743-i*36,'font-size':22,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'},g);tx.textContent='$';return g});
+const LT=[0,1,2,3,4,5].map(i=>mk('circle',{cx:470+i*34,cy:588,r:7,class:'ink'},$('lt_t')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('carrotW'),p(u,TM.golden_carrot,TM.golden_carrot+.6));
+$('carrot').setAttribute('transform','rotate('+(8*Math.sin(t*1.6)).toFixed(2)+' 1400 250)');
+const q0=mid(TM.golden_carrot,TM.checklist,.57); rise($('t_q'),p(u,q0,q0+.5));
+
+rise($('pA'),p(u,TM.checklist,TM.checklist+.5));
+CK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.checklist+.8+i*.6,TM.checklist+1.1+i*.6)));
+rise($('path1'),p(u,TM.checklist+3.2,TM.checklist+3.7));
+rise($('belt'),p(u,TM.assembly_line,TM.assembly_line+.5)); $('boxes').setAttribute('opacity',p(u,TM.assembly_line,TM.assembly_line+.5));
+BXS.forEach((b,i)=>b.setAttribute('x',(160+((t*90+i*126)%504)).toFixed(1)));
+rise($('pB'),p(u,TM.maze_map,TM.maze_map+.5));
+$('sol').setAttribute('stroke-dashoffset',(980*(1-p(u,TM.maze_map+.6,TM.maze_map+3.5))).toFixed(1));
+
+rise($('tbl'),p(u,TM.candle_table,TM.candle_table+.6));
+rise($('wall'),p(u,TM.cork_wall,TM.cork_wall+.5)); rise($('ask'),p(u,TM.cork_wall+1,TM.cork_wall+1.5));
+const f2=mid(TM.cork_wall,TM.empty_box,.57); rise($('fail'),p(u,f2,f2+.6));
+DR.forEach((d,i)=>{const k=((t*90+(i%3)*43)%120); d.setAttribute('cy',((i<3?470:486)+k).toFixed(1)); d.setAttribute('opacity',(1-k/120).toFixed(2))});
+
+const e3=p(u,TM.empty_box+.3,TM.empty_box+1.3);
+TK.forEach((c,i)=>{c.setAttribute('cx',L(T0[i][0],T1[i][0],e3).toFixed(1));c.setAttribute('cy',(L(T0[i][1],T1[i][1],e3)-70*Math.sin(Math.PI*e3)).toFixed(1))});
+const m3=p(u,TM.empty_box+1.5,TM.empty_box+3);
+$('bx').setAttribute('transform','translate('+L(220,970,m3).toFixed(1)+' '+(L(660,470,m3)-90*Math.sin(Math.PI*m3)).toFixed(1)+')');
+$('pins').setAttribute('opacity',p(u,TM.empty_box+3,TM.empty_box+3.4));
+const c3=p(u,TM.candle_shelf,TM.candle_shelf+1.5);
+$('cdl').setAttribute('transform','translate('+L(520,1030,c3).toFixed(1)+' '+(L(600,330,c3)-60*Math.sin(Math.PI*c3)).toFixed(1)+')');
+rise($('shl'),p(u,TM.candle_shelf+1.4,TM.candle_shelf+1.9));
+const h3=mid(TM.candle_shelf,TM.scientist,.47); rise($('hard'),p(u,h3,h3+.6));
+
+rise($('sci'),p(u,TM.scientist,TM.scientist+.5));
+rise($('gA'),p(u,TM.stopwatch,TM.stopwatch+.5));
+$('hand').setAttribute('transform','rotate('+((t*120)%360).toFixed(1)+' 1300 370)');
+rise($('gB'),p(u,TM.cash_stack,TM.cash_stack+.5));
+CS.forEach((g,i)=>rise(g,p(u,TM.cash_stack+.6+i*.3,TM.cash_stack+.9+i*.3)));
+
+$('b1').setAttribute('width',(480*p(u,TM.bar_chart,TM.bar_chart+1.2)).toFixed(1));
+$('b2').setAttribute('width',(880*p(u,TM.bar_chart+.4,TM.bar_chart+2.2)).toFixed(1));
+$('dl').setAttribute('opacity',p(u,TM.bar_chart+1.2,TM.bar_chart+1.6));
+rise($('brk'),p(u,TM.bar_chart+2.2,TM.bar_chart+2.7));
+const s5=mid(TM.bar_chart,TM.blinkers,.66); rise($('shp'),p(u,s5,s5+.5));
+rise($('blk'),p(u,TM.blinkers,TM.blinkers+.6)); rise($('nar'),p(u,TM.blinkers+1,TM.blinkers+1.6));
+
+rise($('lt'),p(u,TM.loose_tacks,TM.loose_tacks+.5));
+LT.forEach((c,i)=>{const k=p(u,TM.loose_tacks+.4+i*.15,TM.loose_tacks+.9+i*.15); c.setAttribute('cy',(588-160*(1-k)).toFixed(1)); c.setAttribute('opacity',k)});
+const r6=mid(TM.loose_tacks,TM.finish_flag,.5); rise($('rtn'),p(u,r6,r6+.5));
+rise($('race'),p(u,TM.finish_flag,TM.finish_flag+.4));
+// bar length = time taken (same encoding as scene 5): cash bar stops sooner and shorter
+$('r1').setAttribute('width',(620*p(u,TM.finish_flag+.3,TM.finish_flag+2.3)).toFixed(1));
+$('r2').setAttribute('width',(434*p(u,TM.finish_flag+.3,TM.finish_flag+1.7)).toFixed(1));
+rise($('fstr'),p(u,TM.finish_flag+1.7,TM.finish_flag+2.1));
+rise($('fst'),p(u,TM.finish_flag+2.2,TM.finish_flag+2.7));
+
+rise($('c7_0'),p(u,TM.if_then_sign,TM.if_then_sign+.5));
+rise($('c7_1'),p(u,TM.lightbulb,TM.lightbulb+.5));
+$('glow').setAttribute('opacity',(1-.75*p(u,TM.lightbulb+.6,TM.lightbulb+1.6)+.05*Math.sin(t*9)).toFixed(2));
+rise($('c7_2'),p(u,TM.gift_box,TM.gift_box+.5));
+const g7=p(u,TM.gift_box+.8,TM.gift_box+1.4);
+$('lid').setAttribute('transform','translate(0 '+(-(34+6*Math.sin(t*3))*g7).toFixed(1)+')');
+$('spk').setAttribute('opacity',g7);
+
+const S8=SC[8][0]/K, E8=SC[8][1]/K, Q8=mid(S8,E8,.38);
+rise($('q8l'),p(u,S8+.4,S8+.9)); rise($('q8g'),p(u,S8+.6,S8+1.1));
+rise($('qa'),p(u,Q8,Q8+.5)); rise($('qb'),p(u,Q8+.4,Q8+.9)); rise($('qc'),p(u,Q8+.8,Q8+1.3));
+const cf=p(u,Q8+1.4,Q8+2.4);
+$('q8s').setAttribute('opacity',(1-cf).toFixed(2));
+$('q8c').setAttribute('transform','translate(0 '+(40*cf).toFixed(1)+') rotate('+(25*cf).toFixed(1)+' 1440 700)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.28;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

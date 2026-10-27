@@ -1,0 +1,328 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapiens Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Sapiens: The Agricultural Revolution produced more food and more people, but for most individuals it meant harder work, poorer diets and new diseases. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAPIENS · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Did wheat</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">domesticate us?</text>
+<text class="b" x="120" y="600" font-size="32">How a humble grass quietly took charge of human lives</text>
+<path class="s-line" d="M1100 800h380" stroke-width="5" stroke-linecap="round"/>
+<g id="t_wheat"></g>
+<g id="t_man"></g>
+<path id="t_leash" d="M1360 600Q1270 610 1200 712" fill="none" stroke="var(--gain)" stroke-width="5" stroke-dasharray="8 8" stroke-linecap="round"/>
+<text id="t_q" class="d" x="1250" y="560" font-size="56" text-anchor="middle" style="fill:var(--gain)">?</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A grass goes global.</text>
+<text class="b" x="120" y="176" font-size="32">From one corner of the Middle East to fields across the world.</text>
+<g id="map"></g>
+<g id="origin"><circle id="ring" cx="900" cy="400" r="20" fill="none" stroke="var(--gain)" stroke-width="5"/><circle cx="900" cy="400" r="10" class="gain"/></g>
+<text id="olbl" class="m" x="120" y="750" font-size="22" style="fill:var(--gain)">WILD GRASS · ONE SMALL CORNER OF THE MIDDLE EAST</text>
+<text id="wl" class="m" x="120" y="786" font-size="22">WITHIN A FEW THOUSAND YEARS · FIELDS ACROSS THE WORLD</text>
+<text id="cap1" class="d" x="120" y="846" font-size="44">Few plants have ever succeeded so spectacularly.</text>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Wheat’s demands.</text>
+<text class="b" x="120" y="176" font-size="32">Wheat was fussy, and Sapiens became its servant.</text>
+<circle id="sun2" class="gain" cx="1400" cy="250" r="36"/>
+<path class="s-line" d="M120 600H1480" stroke-width="5" stroke-linecap="round"/>
+<g id="f2"><path d="M190 600L195 520Q215 470 275 480M255 485L300 575" fill="none" stroke="var(--ink)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/><circle class="ink" cx="300" cy="478" r="22"/></g>
+<path id="bucket" class="s-ink" d="M330 560h44l-6 40h-32z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<g id="stalks2"></g>
+<g id="rocks"></g>
+<g id="weeds"></g>
+<g id="pests"></g>
+<g id="cards"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Bodies not built for it.</text>
+<text class="b" x="120" y="176" font-size="32">Evolved for climbing and chasing, not bending over fields all day.</text>
+<path class="s-line" d="M760 240V820" stroke-width="3"/>
+<g id="spine"></g>
+<g id="marks"></g>
+<text id="pl0" class="m" x="120" y="820" font-size="22" style="fill:var(--loss)">SLIPPED DISCS</text>
+<text id="pl1" class="m" x="360" y="820" font-size="22" style="fill:var(--loss)">ARTHRITIS</text>
+<text id="pl2" class="m" x="560" y="820" font-size="22" style="fill:var(--loss)">HERNIAS</text>
+<g id="variety"><circle cx="960" cy="420" r="30" class="ink"/><path d="M1060 430q50-40 100 0q-50 40-100 0zM1160 430l30-22v44z" class="ink"/><circle cx="1250" cy="410" r="16" class="ink"/><circle cx="1280" cy="440" r="16" class="ink"/><circle cx="1240" cy="445" r="16" class="ink"/><path d="M1330 460q10-70 60-80q0 70-60 80z" class="ink"/></g>
+<g id="grains"></g>
+<path id="bowl3" class="s-ink" d="M880 520H1400A260 170 0 0 1 880 520Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<text id="gl0" class="m" x="880" y="740" font-size="22" style="fill:var(--gain)">A FEW GRAINS</text>
+<text id="gl1" class="m" x="880" y="776" font-size="22">POOR IN VITAMINS AND MINERALS</text>
+<text id="gl2" class="m" x="880" y="812" font-size="22">HARD ON TEETH</text>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">New dangers.</text>
+<text class="b" x="120" y="176" font-size="32">Crowded villages, new diseases, and a single crop.</text>
+<g id="vill"></g>
+<g id="anim"></g>
+<g id="germs"></g>
+<text id="v_l" class="m" x="120" y="800" font-size="20">PEOPLE, ANIMALS AND WASTE, SIDE BY SIDE</text>
+<text id="g_l" class="m" x="120" y="840" font-size="20" style="fill:var(--loss)">INFECTIOUS DISEASES SPREAD</text>
+<g transform="translate(0 -30)">
+<g id="fp">
+<rect class="s-line" x="920" y="240" width="560" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle cx="1160" cy="320" r="34" fill="var(--muted)"/><circle cx="1240" cy="320" r="34" fill="var(--muted)"/><circle cx="1200" cy="298" r="40" fill="var(--muted)"/>
+<path id="rain" d="M1150 370l-10 30M1200 370l-10 30M1250 370l-10 30" stroke="var(--muted)" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M960 690H1440" stroke-width="5" stroke-linecap="round"/>
+<path id="cracks" d="M960 710l40 20 30-14 40 22M1130 706l30 26 40-12M1260 712l40 18 50-16" fill="none" stroke="var(--ink)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="okf"></g><g id="dryf"></g><g id="loc"></g>
+</g>
+</g>
+<text id="f_l" class="m" x="940" y="770" font-size="20">ONE CROP</text>
+<text id="d_l" class="m" x="940" y="806" font-size="20" style="fill:var(--loss)">RAINS FAIL · LOCUSTS · STARVATION</text>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Who tamed whom?</text>
+<g id="w5"><text class="d5" x="120" y="250" font-size="56">domesticate</text><text class="m" x="120" y="296" font-size="22">FROM THE LATIN WORD FOR HOUSE</text></g>
+<path class="s-line" d="M120 700H1480" stroke-width="5" stroke-linecap="round"/>
+<g id="house5"><path class="s-ink" d="M240 460L460 340L680 460Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/><rect class="s-ink" x="280" y="455" width="360" height="245" fill="var(--stage)" stroke-width="7"/><rect class="s-ink" x="420" y="580" width="80" height="120" fill="var(--stage)" stroke-width="5"/><rect id="win5" x="310" y="500" width="70" height="60" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/></g>
+<g id="fld5"></g>
+<g id="p5"></g>
+<text id="l5a" class="m" x="280" y="750" font-size="22" style="fill:var(--gain)">SAPIENS MOVES IN</text>
+<text id="l5b" class="m" x="920" y="750" font-size="22">WHEAT STAYS OUT</text>
+<text id="quo5" class="d" x="120" y="830" font-size="44">“We did not domesticate wheat. <tspan style="fill:var(--gain)">It domesticated us.</tspan>”</text>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The luxury trap.</text>
+<text class="b" x="120" y="176" font-size="32">Each step seemed sensible at the time.</text>
+<g id="ring6"><circle class="s-line" cx="560" cy="500" r="230" fill="none" stroke-width="5" stroke-dasharray="12 10"/><g id="arw"></g></g>
+<circle id="orb" class="gain" r="10"/>
+<g id="nodes"></g>
+<g id="fam"></g>
+<g id="forage"><text class="m" x="940" y="430" font-size="20">BACK TO FORAGING</text><path d="M940 500H1190m-20-18 20 18-20 18" fill="none" stroke="var(--muted)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="1340" cy="460" r="62" fill="var(--muted)" fill-opacity=".5"/><rect x="1330" y="520" width="20" height="80" fill="var(--muted)"/></g>
+<path id="nox" d="M1045 472l50 56M1095 472l-50 56" stroke="var(--loss)" stroke-width="10" stroke-linecap="round"/>
+<text id="cap6" class="d" x="120" y="830" font-size="40">Small improvements quietly become necessities.</text>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Success isn’t happiness.</text>
+<text class="b" x="120" y="176" font-size="32">Far more humans, but harder lives.</text>
+<g id="hc"></g>
+<text id="hl" class="m" x="120" y="730" font-size="20" style="fill:var(--gain)">FAR MORE HUMANS · A TRIUMPH FOR THE SPECIES</text>
+<text id="ne" class="d" x="800" y="540" font-size="160" text-anchor="middle" style="fill:var(--loss)">≠</text>
+<g id="ind"><path class="s-line" d="M1080 590h240" stroke-width="5" stroke-linecap="round"/><g id="indf" transform="rotate(16 1190 573)"></g></g>
+<text id="il" class="m" x="900" y="680" font-size="20" style="fill:var(--loss)">ONE LIFE · HARDER WORK, POORER DIET</text>
+<text id="cap7" class="d" x="120" y="830" font-size="40">A species can thrive while its individuals suffer.</text>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What luxury in your life</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">now <tspan style="fill:var(--gain)">demands your time?</tspan></text></g>
+<text id="qm" class="m" x="143" y="620" font-size="26">NOTICE ONE THIS WEEK · WHO IS SERVING WHOM?</text>
+<g id="cg"><path class="s-line" d="M1260 820h220" stroke-width="5" stroke-linecap="round"/><g id="cw"></g><g id="cp"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="139" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:19</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Did Wheat Domesticate Us?&rdquo;, from <em>Sapiens</em> by Yuval Noah Harari. The spread of wheat, the skeletal evidence of slipped discs, arthritis and hernias, and the luxury trap are as reported in the book. Drawings of villages, families, crowds and scales are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=139, SC=[[0.0, 8.4], [8.4, 23.1], [23.1, 40.8], [40.8, 58.6], [58.6, 74.3], [74.3, 90.2], [90.2, 111.3], [111.3, 125.9], [125.9, 139.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "A Grass Goes Global", "Wheat's Demands", "Bodies Not Built for It", "New Dangers", "Who Tamed Whom", "The Luxury Trap", "Success Isn't Happiness", "Your Wheat"];
+const TM={"wheat_stalk": 0.0, "wild_grass": 8.72, "world_map": 13.76, "farmer": 23.44, "rocks": 27.28, "weeds": 32.16, "skeleton": 41.12, "grain_bowl": 53.0, "village": 58.88, "germs": 63.72, "dry_field": 67.8, "house": 74.56, "farmer_hut": 78.72, "family": 90.48, "crowd": 99.84, "headcount": 111.6, "scales": 117.28, "your_chores": 126.24};
+const fig=(g,x,y,r,c)=>{const w=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,fill:c},w);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,fill:c},w);return w};
+const wheat=(g,x,y,h,c,s=1)=>{const w=mk('g',{},g);mk('path',{d:`M${x} ${y}V${y-h}M${x} ${y-h*.45}q${-24*s} ${-10*s} ${-34*s} ${-40*s}`,fill:'none',stroke:c,'stroke-width':Math.max(4,4*s),'stroke-linecap':'round'},w);
+for(let i=0;i<5;i++)[-1,1].forEach(d=>{const cx=x+d*7*s,cy=y-h+16*s+i*18*s;mk('ellipse',{cx,cy,rx:6*s,ry:12*s,fill:c,transform:`rotate(${d*28} ${cx} ${cy})`},w)});
+mk('ellipse',{cx:x,cy:y-h,rx:6*s,ry:12*s,fill:c},w);return w};
+const W0=wheat($('t_wheat'),1360,800,460,'var(--gain)',2);
+fig($('t_man'),1180,691,26,'var(--ink)');
+const CE=[[420,370,170,110],[560,580,80,120],[790,320,90,60],[830,540,100,140],[1100,370,240,120],[1260,620,90,55]],MD=[];
+for(let x=160;x<=1440;x+=24)for(let y=240;y<=700;y+=24)if(CE.some(e=>((x-e[0])/e[2])**2+((y-e[1])/e[3])**2<1))MD.push([mk('circle',{cx:x,cy:y,r:7,fill:'var(--line)'},$('map')),Math.hypot(x-900,y-400)]);
+for(let j=0;j<9;j++)wheat($('stalks2'),420+j*120,600,200,'var(--gain)');
+const RK=[0,1,2,3].map(i=>mk('ellipse',{cx:480+i*240,cy:588,rx:20,ry:14,fill:'var(--muted)'},$('rocks')));
+const WD=[0,1,2,3].map(i=>{const x=600+i*240;return mk('path',{d:`M${x-16} 600l-6-36 14 16 8-40 8 40 14-16-6 36z`,class:'loss'},$('weeds'))});
+const PS=[0,1,2].map(()=>{const g=mk('g',{},$('pests'));mk('ellipse',{cx:0,cy:0,rx:11,ry:7,class:'loss'},g);mk('path',{d:'M-4 -4l-8 -12M4 -4l8 -12',stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round'},g);return g});
+const KC=['CLEAR STONES','PULL WEEDS','HAUL WATER','FIGHT PESTS'].map((s,i)=>{const x=120+i*345,g=mk('g',{},$('cards'));mk('rect',{x,y:680,width:315,height:96,rx:16,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);mk('text',{x:x+28,y:738,'font-size':22,class:'m'},g).textContent=s;mk('circle',{cx:x+272,cy:728,r:14,class:'gain'},g);return g});
+const VB=[];for(let i=0;i<10;i++)VB.push(mk('rect',{x:-32,y:-15,width:64,height:30,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('spine')));
+const HD=mk('circle',{r:30,class:'ink'},$('spine'));
+const MK=[2,5,8].map(()=>mk('circle',{r:12,class:'loss'},$('marks')));
+for(let i=0;i<13;i++){const cx=1030+(i%7)*36+(i>6?18:0),cy=i>6?494:512;mk('ellipse',{cx,cy,rx:9,ry:14,class:'gain',transform:`rotate(${(i%3-1)*25} ${cx} ${cy})`},$('grains'))}
+const HP=[[220,520],[400,480],[580,530],[760,480],[300,720],[640,720]],ORD=[0,1,4,2,3,5],GM=[];
+const HU=HP.map(([x,y])=>{const g=mk('g',{},$('vill'));const h=mk('path',{d:`M${x-60} ${y}v-70l60-50 60 50v70z`,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},g);mk('rect',{x:x-14,y:y-40,width:28,height:40,class:'ink'},g);return h});
+HP.forEach(([x,y],h)=>[[x-28,y-88],[x+36,y-28]].forEach(([gx,gy])=>{const g=mk('g',{},$('germs'));mk('circle',{cx:0,cy:0,r:9,class:'loss'},g);mk('circle',{cx:0,cy:0,r:17,fill:'none',stroke:'var(--loss)','stroke-width':4,'stroke-dasharray':'3 6'},g);GM.push([g,gx,gy,h])}));
+[[470,690],[800,690],[470,590]].forEach(([x,y])=>{const a=$('anim');mk('ellipse',{cx:x,cy:y,rx:30,ry:18,class:'ink'},a);mk('circle',{cx:x+32,cy:y-14,r:11,class:'ink'},a);mk('path',{d:`M${x-16} ${y+14}v18M${x+16} ${y+14}v18`,stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},a);mk('ellipse',{cx:x-56,cy:y+26,rx:14,ry:7,fill:'var(--muted)'},a)});
+[1010,1086,1162,1238,1314,1390].forEach(x=>{wheat($('okf'),x,690,200,'var(--gain)');wheat(mk('g',{transform:`rotate(24 ${x} 690)`},$('dryf')),x,690,140,'var(--muted)')});
+const LC=[];for(let i=0;i<7;i++)LC.push(mk('ellipse',{rx:9,ry:5,class:'loss'},$('loc')));
+for(let i=0;i<8;i++)wheat($('fld5'),920+i*72,700,230,'var(--gain)',1.2);
+const P5=fig($('p5'),0,600,22,'var(--ink)');
+const NP=[[560,270,'MORE WHEAT'],[790,500,'MORE FOOD'],[560,730,'MORE CHILDREN'],[330,500,'MORE FIELDS']].map(([x,y,s])=>{const g=mk('g',{},$('nodes'));mk('rect',{x:x-120,y:y-28,width:240,height:56,rx:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('text',{x,y:y+8,'font-size':22,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+[-45,45,135,225].forEach(d=>{const a=d*Math.PI/180;mk('path',{d:'M-10 -12L12 0L-10 12z',fill:'var(--muted)',transform:`translate(${(560+230*Math.cos(a)).toFixed(1)} ${(500+230*Math.sin(a)).toFixed(1)}) rotate(${d+90})`},$('arw'))});
+const FM=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++)FM.push(fig($('fam'),485+c*50,430+r*70,12,'var(--gain)'));
+const HC=[];for(let r=0;r<9;r++)for(let c=0;c<12;c++)HC.push(mk('circle',{cx:168+c*48,cy:280+r*48,r:12,fill:'var(--line)'},$('hc')));
+mk('rect',{x:1060,y:262,width:110,height:80,rx:30,class:'loss'},$('indf'));fig($('indf'),1190,380,46,'var(--ink)');
+wheat($('cw'),1420,820,230,'var(--gain)',1.4);
+const CP=fig($('cp'),1320,744,18,'var(--ink)');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(e,a,d=.5)=>rise(typeof e==='string'?$(e):e,p(u,a,a+d));
+const k0=p(u,TM.wheat_stalk,TM.wheat_stalk+2.2);W0.setAttribute('transform',`translate(1360 800) scale(${(.05+.95*k0).toFixed(3)}) translate(-1360 -800)`);
+R('t_man',TM.wheat_stalk+1.2);R('t_leash',TM.wheat_stalk+5);R('t_q',TM.wheat_stalk+5.4);
+
+R('origin',TM.wild_grass);$('ring').setAttribute('r',(20+10*Math.abs(Math.sin(t*2))).toFixed(1));R('olbl',TM.wild_grass+.6);
+const RR=1100*p(u,TM.world_map,TM.world_map+4);MD.forEach(([c,d])=>c.setAttribute('fill',d<RR||(d<14&&u>=TM.wild_grass)?'var(--gain)':'var(--line)'));
+R('wl',TM.world_map+.4);R('cap1',TM.world_map+4.6);
+
+R('f2',TM.farmer);R('stalks2',TM.farmer+.3);R('sun2',TM.farmer);
+const kr=p(u,TM.rocks+.8,TM.rocks+2.5);RK.forEach((e,i)=>{const k=cl(kr*1.6-i*.2);e.setAttribute('transform',`translate(0 ${(-50*k).toFixed(1)})`);e.setAttribute('opacity',1-k)});
+const kw=p(u,TM.weeds+.8,TM.weeds+3);WD.forEach((e,i)=>{const k=cl(kw*1.6-i*.2),x=600+i*240;e.setAttribute('transform',`translate(${x} 600) scale(${(1-k).toFixed(3)}) translate(${-x} -600)`)});
+[TM.rocks,TM.weeds,TM.weeds+5.7,TM.weeds+6.5].forEach((a,i)=>R(KC[i],a));R('bucket',TM.weeds+5.7);
+const kp=p(u,TM.weeds+6.5,TM.weeds+8.5);PS.forEach((g,i)=>{const x=700+i*240+30*Math.sin(t*3+i),y=350+12*Math.sin(t*5+i*2)-120*kp;g.setAttribute('transform',`translate(${x.toFixed(1)} ${y.toFixed(1)})`);g.setAttribute('opacity',(p(u,TM.weeds+5.7,TM.weeds+6.2)*(1-kp)).toFixed(2))});
+
+R('spine',TM.skeleton);
+const bd=p(u,TM.skeleton+1.5,TM.skeleton+4);let sx=300,sy=760,sa=0;const SPT=[];
+VB.forEach((e,i)=>{sa=bd*.12*i;e.setAttribute('transform',`translate(${sx.toFixed(1)} ${sy.toFixed(1)}) rotate(${(sa*57.3).toFixed(1)})`);SPT.push([sx,sy,sa]);sx+=40*Math.sin(sa);sy-=40*Math.cos(sa)});
+HD.setAttribute('cx',(sx+8*Math.sin(sa)).toFixed(1));HD.setAttribute('cy',(sy-8*Math.cos(sa)).toFixed(1));
+[2,5,8].forEach((v,i)=>{const q=SPT[v],a=TM.skeleton+6.5+i*.8;MK[i].setAttribute('cx',(q[0]+44*Math.cos(q[2])).toFixed(1));MK[i].setAttribute('cy',(q[1]+44*Math.sin(q[2])).toFixed(1));MK[i].setAttribute('r',(12+3*Math.abs(Math.sin(t*3+i))).toFixed(1));MK[i].setAttribute('opacity',p(u,a,a+.4));R('pl'+i,a)});
+R('bowl3',TM.grain_bowl);const kv=p(u,TM.grain_bowl+1.5,TM.grain_bowl+2.5);
+$('variety').setAttribute('opacity',(p(u,TM.grain_bowl,TM.grain_bowl+.5)*(1-kv)).toFixed(2));$('variety').setAttribute('transform',`translate(0 ${(-40*kv).toFixed(1)})`);
+R('grains',TM.grain_bowl+2);[2.4,3.4,4.4].forEach((d,i)=>R('gl'+i,TM.grain_bowl+d));
+
+R('vill',TM.village);R('anim',TM.village+.6);R('v_l',TM.village+1);R('fp',TM.village+1.5);R('f_l',TM.village+2);
+GM.forEach(([g,x,y,h],i)=>{const a=TM.germs+ORD.indexOf(h)*.5+(i%2)*.2,k=p(u,a,a+.4);g.setAttribute('opacity',k);g.setAttribute('transform',`translate(${x} ${y}) scale(${(k*(1+.12*Math.sin(t*4+i))).toFixed(3)})`)});
+HU.forEach((e,h)=>e.setAttribute('stroke',u>=TM.germs+ORD.indexOf(h)*.5?'var(--loss)':'var(--ink)'));R('g_l',TM.germs+.5);
+const kd=p(u,TM.dry_field,TM.dry_field+1.5);$('okf').setAttribute('opacity',1-kd);$('dryf').setAttribute('opacity',kd);$('cracks').setAttribute('opacity',kd);
+$('rain').setAttribute('opacity',1-kd);$('rain').setAttribute('transform',`translate(0 ${((t*60)%30).toFixed(1)})`);
+LC.forEach((e,i)=>{e.setAttribute('cx',(960+((i*83+t*110)%460)).toFixed(1));e.setAttribute('cy',(440+(i*37)%90+8*Math.sin(t*5+i)).toFixed(1))});
+$('loc').setAttribute('opacity',p(u,TM.dry_field+2,TM.dry_field+2.6));R('d_l',TM.dry_field+1);
+
+R('w5',TM.house);R('house5',TM.house+.3);R('fld5',TM.farmer_hut);R('p5',TM.farmer_hut+.3);
+const kk=p(u,TM.farmer_hut+.8,TM.farmer_hut+3.5),bob=kk>0&&kk<1?-6*Math.abs(Math.sin(t*8)):0;
+P5.setAttribute('transform',`translate(${(830-370*kk).toFixed(1)} ${bob.toFixed(1)})`);$('win5').setAttribute('fill',kk>=1?'var(--gain)':'var(--stage)');
+R('l5a',TM.farmer_hut+3.5);R('l5b',TM.farmer_hut+3.8);R('quo5',TM.farmer_hut+5.4,.6);
+
+R('ring6',TM.family);[TM.family+5.4,TM.family+6.2,TM.family+7,TM.crowd].forEach((a,i)=>R(NP[i],a));
+FM.forEach((f,i)=>{const a=i<2?TM.family+.4:i<6?TM.family+6+(i-2)*.4:TM.crowd+.5+(i-6)*.3;R(f,a,.4)});
+const oa=t*1.2;$('orb').setAttribute('cx',(560+230*Math.cos(oa)).toFixed(1));$('orb').setAttribute('cy',(500+230*Math.sin(oa)).toFixed(1));$('orb').setAttribute('opacity',p(u,TM.crowd+.5,TM.crowd+1));
+R('forage',TM.crowd+1.5);R('nox',TM.crowd+3,.3);R('cap6',TM.crowd+5.4,.6);
+
+R('hc',TM.headcount);const kh=Math.round(108*p(u,TM.headcount,TM.headcount+3.5));
+HC.forEach((c,i)=>c.setAttribute('fill',i===59&&u>=TM.scales?'var(--loss)':i<kh?'var(--gain)':'var(--line)'));
+R('hl',TM.headcount+2);R('ne',TM.scales);R('ind',TM.scales+.5);R('il',TM.scales+1.2);R('cap7',TM.scales+5.4,.6);
+
+R('qa',TM.your_chores);R('qb',TM.your_chores+.4);R('cg',TM.your_chores+1);R('qm',TM.your_chores+5.8);
+CP.setAttribute('transform',`rotate(${(8+6*Math.sin(t*1.5)).toFixed(1)} 1320 820)`);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:135.92;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

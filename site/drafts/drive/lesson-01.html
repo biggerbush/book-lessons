@@ -1,0 +1,380 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drive Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Drive: Experiments like Harry Harlow&#x27;s monkeys solving puzzles for no reward, and Edward Deci&#x27;s puzzle studies, revealed a third drive: we do some things simply because they are satisfying. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">DRIVE · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The puzzle rewards</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">can’t explain.</text>
+<text class="b" x="120" y="600" font-size="32">Why monkeys and students play with puzzles for no reward.</text>
+<rect class="s-ink" x="1300" y="330" width="170" height="140" rx="10" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M1350 290v80M1420 300v40a14 14 0 0 1-28 0" fill="none" stroke-width="7" stroke-linecap="round"/>
+<circle class="gain" cx="1350" cy="290" r="11"/>
+<g id="mk0"></g>
+<line id="arm0" x1="1205" y1="460" x2="1335" y2="305" stroke="var(--ink)" stroke-width="14" stroke-linecap="round"/>
+<g id="q0"><text class="d" x="1170" y="290" font-size="80" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="dish0"><path class="s-ink" d="M1320 520a65 26 0 0 0 130 0z" fill="none" stroke-width="6" stroke-linejoin="round"/><text class="m" x="1385" y="590" font-size="20" text-anchor="middle">NO TREAT</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two drives, or so we thought.</text>
+<text class="b" x="120" y="176" font-size="32">Scientists long believed behavior had two main drivers.</text>
+<g id="sci"><text class="m" x="260" y="610" font-size="20" text-anchor="middle">SCIENTISTS</text></g>
+<g id="card1">
+<rect class="s-line" x="420" y="240" width="480" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="450" y="300" font-size="22">DRIVE 1 · BIOLOGICAL</text>
+<path class="s-line" d="M530 410q-14-20 0-40M560 410q-14-20 0-40M590 410q-14-20 0-40" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="ink" d="M480 440h160a80 80 0 0 1-160 0z"/>
+<path class="s-ink" d="M780 340c40 60 60 90 60 120a60 60 0 0 1-120 0c0-30 20-60 60-120z" fill="var(--ice)" stroke-width="6" stroke-linejoin="round"/>
+<text class="d" x="450" y="660" font-size="44">Hunger &amp; thirst</text>
+</g>
+<g id="card2">
+<rect class="s-line" x="1000" y="240" width="480" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1030" y="300" font-size="22">DRIVE 2 · REWARDS</text>
+<g id="carrot"><path class="s-line" d="M1140 330v50" stroke-width="4"/><path class="s-ink" d="M1125 380l-10-28M1140 380v-30M1155 380l10-28" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1110 380h60l-30 120z"/></g>
+<path class="s-ink" d="M1300 520L1400 340M1360 410l40-10" fill="none" stroke-width="14" stroke-linecap="round"/>
+<text class="d" x="1030" y="660" font-size="44">Carrot &amp; stick</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Harlow’s monkeys, 1949.</text>
+<text class="b" x="120" y="176" font-size="32">Psychologist Harry Harlow put a puzzle in their cages.</text>
+<g id="mk2w"><g id="mk2"></g><g id="bars"></g><rect class="s-line" x="120" y="230" width="640" height="520" rx="12" fill="none" stroke-width="5"/></g>
+<g id="pz">
+<rect class="s-ink" x="900" y="320" width="520" height="260" rx="10" fill="var(--stage)" stroke-width="7"/>
+<g id="lid"><rect class="ink" x="890" y="290" width="540" height="34" rx="6"/></g>
+<g id="pin"><path class="s-ink" d="M1000 250v90" stroke-width="9" stroke-linecap="round"/><circle class="gain" cx="1000" cy="250" r="14"/></g>
+<g id="hook"><path class="s-ink" d="M1280 250v60a16 16 0 0 0 32 0" fill="none" stroke-width="8" stroke-linecap="round"/></g>
+</g>
+<text id="st0" class="m" x="990" y="640" font-size="20" text-anchor="middle">1 PULL PIN</text>
+<text id="st1" class="m" x="1180" y="640" font-size="20" text-anchor="middle">2 UNDO HOOK</text>
+<text id="st2" class="m" x="1380" y="640" font-size="20" text-anchor="middle">3 LIFT COVER</text>
+<g id="nofood"><text class="m" x="1160" y="720" font-size="24" text-anchor="middle" style="fill:var(--loss)">NO FOOD · NO PRAISE</text></g>
+<g id="happy"><text class="d" x="120" y="830" font-size="44">They dove in, and got good fast.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then Harlow added raisins.</text>
+<text class="b" x="120" y="176" font-size="32">A treat for every solved puzzle.</text>
+<g id="mk3"></g>
+<g id="rais"></g>
+<path class="ink" d="M350 590a90 36 0 0 0 180 0z"/>
+<text class="m" x="440" y="680" font-size="20" text-anchor="middle">RAISINS</text>
+<rect class="s-line" x="720" y="240" width="760" height="440" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="760" y="300" font-size="22">NO RAISINS</text>
+<g id="row1"></g>
+<g id="r2l"><text class="m" x="760" y="500" font-size="22" style="fill:var(--loss)">WITH RAISINS</text></g>
+<g id="row2"></g>
+<g id="treat"><text class="d" x="120" y="800" font-size="52">The treat got in the way.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A strange new idea.</text>
+<text class="b" x="120" y="176" font-size="32">Harlow called it intrinsic motivation.</text>
+<g id="rays"></g>
+<circle id="bulbC" class="s-ink" cx="330" cy="410" r="110" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="290" y="520" width="80" height="60" rx="8"/>
+<path d="M300 540h60M300 560h60" stroke="var(--stage)" stroke-width="4"/>
+<g id="bulbT"><text class="d5" x="330" y="690" font-size="34" text-anchor="middle">Intrinsic motivation</text></g>
+<g id="gift">
+<rect class="s-ink" x="640" y="420" width="300" height="220" rx="8" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="620" y="370" width="340" height="56" rx="8"/>
+<rect class="gain" x="770" y="370" width="40" height="270"/>
+<ellipse class="s-gain" cx="762" cy="346" rx="30" ry="16" fill="none" stroke-width="8" transform="rotate(-20 762 346)"/>
+<ellipse class="s-gain" cx="818" cy="346" rx="30" ry="16" fill="none" stroke-width="8" transform="rotate(20 818 346)"/>
+<text class="d5" x="790" y="700" font-size="34" text-anchor="middle">The task = the reward</text>
+</g>
+<g id="ignl">
+<path class="s-muted" d="M990 480H1150" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round" opacity=".6"/>
+<path class="s-loss" d="M1050 450l40 60M1090 450l-40 60" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="1300" y="600" font-size="20" text-anchor="middle">OTHER SCIENTISTS</text>
+<text class="m" x="1300" y="632" font-size="20" text-anchor="middle" style="fill:var(--loss)">LOOKED AWAY</text>
+</g>
+<g id="ign"></g>
+<g id="ignt"><text class="d" x="120" y="810" font-size="44">So unusual, it was largely ignored.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Deci’s Soma cubes.</text>
+<text class="b" x="120" y="176" font-size="32">Two decades later, with university students.</text>
+<path class="s-line" d="M120 720H1480" stroke-width="4"/>
+<rect class="s-ink" x="140" y="420" width="110" height="300" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="230" cy="575" r="7"/>
+<g id="deciw"><g id="deci"><text class="m" x="330" y="650" font-size="20" text-anchor="middle">EDWARD DECI</text></g></g>
+<g id="desk">
+<g id="stud"></g>
+<rect class="ink" x="480" y="600" width="420" height="16"/>
+<path class="s-ink" d="M500 616V720M880 616V720" stroke-width="8"/>
+<g id="cubes"></g>
+<text class="m" x="620" y="770" font-size="20" text-anchor="middle">STUDENT</text>
+<text class="m" x="780" y="770" font-size="20" text-anchor="middle" style="fill:var(--gain)">SOMA CUBES</text>
+</g>
+<g id="timer">
+<circle class="s-ink" cx="1320" cy="330" r="90" fill="var(--stage)" stroke-width="7"/>
+<path id="tsec" class="gain"/>
+<line id="thand" x1="1320" y1="330" x2="1320" y2="252" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="1320" cy="330" r="9"/>
+<text class="m" x="1320" y="470" font-size="20" text-anchor="middle">8 MINUTES FREE TIME</text>
+</g>
+<g id="mags">
+<text class="m" x="990" y="640" font-size="24" text-anchor="middle">OR</text>
+<rect class="loss" x="1150" y="626" width="160" height="14" rx="3"/><rect class="ink" x="1160" y="612" width="150" height="14" rx="3"/><rect class="loss" x="1145" y="598" width="160" height="14" rx="3"/>
+<rect class="ink" x="1080" y="640" width="340" height="12"/>
+<path class="s-ink" d="M1100 652V720M1400 652V720" stroke-width="8"/>
+<text class="m" x="1250" y="770" font-size="20" text-anchor="middle">MAGAZINES</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Pay changed the play.</text>
+<text class="b" x="120" y="176" font-size="32">Free-time play across three sessions (schematic).</text>
+<g id="band"><rect class="gain" x="560" y="260" width="200" height="440" fill-opacity=".15"/><text class="m" x="660" y="244" font-size="18" text-anchor="middle" style="fill:var(--gain)">PAID $1 PER DESIGN</text></g>
+<text class="m" x="230" y="244" font-size="20">FREE-TIME PLAY</text>
+<path class="s-ink" d="M220 260V700H1100" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="360" y="740" font-size="20" text-anchor="middle">SESSION 1</text>
+<text class="m" x="660" y="740" font-size="20" text-anchor="middle">SESSION 2</text>
+<text class="m" x="960" y="740" font-size="20" text-anchor="middle">SESSION 3</text>
+<g id="startl"><path class="s-muted" d="M360 520H1000" stroke-width="3" stroke-dasharray="8 8"/><text class="m" x="1010" y="526" font-size="18">START</text></g>
+<polyline id="lfree" fill="none" stroke="var(--gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline id="lpaid" fill="none" stroke="var(--loss)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="ink" cx="360" cy="520" r="11"/>
+<g id="coin"><circle class="gain" cx="660" cy="320" r="36"/><text class="d" x="660" y="331" font-size="30" text-anchor="middle" style="fill:var(--on-gain)">$1</text></g>
+<g id="leg1"><path class="s-loss" d="M1180 420h60" stroke-width="8" stroke-linecap="round"/><text class="m" x="1260" y="427" font-size="20">PAID GROUP</text></g>
+<g id="leg2"><path class="s-gain" d="M1180 480h60" stroke-width="8" stroke-linecap="round"/><text class="m" x="1260" y="487" font-size="20">UNPAID GROUP</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A third drive.</text>
+<g id="sub7"><text class="b" x="120" y="176" font-size="32">We do some things simply because they are satisfying.</text></g>
+<g id="toy">
+<rect class="gain" x="130" y="300" width="40" height="40" stroke="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="170" y="300" width="40" height="40" stroke="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="210" y="300" width="40" height="40" stroke="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="130" y="260" width="40" height="40" stroke="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="170" y="260" width="40" height="40" stroke="var(--stage)" stroke-width="3"/>
+<rect class="gain" x="130" y="220" width="40" height="40" stroke="var(--stage)" stroke-width="3"/>
+<text class="m" x="190" y="378" font-size="24" text-anchor="middle">PLAY</text>
+<text class="d" x="345" y="266" font-size="36" text-anchor="middle" style="fill:var(--gain)">$</text>
+<path class="s-muted" d="M290 290h110m-22-22 22 22-22 22" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-loss" d="M470 256v-20h60v20" fill="none" stroke-width="8" stroke-linejoin="round"/>
+<rect class="loss" x="430" y="256" width="140" height="84" rx="10"/>
+<text class="m" x="500" y="378" font-size="24" text-anchor="middle">JOB</text>
+<text class="d5" x="620" y="310" font-size="40">Money turned play into a job.</text>
+</g>
+<g id="gw0"><text class="d" x="360" y="740" font-size="44" text-anchor="middle">Hunger</text></g>
+<g id="gw1"><text class="d" x="800" y="740" font-size="44" text-anchor="middle">Rewards</text></g>
+<g id="gw2"><text class="d" x="1240" y="740" font-size="44" text-anchor="middle" style="fill:var(--gain)">Satisfaction</text></g>
+<g id="ignore"><text class="d" x="120" y="830" font-size="40">Ignore it, and we waste a strong motivator.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Think of one task</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">you’d happily do</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">for free.</text></g>
+<g id="nbl"><text class="m" x="143" y="700" font-size="26">NOTICE WHAT MAKES IT SATISFYING</text></g>
+<g id="nb">
+<rect class="s-ink" x="1180" y="280" width="260" height="320" rx="14" fill="var(--stage)" stroke-width="7"/>
+<g id="spir"></g>
+<path class="s-line" d="M1220 360h180M1220 420h180M1220 480h120" stroke-width="6" stroke-linecap="round"/>
+<path class="s-gain" d="M1220 540l16 18 34-38" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="pen"><path class="gain" d="M0 0l10-26 70-70 16 16-70 70z"/></g>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Puzzle Rewards Can&#x27;t Explain&rdquo;, from <em>Drive</em> by Daniel H. Pink. Harry Harlow&#x27;s 1949 monkey puzzle study and Edward Deci&#x27;s Soma cube experiments are as reported in the book. The monkeys, cubes, coins and engines are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 7.5], [7.5, 20.0], [20.0, 39.4], [39.4, 49.9], [49.9, 60.5], [60.5, 78.0], [78.0, 94.2], [94.2, 109.3], [109.3, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Two Known Drives", "Harlow's Monkeys", "Raisins Backfire", "A Strange New Idea", "Deci's Cubes", "Paying Changes Play", "The Third Drive", "Your Turn"];
+const TM={"monkey_puzzle": 0.0, "scientists": 7.76, "food_water": 11.6, "carrot_stick": 15.28, "harry_harlow": 20.32, "pin_hook_lid": 27.28, "happy_monkeys": 34.8, "raisins": 39.72, "error_marks": 43.12, "lightbulb": 50.16, "gift_box": 54.48, "ed_deci": 60.8, "soma_cubes": 65.44, "timer": 70.72, "magazines": 74.56, "dollar_coin": 78.32, "falling_line": 86.24, "rising_line": 90.59, "broken_toy": 94.48, "three_engines": 97.2, "notebook": 109.6};
+const ape=(g,x,y,r)=>{mk('path',{d:`M${x-1.4*r} ${y+3*r}v${-.8*r}a${1.4*r} ${1.4*r} 0 0 1 ${2.8*r} 0v${.8*r}z`,class:'ink'},g);[-1,1].forEach(s=>mk('circle',{cx:x+s*.95*r,cy:y-.1*r,r:.38*r,class:'ink'},g));mk('circle',{cx:x,cy:y,r:r,class:'ink'},g);mk('ellipse',{cx:x,cy:y+.18*r,rx:.68*r,ry:.58*r,fill:'var(--stage)'},g);[-1,1].forEach(s=>mk('circle',{cx:x+s*.25*r,cy:y+.02*r,r:.1*r,class:'ink'},g));return mk('path',{d:'',fill:'none',stroke:'var(--ink)','stroke-width':Math.max(3,r*.08),'stroke-linecap':'round'},g)};
+const mouth=(m,x,y,r,s)=>m.setAttribute('d',`M${x-.25*r} ${y+.4*r}q${.25*r} ${s*.2*r} ${.5*r} 0`);
+const pp=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:`M${x-1.5*r} ${y+4.2*r}v${-1.3*r}a${1.5*r} ${1.5*r} 0 0 1 ${3*r} 0v${1.3*r}z`,class:cls},g)};
+const M0=ape($('mk0'),1170,380,50);mouth(M0,1170,380,50,1);
+const M2=ape($('mk2'),440,440,64), M3=ape($('mk3'),220,420,50);
+for(let x=200;x<=680;x+=80)mk('path',{d:`M${x} 230V750`,class:'s-line','stroke-width':4},$('bars'));
+[200,320].forEach(x=>pp($('sci'),x,420,30,'ink'));
+const RA=[];for(let i=0;i<6;i++)RA.push(mk('ellipse',{cx:405+(i%3)*35,cy:260,rx:13,ry:9,class:'loss'},$('rais')));
+const mark=(g,x,y,ok)=>mk('path',{d:ok?`M${x-20} ${y}l13 15 28-32`:`M${x-17} ${y-17}l34 34m0-34l-34 34`,fill:'none',stroke:ok?'var(--gain)':'var(--loss)','stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+const R1=[],R2=[];for(let i=0;i<6;i++){R1.push(mark($('row1'),820+i*110,380,1));R2.push(mark($('row2'),820+i*110,580,[0,1,0,0,1,0][i]))}
+for(let i=0;i<7;i++){const a=Math.PI+i*Math.PI/6;mk('path',{d:`M${(330+135*Math.cos(a)).toFixed(1)} ${(410+135*Math.sin(a)).toFixed(1)}L${(330+170*Math.cos(a)).toFixed(1)} ${(410+170*Math.sin(a)).toFixed(1)}`,class:'s-gain','stroke-width':8,'stroke-linecap':'round'},$('rays'))}
+// other scientists, seen from behind: plain backs with hair cap, no faces
+[1200,1300,1400].forEach(x=>{pp($('ign'),x,430,26,'loss');mk('path',{d:`M${x-26} 428a26 26 0 0 1 52 0z`,class:'ink','fill-opacity':.35},$('ign'))});
+pp($('deci'),330,470,28,'ink');pp($('stud'),620,480,30,'ink');
+const piece=(x,y,c)=>{const g=mk('g',{},$('cubes'));c.forEach(q=>mk('rect',{x:x+q[0]*24,y:y+q[1]*24,width:24,height:24,class:'gain',stroke:'var(--stage)','stroke-width':2},g));return g};
+const CB=[piece(700,576,[[0,0],[1,0],[0,-1]]),piece(770,576,[[0,0],[1,0],[2,0],[1,-1]]),piece(852,576,[[0,0],[0,-1],[1,-1]])];
+const sec=k=>{if(k<=0)return '';const a=-Math.PI/2+2*Math.PI*Math.min(k,.999);return `M1320 330V252A78 78 0 ${k>.5?1:0} 1 ${(1320+78*Math.cos(a)).toFixed(1)} ${(330+78*Math.sin(a)).toFixed(1)}Z`};
+const PA=[[360,520],[660,380],[960,600]], FR=[[360,520],[660,490],[960,460]];
+const pl=(P,k)=>{let s=P[0].join(',');for(let i=0;i<2;i++){const f=cl(k-i);if(f>0)s+=' '+(P[i][0]+(P[i+1][0]-P[i][0])*f).toFixed(1)+','+(P[i][1]+(P[i+1][1]-P[i][1])*f).toFixed(1)}return s};
+const gear=(g,x,y,r,f)=>{const q=mk('g',{},g);for(let i=0;i<8;i++)mk('rect',{x:x-16,y:y-r-36,width:32,height:44,rx:6,fill:f,transform:`rotate(${i*45} ${x} ${y})`},q);mk('circle',{cx:x,cy:y,r:r,fill:f},q);mk('circle',{cx:x,cy:y,r:r*.35,fill:'var(--stage)'},q);return q};
+const GX=[360,800,1240], GR=GX.map((x,i)=>gear($('gw'+i),x,540,100,i<2?'var(--muted)':'var(--gain)'));
+for(let y=310;y<=570;y+=40)mk('circle',{cx:1180,cy:y,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('spir'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const am=Math.sin(t*3); $('arm0').setAttribute('x2',(1335+8*am).toFixed(1)); $('arm0').setAttribute('y2',(305+6*am).toFixed(1));
+  rise($('q0'),p(u,TM.monkey_puzzle,TM.monkey_puzzle+.5)); rise($('dish0'),p(u,TM.monkey_puzzle+1.5,TM.monkey_puzzle+2));
+
+  rise($('sci'),p(u,TM.scientists,TM.scientists+.5)); rise($('card1'),p(u,TM.food_water,TM.food_water+.5)); rise($('card2'),p(u,TM.carrot_stick,TM.carrot_stick+.5));
+  $('carrot').setAttribute('transform','rotate('+(8*Math.sin(t*2)).toFixed(1)+' 1140 330)');
+
+  rise($('mk2w'),p(u,TM.harry_harlow,TM.harry_harlow+.5)); rise($('pz'),p(u,TM.harry_harlow+.6,TM.harry_harlow+1.1));
+  const A=TM.pin_hook_lid, ks=[0,2,4].map(d=>p(u,A+d,A+d+1.2));
+  $('pin').setAttribute('transform','translate(0 '+(-40*ks[0]).toFixed(1)+')');
+  $('hook').setAttribute('transform','rotate('+(-70*ks[1]).toFixed(1)+' 1280 250)');
+  $('lid').setAttribute('transform','rotate('+(-12*ks[2]).toFixed(1)+' 890 307)');
+  ks.forEach((k,i)=>{rise($('st'+i),p(u,A+i*2,A+i*2+.4)); $('st'+i).style.fill=k>.5?'var(--gain)':'var(--muted)'});
+  rise($('nofood'),p(u,TM.happy_monkeys-2,TM.happy_monkeys-1.5)); rise($('happy'),p(u,TM.happy_monkeys,TM.happy_monkeys+.6));
+  const hp=u>=TM.happy_monkeys; $('mk2').setAttribute('transform','translate(0 '+(hp?-14*Math.abs(Math.sin(t*5)):0).toFixed(1)+')'); mouth(M2,440,440,64,hp?1:0);
+
+  const s3=SC[3][0]/K; R1.forEach((m,i)=>m.setAttribute('opacity',p(u,s3+.4+i*.15,s3+.7+i*.15)));
+  RA.forEach((r,i)=>{const a=TM.raisins+.3+i*.2,k=p(u,a,a+.6),fy=i>2?566:580; r.setAttribute('cy',(260+(fy-260)*k).toFixed(1)); r.setAttribute('opacity',k>0?1:0)});
+  rise($('r2l'),p(u,TM.raisins,TM.raisins+.5)); R2.forEach((m,i)=>m.setAttribute('opacity',p(u,TM.error_marks+i*.35,TM.error_marks+i*.35+.3)));
+  mouth(M3,220,420,50,u>=TM.error_marks?-1:1); rise($('treat'),p(u,TM.error_marks+5.4,TM.error_marks+6));
+
+  const on=u>=TM.lightbulb; $('bulbC').style.fill=on?'var(--gain)':'var(--stage)';
+  $('rays').setAttribute('opacity',(p(u,TM.lightbulb,TM.lightbulb+.5)*(.7+.3*Math.sin(t*4))).toFixed(2));
+  rise($('bulbT'),p(u,TM.lightbulb,TM.lightbulb+.5)); rise($('gift'),p(u,TM.gift_box,TM.gift_box+.5));
+  rise($('ign'),p(u,TM.gift_box+3,TM.gift_box+3.5)); rise($('ignl'),p(u,TM.gift_box+3.3,TM.gift_box+3.8)); rise($('ignt'),p(u,TM.gift_box+3.5,TM.gift_box+4.1));
+
+  rise($('deciw'),p(u,TM.ed_deci,TM.ed_deci+.5)); rise($('desk'),p(u,TM.soma_cubes,TM.soma_cubes+.5)); rise($('timer'),p(u,TM.timer,TM.timer+.5));
+  const ex=p(u,TM.timer+.8,TM.timer+2.5); $('deci').setAttribute('transform','translate('+(-135*ex).toFixed(1)+' 0)'); $('deci').setAttribute('opacity',(1-ex).toFixed(2));
+  const tk=cl(lin(u,TM.timer+1,TM.timer+9)), ta=-Math.PI/2+2*Math.PI*tk; $('tsec').setAttribute('d',sec(tk));
+  $('thand').setAttribute('x2',(1320+78*Math.cos(ta)).toFixed(1)); $('thand').setAttribute('y2',(330+78*Math.sin(ta)).toFixed(1));
+  rise($('mags'),p(u,TM.magazines,TM.magazines+.5));
+  CB[2].setAttribute('transform','translate(0 '+(u>=TM.magazines?-8*Math.abs(Math.sin(t*4)):0).toFixed(1)+')');
+
+  const ck=p(u,TM.dollar_coin,TM.dollar_coin+.8); $('coin').setAttribute('transform','translate(0 '+(-100*(1-ck)).toFixed(1)+')'); $('coin').setAttribute('opacity',ck.toFixed(2));
+  rise($('band'),p(u,TM.dollar_coin,TM.dollar_coin+.5));
+  $('lpaid').setAttribute('points',pl(PA,p(u,TM.dollar_coin+5,TM.dollar_coin+7)+p(u,TM.falling_line,TM.falling_line+2)));
+  $('lfree').setAttribute('points',pl(FR,2*p(u,TM.rising_line,TM.rising_line+2.5)));
+  rise($('leg1'),p(u,TM.dollar_coin+5,TM.dollar_coin+5.5)); $('startl').setAttribute('opacity',p(u,TM.falling_line,TM.falling_line+.6)); rise($('leg2'),p(u,TM.rising_line,TM.rising_line+.5));
+
+  rise($('toy'),p(u,TM.broken_toy,TM.broken_toy+.5));
+  [0,.5,1.2].forEach((d,i)=>rise($('gw'+i),p(u,TM.three_engines+d,TM.three_engines+d+.5)));
+  GR.forEach((g,i)=>g.setAttribute('transform','rotate('+((i%2?-1:1)*t*(i===2?40:12)).toFixed(1)+' '+GX[i]+' 540)'));
+  rise($('sub7'),p(u,TM.three_engines+5,TM.three_engines+5.6)); rise($('ignore'),p(u,TM.three_engines+8.7,TM.three_engines+9.3));
+
+  rise($('qa'),p(u,TM.notebook,TM.notebook+.5)); rise($('qb'),p(u,TM.notebook+.4,TM.notebook+.9)); rise($('qc'),p(u,TM.notebook+.8,TM.notebook+1.3));
+  rise($('nb'),p(u,TM.notebook+.3,TM.notebook+.9)); rise($('nbl'),p(u,TM.notebook+4.1,TM.notebook+4.7));
+  $('pen').setAttribute('transform','translate('+(1230+90*((t*.5)%1)).toFixed(1)+' 476)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.6;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

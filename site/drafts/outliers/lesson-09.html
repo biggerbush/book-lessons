@@ -1,0 +1,331 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outliers Lesson 9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 9 of Outliers: A cultural legacy of hard, patient rice farming and clear number words helps explain why many Asian students persist and excel at math. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIERS · LESSON 9</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Rice paddies and</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">math skills.</text>
+<text class="b" x="120" y="600" font-size="32">How farming history and number words can shape math persistence.</text>
+<g id="tcard"><rect class="s-ink" x="1220" y="190" width="240" height="110" rx="16" fill="var(--stage)" stroke-width="6"/><text class="d" x="1340" y="262" font-size="48" text-anchor="middle">+ − × ÷</text></g>
+<rect x="1190" y="520" width="290" height="44" fill="var(--ice)"/>
+<path class="s-ink" d="M1190 520h290" stroke-width="6" stroke-linecap="round"/>
+<g id="stalks"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Short words, more memory.</text>
+<text class="b" x="120" y="176" font-size="32">Try to remember: 4, 8, 5, 3, 9, 7, 6.</text>
+<g id="digits"></g>
+<g id="rowE"><text class="m" x="120" y="450" font-size="24">ENGLISH</text><rect class="loss" x="120" y="472" width="230" height="14" rx="7"/><text class="m" x="120" y="518" font-size="22">LONGER WORDS</text><g id="slE"></g><text id="nE" class="d" x="1360" y="505" font-size="72">0</text></g>
+<g id="rowC"><text class="m" x="120" y="640" font-size="24">CHINESE</text><rect class="gain" x="120" y="662" width="90" height="14" rx="7"/><text class="m" x="120" y="708" font-size="22">SHORT, QUICK WORDS</text><g id="slC"></g><text id="nC" class="d" x="1360" y="695" font-size="72" style="fill:var(--gain)">0</text></g>
+<g id="cap1"><text class="d" x="120" y="810" font-size="42">Shorter words, more digits held in mind.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Logical number words.</text>
+<text class="b" x="120" y="176" font-size="32">Do the words follow the tens?</text>
+<g id="en"><rect class="s-line" x="120" y="220" width="620" height="330" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="268" font-size="22">ENGLISH</text>
+<text class="d5" x="150" y="360" font-size="60">eleven</text><text class="d5" x="150" y="440" font-size="60">twelve</text>
+<text class="m" x="150" y="510" font-size="20">SOUND NOTHING LIKE TEN AND ONE</text>
+<text class="d" x="620" y="450" font-size="160" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="cjk"><rect class="s-line" x="800" y="220" width="680" height="330" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="830" y="268" font-size="22">CHINESE · JAPANESE · KOREAN</text>
+<text class="d" x="830" y="340" font-size="52">ten-one</text><text class="d" x="1450" y="340" font-size="52" text-anchor="end" style="fill:var(--gain)">= 11</text>
+<g id="bl1"></g>
+<text class="d" x="830" y="450" font-size="48">two-tens-four</text><text class="d" x="1450" y="450" font-size="52" text-anchor="end" style="fill:var(--gain)">= 24</text>
+<g id="bl2"></g></g>
+<g id="cnt"><text class="m" x="120" y="625" font-size="20">CHINESE 4-YEAR-OLDS COUNT TO</text><rect id="barC" class="gain" x="120" y="640" width="0" height="40" rx="8"/><text id="nCC" class="d" x="140" y="676" font-size="40" style="fill:var(--gain)">0</text>
+<text class="m" x="120" y="725" font-size="20">AMERICAN 4-YEAR-OLDS COUNT TO</text><rect id="barA" class="loss" x="120" y="740" width="0" height="40" rx="8"/><text id="nAA" class="d" x="140" y="776" font-size="40">0</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The rice paddy.</text>
+<text class="b" x="120" y="176" font-size="32">Small, wet and worked entirely by hand.</text>
+<g id="field"><rect class="s-ink" x="120" y="240" width="620" height="340" rx="6" fill="var(--ice)" stroke-width="12"/><g id="seeds"></g>
+<text class="m" x="120" y="625" font-size="20">NO BIGGER THAN A HOTEL ROOM</text></g>
+<g id="farmer"><g id="fbody"><path class="gain" d="M470 372L515 340L560 372Z"/><circle class="ink" cx="515" cy="388" r="18"/>
+<path class="s-ink" d="M532 398Q585 385 625 410M625 410L610 520M625 410L655 520M550 400L548 480" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/></g>
+<path class="s-ink" d="M580 528h110" stroke-width="4" stroke-linecap="round"/></g>
+<g id="tasks"></g>
+<g id="calg"><text class="m" x="820" y="585" font-size="20">THE WHOLE YEAR</text><g id="cal"></g></g>
+<g id="hrs"><text id="hv" class="d" x="120" y="740" font-size="80" style="fill:var(--gain)">Up to 0</text><text class="m" x="120" y="790" font-size="22">HOURS A YEAR, GLADWELL ESTIMATES</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Effort pays off.</text>
+<text class="b" x="120" y="176" font-size="32">Extra work showed up directly in a bigger harvest.</text>
+<g id="pa"><text class="m" x="140" y="266" font-size="20">EFFORT</text><rect x="140" y="280" width="400" height="18" rx="9" fill="none" stroke="var(--ink)" stroke-width="3"/><rect id="eff" class="gain" x="140" y="280" width="0" height="18" rx="9"/>
+<ellipse id="mound" class="gain" cx="340" cy="520" rx="140" ry="10"/><path class="ink" d="M190 520L490 520L450 640L230 640Z"/>
+<text class="m" x="340" y="690" font-size="20" text-anchor="middle">MORE EFFORT → BIGGER HARVEST</text></g>
+<g id="pb"><rect class="ink" x="605" y="240" width="370" height="22" rx="11"/><rect class="s-ink" x="620" y="262" width="340" height="378" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="790" y="310" font-size="20" text-anchor="middle">OLD PROVERB</text>
+<circle id="sun" class="gain" cx="790" cy="480" r="40"/><rect x="623" y="452" width="334" height="60" fill="var(--stage)"/>
+<path class="s-ink" d="M650 450H930" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="790" y="540" font-size="22" text-anchor="middle">RISE BEFORE DAWN</text><text class="m" x="790" y="572" font-size="22" text-anchor="middle">EVERY DAY</text><text class="m" x="790" y="616" font-size="22" text-anchor="middle" style="fill:var(--gain)">= PROSPERITY</text>
+<rect class="ink" x="605" y="640" width="370" height="22" rx="11"/></g>
+<g id="pc"><text class="m" x="1060" y="286" font-size="20">HOURS OF WORK</text><path class="s-muted" d="M1060 300V600H1460" fill="none" stroke-width="3"/>
+<path id="riceL" pathLength="1" d="M1060 360H1460" fill="none" stroke="var(--gain)" stroke-width="6" stroke-linecap="round"/>
+<path id="euL" pathLength="1" d="M1060 580H1130L1160 420H1220L1250 560H1290L1320 400H1370L1400 580H1460" fill="none" stroke="var(--loss)" stroke-width="6" stroke-linejoin="round"/>
+<g id="zzz"><text class="d" x="1420" y="516" font-size="28" style="fill:var(--loss)">zZz</text></g>
+<text class="m" x="1060" y="640" font-size="20" style="fill:var(--gain)">— RICE FARMER</text><text class="m" x="1060" y="672" font-size="20" style="fill:var(--loss)">— EUROPEAN PEASANT</text><text class="m" x="1060" y="704" font-size="20">LONG WINTER REST</text></g>
+<g id="pcap"><text class="d" x="120" y="800" font-size="44">Rice rewarded steady, year-round work.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Math rewards persistence.</text>
+<text class="b" x="120" y="176" font-size="32">Stay with a hard problem instead of giving up.</text>
+<g id="prob"><rect class="s-line" x="120" y="240" width="400" height="240" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="288" font-size="22">A HARD PROBLEM</text><text class="d" x="150" y="420" font-size="90">x = ?</text></g>
+<g id="trail"><polyline points="600,740 820,680 690,600 960,540 840,460 1160,400 1330,326" fill="none" stroke="var(--ink)" stroke-width="6" stroke-dasharray="2 14" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-ink" d="M1370 326V230" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1370 232L1440 252L1370 272Z"/>
+<text class="m" x="1475" y="305" font-size="22" text-anchor="end" style="fill:var(--gain)">SOLVED</text>
+<path class="s-loss" d="M600 740L470 820" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/><text class="m" x="450" y="850" font-size="22" text-anchor="end" style="fill:var(--loss)">GIVE UP</text></g>
+<g id="kidg"></g>
+<g id="pat"><text class="d" x="120" y="590" font-size="44">Patience.</text><text class="d" x="120" y="650" font-size="44" style="fill:var(--gain)">Keep trying.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The questionnaire clue.</text>
+<text class="b" x="120" y="176" font-size="32">Erling Boe compared two rankings.</text>
+<g id="form"><rect class="s-ink" x="160" y="250" width="320" height="490" fill="var(--stage)" stroke-width="4"/><rect class="s-ink" x="140" y="230" width="320" height="490" fill="var(--stage)" stroke-width="4"/><rect class="ink" x="170" y="260" width="180" height="18"/><g id="rows6"></g>
+<text class="m" x="140" y="770" font-size="20">LONG, TEDIOUS QUESTIONNAIRE</text></g>
+<g id="lists"><text class="m" x="750" y="255" font-size="20" text-anchor="middle">QUESTIONS ANSWERED</text><text class="m" x="1290" y="255" font-size="20" text-anchor="middle">MATH TEST SCORE</text><g id="links6"></g></g>
+<g id="rice6"><text class="m" x="620" y="790" font-size="22" style="fill:var(--gain)">MANY LEADERS: RICE-GROWING CULTURES IN ASIA</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Culture, not genes.</text>
+<text class="b" x="120" y="176" font-size="32">Attitudes toward hard work are passed down.</text>
+<g id="dna"><path id="dnax" class="s-loss" d="M150 330L310 490M310 330L150 490" stroke-width="12" stroke-linecap="round"/><text class="m" x="230" y="610" font-size="20" text-anchor="middle">BORN BETTER?</text></g>
+<g id="tree"></g>
+<g id="tlab"><text class="m" x="710" y="730" font-size="20" text-anchor="middle" style="fill:var(--gain)">HARD WORK, PASSED DOWN</text></g>
+<g id="gauge"><path d="M1100 560A170 170 0 0 1 1440 560" fill="none" stroke="var(--line)" stroke-width="26"/>
+<path id="garc" pathLength="1" d="M1100 560A170 170 0 0 1 1440 560" fill="none" stroke="var(--gain)" stroke-width="26"/>
+<line id="needle" class="s-ink" x1="1270" y1="560" x2="1130" y2="560" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1270" cy="560" r="16"/>
+<text class="m" x="1270" y="610" font-size="22" text-anchor="middle">PERSISTENCE</text><text class="m" x="1270" y="645" font-size="20" text-anchor="middle" style="fill:var(--gain)">ANYONE CAN PRACTISE</text></g>
+<g id="cap7"><text class="d" x="120" y="800" font-size="44">Persistence, unlike talent, can be practised.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Feels impossible?</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Give it ten more</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">minutes.</text></g>
+<text class="m" x="143" y="700" font-size="26">SEE WHAT PERSISTENCE CAN DO</text>
+<g id="watch"><rect class="ink" x="1235" y="294" width="50" height="26" rx="6"/><circle class="s-ink" cx="1260" cy="470" r="150" fill="var(--stage)" stroke-width="10"/>
+<path id="sec" class="gain" fill-opacity=".35"/><line id="hand" class="s-ink" x1="1260" y1="470" x2="1260" y2="350" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1260" cy="470" r="12"/>
+<text class="m" x="1260" y="570" font-size="24" text-anchor="middle">+10 MIN</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="145" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:25</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Rice Paddies and Math Skills&rdquo;, from <em>Outliers</em> by Malcolm Gladwell. Examples as reported in the book: research on number words and digit memory, Chinese rice paddy farming, and Erling Boe&#x27;s analysis of international math test questionnaires. The rice paddy, farmer, calendar and comparison drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-09.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=145, SC=[[0.0, 8.7], [8.7, 28.0], [28.0, 48.8], [48.8, 70.1], [70.1, 88.5], [88.5, 100.3], [100.3, 119.9], [119.9, 135.5], [135.5, 145.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["A Puzzle in Numbers", "Short Number Words", "Logical Number Words", "The Rice Paddy", "Effort Pays Off", "Persistence Is the Key", "The Survey Clue", "Culture, Not Genes", "Your Challenge"];
+const TM={"title_rice": 0.0, "digit_string": 8.96, "english_speak": 17.52, "chinese_speak": 22.16, "eleven_card": 28.32, "ten_one": 34.48, "count_forty": 42.64, "paddy_field": 49.12, "farmer_bent": 54.8, "calendar_full": 63.28, "harvest_basket": 70.4, "proverb_scroll": 75.12, "winter_sleep": 82.08, "math_problem": 88.8, "patient_kid": 95.36, "survey_form": 100.64, "two_lists": 107.2, "top_nations": 115.76, "heritage_tree": 120.16, "grit_meter": 130.64, "timer_ten": 135.84};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const sw=(e,k)=>{e.setAttribute('stroke-dasharray','1 1');e.setAttribute('stroke-dashoffset',(1-k).toFixed(3))};
+const ST=[0,1,2,3,4].map(i=>{const x=1230+i*55,s=mk('line',{x1:x,y1:520,x2:x,y2:510,stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('stalks')),h=mk('g',{},$('stalks'));[[-7,0],[7,8],[-7,16],[7,24],[0,-10]].forEach(q=>mk('ellipse',{cx:q[0],cy:q[1],rx:6,ry:10,class:'gain'},h));return [x,s,h]});
+const DG=[4,8,5,3,9,7,6].map((n,i)=>{const g=mk('g',{},$('digits'));mk('rect',{x:120+i*130,y:220,width:110,height:120,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:175+i*130,y:305,'font-size':72,'text-anchor':'middle',class:'d'},g);tx.textContent=n;return g});
+const slots=(id,cy)=>Array.from({length:9},(_,i)=>mk('circle',{cx:470+i*100,cy:cy,r:32,fill:'none',stroke:'var(--line)','stroke-width':5},$(id)));
+const SE=slots('slE',480),SLC=slots('slC',670);
+const fillS=(arr,n,a,c,u)=>{arr.forEach((e,i)=>{const on=i<n&&u>=a+i*.25;e.setAttribute('fill',on?c:'none');e.setAttribute('stroke',on?c:'var(--line)');e.setAttribute('stroke-dasharray',i<n?'none':'8 8')});return Math.min(n,Math.max(0,Math.floor((u-a)/.25)+1))};
+const rod=(g,x,y)=>{mk('rect',{x:x,y:y,width:150,height:26,class:'gain'},g);for(let k=1;k<10;k++)mk('path',{d:'M'+(x+k*15)+' '+y+'v26',stroke:'var(--stage)','stroke-width':2},g)};
+const unit=(g,x,y)=>mk('rect',{x:x,y:y,width:26,height:26,class:'gain'},g);
+rod($('bl1'),830,362);unit($('bl1'),1000,362);rod($('bl2'),830,472);rod($('bl2'),995,472);for(let k=0;k<4;k++)unit($('bl2'),1160+k*34,472);
+const SD=[];[170,240,310,380].forEach(x=>[310,380,450,520].forEach(y=>SD.push(mk('path',{d:'M'+x+' '+y+'v-26m0 12l-12-12m12 12l12-12',stroke:'var(--gain)','stroke-width':5,fill:'none','stroke-linecap':'round'},$('seeds')))));
+const TK=['BUILD DIKES','CONTROL WATER','PLANT BY HAND','WEED BY HAND'].map((s,i)=>{const g=mk('g',{},$('tasks'));mk('rect',{x:820,y:240+i*76,width:420,height:58,rx:29,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:852,y:277+i*76,'font-size':22,class:'m'},g);tx.textContent=s;return g});
+const CAL='JFMAMJJASOND'.split('').map((s,i)=>{const x=820+i*55;mk('rect',{x:x,y:600,width:46,height:160,rx:6,fill:'none',stroke:'var(--line)','stroke-width':3},$('cal'));const tx=mk('text',{x:x+23,y:796,'font-size':22,'text-anchor':'middle',class:'m'},$('cal'));tx.textContent=s;return mk('rect',{x:x,y:760,width:46,height:0,class:'gain'},$('cal'))});
+const kid=mk('g',{},$('kidg'));fig(kid,0,-72,16,'gain');
+const TP=[[600,740],[820,680],[690,600],[960,540],[840,460],[1160,400],[1330,326]];
+const along=k=>{const n=TP.length-1,f=cl(k)*n,i=Math.min(n-1,Math.floor(f)),r=f-i;return [TP[i][0]+(TP[i+1][0]-TP[i][0])*r,TP[i][1]+(TP[i+1][1]-TP[i][1])*r]};
+const TI=[];for(let i=0;i<8;i++){const y=320+i*48;mk('rect',{x:170,y:y-18,width:24,height:24,fill:'none',stroke:'var(--ink)','stroke-width':3},$('rows6'));mk('path',{d:'M210 '+(y-6)+'H430',stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},$('rows6'));TI.push(mk('path',{d:'M173 '+(y-8)+'l7 7l13-15',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('rows6')))}
+const SIG=[0,1,3,2,4,5],LR=[[],[]];
+for(let i=0;i<6;i++){const y=280+i*78;[620,1160].forEach((x,j)=>{const r=mk('rect',{x:x,y:y,width:260,height:52,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('lists'));const tx=mk('text',{x:x+20,y:y+34,'font-size':22,class:'m'},$('lists'));tx.textContent='#'+(i+1);mk('rect',{x:x+80,y:y+19,width:150-i*20,height:14,rx:7,fill:'var(--muted)'},$('lists'));LR[j].push([r,tx])})}
+const LK6=SIG.map((s,i)=>mk('path',{d:'M880 '+(306+i*78)+'L1160 '+(306+s*78),stroke:'var(--ink)','stroke-width':4,pathLength:1,fill:'none'},$('links6')));
+let d1='',d2='';for(let y=260;y<=560;y+=10){const s=Math.sin((y-260)/38),a=(230+50*s).toFixed(1),b=(230-50*s).toFixed(1);d1+=(y==260?'M':'L')+a+' '+y;d2+=(y==260?'M':'L')+b+' '+y;if(y%30==20)mk('path',{d:'M'+a+' '+y+'H'+b,stroke:'var(--line)','stroke-width':4},$('dna'))}
+mk('path',{d:d1,fill:'none',stroke:'var(--ink)','stroke-width':6},$('dna'));mk('path',{d:d2,fill:'none',stroke:'var(--muted)','stroke-width':6},$('dna'));$('dna').appendChild($('dnax'));
+const GEN=[[[710,270]],[[560,440],[860,440]],[[480,610],[640,610],[780,610],[940,610]]];
+[[0,0,1,0],[0,0,1,1],[1,0,2,0],[1,0,2,1],[1,1,2,2],[1,1,2,3]].forEach(q=>{const a=GEN[q[0]][q[1]],b=GEN[q[2]][q[3]];mk('path',{d:'M'+a[0]+' '+(a[1]+70)+'L'+b[0]+' '+(b[1]-24),stroke:'var(--line)','stroke-width':4},$('tree'))});
+const PP=GEN.map(g=>g.map(q=>fig($('tree'),q[0],q[1],16,'ink')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+ST.forEach(([x,s,h],i)=>{const a=TM.title_rice+i*.2,k=p(u,a,a+1.6),y=510-150*k,w=6*Math.sin(t*1.5+i)*k;s.setAttribute('x2',(x+w).toFixed(1));s.setAttribute('y2',y.toFixed(1));h.setAttribute('transform','translate('+(x+w).toFixed(1)+' '+y.toFixed(1)+')');h.setAttribute('opacity',k)});
+rise($('tcard'),p(u,TM.title_rice+1.5,TM.title_rice+2));
+
+DG.forEach((g,i)=>rise(g,p(u,TM.digit_string+.8+i*.45,TM.digit_string+1.2+i*.45)));
+rise($('rowE'),p(u,TM.english_speak,TM.english_speak+.5));rise($('rowC'),p(u,TM.chinese_speak,TM.chinese_speak+.5));
+$('nE').textContent=fillS(SE,7,TM.english_speak+.6,'var(--ink)',u);
+$('nC').textContent=fillS(SLC,9,TM.chinese_speak+.6,'var(--gain)',u);
+rise($('cap1'),p(u,TM.chinese_speak+3.5,TM.chinese_speak+4));
+
+rise($('en'),p(u,TM.eleven_card,TM.eleven_card+.5));rise($('cjk'),p(u,TM.ten_one,TM.ten_one+.5));
+rise($('bl1'),p(u,TM.ten_one+1,TM.ten_one+1.5));rise($('bl2'),p(u,TM.ten_one+3,TM.ten_one+3.5));
+rise($('cnt'),p(u,TM.count_forty,TM.count_forty+.5));
+const kc=p(u,TM.count_forty+.4,TM.count_forty+2.4);
+$('barC').setAttribute('width',1040*kc);$('nCC').setAttribute('x',140+1040*kc);$('nCC').textContent=Math.round(40*kc);
+$('barA').setAttribute('width',390*kc);$('nAA').setAttribute('x',140+390*kc);$('nAA').textContent=Math.round(15*kc);
+
+rise($('field'),p(u,TM.paddy_field,TM.paddy_field+.5));
+SD.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.paddy_field+.6+i*.08,TM.paddy_field+.9+i*.08)));
+rise($('farmer'),p(u,TM.farmer_bent,TM.farmer_bent+.5));$('fbody').setAttribute('transform','translate(0 '+(4*Math.sin(t*2.5)).toFixed(1)+')');
+TK.forEach((g,i)=>rise(g,p(u,TM.farmer_bent+.8+i*.7,TM.farmer_bent+1.2+i*.7)));
+rise($('calg'),p(u,TM.calendar_full,TM.calendar_full+.5));
+CAL.forEach((r,i)=>{const a=TM.calendar_full+.4+i*.12,h=152*p(u,a,a+.6);r.setAttribute('y',760-h);r.setAttribute('height',h)});
+rise($('hrs'),p(u,TM.calendar_full+3,TM.calendar_full+3.5));$('hv').textContent='Up to '+Math.round(3000*p(u,TM.calendar_full+3,TM.calendar_full+4.5)).toLocaleString('en-US');
+
+rise($('pa'),p(u,TM.harvest_basket,TM.harvest_basket+.5));
+const hk=p(u,TM.harvest_basket+.5,TM.harvest_basket+3);$('eff').setAttribute('width',400*hk);$('mound').setAttribute('ry',10+100*hk);
+rise($('pb'),p(u,TM.proverb_scroll,TM.proverb_scroll+.5));$('sun').setAttribute('cy',480-80*p(u,TM.proverb_scroll+.5,TM.proverb_scroll+2.5));
+rise($('pc'),p(u,TM.winter_sleep,TM.winter_sleep+.5));
+sw($('riceL'),p(u,TM.winter_sleep+.3,TM.winter_sleep+1.5));sw($('euL'),p(u,TM.winter_sleep+1.2,TM.winter_sleep+3));
+rise($('zzz'),p(u,TM.winter_sleep+2.6,TM.winter_sleep+3));$('zzz').setAttribute('opacity',p(u,TM.winter_sleep+2.6,TM.winter_sleep+3)*(.7+.3*Math.sin(t*2)));
+rise($('pcap'),p(u,TM.winter_sleep+3.5,TM.winter_sleep+4));
+
+rise($('prob'),p(u,TM.math_problem,TM.math_problem+.5));rise($('trail'),p(u,TM.math_problem+1.5,TM.math_problem+2));
+rise($('kidg'),p(u,TM.math_problem+2.5,TM.math_problem+3));
+const kp=along(p(u,TM.patient_kid,TM.patient_kid+5));kid.setAttribute('transform','translate('+kp[0].toFixed(1)+' '+(kp[1]-Math.abs(4*Math.sin(t*5))).toFixed(1)+')');
+rise($('pat'),p(u,TM.patient_kid+.3,TM.patient_kid+.8));
+
+rise($('form'),p(u,TM.survey_form,TM.survey_form+.5));
+TI.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.survey_form+.8+i*.5,TM.survey_form+1+i*.5)));
+rise($('lists'),p(u,TM.two_lists,TM.two_lists+.5));
+LK6.forEach((e,i)=>sw(e,p(u,TM.two_lists+1+i*.3,TM.two_lists+1.6+i*.3)));
+const tn=u>=TM.top_nations;
+[0,1,2].forEach(i=>[LR[0][i],LR[1][SIG[i]]].forEach(c=>{c[0].style.fill=tn?'var(--gain)':'var(--stage)';c[1].style.fill=tn?'var(--on-gain)':''}));
+rise($('rice6'),p(u,TM.top_nations+.3,TM.top_nations+.8));
+
+rise($('dna'),p(u,TM.heritage_tree,TM.heritage_tree+.5));$('dnax').setAttribute('opacity',p(u,TM.heritage_tree+1.5,TM.heritage_tree+2));
+rise($('tree'),p(u,TM.heritage_tree+2.5,TM.heritage_tree+3));
+PP.forEach((row,g)=>row.forEach(f=>f.forEach(e=>e.setAttribute('class',u>=TM.heritage_tree+4.9+g*1.2?'gain':'ink'))));
+rise($('tlab'),p(u,TM.heritage_tree+7.3,TM.heritage_tree+7.8));
+rise($('gauge'),p(u,TM.grit_meter,TM.grit_meter+.5));
+const gk=p(u,TM.grit_meter+.4,TM.grit_meter+2.5);sw($('garc'),gk*.85);
+$('needle').setAttribute('transform','rotate('+(153*gk+2*Math.sin(t*3)*gk).toFixed(1)+' 1270 560)');
+rise($('cap7'),p(u,TM.grit_meter+1,TM.grit_meter+1.5));
+
+rise($('qa'),p(u,TM.timer_ten,TM.timer_ten+.5));rise($('qb'),p(u,TM.timer_ten+.4,TM.timer_ten+.9));rise($('qc'),p(u,TM.timer_ten+.8,TM.timer_ten+1.3));
+rise($('watch'),p(u,TM.timer_ten+.3,TM.timer_ten+.8));
+const wa=Math.min(359.9,360*p(u,TM.timer_ten+1,TM.timer_ten+7)),wr=wa*Math.PI/180;
+$('sec').setAttribute('d','M1260 470L1260 330A140 140 0 '+(wa>180?1:0)+' 1 '+(1260+140*Math.sin(wr)).toFixed(1)+' '+(470-140*Math.cos(wr)).toFixed(1)+'Z');
+$('hand').setAttribute('transform','rotate('+wa.toFixed(1)+' 1260 470)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:141.44;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

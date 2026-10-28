@@ -1,0 +1,25 @@
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const sw=(e,k)=>{e.setAttribute('stroke-dasharray','1 1');e.setAttribute('stroke-dashoffset',(1-k).toFixed(3))};
+const ST=[0,1,2,3,4].map(i=>{const x=1230+i*55,s=mk('line',{x1:x,y1:520,x2:x,y2:510,stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('stalks')),h=mk('g',{},$('stalks'));[[-7,0],[7,8],[-7,16],[7,24],[0,-10]].forEach(q=>mk('ellipse',{cx:q[0],cy:q[1],rx:6,ry:10,class:'gain'},h));return [x,s,h]});
+const DG=[4,8,5,3,9,7,6].map((n,i)=>{const g=mk('g',{},$('digits'));mk('rect',{x:120+i*130,y:220,width:110,height:120,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);const tx=mk('text',{x:175+i*130,y:305,'font-size':72,'text-anchor':'middle',class:'d'},g);tx.textContent=n;return g});
+const slots=(id,cy)=>Array.from({length:9},(_,i)=>mk('circle',{cx:470+i*100,cy:cy,r:32,fill:'none',stroke:'var(--line)','stroke-width':5},$(id)));
+const SE=slots('slE',480),SLC=slots('slC',670);
+const fillS=(arr,n,a,c,u)=>{arr.forEach((e,i)=>{const on=i<n&&u>=a+i*.25;e.setAttribute('fill',on?c:'none');e.setAttribute('stroke',on?c:'var(--line)');e.setAttribute('stroke-dasharray',i<n?'none':'8 8')});return Math.min(n,Math.max(0,Math.floor((u-a)/.25)+1))};
+const rod=(g,x,y)=>{mk('rect',{x:x,y:y,width:150,height:26,class:'gain'},g);for(let k=1;k<10;k++)mk('path',{d:'M'+(x+k*15)+' '+y+'v26',stroke:'var(--stage)','stroke-width':2},g)};
+const unit=(g,x,y)=>mk('rect',{x:x,y:y,width:26,height:26,class:'gain'},g);
+rod($('bl1'),830,362);unit($('bl1'),1000,362);rod($('bl2'),830,472);rod($('bl2'),995,472);for(let k=0;k<4;k++)unit($('bl2'),1160+k*34,472);
+const SD=[];[170,240,310,380].forEach(x=>[310,380,450,520].forEach(y=>SD.push(mk('path',{d:'M'+x+' '+y+'v-26m0 12l-12-12m12 12l12-12',stroke:'var(--gain)','stroke-width':5,fill:'none','stroke-linecap':'round'},$('seeds')))));
+const TK=['BUILD DIKES','CONTROL WATER','PLANT BY HAND','WEED BY HAND'].map((s,i)=>{const g=mk('g',{},$('tasks'));mk('rect',{x:820,y:240+i*76,width:420,height:58,rx:29,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);const tx=mk('text',{x:852,y:277+i*76,'font-size':22,class:'m'},g);tx.textContent=s;return g});
+const CAL='JFMAMJJASOND'.split('').map((s,i)=>{const x=820+i*55;mk('rect',{x:x,y:600,width:46,height:160,rx:6,fill:'none',stroke:'var(--line)','stroke-width':3},$('cal'));const tx=mk('text',{x:x+23,y:796,'font-size':22,'text-anchor':'middle',class:'m'},$('cal'));tx.textContent=s;return mk('rect',{x:x,y:760,width:46,height:0,class:'gain'},$('cal'))});
+const kid=mk('g',{},$('kidg'));fig(kid,0,-72,16,'gain');
+const TP=[[600,740],[820,680],[690,600],[960,540],[840,460],[1160,400],[1330,326]];
+const along=k=>{const n=TP.length-1,f=cl(k)*n,i=Math.min(n-1,Math.floor(f)),r=f-i;return [TP[i][0]+(TP[i+1][0]-TP[i][0])*r,TP[i][1]+(TP[i+1][1]-TP[i][1])*r]};
+const TI=[];for(let i=0;i<8;i++){const y=320+i*48;mk('rect',{x:170,y:y-18,width:24,height:24,fill:'none',stroke:'var(--ink)','stroke-width':3},$('rows6'));mk('path',{d:'M210 '+(y-6)+'H430',stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},$('rows6'));TI.push(mk('path',{d:'M173 '+(y-8)+'l7 7l13-15',fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('rows6')))}
+const SIG=[0,1,3,2,4,5],LR=[[],[]];
+for(let i=0;i<6;i++){const y=280+i*78;[620,1160].forEach((x,j)=>{const r=mk('rect',{x:x,y:y,width:260,height:52,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('lists'));const tx=mk('text',{x:x+20,y:y+34,'font-size':22,class:'m'},$('lists'));tx.textContent='#'+(i+1);mk('rect',{x:x+80,y:y+19,width:150-i*20,height:14,rx:7,fill:'var(--muted)'},$('lists'));LR[j].push([r,tx])})}
+const LK6=SIG.map((s,i)=>mk('path',{d:'M880 '+(306+i*78)+'L1160 '+(306+s*78),stroke:'var(--ink)','stroke-width':4,pathLength:1,fill:'none'},$('links6')));
+let d1='',d2='';for(let y=260;y<=560;y+=10){const s=Math.sin((y-260)/38),a=(230+50*s).toFixed(1),b=(230-50*s).toFixed(1);d1+=(y==260?'M':'L')+a+' '+y;d2+=(y==260?'M':'L')+b+' '+y;if(y%30==20)mk('path',{d:'M'+a+' '+y+'H'+b,stroke:'var(--line)','stroke-width':4},$('dna'))}
+mk('path',{d:d1,fill:'none',stroke:'var(--ink)','stroke-width':6},$('dna'));mk('path',{d:d2,fill:'none',stroke:'var(--muted)','stroke-width':6},$('dna'));$('dna').appendChild($('dnax'));
+const GEN=[[[710,270]],[[560,440],[860,440]],[[480,610],[640,610],[780,610],[940,610]]];
+[[0,0,1,0],[0,0,1,1],[1,0,2,0],[1,0,2,1],[1,1,2,2],[1,1,2,3]].forEach(q=>{const a=GEN[q[0]][q[1]],b=GEN[q[2]][q[3]];mk('path',{d:'M'+a[0]+' '+(a[1]+70)+'L'+b[0]+' '+(b[1]-24),stroke:'var(--line)','stroke-width':4},$('tree'))});
+const PP=GEN.map(g=>g.map(q=>fig($('tree'),q[0],q[1],16,'ink')));

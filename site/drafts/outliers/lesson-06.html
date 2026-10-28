@@ -1,0 +1,381 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outliers Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Outliers: Timing, family background and meaningful work that is complex, independent and rewards effort combined to launch an unlikely legal superstar. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIERS · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The lessons</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of Joe Flom.</text>
+<text class="b" x="120" y="600" font-size="32">Three hidden kinds of luck behind one lawyer’s rise.</text>
+<path class="s-line" d="M1120 760H1480" stroke-width="5" stroke-linecap="round"/>
+<g id="tb"></g><g id="boyW"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet Joe Flom.</text>
+<text class="b" x="120" y="176" font-size="32">From a poor immigrant family to the top of the law.</text>
+<path class="s-line" d="M300 670H1300" stroke-width="5" stroke-dasharray="12 12"/>
+<g id="h0">
+<path class="s-ink" d="M200 530L300 440L400 530" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<rect class="s-ink" x="225" y="520" width="150" height="120" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="285" y="575" width="30" height="65"/>
+<text class="m" x="300" y="730" font-size="22" text-anchor="middle">IMMIGRANT FAMILY</text>
+<text class="m" x="300" y="762" font-size="20" text-anchor="middle">VERY LITTLE MONEY</text>
+</g>
+<g id="h1">
+<polygon class="ink" points="680,500 800,450 920,500 800,550"/>
+<path class="ink" d="M730 525v45q70 35 140 0v-45l-70 28z"/>
+<path class="s-gain" d="M900 508v60" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="900" cy="574" r="9"/>
+<rect class="gain" x="740" y="606" width="120" height="28" rx="14"/>
+<text class="m" x="800" y="730" font-size="22" text-anchor="middle">HARVARD LAW SCHOOL</text>
+<text class="m" x="800" y="762" font-size="20" text-anchor="middle">WORKED HARD, DID WELL</text>
+</g>
+<g id="h2">
+<rect id="tw" class="s-ink" x="1220" y="540" width="160" height="100" fill="var(--stage)" stroke-width="7"/>
+<g id="wins"></g>
+<text class="m" x="1300" y="730" font-size="22" text-anchor="middle">SKADDEN, ARPS</text>
+<text class="m" x="1300" y="762" font-size="20" text-anchor="middle">BUILT INTO A GIANT</text>
+</g>
+<circle id="jd" class="gain" cx="300" cy="670" r="18"/>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Shut out of Wall Street.</text>
+<text class="b" x="120" y="176" font-size="32">In the 1940s and 1950s, elite firms rarely hired lawyers like Flom.</text>
+<g id="firm">
+<polygon class="s-ink" points="160,340 400,250 640,340" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<rect class="ink" x="160" y="340" width="480" height="30"/>
+<path class="s-ink" d="M200 370V620M280 370V620M520 370V620M600 370V620" stroke-width="26"/>
+<rect class="s-ink" x="360" y="500" width="80" height="120" fill="var(--stage)" stroke-width="6"/>
+<rect id="dl" class="loss" x="363" y="503" width="0" height="114"/>
+<rect id="dr" class="loss" x="437" y="503" width="0" height="114"/>
+<rect class="ink" x="140" y="620" width="520" height="30"/>
+<text class="m" x="400" y="700" font-size="22" text-anchor="middle">ELITE WALL STREET FIRMS</text>
+</g>
+<g id="fw"><g id="fl"></g></g>
+<g id="off">
+<rect class="gain" x="1170" y="400" width="160" height="44" rx="6"/>
+<text class="m" x="1250" y="429" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">NEW FIRM</text>
+<path class="s-ink" d="M1250 444V470" stroke-width="5" stroke-linecap="round"/>
+<rect class="s-ink" x="1110" y="470" width="280" height="180" fill="var(--stage)" stroke-width="7"/>
+<rect x="1150" y="560" width="60" height="90" fill="var(--line)"/>
+<text class="m" x="1250" y="700" font-size="22" text-anchor="middle">TINY, TAKES ANY WORK</text>
+</g>
+<g id="papers"></g>
+<g id="bad"><text class="d" x="120" y="800" font-size="46">It looked like bad luck at the time.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Lesson one: the outsider’s edge.</text>
+<text class="b" x="120" y="176" font-size="32">The messy work nobody else wanted.</text>
+<g id="c3a">
+<rect class="s-line" x="120" y="230" width="500" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path id="pm" class="loss"/>
+<circle class="ink" cx="470" cy="420" r="30"/>
+<text class="m" x="160" y="560" font-size="22">HOSTILE TAKEOVER FIGHTS</text>
+<g id="o1"><text class="m" x="160" y="620" font-size="20" style="fill:var(--loss)">OLD FIRMS: TOO MESSY</text></g>
+<g id="o2"><text class="m" x="160" y="660" font-size="20" style="fill:var(--gain)">FLOM’S FIRM: TOOK THEM ON</text></g>
+</g>
+<g id="c3b">
+<rect class="s-line" x="680" y="230" width="800" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="760" y="280" font-size="20">TAKEOVER DEALS (SCHEMATIC)</text>
+<path class="s-ink" d="M740 650H1440M740 650V300" stroke-width="5" stroke-linecap="round"/>
+<g id="bars"></g>
+<g id="exp"><rect class="gain" x="1220" y="250" width="200" height="48" rx="24"/><text class="m" x="1320" y="281" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">THE EXPERTS</text></g>
+</g>
+<g id="need"><text class="d" x="120" y="800" font-size="46">They were the experts everyone needed.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Lesson two: timing.</text>
+<text class="b" x="120" y="176" font-size="32">Gladwell also points to demographic luck.</text>
+<text class="m" x="160" y="250" font-size="20">BIRTHS PER YEAR (SCHEMATIC)</text>
+<g id="band"><rect class="loss" x="510" y="270" width="198" height="370" fill-opacity=".12"/><text class="m" x="609" y="300" font-size="20" text-anchor="middle" style="fill:var(--loss)">GREAT DEPRESSION</text></g>
+<path class="s-ink" d="M180 640H860M180 640V270" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="290" y="676" font-size="20" text-anchor="middle">1920</text>
+<text class="m" x="510" y="676" font-size="20" text-anchor="middle">1930</text>
+<text class="m" x="730" y="676" font-size="20" text-anchor="middle">1940</text>
+<polyline id="bl" class="s-ink" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="mk4">
+<circle class="gain" cx="610" cy="520" r="12"/>
+<text class="m" x="610" y="566" font-size="20" text-anchor="middle" style="fill:var(--gain)">BORN HERE</text>
+<path class="s-gain" d="M626 514C760 500 850 470 940 440" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<path class="s-gain" d="M916 432l26 7-18 20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="room">
+<rect class="s-line" x="960" y="270" width="500" height="370" rx="14" fill="var(--stage)" stroke-width="3"/>
+<g id="seats"></g><g id="desks"></g>
+<text class="m" x="1210" y="680" font-size="22" text-anchor="middle">UNCROWDED CLASSROOMS</text>
+<text class="m" x="1210" y="714" font-size="20" text-anchor="middle">LESS COMPETITION AT WORK</text>
+</g>
+<g id="rr"><text class="d" x="120" y="810" font-size="46">Fewer peers. More room to rise.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Lesson three: the work.</text>
+<text class="b" x="120" y="176" font-size="32">The garment trade of immigrant New York.</text>
+<g id="mach">
+<path class="s-ink" d="M230 548V430a30 30 0 0 1 30-30H530a30 30 0 0 1 30 30v40" fill="none" stroke-width="28" stroke-linejoin="round"/>
+<rect class="gain" x="380" y="356" width="30" height="30"/>
+<path id="nd" class="s-ink" stroke-width="6" stroke-linecap="round"/>
+<rect class="gain" x="420" y="534" width="260" height="14"/>
+<path id="sti" d="M420 541H680" stroke="var(--on-gain)" stroke-width="3" stroke-dasharray="8 8"/>
+<rect class="ink" x="160" y="548" width="460" height="40" rx="8"/>
+<text class="m" x="160" y="640" font-size="22">GARMENT TRADE, NEW YORK</text>
+</g>
+<g id="par"><text class="m" x="160" y="680" font-size="20" style="fill:var(--gain)">FLOM’S PARENTS WORKED HERE TOO</text></g>
+<g id="shop">
+<rect class="s-ink" x="800" y="306" width="640" height="300" fill="var(--stage)" stroke-width="7"/>
+<rect class="gain" x="780" y="250" width="680" height="56" rx="8"/>
+<text class="m" x="1120" y="286" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">FAMILY CLOTHING SHOP</text>
+<path class="s-ink" d="M1100 380H1420" stroke-width="6" stroke-linecap="round"/>
+<g id="fam"></g><g id="rack"></g>
+</g>
+<g id="chips"></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meaningful work has three parts.</text>
+<text class="b" x="120" y="176" font-size="32">Gladwell’s recipe for work that builds people.</text>
+<g id="cd0"><rect class="s-line" x="120" y="230" width="414" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="k0"><g id="pz"></g><text class="d5" x="156" y="610" font-size="44">Complex</text><text class="m" x="156" y="660" font-size="20">KEEPS YOUR MIND ENGAGED</text></g></g>
+<g id="cd1"><rect class="s-line" x="593" y="230" width="414" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="k1"><g id="ky"><circle class="s-ink" cx="700" cy="420" r="46" fill="none" stroke-width="16"/><rect class="ink" x="746" y="410" width="160" height="20"/><rect class="ink" x="870" y="430" width="16" height="34"/><rect class="ink" x="840" y="430" width="16" height="24"/></g>
+<text class="d5" x="629" y="610" font-size="44">Autonomy</text><text class="m" x="629" y="660" font-size="20">YOU DECIDE HOW TO DO IT</text></g></g>
+<g id="cd2"><rect class="s-line" x="1066" y="230" width="414" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="k2"><path class="s-ink" d="M1110 520H1180V470H1250V420H1320V370H1390V320H1440" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><g id="coins"></g>
+<text class="d5" x="1102" y="610" font-size="44">Rewards effort</text><text class="m" x="1102" y="660" font-size="20">HARDER EFFORT, BIGGER REWARD</text></g></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Lessons from the kitchen table.</text>
+<text class="b" x="120" y="176" font-size="32">Children saw that effort pays off, and carried it into their careers.</text>
+<g id="kt"><g id="ktp"></g>
+<rect class="ink" x="160" y="560" width="420" height="16" rx="4"/>
+<path class="s-ink" d="M190 576V640M550 576V640" stroke-width="8" stroke-linecap="round"/>
+<rect class="s-ink" x="410" y="542" width="56" height="18" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="370" y="690" font-size="22" text-anchor="middle">KITCHEN TABLE</text></g>
+<g id="arw"><path class="s-gain" d="M600 480Q690 420 770 480" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<path class="s-gain" d="M748 456l22 24-30 4" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="690" y="400" font-size="20" text-anchor="middle" style="fill:var(--gain)">EFFORT PAYS OFF</text></g>
+<g id="ad"><g id="adp"></g><rect class="ink" x="884" y="520" width="56" height="40" rx="6"/><path class="s-ink" d="M900 520v-10h24v10" fill="none" stroke-width="5"/>
+<text class="m" x="840" y="690" font-size="20" text-anchor="middle">LAW AND OTHER PROFESSIONS</text></g>
+<path class="s-line" d="M1080 660H1460" stroke-width="5" stroke-linecap="round"/>
+<g id="sk"></g>
+<g id="sf"></g>
+<g id="mys"><text class="d" x="120" y="810" font-size="46">Flom’s rise looks far less mysterious.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Is your work complex,</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">independent, and does</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">it reward your <tspan style="fill:var(--gain)">effort</tspan>?</text></g>
+<g id="q8m"><text class="m" x="143" y="700" font-size="26">IF ONE PIECE IS MISSING, ADD IT THIS WEEK</text></g>
+<g id="sqs"><rect class="gain" x="1180" y="620" width="80" height="80" rx="10"/><rect class="gain" x="1280" y="620" width="80" height="80" rx="10"/>
+<rect id="sq3" class="s-gain" x="1380" y="620" width="80" height="80" rx="10" fill="var(--gain)" fill-opacity="0" stroke-width="5" stroke-dasharray="10 8"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Lessons of Joe Flom&rdquo;, from <em>Outliers</em> by Malcolm Gladwell. Joe Flom&#x27;s career, the Depression birthrate dip, and the garment trade&#x27;s meaningful work are as reported in the book. The takeover chart and birthrate drawing are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 9.0], [9.0, 21.9], [21.9, 36.7], [36.7, 52.0], [52.0, 66.2], [66.2, 80.7], [80.7, 94.0], [94.0, 110.7], [110.7, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Unlikely Star", "Meet Joe Flom", "Shut Out", "Lesson One: Outsider", "Lesson Two: Timing", "Lesson Three: Work", "Meaningful Work", "The Inheritance", "Your Turn"];
+const TM={"poor_kid": 0.0, "joe_flom": 9.28, "harvard": 13.92, "skadden": 17.84, "firm_doors": 22.16, "small_office": 29.44, "takeover": 36.96, "boom_chart": 45.68, "birth_dip": 55.76, "small_class": 60.0, "sewing": 66.48, "shop_family": 74.88, "three_keys": 80.96, "puzzle": 85.28, "key": 88.32, "ladder": 91.04, "dinner_table": 94.32, "stack_luck": 103.68};
+const pp=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const tx=(g,x,y,s,fs,st,a)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:'m','text-anchor':a||'middle'},g);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const blocks=(par,x,w,y0,L)=>L.map((s,i)=>{const g=mk('g',{},par),y=y0-i*70;mk('rect',{x:x,y:y,width:w,height:66,rx:8,class:'gain'},g);tx(g,x+w/2,y+42,s,22,'fill:var(--on-gain)');return g});
+const TB=blocks($('tb'),1180,260,690,['OUTSIDER','TIMING','WORK']);
+const BOY=mk('g',{},$('boyW'));pp(BOY,0,-84,20,'gain');
+const WN=[];for(let i=0;i<9;i++)for(let j=0;j<2;j++)WN.push([mk('rect',{x:1245+j*70,y:600-i*40,width:40,height:20,class:'gain'},$('wins')),600-i*40]);
+pp($('fl'),0,-92,22,'gain');
+// documents: fly in and settle into a neat stack inside the office, right of the door
+const PS=[0,1,2,3].map(i=>[1290,594-i*12]);
+const PA=PS.map(()=>{const g=mk('g',{},$('papers'));mk('rect',{x:0,y:0,width:60,height:44,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M12 15H48M12 29H38',stroke:'var(--muted)','stroke-width':3,'stroke-linecap':'round'},g);return g});
+const BH=[40,80,210,330],BR=BH.map((h,i)=>{tx($('bars'),840+i*160,692,['1950s','1960s','1970s','1980s'][i],20);return mk('rect',{x:790+i*160,y:650,width:100,height:0,class:i>1?'gain':'ink'},$('bars'))});
+const BY=y=>340+180*Math.exp(-Math.pow((y-1934)/4,2)),BX=y=>180+(y-1915)*22;
+const ST=[];for(let r=0;r<2;r++)for(let c=0;c<4;c++){const x=1030+c*120,y=340+r*160,i=r*4+c;
+  if([0,3,5,6].includes(i)){const g=mk('g',{},$('seats'));pp(g,x,y,16,'gain');ST.push(g)}else mk('circle',{cx:x,cy:y+20,r:18,fill:'none',stroke:'var(--line)','stroke-width':4,'stroke-dasharray':'6 6'},$('seats'));
+  mk('rect',{x:x-50,y:y+60,width:100,height:14,rx:4,class:'ink'},$('desks'))}
+pp($('fam'),880,522,20,'ink');pp($('fam'),960,522,20,'ink');pp($('fam'),1030,547,14,'gain');
+for(let i=0;i<5;i++){const x=1140+i*60;mk('path',{d:'M'+x+' 380v14',stroke:'var(--ink)','stroke-width':4},$('rack'));mk('rect',{x:x-22,y:394,width:44,height:70,rx:6,class:i%2?'ink':'gain'},$('rack'))}
+const CH=['MAKE DECISIONS','SOLVE PROBLEMS','SELL'].map((s,i)=>{const g=mk('g',{},$('chips')),x=800+i*240;mk('rect',{x:x,y:640,width:200,height:52,rx:26,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);tx(g,x+100,672,s,18,'fill:var(--ink)');return g});
+[[237,330],[329,330],[237,422]].forEach(q=>mk('rect',{x:q[0],y:q[1],width:88,height:88,rx:8,class:'ink'},$('pz')));
+const PZ=mk('rect',{x:329,y:422,width:88,height:88,rx:8,class:'gain'},$('pz'));
+const CO=[[1145,520],[1215,470],[1285,420],[1355,370],[1415,320]].map((q,i)=>{const r=8+i*4;return mk('circle',{cx:q[0],cy:q[1]-12-r,r:r,class:'gain'},$('coins'))});
+pp($('ktp'),240,460,24,'ink');pp($('ktp'),500,460,24,'ink');pp($('ktp'),370,500,16,'gain');
+pp($('adp'),840,460,24,'gain');
+const SB=blocks($('sk'),1100,340,590,['OUTSIDER STATUS','TIMING','FAMILY LESSON']);
+pp($('sf'),1270,366,20,'ink');tx($('sf'),1270,330,'FLOM',22,'fill:var(--ink)');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('boyW'),p(u,TM.poor_kid,TM.poor_kid+.5));
+let h=0;TB.forEach((g,i)=>{const a=TM.poor_kid+5.8+i*.5,k=p(u,a,a+.4);rise(g,k);h+=k});
+BOY.setAttribute('transform','translate(1310 '+(760-70*h).toFixed(1)+')');
+
+rise($('h0'),p(u,TM.joe_flom,TM.joe_flom+.5));rise($('h1'),p(u,TM.harvard,TM.harvard+.5));rise($('h2'),p(u,TM.skadden,TM.skadden+.5));
+$('jd').setAttribute('cx',(300+500*p(u,TM.harvard,TM.harvard+1.2)+500*p(u,TM.skadden,TM.skadden+1.2)).toFixed(1));
+$('jd').setAttribute('opacity',p(u,TM.joe_flom,TM.joe_flom+.5));
+const th=100+280*p(u,TM.skadden+.4,TM.skadden+2.4),tt=640-th;$('tw').setAttribute('y',tt.toFixed(1));$('tw').setAttribute('height',th.toFixed(1));
+WN.forEach(w=>w[0].setAttribute('opacity',w[1]-10>tt?1:0));
+
+rise($('firm'),p(u,TM.firm_doors,TM.firm_doors+.5));
+const dw=37*p(u,TM.firm_doors+1,TM.firm_doors+2);$('dl').setAttribute('width',dw.toFixed(1));$('dr').setAttribute('width',dw.toFixed(1));$('dr').setAttribute('x',(437-dw).toFixed(1));
+rise($('fw'),p(u,TM.firm_doors+.6,TM.firm_doors+1.1));
+$('fl').setAttribute('transform','translate('+(800+230*p(u,TM.small_office+.4,TM.small_office+1.8)).toFixed(1)+' 650)');
+rise($('off'),p(u,TM.small_office,TM.small_office+.5));
+PA.forEach((g,i)=>{const a=TM.small_office+1.6+i*.6,k=p(u,a,a+.8),sx=1420,sy=520,ex=PS[i][0],ey=PS[i][1];
+  const x=sx+(ex-sx)*k,y=sy+(ey-sy)*k-30*Math.sin(Math.PI*k);
+  g.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');g.setAttribute('opacity',p(u,a,a+.25).toFixed(2))});
+rise($('bad'),p(u,TM.small_office+6.6,TM.small_office+7.1));
+
+rise($('c3a'),p(u,TM.takeover,TM.takeover+.5));
+const ma=.15+.45*Math.abs(Math.sin(t*4)),mx=(300+80*Math.cos(ma)).toFixed(1),my=80*Math.sin(ma);
+$('pm').setAttribute('d','M300 420L'+mx+' '+(420-my).toFixed(1)+'A80 80 0 1 0 '+mx+' '+(420+my).toFixed(1)+'Z');
+rise($('o1'),p(u,TM.takeover+1,TM.takeover+1.5));rise($('o2'),p(u,TM.takeover+5,TM.takeover+5.5));
+rise($('c3b'),p(u,TM.takeover+5,TM.takeover+5.5));
+BR.forEach((r,i)=>{const a=i<2?TM.takeover+5.4+i*.3:TM.boom_chart+(i-2)*.5,hh=BH[i]*p(u,a,a+1.2);r.setAttribute('y',(650-hh).toFixed(1));r.setAttribute('height',hh.toFixed(1))});
+rise($('exp'),p(u,TM.boom_chart+1.6,TM.boom_chart+2.1));rise($('need'),p(u,TM.boom_chart+.6,TM.boom_chart+1.2));
+
+const bp=p(u,SC[4][0]+.5,TM.birth_dip+1.8);let pts='';for(let y=1915;y<=1915+30*bp+.001;y+=.5)pts+=BX(y).toFixed(1)+','+BY(y).toFixed(1)+' ';
+$('bl').setAttribute('points',pts);
+rise($('band'),p(u,TM.birth_dip,TM.birth_dip+.5));rise($('mk4'),p(u,TM.small_class,TM.small_class+.5));
+rise($('room'),p(u,TM.small_class+.4,TM.small_class+.9));ST.forEach((g,i)=>{const a=TM.small_class+.9+i*.3;rise(g,p(u,a,a+.4))});
+rise($('rr'),p(u,TM.small_class+2.6,TM.small_class+3.2));
+
+$('nd').setAttribute('d','M560 470V'+(512+14*Math.sin(t*12)).toFixed(1));$('sti').setAttribute('stroke-dashoffset',(-t*30).toFixed(1));
+rise($('mach'),p(u,TM.sewing,TM.sewing+.5));rise($('par'),p(u,TM.sewing+6.5,TM.sewing+7));
+rise($('shop'),p(u,TM.shop_family-.2,TM.shop_family+.4));CH.forEach((g,i)=>{const a=TM.shop_family+1+i*.8;rise(g,p(u,a,a+.4))});
+
+[0,1,2].forEach(i=>rise($('cd'+i),p(u,TM.three_keys+i*.3,TM.three_keys+i*.3+.5)));
+rise($('k0'),p(u,TM.puzzle,TM.puzzle+.5));rise($('k1'),p(u,TM.key,TM.key+.5));rise($('k2'),p(u,TM.ladder,TM.ladder+.5));
+const pk=70*(1-p(u,TM.puzzle+.5,TM.puzzle+1.5));PZ.setAttribute('transform','translate('+pk.toFixed(1)+' '+pk.toFixed(1)+')');
+$('ky').setAttribute('transform','rotate('+(8*Math.sin(t*2)).toFixed(1)+' 800 420)');
+CO.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.ladder+.4+i*.3,TM.ladder+.7+i*.3)));
+
+rise($('kt'),p(u,TM.dinner_table,TM.dinner_table+.5));rise($('arw'),p(u,TM.dinner_table+4.6,TM.dinner_table+5.1));rise($('ad'),p(u,TM.dinner_table+5.2,TM.dinner_table+5.7));
+SB.forEach((g,i)=>{const a=TM.stack_luck+i*.6;rise(g,p(u,a,a+.4))});
+rise($('sf'),p(u,TM.stack_luck+1.8,TM.stack_luck+2.3));rise($('mys'),p(u,TM.stack_luck+2.4,TM.stack_luck+3));
+
+const s8=SC[8][0];
+rise($('qa'),p(u,s8+.3,s8+.8));rise($('qb'),p(u,s8+.7,s8+1.2));rise($('qc'),p(u,s8+1.1,s8+1.6));rise($('sqs'),p(u,s8+1.6,s8+2.1));
+rise($('q8m'),p(u,s8+6.2,s8+6.7));$('sq3').setAttribute('fill-opacity',p(u,s8+7,s8+8).toFixed(2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.36;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

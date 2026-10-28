@@ -1,0 +1,363 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sapiens Lesson 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 10 of Sapiens: Our shared stories have given Sapiens enormous power without clearly making us happier, and now that we may soon redesign ourselves, we must ask what we actually want. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SAPIENS · LESSON 10</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">More power.</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">But are we happier?</text>
+<text class="b" x="120" y="600" font-size="32">Our species gained enormous power, but did it make us happier?</text>
+<g id="t_art" transform="translate(1305 480) scale(1.3) translate(-1330 -398)">
+<g id="t_tool"><path class="ink" d="M1200 330l40-90 40 90-40 30z"/><text class="m" x="1240" y="402" font-size="20" text-anchor="middle">STONE</text></g>
+<path id="t_arc" class="s-muted" d="M1290 260q55-50 100 0" fill="none" stroke-width="5" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="t_atom"><circle class="gain" cx="1410" cy="320" r="14"/><g id="t_orb"></g><text class="m" x="1410" y="402" font-size="20" text-anchor="middle">ATOM</text></g>
+<g id="t_face"><circle class="s-ink" cx="1320" cy="500" r="56" fill="var(--stage)" stroke-width="6"/><circle class="ink" cx="1300" cy="488" r="6"/><circle class="ink" cx="1340" cy="488" r="6"/><path class="s-ink" d="M1298 524h44" stroke-width="6" stroke-linecap="round"/><text class="d" x="1400" y="480" font-size="56" style="fill:var(--loss)">?</text></g>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Power without joy.</text>
+<text class="b" x="120" y="176" font-size="32">From a minor ape to master of the planet.</text>
+<g id="p_chart">
+<path class="s-line" d="M160 720h720M160 720V260" stroke-width="4" fill="none"/>
+<text class="m" x="176" y="280" font-size="20">POWER</text>
+<text class="m" x="160" y="760" font-size="20">70,000 YEARS AGO</text>
+<text class="m" x="880" y="760" font-size="20" text-anchor="end">TODAY</text>
+<g id="p_ape"></g>
+</g>
+<path id="p_curve" class="s-gain" d="M220 690C500 680 700 600 820 330" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="p_rocket"><path class="ink" d="M820 220c22 20 26 60 18 100h-36c-8-40-4-80 18-100z"/><path class="ink" d="M802 290l-18 30h18zM838 290l18 30h-18z"/><circle cx="820" cy="262" r="8" fill="var(--stage)"/><path id="p_flame" class="loss" d="M808 324l12 26 12-26z"/></g>
+<g id="p_meter">
+<path class="s-loss" d="M1020 560A200 200 0 0 1 1220 360" fill="none" stroke-width="14"/>
+<path class="s-gain" d="M1220 360A200 200 0 0 1 1420 560" fill="none" stroke-width="14"/>
+<path id="p_needle" class="s-ink" d="M1220 560V400" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1220" cy="560" r="16"/>
+<text class="m" x="1020" y="600" font-size="20">LESS HAPPY</text>
+<text class="m" x="1420" y="600" font-size="20" text-anchor="end">HAPPIER</text>
+<text class="d" x="1220" y="680" font-size="72" text-anchor="middle" style="fill:var(--loss)">?</text>
+</g>
+<g id="p_q"><text class="d" x="120" y="830" font-size="44">Maybe the most important question of all.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The inner thermostat.</text>
+<text class="b" x="120" y="176" font-size="32">Happiness as chemistry inside the body.</text>
+<g id="h_head"><circle class="s-ink" cx="300" cy="400" r="90" fill="var(--stage)" stroke-width="6"/><path class="ink" d="M170 640v-40a130 110 0 0 1 260 0v40z"/><g id="h_mol"></g></g>
+<g id="h_th"><rect class="s-ink" x="200" y="670" width="200" height="110" rx="18" fill="var(--stage)" stroke-width="5"/><circle class="s-ink" cx="260" cy="725" r="30" fill="none" stroke-width="5"/><path class="s-gain" d="M260 725v-22" stroke-width="6" stroke-linecap="round"/><text class="m" x="310" y="733" font-size="20">SET</text></g>
+<g id="h_chart">
+<path class="s-line" d="M660 720h680" stroke-width="4"/>
+<path class="s-muted" d="M660 520h680" stroke-width="2" stroke-dasharray="4 8"/>
+<text class="m" x="1350" y="516" font-size="18">USUAL</text><text class="m" x="1350" y="540" font-size="18">SETTING</text>
+<g id="h_wl"><path id="h_wave" class="s-loss" fill="none" stroke-width="4" stroke-dasharray="10 10"/><text class="m" x="745" y="365" font-size="18" text-anchor="middle" style="fill:var(--loss)">HEATWAVE</text><text class="m" x="915" y="692" font-size="18" text-anchor="middle" style="fill:var(--loss)">SNOWSTORM</text></g>
+<path id="h_mood" class="s-gain" d="M660 520H1340" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<g id="h_b0"><path id="h_p0" class="s-gain" fill="none" stroke-width="7" stroke-linejoin="round"/><text class="m" x="890" y="345" font-size="18" text-anchor="middle" style="fill:var(--gain)">PROMOTION</text></g>
+<g id="h_b1"><path id="h_p1" class="s-gain" fill="none" stroke-width="7" stroke-linejoin="round"/><text class="m" x="1130" y="345" font-size="18" text-anchor="middle" style="fill:var(--gain)">NEW CAR</text></g>
+<path class="s-loss" d="M660 772h40" stroke-width="4" stroke-dasharray="10 6"/><text class="m" x="712" y="778" font-size="18">OUTSIDE</text>
+<path class="s-gain" d="M900 772h40" stroke-width="6"/><text class="m" x="952" y="778" font-size="18">YOUR MOOD</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rising expectations.</text>
+<text class="b" x="120" y="176" font-size="32">Happiness: does reality match what we expect?</text>
+<path class="s-line" d="M200 740H960" stroke-width="4"/>
+<g id="e_bars"></g>
+<text class="m" x="300" y="780" font-size="20" text-anchor="middle">ANCESTORS</text>
+<text class="m" x="580" y="780" font-size="20" text-anchor="middle">LATER</text>
+<text class="m" x="860" y="780" font-size="20" text-anchor="middle">US</text>
+<g id="e_st0"><text class="m" x="300" y="580" font-size="20" text-anchor="middle" style="fill:var(--gain)">THRILLED</text></g>
+<g id="e_st1"><text class="m" x="580" y="440" font-size="20" text-anchor="middle">NORMAL</text></g>
+<g id="e_st2"><text class="m" x="860" y="300" font-size="20" text-anchor="middle">NORMAL</text></g>
+<g id="e_arr"><path class="s-loss" d="M300 640L580 460L860 320" fill="none" stroke-width="3" stroke-dasharray="6 8"/><path class="s-loss" d="M1000 700V310M970 340l30-30 30 30" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="e_txt"><text class="d5" x="1100" y="470" font-size="36">Yesterday’s luxury</text><text class="d5" x="1100" y="516" font-size="36">is today’s normal.</text></g>
+<rect class="gain" x="120" y="812" width="18" height="18"/><text class="m" x="148" y="830" font-size="20">REALITY</text>
+<path class="s-loss" d="M300 822h40" stroke-width="6"/><text class="m" x="352" y="830" font-size="20">EXPECTATION</text>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The cost to others.</text>
+<text class="b" x="120" y="176" font-size="32">Billions of farm animals pay for our power.</text>
+<g id="c_cages"></g>
+<g id="c_lbl"><text class="m" x="120" y="690" font-size="20" style="fill:var(--loss)">BILLIONS OF FARM ANIMALS, NEEDS IGNORED</text></g>
+<g id="c_scale">
+<path class="s-ink" d="M1120 700V330" stroke-width="8" stroke-linecap="round"/>
+<rect class="ink" x="1030" y="700" width="180" height="16" rx="8"/>
+<path id="c_beam" class="s-ink" d="M880 330H1360" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1120" cy="330" r="12"/>
+<g id="c_panL"><path class="s-muted" d="M0 0L-70 140M0 0L70 140" stroke-width="3" fill="none"/><rect class="gain" x="-30" y="100" width="60" height="40" rx="6"/><path class="ink" d="M-90 140h180a90 40 0 0 1-180 0z"/><text class="m" x="0" y="215" font-size="20" text-anchor="middle">OUTPUT</text></g>
+<g id="c_panR"><path class="s-muted" d="M0 0L-70 140M0 0L70 140" stroke-width="3" fill="none"/><circle class="loss" cx="-40" cy="122" r="18"/><circle class="loss" cx="0" cy="122" r="18"/><circle class="loss" cx="40" cy="122" r="18"/><circle class="loss" cx="-20" cy="90" r="18"/><circle class="loss" cx="20" cy="90" r="18"/><path class="ink" d="M-90 140h180a90 40 0 0 1-180 0z"/><text class="m" x="0" y="215" font-size="20" text-anchor="middle" style="fill:var(--loss)">SUFFERING</text></g>
+</g>
+<g id="c_txt"><text class="d" x="120" y="820" font-size="40">Measured by suffering, success looks far less impressive.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Letting go of craving.</text>
+<text class="b" x="120" y="176" font-size="32">A Buddhist view of where suffering comes from.</text>
+<circle id="m_halo" class="s-gain" cx="800" cy="500" r="215" fill="none" stroke-width="5" stroke-dasharray="14 12"/>
+<g id="m_fe"></g>
+<g id="m_monk"><circle class="ink" cx="800" cy="400" r="44"/><path class="ink" d="M690 620Q700 480 800 460Q900 480 910 620z"/><rect class="ink" x="680" y="600" width="240" height="40" rx="20"/></g>
+<g id="m_hands"><path class="s-gain" d="M720 596q40-40 70-10M880 596q-40-40-70-10" fill="none" stroke-width="8" stroke-linecap="round"/></g>
+<g id="m_crave"><text class="d" x="120" y="500" font-size="52" style="fill:var(--loss)">Craving</text><text class="m" x="120" y="545" font-size="20">CHASING GOOD FEELINGS</text></g>
+<g id="m_let"><text class="d" x="1480" y="500" font-size="52" text-anchor="end" style="fill:var(--gain)">Letting go</text><text class="m" x="1480" y="545" font-size="20" text-anchor="end">UNDERSTAND, THEN RELEASE</text></g>
+<g id="m_txt"><text class="d" x="120" y="820" font-size="44">No one yet knows which view is right.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Redesigning ourselves.</text>
+<text class="b" x="120" y="176" font-size="32">Biotechnology could reshape our bodies and minds.</text>
+<g id="n0"><rect class="s-line" x="120" y="240" width="400" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle id="n_glow" class="gain" cx="320" cy="460" r="150" fill-opacity=".2"/>
+<ellipse class="gain" cx="232" cy="362" rx="14" ry="46"/><ellipse class="gain" cx="266" cy="358" rx="14" ry="46"/>
+<ellipse class="gain" cx="340" cy="500" rx="90" ry="64"/><circle class="gain" cx="250" cy="440" r="44"/><circle class="gain" cx="430" cy="492" r="18"/><circle cx="236" cy="434" r="6" fill="var(--stage)"/>
+<text class="d5" x="150" y="660" font-size="36">Glowing rabbit</text><text class="m" x="150" y="696" font-size="18">A JELLYFISH GENE</text></g>
+<g id="n1"><rect class="s-line" x="600" y="240" width="400" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="n_rg"></g><path id="n_a" class="s-ink" fill="none" stroke-width="7" stroke-linecap="round"/><path id="n_b" class="s-gain" fill="none" stroke-width="7" stroke-linecap="round"/>
+<text class="d5" x="630" y="660" font-size="36">Edit the code</text><text class="m" x="630" y="696" font-size="18">PLANTS · ANIMALS · US</text></g>
+<g id="n2"><rect class="s-line" x="1080" y="240" width="400" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="ink" d="M1150 620v-50a130 90 0 0 1 260 0v50z"/><path class="s-gain" d="M1300 610v-40h40v-30" fill="none" stroke-width="5"/><circle class="gain" cx="1340" cy="534" r="8"/>
+<circle class="s-ink" cx="1280" cy="400" r="70" fill="var(--stage)" stroke-width="6"/><path class="gain" d="M1280 330a70 70 0 0 1 0 140z"/><circle class="ink" cx="1255" cy="395" r="8"/><circle cx="1305" cy="395" r="10" fill="var(--stage)"/>
+<text class="d5" x="1110" y="660" font-size="36">Something new</text><text class="m" x="1110" y="696" font-size="18">BEYOND TODAY’S HUMANS</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The real question.</text>
+<text class="b" x="120" y="176" font-size="32">Harari’s challenge to a species with godlike power.</text>
+<g id="q_old"><text id="q_oldt" class="d5" x="120" y="330" font-size="48" fill-opacity=".55">What can we become?</text></g>
+<line id="q_strike" class="s-ink" x1="112" y1="314" x2="112" y2="314" stroke-width="5" stroke-linecap="round"/>
+<g id="q_new"><text class="d" x="120" y="450" font-size="72" style="fill:var(--gain)">What do we want</text><text class="d" x="120" y="530" font-size="72" style="fill:var(--gain)">to want?</text></g>
+<g id="g_god">
+<circle cx="1120" cy="500" r="50" fill="var(--line)"/><circle cx="1200" cy="460" r="70" fill="var(--line)"/><circle cx="1290" cy="490" r="55" fill="var(--line)"/><rect x="1080" y="490" width="250" height="60" rx="30" fill="var(--line)"/>
+<g id="g_fig"></g><path class="s-gain" d="M1160 270l-16-10M1240 270l16-10M1200 254v-20" stroke-width="5" stroke-linecap="round"/>
+<path id="g_bolt" class="loss" d="M1316 556l-26 50h20l-16 46 44-62h-22l16-34z"/>
+<circle class="s-ink" cx="1200" cy="680" r="60" fill="var(--stage)" stroke-width="6"/>
+<path id="g_ndl" d="M1200 636l10 44-10 44-10-44z" class="loss"/><circle class="ink" cx="1200" cy="680" r="7"/>
+<text class="m" x="1200" y="780" font-size="20" text-anchor="middle">WHERE TO?</text>
+</g>
+<g id="g_txt"><text class="d" x="120" y="820" font-size="40">Powerful like gods, unsure where we’re heading.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="z_top"><text class="m" x="143" y="250" font-size="24">THINK OF ONE THING YOU ARE WORKING HARD TO GET</text></g>
+<g id="z_a"><text class="d" x="136" y="400" font-size="88" letter-spacing="-2">Do you truly want it,</text></g>
+<g id="z_b"><text class="d" x="136" y="510" font-size="88" letter-spacing="-2">or did a <tspan style="fill:var(--gain)">story</tspan></text></g>
+<g id="z_c"><text class="d" x="136" y="620" font-size="88" letter-spacing="-2">teach you to want it?</text></g>
+<g id="z_mir"><path class="s-ink" d="M1360 610v80M1310 700h100" stroke-width="8" stroke-linecap="round" fill="none"/><ellipse class="s-ink" cx="1360" cy="480" rx="90" ry="130" fill="var(--stage)" stroke-width="8"/><g id="z_ref"></g></g>
+<g id="z_bot"><text class="m" x="143" y="780" font-size="26">WHAT DO YOU WANT TO WANT?</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;More Power, But Are We Happier?&rdquo;, from <em>Sapiens</em> by Yuval Noah Harari. The air conditioner comparison, the Buddhist view of craving, industrial farm animals and the glowing green rabbit are as reported in the book. The happiness meter, expectation bar and ape-to-rocket drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-10.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 6.3], [6.3, 23.9], [23.9, 41.8], [41.8, 56.3], [56.3, 72.0], [72.0, 88.5], [88.5, 106.1], [106.1, 120.3], [120.3, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["More Power, Happier?", "Power Without Joy", "The Inner Thermostat", "Rising Expectations", "The Cost to Others", "Letting Go of Craving", "Redesigning Ourselves", "What Do We Want?", "Your Turn"];
+const TM={"stone_tool": 0.0, "ape_to_rocket": 6.64, "happy_meter": 13.04, "brain": 24.16, "thermostat": 29.68, "bar_level": 42.12, "upward_arrow": 47.36, "chicken_cage": 56.64, "scale": 66.48, "monk": 72.32, "open_hands": 78.96, "green_rabbit": 88.8, "dna_strand": 94.8, "cyborg": 102.08, "question": 106.4, "gods_cloud": 114.8, "mirror": 120.64};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+[0,60,120].forEach(a=>mk('ellipse',{cx:1410,cy:320,rx:50,ry:18,fill:'none',stroke:'var(--ink)','stroke-width':4,transform:'rotate('+a+' 1410 320)'},$('t_orb')));
+fig($('p_ape'),210,600,14,'ink');
+fig($('g_fig'),1200,300,20,'gain');
+fig($('z_ref'),1360,440,24,'gain');
+const MP=[[270,370],[322,362],[300,412],[256,428],[342,424]];
+mk('path',{d:'M'+MP.map(q=>q.join(' ')).join('L'),fill:'none',stroke:'var(--muted)','stroke-width':4},$('h_mol'));
+const MOL=MP.map((q,i)=>mk('circle',{cx:q[0],cy:q[1],r:12,class:i%2?'loss':'gain'},$('h_mol')));
+let wv='M660 520';for(let x=670;x<=1340;x+=10)wv+='L'+x+' '+(520-140*Math.sin((x-660)/340*2*Math.PI)).toFixed(1);$('h_wave').setAttribute('d',wv);
+[860,1100].forEach((x0,j)=>{let d='M'+x0+' 520L'+(x0+30)+' 370';for(let k=1;k<20;k++)d+='L'+(x0+30+k*10)+' '+(520-150*Math.exp(-k/5)).toFixed(1);$('h_p'+j).setAttribute('d',d)});
+const EH=[140,280,420],EX=[640,460,320],BR=[],EL=[];
+[220,500,780].forEach((x,i)=>{BR.push(mk('rect',{x:x,y:740,width:160,height:0,class:'gain'},$('e_bars')));EL.push(mk('path',{d:'M'+(x-10)+' 0h180',stroke:'var(--loss)','stroke-width':8,'stroke-linecap':'round'},$('e_bars')))});
+const CG=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++){const x=120+c*150,y=260+r*130,cx=x+60,cy=y+60,g=mk('g',{},$('c_cages'));CG.push(g);
+ mk('ellipse',{cx:cx-5,cy:cy+18,rx:30,ry:22,class:'ink'},g);mk('circle',{cx:cx+24,cy:cy-6,r:12,class:'ink'},g);
+ mk('path',{d:'M'+(cx+36)+' '+(cy-10)+'l12 4-12 4z',class:'gain'},g);mk('circle',{cx:cx+22,cy:cy-20,r:6,class:'loss'},g);
+ for(let i=1;i<5;i++)mk('path',{d:'M'+(x+i*26)+' '+y+'v110',stroke:'var(--muted)','stroke-width':3},g);
+ mk('rect',{x:x,y:y,width:130,height:110,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':5},g)}
+const FE=[];for(let i=0;i<6;i++){const l=mk('line',{x1:800,y1:470,stroke:'var(--loss)','stroke-width':3,'stroke-dasharray':'6 6'},$('m_fe'));FE.push([mk('circle',{r:16},$('m_fe')),l])}
+const RG=[];for(let i=0;i<14;i++)RG.push(mk('line',{stroke:'var(--line)','stroke-width':5,'stroke-linecap':'round'},$('n_rg')));
+const QW={v:440};function qm(){try{const v=$('q_oldt').getComputedTextLength();if(v>0)QW.v=v}catch(e){}}
+qm();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(qm);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('t_tool'),p(u,TM.stone_tool,TM.stone_tool+.5));
+$('t_arc').setAttribute('stroke-dashoffset',1-p(u,TM.stone_tool+.8,TM.stone_tool+1.6));
+rise($('t_atom'),p(u,TM.stone_tool+1.4,TM.stone_tool+2));
+$('t_orb').setAttribute('transform','rotate('+((t*40)%360).toFixed(1)+' 1410 320)');
+rise($('t_face'),p(u,TM.stone_tool+3.8,TM.stone_tool+4.3));
+
+rise($('p_chart'),p(u,TM.ape_to_rocket,TM.ape_to_rocket+.5));
+$('p_curve').setAttribute('stroke-dashoffset',1-p(u,TM.ape_to_rocket+.5,TM.ape_to_rocket+4));
+rise($('p_rocket'),p(u,TM.ape_to_rocket+3.6,TM.ape_to_rocket+4.2));
+$('p_flame').setAttribute('opacity',(.5+.5*Math.abs(Math.sin(t*9))).toFixed(2));
+rise($('p_meter'),p(u,TM.happy_meter,TM.happy_meter+.5));
+$('p_needle').setAttribute('transform','rotate('+(25*Math.sin(t*1.7)+10*Math.sin(t*3.1)).toFixed(1)+' 1220 560)');
+rise($('p_q'),p(u,TM.happy_meter+7,TM.happy_meter+7.6));
+
+rise($('h_head'),p(u,TM.brain,TM.brain+.5));
+$('h_mol').setAttribute('opacity',p(u,TM.brain+.8,TM.brain+1.6));
+MOL.forEach((c,i)=>c.setAttribute('cy',(MP[i][1]+4*Math.sin(t*2+i)).toFixed(1)));
+rise($('h_th'),p(u,TM.thermostat,TM.thermostat+.5));
+rise($('h_chart'),p(u,TM.thermostat,TM.thermostat+.5));
+rise($('h_wl'),p(u,TM.thermostat+1,TM.thermostat+1.6));
+$('h_mood').setAttribute('stroke-dashoffset',1-p(u,TM.thermostat+.4,TM.thermostat+2.4));
+rise($('h_b0'),p(u,TM.thermostat+6.2,TM.thermostat+6.8));rise($('h_b1'),p(u,TM.thermostat+7.4,TM.thermostat+8));
+
+[TM.bar_level,TM.upward_arrow,TM.upward_arrow+1.2].forEach((a,i)=>{const k=p(u,a,a+.8),h=EH[i]*k,e=p(u,a+.6,a+1.4);
+ BR[i].setAttribute('y',740-h);BR[i].setAttribute('height',h);
+ EL[i].setAttribute('transform','translate(0 '+(740-(740-EX[i])*e).toFixed(1)+')');EL[i].setAttribute('opacity',e>0?1:0)});
+rise($('e_st0'),p(u,TM.bar_level+1.4,TM.bar_level+1.9));
+rise($('e_st1'),p(u,TM.upward_arrow+2.4,TM.upward_arrow+2.9));rise($('e_st2'),p(u,TM.upward_arrow+2.6,TM.upward_arrow+3.1));
+rise($('e_arr'),p(u,TM.upward_arrow+1.8,TM.upward_arrow+2.4));
+rise($('e_txt'),p(u,TM.upward_arrow+3.4,TM.upward_arrow+4));
+
+CG.forEach((g,i)=>{const a=TM.chicken_cage+i*.25;rise(g,p(u,a,a+.4))});
+rise($('c_lbl'),p(u,TM.chicken_cage+4.6,TM.chicken_cage+5.1));
+rise($('c_scale'),p(u,TM.scale,TM.scale+.5));
+const deg=12*p(u,TM.scale+.6,TM.scale+1.8),rad=deg*Math.PI/180,cx=240*Math.cos(rad),cy=240*Math.sin(rad);
+$('c_beam').setAttribute('transform','rotate('+deg.toFixed(2)+' 1120 330)');
+$('c_panL').setAttribute('transform','translate('+(1120-cx).toFixed(1)+' '+(330-cy).toFixed(1)+')');
+$('c_panR').setAttribute('transform','translate('+(1120+cx).toFixed(1)+' '+(330+cy).toFixed(1)+')');
+rise($('c_txt'),p(u,TM.scale+1.5,TM.scale+2.1));
+
+rise($('m_monk'),p(u,TM.monk,TM.monk+.5));rise($('m_crave'),p(u,TM.monk+.8,TM.monk+1.3));
+const rel=p(u,TM.open_hands+.3,TM.open_hands+2.3),fk=p(u,TM.monk+.6,TM.monk+1.2),tf=1-p(u,TM.open_hands,TM.open_hands+.8);
+FE.forEach(([c,l],i)=>{const a=i*Math.PI/3+t*.5,r=230+90*rel,x=(800+r*Math.cos(a)).toFixed(1),y=(500+r*Math.sin(a)).toFixed(1);
+ c.setAttribute('cx',x);c.setAttribute('cy',y);c.setAttribute('opacity',(fk*(1-rel)).toFixed(2));c.setAttribute('class',u>=TM.open_hands?'gain':'loss');
+ l.setAttribute('x2',x);l.setAttribute('y2',y);l.setAttribute('opacity',(fk*tf).toFixed(2))});
+rise($('m_hands'),p(u,TM.open_hands,TM.open_hands+.5));rise($('m_let'),p(u,TM.open_hands+1,TM.open_hands+1.5));
+$('m_halo').setAttribute('opacity',p(u,TM.open_hands+.8,TM.open_hands+1.8));$('m_halo').setAttribute('transform','rotate('+((t*10)%360).toFixed(1)+' 800 500)');
+rise($('m_txt'),p(u,TM.open_hands+7,TM.open_hands+7.6));
+
+rise($('n0'),p(u,TM.green_rabbit,TM.green_rabbit+.5));rise($('n1'),p(u,TM.dna_strand,TM.dna_strand+.5));rise($('n2'),p(u,TM.cyborg,TM.cyborg+.5));
+$('n_glow').setAttribute('r',(150+8*Math.sin(t*2)).toFixed(1));
+let da='',db='';for(let y=280;y<=620;y+=10){const s=70*Math.sin((y-280)/50+t*1.5);da+=(y===280?'M':'L')+(800+s).toFixed(1)+' '+y;db+=(y===280?'M':'L')+(800-s).toFixed(1)+' '+y}
+$('n_a').setAttribute('d',da);$('n_b').setAttribute('d',db);
+RG.forEach((l,i)=>{const y=290+i*24,s=70*Math.sin((y-280)/50+t*1.5);l.setAttribute('x1',(800+s).toFixed(1));l.setAttribute('x2',(800-s).toFixed(1));l.setAttribute('y1',y);l.setAttribute('y2',y)});
+
+rise($('q_old'),p(u,TM.question,TM.question+.5));
+$('q_strike').setAttribute('x2',(112+(QW.v+8)*p(u,TM.question+2,TM.question+2.6)).toFixed(1));
+rise($('q_new'),p(u,TM.question+5,TM.question+5.6));
+rise($('g_god'),p(u,TM.gods_cloud,TM.gods_cloud+.6));
+$('g_ndl').setAttribute('transform','rotate('+(200*Math.sin(t*.9)+90*Math.sin(t*2.3)).toFixed(1)+' 1200 680)');
+$('g_bolt').setAttribute('opacity',(t%2.4)<.3?1:.35);
+rise($('g_txt'),p(u,TM.gods_cloud+1,TM.gods_cloud+1.6));
+
+rise($('z_top'),p(u,TM.mirror,TM.mirror+.5));rise($('z_mir'),p(u,TM.mirror+.3,TM.mirror+.9));
+$('z_ref').setAttribute('transform','translate('+(6*Math.sin(t*1.2)).toFixed(1)+' 0)');
+rise($('z_a'),p(u,TM.mirror+4.2,TM.mirror+4.7));rise($('z_b'),p(u,TM.mirror+4.6,TM.mirror+5.1));rise($('z_c'),p(u,TM.mirror+5,TM.mirror+5.5));
+rise($('z_bot'),p(u,TM.mirror+5.8,TM.mirror+6.3));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.72;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

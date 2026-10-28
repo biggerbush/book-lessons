@@ -1,0 +1,305 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outliers Lesson 8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 8 of Outliers: Plane crashes are often linked to cultural habits of deference, and airlines like Korean Air became safer by teaching crews to speak up directly. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIERS · LESSON 8</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Culture in</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the Cockpit.</text>
+<text class="b" x="120" y="600" font-size="32">Why polite hints can bring down planes,</text>
+<text class="b" x="120" y="644" font-size="32">and how one airline changed.</text>
+<path class="s-ink" d="M900 250H1480L1440 480H940Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path id="mtn" class="loss" d="M960 480L1080 350L1150 420L1240 320L1420 480Z"/>
+<path class="s-ink" d="M900 250H1480L1440 480H940ZM1190 250V480" fill="none" stroke-width="7" stroke-linejoin="round"/>
+<g id="pilots"></g>
+<g id="hint0"><rect class="s-muted" x="1372" y="500" width="100" height="56" rx="14" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><text class="d" x="1422" y="536" font-size="36" text-anchor="middle" style="fill:var(--muted)">…</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Crashes rarely have one cause.</text>
+<text class="b" x="120" y="176" font-size="32">Small errors pile up, one after another.</text>
+<path class="s-line" d="M160 300Q900 240 1360 460" fill="none" stroke-width="4" stroke-dasharray="10 12"/>
+<g id="pl1"></g>
+<g id="errs"></g>
+<g id="boom"><path class="s-muted" d="M1180 580h50m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle class="loss" cx="1360" cy="580" r="100"/><text class="m" x="1360" y="588" font-size="22" text-anchor="middle" style="fill:var(--stage)">DISASTER</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Guam, 1997.</text>
+<text class="b" x="120" y="176" font-size="32">A Korean Air jet crashed approaching the island at night.</text>
+<rect class="s-line" x="120" y="220" width="660" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="s-muted" cx="700" cy="290" r="26" fill="none" stroke-width="5"/>
+<g id="isl"><path class="ink" d="M300 740Q500 540 740 740Z"/><text class="m" x="520" y="612" font-size="22" text-anchor="middle">GUAM</text></g>
+<g id="pl2"></g>
+<g id="cld"><circle class="loss" cx="410" cy="330" r="40"/><circle class="loss" cx="465" cy="305" r="50"/><circle class="loss" cx="525" cy="335" r="36"/><rect class="loss" x="380" y="330" width="170" height="42" rx="21"/></g>
+<g id="rain"></g>
+<g id="cap"><text class="d5" x="950" y="470" font-size="36" style="fill:var(--muted)">Z z</text><text class="m" x="900" y="704" font-size="18" text-anchor="middle">CAPTAIN</text></g>
+<g id="fo"><text class="m" x="1100" y="704" font-size="18" text-anchor="middle">FIRST OFFICER</text></g>
+<g id="fe"><text class="m" x="1340" y="704" font-size="18" text-anchor="middle">FLIGHT ENGINEER</text></g>
+<g id="hb0"><rect class="s-muted" x="1010" y="380" width="180" height="70" rx="16" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><text class="b" x="1100" y="424" font-size="26" text-anchor="middle">the rain…</text></g>
+<g id="hb1"><rect class="s-muted" x="1250" y="380" width="180" height="70" rx="16" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><text class="b" x="1340" y="424" font-size="26" text-anchor="middle">the rain…</text></g>
+<g id="unsaid"><text class="d" x="120" y="812" font-size="44">Neither one said the danger out loud.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Mitigated speech.</text>
+<text class="b" x="120" y="176" font-size="32">Softening a message to sound polite or respectful.</text>
+<g id="spk"><circle class="ink" cx="200" cy="360" r="32"/><path class="ink" d="M152 494v-42a48 48 0 0 1 96 0v42z"/></g>
+<g id="bA"><rect class="s-ink" x="300" y="230" width="280" height="120" rx="20" fill="var(--stage)" stroke-width="6"/><text class="d" x="440" y="324" font-size="90" text-anchor="middle" style="fill:var(--gain)">!</text><text class="m" x="300" y="384" font-size="20">DIRECT</text></g>
+<g id="bB"><path class="s-muted" d="M440 396v38m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-muted" x="320" y="450" width="240" height="90" rx="20" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><text class="d" x="440" y="506" font-size="56" text-anchor="middle" style="fill:var(--muted)">…</text><text class="m" x="320" y="580" font-size="20">SOFTENED</text></g>
+<g id="rails"><path class="s-ink" d="M960 250V760M1240 250V760" stroke-width="8" stroke-linecap="round"/></g>
+<g id="rungs"></g>
+<g id="lblT"><text class="m" x="1270" y="298" font-size="20" style="fill:var(--gain)">BLUNT COMMAND</text></g>
+<g id="lblB"><text class="m" x="1270" y="738" font-size="20">VAGUE HINT</text></g>
+<g id="miss"><text class="d" x="120" y="832" font-size="40">A hint is easy to miss when a captain is struggling.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Power distance.</text>
+<text class="b" x="120" y="176" font-size="32">Researcher Geert Hofstede measured it across cultures.</text>
+<g id="pd"><path class="s-line" d="M120 270H1480" stroke-width="8" stroke-linecap="round"/><g id="ticks"></g><text class="m" x="120" y="316" font-size="20">LOW</text><text class="m" x="1480" y="316" font-size="20" text-anchor="end">HIGH</text><circle id="pdm" class="gain" cx="800" cy="270" r="18"/></g>
+<g id="def"><text class="d5" x="120" y="386" font-size="38">How much people defer to those above them.</text></g>
+<g id="lowp"><rect class="s-line" x="120" y="430" width="640" height="350" rx="18" fill="var(--stage)" stroke-width="3"/><path class="s-line" d="M160 720H720" stroke-width="4"/><path class="s-gain" d="M380 577H500" stroke-width="5" stroke-dasharray="8 8"/><text class="m" x="440" y="760" font-size="18" text-anchor="middle">LOW POWER DISTANCE</text></g>
+<g id="hip"><rect class="s-line" x="840" y="430" width="640" height="350" rx="18" fill="var(--stage)" stroke-width="3"/><path class="s-line" d="M880 720H1440" stroke-width="4"/><rect class="ink" x="1220" y="620" width="180" height="100"/><text class="m" x="1160" y="760" font-size="18" text-anchor="middle">HIGH POWER DISTANCE</text></g>
+<g id="nochal"><rect class="s-loss" x="900" y="470" width="140" height="70" rx="16" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><text class="d" x="970" y="524" font-size="50" text-anchor="middle" style="fill:var(--loss)">!</text><path class="s-loss" d="M890 545L1050 465" stroke-width="6" stroke-linecap="round"/></g>
+<g id="chal"><text class="d" x="120" y="836" font-size="40">Challenging a boss feels wrong, even in an emergency.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not just one country.</text>
+<text class="b" x="120" y="176" font-size="32">A Colombian crew in 1990 ran out of fuel near New York.</text>
+<g id="gauge"><path class="s-ink" d="M200 540A200 200 0 0 1 600 540" fill="none" stroke-width="10" stroke-linecap="round"/><path class="s-loss" d="M200 540A200 200 0 0 1 219 456" fill="none" stroke-width="16" stroke-linecap="round"/><text class="d" x="200" y="592" font-size="36" text-anchor="middle" style="fill:var(--loss)">E</text><text class="d" x="600" y="592" font-size="36" text-anchor="middle">F</text><line id="needle" class="s-ink" x1="400" y1="540" x2="570" y2="540" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="400" cy="540" r="16"/><text class="m" x="400" y="630" font-size="20" text-anchor="middle">FUEL</text></g>
+<g id="cop"><text class="m" x="820" y="690" font-size="18" text-anchor="middle">CO-PILOT</text></g>
+<g id="em"><rect class="s-muted" x="860" y="300" width="320" height="80" rx="18" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><text class="d5" x="1020" y="354" font-size="36" text-anchor="middle" fill-opacity=".4">EMERGENCY</text><text class="m" x="1020" y="416" font-size="18" text-anchor="middle" style="fill:var(--loss)">NEVER CLEARLY SAID</text></g>
+<g id="waves"></g>
+<g id="tower"><rect class="ink" x="1320" y="440" width="40" height="280"/><path class="ink" d="M1290 440h100l-15-50h-70z"/><text class="m" x="1340" y="760" font-size="18" text-anchor="middle">AIR TRAFFIC CONTROL</text></g>
+<g id="muff"><text class="d" x="120" y="824" font-size="42">Here too, deference to authority muffled the warning.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The fix.</text>
+<text class="b" x="120" y="176" font-size="32">Korean Air brought in outside help to rebuild its training.</text>
+<g id="c1"><rect class="s-line" x="120" y="220" width="580" height="200" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="280" font-size="20">OUTSIDE HELP</text><path class="s-muted" d="M160 345h140m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="gain" x="330" y="300" width="340" height="90" rx="16"/><text class="d5" x="500" y="357" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">New training</text></g>
+<g id="c2"><rect class="s-line" x="760" y="220" width="720" height="200" rx="18" fill="var(--stage)" stroke-width="3"/><path class="ink" d="M870 300c-25-16-55-16-70-8v80c15-8 45-8 70 8 25-16 55-16 70-8v-80c-15-8-45-8-70 8z"/><path d="M870 300v80" stroke="var(--stage)" stroke-width="4"/><text class="d" x="980" y="330" font-size="56">English</text><text class="m" x="980" y="370" font-size="18">WITHOUT THE SAME BUILT-IN</text><text class="m" x="980" y="398" font-size="18">LEVELS OF RESPECT</text></g>
+<g id="pil"><path class="s-line" d="M400 780H1200" stroke-width="4"/><rect id="blkC" class="ink" x="480" y="620" width="160" height="160"/><rect id="blkJ" class="ink" x="960" y="760" width="160" height="20"/><text class="m" x="460" y="770" font-size="20" text-anchor="end">CAPTAIN</text><text class="m" x="1140" y="770" font-size="20">JUNIOR PILOT</text></g>
+<g id="eqf"><path class="s-gain" d="M610 584H990" stroke-width="5" stroke-dasharray="8 8"/><text class="m" x="800" y="566" font-size="20" text-anchor="middle" style="fill:var(--gain)">EQUAL FOOTING</text></g>
+<g id="spk6"><text class="m" x="800" y="842" font-size="22" text-anchor="middle" style="fill:var(--gain)">JUNIOR PILOTS SPEAK UP CLEARLY AND DIRECTLY</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Culture can change.</text>
+<text class="b" x="120" y="176" font-size="32">Korean Air went on to become a safe, respected airline.</text>
+<g id="badge"><path class="gain" d="M330 340L430 380V470Q430 560 330 600Q230 560 230 470V380Z"/><path d="M285 470l30 30 55-60" fill="none" stroke="var(--on-gain)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="330" y="650" font-size="20" text-anchor="middle">SAFE · RESPECTED</text></g>
+<g id="team"><circle id="tc" cx="800" cy="470" r="140" fill="none" stroke="var(--line)" stroke-width="5"/><g id="tpl"></g><text class="m" x="800" y="690" font-size="20" text-anchor="middle">CULTURE SHAPES US</text></g>
+<g id="seeit"><text class="d5" x="800" y="462" font-size="34" text-anchor="middle">See it.</text><text class="d" x="800" y="504" font-size="34" text-anchor="middle" style="fill:var(--gain)">Change it.</text></g>
+<g id="clr"><rect class="gain" x="1080" y="330" width="400" height="120" rx="20"/><path class="gain" d="M1150 448l10 42 34-42z"/><text class="d" x="1280" y="406" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">Say it plainly.</text></g>
+<g id="habit"><text class="d" x="120" y="812" font-size="44">That habit can make your own team safer too.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="q0"><text class="m" x="143" y="230" font-size="22">THINK OF A TIME YOU HINTED WHEN YOU SHOULD HAVE SPOKEN DIRECTLY</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What would you say,</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">if you had to say it</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">clearly</tspan>, today?</text></g>
+<g id="hq1"><rect class="s-muted" x="1240" y="280" width="180" height="90" rx="18" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><text class="d" x="1330" y="336" font-size="48" text-anchor="middle" style="fill:var(--muted)">…</text></g>
+<g id="hq2"><path class="s-muted" d="M1330 390v50m-16-16 16 16 16-16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><rect class="gain" x="1220" y="460" width="220" height="120" rx="20"/><text class="d" x="1330" y="550" font-size="84" text-anchor="middle" style="fill:var(--on-gain)">!</text></g>
+<g id="ql"><text class="m" x="143" y="700" font-size="26">SAY IT PLAINLY, NOT AS A HINT</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Culture in the Cockpit&rdquo;, from <em>Outliers</em> by Malcolm Gladwell. Examples as reported in the book: the 1997 Korean Air crash on Guam, the 1990 Colombian airliner that ran out of fuel near New York, and Geert Hofstede&#x27;s work on power distance. The error chain, the ladder of speech and the power distance scale are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-08.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 8.5], [8.5, 24.1], [24.1, 42.4], [42.4, 58.6], [58.6, 74.8], [74.8, 89.5], [89.5, 106.6], [106.6, 124.2], [124.2, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Small Errors Add Up", "The Guam Crash", "Mitigated Speech", "Power Distance", "Not Just One Country", "The Fix", "The Turnaround", "Your Turn"];
+const TM={"cockpit": 0.0, "plane": 8.76, "error_chain": 13.92, "tired_crew": 18.52, "guam_island": 24.4, "rain_cloud": 30.32, "first_officer": 33.76, "speech_bubble": 42.72, "ladder": 49.76, "scale": 58.88, "boss_desk": 68.16, "fuel_gauge": 75.12, "radio": 81.2, "airline_logo": 89.84, "english_book": 93.76, "raised_hand": 103.12, "safety_badge": 106.88, "team_circle": 110.72, "clear_voice": 117.2};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const plane=(g,c)=>{mk('rect',{x:-60,y:-10,width:120,height:20,rx:10,class:c},g);mk('path',{d:'M-8 -8L-34 -50H-16L22 -8ZM-8 8L-34 50H-16L22 8ZM-56 -8L-70 -32H-56L-38 -8Z',class:c},g)};
+fig($('pilots'),1080,580,40,'ink');fig($('pilots'),1320,580,40,'ink');
+const P1=mk('g',{},$('pl1'));plane(P1,'ink');
+const ER=[['BAD WEATHER',''],['TIRED CREW',''],['SLIP IN','COMMUNICATION']].map((l,i)=>{const x=120+i*360,g=mk('g',{},$('errs'));
+ mk('rect',{x:x,y:520,width:320,height:120,rx:16,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);
+ const a=mk('text',{x:x+160,y:588,'font-size':22,'text-anchor':'middle',class:'m'},g),b=mk('text',{x:x+160,y:604,'font-size':22,'text-anchor':'middle',class:'m'},g);
+ if(i<2)mk('text',{x:x+340,y:596,'font-size':44,'text-anchor':'middle',class:'d'},g).textContent='+';return [g,a,b,l]});
+const P2=mk('g',{},$('pl2'));plane(P2,'ink');
+const RN=[];for(let i=0;i<9;i++)RN.push(mk('path',{class:'s-loss','stroke-width':4,'stroke-linecap':'round'},$('rain')));
+fig($('cap'),900,520,34,'ink');fig($('fo'),1100,520,34,'ink');fig($('fe'),1340,520,34,'ink');
+const RG=[];for(let i=0;i<6;i++){const y=290+i*88;RG.push(mk('path',{d:'M960 '+y+'H1240',stroke:i===0?'var(--gain)':i===5?'var(--loss)':'var(--muted)','stroke-width':12-i*1.6,'stroke-linecap':'round','stroke-dasharray':i>2?'14 '+(i*4):'none'},$('rungs')))}
+for(let i=0;i<9;i++)mk('path',{d:'M'+(120+i*170)+' 254v32',class:'s-line','stroke-width':4},$('ticks'));
+fig($('lowp'),330,577,34,'ink');fig($('lowp'),550,577,34,'ink');
+fig($('hip'),1310,477,34,'ink');fig($('hip'),970,611,26,'ink');
+fig($('cop'),820,500,32,'ink');
+const WV=[];for(let i=0;i<4;i++)WV.push(mk('path',{class:'s-ink',fill:'none','stroke-width':6,'stroke-linecap':'round'},$('waves')));
+const CG=mk('g',{},$('pil')),JG=mk('g',{},$('pil'));fig(CG,0,0,30,'ink');fig(JG,0,0,30,'ink');
+const AR=mk('g',{},JG);mk('path',{d:'M34 70L58 -6',class:'s-ink','stroke-width':12,'stroke-linecap':'round'},AR);mk('circle',{cx:58,cy:-16,r:12,class:'ink'},AR);
+mk('rect',{x:80,y:-90,width:120,height:70,rx:16,class:'gain'},AR);mk('text',{x:140,y:-36,'font-size':56,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'},AR).textContent='!';
+const TP=[];for(let i=0;i<6;i++){const a=-Math.PI/2+i*Math.PI/3;TP.push([mk('circle',{cx:800+140*Math.cos(a),cy:470+140*Math.sin(a),r:22,class:'ink'},$('tpl')),470+140*Math.sin(a)])}
+fig($('clr'),1160,540,30,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const mt=p(u,TM.cockpit,TM.cockpit+8);$('mtn').setAttribute('transform','translate(1190 480) scale('+(.6+.4*mt).toFixed(3)+') translate(-1190 -480)');
+$('mtn').setAttribute('opacity',u>=TM.cockpit+6.2?(.7+.3*Math.sin(t*5)).toFixed(2):1);
+rise($('pilots'),p(u,TM.cockpit,TM.cockpit+.6));rise($('hint0'),p(u,TM.cockpit+2.5,TM.cockpit+3));
+
+const k=.85*p(u,TM.plane,TM.tired_crew+3),q=1-k,bx=q*q*160+2*q*k*900+k*k*1360,by=q*q*300+2*q*k*240+k*k*460,dx=q*740+k*460,dy=-q*60+k*220;
+P1.setAttribute('transform','translate('+bx.toFixed(1)+' '+by.toFixed(1)+') rotate('+(Math.atan2(dy,dx)*57.3).toFixed(1)+')');
+rise($('pl1'),p(u,TM.plane,TM.plane+.5));
+ER.forEach((e,i)=>{const a=TM.error_chain+i*.6;rise(e[0],p(u,a,a+.4));const on=u>=TM.tired_crew+i*.7,two=on&&e[3][1]!=='';
+ e[1].textContent=on?e[3][0]:'SMALL ERROR';e[2].textContent=two?e[3][1]:'';e[1].setAttribute('y',two?574:588)});
+rise($('boom'),p(u,TM.tired_crew+2.6,TM.tired_crew+3.1));
+
+rise($('isl'),p(u,TM.guam_island,TM.guam_island+.5));rise($('pl2'),p(u,TM.guam_island+.3,TM.guam_island+.8));
+const g2=p(u,TM.guam_island+.3,TM.guam_island+6);P2.setAttribute('transform','translate('+(180+260*g2).toFixed(1)+' '+(260+240*g2).toFixed(1)+') rotate(35) scale(.6)');
+rise($('cld'),p(u,TM.rain_cloud,TM.rain_cloud+.5));$('rain').setAttribute('opacity',p(u,TM.rain_cloud+.3,TM.rain_cloud+.9));
+RN.forEach((l,i)=>{const x=395+i*16,y=385+((t*260+i*47)%150);l.setAttribute('d','M'+x+' '+y.toFixed(1)+'l-6 22')});
+rise($('cap'),p(u,TM.rain_cloud+1.8,TM.rain_cloud+2.3));rise($('fo'),p(u,TM.first_officer,TM.first_officer+.5));rise($('fe'),p(u,TM.first_officer+.6,TM.first_officer+1.1));
+rise($('hb0'),p(u,TM.first_officer+2.5,TM.first_officer+3));rise($('hb1'),p(u,TM.first_officer+3.3,TM.first_officer+3.8));
+rise($('unsaid'),p(u,TM.first_officer+6.5,TM.first_officer+7.1));
+
+rise($('spk'),p(u,TM.speech_bubble,TM.speech_bubble+.5));rise($('bA'),p(u,TM.speech_bubble+.3,TM.speech_bubble+.8));rise($('bB'),p(u,TM.speech_bubble+2.5,TM.speech_bubble+3));
+rise($('rails'),p(u,TM.ladder,TM.ladder+.5));RG.forEach((r,i)=>{const a=TM.ladder+.3+i*.3;r.setAttribute('opacity',p(u,a,a+.3))});
+rise($('lblT'),p(u,TM.ladder+.6,TM.ladder+1.1));rise($('lblB'),p(u,TM.ladder+2,TM.ladder+2.5));
+RG[5].setAttribute('stroke-width',u>=TM.ladder+7?(4+3*Math.abs(Math.sin(t*4))).toFixed(1):4);rise($('miss'),p(u,TM.ladder+7,TM.ladder+7.6));
+
+rise($('pd'),p(u,TM.scale,TM.scale+.5));$('pdm').setAttribute('cx',(800+560*Math.sin(t*.7)).toFixed(1));
+rise($('def'),p(u,TM.scale+4.9,TM.scale+5.4));rise($('lowp'),p(u,TM.scale+5.4,TM.scale+5.9));
+rise($('hip'),p(u,TM.boss_desk,TM.boss_desk+.5));rise($('nochal'),p(u,TM.boss_desk+1.2,TM.boss_desk+1.7));rise($('chal'),p(u,TM.boss_desk+2,TM.boss_desk+2.6));
+
+rise($('gauge'),p(u,TM.fuel_gauge,TM.fuel_gauge+.5));
+const fa=Math.PI*.97*p(u,TM.fuel_gauge+.5,TM.fuel_gauge+4.5);$('needle').setAttribute('x2',(400+170*Math.cos(fa)).toFixed(1));$('needle').setAttribute('y2',(540-170*Math.sin(fa)).toFixed(1));
+rise($('cop'),p(u,TM.radio,TM.radio+.5));rise($('tower'),p(u,TM.radio+.3,TM.radio+.8));rise($('em'),p(u,TM.radio+1.5,TM.radio+2));
+const rd=p(u,TM.radio+.6,TM.radio+1.2);WV.forEach((w,i)=>{const ph=(t*90+i*100)%400,x=890+ph;w.setAttribute('d','M'+x.toFixed(1)+' 460Q'+(x+26).toFixed(1)+' 500 '+x.toFixed(1)+' 540');w.setAttribute('opacity',(rd*(1-ph/400)*.9).toFixed(2))});
+rise($('muff'),p(u,TM.radio+5,TM.radio+5.6));
+
+rise($('c1'),p(u,TM.airline_logo,TM.airline_logo+.5));rise($('c2'),p(u,TM.english_book,TM.english_book+.5));rise($('pil'),p(u,TM.airline_logo+1.5,TM.airline_logo+2));
+const eq=p(u,TM.english_book+6.2,TM.english_book+7.4),hc=160-90*eq,hj=20+50*eq;
+$('blkC').setAttribute('y',(780-hc).toFixed(1));$('blkC').setAttribute('height',hc.toFixed(1));$('blkJ').setAttribute('y',(780-hj).toFixed(1));$('blkJ').setAttribute('height',hj.toFixed(1));
+CG.setAttribute('transform','translate(560 '+(654-hc).toFixed(1)+')');JG.setAttribute('transform','translate(1040 '+(654-hj).toFixed(1)+')');
+rise($('eqf'),p(u,TM.english_book+7.2,TM.english_book+7.7));rise(AR,p(u,TM.raised_hand,TM.raised_hand+.5));rise($('spk6'),p(u,TM.raised_hand+1,TM.raised_hand+1.5));
+
+rise($('badge'),p(u,TM.safety_badge,TM.safety_badge+.5));rise($('team'),p(u,TM.team_circle,TM.team_circle+.5));
+TP.forEach((c,i)=>c[0].setAttribute('cy',(c[1]+5*Math.sin(t*2+i)).toFixed(1)));
+$('tc').setAttribute('stroke',u>=TM.team_circle+3.5?'var(--gain)':'var(--line)');rise($('seeit'),p(u,TM.team_circle+3.5,TM.team_circle+4));
+rise($('clr'),p(u,TM.clear_voice,TM.clear_voice+.5));rise($('habit'),p(u,TM.clear_voice+4.1,TM.clear_voice+4.7));
+
+const S8=SC[8][0]/K;rise($('q0'),p(u,S8+.3,S8+.8));rise($('hq1'),p(u,S8+.8,S8+1.3));
+rise($('qa'),p(u,S8+4.5,S8+5));rise($('qb'),p(u,S8+4.9,S8+5.4));rise($('qc'),p(u,S8+5.3,S8+5.8));rise($('hq2'),p(u,S8+5.8,S8+6.3));rise($('ql'),p(u,S8+6.5,S8+7));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.28;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

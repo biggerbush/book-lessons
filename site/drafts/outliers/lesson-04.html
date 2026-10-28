@@ -1,0 +1,381 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outliers Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Outliers: The year you are born can matter enormously, as shown by how many tech pioneers were born in the mid-1950s. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIERS · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Born at the</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">right moment.</text>
+<text class="b" x="120" y="600" font-size="32">Why the year you arrive can open or close doors</text>
+<g id="cal">
+<rect class="s-ink" x="1120" y="270" width="320" height="300" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="1120" y="270" width="320" height="84" rx="16"/>
+<rect class="gain" x="1120" y="320" width="320" height="34"/>
+<rect class="ink" x="1180" y="246" width="16" height="48" rx="8"/>
+<rect class="ink" x="1364" y="246" width="16" height="48" rx="8"/>
+<text class="m" x="1280" y="322" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">YOUR BIRTHDAY</text>
+<text id="day" class="d" x="1280" y="520" font-size="150" text-anchor="middle">14</text>
+<text id="yr" class="d" x="1280" y="505" font-size="104" text-anchor="middle" style="fill:var(--gain)" opacity="0">1955</text>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A famous pattern.</text>
+<text class="b" x="120" y="176" font-size="32">Look at when these tech pioneers were born.</text>
+<g id="cards"></g>
+<g id="clu">
+<path class="s-gain" d="M150 690v20h1300v-20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="120" y="800" font-size="46">Gladwell: this cluster is no coincidence.</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The spark: January 1975.</text>
+<text class="b" x="120" y="176" font-size="32">A hobby magazine put a home computer kit on its cover.</text>
+<g id="mag">
+<rect class="s-ink" x="160" y="220" width="380" height="500" rx="8" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="160" y="220" width="380" height="84"/>
+<text class="m" x="350" y="258" font-size="22" text-anchor="middle" style="fill:var(--stage)">HOBBY MAGAZINE</text>
+<text class="m" x="350" y="290" font-size="20" text-anchor="middle" style="fill:var(--gain)">JANUARY 1975</text>
+<rect class="s-ink" x="200" y="380" width="300" height="160" rx="8" fill="var(--stage)" stroke-width="5"/>
+<g id="lights"></g>
+<text class="d" x="350" y="630" font-size="52" text-anchor="middle">ALTAIR</text>
+<text class="m" x="350" y="676" font-size="20" text-anchor="middle">HOME COMPUTER KIT</text>
+</g>
+<g id="rays"></g>
+<g id="rev">
+<path class="s-muted" d="M820 470h40m-16-16 16 16-16 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="890" y="420" font-size="52">The start of the</text>
+<text class="d" x="890" y="484" font-size="52">personal computer</text>
+<text class="d" x="890" y="548" font-size="52" style="fill:var(--gain)">revolution.</text>
+</g>
+<g id="who"><text class="d" x="120" y="800" font-size="46">Who was perfectly placed to jump in?</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Born much earlier? Too settled.</text>
+<text class="b" x="120" y="176" font-size="32">A steady life built around big mainframe computers.</text>
+<g id="old"><g id="oldf"></g><text class="m" x="260" y="640" font-size="18" text-anchor="middle">BORN MUCH EARLIER</text></g>
+<g id="mf">
+<rect class="s-ink" x="420" y="300" width="220" height="300" rx="8" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="480" cy="370" r="36" fill="none" stroke-width="5"/>
+<circle class="s-ink" cx="580" cy="370" r="36" fill="none" stroke-width="5"/>
+<path class="s-line" d="M450 460h160M450 500h160M450 540h100" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="530" y="640" font-size="18" text-anchor="middle">MAINFRAME JOB</text>
+</g>
+<g id="home">
+<path class="s-ink" d="M730 600V470L830 400L930 470V600z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="ink" x="810" y="540" width="40" height="60"/>
+<g id="fam"></g>
+<text class="m" x="930" y="640" font-size="18" text-anchor="middle">HOUSE &amp; FAMILY</text>
+</g>
+<g id="settled">
+<path class="s-loss" d="M180 668v20h980v-20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="670" y="726" font-size="20" text-anchor="middle" style="fill:var(--loss)">SETTLED</text>
+</g>
+<g id="toy">
+<path class="s-loss" d="M1180 300V640" stroke-width="5" stroke-dasharray="12 10" stroke-linecap="round"/>
+<rect class="s-ink" x="1240" y="460" width="200" height="100" rx="8" fill="var(--stage)" stroke-width="5"/>
+<g id="toyl"></g>
+<text class="m" x="1340" y="640" font-size="18" text-anchor="middle">TOY COMPUTER</text>
+</g>
+<g id="reck"><text class="d" x="120" y="800" font-size="46">Quitting to tinker would feel reckless.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Born much later? Too young.</text>
+<text class="b" x="120" y="176" font-size="32">Still a child when the first wave arrived.</text>
+<g id="kid">
+<g id="kidf"></g>
+<rect class="ink" x="230" y="500" width="220" height="16" rx="4"/>
+<rect class="gain" x="300" y="488" width="60" height="12"/>
+<path class="s-ink" d="M250 516v100M430 516v100" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="340" y="670" font-size="20" text-anchor="middle">STILL A CHILD IN 1975</text>
+</g>
+<g id="wv">
+<text class="m" x="640" y="320" font-size="20">THE FIRST WAVE · 1975</text>
+<path id="wavep" class="s-gain" d="M640 460q70-120 140 0t140 0t140 0t140 0t140 0t140 0" fill="none" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g id="race">
+<path class="s-line" d="M640 640H1480" stroke-width="5" stroke-linecap="round"/>
+<circle class="loss" cx="680" cy="640" r="14"/>
+<text class="m" x="680" y="684" font-size="18" text-anchor="middle">YOU</text>
+<g id="runs"></g>
+</g>
+<g id="ahead"><text class="d" x="120" y="800" font-size="42">By the time you could, the pioneers were far ahead.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The sweet spot.</text>
+<text class="b" x="120" y="176" font-size="32">A timeline of birth years.</text>
+<g id="win">
+<rect class="gain" x="752" y="230" width="96" height="370" fill-opacity=".25"/>
+<path class="s-gain" d="M752 230V600M848 230V600" stroke-width="4"/>
+<text class="m" x="800" y="218" font-size="20" text-anchor="middle" style="fill:var(--gain)">SWEET SPOT</text>
+</g>
+<g id="tl">
+<path class="s-ink" d="M200 600H1400" stroke-width="6" stroke-linecap="round"/>
+<g id="ticks"></g>
+<text class="m" x="440" y="560" font-size="22" text-anchor="middle" style="fill:var(--loss)">TOO SETTLED</text>
+<text class="m" x="1160" y="560" font-size="22" text-anchor="middle" style="fill:var(--loss)">TOO YOUNG</text>
+</g>
+<g id="ya"><g id="yaf"></g>
+<path class="s-muted" d="M836 300H884" stroke-width="3" stroke-linecap="round"/>
+<text class="m" x="896" y="307" font-size="20">ABOUT 20 IN 1975</text>
+</g>
+<g id="pins"></g>
+<g id="nm"><text class="m" x="800" y="700" font-size="20" text-anchor="middle" style="fill:var(--gain)">GATES · JOBS · SCHMIDT · JOY</text></g>
+<g id="oe"><text class="d5" x="120" y="776" font-size="38">Old enough to grasp the moment,</text></g>
+<g id="ye"><text class="d5" x="120" y="830" font-size="38">young enough to have nothing to lose.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">It happened before.</text>
+<text class="b" x="120" y="176" font-size="32">The same pattern, a century earlier.</text>
+<g id="grid"><text class="m" x="134" y="500" font-size="20">THE 75 RICHEST PEOPLE IN HISTORY</text></g>
+<g id="big">
+<text id="n14" class="d" x="900" y="370" font-size="150" style="fill:var(--gain)">14</text>
+<text class="d5" x="900" y="456" font-size="40">of the 75 richest</text>
+<text class="m" x="900" y="496" font-size="20">AMERICANS, BORN WITHIN ABOUT</text>
+<text class="m" x="900" y="526" font-size="20">NINE YEARS, IN THE 1830s</text>
+</g>
+<g id="railg">
+<path class="s-ink" d="M140 660H1460" stroke-width="6" stroke-linecap="round"/>
+<g id="ties"></g>
+<g id="loco">
+<rect class="ink" x="0" y="-76" width="140" height="46" rx="6"/>
+<rect class="ink" x="110" y="-110" width="56" height="80" rx="4"/>
+<rect class="ink" x="20" y="-104" width="22" height="28"/>
+<circle class="gain" cx="30" cy="-16" r="16"/><circle class="gain" cx="80" cy="-16" r="16"/><circle class="gain" cx="135" cy="-16" r="16"/>
+</g>
+<text class="m" x="140" y="716" font-size="20">RAILROADS &amp; BIG INDUSTRY</text>
+</g>
+<g id="names"><text class="d" x="120" y="810" font-size="44">John D. Rockefeller · Andrew Carnegie</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Talent meets timing.</text>
+<text class="b" x="120" y="176" font-size="32">Talent needs a clock that strikes at the right hour.</text>
+<g id="tal"><g id="talf"></g><text class="m" x="260" y="640" font-size="20" text-anchor="middle">TALENT + DRIVE</text></g>
+<g id="clk">
+<circle id="face" class="s-ink" cx="760" cy="440" r="140" fill="var(--stage)" stroke-width="8"/>
+<g id="cticks"></g>
+<line id="hand" class="s-ink" x1="760" y1="440" x2="760" y2="330" stroke-width="10" stroke-linecap="round"/>
+<circle class="ink" cx="760" cy="440" r="12"/>
+<text class="m" x="760" y="640" font-size="20" text-anchor="middle">THE RIGHT HOUR</text>
+</g>
+<g id="dr">
+<rect class="gain" x="1160" y="260" width="220" height="380"/>
+<rect id="leaf" class="s-ink" x="1160" y="260" width="220" height="380" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="1160" y="260" width="220" height="380" fill="none" stroke-width="8"/>
+<g id="nearf"></g>
+<text class="m" x="1270" y="680" font-size="18" text-anchor="middle">STANDING NEAR THE DOOR</text>
+</g>
+<g id="hist"><text class="d" x="120" y="790" font-size="44">History opens doors. Only some stand near them.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">What big change is</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">unfolding right now?</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">Are you close enough</text></g>
+<g id="qd"><text class="d" x="136" y="600" font-size="80" letter-spacing="-2">to step <tspan style="fill:var(--gain)">through its door?</tspan></text></g>
+<g id="bring"><text class="m" x="143" y="720" font-size="26">AND WHO COULD YOU BRING ALONG?</text></g>
+<g id="cmp">
+<circle class="s-ink" cx="1340" cy="300" r="80" fill="var(--stage)" stroke-width="7"/>
+<g id="ndl"><path class="gain" d="M1340 240l14 60h-28z"/><path class="ink" d="M1340 360l14-60h-28z"/></g>
+<circle class="ink" cx="1340" cy="300" r="7"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="133" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:13</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Born at the Right Moment&rdquo;, from <em>Outliers</em> by Malcolm Gladwell. Examples as reported in the book: tech pioneers born in the mid-1950s, the 1975 Altair computer kit, and American tycoons born in the 1830s. Timelines, calendars and figures are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=133, SC=[[0.0, 8.2], [8.2, 27.0], [27.0, 43.1], [43.1, 57.3], [57.3, 69.1], [69.1, 87.6], [87.6, 107.9], [107.9, 121.7], [121.7, 133.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Born at the Right Moment", "A Famous Pattern", "The Spark in 1975", "Too Old", "Too Young", "The Sweet Spot", "It Happened Before", "Talent Meets Timing", "Your Window"];
+const TM={"calendar": 0.0, "bill_gates": 8.48, "steve_jobs": 11.6, "eric_schmidt": 13.2, "bill_joy": 18.12, "magazine": 27.28, "spark": 34.24, "old_engineer": 43.36, "mainframe": 46.88, "house_family": 51.04, "child": 57.6, "school_desk": 62.16, "timeline": 69.36, "young_adult": 74.08, "rich_list": 87.92, "tycoon": 91.6, "railroad": 99.36, "talent": 108.24, "clock": 111.6, "door": 115.76, "compass": 122.0};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const TX=(g,x,y,s,fs,cls,a,st)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:cls,'text-anchor':a||'start'},g);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const star=(g,cx,cy,R)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?R*.45:R;d+=(i?'L':'M')+(cx+r*Math.cos(a)).toFixed(1)+' '+(cy+r*Math.sin(a)).toFixed(1)}mk('path',{d:d+'z',class:'gain'},g)};
+const PN=[['Bill Gates','','',1955],['Steve Jobs','','',1955],['Eric Schmidt','LATER LED GOOGLE','',1955],['Bill Joy','CO-FOUNDER OF','SUN MICROSYSTEMS',1954]];
+const cards=PN.map((q,i)=>{const x=120+i*350,c=x+155,g=mk('g',{},$('cards'));mk('rect',{x:x,y:230,width:310,height:430,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);fig(g,c,280,34,'ink');TX(g,c,468,q[0],36,'d5','middle');if(q[1])TX(g,c,502,q[1],18,'m','middle');if(q[2])TX(g,c,528,q[2],18,'m','middle');TX(g,c,564,'BORN',18,'m','middle');TX(g,c,646,String(q[3]),66,'d','middle','fill:var(--gain)');return g});
+const LT=[];for(let i=0;i<8;i++){LT.push(mk('circle',{cx:230+i*34,cy:420,r:9,class:'gain'},$('lights')));mk('rect',{x:224+i*34,y:470,width:12,height:34,rx:3,class:'ink'},$('lights'))}
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(30*Math.cos(a)).toFixed(1)+' '+(30*Math.sin(a)).toFixed(1)+'L'+(90*Math.cos(a)).toFixed(1)+' '+(90*Math.sin(a)).toFixed(1),class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+mk('circle',{cx:0,cy:0,r:22,class:'gain'},$('rays'));
+fig($('oldf'),260,380,40,'ink');fig($('fam'),1000,470,22,'ink');fig($('fam'),1070,470,22,'ink');fig($('fam'),1125,510,15,'ink');
+for(let i=0;i<5;i++)mk('circle',{cx:1280+i*30,cy:510,r:8,class:'gain'},$('toyl'));
+fig($('kidf'),340,400,26,'ink');
+const RU=[];for(let i=0;i<4;i++)RU.push(mk('circle',{cy:640,r:16,class:'gain'},$('runs')));
+for(let y=1930;y<=1980;y+=10){const x=200+(y-1930)*24;mk('path',{d:'M'+x+' 590v20',class:'s-ink','stroke-width':5},$('ticks'));TX($('ticks'),x,646,String(y),22,'m','middle')}
+fig($('yaf'),800,300,26,'gain');
+const PT=[[812,580],[812,550],[812,520],[776,580]],PI=PT.map(()=>mk('circle',{cx:0,cy:0,r:12,class:'gain',stroke:'var(--stage)','stroke-width':3},$('pins')));
+const HL=[2,9,17,20,28,31,36,44,47,53,58,62,66,71],GD=[];for(let i=0;i<75;i++)GD.push(mk('circle',{cx:150+(i%15)*44,cy:260+Math.floor(i/15)*44,r:16},$('grid')));
+for(let x=160;x<=1440;x+=40)mk('path',{d:'M'+x+' 663v12',class:'s-line','stroke-width':6},$('ties'));
+fig($('talf'),260,380,40,'ink');star($('talf'),260,290,40);
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(760+112*Math.cos(a)).toFixed(1)+' '+(440+112*Math.sin(a)).toFixed(1)+'L'+(760+128*Math.cos(a)).toFixed(1)+' '+(440+128*Math.sin(a)).toFixed(1),class:'s-ink','stroke-width':i%3?4:8,'stroke-linecap':'round'},$('cticks'))}
+fig($('nearf'),1050,480,22,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('cal'),p(u,TM.calendar,TM.calendar+.6));
+const yk=p(u,TM.calendar+6.4,TM.calendar+7);$('day').setAttribute('opacity',(1-yk).toFixed(2));$('yr').setAttribute('opacity',yk.toFixed(2));
+
+[TM.bill_gates,TM.steve_jobs,TM.eric_schmidt,TM.bill_joy].forEach((a,i)=>rise(cards[i],p(u,a,a+.5)));
+rise($('clu'),p(u,TM.bill_joy+4.2,TM.bill_joy+4.8));
+
+rise($('mag'),p(u,TM.magazine,TM.magazine+.6));
+LT.forEach((c,i)=>c.setAttribute('opacity',Math.sin(t*3+i*1.7)>0?1:.3));
+const sk=p(u,TM.spark,TM.spark+.6);$('rays').setAttribute('transform','translate(720 470) scale('+(sk*(1+.08*Math.sin(t*5))).toFixed(3)+')');
+rise($('rev'),p(u,TM.spark+.4,TM.spark+1));rise($('who'),p(u,TM.spark+5,TM.spark+5.6));
+
+rise($('old'),p(u,TM.old_engineer,TM.old_engineer+.5));rise($('mf'),p(u,TM.mainframe,TM.mainframe+.5));
+rise($('home'),p(u,TM.house_family,TM.house_family+.5));rise($('settled'),p(u,TM.house_family+1.2,TM.house_family+1.8));
+rise($('toy'),p(u,TM.house_family+3,TM.house_family+3.5));rise($('reck'),p(u,TM.house_family+3.4,TM.house_family+4));
+
+rise($('kid'),p(u,TM.child,TM.child+.5));rise($('wv'),p(u,TM.school_desk,TM.school_desk+.6));
+$('wavep').setAttribute('transform','translate(0 '+(8*Math.sin(t*2)).toFixed(1)+')');
+rise($('race'),p(u,TM.school_desk+1.5,TM.school_desk+2));
+const rk=p(u,TM.school_desk+3.8,TM.school_desk+6.5);RU.forEach((c,i)=>c.setAttribute('cx',(760+i*40+560*rk).toFixed(1)));
+rise($('ahead'),p(u,TM.school_desk+3.8,TM.school_desk+4.4));
+
+rise($('tl'),p(u,TM.timeline,TM.timeline+.6));rise($('win'),p(u,TM.timeline+1.2,TM.timeline+1.8));
+rise($('ya'),p(u,TM.young_adult,TM.young_adult+.5));
+rise($('oe'),p(u,TM.young_adult+3.4,TM.young_adult+4));rise($('ye'),p(u,TM.young_adult+4.6,TM.young_adult+5.2));
+PI.forEach((c,i)=>{const a=TM.young_adult+8.7+i*.4,k=p(u,a,a+.6);c.setAttribute('cx',PT[i][0]);c.setAttribute('cy',(230+(PT[i][1]-230)*k).toFixed(1));c.setAttribute('opacity',k>0?1:0)});
+rise($('nm'),p(u,TM.young_adult+9.5,TM.young_adult+10.1));
+
+rise($('grid'),p(u,TM.rich_list,TM.rich_list+.6));
+GD.forEach((c,i)=>{const k=HL.indexOf(i);c.setAttribute('fill',k>=0&&u>=TM.tycoon+k*.1?'var(--gain)':'var(--muted)');c.setAttribute('fill-opacity',k>=0&&u>=TM.tycoon+k*.1?1:.4)});
+rise($('big'),p(u,TM.tycoon,TM.tycoon+.5));$('n14').textContent=Math.round(14*p(u,TM.tycoon,TM.tycoon+1.4));
+rise($('railg'),p(u,TM.railroad,TM.railroad+.5));
+$('loco').setAttribute('transform','translate('+(140+1140*p(u,TM.railroad,TM.railroad+5)).toFixed(1)+' 660)');
+rise($('names'),p(u,TM.railroad+5.4,TM.railroad+6));
+
+rise($('tal'),p(u,TM.talent,TM.talent+.5));rise($('clk'),p(u,TM.clock,TM.clock+.5));
+const ck=p(u,TM.clock+.3,TM.clock+2.8);$('hand').setAttribute('transform','rotate('+(-240+240*ck).toFixed(1)+' 760 440)');
+$('face').style.stroke=ck>=1?'var(--gain)':'var(--ink)';
+rise($('dr'),p(u,TM.door,TM.door+.5));$('leaf').setAttribute('width',(220*(1-.75*p(u,TM.door+.6,TM.door+2))).toFixed(1));
+rise($('hist'),p(u,TM.door+2,TM.door+2.6));
+
+rise($('qa'),p(u,TM.compass,TM.compass+.5));rise($('qb'),p(u,TM.compass+.4,TM.compass+.9));
+rise($('qc'),p(u,TM.compass+.8,TM.compass+1.3));rise($('qd'),p(u,TM.compass+1.2,TM.compass+1.7));
+rise($('cmp'),p(u,TM.compass,TM.compass+.6));$('ndl').setAttribute('transform','rotate('+(25*Math.sin(t*1.4)).toFixed(1)+' 1340 300)');
+rise($('bring'),p(u,TM.compass+7,TM.compass+7.6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:129.2;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

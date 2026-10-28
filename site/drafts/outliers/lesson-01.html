@@ -1,0 +1,345 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outliers Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Outliers: The surprising health of one small Pennsylvania town shows that success and wellbeing often come from community and context, not just individual choices. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIERS · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The Mystery</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of Roseto.</text>
+<text class="b" x="120" y="600" font-size="32">Why one small town's health puzzled doctors and rewrote success.</text>
+<path d="M960 540C1100 420 1340 420 1480 540Z" fill="var(--line)"/>
+<g id="town"></g>
+<g id="tHeart"><path id="tHP" class="gain" d="M0 120C-150 20-160-90-75-110C-35-120-8-92 0-70C8-92 35-120 75-110C160-90 150 20 0 120Z" transform="translate(1220 230) scale(.4)"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A doctor's hunch.</text>
+<text class="b" x="120" y="176" font-size="32">Late 1950s: physician Stewart Wolf hears something strange.</text>
+<g id="wolf"><text class="m" x="250" y="600" font-size="20" text-anchor="middle">STEWART WOLF</text><text class="m" x="450" y="600" font-size="20" text-anchor="middle">LOCAL DOCTOR</text></g>
+<g id="bub1"><rect class="s-ink" x="350" y="260" width="220" height="60" rx="16" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M440 318l8 24 16-24" fill="var(--stage)" stroke-width="4" stroke-linejoin="round"/><text class="m" x="460" y="297" font-size="18" text-anchor="middle">SOMETHING STRANGE</text></g>
+<g id="hearts">
+<path class="loss" transform="translate(740 420) scale(.6)" d="M0 120C-150 20-160-90-75-110C-35-120-8-92 0-70C8-92 35-120 75-110C160-90 150 20 0 120Z"/>
+<path d="M742 382l-14 28 20 18-16 34" fill="none" stroke="var(--stage)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="rHeart" class="gain" d="M0 120C-150 20-160-90-75-110C-35-120-8-92 0-70C8-92 35-120 75-110C160-90 150 20 0 120Z"/>
+<text class="m" x="740" y="540" font-size="20" text-anchor="middle">AMERICA</text><text class="m" x="740" y="568" font-size="20" text-anchor="middle" style="fill:var(--loss)">LEADING KILLER</text>
+<text class="m" x="940" y="540" font-size="20" text-anchor="middle">ROSETO</text><text class="m" x="940" y="568" font-size="20" text-anchor="middle" style="fill:var(--gain)">RARE</text>
+</g>
+<g id="italy">
+<rect class="s-ink" x="1120" y="250" width="340" height="90" rx="14" fill="var(--stage)" stroke-width="5"/><text class="m" x="1290" y="303" font-size="22" text-anchor="middle">ROSETO, ITALY</text>
+<path id="route" class="s-gain" d="M1290 340C1200 400 1380 450 1290 510" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<text class="m" x="1230" y="432" font-size="18" text-anchor="end">SETTLERS</text>
+<rect class="s-ink" x="1120" y="510" width="340" height="90" rx="14" fill="var(--stage)" stroke-width="5"/><text class="m" x="1290" y="563" font-size="20" text-anchor="middle">ROSETO, PENNSYLVANIA</text>
+<circle id="ship" class="gain" r="12"/>
+</g>
+<g id="why"><text class="d5" x="120" y="760" font-size="44">Why were Roseto's hearts so healthy?</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">They broke every rule.</text>
+<g id="sub2"><text class="b" x="120" y="176" font-size="32">Wolf and his team studied the town closely.</text></g>
+<g id="chart">
+<text class="m" x="120" y="270" font-size="22">HEART DEATHS UNDER 55 (SCHEMATIC)</text>
+<path class="s-ink" d="M200 320V680H700" fill="none" stroke-width="5" stroke-linecap="round"/>
+<rect id="barA" class="loss" x="240" y="680" width="140" height="0"/><rect id="barB" class="gain" x="480" y="680" width="140" height="0"/>
+<text class="m" x="310" y="720" font-size="20" text-anchor="middle">ELSEWHERE</text><text class="m" x="550" y="720" font-size="20" text-anchor="middle" style="fill:var(--gain)">ROSETO</text>
+</g>
+<text class="m" x="880" y="270" font-size="22">HOW THEY LIVED</text>
+<g id="risk0"><circle class="s-ink" cx="950" cy="400" r="60" fill="var(--stage)" stroke-width="8"/><ellipse cx="950" cy="400" rx="30" ry="18" fill="var(--line)"/><path class="s-ink" d="M1014 400H1070" stroke-width="14" stroke-linecap="round"/><text class="m" x="970" y="520" font-size="22" text-anchor="middle">LARD</text></g>
+<g id="risk1"><rect class="s-ink" x="1120" y="385" width="130" height="30" fill="var(--stage)" stroke-width="6"/><rect class="gain" x="1120" y="385" width="36" height="30"/><rect class="loss" x="1250" y="385" width="16" height="30"/><path class="s-line" d="M1272 375c-12-16 12-26 0-44" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="1190" y="520" font-size="22" text-anchor="middle">SMOKING</text></g>
+<g id="risk2"><rect class="s-ink" x="1330" y="350" width="120" height="110" rx="18" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M1360 395a30 30 0 0 1 60 0" fill="none" stroke-width="5"/><line id="needle" class="s-loss" x1="1390" y1="395" x2="1390" y2="368" stroke-width="5" stroke-linecap="round"/><text class="m" x="1390" y="520" font-size="22" text-anchor="middle">EXTRA WEIGHT</text></g>
+<g id="sick"><text class="d" x="120" y="800" font-size="46">By the textbook, they should have been <tspan style="fill:var(--loss)">sick</tspan>.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Was it their genes?</text>
+<text class="b" x="120" y="176" font-size="32">Wolf checked whether Roseto's health ran in the family.</text>
+<rect class="s-line" x="120" y="240" width="440" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">ROSETO FAMILIES</text>
+<rect class="s-line" x="760" y="240" width="720" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="790" y="280" font-size="22">RELATIVES ELSEWHERE IN AMERICA</text>
+<g id="rlinks"></g><g id="tree"></g><g id="rel"></g>
+<g id="relNo"><text class="m" x="790" y="690" font-size="20" style="fill:var(--loss)">NO SPECIAL HEART HEALTH</text></g>
+<g id="blood"><text class="d" x="120" y="810" font-size="56">The secret was not in their blood.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Was it the land?</text>
+<text class="b" x="120" y="176" font-size="32">Maybe it was the place itself.</text>
+<g id="bars"><text class="m" x="120" y="250" font-size="20">BARS: HEART-DISEASE DEATHS (SCHEMATIC)</text>
+<rect id="bar0" class="loss" x="310" y="530" width="60" height="0"/><rect id="bar1" class="gain" x="770" y="530" width="60" height="0"/><rect id="bar2" class="loss" x="1230" y="530" width="60" height="0"/></g>
+<g id="land"><path d="M120 660C240 560 440 560 570 640C700 570 900 570 1030 640C1160 570 1360 570 1480 650V700H120Z" fill="var(--line)"/>
+<g id="tw0"></g><g id="tw1"></g><g id="tw2"></g>
+<text class="m" x="340" y="730" font-size="20" text-anchor="middle">NEIGHBORING TOWN</text><text class="m" x="800" y="730" font-size="20" text-anchor="middle" style="fill:var(--gain)">ROSETO</text><text class="m" x="1260" y="730" font-size="20" text-anchor="middle">NEIGHBORING TOWN</text></g>
+<g id="same"><path class="s-ink" d="M220 750v14h1160v-14" fill="none" stroke-width="4" stroke-linejoin="round"/><text class="m" x="800" y="800" font-size="22" text-anchor="middle">SAME COUNTRYSIDE · SAME MEDICAL CARE</text></g>
+<g id="concl"><text class="d" x="120" y="852" font-size="40">So it was not geography either.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then he saw it.</text>
+<text class="b" x="120" y="176" font-size="32">Wolf walked the streets of Roseto.</text>
+<g id="p0"><rect class="s-line" x="120" y="230" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/><g id="p0f"></g>
+<rect class="s-ink" x="190" y="290" width="100" height="54" rx="16" fill="var(--stage)" stroke-width="4"/><rect class="s-ink" x="360" y="270" width="100" height="54" rx="16" fill="var(--stage)" stroke-width="4"/><g id="dots"></g>
+<path class="ink" d="M300 590h70v40a10 10 0 0 1-10 10h-50a10 10 0 0 1-10-10z"/><path id="steam" class="s-muted" fill="none" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="150" y="670" font-size="20">NEIGHBORS STOP TO CHAT</text><text class="m" x="150" y="700" font-size="20">AND COOK FOR EACH OTHER</text></g>
+<g id="p1"><rect class="s-line" x="590" y="230" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M620 380L800 280L980 380M650 370V640H950V370" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><g id="p1f"></g>
+<text class="m" x="620" y="670" font-size="20">THREE GENERATIONS,</text><text class="m" x="620" y="700" font-size="20">ONE ROOF</text></g>
+<g id="p2"><rect class="s-line" x="1060" y="230" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/><g id="p2d"></g>
+<rect class="s-ink" x="1200" y="450" width="140" height="170" fill="var(--stage)" stroke-width="6"/><path class="gain" d="M1190 450L1270 390L1350 450Z"/><rect class="gain" x="1250" y="330" width="40" height="64"/><path class="s-gain" d="M1270 292v36M1256 306h28" stroke-width="6" stroke-linecap="round"/><path class="ink" d="M1252 620v-50a18 18 0 0 1 36 0v50z"/>
+<text class="m" x="1090" y="670" font-size="20">ONE CHURCH</text><text class="m" x="1090" y="700" font-size="20">BRINGS EVERYONE TOGETHER</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A web of belonging.</text>
+<text class="b" x="120" y="176" font-size="32">Clubs, church and family wove everyone together.</text>
+<g id="clubs"><text id="n22" class="d" x="112" y="380" font-size="180" style="fill:var(--gain)">22</text>
+<text class="m" x="120" y="460" font-size="22">CIVIC ORGANIZATIONS</text><text class="m" x="120" y="494" font-size="22">IN A TOWN OF UNDER 2,000 PEOPLE</text></g>
+<circle id="shield" class="s-gain" cx="1150" cy="470" r="250" fill="none" stroke-width="6" stroke-dasharray="14 10"/>
+<g id="chords"></g><g id="web"></g><g id="stress"></g>
+<g id="eq"><g id="eqh"></g><text class="m" x="120" y="730" font-size="20">WEALTHY FAMILIES DIDN'T SHOW OFF</text></g>
+<g id="buffer"><text class="d" x="120" y="820" font-size="44">This web protected them from modern stress.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Zoom out.</text>
+<text class="b" x="120" y="176" font-size="32">Look past one person's choices to the world around them.</text>
+<g id="zw"><g id="comm"></g><g id="me"></g></g>
+<path id="vf" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="oneL"><text class="m" x="800" y="760" font-size="22" text-anchor="middle">ONE PERSON'S CHOICES</text></g>
+<g id="lensL"><text class="m" x="800" y="784" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE LENS THIS WHOLE BOOK USES</text></g>
+<g id="shape"><text class="d" x="120" y="846" font-size="44">Your surroundings shape you more than you think.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="84" letter-spacing="-2">Who will you invite over,</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="84" letter-spacing="-2">or <tspan style="fill:var(--gain)">call</tspan>, this week?</text></g>
+<g id="qc"><text class="m" x="143" y="560" font-size="26">ADD ONE SMALL THREAD TO YOUR WEB</text></g>
+<g id="call"><path id="thr" class="s-gain" d="M1212 630Q1300 560 1388 630" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/>
+<rect class="s-ink" x="1285" y="660" width="30" height="60" rx="8" fill="var(--stage)" stroke-width="5"/><g id="callF"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Mystery of Roseto&rdquo;, from <em>Outliers</em> by Malcolm Gladwell. The Roseto study by physician Stewart Wolf is described as reported in the book. The town scenes, charts and drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 9.5], [9.5, 27.1], [27.1, 44.7], [44.7, 58.3], [58.3, 71.6], [71.6, 87.9], [87.9, 103.5], [103.5, 120.5], [120.5, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Roseto Mystery", "A Doctor's Hunch", "Breaking the Rules", "Not the Genes", "Not the Place", "A Walk Through Town", "A Web of Belonging", "Zooming Out", "Your Turn"];
+const TM={"roseto_town": 0.0, "doctor_wolf": 9.84, "heart_icon": 16.4, "italy_map": 22.4, "chart_deaths": 30.48, "frying_pan": 36.16, "family_tree": 44.96, "relatives": 47.76, "nearby_towns": 60.88, "same_hills": 65.48, "street_chat": 75.36, "three_gens": 80.08, "church": 84.88, "civic_clubs": 88.16, "equal_houses": 93.52, "lone_figure": 103.76, "zoom_out": 109.2, "phone_call": 124.48};
+const fig=(g,x,y,r,cls)=>{const q=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:cls},q);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},q);return q};
+const house=(g,x,y,w,h,cls)=>{const q=mk('g',{},g);mk('rect',{x:x-w/2,y:y-h,width:w,height:h,class:cls},q);mk('path',{d:'M'+(x-w/2-6)+' '+(y-h+1)+'L'+x+' '+(y-h-w*.5)+'L'+(x+w/2+6)+' '+(y-h+1)+'Z',class:cls},q);return q};
+
+const TH=[[1030,500],[1105,470],[1335,470],[1410,500]].map(q=>house($('town'),q[0],q[1],50,44,'ink'));
+const CHU=mk('g',{},$('town'));house(CHU,1220,456,60,60,'gain');mk('rect',{x:1212,y:330,width:16,height:40,class:'gain'},CHU);mk('path',{d:'M1220 300v30M1208 312h24',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},CHU);TH.push(CHU);
+
+fig($('wolf'),250,380,40,'ink');fig($('wolf'),450,400,34,'ink');
+const RT=$('route'),RTL=RT.getTotalLength?RT.getTotalLength():0;
+
+const TN=[[340,340],[240,470],[440,470],[190,610],[290,610],[390,610],[490,610]],PA=[0,0,1,1,2,2];
+PA.forEach((a,i)=>mk('path',{d:'M'+TN[a][0]+' '+TN[a][1]+'L'+TN[i+1][0]+' '+TN[i+1][1],class:'s-ink','stroke-width':5},$('tree')));
+TN.forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:22,class:'gain'},$('tree')));
+const RP=[[880,380],[1060,350],[1260,400],[1400,340],[960,560],[1180,590],[1380,540]],RS=[1,0,2,6,3,4,5];
+const RLK=RP.map((q,j)=>{const s=TN[RS[j]];return mk('path',{d:'M'+s[0]+' '+s[1]+'C'+(s[0]+220)+' '+s[1]+' '+(q[0]-220)+' '+q[1]+' '+q[0]+' '+q[1],fill:'none',class:'s-line','stroke-width':3,'stroke-dasharray':'6 8'},$('rlinks'))});
+const REL=RP.map(q=>mk('circle',{cx:q[0],cy:q[1],r:22,class:'gain'},$('rel')));
+
+[340,800,1260].forEach((x,i)=>[-60,0,60].forEach(d=>house($('tw'+i),x+d,662,44,40,'ink')));
+
+fig($('p0f'),250,420,30,'ink');fig($('p0f'),410,420,30,'ink');
+const DT=[];[[240,317],[410,297]].forEach(c=>{for(let k=-1;k<2;k++)DT.push(mk('circle',{cx:c[0]+k*22,cy:c[1],r:6,class:'ink'},$('dots')))});
+const G3=[[710,511,26],[800,494,30],[885,544,18]].map(q=>fig($('p1f'),q[0],q[1],q[2],'gain'));
+const CL=[];for(let i=0;i<12;i++){if(i%6===3)continue;const a=i*Math.PI/6,x=1270+170*Math.cos(a),y=480+140*Math.sin(a);
+  CL.push(mk('path',{d:'M'+x.toFixed(0)+' '+y.toFixed(0)+'L1270 540',class:'s-gain','stroke-width':3,'stroke-dasharray':'6 8'},$('p2d')));mk('circle',{cx:x,cy:y,r:12,class:'ink'},$('p2d'))}
+
+const WN=[];for(let i=0;i<22;i++){const a=i*2*Math.PI/22-Math.PI/2;WN.push([1150+200*Math.cos(a),470+200*Math.sin(a)])}
+WN.forEach((q,i)=>[5,9].forEach(k=>{const r=WN[(i+k)%22];mk('path',{d:'M'+q[0].toFixed(0)+' '+q[1].toFixed(0)+'L'+r[0].toFixed(0)+' '+r[1].toFixed(0),class:'s-line','stroke-width':2},$('chords'))}));
+const WC=WN.map(q=>mk('circle',{cx:q[0],cy:q[1],r:16,class:'gain'},$('web')));
+mk('circle',{cx:1150,cy:470,r:30,class:'ink'},$('web'));
+const AR=[1,3,5,7].map(k=>mk('path',{fill:'none',class:'s-loss','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},$('stress')));
+const arr=(a,d)=>{const c=Math.cos(a),s=Math.sin(a),tx=1150+c*d,ty=470+s*d,bx=1150+c*(d+60),by=470+s*(d+60),hx=1150+c*(d+22),hy=470+s*(d+22);
+  return 'M'+bx.toFixed(1)+' '+by.toFixed(1)+'L'+tx.toFixed(1)+' '+ty.toFixed(1)+'M'+(hx-s*16).toFixed(1)+' '+(hy+c*16).toFixed(1)+'L'+tx.toFixed(1)+' '+ty.toFixed(1)+'L'+(hx+s*16).toFixed(1)+' '+(hy-c*16).toFixed(1)};
+let BIG=null;for(let i=0;i<7;i++){const x=170+i*95,g=mk('g',{},$('eqh'));house(g,x,680,70,60,'ink');if(i===3)BIG=g}
+
+for(let i=0;i<10;i++){const a=i*Math.PI/5,x=800+480*Math.cos(a),y=440+190*Math.sin(a);
+  mk('path',{d:'M'+x.toFixed(0)+' '+y.toFixed(0)+'L800 410',class:'s-gain','stroke-width':3,'stroke-dasharray':'6 8'},$('comm'));fig($('comm'),x,y,22,'gain')}
+fig($('me'),800,410,30,'ink');
+const vfd=(a,b,c,d,L=50)=>'M'+a+' '+(b+L)+'V'+b+'H'+(a+L)+'M'+(c-L)+' '+b+'H'+c+'V'+(b+L)+'M'+c+' '+(d-L)+'V'+d+'H'+(c-L)+'M'+(a+L)+' '+d+'H'+a+'V'+(d-L);
+fig($('callF'),1180,640,26,'ink');fig($('callF'),1420,640,26,'gain');
+const beat=(t)=>1+.08*Math.pow(Math.abs(Math.sin(t*3.6)),6);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+TH.forEach((h,i)=>rise(h,p(u,TM.roseto_town+.5+i*.4,TM.roseto_town+.9+i*.4)));
+  rise($('tHeart'),p(u,TM.roseto_town+7,TM.roseto_town+7.5));
+  $('tHP').setAttribute('transform','translate(1220 230) scale('+(.4*beat(t)).toFixed(3)+')');
+
+  rise($('wolf'),p(u,TM.doctor_wolf,TM.doctor_wolf+.5)); rise($('bub1'),p(u,TM.doctor_wolf+2,TM.doctor_wolf+2.5));
+  rise($('hearts'),p(u,TM.heart_icon,TM.heart_icon+.5));
+  $('rHeart').setAttribute('transform','translate(940 420) scale('+(.6*beat(t)).toFixed(3)+')');
+  rise($('italy'),p(u,TM.italy_map,TM.italy_map+.5));
+  if(RTL){const pt=RT.getPointAtLength(RTL*p(u,TM.italy_map+.6,TM.italy_map+2.6));$('ship').setAttribute('cx',pt.x.toFixed(1));$('ship').setAttribute('cy',pt.y.toFixed(1))}
+  rise($('why'),p(u,TM.heart_icon+3,TM.heart_icon+3.6));
+
+  rise($('sub2'),p(u,TM.chart_deaths-3.4,TM.chart_deaths-2.9)); rise($('chart'),p(u,TM.chart_deaths,TM.chart_deaths+.5));
+  const bg=p(u,TM.chart_deaths+.4,TM.chart_deaths+1.6),ha=330*bg,hb=14*bg;
+  $('barA').setAttribute('y',(680-ha).toFixed(1)); $('barA').setAttribute('height',ha.toFixed(1));
+  $('barB').setAttribute('y',(680-hb).toFixed(1)); $('barB').setAttribute('height',hb.toFixed(1));
+  [0,1,2].forEach(i=>rise($('risk'+i),p(u,TM.frying_pan+i*1.2,TM.frying_pan+i*1.2+.5)));
+  $('needle').setAttribute('transform','rotate('+(-60+110*p(u,TM.frying_pan+2.6,TM.frying_pan+3.4)+4*Math.sin(t*3)).toFixed(1)+' 1390 395)');
+  rise($('sick'),p(u,TM.frying_pan+5.3,TM.frying_pan+5.9));
+
+  rise($('tree'),p(u,TM.family_tree,TM.family_tree+.5));
+  const bad=u>=TM.relatives+4.2;
+  RLK.forEach((l,j)=>l.setAttribute('opacity',p(u,TM.relatives+j*.3,TM.relatives+j*.3+.6)));
+  REL.forEach((c,j)=>{rise(c,p(u,TM.relatives+.3+j*.3,TM.relatives+.8+j*.3));c.setAttribute('class',bad?'loss':'gain')});
+  rise($('relNo'),p(u,TM.relatives+4.2,TM.relatives+4.7)); rise($('blood'),p(u,TM.relatives+7.6,TM.relatives+8.2));
+
+  rise($('land'),p(u,TM.nearby_towns-3,TM.nearby_towns-2.4)); rise($('bars'),p(u,TM.nearby_towns,TM.nearby_towns+.4));
+  [200,24,200].forEach((h,i)=>{const v=h*p(u,TM.nearby_towns+.3,TM.nearby_towns+1.5);$('bar'+i).setAttribute('y',(530-v).toFixed(1));$('bar'+i).setAttribute('height',v.toFixed(1))});
+  rise($('same'),p(u,TM.same_hills,TM.same_hills+.5)); rise($('concl'),p(u,TM.same_hills+4.2,TM.same_hills+4.8));
+
+  rise($('p0'),p(u,TM.street_chat,TM.street_chat+.5)); rise($('p1'),p(u,TM.three_gens,TM.three_gens+.5)); rise($('p2'),p(u,TM.church,TM.church+.5));
+  DT.forEach((d,i)=>d.setAttribute('opacity',Math.sin(t*4-i*.9)>0?1:.3));
+  let sd='';[320,350].forEach((x,k)=>{sd+='M'+x+' 585';for(let y=580;y>=555;y-=5)sd+='L'+(x+5*Math.sin(y/5+t*3+k)).toFixed(1)+' '+y});$('steam').setAttribute('d',sd);
+  G3.forEach((g,i)=>rise(g,p(u,TM.three_gens+.4+i*.4,TM.three_gens+.8+i*.4)));
+  CL.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.church+.5+i*.12,TM.church+.9+i*.12)));
+
+  rise($('clubs'),p(u,TM.civic_clubs,TM.civic_clubs+.5));
+  $('n22').textContent=Math.round(22*p(u,TM.civic_clubs+.3,TM.civic_clubs+2.6));
+  WC.forEach((c,i)=>rise(c,p(u,TM.civic_clubs+.3+i*.1,TM.civic_clubs+.6+i*.1)));
+  $('chords').setAttribute('opacity',p(u,TM.civic_clubs+2.6,TM.civic_clubs+3.4));
+  rise($('eq'),p(u,TM.equal_houses,TM.equal_houses+.5));
+  const sy=1.6-.6*p(u,TM.equal_houses+.8,TM.equal_houses+2); BIG.setAttribute('transform','translate(0 680) scale(1 '+sy.toFixed(3)+') translate(0 -680)');
+  const bf=TM.equal_houses+4.5; $('shield').setAttribute('opacity',p(u,bf,bf+.6)); $('stress').setAttribute('opacity',p(u,bf+.4,bf+1));
+  const kc=(t*.8)%1,bo=kc<.5?ease(kc/.5):1-ease((kc-.5)/.5);
+  AR.forEach((a,i)=>a.setAttribute('d',arr((2*i+1)*Math.PI/4,300-34*bo)));
+  rise($('buffer'),p(u,bf+.8,bf+1.4));
+
+  const z=p(u,TM.zoom_out,TM.zoom_out+1.4),sc=2.6-1.6*z,fl=(a,b)=>Math.round(a+(b-a)*z);
+  $('vf').setAttribute('d',vfd(fl(600,180),fl(240,220),fl(1000,1420),fl(700,740)));
+  $('vf').setAttribute('opacity',p(u,TM.lone_figure,TM.lone_figure+.5));
+  rise($('me'),p(u,TM.lone_figure,TM.lone_figure+.5));
+  $('zw').setAttribute('transform','translate(800 460) scale('+sc.toFixed(3)+') translate(-800 -460)');
+  $('comm').setAttribute('opacity',p(u,TM.zoom_out+1,TM.zoom_out+1.6));
+  rise($('oneL'),p(u,TM.lone_figure+.6,TM.lone_figure+1.1)*(1-p(u,TM.zoom_out,TM.zoom_out+.4)));
+  rise($('lensL'),p(u,TM.zoom_out+5.7,TM.zoom_out+6.2)); rise($('shape'),p(u,TM.zoom_out+9.1,TM.zoom_out+9.7));
+
+  const s8=SC[8][0]/K;
+  rise($('qa'),p(u,s8+.3,s8+.8)); rise($('qb'),p(u,s8+.7,s8+1.2)); rise($('qc'),p(u,s8+1.2,s8+1.7));
+  rise($('call'),p(u,TM.phone_call,TM.phone_call+.5)); $('thr').setAttribute('stroke-dashoffset',(-t*30).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.84;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

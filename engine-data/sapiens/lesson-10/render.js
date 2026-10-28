@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 rise($('t_tool'),p(u,TM.stone_tool,TM.stone_tool+.5));
 $('t_arc').setAttribute('stroke-dashoffset',1-p(u,TM.stone_tool+.8,TM.stone_tool+1.6));
 rise($('t_atom'),p(u,TM.stone_tool+1.4,TM.stone_tool+2));
@@ -65,3 +66,48 @@ rise($('z_top'),p(u,TM.mirror,TM.mirror+.5));rise($('z_mir'),p(u,TM.mirror+.3,TM
 $('z_ref').setAttribute('transform','translate('+(6*Math.sin(t*1.2)).toFixed(1)+' 0)');
 rise($('z_a'),p(u,TM.mirror+4.2,TM.mirror+4.7));rise($('z_b'),p(u,TM.mirror+4.6,TM.mirror+5.1));rise($('z_c'),p(u,TM.mirror+5,TM.mirror+5.5));
 rise($('z_bot'),p(u,TM.mirror+5.8,TM.mirror+6.3));
+=======
+rise($('globe'),p(u,TM.spark,TM.spark+.6));rise($('tman'),p(u,TM.spark+.5,TM.spark+1.1));
+$('bolt').setAttribute('opacity',(p(u,TM.spark+1,TM.spark+1.4)*(.7+.3*Math.sin(t*5))).toFixed(2));
+const hb=1+.12*Math.abs(Math.sin(t*6));$('rheart').setAttribute('transform','translate(1200 290) rotate('+(8*Math.sin(t*7)).toFixed(1)+') scale('+(.3*hb).toFixed(3)+')');$('rheart').setAttribute('opacity',p(u,TM.spark+4,TM.spark+4.6));
+
+rise($('stone'),p(u,TM.stone_tool,TM.stone_tool+.6));drw($('pcurve'),p(u,TM.stone_tool+1.5,TM.rocket+1));
+rise($('plab'),p(u,TM.rocket,TM.rocket+.5));rise($('rocket'),p(u,TM.rocket,TM.rocket+.6));
+$('rbody').setAttribute('transform','translate(0 '+(-40*p(u,TM.rocket,TM.rocket+3)+2*Math.sin(t*20)).toFixed(1)+')');$('rflame').setAttribute('opacity',(.6+.4*Math.abs(Math.sin(t*12))).toFixed(2));
+rise($('happy'),p(u,TM.scale,TM.scale+.6));rise($('verd'),p(u,TM.scale+4.9,TM.scale+5.5));
+
+rise($('forag'),p(u,TM.farmer,TM.farmer+.5));rise($('farm'),p(u,TM.farmer+.6,TM.farmer+1.1));
+$('barF').setAttribute('width',(400*p(u,TM.farmer+1,TM.farmer+2.2)).toFixed(1));$('drops').setAttribute('transform','translate(0 '+(12*((t*1.5)%1)).toFixed(1)+')');
+rise($('cagelab'),p(u,TM.chicken,TM.chicken+.5));CG.forEach((g,i)=>rise(g,p(u,TM.chicken+i*.15,TM.chicken+i*.15+.4)));
+rise($('joy'),p(u,TM.chicken+4.9,TM.chicken+5.5));
+
+rise($('bal'),p(u,TM.balance,TM.balance+.6));
+const h1=220+180*p(u,TM.old_car,TM.old_car+1),h2=160+180*p(u,TM.old_car+1.6,TM.old_car+2.8),y1=660-h1,y2=660-h2;
+$('cC').setAttribute('y',y1.toFixed(1));$('cC').setAttribute('height',h1.toFixed(1));$('cE').setAttribute('y',y2.toFixed(1));$('cE').setAttribute('height',h2.toFixed(1));
+$('gT1').setAttribute('d','M380 '+y1.toFixed(1)+'H640');$('gT2').setAttribute('d','M600 '+y2.toFixed(1)+'H640');$('gV').setAttribute('d','M640 '+y1.toFixed(1)+'V'+y2.toFixed(1));$('gL').setAttribute('y',((y1+y2)/2+8).toFixed(1));
+rise($('oc'),p(u,TM.old_car,TM.old_car+.5));rise($('tread'),p(u,TM.treadmill,TM.treadmill+.6));rise($('trc'),p(u,TM.treadmill+.8,TM.treadmill+1.4));
+$('belt').setAttribute('stroke-dashoffset',(-t*120%40).toFixed(1));const ph=Math.sin(t*8);
+$('lg1').setAttribute('x2',(1180+40*ph).toFixed(1));$('lg2').setAttribute('x2',(1180-40*ph).toFixed(1));$('am1').setAttribute('x2',(1186-30*ph).toFixed(1));$('am2').setAttribute('x2',(1186+30*ph).toFixed(1));
+
+rise($('brainG'),p(u,TM.brain,TM.brain+.6));
+MO.forEach((g,i)=>{const k=p(u,TM.brain+.6+i*.5,TM.brain+1.1+i*.5);g.setAttribute('opacity',k.toFixed(2));g.setAttribute('transform','translate(0 '+((1-k)*14+3*Math.sin(t*1.3+i*2)).toFixed(1)+')')});
+rise($('chart'),p(u,TM.lottery,TM.lottery+.5));drw($('mood'),p(u,TM.lottery+.3,TM.dial+1.2));rise($('winl'),p(u,TM.lottery+1,TM.lottery+1.5));rise($('gauge'),p(u,TM.lottery+1,TM.lottery+1.5));
+const gv=.4+.5*p(u,TM.lottery+1.2,TM.lottery+2.2)-.5*p(u,TM.dial,TM.dial+2),ga=Math.PI*(1-gv);
+$('ndl').setAttribute('x2',(1370+56*Math.cos(ga)).toFixed(1));$('ndl').setAttribute('y2',(410-56*Math.sin(ga)).toFixed(1));rise($('drift'),p(u,TM.dial,TM.dial+.6));
+
+rise($('monk'),p(u,TM.monk,TM.monk+.6));rise($('pond'),p(u,TM.ripples,TM.ripples+.6));
+RP.forEach(([e,o])=>{const f=(t*.35+o)%1;e.setAttribute('rx',(10+110*f).toFixed(1));e.setAttribute('ry',(3+33*f).toFixed(1));e.setAttribute('opacity',(1-f).toFixed(2))});
+rise($('chase'),p(u,TM.ripples+3.8,TM.ripples+4.3));rise($('suff'),p(u,TM.ripples+4.2,TM.ripples+4.7));
+const cx=1000+260*Math.sin(t*1.2),dir=Math.cos(t*1.2)>=0?1:-1;$('chp').setAttribute('transform','translate('+cx.toFixed(1)+' 360) scale('+dir+' 1)');
+$('halo').setAttribute('opacity',(p(u,TM.ripples+7.6,TM.ripples+8.2)*(.7+.3*Math.sin(t*2))).toFixed(2));rise($('peace'),p(u,TM.ripples+7.6,TM.ripples+8.2));
+
+rise($('rab'),p(u,TM.rabbit,TM.rabbit+.6));$('glow').setAttribute('opacity',(.15+.2*Math.abs(Math.sin(t*2))).toFixed(2));
+rise($('dnaG'),p(u,TM.dna,TM.dna+.6));ER.setAttribute('class',u>=TM.dna+1.5?'s-gain':'s-line');$('sciss').setAttribute('transform','translate('+(-6*Math.abs(Math.sin(t*3))).toFixed(1)+' 0)');
+rise($('cyb'),p(u,TM.cyborg,TM.cyborg+.6));rise($('next'),p(u,TM.cyborg+4.2,TM.cyborg+4.8));
+
+rise($('god'),p(u,TM.crown,TM.crown+.6));rise($('where'),p(u,TM.crown+2.5,TM.crown+3));rise($('qcard'),p(u,TM.quote_card,TM.quote_card+.6));
+rise($('comp'),p(u,TM.compass,TM.compass+.5));$('cneedle').setAttribute('transform','rotate('+(200*Math.sin(t*1.7)+120*Math.sin(t*3.1)).toFixed(1)+' 1330 440)');rise($('pwp'),p(u,TM.compass+.6,TM.compass+1.2));
+
+rise($('mir'),p(u,TM.mirror,TM.mirror+.6));rise($('mlab'),p(u,TM.mirror+.5,TM.mirror+1.1));
+rise($('qa'),p(u,TM.mirror+6.2,TM.mirror+6.7));rise($('qb'),p(u,TM.mirror+6.6,TM.mirror+7.1));rise($('qc'),p(u,TM.mirror+7,TM.mirror+7.5));rise($('ask'),p(u,TM.mirror+7.6,TM.mirror+8.1));
+>>>>>>> 93ca47a (Draft 'Sapiens': lesson 10 of 10)

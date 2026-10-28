@@ -1,0 +1,14 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const star=(cx,cy,R)=>{let d='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?R*.45:R;d+=(i?'L':'M')+(cx+r*Math.cos(a)).toFixed(1)+' '+(cy+r*Math.sin(a)).toFixed(1)}return d+'Z'};
+fig($('farmer'),1170,497,34,'ink');
+[[200,600],[300,520],[400,440]].forEach(([x,y])=>{mk('circle',{cx:x,cy:y,r:22,class:'ink'},$('players'));mk('rect',{x:x-24,y:y+30,width:48,height:750-y,rx:20,class:'ink'},$('players'))});
+fig($('opp'),240,380,40,'ink');fig($('gen'),1300,370,30,'ink');mk('path',{d:star(1300,306,18),class:'gain'},$('gen'));
+[[320,550],[690,810],[1110,1210]].forEach((a,i)=>mk('path',{d:'M'+a[0]+' 420H'+a[1]+'m-16-16 16 16-16 16',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},$('ar'+i)));
+const CL=[];for(let i=0;i<15;i++)CL.push(mk('rect',{x:170+(i%5)*70,y:410+Math.floor(i/5)*70,width:62,height:62,rx:8,fill:'var(--line)'},$('cal')));
+fig($('famW'),690,440,26,'ink');fig($('famW'),590,490,18,'gain');
+[[940,480,20],[1100,480,20],[1380,430,28],[1280,500,18]].forEach(q=>fig($('famP'),q[0],q[1],q[2],'ink'));
+fig($('exam'),960,440,26,'gain');fig($('exam'),1340,390,36,'ink');
+const AK=[1050,1130,1210].map(x=>{const g=mk('g',{},$('asks'));mk('circle',{cx:x,cy:330,r:32,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':5},g);mk('text',{x:x,y:343,'font-size':36,'text-anchor':'middle',class:'d',style:'fill:var(--gain)'},g).textContent='?';return g});
+const NI=[318,358,398].map(y=>{const g=mk('g',{},$('note'));mk('text',{x:490,y:y+10,'font-size':28,class:'d',style:'fill:var(--gain)'},g).textContent='?';mk('path',{d:'M525 '+y+'h130',stroke:'var(--line)','stroke-width':6,'stroke-linecap':'round'},g);return g});
+const DT=[];for(let i=0;i<40;i++)DT.push(mk('circle',{r:14},$('dots')));
+fig($('hander'),1360,420,40,'gain');

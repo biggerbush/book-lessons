@@ -1,0 +1,328 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outliers Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Outliers: Cultural attitudes from our ancestors, like the honor code behind the feuds of Harlan, Kentucky, can shape our behavior generations later. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIERS · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Feuds and the</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">culture of honor.</text>
+<text class="b" x="120" y="600" font-size="32">How your ancestors’ struggles can still shape your temper today.</text>
+<g id="t_calm"></g>
+<g id="t_ink"></g>
+<g id="t_mad"><path class="s-loss" d="M1334 304l-18-18M1446 304l18-18M1320 340h-22M1460 340h22" stroke-width="6" stroke-linecap="round"/></g>
+<text class="m" x="1180" y="545" font-size="20" text-anchor="middle">SHRUG</text>
+<g id="t_red"><text class="m" x="1390" y="545" font-size="20" text-anchor="middle" style="fill:var(--loss)">SEE RED</text></g>
+<g id="t_ins"><rect x="1245" y="220" width="80" height="44" rx="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><text class="d" x="1285" y="252" font-size="26" text-anchor="middle">#@!</text></g>
+<g id="t_anc"><text class="m" x="1440" y="160" font-size="18" text-anchor="end">GREAT-GREAT-GRANDPARENTS</text><path class="s-gain" d="M1390 204V286" stroke-width="4" stroke-dasharray="6 6"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Harlan County, Kentucky.</text>
+<text class="b" x="120" y="176" font-size="32">In the 1800s, deep in the mountains of eastern Kentucky.</text>
+<g id="mtn"><path class="s-line" d="M120 520L420 330L640 470L880 300L1120 460L1340 320L1480 420" fill="none" stroke-width="4" stroke-linejoin="round"/><path class="s-ink" d="M120 560L330 300L520 520L720 260L960 540L1180 290L1480 560Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/></g>
+<path class="s-ink" d="M120 720H1480" stroke-width="5"/>
+<g id="h0"><path class="ink" d="M225 632L300 575L375 632Z"/><rect class="s-ink" x="240" y="630" width="120" height="90" fill="var(--stage)" stroke-width="6"/><text class="m" x="300" y="760" font-size="22" text-anchor="middle">HOWARDS</text></g>
+<g id="h1"><path class="ink" d="M1125 632L1200 575L1275 632Z"/><rect class="s-ink" x="1140" y="630" width="120" height="90" fill="var(--stage)" stroke-width="6"/><text class="m" x="1200" y="760" font-size="22" text-anchor="middle">TURNERS</text></g>
+<polyline id="bolt" class="s-loss" points="400,670 520,640 600,690 700,640 800,690 900,640 1000,690 1100,660" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="graves"></g>
+<g id="chainT"><text class="m" x="800" y="856" font-size="20" text-anchor="middle" style="fill:var(--loss)">INSULTS → FIGHTS → KILLINGS, FOR YEARS</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not just Harlan.</text>
+<text class="b" x="120" y="176" font-size="32">Feuds broke out across the Appalachian backcountry.</text>
+<g id="ridge"><path class="s-line" d="M180 780C360 640 520 520 660 420S840 260 900 240" fill="none" stroke-width="60" stroke-linecap="round"/><text class="m" x="160" y="844" font-size="22">APPALACHIAN BACKCOUNTRY</text></g>
+<g id="towns"></g>
+<g id="hand"><rect class="ink" x="1060" y="600" width="110" height="80" rx="22"/><rect class="ink" x="960" y="610" width="130" height="28" rx="14"/><rect class="ink" x="1040" y="650" width="60" height="22" rx="11"/></g>
+<g id="ques"><text class="m" x="1000" y="260" font-size="20">GLADWELL’S BETTER QUESTION</text><text class="d" x="1000" y="330" font-size="52">What did these</text><text class="d" x="1000" y="400" font-size="52">places have</text><text class="d" x="1000" y="470" font-size="52" style="fill:var(--gain)">in common?</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Where the settlers came from.</text>
+<text class="b" x="120" y="176" font-size="32">The borderlands of Scotland, Northern Ireland and northern England.</text>
+<rect class="loss" x="120" y="240" width="1360" height="320" rx="18" fill-opacity=".1"/>
+<path class="s-loss" d="M520 300q20-12 40 0t40 0M760 420q20-12 40 0t40 0M600 380q20-12 40 0t40 0M940 300q20-12 40 0t40 0M980 540q20-12 40 0t40 0" fill="none" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+<text class="m" x="800" y="545" font-size="20" text-anchor="middle">ATLANTIC OCEAN</text>
+<path class="s-ink" d="M120 240H330L352 280L322 310L342 342L302 380L312 420L282 460L302 500L262 540L244 560H120Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M150 470L190 410L220 450L250 380L280 430" fill="none" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="120" y="610" font-size="20">APPALACHIA</text>
+<path class="s-ink" d="M1230 360C1270 360 1290 390 1280 430C1272 465 1235 480 1205 465C1178 450 1170 410 1190 385C1200 368 1215 360 1230 360Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M1320 250L1350 245L1370 275L1355 300L1380 320L1390 360L1410 400L1435 450L1455 500L1445 530L1385 550L1325 540L1355 510L1335 480L1355 450L1340 410L1315 380L1325 350L1305 320Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-gain" d="M1318 362H1400" stroke-width="8" stroke-linecap="round" stroke-dasharray="4 12"/>
+<circle class="gain" cx="1250" cy="380" r="9"/>
+<text class="m" x="1480" y="610" font-size="20" text-anchor="end">THE BORDERLANDS</text>
+<path class="s-muted" d="M380 512H1160" stroke-width="3" stroke-dasharray="8 10"/>
+<g id="ship"><path class="ink" d="M-70 0h140l-25 30h-90z"/><path class="s-ink" d="M0 0V-90" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M6 -86L62 -16H6z"/></g>
+<g id="hills">
+<path d="M540 740L680 660L820 710L960 640L1100 705L1240 670L1300 740Z" fill="var(--line)" fill-opacity=".5"/>
+<path class="s-ink" d="M540 730L680 660L820 710L960 640L1100 705L1240 670L1300 730" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<path class="s-ink" d="M420 800H1320" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M512 798V720a12 12 0 0 1 24 0" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="120" y="780" font-size="20">RUGGED HERDING HILLS</text>
+</g>
+<g id="herder"></g>
+<g id="flock"></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The herder’s logic.</text>
+<text class="b" x="120" y="176" font-size="32">Crops stay put. A flock can vanish overnight.</text>
+<rect class="s-line" x="120" y="220" width="640" height="380" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="270" font-size="22">FARMER</text>
+<g id="crops"></g>
+<text class="m" x="150" y="582" font-size="22" style="fill:var(--gain)">HARD TO STEAL</text>
+<rect class="s-line" x="840" y="220" width="640" height="380" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="270" font-size="22">HERDER</text>
+<circle class="gain" cx="1300" cy="290" r="28"/><circle cx="1314" cy="280" r="26" fill="var(--stage)"/>
+<g id="herd"></g>
+<g id="thiefG"></g>
+<g id="gone"><text class="m" x="870" y="582" font-size="22" style="fill:var(--loss)">GONE OVERNIGHT</text></g>
+<g id="shield"><path class="ink" d="M230 646L300 672V748C300 798 270 828 230 848C190 828 160 798 160 748V672Z"/><path class="s-gain" d="M196 752L230 726L264 752M196 786L230 760L264 786" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="hon0"><text class="d5" x="360" y="700" font-size="40">Answer any challenge fiercely.</text></g>
+<g id="hon1"><text class="d" x="360" y="790" font-size="52" style="fill:var(--gain)">A culture of honor.</text><text class="m" x="360" y="840" font-size="22">YOUR REPUTATION IS YOUR PROTECTION</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hallway test.</text>
+<text class="b" x="120" y="176" font-size="32">Psychologists at the University of Michigan, generations later.</text>
+<g id="uni"><path class="ink" d="M1180 270L1320 210L1460 270Z"/><g id="cols"></g><rect class="ink" x="1180" y="390" width="280" height="20"/><text class="m" x="1320" y="442" font-size="20" text-anchor="middle">UNIV. OF MICHIGAN</text></g>
+<g id="hall"><path class="s-ink" d="M120 470H1480M120 740H1480" stroke-width="6"/><text class="m" x="140" y="505" font-size="20">NARROW HALLWAY</text></g>
+<g id="stu"></g>
+<g id="str"></g>
+<path id="bang" class="loss" d="M820 610l10 26 26-8-16 22 20 18-28 2 2 28-18-20-18 20 2-28-28-2 20-18-16-22 26 8z"/>
+<g id="ins"><rect x="790" y="520" width="120" height="56" rx="14" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="d" x="850" y="560" font-size="32" text-anchor="middle" style="fill:var(--loss)">#@!</text></g>
+<g id="secret"><rect class="s-ink" x="130" y="770" width="56" height="74" rx="6" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M144 792h28M144 808h28M144 824h18" stroke-width="4"/><text class="m" x="220" y="820" font-size="22">HE DIDN’T KNOW IT WAS A STUDY</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">North versus South.</text>
+<text class="b" x="120" y="176" font-size="32">Same insult, very different reactions.</text>
+<g id="nP"><rect class="s-line" x="120" y="220" width="640" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="262" font-size="22">RAISED IN THE NORTH</text><g id="nPer"></g><text class="d5" x="160" y="660" font-size="36">Shrugged it off.</text>
+<rect class="s-ink" x="600" y="300" width="70" height="320" rx="8" fill="none" stroke-width="5"/><rect id="gN" class="ink" x="608" width="54" rx="4"/><text class="m" x="635" y="650" font-size="18" text-anchor="middle">ANGER</text></g>
+<g id="sP"><rect class="s-line" x="840" y="220" width="640" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="870" y="262" font-size="22">RAISED IN THE SOUTH</text><g id="sPer"></g><path id="steam" class="s-loss" d="M960 330l-14-24M1000 322v-26M1040 330l14-24" stroke-width="6" stroke-linecap="round"/><text class="d5" x="880" y="660" font-size="36" style="fill:var(--loss)">Got angry.</text>
+<rect class="s-ink" x="1220" y="300" width="70" height="320" rx="8" fill="none" stroke-width="5"/><rect id="gA" class="loss" x="1228" width="54" rx="4"/><text class="m" x="1255" y="650" font-size="18" text-anchor="middle">ANGER</text>
+<rect class="s-ink" x="1340" y="300" width="70" height="320" rx="8" fill="none" stroke-width="5"/><rect id="gS" class="loss" x="1348" width="54" rx="4"/><text class="m" x="1375" y="650" font-size="18" text-anchor="middle">STRESS</text></g>
+<g id="refl"><text class="d" x="120" y="800" font-size="44">They never herded sheep. The reflex stayed.</text><g id="ghost" opacity=".5"></g><path class="s-loss" d="M1340 812L1430 756" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Culture outlives its reasons.</text>
+<text class="b" x="120" y="176" font-size="32">Habits can outlast the conditions that created them.</text>
+<g id="tr0"></g><g id="tr1"></g><g id="tr2"></g>
+<text class="m" x="640" y="290" font-size="20">ANCESTORS</text>
+<g id="youL"><text class="m" x="440" y="650" font-size="20" style="fill:var(--gain)">YOU</text></g>
+<g id="pack"><rect class="loss" x="934" y="420" width="70" height="100" rx="16"/><path class="s-loss" d="M934 440l-30-20" stroke-width="8" stroke-linecap="round"/><g id="packP"></g><text class="m" x="920" y="600" font-size="20" text-anchor="middle">ANCESTORS’ ATTITUDES</text></g>
+<g id="bulb"><g id="rays"></g><circle class="s-ink" cx="1300" cy="380" r="60" fill="var(--gain)" stroke-width="6"/><rect class="ink" x="1276" y="446" width="48" height="40" rx="6"/><text class="m" x="1300" y="600" font-size="20" text-anchor="middle">SEE IT, THEN DECIDE</text></g>
+<g id="cent"><text class="d" x="120" y="770" font-size="44">Habits can outlast their reasons by centuries.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Is that reaction</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">truly yours, or</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">handed down?</text></g>
+<g id="keep"><text class="m" x="143" y="700" font-size="26">CHOOSE WHICH PARTS TO KEEP</text></g>
+<path class="s-ink" d="M1300 600v140M1220 740h160" stroke-width="8" stroke-linecap="round"/>
+<ellipse class="s-ink" cx="1300" cy="420" rx="130" ry="180" fill="var(--stage)" stroke-width="8"/>
+<g id="mLoss"></g><g id="mGain"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="126" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:06</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Feuds and the Culture of Honor&rdquo;, from <em>Outliers</em> by Malcolm Gladwell. Examples as reported in the book: the Howard and Turner feud in Harlan, Kentucky, and the University of Michigan hallway insult experiment. The map, backpack, family tree and mirror drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=126, SC=[[0.0, 9.3], [9.3, 27.1], [27.1, 38.3], [38.3, 47.9], [47.9, 65.5], [65.5, 80.3], [80.3, 95.5], [95.5, 111.1], [111.1, 126.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["A Town of Feuds", "Harlan, Kentucky", "Not Just Harlan", "Where They Came From", "The Herder's Logic", "The Hallway Test", "North Versus South", "Culture Outlives Reasons", "Your Inheritance"];
+const TM={"feud_title": 0.0, "mountains": 9.6, "two_families": 14.96, "gravestones": 20.96, "map_south": 27.44, "pointing_hand": 33.68, "sailing_ship": 38.64, "sheep_flock": 44.16, "thief": 48.16, "raised_fist": 54.08, "university": 65.76, "hallway": 72.04, "bumper": 74.8, "cool_student": 80.56, "angry_student": 84.72, "family_tree": 95.76, "backpack": 102.08, "lightbulb": 107.04, "mirror": 111.36};
+const person=(g,x,y,r,cls)=>{const q=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:cls},q);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},q);return q};
+const sheep=(g,x,y)=>{const q=mk('g',{},g);mk('path',{d:'M'+(x-14)+' '+(y+10)+'v18M'+(x+14)+' '+(y+10)+'v18',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},q);mk('ellipse',{cx:x,cy:y,rx:32,ry:20,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},q);mk('ellipse',{cx:x+32,cy:y-8,rx:11,ry:9,class:'ink'},q);return q};
+person($('t_calm'),1180,330,40,'ink');person($('t_ink'),1390,330,40,'ink');person($('t_mad'),1390,330,40,'loss');
+for(let i=0;i<5;i++)mk('circle',{cx:1230+i*50,cy:190,r:12,fill:'var(--muted)','fill-opacity':.6},$('t_anc'));
+const GR=[];for(let i=0;i<7;i++){const x=590+i*70;GR.push(mk('path',{d:'M'+(x-20)+' 822v-50a20 20 0 0 1 40 0v50z',class:'ink'},$('graves')))}
+const TW=[[230,740],[320,680],[420,610],[520,540],[610,460],[700,390],[790,320],[870,260]].map((q,i)=>{const x=q[0]+(i%2?50:-50),g=mk('g',{},$('towns'));
+ mk('circle',{cx:x,cy:q[1],r:18,class:i===3?'ink':'loss'},g);mk('path',{d:'M'+(x-8)+' '+(q[1]-8)+'l16 16m0-16l-16 16',stroke:'var(--stage)','stroke-width':4,'stroke-linecap':'round'},g);
+ if(i===3){const tx=mk('text',{x:x+30,y:q[1]+6,'font-size':18,class:'m'},g);tx.textContent='HARLAN'}return g});
+// herder stands on the ground line (feet at y 800), flock in front of the hills
+person($('herder'),470,716,20,'ink');
+const FL=[620,730,840,950,1060,1170].map((x,i)=>sheep($('flock'),x,760+(i%2?4:0)));
+for(let r=0;r<3;r++)for(let c=0;c<6;c++){const x=200+c*95,y=380+r*80;mk('path',{d:'M'+x+' '+y+'v-46',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round'},$('crops'));mk('circle',{cx:x,cy:y-46,r:10,class:'gain'},$('crops'))}
+const HD=[910,1010,1110,1210,1310].map((x,i)=>sheep($('herd'),x,i%2?500:440));
+person($('thiefG'),1420,380,20,'loss');
+for(let i=0;i<5;i++)mk('rect',{x:1196+i*56,y:280,width:24,height:110,class:'ink'},$('cols'));
+person($('stu'),0,620,26,'ink');person($('str'),0,620,26,'loss');
+person($('nPer'),300,380,40,'ink');person($('sPer'),1000,380,40,'loss');sheep($('ghost'),1380,784);
+const TX=[[200,320,440,560],[260,500],[380]];
+TX.forEach((row,k)=>row.forEach((x,j)=>{const y=270+k*160;person($('tr'+k),x,y,26,k===2?'gain':'ink');
+ if(k<2){const cx=TX[k+1][j>>1];mk('path',{d:'M'+x+' '+(y+109)+'L'+cx+' '+(y+134),stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round'},$('tr'+(k+1)))}}));
+person($('packP'),900,360,40,'ink');
+for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1300+80*c).toFixed(0)+' '+(380+80*s).toFixed(0)+'L'+(1300+108*c).toFixed(0)+' '+(380+108*s).toFixed(0),stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},$('rays'))}
+person($('mLoss'),1300,360,40,'loss');person($('mGain'),1300,360,40,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const f0=TM.feud_title, mad=p(u,f0+3,f0+3.6);
+rise($('t_calm'),p(u,f0,f0+.5)); $('t_ink').setAttribute('opacity',(p(u,f0,f0+.5)*(1-mad)).toFixed(2));
+$('t_mad').setAttribute('opacity',mad.toFixed(2)); $('t_mad').setAttribute('transform','translate('+(mad*3*Math.sin(t*30)).toFixed(1)+' 0)');
+rise($('t_red'),mad); rise($('t_ins'),p(u,f0+1.5,f0+2)); rise($('t_anc'),p(u,f0+5.8,f0+6.4));
+
+rise($('mtn'),p(u,TM.mountains,TM.mountains+.6));
+rise($('h0'),p(u,TM.two_families,TM.two_families+.5)); rise($('h1'),p(u,TM.two_families+.6,TM.two_families+1.1));
+$('bolt').setAttribute('opacity',(p(u,TM.two_families+1.4,TM.two_families+1.8)*(.75+.25*Math.sin(t*6))).toFixed(2));
+GR.forEach((g,i)=>rise(g,p(u,TM.gravestones+i*.5,TM.gravestones+i*.5+.4))); rise($('chainT'),p(u,TM.gravestones,TM.gravestones+.6));
+
+rise($('ridge'),p(u,TM.map_south,TM.map_south+.6));
+TW.forEach((g,i)=>{const a=TM.map_south+(i===3?0:.5+i*.5);rise(g,p(u,a,a+.4))});
+rise($('hand'),p(u,TM.pointing_hand,TM.pointing_hand+.5)); $('hand').setAttribute('transform','translate('+(10*Math.sin(t*4)).toFixed(1)+' 0)');
+rise($('ques'),p(u,TM.pointing_hand+.4,TM.pointing_hand+1));
+
+const sp=p(u,TM.sailing_ship,TM.sailing_ship+4.5);
+$('ship').setAttribute('transform','translate('+(1100-680*sp).toFixed(1)+' '+(470+4*Math.sin(t*2)).toFixed(1)+')');
+$('ship').setAttribute('opacity',p(u,TM.sailing_ship,TM.sailing_ship+.4).toFixed(2));
+rise($('hills'),p(u,TM.sheep_flock,TM.sheep_flock+.5)); rise($('herder'),p(u,TM.sheep_flock+.3,TM.sheep_flock+.8));
+FL.forEach((g,i)=>rise(g,p(u,TM.sheep_flock+.5+i*.3,TM.sheep_flock+.9+i*.3)));
+
+rise($('thiefG'),p(u,TM.thief,TM.thief+.5));
+HD.forEach((g,i)=>g.setAttribute('opacity',(1-p(u,TM.thief+1.5+i*.6,TM.thief+2+i*.6)).toFixed(2)));
+rise($('gone'),p(u,TM.thief+4.5,TM.thief+5));
+rise($('shield'),p(u,TM.raised_fist,TM.raised_fist+.5)); $('shield').setAttribute('transform','translate(0 '+(u>=TM.raised_fist?-4*Math.abs(Math.sin(t*2)):0).toFixed(1)+')');
+rise($('hon0'),p(u,TM.raised_fist+.4,TM.raised_fist+1)); rise($('hon1'),p(u,TM.raised_fist+6.6,TM.raised_fist+7.2));
+
+rise($('uni'),p(u,TM.university,TM.university+.6)); rise($('hall'),p(u,TM.hallway-.6,TM.hallway));
+const sh=(u>TM.bumper&&u<TM.bumper+.7)?6*Math.sin(t*40):0;
+$('stu').setAttribute('transform','translate('+(200+580*p(u,TM.hallway,TM.hallway+2.6)+sh).toFixed(1)+' 0)'); $('stu').setAttribute('opacity',p(u,TM.hallway,TM.hallway+.3).toFixed(2));
+$('str').setAttribute('transform','translate('+(1400-550*p(u,TM.bumper-1.4,TM.bumper)).toFixed(1)+' 0)'); $('str').setAttribute('opacity',p(u,TM.bumper-1.4,TM.bumper-1.1).toFixed(2));
+$('bang').setAttribute('opacity',(u>=TM.bumper?1-p(u,TM.bumper+.4,TM.bumper+1.2):0).toFixed(2));
+rise($('ins'),p(u,TM.bumper+.2,TM.bumper+.6)); rise($('secret'),p(u,TM.bumper+3.4,TM.bumper+4));
+
+rise($('nP'),p(u,TM.cool_student,TM.cool_student+.5)); rise($('sP'),p(u,TM.angry_student,TM.angry_student+.5));
+const bar=(id,f)=>{const h=304*f;$(id).setAttribute('y',(612-h).toFixed(1));$(id).setAttribute('height',h.toFixed(1))};
+bar('gN',.18*p(u,TM.cool_student+.6,TM.cool_student+1.6)); bar('gA',.85*p(u,TM.angry_student+.6,TM.angry_student+1.8)); bar('gS',.9*p(u,TM.angry_student+2,TM.angry_student+3.2));
+$('steam').setAttribute('transform','translate(0 '+(-4*Math.abs(Math.sin(t*5))).toFixed(1)+')');
+rise($('refl'),p(u,TM.angry_student+6.5,TM.angry_student+7.1));
+
+[0,1,2].forEach(k=>rise($('tr'+k),p(u,TM.family_tree+k*.7,TM.family_tree+k*.7+.5)));
+rise($('youL'),p(u,TM.family_tree+1.4,TM.family_tree+1.9)); rise($('cent'),p(u,TM.family_tree+2.4,TM.family_tree+3));
+rise($('pack'),p(u,TM.backpack,TM.backpack+.6)); rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.5));
+$('rays').setAttribute('opacity',(u>=TM.lightbulb?.55+.45*Math.sin(t*4):0).toFixed(2));
+
+rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9)); rise($('qc'),p(u,TM.mirror+.8,TM.mirror+1.3));
+const ch=p(u,TM.mirror+7.3,TM.mirror+8);
+$('mLoss').setAttribute('opacity',(p(u,TM.mirror,TM.mirror+.6)*(1-ch)).toFixed(2)); $('mGain').setAttribute('opacity',ch.toFixed(2));
+rise($('keep'),ch);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:122.96;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,37 @@
+const P=(g,x,y,r,cls)=>{const h=mk('g',{class:cls},g);mk('circle',{cx:x,cy:y,r:r},h);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},h);return h};
+const door=(el,x,y,w,h,o)=>{const ww=w*(1-.75*o),s=h*.1*o;el.setAttribute('points',[x,y,x+ww,y+s,x+ww,y+h-s,x,y+h].map(v=>v.toFixed(1)).join(' '))};
+const ray=(g,cx,cy,r1,r2,n,col,w)=>{for(let i=0;i<n;i++){const a=i*2*Math.PI/n;mk('path',{d:'M'+(cx+r1*Math.cos(a)).toFixed(1)+' '+(cy+r1*Math.sin(a)).toFixed(1)+'L'+(cx+r2*Math.cos(a)).toFixed(1)+' '+(cy+r2*Math.sin(a)).toFixed(1),stroke:col,'stroke-width':w,'stroke-linecap':'round'},g)}};
+const KID=P($('kid0'),0,0,11,'ink');
+for(let i=0;i<4;i++)mk('rect',{x:160+(i%2)*240+8,y:260+Math.floor(i/2)*240+8,width:224,height:224,rx:18,fill:'none',stroke:'var(--muted)','stroke-width':3,'stroke-dasharray':'10 10'},$('grid'));
+const PZ=[[['Birth','date'],160,260,-70,-80],[['Practice','hours'],400,260,90,-80],[['Family','habits'],160,500,-70,80],[['MORE'],400,500,90,80]].map((q,i)=>{const g=mk('g',{},$('pz')),L=i==3;
+  mk('rect',{x:q[1]+8,y:q[2]+8,width:224,height:224,rx:18,fill:L?'var(--gain)':'var(--stage)',stroke:L?'var(--gain)':'var(--ink)','stroke-width':6},g);
+  q[0].forEach((s,j)=>{const tx=mk('text',{x:q[1]+120,y:q[2]+(L?136:112+j*48),'font-size':L?44:38,'text-anchor':'middle',class:'d',style:L?'fill:var(--on-gain)':'fill:var(--ink)'},g);tx.textContent=s});
+  return [g,q[3],q[4]]});
+ray($('rays'),1040,380,135,170,8,'var(--gain)',7);
+[210,150,260,180,240,170].forEach((h,i)=>{const x=120+i*108;mk('rect',{x:x,y:560-h,width:96,height:h,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('bldg'));
+  for(let wy=560-h+24;wy<520;wy+=40)for(let c=0;c<3;c++)mk('rect',{x:x+14+c*26,y:wy,width:14,height:18,fill:'var(--line)'},$('bldg'))});
+const BL=[...Array(9)].map((_,i)=>mk('circle',{r:14,fill:i%3?'var(--ink)':'var(--gain)'},$('balls')));
+const KD=[...Array(6)].map((_,i)=>P($('kids'),1000+i*88,690,16,'ink'));
+'JFMAMJJASOND'.split('').forEach((c,i)=>{const x=120+i*113,su=i>4&&i<8;mk('rect',{x:x,y:214,width:105,height:52,rx:8,fill:su?'var(--loss)':'var(--stage)','fill-opacity':su?.3:1,stroke:'var(--ink)','stroke-width':3},$('cal'));
+  const tx=mk('text',{x:x+52,y:248,'font-size':20,'text-anchor':'middle',class:'m'},$('cal'));tx.textContent=c});
+P($('kids3'),220,420,30,'ink');P($('kids3'),380,420,30,'loss');
+const GX=[540,740,840,1040,1140,1340,1440],GR=[720,660,630,570,540,480,450],GP=[720,660,660,600,600,540,540];
+function trace(Y,X){let s='';for(let i=0;i<GX.length;i++){if(GX[i]<=X)s+=GX[i]+','+Y[i]+' ';else{const f=(X-GX[i-1])/(GX[i]-GX[i-1]);s+=X.toFixed(1)+','+(Y[i-1]+(Y[i]-Y[i-1])*f).toFixed(1);break}}return s}
+const GB=[2,4,6].map(i=>mk('path',{d:'M'+GX[i]+' '+GP[i]+'V'+GR[i],stroke:'var(--loss)','stroke-width':14,'stroke-linecap':'round'},$('gaps')));
+ray($('ticks'),360,480,172,186,12,'var(--ink)',5);
+const pt=(a,R)=>[360+R*Math.sin(a*Math.PI/180),480-R*Math.cos(a*Math.PI/180)];
+const WK='MTWTFSS'.split('').map((c,i)=>{const x=700+i*112;const r=mk('rect',{x:x,y:260,width:100,height:100,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('week'));
+  const tx=mk('text',{x:x+50,y:326,'font-size':40,'text-anchor':'middle',class:'d'},$('week'));tx.textContent=c;return [r,tx]});
+const SW=[...Array(10)].map((_,i)=>mk('rect',{x:700+i*60,y:520,width:54,height:80,rx:6,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},$('sw')));
+ray($('sunr'),1390,560,48,66,10,'var(--gain)',6);
+P($('girl'),240,330,40,'gain');
+const pan=(lines,cls)=>{const g=mk('g',{},$('bal'));mk('path',{d:'M0 0L-80 90M0 0L80 90',stroke:'var(--ink)','stroke-width':4},g);
+  mk('path',{d:'M-90 90a90 40 0 0 0 180 0z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('circle',{cx:0,cy:66,r:22,class:cls},g);
+  lines.forEach((l,i)=>{const x=mk('text',{x:0,y:168+i*28,'font-size':20,'text-anchor':'middle',class:'m'},g);x.textContent=l});return g};
+const PL=pan(['FREE TIME'],'loss'),PR=pan(['A REAL SHOT','AT THE FUTURE'],'gain');
+const CHP=[['EXTRA TIME',680,170],['HIGH EXPECTATIONS',870,260],['EFFORT IS NORMAL',1150,250]].map(q=>{const g=mk('g',{},$('chips'));
+  mk('rect',{x:q[1],y:700,width:q[2],height:64,rx:32,class:'gain'},g);const tx=mk('text',{x:q[1]+q[2]/2,y:740,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},g);tx.textContent=q[0];return g});
+const PP=[];for(let r=0;r<4;r++)for(let c=0;c<10;c++){if((c==4||c==5)&&(r==1||r==2))continue;const x=200+c*133,y=300+r*120;PP.push([P($('crowd7'),x,y,16,'ink'),Math.hypot((x-800)/600,(y-505)/260)])}
+const RARE=[3,17,30];
+const RP=[0,1,2].map(()=>mk('ellipse',{cx:800,cy:505,fill:'none',stroke:'var(--gain)','stroke-width':5},$('rip')));
+P($('p8'),1250,650,18,'ink');

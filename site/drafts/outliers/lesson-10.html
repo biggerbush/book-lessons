@@ -1,0 +1,398 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outliers Lesson 10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 10 of Outliers: Schools like KIPP show that if success comes from opportunity and culture, we can deliberately create the conditions that let many more people become outliers. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIERS · LESSON 10</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Building opportunity</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">on purpose.</text>
+<text class="b" x="120" y="600" font-size="32">If success is built, we can build it for more people.</text>
+<path class="s-ink" d="M1130 410L1300 300L1470 410" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<rect class="s-ink" x="1150" y="410" width="300" height="310" fill="var(--stage)" stroke-width="7"/>
+<rect class="s-ink" x="1170" y="440" width="50" height="50" fill="none" stroke-width="5"/>
+<rect class="s-ink" x="1380" y="440" width="50" height="50" fill="none" stroke-width="5"/>
+<g id="beam0"><polygon class="gain" points="1240,720 1360,720 1440,800 1160,800" fill-opacity=".3"/></g>
+<rect class="gain" x="1240" y="550" width="120" height="170"/>
+<g id="kid0"></g>
+<polygon id="leaf0" class="loss"/>
+<rect class="s-ink" x="1240" y="550" width="120" height="170" fill="none" stroke-width="6"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Success is built from pieces.</text>
+<text class="b" x="120" y="176" font-size="32">Hidden advantages that add up to an outlier.</text>
+<g id="grid"></g>
+<g id="pz"></g>
+<g id="bulb">
+<circle class="s-ink" cx="1040" cy="380" r="110" fill="var(--stage)" stroke-width="7"/>
+<circle id="glow" class="gain" cx="1040" cy="380" r="88"/>
+<path class="s-ink" d="M1005 420l12-40 12 28 12-28 12 28 12-28 12 40" fill="none" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+<rect class="ink" x="990" y="496" width="100" height="22" rx="6"/><rect class="ink" x="1004" y="526" width="72" height="22" rx="6"/>
+<g id="rays"></g>
+</g>
+<g id="t1a"><text class="d" x="760" y="680" font-size="44">People made these pieces.</text></g>
+<g id="t1b"><text class="d" x="760" y="750" font-size="44" style="fill:var(--gain)">So people can make more.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A school in the South Bronx.</text>
+<text class="b" x="120" y="176" font-size="32">One of New York’s poorest neighborhoods.</text>
+<g id="bldg"><text class="m" x="120" y="610" font-size="20">SOUTH BRONX, NEW YORK</text></g>
+<path class="s-ink" d="M120 560H1480" stroke-width="6" stroke-linecap="round"/>
+<g id="school">
+<rect class="s-ink" x="800" y="330" width="320" height="230" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="925" y="480" width="70" height="80"/>
+</g>
+<g id="kipp">
+<rect class="gain" x="840" y="360" width="240" height="76" rx="10"/>
+<text class="d" x="960" y="416" font-size="52" text-anchor="middle" style="fill:var(--on-gain)">KIPP</text>
+<text class="m" x="800" y="610" font-size="20">KNOWLEDGE IS POWER PROGRAM</text>
+</g>
+<g id="drum">
+<path class="s-ink" d="M1250 560L1330 420L1410 560M1440 420h30v40" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="s-ink" cx="1330" cy="420" r="110" fill="var(--stage)" stroke-width="7"/>
+<g id="balls"></g>
+</g>
+<g id="kids"></g>
+<g id="lotl"><text class="m" x="1000" y="806" font-size="20">ORDINARY LOCAL KIDS,</text><text class="m" x="1000" y="836" font-size="20" style="fill:var(--gain)">CHOSEN BY LOTTERY</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The summer gap.</text>
+<text class="b" x="120" y="176" font-size="32">Karl Alexander’s research in Baltimore.</text>
+<g id="cal"></g>
+<g id="bands">
+<rect class="loss" x="740" y="320" width="100" height="440" fill-opacity=".12"/><rect class="loss" x="1040" y="320" width="100" height="440" fill-opacity=".12"/><rect class="loss" x="1340" y="320" width="100" height="440" fill-opacity=".12"/>
+<text class="m" x="790" y="350" font-size="18" text-anchor="middle">SUMMER</text><text class="m" x="1090" y="350" font-size="18" text-anchor="middle">SUMMER</text><text class="m" x="1390" y="350" font-size="18" text-anchor="middle">SUMMER</text>
+</g>
+<g id="axes3"><path class="s-line" d="M520 330V760H1460" fill="none" stroke-width="4"/><text class="m" x="540" y="330" font-size="18">LEARNING</text></g>
+<g id="kids3">
+<text class="m" x="220" y="620" font-size="20" text-anchor="middle">WEALTHIER</text>
+<text class="m" x="380" y="620" font-size="20" text-anchor="middle" style="fill:var(--loss)">POORER</text>
+</g>
+<polyline id="lr" class="s-ink" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline id="lp" class="s-loss" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="gaps"></g>
+<g id="gapl"><text class="m" x="1460" y="420" font-size="22" text-anchor="end" style="fill:var(--loss)">THE GAP GROWS</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">More time to learn.</text>
+<text class="b" x="120" y="176" font-size="32">KIPP answers the gap with time.</text>
+<g id="face">
+<circle class="s-ink" cx="360" cy="480" r="190" fill="var(--stage)" stroke-width="8"/>
+<g id="ticks"></g>
+<path id="arc" fill="none" stroke="var(--gain)" stroke-width="22" stroke-linecap="round"/>
+<line id="hh" class="s-ink" x1="360" y1="480" stroke-width="10" stroke-linecap="round"/>
+<line id="mh" class="s-ink" x1="360" y1="480" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="360" cy="480" r="12"/>
+<text class="m" x="360" y="730" font-size="22" text-anchor="middle">ABOUT 7:25 AM TO 5 PM</text>
+</g>
+<g id="week"></g>
+<g id="satl"><text class="m" x="700" y="400" font-size="20">LONG WEEKDAYS + SATURDAY MORNINGS</text></g>
+<g id="summer">
+<text class="m" x="700" y="500" font-size="20">SUMMER</text>
+<g id="sw"></g>
+<circle class="gain" cx="1390" cy="560" r="36"/>
+<g id="sunr"></g>
+<text class="m" x="700" y="650" font-size="20" style="fill:var(--gain)">THREE WEEKS OF CLASSES EACH SUMMER</text>
+</g>
+<g id="t4"><text class="d" x="120" y="820" font-size="44">The long break stops erasing progress.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Marita’s bargain.</text>
+<text class="b" x="120" y="176" font-size="32">A twelve-year-old KIPP student and her long days.</text>
+<g id="girl"><text class="m" x="240" y="550" font-size="22" text-anchor="middle">MARITA, 12</text></g>
+<g id="alarm">
+<circle class="ink" cx="372" cy="264" r="12"/><circle class="ink" cx="428" cy="264" r="12"/>
+<circle class="s-ink" cx="400" cy="300" r="38" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M400 300v-22M400 300h16" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="dayb">
+<rect x="560" y="330" width="900" height="90" fill="var(--stage)" stroke="var(--line)" stroke-width="4"/>
+<path class="s-gain" d="M598 300V440" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="598" y="470" font-size="20" text-anchor="middle">WAKE BEFORE 6</text>
+</g>
+<rect id="segS" class="gain" x="681" y="330" width="0" height="90"/>
+<g id="schl"><text class="m" x="920" y="470" font-size="22" text-anchor="middle">SCHOOL</text></g>
+<rect id="segH" class="ink" x="1160" y="330" width="0" height="90"/>
+<g id="hwl">
+<text class="m" x="1285" y="470" font-size="22" text-anchor="middle">HOMEWORK</text>
+<rect x="1410" y="330" width="22" height="90" fill="none" stroke="var(--gain)" stroke-width="3" stroke-dasharray="6 5"/>
+<text class="m" x="1460" y="300" font-size="20" text-anchor="end">LITTLE TIME FOR FRIENDS</text>
+</g>
+<g id="bal">
+<path class="s-ink" d="M1010 540V740M955 740H1065" fill="none" stroke-width="8" stroke-linecap="round"/>
+<line id="beamL" class="s-ink" stroke-width="8" stroke-linecap="round"/>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What changes.</text>
+<text class="b" x="120" y="176" font-size="32">Ordinary kids, far better results.</text>
+<g id="chart">
+<text class="m" x="120" y="250" font-size="20">MATH BY END OF MIDDLE SCHOOL</text>
+<rect id="barP" x="180" y="700" width="140" height="0" fill="var(--muted)" fill-opacity=".5"/>
+<rect id="barK" class="gain" x="380" y="700" width="140" height="0"/>
+<path class="s-ink" d="M120 700H560" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="250" y="740" font-size="20" text-anchor="middle">PREDICTED</text>
+<text class="m" x="450" y="740" font-size="20" text-anchor="middle" style="fill:var(--gain)">KIPP</text>
+</g>
+<g id="stairs">
+<path class="s-ink" d="M680 520H900V420H1120V320H1340" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="790" y="560" font-size="20" text-anchor="middle">MIDDLE SCHOOL</text>
+<text class="m" x="1010" y="460" font-size="20" text-anchor="middle">HIGH SCHOOL</text>
+<text class="m" x="1230" y="360" font-size="20" text-anchor="middle" style="fill:var(--gain)">COLLEGE</text>
+<g id="cap"><path class="gain" d="M-44 0L0-18L44 0L0 18z"/><rect class="gain" x="-22" y="4" width="44" height="20" rx="4"/><path class="s-ink" d="M36 2v22" stroke-width="3"/></g>
+</g>
+<g id="rare"><text class="d5" x="680" y="650" font-size="44">Not rare talent.</text></g>
+<line id="rs" class="s-ink" x1="676" y1="636" x2="676" y2="636" stroke-width="6" stroke-linecap="round"/>
+<g id="chips"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="60">Talent is common. Chances are rare.</text>
+<text class="b" x="120" y="176" font-size="32">The heart of Outliers.</text>
+<g id="rip"></g>
+<g id="crowd7"></g>
+<rect class="gain" x="750" y="410" width="100" height="190"/>
+<polygon id="leaf7" class="loss"/>
+<rect class="s-ink" x="750" y="410" width="100" height="190" fill="none" stroke-width="6"/>
+<g id="build7"><text class="d" x="120" y="820" font-size="52">Build opportunity <tspan style="fill:var(--gain)">on purpose.</tspan></text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Whose spare hours could</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">you fill with a real</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2"><tspan style="fill:var(--gain)">opportunity</tspan> this year?</text></g>
+<g id="pick"><text class="m" x="143" y="680" font-size="26">PICK ONE YOUNG PERSON. OPEN A DOOR.</text></g>
+<g id="p8"></g>
+<rect class="gain" x="1320" y="600" width="120" height="180"/>
+<polygon id="leaf8" class="loss"/>
+<rect class="s-ink" x="1320" y="600" width="120" height="180" fill="none" stroke-width="6"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Building Opportunity on Purpose&rdquo;, from <em>Outliers</em> by Malcolm Gladwell. Examples as reported in the book: KIPP Academy in the South Bronx, the student Marita, and Karl Alexander&#x27;s Baltimore research on summer learning. The gap bars and math chart are illustrations, not actual data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-10.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 6.7], [6.7, 20.9], [20.9, 35.9], [35.9, 51.9], [51.9, 69.4], [69.4, 88.7], [88.7, 107.1], [107.1, 120.0], [120.0, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Building Opportunity", "Success Can Be Built", "A School in the Bronx", "The Summer Gap", "More Time to Learn", "Marita's Bargain", "What Changes", "Opportunity on Purpose", "Your Turn"];
+const TM={"school_door": 0.0, "puzzle": 7.04, "pieces": 11.24, "lightbulb": 15.72, "bronx_street": 21.24, "kipp_sign": 26.12, "lottery_drum": 30.16, "calendar": 36.16, "two_kids": 41.12, "gap_bars": 45.68, "clock": 55.2, "saturday": 60.56, "sun_icon": 63.44, "girl_marita": 69.68, "alarm_clock": 73.44, "homework": 77.28, "math_chart": 88.96, "grad_cap": 94.96, "open_door": 107.44, "ripple": 114.32};
+const P=(g,x,y,r,cls)=>{const h=mk('g',{class:cls},g);mk('circle',{cx:x,cy:y,r:r},h);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},h);return h};
+const door=(el,x,y,w,h,o)=>{const ww=w*(1-.75*o),s=h*.1*o;el.setAttribute('points',[x,y,x+ww,y+s,x+ww,y+h-s,x,y+h].map(v=>v.toFixed(1)).join(' '))};
+const ray=(g,cx,cy,r1,r2,n,col,w)=>{for(let i=0;i<n;i++){const a=i*2*Math.PI/n;mk('path',{d:'M'+(cx+r1*Math.cos(a)).toFixed(1)+' '+(cy+r1*Math.sin(a)).toFixed(1)+'L'+(cx+r2*Math.cos(a)).toFixed(1)+' '+(cy+r2*Math.sin(a)).toFixed(1),stroke:col,'stroke-width':w,'stroke-linecap':'round'},g)}};
+const KID=P($('kid0'),0,0,11,'ink');
+for(let i=0;i<4;i++)mk('rect',{x:160+(i%2)*240+8,y:260+Math.floor(i/2)*240+8,width:224,height:224,rx:18,fill:'none',stroke:'var(--muted)','stroke-width':3,'stroke-dasharray':'10 10'},$('grid'));
+const PZ=[[['Birth','date'],160,260,-70,-80],[['Practice','hours'],400,260,90,-80],[['Family','habits'],160,500,-70,80],[['MORE'],400,500,90,80]].map((q,i)=>{const g=mk('g',{},$('pz')),L=i==3;
+  mk('rect',{x:q[1]+8,y:q[2]+8,width:224,height:224,rx:18,fill:L?'var(--gain)':'var(--stage)',stroke:L?'var(--gain)':'var(--ink)','stroke-width':6},g);
+  q[0].forEach((s,j)=>{const tx=mk('text',{x:q[1]+120,y:q[2]+(L?136:112+j*48),'font-size':L?44:38,'text-anchor':'middle',class:'d',style:L?'fill:var(--on-gain)':'fill:var(--ink)'},g);tx.textContent=s});
+  return [g,q[3],q[4]]});
+ray($('rays'),1040,380,135,170,8,'var(--gain)',7);
+[210,150,260,180,240,170].forEach((h,i)=>{const x=120+i*108;mk('rect',{x:x,y:560-h,width:96,height:h,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('bldg'));
+  for(let wy=560-h+24;wy<520;wy+=40)for(let c=0;c<3;c++)mk('rect',{x:x+14+c*26,y:wy,width:14,height:18,fill:'var(--line)'},$('bldg'))});
+const BL=[...Array(9)].map((_,i)=>mk('circle',{r:14,fill:i%3?'var(--ink)':'var(--gain)'},$('balls')));
+const KD=[...Array(6)].map((_,i)=>P($('kids'),1000+i*88,690,16,'ink'));
+'JFMAMJJASOND'.split('').forEach((c,i)=>{const x=120+i*113,su=i>4&&i<8;mk('rect',{x:x,y:214,width:105,height:52,rx:8,fill:su?'var(--loss)':'var(--stage)','fill-opacity':su?.3:1,stroke:'var(--ink)','stroke-width':3},$('cal'));
+  const tx=mk('text',{x:x+52,y:248,'font-size':20,'text-anchor':'middle',class:'m'},$('cal'));tx.textContent=c});
+P($('kids3'),220,420,30,'ink');P($('kids3'),380,420,30,'loss');
+const GX=[540,740,840,1040,1140,1340,1440],GR=[720,660,630,570,540,480,450],GP=[720,660,660,600,600,540,540];
+function trace(Y,X){let s='';for(let i=0;i<GX.length;i++){if(GX[i]<=X)s+=GX[i]+','+Y[i]+' ';else{const f=(X-GX[i-1])/(GX[i]-GX[i-1]);s+=X.toFixed(1)+','+(Y[i-1]+(Y[i]-Y[i-1])*f).toFixed(1);break}}return s}
+const GB=[2,4,6].map(i=>mk('path',{d:'M'+GX[i]+' '+GP[i]+'V'+GR[i],stroke:'var(--loss)','stroke-width':14,'stroke-linecap':'round'},$('gaps')));
+ray($('ticks'),360,480,172,186,12,'var(--ink)',5);
+const pt=(a,R)=>[360+R*Math.sin(a*Math.PI/180),480-R*Math.cos(a*Math.PI/180)];
+const WK='MTWTFSS'.split('').map((c,i)=>{const x=700+i*112;const r=mk('rect',{x:x,y:260,width:100,height:100,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('week'));
+  const tx=mk('text',{x:x+50,y:326,'font-size':40,'text-anchor':'middle',class:'d'},$('week'));tx.textContent=c;return [r,tx]});
+const SW=[...Array(10)].map((_,i)=>mk('rect',{x:700+i*60,y:520,width:54,height:80,rx:6,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},$('sw')));
+ray($('sunr'),1390,560,48,66,10,'var(--gain)',6);
+P($('girl'),240,330,40,'gain');
+const pan=(lines,cls)=>{const g=mk('g',{},$('bal'));mk('path',{d:'M0 0L-80 90M0 0L80 90',stroke:'var(--ink)','stroke-width':4},g);
+  mk('path',{d:'M-90 90a90 40 0 0 0 180 0z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('circle',{cx:0,cy:66,r:22,class:cls},g);
+  lines.forEach((l,i)=>{const x=mk('text',{x:0,y:168+i*28,'font-size':20,'text-anchor':'middle',class:'m'},g);x.textContent=l});return g};
+const PL=pan(['FREE TIME'],'loss'),PR=pan(['A REAL SHOT','AT THE FUTURE'],'gain');
+const CHP=[['EXTRA TIME',680,170],['HIGH EXPECTATIONS',870,260],['EFFORT IS NORMAL',1150,250]].map(q=>{const g=mk('g',{},$('chips'));
+  mk('rect',{x:q[1],y:700,width:q[2],height:64,rx:32,class:'gain'},g);const tx=mk('text',{x:q[1]+q[2]/2,y:740,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},g);tx.textContent=q[0];return g});
+const PP=[];for(let r=0;r<4;r++)for(let c=0;c<10;c++){if((c==4||c==5)&&(r==1||r==2))continue;const x=200+c*133,y=300+r*120;PP.push([P($('crowd7'),x,y,16,'ink'),Math.hypot((x-800)/600,(y-505)/260)])}
+const RARE=[3,17,30];
+const RP=[0,1,2].map(()=>mk('ellipse',{cx:800,cy:505,fill:'none',stroke:'var(--gain)','stroke-width':5},$('rip')));
+P($('p8'),1250,650,18,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('beam0'),p(u,TM.school_door,TM.school_door+.8)); door($('leaf0'),1240,550,120,170,p(u,TM.school_door,TM.school_door+1.4));
+  KID.setAttribute('transform','translate(1300 '+(610+138*p(u,TM.school_door+5,TM.school_door+6.5)).toFixed(1)+')');
+
+  rise($('grid'),p(u,TM.puzzle,TM.puzzle+.5)); rise($('bulb'),p(u,TM.puzzle+.8,TM.puzzle+1.4));
+  PZ.forEach((q,i)=>{const a=i<3?TM.pieces+i*1.2:TM.lightbulb+1,k=p(u,a,a+.7);q[0].setAttribute('transform','translate('+(q[1]*(1-k)).toFixed(1)+' '+(q[2]*(1-k)).toFixed(1)+')');q[0].setAttribute('opacity',k)});
+  const lb=p(u,TM.lightbulb,TM.lightbulb+.6); $('glow').setAttribute('opacity',lb); $('rays').setAttribute('opacity',(lb*(.7+.3*Math.sin(t*4))).toFixed(2));
+  rise($('t1a'),p(u,TM.lightbulb+.4,TM.lightbulb+1)); rise($('t1b'),p(u,TM.lightbulb+2.5,TM.lightbulb+3.1));
+
+  rise($('bldg'),p(u,TM.bronx_street,TM.bronx_street+.6)); rise($('school'),p(u,TM.bronx_street+1,TM.bronx_street+1.6));
+  rise($('kipp'),p(u,TM.kipp_sign,TM.kipp_sign+.5)); rise($('drum'),p(u,TM.lottery_drum,TM.lottery_drum+.5));
+  BL.forEach((b,i)=>{const a=i*.7+t*1.5*(i%2?1:-1),rr=30+(i%3)*24;b.setAttribute('cx',(1330+rr*Math.cos(a)).toFixed(1));b.setAttribute('cy',(420+rr*Math.sin(a)).toFixed(1))});
+  KD.forEach((k,i)=>rise(k,p(u,TM.lottery_drum+1+i*.3,TM.lottery_drum+1.4+i*.3))); rise($('lotl'),p(u,TM.lottery_drum+3,TM.lottery_drum+3.5));
+
+  rise($('cal'),p(u,TM.calendar,TM.calendar+.5)); rise($('bands'),p(u,TM.calendar+.6,TM.calendar+1.1)); rise($('axes3'),p(u,TM.calendar+1,TM.calendar+1.5));
+  rise($('kids3'),p(u,TM.two_kids,TM.two_kids+.5));
+  const X=540+200*p(u,TM.two_kids+.5,TM.two_kids+2.5)+700*p(u,TM.gap_bars,TM.gap_bars+4);
+  $('lr').setAttribute('points',trace(GR,X)); $('lp').setAttribute('points',trace(GP,X));
+  const ln=u>=TM.two_kids+.5?1:0; $('lr').setAttribute('opacity',ln); $('lp').setAttribute('opacity',ln);
+  GB.forEach((g,i)=>g.setAttribute('opacity',X>=GX[2+i*2]-1?1:0)); rise($('gapl'),p(u,TM.gap_bars+4,TM.gap_bars+4.6));
+
+  const s4=SC[4][0]/K; rise($('face'),p(u,s4+.3,s4+.9));
+  const ck=p(u,TM.clock,TM.clock+3),sp=287.5*ck,a0=pt(222.5,160),a1=pt(222.5+sp,160);
+  $('arc').setAttribute('d',sp<.5?'':'M'+a0[0].toFixed(1)+' '+a0[1].toFixed(1)+'A160 160 0 '+(sp>180?1:0)+' 1 '+a1[0].toFixed(1)+' '+a1[1].toFixed(1));
+  const hr=7+25/60+(17-7-25/60)*ck,h1=pt(hr*30,95),h2=pt((hr%1)*360,140);
+  $('hh').setAttribute('x2',h1[0].toFixed(1)); $('hh').setAttribute('y2',h1[1].toFixed(1)); $('mh').setAttribute('x2',h2[0].toFixed(1)); $('mh').setAttribute('y2',h2[1].toFixed(1));
+  rise($('week'),p(u,TM.clock,TM.clock+.5));
+  WK.forEach((w,i)=>{const on=i<5?u>=TM.clock+.6+i*.25:i==5&&u>=TM.saturday;w[0].setAttribute('fill',on?'var(--gain)':'var(--stage)');w[1].style.fill=on?'var(--on-gain)':'var(--ink)'});
+  rise($('satl'),p(u,TM.saturday,TM.saturday+.5)); rise($('summer'),p(u,TM.sun_icon,TM.sun_icon+.5));
+  SW.forEach((r,i)=>r.setAttribute('fill',i<3&&u>=TM.sun_icon+.6+i*.3?'var(--gain)':'var(--stage)'));
+  $('sunr').setAttribute('transform','rotate('+(t*20%360).toFixed(1)+' 1390 560)'); rise($('t4'),p(u,TM.sun_icon+2.5,TM.sun_icon+3.1));
+
+  rise($('girl'),p(u,TM.girl_marita,TM.girl_marita+.5)); rise($('alarm'),p(u,TM.alarm_clock,TM.alarm_clock+.3));
+  const sh=u>=TM.alarm_clock&&u<TM.alarm_clock+2?8*Math.sin(t*40):0; $('alarm').setAttribute('transform','rotate('+sh.toFixed(1)+' 400 300)');
+  rise($('dayb'),p(u,TM.alarm_clock,TM.alarm_clock+.5));
+  $('segS').setAttribute('width',(479*p(u,TM.alarm_clock+1.5,TM.alarm_clock+3)).toFixed(1)); rise($('schl'),p(u,TM.alarm_clock+2,TM.alarm_clock+2.5));
+  $('segH').setAttribute('width',(250*p(u,TM.homework,TM.homework+1.5)).toFixed(1)); rise($('hwl'),p(u,TM.homework+1,TM.homework+1.5));
+  const bg=TM.homework+5.4; rise($('bal'),p(u,bg,bg+.5));
+  const ta=.16*p(u,bg+1,bg+2.5),c=250*Math.cos(ta),s=250*Math.sin(ta),BY=540;
+  $('beamL').setAttribute('x1',(1010-c).toFixed(1)); $('beamL').setAttribute('y1',(BY-s).toFixed(1)); $('beamL').setAttribute('x2',(1010+c).toFixed(1)); $('beamL').setAttribute('y2',(BY+s).toFixed(1));
+  PL.setAttribute('transform','translate('+(1010-c).toFixed(1)+' '+(BY-s).toFixed(1)+')'); PR.setAttribute('transform','translate('+(1010+c).toFixed(1)+' '+(BY+s).toFixed(1)+')');
+
+  rise($('chart'),p(u,TM.math_chart,TM.math_chart+.5));
+  const hp=160*p(u,TM.math_chart+.3,TM.math_chart+1),hk=380*p(u,TM.math_chart+.8,TM.math_chart+2.6);
+  $('barP').setAttribute('y',700-hp); $('barP').setAttribute('height',hp); $('barK').setAttribute('y',700-hk); $('barK').setAttribute('height',hk);
+  rise($('stairs'),p(u,TM.grad_cap,TM.grad_cap+.5));
+  const gk=2*p(u,TM.grad_cap+.6,TM.grad_cap+3.6),gi=Math.min(1,Math.floor(gk)),gf=gk-gi;
+  $('cap').setAttribute('transform','translate('+(790+220*gk).toFixed(1)+' '+(490-100*gk-50*Math.sin(Math.PI*gf)).toFixed(1)+')');
+  rise($('rare'),p(u,TM.grad_cap+5,TM.grad_cap+5.5)); $('rs').setAttribute('x2',(676+370*p(u,TM.grad_cap+6,TM.grad_cap+6.6)).toFixed(1));
+  CHP.forEach((g,i)=>rise(g,p(u,TM.grad_cap+7.6+i*.7,TM.grad_cap+8.1+i*.7)));
+
+  const sp7=p(u,TM.ripple+.5,TM.ripple+4.5);
+  PP.forEach((q,i)=>{rise(q[0],p(u,TM.open_door+i*.03,TM.open_door+.4+i*.03));const on=(RARE.includes(i)&&u>=TM.open_door+3)||(u>=TM.ripple+.5&&sp7>q[1]/1.2);q[0].setAttribute('class',on?'gain':'ink')});
+  door($('leaf7'),750,410,100,190,p(u,TM.ripple,TM.ripple+1));
+  RP.forEach((e,j)=>{const on=u>=TM.ripple+.3,k=on?((u-TM.ripple)*.45+j/3)%1:0;e.setAttribute('rx',(40+600*k).toFixed(1));e.setAttribute('ry',(20+240*k).toFixed(1));e.setAttribute('opacity',on?(1-k).toFixed(2):0)});
+  rise($('build7'),p(u,TM.ripple+1.5,TM.ripple+2.1));
+
+  const s8=SC[8][0]/K; rise($('qa'),p(u,s8+.3,s8+.8)); rise($('qb'),p(u,s8+.7,s8+1.2)); rise($('qc'),p(u,s8+1.1,s8+1.6));
+  rise($('pick'),p(u,s8+5,s8+5.5)); rise($('p8'),p(u,s8+5,s8+5.5)); door($('leaf8'),1320,600,120,180,p(u,s8+5.5,s8+6.7));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.84;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

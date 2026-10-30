@@ -1,0 +1,313 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nexus Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Nexus: The naive belief that more information automatically leads to truth and wisdom is wrong, and history shows why. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">NEXUS · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The myth of</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">more information.</text>
+<text class="b" x="120" y="600" font-size="32">Why knowing more has never automatically made us wiser.</text>
+<g id="t_pile"></g>
+<g id="t_me"></g>
+<g id="t_q"><text id="t_qt" class="d" x="1210" y="370" font-size="100" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="t_lbl"><text class="m" x="1140" y="680" font-size="20">HOMO SAPIENS · WISE HUMAN</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A huge library.</text>
+<text class="b" x="120" y="176" font-size="32">Thousands of years of piled-up information.</text>
+<rect class="s-ink" x="120" y="240" width="600" height="560" rx="8" fill="none" stroke-width="7"/>
+<path class="s-ink" d="M120 426h600M120 613h600" stroke-width="6"/>
+<g id="l_books"></g>
+<text class="m" x="420" y="844" font-size="22" text-anchor="middle">INFORMATION, PILED UP</text>
+<g id="l_gal"><circle class="gain" cx="960" cy="370" r="18"/><g id="l_arm"></g><text class="m" x="960" y="524" font-size="24" text-anchor="middle">GALAXIES</text></g>
+<g id="l_cell"><ellipse class="s-ink" cx="1300" cy="370" rx="150" ry="100" fill="var(--stage)" stroke-width="6"/><circle class="gain" cx="1270" cy="360" r="34"/><circle class="ink" cx="1360" cy="320" r="10"/><circle class="ink" cx="1380" cy="400" r="14"/><circle class="ink" cx="1200" cy="410" r="8"/><text class="m" x="1300" y="524" font-size="24" text-anchor="middle">CELLS</text></g>
+<g id="l_warn"></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The naive view.</text>
+<text class="b" x="120" y="176" font-size="32">More information, more truth, more wisdom?</text>
+<g id="n0"><rect class="s-ink" x="120" y="300" width="320" height="150" rx="18" fill="var(--stage)" stroke-width="5"/><text class="d5" x="280" y="390" font-size="42" text-anchor="middle">Information</text></g>
+<g id="a1"><text class="m" x="540" y="344" font-size="22" text-anchor="middle">LEADS TO</text><path class="s-muted" d="M468 375h145m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="n1"><rect class="s-ink" x="640" y="300" width="320" height="150" rx="18" fill="var(--stage)" stroke-width="5"/><text class="d5" x="800" y="390" font-size="44" text-anchor="middle">Truth</text></g>
+<g id="a2"><text class="m" x="1060" y="344" font-size="22" text-anchor="middle">LEADS TO</text><path class="s-muted" d="M988 375h145m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="n2"><rect class="gain" x="1160" y="300" width="320" height="150" rx="18"/><text class="d" x="1320" y="388" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">Wisdom &amp; power</text></g>
+<g id="nv_gap"><text class="d" x="120" y="610" font-size="48">Every problem is just a lack of data.</text><g id="nv_sq"></g><text class="m" x="120" y="790" font-size="20">SO THE FIX IS ALWAYS: ADD MORE DATA</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A tempting promise.</text>
+<text class="b" x="120" y="176" font-size="32">Tech optimists: let information flow freely.</text>
+<g id="p_srv"><rect class="s-ink" x="140" y="280" width="180" height="250" rx="12" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M170 340h90M170 400h90M170 460h90" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="290" cy="340" r="8"/><circle class="gain" cx="290" cy="400" r="8"/><circle class="gain" cx="290" cy="460" r="8"/><g id="p_ppl"></g></g>
+<g id="p_pipe"><rect class="s-ink" x="420" y="360" width="1000" height="100" rx="50" fill="none" stroke-width="6"/><g id="p_dots"></g>
+<path class="s-loss" d="M840 342v-12h340v12" fill="none" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+<text class="m" x="1010" y="316" font-size="20" text-anchor="middle" style="fill:var(--loss)">LIES FADE</text>
+<path class="s-gain" d="M1180 478v12h220v-12" fill="none" stroke-width="4" stroke-linecap="round"/>
+<text class="m" x="1400" y="520" font-size="20" text-anchor="end" style="fill:var(--gain)">TRUTH WINS</text></g>
+<g id="p_hope"><text class="d5" x="420" y="620" font-size="44">Hopeful. Simple.</text></g>
+<g id="p_hist"><text class="d" x="120" y="790" font-size="52">But history tells a different story.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The printing press.</text>
+<text class="b" x="120" y="176" font-size="32">It spread across Europe in the fifteenth century.</text>
+<g id="pr"><path class="s-ink" d="M170 620V260M410 620V260M150 620h280" fill="none" stroke-width="8" stroke-linecap="round"/><rect class="ink" x="170" y="260" width="240" height="36"/><path class="s-ink" d="M230 330h120" stroke-width="8" stroke-linecap="round"/><line id="pr_scr" class="s-ink" x1="290" y1="296" x2="290" y2="400" stroke-width="10"/><rect id="pr_plat" class="ink" x="210" y="400" width="160" height="30" rx="4"/><rect class="ink" x="190" y="540" width="200" height="20"/><text class="m" x="290" y="670" font-size="20" text-anchor="middle">PRINTING PRESS</text><g id="pr_fly"></g></g>
+<g id="tl"><path class="s-ink" d="M600 400L780 320" stroke-width="26" stroke-linecap="round"/><path class="s-ink" d="M700 360L660 430M700 360L740 430" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="830" cy="280" r="8"/><circle class="gain" cx="868" cy="322" r="5"/><circle class="gain" cx="812" cy="336" r="4"/><text class="m" x="920" y="320" font-size="20">THE NAIVE VIEW</text><text class="d5" x="920" y="375" font-size="38">Printing sparked science.</text></g>
+<g id="pa"><rect x="580" y="480" width="110" height="140" rx="6" fill="var(--stage)" stroke="var(--loss)" stroke-width="5" transform="rotate(-8 635 550)"/><rect x="670" y="476" width="110" height="140" rx="6" fill="var(--stage)" stroke="var(--loss)" stroke-width="5" transform="rotate(4 725 546)"/><rect x="760" y="482" width="110" height="140" rx="6" fill="var(--stage)" stroke="var(--loss)" stroke-width="5" transform="rotate(10 815 552)"/><text class="d" x="725" y="572" font-size="64" text-anchor="middle" style="fill:var(--loss)">!</text><text class="d" x="815" y="578" font-size="64" text-anchor="middle" style="fill:var(--loss)">!</text><text class="m" x="580" y="680" font-size="20">TALES · CONSPIRACIES</text></g>
+<g id="wb"><rect class="loss" x="1000" y="470" width="170" height="200" rx="8"/><path d="M1020 470v200" stroke="var(--stage)" stroke-width="4"/><polygon points="1060,600 1130,600 1095,510" fill="var(--stage)"/><path d="M1045 602h100" stroke="var(--stage)" stroke-width="6" stroke-linecap="round"/><text class="m" x="1200" y="540" font-size="20">HOW TO SPOT</text><text class="m" x="1200" y="570" font-size="20">AND PUNISH</text><text class="m" x="1200" y="600" font-size="20" style="fill:var(--loss)">WITCHES</text></g>
+<g id="wf"><text class="d" x="120" y="800" font-size="46">Wild fantasies spread as fast as discoveries.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Truth is costly.</text>
+<text class="b" x="120" y="176" font-size="32">Truth is expensive. Fiction is cheap.</text>
+<g id="sc"><path class="s-ink" d="M800 330V640M700 640h200" stroke-width="8" stroke-linecap="round"/><line id="sc_beam" class="s-ink" x1="500" y1="330" x2="1100" y2="330" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="800" cy="330" r="14"/>
+<g id="sc_L"><path class="s-ink" d="M0 0L-95 120M0 0L95 120M-100 120h200" fill="none" stroke-width="5" stroke-linecap="round"/><rect class="gain" x="-50" y="50" width="100" height="70" rx="6"/><text class="d" x="0" y="172" font-size="30" text-anchor="middle">TRUTH</text></g>
+<g id="sc_R"><path class="s-ink" d="M0 0L-95 120M0 0L95 120M-100 120h200" fill="none" stroke-width="5" stroke-linecap="round"/><g id="sc_cards"></g><text class="d" x="0" y="172" font-size="30" text-anchor="middle" style="fill:var(--loss)">FICTION</text></g></g>
+<g id="sc_tl"><text class="d5" x="120" y="300" font-size="36" style="fill:var(--gain)">Expensive</text><text class="d5" x="120" y="350" font-size="36" style="fill:var(--gain)">Complicated</text><text class="d5" x="120" y="400" font-size="36" style="fill:var(--gain)">Painful</text></g>
+<g id="sc_tr"><text class="d5" x="1480" y="300" font-size="36" text-anchor="end" style="fill:var(--loss)">Cheap</text><text class="d5" x="1480" y="350" font-size="36" text-anchor="end" style="fill:var(--loss)">Simple</text><text class="d5" x="1480" y="400" font-size="36" text-anchor="end" style="fill:var(--loss)">Flattering</text></g>
+<g id="sc_cost"><text class="b" x="120" y="720" font-size="32">Checking facts: time and money. Inventing a tale: almost nothing.</text></g>
+<g id="sc_fl"><text class="d" x="120" y="810" font-size="48">In a flood, the truth is outnumbered.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not just bad apples.</text>
+<text class="b" x="120" y="176" font-size="32">The problem is how large groups share information.</text>
+<g id="so"><rect class="s-line" x="120" y="240" width="480" height="480" rx="18" fill="var(--stage)" stroke-width="3"/><g id="so_p"></g><polygon class="loss" points="266,400 300,316 334,400"/><path class="s-ink" d="M350 500L410 440" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="410" cy="440" r="10"/><g id="so_b"></g><text class="m" x="360" y="690" font-size="20" text-anchor="middle">THE FOOLISH APPRENTICE</text></g>
+<path id="so_x" class="s-ink" d="M170 280L550 660M550 280L170 660" stroke-width="10" stroke-linecap="round" opacity="0"/>
+<g id="nw_w"><g id="nw"></g></g>
+<g id="cr">
+<text class="m" x="1060" y="720" font-size="22" text-anchor="middle">GOOD PEOPLE, BADLY BUILT NETWORK</text>
+<path class="s-loss" d="M1290 470h66m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="loss" d="M1420 418L1462 500H1378Z" stroke="var(--loss)" stroke-width="6" stroke-linejoin="round"/>
+<text class="d" x="1420" y="492" font-size="48" text-anchor="middle" style="fill:var(--stage)">!</text>
+<text class="m" x="1420" y="546" font-size="20" text-anchor="middle" style="fill:var(--loss)">DISASTER</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Raw material, not wisdom.</text>
+<text class="b" x="120" y="176" font-size="32">Ask how well it has been checked.</text>
+<g id="rm"><g id="rm_pile"></g><text class="m" x="120" y="700" font-size="20">MORE INFORMATION = RAW MATERIAL</text></g>
+<g id="mg_w"><g id="mg"><circle class="s-ink" cx="0" cy="0" r="60" fill="var(--stage)" fill-opacity=".5" stroke-width="10"/><path class="s-ink" d="M44 44l56 56" stroke-width="18" stroke-linecap="round"/></g></g>
+<g id="mg_c"><text class="m" x="120" y="760" font-size="22" style="fill:var(--gain)">HOW WELL HAS IT BEEN CHECKED?</text></g>
+<path id="ar" class="s-muted" d="M620 450h200m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="fn"><path class="s-ink" d="M880 300H1420L1180 520V600H1120V520Z" fill="none" stroke-width="6" stroke-linejoin="round"/><text class="m" x="860" y="310" font-size="20" text-anchor="end">VOLUME</text><text class="m" x="1200" y="700" font-size="20" style="fill:var(--gain)">ACCURACY</text><g id="fd"></g></g>
+<g id="ft"><text class="d" x="120" y="830" font-size="48">Volume is not the same as accuracy.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">“We just need more data.”</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">What would actually make</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">that data <tspan style="fill:var(--gain)">trustworthy</tspan>?</text></g>
+<text class="m" x="143" y="700" font-size="26">MORE DATA IS NOT ENOUGH</text>
+<g id="ch_g"><rect class="s-ink" x="1290" y="640" width="140" height="36" rx="18" fill="var(--stage)" stroke-width="5"/><rect class="s-ink" x="1290" y="684" width="140" height="36" rx="18" fill="var(--stage)" stroke-width="5"/><rect class="s-ink" x="1290" y="728" width="140" height="36" rx="18" fill="var(--stage)" stroke-width="5"/><circle class="gain" cx="1440" cy="760" r="34"/><path d="M1424 760l12 12 20-24" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="143" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:23</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Myth of More Information&rdquo;, from <em>Nexus</em> by Yuval Noah Harari. Examples as reported in the book: the naive view of information, the printing press and printed witch-hunting manuals, and the sorcerer&#x27;s apprentice story. The chain, scale and network drawings are illustrations of ideas, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=143, SC=[[0.0, 9.7], [9.7, 27.1], [27.1, 41.7], [41.7, 57.0], [57.0, 80.1], [80.1, 101.5], [101.5, 118.8], [118.8, 132.1], [132.1, 143.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Wise Human", "A Huge Library", "The Naive View", "A Tempting Promise", "The Printing Press", "Truth Is Costly", "Not Just Bad Apples", "What to Do", "Your Challenge"];
+const TM={"sapiens": 0.0, "puzzle": 5.04, "library": 10.0, "galaxy": 15.12, "warning": 19.6, "chain": 27.36, "arrow_truth": 31.6, "arrow_wisdom": 34.88, "tech_campus": 42.0, "open_pipes": 45.28, "press": 57.28, "telescope": 61.52, "pamphlets": 65.68, "witch_book": 71.68, "scale": 80.4, "cheap_story": 88.32, "sorcerer": 101.84, "network": 109.04, "crowd": 113.92, "raw_material": 119.12, "magnifier": 123.84, "filter": 129.44, "challenge": 132.4};
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+const T=(g,x,y,s,c,str,ex)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':s,class:c},ex||{}),g);e.textContent=str;return e};
+P($('t_me'),1210,440,34,'ink');
+const TS=[];for(let i=0;i<10;i++)TS.push(mk('rect',{x:1320+(i%2)*10,y:566-i*16,width:150,height:12,rx:3,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('t_pile')));
+const BK=[];[426,613,800].forEach((b,k)=>{for(let i=0;i<21;i++){const h=110+((i*7+k*5)%5)*14;BK.push(mk('rect',{x:142+i*26.5,y:b-h-6,width:22,height:h,fill:(i+k)%4===1?'var(--gain)':'var(--ink)','fill-opacity':(i+k)%3===2?.45:1},$('l_books')))}});
+for(let k=0;k<2;k++)for(let j=0;j<18;j++){const a=j*.38+k*Math.PI,r=16+j*5.2;mk('circle',{cx:(r*Math.cos(a)).toFixed(1),cy:(r*Math.sin(a)).toFixed(1),r:3+j*.2,class:'ink'},$('l_arm'))}
+const WN=['ECOLOGICAL|COLLAPSE','NUCLEAR|DANGER','UNCONTROLLED|TECHNOLOGY'].map((s,i)=>{const x=920+i*230,g=mk('g',{},$('l_warn'));mk('path',{d:'M'+x+' 560L'+(x+60)+' 664H'+(x-60)+'Z',class:'loss','stroke-linejoin':'round'},g);T(g,x,650,60,'d','!',{'text-anchor':'middle',style:'fill:var(--stage)'});s.split('|').forEach((w,j)=>T(g,x,706+j*32,22,'m',w,{'text-anchor':'middle'}));return g});
+const GQ=[];for(let i=0;i<10;i++)GQ.push(mk('rect',{x:120+i*100,y:650,width:80,height:80,rx:10,stroke:'var(--loss)','stroke-width':4,'stroke-dasharray':'8 8'},$('nv_sq')));
+[160,230,300].forEach(x=>P($('p_ppl'),x,590,16,'ink'));
+// pipe: lies (indigo) fade and shrink; truth (amber) full-length plus extra truth joining in the right half
+const PL=[],PT=[],PX=[];
+for(let i=0;i<8;i++)PL.push(mk('circle',{r:12,class:'loss'},$('p_dots')));
+for(let i=0;i<8;i++)PT.push(mk('circle',{r:12,class:'gain'},$('p_dots')));
+for(let i=0;i<8;i++)PX.push(mk('circle',{r:12,class:'gain'},$('p_dots')));
+const FL=[];for(let i=0;i<4;i++)FL.push(mk('rect',{width:36,height:46,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},$('pr_fly')));
+const CD=[];for(let r=0;r<6;r++)for(let j=0;j<6-r;j++)CD.push(mk('rect',{x:-(6-r)*12+j*24+1,y:96-r*20,width:22,height:18,rx:3,class:'loss'},$('sc_cards')));
+P($('so_p'),300,420,32,'loss');
+const BR=[460,515,570].map(x=>{const g=mk('g',{},$('so_b'));mk('path',{d:'M'+x+' 480V580',class:'s-ink','stroke-width':5,'stroke-linecap':'round'},g);mk('path',{d:'M'+(x-14)+' 580h28l8 50h-44z',fill:'var(--muted)'},g);return g});
+for(let i=0;i<8;i++){const a=i*Math.PI/4+.4,x=1000+170*Math.cos(a),y=470+170*Math.sin(a);mk('path',{d:'M1000 470L'+x.toFixed(0)+' '+y.toFixed(0),stroke:'var(--loss)','stroke-width':4,'stroke-dasharray':'8 6'},$('nw'));mk('circle',{cx:x.toFixed(0),cy:y.toFixed(0),r:20,class:'gain'},$('nw'))}
+mk('circle',{cx:1000,cy:470,r:26,class:'loss'},$('nw'));
+let rk=0;[5,4,3].forEach((n,r)=>{for(let j=0;j<n;j++){const cx=180+r*42+j*85,cy=610-r*58;let d='';for(let q=0;q<7;q++){const a=q*2*Math.PI/7,rr=30+((rk*3+q*5)%4)*4;d+=(q?'L':'M')+(cx+rr*Math.cos(a)).toFixed(0)+' '+(cy+rr*Math.sin(a)).toFixed(0)}mk('path',{d:d+'Z',fill:'var(--line)',stroke:'var(--ink)','stroke-width':4,'stroke-linejoin':'round'},$('rm_pile'));rk++}});
+const FD=[];for(let i=0;i<14;i++)FD.push(mk('circle',{r:10,fill:i%4?'var(--muted)':'var(--gain)'},$('fd')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('t_me'),p(u,TM.sapiens,TM.sapiens+.5));rise($('t_lbl'),p(u,TM.sapiens+.8,TM.sapiens+1.3));
+TS.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.sapiens+.4+i*.3,TM.sapiens+.7+i*.3)));
+rise($('t_q'),p(u,TM.puzzle,TM.puzzle+.5));$('t_qt').setAttribute('transform','rotate('+(8*Math.sin(t*2)).toFixed(1)+' 1210 340)');
+
+BK.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.library+i*.04,TM.library+i*.04+.3)));
+rise($('l_gal'),p(u,TM.galaxy,TM.galaxy+.5));rise($('l_cell'),p(u,TM.galaxy+.8,TM.galaxy+1.3));
+$('l_arm').setAttribute('transform','translate(960 370) rotate('+(t*10%360).toFixed(1)+')');
+WN.forEach((g,i)=>rise(g,p(u,TM.warning+i*1.4,TM.warning+i*1.4+.5)));
+
+rise($('n0'),p(u,TM.chain,TM.chain+.5));
+rise($('a1'),p(u,TM.arrow_truth,TM.arrow_truth+.4));rise($('n1'),p(u,TM.arrow_truth+.3,TM.arrow_truth+.8));
+rise($('a2'),p(u,TM.arrow_wisdom,TM.arrow_wisdom+.4));rise($('n2'),p(u,TM.arrow_wisdom+.3,TM.arrow_wisdom+.8));
+rise($('nv_gap'),p(u,TM.arrow_wisdom+3.3,TM.arrow_wisdom+3.8));
+GQ.forEach((q,i)=>q.setAttribute('fill',u>=TM.arrow_wisdom+4+i*.25?'var(--gain)':'var(--stage)'));
+
+rise($('p_srv'),p(u,TM.tech_campus,TM.tech_campus+.5));rise($('p_pipe'),p(u,TM.open_pipes,TM.open_pipes+.5));
+const edge=x=>cl((x-450)/30)*cl((1390-x)/30);
+PL.forEach((d,i)=>{const x=450+((i*117.5+t*140)%940),k=cl((x-500)/600);
+  d.setAttribute('cx',x.toFixed(1));d.setAttribute('cy',(410+20*Math.sin(i*1.7)).toFixed(1));
+  d.setAttribute('r',(12*(1-.75*k)).toFixed(1));d.setAttribute('opacity',(edge(x)*(1-k)).toFixed(2))});
+PT.forEach((d,i)=>{const x=450+((i*117.5+58+t*140)%940);
+  d.setAttribute('cx',x.toFixed(1));d.setAttribute('cy',(410+20*Math.sin(i*2.3+1)).toFixed(1));d.setAttribute('opacity',edge(x).toFixed(2))});
+PX.forEach((d,i)=>{const x=900+((i*61.25+30+t*140)%490);
+  d.setAttribute('cx',x.toFixed(1));d.setAttribute('cy',(410+22*Math.sin(i*1.3+2)).toFixed(1));d.setAttribute('opacity',(cl((x-900)/80)*cl((1390-x)/30)).toFixed(2))});
+rise($('p_hope'),p(u,TM.open_pipes+6.6,TM.open_pipes+7.1));rise($('p_hist'),p(u,TM.open_pipes+8.8,TM.open_pipes+9.4));
+
+rise($('pr'),p(u,TM.press,TM.press+.5));
+const py=400+30*Math.abs(Math.sin(t*2));$('pr_plat').setAttribute('y',py.toFixed(1));$('pr_scr').setAttribute('y2',py.toFixed(1));
+FL.forEach((f,i)=>{const c=(t*.5+i/4)%1;f.setAttribute('x',(420+130*c).toFixed(1));f.setAttribute('y',(480-70*Math.sin(c*Math.PI)).toFixed(1));f.setAttribute('opacity',((1-c)*(u>=TM.press?1:0)).toFixed(2))});
+rise($('tl'),p(u,TM.telescope,TM.telescope+.5));rise($('pa'),p(u,TM.pamphlets,TM.pamphlets+.5));
+rise($('wb'),p(u,TM.witch_book,TM.witch_book+.5));rise($('wf'),p(u,TM.witch_book+5,TM.witch_book+5.6));
+
+const fl=p(u,TM.cheap_story+8.3,TM.cheap_story+9.8),sa0=.16-.32*fl,ca=Math.cos(sa0),sa=Math.sin(sa0);
+$('sc_beam').setAttribute('transform','rotate('+(-sa0*57.3).toFixed(2)+' 800 330)');
+$('sc_L').setAttribute('transform','translate('+(800-300*ca).toFixed(1)+' '+(330+300*sa).toFixed(1)+')');
+$('sc_R').setAttribute('transform','translate('+(800+300*ca).toFixed(1)+' '+(330-300*sa).toFixed(1)+')');
+const nc=(u>=TM.cheap_story?3:0)+Math.floor(18*fl);CD.forEach((c,i)=>c.setAttribute('opacity',i<nc?1:0));
+rise($('sc'),p(u,TM.scale,TM.scale+.5));rise($('sc_tl'),p(u,TM.scale+1.8,TM.scale+2.3));rise($('sc_tr'),p(u,TM.cheap_story,TM.cheap_story+.5));
+rise($('sc_cost'),p(u,TM.cheap_story+2.9,TM.cheap_story+3.5));rise($('sc_fl'),p(u,TM.cheap_story+8.3,TM.cheap_story+8.9));
+
+rise($('so'),p(u,TM.sorcerer,TM.sorcerer+.5));
+BR.forEach((b,i)=>b.setAttribute('transform','translate(0 '+(10*Math.sin(t*4+i*1.3)).toFixed(1)+')'));
+$('so_x').setAttribute('opacity',p(u,TM.sorcerer+4.6,TM.sorcerer+5.1));
+rise($('nw_w'),p(u,TM.network,TM.network+.6));
+$('nw').setAttribute('transform','translate('+(60*p(u,TM.crowd,TM.crowd+4)).toFixed(1)+' 0)');
+rise($('cr'),p(u,TM.crowd,TM.crowd+.5));
+
+rise($('rm'),p(u,TM.raw_material,TM.raw_material+.5));
+$('ar').setAttribute('opacity',p(u,TM.raw_material+1,TM.raw_material+1.5));
+rise($('mg_w'),p(u,TM.magnifier,TM.magnifier+.5));rise($('mg_c'),p(u,TM.magnifier+.6,TM.magnifier+1.1));
+$('mg').setAttribute('transform','translate('+(340+150*Math.sin(t*1.2)).toFixed(1)+' '+(500+30*Math.sin(t*2)).toFixed(1)+')');
+rise($('fn'),p(u,TM.filter,TM.filter+.5));rise($('ft'),p(u,TM.filter+.6,TM.filter+1.2));
+FD.forEach((d,i)=>{const c=(t*.35+i/14)%1,sx=920+i*36;let x=1150,y,o=1;if(c<.6){const k=c/.6;x=sx+(1150-sx)*k;y=240+300*k}else{y=540+(c-.6)/.4*200;o=i%4?0:1}d.setAttribute('cx',x.toFixed(1));d.setAttribute('cy',y.toFixed(1));d.setAttribute('opacity',o)});
+
+rise($('qa'),p(u,TM.challenge,TM.challenge+.5));rise($('qb'),p(u,TM.challenge+.4,TM.challenge+.9));rise($('qc'),p(u,TM.challenge+.8,TM.challenge+1.3));
+rise($('ch_g'),p(u,TM.challenge+1.3,TM.challenge+1.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:139.12;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

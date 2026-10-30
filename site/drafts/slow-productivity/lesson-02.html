@@ -1,0 +1,304 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slow Productivity Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Slow Productivity: Knowledge workers lost the clear measures of factory work, so emails, meetings and fast replies became the default signal of value. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SLOW PRODUCTIVITY · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Why busyness feels</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">like progress.</text>
+<text class="b" x="120" y="600" font-size="32">How knowledge work swapped real results for looking busy</text>
+<circle id="glow" class="gain" cx="1300" cy="560" r="170" opacity="0"/>
+<g id="envs"></g>
+<path class="s-ink" d="M1140 630v70h320v-70" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="badge"><circle class="gain" cx="1420" cy="330" r="52"/><text id="cnt" class="d" x="1420" y="346" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">0</text></g>
+<g id="nothing"><text class="m" x="1300" y="780" font-size="22" text-anchor="middle">REAL WORK DONE: ?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Productivity used to be visible.</text>
+<text class="b" x="120" y="176" font-size="32">An early car factory and its assembly line.</text>
+<g id="line1"><rect class="ink" x="120" y="600" width="960" height="24" rx="12"/><g id="rollers"></g><g id="cars"></g><text class="m" x="120" y="720" font-size="20">ASSEMBLY LINE</text></g>
+<g id="watch"><circle class="s-ink" cx="1300" cy="390" r="110" fill="var(--stage)" stroke-width="8"/><rect class="ink" x="1286" y="250" width="28" height="22" rx="4"/><path id="hand" class="s-gain" d="M1300 390V300" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="1300" cy="390" r="10"/></g>
+<g id="tally"><text class="m" x="1190" y="580" font-size="20">CARS PER HOUR</text><g id="marks"></g><path class="s-gain" d="M1446 700V614m-20 20 20-20 20 20" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A new kind of worker.</text>
+<text class="b" x="120" y="176" font-size="32">Peter Drucker named them knowledge workers.</text>
+<g id="dru"><text class="d" x="120" y="320" font-size="96" style="fill:var(--gain)">1959</text><g id="druP"></g>
+<text class="m" x="260" y="650" font-size="20" text-anchor="middle">PETER DRUCKER</text>
+<path class="s-ink" d="M360 380h360v80H400l-30 26 6-26h-16z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="540" y="428" font-size="20" text-anchor="middle">KNOWLEDGE WORKERS</text></g>
+<g id="wk"><g id="wkP"></g><rect class="ink" x="820" y="640" width="440" height="14" rx="4"/><path class="s-ink" d="M860 654v100M1220 654v100" stroke-width="7" stroke-linecap="round"/><rect class="s-ink" x="1070" y="560" width="120" height="76" rx="6" fill="var(--stage)" stroke-width="5"/><circle class="ink" cx="1040" cy="420" r="8"/><circle class="ink" cx="1066" cy="396" r="12"/></g>
+<g id="chips2"></g>
+<g id="hard"><text class="d" x="120" y="810" font-size="48" style="fill:var(--loss)">Making it productive: a huge challenge.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No clear number.</text>
+<text class="b" x="120" y="176" font-size="32">Many jobs at once, and no fixed output.</text>
+<g id="jug"><g id="jugP"></g><path class="s-ink" d="M424 570L380 510M496 570L540 510" stroke-width="10" stroke-linecap="round" fill="none"/><text class="m" x="460" y="720" font-size="20" text-anchor="middle">MANY JOBS AT ONCE</text></g>
+<g id="balls"></g>
+<g id="qbox"><rect class="s-line" x="860" y="250" width="560" height="420" rx="18" fill="var(--stage)" stroke-width="4"/><text class="m" x="890" y="300" font-size="22">OUTPUT TODAY</text><g id="minicar" transform="translate(1340 330) scale(.6)"></g><path class="s-loss" d="M1280 280l110 64" stroke-width="6" stroke-linecap="round"/><text id="qm" class="d" x="1140" y="610" font-size="280" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="agree"><text class="d" x="120" y="810" font-size="48">Nobody agreed on what productivity meant.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Activity filled the gap.</text>
+<text class="b" x="120" y="176" font-size="32">With no clear measure, people showed effort they could see.</text>
+<g id="desks"></g><g id="sigs"></g>
+<g id="pseudo"><text class="d" x="120" y="790" font-size="60" style="fill:var(--loss)">Pseudo-productivity.</text><text class="b" x="120" y="840" font-size="30">Visible effort standing in for real results.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Tech turned up the signal.</text>
+<text class="b" x="120" y="176" font-size="32">Showing activity became possible everywhere, all the time.</text>
+<g id="phone"><rect class="s-ink" x="170" y="250" width="240" height="400" rx="32" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="250" y="266" width="80" height="10" rx="5"/><text class="m" x="290" y="710" font-size="20" text-anchor="middle">LAPTOPS · PHONES · EMAIL</text></g>
+<g id="notifs"></g>
+<g id="chatL"><text class="m" x="670" y="710" font-size="20" text-anchor="middle">CHAT · VIDEO CALLS</text></g>
+<g id="chat"></g>
+<g id="vidL"><text class="m" x="1203" y="710" font-size="20" text-anchor="middle" style="fill:var(--loss)">REMOTE WORK: THE ONLY PROOF</text></g>
+<g id="vid"></g>
+<g id="proof"><text class="d" x="120" y="810" font-size="48">Signals became the proof of effort.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Busy feels like progress.</text>
+<g id="pc"><rect class="s-line" x="120" y="220" width="640" height="280" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="262" font-size="20">EVERY REPLY FEELS FINISHED</text></g>
+<g id="checks"></g>
+<g id="pcal"><rect class="s-line" x="840" y="220" width="640" height="280" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="870" y="262" font-size="20">A PACKED CALENDAR</text><g id="cal"></g></g>
+<g id="bars"><text class="m" x="120" y="580" font-size="20" style="fill:var(--gain)">THE WORK THAT TRULY MATTERS</text><g id="barG"></g></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Name your real output.</text>
+<text class="b" x="120" y="176" font-size="32">List activity on one side, finished work on the other.</text>
+<g id="pad"><rect class="s-ink" x="220" y="220" width="1160" height="560" rx="16" fill="var(--stage)" stroke-width="6"/><g id="rings"></g><path class="s-line" d="M800 260v480" stroke-width="4"/></g>
+<g id="colLw"><g id="colL"><text class="m" x="260" y="300" font-size="22">VISIBLE ACTIVITY</text><text class="d5" x="260" y="400" font-size="36">Emails sent</text><text class="d5" x="260" y="480" font-size="36">Meetings</text><text class="d5" x="260" y="560" font-size="36">Quick replies</text></g></g>
+<g id="colR"><text class="m" x="840" y="300" font-size="22" style="fill:var(--gain)">FINISHED WORK THAT MATTERS</text><text class="d5" x="840" y="400" font-size="36">The report</text><text class="d5" x="840" y="480" font-size="36">The design</text><text class="d5" x="840" y="560" font-size="36">The big idea</text></g>
+<g id="judge"><rect class="s-gain" x="820" y="250" width="530" height="500" rx="16" fill="none" stroke-width="6" stroke-dasharray="14 10"/><text class="m" x="850" y="700" font-size="22" style="fill:var(--gain)">JUDGE YOURSELF BY THIS, WEEKLY</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What two or three</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">results does your work</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">truly exist to <tspan style="fill:var(--gain)">produce?</tspan></text></g>
+<g id="wd"><text class="m" x="143" y="700" font-size="26">WRITE THEM DOWN TODAY. MAKE THEM YOUR MEASURE.</text></g>
+<g id="card"><rect class="s-ink" x="1180" y="620" width="280" height="200" rx="16" fill="var(--stage)" stroke-width="6"/><g id="boxes"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Why Busyness Feels Like Progress&rdquo;, from <em>Slow Productivity</em> by Cal Newport. Peter Drucker&#x27;s naming of knowledge workers and the contrast with factory output are as reported in the book. The car tally, stalled progress bar and two-column page are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 8.2], [8.2, 21.1], [21.1, 38.9], [38.9, 53.3], [53.3, 71.2], [71.2, 88.7], [88.7, 102.7], [102.7, 117.9], [117.9, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Busy Is Not Better", "The Factory Clock", "A New Kind of Worker", "No Clear Number", "Filling the Void", "Tech Turns It Up", "Why It Feels Real", "Name Your Output", "Your Challenge"];
+const TM={"inbox_glow": 0.0, "assembly_line": 8.48, "stopwatch": 13.2, "car_tally": 17.44, "drucker": 21.44, "desk_worker": 28.16, "juggler": 39.24, "question_mark": 44.6, "open_office": 53.57, "busy_signals": 59.28, "smartphone": 71.52, "chat_bubbles": 78.24, "video_grid": 83.04, "checkmark": 89.04, "full_calendar": 93.04, "stalled_bar": 96.56, "notepad": 103.04, "two_columns": 107.28, "question_card": 118.24};
+const guy=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const env=(g,x,y,w,h,f)=>{mk('rect',{x:x,y:y,width:w,height:h,rx:6,fill:f||'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('path',{d:'M'+x+' '+y+'l'+w/2+' '+(h*.55)+'l'+w/2+' '+(-h*.55),fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},g)};
+const car=g=>{mk('path',{d:'M-70 0v-36h30l20-30h50l20 30h20v36z',class:'ink'},g);[-40,40].forEach(x=>mk('circle',{cx:x,cy:0,r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g))};
+const R=n=>Array.from({length:n},(_,i)=>i);
+const ENV=R(5).map(i=>{const g=mk('g',{},$('envs'));env(g,1190,600-i*28,220,80);return g});
+for(let x=160;x<=1040;x+=80)mk('circle',{cx:x,cy:650,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rollers'));
+const CARS=R(4).map(()=>{const g=mk('g',{},$('cars'));car(g);return g});
+const MK=R(10).map(i=>mk('path',{d:'M'+(1190+i*20+Math.floor(i/5)*24)+' 620v70',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},$('marks')));
+guy($('druP'),260,440,40,'ink');guy($('wkP'),980,470,34,'ink');
+const CHP=['WRITING','PLANNING','ANALYSING','DECIDING'].map((s,i)=>{const x=1100+(i%2)*190,y=270+Math.floor(i/2)*70,g=mk('g',{},$('chips2'));
+  mk('rect',{x:x,y:y,width:180,height:52,rx:26,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},g);
+  mk('text',{x:x+90,y:y+33,'font-size':18,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+guy($('jugP'),460,480,36,'ink');
+const BL=['gain','ink','loss','ink','gain'].map(c=>mk('circle',{r:18,class:c},$('balls')));
+car($('minicar'));
+const DK=[],SG=[];
+[360,800,1240].forEach((c,i)=>{const g=mk('g',{},$('desks'));guy(g,c-20,470,30,'ink');
+  mk('rect',{x:c-150,y:610,width:300,height:14,rx:4,class:'ink'},g);
+  mk('path',{d:'M'+(c-130)+' 624v76M'+(c+130)+' 624v76',class:'s-ink','stroke-width':6,'stroke-linecap':'round'},g);
+  mk('rect',{x:c+50,y:548,width:80,height:62,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);DK.push(g);
+  const s=mk('g',{},$('sigs'));
+  if(i===0){mk('circle',{cx:c,cy:320,r:44,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},s);mk('path',{d:'M'+c+' 320v-28M'+c+' 320h22',class:'s-loss','stroke-width':6,'stroke-linecap':'round'},s)}
+  if(i===1){[-50,0,50].forEach(d=>mk('circle',{cx:c+d,cy:296,r:16,class:'ink'},s));mk('rect',{x:c-80,y:326,width:160,height:20,rx:10,class:'loss'},s)}
+  if(i===2)env(s,c-60,282,120,76,'var(--loss)');
+  mk('text',{x:c,y:410,'font-size':20,'text-anchor':'middle',class:'m'},s).textContent=['AT YOUR DESK','IN MEETINGS','QUICK REPLIES'][i];SG.push(s)});
+const NT=R(5).map(i=>{const g=mk('g',{},$('notifs')),y=300+i*66;mk('rect',{x:190,y:y,width:200,height:50,rx:10,fill:i%2?'var(--line)':'var(--gain)'},g);mk('circle',{cx:214,cy:y+25,r:10,fill:'var(--stage)'},g);return g});
+const CB=R(4).map(i=>{const g=mk('g',{},$('chat')),x=i%2?600:480,y=260+i*96,o=i%2;
+  mk('rect',{x:x,y:y,width:260,height:70,rx:24,fill:o?'var(--gain)':'var(--stage)',stroke:o?'var(--gain)':'var(--ink)','stroke-width':4},g);
+  R(3).forEach(k=>mk('circle',{cx:x+100+k*30,cy:y+35,r:8,fill:o?'var(--on-gain)':'var(--ink)'},g));return g});
+const VT=R(9).map(i=>{const g=mk('g',{},$('vid')),x=940+(i%3)*178,y=260+Math.floor(i/3)*130;
+  mk('rect',{x:x,y:y,width:164,height:116,rx:10,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);guy(g,x+82,y+30,14,i===4?'gain':'ink');return g});
+const CK=R(8).map(i=>{const g=mk('g',{},$('checks')),x=180+i*76;mk('circle',{cx:x,cy:390,r:28,class:'gain'},g);
+  mk('path',{d:'M'+(x-12)+' 390l9 10l16-20',fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+const CAL=R(30).map(i=>mk('rect',{x:870+Math.floor(i/6)*120,y:285+(i%6)*34,width:100,height:28,rx:6,fill:'var(--line)'},$('cal')));
+const BR=['The report','The design','The big idea'].map((s,i)=>{const y=610+i*70;mk('text',{x:120,y:y+28,'font-size':32,class:'d5'},$('barG')).textContent=s;
+  mk('rect',{x:520,y:y,width:960,height:36,rx:18,fill:'var(--line)'},$('barG'));return mk('rect',{x:520,y:y,width:36,height:36,rx:18,class:'gain'},$('barG'))});
+for(let x=280;x<=1320;x+=80)mk('circle',{cx:x,cy:220,r:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const QB=R(3).map(i=>{const y=650+i*56;mk('rect',{x:1210,y:y,width:32,height:32,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':5},$('boxes'));
+  mk('path',{d:'M1262 '+(y+16)+'H1430',class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('boxes'));
+  return mk('path',{d:'M1216 '+(y+16)+'l9 10l18-22',fill:'none',class:'s-gain','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('boxes'))});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const g0=p(u,TM.inbox_glow,TM.inbox_glow+.8);
+  $('glow').setAttribute('opacity',(g0*(.18+.08*Math.sin(t*2))).toFixed(3));
+  ENV.forEach((e,i)=>{const k=p(u,TM.inbox_glow+.3+i*.5,TM.inbox_glow+.9+i*.5);e.setAttribute('transform','translate(0 '+(-260*(1-k)).toFixed(1)+')');e.setAttribute('opacity',k)});
+  rise($('badge'),g0);$('cnt').textContent=Math.round(50*p(u,TM.inbox_glow,TM.inbox_glow+3));
+  rise($('nothing'),p(u,TM.inbox_glow+5,TM.inbox_glow+5.6));
+
+  rise($('line1'),p(u,TM.assembly_line,TM.assembly_line+.6));
+  CARS.forEach((c,i)=>{const x=190+((t*90+i*205)%820);c.setAttribute('transform','translate('+x.toFixed(1)+' 586)');c.setAttribute('opacity',cl(Math.min((x-190)/60,(1010-x)/60)).toFixed(2))});
+  rise($('watch'),p(u,TM.stopwatch,TM.stopwatch+.5));$('hand').setAttribute('transform','rotate('+((t*120)%360).toFixed(1)+' 1300 390)');
+  rise($('tally'),p(u,TM.car_tally,TM.car_tally+.5));
+  MK.forEach((m,i)=>m.setAttribute('opacity',p(u,TM.car_tally+.4+i*.25,TM.car_tally+.6+i*.25)));
+
+  rise($('dru'),p(u,TM.drucker,TM.drucker+.5));rise($('wk'),p(u,TM.desk_worker,TM.desk_worker+.5));
+  CHP.forEach((c,i)=>{const a=TM.desk_worker+.8+i*.7;rise(c,p(u,a,a+.4))});
+  rise($('hard'),p(u,TM.desk_worker+5.4,TM.desk_worker+6));
+
+  rise($('jug'),p(u,TM.juggler,TM.juggler+.5));
+  BL.forEach((b,i)=>{const a=t*2+i*Math.PI*2/5,s=TM.juggler+.3+i*.3;b.setAttribute('cx',(460+160*Math.cos(a)).toFixed(1));b.setAttribute('cy',(330+80*Math.sin(a)).toFixed(1));b.setAttribute('opacity',p(u,s,s+.3))});
+  rise($('qbox'),p(u,TM.question_mark,TM.question_mark+.5));$('qm').setAttribute('transform','rotate('+(6*Math.sin(t*2)).toFixed(1)+' 1140 520)');
+  rise($('agree'),p(u,TM.question_mark+6.5,TM.question_mark+7.1));
+
+  DK.forEach((d,i)=>{const a=TM.open_office+i*.4;rise(d,p(u,a,a+.5))});
+  SG.forEach((s,i)=>{const a=TM.busy_signals+i*1.2;rise(s,p(u,a,a+.5))});
+  rise($('pseudo'),p(u,TM.busy_signals+5.7,TM.busy_signals+6.3));
+
+  rise($('phone'),p(u,TM.smartphone,TM.smartphone+.5));
+  NT.forEach((n,i)=>{const a=TM.smartphone+.6+i*.6;rise(n,p(u,a,a+.4))});
+  rise($('chatL'),p(u,TM.chat_bubbles,TM.chat_bubbles+.5));
+  CB.forEach((c,i)=>{const a=TM.chat_bubbles+.4+i*.7;rise(c,p(u,a,a+.4))});
+  rise($('vidL'),p(u,TM.video_grid,TM.video_grid+.5));
+  VT.forEach((v,i)=>{const a=TM.video_grid+i*.15;rise(v,p(u,a,a+.4))});
+  rise($('proof'),p(u,TM.video_grid+3,TM.video_grid+3.6));
+
+  rise($('pc'),p(u,TM.checkmark,TM.checkmark+.5));
+  CK.forEach((c,i)=>{const a=TM.checkmark+.5+i*.4;rise(c,p(u,a,a+.3))});
+  rise($('pcal'),p(u,TM.full_calendar,TM.full_calendar+.5));
+  CAL.forEach((r,i)=>r.setAttribute('fill',u>=TM.full_calendar+.3+i*.06?'var(--loss)':'var(--line)'));
+  rise($('bars'),p(u,TM.stalled_bar,TM.stalled_bar+.5));
+  BR.forEach((b,i)=>b.setAttribute('width',(36+(18+i*8)*p(u,TM.stalled_bar+.6,TM.stalled_bar+3)+3*Math.abs(Math.sin(t*1.5+i))).toFixed(1)));
+
+  rise($('pad'),p(u,TM.notepad,TM.notepad+.6));
+  rise($('colL'),p(u,TM.two_columns,TM.two_columns+.5));rise($('colR'),p(u,TM.two_columns+1.2,TM.two_columns+1.7));
+  const jd=p(u,TM.two_columns+6.2,TM.two_columns+6.8);$('colLw').setAttribute('opacity',(1-.6*jd).toFixed(2));rise($('judge'),jd);
+
+  rise($('qa'),p(u,TM.question_card,TM.question_card+.5));rise($('qb'),p(u,TM.question_card+.4,TM.question_card+.9));rise($('qc'),p(u,TM.question_card+.8,TM.question_card+1.3));
+  rise($('card'),p(u,TM.question_card+1.4,TM.question_card+2));rise($('wd'),p(u,TM.question_card+5.4,TM.question_card+6));
+  QB.forEach((c,i)=>{const a=TM.question_card+5.8+i*.5;c.setAttribute('opacity',p(u,a,a+.3))});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.32;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

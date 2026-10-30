@@ -1,0 +1,358 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nexus Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Nexus: Democracies spread information through many independent channels while dictatorships centralize it, and this shapes how each handles errors. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">NEXUS · LESSON 6</text>
+<text class="d" x="116" y="340" font-size="84" letter-spacing="-2">Democracy and</text>
+<text class="d" x="116" y="436" font-size="84" letter-spacing="-2">dictatorship</text>
+<text class="d" x="116" y="532" font-size="84" letter-spacing="-2">as networks.</text>
+<text class="b" x="120" y="620" font-size="32">Why who hears the bad news decides a nation’s fate.</text>
+<g id="cty"><rect class="s-line" x="1000" y="290" width="220" height="260" rx="30" fill="var(--stage)" stroke-width="4"/><rect class="s-line" x="1260" y="290" width="220" height="260" rx="30" fill="var(--stage)" stroke-width="4"/></g>
+<g id="flw"><g id="lA"></g><g id="lB"></g><text class="m" x="1110" y="600" font-size="22" text-anchor="middle">HUB</text><text class="m" x="1370" y="600" font-size="22" text-anchor="middle">WEB</text></g>
+<g id="dots"></g>
+<circle id="pA" class="gain" r="7"/><circle id="pB" class="gain" r="7"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two shapes of network.</text>
+<text class="b" x="120" y="176" font-size="32">Harari: regimes are best understood as information networks.</text>
+<g id="pan"><rect class="s-line" x="120" y="220" width="660" height="560" rx="18" fill="var(--stage)" stroke-width="3"/><rect class="s-line" x="820" y="220" width="660" height="560" rx="18" fill="var(--stage)" stroke-width="3"/></g>
+<g id="hubG"><g id="hubE"></g><g id="hubN"></g><circle class="loss" cx="450" cy="480" r="32"/><g id="hubP"></g><text class="m" x="450" y="750" font-size="22" text-anchor="middle">DICTATORSHIP · HUB</text></g>
+<g id="webG"><g id="webE"></g><g id="webN"></g><g id="webP"></g><text class="m" x="1150" y="750" font-size="22" text-anchor="middle">DEMOCRACY · WEB</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hub: one center.</text>
+<text class="b" x="120" y="176" font-size="32">In a dictatorship, every message flows to the ruler.</text>
+<g id="pal"><g id="hl"></g><g id="hp"></g><path class="loss" d="M772 262l6-28 12 12 10-18 10 18 12-12 6 28z"/><g id="rul"></g>
+<text class="m" x="120" y="300" font-size="22">REPORTS TRAVEL UP</text><text class="m" x="120" y="332" font-size="22" style="fill:var(--loss)">ORDERS TRAVEL DOWN</text><g id="hd"></g></g>
+<g id="gt"><rect class="loss" x="730" y="426" width="140" height="16" rx="8"/><text class="m" x="1000" y="300" font-size="22">THE CENTER DECIDES WHAT IS TRUE</text><text class="m" x="1000" y="332" font-size="22">AND WHO GETS TO HEAR IT</text></g>
+<g id="risk"><text class="d" x="120" y="800" font-size="46">Fast, but it assumes the center is never wrong.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The web: many centers.</text>
+<text class="b" x="120" y="176" font-size="32">Much information never passes through the government at all.</text>
+<g id="we3"></g><g id="wp3"></g><g id="wn3"></g>
+<g id="byp"><text class="m" x="800" y="530" font-size="20" text-anchor="middle">MUCH INFO BYPASSES IT</text></g>
+<g id="noisy"><text class="d" x="120" y="810" font-size="40">Slower and noisier, but no single point controls it all.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The applause.</text>
+<text class="b" x="120" y="176" font-size="32">A Soviet party meeting under Stalin.</text>
+<g id="ban"><rect class="s-ink" x="600" y="214" width="400" height="76" rx="14" fill="var(--stage)" stroke-width="5"/><text class="d" x="800" y="266" font-size="40" text-anchor="middle">Stalin</text></g>
+<g id="hallP"></g>
+<g id="cage"></g>
+<g id="dare"><text class="m" x="120" y="800" font-size="22">NOBODY DARED TO STOP FIRST</text></g>
+<g id="arr"><text class="m" x="120" y="842" font-size="22" style="fill:var(--loss)">THAT NIGHT, THE DIRECTOR WAS ARRESTED</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Silence at the top.</text>
+<text class="b" x="120" y="176" font-size="32">It is about what people learn to hide.</text>
+<g id="lk5"></g><g id="pp5"></g><g id="ru5"></g>
+<path class="loss" d="M752 270l6-26 12 12 10-18 10 18 12-12 6 26z"/>
+<circle id="ring5" class="s-loss" cx="780" cy="350" r="100" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<circle id="msg5" class="loss" r="9"/>
+<g id="lone"><text class="m" x="120" y="770" font-size="22">BAD NEWS STOPS TRAVELLING TO THE CENTER</text></g>
+<g id="ch5"><text class="m" x="960" y="280" font-size="20">COLLECTIVIZATION</text>
+<path class="s-muted" d="M960 300V700H1460" fill="none" stroke-width="4"/>
+<path class="s-gain" d="M980 380H1440" stroke-width="6" stroke-dasharray="14 10"/>
+<text class="m" x="980" y="360" font-size="18" style="fill:var(--gain)">WHAT THE CENTER HEARD</text>
+<path id="real5" class="s-loss" d="M980 392C1150 400 1250 520 1440 670" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1"/>
+<text class="m" x="1440" y="740" font-size="18" text-anchor="end" style="fill:var(--loss)">WHAT WAS HAPPENING</text></g>
+<g id="mil"><text class="d" x="120" y="840" font-size="40">The errors grew into a famine that killed millions.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">More than voting.</text>
+<text class="b" x="120" y="176" font-size="32">Democracy is not simply majority rule.</text>
+<g id="bal">
+<text class="m" x="280" y="252" font-size="20" text-anchor="middle">MOST VOTES WIN</text>
+<g id="tal6"></g>
+<g id="bp"><rect class="s-ink" x="250" y="330" width="60" height="80" rx="4" fill="var(--stage)" stroke-width="5"/><path class="s-gain" d="M264 372l10 10 22-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<rect class="s-ink" x="180" y="470" width="200" height="150" rx="10" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="240" y="464" width="80" height="12" rx="6"/>
+<text class="m" x="280" y="664" font-size="22" text-anchor="middle">MAJORITY RULE</text></g>
+<g id="net6"><g id="we6"></g><g id="cut6"></g><g id="sp6"></g><g id="nd6"></g>
+<text id="lc6" class="m" x="820" y="467" font-size="20" text-anchor="end">COURTS</text><text id="lp6" class="m" x="1340" y="467" font-size="20">PRESS</text>
+<g id="lead6"><circle class="loss" cx="1080" cy="460" r="36"/><path class="loss" d="M1058 418l6-26 12 12 10-18 10 18 12-12 6 26z"/></g></g>
+<g id="sm6"><text class="m" x="760" y="730" font-size="20">ELECTED LEADER SILENCES COURTS AND PRESS</text><text class="m" x="760" y="762" font-size="20" style="fill:var(--loss)">THE WEB BECOMES A HUB</text></g>
+<g id="sh6"><text class="d" x="120" y="830" font-size="40">Independent channels catch mistakes, even the majority’s.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Noise is a feature.</text>
+<text class="b" x="120" y="176" font-size="32">The self-correcting system at work.</text>
+<g id="rg7"></g>
+<g id="er7"><circle id="ec7" class="loss" cx="800" cy="320" r="40"/><path id="ex7" d="M784 304l32 32m0-32l-32 32" stroke="var(--stage)" stroke-width="7" stroke-linecap="round"/><path id="ok7" d="M782 322l12 12 24-26" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="lk7"></g>
+<g id="ar7"></g>
+<g id="fx7"><text class="d" x="120" y="810" font-size="40">Arguing finds errors before they spread.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">Does bad news flow freely</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">to the people in charge</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">where you <tspan style="fill:var(--gain)">work?</tspan></text></g>
+<g id="g8"><path class="s-gain" d="M1090 540Q1220 440 1350 490" fill="none" stroke-width="5" stroke-dasharray="10 10"/><g id="em8"></g></g>
+<g id="bm8"><circle class="gain" cx="0" cy="0" r="18"/><text class="d" x="0" y="9" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">!</text></g>
+<g id="tk"><text class="m" x="143" y="680" font-size="26">THIS WEEK, THANK SOMEONE WHO TOLD YOU</text><text class="m" x="143" y="720" font-size="26">SOMETHING YOU DID NOT WANT TO HEAR</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="137" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:17</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Democracy and Dictatorship as Networks&rdquo;, from <em>Nexus</em> by Yuval Noah Harari. Examples, as reported in the book: the Soviet party-meeting applause story, which Harari takes from Solzhenitsyn, and the famine that followed Stalin&#x27;s farm collectivization. The hub and web drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=137, SC=[[0.0, 9.4], [9.4, 25.7], [25.7, 41.9], [41.9, 59.3], [59.3, 77.2], [77.2, 98.1], [98.1, 114.3], [114.3, 124.5], [124.5, 137.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Two Countries", "Two Networks", "The Hub", "The Web", "The Applause", "Silence at the Top", "More Than Voting", "Noise Is a Feature", "Your Turn"];
+const TM={"stage": 0.0, "two_maps": 9.72, "hub": 16.8, "web": 21.6, "palace": 26.04, "gate": 31.56, "newspaper": 42.24, "courthouse": 47.08, "hall": 59.6, "clapping": 64.24, "director": 71.04, "warning": 77.47, "ruler_alone": 82.88, "famine": 87.52, "ballot": 98.36, "strongman": 102.56, "shield": 108.53, "argument": 114.64, "repair": 117.76, "workplace": 124.8};
+const fig=(g,x,y,r,cls)=>{const e=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:cls},e);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3).toFixed(1)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3).toFixed(1)+'z',class:cls},e);return e};
+const ln=(g,a,b,o)=>mk('path',Object.assign({d:'M'+a[0].toFixed(1)+' '+a[1].toFixed(1)+'L'+b[0].toFixed(1)+' '+b[1].toFixed(1),'stroke-linecap':'round'},o),g);
+const at=(el,x,y)=>{el.setAttribute('cx',x.toFixed(1));el.setAttribute('cy',y.toFixed(1))};
+const mv=(el,a,b,f)=>at(el,a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f);
+const fr=x=>x-Math.floor(x);
+
+const T0=[[-62,-80],[48,-92],[82,-6],[40,88],[-60,76],[-84,4],[0,0]];
+[1110,1370].forEach((c,k)=>{T0.forEach((d,i)=>mk('circle',{cx:c+d[0],cy:420+d[1],r:i==6&&!k?18:12,class:i==6&&!k?'loss':'ink'},$('dots')));
+  const E=k?[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,6],[6,3],[1,6],[6,4]]:[0,1,2,3,4,5].map(i=>[i,6]);
+  E.forEach(e=>ln($(k?'lB':'lA'),[c+T0[e[0]][0],420+T0[e[0]][1]],[c+T0[e[1]][0],420+T0[e[1]][1]],{class:'s-ink','stroke-width':4}))});
+const cA=c=>[1110+T0[c][0],420+T0[c][1]],cB=c=>[1370+T0[c][0],420+T0[c][1]];
+
+const HN=[...Array(10)].map((_,i)=>{const a=i*Math.PI/5+.3;return[450+200*Math.cos(a),480+190*Math.sin(a)]});
+HN.forEach(q=>{ln($('hubE'),q,[450,480],{class:'s-line','stroke-width':4});mk('circle',{cx:q[0],cy:q[1],r:16,class:'ink'},$('hubN'))});
+const hP=HN.map(()=>mk('circle',{r:6,class:'gain'},$('hubP')));
+const WN=[...Array(7)].map((_,i)=>{const a=i*2*Math.PI/7-.4;return[1150+200*Math.cos(a),480+190*Math.sin(a)]}).concat([[1080,420],[1230,450],[1140,570]]);
+const WE=[];WN.forEach((a,i)=>WN.forEach((b,j)=>{if(j>i&&Math.hypot(a[0]-b[0],a[1]-b[1])<215){WE.push([a,b]);ln($('webE'),a,b,{class:'s-line','stroke-width':4})}}));
+WN.forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:16,class:'gain'},$('webN')));
+const wP=[0,1,2,3,4,5].map(()=>mk('circle',{r:6,class:'ink'},$('webP')));
+
+const PX=[300,550,800,1050,1300],HL=[],HR=[],HO=[];
+PX.forEach(x=>{HL.push(ln($('hl'),[x,566],[800,440],{class:'s-line','stroke-width':4}));fig($('hp'),x,590,22,'ink');HR.push(mk('circle',{r:8,class:'ink'},$('hd')));HO.push(mk('circle',{r:8,class:'loss'},$('hd')))});
+fig($('rul'),800,290,30,'loss');
+
+const N3=[['NEWSPAPERS',360,300],['COURTS',1240,300],['UNIVERSITIES',360,620],['BUSINESSES',1240,620],['CITIZENS',800,700],['GOVERNMENT',800,450]];
+const E3=[[0,1],[0,2],[0,4],[1,3],[1,4],[2,4],[3,4],[2,3]];
+const eL=E3.map(e=>ln($('we3'),[N3[e[0]][1],N3[e[0]][2]],[N3[e[1]][1],N3[e[1]][2]],{class:'s-ink','stroke-width':4}));
+const P3=[0,1,2,3].map(()=>mk('circle',{r:7,class:'gain'},$('wp3')));
+const nG=N3.map((n,i)=>{const g=mk('g',{},$('wn3')),w=i<5?260:240;mk('rect',{x:n[1]-w/2,y:n[2]-32,width:w,height:64,rx:32,fill:i<5?'var(--stage)':'none',stroke:i<5?'var(--gain)':'var(--muted)','stroke-width':i<5?5:4,'stroke-dasharray':i<5?'none':'10 8'},g);
+  const tx=mk('text',i<5?{x:n[1],y:n[2]+8,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'}:{x:n[1],y:n[2]+8,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent=n[0];return g});
+const rt3=i=>i==5?TM.newspaper:i==0?TM.newspaper+1.5:TM.courthouse+(i-1)*.6;
+
+const HP=[],DI=18;
+[380,500,620].forEach(y=>{for(let i=0;i<8;i++){const x=310+i*140,g=mk('g',{},$('hallP')),n=mk('g',{},g),f=fig(n,x,y,20,'ink');
+  const c=mk('path',{d:'M'+(x-30)+' '+(y-4)+'l-12-10M'+(x+30)+' '+(y-4)+'l12-10M'+(x-34)+' '+(y+12)+'h-14M'+(x+34)+' '+(y+12)+'h14',class:'s-gain','stroke-width':4,'stroke-linecap':'round'},n);HP.push([g,n,f,c])}});
+for(let i=0;i<6;i++)ln($('cage'),[546+i*18,592],[546+i*18,752],{class:'s-loss','stroke-width':5});
+mk('rect',{x:536,y:584,width:108,height:176,rx:8,fill:'none',class:'s-loss','stroke-width':6},$('cage'));
+
+const S5=[[280,620],[440,540],[600,460]],CH5=S5.concat([[780,330]]),B5=[],K5=[];
+for(let i=0;i<3;i++)K5.push(ln($('lk5'),CH5[i],CH5[i+1],{class:'s-muted','stroke-width':4,'stroke-dasharray':'8 8'}));
+S5.forEach(q=>{fig($('pp5'),q[0],q[1],22,'ink');const g=mk('g',{},$('pp5'));const r=mk('rect',{x:q[0]-110,y:q[1]-92,width:80,height:56,rx:14,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  const tx=mk('text',{x:q[0]-70,y:q[1]-52,'font-size':34,'text-anchor':'middle',class:'d'},g);B5.push([g,r,tx])});
+fig($('ru5'),780,300,28,'loss');
+
+// scene 6: majority tally, web that turns into a hub
+const T6=[...Array(7)].map((_,i)=>mk('circle',i<5?{cx:184+i*32,cy:290,r:13,class:'gain'}:{cx:184+i*32,cy:290,r:13,fill:'var(--muted)'},$('tal6')));
+const C6=[1080,460];
+const N6=[...Array(8)].map((_,i)=>{const a=i*Math.PI/4;return[1080+230*Math.cos(a),460+200*Math.sin(a)]});
+const CUT6=[0,4],E6=[],S6=[],ND6=[];
+N6.forEach((q,i)=>{E6.push(ln($('we6'),q,N6[(i+1)%8],{class:'s-gain','stroke-width':4}));if(i<4)E6.push(ln($('we6'),q,N6[i+3],{class:'s-gain','stroke-width':4}));
+  if(CUT6.includes(i)){ln($('cut6'),q,C6,{class:'s-muted','stroke-width':4,'stroke-dasharray':'8 10'});
+    const mx=(q[0]+C6[0])/2,my=q[1];mk('path',{d:'M'+(mx-12)+' '+(my-16)+'l24 32M'+(mx+12)+' '+(my-16)+'l-24 32',class:'s-loss','stroke-width':6,'stroke-linecap':'round'},$('cut6'))}
+  else S6.push(ln($('sp6'),q,C6,{class:'s-loss','stroke-width':5,pathLength:1,'stroke-dasharray':'1 1'}));
+  ND6.push(mk('circle',{cx:q[0],cy:q[1],r:20,class:'gain'},$('nd6')))});
+
+const R7=[0,1,2].map(()=>mk('circle',{cx:800,cy:320,r:40,fill:'none',class:'s-loss','stroke-width':4},$('rg7')));
+const A7=[],L7=[];
+for(let i=0;i<6;i++){const x=260+i*216,g=mk('g',{},$('ar7'));fig(g,x,640,22,'ink');const b=mk('g',{},g);
+  mk('path',{d:'M'+(x-55)+' 506h110v58h-44l-11 14-11-14h-44z',fill:'var(--stage)',class:'s-ink','stroke-width':4,'stroke-linejoin':'round'},b);
+  mk('path',{d:'M'+(x-36)+' 535q9-14 18 0t18 0 18 0 18 0',fill:'none',class:'s-muted','stroke-width':4,'stroke-linecap':'round'},b);
+  A7.push([g,b,x]);L7.push(ln($('lk7'),[x,500],[800,366],{class:'s-gain','stroke-width':4,'stroke-dasharray':'8 8'}))}
+
+fig($('em8'),1060,560,18,'ink');fig($('em8'),1380,500,22,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const r0=p(u,TM.stage,TM.stage+.6),f0=p(u,TM.stage+5.8,TM.stage+6.5);
+rise($('cty'),r0);rise($('dots'),r0);rise($('flw'),f0);
+const k0=Math.floor(t*.7)%6,q0=fr(t*.7);
+mv($('pA'),cA(k0),cA(6),q0);mv($('pB'),cB(k0),cB((k0+1)%6),q0);$('pA').setAttribute('opacity',f0);$('pB').setAttribute('opacity',f0);
+
+rise($('pan'),p(u,TM.two_maps,TM.two_maps+.6));rise($('hubG'),p(u,TM.hub,TM.hub+.6));rise($('webG'),p(u,TM.web,TM.web+.6));
+hP.forEach((c,i)=>mv(c,HN[i],[450,480],fr(t*.5+i*.37)));
+wP.forEach((c,i)=>{const e=WE[(i*5)%WE.length],f=fr(t*.4+i/6);mv(c,i%2?e[0]:e[1],i%2?e[1]:e[0],f)});
+
+rise($('pal'),p(u,TM.palace,TM.palace+.6));
+const g2=p(u,TM.gate,TM.gate+.6);
+PX.forEach((x,i)=>{const a=[x,566],b=[800,440],bl=i%2==1;mv(HR[i],a,b,fr(t*.4+i*.23));mv(HO[i],b,a,fr(t*.4+i*.23+.5));
+  HL[i].setAttribute('opacity',bl?1-.8*g2:1);HO[i].setAttribute('opacity',bl?1-g2:1)});
+rise($('gt'),g2);rise($('risk'),p(u,TM.gate+5,TM.gate+5.6));
+
+nG.forEach((g,i)=>rise(g,p(u,rt3(i),rt3(i)+.4)));
+eL.forEach((l,k)=>{const a=Math.max(rt3(E3[k][0]),rt3(E3[k][1]))+.3;l.setAttribute('opacity',p(u,a,a+.4))});
+rise($('byp'),p(u,TM.newspaper+.6,TM.newspaper+1.1));
+P3.forEach((c,i)=>{const e=E3[i*2],f=fr(t*.35+i*.25);mv(c,[N3[e[0]][1],N3[e[0]][2]],[N3[e[1]][1],N3[e[1]][2]],f);c.setAttribute('opacity',p(u,TM.courthouse+2.8,TM.courthouse+3.2))});
+rise($('noisy'),p(u,TM.courthouse+5.4,TM.courthouse+6));
+
+const ar=u>=TM.director+4.2;
+HP.forEach((h,i)=>{const s=i==DI?TM.director:TM.director+1+((i*7)%24)*.08,sit=p(u,s,s+.4),cp=u>=TM.clapping&&sit<.5,w=Math.abs(Math.sin(t*9+i));
+  rise(h[0],p(u,TM.hall+i*.03,TM.hall+i*.03+.4));
+  h[1].setAttribute('transform','translate(0 '+(30*sit-(cp?3*w:0)).toFixed(1)+')');h[3].setAttribute('opacity',cp?(.3+.7*w).toFixed(2):0);
+  if(i==DI)h[2].childNodes.forEach(n=>n.setAttribute('class',ar?'loss':sit>0?'gain':'ink'))});
+rise($('ban'),p(u,TM.clapping,TM.clapping+.5));rise($('dare'),p(u,TM.clapping+1,TM.clapping+1.5));
+rise($('cage'),p(u,TM.director+4.2,TM.director+4.7));rise($('arr'),p(u,TM.director+4.2,TM.director+4.8));
+
+const h5=u>=TM.warning+2.9,a5=p(u,TM.ruler_alone,TM.ruler_alone+.6);
+B5.forEach((b,i)=>{rise(b[0],p(u,TM.warning+i*.3,TM.warning+i*.3+.4));b[2].textContent=h5?'…':'!';b[1].setAttribute('stroke',h5?'var(--muted)':'var(--loss)');b[2].style.fill=h5?'var(--muted)':'var(--loss)'});
+K5.forEach(k=>k.setAttribute('opacity',1-.8*a5));
+const f5=fr(t*.3)*3,sg=Math.min(2,Math.floor(f5));mv($('msg5'),CH5[sg],CH5[sg+1],f5-sg);$('msg5').setAttribute('opacity',((1-a5)*p(u,TM.warning,TM.warning+.4)).toFixed(2));
+$('ring5').setAttribute('opacity',a5);rise($('lone'),a5);
+rise($('ch5'),p(u,TM.famine,TM.famine+.5));$('real5').setAttribute('stroke-dashoffset',(1-p(u,TM.famine+.5,TM.famine+3)).toFixed(3));
+rise($('mil'),p(u,TM.famine+6.2,TM.famine+6.8));
+
+// scene 6
+rise($('bal'),p(u,TM.ballot,TM.ballot+.5));
+T6.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.ballot+.3+i*.12,TM.ballot+.6+i*.12).toFixed(2)));
+$('bp').setAttribute('transform','translate(0 '+(150*p(u,TM.ballot+1.2,TM.ballot+2)).toFixed(1)+')');
+rise($('net6'),p(u,TM.ballot+1.5,TM.ballot+2.1));
+const w6=p(u,TM.strongman+.8,TM.strongman+2);
+rise($('lead6'),p(u,TM.strongman,TM.strongman+.5));
+E6.forEach(e=>e.setAttribute('opacity',(1-.88*w6).toFixed(2)));
+$('cut6').setAttribute('opacity',w6.toFixed(2));
+const sp=p(u,TM.strongman+1.2,TM.strongman+2.4);S6.forEach(e=>e.setAttribute('stroke-dashoffset',(1-sp).toFixed(3)));
+ND6.forEach((c,i)=>{c.style.fill=w6>.5?(CUT6.includes(i)?'var(--muted)':'var(--ink)'):'var(--gain)'});
+$('lc6').style.fill=w6>.5?'var(--muted)':'var(--ink)';$('lp6').style.fill=w6>.5?'var(--muted)':'var(--ink)';
+rise($('sm6'),p(u,TM.strongman,TM.strongman+.5));rise($('sh6'),p(u,TM.shield,TM.shield+.6));
+
+const fx=p(u,TM.repair+2,TM.repair+2.6),e7=p(u,TM.repair,TM.repair+.5);
+A7.forEach((a,i)=>{rise(a[0],p(u,TM.argument+i*.15,TM.argument+i*.15+.4));a[1].setAttribute('transform','rotate('+((1-fx)*6*Math.sin(t*5+i*2)).toFixed(1)+' '+a[2]+' 540)')});
+rise($('er7'),e7);
+R7.forEach((r,k)=>{const f=fr(t*.5+k/3);r.setAttribute('r',(40+80*f).toFixed(1));r.setAttribute('opacity',((1-f)*(1-fx)*e7).toFixed(2))});
+L7.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.repair+.8+i*.1,TM.repair+1.2+i*.1)));
+$('ec7').setAttribute('class',fx>.5?'gain':'loss');$('ex7').setAttribute('opacity',1-fx);$('ok7').setAttribute('opacity',fx);
+rise($('fx7'),p(u,TM.repair+3,TM.repair+3.6));
+
+rise($('qa'),p(u,TM.workplace,TM.workplace+.5));rise($('qb'),p(u,TM.workplace+.4,TM.workplace+.9));rise($('qc'),p(u,TM.workplace+.8,TM.workplace+1.3));
+const g8=p(u,TM.workplace+1.3,TM.workplace+1.8);rise($('g8'),g8);
+const b8=fr(t*.4),bx=(1-b8)*(1-b8)*1090+2*(1-b8)*b8*1220+b8*b8*1350,by=(1-b8)*(1-b8)*540+2*(1-b8)*b8*440+b8*b8*490;
+$('bm8').setAttribute('transform','translate('+bx.toFixed(1)+' '+by.toFixed(1)+')');$('bm8').setAttribute('opacity',(g8*Math.min(1,(1-b8)*6)).toFixed(2));
+rise($('tk'),p(u,TM.workplace+5.4,TM.workplace+6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:133.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

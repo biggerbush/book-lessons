@@ -1,0 +1,392 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Coming Wave Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Coming Wave: Once a general-purpose technology works, it spreads, gets cheaper and becomes nearly impossible to stop, as history repeatedly shows. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMING WAVE · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Technology always</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">arrives in waves.</text>
+<text class="b" x="120" y="600" font-size="32">Why powerful inventions always spread, and why they’re so hard to stop</text>
+<g id="tw"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">General-purpose technologies.</text>
+<text class="b" x="120" y="176" font-size="32">Inventions so useful they spread into almost every part of life.</text>
+<g id="br"></g>
+<g id="brx"></g>
+<g id="hub"><circle class="gain" cx="300" cy="500" r="80"/><text class="m" x="300" y="496" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">GENERAL-</text><text class="m" x="300" y="522" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">PURPOSE</text></g>
+<g id="wc1"><path id="wcf" fill="var(--gain)" fill-opacity=".12"/><path id="wcl" class="s-gain" fill="none" stroke-width="6" stroke-linecap="round"/><g id="wcr"></g><text class="m" x="880" y="780" font-size="22">THEY ARRIVE IN CLUSTERS, LIKE A WAVE</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1886: the first motor car.</text>
+<text class="b" x="120" y="176" font-size="32">Carl Benz built a three-wheeled motor car in Germany.</text>
+<path class="s-line" d="M120 700H1480" stroke-width="4"/>
+<g id="car">
+<g id="pf"></g>
+<rect class="s-ink" x="470" y="460" width="90" height="50" rx="6" fill="var(--stage)" stroke-width="5"/>
+<rect class="ink" x="590" y="410" width="20" height="100" rx="6"/>
+<rect class="ink" x="600" y="462" width="100" height="40" rx="8"/>
+<path class="s-ink" d="M760 530L740 430M718 430h44M760 530L860 650" fill="none" stroke-width="7" stroke-linecap="round"/>
+<rect class="gain" x="470" y="510" width="300" height="34" rx="10"/>
+<circle class="s-ink" cx="560" cy="620" r="80" fill="none" stroke-width="7"/>
+<circle class="s-ink" cx="860" cy="650" r="50" fill="none" stroke-width="6"/>
+<g id="wr"></g><g id="wf"></g>
+<text class="m" x="690" y="752" font-size="20" text-anchor="middle">BENZ MOTOR CAR · 1886</text>
+</g>
+<g id="crd"><text class="m" x="120" y="790" font-size="20">A NOISY CURIOSITY FEW COULD AFFORD</text></g>
+<g id="hrs">
+<rect class="s-ink" x="990" y="560" width="110" height="50" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-ink" cx="1045" cy="654" r="44" fill="none" stroke-width="5"/>
+<path class="s-muted" d="M1100 600L1150 610" stroke-width="5"/>
+<path class="s-ink" d="M1135 590q-30 10-30 50M1160 620v80M1185 625v75M1235 625v75M1260 620v80" fill="none" stroke-width="9" stroke-linecap="round"/>
+<ellipse class="ink" cx="1210" cy="600" rx="75" ry="36"/>
+<path class="ink" d="M1260 590L1300 520L1325 530L1290 610zM1296 512l50 14-6 20-46-10z"/>
+<text class="m" x="1480" y="790" font-size="20" text-anchor="end">HORSES STILL RULED THE ROADS</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then it got cheaper every year.</text>
+<text class="b" x="120" y="176" font-size="32">Henry Ford’s assembly line turned out the Model T in huge numbers.</text>
+<g id="fl"><rect class="ink" x="420" y="214" width="80" height="34" rx="6"/><rect id="stamp" class="ink" x="450" y="248" width="20" height="22"/>
+<rect class="ink" x="120" y="336" width="640" height="18" rx="9"/><g id="belt"></g>
+<text class="m" x="120" y="395" font-size="20">MODEL T · ASSEMBLY LINE</text></g>
+<g id="pd"><path class="s-ink" d="M160 450V760H720" fill="none" stroke-width="4"/>
+<path id="pl" class="s-gain" d="M180 480H260V530H340V580H420V630H500V670H580V700H700" fill="none" stroke-width="7" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>
+<path id="bl" class="s-ink" d="M180 740L260 735L340 720L420 690L500 640L580 570L700 490" fill="none" stroke-width="6" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>
+<text class="m" x="712" y="705" font-size="20" style="fill:var(--gain)">PRICE</text><text class="m" x="712" y="495" font-size="20">BUYERS</text></g>
+<g id="cyc"><circle class="s-line" cx="1170" cy="530" r="170" fill="none" stroke-width="6"/><g id="cyx"></g>
+<text class="m" x="1170" y="790" font-size="22" text-anchor="middle">THE CYCLE KEEPS SPINNING</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Then they were everywhere.</text>
+<text class="b" x="120" y="176" font-size="32">Within a few decades, cars and engines filled streets across the world.</text>
+<g id="ct"><text class="m" x="120" y="236" font-size="20">STREETS ACROSS THE WORLD</text><g id="bld"></g>
+<path class="s-ink" d="M120 400H760M120 470H760" stroke-width="5"/><path class="s-muted" d="M120 435H760" stroke-width="3" stroke-dasharray="14 12"/><g id="cars"></g></g>
+<g id="eng"><g id="engx"></g><g id="gear"></g><text class="m" x="1190" y="612" font-size="20" text-anchor="middle">THE ENGINE</text></g>
+<g id="wm"><circle class="s-ink" cx="260" cy="650" r="120" fill="var(--stage)" stroke-width="5"/><ellipse class="s-line" cx="260" cy="650" rx="56" ry="120" fill="none" stroke-width="3"/>
+<path class="s-line" d="M140 650h240M156 590h208M156 710h208" stroke-width="3"/><g id="gd"></g>
+<text class="d5" x="420" y="630" font-size="40">A rare luxury became</text><text class="d5" x="420" y="684" font-size="40">part of daily life.</text>
+<text class="m" x="420" y="740" font-size="22" style="fill:var(--gain)">ON EVERY CONTINENT</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="64">The same story: the printing press.</text>
+<text class="b" x="120" y="176" font-size="32">Gutenberg, in the fifteenth century.</text>
+<g id="gp"><rect class="ink" x="180" y="280" width="22" height="440"/><rect class="ink" x="378" y="280" width="22" height="440"/>
+<rect class="ink" x="160" y="250" width="260" height="40" rx="6"/>
+<line id="scr" class="s-ink" x1="290" y1="290" x2="290" y2="410" stroke-width="10"/>
+<line id="hdl" class="s-ink" x1="240" y1="340" x2="340" y2="340" stroke-width="8" stroke-linecap="round"/>
+<rect id="plat" class="ink" x="230" y="410" width="120" height="26" rx="4"/>
+<rect class="gain" x="240" y="500" width="100" height="14"/>
+<rect class="s-ink" x="200" y="514" width="180" height="40" fill="var(--stage)" stroke-width="5"/>
+<rect class="ink" x="150" y="700" width="280" height="22" rx="6"/>
+<text class="m" x="290" y="770" font-size="20" text-anchor="middle">GUTENBERG’S PRESS</text></g>
+<g id="eu"><rect class="s-line" x="520" y="250" width="460" height="360" rx="24" fill="none" stroke-width="4" stroke-dasharray="12 10"/>
+<text class="m" x="550" y="292" font-size="20">PRESSES ACROSS EUROPE</text>
+<path d="M560 520L600 470L650 470L670 430L700 400L740 380L790 370L820 340L850 370L900 360L950 380L950 560L900 580L870 560L860 595L840 565L815 530L830 590L815 600L780 545L745 510L700 520L670 505L645 525L640 580L590 595L560 570Z" fill="var(--line)" fill-opacity=".5" stroke="var(--muted)" stroke-width="3" stroke-linejoin="round"/>
+<path d="M665 335L690 318L708 355L692 392L662 385Z" fill="var(--line)" fill-opacity=".5" stroke="var(--muted)" stroke-width="3" stroke-linejoin="round"/>
+<path d="M830 335L855 312L920 312L900 335L870 350Z" fill="var(--line)" fill-opacity=".5" stroke="var(--muted)" stroke-width="3" stroke-linejoin="round"/>
+<g id="eul"></g><g id="eud"></g></g>
+<g id="pr"><text class="m" x="520" y="670" font-size="20">PRICE OF BOOKS</text>
+<path id="pra" class="s-gain" d="M540 700C700 700 820 760 940 790" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<path id="prh" class="gain" d="M952 793L927 800L933 776z"/></g>
+<g id="bk"><text class="m" x="1060" y="290" font-size="20">A FEW HANDWRITTEN COPIES</text>
+<rect class="s-ink" x="1080" y="320" width="80" height="100" rx="6" fill="var(--stage)" stroke-width="5"/><rect class="s-ink" x="1180" y="320" width="80" height="100" rx="6" fill="var(--stage)" stroke-width="5"/>
+<path class="s-muted" d="M1094 345q10-6 20 0t20 0t18 0M1094 370q10-6 20 0t20 0t18 0M1094 395q10-6 20 0t20 0M1194 345q10-6 20 0t20 0t18 0M1194 370q10-6 20 0t20 0t18 0M1194 395q10-6 20 0t20 0" fill="none" stroke-width="3"/>
+<path class="s-muted" d="M1220 440v60m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="bk2"><g id="bst"></g><g id="rdr"></g><text class="m" x="1060" y="770" font-size="20">NOW FOR ORDINARY READERS</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The pattern repeats.</text>
+<text class="b" x="120" y="176" font-size="32">Suleyman sums it up simply.</text>
+<g id="qc6"><rect class="s-ink" x="120" y="230" width="640" height="250" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="170" y="284" font-size="20">MUSTAFA SULEYMAN</text>
+<text class="d" x="166" y="370" font-size="64">“Proliferation</text><text class="d" x="166" y="446" font-size="64" style="fill:var(--gain)">is the default.”</text></g>
+<g id="dem"><rect class="gain" x="120" y="560" width="200" height="60" rx="30"/><text class="m" x="220" y="597" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">USEFUL</text>
+<rect class="gain" x="120" y="650" width="200" height="60" rx="30"/><text class="m" x="220" y="687" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">CHEAP</text>
+<path id="dar" class="s-ink" d="M350 635H520" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/><path class="ink" d="M542 635l-26-15v30z"/>
+<g id="ppl"></g><text class="m" x="120" y="790" font-size="22">PEOPLE FIND A WAY TO GET IT</text></g>
+<g id="ban"><path class="s-line" d="M880 668H1480" stroke-width="4"/><g id="fl6"></g>
+<rect class="ink" x="1172" y="470" width="16" height="110"/>
+<circle cx="1180" cy="380" r="90" fill="var(--stage)" stroke="var(--loss)" stroke-width="14"/><path d="M1116 316l128 128" stroke="var(--loss)" stroke-width="14"/>
+<text class="m" x="880" y="740" font-size="20">BANS MOSTLY DELAYED NEW TOOLS</text><text class="m" x="880" y="772" font-size="20">OR LEFT THE BANNERS BEHIND</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Don’t ask if. Ask how.</text>
+<text class="b" x="120" y="176" font-size="32">The real question is not whether a new technology will spread.</text>
+<g id="ey"><text class="d5" x="120" y="320" font-size="52" fill-opacity=".55">Will it spread?</text>
+<circle class="s-ink" cx="1360" cy="300" r="60" fill="var(--stage)" stroke-width="8"/><path class="s-ink" d="M1403 343l50 50" stroke-width="14" stroke-linecap="round"/>
+<ellipse class="s-ink" cx="1360" cy="300" rx="36" ry="20" fill="none" stroke-width="5"/><circle id="pup" class="gain" cx="1360" cy="300" r="11"/></g>
+<line id="stk" class="s-ink" x1="112" y1="302" x2="112" y2="302" stroke-width="6" stroke-linecap="round"/>
+<g id="ey2"><text class="d5" x="620" y="316" font-size="40" style="fill:var(--gain)">It will. So ask how.</text></g>
+<g id="k0"><rect class="s-line" x="120" y="430" width="440" height="220" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="s-ink" cx="340" cy="510" r="50" fill="none" stroke-width="6"/><path id="hm" class="s-gain" d="M340 510V472" stroke-width="5" stroke-linecap="round"/><path id="hh" class="s-ink" d="M340 510h24" stroke-width="6" stroke-linecap="round"/>
+<text class="d5" x="340" y="620" font-size="36" text-anchor="middle">How fast?</text></g>
+<g id="k1"><rect class="s-line" x="580" y="430" width="440" height="220" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M740 480h80l30 30-30 30h-80z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><circle class="ink" cx="826" cy="510" r="7"/>
+<path class="s-gain" d="M780 490v38m-12-12 12 12 12-12" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d5" x="800" y="620" font-size="36" text-anchor="middle">How cheaply?</text></g>
+<g id="k2"><rect class="s-line" x="1040" y="430" width="440" height="220" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="ink" cx="1230" cy="480" r="20"/><path class="ink" d="M1200 564v-26a30 30 0 0 1 60 0v26z"/><path class="gain" d="M1300 500l18 18-18 18-18-18z"/>
+<text class="d5" x="1260" y="620" font-size="36" text-anchor="middle">Who holds it?</text></g>
+<g id="chk"><rect class="s-line" x="120" y="690" width="1360" height="150" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="160" y="740" width="50" height="50" rx="8" fill="none" stroke-width="5"/>
+<path id="tick" class="s-gain" d="M170 764l14 14 30-36" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>
+<text class="d5" x="250" y="752" font-size="36">When a tool clearly works,</text><text class="d" x="250" y="810" font-size="40" style="fill:var(--gain)">assume it will soon be everywhere.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="76" letter-spacing="-2">What tool do you use daily</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="76" letter-spacing="-2">that was rare five years ago?</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="76" letter-spacing="-2">Where will it be in <tspan style="fill:var(--gain)">five more?</tspan></text></g>
+<g id="qlab"><text class="m" x="143" y="640" font-size="26">ASSUME IT WILL SOON BE EVERYWHERE</text></g>
+<path id="qw" class="s-gain" fill="none" stroke-width="8" stroke-linecap="round"/><circle id="qr" class="ink" r="16"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Technology Always Arrives in Waves&rdquo;, from <em>The Coming Wave</em> by Mustafa Suleyman with Michael Bhaskar. The examples of Carl Benz&#x27;s early motor car, Henry Ford&#x27;s Model T and Gutenberg&#x27;s printing press are as reported in the book. The price-drop and cycle drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 10.1], [10.1, 27.9], [27.9, 40.3], [40.3, 54.9], [54.9, 71.1], [71.1, 86.5], [86.5, 102.0], [102.0, 117.4], [117.4, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Wave", "What a Wave Is", "The First Car", "Cheaper Every Year", "Everywhere at Once", "The Printing Press", "The Default Setting", "Reading the Signs", "Your Turn"];
+const TM={"title_wave": 0.0, "gpt_icon": 10.36, "branches": 15.36, "wave_cluster": 22.96, "benz_car": 28.24, "crowd_doubt": 33.4, "horse_cart": 38.28, "ford_line": 40.64, "price_drop": 45.76, "cycle_arrow": 50.92, "city_traffic": 55.24, "engine_parts": 59.84, "world_map": 66.08, "gutenberg": 71.44, "press_spread": 75.92, "book_stack": 81.12, "quote_card": 86.8, "ban_sign": 91.92, "demand_arrow": 98.16, "eye_glass": 102.32, "clock_face": 106.64, "checklist": 111.52, "your_tool": 117.68};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const wy=(x,y,a,ph)=>y+a*Math.sin(x/50+ph);
+const W=(x0,x1,y,a,ph)=>{let s='';for(let x=x0;x<=x1;x+=10)s+=(x==x0?'M':'L')+x+' '+wy(x,y,a,ph).toFixed(1);return s};
+const dr=(el,k)=>{el.style.strokeDashoffset=1-k};
+const tx=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+const f1=v=>v.toFixed(1);
+
+const TW=[0,1,2].map(i=>mk('path',{fill:'none',stroke:['var(--gain)','var(--ink)','var(--line)'][i],'stroke-width':8-i*2,'stroke-linecap':'round'},$('tw')));
+const TR=[0,1,2,3].map(i=>mk('circle',{r:14,class:i==1?'gain':'ink'},$('tw')));
+
+const BN=[[600,300,'FIRE','M0 -32c14 16 22 26 22 38a22 22 0 0 1-44 0c0-10 8-16 12-24 2 8 6 12 10 12 0-10-4-18 0-26z','gain'],[640,500,'WRITING','M-20 20L18 -24M-24 30h44','s-ink'],[600,700,'ELECTRICITY','M6 -32L-18 4h16l-6 28 26-38h-16z','gain']].map(([x,y,s,d,c])=>{
+  const l=mk('path',{d:'M300 500L'+x+' '+y,class:'s-ink','stroke-width':5,pathLength:1,'stroke-dasharray':1},$('br'));const g=mk('g',{},$('br'));
+  mk('circle',{cx:x,cy:y,r:50,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('path',{d:d,transform:'translate('+x+' '+y+')',class:c,fill:'none','stroke-width':6,'stroke-linecap':'round'},g);
+  tx(g,x+(s=='ELECTRICITY'?88:72),y+8,s,{class:'m','font-size':22});return [l,g]});
+[135,165,195,225].forEach(a=>{const r=a*Math.PI/180,x=300+170*Math.cos(r),y=500-170*Math.sin(r);mk('path',{d:'M300 500L'+f1(x)+' '+f1(y),class:'s-line','stroke-width':3},$('brx'));mk('circle',{cx:f1(x),cy:f1(y),r:12,fill:'var(--muted)'},$('brx'))});
+const WR=[0,1,2,3,4].map(i=>mk('circle',{r:18,class:i%2?'gain':'ink'},$('wcr')));
+
+[[560,620,76,'wr'],[860,650,46,'wf']].forEach(([x,y,r,id])=>{for(let i=0;i<3;i++){const a=i*Math.PI/3,c=r*Math.cos(a),s=r*Math.sin(a);mk('path',{d:'M'+f1(x-c)+' '+f1(y-s)+'L'+f1(x+c)+' '+f1(y+s),class:'s-ink','stroke-width':4},$(id))}});
+const PF=[0,1,2,3].map(()=>mk('circle',{fill:'var(--muted)','fill-opacity':.35},$('pf')));
+[200,280,360].forEach(x=>{person($('crd'),x,600,22,'ink');tx($('crd'),x,550,'?',{class:'d','font-size':44,'text-anchor':'middle',style:'fill:var(--loss)'})});
+
+const BC=[0,1,2,3,4].map(()=>{const g=mk('g',{},$('belt'));mk('rect',{x:0,y:296,width:60,height:26,rx:6,class:'gain'},g);mk('rect',{x:14,y:280,width:30,height:18,rx:4,class:'ink'},g);[12,48].forEach(c=>mk('circle',{cx:c,cy:328,r:7,class:'ink'},g));return g});
+[-30,90,210].forEach(a=>{const r=a*Math.PI/180,x=1170+170*Math.cos(r),y=530+170*Math.sin(r),tx_=-Math.sin(r),ty=Math.cos(r),nx=Math.cos(r),ny=Math.sin(r);
+  mk('path',{d:'M'+f1(x+14*tx_)+' '+f1(y+14*ty)+'L'+f1(x-10*tx_+12*nx)+' '+f1(y-10*ty+12*ny)+'L'+f1(x-10*tx_-12*nx)+' '+f1(y-10*ty-12*ny)+'Z',class:'ink'},$('cyx'))});
+const CDOT=[0,1,2].map(()=>mk('circle',{r:10,class:'gain'},$('cyx')));
+const CY=[[-90,'CHEAPER CARS'],[30,'MORE BUYERS'],[150,'MORE IMPROVEMENTS']].map(([a,s])=>{const r=a*Math.PI/180,x=1170+170*Math.cos(r),y=530+170*Math.sin(r),g=mk('g',{},$('cyx'));
+  mk('rect',{x:f1(x-125),y:f1(y-28),width:250,height:56,rx:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  tx(g,f1(x),f1(y+7),s,{class:'m','font-size':18,'text-anchor':'middle',style:'fill:var(--ink)'});return g});
+
+for(let i=0;i<8;i++){const h=60+(i*37)%70;mk('rect',{x:130+i*78,y:392-h,width:62,height:h,fill:'var(--line)'},$('bld'))}
+const CR=[];for(let i=0;i<10;i++)CR.push(mk('rect',{y:i%2?442:408,width:44,height:20,rx:6,class:i%3?'ink':'gain'},$('cars')));
+for(let i=0;i<8;i++)mk('rect',{x:1180,y:440,width:20,height:24,rx:3,class:'ink',transform:'rotate('+i*45+' 1190 510)'},$('gear'));
+mk('circle',{cx:1190,cy:510,r:56,class:'ink'},$('gear'));mk('circle',{cx:1190,cy:510,r:18,fill:'var(--stage)'},$('gear'));
+const EP=[[990,330,'SHIPS','M-36 6h72l-14 22h-44zM-2 6V-30h4V6z','M2 -28l24 28h-24z'],
+  [1390,330,'TRACTORS','M-14 -4h44v18h-44zM-22 -30h22v26h-22zM-32 14a18 18 0 1 0 36 0a18 18 0 1 0-36 0z','M14 22a10 10 0 1 0 20 0a10 10 0 1 0-20 0z'],
+  [990,690,'PLANES','M-36 -5h62a6 6 0 0 1 0 10h-62zM-6 -4l-14-26h10l20 26zM-6 4l-14 26h10l20-26z','M-34 -4l-6-14h8l8 14z'],
+  [1390,690,'GENERATORS','M-32 -22h64v44h-64z','M4 -16l-14 18h10l-4 16 14-20h-10z']].map(([x,y,s,a,b])=>{const g=mk('g',{},$('engx'));
+  mk('path',{d:'M1190 510L'+x+' '+y,class:'s-gain','stroke-width':4,'stroke-dasharray':'8 8'},g);
+  mk('circle',{cx:x,cy:y,r:56,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('path',{d:a,class:'ink',transform:'translate('+x+' '+y+')'},g);mk('path',{d:b,class:'gain',transform:'translate('+x+' '+y+')'},g);
+  tx(g,x,y+92,s,{class:'m','font-size':20,'text-anchor':'middle'});return g});
+const GD=[];for(let i=0;i<14;i++){const a=i*2.4,r=20+(i*37)%85;GD.push(mk('circle',{cx:f1(260+r*Math.cos(a)),cy:f1(650+r*Math.sin(a)),r:8,class:'gain'},$('gd')))}
+
+// presses spreading from Mainz across a schematic Europe (illustrative city positions)
+const EC=[[760,440],[730,410],[790,410],[800,460],[720,470],[690,440],[770,500],[840,420],[870,460],[610,530],[685,355],[900,410],[800,550],[880,325],[900,520]];
+const EL=EC.map((c,i)=>i?mk('path',{d:'M760 440L'+c[0]+' '+c[1],stroke:'var(--gain)','stroke-width':2,'stroke-dasharray':'4 5',fill:'none'},$('eul')):null);
+const ED=EC.map((c,i)=>{const g=mk('g',{},$('eud'));
+  if(i==0){mk('circle',{cx:c[0],cy:c[1],r:14,class:'gain',stroke:'var(--stage)','stroke-width':3},g)}
+  else{mk('rect',{x:c[0]-9,y:c[1]-9,width:18,height:18,rx:3,class:'ink',stroke:'var(--stage)','stroke-width':3},g)}
+  return g});
+for(let i=0;i<6;i++)mk('rect',{x:1080+(i%2)*14,y:690-i*30,width:200,height:26,rx:4,fill:['var(--ink)','var(--gain)','var(--muted)'][i%3]},$('bst'));
+person($('rdr'),1360,600,18,'gain');person($('rdr'),1435,630,18,'ink');
+
+// ban: a queue held back before the sign, a few tools slipping past
+const FQ=[];for(let i=0;i<6;i++)FQ.push(mk('circle',{cx:1140-i*40,cy:640,r:14,class:'ink'},$('fl6')));
+const FP=[0,1].map(()=>mk('circle',{r:14,cy:640,class:'gain'},$('fl6')));
+[600,670,740].forEach((x,i)=>person($('ppl'),x,600,20,i==1?'gain':'ink'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const k0=p(u,TM.title_wave,TM.title_wave+2.5);
+TW.forEach((e,i)=>e.setAttribute('d',W(1080,1480,340+i*80,28*k0,t*2-i*.8)));
+TR.forEach((c,i)=>{const x=1130+i*100;c.setAttribute('cx',x);c.setAttribute('cy',f1(wy(x,340,28*k0,t*2)-22));c.setAttribute('opacity',k0)});
+
+rise($('hub'),p(u,TM.gpt_icon,TM.gpt_icon+.5));
+BN.forEach(([l,g],i)=>{const a=TM.branches+i*.6;dr(l,p(u,a,a+.5));rise(g,p(u,a+.3,a+.8))});
+rise($('brx'),p(u,TM.branches+2,TM.branches+2.6));
+const k1=p(u,TM.wave_cluster,TM.wave_cluster+1.5);rise($('wc1'),p(u,TM.wave_cluster,TM.wave_cluster+.5));
+const wl=W(880,1480,600,34*k1,t*1.6);$('wcl').setAttribute('d',wl);$('wcf').setAttribute('d',wl+'L1480 700L880 700Z');
+WR.forEach((c,i)=>{const x=960+i*115;c.setAttribute('cx',x);c.setAttribute('cy',f1(wy(x,600,34*k1,t*1.6)-24))});
+
+rise($('car'),p(u,TM.benz_car,TM.benz_car+.6));
+$('wr').setAttribute('transform','rotate('+f1(t*40%360)+' 560 620)');$('wf').setAttribute('transform','rotate('+f1(t*64%360)+' 860 650)');
+const vp=p(u,TM.benz_car+.5,TM.benz_car+1);
+PF.forEach((c,i)=>{const k=(t*.4+i/4)%1;c.setAttribute('cx',f1(470-30*k));c.setAttribute('cy',f1(450-200*k));c.setAttribute('r',f1(10+20*k));c.setAttribute('opacity',((1-k)*vp).toFixed(2))});
+rise($('crd'),p(u,TM.crowd_doubt,TM.crowd_doubt+.5));rise($('hrs'),p(u,TM.horse_cart,TM.horse_cart+.5));
+
+rise($('fl'),p(u,TM.ford_line,TM.ford_line+.5));
+BC.forEach((g,i)=>{const x=((i*150+t*70)%750)+60;g.setAttribute('transform','translate('+f1(x)+' 0)');g.setAttribute('opacity',(cl((x-120)/30)*cl((700-x)/30)).toFixed(2))});
+$('stamp').setAttribute('y',f1(248+12*Math.abs(Math.sin(t*3))));
+rise($('pd'),p(u,TM.price_drop,TM.price_drop+.5));dr($('pl'),p(u,TM.price_drop+.3,TM.price_drop+2.5));dr($('bl'),p(u,TM.price_drop+1,TM.price_drop+3.2));
+rise($('cyc'),p(u,TM.cycle_arrow,TM.cycle_arrow+.5));CY.forEach((g,i)=>rise(g,p(u,TM.cycle_arrow+i*.5,TM.cycle_arrow+i*.5+.4)));
+const ca=p(u,TM.cycle_arrow+1.5,TM.cycle_arrow+2);
+CDOT.forEach((c,i)=>{const a=t*.9+i*2.094;c.setAttribute('cx',f1(1170+170*Math.cos(a)));c.setAttribute('cy',f1(530+170*Math.sin(a)));c.setAttribute('opacity',ca)});
+
+rise($('ct'),p(u,TM.city_traffic,TM.city_traffic+.5));
+CR.forEach((c,i)=>{const d=i%2?-1:1,x=((i*137+d*t*90)%700+700)%700+90;c.setAttribute('x',f1(x));c.setAttribute('opacity',(cl((x-120)/30)*cl((716-x)/30)*p(u,TM.city_traffic+i*.25,TM.city_traffic+i*.25+.3)).toFixed(2))});
+rise($('eng'),p(u,TM.engine_parts,TM.engine_parts+.5));$('gear').setAttribute('transform','rotate('+f1(t*50%360)+' 1190 510)');
+EP.forEach((g,i)=>rise(g,p(u,TM.engine_parts+.4+i*.5,TM.engine_parts+.8+i*.5)));
+rise($('wm'),p(u,TM.world_map,TM.world_map+.5));GD.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.world_map+.3+i*.15,TM.world_map+.5+i*.15)));
+
+rise($('gp'),p(u,TM.gutenberg,TM.gutenberg+.6));
+const py=410+60*Math.abs(Math.sin(t*1.5)),hc=50*Math.cos(t*1.5);$('plat').setAttribute('y',f1(py));$('scr').setAttribute('y2',f1(py));
+$('hdl').setAttribute('x1',f1(290-hc));$('hdl').setAttribute('x2',f1(290+hc));
+rise($('eu'),p(u,TM.press_spread,TM.press_spread+.5));
+ED.forEach((e,i)=>{const a=TM.press_spread+.3+i*.14;e.setAttribute('opacity',p(u,a,a+.25));if(EL[i])EL[i].setAttribute('opacity',(.7*p(u,a-.1,a+.2)).toFixed(2))});
+rise($('pr'),p(u,TM.press_spread+2.4,TM.press_spread+2.9));dr($('pra'),p(u,TM.press_spread+2.7,TM.press_spread+4.2));$('prh').setAttribute('opacity',p(u,TM.press_spread+4,TM.press_spread+4.3));
+rise($('bk'),p(u,TM.book_stack,TM.book_stack+.5));rise($('bk2'),p(u,TM.book_stack+1.2,TM.book_stack+1.8));
+
+rise($('qc6'),p(u,TM.quote_card,TM.quote_card+.6));rise($('ban'),p(u,TM.ban_sign,TM.ban_sign+.5));
+FQ.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.ban_sign+.4+i*.2,TM.ban_sign+.6+i*.2)));
+const fpk=p(u,TM.ban_sign+1.6,TM.ban_sign+2.1);
+FP.forEach((c,i)=>{const fr=(t*.15+i*.5)%1,x=1220+240*fr;c.setAttribute('cx',f1(x));c.setAttribute('opacity',(fpk*cl(fr*8)*cl((1-fr)*8)).toFixed(2))});
+rise($('dem'),p(u,TM.demand_arrow,TM.demand_arrow+.5));dr($('dar'),p(u,TM.demand_arrow+.3,TM.demand_arrow+1));
+
+rise($('ey'),p(u,TM.eye_glass,TM.eye_glass+.5));$('pup').setAttribute('cx',f1(1360+10*Math.sin(t*1.5)));
+const sk=p(u,TM.eye_glass+1.5,TM.eye_glass+2.1);$('stk').setAttribute('x2',f1(112+420*sk));$('stk').setAttribute('opacity',sk>0?1:0);
+rise($('ey2'),p(u,TM.eye_glass+2.2,TM.eye_glass+2.8));
+['k0','k1','k2'].forEach((id,i)=>rise($(id),p(u,TM.clock_face+i*1.2,TM.clock_face+i*1.2+.5)));
+$('hm').setAttribute('transform','rotate('+f1(t*240%360)+' 340 510)');$('hh').setAttribute('transform','rotate('+f1(t*20%360)+' 340 510)');
+rise($('chk'),p(u,TM.checklist,TM.checklist+.5));dr($('tick'),p(u,TM.checklist+.8,TM.checklist+1.3));
+
+rise($('qa'),p(u,TM.your_tool,TM.your_tool+.5));rise($('qb'),p(u,TM.your_tool+.4,TM.your_tool+.9));
+rise($('qc'),p(u,TM.your_tool+5,TM.your_tool+5.6));rise($('qlab'),p(u,TM.your_tool+1,TM.your_tool+1.5));
+$('qw').setAttribute('d',W(1100,1460,770,18,t*2));$('qr').setAttribute('cx',1280);$('qr').setAttribute('cy',f1(wy(1280,770,18,t*2)-22));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.48;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

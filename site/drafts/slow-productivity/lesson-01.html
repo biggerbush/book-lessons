@@ -1,0 +1,340 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slow Productivity Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Slow Productivity: Because knowledge work never defined productivity, we treat looking busy as a stand-in for real accomplishment, and that is burning us out. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SLOW PRODUCTIVITY · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The trap of</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">pseudo-productivity.</text>
+<text class="b" x="120" y="600" font-size="32">Why looking busy has quietly replaced getting real work done.</text>
+<g id="cal0"><rect class="s-ink" x="1186" y="190" width="288" height="136" rx="10" fill="var(--stage)" stroke-width="5"/></g>
+<g id="wk0"><g id="wkb"></g>
+<rect class="ink" x="1186" y="506" width="288" height="12" rx="6"/>
+<rect class="s-ink" x="1392" y="446" width="76" height="56" rx="6" fill="var(--stage)" stroke-width="5"/>
+<text id="inb0" class="m" x="1186" y="556" font-size="20">INBOX: 0</text></g>
+<text id="why0" class="d" x="1210" y="410" font-size="72" style="fill:var(--loss)">?</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What is productivity, anyway?</text>
+<text class="b" x="120" y="176" font-size="32">Knowledge work never settled on a clear definition.</text>
+<g id="asker"></g>
+<text id="qm1" class="d" x="350" y="470" font-size="180" style="fill:var(--loss)">?</text>
+<g id="opt0"><rect class="s-ink" x="120" y="560" width="400" height="60" rx="30" fill="var(--stage)" stroke-width="4"/><text class="m" x="320" y="598" font-size="22" text-anchor="middle">HOURS WORKED?</text></g>
+<g id="opt1"><rect class="s-ink" x="120" y="640" width="400" height="60" rx="30" fill="var(--stage)" stroke-width="4"/><text class="m" x="320" y="678" font-size="22" text-anchor="middle">TASKS FINISHED?</text></g>
+<g id="book1">
+<rect class="s-ink" x="640" y="240" width="280" height="400" rx="8" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="640" y="240" width="26" height="400"/>
+<text class="d" x="690" y="340" font-size="48">Slow</text>
+<text class="d5" x="690" y="390" font-size="30">Productivity</text>
+<rect class="gain" x="690" y="414" width="80" height="6"/>
+<text class="m" x="690" y="600" font-size="18">CAL NEWPORT</text></g>
+<text id="def1" class="m" x="640" y="690" font-size="22">DEFINITION: ?</text>
+<g id="ruler1"><rect class="s-ink" x="1000" y="400" width="480" height="90" rx="8" fill="var(--stage)" stroke-width="6"/><g id="ticks1"></g>
+<text class="m" x="1000" y="560" font-size="22">NO AGREED RULER</text></g>
+<g id="rt1"><text class="d" x="120" y="800" font-size="44">No agreed way to measure good work.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="64">So we measured what we could see.</text>
+<text class="b" x="120" y="176" font-size="32">Visible effort became our proof of value.</text>
+<g id="envs"></g>
+<text id="lb2a" class="m" x="180" y="640" font-size="20">QUICK REPLIES</text>
+<g id="calG"><rect class="s-ink" x="620" y="260" width="360" height="320" rx="10" fill="var(--stage)" stroke-width="5"/><rect class="ink" x="620" y="260" width="360" height="40" rx="8"/><g id="calC"></g>
+<text class="m" x="620" y="640" font-size="20">PACKED CALENDARS</text></g>
+<g id="meet"><ellipse class="s-ink" cx="1270" cy="440" rx="130" ry="50" fill="var(--stage)" stroke-width="5"/><g id="heads"></g>
+<text class="m" x="1080" y="640" font-size="20">BACK-TO-BACK MEETINGS</text></g>
+<g id="eye2"><path class="s-gain" d="M120 760Q180 715 240 760Q180 805 120 760Z" fill="none" stroke-width="6" stroke-linejoin="round"/><circle class="gain" cx="180" cy="760" r="16"/>
+<text class="d" x="280" y="778" font-size="48">Being visible = being valuable.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A name for the habit.</text>
+<text class="b" x="120" y="176" font-size="32">Visible activity as a rough stand-in for real accomplishment.</text>
+<g id="sign3"><g id="signS"><path class="s-ink" d="M180 300L340 240L500 300" fill="none" stroke-width="4"/><circle class="ink" cx="340" cy="240" r="8"/>
+<rect class="gain" x="140" y="300" width="400" height="110" rx="14"/><text class="m" x="340" y="365" font-size="26" text-anchor="middle" style="fill:var(--on-gain)">PSEUDO-PRODUCTIVITY</text></g></g>
+<path class="s-line" d="M680 700H1240" stroke-width="4"/>
+<g id="slips"></g>
+<rect class="gain" x="1040" y="670" width="80" height="30" rx="4"/>
+<text class="m" x="800" y="750" font-size="22" text-anchor="middle">ACTIVITY</text>
+<text class="m" x="1080" y="750" font-size="22" text-anchor="middle">RESULTS</text>
+<g id="lens3"><circle class="s-ink" cx="1080" cy="620" r="90" fill="none" stroke-width="14"/><path class="s-ink" d="M1144 684L1206 746" stroke-width="22" stroke-linecap="round"/></g>
+<g id="beeG"><ellipse class="s-muted" cx="340" cy="610" rx="170" ry="90" fill="none" stroke-width="3" stroke-dasharray="8 10"/><g id="beeM"></g>
+<text class="m" x="140" y="790" font-size="20">LOOKING BUSY BECOMES THE JOB</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A writer on a picnic table.</text>
+<text class="b" x="120" y="176" font-size="32">John McPhee, thinking for about two weeks.</text>
+<path class="s-line" d="M120 760H880" stroke-width="5"/>
+<g id="tree4"><path class="s-ink" d="M220 760V400M220 400Q330 300 520 290M330 320Q420 240 600 250M220 460Q420 360 700 360M520 290Q620 300 720 290" fill="none" stroke-width="8" stroke-linecap="round"/><g id="leaves"></g></g>
+<g id="table4"><rect class="ink" x="300" y="600" width="500" height="16" rx="6"/><path class="s-ink" d="M340 760L400 616M760 760L700 616" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="360" cy="578" r="22"/><rect class="ink" x="386" y="572" width="280" height="28" rx="14"/>
+<path class="s-muted" d="M366 556L470 370" stroke-width="3" stroke-dasharray="6 8"/></g>
+<g id="think4"><circle class="gain" cx="420" cy="520" r="6"/><circle class="gain" cx="445" cy="485" r="9"/><circle class="gain" cx="478" cy="445" r="12"/>
+<text class="m" x="960" y="260" font-size="20">NO INBOX · NO MEETINGS</text><text class="m" x="960" y="292" font-size="20" style="fill:var(--gain)">JUST THINKING</text></g>
+<g id="clock4"><circle class="s-ink" cx="1060" cy="450" r="90" fill="var(--stage)" stroke-width="7"/><g id="cticks"></g>
+<path id="hrH" class="s-ink" d="M1060 450V400" stroke-width="8" stroke-linecap="round"/><path id="mnH" class="s-ink" d="M1060 450V380" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="1060" y="600" font-size="20" text-anchor="middle">LOOKED IDLE</text>
+<path class="s-muted" d="M1165 450h70m-18-18 18 18-18 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="pages4"><g id="pg"></g><circle class="gain" cx="1420" cy="410" r="22"/><text class="m" x="1370" y="630" font-size="20" text-anchor="middle" style="fill:var(--gain)">CELEBRATED WORK</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hidden cost.</text>
+<text class="b" x="120" y="176" font-size="32">Busywork has no finish line.</text>
+<g id="phone5"><rect class="s-ink" x="160" y="260" width="220" height="400" rx="30" fill="var(--stage)" stroke-width="7"/><g id="pbars"></g>
+<circle id="ring5" class="s-loss" cx="380" cy="260" r="34" fill="none" stroke-width="4"/>
+<circle class="loss" cx="380" cy="260" r="34"/><text id="pcnt" class="m" x="380" y="268" font-size="24" text-anchor="middle" style="fill:var(--stage)">+0</text>
+<text class="m" x="120" y="720" font-size="20">ALWAYS ONE MORE MESSAGE</text></g>
+<g id="bat5"><rect class="s-ink" x="560" y="260" width="70" height="400" rx="8" fill="none" stroke-width="5"/><rect id="pres" class="loss" x="566" y="640" width="58" height="14" rx="4"/>
+<text class="m" x="595" y="720" font-size="20" text-anchor="middle">PRESSURE</text>
+<rect class="s-ink" x="720" y="380" width="300" height="150" rx="16" fill="none" stroke-width="7"/><rect class="ink" x="1020" y="425" width="20" height="60" rx="4"/>
+<rect id="bat" x="736" y="396" width="268" height="118" rx="8" fill="var(--gain)"/>
+<text class="m" x="870" y="580" font-size="20" text-anchor="middle">ENERGY</text></g>
+<g id="flame5"><g id="flk"><path class="loss" d="M1300 330C1360 410 1420 450 1400 560C1385 640 1215 640 1200 560C1185 480 1250 440 1300 330Z"/><path class="gain" d="M1300 450C1330 500 1360 530 1350 580C1340 620 1260 620 1250 580C1240 540 1280 500 1300 450Z"/></g>
+<text class="d" x="1300" y="710" font-size="56" text-anchor="middle" style="fill:var(--loss)">Burnout</text></g>
+<g id="drv5"><text class="m" x="120" y="820" font-size="22">NEWPORT: A MAJOR DRIVER OF PROFESSIONAL BURNOUT</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Screens made it worse.</text>
+<text class="b" x="120" y="176" font-size="32">The pandemic moved work onto video calls and chat.</text>
+<g id="lap6"><rect class="s-ink" x="160" y="230" width="680" height="450" rx="16" fill="var(--stage)" stroke-width="8"/><rect class="ink" x="120" y="690" width="760" height="24" rx="8"/></g>
+<g id="tiles"></g>
+<g id="chats"></g>
+<g id="exh6"><text class="d" x="120" y="800" font-size="46">The exhaustion became impossible to ignore.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Motion is not results.</text>
+<text class="b" x="120" y="176" font-size="32">Measure what you produced, not how busy you looked.</text>
+<g id="scale7"><path class="s-ink" d="M470 300V700" stroke-width="10" stroke-linecap="round"/><rect class="ink" x="370" y="700" width="200" height="16" rx="8"/>
+<g id="beam"><path class="s-ink" d="M-240 0H240" stroke-width="10" stroke-linecap="round"/><circle class="ink" cx="0" cy="0" r="14"/></g>
+<g id="panL"><path class="s-ink" d="M-90 140L0 0L90 140" fill="none" stroke-width="3"/><g id="pell"></g><path class="s-ink" d="M-90 140a90 40 0 0 0 180 0z" fill="var(--stage)" stroke-width="5"/><text class="m" x="0" y="215" font-size="22" text-anchor="middle">MOTION</text></g>
+<g id="panR"><path class="s-ink" d="M-90 140L0 0L90 140" fill="none" stroke-width="3"/><rect id="blk" class="gain" x="-35" y="78" width="70" height="60" rx="6"/><path class="s-ink" d="M-90 140a90 40 0 0 0 180 0z" fill="var(--stage)" stroke-width="5"/><text class="m" x="0" y="215" font-size="22" text-anchor="middle" style="fill:var(--gain)">RESULTS</text></g></g>
+<g id="card7"><rect class="s-gain" x="900" y="230" width="580" height="240" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="936" y="286" font-size="22">ASK EACH WEEK</text>
+<text class="d5" x="936" y="350" font-size="40">What did I actually</text><text class="d5" x="936" y="402" font-size="40">produce this week?</text>
+<text class="m" x="936" y="446" font-size="20">NOT HOW BUSY I LOOKED</text></g>
+<g id="path7"><path id="spath" class="s-gain" d="M920 810C1060 810 1040 700 1180 700S1320 640 1420 640" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/>
+<path class="s-ink" d="M1420 640V560" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1420 560l58 18-58 18z"/>
+<circle id="walk" class="ink" r="14"/>
+<text class="d" x="1376" y="576" font-size="44" text-anchor="end">Slow productivity.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="72" letter-spacing="-2">One win that mattered.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="72" letter-spacing="-2">One busy task to drop.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="72" letter-spacing="-2" style="fill:var(--gain)">Protect time for the win.</text></g>
+<text class="m" x="143" y="700" font-size="26">TONIGHT: WRITE THEM DOWN</text>
+<g id="pad8"><rect class="s-ink" x="1220" y="280" width="240" height="320" rx="14" fill="var(--stage)" stroke-width="6"/><g id="spir"></g></g>
+<g id="n0"><path class="s-gain" d="M1248 376l12 12 22-24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="gain" x="1296" y="370" width="136" height="14" rx="7"/></g>
+<g id="n1"><rect class="s-line" x="1250" y="460" width="182" height="14" rx="7" fill="var(--line)"/><path class="s-loss" d="M1242 467H1440" stroke-width="5" stroke-linecap="round"/></g>
+<g id="n2"><circle class="s-gain" cx="1262" cy="552" r="16" fill="none" stroke-width="4"/><path class="s-gain" d="M1262 552v-10M1262 552h8" stroke-width="4" stroke-linecap="round"/><rect class="gain" x="1296" y="545" width="136" height="14" rx="7"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Trap of Pseudo-Productivity&rdquo;, from <em>Slow Productivity</em> by Cal Newport. The John McPhee picnic table story is as reported in the book. Drawings of inboxes, batteries, flames and scales are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 7.8], [7.8, 24.7], [24.7, 37.8], [37.8, 52.0], [52.0, 73.0], [73.0, 87.7], [87.7, 103.2], [103.2, 117.1], [117.1, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Busy but Exhausted", "A Strange Question", "Filling the Gap", "Pseudo-Productivity", "A Writer on a Table", "The Hidden Cost", "Screens Made It Worse", "A Different Measure", "Your Challenge"];
+const TM={"tired_worker": 0.0, "question_mark": 8.08, "book_cover": 16.48, "empty_ruler": 21.36, "email_stack": 25.04, "calendar_full": 28.4, "label_sign": 38.08, "magnifier": 42.24, "busy_bee": 47.36, "picnic_table": 52.32, "tree_branches": 57.56, "clock_pages": 67.04, "ping_alerts": 73.28, "battery_low": 78.72, "burnout_flame": 83.0, "video_grid": 88.0, "chat_bubbles": 93.89, "scale_balance": 103.52, "finished_work": 108.4, "slow_path": 112.72, "notepad": 117.44};
+const fig=(g,x,y,r,c)=>[mk('circle',{cx:x,cy:y,r:r,class:c},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)];
+const txt=(g,x,y,s,fs,a)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':fs,class:'m'},a||{}),g);e.textContent=s;return e};
+fig($('wkb'),1320,380,30,'ink');
+const cells0=[];for(let i=0;i<15;i++)cells0.push(mk('rect',{x:1198+(i%5)*54,y:202+Math.floor(i/5)*40,width:48,height:32,rx:6,fill:'var(--line)'},$('cal0')));
+fig($('asker'),260,330,40,'ink');
+for(let i=0;i<23;i++){const x=1020+i*20;mk('path',{d:'M'+x+' 400v'+(i%5?20:40),class:'s-ink','stroke-width':4},$('ticks1'));if(i%5===0)txt($('ticks1'),x,475,'?',22,{'text-anchor':'middle',style:'fill:var(--loss)'})}
+const envs=[];for(let i=0;i<5;i++){const g=mk('g',{},$('envs')),x=180+i*14,y=270+i*46;mk('rect',{x:x,y:y,width:260,height:120,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('path',{d:'M'+x+' '+y+'l130 60 130-60',fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},g);envs.push(g)}
+const calC=[];for(let i=0;i<30;i++)calC.push(mk('rect',{x:636+(i%5)*70,y:316+Math.floor(i/5)*42,width:58,height:32,rx:5,fill:'var(--loss)'},$('calC')));
+for(let i=0;i<8;i++){const a=i*Math.PI/4+.4;mk('circle',{cx:1270+175*Math.cos(a),cy:440+110*Math.sin(a),r:22,class:'ink'},$('heads'))}
+const slips=[];for(let i=0;i<11;i++)slips.push(mk('rect',{x:720,y:660-i*40,width:160,height:32,rx:6,class:'loss','fill-opacity':i%2?.6:1},$('slips')));
+mk('ellipse',{cx:0,cy:0,rx:24,ry:17,class:'gain'},$('beeM'));mk('path',{d:'M-8-15v30M6-16v32',class:'s-ink','stroke-width':5},$('beeM'));mk('circle',{cx:26,cy:0,r:9,class:'ink'},$('beeM'));
+const wings=[-10,4].map(x=>mk('ellipse',{cx:x,cy:-24,rx:10,ry:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},$('beeM')));
+[[300,300],[420,250],[520,280],[600,240],[700,350],[640,300],[260,360],[460,330]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:22,class:'gain','fill-opacity':.5},$('leaves')));
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(1060+76*Math.cos(a))+' '+(450+76*Math.sin(a))+'L'+(1060+84*Math.cos(a))+' '+(450+84*Math.sin(a)),class:'s-ink','stroke-width':4},$('cticks'))}
+for(let k=0;k<3;k++){const x=1270+k*12,y=350+k*14;mk('rect',{x:x,y:y,width:160,height:200,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('pg'));if(k===2)for(let j=0;j<5;j++)mk('path',{d:'M'+(x+20)+' '+(y+80+j*24)+'h'+(j===4?70:120),class:'s-line','stroke-width':5,'stroke-linecap':'round'},$('pg'))}
+for(let i=0;i<4;i++)mk('rect',{x:190,y:320+i*80,width:160,height:48,rx:12,fill:'var(--line)'},$('pbars'));
+const tiles=[];for(let i=0;i<9;i++){const x=184+(i%3)*216,y=254+Math.floor(i/3)*136,g=mk('g',{},$('tiles'));mk('rect',{x:x,y:y,width:200,height:124,rx:8,fill:'var(--line)'},g);tiles.push([g].concat(fig(g,x+100,y+40,16,'ink')))}
+const chats=[],dots=[];for(let i=0;i<6;i++){const x=i%2?1100:940,y=240+i*76,g=mk('g',{},$('chats'));mk('rect',{x:x,y:y,width:380,height:60,rx:28,fill:i%2?'var(--gain)':'var(--stage)',stroke:i%2?'none':'var(--ink)','stroke-width':4},g);for(let k=0;k<3;k++)dots.push([mk('circle',{cx:x+40+k*28,cy:y+30,r:7,fill:i%2?'var(--on-gain)':'var(--ink)'},g),y+30,k]);chats.push(g)}
+for(let i=0;i<7;i++)mk('circle',{cx:-60+i*20,cy:126,r:10,class:'loss'},$('pell'));for(let i=0;i<4;i++)mk('circle',{cx:-30+i*20,cy:106,r:10,class:'loss'},$('pell'));
+const SPL=$('spath').getTotalLength()||700;
+for(let i=0;i<5;i++)mk('circle',{cx:1250+i*45,cy:280,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('spir'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('wk0'),p(u,TM.tired_worker,TM.tired_worker+.6));
+$('wkb').setAttribute('transform','translate(0 '+(4*Math.sin(t*1.5)).toFixed(1)+')');
+cells0.forEach((c,i)=>c.setAttribute('fill',u>=TM.tired_worker+.6+i*.2?'var(--loss)':'var(--line)'));
+rise($('why0'),p(u,TM.tired_worker+6.8,TM.tired_worker+7.3));
+
+rise($('asker'),p(u,TM.question_mark,TM.question_mark+.5)); rise($('qm1'),p(u,TM.question_mark+.4,TM.question_mark+.9));
+rise($('opt0'),p(u,TM.question_mark+5.5,TM.question_mark+6)); rise($('opt1'),p(u,TM.question_mark+6.2,TM.question_mark+6.7));
+rise($('book1'),p(u,TM.book_cover,TM.book_cover+.6)); rise($('def1'),p(u,TM.book_cover+2,TM.book_cover+2.5));
+rise($('ruler1'),p(u,TM.empty_ruler,TM.empty_ruler+.6)); rise($('rt1'),p(u,TM.empty_ruler+1,TM.empty_ruler+1.6));
+
+envs.forEach((g,i)=>rise(g,p(u,TM.email_stack+i*.35,TM.email_stack+i*.35+.4))); rise($('lb2a'),p(u,TM.email_stack,TM.email_stack+.5));
+rise($('calG'),p(u,TM.calendar_full,TM.calendar_full+.5)); calC.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.calendar_full+.4+i*.06,TM.calendar_full+.6+i*.06)));
+rise($('meet'),p(u,TM.calendar_full+2.5,TM.calendar_full+3)); rise($('eye2'),p(u,TM.calendar_full+6,TM.calendar_full+6.6));
+
+rise($('sign3'),p(u,TM.label_sign,TM.label_sign+.5)); $('signS').setAttribute('transform','rotate('+(3*Math.sin(t*1.5)).toFixed(2)+' 340 240)');
+slips.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.magnifier+i*.12,TM.magnifier+i*.12+.3)));
+rise($('lens3'),p(u,TM.magnifier+1.6,TM.magnifier+2.2));
+rise($('beeG'),p(u,TM.busy_bee,TM.busy_bee+.5));
+const ba=t*2.2; $('beeM').setAttribute('transform','translate('+(340+170*Math.cos(ba)).toFixed(1)+' '+(610+90*Math.sin(ba)).toFixed(1)+')');
+wings.forEach(w=>w.setAttribute('ry',(8+7*Math.abs(Math.sin(t*20))).toFixed(1)));
+
+rise($('table4'),p(u,TM.picnic_table,TM.picnic_table+.6)); rise($('tree4'),p(u,TM.tree_branches,TM.tree_branches+.6));
+rise($('think4'),p(u,TM.tree_branches+6.6,TM.tree_branches+7.2));
+rise($('clock4'),p(u,TM.clock_pages,TM.clock_pages+.5)); rise($('pages4'),p(u,TM.clock_pages+3,TM.clock_pages+3.6));
+$('mnH').setAttribute('transform','rotate('+(t*90%360).toFixed(1)+' 1060 450)'); $('hrH').setAttribute('transform','rotate('+(t*7.5%360).toFixed(1)+' 1060 450)');
+
+rise($('phone5'),p(u,TM.ping_alerts,TM.ping_alerts+.5));
+$('pcnt').textContent='+'+Math.floor(cl((u-TM.ping_alerts)*2.5,0,99));
+const ph=(t%1.2)/1.2; $('ring5').setAttribute('r',(34+40*ph).toFixed(1)); $('ring5').setAttribute('opacity',(u>=TM.ping_alerts?1-ph:0).toFixed(2));
+rise($('bat5'),p(u,TM.battery_low,TM.battery_low+.5));
+const ph2=20+360*p(u,TM.battery_low,TM.battery_low+4); $('pres').setAttribute('y',(654-ph2).toFixed(1)); $('pres').setAttribute('height',ph2.toFixed(1));
+const lv=1-.85*p(u,TM.battery_low,TM.battery_low+4); $('bat').setAttribute('width',(268*lv).toFixed(1)); $('bat').setAttribute('fill',lv<.35?'var(--loss)':'var(--gain)');
+rise($('flame5'),p(u,TM.burnout_flame,TM.burnout_flame+.6)); rise($('drv5'),p(u,TM.burnout_flame+1.2,TM.burnout_flame+1.8));
+$('flk').setAttribute('transform','translate(1300 620) scale('+(1+.04*Math.sin(t*7)).toFixed(3)+' '+(1+.07*Math.sin(t*5)).toFixed(3)+') translate(-1300 -620)');
+
+rise($('lap6'),p(u,TM.video_grid-.3,TM.video_grid+.3));
+const ex=u>=TM.chat_bubbles+5.8;
+tiles.forEach((q,i)=>{rise(q[0],p(u,TM.video_grid+i*.3,TM.video_grid+i*.3+.4));q[1].setAttribute('class',ex?'loss':'ink');q[2].setAttribute('class',ex?'loss':'ink')});
+chats.forEach((g,i)=>rise(g,p(u,TM.chat_bubbles+i*.4,TM.chat_bubbles+i*.4+.4)));
+dots.forEach(d=>d[0].setAttribute('cy',(d[1]-5*Math.max(0,Math.sin(t*6-d[2]))).toFixed(1)));
+rise($('exh6'),p(u,TM.chat_bubbles+5.8,TM.chat_bubbles+6.4));
+
+rise($('scale7'),p(u,TM.scale_balance,TM.scale_balance+.6)); rise($('pell'),p(u,TM.scale_balance+.5,TM.scale_balance+1));
+rise($('blk'),p(u,TM.finished_work,TM.finished_work+.5));
+const ag=-7*p(u,TM.scale_balance+.6,TM.scale_balance+1.6)+17*p(u,TM.finished_work+.4,TM.finished_work+1.6), ar=ag*Math.PI/180, bx=240*Math.cos(ar), by=240*Math.sin(ar);
+$('beam').setAttribute('transform','translate(470 300) rotate('+ag.toFixed(2)+')');
+$('panL').setAttribute('transform','translate('+(470-bx).toFixed(1)+' '+(300-by).toFixed(1)+')'); $('panR').setAttribute('transform','translate('+(470+bx).toFixed(1)+' '+(300+by).toFixed(1)+')');
+rise($('card7'),p(u,TM.finished_work,TM.finished_work+.6));
+rise($('path7'),p(u,TM.slow_path,TM.slow_path+.6));
+const wp=$('spath').getPointAtLength(SPL*p(u,TM.slow_path+.5,TM.slow_path+4)); $('walk').setAttribute('cx',wp.x.toFixed(1)); $('walk').setAttribute('cy',(wp.y-16).toFixed(1));
+
+rise($('pad8'),p(u,TM.notepad,TM.notepad+.5));
+rise($('qa'),p(u,TM.notepad+.3,TM.notepad+.8)); rise($('n0'),p(u,TM.notepad+1,TM.notepad+1.5));
+rise($('qb'),p(u,TM.notepad+3,TM.notepad+3.5)); rise($('n1'),p(u,TM.notepad+3.6,TM.notepad+4.1));
+rise($('qc'),p(u,TM.notepad+7,TM.notepad+7.5)); rise($('n2'),p(u,TM.notepad+7.5,TM.notepad+8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.64;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

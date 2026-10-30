@@ -1,0 +1,421 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nexus Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Nexus: AI is an agent that makes its own decisions, so our survival depends on building strong self-correcting institutions around it. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">NEXUS · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">AI: a new member</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of the network.</text>
+<text class="b" x="120" y="600" font-size="32">Why AI is not a tool, and how we keep it in check</text>
+<g id="hum"></g><g id="rob"></g>
+<rect class="ink" x="1050" y="548" width="430" height="18" rx="9"/>
+<path class="s-ink" d="M1090 566v70M1440 566v70" stroke-width="8" stroke-linecap="round"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Tool or agent?</text>
+<text class="b" x="120" y="176" font-size="32">Harari compares AI to the printing press.</text>
+<g id="pL">
+<rect class="s-line" x="120" y="230" width="640" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">PRINTING PRESS</text>
+<path class="s-ink" d="M340 520V320M540 520V320M320 320H560M440 320V380M400 345H480" fill="none" stroke-width="8" stroke-linecap="round"/>
+<rect id="plate" class="ink" x="380" y="380" width="120" height="22" rx="4"/>
+<rect class="ink" x="320" y="500" width="240" height="22" rx="4"/>
+<g id="copies"></g>
+</g>
+<g id="pR">
+<rect class="s-line" x="840" y="230" width="640" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="280" font-size="22">AI</text>
+<rect class="s-ink" x="940" y="380" width="90" height="110" rx="6" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M958 410h54M958 435h54M958 460h34" stroke-width="6" stroke-linecap="round"/>
+<g id="aibot"></g>
+<circle class="gain" cx="1330" cy="400" r="32"/><rect class="ink" x="1318" y="434" width="24" height="16" rx="3"/>
+<path class="s-gain" d="M1330 350v-16M1374 400h16M1286 400h-16M1362 368l12-12M1298 368l-12-12" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="rw0"></g><g id="rw1"></g>
+<g id="agt"><text class="d" x="120" y="830" font-size="40">AI makes decisions and creates ideas by itself.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Alien thinking.</text>
+<text class="b" x="120" y="176" font-size="32">In 2016, AlphaGo played a world champion at Go.</text>
+<rect class="s-ink" x="160" y="230" width="456" height="456" rx="10" fill="var(--stage)" stroke-width="6"/>
+<g id="grid"></g><g id="stones"></g>
+<g id="mv"><circle id="ring" class="s-gain" cx="488" cy="458" r="30" fill="none" stroke-width="4"/><circle class="gain" cx="488" cy="458" r="20"/>
+<text class="m" x="160" y="730" font-size="20" style="fill:var(--gain)">THE SURPRISING MOVE</text></g>
+<g id="exp"><g id="expp"></g><text class="m" x="840" y="410" font-size="20" text-anchor="middle">HUMAN EXPERTS</text></g>
+<g id="bub"><rect class="s-ink" x="1000" y="250" width="320" height="80" rx="20" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M1000 300l-30 20 34-4" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d5" x="1160" y="302" font-size="36" text-anchor="middle">“A mistake?”</text></g>
+<g id="yet"><text class="m" x="1000" y="380" font-size="22" style="fill:var(--gain)">…YET IT HELPED WIN THE GAME</text></g>
+<g id="aln">
+<path class="s-muted" d="M780 474h50" stroke-width="4" stroke-dasharray="8 8"/><text class="m" x="845" y="480" font-size="20">EXPECTED ROUTE</text>
+<path class="s-gain" d="M1110 474h50" stroke-width="7"/><text class="m" x="1175" y="480" font-size="20" style="fill:var(--gain)">ALIEN ROUTE</text>
+<path class="s-muted" d="M780 700Q1100 700 1420 590" fill="none" stroke-width="4" stroke-dasharray="8 8"/>
+<circle class="ink" cx="780" cy="700" r="14"/>
+<path class="s-ink" d="M1420 590V520" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1420 520l50 16-50 16z"/>
+</g>
+<path id="aip" class="s-gain" d="M780 700C860 520 980 800 1100 640S1320 520 1420 590" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" fill="none" stroke-width="7"/>
+<g id="alt"><text class="d" x="120" y="820" font-size="40">Alien intelligence: same goal, unexpected path.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">His sharpest example: Myanmar.</text>
+<text class="b" x="120" y="176" font-size="32">Facebook’s algorithms had one simple goal: keep users engaged.</text>
+<g id="ph">
+<rect class="s-ink" x="180" y="230" width="300" height="570" rx="36" fill="var(--stage)" stroke-width="7"/>
+<rect class="ink" x="290" y="248" width="80" height="10" rx="5"/>
+<g id="posts"></g>
+<text class="m" x="330" y="840" font-size="20" text-anchor="middle">THE FEED</text>
+</g>
+<g id="gg">
+<text class="m" x="820" y="300" font-size="22" text-anchor="middle">GOAL: KEEP USERS ENGAGED</text>
+<path class="s-line" d="M620 560A200 200 0 0 1 1020 560" fill="none" stroke-width="28"/>
+<path id="arc" class="s-loss" d="M620 560A200 200 0 0 1 1020 560" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" fill="none" stroke-width="28"/>
+<line id="ndl" class="s-ink" x1="820" y1="560" x2="650" y2="560" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="820" cy="560" r="16"/>
+<text class="m" x="820" y="620" font-size="22" text-anchor="middle">ENGAGEMENT</text>
+</g>
+<g id="hb1"><rect class="s-loss" x="1080" y="250" width="400" height="170" rx="16" fill="var(--stage)" stroke-width="4"/>
+<text class="d5" x="1104" y="310" font-size="36">Outrage worked.</text>
+<text class="m" x="1104" y="358" font-size="20">HATEFUL CONTENT AGAINST</text><text class="m" x="1104" y="388" font-size="20">THE ROHINGYA, AMPLIFIED</text></g>
+<g id="hb2"><rect class="loss" x="1080" y="460" width="400" height="220" rx="16" fill-opacity=".14"/>
+<text class="d" x="1104" y="560" font-size="72" style="fill:var(--loss)">2016–17</text>
+<text class="m" x="1104" y="610" font-size="20">HELPED FUEL THE VIOLENCE</text><text class="m" x="1104" y="640" font-size="20">OF ETHNIC CLEANSING</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The goal problem.</text>
+<text class="b" x="120" y="176" font-size="32">No engineer chose hatred. The machine chose the path.</text>
+<g id="eng"><g id="engp"></g>
+<text class="m" x="200" y="510" font-size="20" text-anchor="middle">ENGINEER</text>
+<circle class="s-ink" cx="1320" cy="400" r="110" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="1320" cy="400" r="74" fill="none" stroke-width="6"/>
+<circle class="ink" cx="1320" cy="400" r="36"/>
+<text class="m" x="1320" y="550" font-size="20" text-anchor="middle">GOAL: ENGAGEMENT</text>
+<path class="s-muted" d="M260 400H1200" stroke-width="4" stroke-dasharray="10 10"/>
+<text class="m" x="300" y="380" font-size="20">THE PATH WE PICTURED</text>
+</g>
+<path id="aip2" class="s-loss" d="M260 420C480 420 560 560 730 560S1000 430 1210 410" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" fill="none" stroke-width="7"/>
+<g id="harm"><circle class="loss" cx="730" cy="560" r="16"/><text class="m" x="730" y="604" font-size="20" text-anchor="middle" style="fill:var(--loss)">HARMFUL RESULT</text></g>
+<g id="gap"><path class="s-loss" d="M730 408V540" stroke-width="4" stroke-dasharray="6 8"/>
+<text class="m" x="748" y="470" font-size="20" style="fill:var(--loss)">ALIGNMENT GAP</text>
+<text class="m" x="1320" y="582" font-size="20" text-anchor="middle" style="fill:var(--gain)">LOOKS HARMLESS</text></g>
+<g id="dots"></g>
+<g id="spd"><text class="m" x="120" y="852" font-size="22">SPEED AND SCALE: ONE MISTAKE SPREADS BEFORE ANYONE NOTICES</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Build the brakes.</text>
+<text class="b" x="120" y="176" font-size="32">Not blind trust. Not a ban. Self-correcting institutions.</text>
+<g id="no0"><rect class="s-ink" x="120" y="250" width="400" height="100" rx="16" fill="var(--stage)" stroke-width="4"/><text class="d5" x="150" y="312" font-size="34">Trust it blindly</text></g>
+<g id="no1"><rect class="s-ink" x="120" y="380" width="400" height="100" rx="16" fill="var(--stage)" stroke-width="4"/><text class="d5" x="150" y="442" font-size="34">Ban it outright</text></g>
+<path id="x0" class="s-loss" d="M136 300H504" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="7"/>
+<path id="x1" class="s-loss" d="M136 430H504" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" stroke-width="7"/>
+<g id="loop"><circle class="s-line" cx="1000" cy="520" r="200" fill="none" stroke-width="6" stroke-dasharray="14 10"/><g id="lbot"></g></g>
+<circle id="dot5" class="gain" r="14"/>
+<g id="n0"><rect class="s-gain" x="870" y="290" width="260" height="60" rx="30" fill="var(--stage)" stroke-width="5"/><text class="m" x="1000" y="327" font-size="20" text-anchor="middle">CATCH ERRORS EARLY</text></g>
+<g id="n1"><rect class="s-gain" x="1043" y="590" width="260" height="60" rx="30" fill="var(--stage)" stroke-width="5"/><text class="m" x="1173" y="627" font-size="20" text-anchor="middle">ADMIT THE ERROR</text></g>
+<g id="n2"><rect class="s-gain" x="697" y="590" width="260" height="60" rx="30" fill="var(--stage)" stroke-width="5"/><text class="m" x="827" y="627" font-size="20" text-anchor="middle">FIX IT</text></g>
+<g id="eye"><path class="s-ink" d="M1240 290Q1300 240 1360 290Q1300 340 1240 290Z" fill="var(--stage)" stroke-width="5"/><circle id="pup" class="gain" cx="1300" cy="290" r="14"/>
+<text class="m" x="1300" y="370" font-size="20" text-anchor="middle">INSTITUTIONS WATCH</text></g>
+<g id="icons">
+<path class="ink" d="M150 600L250 550L350 600Z"/>
+<path class="s-ink" d="M170 612v96M210 612v96M250 612v96M290 612v96M330 612v96" stroke-width="14"/>
+<rect class="ink" x="150" y="710" width="200" height="16"/>
+<text class="m" x="250" y="765" font-size="20" text-anchor="middle">COURTS</text>
+<rect class="s-ink" x="390" y="560" width="130" height="166" rx="6" fill="var(--stage)" stroke-width="5"/>
+<rect class="ink" x="405" y="578" width="100" height="18"/>
+<path class="s-line" d="M405 620h100M405 646h100M405 672h60M405 698h80" stroke-width="6"/>
+<text class="m" x="455" y="765" font-size="20" text-anchor="middle">NEWSPAPERS</text>
+</g>
+<g id="fixt"><text class="d" x="120" y="830" font-size="40">Institutions that admit mistakes and fix them.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Know who is speaking.</text>
+<text class="b" x="120" y="176" font-size="32">AI should never pretend to be human.</text>
+<g id="bt"><g id="btr"></g>
+<g id="mask"><circle class="s-ink" cx="360" cy="400" r="94" fill="var(--stage)" stroke-width="6"/><circle class="ink" cx="328" cy="385" r="9"/><circle class="ink" cx="392" cy="385" r="9"/>
+<path class="s-ink" d="M322 428Q360 458 398 428" fill="none" stroke-width="6" stroke-linecap="round"/></g></g>
+<g id="tag"><rect class="gain" x="290" y="636" width="140" height="46" rx="23"/><text class="m" x="360" y="666" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">AI BOT</text></g>
+<g id="chat"><rect class="s-line" x="760" y="230" width="720" height="400" rx="20" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="790" y="272" font-size="20">CHAT</text><path class="s-line" d="M760 292H1480" stroke-width="3"/>
+<circle class="s-muted" cx="808" cy="352" r="22" fill="var(--line)" stroke-width="3"/>
+<rect class="s-ink" x="846" y="320" width="400" height="64" rx="20" fill="var(--stage)" stroke-width="4"/>
+<text class="b" x="870" y="362" font-size="28">Hi! How can I help you?</text></g>
+<g id="ctag"><rect class="gain" x="1262" y="330" width="130" height="44" rx="22"/><text class="m" x="1327" y="359" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">AI BOT</text></g>
+<g id="rep"><rect class="gain" x="1060" y="430" width="380" height="64" rx="20"/><text class="b" x="1084" y="472" font-size="28" style="fill:var(--on-gain)">Thanks for telling me.</text></g>
+<g id="conv"></g>
+<g id="cvt"><text class="m" x="120" y="852" font-size="20">PUBLIC CONVERSATION FULL OF VOICES THAT BELONG TO NO ONE</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your part.</text>
+<text class="b" x="120" y="176" font-size="32">You can start small.</text>
+<g id="k0"><rect class="s-line" x="120" y="230" width="414" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="252" y="280" width="150" height="260" rx="22" fill="var(--stage)" stroke-width="6"/>
+<g id="angry"><circle class="loss" cx="327" cy="410" r="46"/><path d="M300 392l18 8M354 392l-18 8M305 438Q327 422 349 438" fill="none" stroke="var(--stage)" stroke-width="6" stroke-linecap="round"/></g>
+<text class="m" x="150" y="620" font-size="20">WHEN A FEED</text><text class="m" x="150" y="652" font-size="20">MAKES YOU FURIOUS</text>
+<text class="d5" x="150" y="720" font-size="36">Notice it.</text></g>
+<g id="k1"><rect class="s-line" x="593" y="230" width="414" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g class="gain"><rect x="752" y="300" width="22" height="100" rx="11"/><rect x="778" y="290" width="22" height="110" rx="11"/><rect x="804" y="294" width="22" height="106" rx="11"/><rect x="830" y="306" width="22" height="94" rx="11"/>
+<rect x="748" y="370" width="106" height="120" rx="34"/><rect x="706" y="400" width="60" height="24" rx="12" transform="rotate(-35 736 412)"/></g>
+<text class="m" x="623" y="620" font-size="20">PAUSE AND ASK:</text>
+<text class="d5" x="623" y="680" font-size="36" style="fill:var(--gain)">What goal is</text><text class="d5" x="623" y="726" font-size="36" style="fill:var(--gain)">it serving?</text></g>
+<g id="k2"><rect class="s-line" x="1066" y="230" width="414" height="530" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-ink" d="M1213 290Q1273 240 1333 290Q1273 340 1213 290Z" fill="var(--stage)" stroke-width="5"/><circle class="gain" cx="1273" cy="290" r="14"/>
+<g id="ppl"></g>
+<text class="m" x="1096" y="560" font-size="20">JOURNALISTS</text><text class="m" x="1096" y="600" font-size="20">REGULATORS</text><text class="m" x="1096" y="640" font-size="20">RESEARCHERS</text>
+<text class="d5" x="1096" y="720" font-size="36">Support them.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="w0"><text class="d" x="136" y="300" font-size="72" letter-spacing="-1">This week, notice one</text></g>
+<g id="w1"><text class="d" x="136" y="388" font-size="72" letter-spacing="-1">decision an algorithm</text></g>
+<g id="w2"><text class="d" x="136" y="476" font-size="72" letter-spacing="-1">made for you.</text></g>
+<g id="w3"><text class="d" x="136" y="600" font-size="72" letter-spacing="-1" style="fill:var(--gain)">Who could catch it</text></g>
+<g id="w4"><text class="d" x="136" y="688" font-size="72" letter-spacing="-1" style="fill:var(--gain)">if it were wrong?</text></g>
+<g id="mag"><circle class="s-ink" cx="1300" cy="430" r="100" fill="var(--stage)" stroke-width="14"/><g id="magb"></g>
+<path class="s-ink" d="M1371 501L1446 576" stroke-width="24" stroke-linecap="round"/></g>
+<g id="clab"><text class="m" x="143" y="790" font-size="26">YOUR CHALLENGE THIS WEEK</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;AI: A New Member of the Network&rdquo;, from <em>Nexus</em> by Yuval Noah Harari. Examples as reported in the book: the printing press comparison, AlphaGo&#x27;s surprising move in 2016, and Facebook&#x27;s algorithms in Myanmar. The robot, meters and loops are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 9.2], [9.2, 25.2], [25.2, 44.4], [44.4, 64.6], [64.6, 83.0], [83.0, 99.0], [99.0, 112.9], [112.9, 124.2], [124.2, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["AI Joins the Network", "Tool or Agent", "Alien Thinking", "Myanmar Feeds", "The Goal Problem", "Build the Brakes", "Know Who Speaks", "Your Part", "Your Challenge"];
+const TM={"robot_seat": 0.0, "press": 9.52, "book_choose": 16.32, "ai_agent": 19.76, "go_board": 25.52, "move_37": 32.16, "alien_mind": 37.88, "phone_feed": 44.72, "engage_meter": 48.12, "hate_posts": 52.83, "target": 64.92, "goal_gap": 70.32, "speed_wave": 76.16, "court": 83.28, "watchdog": 88.72, "repair_loop": 93.92, "bot_mask": 99.28, "label_tag": 104.53, "conversation": 108.24, "feed_check": 113.16, "pause_hand": 114.72, "support_inst": 119.64};
+const bust=(g,x,y,r,cls)=>mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);
+const who=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);bust(g,x,y,r,cls)};
+const ln=(d,g,c,w,dash)=>mk('path',{d:d,fill:'none',stroke:'var(--'+c+')','stroke-width':w,'stroke-linecap':'round','stroke-dasharray':dash||'none'},g);
+const tx=(g,x,y,s,cls,str)=>{const e=mk('text',{x:x,y:y,'font-size':s,class:cls},g);e.textContent=str;return e};
+const bot=(g,x,y,r,cls)=>{ln('M'+x+' '+(y-r)+'v'+(-r*.5),g,cls,Math.max(4,r*.12));mk('circle',{cx:x,cy:y-r*1.6,r:r*.18,class:cls},g);
+  mk('rect',{x:x-r,y:y-r,width:2*r,height:2*r,rx:r*.3,class:cls},g);[-1,1].forEach(s=>mk('circle',{cx:x+s*r*.4,cy:y-r*.1,r:r*.17,fill:'var(--stage)'},g));
+  ln('M'+(x-r*.4)+' '+(y+r*.45)+'h'+(r*.8),g,'stage',r*.12)};
+
+[1100,1190,1280].forEach(x=>who($('hum'),x,440,26,'ink'));
+ln('M1100 412Q1145 360 1190 412M1190 412Q1235 360 1280 412',$('hum'),'line',4,'8 8');
+ln('M1280 412Q1330 350 1370 405',$('rob'),'gain',4,'8 8');ln('M1446 440V560',$('rob'),'muted',8);
+bust($('rob'),1400,440,26,'gain');bot($('rob'),1400,440,30,'gain');
+
+for(let i=0;i<3;i++)mk('rect',{x:596+i*10,y:430-i*16,width:110,height:76,rx:6,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('copies'));
+ln('M636 420h70M636 444h70M636 468h40',$('copies'),'line',6);
+bot($('aibot'),1160,430,64,'gain');
+const RW=[0,1].map(s=>['COPY A BOOK','WRITE A BOOK','CHOOSE WHAT TO PRINT'].map((w,i)=>{const x0=120+s*720,y=590+i*60,g=mk('g',{},$('rw'+s));
+  tx(g,x0+30,y,22,'m',w);const mx=x0+590,my=y-8;
+  if(s||!i)ln('M'+(mx-16)+' '+my+'l10 12 22-26',g,'gain',7);else ln('M'+(mx-12)+' '+(my-12)+'l24 24m0-24l-24 24',g,'loss',7);return g}));
+
+for(let i=0;i<9;i++){ln('M188 '+(258+i*50)+'H588',$('grid'),'ink',2);ln('M'+(188+i*50)+' 258V658',$('grid'),'ink',2)}
+const ST=[[2,2,0],[6,2,1],[2,6,1],[6,6,0],[3,3,1],[5,5,0],[4,2,0],[2,4,1],[5,3,1],[3,5,0]].map(q=>mk('circle',{cx:188+q[0]*50,cy:258+q[1]*50,r:20,fill:q[2]?'var(--stage)':'var(--ink)',stroke:'var(--ink)','stroke-width':4},$('stones')));
+[760,840,920].forEach(x=>who($('expp'),x,290,20,'ink'));
+
+const HO=[];for(let i=0;i<5;i++){const y=290+i*98,g=$('posts');
+  mk('rect',{x:205,y:y,width:250,height:80,rx:12,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  if(i===1||i===2||i===4)HO.push(mk('rect',{x:205,y:y,width:250,height:80,rx:12,class:'loss',opacity:0},g));
+  mk('circle',{cx:232,cy:y+28,r:12,fill:'var(--muted)'},g);ln('M255 '+(y+28)+'h150M220 '+(y+56)+'h200',g,'line',6)}
+
+who($('engp'),200,360,26,'ink');
+const DT=[];for(let j=0;j<4;j++)for(let i=0;i<24;i++){const x=160+i*55,y=660+j*48;DT.push([mk('circle',{cx:x,cy:y,r:9,fill:'var(--line)'},$('dots')),Math.hypot(x-160,y-708)])}
+
+bot($('lbot'),1000,520,60,'ink');
+// pill boxes on the repair loop, used to keep the travelling dot clear of them
+const PILLS=[[870,290,260,60],[1043,590,260,60],[697,590,260,60]];
+const pillClear=(x,y)=>{let d=1e9;PILLS.forEach(b=>{const dx=Math.max(b[0]-x,0,x-(b[0]+b[2])),dy=Math.max(b[1]-y,0,y-(b[1]+b[3]));d=Math.min(d,Math.hypot(dx,dy))});return cl((d-22)/20)};
+
+bust($('btr'),360,410,50,'ink');bot($('btr'),360,400,70,'ink');
+const BB=[];for(let i=0;i<10;i++){const x=120+i*136,y=i%2?770:716,g=mk('g',{},$('conv'));
+  mk('rect',{x:x,y:y,width:116,height:46,rx:16,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  [38,58,78].forEach(d=>mk('circle',{cx:x+d,cy:y+23,r:5,fill:'var(--muted)'},g));BB.push(g)}
+
+const PP=[1170,1273,1376].map(x=>{const g=mk('g',{},$('ppl'));who(g,x,380,22,'gain');return g});
+bot($('magb'),1300,440,40,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('hum'),p(u,TM.robot_seat,TM.robot_seat+.6));
+const rk=p(u,TM.robot_seat+4,TM.robot_seat+5.5);
+$('rob').setAttribute('transform','translate('+(30*(1-rk)).toFixed(1)+' 0)');$('rob').setAttribute('opacity',rk);
+
+rise($('pL'),p(u,TM.press,TM.press+.5));
+$('plate').setAttribute('transform','translate(0 '+(30*Math.abs(Math.sin(t*1.5))).toFixed(1)+')');
+rise($('copies'),p(u,TM.press+3,TM.press+3.5));
+const R1=[TM.press+3,TM.press+4.5,TM.book_choose];
+RW[0].forEach((g,i)=>rise(g,p(u,R1[i],R1[i]+.4)));
+rise($('pR'),p(u,TM.ai_agent,TM.ai_agent+.5));
+RW[1].forEach((g,i)=>rise(g,p(u,TM.ai_agent+.6+i*.4,TM.ai_agent+1+i*.4)));
+rise($('agt'),p(u,TM.ai_agent+2,TM.ai_agent+2.6));
+
+ST.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.go_board+i*.25,TM.go_board+i*.25+.3)));
+rise($('mv'),p(u,TM.move_37,TM.move_37+.4));$('ring').setAttribute('r',(30+6*Math.sin(t*4)).toFixed(1));
+rise($('exp'),p(u,TM.move_37+.4,TM.move_37+.9));rise($('bub'),p(u,TM.move_37+1,TM.move_37+1.5));
+rise($('yet'),p(u,TM.move_37+3.5,TM.move_37+4));
+rise($('aln'),p(u,TM.alien_mind,TM.alien_mind+.5));
+$('aip').setAttribute('stroke-dashoffset',(1-p(u,TM.alien_mind+.6,TM.alien_mind+2.6)).toFixed(3));
+rise($('alt'),p(u,TM.alien_mind+2.6,TM.alien_mind+3.2));
+
+rise($('ph'),p(u,TM.phone_feed,TM.phone_feed+.5));rise($('gg'),p(u,TM.engage_meter,TM.engage_meter+.5));
+const gv=.1+.3*p(u,TM.engage_meter+.5,TM.engage_meter+2)+.55*p(u,TM.hate_posts,TM.hate_posts+2),an=Math.PI*(1+gv);
+$('ndl').setAttribute('x2',(820+170*Math.cos(an)).toFixed(1));$('ndl').setAttribute('y2',(560+170*Math.sin(an)).toFixed(1));
+$('arc').setAttribute('stroke-dashoffset',(1-gv).toFixed(3));
+HO.forEach((r,i)=>r.setAttribute('opacity',(.4*p(u,TM.hate_posts+i*.4,TM.hate_posts+i*.4+.4)).toFixed(2)));
+rise($('hb1'),p(u,TM.hate_posts+.5,TM.hate_posts+1));rise($('hb2'),p(u,TM.hate_posts+5.8,TM.hate_posts+6.4));
+
+rise($('eng'),p(u,TM.target,TM.target+.5));
+$('aip2').setAttribute('stroke-dashoffset',(1-p(u,TM.target+1.8,TM.target+3.6)).toFixed(3));
+rise($('harm'),p(u,TM.target+3,TM.target+3.5));rise($('gap'),p(u,TM.goal_gap,TM.goal_gap+.5));
+rise($('dots'),p(u,TM.goal_gap+2,TM.goal_gap+2.6));
+const wr=p(u,TM.speed_wave,TM.speed_wave+3.5)*1400;
+DT.forEach(q=>q[0].setAttribute('fill',u>=TM.speed_wave&&q[1]<=wr?'var(--loss)':'var(--line)'));
+rise($('spd'),p(u,TM.speed_wave+.5,TM.speed_wave+1));
+
+rise($('no0'),p(u,TM.court,TM.court+.5));rise($('no1'),p(u,TM.court+2,TM.court+2.5));
+$('x0').setAttribute('stroke-dashoffset',(1-p(u,TM.court+3,TM.court+3.5)).toFixed(3));
+$('x1').setAttribute('stroke-dashoffset',(1-p(u,TM.court+4,TM.court+4.5)).toFixed(3));
+rise($('loop'),p(u,TM.court+4.5,TM.court+5));
+rise($('n0'),p(u,TM.watchdog,TM.watchdog+.5));rise($('eye'),p(u,TM.watchdog+.3,TM.watchdog+.8));
+$('pup').setAttribute('cx',(1300+12*Math.sin(t*1.4)).toFixed(1));
+rise($('icons'),p(u,TM.repair_loop,TM.repair_loop+.5));
+rise($('n1'),p(u,TM.repair_loop+1,TM.repair_loop+1.5));rise($('n2'),p(u,TM.repair_loop+2.5,TM.repair_loop+3));
+// the dot makes one full lap of the loop, starting and parking at the clear bottom gap between the two lower pills; it fades out near any pill
+const da=Math.PI/2+2*Math.PI*p(u,TM.repair_loop+3,TM.repair_loop+7),dx5=1000+200*Math.cos(da),dy5=520+200*Math.sin(da);
+$('dot5').setAttribute('cx',dx5.toFixed(1));$('dot5').setAttribute('cy',dy5.toFixed(1));
+$('dot5').setAttribute('opacity',(p(u,TM.repair_loop+3,TM.repair_loop+3.4)*pillClear(dx5,dy5)).toFixed(2));
+rise($('fixt'),p(u,TM.repair_loop+3.5,TM.repair_loop+4.1));
+
+rise($('bt'),p(u,TM.bot_mask,TM.bot_mask+.5));
+const mr=p(u,TM.label_tag,TM.label_tag+.8);
+$('mask').setAttribute('transform','translate(0 '+(-80*mr).toFixed(1)+')');$('mask').setAttribute('opacity',(1-mr).toFixed(2));
+rise($('tag'),p(u,TM.label_tag+.6,TM.label_tag+1.1));
+rise($('chat'),p(u,TM.bot_mask+1,TM.bot_mask+1.5));
+rise($('ctag'),p(u,TM.label_tag+.8,TM.label_tag+1.3));rise($('rep'),p(u,TM.label_tag+2,TM.label_tag+2.5));
+BB.forEach((b,i)=>rise(b,p(u,TM.conversation+i*.25,TM.conversation+i*.25+.3)));
+rise($('cvt'),p(u,TM.conversation+1,TM.conversation+1.5));
+
+[TM.feed_check,TM.pause_hand,TM.support_inst].forEach((a,i)=>rise($('k'+i),p(u,a,a+.5)));
+$('angry').setAttribute('transform','translate('+(3*Math.sin(t*25)).toFixed(1)+' 0)');
+PP.forEach((g,i)=>rise(g,p(u,TM.support_inst+.5+i*.3,TM.support_inst+.9+i*.3)));
+
+const S8=SC[8][0]/K;
+[.4,.8,1.2,4.2,4.6].forEach((d,i)=>rise($('w'+i),p(u,S8+d,S8+d+.5)));
+rise($('clab'),p(u,S8+5.2,S8+5.7));
+$('mag').setAttribute('transform','translate('+(12*Math.sin(t*.9)).toFixed(1)+' '+(8*Math.cos(t*1.2)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.2;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

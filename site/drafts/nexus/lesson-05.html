@@ -1,0 +1,424 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nexus Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Nexus: Networks that can admit and fix their own mistakes, like science, outperform those that cannot, like the systems behind the witch hunts. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">NEXUS · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Self-correction</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">is what saves us.</text>
+<text class="b" x="120" y="600" font-size="32">Why networks that admit mistakes beat networks that hide them</text>
+<g id="cdl">
+<circle id="glow" class="gain" cx="1320" cy="370" r="90" fill-opacity=".15"/>
+<path id="flame" class="gain" d="M1320 330c-30 40-30 76 0 76s30-36 0-76z"/>
+<path class="s-ink" d="M1320 430v-24" stroke-width="5" stroke-linecap="round"/>
+<rect class="s-ink" x="1280" y="430" width="80" height="220" rx="8" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1240" y="650" width="160" height="16" rx="6"/>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The printing press spreads.</text>
+<text class="b" x="120" y="176" font-size="32">Europe, late 1400s: many hoped it would spread truth and wisdom.</text>
+<g id="prs">
+<g id="plat"><path class="s-ink" d="M352 260v120" stroke-width="10"/><rect class="s-ink" x="262" y="380" width="180" height="40" rx="4" fill="var(--stage)" stroke-width="6"/></g>
+<path class="s-ink" d="M352 226v34M312 232h80" stroke-width="10" stroke-linecap="round"/>
+<rect class="ink" x="180" y="260" width="344" height="36" rx="6"/>
+<rect class="ink" x="190" y="296" width="24" height="410"/><rect class="ink" x="490" y="296" width="24" height="410"/>
+<rect x="270" y="462" width="164" height="8" fill="var(--ice)"/>
+<rect class="s-ink" x="230" y="470" width="244" height="30" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M260 600h184M260 625h184M260 650h184" stroke-width="6" stroke-linecap="round"/>
+<rect class="ink" x="160" y="700" width="384" height="20" rx="6"/>
+<text class="m" x="352" y="770" font-size="20" text-anchor="middle">PRINTING PRESS</text>
+</g>
+<g id="hope">
+<rect class="s-gain" x="590" y="340" width="150" height="190" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-gain" x="630" y="370" width="150" height="190" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-gain" x="670" y="400" width="150" height="190" fill="var(--stage)" stroke-width="5"/>
+<path class="s-gain" d="M695 440h100M695 480h100M695 520h70" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="705" y="640" font-size="20" text-anchor="middle" style="fill:var(--gain)">HOPE: TRUTH</text>
+<text class="m" x="705" y="670" font-size="20" text-anchor="middle" style="fill:var(--gain)">&amp; WISDOM</text>
+</g>
+<g id="wb">
+<rect class="loss" x="890" y="300" width="260" height="360" rx="8"/>
+<rect x="890" y="300" width="26" height="360" fill="var(--ink)" fill-opacity=".25"/>
+<text class="d" x="1030" y="430" font-size="32" text-anchor="middle" style="fill:var(--stage)">HAMMER</text>
+<text class="d" x="1030" y="472" font-size="32" text-anchor="middle" style="fill:var(--stage)">OF THE</text>
+<text class="d" x="1030" y="514" font-size="32" text-anchor="middle" style="fill:var(--stage)">WITCHES</text>
+<text class="m" x="1020" y="700" font-size="20" text-anchor="middle">AN EARLY BESTSELLER</text>
+</g>
+<g id="kr">
+<g id="krp"></g>
+<rect class="s-ink" x="1200" y="250" width="280" height="140" rx="16" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M1320 390l20 34 10-34" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="1340" y="302" font-size="20" text-anchor="middle" style="fill:var(--loss)">A VAST</text>
+<text class="m" x="1340" y="332" font-size="20" text-anchor="middle" style="fill:var(--loss)">CONSPIRACY</text>
+<text class="m" x="1340" y="362" font-size="20" text-anchor="middle" style="fill:var(--loss)">OF WITCHES</text>
+<text class="m" x="1340" y="640" font-size="20" text-anchor="middle">HEINRICH KRAMER</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A machine for making errors.</text>
+<text class="b" x="120" y="176" font-size="32">Torture produced confessions. Confessions produced names.</text>
+<g id="webE"></g>
+<g id="acc">
+<circle class="loss" cx="220" cy="520" r="34"/>
+<path class="s-loss" d="M160 470l14 12-12 10 14 12M280 470l-14 12 12 10-14 12" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="120" y="610" font-size="20">ACCUSED</text>
+<text class="m" x="120" y="640" font-size="20">UNDER TORTURE</text>
+</g>
+<g id="conf">
+<rect class="s-ink" x="130" y="320" width="200" height="64" rx="14" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M200 384l10 30 20-30" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="230" y="360" font-size="20" text-anchor="middle">NAMES…</text>
+</g>
+<g id="webN"></g>
+<g id="webL"><text class="m" x="120" y="800" font-size="20">EACH NAME: A NEW ARREST, A NEW CONFESSION</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No way to say stop.</text>
+<text class="b" x="120" y="176" font-size="32">Every confession seemed to prove the conspiracy was real.</text>
+<g id="lp">
+<circle class="s-loss" cx="440" cy="480" r="170" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<circle id="lpD" class="loss" r="12"/>
+<g id="lpP"></g>
+</g>
+<g id="jd">
+<path class="ink" d="M940 262c-24-14-56-14-80-6v56c24-8 56-8 80 6 24-14 56-14 80-6v-56c-24-8-56-8-80 6z"/>
+<g id="jdP"></g>
+<text class="m" x="810" y="560" font-size="18" text-anchor="middle">JUDGE</text>
+<text class="m" x="940" y="560" font-size="18" text-anchor="middle">PREACHER</text>
+<text class="m" x="1070" y="560" font-size="18" text-anchor="middle">SCHOLAR</text>
+<text class="m" x="940" y="600" font-size="20" text-anchor="middle">SAME BOOKS, SAME ASSUMPTIONS</text>
+</g>
+<g id="ld">
+<rect class="s-ink" x="1230" y="250" width="180" height="280" rx="6" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="1390" cy="390" r="8"/>
+<path class="s-loss" d="M1290 400v-24a30 30 0 0 1 60 0v24" fill="none" stroke-width="10"/>
+<rect class="loss" x="1278" y="398" width="84" height="64" rx="8"/>
+<text class="m" x="1320" y="575" font-size="20" text-anchor="middle">NO REWARD FOR ASKING:</text>
+<text class="m" x="1320" y="603" font-size="20" text-anchor="middle" style="fill:var(--loss)">“IS THIS A MISTAKE?”</text>
+</g>
+<g id="dgP"></g>
+<g id="dgL"><text class="m" x="1116" y="812" font-size="20" text-anchor="middle">MANY THOUSANDS OF INNOCENT PEOPLE DIED</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Science works differently.</text>
+<text class="b" x="120" y="176" font-size="32">Its institutions are built to test claims and expose flaws.</text>
+<g id="sci">
+<path class="s-line" d="M190 440H370" stroke-width="4"/>
+<g id="sciP"></g>
+<text class="m" x="120" y="600" font-size="20">A NETWORK OF PEOPLE</text>
+</g>
+<line id="arwL" class="s-gain" x1="418" y1="450" x2="418" y2="450" stroke-width="7" stroke-linecap="round"/>
+<path id="arwH" class="s-gain" d="M526 432l18 18-18 18" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="jr">
+<rect class="s-ink" x="560" y="320" width="300" height="260" rx="16" fill="var(--stage)" stroke-width="6"/>
+<text class="d5" x="710" y="430" font-size="36" text-anchor="middle">Journals</text>
+<text class="d5" x="710" y="476" font-size="36" text-anchor="middle">&amp; academies</text>
+<text class="m" x="710" y="530" font-size="18" text-anchor="middle">TEST · CHECK · REPEAT</text>
+</g>
+<g id="rs">
+<path class="s-gain" d="M960 360l14 14 26-30M960 450l14 14 26-30" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-loss" d="M962 522l36 36M998 522l-36 36" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="1020" y="547" font-size="18" style="fill:var(--loss)">FLAW EXPOSED</text>
+</g>
+<g id="tr">
+<rect class="s-ink" x="1205" y="226" width="230" height="56" rx="8" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="1320" y="262" font-size="22" text-anchor="middle">FAMOUS IDEA</text>
+<line id="fstk" class="s-loss" x1="1222" y1="255" x2="1222" y2="255" stroke-width="3" stroke-linecap="round"/>
+<path class="gain" d="M1250 330h140v60a70 70 0 0 1-140 0z"/>
+<path class="s-gain" d="M1250 350h-30a30 30 0 0 0 30 40M1390 350h30a30 30 0 0 1-30 40" fill="none" stroke-width="8"/>
+<rect class="gain" x="1308" y="458" width="24" height="50"/><rect class="gain" x="1270" y="508" width="100" height="20" rx="4"/>
+<text class="m" x="1320" y="590" font-size="20" text-anchor="middle">FAME FOR PROVING</text>
+<text class="m" x="1320" y="618" font-size="20" text-anchor="middle">A FAMOUS IDEA WRONG</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Expecting to be wrong.</text>
+<text class="b" x="120" y="176" font-size="32">Scientists are not smarter or more honest than anyone else.</text>
+<g id="eq">
+<g id="eqP"></g>
+<text class="d" x="320" y="470" font-size="80" text-anchor="middle" style="fill:var(--muted)">=</text>
+<text class="m" x="200" y="556" font-size="22" text-anchor="middle">SCIENTIST</text>
+<text class="m" x="440" y="556" font-size="22" text-anchor="middle">ANYONE ELSE</text>
+</g>
+<rect class="s-ink" x="640" y="240" width="460" height="560" rx="10" fill="var(--stage)" stroke-width="5"/>
+<g id="ppL"></g><g id="errs"></g><g id="rings"></g>
+<g id="mag"><circle class="s-ink" r="50" fill="var(--stage)" fill-opacity=".3" stroke-width="10"/><path class="s-ink" d="M36 36L80 80" stroke-width="14" stroke-linecap="round"/></g>
+<g id="st0"><rect class="s-ink" x="1160" y="300" width="320" height="84" rx="16" fill="var(--stage)" stroke-width="4"/><text class="d5" x="1190" y="354" font-size="34">Expect errors</text></g>
+<g id="st1"><rect class="s-ink" x="1160" y="420" width="320" height="84" rx="16" fill="var(--stage)" stroke-width="4"/><text class="d5" x="1190" y="474" font-size="34">Search for them</text></g>
+<g id="st2"><rect class="gain" x="1160" y="540" width="320" height="84" rx="16"/><text class="d5" x="1190" y="594" font-size="34" style="fill:var(--on-gain)">Admit publicly</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why self-correction wins.</text>
+<text class="b" x="120" y="176" font-size="32">Over time, the two kinds of networks drift apart.</text>
+<g id="tp">
+<path class="s-gain" d="M214 514L300 480" stroke-width="8" stroke-linecap="round"/>
+<path class="s-loss" d="M212 534L518 544" stroke-width="6" stroke-dasharray="10 10" stroke-linecap="round"/>
+<circle class="ink" cx="200" cy="520" r="14"/>
+<text class="m" x="196" y="486" font-size="22" text-anchor="middle">START</text>
+</g>
+<g id="stp"></g>
+<circle id="clb" class="gain" r="16"/>
+<g id="pl"></g>
+<g id="plL"><text class="m" x="720" y="760" font-size="20" style="fill:var(--loss)">CAN’T CORRECT ITSELF</text><text class="m" x="720" y="792" font-size="20">MISTAKE PILED ON MISTAKE</text></g>
+<g id="stL"><text class="m" x="1480" y="390" font-size="20" text-anchor="end" style="fill:var(--gain)">CAN CORRECT ITSELF</text><text class="m" x="1480" y="420" font-size="20" text-anchor="end">CLIMBS TOWARD BETTER ANSWERS</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your own network.</text>
+<text class="b" x="120" y="176" font-size="32">Your family, team or company is an information network too.</text>
+<g id="tm">
+<g id="tmP"></g>
+<ellipse cx="560" cy="540" rx="280" ry="50" fill="var(--line)" stroke="var(--ink)" stroke-width="6"/>
+<text class="m" x="560" y="640" font-size="20" text-anchor="middle">AN INFORMATION NETWORK</text>
+</g>
+<g id="hnd"><path class="s-gain" d="M790 500L830 372" stroke-width="12" stroke-linecap="round"/><circle class="gain" cx="832" cy="362" r="14"/></g>
+<g id="q7">
+<text class="m" x="960" y="330" font-size="22">IS ANYONE REWARDED FOR</text>
+<text class="m" x="960" y="362" font-size="22">POINTING OUT A MISTAKE?</text>
+<text class="d" x="1380" y="380" font-size="120" text-anchor="middle" style="fill:var(--gain)">?</text>
+</g>
+<g id="gx0"><path class="s-loss" d="M988 568l24 24m0-24l-24 24" stroke-width="6" stroke-linecap="round"/></g>
+<g id="gc0"><path class="s-muted" d="M1042 568l12 12-12 12" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="gx1"><path class="s-loss" d="M1084 554l52 52m0-52l-52 52" stroke-width="8" stroke-linecap="round"/></g>
+<g id="gc1"><path class="s-muted" d="M1166 568l12 12-12 12" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="gx2"><path id="bigx" class="s-loss" d="M1214 532l96 96m0-96l-96 96" stroke-width="12" stroke-linecap="round"/></g>
+<g id="gface">
+<path class="ink" d="M1370 650v-30a50 50 0 0 1 100 0v30z"/>
+<circle class="s-ink" cx="1420" cy="530" r="34" fill="var(--stage)" stroke-width="5"/>
+<circle class="ink" cx="1408" cy="520" r="4"/><circle class="ink" cx="1432" cy="520" r="4"/>
+<rect class="loss" x="1394" y="538" width="52" height="20" rx="10"/>
+</g>
+<g id="gr">
+<text class="m" x="960" y="760" font-size="20">IF NOT, SMALL ERRORS QUIETLY GROW</text>
+<text class="m" x="960" y="790" font-size="20">BECAUSE NO ONE DARES TO NAME THEM</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Who is truly allowed</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">to tell you</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">that you are <tspan style="fill:var(--gain)">wrong?</tspan></text></g>
+<g id="tk">
+<text class="m" x="143" y="700" font-size="26">THIS WEEK: THANK SOMEONE FOR CATCHING A MISTAKE</text>
+<rect class="gain" x="1180" y="640" width="290" height="100" rx="50"/>
+<path class="gain" d="M1240 730l-20 50 60-44z"/>
+<text class="m" x="1325" y="700" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">THANK YOU</text>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="137" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:17</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Self-Correction Is What Saves Us&rdquo;, from <em>Nexus</em> by Yuval Noah Harari. The Hammer of the Witches, Heinrich Kramer and the European witch hunts are as reported in the book. The spreading web, the two paths and the staircase are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=137, SC=[[0.0, 8.3], [8.3, 29.5], [29.5, 45.1], [45.1, 66.5], [66.5, 81.4], [81.4, 95.2], [95.2, 109.9], [109.9, 124.3], [124.3, 137.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Admitting We Were Wrong", "The Printing Press", "A Machine for Errors", "No Way to Say Stop", "Science Works Differently", "Expecting to Be Wrong", "Why It Wins", "Your Own Network", "Your Challenge"];
+const TM={"candle": 0.0, "press": 8.64, "witch_book": 16.16, "kramer": 22.4, "accused": 29.76, "confession": 34.48, "web": 39.2, "judge": 49.44, "locked_door": 55.04, "scientist": 66.8, "journal": 70.16, "trophy": 77.28, "error_marks": 86.72, "magnifier": 88.8, "two_paths": 95.52, "pile": 99.04, "staircase": 103.68, "team": 110.16, "raised_hand": 114.76};
+const per=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const txt=(g,x,y,s,fs,st)=>{const e=mk('text',{x:x,y:y,'font-size':fs,'text-anchor':'middle',class:'m',style:st||''},g);e.textContent=s;return e};
+per($('krp'),1340,470,30,'ink');
+const GN=[1,3,6,10,14],GR=[34,24,18,14,11],WN=[];
+for(let g=1;g<5;g++){const n=GN[g],np=GN[g-1];for(let i=0;i<n;i++){const x=220+g*300,y=260+(i+.5)*520/n,j=Math.floor(i*np/n),px=220+(g-1)*300,py=260+(j+.5)*520/np;
+  const e=mk('path',{d:'M'+px+' '+py.toFixed(0)+'L'+x+' '+y.toFixed(0),class:'s-loss','stroke-width':3},$('webE'));
+  const c=mk('circle',{cx:x,cy:y.toFixed(0),r:GR[g],class:'loss'},$('webN'));WN.push({c:c,e:e,g:g,i:i})}}
+[[440,310,'CONFESSION'],[610,480,'PROOF!'],[440,650,'ARREST'],[270,480,'TORTURE']].forEach(q=>{mk('rect',{x:q[0]-95,y:q[1]-28,width:190,height:56,rx:28,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},$('lpP'));txt($('lpP'),q[0],q[1]+7,q[2],20,'fill:var(--ink)')});
+[810,940,1070].forEach(x=>{mk('path',{d:'M'+x+' 386L940 318',class:'s-line','stroke-width':3,'stroke-dasharray':'6 8'},$('jdP'));per($('jdP'),x,410,24,'ink')});
+const DG=[];for(let k=0;k<100;k++)DG.push(mk('circle',{cx:780+(k%25)*28,cy:640+Math.floor(k/25)*40,r:9,class:'loss'},$('dgP')));
+[190,280,370].forEach(x=>per($('sciP'),x,440,22,'ink'));
+per($('eqP'),200,380,30,'ink');per($('eqP'),440,380,30,'ink');
+for(let i=0;i<10;i++)mk('path',{d:'M680 '+(320+i*50)+'h'+(i%3===2?260:380),class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('ppL'));
+const EP=[[760,325],[980,425],[720,525],[1020,625],[840,725]];
+const EX=EP.map(q=>mk('path',{d:'M'+(q[0]-14)+' '+(q[1]-14)+'l28 28m0-28l-28 28',class:'s-loss','stroke-width':6,'stroke-linecap':'round'},$('errs')));
+const RG=EP.map(q=>mk('circle',{cx:q[0],cy:q[1],r:30,fill:'none',stroke:'var(--gain)','stroke-width':5},$('rings')));
+const ST=[];for(let i=0;i<8;i++){const x=300+i*140,y=480-i*30;ST.push(mk('path',{d:'M'+x+' '+y+'h140'+(i<7?'v-30':''),fill:'none',class:'s-gain','stroke-width':8,'stroke-linecap':'round','stroke-linejoin':'round'},$('stp')))}
+const PL=[];[5,4,3,2].forEach((n,r)=>{for(let j=0;j<n;j++){const x=360+r*32+j*64,y=800-(r+1)*64,g=mk('g',{},$('pl'));mk('rect',{x:x+3,y:y+3,width:58,height:58,rx:6,class:'loss'},g);mk('path',{d:'M'+(x+20)+' '+(y+20)+'l24 24m0-24l-24 24',stroke:'var(--stage)','stroke-width':5,'stroke-linecap':'round'},g);PL.push(g)}});
+[360,460,560,660,760].forEach((x,i)=>per($('tmP'),x,420,26,i===4?'gain':'ink'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('flame').setAttribute('transform','translate(1320 406) scale('+(1+.06*Math.sin(t*9)).toFixed(3)+' '+(1+.1*Math.sin(t*7)).toFixed(3)+') translate(-1320 -406)');
+$('glow').setAttribute('r',(90+50*p(u,TM.candle+5.8,TM.candle+7)+6*Math.sin(t*3)).toFixed(1));
+rise($('cdl'),p(u,TM.candle,TM.candle+.6));
+
+rise($('prs'),p(u,TM.press,TM.press+.5));
+$('plat').setAttribute('transform','translate(0 '+(40*Math.abs(Math.sin(t*1.6))).toFixed(1)+')');
+rise($('hope'),p(u,TM.press+5,TM.press+5.5));
+rise($('wb'),p(u,TM.witch_book,TM.witch_book+.5));
+rise($('kr'),p(u,TM.kramer,TM.kramer+.5));
+
+rise($('acc'),p(u,TM.accused,TM.accused+.5));
+rise($('conf'),p(u,TM.confession,TM.confession+.5));
+WN.forEach(n=>{const a=[0,TM.confession+1,TM.web,TM.web+1.5,TM.web+3][n.g]+n.i*.08,o=p(u,a,a+.4);n.c.setAttribute('opacity',o);n.e.setAttribute('opacity',o*.6)});
+rise($('webL'),p(u,TM.web+1,TM.web+1.5));
+
+const S3=SC[3][0]/K; rise($('lp'),p(u,S3+.4,S3+1));
+const an=t*1.2; $('lpD').setAttribute('cx',(440+170*Math.cos(an)).toFixed(1)); $('lpD').setAttribute('cy',(480+170*Math.sin(an)).toFixed(1));
+rise($('jd'),p(u,TM.judge,TM.judge+.5));
+rise($('ld'),p(u,TM.locked_door,TM.locked_door+.5));
+const D3=TM.locked_door+6.2; DG.forEach((c,k)=>c.setAttribute('opacity',p(u,D3+k*.03,D3+k*.03+.3)));
+rise($('dgL'),p(u,D3,D3+.5));
+
+rise($('sci'),p(u,TM.scientist,TM.scientist+.5));
+const aw=p(u,TM.journal,TM.journal+.6);
+$('arwL').setAttribute('x2',(418+(538-418)*aw).toFixed(1)); $('arwL').setAttribute('opacity',aw>0?1:0);
+$('arwH').setAttribute('opacity',p(u,TM.journal+.4,TM.journal+.7));
+rise($('jr'),p(u,TM.journal,TM.journal+.5));
+rise($('rs'),p(u,TM.journal+2.5,TM.journal+3));
+rise($('tr'),p(u,TM.trophy,TM.trophy+.5));
+$('fstk').setAttribute('x2',(1222+196*p(u,TM.trophy+.6,TM.trophy+1.2)).toFixed(1));
+
+const S5=SC[5][0]/K; rise($('eq'),p(u,S5+.5,S5+1));
+EX.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.error_marks+i*.3,TM.error_marks+i*.3+.3)));
+const mk5=cl((u-TM.magnifier-.3)/.8,0,4), mi=Math.min(3,Math.floor(mk5)), mf=ease(mk5-mi);
+const mx=EP[mi][0]+(EP[mi+1][0]-EP[mi][0])*mf, my=EP[mi][1]+(EP[mi+1][1]-EP[mi][1])*mf;
+$('mag').setAttribute('transform','translate('+mx.toFixed(1)+' '+my.toFixed(1)+')'); $('mag').setAttribute('opacity',p(u,TM.magnifier,TM.magnifier+.3));
+RG.forEach((r,i)=>r.setAttribute('opacity',p(u,TM.magnifier+.2+i*.8,TM.magnifier+.5+i*.8)));
+[0,2,4].forEach((d,i)=>rise($('st'+i),p(u,TM.magnifier+d,TM.magnifier+d+.5)));
+
+rise($('tp'),p(u,TM.two_paths,TM.two_paths+.5));
+PL.forEach((g,j)=>rise(g,p(u,TM.pile+j*.2,TM.pile+j*.2+.3)));
+rise($('plL'),p(u,TM.pile+.5,TM.pile+1));
+ST.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.staircase+i*.35,TM.staircase+i*.35+.3)));
+rise($('stL'),p(u,TM.staircase+2.5,TM.staircase+3));
+const ck=p(u,TM.staircase+.3,TM.staircase+3.5)*7.99, ci=Math.floor(ck);
+$('clb').setAttribute('cx',(300+ck*140).toFixed(1)); $('clb').setAttribute('cy',(480-ci*30-20).toFixed(1)); $('clb').setAttribute('opacity',u>=TM.staircase?1:0);
+
+rise($('tm'),p(u,TM.team,TM.team+.5));
+const ha=p(u,TM.raised_hand,TM.raised_hand+.6);
+$('hnd').setAttribute('transform','rotate('+((1-ha)*140).toFixed(1)+' 790 500)'); $('hnd').setAttribute('opacity',ha>0?1:0);
+rise($('q7'),p(u,TM.raised_hand+.4,TM.raised_hand+.9));
+const G7=TM.raised_hand+4.6;
+rise($('gx0'),p(u,G7,G7+.4)); rise($('gc0'),p(u,G7+.8,G7+1.1));
+rise($('gx1'),p(u,G7+1.1,G7+1.5)); rise($('gc1'),p(u,G7+1.9,G7+2.2));
+rise($('gx2'),p(u,G7+2.2,G7+2.6));
+const bs=1+.04*Math.sin(t*3)*p(u,G7+2.2,G7+2.6);
+$('bigx').setAttribute('transform','translate(1262 580) scale('+bs.toFixed(3)+') translate(-1262 -580)');
+rise($('gface'),p(u,G7+3.2,G7+3.7));
+rise($('gr'),p(u,G7+.4,G7+.9));
+
+const S8=SC[8][0]/K; rise($('tk'),p(u,S8+.4,S8+.9));
+rise($('qa'),p(u,S8+5,S8+5.5)); rise($('qb'),p(u,S8+5.4,S8+5.9)); rise($('qc'),p(u,S8+5.8,S8+6.3));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:134.0;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

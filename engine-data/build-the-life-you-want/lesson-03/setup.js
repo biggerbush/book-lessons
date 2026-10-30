@@ -1,0 +1,12 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+fig($('lis'),1440,490,20,'ink');
+fig($('p1'),500,440,40,'ink');
+fig($('obs'),1080,440,40,'gain');
+[1195,1385].forEach(x=>{const g=$('frowns');mk('circle',{cx:x,cy:470,r:50,fill:'none',stroke:'var(--loss)','stroke-width':6},g);
+  mk('circle',{cx:x-17,cy:458,r:6,fill:'var(--loss)'},g);mk('circle',{cx:x+17,cy:458,r:6,fill:'var(--loss)'},g);
+  mk('path',{d:'M'+(x-22)+' 495q22-18 44 0',fill:'none',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},g)});
+for(let i=0;i<7;i++)mk('circle',{cx:160,cy:275+i*48,r:9,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nbs'));
+const NW=[220,180,220,140,200];
+const NL=NW.map((w,i)=>mk('line',{x1:200,y1:320+i*55,x2:200,y2:320+i*55,stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},$('nbl')));
+const TH=[0,1,2].map(i=>{const g=mk('g',{},$('th'));mk('ellipse',{cx:0,cy:0,rx:56,ry:30,fill:'var(--stage)',stroke:'var(--muted)','stroke-width':5},g);
+  mk('path',{d:'M-24 0h48',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round'},g);return g});

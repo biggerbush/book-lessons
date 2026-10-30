@@ -1,0 +1,425 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build the Life You Want Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Build the Life You Want: Metacognition means noticing your emotions as signals rather than commands, which lets you respond thoughtfully instead of reacting on autopilot. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">BUILD THE LIFE YOU WANT · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Step back and watch</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">your feelings.</text>
+<text class="b" x="120" y="600" font-size="32">Treat your emotions as useful signals, not orders you must obey.</text>
+<path id="shout" class="s-loss" d="M1200 260l-40-30M1190 335h-50M1205 410l-40 25" fill="none" stroke-width="7" stroke-linecap="round"/>
+<g id="face">
+<circle class="loss" cx="1330" cy="350" r="100"/>
+<circle cx="1295" cy="345" r="9" fill="var(--stage)"/><circle cx="1365" cy="345" r="9" fill="var(--stage)"/>
+<path d="M1275 312l34 16M1385 312l-34 16" stroke="var(--stage)" stroke-width="7" stroke-linecap="round"/>
+<path id="mouth0" d="M1290 405q40 -28 80 0" fill="none" stroke="var(--stage)" stroke-width="7" stroke-linecap="round"/>
+</g>
+<g id="lis"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Feelings are signals.</text>
+<text class="b" x="120" y="176" font-size="32">An emotion is like a smoke alarm in your kitchen.</text>
+<path class="s-line" d="M160 240H760" stroke-width="6" stroke-linecap="round"/>
+<g id="alarm">
+<rect class="ink" x="330" y="242" width="140" height="34" rx="14"/>
+<path class="ink" d="M310 276h180a90 30 0 0 1-180 0z"/>
+<circle id="led" cx="400" cy="292" r="9"/>
+<path id="arcs" class="s-loss" d="M320 335q80 40 160 0M290 375q110 55 220 0M260 415q140 70 280 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="attn"><text class="m" x="400" y="490" font-size="20" text-anchor="middle">SOMETHING MIGHT NEED ATTENTION</text></g>
+<g id="toast">
+<path id="smk" class="s-muted" d="M365 550c-12-14 12-22 0-36M435 550c-12-14 12-22 0-36" fill="none" stroke-width="5" stroke-linecap="round"/>
+<rect class="ink" x="335" y="560" width="60" height="70" rx="10"/><rect class="ink" x="405" y="560" width="60" height="70" rx="10"/>
+<rect class="s-ink" x="290" y="600" width="220" height="150" rx="34" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M510 650h26" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="400" y="800" font-size="20" text-anchor="middle">BURNT TOAST, NOT A HOUSE FIRE</text>
+</g>
+<g id="cd0">
+<text class="m" x="880" y="272" font-size="20">EMOTIONS ARE…</text>
+<rect class="s-line" x="880" y="300" width="600" height="160" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-gain" d="M930 380l26 26 50-56" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="1040" y="400" font-size="56">Information</text>
+</g>
+<g id="cd1">
+<rect class="s-line" x="880" y="520" width="600" height="160" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-loss" d="M935 575l46 46M981 575l-46 46" stroke-width="9" stroke-linecap="round"/>
+<text class="d5" x="1040" y="620" font-size="56" style="fill:var(--muted)">Instructions</text>
+<line id="stk1" class="s-loss" x1="1030" y1="602" x2="1030" y2="602" stroke-width="6"/>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two parts of the brain.</text>
+<text class="b" x="120" y="176" font-size="32">A fast alarm deep inside, a thoughtful decider up front.</text>
+<g transform="translate(40 0)">
+<g id="brn">
+<path class="s-ink" d="M430 580C390 450 470 300 640 290C790 280 930 330 970 450C1000 540 960 630 880 650L800 660L790 740L730 740L720 660C590 670 460 650 430 580Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-line" d="M480 520c30-30 70-30 90 0M560 380c50-20 110 0 130 30M740 360c40 20 60 60 50 100M600 620c40-20 100-20 140 10" fill="none" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="limb"><circle id="ring" class="s-loss" cx="640" cy="520" r="55" fill="none" stroke-width="4"/><circle class="loss" cx="640" cy="520" r="55"/></g>
+<path id="bolts" class="s-loss" d="M600 425l14 20-10 4 14 20M690 425l-14 20 10 4-14 20" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="pfc"><ellipse id="pfcE" class="gain" cx="880" cy="470" rx="55" ry="90"/></g>
+</g>
+<g id="lbl0"><text class="m" x="120" y="400" font-size="22">LIMBIC SYSTEM</text><text class="d" x="120" y="456" font-size="46" style="fill:var(--loss)">Fast alarm</text></g>
+<g id="lbl1"><text class="m" x="120" y="500" font-size="20">FLAGS THREATS</text><text class="m" x="120" y="530" font-size="20">AND REWARDS</text><text class="m" x="120" y="560" font-size="20">BEFORE YOU THINK</text></g>
+<g id="lbl2"><text class="m" x="1090" y="400" font-size="22">PREFRONTAL CORTEX</text><text class="d" x="1090" y="456" font-size="46" style="fill:var(--gain)">Thoughtful</text></g>
+<g id="lbl3"><text class="m" x="1090" y="500" font-size="20" style="fill:var(--gain)">WHERE YOU DECIDE</text><text class="m" x="1090" y="530" font-size="20" style="fill:var(--gain)">WHAT TO DO</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Thinking about your thinking.</text>
+<text class="b" x="120" y="176" font-size="32">Metacognition: noticing that you are feeling something.</text>
+<g id="p1"></g>
+<text class="m" x="500" y="660" font-size="20" text-anchor="middle">FEELING IT</text>
+<g id="thk">
+<path class="s-ink" d="M430 340a40 40 0 0 1 10-75a55 55 0 0 1 100-20a42 42 0 0 1 55 70z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-loss" d="M470 305l20-15 20 15 20-15 20 15" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="s-ink" cx="482" cy="366" r="9" fill="var(--stage)" stroke-width="4"/><circle class="ink" cx="492" cy="388" r="5"/>
+</g>
+<path id="sight" class="s-gain" d="M1030 430L610 310" fill="none" stroke-width="5" stroke-dasharray="12 12" stroke-linecap="round"/>
+<g id="obs"><text class="m" x="1080" y="660" font-size="20" text-anchor="middle" style="fill:var(--gain)">I NOTICE I’M FEELING IT</text></g>
+<g id="flow">
+<rect class="s-loss" x="300" y="720" width="380" height="76" rx="38" fill="none" stroke-width="5"/>
+<text class="m" x="490" y="766" font-size="22" text-anchor="middle" style="fill:var(--loss)">FAST ALARM</text>
+<path class="s-muted" d="M700 758h200m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="fdot" class="ink" cx="700" cy="758" r="10"/>
+<rect class="gain" x="920" y="720" width="380" height="76" rx="38"/>
+<text class="m" x="1110" y="766" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">THOUGHTFUL SYSTEM</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Autopilot in action.</text>
+<text class="b" x="120" y="176" font-size="32">A sharp email from your boss, late on a Friday.</text>
+<g id="em">
+<rect class="s-ink" x="160" y="290" width="280" height="190" rx="14" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M164 300l136 100 136-100" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<circle id="badge" class="loss" cx="440" cy="290" r="24"/>
+<text class="d" x="440" y="303" font-size="34" text-anchor="middle" style="fill:var(--stage)">!</text>
+<text class="m" x="300" y="530" font-size="20" text-anchor="middle">FRIDAY · LATE</text>
+</g>
+<g id="hot"><g id="hotR">
+<path class="s-loss" d="M470 350h150M490 385h170M470 420h150" stroke-width="6" stroke-linecap="round" stroke-dasharray="20 14"/>
+<rect class="loss" x="720" y="290" width="280" height="190" rx="14"/>
+<path d="M760 350l25-20 25 20 25-20 25 20 25-20 25 20M760 420l25-20 25 20 25-20 25 20 25-20 25 20" fill="none" stroke="var(--stage)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="860" y="530" font-size="20" text-anchor="middle">ANGRY REPLY, SENT</text>
+</g></g>
+<g id="dec">
+<rect class="s-loss" x="160" y="600" width="300" height="90" rx="16" fill="none" stroke-width="5"/>
+<text class="m" x="310" y="654" font-size="24" text-anchor="middle" style="fill:var(--loss)">FEELING</text>
+<rect class="loss" x="460" y="600" width="300" height="90" rx="16"/>
+<text class="m" x="610" y="654" font-size="24" text-anchor="middle" style="fill:var(--stage)">ACTION</text>
+</g>
+<g id="nogap"><text class="d5" x="120" y="770" font-size="40">No gap: the feeling made the decision.</text></g>
+<g id="wk">
+<rect class="s-ink" x="1100" y="290" width="380" height="300" rx="16" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1100" y="290" width="380" height="60" rx="16"/><rect class="ink" x="1100" y="320" width="380" height="30"/>
+<text class="m" x="1195" y="330" font-size="22" text-anchor="middle" style="fill:var(--stage)">SAT</text>
+<text class="m" x="1385" y="330" font-size="22" text-anchor="middle" style="fill:var(--stage)">SUN</text>
+<path class="s-line" d="M1290 350v240" stroke-width="4"/>
+<g id="frowns"></g>
+<text class="m" x="1290" y="640" font-size="20" text-anchor="middle">A WEEKEND OF REGRET</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hit pause instead.</text>
+<text class="b" x="120" y="176" font-size="32">Name what is happening, then choose your reply.</text>
+<g id="pz"><g id="pzb">
+<circle class="gain" cx="300" cy="470" r="130"/>
+<rect x="255" y="410" width="30" height="120" rx="8" fill="var(--on-gain)"/><rect x="315" y="410" width="30" height="120" rx="8" fill="var(--on-gain)"/>
+</g><text class="m" x="300" y="650" font-size="20" text-anchor="middle">PAUSE</text></g>
+<path id="ar1" class="s-muted" d="M460 470h80m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="tag">
+<rect class="s-ink" x="570" y="330" width="440" height="280" rx="20" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="570" y="330" width="440" height="80" rx="20"/><rect class="ink" x="570" y="380" width="440" height="30"/>
+<text class="m" x="790" y="382" font-size="24" text-anchor="middle" style="fill:var(--stage)">HELLO, I FEEL</text>
+<text class="m" x="790" y="650" font-size="20" text-anchor="middle">NAME IT</text>
+</g>
+<g id="w0"><text class="d5" x="790" y="490" font-size="44" text-anchor="middle" style="fill:var(--loss)">defensive</text></g>
+<g id="w1"><text class="d5" x="790" y="560" font-size="40" text-anchor="middle" style="fill:var(--loss)">and embarrassed</text></g>
+<path id="ar2" class="s-muted" d="M1030 470h60m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="calm">
+<rect class="s-gain" x="1120" y="370" width="330" height="220" rx="14" fill="var(--stage)" stroke-width="7"/>
+<path class="s-gain" d="M1124 380l161 110 161-110" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<circle class="gain" cx="1440" cy="370" r="30"/>
+<path d="M1426 370l10 10 18-20" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1285" y="650" font-size="20" text-anchor="middle">MONDAY: NO REGRETS</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Widen the gap.</text>
+<text class="b" x="120" y="176" font-size="32">Simple habits that build the skill.</text>
+<g id="nb">
+<rect class="s-ink" x="160" y="240" width="300" height="360" rx="14" fill="var(--stage)" stroke-width="6"/>
+<g id="nbs"></g><g id="nbl"></g>
+<text class="m" x="310" y="650" font-size="20" text-anchor="middle">WRITE DOWN WHAT YOU FEEL</text>
+</g>
+<g id="med">
+<circle class="ink" cx="760" cy="370" r="36"/>
+<path class="ink" d="M705 525v-40a55 55 0 0 1 110 0v40z"/>
+<path class="s-ink" d="M690 540h140" stroke-width="34" stroke-linecap="round"/>
+<text class="m" x="760" y="650" font-size="20" text-anchor="middle">MEDITATE</text>
+</g>
+<g id="th"><text class="m" x="1180" y="650" font-size="20" text-anchor="middle">THOUGHTS PASS BY</text></g>
+<g id="gap">
+<path class="s-line" d="M200 760H1400" stroke-width="4"/>
+<circle class="loss" cx="200" cy="760" r="18"/>
+<text class="m" x="200" y="812" font-size="20" text-anchor="middle">FEELING</text>
+<path id="gapB" class="s-gain" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text id="gapT" class="m" y="712" font-size="20" text-anchor="middle" style="fill:var(--gain)">GAP</text>
+<circle id="resp" class="gain" cy="760" r="18"/>
+<text id="respL" class="m" y="812" font-size="20" text-anchor="middle">RESPONSE</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Feelings ride along.</text>
+<text class="b" x="120" y="176" font-size="32">Negative emotions are normal, and often useful.</text>
+<g id="nopr"><text class="m" x="380" y="560" font-size="20" text-anchor="middle">NOT PRETENDED AWAY</text></g>
+<g id="tg0"><rect class="s-line" x="160" y="600" width="300" height="64" rx="32" fill="var(--stage)" stroke-width="4"/><text class="m" x="310" y="640" font-size="22" text-anchor="middle">NORMAL</text></g>
+<g id="tg1"><rect class="s-line" x="160" y="690" width="300" height="64" rx="32" fill="var(--stage)" stroke-width="4"/><text class="m" x="310" y="730" font-size="22" text-anchor="middle" style="fill:var(--gain)">OFTEN USEFUL</text></g>
+<g id="car"><g id="carB">
+<rect class="s-ink" x="700" y="520" width="760" height="140" rx="46" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M830 520L920 400H1230L1330 520" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<path class="s-ink" d="M1080 400v120" stroke-width="6"/>
+<circle class="gain" cx="1180" cy="465" r="28"/><path class="gain" d="M1145 520v-12a35 35 0 0 1 70 0v12z"/>
+<circle class="s-gain" cx="1262" cy="482" r="22" fill="none" stroke-width="6"/>
+<circle class="ink" cx="860" cy="670" r="46"/><circle class="ink" cx="1300" cy="670" r="46"/>
+<circle cx="860" cy="670" r="16" fill="var(--stage)"/><circle cx="1300" cy="670" r="16" fill="var(--stage)"/>
+</g></g>
+<g id="cl7">
+<path class="loss" d="M-100 40a45 45 0 0 1 5-85a60 60 0 0 1 110-20a50 50 0 0 1 75 60a35 35 0 0 1-15 45z"/>
+<circle cx="-30" cy="-15" r="7" fill="var(--stage)"/><circle cx="30" cy="-15" r="7" fill="var(--stage)"/>
+<path d="M-25 18q25-18 50 0" fill="none" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/>
+<path class="s-loss" d="M-60 60l-10 25M0 60l-10 25M60 60l-10 25" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="drv"><text class="m" x="1080" y="790" font-size="20" text-anchor="middle">YOU DRIVE. YOUR FEELINGS RIDE ALONG.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="stk"><g transform="rotate(4 1300 320)">
+<rect class="gain" x="1160" y="200" width="280" height="240"/>
+<path d="M1440 400l-40 40v-40z" fill="var(--stage)" fill-opacity=".5"/>
+<text class="d5" x="1190" y="300" font-size="38" style="fill:var(--on-gain)">I feel…</text>
+<line id="uln" x1="1190" y1="360" x2="1190" y2="360" stroke="var(--on-gain)" stroke-width="5" stroke-linecap="round"/>
+</g></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Pause. Name it.</text></g>
+<g id="qb"><text class="d" x="136" y="500" font-size="88" letter-spacing="-2">What is this <tspan style="fill:var(--gain)">signal</tspan></text></g>
+<g id="qc"><text class="d" x="136" y="610" font-size="88" letter-spacing="-2">trying to tell me?</text></g>
+<g id="lbl8"><text class="m" x="143" y="730" font-size="26">SIGNALS, NOT ORDERS</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Step Back and Watch Your Feelings&rdquo;, from <em>Build the Life You Want</em> by Arthur C. Brooks and Oprah Winfrey. The brain explanation, limbic system and prefrontal cortex, and the writing and meditation practices are as reported in the book. The smoke alarm, the Friday email and the steering wheel are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 6.2], [6.2, 22.9], [22.9, 41.3], [41.3, 56.7], [56.7, 69.9], [69.9, 81.6], [81.6, 97.5], [97.5, 109.9], [109.9, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Feelings Are Signals", "Two Parts of the Brain", "What Metacognition Is", "Autopilot in Action", "The Pause", "Practical Tools", "Not Erasing Feelings", "Your Challenge"];
+const TM={"angry_face": 0.0, "smoke_alarm": 6.52, "burnt_toast": 12.92, "brain": 23.24, "alarm_center": 29.04, "front_brain": 33.68, "thought_cloud": 41.6, "observer": 45.88, "email_icon": 56.96, "hot_reply": 60.8, "pause_button": 70.24, "name_tag": 73.44, "calm_reply": 78.52, "notebook": 81.88, "meditator": 87.12, "gap_widens": 92.96, "sad_cloud": 97.8, "steering_whl": 105.84, "sticky_note": 110.16};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+fig($('lis'),1440,490,20,'ink');
+fig($('p1'),500,440,40,'ink');
+fig($('obs'),1080,440,40,'gain');
+[1195,1385].forEach(x=>{const g=$('frowns');mk('circle',{cx:x,cy:470,r:50,fill:'none',stroke:'var(--loss)','stroke-width':6},g);
+  mk('circle',{cx:x-17,cy:458,r:6,fill:'var(--loss)'},g);mk('circle',{cx:x+17,cy:458,r:6,fill:'var(--loss)'},g);
+  mk('path',{d:'M'+(x-22)+' 495q22-18 44 0',fill:'none',stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},g)});
+for(let i=0;i<7;i++)mk('circle',{cx:160,cy:275+i*48,r:9,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nbs'));
+const NW=[220,180,220,140,200];
+const NL=NW.map((w,i)=>mk('line',{x1:200,y1:320+i*55,x2:200,y2:320+i*55,stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},$('nbl')));
+const TH=[0,1,2].map(i=>{const g=mk('g',{},$('th'));mk('ellipse',{cx:0,cy:0,rx:56,ry:30,fill:'var(--stage)',stroke:'var(--muted)','stroke-width':5},g);
+  mk('path',{d:'M-24 0h48',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round'},g);return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const A=TM.angry_face, calmK=p(u,A+3.8,A+4.6);
+rise($('face'),p(u,A,A+.5));
+$('shout').setAttribute('opacity',((1-calmK)*(.5+.5*Math.abs(Math.sin(t*5)))*p(u,A+.3,A+.8)).toFixed(2));
+$('shout').setAttribute('transform','translate('+(4*Math.sin(t*23)*(1-calmK)).toFixed(1)+' 0)');
+$('mouth0').setAttribute('d','M1290 405q40 '+(-28*(1-calmK)+12*calmK).toFixed(1)+' 80 0');
+rise($('lis'),calmK);
+
+const S=TM.smoke_alarm, B=TM.burnt_toast;
+rise($('alarm'),p(u,S,S+.5));
+const rg=u>=S+.4&&u<B+4.5;
+$('arcs').setAttribute('opacity',rg?(.3+.7*Math.abs(Math.sin(t*6))).toFixed(2):.15);
+$('led').setAttribute('fill',rg&&Math.sin(t*12)>0?'var(--loss)':'var(--muted)');
+rise($('attn'),p(u,S+5.4,S+5.9));
+rise($('toast'),p(u,B,B+.5));
+$('smk').setAttribute('transform','translate(0 '+(-6*Math.abs(Math.sin(t*2))).toFixed(1)+')');
+rise($('cd0'),p(u,B+4.5,B+5)); rise($('cd1'),p(u,B+5.2,B+5.7));
+$('stk1').setAttribute('x2',(1030+372*p(u,B+5.8,B+6.4)).toFixed(0));
+
+const Br=TM.brain, AC=TM.alarm_center, FB=TM.front_brain;
+rise($('brn'),p(u,Br,Br+.6));
+rise($('limb'),p(u,Br+2,Br+2.5)); rise($('lbl0'),p(u,Br+2.3,Br+2.8));
+rise($('lbl1'),p(u,AC,AC+.5)); rise($('bolts'),p(u,AC,AC+.4));
+const fr=(t*1.2)%1;
+$('ring').setAttribute('r',(55+45*fr).toFixed(1)); $('ring').setAttribute('opacity',(u>=AC?1-fr:0).toFixed(2));
+rise($('pfc'),p(u,FB,FB+.5)); rise($('lbl2'),p(u,FB+.3,FB+.8)); rise($('lbl3'),p(u,FB+3.8,FB+4.3));
+$('pfcE').setAttribute('opacity',(u>=FB+3.8?.7+.3*Math.sin(t*3):1).toFixed(2));
+
+const TC=TM.thought_cloud, OB=TM.observer;
+rise($('thk'),p(u,TC,TC+.5));
+rise($('obs'),p(u,OB,OB+.5)); $('sight').setAttribute('opacity',p(u,OB+.5,OB+1.2));
+rise($('flow'),p(u,OB+6.2,OB+6.8));
+$('fdot').setAttribute('cx',(700+190*((t*.6)%1)).toFixed(1));
+
+const E=TM.email_icon, H=TM.hot_reply;
+rise($('em'),p(u,E,E+.5));
+$('badge').setAttribute('r',(24+4*Math.abs(Math.sin(t*4))).toFixed(1));
+rise($('hot'),p(u,H,H+.3));
+$('hotR').setAttribute('transform','translate('+(-240*(1-p(u,H,H+.8))).toFixed(1)+' 0)');
+rise($('dec'),p(u,H+4.2,H+4.7)); rise($('nogap'),p(u,H+4.6,H+5.1)); rise($('wk'),p(u,H+7.2,H+7.7));
+
+const P=TM.pause_button, N=TM.name_tag, C=TM.calm_reply;
+rise($('pz'),p(u,P,P+.5));
+const sc=1+.03*Math.sin(t*2);
+$('pzb').setAttribute('transform','translate(300 470) scale('+sc.toFixed(3)+') translate(-300 -470)');
+$('ar1').setAttribute('opacity',p(u,N-.3,N+.2)); rise($('tag'),p(u,N,N+.5));
+rise($('w0'),p(u,N+1.4,N+1.9)); rise($('w1'),p(u,N+2.4,N+2.9));
+$('ar2').setAttribute('opacity',p(u,C-.3,C+.2)); rise($('calm'),p(u,C,C+.5));
+
+const NB=TM.notebook, MD=TM.meditator, G=TM.gap_widens;
+rise($('nb'),p(u,NB,NB+.5));
+NL.forEach((l,i)=>l.setAttribute('x2',(200+NW[i]*p(u,NB+.6+i*.5,NB+1+i*.5)).toFixed(1)));
+rise($('med'),p(u,MD,MD+.5)); rise($('th'),p(u,MD+.3,MD+.8));
+TH.forEach((g,i)=>{const c=(t*.12+i/3)%1;g.setAttribute('transform','translate('+(1420-520*c).toFixed(1)+' '+(330+i*80)+')');g.setAttribute('opacity',Math.sin(Math.PI*c).toFixed(2))});
+rise($('gap'),p(u,G,G+.5));
+const gx=340+1000*p(u,G+.4,G+4);
+$('resp').setAttribute('cx',gx.toFixed(1)); $('respL').setAttribute('x',gx.toFixed(1)); $('gapT').setAttribute('x',((200+gx)/2).toFixed(1));
+$('gapB').setAttribute('d','M222 718v24M222 730H'+(gx-22).toFixed(1)+'M'+(gx-22).toFixed(1)+' 718v24');
+
+const SD=TM.sad_cloud, SW=TM.steering_whl;
+$('cl7').setAttribute('opacity',p(u,SD,SD+.5));
+const ck=p(u,SW+.4,SW+1.8), bob=6*Math.sin(t*2);
+$('cl7').setAttribute('transform','translate('+(380+610*ck).toFixed(1)+' '+(400+70*ck+bob*(1-ck)).toFixed(1)+') scale('+(1.3-.8*ck).toFixed(3)+')');
+rise($('nopr'),p(u,SD+.8,SD+1.3)); rise($('tg0'),p(u,SD+3.4,SD+3.9)); rise($('tg1'),p(u,SD+4,SD+4.5));
+rise($('car'),p(u,SW,SW+.5));
+$('carB').setAttribute('transform','translate(0 '+(u>=SW+1.8?3*Math.sin(t*6):0).toFixed(1)+')');
+rise($('drv'),p(u,SW+1.8,SW+2.3));
+
+const SN=TM.sticky_note;
+rise($('stk'),p(u,SN,SN+.5));
+$('uln').setAttribute('x2',(1190+200*p(u,SN+.6,SN+1.4)).toFixed(1));
+rise($('qa'),p(u,SN+.3,SN+.8)); rise($('qb'),p(u,SN+4.6,SN+5.1)); rise($('qc'),p(u,SN+5,SN+5.5)); rise($('lbl8'),p(u,SN+5.6,SN+6.1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:118.0;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

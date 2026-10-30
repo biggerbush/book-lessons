@@ -1,0 +1,337 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Coming Wave Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of The Coming Wave: The wave strains the bargain in which states provide order and security, empowering both tiny bad actors and giant centralised powers. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMING WAVE · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The nation-state</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">under pressure.</text>
+<text class="b" x="120" y="600" font-size="32">How new technology strains the deal between citizens and states.</text>
+<g id="tsw">
+<g id="tshield"><path class="s-ink" d="M1310 220L1450 270V380C1450 460 1390 510 1310 540C1230 510 1170 460 1170 380V270Z" fill="var(--stage)" stroke-width="8" stroke-linejoin="round"/>
+<circle class="gain" cx="1310" cy="330" r="34"/><path class="gain" d="M1250 450v-24a60 60 0 0 1 120 0v24z"/></g>
+<path id="tcrack" class="s-loss" d="M1300 224L1330 300L1290 360L1340 430L1308 536" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+</g>
+<path id="twave" class="s-loss" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1280" y="770" font-size="20" text-anchor="middle">THE COMING WAVE</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The grand bargain.</text>
+<text class="b" x="120" y="176" font-size="32">We hand the state power. It promises order in return.</text>
+<g id="cits"><text class="m" x="340" y="630" font-size="22" text-anchor="middle">CITIZENS</text></g>
+<g id="stbld"><path class="ink" d="M1090 380L1260 300L1430 380Z"/><g id="cols"></g><rect class="ink" x="1080" y="570" width="360" height="24"/>
+<text class="m" x="1260" y="630" font-size="22" text-anchor="middle">STATE</text></g>
+<g id="badge"><circle class="s-ink" cx="800" cy="270" r="34" fill="var(--stage)" stroke-width="6"/><path class="gain" d="M800 248l6 14 15 1-11 10 4 15-14-8-14 8 4-15-11-10 15-1z"/></g>
+<g id="arrows">
+<g id="give"><path id="ar1" class="s-ink" d="M540 380H1050m-22-22 22 22-22 22" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="800" y="350" font-size="22" text-anchor="middle">LAWS · TAXES · MONOPOLY ON FORCE</text></g>
+<g id="get"><path id="ar2" class="s-ink" d="M1060 520H550m22-22-22 22 22 22" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="800" y="570" font-size="22" text-anchor="middle">ORDER · SECURITY · SERVICES</text></g>
+</g>
+<g id="houses"></g>
+<g id="strain"><text class="d" x="120" y="790" font-size="44">The coming wave puts this bargain under strain.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Power gets cheap.</text>
+<text class="b" x="120" y="176" font-size="32">Abilities once held only by governments reach ordinary laptops.</text>
+<g id="chart"><path class="s-line" d="M160 270V500H620" fill="none" stroke-width="4"/><text class="m" x="180" y="262" font-size="20">COST OF POWER</text>
+<path id="cost" class="s-ink" d="M180 290C320 300 400 460 600 480" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/></g>
+<g id="tag"><path class="s-ink" d="M480 280H580L610 310L580 340H480Z" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/><circle class="ink" cx="588" cy="310" r="5"/>
+<path class="s-loss" d="M520 292v34m-12-12 12 12 12-12" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="gov"><path class="ink" d="M760 330L830 290L900 330Z"/><rect class="ink" x="770" y="335" width="16" height="70"/><rect class="ink" x="800" y="335" width="16" height="70"/><rect class="ink" x="830" y="335" width="16" height="70"/><rect class="ink" x="860" y="335" width="16" height="70"/><rect class="ink" x="755" y="405" width="150" height="12"/>
+<text class="m" x="830" y="450" font-size="18" text-anchor="middle">GOVERNMENTS</text></g>
+<path id="arc" class="s-muted" d="M910 330C980 230 1080 230 1140 320" fill="none" stroke-width="4" stroke-dasharray="8 8"/>
+<g id="flow"></g>
+<g id="lap"><rect id="lscr" class="s-ink" x="1140" y="300" width="240" height="150" rx="10" fill="var(--stage)" stroke-width="6"/><path class="ink" d="M1100 450H1420L1400 474H1120Z"/>
+<text class="m" x="1260" y="510" font-size="18" text-anchor="middle">ORDINARY LAPTOP</text></g>
+<g id="army"><text class="m" x="160" y="770" font-size="20">ONCE: AN ARMY</text></g>
+<g id="eq"><text class="d" x="640" y="700" font-size="90" text-anchor="middle">=</text></g>
+<g id="tiny"><g id="tinyp"></g><rect class="s-ink" x="1050" y="640" width="70" height="46" rx="4" fill="var(--stage)" stroke-width="4"/><rect class="ink" x="1040" y="686" width="90" height="8"/>
+<text class="m" x="880" y="770" font-size="20" text-anchor="middle">NOW: A TINY GROUP</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A hospital goes dark.</text>
+<text class="b" x="120" y="176" font-size="32">WannaCry ransomware hits Britain’s NHS, 2017.</text>
+<g id="hosp"><path class="s-ink" d="M320 290v60M290 320h60" stroke-width="16"/><rect class="s-ink" x="160" y="360" width="320" height="320" fill="var(--stage)" stroke-width="6"/>
+<g id="wins"></g><rect class="ink" x="290" y="630" width="60" height="50"/>
+<text class="m" x="320" y="720" font-size="22" text-anchor="middle">NHS · BRITAIN</text></g>
+<g id="scr"><rect class="s-ink" x="620" y="330" width="380" height="250" rx="12" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M810 580v40M750 620h120" stroke-width="6" stroke-linecap="round"/>
+<path class="s-loss" d="M780 440v-24a30 30 0 0 1 60 0v24" fill="none" stroke-width="10"/><rect class="loss" x="765" y="436" width="90" height="70" rx="8"/>
+<text class="m" x="810" y="552" font-size="20" text-anchor="middle" style="fill:var(--loss)">PAY TO UNLOCK</text></g>
+<g id="appt"><text class="m" x="810" y="670" font-size="20" text-anchor="middle">APPOINTMENTS CANCELLED</text></g>
+<g id="file"><path class="s-ink" d="M1160 340h80l20 22h140v150H1160Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="m" x="1280" y="445" font-size="22" text-anchor="middle">NSA TOOL</text>
+<text class="m" x="1280" y="550" font-size="20" text-anchor="middle">BUILT BY THE NSA,</text><text class="m" x="1280" y="580" font-size="20" text-anchor="middle">THEN LEAKED</text></g>
+<path id="back" class="s-loss" d="M1240 330C1100 200 520 200 370 300" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="turned"><text class="d" x="120" y="800" font-size="44">A weapon made by a state, turned against states.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Pressure one: fragmentation.</text>
+<text class="b" x="120" y="176" font-size="32">Power splinters into groups that act like mini-states.</text>
+<g id="wedges"></g>
+<g id="sh4w"><g id="sh4"><path class="s-ink" d="M560 440L600 455V490C600 515 585 530 560 540C535 530 520 515 520 490V455Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/></g></g>
+<g id="chhead"><text class="m" x="1020" y="290" font-size="22">GAINING STATE-LIKE POWERS</text></g>
+<g id="chips"></g>
+<g id="shaky"><text class="d" x="120" y="820" font-size="44">The promise of security starts to look shaky.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Pressure two: concentration.</text>
+<text class="b" x="120" y="176" font-size="32">The same tools let governments watch whole populations.</text>
+<g id="sight"></g>
+<g id="tower"><path class="s-ink" d="M220 700L260 400H340L380 700Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><path class="ink" d="M220 330L300 270L380 330Z"/>
+<rect class="s-ink" x="230" y="330" width="140" height="70" fill="var(--stage)" stroke-width="6"/><ellipse class="s-ink" cx="300" cy="365" rx="40" ry="20" fill="var(--stage)" stroke-width="4"/><circle id="pupil" class="loss" cx="300" cy="365" r="11"/>
+<text class="m" x="300" y="740" font-size="20" text-anchor="middle">THE STATE</text></g>
+<g id="cams"></g>
+<g id="pop"></g>
+<g id="cn"><rect class="s-loss" x="580" y="320" width="860" height="320" rx="60" fill="none" stroke-width="4" stroke-dasharray="12 10"/>
+<text class="m" x="600" y="690" font-size="22">CHINA · A VAST SURVEILLANCE SYSTEM</text></g>
+<g id="conc"><text class="d" x="120" y="830" font-size="44">Power can concentrate as easily as it scatters.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Pulled two ways at once.</text>
+<text class="b" x="120" y="176" font-size="32">Fragility amplifiers stress already weakened institutions.</text>
+<path id="rope" class="s-muted" d="M270 380H1350" stroke-width="6" stroke-linecap="round"/>
+<g id="tugL"><text class="m" x="120" y="460" font-size="20">MANY SMALL ACTORS</text></g>
+<g id="tugR"><text class="m" x="1480" y="490" font-size="20" text-anchor="end">A FEW GIANTS</text></g>
+<g id="tugSw"><g id="tugS"><path class="ink" d="M745 340L800 310L855 340Z"/><rect class="s-ink" x="750" y="340" width="100" height="70" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="800" y="445" font-size="20" text-anchor="middle">STATE</text></g></g>
+<g id="bridge"><text class="m" x="800" y="575" font-size="22" text-anchor="middle">FRAGILITY AMPLIFIERS</text>
+<g id="brw"><rect class="ink" x="260" y="600" width="1080" height="24"/><rect class="ink" x="480" y="624" width="60" height="136"/><rect class="ink" x="1060" y="624" width="60" height="136"/>
+<path id="ck0" d="M500 630l18 30-16 28 20 30-14 34" fill="none" stroke="var(--stage)" stroke-width="5" pathLength="1" stroke-dasharray="1 1"/>
+<path id="ck1" d="M1084 630l-16 34 20 26-18 32 14 30" fill="none" stroke="var(--stage)" stroke-width="5" pathLength="1" stroke-dasharray="1 1"/></g>
+<text class="m" x="510" y="795" font-size="20" text-anchor="middle">DISTRUST</text><text class="m" x="1090" y="795" font-size="20" text-anchor="middle">INEQUALITY</text></g>
+<g id="both"><text class="d" x="120" y="852" font-size="38">Not one outcome, but a system wobbling under both.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ask one simple question.</text>
+<text class="b" x="120" y="176" font-size="32">Who does this powerful new tool hand power to?</text>
+<g id="qm"><circle class="s-ink" cx="300" cy="440" r="140" fill="var(--stage)" stroke-width="8"/><text class="d" x="300" y="515" font-size="220" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="scale"><rect class="ink" x="814" y="300" width="12" height="340"/><path class="s-ink" d="M720 640H920" stroke-width="10" stroke-linecap="round"/>
+<line id="beam" class="s-ink" stroke-width="10" stroke-linecap="round"/><circle class="ink" cx="820" cy="300" r="14"/><g id="pans"></g></g>
+<g id="plab"><text class="m" x="600" y="520" font-size="20" text-anchor="middle">A FEW GIANTS</text><text class="m" x="1040" y="520" font-size="20" text-anchor="middle">ANYONE WITH BAD INTENT</text></g>
+<g id="ballot"><rect id="paper" class="gain" x="1330" y="300" width="60" height="70"/><rect class="s-ink" x="1260" y="420" width="200" height="160" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1320 420h80" stroke-width="10" stroke-linecap="round"/><path id="chk" class="s-gain" d="M1330 500l20 20 40-40" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="blab"><text class="m" x="1360" y="630" font-size="20" text-anchor="middle">BACK LEADERS WHO</text><text class="m" x="1360" y="660" font-size="20" text-anchor="middle">TAKE IT SERIOUSLY</text></g>
+<g id="ask"><text class="d" x="120" y="800" font-size="40">A few giants, or anyone with bad intentions?</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which promise from your</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">state would you most</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">hate to <tspan style="fill:var(--gain)">lose?</tspan></text></g>
+<g id="q2"><text class="m" x="143" y="700" font-size="26">AND WHAT WOULD YOU DO TO PROTECT IT?</text></g>
+<g id="face"><circle class="s-ink" cx="1340" cy="720" r="64" fill="var(--stage)" stroke-width="6"/><circle class="ink" cx="1318" cy="708" r="6"/><circle class="ink" cx="1362" cy="708" r="6"/>
+<path class="s-ink" d="M1318 750h40" stroke-width="5" stroke-linecap="round"/><circle class="ink" cx="1326" cy="636" r="8"/><circle class="ink" cx="1314" cy="606" r="5"/></g>
+<g id="sh8"><path class="gain" d="M1340 480L1380 495V530C1380 555 1365 565 1340 575C1315 565 1300 555 1300 530V495Z"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="138" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:18</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Nation-State Under Pressure&rdquo;, from <em>The Coming Wave</em> by Mustafa Suleyman with Michael Bhaskar. The WannaCry attack on Britain&#x27;s National Health Service and China&#x27;s surveillance system are examples as reported in the book. The tug of war, splintered map and fragile bridge drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=138, SC=[[0.0, 9.4], [9.4, 29.1], [29.1, 41.9], [41.9, 64.0], [64.0, 77.0], [77.0, 95.5], [95.5, 113.0], [113.0, 128.0], [128.0, 138.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Deal", "The Grand Bargain", "Power Gets Cheap", "A Hospital Goes Dark", "Power Splinters", "Power Concentrates", "Both At Once", "Your Move", "Final Thought"];
+const TM={"state_shield": 0.0, "citizens": 9.68, "police_badge": 13.68, "peaceful_town": 18.48, "price_tag": 29.36, "laptop": 32.72, "small_group": 37.76, "nhs_hospital": 42.16, "locked_screen": 49.36, "leaked_file": 53.12, "splinter_map": 64.32, "rival_groups": 67.6, "watch_tower": 77.28, "camera_grid": 80.72, "china_map": 86.88, "tug_of_war": 95.76, "fragile_bridge": 99.84, "question_mark": 113.28, "balance_scale": 118.0, "ballot_box": 123.44, "thinking_face": 128.32};
+const guy=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const drw=(el,k)=>{el.style.strokeDashoffset=(1-k).toFixed(3)};
+[[220,330],[340,330],[460,330],[220,470],[340,470],[460,470]].forEach(q=>guy($('cits'),q[0],q[1],20,'ink'));
+[1110,1180,1250,1320,1390].forEach(x=>mk('rect',{x:x,y:390,width:24,height:180,class:'ink'},$('cols')));
+[690,770,850].forEach(x=>{mk('rect',{x:x-28,y:630,width:56,height:50,class:'ink'},$('houses'));mk('path',{d:`M${x-36} 632L${x} 598L${x+36} 632Z`,class:'gain'},$('houses'))});
+for(let j=0;j<4;j++)for(let i=0;i<12;i++)mk('circle',{cx:160+i*32,cy:610+j*32,r:10,fill:'var(--muted)','fill-opacity':.6},$('army'));
+[800,880,960].forEach(x=>guy($('tinyp'),x,600,18,'gain'));
+const DT=[0,1,2].map(()=>mk('circle',{r:9,class:'gain'},$('flow')));
+const bz=(a,b,c,d,s)=>{const v=1-s;return v*v*v*a+3*v*v*s*b+3*v*s*s*c+s*s*s*d};
+const WIN=[];for(let r=0;r<3;r++)for(let c=0;c<3;c++)WIN.push(mk('rect',{x:200+c*90,y:410+r*80,width:60,height:50,rx:4,stroke:'var(--ink)','stroke-width':4},$('wins')));
+const WG=[];for(let k=0;k<6;k++){const a1=k*Math.PI/3-Math.PI/2,a2=a1+Math.PI/3,P=a=>(560+180*Math.cos(a)).toFixed(1)+' '+(490+180*Math.sin(a)).toFixed(1);
+  WG.push([mk('path',{d:`M560 490L${P(a1)}A180 180 0 0 1 ${P(a2)}Z`,class:'ink',stroke:'var(--stage)','stroke-width':8,'stroke-linejoin':'round'},$('wedges')),a1+Math.PI/6])}
+const CHP=['Companies','Gangs','Movements'].map((s,i)=>{const g=mk('g',{},$('chips'));mk('rect',{x:1020,y:320+i*110,width:440,height:80,rx:40,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  const tx=mk('text',{x:1240,y:373+i*110,'font-size':36,'text-anchor':'middle',class:'d5'},g);tx.textContent=s;return g});
+const DS=[];for(let j=0;j<4;j++)for(let i=0;i<14;i++){const x=620+i*60,y=360+j*80;mk('path',{d:`M${x} ${y}L300 365`,stroke:'var(--line)','stroke-width':1.5},$('sight'));DS.push([mk('circle',{cx:x,cy:y,r:14,class:'ink'},$('pop')),i])}
+[700,900,1100,1300].forEach(x=>{mk('rect',{x:x-26,y:256,width:44,height:28,rx:5,class:'ink'},$('cams'));mk('path',{d:`M${x+18} 262l16-8v28l-16-8z`,class:'ink'},$('cams'))});
+[150,200,250].forEach(x=>guy($('tugL'),x,350,14,'loss'));guy($('tugR'),1400,300,36,'loss');
+const PAN=[0,1].map(i=>{const g=mk('g',{},$('pans'));mk('path',{d:'M-60 100L0 0L60 100',fill:'none',stroke:'var(--muted)','stroke-width':3},g);mk('path',{d:'M-70 100A70 40 0 0 0 70 100Z',class:'ink'},g);
+  if(i===0)mk('circle',{cx:0,cy:66,r:30,class:'loss'},g);else[-34,0,34].forEach(x=>mk('circle',{cx:x,cy:88,r:11,class:'loss'},g));return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+R('tshield',TM.state_shield);
+const ck=p(u,TM.state_shield+7.4,TM.state_shield+8.4); drw($('tcrack'),ck);
+$('tsw').setAttribute('transform','rotate('+(ck*1.5*Math.sin(t*6)).toFixed(2)+' 1310 380)');
+let wv='M1080 700'; for(let x=1100;x<=1480;x+=20)wv+='L'+x+' '+(700+12*Math.sin(x/40-t*2)).toFixed(1); $('twave').setAttribute('d',wv);
+
+R('cits',TM.citizens); R('stbld',TM.citizens+.6); R('badge',TM.police_badge); R('give',TM.police_badge+.4);
+R('get',TM.peaceful_town); R('houses',TM.peaceful_town+.5); R('strain',TM.peaceful_town+4.1);
+const sk=p(u,TM.peaceful_town+4.1,TM.peaceful_town+4.8);
+$('arrows').setAttribute('transform','translate(0 '+(sk*4*Math.sin(t*9)).toFixed(1)+')');
+['ar1','ar2'].forEach(a=>$(a).style.stroke=sk>0?'var(--loss)':'var(--ink)');
+
+R('chart',TM.price_tag); drw($('cost'),p(u,TM.price_tag+.3,TM.price_tag+1.8)); R('tag',TM.price_tag+1.4);
+R('gov',TM.laptop); R('lap',TM.laptop+.4); $('arc').setAttribute('opacity',p(u,TM.laptop+.6,TM.laptop+1));
+const fl=u>=TM.laptop+.8;
+DT.forEach((d,i)=>{const s=(t*.5+i/3)%1; d.setAttribute('cx',bz(910,980,1080,1140,s).toFixed(1)); d.setAttribute('cy',bz(330,230,230,320,s).toFixed(1)); d.setAttribute('opacity',fl?1:0)});
+$('lscr').style.stroke=u>=TM.laptop+1.5?'var(--gain)':'var(--ink)';
+R('army',TM.small_group); R('eq',TM.small_group+.6); R('tiny',TM.small_group+1.1);
+
+R('hosp',TM.nhs_hospital);
+WIN.forEach((w,i)=>w.style.fill=u>=TM.nhs_hospital+1.2+i*.15?'var(--ink)':'var(--ice)');
+R('scr',TM.locked_screen); R('appt',TM.locked_screen+1); R('file',TM.leaked_file);
+drw($('back'),p(u,TM.leaked_file+2,TM.leaked_file+3.5)); R('turned',TM.leaked_file+7.4);
+
+const sp=p(u,TM.splinter_map,TM.splinter_map+1.5), rv=u>=TM.rival_groups;
+WG.forEach((w,k)=>{const d=sp*(60+4*Math.sin(t*2+k)); w[0].setAttribute('transform','translate('+(Math.cos(w[1])*d).toFixed(1)+' '+(Math.sin(w[1])*d).toFixed(1)+')'); w[0].setAttribute('class',rv&&k%2===0?'loss':'ink')});
+R('chhead',TM.rival_groups); CHP.forEach((g,i)=>rise(g,p(u,TM.rival_groups+.4+i*.5,TM.rival_groups+.9+i*.5)));
+const shk=p(u,TM.rival_groups+5,TM.rival_groups+5.5); R('sh4',TM.rival_groups+5); R('shaky',TM.rival_groups+5);
+$('sh4w').setAttribute('transform','rotate('+(shk*8*Math.sin(t*5)).toFixed(2)+' 560 490)');
+
+R('tower',TM.watch_tower); $('pupil').setAttribute('cx',(300+10*Math.sin(t*1.3)).toFixed(1));
+R('cams',TM.camera_grid);
+DS.forEach(d=>d[0].setAttribute('class',u>=TM.camera_grid+.5+d[1]*.12?'loss':'ink'));
+$('sight').setAttribute('opacity',(.6*p(u,TM.camera_grid+1,TM.camera_grid+2)).toFixed(2));
+R('cn',TM.china_map); R('conc',TM.china_map+6.6);
+
+R('tugL',TM.tug_of_war); R('tugR',TM.tug_of_war+.3); R('tugS',TM.tug_of_war+.6);
+$('rope').setAttribute('opacity',p(u,TM.tug_of_war+.3,TM.tug_of_war+.8));
+const tg=p(u,TM.tug_of_war+1,TM.tug_of_war+1.6);
+$('tugSw').setAttribute('transform','translate('+(tg*40*Math.sin(t*1.6)).toFixed(1)+' 0)');
+R('bridge',TM.fragile_bridge);
+drw($('ck0'),p(u,TM.fragile_bridge+1.5,TM.fragile_bridge+2.3)); drw($('ck1'),p(u,TM.fragile_bridge+2.3,TM.fragile_bridge+3.1));
+const wb=p(u,TM.fragile_bridge+5.8,TM.fragile_bridge+6.4);
+$('brw').setAttribute('transform','rotate('+((.3+1.2*wb)*Math.sin(t*2.5)).toFixed(2)+' 800 612)');
+R('both',TM.fragile_bridge+5.8);
+
+R('qm',TM.question_mark); R('scale',TM.balance_scale); R('plab',TM.balance_scale+.6); R('ask',TM.balance_scale+1.5);
+const ang=6*Math.sin(t*1.2)*Math.PI/180, bx=220*Math.cos(ang), by=220*Math.sin(ang), bm=$('beam');
+bm.setAttribute('x1',(820-bx).toFixed(1)); bm.setAttribute('y1',(300-by).toFixed(1)); bm.setAttribute('x2',(820+bx).toFixed(1)); bm.setAttribute('y2',(300+by).toFixed(1));
+PAN[0].setAttribute('transform','translate('+(820-bx).toFixed(1)+' '+(300-by).toFixed(1)+')'); PAN[1].setAttribute('transform','translate('+(820+bx).toFixed(1)+' '+(300+by).toFixed(1)+')');
+R('ballot',TM.ballot_box); R('blab',TM.ballot_box+.4);
+$('paper').setAttribute('y',(300+120*p(u,TM.ballot_box+.6,TM.ballot_box+1.6)).toFixed(1));
+$('chk').setAttribute('opacity',p(u,TM.ballot_box+1.6,TM.ballot_box+2));
+
+R('qa',TM.thinking_face); R('qb',TM.thinking_face+.4); R('qc',TM.thinking_face+.8);
+R('face',TM.thinking_face+1.2); R('sh8',TM.thinking_face+1.8); R('q2',TM.thinking_face+4.6);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:134.16;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

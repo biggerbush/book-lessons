@@ -1,0 +1,364 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Creative Act Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of The Creative Act: Ideas are better received than invented, so the creator&#x27;s job is to stay open and catch what is already flowing around them. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE CREATIVE ACT · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Tuning in</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">to the Source.</text>
+<text class="b" x="120" y="600" font-size="32">Why great ideas are caught, not built from scratch.</text>
+<g id="tdots"></g>
+<circle id="tidea" class="gain" cx="1300" cy="230" r="26"/>
+<path class="s-ink" d="M1170 560Q1180 690 1300 690Q1420 690 1430 560M1170 560l-24-30M1430 560l24-30" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-ink" d="M1250 690v110M1350 690v110" stroke-width="8" stroke-linecap="round"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Source.</text>
+<text class="b" x="120" y="176" font-size="32">A vast field of ideas, drifting all around us.</text>
+<g id="cloud"><path class="s-ink" d="M260 560a120 120 0 0 1 20-210a150 150 0 0 1 260-90a160 160 0 0 1 280 40a140 140 0 0 1 140 260z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><text class="m" x="600" y="340" font-size="22" text-anchor="middle">THE SOURCE</text></g>
+<g id="bits"></g>
+<g id="srcN"><text class="m" x="160" y="620" font-size="22">THEY BELONG TO NO ONE IN PARTICULAR</text></g>
+<path id="rarr" class="s-gain" d="M960 420C1100 400 1200 440 1270 500" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<circle id="rdot" class="gain" r="12"/>
+<g id="rcv"></g>
+<g id="srcA"><text class="d5" x="120" y="720" font-size="40">We don’t create them from nothing.</text></g>
+<g id="srcB"><text class="d" x="120" y="810" font-size="60" style="fill:var(--gain)">We receive them.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">We are antennas.</text>
+<text class="b" x="120" y="176" font-size="32">Signals are always in the air around us.</text>
+<g id="waves"></g>
+<g id="ant">
+<path class="s-ink" d="M400 640V360M340 640l60-200 60 200" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="gain" cx="400" cy="360" r="16"/>
+<rect class="s-ink" x="280" y="640" width="240" height="140" rx="18" fill="var(--stage)" stroke-width="7"/>
+<circle class="s-line" cx="350" cy="710" r="40" fill="none" stroke-width="6"/>
+<g id="knob"><circle class="ink" cx="460" cy="710" r="26"/><path d="M460 710v-20" stroke="var(--stage)" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+<g id="anA"><text class="d5" x="720" y="330" font-size="38">An antenna doesn’t make the music.</text></g>
+<g id="anB"><text class="d" x="720" y="410" font-size="60" style="fill:var(--gain)">It picks it up.</text></g>
+<g id="tune">
+<text class="m" x="720" y="520" font-size="22">FREQUENCY</text>
+<path class="s-ink" d="M720 580H1440" stroke-width="5" stroke-linecap="round"/>
+<path class="gain" d="M1228 546h24l-12 14z"/>
+<path id="needle" d="M0 545V615" stroke-width="7" stroke-linecap="round"/>
+<polyline id="trace" fill="none" stroke-width="5" stroke-linejoin="round"/>
+</g>
+<g id="anT"><text class="d" x="120" y="840" font-size="40">Tune in, and the signal comes through clearly.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Forcing it creates static.</text>
+<text class="b" x="120" y="176" font-size="32">Strain, worry and ego drown out the signal.</text>
+<g id="fist">
+<rect class="ink" x="220" y="360" width="200" height="170" rx="44"/>
+<path d="M270 380v70M320 380v70M370 380v70M230 480h110" stroke="var(--stage)" stroke-width="6" stroke-linecap="round"/>
+<rect class="ink" x="260" y="530" width="120" height="60"/>
+<text class="m" x="320" y="640" font-size="22" text-anchor="middle">STRAIN</text>
+</g>
+<g id="ohand">
+<rect class="gain" x="240" y="420" width="160" height="130" rx="30"/>
+<rect class="gain" x="244" y="290" width="32" height="160" rx="16"/><rect class="gain" x="284" y="280" width="32" height="170" rx="16"/><rect class="gain" x="324" y="285" width="32" height="165" rx="16"/><rect class="gain" x="364" y="300" width="32" height="150" rx="16"/>
+<path class="s-gain" d="M250 490l-60-60" stroke-width="32" stroke-linecap="round"/>
+<rect class="gain" x="270" y="540" width="100" height="50"/>
+<text class="m" x="320" y="640" font-size="22" text-anchor="middle" style="fill:var(--gain)">RELEASE</text>
+</g>
+<polyline id="sig" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<g id="stc0"><rect x="640" y="580" width="220" height="60" rx="30" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="750" y="618" font-size="22" text-anchor="middle" style="fill:var(--loss)">WORRY</text></g>
+<g id="stc1"><rect x="900" y="580" width="220" height="60" rx="30" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="1010" y="618" font-size="22" text-anchor="middle" style="fill:var(--loss)">EGO</text></g>
+<g id="stc2"><rect x="1160" y="580" width="220" height="60" rx="30" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="1270" y="618" font-size="22" text-anchor="middle" style="fill:var(--loss)">PRESSURE</text></g>
+<g id="stA"><text class="d" x="120" y="760" font-size="48">Loosen your grip. Let ideas arrive.</text></g>
+<g id="stB"><text class="d5" x="120" y="830" font-size="34">A calm, receptive state lets more come through.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stay open.</text>
+<text class="b" x="120" y="176" font-size="32">Don’t decide in advance what the idea should be.</text>
+<g id="oph">
+<circle class="s-muted" cx="310" cy="390" r="70" fill="none" stroke-width="4" stroke-dasharray="10 10"/>
+<text class="d" x="310" y="418" font-size="80" text-anchor="middle" style="fill:var(--muted)">?</text>
+<path class="s-ink" d="M170 520Q180 610 310 610Q440 610 450 520M310 610v-50" fill="none" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="310" y="670" font-size="18" text-anchor="middle">NOT DECIDED IN ADVANCE</text>
+</g>
+<g id="cup1">
+<path class="s-ink" d="M640 420L680 680H880L920 420" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="780" y="730" font-size="20" text-anchor="middle" style="fill:var(--gain)">EMPTY · READY</text>
+</g>
+<ellipse id="splash" class="s-gain" cx="780" cy="668" rx="14" ry="5" fill="none" stroke-width="4"/>
+<circle id="drop1" class="gain" cx="780" r="14"/>
+<g id="cup2">
+<polygon class="loss" points="1080,420 1360,420 1320,680 1120,680" fill-opacity=".35"/>
+<path class="s-ink" d="M1080 420L1120 680H1320L1360 420M1130 480h180M1140 540h160M1150 600h140" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<text class="m" x="1220" y="730" font-size="20" text-anchor="middle">ALREADY FULL</text>
+</g>
+<circle id="drop2" class="gain" r="14"/>
+<g id="opT"><text class="d" x="120" y="830" font-size="44">A full mind has no room for anything new.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ideas look for a way in.</text>
+<text class="b" x="120" y="176" font-size="32">If one person doesn’t act, the idea may find another.</text>
+<path id="arL" class="s-line" d="M740 400Q560 420 430 540" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<path id="arR" class="s-gain" d="M860 400Q1040 420 1170 540" fill="none" stroke-width="5" stroke-dasharray="10 10"/>
+<g id="ppl"><g id="pL"></g><g id="pR"></g></g>
+<g id="bulbW"><g id="bulb">
+<path class="s-gain" d="M-70 0h-20M70 0h20M-50-50l-14-14M50-50l14-14M0-70v-20" stroke-width="6" stroke-linecap="round"/>
+<circle class="gain" r="50"/><rect class="ink" x="-22" y="44" width="44" height="30" rx="6"/>
+</g></g>
+<g id="lbL"><text class="m" x="400" y="810" font-size="22" text-anchor="middle">ONE PERSON WAITS</text></g>
+<g id="lbR"><text class="m" x="1200" y="810" font-size="22" text-anchor="middle" style="fill:var(--gain)">ANOTHER ACTS</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Catch it before it fades.</text>
+<text class="b" x="120" y="176" font-size="32">When something arrives, honor it quickly.</text>
+<g id="nb">
+<rect class="s-ink" x="160" y="250" width="460" height="470" rx="14" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M190 360H590M190 480H590M190 600H590" stroke-width="3"/>
+<g id="rings"></g>
+</g>
+<g id="sl0"><text class="m" x="190" y="345" font-size="20">WRITE</text></g>
+<g id="sl1"><text class="m" x="190" y="465" font-size="20">HUM</text></g>
+<g id="sl2"><text class="m" x="190" y="585" font-size="20">SKETCH</text></g>
+<path id="sc0" class="s-gain" d="M300 340q15-30 30 0t30 0t30 0t30 0t30 0t30 0t30 0t30 0" pathLength="1" stroke-dasharray="1" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="sc1" class="s-gain" d="M300 460h40v-50h40v50h40v-30h40v30h40v-40h40" pathLength="1" stroke-dasharray="1" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="sc2" class="s-gain" d="M310 590l60-70 50 40 60-60 60 90" pathLength="1" stroke-dasharray="1" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="nbdot" class="gain" r="16"/>
+<g id="clk">
+<circle class="s-ink" cx="1120" cy="450" r="160" fill="var(--stage)" stroke-width="7"/>
+<g id="cticks"></g>
+<line id="hand" class="s-ink" x1="1120" y1="450" x2="1120" y2="330" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1120" cy="450" r="12"/>
+<g id="bars"></g>
+<text class="m" x="1120" y="680" font-size="20" text-anchor="middle">WAITING FOR THE PERFECT MOMENT</text>
+</g>
+<g id="actT"><text class="d" x="120" y="820" font-size="44">Wait too long and the signal is gone.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Less pressure.</text>
+<text class="b" x="120" y="176" font-size="32">You don’t have to generate everything alone.</text>
+<g id="lpP"></g>
+<g id="wt"><rect class="loss" x="280" y="330" width="240" height="110" rx="14"/><text class="m" x="400" y="393" font-size="20" text-anchor="middle" style="fill:var(--stage)">DO IT ALL ALONE</text></g>
+<g id="lpA"><path class="s-ink" d="M400 474V404" stroke-width="6" stroke-linecap="round"/><circle class="gain" cx="400" cy="394" r="12"/></g>
+<g id="lgW"><text class="d5" x="780" y="330" font-size="44" style="fill:var(--muted)">Lone genius</text></g>
+<line id="lgS" class="s-ink" x1="772" y1="316" x2="772" y2="316" stroke-width="6" stroke-linecap="round"/>
+<g id="sbW"><g id="sbars"></g><text class="m" x="780" y="690" font-size="20">AVAILABLE · PAYING ATTENTION</text></g>
+<g id="suW"><g id="sudots"></g><text class="m" x="780" y="840" font-size="20">KEEP SHOWING UP · STAY TUNED</text></g>
+<g id="fthW"><g id="fth"><path class="gain" d="M0-80C40-40 30 40 0 80C-30 40-40-40 0-80z"/><path class="s-ink" d="M0-70V100" stroke-width="4" stroke-linecap="round"/></g></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qm"><text class="m" x="143" y="600" font-size="26">THIS WEEK: CATCH AN IDEA WITHIN ONE MINUTE</text></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What signal might</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">you have been <tspan style="fill:var(--gain)">missing?</tspan></text></g>
+<g id="cant"><g id="cw"></g><path class="s-ink" d="M1360 760V620M1320 760l40-110 40 110" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle class="gain" cx="1360" cy="610" r="14"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Tuning In to the Source&rdquo;, from <em>The Creative Act</em> by Rick Rubin (with Neil Strauss). The Source and the antenna image are Rubin&#x27;s own metaphors, as reported in the book. The empty cup, clock and feather drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 9.1], [9.1, 25.8], [25.8, 40.7], [40.7, 58.5], [58.5, 71.6], [71.6, 85.8], [85.8, 99.3], [99.3, 116.5], [116.5, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Tuning In", "The Source", "We Are Antennas", "Forcing Gets Static", "Staying Open", "Ideas Move On", "Act When It Lands", "Less Pressure", "Your Turn"];
+const TM={"catching_hand": 0.0, "cloud_source": 9.36, "floating_bits": 14.08, "antenna": 26.08, "radio_waves": 29.84, "tuning_dial": 36.32, "clenched_fist": 40.96, "static_lines": 45.76, "open_hands": 58.8, "empty_cup": 63.28, "lightbulb": 71.92, "two_people": 76.56, "notebook": 86.08, "clock": 94.96, "feather": 99.6, "signal_bars": 106.32};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const arcD=(cx,cy,r,s)=>{const a=.85,x1=(cx+s*r*Math.cos(a)).toFixed(1),y1=(cy-r*Math.sin(a)).toFixed(1),y2=(cy+r*Math.sin(a)).toFixed(1);return 'M'+x1+' '+y1+'A'+r.toFixed(1)+' '+r.toFixed(1)+' 0 0 '+(s>0?1:0)+' '+x1+' '+y2};
+const mkWaves=g=>{const a=[];for(let i=0;i<3;i++)[1,-1].forEach(s=>a.push([mk('path',{fill:'none',stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round'},$(g)),s,i]));return a};
+const WV=mkWaves('waves'),CW=mkWaves('cw');
+const waveR=(arr,cx,cy,r0,span,t,on)=>arr.forEach(([e,s,i])=>{const f=(t*.5+i/3)%1;e.setAttribute('d',arcD(cx,cy,r0+span*f,s));e.setAttribute('opacity',(on*(1-f)).toFixed(2))});
+const TD=[];for(let i=0;i<7;i++){const a=i*.9+.4;TD.push([mk('circle',{r:8+i%3*3,class:'gain','fill-opacity':.55},$('tdots')),1300+150*Math.cos(a),340+110*Math.sin(a)])}
+const BX=[380,530,680,830],BY=[420,480,420,480],BITS=['MELODIES','STORIES','IMAGES','SOLUTIONS'].map(s=>{const g=mk('g',{},$('bits'));mk('circle',{r:24,class:'gain'},g);const tx=mk('text',{x:0,y:52,'font-size':18,'text-anchor':'middle',class:'m'},g);tx.textContent=s;return g});
+const RC=fig($('rcv'),1280,560,36,'ink');
+let tk='';for(let i=0;i<=12;i++)tk+='M'+(720+i*60)+' '+(i%3?570:560)+'V580';mk('path',{d:tk,class:'s-ink','stroke-width':4},$('tune'));
+fig($('pL'),400,600,40,'ink');const P1=fig($('pR'),1200,600,40,'ink');
+for(let i=0;i<7;i++)mk('circle',{cx:200+i*64,cy:250,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rings'));
+let ct='';for(let i=0;i<12;i++){const a=i*Math.PI/6,s=Math.sin(a),c=Math.cos(a);ct+='M'+(1120+140*s).toFixed(1)+' '+(450-140*c).toFixed(1)+'L'+(1120+124*s).toFixed(1)+' '+(450-124*c).toFixed(1)}
+mk('path',{d:ct,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('cticks'));
+const BR=[40,70,100,130].map((h,i)=>mk('rect',{x:1330+i*34,y:620-h,width:24,height:h,rx:4,class:'gain'},$('bars')));
+fig($('lpP'),400,520,46,'ink');
+const SB=[60,110,160,210].map((h,i)=>mk('rect',{x:780+i*80,y:640-h,width:56,height:h,rx:8},$('sbars')));
+const SU=[];for(let i=0;i<7;i++)SU.push(mk('circle',{cx:800+i*70,cy:770,r:18},$('sudots')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+const ch=TM.catching_hand,ci=p(u,ch+1,ch+2.6);
+$('tidea').setAttribute('cy',(230+420*ci).toFixed(1));$('tidea').setAttribute('opacity',p(u,ch,ch+.5));
+const tk0=p(u,ch+5.8,ch+6.6);TD.forEach(([e,x,y],i)=>{e.setAttribute('cx',(x+12*Math.sin(t*.7+i)).toFixed(1));e.setAttribute('cy',(y+10*Math.cos(t*.9+i*1.3)).toFixed(1));e.setAttribute('opacity',tk0)});
+
+const fb=TM.floating_bits;
+R('cloud',TM.cloud_source,.6);
+BITS.forEach((g,i)=>{const k=p(u,fb+i*.5,fb+i*.5+.5);g.setAttribute('opacity',k);g.setAttribute('transform','translate('+(BX[i]+10*Math.sin(t*.6+i*1.7)).toFixed(1)+' '+(BY[i]+8*Math.cos(t*.8+i)+(1-k)*20).toFixed(1)+')')});
+R('srcN',fb+4.6);R('srcA',fb+8);R('rcv',fb+8);R('srcB',fb+10.9);
+const rv=p(u,fb+10.9,fb+11.5),rf=(t*.6)%1;$('rarr').setAttribute('opacity',rv);
+$('rdot').setAttribute('cx',(960+310*rf).toFixed(1));$('rdot').setAttribute('cy',(420+100*rf*rf).toFixed(1));$('rdot').setAttribute('opacity',(rv*(rf<.9?1:0)).toFixed(2));
+RC.forEach(e=>e.setAttribute('class',rv>0?'gain':'ink'));
+
+R('ant',TM.antenna,.6);waveR(WV,400,360,30,170,t,p(u,TM.radio_waves,TM.radio_waves+.6));
+R('anA',TM.radio_waves+3.4);R('anB',TM.radio_waves+6.4);
+const td=TM.tuning_dial,tn=p(u,td+.4,td+2.4);R('tune',td);R('anT',td+.4);
+$('needle').setAttribute('transform','translate('+(780+460*tn).toFixed(1)+' 0)');$('needle').style.stroke=tn>=1?'var(--gain)':'var(--ink)';
+$('knob').setAttribute('transform','rotate('+(tn*270).toFixed(1)+' 460 710)');
+let pt='';for(let x=720;x<=1440;x+=8)pt+=x+','+(690+30*(.3+.7*tn)*Math.sin(x/40-t*4)+(1-tn)*(20*Math.sin(x*.73+t*19)+12*Math.sin(x*1.9-t*13))).toFixed(1)+' ';
+$('trace').setAttribute('points',pt);$('trace').style.stroke=tn>=1?'var(--gain)':'var(--muted)';
+
+const cf=TM.clenched_fist,L=cf+9.2,calm=p(u,cf+13,cf+13.6),nz=p(u,TM.static_lines,TM.static_lines+1)*(1-p(u,L,L+1.2));
+rise($('fist'),p(u,cf,cf+.5)*(1-p(u,L,L+.6)));rise($('ohand'),p(u,L,L+.6));
+let sp='';for(let x=620;x<=1440;x+=8)sp+=x+','+(430+(25+25*calm)*Math.sin(x/45-t*3)+nz*(40*Math.sin(x*.61+t*21)+25*Math.sin(x*1.7-t*15))).toFixed(1)+' ';
+$('sig').setAttribute('points',sp);$('sig').setAttribute('opacity',p(u,cf,cf+.5));$('sig').style.stroke=nz>.3?'var(--loss)':calm>.5?'var(--gain)':'var(--ink)';
+[0,1,2].forEach(i=>{const a=TM.static_lines+.4*i;rise($('stc'+i),p(u,a,a+.4)*(1-p(u,L,L+.6)))});
+R('stA',L);R('stB',cf+13);
+
+// stay open: the empty cup keeps receiving (stays empty), the full cup overflows
+const ec=TM.empty_cup;R('oph',TM.open_hands,.6);R('cup1',ec);R('cup2',ec+3.3);R('opT',ec+3.8);
+const on1=u>=ec+.5,f1=(t*.7)%1,fall=cl(f1/.85),sk=cl((f1-.85)/.15);
+$('drop1').setAttribute('cy',(240+(654-240)*fall*fall).toFixed(1));$('drop1').setAttribute('opacity',on1&&f1<.85?1:0);
+$('splash').setAttribute('rx',(14+36*sk).toFixed(1));$('splash').setAttribute('ry',(5+5*sk).toFixed(1));
+$('splash').setAttribute('opacity',(on1&&f1>=.85?1-sk:0).toFixed(2));
+const f2=(t*.7+.5)%1,g2=f2<.6?0:(f2-.6)/.4;
+$('drop2').setAttribute('cx',(1220+120*g2).toFixed(1));$('drop2').setAttribute('cy',(f2<.6?240+160*(f2/.6)*(f2/.6):400-80*g2+200*g2*g2).toFixed(1));
+$('drop2').setAttribute('opacity',(u>=ec+3.6?1-g2:0).toFixed(2));
+
+const tp=TM.two_people,m=p(u,tp+4.9,tp+6.7);R('bulbW',TM.lightbulb,.6);
+$('bulb').setAttribute('transform','translate('+(800+400*m).toFixed(1)+' '+(340+130*m+6*Math.sin(t*2)).toFixed(1)+')');
+R('ppl',tp);$('arL').setAttribute('opacity',(p(u,tp,tp+.6)*(1-.8*m)).toFixed(2));$('arR').setAttribute('opacity',p(u,tp+.3,tp+.9));
+$('pL').setAttribute('opacity',(1-.6*m).toFixed(2));P1.forEach(e=>e.setAttribute('class',m>=1?'gain':'ink'));
+R('lbL',tp+4.9);R('lbR',tp+6.7);
+
+const nbc=TM.notebook,nk=p(u,nbc+.6,nbc+1.6);R('nb',nbc,.6);
+$('nbdot').setAttribute('cx',(860-280*nk).toFixed(1));$('nbdot').setAttribute('cy',(270+25*nk).toFixed(1));$('nbdot').setAttribute('opacity',p(u,nbc+.4,nbc+.8));
+[0,1,2].forEach(i=>{const a=nbc+4.5+i*1.2;R('sl'+i,a,.4);$('sc'+i).setAttribute('stroke-dashoffset',(1-p(u,a,a+1)).toFixed(3))});
+const ck=TM.clock,fd=1-p(u,ck+.8,ck+4);R('clk',ck);R('actT',ck+.6);
+$('hand').setAttribute('transform','rotate('+(720*p(u,ck+.3,ck+4)).toFixed(1)+' 1120 450)');
+BR.forEach((b,i)=>b.setAttribute('opacity',(.12+.88*cl(fd*4-i)).toFixed(2)));
+
+const fe=TM.feather,s7=SC[7][0]/K,lf=p(u,fe+1,fe+2.6);
+R('lpP',s7+.1);$('wt').setAttribute('opacity',(p(u,s7+.1,s7+.6)*(1-lf)).toFixed(2));$('wt').setAttribute('transform','translate(0 '+(-60*lf).toFixed(1)+')');
+R('fthW',fe);$('fth').setAttribute('transform','translate('+(1300+60*Math.sin(t*1.3)).toFixed(1)+' '+(260+340*lin(u,fe,fe+9)).toFixed(1)+') rotate('+(25*Math.sin(t*1.3)).toFixed(1)+')');
+R('lgW',fe+3.7);$('lgS').setAttribute('x2',(772+270*p(u,fe+4.6,fe+5.3)).toFixed(1));
+const sb=TM.signal_bars;R('sbW',sb);R('lpA',sb+.4);R('suW',sb+5);
+SB.forEach((b,i)=>b.setAttribute('fill',u>=sb+.4+i*.4?'var(--gain)':'var(--line)'));
+SU.forEach((c,i)=>c.setAttribute('fill',u>=sb+5.4+i*.3?'var(--gain)':'var(--line)'));
+
+const S8=SC[8][0]/K;R('cant',S8+.2);R('qm',S8+.4);R('qa',S8+5);R('qb',S8+5.4);waveR(CW,1360,610,24,100,t,1);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.52;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

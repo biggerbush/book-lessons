@@ -1,0 +1,356 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Coming Wave Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of The Coming Wave: Artificial intelligence and the ability to engineer life are the twin technologies driving the next wave, and they amplify each other. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMING WAVE · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">AI and synthetic biology</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">lead the wave.</text>
+<text class="b" x="120" y="590" font-size="32">Two technologies, learning machines and editable life,</text>
+<text class="b" x="120" y="634" font-size="32">are speeding each other up.</text>
+<path id="wv0" class="s-line" fill="none" stroke-width="5" stroke-linecap="round"/>
+<g id="gA"></g><g id="gB"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet the two engines.</text>
+<text class="b" x="120" y="176" font-size="32">Learning software and the code of life.</text>
+<g id="orbg"><ellipse id="orb" class="s-line" cx="800" cy="520" rx="640" ry="310" fill="none" stroke-width="4" stroke-dasharray="14 12"/></g>
+<g id="ai1">
+<rect class="s-ink" x="370" y="370" width="220" height="220" rx="20" fill="var(--stage)" stroke-width="7"/>
+<g id="chip"></g>
+<text class="m" x="480" y="650" font-size="22" text-anchor="middle" style="fill:var(--ink)">ARTIFICIAL INTELLIGENCE</text>
+<text class="m" x="480" y="682" font-size="18" text-anchor="middle">SOFTWARE THAT LEARNS FROM DATA</text>
+</g>
+<g id="dna1">
+<g id="helix"></g>
+<text class="m" x="1120" y="650" font-size="22" text-anchor="middle" style="fill:var(--gain)">SYNTHETIC BIOLOGY</text>
+<text class="m" x="1120" y="682" font-size="18" text-anchor="middle">READ · EDIT · WRITE LIFE</text>
+</g>
+<g id="satg">
+<g id="sat0"><rect class="ink" x="-20" y="-16" width="40" height="32" rx="6"/><circle cx="-8" cy="-2" r="4" fill="var(--stage)"/><circle cx="8" cy="-2" r="4" fill="var(--stage)"/><path class="s-ink" d="M0-16v-10" stroke-width="4" stroke-linecap="round"/><text class="m" x="34" y="8" font-size="22">ROBOTICS</text></g>
+<g id="sat1"><circle class="gain" r="8"/><ellipse class="s-gain" rx="24" ry="9" fill="none" stroke-width="4" transform="rotate(60)"/><ellipse class="s-gain" rx="24" ry="9" fill="none" stroke-width="4" transform="rotate(-60)"/><text class="m" x="34" y="8" font-size="22">QUANTUM COMPUTING</text></g>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Machines that learn.</text>
+<text class="b" x="120" y="176" font-size="32">DeepMind’s AlphaGo beat a world champion at Go.</text>
+<g id="brd2"><rect class="s-ink" x="160" y="240" width="460" height="460" rx="10" fill="var(--stage)" stroke-width="6"/><g id="grid2"></g><g id="stones"></g></g>
+<g id="supg"><circle id="supr" class="s-gain" cx="540" cy="470" r="24" fill="none" stroke-width="5"/><circle class="gain" cx="540" cy="470" r="21"/></g>
+<g id="exp1"><text class="m" x="720" y="300" font-size="24">EXPERTS AT FIRST</text><text class="d" x="720" y="370" font-size="56" style="fill:var(--loss)">“A mistake?”</text></g>
+<g id="exp2"><text class="m" x="720" y="460" font-size="24">THEN THEY REALISED</text><text class="d" x="720" y="530" font-size="56" style="fill:var(--gain)">Brilliant.</text></g>
+<g id="bulb"><g id="rays"></g><circle id="bulbc" class="s-ink" cx="1300" cy="400" r="90" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M1265 500h70M1270 530h60M1282 560h36" stroke-width="10" stroke-linecap="round"/></g>
+<g id="disc2"><text class="d" x="120" y="800" font-size="44">AI could discover new things, not just copy us.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Life is becoming code.</text>
+<text class="b" x="120" y="176" font-size="32">Read it. Edit it. Write it.</text>
+<g id="p3a"><rect class="s-line" x="120" y="230" width="420" height="470" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="280" font-size="22">1 · READ</text><g id="rd3"></g><rect id="scan" class="gain" x="160" y="380" width="8" height="80"/><text id="lets" class="m" x="330" y="560" font-size="34" text-anchor="middle" style="fill:var(--ink)"></text><text class="d5" x="150" y="660" font-size="30">Faster and cheaper.</text></g>
+<g id="p3b"><rect class="s-line" x="590" y="230" width="420" height="470" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="620" y="280" font-size="22">2 · EDIT · CRISPR</text><g id="ed3"></g><path id="edc" class="s-gain" d="M772 448H828M772 492H828M786 448V492M814 448V492" stroke-width="8" stroke-linecap="round"/><g id="sci"><g id="scii"><path class="s-ink" d="M785 440L818 358M815 440L782 358" stroke-width="7" stroke-linecap="round"/><circle class="s-ink" cx="776" cy="344" r="16" fill="none" stroke-width="6"/><circle class="s-ink" cx="824" cy="344" r="16" fill="none" stroke-width="6"/></g></g><text class="d5" x="620" y="660" font-size="30">Precise gene edits.</text></g>
+<g id="p3c"><rect class="s-line" x="1060" y="230" width="420" height="470" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1090" y="280" font-size="22">3 · WRITE</text><rect class="s-ink" x="1120" y="320" width="300" height="110" rx="14" fill="var(--stage)" stroke-width="6"/><text class="m" x="1146" y="384" font-size="22" style="fill:var(--ink)">DNA PRINTER</text><circle class="gain" cx="1388" cy="356" r="11"/><path class="s-ink" d="M1220 430h100" stroke-width="10" stroke-linecap="round"/><g id="wr3"></g><path id="w1" class="s-ink" stroke-width="6" stroke-linecap="round"/><path id="w2" class="s-ink" stroke-width="6" stroke-linecap="round"/><text class="d5" x="1090" y="660" font-size="30">Print custom DNA.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Where the engines meet.</text>
+<text class="b" x="120" y="176" font-size="32">Proteins: the tiny machines inside every cell.</text>
+<g id="pr4"><polyline id="chain4" class="s-ink" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/><g id="beads"></g></g>
+<g id="shp4"><text class="m" x="140" y="700" font-size="22">SHAPE DECIDES WHAT IT DOES</text></g>
+<g id="sci4"><rect class="s-ink" x="760" y="290" width="200" height="150" rx="10" fill="var(--stage)" stroke-width="6"/><rect class="loss" x="760" y="290" width="200" height="40" rx="10"/><text class="d" x="860" y="410" font-size="44" text-anchor="middle">YEARS</text><g id="sct4"></g><text class="m" x="860" y="700" font-size="22" text-anchor="middle">PER PROTEIN SHAPE</text></g>
+<g id="af4"><rect class="gain" x="1060" y="250" width="420" height="90" rx="16"/><text class="d" x="1270" y="310" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">AlphaFold</text><g id="afg"></g></g>
+<g id="rel4"><text class="m" x="1060" y="700" font-size="22">PREDICTIONS RELEASED FOR</text><text class="m" x="1060" y="732" font-size="22" style="fill:var(--gain)">ALMOST EVERY KNOWN PROTEIN</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A feedback loop.</text>
+<text class="b" x="120" y="176" font-size="32">Biology feeds AI. AI feeds biology.</text>
+<g id="lp5">
+<path class="s-line" d="M1080 400C1000 230 600 230 520 400" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path class="s-line" d="M520 600C600 770 1000 770 1080 600" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="hd5"></g>
+<circle class="s-ink" cx="480" cy="500" r="110" fill="var(--stage)" stroke-width="7"/><text class="d" x="480" y="520" font-size="60" text-anchor="middle">AI</text>
+<circle class="s-gain" cx="1120" cy="500" r="110" fill="var(--stage)" stroke-width="7"/><text class="d" x="1120" y="514" font-size="40" text-anchor="middle" style="fill:var(--gain)">Biology</text>
+</g>
+<g id="dsg"><text class="m" x="800" y="250" font-size="24" text-anchor="middle">VAST DATA</text><g id="dsp"></g></g>
+<g id="mog"><text class="m" x="800" y="790" font-size="24" text-anchor="middle" style="fill:var(--gain)">NEW PROTEINS · MEDICINES</text><g id="mop"></g></g>
+<g id="fast5"><text class="d" x="120" y="852" font-size="40">Each engine speeds up the other.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Promise and peril.</text>
+<text class="b" x="120" y="176" font-size="32">The same tools point both ways.</text>
+<g id="box6"><rect class="ink" x="600" y="220" width="400" height="90" rx="45"/><text class="d" x="800" y="280" font-size="40" text-anchor="middle" style="fill:var(--stage)">Same tools</text></g>
+<g id="up6"><g id="ar6a"></g><rect class="s-line" x="120" y="420" width="640" height="340" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="466" font-size="22" style="fill:var(--gain)">THE UPSIDE</text>
+<g id="mi0"><g transform="rotate(-30 240 580)"><rect class="gain" x="190" y="558" width="100" height="44" rx="22"/><path d="M240 558v44" stroke="var(--stage)" stroke-width="5"/></g><text class="m" x="240" y="730" font-size="22" text-anchor="middle">MEDICINES</text></g>
+<g id="mi1"><path class="s-ink" d="M400 650h80M440 650v-90" stroke-width="7" stroke-linecap="round"/><path class="gain" d="M440 600c-40 0-60-20-60-50 40 0 60 20 60 50zM440 580c40 0 60-20 60-50-40 0-60 20-60 50z"/><text class="m" x="440" y="730" font-size="22" text-anchor="middle">CROPS</text></g>
+<g id="mi2"><path class="s-ink" d="M640 520l60 32v66l-60 32-60-32v-66zM580 552l60 32 60-32M640 584v66" fill="none" stroke-width="6" stroke-linejoin="round"/><text class="m" x="640" y="730" font-size="22" text-anchor="middle">MATERIALS</text></g>
+</g>
+<g id="risk6"><g id="ar6b"></g><rect class="s-line" x="840" y="420" width="640" height="340" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="870" y="466" font-size="22" style="fill:var(--loss)">IN THE WRONG HANDS</text>
+<path class="s-loss" d="M1160 490L1280 690H1040Z" fill="none" stroke-width="7" stroke-linejoin="round"/><g id="vir"></g><text class="m" x="1160" y="735" font-size="22" text-anchor="middle">A DANGEROUS PATHOGEN</text></g>
+<g id="both6"><text class="d" x="120" y="836" font-size="48">This power cuts both ways.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Watch the overlap.</text>
+<text class="b" x="120" y="176" font-size="32">Stop treating them as separate stories.</text>
+<defs><clipPath id="vclip"><circle id="vcl" cx="560" cy="600" r="160"/></clipPath></defs>
+<g id="np0"><rect class="s-ink" x="260" y="220" width="300" height="190" rx="8" fill="var(--stage)" stroke-width="5"/><text class="m" x="285" y="262" font-size="22" style="fill:var(--ink)">AI NEWS</text><path class="s-line" d="M285 300H535M285 335H535M285 370H460" stroke-width="6" stroke-linecap="round"/></g>
+<g id="np1"><rect class="s-ink" x="1040" y="220" width="300" height="190" rx="8" fill="var(--stage)" stroke-width="5"/><text class="m" x="1065" y="262" font-size="22" style="fill:var(--ink)">BIOLOGY NEWS</text><path class="s-line" d="M1065 300H1315M1065 335H1315M1065 370H1240" stroke-width="6" stroke-linecap="round"/></g>
+<g id="venn7"><circle id="vov" class="gain" cx="1040" cy="600" r="160" clip-path="url(#vclip)"/><circle id="vL" class="s-ink" cx="560" cy="600" r="160" fill="none" stroke-width="6"/><circle id="vR" class="s-gain" cx="1040" cy="600" r="160" fill="none" stroke-width="6"/><text id="vLt" class="d5" x="500" y="610" font-size="28" text-anchor="middle">Computing</text><text id="vRt" class="d5" x="1100" y="610" font-size="28" text-anchor="middle">Biology</text></g>
+<g id="act7"><text class="m" x="800" y="608" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">ACTION</text></g>
+<g id="ask7"><text class="d" x="120" y="830" font-size="38">See a headline about one? Ask what it unlocks in the other.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="290" font-size="88" letter-spacing="-2">One story about AI</text></g>
+<g id="qb"><text class="d" x="136" y="390" font-size="88" letter-spacing="-2">or gene editing:</text></g>
+<g id="qc"><text class="d" x="136" y="490" font-size="88" letter-spacing="-2">how could the other</text></g>
+<g id="qd"><text class="d" x="136" y="590" font-size="88" letter-spacing="-2">engine make it bigger?</text></g>
+<g id="qm"><text class="d" x="1340" y="540" font-size="240" text-anchor="middle" style="fill:var(--gain)">?</text></g>
+<g id="qe"><text class="m" x="143" y="700" font-size="26">FOR BETTER OR FOR WORSE</text></g>
+<g id="qg"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="141" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:21</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;AI and Synthetic Biology Lead the Wave&rdquo;, from <em>The Coming Wave</em> by Mustafa Suleyman with Michael Bhaskar. AlphaGo, CRISPR, DNA printing and AlphaFold are examples as reported in the book. The feedback loop and the overlapping circles are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=141, SC=[[0.0, 7.1], [7.1, 25.7], [25.7, 44.1], [44.1, 60.0], [60.0, 81.0], [81.0, 97.7], [97.7, 114.4], [114.4, 127.6], [127.6, 141.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Twin Engines", "Meet the Engines", "Machines That Learn", "Life as Code", "The Protein Puzzle", "A Feedback Loop", "Promise and Peril", "Watch the Overlap", "Your Challenge"];
+const TM={"twin_engines": 0.0, "ai_brain": 7.36, "dna_helix": 14.08, "orbit_techs": 21.48, "go_board": 26.0, "surprise_move": 32.96, "lightbulb": 38.96, "dna_reader": 44.44, "gene_scissors": 49.12, "dna_printer": 53.52, "protein_blob": 60.32, "scientist": 69.12, "alphafold": 73.52, "loop_arrows": 81.28, "data_stream": 84.68, "new_molecule": 89.28, "medicine": 98.0, "warning_sign": 104.24, "newspaper": 114.72, "venn_circles": 119.2, "question_mark": 127.92};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const gearD=(r,n)=>{let d='';const s=2*Math.PI/n;for(let i=0;i<n;i++){const a=i*s;[[r,-.25],[r+16,-.13],[r+16,.13],[r,.25]].forEach((q,j)=>{d+=(i+j?'L':'M')+(q[0]*Math.cos(a+q[1]*s)).toFixed(1)+' '+(q[0]*Math.sin(a+q[1]*s)).toFixed(1)})}return d+'Z'};
+const mkGear=(par,x,y,r,n,cls,lab)=>{const h=mk('g',{transform:'translate('+x+' '+y+')'},par);const g=mk('path',{d:gearD(r,n),class:cls},h);mk('circle',{r:r*.42,fill:'var(--stage)'},h);if(lab){const tx=mk('text',{y:8,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},h);tx.textContent=lab}return g};
+const head=(g,x,y,dx,dy,cls)=>{const L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,s=22;mk('path',{d:'M'+(x-s*(ux-uy*.6)).toFixed(1)+' '+(y-s*(uy+ux*.6)).toFixed(1)+'L'+x+' '+y+'L'+(x-s*(ux+uy*.6)).toFixed(1)+' '+(y-s*(uy-ux*.6)).toFixed(1),fill:'none',class:cls,'stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g)};
+const ladder=(g,x1,x2,y)=>{let d='';for(let x=x1+14;x<x2;x+=28)d+='M'+x+' '+(y-22)+'V'+(y+22);mk('path',{d:d,class:'s-line','stroke-width':4},g);mk('path',{d:'M'+x1+' '+(y-22)+'H'+x2+'M'+x1+' '+(y+22)+'H'+x2,class:'s-ink','stroke-width':6,'stroke-linecap':'round'},g)};
+const bz=(P,s)=>{const a=1-s;return[a*a*a*P[0]+3*a*a*s*P[2]+3*a*s*s*P[4]+s*s*s*P[6],a*a*a*P[1]+3*a*a*s*P[3]+3*a*s*s*P[5]+s*s*s*P[7]]};
+const tr=(el,x,y)=>el.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')');
+
+const GA=mkGear($('gA'),1200,720,80,12,'ink','AI'), GB=mkGear($('gB'),1355,680,70,10,'gain','DNA');
+
+let pd='';for(let i=0;i<5;i++){const v=392+i*44;pd+='M352 '+v+'H370M590 '+v+'H608M'+v+' 352V370M'+v+' 590V608'}
+mk('path',{d:pd,class:'s-ink','stroke-width':6,'stroke-linecap':'round'},$('chip'));
+const LYR=[[420,[420,480,540]],[480,[400,453,507,560]],[540,[440,520]]];
+for(let l=0;l<2;l++)LYR[l][1].forEach(a=>LYR[l+1][1].forEach(b=>mk('path',{d:'M'+LYR[l][0]+' '+a+'L'+LYR[l+1][0]+' '+b,class:'s-line','stroke-width':3},$('chip'))));
+const NODES=[];LYR.forEach((L,l)=>L[1].forEach(y=>NODES.push([mk('circle',{cx:L[0],cy:y,r:12,class:'ink'},$('chip')),l])));
+const RUNG=[];for(let i=0;i<11;i++)RUNG.push(mk('path',{class:'s-line','stroke-width':4},$('helix')));
+const H1=mk('path',{class:'s-ink',fill:'none','stroke-width':7,'stroke-linecap':'round'},$('helix')),H2=mk('path',{class:'s-gain',fill:'none','stroke-width':7,'stroke-linecap':'round'},$('helix'));
+
+let gd='';for(let i=0;i<9;i++){const v=190+i*50;gd+='M'+v+' 270V670M190 '+(270+i*50)+'H590'}
+mk('path',{d:gd,class:'s-line','stroke-width':3},$('grid2'));
+const ST=[[2,2,1],[2,6,1],[6,6,1],[3,4,1],[5,3,1],[6,2,0],[4,5,0],[5,6,0],[3,6,0],[1,4,0]].map(q=>mk('circle',{cx:190+q[0]*50,cy:270+q[1]*50,r:21,fill:q[2]?'var(--ink)':'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('stones')));
+const RAYS=[];for(let i=0;i<7;i++){const a=Math.PI+i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);RAYS.push(mk('path',{d:'M'+(1300+110*c).toFixed(0)+' '+(400+110*s).toFixed(0)+'L'+(1300+140*c).toFixed(0)+' '+(400+140*s).toFixed(0),class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays')))}
+
+ladder($('rd3'),160,500,420);ladder($('ed3'),630,970,470);
+const LT='A T G C C T A G';
+const WR=[];for(let i=0;i<6;i++)WR.push(mk('path',{d:'M1246 '+(456+i*26)+'H1294',class:'s-line','stroke-width':4},$('wr3')));
+
+// protein: straight chain folds into a clean, non-overlapping shape
+const FOLD=[[200,590],[250,630],[310,640],[370,620],[400,570],[380,515],[330,490],[270,500],[230,450],[250,395],[310,370],[370,385],[440,420],[480,480]];
+const LN=[],FD=[],B4=[];for(let i=0;i<14;i++){LN.push([170+i*34,520]);FD.push(FOLD[i]);B4.push(mk('circle',{r:14,class:'ink'},$('beads')))}
+person($('sct4'),860,520,26,'ink');
+const AF=[];for(let j=0;j<5;j++)for(let i=0;i<7;i++){const x=1090+i*52,y=400+j*56;AF.push(mk('path',{d:'M'+(x-14)+' '+(y+6)+'q7-22 14-6t14-6',fill:'none',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},$('afg')))}
+
+const TOP=[1080,400,1000,230,600,230,520,400],BOT=[520,600,600,770,1000,770,1080,600];
+head($('hd5'),520,400,-80,170,'s-muted');head($('hd5'),1080,600,80,-170,'s-muted');
+const DS=[],MO=[];for(let i=0;i<6;i++)DS.push(mk('rect',{x:-8,y:-8,width:16,height:16,class:'ink'},$('dsp')));
+for(let i=0;i<5;i++)MO.push(mk('path',{d:'M-13 0L-7-11H7L13 0L7 11H-7Z',class:'gain'},$('mop')));
+
+mk('path',{d:'M700 312L450 410',class:'s-muted','stroke-width':5,'stroke-linecap':'round'},$('ar6a'));head($('ar6a'),450,410,-250,98,'s-muted');
+mk('path',{d:'M900 312L1150 410',class:'s-muted','stroke-width':5,'stroke-linecap':'round'},$('ar6b'));head($('ar6b'),1150,410,250,98,'s-muted');
+let vd='';for(let i=0;i<8;i++){const a=i*Math.PI/4;vd+='M'+(1160+26*Math.cos(a)).toFixed(1)+' '+(625+26*Math.sin(a)).toFixed(1)+'L'+(1160+40*Math.cos(a)).toFixed(1)+' '+(625+40*Math.sin(a)).toFixed(1)}
+mk('path',{d:vd,class:'s-loss','stroke-width':6,'stroke-linecap':'round'},$('vir'));mk('circle',{cx:1160,cy:625,r:26,class:'loss'},$('vir'));
+
+const QA=mkGear($('qg'),1290,760,50,9,'ink'),QB=mkGear($('qg'),1390,735,40,7,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const tw=TM.ai_brain-5, aA=50*Math.max(0,u-tw);
+rise($('gA'),p(u,TM.twin_engines,TM.twin_engines+.6)); rise($('gB'),p(u,tw,tw+.6));
+GA.setAttribute('transform','rotate('+aA.toFixed(1)+')'); GB.setAttribute('transform','rotate('+(18-aA*1.2).toFixed(1)+')');
+let w0='';for(let x=1080;x<=1480;x+=20)w0+=(x>1080?'L':'M')+x+' '+(848+8*Math.sin(x/40-t*2)).toFixed(1);$('wv0').setAttribute('d',w0);
+
+rise($('ai1'),p(u,TM.ai_brain,TM.ai_brain+.6));
+const lay=Math.floor(t*2)%3; NODES.forEach(n=>n[0].setAttribute('class',n[1]===lay?'gain':'ink'));
+rise($('dna1'),p(u,TM.dna_helix,TM.dna_helix+.6));
+let h1='',h2='';for(let y=370;y<=590;y+=10){const s=60*Math.sin(y/42+t*1.5);h1+=(y>370?'L':'M')+(1120+s).toFixed(1)+' '+y;h2+=(y>370?'L':'M')+(1120-s).toFixed(1)+' '+y}
+H1.setAttribute('d',h1);H2.setAttribute('d',h2);
+RUNG.forEach((r,i)=>{const y=380+i*20,s=60*Math.sin(y/42+t*1.5);r.setAttribute('d','M'+(1120+s).toFixed(1)+' '+y+'L'+(1120-s).toFixed(1)+' '+y)});
+rise($('orbg'),p(u,TM.orbit_techs,TM.orbit_techs+.6)); rise($('satg'),p(u,TM.orbit_techs+.3,TM.orbit_techs+.9));
+$('orb').setAttribute('stroke-dashoffset',(-t*30).toFixed(1));
+[-Math.PI/2,Math.PI/2].forEach((b,i)=>{const a=b+.1*Math.sin(t*.6+i);tr($('sat'+i),800+640*Math.cos(a),520+310*Math.sin(a))});
+
+rise($('brd2'),p(u,TM.go_board,TM.go_board+.6));
+ST.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.go_board+.4+i*.15,TM.go_board+.7+i*.15)));
+rise($('supg'),p(u,TM.surprise_move,TM.surprise_move+.4));
+const rp=(t%1.5)/1.5; $('supr').setAttribute('r',(24+22*rp).toFixed(1)); $('supr').setAttribute('opacity',(1-rp).toFixed(2));
+rise($('exp1'),p(u,TM.surprise_move+.4,TM.surprise_move+.9)); rise($('exp2'),p(u,TM.lightbulb-3,TM.lightbulb-2.5));
+rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.5));
+const lit=u>=TM.lightbulb+.4; $('bulbc').style.fill=lit?'var(--gain)':'var(--stage)';
+RAYS.forEach((r,i)=>r.setAttribute('opacity',lit?(.5+.5*Math.sin(t*3+i)).toFixed(2):0));
+rise($('disc2'),p(u,TM.lightbulb+.8,TM.lightbulb+1.4));
+
+rise($('p3a'),p(u,TM.dna_reader,TM.dna_reader+.5));
+$('scan').setAttribute('x',(160+332*((Math.max(0,u-TM.dna_reader)*.4)%1)).toFixed(1));
+$('lets').textContent=LT.slice(0,Math.floor(LT.length*p(u,TM.dna_reader+.4,TM.dna_reader+3)));
+rise($('p3b'),p(u,TM.gene_scissors,TM.gene_scissors+.5));
+tr($('scii'),0,-50*(1-p(u,TM.gene_scissors+.3,TM.gene_scissors+1.1)));
+$('edc').setAttribute('opacity',p(u,TM.gene_scissors+1.2,TM.gene_scissors+1.6));
+rise($('p3c'),p(u,TM.dna_printer,TM.dna_printer+.5));
+const wk=440+160*p(u,TM.dna_printer+.4,TM.dna_printer+3);
+$('w1').setAttribute('d','M1246 440V'+wk.toFixed(1)); $('w2').setAttribute('d','M1294 440V'+wk.toFixed(1));
+WR.forEach((r,i)=>r.setAttribute('opacity',wk>460+i*26?1:0));
+
+rise($('pr4'),p(u,TM.protein_blob,TM.protein_blob+.6));
+const fo=p(u,TM.scientist-2.5,TM.scientist-1), af=u>=TM.alphafold; let cp='';
+B4.forEach((b,i)=>{const x=LN[i][0]+(FD[i][0]-LN[i][0])*fo,y=LN[i][1]+(FD[i][1]-LN[i][1])*fo;b.setAttribute('cx',x.toFixed(1));b.setAttribute('cy',y.toFixed(1));b.setAttribute('class',af?'gain':'ink');cp+=x.toFixed(1)+','+y.toFixed(1)+' '});
+$('chain4').setAttribute('points',cp);
+rise($('shp4'),p(u,TM.scientist-2.5,TM.scientist-2)); rise($('sci4'),p(u,TM.scientist,TM.scientist+.6));
+rise($('af4'),p(u,TM.alphafold,TM.alphafold+.5));
+AF.forEach((a,i)=>a.setAttribute('opacity',p(u,TM.alphafold+.6+i*.06,TM.alphafold+.9+i*.06)));
+rise($('rel4'),p(u,TM.alphafold+2.5,TM.alphafold+3));
+
+rise($('lp5'),p(u,TM.loop_arrows,TM.loop_arrows+.6));
+rise($('dsg'),p(u,TM.data_stream,TM.data_stream+.5)); rise($('mog'),p(u,TM.new_molecule,TM.new_molecule+.5));
+const fs=TM.medicine-3, ph=.18*u+.5*Math.max(0,u-fs);
+DS.forEach((r,i)=>{const q=bz(TOP,(ph+i/6)%1);tr(r,q[0],q[1])});
+MO.forEach((r,i)=>{const q=bz(BOT,(ph+i/5)%1);tr(r,q[0],q[1])});
+rise($('fast5'),p(u,fs,fs+.6));
+
+rise($('box6'),p(u,SC[6][0]/K+.4,SC[6][0]/K+1));
+rise($('up6'),p(u,TM.medicine,TM.medicine+.5));
+[0,1,2].forEach(i=>rise($('mi'+i),p(u,TM.medicine+.6+i*.7,TM.medicine+1.1+i*.7)));
+rise($('risk6'),p(u,TM.warning_sign,TM.warning_sign+.5));
+$('vir').setAttribute('transform','rotate('+(10*Math.sin(t*2)).toFixed(1)+' 1160 625)');
+rise($('both6'),p(u,TM.newspaper-3.8,TM.newspaper-3.2));
+
+rise($('np0'),p(u,TM.newspaper,TM.newspaper+.5)); rise($('np1'),p(u,TM.newspaper+.6,TM.newspaper+1.1));
+rise($('venn7'),p(u,TM.newspaper+1.4,TM.newspaper+2));
+const vm=p(u,TM.venn_circles,TM.venn_circles+1.5), xl=560+140*vm, xr=1040-140*vm;
+$('vL').setAttribute('cx',xl); $('vcl').setAttribute('cx',xl); $('vR').setAttribute('cx',xr); $('vov').setAttribute('cx',xr);
+$('vLt').setAttribute('x',xl-60); $('vRt').setAttribute('x',xr+60); $('vov').setAttribute('opacity',vm);
+rise($('act7'),p(u,TM.venn_circles+1.5,TM.venn_circles+2)); rise($('ask7'),p(u,TM.venn_circles+3.8,TM.venn_circles+4.4));
+
+['qa','qb','qc','qd'].forEach((q,i)=>rise($(q),p(u,TM.question_mark+i*.4,TM.question_mark+.5+i*.4)));
+rise($('qm'),p(u,TM.question_mark+1.6,TM.question_mark+2.2)); rise($('qe'),p(u,TM.question_mark+4.6,TM.question_mark+5.1));
+rise($('qg'),p(u,TM.question_mark+4.6,TM.question_mark+5.1));
+QA.setAttribute('transform','rotate('+(t*40).toFixed(1)+')'); QB.setAttribute('transform','rotate('+(20-t*40*9/7).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:137.28;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

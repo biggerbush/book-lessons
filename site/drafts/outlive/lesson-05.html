@@ -1,0 +1,342 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outlive Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Outlive: Choose the physical tasks you want to do in your last decade, like lifting a grandchild or climbing stairs, then build the strength and stability now to still do them later. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIVE · LESSON 5</text>
+<text class="d" x="116" y="330" font-size="84" letter-spacing="-2">Train for your</text>
+<text class="d" x="116" y="426" font-size="84" letter-spacing="-2">Centenarian</text>
+<text class="d" x="116" y="522" font-size="84" letter-spacing="-2">Decathlon.</text>
+<text class="b" x="120" y="610" font-size="32">Train today for the body you want at 90.</text>
+<path class="s-line" d="M1000 720H1460" stroke-width="5" stroke-linecap="round"/>
+<g id="elder"><g id="eld"></g><g id="kid"></g><path id="arm0" class="s-ink" fill="none" stroke-width="12" stroke-linecap="round"/></g>
+<g id="yes"><rect class="s-gain" x="1180" y="230" width="190" height="100" rx="50" fill="var(--stage)" stroke-width="5"/><path class="gain" d="M1222 324l-24 32 46-26z"/><text class="d" x="1275" y="298" font-size="52" text-anchor="middle" style="fill:var(--gain)">Yes?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A decathlon for life.</text>
+<g id="cd"><text class="b" x="120" y="176" font-size="32">Peter Attia’s Centenarian Decathlon.</text><text class="m" x="550" y="270" font-size="22">THE CENTENARIAN DECATHLON</text></g>
+<g id="ath"></g>
+<g id="ten0"><text class="m" x="260" y="680" font-size="20" text-anchor="middle">TEN EVENTS, NOT ONE</text></g>
+<g id="cards"></g>
+<g id="ten"><text class="d" x="120" y="800" font-size="48">About ten tasks for your last decade.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Pick your events.</text>
+<text class="b" x="120" y="176" font-size="32">Attia’s examples. Your own list should be personal.</text>
+<g id="ev0"><path class="s-ink" d="M162 490h60v-55h60v-55h60v-55h60" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><circle id="climb" class="gain" r="16"/></g>
+<g id="ev1"><g id="bags"><rect class="gain" x="535" y="380" width="80" height="100" rx="8"/><rect class="gain" x="640" y="380" width="80" height="100" rx="8"/><path class="s-ink" d="M555 380v-25a20 20 0 0 1 40 0v25M660 380v-25a20 20 0 0 1 40 0v25" fill="none" stroke-width="6"/></g></g>
+<g id="ev2"><path class="s-ink" d="M850 260h245v80h-245z" fill="none" stroke-width="6" stroke-linejoin="round"/><g id="case"><rect class="gain" x="920" y="420" width="105" height="70" rx="10"/><path class="s-ink" d="M955 420v-10h35v10" fill="none" stroke-width="5"/></g></g>
+<g id="ev3"><path class="s-line" d="M1185 490h265" stroke-width="5" stroke-linecap="round"/><g id="riser"></g></g>
+<g id="mine">
+<text class="m" x="120" y="700" font-size="20">YOUR OWN EVENTS</text>
+<rect class="gain" x="120" y="720" width="300" height="76" rx="38"/><text class="d5" x="270" y="770" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">Gardening</text>
+<rect class="gain" x="440" y="720" width="240" height="76" rx="38"/><text class="d5" x="560" y="770" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">Hiking</text>
+<rect class="gain" x="700" y="720" width="380" height="76" rx="38"/><text class="d5" x="890" y="770" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">Playing with kids</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Strength fades.</text>
+<g id="catch"><text class="b" x="120" y="176" font-size="32">Here is the catch.</text></g>
+<path class="s-ink" d="M200 250V720H1000" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="200" y="236" font-size="20">STRENGTH</text>
+<text class="m" x="1012" y="728" font-size="20">AGE</text>
+<text class="m" x="260" y="760" font-size="20" text-anchor="middle">TODAY</text>
+<text class="m" x="920" y="760" font-size="20" text-anchor="middle">+30 YEARS</text>
+<g id="band"><polygon class="gain" points="860,480.5 980,520 980,560 860,560" fill-opacity=".3"/></g>
+<g id="tgt"><path class="s-muted" d="M200 560H1000" stroke-width="3" stroke-dasharray="10 10"/><text class="m" x="220" y="592" font-size="18">WHAT YOU WANT TO DO</text></g>
+<path id="dl" class="s-loss" d="M220 380L980 660" stroke-width="8" stroke-linecap="round" stroke-dasharray="810"/>
+<g id="pts"><path class="s-muted" d="M260 395V720M920 638V720" stroke-width="3" stroke-dasharray="6 8"/><circle class="loss" cx="260" cy="395" r="13"/><circle class="loss" cx="920" cy="638" r="13"/></g>
+<path id="gl" class="s-gain" d="M220 270L980 520" stroke-width="8" stroke-linecap="round" stroke-dasharray="800"/>
+<path id="brace" class="s-gain" d="M992 520H1004V560H992" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="lt"><text class="m" x="1060" y="300" font-size="20">IN THIRTY YEARS</text><text class="d" x="1060" y="356" font-size="44">You lift less.</text></g>
+<g id="hb"><path class="s-gain" d="M1006 540H1056" stroke-width="4" stroke-linecap="round"/><text class="m" x="1068" y="549" font-size="26" style="fill:var(--gain)">BUFFER</text>
+<text class="d" x="1060" y="650" font-size="38">Train well beyond</text><text class="d" x="1060" y="696" font-size="38">your target now.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Work backwards.</text>
+<text class="b" x="120" y="176" font-size="32">Start from the task you want at 85.</text>
+<path class="s-ink" d="M200 640H1400M300 625v30M1260 625v30" stroke-width="5" stroke-linecap="round"/>
+<text class="d" x="300" y="710" font-size="44" text-anchor="middle">Age 50</text>
+<text class="d" x="1260" y="710" font-size="44" text-anchor="middle">Age 85</text>
+<g id="gk"><text class="m" x="1260" y="330" font-size="20" text-anchor="middle">30 LB GRANDCHILD</text></g>
+<g id="lifter"><g id="plates"></g></g>
+<g id="more"><text class="m" x="300" y="240" font-size="20" text-anchor="middle" style="fill:var(--gain)">FAR MORE THAN 30 LB</text></g>
+<g id="back"><path id="arw" class="s-gain" d="M1200 770H372" fill="none" stroke-width="7" stroke-linecap="round" stroke-dasharray="14 10"/><path class="s-gain" d="M392 748L362 770L392 792" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="120" y="845" font-size="40">Start from the future. Work backwards.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Grip and carry.</text>
+<text class="b" x="120" y="176" font-size="32">Studies link grip strength to longer life.</text>
+<g id="p0"><rect class="s-line" x="120" y="230" width="440" height="500" rx="18" fill="none" stroke-width="3"/><text class="m" x="150" y="280" font-size="18">LINKED TO LONGER LIFE</text>
+<path class="s-ink" d="M180 445H500" stroke-width="8" stroke-linecap="round"/>
+<g id="fist"><rect class="gain" x="290" y="400" width="120" height="90" rx="30"/><path d="M320 412v30M350 412v30M380 412v30" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/></g>
+<text class="d5" x="150" y="700" font-size="36">Grip strength</text></g>
+<g id="p1"><rect class="s-line" x="580" y="230" width="440" height="500" rx="18" fill="none" stroke-width="3"/><text class="m" x="610" y="280" font-size="18">HANG AS LONG AS YOU CAN</text>
+<path class="s-ink" d="M680 340H920" stroke-width="8" stroke-linecap="round"/><g id="hang"></g>
+<circle class="s-line" cx="960" cy="470" r="34" fill="none" stroke-width="6"/><circle id="ring" class="s-gain" cx="960" cy="470" r="34" fill="none" stroke-width="6" stroke-dasharray="213.6"/>
+<text class="d5" x="610" y="700" font-size="36">Dead hang</text></g>
+<g id="p2"><rect class="s-line" x="1040" y="230" width="440" height="500" rx="18" fill="none" stroke-width="3"/><text class="m" x="1070" y="280" font-size="18">BUILDS GRIP AND A STRONG CORE</text>
+<path class="s-line" d="M1080 640H1440" stroke-width="5" stroke-linecap="round"/><g id="farm"></g>
+<text class="d5" x="1070" y="700" font-size="36">Farmer’s carry</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stability matters.</text>
+<g id="alone"><text class="b" x="120" y="176" font-size="32">Strength alone is not enough.</text></g>
+<g id="bal"><rect class="ink" x="300" y="640" width="280" height="16" rx="8"/><g id="sway"></g>
+<text class="m" x="150" y="710" font-size="20">STABILITY: CONTROL THAT KEEPS</text><text class="m" x="150" y="740" font-size="20">JOINTS SAFE AND YOU STEADY</text></g>
+<g id="fallg"><path class="s-line" d="M900 640H1440" stroke-width="5" stroke-linecap="round"/><g id="tip"></g>
+<text class="m" x="860" y="710" font-size="20">FALLS ARE A LEADING CAUSE OF</text><text class="m" x="860" y="740" font-size="20" style="fill:var(--loss)">ACCIDENTAL DEATH IN OLDER ADULTS</text></g>
+<g id="mat"><text class="d" x="120" y="820" font-size="44">Balance really matters.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Train with purpose.</text>
+<text class="b" x="120" y="176" font-size="32">You are an athlete in training. Your event is decades away.</text>
+<g id="tr"></g>
+<path class="s-line" d="M320 500H1380" stroke-width="4" stroke-dasharray="4 12" stroke-linecap="round"/>
+<g id="tdots"></g>
+<g id="flag"><path class="s-ink" d="M1400 500V370" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1400 372L1460 392L1400 412z"/><text class="m" x="1400" y="350" font-size="20" text-anchor="middle">YOUR EVENT</text></g>
+<text class="m" x="120" y="550" font-size="20">LIFT REGULARLY</text>
+<g id="mv0"><rect class="s-ink" x="120" y="570" width="320" height="110" rx="16" fill="var(--stage)" stroke-width="4"/><text class="d5" x="280" y="636" font-size="30" text-anchor="middle">Carry</text></g>
+<g id="mv1"><rect class="s-ink" x="460" y="570" width="320" height="110" rx="16" fill="var(--stage)" stroke-width="4"/><text class="d5" x="620" y="636" font-size="30" text-anchor="middle">Pull</text></g>
+<g id="mv2"><rect class="s-ink" x="800" y="570" width="320" height="110" rx="16" fill="var(--stage)" stroke-width="4"/><text class="d5" x="960" y="636" font-size="30" text-anchor="middle">Rise from a squat</text></g>
+<g id="jar"><path class="s-ink" d="M1140 520v190a30 30 0 0 0 30 30h160a30 30 0 0 0 30-30V520" fill="none" stroke-width="6" stroke-linecap="round"/><text class="m" x="1250" y="785" font-size="20" text-anchor="middle">FUTURE BODY</text></g>
+<g id="coins"></g>
+<g id="dep"><text class="d" x="120" y="820" font-size="44">Each session is a deposit.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="290" font-size="80" letter-spacing="-2">Write down three things</text></g>
+<g id="qb"><text class="d" x="136" y="380" font-size="80" letter-spacing="-2">you want to do at 90.</text></g>
+<g id="qc"><text class="d" x="136" y="530" font-size="80" letter-spacing="-2" style="fill:var(--gain)">What training this week</text></g>
+<g id="qd"><text class="d" x="136" y="620" font-size="80" letter-spacing="-2" style="fill:var(--gain)">keeps that possible?</text></g>
+<g id="qm"><text class="m" x="143" y="740" font-size="26">YOUR CENTENARIAN DECATHLON STARTS NOW</text></g>
+<g id="pad"><rect class="s-ink" x="1260" y="580" width="200" height="240" rx="14" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="1260" y="580" width="200" height="24" rx="8"/><g id="ticks"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Train for Your Centenarian Decathlon&rdquo;, from <em>Outlive</em> by Peter Attia, with Bill Gifford. The decathlon events, the focus on grip strength and the danger of falls are as reported in the book. The thirty pound grandchild example and the strength decline line are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 7.4], [7.4, 22.0], [22.0, 43.1], [43.1, 59.1], [59.1, 73.7], [73.7, 89.5], [89.5, 103.7], [103.7, 117.9], [117.9, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Your Last Decade", "A Decathlon for Life", "Pick Your Events", "Strength Fades", "Work Backwards", "Grip and Carry", "Stability Matters", "Train with Purpose", "Your Challenge"];
+const TM={"old_self": 0.0, "athlete": 7.68, "event_list": 16.72, "stairs": 22.32, "groceries": 26.96, "suitcase": 30.24, "floor_rise": 33.92, "decline_line": 45.2, "heavy_box": 53.68, "toddler": 59.44, "arrow_back": 68.08, "grip_hand": 74.0, "dead_hang": 78.96, "farmer_carry": 83.36, "balance": 91.84, "falling": 97.52, "trainee": 104.0, "barbell": 108.84, "notepad": 118.24};
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const L=(g,d,c,w)=>mk('path',{d:d,fill:'none',stroke:'var(--'+c+')','stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},g);
+const T=(g,x,y,s,c,txt,a,st)=>{const e=mk('text',{x:x,y:y,'font-size':s,class:c},g);if(a)e.setAttribute('text-anchor',a);if(st)e.setAttribute('style',st);e.textContent=txt;return e};
+
+P($('eld'),1150,420,34,'ink');L($('eld'),'M1130 563V720M1170 563L1235 640V720','ink',14);
+P($('kid'),1330,560,20,'gain');
+
+const ath=$('ath');P(ath,260,300,40,'ink');L(ath,'M245 468L215 560L180 620M275 468L320 540L360 600','ink',14);L(ath,'M215 390L160 450M305 390L360 330','ink',12);
+const cards=[];for(let i=0;i<10;i++){const x=550+(i%5)*190,y=300+Math.floor(i/5)*200,g=mk('g',{},$('cards'));
+  const r=mk('rect',{x:x,y:y,width:170,height:160,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  cards.push([g,r,T(g,x+85,y+102,64,'d',String(i+1),'middle')])}
+
+[['4 FLIGHTS OF STAIRS','IN 3 MINUTES'],['2 BAGS OF GROCERIES','FOR 5 BLOCKS'],['A SUITCASE INTO THE','OVERHEAD BIN'],['UP OFF THE FLOOR,','ONE ARM AT MOST']].forEach((c,i)=>{const g=$('ev'+i),x=120+345*i;
+  mk('rect',{x:x,y:230,width:325,height:420,rx:18,fill:'none',stroke:'var(--line)','stroke-width':3},g);c.forEach((s,j)=>T(g,x+162,560+j*34,20,'m',s,'middle'))});
+const rs=$('riser');P(rs,1330,330,24,'ink');L(rs,'M1315 431L1300 490M1345 431L1380 470L1390 490','ink',12);L(rs,'M1305 390L1250 490','gain',10);
+
+const gk=$('gk');P(gk,1220,400,32,'ink');L(gk,'M1205 534L1200 640M1235 534L1240 640','ink',12);P(gk,1310,400,18,'gain');L(gk,'M1240 455L1300 450','ink',10);
+const lf=$('lifter');P(lf,300,400,32,'ink');L(lf,'M285 534L280 640M315 534L320 640','ink',12);L(lf,'M276 450L250 330M324 450L350 330','ink',10);L(lf,'M140 330H460','ink',8);
+const PL=[];for(let i=0;i<5;i++){PL.push(mk('rect',{x:214-i*16,y:275,width:12,height:110,rx:4,class:'gain'},$('plates')));PL.push(mk('rect',{x:374+i*16,y:275,width:12,height:110,rx:4,class:'gain'},$('plates')))}
+
+const hg=$('hang');P(hg,800,400,24,'ink');L(hg,'M782 340V440M818 340V440','ink',8);L(hg,'M790 501L788 600M810 501L812 600','ink',10);
+const fm=$('farm');P(fm,1260,370,26,'ink');L(fm,'M1225 420L1205 530M1295 420L1315 530','ink',8);
+[1185,1295].forEach(x=>mk('rect',{x:x,y:530,width:40,height:56,rx:8,class:'gain'},fm));
+const FL=L(fm,'','ink',12);
+
+const sw=$('sway');P(sw,440,340,30,'ink');L(sw,'M370 420H510','ink',8);L(sw,'M440 466V640','ink',12);L(sw,'M450 480L500 560L470 600','ink',12);
+[[440,470,12],[500,560,11]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],class:'gain'},sw));
+const tp=$('tip');P(tp,1100,340,30,'loss');L(tp,'M1085 466L1090 640M1115 466L1110 640','loss',12);L(tp,'M1060 420L1030 360M1140 420L1170 360','loss',8);
+
+const tr=$('tr');P(tr,220,300,30,'gain');L(tr,'M210 426L205 500M230 426L235 500','gain',12);L(tr,'M190 360L170 240M250 360L270 240','ink',8);L(tr,'M136 240H304','ink',8);
+[136,290].forEach(x=>mk('rect',{x:x,y:215,width:14,height:50,rx:4,class:'ink'},tr));
+const TD=[];for(let i=0;i<6;i++)TD.push(mk('circle',{cy:500,r:8,class:'gain'},$('tdots')));
+const CO=[];for(let i=0;i<8;i++)CO.push(mk('circle',{cx:1180+(i%4)*52,cy:715-Math.floor(i/4)*44,r:20,class:'gain'},$('coins')));
+
+const TK=[650,720,790].map(y=>{mk('rect',{x:1285,y:y-16,width:28,height:28,rx:5,fill:'none',stroke:'var(--ink)','stroke-width':4},$('ticks'));
+  mk('path',{d:'M1330 '+y+'H1435',stroke:'var(--line)','stroke-width':5,'stroke-linecap':'round'},$('ticks'));
+  return L($('ticks'),'M1290 '+(y-2)+'l8 9 18-22','gain',6)});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('elder'),p(u,TM.old_self,TM.old_self+.6));
+  const ky=76-136*p(u,TM.old_self+1.4,TM.old_self+3.8);
+  $('kid').setAttribute('transform','translate(0 '+ky.toFixed(1)+')');
+  $('arm0').setAttribute('d','M1185 500L1312 '+(610+ky).toFixed(0));
+  rise($('yes'),p(u,TM.old_self+5.4,TM.old_self+5.9));
+
+  rise($('ath'),p(u,TM.athlete,TM.athlete+.5)); rise($('ten0'),p(u,TM.athlete+.8,TM.athlete+1.3));
+  rise($('cd'),p(u,TM.athlete+4.2,TM.athlete+4.7));
+  cards.forEach(([g,r,tx],i)=>{rise(g,p(u,TM.athlete+.8+i*.15,TM.athlete+1.2+i*.15));const on=u>=TM.event_list+.5+i*.35;
+    r.setAttribute('fill',on?'var(--gain)':'var(--stage)');r.setAttribute('stroke',on?'var(--gain)':'var(--ink)');tx.style.fill=on?'var(--on-gain)':'var(--ink)'});
+  rise($('ten'),p(u,TM.event_list,TM.event_list+.6));
+
+  rise($('ev0'),p(u,TM.stairs,TM.stairs+.5));
+  rise($('ev1'),p(u,TM.groceries,TM.groceries+.5));
+  rise($('ev2'),p(u,TM.suitcase,TM.suitcase+.5));
+  rise($('ev3'),p(u,TM.floor_rise,TM.floor_rise+.5));
+  const st=Math.floor((t*1.5)%4); $('climb').setAttribute('cx',192+60*st); $('climb').setAttribute('cy',470-55*st);
+  $('bags').setAttribute('transform','translate(0 '+(6*Math.sin(t*4)).toFixed(1)+')');
+  $('case').setAttribute('transform','translate(0 '+(-145*ease(cl(((t*.4)%1)/.6))).toFixed(1)+')');
+  rise($('mine'),p(u,TM.floor_rise+5.4,TM.floor_rise+6));
+
+  rise($('catch'),p(u,TM.decline_line-1.7,TM.decline_line-1.2));
+  $('tgt').setAttribute('opacity',p(u,TM.decline_line,TM.decline_line+.6));
+  $('dl').setAttribute('stroke-dashoffset',(810*(1-p(u,TM.decline_line,TM.decline_line+2))).toFixed(1));
+  rise($('pts'),p(u,TM.decline_line+4.2,TM.decline_line+4.7)); rise($('lt'),p(u,TM.decline_line+4.4,TM.decline_line+4.9));
+  $('gl').setAttribute('stroke-dashoffset',(800*(1-p(u,TM.heavy_box,TM.heavy_box+2))).toFixed(1));
+  $('band').setAttribute('opacity',p(u,TM.heavy_box+1.8,TM.heavy_box+2.4));
+  $('brace').setAttribute('opacity',p(u,TM.heavy_box+2,TM.heavy_box+2.4)); rise($('hb'),p(u,TM.heavy_box+2.2,TM.heavy_box+2.7));
+
+  rise($('gk'),p(u,TM.toddler,TM.toddler+.5)); rise($('lifter'),p(u,TM.toddler+4.6,TM.toddler+5.1)); rise($('more'),p(u,TM.toddler+4.8,TM.toddler+5.3));
+  PL.forEach((e,j)=>{const a=TM.toddler+5+(j>>1)*.3;e.setAttribute('opacity',p(u,a,a+.3))});
+  rise($('back'),p(u,TM.arrow_back,TM.arrow_back+.6)); $('arw').setAttribute('stroke-dashoffset',(-(t*40)%24).toFixed(1));
+
+  rise($('p0'),p(u,TM.grip_hand,TM.grip_hand+.5)); rise($('p1'),p(u,TM.dead_hang,TM.dead_hang+.5)); rise($('p2'),p(u,TM.farmer_carry,TM.farmer_carry+.5));
+  const fs=1+.05*Math.sin(t*5); $('fist').setAttribute('transform','translate(350 445) scale('+fs.toFixed(3)+') translate(-350 -445)');
+  $('hang').setAttribute('transform','rotate('+(2*Math.sin(t*1.5)).toFixed(2)+' 800 340)');
+  $('ring').setAttribute('stroke-dashoffset',(213.6*(1-(t*.25)%1)).toFixed(1));
+  const ls=18*Math.sin(t*4); FL.setAttribute('d','M1250 479L'+(1250-ls).toFixed(1)+' 640M1270 479L'+(1270+ls).toFixed(1)+' 640');
+
+  rise($('alone'),p(u,TM.balance-2.2,TM.balance-1.7)); rise($('bal'),p(u,TM.balance,TM.balance+.5));
+  $('sway').setAttribute('transform','rotate('+(3*Math.sin(t*1.6)).toFixed(2)+' 440 640)');
+  rise($('fallg'),p(u,TM.falling,TM.falling+.5));
+  $('tip').setAttribute('transform','rotate('+(55*p(u,TM.falling+.6,TM.falling+1.4)).toFixed(1)+' 1100 640)');
+  rise($('mat'),p(u,TM.falling+3,TM.falling+3.6));
+
+  rise($('tr'),p(u,TM.trainee,TM.trainee+.5)); rise($('flag'),p(u,TM.trainee+1,TM.trainee+1.5));
+  const td=p(u,TM.trainee+1.2,TM.trainee+1.8); TD.forEach((c,i)=>{c.setAttribute('cx',(320+(i*175+t*60)%1040).toFixed(1));c.setAttribute('opacity',td)});
+  [0,1,2].forEach(i=>rise($('mv'+i),p(u,TM.barbell+i*.6,TM.barbell+i*.6+.5)));
+  rise($('jar'),p(u,TM.barbell+5,TM.barbell+5.5)); rise($('dep'),p(u,TM.barbell+5,TM.barbell+5.6));
+  CO.forEach((c,i)=>{const a=TM.barbell+5.4+i*.35;rise(c,p(u,a,a+.3))});
+
+  rise($('qa'),p(u,TM.notepad,TM.notepad+.5)); rise($('qb'),p(u,TM.notepad+.4,TM.notepad+.9));
+  rise($('pad'),p(u,TM.notepad+.2,TM.notepad+.7));
+  TK.forEach((k,i)=>k.setAttribute('opacity',p(u,TM.notepad+1+i*.6,TM.notepad+1.3+i*.6)));
+  rise($('qc'),p(u,TM.notepad+4.2,TM.notepad+4.7)); rise($('qd'),p(u,TM.notepad+4.6,TM.notepad+5.1)); rise($('qm'),p(u,TM.notepad+5.2,TM.notepad+5.7));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

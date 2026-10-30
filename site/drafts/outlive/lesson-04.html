@@ -1,0 +1,392 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outlive Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Outlive: Aerobic fitness, built through steady Zone 2 training and pushing up your VO2 max, is one of the strongest predictors of how long and how well you live. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIVE · LESSON 4</text>
+<text class="d" x="116" y="360" font-size="84" letter-spacing="-2">Exercise is the</text>
+<text class="d" x="116" y="456" font-size="84" letter-spacing="-2">strongest longevity</text>
+<text class="d" x="116" y="552" font-size="84" letter-spacing="-2">drug.</text>
+<text class="b" x="120" y="640" font-size="32">Why aerobic fitness may be your most powerful longevity medicine.</text>
+<g id="pill"><g transform="rotate(-20 1340 230)"><path class="gain" d="M1340 201h-58a29 29 0 0 0 0 58h58z"/><rect class="s-ink" x="1250" y="198" width="180" height="64" rx="32" fill="none" stroke-width="6"/></g></g>
+<g id="run0">
+<path class="s-gain" d="M1170 430h55M1180 470h45M1170 510h55" stroke-width="6" stroke-linecap="round"/>
+<path id="rp0" class="s-gain" fill="none" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="gain" cx="1341" cy="376" r="30"/>
+<path class="s-ink" d="M1200 658H1480" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="modes"><text class="m" x="1480" y="740" font-size="20" text-anchor="end">BIKE · TRAIL · TREADMILL</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fitness beats habits.</text>
+<text class="b" x="120" y="176" font-size="32">Attia points to a large study of treadmill fitness tests.</text>
+<g id="tm">
+<text id="cnt" class="d" x="140" y="300" font-size="72">120,000+</text>
+<text class="m" x="140" y="345" font-size="20">ADULTS · TREADMILL TESTS</text>
+<path class="s-ink" d="M510 640L545 470M525 470h60" stroke-width="7" stroke-linecap="round"/>
+<rect class="s-ink" x="150" y="640" width="400" height="28" rx="14" fill="var(--stage)" stroke-width="6"/>
+<path id="belt" class="s-muted" d="M172 654H528" stroke-width="4" stroke-dasharray="16 16"/>
+<path id="rp1" class="s-ink" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="ink" cx="346" cy="418" r="24"/>
+</g>
+<g id="bars"></g>
+<g id="cax">
+<path class="s-ink" d="M700 720H1460" stroke-width="4"/>
+<text class="m" x="700" y="300" font-size="20">RISK OF DEATH</text>
+<text class="m" x="775" y="756" font-size="20" text-anchor="middle">LEAST FIT</text>
+<text class="m" x="1375" y="756" font-size="20" text-anchor="middle">MOST FIT</text>
+</g>
+<g id="smoke">
+<path class="s-loss" d="M700 400H1460" stroke-width="4" stroke-dasharray="12 10"/>
+<rect x="1200" y="374" width="90" height="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="3"/>
+<rect class="loss" x="1290" y="374" width="18" height="14"/>
+<text class="m" x="1460" y="390" font-size="20" text-anchor="end" style="fill:var(--loss)">SMOKING</text>
+</g>
+<g id="arrow1"><path id="ap" class="s-gain" d="M775 316Q1000 400 1375 570" fill="none" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/><path id="ah" class="s-gain" d="M1349 548L1375 570L1343 576" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="drop"><text class="d" x="120" y="830" font-size="40">Risk keeps dropping with every step up.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Leave the bottom.</text>
+<text class="b" x="120" y="176" font-size="32">Even one step up the ladder pays off.</text>
+<g id="stairs"><path d="M160 780V700H360V620H560V540H760V460H960V380H1160V780Z" fill="var(--line)"/></g>
+<g id="couchg">
+<rect class="loss" x="200" y="600" width="150" height="60" rx="14"/>
+<rect class="loss" x="190" y="655" width="170" height="45" rx="12"/>
+<g id="climb"><circle class="gain" cx="0" cy="-92" r="22"/><path class="gain" d="M-33 0v-20a33 33 0 0 1 66 0v20z"/></g>
+</g>
+<g id="riskg">
+<text class="m" x="1360" y="280" font-size="20" text-anchor="middle">RISK</text>
+<rect class="s-ink" x="1300" y="300" width="120" height="440" rx="10" fill="none" stroke-width="5"/>
+<rect id="riskf" class="loss" x="1306" width="108" rx="6"/>
+</g>
+<g id="bigdrop"><text class="m" x="1360" y="790" font-size="20" text-anchor="middle" style="fill:var(--gain)">BIG DROP</text></g>
+<g id="ath"><text class="d" x="120" y="850" font-size="44">You don’t need to be an athlete to gain a lot.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Zone 2 builds your base.</text>
+<text class="b" x="120" y="176" font-size="32">A steady pace you can hold for a long time.</text>
+<g id="bike">
+<circle class="s-ink" cx="210" cy="620" r="70" fill="none" stroke-width="7"/><circle class="s-ink" cx="460" cy="620" r="70" fill="none" stroke-width="7"/>
+<path class="s-ink" d="M210 620L330 620L300 505L430 505L460 620M330 620L430 505M300 505L286 490M272 490H306M430 505L440 482H470" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="rider" class="s-gain" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="gain" cx="418" cy="398" r="24"/>
+<path class="s-line" d="M130 690H640" stroke-width="5"/>
+<text class="m" x="140" y="740" font-size="20">ZONE 2 · A STEADY PACE</text>
+</g>
+<g id="bub">
+<rect class="s-ink" x="440" y="240" width="330" height="80" rx="40" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M480 318L445 360L515 318" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d5" x="605" y="290" font-size="26" text-anchor="middle">Can talk. Rather not.</text>
+</g>
+<g id="cell">
+<circle class="s-line" cx="960" cy="440" r="170" fill="none" stroke-width="5"/>
+<text class="m" x="960" y="650" font-size="20" text-anchor="middle">MITOCHONDRIA · CELL ENGINES</text>
+</g>
+<g id="mito"></g>
+<g id="clk">
+<circle class="s-ink" cx="1330" cy="370" r="100" fill="var(--stage)" stroke-width="7"/>
+<path id="wedge" class="gain"/>
+<path id="hand" class="s-ink" d="M1330 370V295" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1330" cy="370" r="10"/>
+<text class="d" x="1330" y="520" font-size="36" text-anchor="middle">3 hours a week</text>
+<g id="blk"></g>
+<text class="m" x="1330" y="660" font-size="20" text-anchor="middle">4 × 45 MIN</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">VO2 max is your ceiling.</text>
+<text class="b" x="120" y="176" font-size="32">The most oxygen your body can use at full effort.</text>
+<g id="gauge">
+<path class="s-line" d="M180 520A200 200 0 0 1 580 520" fill="none" stroke-width="26" stroke-linecap="round"/>
+<path id="garc" class="s-gain" d="M180 520A200 200 0 0 1 580 520" fill="none" stroke-width="26" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<path id="needle" class="s-ink" d="M380 520V360" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="380" cy="520" r="14"/>
+<text class="m" x="380" y="570" font-size="22" text-anchor="middle">VO2 MAX</text>
+</g>
+<g id="hillg">
+<path d="M160 790Q380 610 600 790Z" fill="var(--line)"/>
+<circle class="gain" cx="380" cy="650" r="16"/><path class="gain" d="M356 700v-12a24 24 0 0 1 48 0v12z"/>
+<text class="m" x="380" y="840" font-size="20" text-anchor="middle">THE HARDEST YOU CAN PUSH</text>
+</g>
+<g id="chart">
+<text class="m" x="760" y="262" font-size="20">CAPACITY</text>
+<path class="s-ink" d="M760 280V760H1460" fill="none" stroke-width="4"/>
+<text class="m" x="1460" y="800" font-size="20" text-anchor="end">AGE →</text>
+<path class="s-muted" d="M760 620H1460" stroke-width="3" stroke-dasharray="10 10"/>
+<text class="m" x="790" y="600" font-size="20">WHAT DAILY LIFE DEMANDS</text>
+<path id="l1" class="s-loss" d="M780 420L1440 640" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<text class="m" x="1440" y="692" font-size="20" text-anchor="end" style="fill:var(--loss)">CEILING TODAY</text>
+<path id="l2" class="s-gain" d="M780 320L1440 540" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<g id="room"><text class="m" x="900" y="326" font-size="20" style="fill:var(--gain)">RAISED NOW</text><path class="s-gain" d="M1450 550V610M1440 562l10-12 10 12M1440 598l10 12 10-12" fill="none" stroke-width="4" stroke-linecap="round"/></g>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hard intervals lift the ceiling.</text>
+<text class="b" x="120" y="176" font-size="32">Short, very hard efforts.</text>
+<g id="sw">
+<rect class="ink" x="270" y="290" width="40" height="24" rx="6"/>
+<circle class="s-ink" cx="290" cy="460" r="140" fill="var(--stage)" stroke-width="8"/>
+<path id="swh" class="s-gain" d="M290 460V350" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="290" cy="460" r="12"/>
+<text class="m" x="290" y="650" font-size="20" text-anchor="middle">SHORT · VERY HARD</text>
+</g>
+<g id="ilg">
+<rect class="gain" x="540" y="252" width="22" height="22" rx="4"/><text class="m" x="574" y="272" font-size="20">4 MIN NEAR MAX</text>
+<rect x="900" y="252" width="22" height="22" rx="4" fill="var(--line)"/><text class="m" x="934" y="272" font-size="20">4 MIN EASY</text>
+<path class="s-ink" d="M530 640H1450" stroke-width="4"/>
+<text class="m" x="990" y="690" font-size="20" text-anchor="middle">REPEAT 4–6 TIMES</text>
+</g>
+<g id="ivs"></g>
+<g id="cal"><text class="m" x="140" y="776" font-size="20">ONE HARD SESSION A WEEK</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it is medicine.</text>
+<text class="b" x="120" y="176" font-size="32">No pill matches what fitness does.</text>
+<g id="bottle">
+<rect class="ink" x="210" y="280" width="160" height="50" rx="8"/>
+<rect class="s-ink" x="190" y="330" width="200" height="300" rx="20" fill="var(--stage)" stroke-width="7"/>
+<rect x="190" y="420" width="200" height="110" fill="var(--line)"/>
+<text class="d" x="290" y="495" font-size="56" text-anchor="middle">Rx</text>
+<text class="m" x="290" y="690" font-size="20" text-anchor="middle">NO PILL MATCHES IT</text>
+</g>
+<g id="lt"><text class="d" x="590" y="540" font-size="140" text-anchor="middle" style="fill:var(--muted)">&lt;</text></g>
+<g id="body"><circle class="ink" cx="900" cy="300" r="64"/><path class="ink" d="M760 760V520a140 140 0 0 1 280 0V760Z"/></g>
+<g id="mk0"><circle id="hrt" class="gain" cx="940" cy="500" r="20"/><path class="s-gain" d="M960 500H1120" stroke-width="4"/><text class="d5" x="1140" y="512" font-size="36">Heart</text></g>
+<g id="mk1"><circle class="gain" cx="900" cy="620" r="20"/><path class="s-gain" d="M920 620H1120" stroke-width="4"/><text class="d5" x="1140" y="632" font-size="36">Metabolism</text></g>
+<g id="mk2"><circle class="gain" cx="900" cy="290" r="20"/><path class="s-gain" d="M920 290H1120" stroke-width="4"/><text class="d5" x="1140" y="302" font-size="36">Brain</text></g>
+<g id="medi"><text class="d" x="120" y="840" font-size="44">Medicine you take with your legs and lungs.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start where you are.</text>
+<text class="b" x="120" y="176" font-size="32">Steady most days, one hard day, retest often.</text>
+<g id="week"></g>
+<path class="s-line" d="M140 742H1460" stroke-width="4"/>
+<path id="cv" class="s-gain" fill="none" stroke-width="7" stroke-linecap="round" pathLength="1" stroke-dasharray="1"/>
+<g id="dots"></g>
+<g id="rlab"><text class="m" x="140" y="790" font-size="20">RETEST EVERY FEW MONTHS</text><text class="m" x="1460" y="790" font-size="20" text-anchor="end">DECADES →</text></g>
+<g id="sgain"><text class="d" x="140" y="510" font-size="46">Small gains compound over decades.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="320" font-size="88" letter-spacing="-2">This week, can you find</text></g>
+<g id="qb"><text class="d" x="136" y="430" font-size="88" letter-spacing="-2">three steady hours where you</text></g>
+<g id="qc"><text class="d" x="136" y="540" font-size="88" letter-spacing="-2">can talk but <tspan style="fill:var(--gain)">would rather not?</tspan></text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">BOOK THEM LIKE A DOCTOR’S APPOINTMENT</text></g>
+<g id="cal8">
+<rect class="s-ink" x="1160" y="600" width="300" height="220" rx="18" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1160 650H1460M1220 585v30M1400 585v30" stroke-width="6" stroke-linecap="round"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="137" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:17</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Exercise Is the Strongest Longevity Drug&rdquo;, from <em>Outlive</em> by Peter Attia, with Bill Gifford. The large treadmill study linking low fitness to higher mortality is described as reported in the book. The charts, gauges and decline line are illustrations of the ideas, not plotted data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=137, SC=[[0.0, 10.3], [10.3, 31.5], [31.5, 43.6], [43.6, 64.7], [64.7, 81.3], [81.3, 96.3], [96.3, 110.8], [110.8, 123.5], [123.5, 137.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Free Drug", "Fitness Beats Habits", "Leave the Bottom", "Build Your Base", "Raise Your Ceiling", "Hard Intervals", "Why It Is Medicine", "Start Where You Are", "Your Challenge"];
+const TM={"title_runner": 0.0, "treadmill": 10.6, "fitness_chart": 17.6, "cigarette": 23.2, "couch": 31.76, "step_up": 33.6, "cyclist": 43.92, "talk_bubble": 50.08, "mitochondria": 53.36, "clock": 59.48, "oxygen_gauge": 64.96, "hill": 71.2, "decline_line": 75.96, "stopwatch": 81.6, "intervals": 85.97, "calendar": 92.72, "pill_bottle": 96.56, "body_map": 102.52, "sneakers": 111.12, "progress_bar": 114.8};
+const R=n=>n.toFixed(1);
+const RD=(x,y,s,ph)=>{const S=Math.sin,sx=x+10*s,sy=y-80*s;let d='M'+x+' '+y+'L'+sx+' '+sy;
+[0,Math.PI].forEach(k=>{const a=ph+k;d+='M'+x+' '+y+'L'+R(x+30*s*S(a))+' '+R(y+52*s)+'L'+R(x+45*s*S(a)-14*s)+' '+R(y+100*s-16*s*Math.max(0,Math.cos(a)));
+d+='M'+sx+' '+sy+'L'+R(sx-26*s*S(a))+' '+R(sy+36*s)+'L'+R(sx-26*s*S(a)+26*s)+' '+R(sy+40*s)});return d};
+const BR=[380,280,210,160,120].map((h,i)=>mk('rect',{x:720+i*150,y:720-h,width:110,height:h,rx:6,fill:i?'var(--ink)':'var(--loss)'},$('bars')));
+['LEAST FIT','BELOW AVG','ABOVE AVG','HIGH','ELITE'].forEach((s,i)=>{mk('text',{x:260+i*200,y:744-i*80,'font-size':18,'text-anchor':'middle',class:'m'},$('stairs')).textContent=s});
+const MP=[[-80,-60,30],[60,-90,-20],[95,30,40],[-30,75,-10],[-110,40,60],[15,-5,10]],MI=MP.map(q=>{const g=mk('g',{},$('mito'));mk('ellipse',{rx:44,ry:22,class:'gain'},g);mk('path',{d:'M-28 0q7-12 14 0t14 0t14 0',fill:'none',stroke:'var(--stage)','stroke-width':4},g);return g});
+const BK=[0,1,2,3].map(i=>{const g=mk('g',{},$('blk'));mk('rect',{x:1190+i*72,y:560,width:60,height:60,rx:10,class:'gain'},g);mk('text',{x:1220+i*72,y:599,'font-size':24,'text-anchor':'middle',class:'d5',style:'fill:var(--on-gain)'},g).textContent='45';return g});
+const IV=[];for(let i=0;i<6;i++){const x=540+i*150;IV.push(mk('rect',{x:x,y:340,width:70,height:300,rx:6,fill:i<4?'var(--gain)':'none',stroke:'var(--gain)','stroke-width':i<4?0:4,'stroke-dasharray':'10 8'},$('ivs')));IV.push(mk('rect',{x:x+75,y:550,width:70,height:90,rx:6,fill:'var(--line)'},$('ivs')))}
+const DY=[...'MTWTFSS'];
+DY.forEach((d,i)=>{const x=540+i*130,on=i==3;mk('rect',{x:x,y:720,width:110,height:90,rx:12,fill:on?'var(--gain)':'var(--stage)',stroke:on?'var(--gain)':'var(--line)','stroke-width':4},$('cal'));mk('text',{x:x+55,y:776,'font-size':28,'text-anchor':'middle',class:'d5',style:on?'fill:var(--on-gain)':''},$('cal')).textContent=d});
+const SH='M0 0h40l12 14 30 8q14 4 14 18v8H0z',TY='zzhzzrz',TL=DY.map((d,i)=>{const x=120+i*190,c=TY[i],h=c=='h',g=mk('g',{},$('week'));
+mk('rect',{x:x,y:240,width:170,height:150,rx:16,fill:h?'var(--gain)':'var(--stage)',stroke:h?'var(--gain)':'var(--ink)','stroke-width':4},g);
+mk('text',{x:x+20,y:274,'font-size':20,class:'m',style:h?'fill:var(--on-gain)':''},g).textContent=d;
+if(c=='z'){mk('path',{d:SH,transform:'translate('+(x+37)+' 292)',fill:'var(--gain)'},g);mk('text',{x:x+85,y:372,'font-size':18,'text-anchor':'middle',class:'m'},g).textContent='ZONE 2'}
+else mk('text',{x:x+85,y:345,'font-size':h?36:20,'text-anchor':'middle',class:h?'d':'m',style:h?'fill:var(--on-gain)':''},g).textContent=h?'HARD':'REST';return g});
+const CY=f=>732-262*(Math.exp(3*f)-1)/(Math.exp(3)-1);let cd='';for(let i=0;i<=40;i++){const f=i/40;cd+=(i?'L':'M')+R(160+1280*f)+' '+R(CY(f))}$('cv').setAttribute('d',cd);
+const DF=[.2,.35,.5,.65,.8,.95],DT=DF.map(f=>mk('circle',{cx:R(160+1280*f),cy:R(CY(f)),r:11,class:'gain',stroke:'var(--stage)','stroke-width':4},$('dots')));
+const CB=[0,1,2].map(i=>{const g=mk('g',{},$('cal8'));mk('rect',{x:1190+i*90,y:680,width:70,height:110,rx:10,class:'gain'},g);mk('text',{x:1225+i*90,y:745,'font-size':28,'text-anchor':'middle',class:'d5',style:'fill:var(--on-gain)'},g).textContent='1H';return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const dr=(id,k)=>$(id).setAttribute('stroke-dashoffset',R(1-k));
+
+  $('rp0').setAttribute('d',RD(1320,522,1.3,t*7));
+  rise($('run0'),p(u,TM.title_runner,TM.title_runner+.6)); rise($('modes'),p(u,TM.title_runner+5,TM.title_runner+5.6));
+  $('pill').setAttribute('transform','translate(0 '+R(8*Math.sin(t*1.5))+')');
+
+  rise($('tm'),p(u,TM.treadmill,TM.treadmill+.5)); $('rp1').setAttribute('d',RD(330,530,1,t*8)); $('belt').setAttribute('stroke-dashoffset',R(t*80));
+  $('cnt').textContent=Math.round(120000*p(u,TM.treadmill+.3,TM.treadmill+1.8)).toLocaleString('en-US')+'+';
+  rise($('cax'),p(u,TM.fitness_chart,TM.fitness_chart+.5));
+  BR.forEach((b,i)=>{const a=TM.fitness_chart+.3+i*.3; rise(b,p(u,a,a+.4))});
+  rise($('smoke'),p(u,TM.cigarette,TM.cigarette+.5));
+  const ak=p(u,TM.cigarette+4.9,TM.cigarette+6.2); dr('ap',ak); $('ah').setAttribute('opacity',ak>.95?1:0);
+  rise($('drop'),p(u,TM.cigarette+5.4,TM.cigarette+6));
+
+  rise($('stairs'),p(u,TM.couch,TM.couch+.5)); rise($('couchg'),p(u,TM.couch+.2,TM.couch+.7)); rise($('riskg'),p(u,TM.couch+.4,TM.couch+.9));
+  const ck=p(u,TM.step_up,TM.step_up+1.4);
+  $('climb').setAttribute('transform','translate('+R(275+185*ck)+' '+R(655-35*ck-90*Math.sin(Math.PI*ck))+')');
+  const rh=428*(1-.5*p(u,TM.step_up+.6,TM.step_up+1.8)); $('riskf').setAttribute('y',R(734-rh)); $('riskf').setAttribute('height',R(rh));
+  rise($('bigdrop'),p(u,TM.step_up+1.6,TM.step_up+2.1)); rise($('ath'),p(u,TM.step_up+8.1,TM.step_up+8.7));
+
+  rise($('bike'),p(u,TM.cyclist,TM.cyclist+.5));
+  let rd='M290 486L395 428L465 482';
+  [0,Math.PI].forEach(k=>{const fx=330+28*Math.cos(t*4+k),fy=620+28*Math.sin(t*4+k); rd+='M290 486L'+R((290+fx)/2+34)+' '+R((486+fy)/2-14)+'L'+R(fx)+' '+R(fy)});
+  $('rider').setAttribute('d',rd);
+  rise($('bub'),p(u,TM.talk_bubble,TM.talk_bubble+.5)); rise($('cell'),p(u,TM.mitochondria,TM.mitochondria+.5));
+  MI.forEach((g,i)=>{const q=MP[i],a=TM.mitochondria+.4+i*.3; g.setAttribute('opacity',R(p(u,a,a+.4))); g.setAttribute('transform','translate('+(960+q[0])+' '+(440+q[1])+') rotate('+q[2]+') scale('+(1+.06*Math.sin(t*3+i)).toFixed(3)+')')});
+  rise($('clk'),p(u,TM.clock,TM.clock+.5));
+  const wk=p(u,TM.clock+.3,TM.clock+1.6),wa=Math.PI/2*wk;
+  $('wedge').setAttribute('d','M1330 370L1330 280A90 90 0 0 1 '+R(1330+90*Math.sin(wa))+' '+R(370-90*Math.cos(wa))+'Z');
+  $('hand').setAttribute('transform','rotate('+R(90*wk)+' 1330 370)');
+  BK.forEach((g,i)=>{const a=TM.clock+2+i*.35; rise(g,p(u,a,a+.4))});
+
+  rise($('gauge'),p(u,TM.oxygen_gauge,TM.oxygen_gauge+.5));
+  const gk=p(u,TM.oxygen_gauge+.4,TM.oxygen_gauge+1.8); dr('garc',gk);
+  $('needle').setAttribute('transform','rotate('+R(-90+176*gk+2*gk*Math.sin(t*6))+' 380 520)');
+  rise($('hillg'),p(u,TM.hill,TM.hill+.5)); rise($('chart'),p(u,TM.decline_line,TM.decline_line+.5));
+  dr('l1',p(u,TM.decline_line+.4,TM.decline_line+1.9)); dr('l2',p(u,TM.decline_line+2,TM.decline_line+3.5));
+  rise($('room'),p(u,TM.decline_line+3.3,TM.decline_line+3.9));
+
+  rise($('sw'),p(u,TM.stopwatch,TM.stopwatch+.5)); $('swh').setAttribute('transform','rotate('+R((t*90)%360)+' 290 460)');
+  rise($('ilg'),p(u,TM.intervals,TM.intervals+.5));
+  IV.forEach((r,i)=>{const a=TM.intervals+.4+i*.35; rise(r,p(u,a,a+.35))});
+  rise($('cal'),p(u,TM.calendar,TM.calendar+.5));
+
+  rise($('bottle'),p(u,TM.pill_bottle,TM.pill_bottle+.5)); rise($('lt'),p(u,TM.pill_bottle+1.5,TM.pill_bottle+2)); rise($('body'),p(u,TM.pill_bottle+2,TM.pill_bottle+2.6));
+  [0,1,2].forEach(i=>{const a=TM.body_map+i*1.2; rise($('mk'+i),p(u,a,a+.5))});
+  $('hrt').setAttribute('r',R(20+5*Math.pow(Math.abs(Math.sin(t*3)),6)));
+  rise($('medi'),p(u,TM.body_map+5,TM.body_map+5.6));
+
+  TL.forEach((g,i)=>{const a=TY[i]=='h'?TM.progress_bar:TM.sneakers+i*.25; rise(g,p(u,a,a+.4))});
+  const vk=p(u,TM.progress_bar+.5,TM.progress_bar+6); dr('cv',vk);
+  DT.forEach((c,i)=>c.setAttribute('opacity',vk>=DF[i]?1:0));
+  rise($('rlab'),p(u,TM.progress_bar+.5,TM.progress_bar+1)); rise($('sgain'),p(u,TM.progress_bar+4.6,TM.progress_bar+5.2));
+
+  const b8=SC[8][0]/K;
+  rise($('qa'),p(u,b8+.4,b8+.9)); rise($('qb'),p(u,b8+.8,b8+1.3)); rise($('qc'),p(u,b8+1.2,b8+1.7));
+  rise($('cal8'),p(u,b8+2,b8+2.5)); CB.forEach((g,i)=>{const a=b8+2.6+i*.4; rise(g,p(u,a,a+.4))});
+  rise($('qd'),p(u,b8+6.6,b8+7.2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:133.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

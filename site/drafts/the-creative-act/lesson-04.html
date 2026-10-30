@@ -1,0 +1,347 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Creative Act Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of The Creative Act: Early on, you should gather many rough ideas freely and avoid deciding too soon which ones deserve to grow. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE CREATIVE ACT · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Collect seeds before</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">choosing one.</text>
+<text class="b" x="120" y="600" font-size="32">Gather many rough ideas before deciding which ones deserve to grow.</text>
+<path class="s-line" d="M1150 518h340" stroke-width="5" stroke-linecap="round"/>
+<circle id="glow" cx="1266" cy="480" r="24" fill="none" stroke="var(--gain)" stroke-width="4"/>
+<g id="pile"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Planting time.</text>
+<text class="b" x="120" y="176" font-size="32">Rubin: the start of any project is a garden at planting time.</text>
+<g id="bed"><text class="m" x="120" y="470" font-size="20">THE PROJECT</text><rect x="120" y="500" width="760" height="200" rx="20" fill="var(--line)"/><path class="s-muted" d="M160 560h680M160 610h680M160 660h680" stroke-width="3" stroke-dasharray="6 10"/></g>
+<g id="bedseeds"></g>
+<g id="packet"><rect class="s-ink" x="1000" y="230" width="260" height="300" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M1000 280h260" stroke-width="4" stroke-dasharray="10 8"/><ellipse class="gain" cx="1130" cy="370" rx="40" ry="26" transform="rotate(-20 1130 370)"/><text class="m" x="1130" y="448" font-size="28" text-anchor="middle">SEEDS</text><text class="m" x="1130" y="492" font-size="22" text-anchor="middle">ROUGH IDEAS</text></g>
+<g id="chips1"></g>
+<g id="collect"><text class="d" x="120" y="800" font-size="48">Your only job is to collect.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Anything can be a seed.</text>
+<text class="b" x="120" y="176" font-size="32">A scrap of melody, a phrase, a shape, a feeling, a question, a theme.</text>
+<g id="icons"></g>
+<g id="cseed"><ellipse cx="800" cy="470" rx="70" ry="44" fill="var(--muted)" transform="rotate(-15 800 470)"/><text class="m" x="800" y="560" font-size="20" text-anchor="middle">A SEED</text></g>
+<g id="plain"><text class="d" x="120" y="820" font-size="48">Seeds often look unimpressive at first.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Don’t judge too early.</text>
+<g id="sq3"><text class="b" x="120" y="176" font-size="32">Ranking ideas the moment they appear squeezes the life out of them.</text></g>
+<rect class="s-line" x="120" y="230" width="620" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="cards"></g>
+<g id="rts"><text class="m" x="430" y="705" font-size="20" text-anchor="middle" style="fill:var(--loss)">RANKED TOO SOON</text></g>
+<g id="pen"><g transform="rotate(30)"><rect class="loss" x="-10" y="-110" width="20" height="88" rx="6"/><path class="loss" d="M-10-22h20L0 0z"/></g></g>
+<path class="s-ink" d="M860 700h600" stroke-width="6" stroke-linecap="round"/>
+<g id="plants"></g>
+<g id="later"><text class="d" x="120" y="820" font-size="48">Judgment has its place, but later.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">You can’t tell by staring.</text>
+<text class="b" x="120" y="176" font-size="32">Rubin’s point is humble and freeing.</text>
+<rect x="160" y="640" width="1000" height="40" rx="10" fill="var(--line)"/>
+<g id="sprouts"></g>
+<g id="qs"></g>
+<g id="eye"><path class="s-line" d="M1250 578L1172 632" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/><ellipse class="s-ink" cx="1330" cy="560" rx="80" ry="44" fill="var(--stage)" stroke-width="6"/><circle id="pupil" class="ink" cx="1330" cy="560" r="22"/><text class="m" x="1330" y="650" font-size="20" text-anchor="middle">STARING WON’T TELL</text></g>
+<g id="can"><g id="canb"><g transform="rotate(28)"><path class="s-ink" d="M-50-40H45L48-18L104-58L116-44L52 12L55 40H-50Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><path class="s-ink" d="M-50-24q-38 0-38 28t38 28" fill="none" stroke-width="7" stroke-linecap="round"/><path class="s-gain" d="M-36 18h70" stroke-width="6" stroke-linecap="round"/></g><g id="drops"></g></g></g>
+<g id="only"><text class="d" x="120" y="800" font-size="46">The only way to know: time and attention.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Catch everything.</text>
+<text class="b" x="120" y="176" font-size="32">Keep a notebook, or voice memos on your phone.</text>
+<g id="nb"><rect class="s-ink" x="160" y="260" width="240" height="320" rx="12" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M200 330h160M200 380h160M200 430h160M200 480h110" stroke-width="6" stroke-linecap="round"/><rect class="s-ink" x="460" y="300" width="150" height="280" rx="22" fill="var(--stage)" stroke-width="6"/><path class="s-gain" d="M495 440v0M515 420v40M535 400v80M555 425v30M575 435v10" stroke-width="10" stroke-linecap="round"/><text class="m" x="280" y="620" font-size="20" text-anchor="middle">NOTEBOOK</text><text class="m" x="535" y="620" font-size="20" text-anchor="middle">VOICE MEMOS</text></g>
+<path id="arr5" class="s-muted" d="M650 460h150m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="jar"><path class="s-ink" d="M920 290h180v40q50 10 50 60v290q0 40-40 40H910q-40 0-40-40V390q0-50 50-60z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/></g>
+<g id="jarseeds"></g>
+<line id="jstem" x1="1010" y1="330" x2="1010" y2="330" stroke="var(--gain)" stroke-width="7" stroke-linecap="round"/>
+<g id="jleaf"><ellipse class="gain" cx="988" cy="240" rx="22" ry="10"/><ellipse class="gain" cx="1032" cy="240" rx="22" ry="10"/></g>
+<g id="qq"><text class="d" x="1200" y="430" font-size="48" style="fill:var(--gain)">QUANTITY</text><text class="m" x="1200" y="480" font-size="22">OVER</text><text class="d5" x="1200" y="540" font-size="40" style="fill:var(--muted)">quality</text></g>
+<g id="more"><text class="d" x="120" y="800" font-size="44">The more seeds, the more chances to take root.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Some seeds wait their season.</text>
+<text class="b" x="120" y="176" font-size="32">An idea that goes nowhere today can be revisited months later.</text>
+<g id="cal"><rect class="s-ink" x="160" y="260" width="380" height="360" rx="14" fill="var(--stage)" stroke-width="6"/><rect id="calh" x="160" y="260" width="380" height="72" rx="14" fill="var(--ink)"/><text id="calt" class="m" x="350" y="306" font-size="24" text-anchor="middle" style="fill:var(--stage)">TODAY</text><g id="days"></g></g>
+<g id="shelfg"><rect class="ink" x="700" y="600" width="760" height="16" rx="4"/><path class="s-ink" d="M760 616v40M1400 616v40" stroke-width="8" stroke-linecap="round"/><g id="jars"></g><text class="m" x="1080" y="700" font-size="20" text-anchor="middle">SET ASIDE, REVISIT LATER</text></g>
+<g id="mseed"><ellipse class="ink" cx="0" cy="0" rx="17" ry="11"/></g>
+<line id="wstem" x1="1080" y1="570" x2="1080" y2="570" stroke="var(--gain)" stroke-width="7" stroke-linecap="round"/>
+<g id="wleaf"><ellipse class="gain" cx="1056" cy="320" rx="24" ry="11"/><ellipse class="gain" cx="1104" cy="320" rx="24" ry="11"/></g>
+<g id="season"><text class="d" x="120" y="800" font-size="48">Its season may not have come yet.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Try this today.</text>
+<text class="b" x="120" y="176" font-size="32">Ten minutes. Write down every idea that comes, however rough.</text>
+<g id="tmr"><circle cx="360" cy="480" r="150" fill="none" stroke="var(--line)" stroke-width="16"/><circle id="arc" cx="360" cy="480" r="150" fill="none" stroke="var(--gain)" stroke-width="16" stroke-linecap="round" stroke-dasharray="942" transform="rotate(-90 360 480)"/><rect class="ink" x="340" y="294" width="40" height="20" rx="6"/><text class="d" x="360" y="510" font-size="96" text-anchor="middle">10</text><text class="m" x="360" y="560" font-size="22" text-anchor="middle">MINUTES</text></g>
+<rect class="s-ink" x="640" y="230" width="520" height="540" rx="14" fill="var(--stage)" stroke-width="5"/>
+<g id="lines7"></g>
+<circle id="pick7" class="gain" cx="665" cy="590" r="10"/>
+<g id="tags"><text class="m" x="1130" y="477" font-size="20" text-anchor="end" style="fill:var(--gain)">SILLY</text><text class="m" x="1130" y="597" font-size="20" text-anchor="end" style="fill:var(--gain)">STRANGE</text></g>
+<g id="nox"><circle class="s-loss" cx="1340" cy="380" r="80" fill="none" stroke-width="8"/><rect class="ink" x="1290" y="372" width="100" height="16" rx="8"/><path class="s-loss" d="M1280 380h120" stroke-width="4"/><path class="s-loss" d="M1283 323l114 114" stroke-width="8" stroke-linecap="round"/><text class="m" x="1340" y="500" font-size="20" text-anchor="middle">CROSS NOTHING OUT</text></g>
+<g id="wait"><g id="dots7"></g><text class="m" x="1340" y="670" font-size="18" text-anchor="middle">LET IT SIT A FEW DAYS</text><text class="m" x="1340" y="720" font-size="18" text-anchor="middle" style="fill:var(--gain)">THEN PICK ONE</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which idea have you</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">dismissed too <tspan style="fill:var(--gain)">quickly?</tspan></text></g>
+<g id="plant8"><text class="m" x="143" y="600" font-size="26">PLANT IT BACK IN THE PILE THIS WEEK.</text><text class="m" x="143" y="644" font-size="26">SEE WHAT GROWS.</text></g>
+<g id="hand">
+<rect class="ink" x="1390" y="500" width="90" height="64" rx="10"/>
+<path class="s-ink" d="M1390 504h-80q-34 0-34 28q0 28 34 28h80z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M1300 514h-36M1298 532h-44M1300 550h-36" fill="none" stroke-width="10" stroke-linecap="round"/>
+</g>
+<path d="M1170 720q120-110 240 0z" fill="var(--line)"/>
+<path class="s-ink" d="M1140 720h300" stroke-width="6" stroke-linecap="round"/>
+<line id="tstem" x1="1290" y1="668" x2="1290" y2="668" stroke="var(--gain)" stroke-width="7" stroke-linecap="round"/>
+<g id="tleaf"><ellipse class="gain" cx="1267" cy="590" rx="22" ry="10"/><ellipse class="gain" cx="1313" cy="590" rx="22" ry="10"/></g>
+<g id="tseed"><ellipse class="gain" cx="0" cy="0" rx="16" ry="10"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="122" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:02</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Collect Seeds Before Choosing One&rdquo;, from <em>The Creative Act</em> by Rick Rubin (with Neil Strauss). The garden and seed metaphor for the opening phase of creative work is as described in the book. The notebook, phone, jar, timer and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=122, SC=[[0.0, 8.3], [8.3, 25.9], [25.9, 39.3], [39.3, 56.3], [56.3, 68.8], [68.8, 85.2], [85.2, 97.7], [97.7, 111.7], [111.7, 122.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "The Seed Phase", "What Counts as a Seed", "Do Not Judge Yet", "You Cannot Know Yet", "Gather Widely", "Some Seeds Wait", "Try This Today", "Your Challenge"];
+const TM={"seed_pile": 0.0, "garden_bed": 8.56, "seed_packet": 13.68, "melody_note": 26.16, "thought_cloud": 31.76, "red_pen": 39.6, "tiny_sprout": 47.2, "question_mark": 59.44, "watering_can": 63.92, "notebook": 69.12, "seed_jar": 74.56, "calendar": 85.52, "shelf": 89.44, "timer": 98.0, "cross_out": 106.16, "open_hand": 112.0};
+const seed=(par,x,y,s,a,f)=>{const g=mk('g',{},par);mk('ellipse',{cx:x,cy:y,rx:14*s,ry:9*s,transform:'rotate('+a+' '+x+' '+y+')',fill:f||'var(--ink)'},g);return g};
+const drop=(g,k,d)=>{g.setAttribute('opacity',k.toFixed(3));g.setAttribute('transform','translate(0 '+(-(1-k)*d).toFixed(1)+')')};
+const PS=[];for(let r=0;r<6;r++){const n=7-r;for(let i=0;i<n;i++)PS.push(seed($('pile'),1320+(i-(n-1)/2)*36,500-r*20,1.1,((r*7+i*13)%60)-30,r===1&&i===1?'var(--gain)':'var(--ink)'))}
+const BS=[];[560,610,660].forEach((y,r)=>{for(let i=0;i<4;i++)BS.push(seed($('bedseeds'),210+i*180+(r%2)*40,y,1,(i*25+r*40)%70-35))});
+const CH1=['NOT CHOOSING','NOT POLISHING','JUST GATHERING'].map((s,i)=>{const g=mk('g',{},$('chips1')),on=i===2;
+  mk('rect',{x:1000,y:560+i*64,width:400,height:52,rx:26,fill:on?'var(--gain)':'var(--stage)',stroke:on?'var(--gain)':'var(--muted)','stroke-width':3},g);
+  const tx=mk('text',{x:1200,y:593+i*64,'font-size':20,'text-anchor':'middle',class:'m',style:on?'fill:var(--on-gain)':''},g);tx.textContent=s;return g});
+const S5=d=>({d:d,fill:'none',class:'s-ink','stroke-width':5,'stroke-linejoin':'round','stroke-linecap':'round'});
+const IC=[[300,290,'MELODY SCRAP',[['circle',{cx:-12,cy:18,r:12,class:'ink'}],['path',S5('M0 18V-28l24 8')]]],
+ [300,470,'OVERHEARD PHRASE',[['path',S5('M-30-24h60v36H-2l-14 14v-14h-14z')]]],
+ [300,650,'A SHAPE',[['path',S5('M0-26L28 22H-28z')]]],
+ [1300,290,'A FEELING',[['path',{d:'M0 24C-40 0-36-28-18-28C-8-28-2-20 0-14C2-20 8-28 18-28C36-28 40 0 0 24Z',class:'ink'}]]],
+ [1300,470,'A QUESTION',[['text',{y:20,'font-size':60,'text-anchor':'middle',class:'d'},'?']]],
+ [1300,650,'HALF-FORMED THEME',[['path',Object.assign(S5('M-26 0a26 26 0 1 0 52 0a26 26 0 1 0-52 0'),{'stroke-dasharray':'8 8'})]]]];
+const ICG=IC.map(([x,y,lb,parts])=>{const g=mk('g',{},$('icons')),dx=800-x,dy=470-y,L=Math.hypot(dx,dy);
+  mk('path',{d:'M'+x+' '+y+'L'+(800-dx/L*95).toFixed(0)+' '+(470-dy/L*65).toFixed(0),class:'s-line','stroke-width':4,'stroke-dasharray':'8 8'},g);
+  mk('circle',{cx:x,cy:y,r:58,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const ig=mk('g',{transform:'translate('+x+' '+y+')'},g);parts.forEach(q=>{const e=mk(q[0],q[1],ig);if(q[2])e.textContent=q[2]});
+  const tx=mk('text',{x:x,y:y+92,'font-size':20,'text-anchor':'middle',class:'m'},g);tx.textContent=lb;return g});
+// ranked cards: seed icon at x=236, label starts at x=290 (clear gap), strike limited to label width
+const TX0=290;
+const CD=[0,1,2,3].map(i=>{const cy=300+i*105,g=mk('g',{},$('cards'));
+  const r=mk('rect',{x:200,y:cy-40,width:500,height:80,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const sd=seed(g,236,cy,1,-20);
+  const tx=mk('text',{x:TX0,y:cy+9,'font-size':24,class:'m',style:'fill:var(--muted)'},g);tx.textContent='ROUGH IDEA';
+  const rk=mk('text',{x:160,y:cy+8,'font-size':24,'text-anchor':'middle',class:'m',style:'fill:var(--loss)'},g);rk.textContent='#'+(i+1);
+  const st=mk('line',{x1:TX0-4,y1:cy,x2:TX0-4,y2:cy,stroke:'var(--loss)','stroke-width':3,'stroke-linecap':'round'},g);return {g,r,rk,st,cy,tx,sd}});
+let TW=170;function m3(){try{const v=CD[0].tx.getComputedTextLength();if(v>0)TW=v}catch(e){}}
+m3();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(m3);
+const PL=[[960,1.6,140,'var(--ink)','IMPRESSIVE'],[1160,1.2,100,'var(--ink)',''],[1360,.7,420,'var(--gain)','SMALL, PLAIN']].map(([x,s,h,c,lb])=>{const g=$('plants');
+  const st=mk('line',{x1:x,y1:700,x2:x,y2:700,stroke:c,'stroke-width':6,'stroke-linecap':'round'},g);const cr=mk('circle',{cx:x,cy:700,r:0,fill:c},g);seed(g,x,716,s,-15,c);
+  if(lb){const tx=mk('text',{x:x,y:760,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:'+c},g);tx.textContent=lb}return {st,cr,h,big:s<1}});
+const SX=[240,450,660,870,1080],SH=[110,60,220,140,80];
+const SP4=SX.map((x,i)=>{const g=$('sprouts'),c=i===2?'var(--gain)':'var(--ink)';
+  const st=mk('line',{x1:x,y1:640,x2:x,y2:640,stroke:c,'stroke-width':6,'stroke-linecap':'round'},g);const lf=mk('g',{opacity:0},g);
+  [-1,1].forEach(d=>mk('ellipse',{cx:x+d*18,cy:0,rx:18,ry:9,fill:c},lf));seed(g,x,656,1.2,-15);
+  const q=mk('text',{x:x,y:540,'font-size':72,'text-anchor':'middle',class:'d',style:'fill:var(--muted)'},$('qs'));q.textContent='?';return {st,lf,q,x,h:SH[i]}});
+// droplets fall from the spout tip (local ~121,7 after the 28deg tilt)
+const DR=[0,1,2].map(j=>mk('line',{x1:116+j*9,x2:116+j*9,stroke:'var(--gain)','stroke-width':5,'stroke-linecap':'round'},$('drops')));
+const JS=[];for(let i=0;i<40;i++){const c=i%8,r=Math.floor(i/8);JS.push(seed($('jarseeds'),908+c*29+(r%2)*10,695-r*34,1,((i*37)%80)-40,i===27?'var(--gain)':'var(--ink)'))}
+const DY=[];for(let i=0;i<20;i++)DY.push(mk('rect',{x:190+(i%5)*68,y:358+Math.floor(i/5)*62,width:48,height:46,rx:8,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},$('days')));
+const LIDS=[820,1080,1340].map((c,i)=>{const g=$('jars');mk('rect',{x:c-70,y:430,width:140,height:170,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  if(i!==1)seed(g,c,575,1.2,-20,'var(--muted)');return mk('rect',{x:c-80,y:406,width:160,height:24,rx:6,class:'ink'},g)});
+const LW=[380,260,320,200,350,180,300,240],L7=LW.map((w,i)=>mk('rect',{x:690,y:282+i*60,width:w,height:16,rx:8,fill:'var(--ink)'},$('lines7')));
+const D7=[1280,1340,1400].map(x=>mk('circle',{cx:x,cy:610,r:16,fill:'var(--stage)',stroke:'var(--gain)','stroke-width':4},$('dots7')));
+const grow=(ln,y0,h,k)=>ln.setAttribute('y2',(y0-h*k).toFixed(1));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+PS.forEach((g,i)=>drop(g,p(u,TM.seed_pile+i*.05,TM.seed_pile+i*.05+.4),160));
+const gk=p(u,TM.seed_pile+5.8,TM.seed_pile+6.4);$('glow').setAttribute('opacity',gk);$('glow').setAttribute('r',(24+6*Math.sin(t*3)).toFixed(1));
+
+rise($('bed'),p(u,TM.garden_bed,TM.garden_bed+.5));rise($('packet'),p(u,TM.seed_packet,TM.seed_packet+.5));
+BS.forEach((g,i)=>{const a=TM.seed_packet+.4+i*.25;drop(g,p(u,a,a+.35),140)});
+rise($('collect'),p(u,TM.seed_packet+5.8,TM.seed_packet+6.4));
+CH1.forEach((g,i)=>{const a=TM.seed_packet+9.5+i*.5;rise(g,p(u,a,a+.4))});
+
+rise($('cseed'),p(u,SC[2][0]/K+.3,SC[2][0]/K+.9));
+ICG.forEach((g,i)=>{const a=i<3?TM.melody_note+i*1.5:TM.thought_cloud+(i-3)*1.2;rise(g,p(u,a,a+.5))});
+rise($('plain'),p(u,TM.thought_cloud+4.5,TM.thought_cloud+5.1));
+
+rise($('cards'),p(u,SC[3][0]/K+.3,SC[3][0]/K+.9));
+const sq=p(u,TM.red_pen+2.6,TM.red_pen+3.4);let pi=0;const SW=TW+8,SX0=TX0-4;
+CD.forEach((c,i)=>{const a=TM.red_pen+.3+i*.55,k=p(u,a,a+.45);if(u>=a)pi=i;c.st.setAttribute('x2',(SX0+SW*k).toFixed(1));
+  c.r.setAttribute('height',(80-44*sq).toFixed(1));c.r.setAttribute('y',(c.cy-40+22*sq).toFixed(1));c.rk.setAttribute('opacity',sq);
+  c.sd.setAttribute('transform','translate(236 '+c.cy+') scale(1 '+(1-.55*sq).toFixed(3)+') translate(-236 '+(-c.cy)+')');
+  c.g.setAttribute('opacity',(1-.2*sq).toFixed(2))});
+const pk=p(u,TM.red_pen+.3+pi*.55,TM.red_pen+.75+pi*.55);
+$('pen').setAttribute('transform','translate('+(SX0+SW*pk).toFixed(1)+' '+CD[pi].cy+')');
+$('pen').setAttribute('opacity',(p(u,TM.red_pen,TM.red_pen+.3)*(1-p(u,TM.red_pen+2.6,TM.red_pen+3))).toFixed(2));
+rise($('sq3'),p(u,TM.red_pen+2.5,TM.red_pen+3));rise($('rts'),sq);
+PL.forEach(q=>{const k=p(u,TM.tiny_sprout+.3,TM.tiny_sprout+(q.big?3.5:2));grow(q.st,700,q.h,k);q.cr.setAttribute('cy',(700-q.h*k).toFixed(1));q.cr.setAttribute('r',((q.big?40:22)*k).toFixed(1))});
+rise($('later'),p(u,TM.tiny_sprout+6.6,TM.tiny_sprout+7.2));
+
+rise($('eye'),p(u,TM.question_mark,TM.question_mark+.5));$('pupil').setAttribute('cx',(1330+30*Math.sin(t*1.5)).toFixed(1));
+const wc=TM.watering_can,cx=210+800*lin(u,wc+.5,wc+4.5),pour=u>wc+.5&&u<wc+4.8;
+$('can').setAttribute('opacity',p(u,wc,wc+.5));$('canb').setAttribute('transform','translate('+cx.toFixed(1)+' 300)');
+DR.forEach((d,j)=>{const y=18+((t*160+j*40)%100);d.setAttribute('y1',y.toFixed(1));d.setAttribute('y2',(y+12).toFixed(1));d.setAttribute('opacity',pour?1:0)});
+SP4.forEach((s,i)=>{const a=wc+.5+4*cl((s.x-331)/800),k=p(u,a,a+1.5),y=640-s.h*k;grow(s.st,640,s.h,k);s.lf.setAttribute('transform','translate(0 '+y.toFixed(1)+')');s.lf.setAttribute('opacity',k);
+  s.q.setAttribute('opacity',(p(u,TM.question_mark+i*.2,TM.question_mark+i*.2+.4)*(1-k)).toFixed(2))});
+rise($('only'),p(u,wc+5,wc+5.6));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));$('arr5').setAttribute('opacity',p(u,TM.notebook+1,TM.notebook+1.5));
+rise($('jar'),p(u,TM.seed_jar-.4,TM.seed_jar));
+JS.forEach((g,i)=>{const a=TM.seed_jar+i*.12;drop(g,p(u,a,a+.35),120)});
+rise($('qq'),p(u,TM.seed_jar+3.8,TM.seed_jar+4.3));
+grow($('jstem'),330,100,p(u,TM.seed_jar+6.4,TM.seed_jar+7.6));rise($('jleaf'),p(u,TM.seed_jar+7.2,TM.seed_jar+7.7));
+rise($('more'),p(u,TM.seed_jar+6.4,TM.seed_jar+7));
+
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5));rise($('shelfg'),p(u,TM.shelf,TM.shelf+.5));
+const ss=TM.shelf,mk6=p(u,ss+.6,ss+2),seas=u>=ss+5.8;
+$('mseed').setAttribute('opacity',p(u,ss+.2,ss+.6));
+$('mseed').setAttribute('transform','translate('+(350+730*mk6).toFixed(1)+' '+(690-112*mk6-120*Math.sin(Math.PI*mk6)).toFixed(1)+')');
+DY.forEach((d,i)=>d.setAttribute('fill',u>=ss+1+i*.22?'var(--muted)':'var(--stage)'));
+$('calt').textContent=u<ss+1.5?'TODAY':seas?'ITS SEASON':'MONTHS LATER';
+$('calh').setAttribute('fill',seas?'var(--gain)':'var(--ink)');$('calt').style.fill=seas?'var(--on-gain)':'var(--stage)';
+const lk=p(u,ss+5.8,ss+6.4);LIDS[1].setAttribute('transform','translate(0 '+(-40*lk).toFixed(1)+')');LIDS[1].setAttribute('opacity',(1-lk).toFixed(2));
+grow($('wstem'),570,260,p(u,ss+6.2,ss+7.6));rise($('wleaf'),p(u,ss+7.2,ss+7.7));rise($('season'),p(u,ss+5.8,ss+6.4));
+
+rise($('tmr'),p(u,TM.timer,TM.timer+.5));$('arc').setAttribute('stroke-dashoffset',(942*(1-p(u,TM.timer+.3,TM.timer+6))).toFixed(1));
+L7.forEach((l,i)=>{const a=TM.timer+.6+i*.7;l.setAttribute('opacity',p(u,a,a+.3))});
+rise($('tags'),p(u,TM.timer+6.2,TM.timer+6.7));rise($('nox'),p(u,TM.cross_out,TM.cross_out+.5));
+rise($('wait'),p(u,TM.cross_out+1.4,TM.cross_out+1.9));
+D7.forEach((d,i)=>d.setAttribute('fill',u>=TM.cross_out+1.8+i*.6?'var(--gain)':'var(--stage)'));
+const pick=u>=TM.cross_out+4.2;L7[5].setAttribute('fill',pick?'var(--gain)':'var(--ink)');$('pick7').setAttribute('opacity',pick?1:0);
+
+rise($('qa'),p(u,TM.open_hand,TM.open_hand+.5));rise($('qb'),p(u,TM.open_hand+.4,TM.open_hand+.9));
+const hk=p(u,TM.open_hand+.8,TM.open_hand+1.3),hout=p(u,TM.open_hand+4.3,TM.open_hand+4.9);
+$('hand').setAttribute('opacity',(hk*(1-hout)).toFixed(3));
+$('hand').setAttribute('transform','translate('+(40*(1-hk)+60*hout).toFixed(1)+' '+(-10*(1-hk)).toFixed(1)+')');
+rise($('plant8'),p(u,TM.open_hand+2.9,TM.open_hand+3.4));
+const tk=p(u,TM.open_hand+3.2,TM.open_hand+4.2);
+$('tseed').setAttribute('opacity',hk);
+$('tseed').setAttribute('transform','translate('+(1268+22*tk).toFixed(1)+' '+(572+92*tk).toFixed(1)+')');
+grow($('tstem'),668,78,p(u,TM.open_hand+4.4,TM.open_hand+5.2));rise($('tleaf'),p(u,TM.open_hand+5,TM.open_hand+5.5));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:118.08;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,390 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Anxious Generation Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Anxious Generation: In the early 2010s, teen mental health declined sharply just as childhood moved from playgrounds to smartphones and social media. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE ANXIOUS GENERATION · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The Great Rewiring</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of Childhood.</text>
+<text class="b" x="120" y="600" font-size="32">How smartphones quietly reshaped childhood in just five years</text>
+<g id="w_win">
+<rect x="1170" y="190" width="280" height="280" rx="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<path class="s-line" d="M1310 190v280M1170 330h280" stroke-width="4"/>
+<g id="w_teen"></g>
+<circle id="w_tgl" class="gain" cx="1310" cy="394" r="40" fill-opacity=".35"/>
+<rect class="gain" x="1296" y="372" width="28" height="44" rx="5"/>
+</g>
+<g id="w_fall">
+<text class="m" x="1170" y="510" font-size="20">MENTAL HEALTH</text>
+<path id="w_fallp" class="s-loss" d="M1170 540H1320L1450 590" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hockey stick.</text>
+<text class="b" x="120" y="176" font-size="32">Teen depression ran flat for years. Then the line bent.</text>
+<g id="w_chart">
+<path class="s-ink" d="M160 240V740H1000" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="180" y="260" font-size="20">TEEN DEPRESSION</text>
+<text class="m" x="1000" y="780" font-size="20" text-anchor="end">TIME</text>
+</g>
+<path id="w_hs0" class="s-ink" d="M180 640L320 634L460 642L600 632L700 628" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="w_hs1" class="s-loss" d="M700 628Q860 610 960 300" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="w_bendlbl"><path class="s-muted" d="M700 290V740" stroke-width="2" stroke-dasharray="6 8"/><text class="m" x="700" y="780" font-size="20" text-anchor="middle">EARLY 2010s</text></g>
+<g id="w_dbl">
+<text class="m" x="1080" y="270" font-size="20">US TEEN DEPRESSION</text>
+<text class="m" x="1080" y="304" font-size="20">MORE THAN</text>
+<text id="w_dblv" class="d" x="1072" y="500" font-size="140" style="fill:var(--loss)">2×</text>
+<text class="m" x="1080" y="580" font-size="20">IN ABOUT A DECADE</text>
+</g>
+<g id="w_er">
+<rect x="1040" y="620" width="100" height="160" rx="6" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/>
+<path class="s-loss" d="M1090 645v40M1070 665h40" stroke-width="10"/>
+<circle class="ink" cx="1124" cy="730" r="6"/>
+<path class="s-loss" d="M1174 660V632M1162 644l12-12 12 12" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1200" y="657" font-size="22">ANXIETY</text>
+<path class="s-loss" d="M1174 702V674M1162 686l12-12 12 12" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1200" y="699" font-size="22">SELF-HARM VISITS</text>
+<text class="m" x="1160" y="744" font-size="22" style="fill:var(--loss)">ESPECIALLY</text>
+<text class="m" x="1160" y="776" font-size="22" style="fill:var(--loss)">YOUNGER GIRLS</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Not just America.</text>
+<text class="b" x="120" y="176" font-size="32">Similar upward lines, in country after country.</text>
+<g id="w_globe">
+<circle cx="300" cy="480" r="170" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<ellipse id="w_mer" class="s-line" cx="300" cy="480" rx="80" ry="170" fill="none" stroke-width="4"/>
+<path class="s-line" d="M150 400H450M130 480H470M150 560H450" stroke-width="4"/>
+</g>
+<g id="w_pins"></g>
+<g id="w_cards"></g>
+<g id="w_apart"><path class="s-gain" d="M230 420Q440 400 420 580" fill="none" stroke-width="4" stroke-dasharray="8 8"/><text class="m" x="130" y="704" font-size="22">THOUSANDS OF MILES APART</text></g>
+<g id="w_shared"><text class="d" x="120" y="800" font-size="44">So the cause had to be something they all shared.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What changed?</text>
+<text class="b" x="120" y="176" font-size="32">What changed in kids’ lives right around then?</text>
+<g id="w_qm"><text class="d" x="150" y="600" font-size="320" style="fill:var(--loss)">?</text></g>
+<g id="w_tiles"></g>
+<g id="w_brk"><path class="s-gain" d="M520 520v20h950v-20" fill="none" stroke-width="5" stroke-linejoin="round"/><text class="m" x="995" y="580" font-size="22" text-anchor="middle">THE SWITCH TO SMARTPHONES</text></g>
+<g id="w_moved"><text class="d" x="120" y="790" font-size="44">Teens moved their social lives onto smartphones.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Flip phone to smartphone.</text>
+<text class="b" x="120" y="176" font-size="32">From calling friends to the whole internet in every pocket.</text>
+<g id="w_flip"><g id="w_flipin">
+<rect x="260" y="260" width="140" height="170" rx="18" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<rect x="282" y="285" width="96" height="110" rx="6" fill="var(--line)"/>
+<rect class="ink" x="270" y="430" width="120" height="14"/>
+<rect x="260" y="444" width="140" height="200" rx="18" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<g id="w_keys"></g>
+</g><text class="m" x="260" y="744" font-size="22">LATE 2000s</text></g>
+<g id="w_calls">
+<rect x="430" y="290" width="130" height="48" rx="24" fill="var(--stage)" stroke="var(--gain)" stroke-width="4"/><text class="m" x="495" y="321" font-size="20" text-anchor="middle">CALL</text>
+<rect x="430" y="350" width="130" height="48" rx="24" fill="var(--stage)" stroke="var(--gain)" stroke-width="4"/><text class="m" x="495" y="381" font-size="20" text-anchor="middle">TEXT</text>
+</g>
+<g id="w_away"><text class="m" x="430" y="440" font-size="20">THEN PUT AWAY</text></g>
+<g id="w_arr"><path class="s-muted" d="M640 490H900m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="w_smart">
+<rect x="960" y="220" width="280" height="520" rx="36" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/>
+<rect class="s-line" x="980" y="260" width="240" height="440" rx="10" fill="none" stroke-width="3"/>
+<circle class="ink" cx="1100" cy="240" r="5"/>
+<g id="w_apps"></g>
+</g>
+<g id="w_feats"></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Selfies and feeds.</text>
+<text class="b" x="120" y="176" font-size="32">Front cameras made selfies easy. Then came the photo feeds.</text>
+<g id="w_cam">
+<rect x="170" y="230" width="260" height="460" rx="34" fill="var(--stage)" stroke="var(--ink)" stroke-width="7"/>
+<rect class="s-line" x="190" y="270" width="220" height="400" rx="10" fill="none" stroke-width="3"/>
+<circle id="w_flash" class="gain" cx="300" cy="255" r="40"/>
+<circle class="gain" cx="300" cy="255" r="9"/>
+<g id="w_selfie"></g>
+<text class="m" x="120" y="740" font-size="20">AROUND 2010</text>
+<text class="m" x="120" y="770" font-size="20">FRONT-FACING CAMERAS</text>
+</g>
+<g id="w_feed"></g>
+<g id="w_cmp"><text class="d" x="540" y="740" font-size="40">Posting and comparing, constantly.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ruling out rivals.</text>
+<text class="b" x="120" y="176" font-size="32">Could something else explain it?</text>
+<g id="w_money">
+<rect x="120" y="220" width="640" height="520" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="3"/>
+<text class="m" x="150" y="265" font-size="20">THE 2008 FINANCIAL CRISIS?</text>
+<path id="w_econ" class="s-gain" d="M160 360L300 380L360 560L480 510L600 430L720 340" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="360" y="604" font-size="20" text-anchor="middle">2008</text>
+<text class="m" x="150" y="686" font-size="20" style="fill:var(--gain)">ECONOMY RECOVERS</text>
+</g>
+<g id="w_mh">
+<path id="w_mhp" class="s-loss" d="M360 460L480 500L600 560L720 640" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="150" y="718" font-size="20" style="fill:var(--loss)">TEEN MENTAL HEALTH KEEPS WORSENING</text>
+</g>
+<g id="w_glb">
+<circle cx="1160" cy="450" r="170" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<ellipse id="w_mer2" class="s-line" cx="1160" cy="450" rx="80" ry="170" fill="none" stroke-width="4"/>
+<path class="s-line" d="M990 450H1330" stroke-width="4"/>
+<g id="w_gp"></g>
+<text class="m" x="1160" y="690" font-size="22" text-anchor="middle">SUDDEN · SHARED · WORLDWIDE</text>
+</g>
+<g id="w_nosingle"><text class="d" x="120" y="810" font-size="44">No single country’s events could explain it.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Great Rewiring.</text>
+<text class="b" x="120" y="176" font-size="32">From a play-based to a phone-based childhood.</text>
+<g id="w_play"><g id="w_playin">
+<path class="s-line" d="M140 620H700" stroke-width="5"/>
+<path class="s-ink" d="M180 620L240 330L300 620M400 620L460 330L520 620M240 330H460" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="w_swings"></g>
+<path class="s-ink" d="M580 620V420H620L700 620M580 480h40M580 540h40" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="w_slider"></g>
+</g><text class="m" x="140" y="665" font-size="22">PLAY-BASED</text></g>
+<g id="w_couch">
+<path class="s-muted" d="M730 470H800m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="850" y="410" width="420" height="130" rx="24" fill="var(--line)" stroke="var(--ink)" stroke-width="5"/>
+<rect x="830" y="520" width="460" height="70" rx="16" fill="var(--line)" stroke="var(--ink)" stroke-width="5"/>
+<rect x="810" y="470" width="50" height="130" rx="20" fill="var(--line)" stroke="var(--ink)" stroke-width="5"/>
+<rect x="1260" y="470" width="50" height="130" rx="20" fill="var(--line)" stroke="var(--ink)" stroke-width="5"/>
+<path class="s-ink" d="M850 600v20M1270 600v20" stroke-width="6" stroke-linecap="round"/>
+<g id="w_kids"></g>
+<text class="m" x="830" y="665" font-size="22">PHONE-BASED</text>
+</g>
+<g id="w_bars">
+<text class="m" x="140" y="720" font-size="22">TOGETHER IN PERSON</text><rect id="w_bar0" class="gain" x="480" y="700" height="24" width="600" rx="12"/>
+<text class="m" x="140" y="762" font-size="22">ALONE ON SCREENS</text><rect id="w_bar1" class="loss" x="480" y="742" height="24" width="150" rx="12"/>
+</g>
+<g id="w_tube">
+<path d="M1370 250V560a30 30 0 0 0 60 0V250" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/>
+<path class="gain" d="M1376 430V560a24 24 0 0 0 48 0V430z"/>
+<g id="w_bub"></g>
+<path class="s-ink" d="M1355 250H1445" stroke-width="7" stroke-linecap="round"/>
+<text class="m" x="1400" y="665" font-size="20" text-anchor="middle">EXPERIMENT</text>
+</g>
+<g id="w_exp"><text class="d" x="120" y="840" font-size="40">A giant experiment, run on kids, without asking.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="w_qa"><text class="d" x="136" y="250" font-size="76" letter-spacing="-2">When did you get your</text></g>
+<g id="w_qb"><text class="d" x="136" y="340" font-size="76" letter-spacing="-2">first smartphone?</text></g>
+<g id="w_qc"><text class="d" x="136" y="460" font-size="76" letter-spacing="-2">What did afternoons look like</text></g>
+<g id="w_qd"><text class="d" x="136" y="550" font-size="76" letter-spacing="-2" style="fill:var(--gain)">before, and after?</text></g>
+<g id="w_ph0"><g transform="rotate(-4 250 705)">
+<rect x="140" y="620" width="220" height="170" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/>
+<circle class="gain" cx="320" cy="652" r="16"/>
+<path class="s-line" d="M150 760H350" stroke-width="4"/>
+<g id="w_pk0"></g>
+</g><text class="m" x="250" y="840" font-size="22" text-anchor="middle">BEFORE</text></g>
+<g id="w_ph1"><path class="s-muted" d="M380 705H440m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g transform="rotate(3 570 705)">
+<rect x="460" y="620" width="220" height="170" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/>
+<g id="w_pk1"></g>
+<circle class="gain" cx="605" cy="697" r="34" fill-opacity=".3"/>
+<rect class="gain" x="590" y="670" width="30" height="54" rx="6"/>
+</g><text class="m" x="570" y="840" font-size="22" text-anchor="middle">AFTER</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="140" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:20</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Great Rewiring of Childhood&rdquo;, from <em>The Anxious Generation</em> by Jonathan Haidt. The rise in teen depression, anxiety and self-harm, the matching trends abroad, and the smartphone timeline are as reported in the book. The chart, map and phone drawings are illustrations, not plotted data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=140, SC=[[0.0, 9.8], [9.8, 32.3], [32.3, 48.5], [48.5, 62.8], [62.8, 79.5], [79.5, 91.7], [91.7, 106.2], [106.2, 127.6], [127.6, 140.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["A Sudden Turn", "The Hockey Stick", "Not Just America", "What Changed?", "Flip to Smart", "Selfies and Feeds", "Ruling Out Rivals", "The Great Rewiring", "Your Turn"];
+const TM={"teen_window": 0.0, "line_chart": 10.08, "sharp_bend": 14.24, "er_door": 25.84, "world_map": 32.56, "flag_pins": 34.92, "question_mark": 48.84, "calendar": 54.56, "flip_phone": 63.12, "smartphone": 71.12, "front_camera": 79.76, "photo_feed": 85.2, "money_chart": 92.0, "globe_spin": 100.88, "playground": 106.48, "kids_on_couch": 110.56, "test_tube": 122.12, "two_photos": 127.92};
+const W_NUL=document.createElementNS('http://www.w3.org/2000/svg','g');
+const G=id=>$(id)||W_NUL;
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const txt=(g,x,y,s,fs,cls,ex)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':fs,class:cls},ex||{}),g);e.textContent=s;return e};
+const dr=(el,k)=>{if(!el)return;if(!el._l){try{el._l=el.getTotalLength()}catch(e){}el._l=el._l||2000}el.style.strokeDasharray=el._l;el.style.strokeDashoffset=(el._l*(1-k)).toFixed(1)};
+fig(G('w_teen'),1310,290,32,'ink');
+const PIN=[[230,420],[330,380],[220,370],[420,580],[350,350]],CNM=['UNITED STATES','BRITAIN','CANADA','AUSTRALIA','NORDIC NATIONS'],cards=[],pins=[],marks=[];
+CNM.forEach((s,i)=>{const x=i<3?540+i*320:700+(i-3)*320,y=i<3?240:470,g=mk('g',{},G('w_cards'));
+  mk('rect',{x:x,y:y,width:290,height:200,rx:14,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);txt(g,x+20,y+40,s,20,'m');
+  mk('path',{d:`M${x+20} ${y+170}L${x+180} ${y+164}Q${x+240} ${y+158} ${x+270} ${y+70}`,fill:'none',stroke:'var(--loss)','stroke-width':5,'stroke-linecap':'round'},g);cards.push(g);
+  marks.push(mk('path',{d:`M${x+180} ${y+60}V${y+185}`,stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'6 6'},G('w_cards')));
+  pins.push(mk('circle',{cx:PIN[i][0],cy:PIN[i][1],r:13,fill:'var(--loss)',stroke:'var(--stage)','stroke-width':4},G('w_pins')))});
+const ph3=[];for(let i=0;i<6;i++){const x=520+i*160,g=mk('g',{},G('w_tiles'));
+  mk('rect',{x:x,y:260,width:150,height:220,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);txt(g,x+75,310,String(2010+i),34,'d5',{'text-anchor':'middle'});
+  ph3.push([g,mk('rect',{x:x+52,y:340,width:46,height:90,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g)])}
+for(let r=0;r<4;r++)for(let c=0;c<3;c++)mk('circle',{cx:290+c*40,cy:485+r*40,r:9,class:'ink'},G('w_keys'));
+const CO=['var(--gain)','var(--ink)','var(--loss)','var(--muted)'],apps=[];for(let i=0;i<12;i++)apps.push(mk('rect',{x:996+(i%3)*76,y:285+Math.floor(i/3)*100,width:56,height:56,rx:14,fill:CO[i%4]},G('w_apps')));
+const feats=['INTERNET','ENDLESS APPS','SOCIAL MEDIA','ALL DAY LONG'].map((s,i)=>{const g=mk('g',{},G('w_feats'));txt(g,1280,330+i*60,s,20,'m',i===3?{style:'fill:var(--loss)'}:{});return g});
+fig(G('w_selfie'),300,400,46,'ink');
+const LW=[200,90,150,60,180,110],FT=[],FB=[];for(let i=0;i<6;i++){const x=540+(i%3)*315,y=240+Math.floor(i/3)*220,g=mk('g',{},G('w_feed'));
+  mk('rect',{x:x,y:y,width:290,height:190,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);fig(g,x+145,y+40,20,'ink');
+  mk('circle',{cx:x+40,cy:y+162,r:10,class:'gain'},g);FB.push(mk('rect',{x:x+60,y:y+154,height:16,width:0,rx:8,fill:i===0?'var(--gain)':'var(--muted)'},g));FT.push(g)}
+const GP=[];for(let i=0;i<9;i++){const a=i*2.4,rr=40+(i*37)%110;GP.push(mk('circle',{cx:(1160+rr*Math.cos(a)).toFixed(0),cy:(450+rr*Math.sin(a)*.9).toFixed(0),r:10,fill:'var(--loss)'},G('w_gp')))}
+const SW=[300,400].map(x=>{const g=mk('g',{},G('w_swings'));mk('path',{d:`M${x} 330V490`,stroke:'var(--line)','stroke-width':4},g);mk('rect',{x:x-22,y:488,width:44,height:10,rx:4,class:'ink'},g);fig(g,x,428,15,'gain');return g});
+fig(G('w_slider'),610,355,15,'gain');
+const KD=[930,1060,1190].map(x=>{const g=mk('g',{},G('w_kids'));fig(g,x,420,24,'ink');mk('circle',{cx:x,cy:490,r:34,fill:'var(--gain)','fill-opacity':.25},g);mk('rect',{x:x-11,y:472,width:22,height:36,rx:5,class:'gain'},g);return g});
+const BB=[0,1,2,3].map(i=>mk('circle',{cx:1386+i*9,cy:540,r:4+i%2*2,fill:'var(--stage)'},G('w_bub')));
+fig(G('w_pk0'),210,690,12,'gain');fig(G('w_pk0'),260,700,12,'gain');fig(G('w_pk1'),530,680,14,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a)=>rise(G(id),p(u,a,a+.5));
+  G('w_tgl').setAttribute('opacity',(.3+.5*Math.abs(Math.sin(t*2))).toFixed(2));
+  R('w_win',TM.teen_window); R('w_fall',TM.teen_window+5); dr(G('w_fallp'),p(u,TM.teen_window+5.2,TM.teen_window+6.6));
+
+  R('w_chart',TM.line_chart); dr(G('w_hs0'),p(u,TM.line_chart+.3,TM.line_chart+3)); dr(G('w_hs1'),p(u,TM.sharp_bend,TM.sharp_bend+1.6));
+  R('w_bendlbl',TM.sharp_bend+.8); R('w_dbl',TM.sharp_bend+5.8);
+  const db=p(u,TM.sharp_bend+6,TM.sharp_bend+7.4); G('w_dblv').textContent=db<1?(1+db).toFixed(1)+'×':'2×';
+  R('w_er',TM.er_door);
+
+  R('w_globe',TM.world_map); G('w_mer').setAttribute('rx',(170*Math.abs(Math.cos(t*.7))).toFixed(1));
+  cards.forEach((g,i)=>{const a=i?TM.flag_pins+(i-1)*.9:TM.world_map+.6; rise(g,p(u,a,a+.5)); pins[i].setAttribute('opacity',p(u,a,a+.3)); marks[i].setAttribute('opacity',p(u,TM.flag_pins+5.3,TM.flag_pins+5.9))});
+  R('w_apart',TM.flag_pins+5.3); R('w_shared',TM.flag_pins+10.7);
+
+  R('w_qm',TM.question_mark);
+  ph3.forEach((q,i)=>{rise(q[0],p(u,TM.calendar+i*.3,TM.calendar+i*.3+.4)); q[1].setAttribute('fill',u>=TM.calendar+4.2+i*.4?'var(--gain)':'var(--stage)')});
+  R('w_brk',TM.calendar+4.2); R('w_moved',TM.calendar+4.8);
+
+  R('w_flip',TM.flip_phone); R('w_calls',TM.flip_phone+4.2);
+  const aw=p(u,TM.flip_phone+6,TM.flip_phone+7); G('w_flipin').setAttribute('transform','translate(0 '+(40*aw).toFixed(1)+')'); G('w_flipin').setAttribute('opacity',(1-.6*aw).toFixed(2));
+  R('w_away',TM.flip_phone+6); R('w_arr',TM.smartphone-.3); R('w_smart',TM.smartphone);
+  apps.forEach((a,i)=>a.setAttribute('opacity',p(u,TM.smartphone+1.8+i*.15,TM.smartphone+2.1+i*.15)));
+  feats.forEach((g,i)=>rise(g,p(u,TM.smartphone+1.8+i*.9,TM.smartphone+2.3+i*.9)));
+
+  const fc=TM.front_camera; R('w_cam',fc); G('w_flash').setAttribute('opacity',(p(u,fc+.6,fc+.8)*(1-p(u,fc+.8,fc+1.4))).toFixed(2)); R('w_selfie',fc+.8);
+  FT.forEach((g,i)=>rise(g,p(u,TM.photo_feed+i*.3,TM.photo_feed+i*.3+.4)));
+  FB.forEach((b,i)=>b.setAttribute('width',(LW[i]*p(u,TM.photo_feed+2.5+i*.1,TM.photo_feed+4)).toFixed(1)));
+  R('w_cmp',TM.photo_feed+3.5);
+
+  const mc=TM.money_chart; R('w_money',mc); dr(G('w_econ'),p(u,mc+.3,mc+1.8)); R('w_mh',mc+3.4); dr(G('w_mhp'),p(u,mc+3.6,mc+5));
+  R('w_glb',TM.globe_spin); G('w_mer2').setAttribute('rx',(170*Math.abs(Math.cos(t))).toFixed(1));
+  GP.forEach((c,i)=>c.setAttribute('r',(10+5*Math.abs(Math.sin(t*3+i))).toFixed(1))); R('w_nosingle',TM.globe_spin+1.5);
+
+  const kc=TM.kids_on_couch; R('w_play',TM.playground);
+  SW.forEach((g,i)=>g.setAttribute('transform','rotate('+(14*Math.sin(t*2+i*1.5)).toFixed(1)+' '+[300,400][i]+' 330)'));
+  const sp=p(u,kc+5,kc+6.8); G('w_playin').setAttribute('opacity',(1-.65*sp).toFixed(2));
+  R('w_couch',kc); KD[0].setAttribute('transform','translate('+(-30*sp).toFixed(1)+' 0)'); KD[2].setAttribute('transform','translate('+(30*sp).toFixed(1)+' 0)');
+  R('w_bars',kc+5); G('w_bar0').setAttribute('width',(600-400*sp).toFixed(1)); G('w_bar1').setAttribute('width',(150+550*sp).toFixed(1));
+  R('w_tube',TM.test_tube); BB.forEach((b,i)=>b.setAttribute('cy',(575-((t*40+i*37)%140)).toFixed(1))); R('w_exp',TM.test_tube+.6);
+
+  const tp=TM.two_photos; R('w_qa',tp); R('w_qb',tp+.4); R('w_ph0',tp+.9); R('w_ph1',tp+1.5); R('w_qc',tp+5.4); R('w_qd',tp+5.8);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:136.4;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

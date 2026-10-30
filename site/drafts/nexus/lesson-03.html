@@ -1,0 +1,300 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nexus Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Nexus: Shared stories and bureaucratic records let huge numbers of strangers cooperate, creating realities like nations and money. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">NEXUS · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Stories and documents</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">build societies.</text>
+<text class="b" x="120" y="600" font-size="32">How shared stories and paperwork turn strangers into societies.</text>
+<g id="tLinks"></g>
+<g id="tNote"><rect class="s-ink" x="1200" y="250" width="260" height="130" rx="10" fill="var(--stage)" stroke-width="6"/><circle class="s-gain" cx="1330" cy="315" r="38" fill="none" stroke-width="6"/><path class="s-line" d="M1222 280h50M1388 350h50" stroke-width="6" stroke-linecap="round"/></g>
+<g id="tCrowd"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Strangers, together.</text>
+<text class="b" x="120" y="176" font-size="32">Chimps cooperate with a few dozen. Humans, with millions.</text>
+<g id="chimp"><circle class="s-line" cx="380" cy="470" r="190" fill="none" stroke-width="4"/><g id="chimpN"></g><text class="m" x="380" y="710" font-size="22" text-anchor="middle">A FEW DOZEN, ALL KNOWN</text></g>
+<g id="crowd"></g>
+<g id="shL"></g>
+<g id="shB"><rect class="gain" x="1010" y="425" width="240" height="90" rx="16"/><text class="m" x="1130" y="479" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">SHARED STORY</text></g>
+<g id="crowdL"><text class="m" x="1110" y="710" font-size="22" text-anchor="middle">MILLIONS OF STRANGERS</text></g>
+<g id="link1"><text class="d" x="120" y="810" font-size="48">The secret: shared information links us.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Three kinds of real.</text>
+<text class="b" x="120" y="176" font-size="32">Some things are real in very different ways.</text>
+<g id="k0"><path class="s-ink" d="M210 560L240 470L300 420L380 410L450 460L480 560Z" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/><path class="s-muted" d="M180 560h320" stroke-width="5" stroke-linecap="round"/><text class="d" x="340" y="650" font-size="46" text-anchor="middle">Objective</text><text class="m" x="340" y="700" font-size="20" text-anchor="middle">EXISTS WHETHER ANYONE</text><text class="m" x="340" y="730" font-size="20" text-anchor="middle">NOTICES IT OR NOT</text></g>
+<g id="k1"><circle class="s-ink" cx="800" cy="400" r="90" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M680 580a120 80 0 0 1 240 0" fill="none" stroke-width="6" stroke-linecap="round"/><path id="ache" class="s-loss" d="M880 300l30-22-8 30 34-14M712 300l-30-22 8 30-34-14" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="d" x="800" y="650" font-size="46" text-anchor="middle">Subjective</text><text class="m" x="800" y="700" font-size="20" text-anchor="middle">ONLY YOU CAN FEEL IT</text></g>
+<g id="k2"><g id="mindL"></g><rect class="gain" x="1160" y="400" width="200" height="100" rx="8"/><circle cx="1260" cy="450" r="28" fill="none" stroke="var(--on-gain)" stroke-width="5"/><g id="minds"></g><text class="d" x="1260" y="650" font-size="46" text-anchor="middle" style="fill:var(--gain)">Intersubjective</text><text class="m" x="1260" y="700" font-size="20" text-anchor="middle">REAL BECAUSE MANY MINDS</text><text class="m" x="1260" y="730" font-size="20" text-anchor="middle">SHARE THE SAME STORY</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Nations and money.</text>
+<text class="b" x="120" y="176" font-size="32">Powerful realities made of shared belief.</text>
+<g id="nat"><g id="natS"><path class="s-ink" d="M190 270V700" stroke-width="8" stroke-linecap="round"/><path class="s-loss" d="M196 280h270v170H196" fill="none" stroke-width="5" stroke-dasharray="14 10"/></g><text class="m" x="120" y="750" font-size="20" style="fill:var(--ink)">NO PHYSICAL BODY</text></g>
+<g id="acts"></g>
+<g id="money"><g id="monS"><rect class="s-ink" x="880" y="300" width="380" height="180" rx="12" fill="var(--stage)" stroke-width="6"/><circle class="s-ink" cx="1070" cy="390" r="50" fill="none" stroke-width="5"/><path class="s-line" d="M910 330h80M1150 450h80" stroke-width="5" stroke-linecap="round"/></g><text class="m" x="1070" y="530" font-size="20" text-anchor="middle" style="fill:var(--ink)">JUST PAPER</text></g>
+<g id="buy"><g id="buyS"><path class="s-muted" d="M1280 390h60m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="gain" d="M1360 430v-30a60 40 0 0 1 120 0v30z"/></g><text class="m" x="1420" y="480" font-size="20" text-anchor="middle" style="fill:var(--ink)">BREAD</text></g>
+<g id="belW"><g id="believers"></g></g>
+<g id="fades"><text class="d" x="120" y="820" font-size="48">If the shared story fades, so do they.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The power of a story.</text>
+<text class="b" x="120" y="176" font-size="32">Theodor Herzl imagined a Jewish state in a book.</text>
+<g id="rays"></g>
+<g id="hz"><g id="hzP"></g><text class="m" x="300" y="610" font-size="22" text-anchor="middle">THEODOR HERZL</text></g>
+<g id="bk"><path class="ink" d="M620 440c-40-24-100-24-140-10v130c40-14 100-14 140 10 40-24 100-24 140-10V430c-40-14-100-14-140 10z"/><path d="M620 440v130" stroke="var(--stage)" stroke-width="4"/><text class="m" x="620" y="620" font-size="20" text-anchor="middle">A STATE IMAGINED IN A BOOK</text></g>
+<g id="ctry"></g>
+<g id="rally"><text class="d5" x="120" y="780" font-size="40">A vivid tale can rally strangers faster than any order.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A story alone can’t run a state.</text>
+<text class="b" x="120" y="176" font-size="32">Records, offices and bureaucrats make the dream real.</text>
+<g id="dream"><path class="s-muted" d="M220 340a50 50 0 0 1 40-80a70 70 0 0 1 130-20a60 60 0 0 1 110 40a40 40 0 0 1 0 60z" fill="none" stroke-width="5" stroke-dasharray="10 8"/><text class="m" x="370" y="315" font-size="22" text-anchor="middle">THE DREAM</text></g>
+<g id="office"><path class="ink" d="M170 440L370 380L570 440Z"/><rect class="s-ink" x="190" y="440" width="360" height="250" fill="var(--stage)" stroke-width="6"/><g id="win"></g><text class="m" x="120" y="740" font-size="20">BUREAUCRATS · RECORDS · OFFICES</text></g>
+<g id="tab"><rect class="s-ink" x="700" y="250" width="320" height="400" rx="34" fill="var(--line)" stroke-width="6"/><g id="wedge"></g><text class="m" x="860" y="700" font-size="20" text-anchor="middle">CLAY TABLET</text></g>
+<g id="deed"><path class="s-gain" d="M1040 450h90m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="s-ink" d="M1160 460L1260 380L1360 460" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-ink" x="1180" y="460" width="160" height="140" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="1240" y="530" width="40" height="70"/><g id="ownP"></g><text class="m" x="1290" y="700" font-size="20" text-anchor="middle">OWNERSHIP = WHAT IT SAYS</text></g>
+<g id="created"><text class="d" x="120" y="820" font-size="44">The document didn’t describe reality. It created it.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why paper feels cold.</text>
+<text class="b" x="120" y="176" font-size="32">We evolved to love stories, not filing cabinets.</text>
+<g id="cab"><rect id="cabR" x="160" y="270" width="240" height="400" rx="10" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><g id="drw"></g></g>
+<g id="love"><path class="gain" d="M580 300c-30-18-70-18-100-8v80c30-10 70-10 100 8 30-18 70-18 100-8v-80c-30-10-70-10-100 8z"/><path d="M580 300v80" stroke="var(--stage)" stroke-width="4"/><text class="m" x="580" y="430" font-size="22" text-anchor="middle">WHAT WE LOVE</text></g>
+<g id="cold"></g>
+<g id="city"><g id="bld"></g><path class="s-ink" d="M880 600h600" stroke-width="6"/><path class="s-line" d="M900 690h580" stroke-width="30"/><path id="flow" class="s-gain" d="M900 690h580" stroke-width="6" stroke-dasharray="20 24" fill="none"/><text class="m" x="880" y="750" font-size="20">FROM TAX SYSTEMS TO SEWAGE PIPES</text></g>
+<g id="run"><text class="d" x="120" y="830" font-size="46">Records quietly keep cities running.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your move this week.</text>
+<text class="b" x="120" y="176" font-size="32">Find the story. Then find the paperwork.</text>
+<g id="c0"><rect class="s-line" x="120" y="230" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="290" font-size="22">1. NOTICE ONE SHARED STORY</text><rect class="s-ink" x="180" y="340" width="200" height="260" rx="10" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M220 400h120M220 450h120M220 500h80" stroke-width="6" stroke-linecap="round"/><g id="nb"></g></g>
+<g id="c1"><rect class="s-line" x="840" y="230" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="870" y="290" font-size="22">2. SPOT THE PAPERWORK</text><rect class="s-ink" x="900" y="340" width="200" height="260" rx="6" fill="var(--stage)" stroke-width="6"/><path class="s-line" d="M930 390h140M930 430h140M930 470h100M930 510h120" stroke-width="5" stroke-linecap="round"/><circle class="s-gain" cx="1060" cy="560" r="26" fill="none" stroke-width="6"/></g>
+<path id="bridge" class="s-gain" d="M772 480h56m-16-16 16 16-16 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="layers"><text class="d" x="120" y="810" font-size="44">Seeing both layers shows how power really works.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">If everyone suddenly</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">stopped believing in money,</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">what would your wallet</text></g>
+<g id="qd"><text class="d" x="136" y="600" font-size="80" letter-spacing="-2">be <tspan style="fill:var(--gain)">worth tomorrow?</tspan></text></g>
+<g id="qlab"><text class="m" x="143" y="720" font-size="26">WHAT IS MONEY WITHOUT THE STORY?</text></g>
+<g id="wal"><rect class="s-muted" x="1250" y="620" width="160" height="60" rx="6" fill="none" stroke-width="4" stroke-dasharray="8 6"/><rect id="cash" class="gain" x="1250" y="620" width="160" height="60" rx="6"/><rect class="s-ink" x="1220" y="660" width="220" height="140" rx="18" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="1380" y="710" width="60" height="40" rx="8"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="138" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:18</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Stories and Documents Build Societies&rdquo;, from <em>Nexus</em> by Yuval Noah Harari. Examples as reported in the book: Theodor Herzl&#x27;s vision of a Jewish state and ancient Mesopotamian clay tablets recording loans and property. Drawings of chimpanzees, crowds, rocks, flags and banknotes are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=138, SC=[[0.0, 9.7], [9.7, 24.5], [24.5, 41.8], [41.8, 59.8], [59.8, 73.8], [73.8, 97.6], [97.6, 112.9], [112.9, 129.9], [129.9, 138.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Paper Realities", "Strangers Together", "Three Kinds of Real", "Nations and Money", "The Power of a Story", "Enter the Documents", "Why Paper Feels Cold", "Your Move", "Your Challenge"];
+const TM={"title_card": 0.0, "chimp_band": 10.0, "crowd_city": 15.6, "rock": 24.8, "headache": 31.28, "banknote": 35.68, "flag": 42.08, "treaty": 45.28, "herzl": 60.08, "book_open": 65.0, "clay_tablet": 82.88, "deed_owner": 89.16, "filing_cab": 97.92, "sewer_pipe": 107.96, "notebook": 113.16, "form_sheet": 120.0, "question": 130.16};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const tx=(g,x,y,s,fs,a)=>{const e=mk('text',Object.assign({x:x,y:y,'font-size':fs,class:'m'},a||{}),g);e.textContent=s;return e};
+const chip=(g,x,y,w,s)=>{const c=mk('g',{},g);c.rr=mk('rect',{x:x,y:y,width:w,height:64,rx:32,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},c);tx(c,x+w/2,y+41,s,22,{'text-anchor':'middle',style:'fill:var(--ink)'});return c};
+const TC=[];for(let i=0;i<7;i++){const x=1200+i*43,y=480+(i%2)*44;mk('path',{d:'M'+x+' '+y+'L1330 380',class:'s-gain','stroke-width':3,'stroke-dasharray':'6 6'},$('tLinks'));TC.push(mk('circle',{cx:x,cy:y,r:15,class:'ink'},$('tCrowd')))}
+const CN=[];for(let i=0;i<14;i++){const a=i*2*Math.PI/14;CN.push([380+120*Math.cos(a),470+120*Math.sin(a)])}
+CN.forEach((a,i)=>CN.forEach((b,j)=>{if(j>i&&(i+j)%3==0)mk('path',{d:'M'+a[0].toFixed(0)+' '+a[1].toFixed(0)+'L'+b[0].toFixed(0)+' '+b[1].toFixed(0),class:'s-line','stroke-width':2},$('chimpN'))}));
+CN.forEach(a=>mk('circle',{cx:a[0],cy:a[1],r:16,class:'ink'},$('chimpN')));
+const CR=[];for(let i=0;i<180;i++)CR.push(mk('circle',{cx:780+(i%18)*38,cy:290+Math.floor(i/18)*38,r:9,fill:'var(--muted)'},$('crowd')));
+const LKD=[3,16,22,40,57,70,95,121,138,150,165,177];LKD.forEach(i=>mk('path',{d:'M1130 470L'+(780+(i%18)*38)+' '+(290+Math.floor(i/18)*38),class:'s-gain','stroke-width':3},$('shL')));
+const ML=[[1170,300],[1260,275],[1350,300],[1175,575],[1345,575]].map(q=>{mk('circle',{cx:q[0],cy:q[1],r:18,class:'ink'},$('minds'));return mk('path',{d:'M'+q[0]+' '+q[1]+'L1260 450',class:'s-ink','stroke-width':3,'stroke-dasharray':'6 6'},$('mindL'))});
+const ACT=['SIGNS TREATIES','WAGES WARS','COLLECTS TAXES'].map((s,i)=>chip($('acts'),500,300+i*90,270,s));
+for(let i=0;i<6;i++)fig($('believers'),910+i*65,590,14,'gain');
+fig($('hzP'),300,380,40,'ink');
+// book -> four group boxes; every connector ends at its box edge, right-hand ones run through the row gap (y 430-470)
+const BX=[[880,250],[1190,250],[880,470],[1190,470]];
+const RD=['M770 432C830 432 830 340 880 340','M772 444H1300V430','M770 560H880','M772 456H1360V470'];
+const PP=[],RY=RD.map(d=>mk('path',{d:d,class:'s-gain',fill:'none','stroke-width':4,'stroke-dasharray':'10 8','stroke-linecap':'round','stroke-linejoin':'round'},$('rays')));
+const BG=BX.map(b=>{const g=mk('g',{},$('ctry'));mk('rect',{x:b[0],y:b[1],width:280,height:180,rx:16,fill:'var(--stage)',stroke:'var(--line)','stroke-width':4},g);for(let k=0;k<3;k++)PP.push(fig(g,b[0]+70+k*70,b[1]+55,18,'ink'));return g});
+const WN=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++)WN.push(mk('rect',{x:222+c*82,y:465+r*70,width:50,height:40,fill:'var(--line)'},$('win')));
+const WG=[];for(let r=0;r<8;r++)for(let c=0;c<6;c++)WG.push(mk('path',{d:'M'+(740+c*44)+' '+(295+r*42)+'l22-9v18z',class:'ink'},$('wedge')));
+fig($('ownP'),1420,480,24,'gain');
+for(let i=0;i<4;i++){mk('rect',{x:180,y:290+i*95,width:200,height:80,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},$('drw'));mk('path',{d:'M250 '+(330+i*95)+'h60',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},$('drw'))}
+const COLD=['CONFUSING','COLD','SINISTER'].map((s,i)=>tx($('cold'),450,520+i*50,s,26,{style:'fill:var(--loss)'}));
+const BW=[];[160,240,190,260,140].forEach((h,i)=>{const x=900+i*115;mk('path',{d:'M'+(x+45)+' 600v90',stroke:'var(--line)','stroke-width':12},$('bld'));mk('rect',{x:x,y:600-h,width:90,height:h,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('bld'));for(let y=620-h;y<570;y+=40){BW.push(mk('rect',{x:x+20,y:y,width:18,height:18,fill:'var(--line)'},$('bld')));BW.push(mk('rect',{x:x+52,y:y,width:18,height:18,fill:'var(--line)'},$('bld')))}});
+for(let i=0;i<5;i++)mk('circle',{cx:180,cy:370+i*50,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nb'));
+const NC=['A CURRENCY','A COMPANY','A COUNTRY'].map((s,i)=>chip($('c0'),430,370+i*90,290,s));
+const FC=['CONTRACTS','PASSPORTS','RECEIPTS'].map((s,i)=>chip($('c1'),1150,370+i*90,290,s));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('tNote'),p(u,TM.title_card,TM.title_card+.6));
+TC.forEach((c,i)=>rise(c,p(u,TM.title_card+.3+i*.15,TM.title_card+.8+i*.15)));
+$('tLinks').setAttribute('opacity',p(u,TM.title_card+5.4,TM.title_card+6.4));
+
+rise($('chimp'),p(u,TM.chimp_band,TM.chimp_band+.6));
+const cs=TM.crowd_city,sh=cs+4.2;
+CR.forEach((c,i)=>{const a=cs+(i%18)*.04+Math.floor(i/18)*.05;c.setAttribute('opacity',p(u,a,a+.4))});
+rise($('crowdL'),p(u,cs+.5,cs+1));
+LKD.forEach(i=>CR[i].setAttribute('fill',u>=sh?'var(--gain)':'var(--muted)'));
+$('shL').setAttribute('opacity',p(u,sh,sh+.8)); rise($('shB'),p(u,sh,sh+.5)); rise($('link1'),p(u,sh+.6,sh+1.2));
+
+rise($('k0'),p(u,TM.rock,TM.rock+.6)); rise($('k1'),p(u,TM.headache,TM.headache+.6)); rise($('k2'),p(u,TM.banknote,TM.banknote+.6));
+$('ache').setAttribute('opacity',(.35+.65*Math.abs(Math.sin(t*4))).toFixed(2));
+ML.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.banknote+.6+i*.25,TM.banknote+1+i*.25)));
+
+// nations and money: shapes fade, labels stay legible
+rise($('nat'),p(u,TM.flag,TM.flag+.6));
+ACT.forEach((c,i)=>rise(c,p(u,TM.treaty+i*.6,TM.treaty+i*.6+.4)));
+rise($('money'),p(u,TM.treaty+4.2,TM.treaty+4.8)); rise($('buy'),p(u,TM.treaty+5,TM.treaty+5.5)); rise($('believers'),p(u,TM.treaty+5.6,TM.treaty+6.2));
+const fd=p(u,TM.treaty+9.9,TM.treaty+11.4);
+['natS','monS','buyS'].forEach(id=>$(id).setAttribute('opacity',(1-.55*fd).toFixed(2)));
+$('belW').setAttribute('opacity',(1-.8*fd).toFixed(2));
+ACT.forEach(c=>{c.rr.setAttribute('stroke-dasharray',fd>0?'8 8':'none'); c.rr.setAttribute('stroke',fd>0?'var(--muted)':'var(--ink)')});
+rise($('fades'),p(u,TM.treaty+9.9,TM.treaty+10.5));
+
+rise($('hz'),p(u,TM.herzl,TM.herzl+.6)); rise($('bk'),p(u,TM.herzl+2.5,TM.herzl+3.1));
+BG.forEach((g,i)=>{const a=TM.book_open+i*.4; rise(g,p(u,a,a+.4)); RY[i].setAttribute('opacity',p(u,a,a+.4))});
+PP.forEach((q,i)=>{const c=u>=TM.book_open+1.8+i*.15?'gain':'ink'; q[0].setAttribute('class',c); q[1].setAttribute('class',c)});
+rise($('rally'),p(u,TM.book_open+5,TM.book_open+5.6));
+
+const s5=SC[5][0]/K;
+rise($('dream'),p(u,s5+.4,s5+1)); rise($('office'),p(u,TM.clay_tablet-5.4,TM.clay_tablet-4.8));
+WN.forEach((w,i)=>w.setAttribute('fill',u>=TM.clay_tablet-4.6+i*.15?'var(--gain)':'var(--line)'));
+rise($('tab'),p(u,TM.clay_tablet,TM.clay_tablet+.6));
+WG.forEach((w,i)=>{const a=TM.clay_tablet+.5+i*.05; w.setAttribute('opacity',p(u,a,a+.2))});
+rise($('deed'),p(u,TM.deed_owner,TM.deed_owner+.6)); rise($('created'),p(u,TM.deed_owner+5,TM.deed_owner+5.6));
+
+rise($('cab'),p(u,TM.filing_cab,TM.filing_cab+.6)); rise($('love'),p(u,TM.filing_cab+.8,TM.filing_cab+1.4));
+COLD.forEach((c,i)=>rise(c,p(u,TM.filing_cab+4.2+i*.4,TM.filing_cab+4.6+i*.4)));
+$('cabR').setAttribute('stroke',u>=TM.filing_cab+4.2?'var(--loss)':'var(--ink)');
+rise($('city'),p(u,TM.sewer_pipe,TM.sewer_pipe+.6)); $('flow').setAttribute('stroke-dashoffset',(-t*80).toFixed(1));
+BW.forEach((w,i)=>w.setAttribute('fill',u>=TM.sewer_pipe+1+i*.06?'var(--gain)':'var(--line)'));
+rise($('run'),p(u,TM.sewer_pipe+2,TM.sewer_pipe+2.6));
+
+rise($('c0'),p(u,TM.notebook,TM.notebook+.6));
+NC.forEach((c,i)=>rise(c,p(u,TM.notebook+2+i*.6,TM.notebook+2.4+i*.6)));
+rise($('c1'),p(u,TM.form_sheet,TM.form_sheet+.6));
+FC.forEach((c,i)=>rise(c,p(u,TM.form_sheet+1.5+i*.6,TM.form_sheet+1.9+i*.6)));
+rise($('bridge'),p(u,TM.form_sheet+5.4,TM.form_sheet+5.9)); rise($('layers'),p(u,TM.form_sheet+5.4,TM.form_sheet+6));
+
+['qa','qb','qc','qd'].forEach((id,i)=>rise($(id),p(u,TM.question+i*.4,TM.question+i*.4+.5)));
+rise($('qlab'),p(u,TM.question+1.8,TM.question+2.4)); rise($('wal'),p(u,TM.question+1.6,TM.question+2.2));
+$('cash').setAttribute('opacity',(1-p(u,TM.question+3,TM.question+5)).toFixed(2));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:134.64;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

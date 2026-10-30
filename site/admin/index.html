@@ -64,10 +64,20 @@ textarea{min-height:90px;resize:vertical}
 .flag{color:var(--loss);font-size:13px}
 .links{display:flex;gap:14px;flex-wrap:wrap;font-size:14px}
 .chead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.spin{width:15px;height:15px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;display:inline-block;flex:none;animation:vgspin .8s linear infinite}
+@keyframes vgspin{to{transform:rotate(360deg)}}
+.jobs{position:sticky;top:0;z-index:30;display:flex;flex-direction:column;gap:6px;padding:0 16px;max-width:880px;margin:0 auto}
+.jobs:not(:empty){padding-top:10px}
+.job{display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid rgba(255,194,51,.55);color:var(--gain);border-radius:10px;padding:10px 12px;font-size:14px;box-shadow:0 8px 24px -10px #000}
+.job .jt{flex:1;color:var(--ink)}.job .jt b{display:block;font-weight:600}.job .jt span{color:var(--muted);font-size:13px}
+.job.ok{border-color:rgba(127,214,164,.6);color:var(--ok)}.job.bad{border-color:rgba(255,138,128,.6);color:var(--bad)}
+.job a{color:var(--ink);font-size:13px}.job button{background:none;border:0;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;padding:0 4px}
+.btn .spin{margin-right:2px}
 </style>
 </head>
 <body>
 <header class="top"><div class="top-in"><a class="brand" href="../"><i></i>VisualGrowth</a><span class="sp">Admin</span></div></header>
+<div class="jobs" id="jobs" role="status" aria-live="polite"></div>
 <main>
   <div><div class="eyebrow">Book engine</div><h1>Type a title. Get a lesson set.</h1>
   <p class="lede">The engine writes the lessons, draws the motion graphics, records the voiceover and builds a draft. Nothing goes public until you approve it.</p></div>
@@ -271,16 +281,58 @@ function wireBulk(){
     b.disabled=true;
     try{
       await dispatch("bulk-books.yml",{books:todo.map(d=>(d.input_title||d.title)+" | "+(d.author||"").replace(/\|/g," ")+" | "+d.planned).join("\n"),lessons:"10",parallel:"3",mode:"real"});
-      b.textContent="Started…";setTimeout(loadRuns,5000);
+      watch({label:"Resuming "+todo.length+" unfinished book"+(todo.length>1?"s":""),workflow:"Bulk add books",has:"",deploy:false,doing:"Building the missing lessons (can take hours)"});
+      b.textContent="Resume unfinished";b.disabled=false;setTimeout(loadRuns,5000);
     }catch(err){alert(err.message);b.disabled=false}
   });
   $("#approveall").addEventListener("click",async e=>{
     if(!confirm("Publish every finished draft to the public library?\n\nDry runs and unfinished drafts are left alone."))return;
-    const b=e.currentTarget;b.disabled=true;
-    try{await dispatch("review-book.yml",{slug:"all",action:"approve"});b.textContent="Started…";setTimeout(loadRuns,4000)}
-    catch(err){alert(err.message);b.disabled=false}
+    const b=e.currentTarget;busy(b,"Publishing…");
+    try{await dispatch("review-book.yml",{slug:"all",action:"approve"});
+      watch({label:"Publishing every finished draft",workflow:"Review book",has:": all",deploy:true,doing:"Publishing: covers, categories, library"});setTimeout(loadRuns,4000)}
+    catch(err){alert(err.message);b.disabled=false;b.textContent="Approve all finished"}
   });
 }
+
+/* ---------------------------------------------------------------- progress banner */
+/* After a click, follow the GitHub run it started: starting -> working -> (publishing the site) -> done or failed. */
+const jobs=[];
+const mmss=ms=>{const s=Math.floor(ms/1000);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
+function renderJobs(){
+  $("#jobs").innerHTML=jobs.map((j,i)=>'<div class="job '+(j.state||"")+'">'+(j.state?(j.state==="ok"?"<span>✓</span>":"<span>!</span>"):'<span class="spin"></span>')+
+    '<div class="jt"><b>'+esc(j.label)+'</b><span>'+esc(j.msg)+(j.state?"":" · "+mmss(Date.now()-j.t0))+'</span></div>'+
+    (j.url&&j.state==="bad"?'<a href="'+esc(j.url)+'" target="_blank" rel="noopener">View log</a>':"")+
+    (j.state?'<button type="button" data-i="'+i+'" aria-label="Dismiss">×</button>':"")+'</div>').join("");
+  $("#jobs").querySelectorAll("button[data-i]").forEach(b=>b.onclick=()=>{jobs.splice(+b.dataset.i,1);renderJobs()});
+}
+setInterval(()=>{if(jobs.some(j=>!j.state))renderJobs()},1000);
+/* opts: label, workflow (run name), has (text in the run's title), deploy (also wait for the site to go live), doing (what to call the work) */
+function watch(opts){
+  const j={label:opts.label,msg:"Starting…",t0:Date.now(),state:"",url:""};
+  jobs.push(j);renderJobs();
+  (async()=>{
+    const t0=j.t0-20000;let run=null,siteSeen=0,idle=0;
+    for(let n=0;n<400&&!j.state;n++){
+      await new Promise(r=>setTimeout(r,n<3?3000:6000));
+      let runs=[];try{const r=await gh("/actions/runs?per_page=40");if(r.ok)runs=(await r.json()).workflow_runs||[]}catch(e){continue}
+      run=runs.find(r=>r.name===opts.workflow&&new Date(r.created_at)>=t0&&(!opts.has||String(r.display_title||"").includes(opts.has)))||null;
+      if(!run){j.msg=n>8?"Waiting for GitHub to pick it up…":"Starting…";renderJobs();continue}
+      j.url=run.html_url;
+      if(run.status!=="completed"){j.msg=run.status==="queued"?"Queued on GitHub…":opts.doing||"Working…";renderJobs();continue}
+      if(run.conclusion!=="success"){j.state="bad";j.msg=run.conclusion==="cancelled"?"Cancelled.":"It didn't finish. Nothing was changed on the live site.";break}
+      if(!opts.deploy){j.state="ok";j.msg="Done.";break}
+      const sites=runs.filter(r=>r.name==="Publish site"&&new Date(r.created_at)>=new Date(run.created_at)-5000);
+      if(sites.some(r=>r.status!=="completed")){siteSeen=1;j.msg="Saved. Updating the live site…";renderJobs();continue}
+      if(sites.some(r=>r.conclusion==="success")){j.state="ok";j.msg="Live on the site.";break}
+      if(++idle>8||siteSeen){j.state=siteSeen?"bad":"ok";j.msg=siteSeen?"Saved, but the site update failed. Re-run it from GitHub Actions (Publish site).":"Saved. The site refreshes in a minute or two.";if(siteSeen)j.url="https://github.com/"+OWNER+"/"+REPO+"/actions/workflows/pages.yml";break}
+      j.msg="Saved. Starting the site update…";renderJobs();
+    }
+    if(!j.state){j.state="bad";j.msg="Still no result after a long wait. Check GitHub Actions.";j.url="https://github.com/"+OWNER+"/"+REPO+"/actions"}
+    renderJobs();loadDrafts();loadPublished();loadRuns();
+    if(j.state==="ok")setTimeout(()=>{const i=jobs.indexOf(j);if(i>=0){jobs.splice(i,1);renderJobs()}},25000);
+  })();
+}
+function busy(b,text){b.disabled=true;b.innerHTML='<span class="spin"></span> '+esc(text)}
 
 /* ---------------------------------------------------------------- drafts */
 async function fetchJson(urls){
@@ -314,16 +366,18 @@ async function draftAction(b){
   try{
     if(act==="approve"){
       if(!confirm('Publish "'+title+'" to the public library?'))return;
-      b.disabled=true;await dispatch("review-book.yml",{slug:slug,action:"approve"});
+      busy(b,"Publishing…");await dispatch("review-book.yml",{slug:slug,action:"approve"});
+      watch({label:'Publishing "'+title+'"',workflow:"Review book",has:": "+slug,deploy:true,doing:"Publishing: cover, categories, library"});
     }else if(act==="reject"){
       if(!confirm('Reject and delete the draft "'+title+'"?'))return;
-      b.disabled=true;await dispatch("review-book.yml",{slug:slug,action:"reject"});
+      busy(b,"Rejecting…");await dispatch("review-book.yml",{slug:slug,action:"reject"});
+      watch({label:'Rejecting "'+title+'"',workflow:"Review book",has:": "+slug,deploy:false,doing:"Removing the draft"});
     }else{
-      b.disabled=true;await dispatch("create-book.yml",{title:title,author:"",lessons:b.dataset.n,notes:"",mode:b.dataset.dry==="1"?"dry":"real"});
+      busy(b,"Resuming…");await dispatch("create-book.yml",{title:title,author:"",lessons:b.dataset.n,notes:"",mode:b.dataset.dry==="1"?"dry":"real"});
+      watch({label:'Resuming "'+title+'"',workflow:"Create book",has:title,deploy:false,doing:"Building the missing lessons (can take an hour)"});
     }
     setTimeout(loadRuns,4000);
-    b.textContent=act==="resume"?"Resuming…":"Started…";
-  }catch(err){alert(err.message);b.disabled=false}
+  }catch(err){alert(err.message);b.disabled=false;b.textContent=act==="approve"?"Approve & publish":act==="reject"?"Reject":"Resume"}
 }
 
 /* ---------------------------------------------------------------- activity */
@@ -390,11 +444,10 @@ function updateCatSave(){
 $("#catsave").addEventListener("click",async e=>{
   const btn=e.currentTarget,n=Object.keys(catEdits).length;if(!n)return;
   try{
-    btn.disabled=true;await dispatch("set-categories.yml",{changes:JSON.stringify(catEdits)});
-    $("#catmsg").textContent="Saving "+n+" book"+(n>1?"s":"")+"… live in about 2 minutes.";
+    busy(btn,"Saving…");await dispatch("set-categories.yml",{changes:JSON.stringify(catEdits)});
+    watch({label:"Saving categories for "+n+" book"+(n>1?"s":""),workflow:"Set categories",has:"",deploy:true,doing:"Saving categories"});
     setTimeout(loadRuns,4000);
-    setTimeout(()=>{loadPublished();$("#catmsg").textContent=""},120000);
-  }catch(err){alert(err.message);btn.disabled=false}
+  }catch(err){alert(err.message);btn.disabled=false;updateCatSave()}
 });
 
 function loadAll(){loadDrafts();loadRuns();loadPublished()}

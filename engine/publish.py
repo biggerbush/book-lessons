@@ -71,6 +71,8 @@ def write_draft(state: dict) -> None:
     }
     if state.get("cover_art"):
         book["cover_art"] = state["cover_art"]
+    if state.get("categories"):
+        book["categories"] = state["categories"]
     if state.get("kind") == "model":
         book.update(kind="model", model_id=state.get("model_id", ""), category=state.get("category", ""))
     (d / "book.json").write_text(json.dumps(book, indent=1, ensure_ascii=False), encoding="utf8")
@@ -137,15 +139,36 @@ def approve(slug: str) -> None:
            "planned": book["planned"], "lessons": lessons}
     if entry:
         entry.update(new)                       # keeps the book's categories
+        target = entry
     else:
-        new["categories"] = []                  # set later from the admin page
+        new["categories"] = book.get("categories") or []
         data["books"].append(new)
+        target = new
+    if not target.get("categories"):            # every published book gets categories (editable later from the admin page)
+        target["categories"] = _pick_categories(data, target)
     from .categories import reindex
     reindex(data)
     _make_cover(data, book_id, book)
     books_path.write_text(json.dumps(data, indent=1, ensure_ascii=False), encoding="utf8")
     update_drafts_index()
     log(f"Published '{book['title']}' ({len(lessons)} lessons) as site/{dest.name}/")
+
+
+def _pick_categories(data: dict, entry: dict) -> list[str]:
+    """Claude picks from the library's categories; a keyword guess if Claude isn't available. Never blocks publishing."""
+    from . import categorise
+    names = [c["name"] for c in data.get("categories", [])]
+    llm = None
+    try:
+        if os.environ.get("ANTHROPIC_API_KEY"):
+            from .llm import LLM, new_usage
+            llm = LLM(new_usage())
+    except Exception:
+        llm = None
+    cats = categorise.choose(llm, entry["title"], entry.get("author", ""), entry.get("blurb", ""), names) if llm else \
+        categorise.guess(entry["title"], entry.get("blurb", ""), names)
+    log(f"Categories for '{entry['title']}': {', '.join(cats)}")
+    return cats
 
 
 def _make_cover(data: dict, book_id: str, book: dict) -> None:

@@ -1,0 +1,328 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Creative Act Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of The Creative Act: Rubin argues that creativity isn&#x27;t reserved for artists, because anyone who perceives the world and responds to it is already creating. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE CREATIVE ACT · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Everyone is already</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">a creator.</text>
+<text class="b" x="120" y="600" font-size="32">Why you have been creating all along, without noticing.</text>
+<g id="hp"></g>
+<g id="orb"></g>
+</g>
+
+<g id="s1" opacity="0">
+<rect class="loss" x="0" y="200" width="1600" height="660" fill-opacity=".07"/>
+<text class="d" x="120" y="124" font-size="68">The old myth.</text>
+<text class="b" x="120" y="176" font-size="32">Creativity as a spotlight on a lucky few.</text>
+<g id="spot"><polygon points="770,236 830,236 1060,720 540,720" fill="var(--gain)" fill-opacity=".2"/><ellipse cx="800" cy="720" rx="260" ry="28" fill="var(--gain)" fill-opacity=".35"/><rect class="ink" x="756" y="200" width="88" height="40" rx="8"/></g>
+<g id="perf"></g>
+<g id="crw"><g id="crwi" opacity=".45"></g><text class="m" x="120" y="790" font-size="20">EVERYONE ELSE, IN THE DARK</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rubin disagrees.</text>
+<text class="b" x="120" y="176" font-size="32">Decades in studios with famous artists, yet he rejects that picture.</text>
+<g id="rb"><g id="rbf"></g><path d="M262 392q38 80 76 0z" fill="var(--muted)"/>
+<rect class="ink" x="140" y="560" width="320" height="70" rx="10"/>
+<path d="M190 575v40M240 575v40M290 575v40M340 575v40M390 575v40" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/>
+<g id="knb"></g>
+<text class="m" x="300" y="680" font-size="20" text-anchor="middle">THE STUDIO</text></g>
+<g id="qc"><rect class="s-line" x="620" y="240" width="860" height="300" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="670" y="360" font-size="60">“Creativity is not</text>
+<text class="d" x="670" y="440" font-size="60">a <tspan style="fill:var(--gain)">rare ability.</tspan>”</text>
+<text class="m" x="670" y="500" font-size="22">RICK RUBIN</text></g>
+<g id="hu"><g id="hul"><text class="m" x="620" y="770" font-size="24" style="fill:var(--gain)">A FUNDAMENTAL PART OF BEING HUMAN</text></g></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">You make things every day.</text>
+<text class="b" x="120" y="176" font-size="32">To create: bring something into being that wasn’t there before.</text>
+<g id="pn"><rect class="s-line" x="120" y="240" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/><rect class="s-line" x="590" y="240" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/><rect class="s-line" x="1060" y="240" width="420" height="490" rx="18" fill="var(--stage)" stroke-width="3"/></g>
+<g id="e0"><g id="e0f"></g><text class="d5" x="150" y="690" font-size="30">A conversation</text></g>
+<g id="b0"><rect x="160" y="280" width="140" height="70" rx="22" fill="var(--stage)" class="s-ink" stroke-width="5"/><circle class="ink" cx="200" cy="315" r="7"/><circle class="ink" cx="230" cy="315" r="7"/><circle class="ink" cx="260" cy="315" r="7"/></g>
+<g id="b1"><rect class="gain" x="360" y="300" width="140" height="70" rx="22"/><circle cx="400" cy="335" r="7" fill="var(--on-gain)"/><circle cx="430" cy="335" r="7" fill="var(--on-gain)"/><circle cx="460" cy="335" r="7" fill="var(--on-gain)"/></g>
+<g id="e1"><rect class="s-muted" x="630" y="420" width="260" height="120" rx="14" fill="none" stroke-width="4" stroke-dasharray="10 10"/>
+<path class="s-muted" d="M700 380h120m-18-16 18 16-18 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-line" d="M610 560H990" stroke-width="4"/>
+<g id="sofaI"><rect class="gain" x="650" y="420" width="220" height="70" rx="14"/><rect class="gain" x="630" y="470" width="260" height="70" rx="14"/><path d="M660 490H860" stroke="var(--stage)" stroke-width="4"/></g>
+<text class="d5" x="620" y="690" font-size="30">Rearranged furniture</text></g>
+<g id="e2"><path class="s-line" d="M1130 600V340H1370" fill="none" stroke-width="10" stroke-linejoin="round"/>
+<rect class="loss" x="1170" y="328" width="36" height="24" rx="5"/><rect class="loss" x="1220" y="328" width="36" height="24" rx="5"/><rect class="loss" x="1270" y="328" width="36" height="24" rx="5"/>
+<path id="rt" d="M1130 600H1310V420H1400V365" fill="none" stroke="var(--gain)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+<path class="gain" d="M1370 360v-34l30-26 30 26v34z"/><circle class="ink" cx="1130" cy="600" r="14"/>
+<text class="d5" x="1090" y="690" font-size="30">A new way home</text></g>
+<g id="nw"><text class="d" x="120" y="815" font-size="44">Each one is something new.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Even seeing is creating.</text>
+<text class="b" x="120" y="176" font-size="32">Your senses take in the world. Your mind builds its own version.</text>
+<g id="wld"><rect class="s-line" x="120" y="240" width="280" height="280" rx="14" fill="var(--stage)" stroke-width="3"/><circle class="gain" cx="170" cy="290" r="24"/><polygon class="ink" points="140,500 230,360 320,500"/><rect class="ink" x="354" y="450" width="12" height="50"/><circle class="ink" cx="360" cy="430" r="22"/><text class="m" x="120" y="556" font-size="20">THE WORLD</text></g>
+<path id="a0" class="s-muted" d="M420 380h60m-16-14 16 14-16 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="eyeG"><path class="s-ink" d="M500 380Q580 316 660 380Q580 444 500 380Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><circle id="iris" class="ink" cx="580" cy="380" r="22"/></g>
+<path id="a1" class="s-muted" d="M680 380h76m-16-14 16 14-16 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="hdG"><circle class="s-ink" cx="880" cy="380" r="100" fill="var(--stage)" stroke-width="6"/><circle class="gain" cx="850" cy="360" r="30"/><circle class="gain" cx="900" cy="350" r="32"/><circle class="gain" cx="870" cy="400" r="30"/><circle class="gain" cx="915" cy="395" r="26"/></g>
+<path id="a2" class="s-muted" d="M1000 380h76m-16-14 16 14-16 14" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="vb"><rect class="s-line" x="1100" y="240" width="380" height="280" rx="14" fill="var(--stage)" stroke-width="3"/><text class="m" x="1100" y="556" font-size="20" style="fill:var(--gain)">YOUR VERSION</text></g>
+<g id="ver"></g>
+<g id="two"><g id="twof"></g>
+<rect class="s-line" x="240" y="640" width="180" height="140" rx="10" fill="var(--stage)" stroke-width="3"/><circle class="gain" cx="275" cy="672" r="14"/><polygon class="ink" points="260,770 330,690 400,770"/>
+<rect class="s-line" x="620" y="640" width="180" height="140" rx="10" fill="var(--stage)" stroke-width="3"/><circle class="gain" cx="770" cy="672" r="14"/><polygon class="ink" points="630,770 680,710 730,770"/><polygon class="ink" points="690,770 745,700 795,770"/></g>
+<g id="twoc"><text class="d" x="880" y="700" font-size="44">Your view of reality</text><text class="d" x="880" y="760" font-size="44">is an <tspan style="fill:var(--gain)">original</tspan> work.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Notice, respond, leave a mark.</text>
+<text class="b" x="120" y="176" font-size="32">Every choice shapes something, however small.</text>
+<g id="inp"><text class="m" x="140" y="400" font-size="20">WHAT YOU NOTICE</text><path class="s-ink" d="M140 430H440m-22-20 22 20-22 20" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="p5"></g>
+<g id="chs"></g>
+<g id="chl"><text class="m" x="1100" y="437" font-size="20" style="fill:var(--gain)">EACH CHOICE LEAVES A MARK</text></g>
+<g id="day"><path class="s-line" d="M140 700H1460" stroke-width="6" stroke-linecap="round"/><text class="m" x="140" y="750" font-size="20">MORNING</text><text class="m" x="1460" y="750" font-size="20" text-anchor="end">NIGHT</text><g id="dm"></g></g>
+<g id="cc"><text class="d" x="120" y="830" font-size="44">Creating constantly, art or not.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No audience needed.</text>
+<text class="b" x="120" y="176" font-size="32">A work doesn’t need to be sold, recorded or hung to count.</text>
+<g id="gf"><rect class="s-ink" x="140" y="240" width="340" height="260" fill="var(--stage)" stroke-width="10"/><rect x="170" y="270" width="280" height="200" fill="var(--line)"/><circle class="gain" cx="400" cy="320" r="20"/><polygon fill="var(--muted)" points="190,470 280,350 370,470"/>
+<text class="m" x="140" y="560" font-size="22" style="fill:var(--loss)">NOT REQUIRED</text>
+<text class="d5" x="140" y="615" font-size="32">Sold</text><text class="d5" x="140" y="665" font-size="32">Recorded</text><text class="d5" x="140" y="715" font-size="32">Hung in a gallery</text></g>
+<line id="k0" x1="136" y1="604" x2="136" y2="604" stroke="var(--loss)" stroke-width="5" stroke-linecap="round"/>
+<line id="k1" x1="136" y1="654" x2="136" y2="654" stroke="var(--loss)" stroke-width="5" stroke-linecap="round"/>
+<line id="k2" x1="136" y1="704" x2="136" y2="704" stroke="var(--loss)" stroke-width="5" stroke-linecap="round"/>
+<g id="bal"><path class="s-ink" d="M1000 360V700" stroke-width="8"/><path class="ink" d="M960 740L1000 700L1040 740z"/>
+<g id="beamR"><path class="s-ink" d="M720 360H1280" stroke-width="8" stroke-linecap="round"/>
+<path class="s-muted" d="M720 360L630 520M720 360L810 520M1280 360L1190 520M1280 360L1370 520" stroke-width="3"/>
+<path class="ink" d="M630 520h180q-90 50-180 0z"/><path class="ink" d="M1190 520h180q-90 50-180 0z"/>
+<g id="rec"><circle class="ink" cx="1280" cy="476" r="40"/><circle class="gain" cx="1280" cy="476" r="12"/></g>
+<g id="note"><rect class="gain" x="680" y="455" width="80" height="62" rx="6"/><path d="M692 472h56M692 486h56M692 500h34" stroke="var(--on-gain)" stroke-width="4" stroke-linecap="round"/></g></g>
+<circle class="ink" cx="1000" cy="360" r="12"/>
+<text class="m" x="1280" y="640" font-size="20" text-anchor="middle">A HIT RECORD</text></g>
+<g id="nl"><text class="m" x="720" y="640" font-size="20" text-anchor="middle" style="fill:var(--gain)">A NOTE TO A FRIEND</text></g>
+<g id="val"><text class="d" x="120" y="820" font-size="44">The value lies in the making itself.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Artist is a way of being.</text>
+<text class="b" x="120" y="176" font-size="32">Less a job title, more a way of moving through the world.</text>
+<g id="bd"><rect class="s-ink" x="120" y="240" width="380" height="200" rx="18" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="132" y="252" width="356" height="48" rx="10"/><text class="m" x="150" y="284" font-size="22" style="fill:var(--stage)">JOB TITLE</text><text class="d" x="150" y="400" font-size="64">Artist</text></g>
+<line id="bs" x1="146" y1="276" x2="146" y2="276" stroke="var(--loss)" stroke-width="5" stroke-linecap="round"/>
+<g id="wob"><text class="m" x="304" y="284" font-size="20" style="fill:var(--gain)">WAY OF BEING</text></g>
+<g id="trk"><path class="s-gain" d="M160 700H700" stroke-width="6" stroke-linecap="round"/><path class="s-muted" d="M700 700H1190" stroke-width="4" stroke-dasharray="10 12"/><g id="tdots"></g><text class="m" x="160" y="745" font-size="20">ALREADY CREATING</text></g>
+<g id="door"><rect class="gain" x="1200" y="300" width="220" height="400" fill-opacity=".3"/><rect id="dp" class="ink" x="1204" y="304" width="212" height="392"/>
+<g id="lk"><rect class="loss" x="1355" y="490" width="34" height="28" rx="4"/><path class="s-loss" d="M1362 490v-10a10 10 0 0 1 20 0v10" fill="none" stroke-width="5"/></g>
+<rect class="s-ink" x="1200" y="300" width="220" height="400" fill="none" stroke-width="8"/></g>
+<g id="wk"><g id="wkI"></g></g>
+<g id="zero"><text class="d" x="120" y="830" font-size="40">Not starting from zero. Simply continuing.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="ck"><text class="m" x="136" y="230" font-size="24">TONIGHT: THREE THINGS YOU MADE TODAY</text><g id="ckr"></g><path class="gain" d="M1180 440l200-200 34 34-200 200-46 12z"/></g>
+<g id="qa"><text class="d" x="136" y="610" font-size="88" letter-spacing="-2">What might you make</text></g>
+<g id="qb"><text class="d" x="136" y="720" font-size="88" letter-spacing="-2">if you did it <tspan style="fill:var(--gain)">on purpose?</tspan></text><text class="m" x="143" y="810" font-size="26">MAKE SOMETHING ON PURPOSE</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="122" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:02</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Everyone Is Already a Creator&rdquo;, from <em>The Creative Act</em> by Rick Rubin (with Neil Strauss). The everyday examples, such as a conversation, rearranged furniture, a new route home and a note to a friend, are drawn from the kinds of acts Rubin describes in the book. The spotlight, crowd and two heads drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=122, SC=[[0.0, 9.0], [9.0, 22.1], [22.1, 36.7], [36.7, 52.4], [52.4, 68.4], [68.4, 81.1], [81.1, 93.4], [93.4, 108.7], [108.7, 122.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["You Make Things", "The Old Myth", "Rubin's Claim", "Everyday Making", "Seeing Is Making", "Respond, Then Add", "No Audience Needed", "A Way of Being", "Your Challenge"];
+const TM={"hook_person": 0.0, "spotlight": 9.28, "painter": 14.32, "crowd": 17.84, "rubin": 22.4, "quote_card": 28.88, "human_icon": 33.2, "chat_bubbles": 43.28, "sofa": 45.76, "new_route": 48.8, "eye": 52.72, "brain": 57.08, "two_heads": 61.92, "input_arrow": 68.72, "choice_paths": 71.6, "gallery_frame": 81.36, "note_card": 86.96, "artist_badge": 93.68, "open_door": 99.76, "checklist": 109.0};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-1.6*r)+' '+(y+3.6*r)+'v'+(-.9*r)+'a'+(1.6*r)+' '+(1.6*r)+' 0 0 1 '+(3.2*r)+' 0v'+(.9*r)+'z',class:c},g);return g};
+const G=id=>mk('g',{},$(id));
+fig($('hp'),1320,340,40,'ink');
+const ORB=[0,1,2].map(i=>{const g=G('orb');if(i==0)mk('circle',{r:22,class:'gain'},g);else if(i==1)mk('rect',{x:-20,y:-20,width:40,height:40,rx:6,class:'gain'},g);else mk('path',{d:'M0 -24L22 16H-22z',class:'gain'},g);return g});
+const PF=['PAINTER','MUSICIAN','POET'].map((s,i)=>{const x=660+i*140,g=G('perf');fig(g,x,560,26,'gain');mk('text',{x:x,y:790,'font-size':20,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+[170,270,370,470,1130,1230,1330,1430].forEach(x=>fig($('crwi'),x,620,22,'ink'));
+fig($('rbf'),300,390,40,'ink');
+const KN=[0,1,2,3,4].map(i=>mk('rect',{x:180+i*50,y:589,width:20,height:12,rx:3,class:'gain'},$('knb')));
+const HU=[];for(let i=0;i<9;i++)HU.push(fig(G('hu'),680+i*95,620,18,'gain'));
+fig($('e0f'),230,430,28,'ink');fig($('e0f'),430,430,28,'ink');
+const PC=[[mk('circle',{cx:1400,cy:300,r:30,class:'gain'},$('ver')),1400,300],[mk('polygon',{points:'1130,500 1240,330 1350,500',class:'ink'},$('ver')),1240,415]];
+{const g=G('ver');mk('rect',{x:1392,y:440,width:14,height:60,class:'ink'},g);mk('circle',{cx:1399,cy:420,r:32,class:'ink'},g);PC.push([g,1399,450])}
+fig($('twof'),180,690,26,'ink');fig($('twof'),560,690,26,'gain');
+fig($('p5'),530,380,34,'ink');
+const CP=[270,430,590].map(y=>mk('path',{d:'M600 430C820 430 840 '+y+' 1060 '+y,fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round',pathLength:100,'stroke-dasharray':100,'stroke-dashoffset':100},$('chs')));
+const EP=[270,430,590].map(y=>mk('circle',{cx:1060,cy:y,r:16,class:'gain'},$('chs')));
+const DM=[];for(let i=0;i<16;i++)DM.push(mk('circle',{cx:180+i*83,cy:700,r:10,class:'gain'},$('dm')));
+for(let i=0;i<5;i++)mk('circle',{cx:220+i*110,cy:700,r:11,class:'gain'},$('tdots'));
+fig($('wkI'),0,0,24,'gain');
+const CK=['A conversation','A quick fix','Something else'].map((s,i)=>{const y=300+i*62;mk('rect',{x:140,y:y-30,width:36,height:36,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},$('ckr'));mk('text',{x:200,y:y,'font-size':30,class:'d5'},$('ckr')).textContent=s;return mk('path',{d:'M148 '+(y-12)+'l10 10 18-22',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('ckr'))});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d)=>rise($(id),p(u,a,a+(d||.5)));
+R('hp',TM.hook_person);
+const h2=TM.hook_person+3.8; rise($('orb'),p(u,h2,h2+.6));
+ORB.forEach((g,i)=>{const a=t*.5+i*2.094;g.setAttribute('transform','translate('+(1320+150*Math.cos(a)).toFixed(1)+' '+(420+150*Math.sin(a)).toFixed(1)+') rotate('+((t*30+i*40)%360).toFixed(1)+')')});
+
+R('spot',TM.spotlight);
+PF.forEach((g,i)=>rise(g,p(u,TM.painter+i*.4,TM.painter+i*.4+.5)));
+R('crw',TM.crowd);
+
+R('rb',TM.rubin);
+KN.forEach((k,i)=>k.setAttribute('y',(583+12*Math.sin(t*1.5+i*1.3)).toFixed(1)));
+R('qc',TM.quote_card,.6);
+HU.forEach((g,i)=>rise(g,p(u,TM.human_icon+i*.12,TM.human_icon+i*.12+.4)));
+R('hul',TM.human_icon+1);
+
+R('pn',SC[3][0]/K+1,.6);
+R('e0',TM.chat_bubbles-.3); R('b0',TM.chat_bubbles+.2); R('b1',TM.chat_bubbles+1);
+R('e1',TM.sofa-.3); $('sofaI').setAttribute('transform','translate('+(80*p(u,TM.sofa+.6,TM.sofa+2)).toFixed(1)+' 0)');
+R('e2',TM.new_route-.3); $('rt').setAttribute('stroke-dashoffset',(100*(1-p(u,TM.new_route+.6,TM.new_route+2.4))).toFixed(1));
+R('nw',TM.new_route+3);
+
+R('wld',TM.eye-.8); R('eyeG',TM.eye); R('a0',TM.eye+.4);
+$('iris').setAttribute('cx',(580+8*Math.sin(t*1.2)).toFixed(1));
+R('a1',TM.brain); R('hdG',TM.brain); R('a2',TM.brain+.6); R('vb',TM.brain+.6);
+PC.forEach(([g,cx,cy],i)=>{const k=p(u,TM.brain+1.2+i*.5,TM.brain+2.2+i*.5);g.setAttribute('transform','translate('+((880-cx)*(1-k)).toFixed(1)+' '+((380-cy)*(1-k)).toFixed(1)+')');g.setAttribute('opacity',cl(k*4))});
+R('two',TM.two_heads); R('twoc',TM.two_heads+1.5);
+
+R('p5',SC[5][0]/K+.3); R('inp',TM.input_arrow);
+CP.forEach((c,i)=>{const a=TM.choice_paths+i*.6;c.setAttribute('stroke-dashoffset',(100*(1-p(u,a,a+.8))).toFixed(1));EP[i].setAttribute('opacity',p(u,a+.7,a+1))});
+R('chl',TM.choice_paths+2);
+R('day',TM.choice_paths+5.4);
+DM.forEach((d,i)=>d.setAttribute('opacity',p(u,TM.choice_paths+5.6+i*.15,TM.choice_paths+5.9+i*.15)));
+R('cc',TM.choice_paths+6.6);
+
+R('gf',TM.gallery_frame);
+[75,145,280].forEach((L,i)=>{const a=TM.gallery_frame+2+i*.7;$('k'+i).setAttribute('x2',(136+(L+8)*p(u,a,a+.5)).toFixed(1))});
+R('bal',TM.gallery_frame+3);
+R('note',TM.note_card); R('nl',TM.note_card);
+$('beamR').setAttribute('transform','rotate('+(8*(1-p(u,TM.note_card+.4,TM.note_card+1.8))).toFixed(2)+' 1000 360)');
+R('val',TM.note_card+5.4);
+
+R('bd',TM.artist_badge);
+$('bs').setAttribute('x2',(146+144*p(u,TM.artist_badge+2,TM.artist_badge+2.6)).toFixed(1));
+R('wob',TM.artist_badge+2.6); R('trk',TM.artist_badge+3); R('wk',TM.artist_badge+3); R('door',TM.artist_badge+3.5);
+const wx=200+480*p(u,TM.artist_badge+3.5,TM.open_door)+450*p(u,TM.open_door+5,TM.open_door+8);
+$('wkI').setAttribute('transform','translate('+wx.toFixed(1)+' '+(590-4*Math.abs(Math.sin(t*4))).toFixed(1)+')');
+const dk=p(u,TM.open_door+.3,TM.open_door+1.8);
+$('dp').setAttribute('width',(212*(1-.8*dk)).toFixed(1));
+$('lk').setAttribute('opacity',1-p(u,TM.open_door,TM.open_door+.5));
+R('zero',TM.open_door+5);
+
+R('ck',TM.checklist);
+CK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.checklist+1.2+i*.9,TM.checklist+1.6+i*.9)));
+R('qa',TM.checklist+5.8); R('qb',TM.checklist+6.4);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:118.16;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

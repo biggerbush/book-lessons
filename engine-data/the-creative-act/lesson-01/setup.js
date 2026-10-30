@@ -1,0 +1,20 @@
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-1.6*r)+' '+(y+3.6*r)+'v'+(-.9*r)+'a'+(1.6*r)+' '+(1.6*r)+' 0 0 1 '+(3.2*r)+' 0v'+(.9*r)+'z',class:c},g);return g};
+const G=id=>mk('g',{},$(id));
+fig($('hp'),1320,340,40,'ink');
+const ORB=[0,1,2].map(i=>{const g=G('orb');if(i==0)mk('circle',{r:22,class:'gain'},g);else if(i==1)mk('rect',{x:-20,y:-20,width:40,height:40,rx:6,class:'gain'},g);else mk('path',{d:'M0 -24L22 16H-22z',class:'gain'},g);return g});
+const PF=['PAINTER','MUSICIAN','POET'].map((s,i)=>{const x=660+i*140,g=G('perf');fig(g,x,560,26,'gain');mk('text',{x:x,y:790,'font-size':20,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+[170,270,370,470,1130,1230,1330,1430].forEach(x=>fig($('crwi'),x,620,22,'ink'));
+fig($('rbf'),300,390,40,'ink');
+const KN=[0,1,2,3,4].map(i=>mk('rect',{x:180+i*50,y:589,width:20,height:12,rx:3,class:'gain'},$('knb')));
+const HU=[];for(let i=0;i<9;i++)HU.push(fig(G('hu'),680+i*95,620,18,'gain'));
+fig($('e0f'),230,430,28,'ink');fig($('e0f'),430,430,28,'ink');
+const PC=[[mk('circle',{cx:1400,cy:300,r:30,class:'gain'},$('ver')),1400,300],[mk('polygon',{points:'1130,500 1240,330 1350,500',class:'ink'},$('ver')),1240,415]];
+{const g=G('ver');mk('rect',{x:1392,y:440,width:14,height:60,class:'ink'},g);mk('circle',{cx:1399,cy:420,r:32,class:'ink'},g);PC.push([g,1399,450])}
+fig($('twof'),180,690,26,'ink');fig($('twof'),560,690,26,'gain');
+fig($('p5'),530,380,34,'ink');
+const CP=[270,430,590].map(y=>mk('path',{d:'M600 430C820 430 840 '+y+' 1060 '+y,fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round',pathLength:100,'stroke-dasharray':100,'stroke-dashoffset':100},$('chs')));
+const EP=[270,430,590].map(y=>mk('circle',{cx:1060,cy:y,r:16,class:'gain'},$('chs')));
+const DM=[];for(let i=0;i<16;i++)DM.push(mk('circle',{cx:180+i*83,cy:700,r:10,class:'gain'},$('dm')));
+for(let i=0;i<5;i++)mk('circle',{cx:220+i*110,cy:700,r:11,class:'gain'},$('tdots'));
+fig($('wkI'),0,0,24,'gain');
+const CK=['A conversation','A quick fix','Something else'].map((s,i)=>{const y=300+i*62;mk('rect',{x:140,y:y-30,width:36,height:36,rx:6,fill:'none',stroke:'var(--ink)','stroke-width':4},$('ckr'));mk('text',{x:200,y:y,'font-size':30,class:'d5'},$('ckr')).textContent=s;return mk('path',{d:'M148 '+(y-12)+'l10 10 18-22',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('ckr'))});

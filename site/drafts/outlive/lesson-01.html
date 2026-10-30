@@ -1,0 +1,320 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outlive Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Outlive: Your last decade of life is often spent in decline, and the real goal is to extend healthspan, the years you live with a capable body and mind, not just lifespan. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIVE · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Plan for your</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">marginal decade.</text>
+<text class="b" x="120" y="600" font-size="32">Why the years you live well matter more than the total.</text>
+<circle class="s-line" cx="1300" cy="400" r="120" fill="var(--stage)" stroke-width="4"/>
+<g id="ring"></g>
+<line id="hand" class="s-ink" x1="1300" y1="400" x2="1300" y2="310" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1300" cy="400" r="12"/>
+<g id="hike"><path class="s-line" d="M1160 736h100" stroke-width="4"/><path class="s-gain" d="M1248 670L1262 734" stroke-width="6" stroke-linecap="round"/></g>
+<g id="chair"><text class="m" x="1300" y="700" font-size="22" text-anchor="middle">OR</text><path class="s-loss" d="M1440 640v100M1350 726h90M1356 726v14M1434 726v14" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of years.</text>
+<text class="b" x="120" y="176" font-size="32">Every life can be measured in two ways.</text>
+<g id="tl"><path class="s-ink" d="M120 270H1400" stroke-width="6" stroke-linecap="round"/><g id="ticks"></g><text class="m" x="120" y="314" font-size="20">BIRTH</text><text class="m" x="1400" y="314" font-size="20" text-anchor="end">DEATH</text></g>
+<g id="lsl"><text class="m" x="120" y="384" font-size="22">LIFESPAN · HOW MANY YEARS YOU LIVE</text></g>
+<rect id="lsb" class="ink" x="120" y="404" width="0" height="80" rx="10"/>
+<g id="hsl"><text class="m" x="120" y="584" font-size="22" style="fill:var(--gain)">HEALTHSPAN · YEARS WITH A BODY AND MIND THAT WORK WELL</text></g>
+<rect id="hsb" class="gain" x="120" y="604" width="0" height="80" rx="10"/>
+<rect id="hsr" x="1070" y="604" width="330" height="80" rx="10" fill="none" stroke="var(--loss)" stroke-width="4" stroke-dasharray="10 8"/>
+<g id="hst"><text class="d" x="120" y="800" font-size="40">Lifespan counts years. Healthspan counts good ones.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The marginal decade.</text>
+<text class="b" x="120" y="176" font-size="32">The final stretch of life, often spent in slow decline.</text>
+<rect class="gain" x="120" y="236" width="1030" height="64" rx="10" fill-opacity=".35"/>
+<g id="seg"><rect class="loss" x="1150" y="236" width="250" height="64" rx="10"/><path class="s-ink" d="M1150 320v14h250v-14" fill="none" stroke-width="4"/><text class="m" x="1275" y="370" font-size="22" text-anchor="middle">MARGINAL DECADE</text></g>
+<path id="decl" d="M1162 246L1388 290" stroke="var(--stage)" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<g id="cw"><rect class="s-line" x="120" y="430" width="520" height="340" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="150" y="476" font-size="20">CARRYING GROCERIES</text>
+<circle class="ink" cx="290" cy="560" r="24"/><path class="s-ink" d="M296 588Q330 630 320 690M320 690L300 750M320 690L345 750M310 612L376 636" fill="none" stroke-width="12" stroke-linecap="round"/>
+<path class="s-ink" d="M370 630h90M380 630v120M450 630v120" fill="none" stroke-width="7" stroke-linecap="round"/>
+<rect class="loss" x="490" y="660" width="70" height="80" rx="8"/><path class="s-loss" d="M505 662q20-36 40 0" fill="none" stroke-width="6"/></g>
+<g id="cf"><rect class="s-line" x="680" y="430" width="520" height="340" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="710" y="476" font-size="20">GETTING OFF THE FLOOR</text>
+<path class="s-line" d="M720 740h440" stroke-width="4"/><circle class="ink" cx="820" cy="640" r="24"/><path class="s-ink" d="M824 668L840 730L940 736" fill="none" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-loss" d="M1060 730V540M1036 564l24-24 24 24" fill="none" stroke-width="6" stroke-dasharray="12 8" stroke-linecap="round"/><path class="s-loss" d="M1030 600l60 60M1090 600l-60 60" stroke-width="8" stroke-linecap="round"/></g>
+<g id="qm"><text class="d" x="1340" y="720" font-size="300" text-anchor="middle" style="fill:var(--gain)">?</text><text class="d5" x="120" y="830" font-size="38">What do you want those years to look like?</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. The body.</text>
+<text class="b" x="120" y="176" font-size="32">With age, we tend to lose muscle, strength, and balance.</text>
+<g id="arm"><path class="s-gain" d="M150 520H320L300 330" fill="none" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/><circle class="gain" cx="240" cy="492" r="50"/><circle class="gain" cx="300" cy="310" r="36"/></g>
+<g id="bars"></g>
+<g id="stg"><path id="stp" class="s-ink" fill="var(--line)" stroke-width="6" stroke-linejoin="round"/><g id="climber"></g><text class="m" x="820" y="240" font-size="20">A FLIGHT OF STAIRS CAN BECOME A WALL</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. The mind.</text>
+<text class="b" x="120" y="176" font-size="32">Memory, focus, and quick thinking can fade.</text>
+<g id="brn"><circle class="s-ink" cx="360" cy="500" r="190" fill="var(--stage)" stroke-width="7"/><path class="s-line" d="M360 320V680" stroke-width="4"/><g id="nodes"></g></g>
+<g id="ml0"><text class="m" x="620" y="420" font-size="26">MEMORY</text></g>
+<g id="ml1"><text class="m" x="620" y="480" font-size="26">FOCUS</text></g>
+<g id="ml2"><text class="m" x="620" y="540" font-size="26">QUICK THINKING</text></g>
+<g id="ml3"><text class="m" x="620" y="610" font-size="20" style="fill:var(--loss)">CAN FADE YEARS BEFORE</text><text class="m" x="620" y="640" font-size="20" style="fill:var(--loss)">ANYONE NOTICES</text></g>
+<g id="pz"></g>
+<g id="pzt"><text class="d" x="120" y="800" font-size="44">Losing them means losing independence.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Emotional health.</text>
+<text class="b" x="120" y="176" font-size="32">Connection and purpose are part of a good life, not extras.</text>
+<g id="face"><circle class="gain" cx="330" cy="470" r="150"/><circle cx="285" cy="430" r="15" fill="var(--on-gain)"/><circle cx="375" cy="430" r="15" fill="var(--on-gain)"/><path id="smile" fill="none" stroke="var(--on-gain)" stroke-width="12" stroke-linecap="round" d="M260 515Q330 515 400 515"/></g>
+<g id="pl0"><rect class="s-gain" x="560" y="380" width="360" height="76" rx="38" fill="var(--stage)" stroke-width="5"/><text class="m" x="740" y="428" font-size="26" text-anchor="middle">CONNECTION</text></g>
+<g id="pl1"><rect class="s-gain" x="560" y="490" width="360" height="76" rx="38" fill="var(--stage)" stroke-width="5"/><text class="m" x="740" y="538" font-size="26" text-anchor="middle">PURPOSE</text></g>
+<g id="frd"><path class="s-gain" d="M1100 380Q1170 320 1240 380Q1310 320 1380 380" fill="none" stroke-width="5" stroke-dasharray="10 8"/></g>
+<g id="joy"><text class="d" x="120" y="790" font-size="46">A long life without joy is not the goal.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two curves.</text>
+<text class="b" x="120" y="176" font-size="32">Age along the bottom, health up the side.</text>
+<g id="ax"><path class="s-ink" d="M220 240V760H1440" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1440" y="800" font-size="22" text-anchor="end">AGE</text><text class="m" x="240" y="250" font-size="22">HEALTH</text></g>
+<g id="gapg"><path class="gain" fill-opacity=".18" d="M220 300C700 290 1050 300 1180 360C1260 420 1290 600 1320 760L1300 700C1260 690 1150 670 1000 580C800 460 500 320 220 300Z"/><text class="d" x="960" y="420" font-size="34" text-anchor="middle" style="fill:var(--gain)">MORE GOOD YEARS</text></g>
+<path id="cg" class="s-muted" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" d="M220 300C500 320 800 460 1000 580C1150 670 1260 690 1300 700L1320 760"/>
+<path id="cn" class="s-gain" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1" d="M220 300C700 290 1050 300 1180 360C1260 420 1290 600 1320 760"/>
+<g id="lg"><text class="m" x="700" y="570" font-size="22">USUAL PATH</text><text class="m" x="1050" y="735" font-size="20">LONG, WEAK TAIL</text></g>
+<g id="ln"><text class="m" x="560" y="270" font-size="22" style="fill:var(--gain)">IDEAL PATH</text></g>
+<g id="gl"><text class="d" x="120" y="845" font-size="44">More good years, not just more years.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start decades early.</text>
+<text class="b" x="120" y="176" font-size="32">The marginal decade is shaped long before it arrives.</text>
+<g id="tl2"><path class="s-ink" d="M120 720H1440M1420 704l20 16-20 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="380" y="764" font-size="22" text-anchor="middle">MIDLIFE</text><text class="m" x="1250" y="764" font-size="22" text-anchor="middle">MARGINAL DECADE</text></g>
+<g id="ya"></g>
+<g id="blk"></g>
+<g id="carry"><path class="s-gain" d="M590 520Q880 360 1180 520M1154 488L1180 520L1140 524" fill="none" stroke-width="5" stroke-dasharray="12 8" stroke-linecap="round"/></g>
+<g id="old"><path class="s-ink" d="M1284 668C1284 642 1316 642 1316 666L1320 718" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="cal"><rect class="s-ink" x="700" y="220" width="200" height="180" rx="12" fill="var(--stage)" stroke-width="5"/><rect class="gain" x="700" y="220" width="200" height="44" rx="12"/><text class="m" x="800" y="251" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">NOW</text><g id="cells"></g><circle id="ring2" class="s-gain" cx="732" cy="290" r="22" fill="none" stroke-width="5"/><text class="d" x="120" y="835" font-size="40">The best time to plan for that decade is now.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">Picture a day in your</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2" style="fill:var(--gain)">marginal decade.</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">Write three things</text></g>
+<g id="qd"><text class="d" x="136" y="600" font-size="80" letter-spacing="-2">you want to do.</text></g>
+<g id="nb"><rect class="s-ink" x="1160" y="300" width="280" height="340" rx="14" fill="var(--stage)" stroke-width="6"/><g id="holes"></g>
+<text class="d" x="1190" y="412" font-size="36">1</text><text class="d" x="1190" y="492" font-size="36">2</text><text class="d" x="1190" y="572" font-size="36">3</text>
+<path id="nl0" class="s-gain" d="M1240 400H1410" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<path id="nl1" class="s-gain" d="M1240 480H1410" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<path id="nl2" class="s-gain" d="M1240 560H1410" stroke-width="6" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/></g>
+<g id="keep"><text class="m" x="143" y="740" font-size="26">KEEP THAT LIST SOMEWHERE YOU’LL SEE IT</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Plan for Your Marginal Decade&rdquo;, from <em>Outlive</em> by Peter Attia, with Bill Gifford. The marginal decade, the three parts of healthspan and the two-curve health graph are ideas as reported in the book. The curves, stairs and other drawings are illustrations, not real data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 7.4], [7.4, 21.6], [21.6, 40.3], [40.3, 53.1], [53.1, 66.3], [66.3, 79.5], [79.5, 102.3], [102.3, 115.4], [115.4, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Your Last Ten Years", "Two Kinds of Years", "The Marginal Decade", "The Body Declines", "The Mind Declines", "The Heart Matters Too", "Two Curves", "Start Decades Early", "Your Challenge"];
+const TM={"old_clock": 0.0, "timeline": 7.68, "lifespan_bar": 11.68, "healthspan_bar": 15.92, "last_segment": 21.92, "walker": 30.64, "question_mark": 36.48, "muscle_icon": 40.56, "stairs": 48.64, "brain": 53.44, "puzzle": 61.84, "smiling_face": 66.64, "friends": 75.44, "graph_axes": 79.84, "gray_curve": 85.2, "green_curve": 92.4, "young_adult": 102.56, "habit_blocks": 107.52, "calendar": 112.0, "notebook": 115.68};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const draw=(el,k)=>el.setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+const segs=[];for(let i=0;i<10;i++){const a0=(-90+i*36+3)*Math.PI/180,a1=a0+30*Math.PI/180,R=150;
+  segs.push(mk('path',{d:'M'+(1300+R*Math.cos(a0)).toFixed(1)+' '+(400+R*Math.sin(a0)).toFixed(1)+'A'+R+' '+R+' 0 0 1 '+(1300+R*Math.cos(a1)).toFixed(1)+' '+(400+R*Math.sin(a1)).toFixed(1),fill:'none',stroke:i>6?'var(--loss)':'var(--gain)','stroke-width':22,'stroke-linecap':'round'},$('ring')))}
+fig($('hike'),1210,650,20,'gain'); fig($('chair'),1395,650,18,'loss');
+for(let i=0;i<=10;i++)mk('path',{d:'M'+(120+i*128)+' 258v24',class:'s-ink','stroke-width':4},$('ticks'));
+// body bars: grey track, navy remainder that shrinks, dashed outline of what is lost
+const BT=[110,150,80];
+const BL=['MUSCLE','STRENGTH','BALANCE'].map((s,i)=>{const g=mk('g',{},$('bars')),y=640+i*70;const tx=mk('text',{x:120,y:y,'font-size':22,class:'m'},g);tx.textContent=s;
+  mk('rect',{x:300,y:y-24,width:300,height:30,rx:8,fill:'var(--line)'},g);
+  const lost=mk('rect',{x:300,y:y-24,width:0,height:30,rx:8,fill:'none',stroke:'var(--loss)','stroke-width':3,'stroke-dasharray':'8 6'},g);
+  const bar=mk('rect',{x:300,y:y-24,width:300,height:30,rx:8,fill:'var(--loss)'},g);
+  return [g,bar,lost,BT[i]]});
+fig($('climber'),760,696,20,'ink');
+const NP=[];for(let i=0;i<14;i++){const a=i*2.4,r=25+10*i;NP.push([360+r*Math.cos(a),500+r*Math.sin(a)])}
+const NE=[];for(let i=1;i<14;i++)[i-1,i-3].forEach(j=>{if(j>=0)NE.push(mk('path',{d:'M'+NP[i][0].toFixed(0)+' '+NP[i][1].toFixed(0)+'L'+NP[j][0].toFixed(0)+' '+NP[j][1].toFixed(0),class:'s-line','stroke-width':4},$('nodes')))});
+const ND=NP.map(q=>mk('circle',{cx:q[0].toFixed(0),cy:q[1].toFixed(0),r:13,class:'gain'},$('nodes')));
+// puzzle: real interlocking pieces; tabs (+1) of one piece fit notches (-1) of its neighbour
+const PS=200;
+function pzEdge(x,y,dx,dy,s){const nx=dy,ny=-dx,P=(a,h)=>(x+dx*a+nx*h).toFixed(1)+' '+(y+dy*a+ny*h).toFixed(1);
+  if(!s)return 'L'+P(PS,0);
+  return 'L'+P(80,0)+'C'+P(50,55*s)+' '+P(150,55*s)+' '+P(120,0)+'L'+P(PS,0)}
+function pzPath(x,y,e){return 'M'+x+' '+y+pzEdge(x,y,1,0,e[0])+pzEdge(x+PS,y,0,1,e[1])+pzEdge(x+PS,y+PS,-1,0,e[2])+pzEdge(x,y+PS,0,-1,e[3])+'Z'}
+const PE=[[1000,300,[0,1,1,0]],[1200,300,[0,0,1,-1]],[1000,500,[-1,1,0,0]],[1200,500,[-1,0,0,-1]]];
+mk('path',{d:pzPath(1200,500,PE[3][2]),fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'10 8','stroke-linejoin':'round'},$('pz'));
+const PZ=PE.map((q,i)=>{const g=mk('g',{},$('pz'));
+  mk('path',{d:pzPath(q[0],q[1],q[2]),fill:i===3?'var(--gain)':'var(--stage)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},g);
+  if(i===3){const tx=mk('text',{x:1300,y:612,'font-size':20,'text-anchor':'middle',style:'font-family:var(--mono);letter-spacing:.02em;font-weight:700;fill:var(--on-gain)'},g);tx.textContent='INDEPENDENCE'}return g});
+[1100,1240,1380].forEach(x=>fig($('frd'),x,430,30,'ink'));
+fig($('ya'),300,560,30,'gain'); fig($('old'),1250,580,26,'ink');
+const BK=['STRENGTH','HABITS','',''].map((s,i)=>{const y=636-i*56,g=mk('g',{},$('blk'));mk('rect',{x:380,y:y,width:200,height:50,rx:8,class:'gain','fill-opacity':i<2?1:.55},g);
+  if(s){const tx=mk('text',{x:480,y:y+33,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},g);tx.textContent=s}return g});
+for(let r=0;r<3;r++)for(let c=0;c<5;c++)mk('rect',{x:718+c*34,y:276+r*34,width:28,height:28,rx:4,fill:'var(--line)'},$('cells'));
+for(let i=0;i<5;i++)mk('circle',{cx:1200+i*50,cy:300,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('holes'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('hand').setAttribute('transform','rotate('+(t*60%360).toFixed(1)+' 1300 400)');
+segs.forEach((s,i)=>s.setAttribute('opacity',p(u,TM.old_clock+i*.15,TM.old_clock+i*.15+.3)));
+rise($('hike'),p(u,TM.old_clock+3.2,TM.old_clock+3.7)); rise($('chair'),p(u,TM.old_clock+4.2,TM.old_clock+4.7));
+
+rise($('tl'),p(u,TM.timeline,TM.timeline+.5));
+rise($('lsl'),p(u,TM.lifespan_bar,TM.lifespan_bar+.4)); $('lsb').setAttribute('width',(1280*p(u,TM.lifespan_bar,TM.lifespan_bar+1.4)).toFixed(1));
+rise($('hsl'),p(u,TM.healthspan_bar,TM.healthspan_bar+.4)); $('hsb').setAttribute('width',(940*p(u,TM.healthspan_bar,TM.healthspan_bar+1.4)).toFixed(1));
+$('hsr').setAttribute('opacity',p(u,TM.healthspan_bar+1.4,TM.healthspan_bar+1.9)); rise($('hst'),p(u,TM.healthspan_bar+3,TM.healthspan_bar+3.6));
+
+rise($('seg'),p(u,TM.last_segment,TM.last_segment+.5)); draw($('decl'),p(u,TM.walker-4,TM.walker-2.5));
+rise($('cw'),p(u,TM.walker,TM.walker+.5)); rise($('cf'),p(u,TM.walker+1.5,TM.walker+2)); rise($('qm'),p(u,TM.question_mark,TM.question_mark+.6));
+
+rise($('arm'),p(u,TM.muscle_icon,TM.muscle_icon+.5));
+BL.forEach((b,i)=>{const a=TM.muscle_icon+1+i*.4; rise(b[0],p(u,a,a+.4));
+  const k=p(u,a+.8,a+2.4), w=300-(300-b[3])*k;
+  b[1].setAttribute('width',w.toFixed(1)); b[2].setAttribute('x',(300+w).toFixed(1)); b[2].setAttribute('width',(300-w).toFixed(1)); b[2].setAttribute('opacity',k.toFixed(2))});
+rise($('stg'),p(u,TM.stairs,TM.stairs+.5));
+const sh=40+60*p(u,TM.stairs+.6,TM.stairs+4.5); let sd='M820 780'; for(let i=0;i<5;i++)sd+='v'+(-sh).toFixed(1)+'h120'; $('stp').setAttribute('d',sd+'V780Z');
+
+rise($('brn'),p(u,TM.brain,TM.brain+.5));
+[0,1,2].forEach(i=>rise($('ml'+i),p(u,TM.brain+2.5+i*.4,TM.brain+2.9+i*.4))); rise($('ml3'),p(u,TM.brain+4,TM.brain+4.5));
+ND.forEach((c,i)=>{const a=TM.brain+3+((i*5)%14)*.25; c.setAttribute('opacity',(1-.8*p(u,a,a+.6)).toFixed(2))});
+NE.forEach(e=>e.setAttribute('opacity',(1-.6*p(u,TM.brain+3,TM.puzzle)).toFixed(2)));
+rise($('pz'),p(u,TM.puzzle,TM.puzzle+.5));
+const fk=p(u,TM.puzzle+1.2,TM.puzzle+2.6); PZ[3].setAttribute('transform','translate('+(60*fk).toFixed(1)+' '+(60*fk).toFixed(1)+')'); PZ[3].setAttribute('opacity',(1-.35*fk).toFixed(2));
+rise($('pzt'),p(u,TM.puzzle+1.5,TM.puzzle+2));
+
+rise($('face'),p(u,TM.smiling_face,TM.smiling_face+.5));
+const sm=p(u,TM.smiling_face+.3,TM.smiling_face+1.6); $('smile').setAttribute('d','M260 515Q330 '+(515+70*sm).toFixed(1)+' 400 515');
+rise($('pl0'),p(u,TM.smiling_face+2.5,TM.smiling_face+3)); rise($('pl1'),p(u,TM.smiling_face+3.3,TM.smiling_face+3.8));
+rise($('frd'),p(u,TM.friends,TM.friends+.5)); rise($('joy'),p(u,TM.friends+1,TM.friends+1.6));
+
+rise($('ax'),p(u,TM.graph_axes,TM.graph_axes+.5));
+draw($('cg'),p(u,TM.gray_curve,TM.gray_curve+2.5)); rise($('lg'),p(u,TM.gray_curve+2,TM.gray_curve+2.5));
+draw($('cn'),p(u,TM.green_curve,TM.green_curve+2.5)); rise($('ln'),p(u,TM.green_curve+1.5,TM.green_curve+2));
+rise($('gapg'),p(u,TM.green_curve+6.5,TM.green_curve+7.1)); rise($('gl'),p(u,TM.green_curve+7,TM.green_curve+7.6));
+
+rise($('tl2'),p(u,TM.young_adult,TM.young_adult+.5)); rise($('ya'),p(u,TM.young_adult+.3,TM.young_adult+.8));
+BK.forEach((b,i)=>{const a=TM.habit_blocks+i*.5; rise(b,p(u,a,a+.4))});
+rise($('carry'),p(u,TM.habit_blocks+2.5,TM.habit_blocks+3)); rise($('old'),p(u,TM.habit_blocks+2.8,TM.habit_blocks+3.3));
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5)); $('ring2').setAttribute('r',(22+3*Math.sin(t*4)).toFixed(1));
+
+rise($('qa'),p(u,TM.notebook,TM.notebook+.5)); rise($('qb'),p(u,TM.notebook+.4,TM.notebook+.9));
+rise($('qc'),p(u,TM.notebook+.8,TM.notebook+1.3)); rise($('qd'),p(u,TM.notebook+1.2,TM.notebook+1.7));
+rise($('nb'),p(u,TM.notebook+.5,TM.notebook+1));
+[0,1,2].forEach(i=>draw($('nl'+i),p(u,TM.notebook+2+i*1.2,TM.notebook+2.8+i*1.2)));
+rise($('keep'),p(u,TM.notebook+7,TM.notebook+7.6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.28;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

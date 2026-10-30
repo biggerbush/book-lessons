@@ -1,0 +1,397 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Coming Wave Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of The Coming Wave: This wave is uniquely hard to control because it is asymmetric, hyper-evolving, omni-use and increasingly autonomous. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMING WAVE · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Four traits that make</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">this wave different.</text>
+<text class="b" x="120" y="600" font-size="32">Why this technology wave is so hard to hold back</text>
+<path class="s-ink" d="M1170 690C1270 690 1250 330 1370 300C1450 280 1490 360 1460 410C1440 450 1390 440 1400 400" fill="none" stroke-width="8" stroke-linecap="round"/>
+<path id="w0" class="s-loss" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="tdots"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Old waves had limits.</text>
+<text class="b" x="120" y="176" font-size="32">Steam engines and cars: big, slow to change, people at the controls.</text>
+<g id="train">
+<rect class="s-ink" x="200" y="250" width="44" height="60" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="150" y="310" width="300" height="110" rx="10" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="450" y="240" width="130" height="180" rx="8" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="480" y="270" width="70" height="60" fill="none" stroke-width="5"/>
+<circle class="s-ink" cx="230" cy="450" r="34" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="350" cy="450" r="34" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="515" cy="450" r="34" fill="var(--stage)" stroke-width="6"/>
+<path class="s-line" d="M130 490H620" stroke-width="5"/>
+<text class="m" x="120" y="540" font-size="20">STEAM ENGINE</text>
+</g>
+<g id="tags"></g>
+<g id="brk"><text class="m" x="120" y="578" font-size="20" style="fill:var(--gain)">THE COMING WAVE BREAKS ALL THREE</text></g>
+<g id="boxes"></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">1. Asymmetry.</text>
+<text class="b" x="120" y="176" font-size="32">Tiny forces can now hit huge targets.</text>
+<g id="map">
+<rect class="s-line" x="980" y="220" width="500" height="170" rx="16" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1010" y="262" font-size="20">IN THE BOOK: UKRAINE</text>
+<text class="d5" x="1010" y="312" font-size="28">Cheap commercial drones</text>
+<text class="d5" x="1010" y="356" font-size="28">vs a far larger Russian army</text>
+</g>
+<path class="ink" d="M700 708L640 800h120z"/>
+<g id="plank">
+<rect class="ink" x="250" y="690" width="900" height="20" rx="10"/>
+<g id="drone">
+<path class="s-gain" d="M320 660h80M350 674l-6 14M370 674l6 14" stroke-width="6" stroke-linecap="round"/>
+<rect class="gain" x="345" y="652" width="30" height="22" rx="5"/>
+<ellipse class="gain" cx="320" cy="648" rx="24" ry="6"/><ellipse class="gain" cx="400" cy="648" rx="24" ry="6"/>
+<text class="m" x="360" y="620" font-size="20" text-anchor="middle" style="fill:var(--gain)">CHEAP DRONE</text>
+</g>
+<g id="army"><text class="m" x="1000" y="570" font-size="20" text-anchor="middle" style="fill:var(--loss)">LARGE ARMY</text></g>
+</g>
+<g id="wt"><text class="d" x="120" y="852" font-size="40">A little technology now carries a lot of weight.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">2. Hyper-evolution.</text>
+<text class="b" x="120" y="176" font-size="32">These tools improve at dizzying speed.</text>
+<g id="ch0">
+<path class="s-ink" d="M160 260V700H800" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="176" y="272" font-size="20">COST</text>
+<text class="m" x="800" y="736" font-size="20" text-anchor="end">TIME</text>
+<path class="s-muted" d="M160 768h40" stroke-width="5"/>
+<text class="m" x="214" y="776" font-size="20">COMPUTER CHIPS</text>
+<text class="m" x="160" y="816" font-size="18">SCHEMATIC, NOT TO SCALE</text>
+</g>
+<path id="cc" class="s-muted" d="M160 330C400 380 600 440 800 520" fill="none" stroke-width="5" stroke-linecap="round"/>
+<g id="dna">
+<g id="hx"></g>
+<path class="s-gain" d="M480 768h40" stroke-width="7"/>
+<text class="m" x="534" y="776" font-size="20" style="fill:var(--gain)">READING DNA</text>
+</g>
+<path id="dc" class="s-gain" d="M160 300C240 600 380 680 800 690" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="bp">
+<rect class="s-ink" x="920" y="260" width="520" height="320" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-muted" x="960" y="310" width="200" height="140" fill="none" stroke-width="4" stroke-dasharray="10 8"/>
+<circle class="s-ink" cx="1060" cy="380" r="40" fill="none" stroke-width="4"/>
+<path class="s-line" d="M960 490h200" stroke-width="4"/>
+<text class="m" x="960" y="540" font-size="18">TESTED IN SOFTWARE</text>
+<text id="ver" class="d" x="1320" y="460" font-size="110" text-anchor="middle" style="fill:var(--gain)">v1</text>
+<path class="s-ink" d="M1180 580v36M1110 620h140" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="920" y="668" font-size="20">NEW VERSIONS</text>
+<rect id="nv" class="gain" x="1140" y="650" height="24" width="0" rx="6"/>
+<text class="m" x="920" y="728" font-size="20">RULES</text>
+<rect id="rl" class="loss" x="1140" y="710" height="24" width="0" rx="6"/>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">3. Omni-use.</text>
+<text class="b" x="120" y="176" font-size="32">One tool serves almost any purpose, good or bad.</text>
+<g id="kn">
+<g id="blades"></g>
+<rect class="ink" x="160" y="460" width="280" height="60" rx="30"/>
+<circle cx="190" cy="490" r="8" fill="var(--stage)"/>
+<text class="m" x="120" y="600" font-size="20">ONE TOOL, MANY USES</text>
+</g>
+<g id="ai">
+<polygon class="s-ink" points="794,300 777,329 743,329 726,300 743,271 777,271" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-line" d="M760 334v40" stroke-width="4"/>
+<rect class="s-ink" x="640" y="380" width="240" height="160" rx="20" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="760" y="482" font-size="64" text-anchor="middle">AI</text>
+<text class="m" x="760" y="572" font-size="18" text-anchor="middle">SAME CODE</text>
+</g>
+<g id="med">
+<path class="s-gain" d="M880 430C980 430 980 305 1070 305" fill="none" stroke-width="5"/>
+<rect class="gain" x="1080" y="240" width="400" height="130" rx="16"/>
+<text class="d5" x="1110" y="312" font-size="34" style="fill:var(--on-gain)">Safe medicines</text>
+<text class="m" x="1110" y="348" font-size="18" style="fill:var(--on-gain)">WHAT IT WAS BUILT FOR</text>
+</g>
+<g id="tox"><path class="s-loss" d="M880 490C980 490 980 620 1070 620" fill="none" stroke-width="5" stroke-dasharray="10 8"/></g>
+<g id="pois">
+<rect x="1080" y="560" width="400" height="220" rx="16" fill="var(--stage)" stroke="var(--loss)" stroke-width="5"/>
+<text class="d5" x="1110" y="610" font-size="34" style="fill:var(--loss)">Toxic molecules</text>
+<g id="pdots"></g>
+<text class="m" x="1110" y="762" font-size="18">THOUSANDS OF POSSIBLE POISONS</text>
+</g>
+<g id="same"><text class="d" x="120" y="840" font-size="48">Same tool, same code, opposite intent.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">4. Autonomy.</text>
+<text class="b" x="120" y="176" font-size="32">These systems increasingly act on their own.</text>
+<g id="board"><rect class="s-ink" x="140" y="230" width="480" height="480" rx="8" fill="var(--stage)" stroke-width="6"/></g>
+<circle id="ring" class="s-gain" cx="485" cy="417.5" r="22" fill="none" stroke-width="5"/>
+<g id="m37"><circle class="gain" cx="485" cy="417.5" r="22"/><text class="m" x="380" y="750" font-size="22" text-anchor="middle" style="fill:var(--gain)">MOVE 37</text></g>
+<g id="ex"><text class="m" x="720" y="300" font-size="22">HUMAN EXPERTS</text></g>
+<g id="bril"><text class="d" x="1110" y="500" font-size="52" style="fill:var(--gain)">Brilliant.</text></g>
+<g id="expl"><text class="m" x="720" y="640" font-size="22">NOBODY COULD FULLY EXPLAIN WHERE IT CAME FROM</text></g>
+<g id="ctl">
+<text class="m" x="720" y="742" font-size="20">HUMAN CONTROL</text>
+<rect id="hb" class="ink" x="1000" y="724" height="24" width="460" rx="6"/>
+<text class="m" x="720" y="802" font-size="20">MACHINE DECISIONS</text>
+<rect id="mb" class="gain" x="1000" y="784" height="24" width="90" rx="6"/>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">All four, together.</text>
+<text class="b" x="120" y="176" font-size="32">Cheap, fast, flexible and partly self-directed.</text>
+<g id="stack"></g>
+<g id="fence">
+<rect class="s-ink" x="760" y="300" width="220" height="160" rx="14" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="870" cy="380" r="40" fill="none" stroke-width="8"/>
+<rect class="s-ink" x="760" y="500" width="220" height="160" rx="14" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="870" cy="580" r="40" fill="none" stroke-width="8"/>
+<text class="m" x="870" y="700" font-size="20" text-anchor="middle">BIG MACHINES</text>
+<g id="posts"></g>
+<text class="m" x="1060" y="760" font-size="20" text-anchor="middle">BANS · LICENCES</text>
+</g>
+<g id="leak"></g>
+<g id="slip"><text class="m" x="1480" y="226" font-size="20" text-anchor="end" style="fill:var(--gain)">SMALL TOOLS SLIP THROUGH</text></g>
+<g id="old"><text class="d" x="120" y="840" font-size="48">Old controls may not hold.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Use the four traits as a lens.</text>
+<text class="b" x="120" y="176" font-size="32">Hold it up to any new tool.</text>
+<g id="tool">
+<rect class="s-ink" x="160" y="390" width="240" height="170" rx="18" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="280" cy="475" r="36" fill="none" stroke-width="10" stroke-dasharray="12 8"/>
+<text class="m" x="280" y="712" font-size="20" text-anchor="middle">ANY NEW TOOL</text>
+</g>
+<g id="mgw"><g id="mg">
+<circle class="s-ink" cx="0" cy="0" r="110" fill="var(--stage)" fill-opacity=".3" stroke-width="12"/>
+<path class="s-ink" d="M78 78L150 150" stroke-width="22" stroke-linecap="round"/>
+</g></g>
+<g id="cards"></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">Pick one AI tool</text></g>
+<g id="qb"><text class="d" x="136" y="395" font-size="80" letter-spacing="-2">you used this week.</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="80" letter-spacing="-2" style="fill:var(--gain)">Which trait shows most?</text></g>
+<g id="qd"><text class="d" x="136" y="615" font-size="80" letter-spacing="-2">And in the wrong hands?</text></g>
+<g id="qm">
+<circle id="qr" class="gain" cx="1350" cy="420" r="100"/>
+<text class="d" x="1350" y="468" font-size="140" text-anchor="middle" style="fill:var(--on-gain)">?</text>
+<circle class="ink" cx="1260" cy="580" r="14"/><circle class="ink" cx="1320" cy="580" r="14"/><circle class="ink" cx="1380" cy="580" r="14"/><circle class="ink" cx="1440" cy="580" r="14"/>
+</g>
+<text class="m" x="143" y="740" font-size="26">ASYMMETRY · HYPER-EVOLUTION · OMNI-USE · AUTONOMY</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="146" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:26</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Four Traits That Make This Wave Different&rdquo;, from <em>The Coming Wave</em> by Mustafa Suleyman with Michael Bhaskar. Examples as reported in the book: cheap drones in Ukraine, the falling cost of DNA sequencing, a drug-discovery AI turned toward toxins, and AlphaGo&#x27;s move 37. The seesaw, fence and toolkit drawings are illustrations rather than data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=146, SC=[[0.0, 8.0], [8.0, 26.7], [26.7, 46.6], [46.6, 63.8], [63.8, 87.3], [87.3, 108.0], [108.0, 122.7], [122.7, 133.9], [133.9, 146.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Four Traits", "Old Waves, New Wave", "Asymmetric", "Hyper-Evolving", "Omni-Use", "Autonomous", "All Four Together", "Use the Lens", "Your Turn"];
+const TM={"wave_title": 0.0, "old_tools": 8.32, "four_boxes": 19.76, "small_drone": 26.96, "ukraine_map": 32.6, "seesaw": 40.64, "speed_line": 46.88, "dna_strand": 50.72, "blueprint": 57.04, "swiss_knife": 64.12, "molecule": 70.24, "skull_flask": 77.6, "go_board": 87.6, "move_37": 91.52, "robot_hand": 103.04, "stacked_traits": 108.28, "leaky_fence": 115.16, "magnifier": 122.96, "four_question": 126.88, "question_mark": 134.24};
+const tx=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a||{}),g);e.textContent=s;return e};
+const man=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)};
+const LEN=e=>{let v=0;try{v=e.getTotalLength()}catch(x){}return v>0?v:1200};
+const draw=(e,L,k)=>{e.setAttribute('stroke-dasharray',L.toFixed(1));e.setAttribute('stroke-dashoffset',(L*(1-k)).toFixed(1))};
+const WY=(x,t)=>700+14*Math.sin(x/70-t*2);
+const TD=[300,500,700,900].map(x=>mk('circle',{cx:x,cy:674,r:18,class:'gain'},$('tdots')));
+const LIM=['BIG','SLOW TO CHANGE','PEOPLE AT THE CONTROLS'];
+const TG=LIM.map((s,i)=>{const g=mk('g',{},$('tags'));mk('rect',{x:720,y:250+i*90,width:760,height:64,rx:32,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);tx(g,760,292+i*90,s,{class:'m','font-size':24});return g});
+const KS=LIM.map((s,i)=>mk('line',{x1:740,y1:282+i*90,x2:740,y2:282+i*90,stroke:'var(--loss)','stroke-width':6,'stroke-linecap':'round'},$('tags')));
+const KW=LIM.map(s=>40+s.length*18);
+const TR=['ASYMMETRY','HYPER-EVOLUTION','OMNI-USE','AUTONOMY'];
+const BX=TR.map((s,i)=>{const g=mk('g',{},$('boxes')),x=120+i*346;mk('rect',{x:x,y:600,width:320,height:140,rx:16,class:'gain'},g);tx(g,x+160,662,''+(i+1),{class:'d','font-size':48,'text-anchor':'middle',style:'fill:var(--on-gain)'});tx(g,x+160,712,s,{class:'m','font-size':22,'text-anchor':'middle',style:'fill:var(--on-gain)'});return g});
+for(let r=0;r<3;r++)for(let c=0;c<4;c++){const x=880+c*62,y=592+r*32;mk('rect',{x:x,y:y,width:50,height:22,rx:4,class:'loss'},$('army'));mk('path',{d:'M'+(x+25)+' '+(y+6)+'h-30',stroke:'var(--loss)','stroke-width':4},$('army'))}
+let h1='',h2='';for(let x=560;x<=800;x+=6){const s=36*Math.sin((x-560)/40);h1+=(x===560?'M':'L')+x+' '+(320+s).toFixed(1);h2+=(x===560?'M':'L')+x+' '+(320-s).toFixed(1)}
+for(let x=572;x<800;x+=24){const s=36*Math.sin((x-560)/40);mk('path',{d:'M'+x+' '+(320+s).toFixed(1)+'V'+(320-s).toFixed(1),class:'s-line','stroke-width':4},$('hx'))}
+mk('path',{d:h1,fill:'none',class:'s-gain','stroke-width':6},$('hx'));mk('path',{d:h2,fill:'none',class:'s-ink','stroke-width':6},$('hx'));
+const LC=LEN($('cc')),LD=LEN($('dc'));
+const ANG=[-18,-42,-66,-90],BL=[230,200,180,150].map((L,i)=>mk('rect',{x:190,y:482,width:L,height:16,rx:8,fill:i===1?'var(--gain)':'var(--muted)'},$('blades')));
+const PD=[];for(let r=0;r<4;r++)for(let c=0;c<12;c++)PD.push(mk('circle',{cx:1115+c*30,cy:640+r*25,r:8,class:'loss'},$('pdots')));
+const G=i=>170+i*52.5;
+for(let i=0;i<9;i++)mk('path',{d:'M'+G(i)+' 260V680M170 '+(260+i*52.5)+'H590',class:'s-line','stroke-width':3},$('board'));
+[[2,2,1],[3,3,1],[2,5,1],[5,6,1],[6,5,1],[3,6,1],[6,2,0],[5,3,0],[2,3,0],[6,6,0],[4,5,0]].forEach(s=>mk('circle',{cx:G(s[0]),cy:260+s[1]*52.5,r:22,fill:s[2]?'var(--ink)':'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('board')));
+const BR=[],BT=[];for(let i=0;i<3;i++){const x=780+i*120;BR.push(mk('rect',{x:x-34,y:340,width:68,height:60,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('ex')));BT.push(tx($('ex'),x,384,'?',{class:'d','font-size':36,'text-anchor':'middle'}));man($('ex'),x,470,26,'ink')}
+const ST=[['Cheap','ASYMMETRY'],['Fast','HYPER-EVOLUTION'],['Flexible','OMNI-USE'],['Self-directed','AUTONOMY']].map((d,i)=>{const g=mk('g',{},$('stack')),y=640-i*100;mk('rect',{x:120,y:y,width:440,height:86,rx:14,class:'gain'},g);tx(g,150,y+56,d[0],{class:'d5','font-size':34,style:'fill:var(--on-gain)'});tx(g,540,y+54,d[1],{class:'m','font-size':18,'text-anchor':'end',style:'fill:var(--on-gain)'});return g});
+// barrier posts: 40 tall every 70 -> 30px gaps centred at y=295,365,...,645
+for(let i=0;i<7;i++)mk('rect',{x:1040,y:240+i*70,width:40,height:40,rx:6,class:'ink'},$('posts'));
+// small tools: one dot stream per gap, settling past the barrier in a diagonal formation
+const LK=[];for(let j=0;j<3;j++)for(let r=0;r<6;r++)LK.push({e:mk('circle',{cx:1000,cy:295+70*r,r:7,class:'gain',opacity:0},$('leak')),x:1130+j*100+r*24,o:(2-j)*6+r});
+const QS=[['ASYMMETRY','Who does it','empower?'],['HYPER-EVOLUTION','How fast does','it change?'],['OMNI-USE','What else','could it do?'],['AUTONOMY','How much runs','without people?']];
+const CD=QS.map((q,i)=>{const x=640+(i%2)*440,y=250+Math.floor(i/2)*240,g=mk('g',{},$('cards'));mk('rect',{x:x,y:y,width:400,height:210,rx:18,fill:'var(--stage)',class:'s-line','stroke-width':3},g);tx(g,x+30,y+66,''+(i+1),{class:'d','font-size':48,style:'fill:var(--gain)'});tx(g,x+90,y+58,q[0],{class:'m','font-size':18});tx(g,x+30,y+130,q[1],{class:'d5','font-size':34});tx(g,x+30,y+176,q[2],{class:'d5','font-size':34});return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+let wd='';for(let x=120;x<=1480;x+=20)wd+=(x===120?'M':'L')+x+' '+WY(x,t).toFixed(1);
+$('w0').setAttribute('d',wd);$('w0').setAttribute('opacity',p(u,TM.wave_title,TM.wave_title+.8));
+TD.forEach((c,i)=>{const x=300+i*200,a=TM.wave_title+2.6+i*.4;c.setAttribute('cy',(WY(x,t)-26).toFixed(1));c.setAttribute('opacity',p(u,a,a+.4))});
+
+rise($('train'),p(u,TM.old_tools,TM.old_tools+.5));
+TG.forEach((g,i)=>{const a=TM.old_tools+2.6+i*1.4;rise(g,p(u,a,a+.4))});
+const bk=TM.four_boxes-4.4;
+KS.forEach((l,i)=>l.setAttribute('x2',(740+KW[i]*p(u,bk+i*.4,bk+i*.4+.4)).toFixed(1)));
+rise($('brk'),p(u,bk,bk+.5));
+BX.forEach((g,i)=>{const a=TM.four_boxes+i*.8;rise(g,p(u,a,a+.4))});
+
+rise($('drone'),p(u,TM.small_drone,TM.small_drone+.5));
+rise($('map'),p(u,TM.ukraine_map,TM.ukraine_map+.5));rise($('army'),p(u,TM.ukraine_map+.6,TM.ukraine_map+1.1));
+$('plank').setAttribute('transform','rotate('+(8*p(u,TM.ukraine_map+1,TM.ukraine_map+2)-16*p(u,TM.seesaw,TM.seesaw+1.2)).toFixed(2)+' 700 700)');
+rise($('wt'),p(u,TM.seesaw+1,TM.seesaw+1.6));
+
+rise($('ch0'),p(u,TM.speed_line,TM.speed_line+.5));
+draw($('cc'),LC,p(u,TM.speed_line+.4,TM.speed_line+1.8));
+rise($('dna'),p(u,TM.dna_strand,TM.dna_strand+.5));
+draw($('dc'),LD,p(u,TM.dna_strand+.6,TM.dna_strand+2.4));
+rise($('bp'),p(u,TM.blueprint,TM.blueprint+.5));
+$('ver').textContent='v'+(1+Math.floor(8*p(u,TM.blueprint+.5,TM.blueprint+5)));
+$('nv').setAttribute('width',(340*p(u,TM.blueprint+1,TM.blueprint+4)).toFixed(1));
+$('rl').setAttribute('width',(70*p(u,TM.blueprint+1,TM.blueprint+4)).toFixed(1));
+
+rise($('kn'),p(u,TM.swiss_knife,TM.swiss_knife+.5));
+BL.forEach((b,i)=>{const a=TM.swiss_knife+.4+i*.3;b.setAttribute('transform','rotate('+(ANG[i]*p(u,a,a+.6)).toFixed(1)+' 190 490)')});
+rise($('ai'),p(u,TM.molecule,TM.molecule+.5));rise($('med'),p(u,TM.molecule+1,TM.molecule+1.5));
+rise($('tox'),p(u,TM.molecule+4.5,TM.molecule+5));rise($('pois'),p(u,TM.skull_flask,TM.skull_flask+.5));
+PD.forEach((d,i)=>{const a=TM.skull_flask+.4+i*.05;d.setAttribute('opacity',p(u,a,a+.2))});
+rise($('same'),p(u,TM.skull_flask+5,TM.skull_flask+5.6));
+
+rise($('board'),p(u,TM.go_board,TM.go_board+.5));
+const k37=p(u,TM.move_37,TM.move_37+.5),rp=(t*1.2)%1;
+rise($('m37'),k37);$('ring').setAttribute('r',(22+26*rp).toFixed(1));$('ring').setAttribute('opacity',((1-rp)*k37).toFixed(2));
+rise($('ex'),p(u,TM.move_37+1,TM.move_37+1.5));
+const ok=u>=TM.move_37+6.2;BT.forEach(e=>{e.textContent=ok?'!':'?';e.style.fill=ok?'var(--gain)':'var(--ink)'});BR.forEach(r=>r.setAttribute('stroke',ok?'var(--gain)':'var(--ink)'));
+rise($('bril'),p(u,TM.move_37+6.2,TM.move_37+6.7));rise($('expl'),p(u,TM.move_37+8,TM.move_37+8.6));
+rise($('ctl'),p(u,TM.robot_hand,TM.robot_hand+.5));
+const kc=p(u,TM.robot_hand+.6,TM.robot_hand+3);
+$('hb').setAttribute('width',(460*(1-.75*kc)).toFixed(1));$('mb').setAttribute('width',(460*(.2+.75*kc)).toFixed(1));
+
+ST.forEach((g,i)=>{const a=TM.stacked_traits+i*1.2;rise(g,p(u,a,a+.5))});
+rise($('fence'),p(u,TM.leaky_fence,TM.leaky_fence+.5));
+const kl=p(u,TM.leaky_fence+1.5,TM.leaky_fence+2.5);
+LK.forEach(d=>{const s=TM.leaky_fence+1.5+d.o*.1,k=p(u,s,s+.9);d.e.setAttribute('cx',(1000+(d.x-1000)*k).toFixed(1));d.e.setAttribute('opacity',cl(k*6).toFixed(2))});
+rise($('slip'),kl);rise($('old'),p(u,TM.leaky_fence+3,TM.leaky_fence+3.6));
+
+rise($('tool'),p(u,TM.magnifier,TM.magnifier+.5));rise($('mgw'),p(u,TM.magnifier+.5,TM.magnifier+1));
+$('mg').setAttribute('transform','translate('+(280+60*Math.sin(t*.9)).toFixed(1)+' '+(470+30*Math.cos(t*1.3)).toFixed(1)+')');
+CD.forEach((g,i)=>{const a=TM.four_question+i*1.6;rise(g,p(u,a,a+.5))});
+
+rise($('qa'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qb'),p(u,TM.question_mark+.4,TM.question_mark+.9));
+rise($('qc'),p(u,TM.question_mark+3.4,TM.question_mark+3.9));rise($('qd'),p(u,TM.question_mark+5,TM.question_mark+5.5));
+rise($('qm'),p(u,TM.question_mark+.2,TM.question_mark+.8));$('qr').setAttribute('r',(100+6*Math.sin(t*3)).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:142.8;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,30 @@
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const EM=['Gratitude','Hope','Compassion','Humor'];
+const WV=[30,55,80].map(r=>mk('path',{d:'M'+(1170+r*.5)+' '+(240-r*.87)+'A'+r+' '+r+' 0 0 1 '+(1170+r)+' 240',fill:'none',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},$('waves')));
+for(let i=0;i<11;i++)mk('path',{d:'M'+(1170+i*17)+' 398v14',class:'s-line','stroke-width':3},$('ticks'));
+for(let r=0;r<3;r++)for(let c=0;c<8;c++)mk('circle',{cx:1170+c*22,cy:494+r*25,r:6,class:'ink'},$('grille'));
+const PG=[],LG=[];EM.forEach((s,i)=>{const y=300+i*140,g=mk('g',{},$('paths'));
+  mk('path',{d:'M675 600C880 600 900 '+y+' 1100 '+y,fill:'none',class:'s-gain','stroke-width':6,'stroke-dasharray':'12 10','stroke-linecap':'round'},g);
+  mk('circle',{cx:1100,cy:y,r:14,class:'gain'},g);PG.push(g);
+  const l=mk('g',{},$('paths'));mk('text',{x:1135,y:y+14,'font-size':40,class:'d5'},l).textContent=s;LG.push(l)});
+const JL=[0,1,2,3,4].map(k=>mk('path',{d:'M175 '+(310+k*60)+'H'+(405-(k%2)*50),class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('jl')));
+const DT=[];for(let i=0;i<6;i++){const x=900+i*104;DT.push([mk('circle',{cx:x,cy:728,r:20,fill:'var(--line)'},$('dots')),i%3!==0,x])}
+for(let i=0;i<8;i++){const a=i*Math.PI/4;mk('path',{d:'M'+(440+72*Math.cos(a)).toFixed(1)+' '+(400+72*Math.sin(a)).toFixed(1)+'L'+(440+96*Math.cos(a)).toFixed(1)+' '+(400+96*Math.sin(a)).toFixed(1),class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+fig($('sitter'),440,540,22,'ink');
+mk('path',{d:'M1260 320V640M1340 320V640',class:'s-ink','stroke-width':7,'stroke-linecap':'round'},$('rungs'));
+for(let y=350;y<=620;y+=45)mk('path',{d:'M1260 '+y+'h80',class:'s-ink','stroke-width':6},$('rungs'));
+fig($('clp'),1060,500,24,'gain');
+const Y5=fig($('you5'),420,480,40,'ink');fig($('oth5'),900,480,40,'loss');fig($('fr5'),1300,480,40,'ink');
+fig($('mock'),260,560,30,'ink');fig($('tg'),600,560,30,'loss');fig($('tg'),700,560,30,'loss');
+const HA=[960,1110,1260].map(x=>{fig($('shared'),x,570,30,'gain');const h=mk('text',{x:x,y:515,'font-size':30,'text-anchor':'middle',class:'d5'},$('haG'));h.textContent='ha';return h});
+const DY=['MON','TUE','WED','THU','FRI','SAT','SUN'].map((s,i)=>{const x=120+i*196,g=mk('g',{},$('days'));
+  const r=mk('rect',{x:x,y:230,width:184,height:160,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  mk('text',{x:x+20,y:270,'font-size':20,class:'m'},g).textContent=s;const c=mk('g',{},g);
+  mk('rect',{x:x+6,y:300,width:172,height:64,rx:10,class:'gain'},c);
+  mk('text',{x:x+92,y:340,'font-size':21,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain);letter-spacing:.02em'},c).textContent=EM[i%4].toUpperCase();return [g,r,c]});
+for(let i=0;i<9;i++)mk('circle',{cx:160+i*55,cy:490,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rings'));
+const NL=[0,1,2].map(k=>{const y=590+k*80,g=mk('g',{},$('nlines'));mk('text',{x:160,y:y,'font-size':36,class:'d5'},g).textContent=(k+1)+'.';
+  mk('path',{d:'M215 '+y+'H600',class:'s-line','stroke-width':4},g);
+  mk('path',{d:'M552 '+(y-26)+'l14 14 26-30',fill:'none',class:'s-gain','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+const CP=EM.map((s,i)=>{const x=136+i*330;mk('rect',{x:x,y:640,width:300,height:70,rx:35,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('chips8'));
+  mk('text',{x:x+150,y:683,'font-size':22,'text-anchor':'middle',class:'m'},$('chips8')).textContent=s.toUpperCase();return x});

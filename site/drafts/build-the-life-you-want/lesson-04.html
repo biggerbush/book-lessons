@@ -1,0 +1,391 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build the Life You Want Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Build the Life You Want: You can deliberately cultivate gratitude, hope, compassion, and humor to steer your emotional life in a better direction. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">BUILD THE LIFE YOU WANT · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Choose a better</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">emotion.</text>
+<text class="b" x="120" y="600" font-size="32">Four emotions you can practice on purpose, starting today.</text>
+<g id="waves"></g>
+<path class="s-ink" d="M1210 330L1170 240" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="1170" cy="240" r="9"/>
+<rect class="s-ink" x="1130" y="330" width="350" height="250" rx="28" fill="var(--stage)" stroke-width="7"/>
+<rect class="s-line" x="1160" y="360" width="190" height="60" rx="8" fill="none" stroke-width="4"/>
+<g id="ticks"></g>
+<rect id="needle" x="1176" y="364" width="6" height="52" class="loss"/>
+<text class="m" x="1160" y="452" font-size="22">LOW</text>
+<text class="m" x="1350" y="452" font-size="22" text-anchor="end" style="fill:var(--gain)">BETTER</text>
+<g id="grille"></g>
+<circle class="s-ink" cx="1415" cy="470" r="40" fill="var(--stage)" stroke-width="6"/>
+<path id="knob" class="s-ink" d="M1415 470V440" stroke-width="7" stroke-linecap="round"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Feelings can be steered.</text>
+<text class="b" x="120" y="176" font-size="32">Bad feelings still roll in. That’s perfectly normal.</text>
+<g id="cloud">
+<circle class="loss" cx="290" cy="330" r="50"/><circle class="loss" cx="360" cy="300" r="62"/><circle class="loss" cx="430" cy="335" r="46"/>
+<rect class="loss" x="250" y="330" width="220" height="50" rx="25"/>
+<path class="s-loss" d="M290 405l-10 30M350 405l-10 30M410 405l-10 30" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="250" y="500" font-size="20">THAT’S NORMAL</text>
+</g>
+<g id="wheel1">
+<g id="wrot">
+<circle class="s-ink" cx="560" cy="600" r="105" fill="none" stroke-width="16"/>
+<path class="s-ink" d="M455 600H665M560 600V705" stroke-width="12" stroke-linecap="round"/>
+<circle class="ink" cx="560" cy="600" r="24"/>
+</g>
+<text class="m" x="560" y="780" font-size="20" text-anchor="middle">NOTICE IT, THEN STEER</text>
+</g>
+<g id="paths"></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Gratitude.</text>
+<text class="b" x="120" y="176" font-size="32">Oprah’s journal: good things from each day.</text>
+<g id="jr">
+<rect class="s-ink" x="140" y="240" width="300" height="400" rx="10" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="440" y="240" width="300" height="400" rx="10" fill="var(--stage)" stroke-width="6"/>
+<g id="jl"></g>
+</g>
+<g id="items">
+<rect class="gain" x="555" y="300" width="70" height="80" rx="10"/>
+<path class="s-gain" d="M625 320h14a16 16 0 0 1 0 32h-14M570 290v-24M590 290v-30M610 290v-24" fill="none" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="590" y="420" font-size="20" text-anchor="middle">WARM COFFEE</text>
+<rect class="s-ink" x="555" y="465" width="60" height="100" rx="10" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="595" y="450" width="95" height="40" rx="14"/>
+<text class="m" x="590" y="605" font-size="20" text-anchor="middle">KIND TEXT</text>
+<text class="m" x="440" y="700" font-size="20" text-anchor="middle">SMALL THINGS COUNT</text>
+</g>
+<g id="spot">
+<polygon id="beam" class="gain" fill-opacity=".16"/>
+<ellipse id="pool" class="gain" cy="700" rx="120" ry="80" fill-opacity=".22"/>
+<rect class="ink" x="1125" y="220" width="70" height="44" rx="8"/>
+<g id="dots"></g>
+<g id="spheart"><path class="gain" d="M0 120C-150 20-160-90-75-110C-35-120-8-92 0-70C8-92 35-120 75-110C160-90 150 20 0 120Z"/></g>
+<text class="m" x="840" y="812" font-size="20">TRAINS ATTENTION ON WHAT’S GOING RIGHT</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Act it first.</text>
+<text class="b" x="120" y="176" font-size="32">Don’t wait to feel grateful before you act grateful.</text>
+<g id="mask"><g id="mtilt">
+<path class="s-ink" d="M240 360Q360 300 480 360Q490 520 360 640Q230 520 240 360z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<ellipse class="ink" cx="310" cy="430" rx="28" ry="16"/><ellipse class="ink" cx="410" cy="430" rx="28" ry="16"/>
+<path class="s-ink" d="M290 520Q360 580 430 520" fill="none" stroke-width="8" stroke-linecap="round"/>
+</g></g>
+<g id="acttxt"><text class="m" x="360" y="700" font-size="22" text-anchor="middle" style="fill:var(--gain)">ACT GRATEFUL FIRST</text></g>
+<g id="note">
+<g transform="rotate(-4 800 480)">
+<rect class="s-ink" x="640" y="380" width="320" height="200" rx="12" fill="var(--stage)" stroke-width="6"/>
+<text class="d5" x="800" y="475" font-size="48" text-anchor="middle">Thank you!</text>
+<path class="s-line" d="M690 520h220M690 548h150" stroke-width="5" stroke-linecap="round"/>
+</g>
+<text class="m" x="800" y="650" font-size="20" text-anchor="middle">SAY IT, COUNT BLESSINGS</text>
+</g>
+<g id="arr"><path class="s-muted" d="M1000 480h110m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="heart3">
+<g id="hsc"><path class="gain" d="M0 120C-150 20-160-90-75-110C-35-120-8-92 0-70C8-92 35-120 75-110C160-90 150 20 0 120Z"/></g>
+<text class="m" x="1270" y="650" font-size="20" text-anchor="middle">THE FEELING FOLLOWS</text>
+</g>
+<g id="beh"><text class="d" x="120" y="800" font-size="44">The feeling comes along behind the action.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hope beats optimism.</text>
+<text class="b" x="120" y="176" font-size="32">Two different beliefs about the future.</text>
+<g id="opt">
+<rect class="s-line" x="120" y="220" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="270" font-size="22">OPTIMISM</text>
+<g id="rays"></g>
+<circle class="gain" cx="440" cy="400" r="56"/>
+<g id="sitter"></g>
+<text class="d5" x="150" y="690" font-size="30">“It’ll all turn out fine.”</text>
+</g>
+<rect class="s-line" x="840" y="220" width="640" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="ladder4">
+<circle class="loss" cx="1040" cy="320" r="34"/><circle class="loss" cx="1100" cy="305" r="42"/><circle class="loss" cx="1160" cy="325" r="30"/>
+<g id="rungs"></g>
+</g>
+<g id="hope">
+<text class="m" x="870" y="270" font-size="22" style="fill:var(--gain)">HOPE</text>
+<g id="climber"><g id="clp"></g><path class="s-gain" d="M1092 560L1130 505L1118 462" fill="none" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text class="d5" x="870" y="690" font-size="30">“I can help make it better.”</text>
+</g>
+<g id="hopeT">
+<text class="d" x="120" y="800" font-size="48">Hope gives you a part to play.</text>
+<text class="m" x="120" y="848" font-size="22">IT HOLDS UP EVEN WHEN THE OUTLOOK LOOKS BLEAK</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Compassion.</text>
+<text class="b" x="120" y="176" font-size="32">Notice someone’s struggle, and want to ease it.</text>
+<g id="glow" opacity="0"><circle class="gain" cx="420" cy="544" r="180" fill-opacity=".1"/><circle class="gain" cx="420" cy="544" r="130" fill-opacity=".14"/></g>
+<g id="you5"><text class="m" x="420" y="790" font-size="20" text-anchor="middle">YOU</text></g>
+<g id="oth5">
+<circle class="loss" cx="880" cy="370" r="26"/><circle class="loss" cx="915" cy="358" r="32"/><circle class="loss" cx="945" cy="374" r="22"/>
+<path class="s-loss" d="M895 405l-6 18M925 405l-6 18" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="900" y="790" font-size="20" text-anchor="middle">STRUGGLING</text>
+</g>
+<g id="arc1"><path class="s-gain" d="M470 450Q680 330 850 450" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/><circle class="gain" cx="850" cy="450" r="10"/></g>
+<g id="fr5">
+<path d="M1255 400l15-25 15 25 15-25 15 25 15-25 15 25" fill="none" stroke="var(--muted)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-gain" d="M470 640Q880 830 1250 640" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/><circle class="gain" cx="1250" cy="640" r="10"/>
+<text class="m" x="1300" y="790" font-size="20" text-anchor="middle">FRUSTRATING</text>
+</g>
+<g id="soft"><text class="d" x="120" y="852" font-size="40">Caring for others softens your own mood too.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Humor.</text>
+<text class="b" x="120" y="176" font-size="32">The kind of humor really matters.</text>
+<g id="face"><g id="fbob">
+<circle class="s-ink" cx="800" cy="300" r="66" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M770 288q12-14 24 0M806 288q12-14 24 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path class="ink" d="M766 315h68a34 34 0 0 1-68 0z"/>
+</g></g>
+<path class="s-line" d="M800 430V820" stroke-width="3" stroke-dasharray="6 8"/>
+<g id="mock">
+<text class="m" x="140" y="450" font-size="22" style="fill:var(--loss)">MOCKING, CRUEL</text>
+<polyline class="s-loss" points="320,600 360,580 390,605 430,585 460,610 500,592" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon class="loss" points="498,572 532,590 506,614"/>
+<g id="tg"></g>
+<text class="m" x="140" y="800" font-size="20">PUSHES PEOPLE AWAY, SOURS THE ROOM</text>
+</g>
+<g id="shared">
+<text class="m" x="840" y="450" font-size="22" style="fill:var(--gain)">GENTLE, LAUGHING AT YOURSELF</text>
+<text class="m" x="840" y="800" font-size="20">CARRIES HARD MOMENTS MORE LIGHTLY</text>
+</g>
+<g id="haG"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your daily practice.</text>
+<text class="b" x="120" y="176" font-size="32">Not all four at once. One each morning.</text>
+<g id="days"></g>
+<g id="cal7"><text class="m" x="120" y="450" font-size="22">PICK ONE EACH MORNING · LOOK FOR ONE CHANCE TO PRACTICE IT</text></g>
+<g id="nb">
+<rect class="s-ink" x="120" y="490" width="520" height="340" rx="14" fill="var(--stage)" stroke-width="6"/>
+<g id="rings"></g>
+<g id="nlines"></g>
+</g>
+<g id="tn">
+<text class="d" x="720" y="610" font-size="52">Tonight, write down</text>
+<text class="d" x="720" y="680" font-size="52" style="fill:var(--gain)">three good things.</text>
+<text class="m" x="720" y="740" font-size="22">JUST AS OPRAH DOES</text>
+</g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">When the next hard</text></g>
+<g id="qb"><text class="d" x="136" y="410" font-size="88" letter-spacing="-2">moment arrives, which</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">emotion will you <tspan style="fill:var(--gain)">choose?</tspan></text></g>
+<g id="chips8"></g>
+<rect id="sel" y="632" width="316" height="86" rx="43" fill="none" stroke="var(--gain)" stroke-width="6" opacity="0"/>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="121" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:01</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Choose a Better Emotion&rdquo;, from <em>Build the Life You Want</em> by Arthur C. Brooks and Oprah Winfrey. Oprah&#x27;s gratitude journal habit and the hope versus optimism distinction are as reported in the book. The radio, storm cloud, ladder and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=121, SC=[[0.0, 8.4], [8.4, 27.3], [27.3, 44.5], [44.5, 57.2], [57.2, 72.2], [72.2, 85.2], [85.2, 100.1], [100.1, 112.9], [112.9, 121.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Choose a Better Emotion", "Feelings Can Be Steered", "Gratitude", "Act It First", "Hope Beats Optimism", "Compassion", "Humor", "Your Daily Practice", "Your Turn"];
+const TM={"radio": 0.0, "storm_cloud": 8.72, "steer_wheel": 13.92, "four_paths": 18.72, "journal": 27.6, "small_items": 33.12, "spotlight": 38.48, "actor_mask": 44.8, "thank_note": 52.0, "sunny_sky": 57.52, "rolled_sleeve": 62.16, "ladder": 67.2, "two_people": 72.48, "open_hand": 76.96, "warm_glow": 81.6, "laugh_face": 85.52, "sharp_arrow": 90.16, "shared_laugh": 94.36, "calendar": 100.4, "one_card": 103.92, "notebook": 108.8};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const EM=['Gratitude','Hope','Compassion','Humor'];
+const WV=[30,55,80].map(r=>mk('path',{d:'M'+(1170+r*.5)+' '+(240-r*.87)+'A'+r+' '+r+' 0 0 1 '+(1170+r)+' 240',fill:'none',class:'s-gain','stroke-width':5,'stroke-linecap':'round'},$('waves')));
+for(let i=0;i<11;i++)mk('path',{d:'M'+(1170+i*17)+' 398v14',class:'s-line','stroke-width':3},$('ticks'));
+for(let r=0;r<3;r++)for(let c=0;c<8;c++)mk('circle',{cx:1170+c*22,cy:494+r*25,r:6,class:'ink'},$('grille'));
+const PG=[],LG=[];EM.forEach((s,i)=>{const y=300+i*140,g=mk('g',{},$('paths'));
+  mk('path',{d:'M675 600C880 600 900 '+y+' 1100 '+y,fill:'none',class:'s-gain','stroke-width':6,'stroke-dasharray':'12 10','stroke-linecap':'round'},g);
+  mk('circle',{cx:1100,cy:y,r:14,class:'gain'},g);PG.push(g);
+  const l=mk('g',{},$('paths'));mk('text',{x:1135,y:y+14,'font-size':40,class:'d5'},l).textContent=s;LG.push(l)});
+const JL=[0,1,2,3,4].map(k=>mk('path',{d:'M175 '+(310+k*60)+'H'+(405-(k%2)*50),class:'s-line','stroke-width':6,'stroke-linecap':'round'},$('jl')));
+const DT=[];for(let i=0;i<6;i++){const x=900+i*104;DT.push([mk('circle',{cx:x,cy:728,r:20,fill:'var(--line)'},$('dots')),i%3!==0,x])}
+for(let i=0;i<8;i++){const a=i*Math.PI/4;mk('path',{d:'M'+(440+72*Math.cos(a)).toFixed(1)+' '+(400+72*Math.sin(a)).toFixed(1)+'L'+(440+96*Math.cos(a)).toFixed(1)+' '+(400+96*Math.sin(a)).toFixed(1),class:'s-gain','stroke-width':7,'stroke-linecap':'round'},$('rays'))}
+fig($('sitter'),440,540,22,'ink');
+mk('path',{d:'M1260 320V640M1340 320V640',class:'s-ink','stroke-width':7,'stroke-linecap':'round'},$('rungs'));
+for(let y=350;y<=620;y+=45)mk('path',{d:'M1260 '+y+'h80',class:'s-ink','stroke-width':6},$('rungs'));
+fig($('clp'),1060,500,24,'gain');
+const Y5=fig($('you5'),420,480,40,'ink');fig($('oth5'),900,480,40,'loss');fig($('fr5'),1300,480,40,'ink');
+fig($('mock'),260,560,30,'ink');fig($('tg'),600,560,30,'loss');fig($('tg'),700,560,30,'loss');
+const HA=[960,1110,1260].map(x=>{fig($('shared'),x,570,30,'gain');const h=mk('text',{x:x,y:515,'font-size':30,'text-anchor':'middle',class:'d5'},$('haG'));h.textContent='ha';return h});
+const DY=['MON','TUE','WED','THU','FRI','SAT','SUN'].map((s,i)=>{const x=120+i*196,g=mk('g',{},$('days'));
+  const r=mk('rect',{x:x,y:230,width:184,height:160,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  mk('text',{x:x+20,y:270,'font-size':20,class:'m'},g).textContent=s;const c=mk('g',{},g);
+  mk('rect',{x:x+6,y:300,width:172,height:64,rx:10,class:'gain'},c);
+  mk('text',{x:x+92,y:340,'font-size':21,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain);letter-spacing:.02em'},c).textContent=EM[i%4].toUpperCase();return [g,r,c]});
+for(let i=0;i<9;i++)mk('circle',{cx:160+i*55,cy:490,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rings'));
+const NL=[0,1,2].map(k=>{const y=590+k*80,g=mk('g',{},$('nlines'));mk('text',{x:160,y:y,'font-size':36,class:'d5'},g).textContent=(k+1)+'.';
+  mk('path',{d:'M215 '+y+'H600',class:'s-line','stroke-width':4},g);
+  mk('path',{d:'M552 '+(y-26)+'l14 14 26-30',fill:'none',class:'s-gain','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+const CP=EM.map((s,i)=>{const x=136+i*330;mk('rect',{x:x,y:640,width:300,height:70,rx:35,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('chips8'));
+  mk('text',{x:x+150,y:683,'font-size':22,'text-anchor':'middle',class:'m'},$('chips8')).textContent=s.toUpperCase();return x});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const nd=p(u,TM.radio+1,TM.radio+5);$('needle').setAttribute('x',(1176+162*nd).toFixed(1));$('needle').setAttribute('class',nd>.6?'gain':'loss');
+$('knob').setAttribute('transform','rotate('+(nd*240-120).toFixed(1)+' 1415 470)');
+WV.forEach((w,i)=>w.setAttribute('opacity',(nd*(.5+.5*Math.sin(t*3-i))).toFixed(2)));
+
+const cd=p(u,TM.storm_cloud,TM.storm_cloud+.6);$('cloud').setAttribute('opacity',cd);$('cloud').setAttribute('transform','translate('+(-60*(1-cd)+8*Math.sin(t)).toFixed(1)+' 0)');
+rise($('wheel1'),p(u,TM.steer_wheel,TM.steer_wheel+.5));$('wrot').setAttribute('transform','rotate('+(-30*Math.sin(Math.PI*p(u,TM.steer_wheel+.6,TM.steer_wheel+3))).toFixed(1)+' 560 600)');
+PG.forEach((g,i)=>rise(g,p(u,TM.four_paths+i*.3,TM.four_paths+i*.3+.5)));LG.forEach((g,i)=>rise(g,p(u,TM.four_paths+4+i*.6,TM.four_paths+4.5+i*.6)));
+
+rise($('jr'),p(u,TM.journal,TM.journal+.5));JL.forEach((l,i)=>l.setAttribute('opacity',p(u,TM.journal+1+i*.5,TM.journal+1.3+i*.5)));
+rise($('items'),p(u,TM.small_items,TM.small_items+.6));
+const sp=p(u,TM.spotlight,TM.spotlight+.6);rise($('spot'),sp);const bx=1180+180*Math.sin(t*.9);
+$('beam').setAttribute('points','1140,264 1180,264 '+(bx+120).toFixed(1)+',700 '+(bx-120).toFixed(1)+',700');$('pool').setAttribute('cx',bx.toFixed(1));
+$('spheart').setAttribute('transform','translate('+bx.toFixed(1)+' '+(660-4*Math.abs(Math.sin(t*3))).toFixed(1)+') scale(.22)');
+DT.forEach(d=>{const lit=sp>.5&&Math.abs(d[2]-bx)<110;d[0].setAttribute('fill',lit?(d[1]?'var(--gain)':'var(--loss)'):'var(--line)')});
+
+rise($('mask'),p(u,TM.actor_mask,TM.actor_mask+.6));$('mtilt').setAttribute('transform','rotate('+(4*Math.sin(t*1.2)).toFixed(1)+' 360 480)');
+rise($('acttxt'),p(u,TM.actor_mask+3.4,TM.actor_mask+3.9));
+rise($('note'),p(u,TM.thank_note,TM.thank_note+.5));rise($('arr'),p(u,TM.thank_note+1,TM.thank_note+1.4));
+const hs=p(u,TM.thank_note+1.4,TM.thank_note+2.4);rise($('heart3'),hs);$('hsc').setAttribute('transform','translate(1270 470) scale('+(.3+.5*hs+.03*Math.sin(t*4)*hs).toFixed(3)+')');
+rise($('beh'),p(u,TM.thank_note+2.6,TM.thank_note+3.2));
+
+rise($('opt'),p(u,TM.sunny_sky,TM.sunny_sky+.6));$('rays').setAttribute('transform','rotate('+(t*12%360).toFixed(1)+' 440 400)');
+rise($('hope'),p(u,TM.rolled_sleeve,TM.rolled_sleeve+.6));rise($('ladder4'),p(u,TM.ladder,TM.ladder+.5));
+$('climber').setAttribute('transform','translate('+(240*p(u,TM.ladder+.6,TM.ladder+1.4)).toFixed(1)+' '+(-180*p(u,TM.ladder+1.4,TM.ladder+3)).toFixed(1)+')');
+rise($('hopeT'),p(u,TM.ladder+1.5,TM.ladder+2.1));
+
+rise($('you5'),p(u,TM.two_people,TM.two_people+.5));rise($('oth5'),p(u,TM.two_people+.4,TM.two_people+.9));
+rise($('arc1'),p(u,TM.two_people+2,TM.two_people+2.6));rise($('fr5'),p(u,TM.open_hand,TM.open_hand+.6));
+const wg=p(u,TM.warm_glow,TM.warm_glow+.8);$('glow').setAttribute('opacity',(wg*(.7+.3*Math.sin(t*2))).toFixed(2));Y5.forEach(e=>e.setAttribute('class',wg>.3?'gain':'ink'));
+rise($('soft'),p(u,TM.warm_glow+.6,TM.warm_glow+1.2));
+
+const lf=p(u,TM.laugh_face,TM.laugh_face+.6);rise($('face'),lf);$('fbob').setAttribute('transform','rotate('+(6*Math.sin(t*5)*lf).toFixed(1)+' 800 300)');
+rise($('mock'),p(u,TM.sharp_arrow,TM.sharp_arrow+.5));$('tg').setAttribute('transform','translate('+(50*p(u,TM.sharp_arrow+.8,TM.sharp_arrow+2)).toFixed(1)+' 0)');
+rise($('shared'),p(u,TM.shared_laugh,TM.shared_laugh+.6));
+HA.forEach((h,i)=>{h.setAttribute('opacity',p(u,TM.shared_laugh+.8+i*.3,TM.shared_laugh+1.1+i*.3));h.setAttribute('y',(515-8*Math.abs(Math.sin(t*4+i))).toFixed(1))});
+
+DY.forEach((d,i)=>{rise(d[0],p(u,TM.calendar+i*.15,TM.calendar+i*.15+.4));d[2].setAttribute('opacity',p(u,TM.one_card+i*.4,TM.one_card+i*.4+.3));
+  const on=i===0&&u>=TM.one_card;d[1].setAttribute('stroke',on?'var(--gain)':'var(--ink)');d[1].setAttribute('stroke-width',on?7:4)});
+rise($('cal7'),p(u,TM.one_card+.5,TM.one_card+1));
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));NL.forEach((g,i)=>g.setAttribute('opacity',p(u,TM.notebook+1+i*.6,TM.notebook+1.3+i*.6)));
+rise($('tn'),p(u,TM.notebook+.4,TM.notebook+1));
+
+const q0=SC[8][0]/K;rise($('qa'),p(u,q0+.4,q0+.9));rise($('qb'),p(u,q0+.8,q0+1.3));rise($('qc'),p(u,q0+1.2,q0+1.7));
+rise($('chips8'),p(u,q0+1.8,q0+2.4));$('sel').setAttribute('x',CP[Math.floor(t/1.2)%4]-8);$('sel').setAttribute('opacity',p(u,q0+2.4,q0+2.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:117.76;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

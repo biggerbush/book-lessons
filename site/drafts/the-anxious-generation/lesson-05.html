@@ -1,0 +1,378 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Anxious Generation Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of The Anxious Generation: Image-based social media exploits girls&#x27; sensitivity to social comparison and relational aggression, driving higher rates of anxiety and depression. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE ANXIOUS GENERATION · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Why social media</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">hits girls hardest.</text>
+<text class="b" x="120" y="600" font-size="32">How image-based feeds turn girls' need to belong against them</text>
+<g id="tgirl"></g>
+<g id="tphone"><rect class="s-ink" x="1260" y="230" width="180" height="340" rx="26" fill="var(--stage)" stroke-width="7"/><path class="s-line" d="M1325 256h50" stroke-width="5" stroke-linecap="round"/></g>
+<g id="tgrid"></g>
+<g id="thearts"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A wider gap.</text>
+<text class="b" x="120" y="176" font-size="32">After 2012, depression and anxiety rose for both. Girls rose faster.</text>
+<g id="chart">
+<path class="s-ink" d="M160 240V760H1040" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-muted" d="M560 260V760" stroke-width="3" stroke-dasharray="8 10"/>
+<text class="m" x="560" y="800" font-size="22" text-anchor="middle">2012</text>
+<text class="m" x="190" y="262" font-size="20">DEPRESSION + ANXIETY</text>
+<text class="m" x="1040" y="800" font-size="18" text-anchor="end">SCHEMATIC</text>
+</g>
+<path id="lb" class="s-ink" d="M180 650L560 640L960 560" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<path id="lg" class="s-loss" d="M180 630L560 618L960 320" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="1"/>
+<text id="lbt" class="m" x="980" y="568" font-size="22">BOYS</text>
+<text id="lgt" class="m" x="980" y="328" font-size="22" style="fill:var(--loss)">GIRLS</text>
+<g id="hosp">
+<rect class="s-line" x="1110" y="240" width="370" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="1190" y="410" width="180" height="150" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1280 380v30" stroke-width="5"/>
+<rect class="loss" x="1250" y="320" width="60" height="60" rx="8"/>
+<path d="M1280 333v34M1263 350h34" stroke="var(--stage)" stroke-width="10" stroke-linecap="round"/>
+<rect class="ink" x="1262" y="500" width="36" height="60"/>
+<path class="s-ink" d="M1215 445h30M1315 445h30" stroke-width="10"/>
+<path class="s-loss" d="M1430 560V400M1404 426l26-26 26 26" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1140" y="630" font-size="20">SELF-HARM VISITS</text>
+<text class="m" x="1140" y="662" font-size="20">ROSE FASTEST AMONG</text>
+<text class="m" x="1140" y="694" font-size="20" style="fill:var(--loss)">YOUNG TEEN GIRLS</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Built to belong.</text>
+<text class="b" x="120" y="176" font-size="32">Two deep motives: agency, to stand out, and communion, to belong.</text>
+<g id="cA"><circle class="s-line" cx="420" cy="470" r="170" fill="none" stroke-width="4"/><g id="ag"></g>
+<text class="d" x="420" y="710" font-size="44" text-anchor="middle">Agency</text><text class="m" x="420" y="752" font-size="20" text-anchor="middle">STAND OUT</text></g>
+<g id="cB"><circle id="cBc" class="s-line" cx="860" cy="470" r="170" fill="none" stroke-width="4"/><circle class="s-line" cx="860" cy="470" r="105" fill="none" stroke-width="3"/><g id="cm"></g>
+<text class="d" x="860" y="710" font-size="44" text-anchor="middle">Communion</text><text class="m" x="860" y="752" font-size="20" text-anchor="middle">BELONG</text></g>
+<circle id="gcm" class="gain" cx="640" cy="470" r="22" opacity="0"/>
+<g id="lean"><text class="m" x="640" y="810" font-size="20" text-anchor="middle" style="fill:var(--gain)">GIRLS, ON AVERAGE, LEAN TOWARD COMMUNION</text></g>
+<path id="hh" class="gain" d="M1230 636C1170 600 1189 554 1230 579C1271 554 1290 600 1230 636Z"/>
+<g id="hk" opacity="0"><path class="s-loss" d="M1300 230V520a70 70 0 1 1-140 0v-40l24 30" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1230" y="710" font-size="20" text-anchor="middle">HOOKS INTO THE NEED</text></g>
+<g id="agst"><text class="m" x="1230" y="752" font-size="20" text-anchor="middle" style="fill:var(--loss)">THEN TURNS IT AGAINST THEM</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The perfect feed.</text>
+<text class="b" x="120" y="176" font-size="32">Faces and bodies, filtered, then scored in public.</text>
+<g id="ph3"><rect class="s-ink" x="140" y="210" width="300" height="620" rx="30" fill="var(--stage)" stroke-width="7"/></g>
+<g id="feed"></g>
+<g id="flt">
+<circle class="s-ink" cx="650" cy="420" r="78" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="624" cy="405" r="7"/><circle class="ink" cx="676" cy="405" r="7"/>
+<path class="s-ink" d="M625 452q25 8 50 0" fill="none" stroke-width="5" stroke-linecap="round"/>
+<circle cx="610" cy="435" r="4" fill="var(--muted)"/><circle cx="690" cy="440" r="4" fill="var(--muted)"/><circle cx="700" cy="424" r="4" fill="var(--muted)"/>
+<path class="s-muted" d="M745 420h80m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="gain" cx="930" cy="420" r="78"/>
+<circle class="ink" cx="904" cy="405" r="7"/><circle class="ink" cx="956" cy="405" r="7"/>
+<path class="s-ink" d="M902 445q28 22 56 0" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="gain" d="M1030 320l6 14 14 6-14 6-6 14-6-14-14-6 14-6z"/><path class="gain" d="M1024 486l4 9 9 4-9 4-4 9-4-9-9-4 9-4z"/>
+<text class="m" x="650" y="540" font-size="22" text-anchor="middle">REAL</text>
+<text class="m" x="930" y="540" font-size="22" text-anchor="middle" style="fill:var(--gain)">FILTERED</text>
+</g>
+<g id="cmp"><circle class="ink" cx="600" cy="258" r="26"/><circle cx="613" cy="249" r="22" fill="var(--stage)"/><g id="tiles"></g>
+<text class="m" x="560" y="800" font-size="20">HUNDREDS OF POLISHED IMAGES AT NIGHT</text></g>
+<g id="sb"><rect class="s-line" x="1130" y="230" width="350" height="570" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1160" y="280" font-size="22">PUBLIC SCORE</text><g id="hts"></g>
+<text class="m" x="1160" y="730" font-size="20">LIKES + COMMENTS</text>
+<text class="m" x="1160" y="764" font-size="20" style="fill:var(--gain)">= HER LOOKS, RATED</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">They knew.</text>
+<text class="b" x="120" y="176" font-size="32">Facebook's own internal research on teen Instagram users, later leaked.</text>
+<g id="slide"><rect class="s-ink" x="120" y="230" width="780" height="420" rx="14" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="160" y="282" font-size="20">INTERNAL RESEARCH · TEEN INSTAGRAM USERS</text><g id="sfig"></g></g>
+<g id="quo"><text class="d5" x="160" y="520" font-size="34">“We make body image issues</text><text class="d5" x="160" y="570" font-size="34">worse for one in three teen girls.”</text></g>
+<g id="stamp"><g transform="rotate(-6 750 712)"><rect class="s-loss" x="640" y="680" width="220" height="64" rx="8" fill="none" stroke-width="5"/>
+<text class="m" x="750" y="724" font-size="30" text-anchor="middle" style="fill:var(--loss)">LEAKED</text></g></g>
+<g id="hq"><text class="m" x="1080" y="260" font-size="20">INSIDE THE COMPANY</text>
+<rect class="s-ink" x="1080" y="280" width="340" height="460" fill="var(--stage)" stroke-width="6"/><g id="win"></g></g>
+<rect id="hw" class="loss" x="1110" y="392" width="70" height="50" opacity="0"/>
+<path id="lnk" class="s-loss" d="M1110 417H900" stroke-width="5" stroke-dasharray="10 10" opacity="0"/>
+<g id="knw"><text class="d" x="120" y="820" font-size="46">The harm was known inside the company.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Mean without fists.</text>
+<text class="b" x="120" y="176" font-size="32">Boys' aggression is more often physical. Girls' is more often relational.</text>
+<g id="boys"><g id="bf"></g><path class="loss" d="M290 330l9 22 22-9-9 22 22 9-22 9 9 22-22-9-9 22-9-22-22 9 9-22-22-9 22-9-9-22 22 9z"/>
+<text class="m" x="290" y="500" font-size="22" text-anchor="middle">BOYS · PHYSICAL</text></g>
+<g id="girls5"><g id="gf"></g><text class="m" x="750" y="500" font-size="22" text-anchor="middle">GIRLS · RELATIONAL</text></g>
+<g id="wsp"><rect class="s-ink" x="600" y="218" width="110" height="48" rx="24" fill="var(--stage)" stroke-width="4"/>
+<circle class="ink" cx="635" cy="242" r="5"/><circle class="ink" cx="655" cy="242" r="5"/><circle class="ink" cx="675" cy="242" r="5"/></g>
+<g id="wrd"><text class="m" x="750" y="540" font-size="20" text-anchor="middle">RUMORS · GOSSIP · LEAVING SOMEONE OUT</text></g>
+<g id="gc"><rect class="s-ink" x="1100" y="220" width="320" height="500" rx="28" fill="var(--stage)" stroke-width="6"/>
+<text class="m" x="1130" y="268" font-size="20">GROUP CHAT</text>
+<rect x="1130" y="290" width="180" height="36" rx="18" fill="var(--line)"/><rect x="1230" y="340" width="160" height="36" rx="18" fill="var(--line)"/><rect x="1130" y="390" width="200" height="36" rx="18" fill="var(--line)"/>
+<rect class="s-ink" x="1130" y="450" width="260" height="160" rx="10" fill="none" stroke-width="4"/><g id="pf"></g>
+<text class="m" x="1130" y="670" font-size="20" style="fill:var(--loss)">YOU WEREN'T IN IT</text></g>
+<g id="home"><path class="s-ink" d="M160 770L210 720L260 770V830H160Z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<circle class="s-ink" cx="340" cy="770" r="46" fill="var(--stage)" stroke-width="6"/>
+<path id="hand" class="s-loss" d="M340 770V738" stroke-width="6" stroke-linecap="round"/>
+<text class="d" x="420" y="788" font-size="40">It follows her home, every hour.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Feelings spread.</text>
+<text class="b" x="120" y="176" font-size="32">Shared openly between friends, then amplified across huge networks.</text>
+<g id="rip"><g id="rf"></g><g id="rings"></g><text class="m" x="310" y="600" font-size="20" text-anchor="middle">SHARED OPENLY</text></g>
+<g id="net"></g>
+<g id="netl"><text class="m" x="840" y="790" font-size="20" text-anchor="middle" style="fill:var(--loss)">ANXIETY SPREADS ACROSS THE NETWORK</text></g>
+<g id="str"><g id="sf"></g><text class="m" x="1320" y="680" font-size="20" text-anchor="middle">UNWANTED MESSAGES</text>
+<text class="m" x="1320" y="712" font-size="20" text-anchor="middle">FROM STRANGERS</text></g>
+<g id="env"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What helps.</text>
+<text class="b" x="120" y="176" font-size="32">Three small moves that take the power back.</text>
+<g id="k0"><rect class="s-line" x="120" y="230" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-line" d="M160 540H500" stroke-width="4"/><g id="k0f"></g>
+<text class="d5" x="150" y="720" font-size="34">Ask, then listen.</text></g>
+<g id="bq"><rect class="s-ink" x="170" y="262" width="110" height="60" rx="20" fill="var(--stage)" stroke-width="4"/><text class="d" x="225" y="307" font-size="40" text-anchor="middle">?</text></g>
+<g id="ba"><rect class="s-gain" x="370" y="282" width="120" height="56" rx="20" fill="var(--stage)" stroke-width="4"/>
+<circle class="gain" cx="408" cy="310" r="6"/><circle class="gain" cx="430" cy="310" r="6"/><circle class="gain" cx="452" cy="310" r="6"/></g>
+<g id="k1"><rect class="s-line" x="590" y="230" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-ink" x="650" y="260" width="300" height="300" rx="10" fill="var(--stage)" stroke-width="5"/>
+<rect id="fov" class="gain" x="650" y="260" width="300" height="300" fill-opacity=".35"/>
+<circle class="s-ink" cx="800" cy="410" r="80" fill="none" stroke-width="5"/>
+<circle class="ink" cx="774" cy="395" r="7"/><circle class="ink" cx="826" cy="395" r="7"/>
+<path class="s-ink" d="M770 440q30 18 60 0" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path id="dv" class="s-ink" d="M650 260V560" stroke-width="4"/>
+<path class="s-line" d="M650 610H950M650 660H950" stroke-width="6" stroke-linecap="round"/>
+<circle id="kn1" class="gain" cx="900" cy="610" r="14"/><circle id="kn2" class="gain" cx="860" cy="660" r="14"/>
+<text class="d5" x="620" y="720" font-size="34">Reveal the edits.</text></g>
+<g id="k2"><rect class="s-line" x="1060" y="230" width="420" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-line" d="M1090 620H1460" stroke-width="4"/>
+<path class="s-ink" d="M1440 620V420" stroke-width="8" stroke-linecap="round"/><circle class="gain" cx="1440" cy="380" r="34"/>
+<path class="s-ink" d="M1110 500H1370M1100 560H1380M1120 560V620M1360 560V620" stroke-width="8" stroke-linecap="round"/>
+<g id="k2f"></g><path id="bh" class="gain" d="M0 14.4C-20.8 1.6-14.4-14.4 0-5.6C14.4-14.4 20.8 1.6 0 14.4Z" transform="translate(1240 380)"/>
+<text class="d5" x="1090" y="720" font-size="34">Belong offline.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qmk"><text id="qq" class="d" x="1360" y="400" font-size="220" text-anchor="middle" style="fill:var(--gain)">?</text><g id="qg"></g></g>
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What could you do</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">this week to help her</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">belong <tspan style="fill:var(--gain)">without a screen?</tspan></text></g>
+<g id="qm"><text class="m" x="143" y="700" font-size="26">THINK OF ONE GIRL YOU CARE ABOUT</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="138" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:18</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Why Social Media Hits Girls Hardest&rdquo;, from <em>The Anxious Generation</em> by Jonathan Haidt. The rise in girls&#x27; depression and self-harm and the leaked Facebook internal research are as reported in the book. The rising lines and the feed, chat and filter drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=138, SC=[[0.0, 9.7], [9.7, 24.3], [24.3, 42.0], [42.0, 59.4], [59.4, 75.6], [75.6, 96.5], [96.5, 112.3], [112.3, 128.0], [128.0, 138.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Question", "A Wider Gap", "Built to Belong", "The Perfect Feed", "They Knew", "Mean Without Fists", "Feelings Spread", "What Helps", "Your Turn"];
+const TM={"phone_girl": 0.0, "two_lines": 10.0, "hospital": 19.92, "two_circles": 24.64, "hook": 37.12, "insta_feed": 42.32, "filter_face": 46.96, "scoreboard": 55.76, "leaked_slide": 59.68, "company_hq": 72.8, "schoolyard": 75.92, "whisper": 81.2, "group_chat": 85.44, "ripples": 96.8, "network_web": 101.2, "stranger_msg": 107.52, "conversation": 112.56, "photo_reveal": 117.92, "park_bench": 123.04, "question_mark": 128.32};
+const fig=(par,x,y,r,cls)=>{const g=mk('g',{class:cls},par);mk('circle',{cx:x,cy:y,r:r},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},g);return g};
+const hd=(x,y,s)=>'M'+x+' '+(y+s*.9)+'C'+(x-s*1.3)+' '+(y+s*.1)+' '+(x-s*.9)+' '+(y-s*.9)+' '+x+' '+(y-s*.35)+'C'+(x+s*.9)+' '+(y-s*.9)+' '+(x+s*1.3)+' '+(y+s*.1)+' '+x+' '+(y+s*.9)+'Z';
+
+fig($('tgirl'),1170,400,34,'ink');
+for(let i=0;i<6;i++)mk('rect',{x:1282+(i%2)*72,y:280+Math.floor(i/2)*90,width:64,height:80,rx:8,fill:i%3===1?'var(--line)':'var(--gain)'},$('tgrid'));
+const TH=[0,1,2].map(()=>mk('path',{d:hd(0,0,16),class:'gain'},$('thearts')));
+
+[310,360,480,530].forEach(x=>fig($('ag'),x,470,16,'ink'));fig($('ag'),420,380,22,'gain');
+for(let i=0;i<6;i++){const a=i*Math.PI/3-Math.PI/2;mk('circle',{cx:860+105*Math.cos(a),cy:470+105*Math.sin(a),r:20,class:'ink'},$('cm'))}
+
+const FD=[];for(let i=0;i<3;i++){const y=240+i*190,g=mk('g',{},$('feed')),c=i===1?'gain':'ink';
+  mk('rect',{x:165,y:y,width:250,height:170,rx:12,fill:'var(--line)'},g);mk('circle',{cx:290,cy:y+65,r:30,class:c},g);mk('path',{d:'M250 '+(y+150)+'a40 40 0 0 1 80 0z',class:c},g);FD.push(g)}
+const TL=[];for(let i=0;i<120;i++)TL.push(mk('rect',{x:560+(i%20)*25,y:600+Math.floor(i/20)*25,width:20,height:20,rx:4,fill:i%4?'var(--line)':'var(--gain)'},$('tiles')));
+const HT=[];for(let i=0;i<30;i++){const x=1190+(i%5)*58,y=340+Math.floor(i/5)*62;
+  HT.push(i%3===2?mk('rect',{x:x-14,y:y-10,width:28,height:20,rx:6,class:'ink'},$('hts')):mk('path',{d:hd(x,y,16),class:'gain'},$('hts')))}
+
+const SF=[400,510,620].map(x=>fig($('sfig'),x,330,24,'ink'));
+for(let i=0;i<15;i++)mk('rect',{x:1110+(i%3)*105,y:310+Math.floor(i/3)*82,width:70,height:50,fill:'var(--line)'},$('win'));
+
+fig($('bf'),200,320,26,'ink');fig($('bf'),380,320,26,'ink');
+[600,670,740].forEach(x=>fig($('gf'),x,320,24,'ink'));const OUT=fig($('gf'),910,320,24,'ink');
+[1180,1240,1300].forEach(x=>fig($('pf'),x,490,15,'ink'));
+const GH=mk('g',{fill:'none',stroke:'var(--loss)','stroke-width':3,'stroke-dasharray':'5 5'},$('pf'));
+mk('circle',{cx:1360,cy:490,r:15},GH);mk('path',{d:'M1337.5 553v-19.5a22.5 22.5 0 0 1 45 0v19.5z'},GH);
+
+fig($('rf'),210,400,28,'ink');fig($('rf'),410,400,28,'gain');
+const RG=[0,1,2].map(()=>mk('circle',{cx:310,cy:430,r:10,fill:'none',stroke:'var(--gain)','stroke-width':4},$('rings')));
+const ND=[];[[0,1],[95,6],[175,10],[250,14]].forEach(([rr,n],k)=>{for(let i=0;i<n;i++){const a=i*2*Math.PI/n+k*.4;ND.push({x:840+rr*Math.cos(a),y:480+rr*Math.sin(a),d:rr,k:k,i:i})}});
+const NE=mk('g',{},$('net')),ln=(a,b)=>mk('path',{d:'M'+a.x.toFixed(0)+' '+a.y.toFixed(0)+'L'+b.x.toFixed(0)+' '+b.y.toFixed(0),stroke:'var(--line)','stroke-width':3},NE);
+ND.forEach((q,j)=>{if(!q.k)return;let b=null,bd=1e9;ND.forEach(o=>{if(o.k===q.k-1){const dd=(o.x-q.x)**2+(o.y-q.y)**2;if(dd<bd){bd=dd;b=o}}});ln(q,b);
+  if(q.k>1)ln(q,ND[j+1<ND.length&&ND[j+1].k===q.k?j+1:j-q.i])});
+const NC=ND.map(q=>mk('circle',{cx:q.x.toFixed(0),cy:q.y.toFixed(0),r:q.k?14:20},$('net')));
+const SG=fig($('sf'),1240,260,22,'ink');SG.setAttribute('style','fill:var(--muted)');
+mk('text',{x:1240,y:268,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--stage)'},$('sf')).textContent='?';
+fig($('sf'),1400,470,28,'gain');
+const EV=[0,1,2].map(()=>{const g=mk('g',{},$('env'));mk('rect',{x:-18,y:-13,width:36,height:26,rx:3,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':3},g);
+  mk('path',{d:'M-18 -13L0 2L18 -13',fill:'none',stroke:'var(--loss)','stroke-width':3},g);return g});
+
+fig($('k0f'),230,400,32,'ink');fig($('k0f'),420,420,26,'gain');
+fig($('k2f'),1190,430,26,'ink');fig($('k2f'),1290,430,26,'gain');
+fig($('qg'),1360,620,30,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(e,a,d=.5)=>rise(typeof e=='string'?$(e):e,p(u,a,a+d));
+  const D=(e,k)=>$(e).setAttribute('stroke-dashoffset',(1-k).toFixed(3));
+
+  R('tgirl',TM.phone_girl);R('tphone',TM.phone_girl+.4);
+  const g0=TM.phone_girl+5.8;$('tgrid').setAttribute('opacity',p(u,g0,g0+.6));
+  TH.forEach((h,i)=>{const c=(t*.4+i/3)%1;h.setAttribute('transform','translate('+(1300+i*50)+' '+(220-100*c).toFixed(1)+')');h.setAttribute('opacity',(u>=g0?1-c:0).toFixed(2))});
+
+  const L=TM.two_lines;R('chart',L-.3);D('lb',p(u,L,L+3));D('lg',.43*p(u,L,L+3)+.57*p(u,L+5.8,L+7.6));
+  R('lbt',L+2.5);R('lgt',L+7.2);R('hosp',TM.hospital);
+
+  const C=TM.two_circles;R('cA',C);R('cB',C+3);
+  const gm=p(u,C+7.5,C+9);$('gcm').setAttribute('cx',(640+220*gm).toFixed(1));$('gcm').setAttribute('opacity',p(u,C+7,C+7.4));
+  R('lean',C+7.5);$('cBc').style.stroke=u>=C+8.5?'var(--gain)':'';
+  const hk=p(u,TM.hook,TM.hook+.6);$('hk').setAttribute('opacity',hk);$('hk').setAttribute('transform','translate(0 '+(-60*(1-hk)).toFixed(1)+')');
+  R('hh',TM.hook);$('hh').setAttribute('class',u>=TM.hook+2.5?'loss':'gain');R('agst',TM.hook+2.5);
+
+  R('ph3',TM.insta_feed-.4);FD.forEach((g,i)=>R(g,TM.insta_feed+i*.4));R('flt',TM.filter_face);
+  const F2=TM.filter_face+3;R('cmp',F2);TL.forEach((e,i)=>e.setAttribute('opacity',p(u,F2+i*.02,F2+i*.02+.2)));
+  R('sb',TM.scoreboard);HT.forEach((e,i)=>e.setAttribute('opacity',p(u,TM.scoreboard+.4+i*.08,TM.scoreboard+.6+i*.08)));
+
+  const Q=TM.leaked_slide;R('slide',Q);R('stamp',Q+1.5);R('quo',Q+5.3);SF[0].setAttribute('class',u>=Q+5.8?'loss':'ink');
+  const H=TM.company_hq;R('hq',H);$('hw').setAttribute('opacity',p(u,H+.5,H+.9));$('lnk').setAttribute('opacity',p(u,H+.8,H+1.3));R('knw',H+.8);
+
+  const Y=TM.schoolyard;R('boys',Y);R('girls5',Y+2.6);R('wsp',TM.whisper);R('wrd',TM.whisper+.5);
+  OUT.setAttribute('opacity',(1-.6*p(u,TM.whisper+1.2,TM.whisper+2)).toFixed(2));
+  R('gc',TM.group_chat);GH.setAttribute('opacity',(.6+.4*Math.sin(t*4)).toFixed(2));R('home',TM.group_chat+7.8);
+  $('hand').setAttribute('transform','rotate('+(t*120%360).toFixed(1)+' 340 770)');
+
+  R('rip',TM.ripples);RG.forEach((c,i)=>{const k=(t*.5+i/3)%1;c.setAttribute('r',(8+46*k).toFixed(1));c.setAttribute('opacity',(1-k).toFixed(2))});
+  const N=TM.network_web;R('net',N);R('netl',N+1);
+  NC.forEach((c,i)=>c.setAttribute('fill',u>=N+.6+ND[i].d/250*3?'var(--loss)':'var(--muted)'));
+  R('str',TM.stranger_msg);
+  EV.forEach((e,i)=>{const k=(t*.45+i/3)%1;e.setAttribute('transform','translate('+(1270+100*k).toFixed(1)+' '+(330+110*k).toFixed(1)+')');
+    e.setAttribute('opacity',u>=TM.stranger_msg+.6?(k<.85?1:(1-k)/.15).toFixed(2):0)});
+
+  const V=TM.conversation;R('k0',V);R('bq',V+.6);R('ba',V+2.6);R('k1',TM.photo_reveal);
+  const dv=p(u,TM.photo_reveal+.8,TM.photo_reveal+3),dx=650+300*dv;
+  $('dv').setAttribute('d','M'+dx.toFixed(1)+' 260V560');$('fov').setAttribute('x',dx.toFixed(1));$('fov').setAttribute('width',(950-dx).toFixed(1));
+  $('kn1').setAttribute('cx',(900-200*dv).toFixed(1));$('kn2').setAttribute('cx',(860-160*dv).toFixed(1));
+  R('k2',TM.park_bench);$('bh').setAttribute('transform','translate(1240 380) scale('+(1+.12*Math.abs(Math.sin(t*2.5))).toFixed(3)+')');
+
+  const M=TM.question_mark;R('qmk',M);R('qm',M+.3);R('qa',M+3);R('qb',M+3.4);R('qc',M+3.8);
+  $('qq').setAttribute('transform','translate(0 '+(8*Math.sin(t*2)).toFixed(1)+')');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:134.72;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

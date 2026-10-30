@@ -1,0 +1,28 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:cls},g)};
+const G=(par,x,y,s)=>mk('g',{transform:`translate(${x} ${y}) scale(${s})`},par);
+const T=(par,x,y,cls,fs,s,ex={})=>{const e=mk('text',Object.assign({x:x,y:y,class:cls,'font-size':fs},ex),par);e.textContent=s;return e};
+const icHeart=(par,x,y,s,cls='loss')=>{const g=G(par,x,y,s);mk('path',{d:'M0 70C-90 10-90-60-45-60C-20-60-5-45 0-30C5-45 20-60 45-60C90-60 90 10 0 70Z',class:cls},g);return g};
+const icCell=(par,x,y,s)=>{const g=G(par,x,y,s);mk('circle',{r:60,class:'loss','fill-opacity':.25,stroke:'var(--loss)','stroke-width':6},g);mk('circle',{cx:-12,cy:-8,r:20,class:'loss'},g);[[28,22],[22,-30],[-30,30]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:7,class:'loss'},g));return g};
+const icBrain=(par,x,y,s,c='var(--ink)')=>{const g=G(par,x,y,s);mk('ellipse',{rx:75,ry:58,fill:'var(--stage)',stroke:c,'stroke-width':7},g);mk('path',{d:'M0-58V58M-58-12q14-20 28 0t28 0M30-22q12 16 26 0M-52 26q14 14 28 0M22 28q14-16 30 0',fill:'none',stroke:c,'stroke-width':6,'stroke-linecap':'round'},g);return g};
+const icCube=(par,x,y,s)=>{const g=G(par,x,y,s);[['0,-65 65,-32 0,0 -65,-32','var(--stage)'],['-65,-32 0,0 0,70 -65,38','var(--line)'],['0,0 65,-32 65,38 0,70','var(--stage)']].forEach(q=>mk('polygon',{points:q[0],fill:q[1],stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},g));return g};
+const horse=(par,x,gy,s)=>{const g=mk('g',{},par),h=G(g,x,gy,s);mk('path',{d:'M-35-30v30M-20-30v30M20-30v30M35-30v30M-48-52q-22 6-24 30',stroke:'var(--loss)','stroke-width':7,'stroke-linecap':'round',fill:'none'},h);mk('rect',{x:-50,y:-64,width:100,height:38,rx:19,class:'loss'},h);mk('path',{d:'M36-58L56-92h20l4 14-22 6-14 30z',class:'loss'},h);mk('circle',{cx:-4,cy:-104,r:13,class:'ink'},h);mk('path',{d:'M-22-62v-12a18 18 0 0 1 36 0v12z',class:'ink'},h);return g};
+// each rider spans about 114px at scale .75; 160px spacing leaves ~46px gaps, centred on the ground line
+const R=[927,1087,1247,1407].map(x=>horse($('riders'),x,650,.75));
+const CD=[['Heart','DISEASE',''],['Cancer','TUMOURS',''],['Brain','NEURODEGENERATIVE','E.G. ALZHEIMER’S'],['Metabolic','DYSFUNCTION','E.G. TYPE 2 DIABETES']];
+const cards=CD.map((c,i)=>{const X=120+i*350,cx=X+155,g=mk('g',{},$('cards'));mk('rect',{x:X,y:230,width:310,height:380,rx:18,class:'s-line',fill:'var(--stage)','stroke-width':3},g);T(g,X+26,272,'m',20,'0'+(i+1));[icHeart,icCell,icBrain,icCube][i](g,cx,370,1.1);T(g,cx,520,'d5',40,c[0],{'text-anchor':'middle'});T(g,cx,562,'m',18,c[1],{'text-anchor':'middle'});if(c[2])T(g,cx,590,'m',18,c[2],{'text-anchor':'middle'});return g});
+const CP=[];for(let y=0;y<=40;y+=.5)CP.push([200+30*y,750-480*Math.pow(y/40,2.2)]);
+$('area').setAttribute('points',CP.map(q=>q[0].toFixed(0)+','+q[1].toFixed(1)).join(' ')+' 1400,760 200,760');
+[0,10,20,30,40].forEach(y=>{const x=200+30*y;mk('path',{d:`M${x} 760v14`,class:'s-ink','stroke-width':4},$('ticks'));T($('ticks'),x,804,'m',20,y?y+' YRS':'0',{'text-anchor':'middle'})});
+const BC=[];for(let i=0;i<8;i++)BC.push(mk('circle',{cy:400,r:13},$('cells')));
+fig($('young'),1120,300,34,'ink');
+const FD=[[380,470,14],[440,440,12],[505,452,15],[420,520,16],[485,515,12],[350,530,11]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},$('fat')));
+const AR=[[300,icHeart,'Heart disease'],[500,icCell,'Cancer'],[700,icBrain,'Dementia']].map(([y,f,s])=>{const g=mk('g',{},$('arw'));mk('path',{d:`M610 480C820 480 830 ${y} 1030 ${y}`,fill:'none',class:'s-loss','stroke-width':6,'stroke-dasharray':'12 10'},g);mk('path',{d:`M1012 ${y-14}l20 14-20 14`,fill:'none',class:'s-loss','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);f(g,1110,y,.6);T(g,1190,y+12,'d5',36,s);return g});
+const SD=[];for(let i=0;i<10;i++){const a=i*.628+.3,rr=140+(i%3)*12;SD.push(mk('circle',{cx:(440+rr*Math.cos(a)).toFixed(1),cy:(470+rr*Math.sin(a)).toFixed(1),r:11,class:'loss'},$('spread')))}
+for(let r=0;r<6;r++)for(let c=0;c<11;c++)if(!(c===5&&r===2))mk('circle',{cx:900+c*52,cy:340+r*56,r:10,fill:'var(--muted)','fill-opacity':.35},$('grid'));
+let da='',db='';for(let y=250;y<=690;y+=10){const s=50*Math.sin((y-250)/45),c=y>250?'L':'M';da+=c+(260+s).toFixed(1)+' '+y;db+=c+(260-s).toFixed(1)+' '+y;if((y-250)%30===0){const k=(y-250)/30,bad=k===5||k===10;mk('path',{d:`M${(260+s).toFixed(1)} ${y}H${(260-s).toFixed(1)}`,stroke:bad?'var(--loss)':'var(--line)','stroke-width':bad?8:4,'stroke-linecap':'round'},$('dna'))}}
+[da,db].forEach(d=>mk('path',{d:d,class:'s-ink',fill:'none','stroke-width':6,'stroke-linecap':'round'},$('dna')));
+icBrain($('bigbrain'),800,470,2);
+const HR=[[icHeart,'Heart'],[icCube,'Metabolism'],[icBrain,'Brain']].map(([f,s],i)=>{const g=mk('g',{},$('habrows'));f(g,1130,420+i*110,.45);T(g,1190,432+i*110,'d5',36,s,i===2?{style:'fill:var(--gain)'}:{});return g});
+const CK=['Family history','Your apo B','Insulin response'].map((s,i)=>{const y=350+i*70;mk('rect',{x:160,y:y-30,width:36,height:36,rx:6,class:'s-ink',fill:'none','stroke-width':4},$('items'));T($('items'),220,y,'d5',34,s);return mk('path',{d:`M166 ${y-12}l10 10 22-26`,class:'s-gain',fill:'none','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('items'))});
+fig($('doc'),1000,270,40,'ink');
+const CB=['30s','40s','50s','60s','70s'].map((s,i)=>{const X=120+i*276,r=mk('rect',{x:X,y:580,width:250,height:170,rx:16,fill:'var(--stage)',stroke:i===4?'var(--loss)':'var(--ink)','stroke-width':5,'stroke-dasharray':i===4?'12 10':'none'},$('cal'));return [r,T($('cal'),X+125,688,'d',60,s,{'text-anchor':'middle'})]});

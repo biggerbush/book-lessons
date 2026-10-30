@@ -1,0 +1,373 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outlive Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Outlive: Heart disease, cancer, neurodegenerative disease and metabolic dysfunction cause most deaths, develop silently over decades, and must be tackled long before symptoms appear. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIVE · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Meet the Four</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Horsemen.</text>
+<text class="b" x="120" y="600" font-size="32">Four slow killers, and why you must</text>
+<text class="b" x="120" y="644" font-size="32">start fighting them early</text>
+<path class="s-line" d="M860 660H1480" stroke-width="6" stroke-linecap="round"/>
+<g id="riders"></g>
+<text id="slow" class="m" x="1480" y="720" font-size="22" text-anchor="end">MOVING VERY SLOWLY</text>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Four Horsemen.</text>
+<text class="b" x="120" y="176" font-size="32">Peter Attia’s name for the four slow killers.</text>
+<g id="cards"></g>
+<g id="tog"><path class="s-ink" d="M275 640v24H1325v-24M800 664v24" fill="none" stroke-width="5" stroke-linecap="round"/>
+<text class="d" x="800" y="760" font-size="46" text-anchor="middle">Together: most deaths among non-smokers.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Silent for decades.</text>
+<text class="b" x="120" y="176" font-size="32">Each horseman builds quietly for 20, 30, even 40 years.</text>
+<g id="ice">
+<rect class="loss" x="120" y="330" width="1360" height="430" fill-opacity=".1"/>
+<polygon id="area" fill="var(--ink)" fill-opacity=".15"/>
+<path class="s-loss" d="M120 330H1480" stroke-width="4" stroke-dasharray="12 10"/>
+<text class="m" x="240" y="400" font-size="22">YEARS OF SILENT DAMAGE</text>
+<text class="m" x="1330" y="300" font-size="20" text-anchor="end">SYMPTOMS: THE TIP</text>
+</g>
+<g id="ticks"><path class="s-ink" d="M160 760H1440" stroke-width="5" stroke-linecap="round"/></g>
+<polyline id="curve" class="s-loss" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="diag">
+<path class="s-ink" d="M1420 330V230" stroke-width="5" stroke-linecap="round"/>
+<polygon class="ink" points="1420,230 1470,245 1420,260"/>
+<text class="m" x="1470" y="214" font-size="20" text-anchor="end">DIAGNOSIS</text>
+<text class="d" x="240" y="480" font-size="52">A decades-long head start.</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Plaque starts young.</text>
+<text class="b" x="120" y="176" font-size="32">Heart disease starts long before the first symptom.</text>
+<g id="artg">
+<g id="cells"></g>
+<path id="plaque" class="loss"/>
+<path class="s-ink" d="M160 300H900M160 500H900" stroke-width="8" stroke-linecap="round"/>
+</g>
+<g id="aut"><text class="m" x="160" y="556" font-size="20">AUTOPSIES OF YOUNG PEOPLE: EARLY FATTY PLAQUE</text></g>
+<g id="young">
+<text class="m" x="1120" y="500" font-size="22" text-anchor="middle">DAMAGE CAN BEGIN IN YOUR</text>
+<text class="m" x="1120" y="532" font-size="22" text-anchor="middle" style="fill:var(--loss)">TEENS OR TWENTIES</text>
+</g>
+<g id="tube">
+<rect class="s-ink" x="170" y="610" width="56" height="200" rx="28" fill="var(--stage)" stroke-width="6"/>
+<rect class="loss" x="178" y="690" width="40" height="112" rx="20"/>
+<text class="d" x="270" y="690" font-size="48">Track apo B.</text>
+<text class="m" x="272" y="734" font-size="20">A BLOOD MARKER THAT COUNTS THE PARTICLES</text>
+<text class="m" x="272" y="762" font-size="20">THAT DRIVE THIS PLAQUE</text>
+</g>
+<g id="lower">
+<path class="s-gain" d="M1000 630v140m-36-36 36 36 36-36" fill="none" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d5" x="1060" y="690" font-size="38">Lower it early,</text>
+<text class="d5" x="1060" y="740" font-size="38" style="fill:var(--gain)">slow the process.</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The root horseman.</text>
+<text class="b" x="120" y="176" font-size="32">Metabolic dysfunction feeds the other three.</text>
+<g id="liv">
+<text class="m" x="445" y="350" font-size="20" text-anchor="middle">METABOLIC DYSFUNCTION</text>
+<path class="loss" d="M300 450C320 390 470 370 580 400C610 410 600 470 560 500C510 545 450 590 380 585C320 580 290 510 300 450Z" fill-opacity=".25" stroke="var(--loss)" stroke-width="6" stroke-linejoin="round"/>
+<g id="fat"></g>
+<text class="m" x="445" y="626" font-size="20" text-anchor="middle">FAT IN THE LIVER</text>
+</g>
+<g id="ins">
+<circle class="s-ink" cx="540" cy="740" r="44" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="540" cy="730" r="9"/><path class="ink" d="M534 735h12l4 22h-20z"/>
+<g id="key"><circle class="s-gain" r="16" fill="none" stroke-width="6"/><path class="s-gain" d="M16 0H80M64 0v14M76 0v12" stroke-width="6" stroke-linecap="round"/></g>
+<text class="m" x="120" y="836" font-size="20">CELLS START IGNORING INSULIN</text>
+</g>
+<g id="arw"></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Catch cancer early.</text>
+<text class="b" x="120" y="176" font-size="32">It is hardest to beat once it has spread.</text>
+<g id="late">
+<rect class="s-line" x="120" y="230" width="640" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">FOUND LATE · SPREAD</text>
+<circle class="loss" cx="440" cy="470" r="100" fill-opacity=".35" stroke="var(--loss)" stroke-width="6"/>
+<g id="spread"></g>
+<text id="hard" class="m" x="440" y="686" font-size="20" text-anchor="middle" style="fill:var(--loss)">HARD TO TREAT</text>
+</g>
+<g id="easy">
+<rect class="s-line" x="840" y="230" width="640" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="280" font-size="22">FOUND EARLY · SMALL</text>
+<g id="grid"></g>
+<circle class="loss" cx="1160" cy="452" r="12"/>
+<circle id="ring" class="s-gain" cx="1160" cy="452" r="26" fill="none" stroke-width="5"/>
+<text id="easyl" class="m" x="1160" y="686" font-size="20" text-anchor="middle" style="fill:var(--gain)">FAR EASIER TO TREAT</text>
+</g>
+<g id="magw"><g id="mag"><circle id="lens" r="64" fill="var(--stage)" fill-opacity=".3" stroke="var(--ink)" stroke-width="12"/><path class="s-ink" d="M50 50L100 100" stroke-width="20" stroke-linecap="round"/></g></g>
+<g id="beat"><text class="d" x="120" y="800" font-size="46">Small and early beats large and late.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Guard the brain.</text>
+<text class="b" x="120" y="176" font-size="32">Alzheimer’s begins long before memory slips.</text>
+<g id="gn"><g id="dna"></g><text class="m" x="120" y="740" font-size="20">SOME GENES RAISE RISK</text></g>
+<path id="shf" class="gain" d="M800 250L1000 310V470C1000 600 900 680 800 720C700 680 600 600 600 470V310Z" fill-opacity=".12"/>
+<g id="bigbrain"></g>
+<path id="shd" class="s-gain" d="M800 250L1000 310V470C1000 600 900 680 800 720C700 680 600 600 600 470V310Z" fill="none" stroke-width="10" stroke-linejoin="round" pathLength="1" stroke-dasharray="1"/>
+<g id="prev"><text class="m" x="800" y="780" font-size="22" text-anchor="middle" style="fill:var(--gain)">PREVENTION IS THE BEST DEFENSE</text></g>
+<g id="hab"><text class="m" x="1080" y="340" font-size="20">THE SAME HABITS PROTECT</text></g>
+<g id="habrows"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start before symptoms.</text>
+<text class="b" x="120" y="176" font-size="32">Act decades before anything hurts.</text>
+<g id="card">
+<rect class="s-line" x="120" y="220" width="600" height="330" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="ink" x="360" y="206" width="120" height="30" rx="8"/>
+<text class="m" x="160" y="284" font-size="22">ASK YOUR DOCTOR ABOUT</text>
+<g id="items"></g>
+</g>
+<g id="doc">
+<path class="s-muted" d="M740 385H900m-20-18 20 18-20 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-gain" d="M975 350q0 50 25 60q25-10 25-60" fill="none" stroke-width="5"/>
+<circle class="gain" cx="1000" cy="418" r="9"/>
+<text class="m" x="1000" y="496" font-size="22" text-anchor="middle">YOUR DOCTOR</text>
+</g>
+<g id="cal"></g>
+<text id="lab70" class="m" x="1349" y="790" font-size="20" text-anchor="middle" style="fill:var(--loss)">WHEN IT HURTS</text>
+<text id="most" class="m" x="521" y="790" font-size="20" text-anchor="middle" style="fill:var(--gain)">MATTERS MOST</text>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which horseman</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">runs in your <tspan style="fill:var(--gain)">family?</tspan></text></g>
+<g id="wk"><text class="m" x="143" y="640" font-size="26">THIS WEEK: BOOK A CHECKUP AND ASK HOW TO SPOT IT EARLY</text></g>
+<g id="ph"><g id="phr">
+<rect class="s-ink" x="1240" y="270" width="170" height="300" rx="28" fill="var(--stage)" stroke-width="8"/>
+<rect class="s-line" x="1270" y="320" width="110" height="110" rx="10" fill="none" stroke-width="5"/>
+<path class="s-line" d="M1270 350h110" stroke-width="5"/>
+<path id="phck" class="s-gain" d="M1295 390l18 18 40-42" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-line" d="M1272 470h106M1272 500h70" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="1325" cy="540" r="10"/>
+</g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Meet the Four Horsemen&rdquo;, from <em>Outlive</em> by Peter Attia, with Bill Gifford. Autopsy findings of early arterial plaque in young people and the apo B marker are as reported in the book. The horsemen, iceberg, timeline and arrows are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 7.6], [7.6, 27.6], [27.6, 41.9], [41.9, 64.1], [64.1, 81.3], [81.3, 95.6], [95.6, 111.9], [111.9, 125.5], [125.5, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Four Horsemen", "Who They Are", "Silent for Decades", "Plaque Starts Young", "The Root Horseman", "Catch Cancer Early", "Guard the Brain", "Start Before Symptoms", "Your Move"];
+const TM={"horsemen": 0.0, "heart": 7.92, "cancer_cell": 13.04, "brain": 14.8, "sugar_cube": 18.8, "timeline": 27.92, "iceberg": 33.36, "artery": 42.24, "young_man": 50.28, "blood_tube": 53.52, "liver": 64.4, "insulin_key": 70.08, "arrows": 74.88, "magnifier": 84.84, "small_tumor": 90.4, "gene": 95.92, "shield": 102.69, "checklist": 112.24, "doctor": 116.48, "calendar": 122.52, "phone": 128.16};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v${-r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:cls},g)};
+const G=(par,x,y,s)=>mk('g',{transform:`translate(${x} ${y}) scale(${s})`},par);
+const T=(par,x,y,cls,fs,s,ex={})=>{const e=mk('text',Object.assign({x:x,y:y,class:cls,'font-size':fs},ex),par);e.textContent=s;return e};
+const icHeart=(par,x,y,s,cls='loss')=>{const g=G(par,x,y,s);mk('path',{d:'M0 70C-90 10-90-60-45-60C-20-60-5-45 0-30C5-45 20-60 45-60C90-60 90 10 0 70Z',class:cls},g);return g};
+const icCell=(par,x,y,s)=>{const g=G(par,x,y,s);mk('circle',{r:60,class:'loss','fill-opacity':.25,stroke:'var(--loss)','stroke-width':6},g);mk('circle',{cx:-12,cy:-8,r:20,class:'loss'},g);[[28,22],[22,-30],[-30,30]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:7,class:'loss'},g));return g};
+const icBrain=(par,x,y,s,c='var(--ink)')=>{const g=G(par,x,y,s);mk('ellipse',{rx:75,ry:58,fill:'var(--stage)',stroke:c,'stroke-width':7},g);mk('path',{d:'M0-58V58M-58-12q14-20 28 0t28 0M30-22q12 16 26 0M-52 26q14 14 28 0M22 28q14-16 30 0',fill:'none',stroke:c,'stroke-width':6,'stroke-linecap':'round'},g);return g};
+const icCube=(par,x,y,s)=>{const g=G(par,x,y,s);[['0,-65 65,-32 0,0 -65,-32','var(--stage)'],['-65,-32 0,0 0,70 -65,38','var(--line)'],['0,0 65,-32 65,38 0,70','var(--stage)']].forEach(q=>mk('polygon',{points:q[0],fill:q[1],stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},g));return g};
+const horse=(par,x,gy,s)=>{const g=mk('g',{},par),h=G(g,x,gy,s);mk('path',{d:'M-35-30v30M-20-30v30M20-30v30M35-30v30M-48-52q-22 6-24 30',stroke:'var(--loss)','stroke-width':7,'stroke-linecap':'round',fill:'none'},h);mk('rect',{x:-50,y:-64,width:100,height:38,rx:19,class:'loss'},h);mk('path',{d:'M36-58L56-92h20l4 14-22 6-14 30z',class:'loss'},h);mk('circle',{cx:-4,cy:-104,r:13,class:'ink'},h);mk('path',{d:'M-22-62v-12a18 18 0 0 1 36 0v12z',class:'ink'},h);return g};
+// each rider spans about 114px at scale .75; 160px spacing leaves ~46px gaps, centred on the ground line
+const R=[927,1087,1247,1407].map(x=>horse($('riders'),x,650,.75));
+const CD=[['Heart','DISEASE',''],['Cancer','TUMOURS',''],['Brain','NEURODEGENERATIVE','E.G. ALZHEIMER’S'],['Metabolic','DYSFUNCTION','E.G. TYPE 2 DIABETES']];
+const cards=CD.map((c,i)=>{const X=120+i*350,cx=X+155,g=mk('g',{},$('cards'));mk('rect',{x:X,y:230,width:310,height:380,rx:18,class:'s-line',fill:'var(--stage)','stroke-width':3},g);T(g,X+26,272,'m',20,'0'+(i+1));[icHeart,icCell,icBrain,icCube][i](g,cx,370,1.1);T(g,cx,520,'d5',40,c[0],{'text-anchor':'middle'});T(g,cx,562,'m',18,c[1],{'text-anchor':'middle'});if(c[2])T(g,cx,590,'m',18,c[2],{'text-anchor':'middle'});return g});
+const CP=[];for(let y=0;y<=40;y+=.5)CP.push([200+30*y,750-480*Math.pow(y/40,2.2)]);
+$('area').setAttribute('points',CP.map(q=>q[0].toFixed(0)+','+q[1].toFixed(1)).join(' ')+' 1400,760 200,760');
+[0,10,20,30,40].forEach(y=>{const x=200+30*y;mk('path',{d:`M${x} 760v14`,class:'s-ink','stroke-width':4},$('ticks'));T($('ticks'),x,804,'m',20,y?y+' YRS':'0',{'text-anchor':'middle'})});
+const BC=[];for(let i=0;i<8;i++)BC.push(mk('circle',{cy:400,r:13},$('cells')));
+fig($('young'),1120,300,34,'ink');
+const FD=[[380,470,14],[440,440,12],[505,452,15],[420,520,16],[485,515,12],[350,530,11]].map(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},$('fat')));
+const AR=[[300,icHeart,'Heart disease'],[500,icCell,'Cancer'],[700,icBrain,'Dementia']].map(([y,f,s])=>{const g=mk('g',{},$('arw'));mk('path',{d:`M610 480C820 480 830 ${y} 1030 ${y}`,fill:'none',class:'s-loss','stroke-width':6,'stroke-dasharray':'12 10'},g);mk('path',{d:`M1012 ${y-14}l20 14-20 14`,fill:'none',class:'s-loss','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);f(g,1110,y,.6);T(g,1190,y+12,'d5',36,s);return g});
+const SD=[];for(let i=0;i<10;i++){const a=i*.628+.3,rr=140+(i%3)*12;SD.push(mk('circle',{cx:(440+rr*Math.cos(a)).toFixed(1),cy:(470+rr*Math.sin(a)).toFixed(1),r:11,class:'loss'},$('spread')))}
+for(let r=0;r<6;r++)for(let c=0;c<11;c++)if(!(c===5&&r===2))mk('circle',{cx:900+c*52,cy:340+r*56,r:10,fill:'var(--muted)','fill-opacity':.35},$('grid'));
+let da='',db='';for(let y=250;y<=690;y+=10){const s=50*Math.sin((y-250)/45),c=y>250?'L':'M';da+=c+(260+s).toFixed(1)+' '+y;db+=c+(260-s).toFixed(1)+' '+y;if((y-250)%30===0){const k=(y-250)/30,bad=k===5||k===10;mk('path',{d:`M${(260+s).toFixed(1)} ${y}H${(260-s).toFixed(1)}`,stroke:bad?'var(--loss)':'var(--line)','stroke-width':bad?8:4,'stroke-linecap':'round'},$('dna'))}}
+[da,db].forEach(d=>mk('path',{d:d,class:'s-ink',fill:'none','stroke-width':6,'stroke-linecap':'round'},$('dna')));
+icBrain($('bigbrain'),800,470,2);
+const HR=[[icHeart,'Heart'],[icCube,'Metabolism'],[icBrain,'Brain']].map(([f,s],i)=>{const g=mk('g',{},$('habrows'));f(g,1130,420+i*110,.45);T(g,1190,432+i*110,'d5',36,s,i===2?{style:'fill:var(--gain)'}:{});return g});
+const CK=['Family history','Your apo B','Insulin response'].map((s,i)=>{const y=350+i*70;mk('rect',{x:160,y:y-30,width:36,height:36,rx:6,class:'s-ink',fill:'none','stroke-width':4},$('items'));T($('items'),220,y,'d5',34,s);return mk('path',{d:`M166 ${y-12}l10 10 22-26`,class:'s-gain',fill:'none','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},$('items'))});
+fig($('doc'),1000,270,40,'ink');
+const CB=['30s','40s','50s','60s','70s'].map((s,i)=>{const X=120+i*276,r=mk('rect',{x:X,y:580,width:250,height:170,rx:16,fill:'var(--stage)',stroke:i===4?'var(--loss)':'var(--ink)','stroke-width':5,'stroke-dasharray':i===4?'12 10':'none'},$('cal'));return [r,T($('cal'),X+125,688,'d',60,s,{'text-anchor':'middle'})]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+R.forEach((g,i)=>rise(g,p(u,TM.horsemen+i*.5,TM.horsemen+i*.5+.6)));
+$('riders').setAttribute('transform','translate('+(10*Math.sin(t*.4)).toFixed(1)+' 0)');
+rise($('slow'),p(u,TM.horsemen+6,TM.horsemen+6.6));
+
+[TM.heart,TM.cancer_cell,TM.brain,TM.sugar_cube].forEach((a,i)=>rise(cards[i],p(u,a,a+.5)));
+rise($('tog'),p(u,TM.sugar_cube+3.3,TM.sugar_cube+3.9));
+
+rise($('ticks'),p(u,TM.timeline,TM.timeline+.5));
+const n=Math.max(1,Math.round(p(u,TM.timeline,TM.timeline+3.6)*(CP.length-1)));
+$('curve').setAttribute('points',CP.slice(0,n+1).map(q=>q[0].toFixed(0)+','+q[1].toFixed(0)).join(' '));
+$('curve').setAttribute('opacity',u>=TM.timeline?1:0);
+rise($('ice'),p(u,TM.iceberg,TM.iceberg+.6)); rise($('diag'),p(u,TM.iceberg+4.2,TM.iceberg+4.8));
+
+rise($('artg'),p(u,TM.artery,TM.artery+.5)); rise($('aut'),p(u,TM.artery+1.3,TM.artery+1.8));
+BC.forEach((c,i)=>{c.setAttribute('cx',(180+((i*90+t*90)%720)).toFixed(1));c.setAttribute('fill',i%2&&u>=TM.blood_tube?'var(--loss)':'var(--muted)')});
+const h=35*p(u,TM.artery+1.3,TM.artery+3.5)+28*p(u,TM.young_man,TM.blood_tube+7)+7*p(u,TM.blood_tube+7,TM.blood_tube+14);
+$('plaque').setAttribute('d','M380 496Q530 '+(496-2*h).toFixed(1)+' 680 496Z');
+rise($('young'),p(u,TM.young_man,TM.young_man+.5)); rise($('tube'),p(u,TM.blood_tube,TM.blood_tube+.5)); rise($('lower'),p(u,TM.blood_tube+7,TM.blood_tube+7.6));
+
+rise($('liv'),p(u,TM.liver,TM.liver+.5));
+FD.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.liver+1+i*.3,TM.liver+1.3+i*.3)));
+rise($('ins'),p(u,TM.insulin_key,TM.insulin_key+.5));
+const kc=(t*.6)%1, kd=kc<.5?ease(kc*2):1-ease((kc-.5)*2);
+$('key').setAttribute('transform','translate('+(300+130*kd).toFixed(1)+' 740)');
+AR.forEach((g,i)=>rise(g,p(u,TM.arrows+i*.8,TM.arrows+i*.8+.5)));
+
+const s5=SC[5][0]/K;
+rise($('late'),p(u,s5+.3,s5+.8));
+SD.forEach((c,i)=>c.setAttribute('opacity',p(u,s5+1+i*.15,s5+1.3+i*.15)));
+$('hard').setAttribute('opacity',p(u,s5+2.5,s5+3));
+rise($('easy'),p(u,TM.magnifier-.3,TM.magnifier+.2)); rise($('magw'),p(u,TM.magnifier,TM.magnifier+.5));
+const mk5=p(u,TM.magnifier,TM.small_tumor);
+$('mag').setAttribute('transform','translate('+(960+200*mk5).toFixed(1)+' '+(560-108*mk5+40*Math.sin(mk5*Math.PI*2)).toFixed(1)+')');
+const fd=u>=TM.small_tumor; $('lens').setAttribute('stroke',fd?'var(--gain)':'var(--ink)');
+$('ring').setAttribute('opacity',p(u,TM.small_tumor,TM.small_tumor+.4)*(fd?.7+.3*Math.sin(t*5):0));
+$('easyl').setAttribute('opacity',p(u,TM.small_tumor+.5,TM.small_tumor+1));
+rise($('beat'),p(u,TM.small_tumor+1.5,TM.small_tumor+2.1));
+
+const s6=SC[6][0]/K;
+rise($('bigbrain'),p(u,s6+.4,s6+1)); rise($('gn'),p(u,TM.gene,TM.gene+.5));
+$('shd').setAttribute('stroke-dashoffset',(1-p(u,TM.shield,TM.shield+1.2)).toFixed(3));
+$('shd').setAttribute('opacity',u>=TM.shield?1:0);
+$('shf').setAttribute('opacity',p(u,TM.shield+.8,TM.shield+1.4));
+rise($('prev'),p(u,TM.shield+1,TM.shield+1.5));
+rise($('hab'),p(u,TM.shield+4.5,TM.shield+5));
+HR.forEach((g,i)=>rise(g,p(u,TM.shield+4.8+i*.5,TM.shield+5.3+i*.5)));
+
+rise($('cal'),p(u,TM.checklist,TM.checklist+.5)); rise($('lab70'),p(u,TM.checklist+1,TM.checklist+1.5));
+rise($('card'),p(u,TM.checklist+.6,TM.checklist+1.1));
+CK.forEach((c,i)=>c.setAttribute('opacity',p(u,TM.doctor+.8+i*1.2,TM.doctor+1.1+i*1.2)));
+rise($('doc'),p(u,TM.doctor,TM.doctor+.5));
+const hl=u>=TM.calendar; CB[1][0].setAttribute('fill',hl?'var(--gain)':'var(--stage)'); CB[1][0].setAttribute('stroke',hl?'var(--gain)':'var(--ink)');
+CB[1][1].style.fill=hl?'var(--on-gain)':'var(--ink)'; CB[4][1].style.fill=hl?'var(--muted)':'var(--ink)';
+rise($('most'),p(u,TM.calendar,TM.calendar+.5));
+
+const s8=SC[8][0]/K;
+rise($('qa'),p(u,s8+.3,s8+.8)); rise($('qb'),p(u,s8+.7,s8+1.2));
+rise($('ph'),p(u,TM.phone,TM.phone+.5)); rise($('wk'),p(u,TM.phone+.3,TM.phone+.8));
+$('phck').setAttribute('opacity',p(u,TM.phone+.8,TM.phone+1.2));
+const rc=t%2.5, ang=u>=TM.phone&&rc<.6?6*Math.sin(rc*40)*(1-rc/.6):0;
+$('phr').setAttribute('transform','rotate('+ang.toFixed(2)+' 1325 420)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.92;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

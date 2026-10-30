@@ -1,0 +1,28 @@
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const wk=mk('g',{},$('walker'));
+mk('path',{d:'M-14 0L0-50L14 0M0-50V-108M-60-88L0-100L60-88',fill:'none',stroke:'var(--ink)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},wk);
+mk('path',{d:'M-120-88H120',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},wk);
+mk('circle',{cx:0,cy:-130,r:20,class:'gain'},wk);
+const RAD=[95,140,185,230,275];
+const RR=RAD.map((r,i)=>{const C=2*Math.PI*r;return mk('circle',{cx:1120,cy:480,r:r,fill:'none',stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round','stroke-dasharray':(C*.86).toFixed(0)+' '+(C*.14).toFixed(0),transform:'rotate('+(i*77)+' 1120 480)'},$('rings'))});
+const SPK=[];for(let i=0;i<8;i++)SPK.push(mk('circle',{r:9,class:'loss'},$('rings')));
+const CEL=[];for(let i=0;i<8;i++)CEL.push(mk('rect',{x:1140+(i%4)*80,y:470+Math.floor(i/4)*90,width:50,height:50,rx:8,fill:'var(--line)'},$('cells')));
+for(let i=0;i<5;i++){const q=222+i*34;[[q,306,12,24],[q,510,12,24],[176,q+130,24,12],[380,q+130,24,12]].forEach(a=>mk('rect',{x:a[0],y:a[1],width:a[2],height:a[3],class:'ink'},$('pins')))}
+const FAB=[560,710,860].map(x=>{const g=mk('g',{},$('fabs'));mk('rect',{x:x+10,y:390,width:18,height:70,class:'ink'},g);mk('path',{d:'M'+x+' 540V440l40 30v-30l40 30v-30l40 30V540z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},g);mk('rect',{x:x+44,y:495,width:32,height:30,class:'gain'},g);return g});
+const BL=[[420,650],[495,650],[570,650],[457,600],[532,600],[495,550]].map(b=>mk('rect',{x:b[0],y:b[1],width:70,height:46,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('blk')));
+const BG=mk('g',{},$('bld')),BP=fig(BG,0,608,22,''),BB=mk('g',{},BG);
+mk('rect',{x:30,y:500,width:50,height:44,rx:10,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},BB);
+mk('text',{x:55,y:533,'font-size':30,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},BB).textContent='!';
+const PAN=[['PROFIT','ink'],['PURPOSE','gain']].map(a=>{const g=mk('g',{},$('scale'));mk('path',{d:'M0 0L-70 80M0 0L70 80',stroke:'var(--muted)','stroke-width':3},g);mk('circle',{cx:0,cy:64,r:16,class:a[1]},g);mk('path',{d:'M-80 80a80 40 0 0 0 160 0z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('text',{x:0,y:160,'font-size':22,'text-anchor':'middle',class:'m'},g).textContent=a[0];return g});
+const PL='M-90-8h140q30 0 30 8t-30 8h-140zM-10 4l-30 46h22l44-46zM-10-4l-20-34h16l34 34zM-90-8l-12-30h14l24 30z';
+const PLN=mk('path',{d:PL,class:'ink'},$('plane'));
+[170,290,410,530].forEach(x=>{mk('path',{d:'M330 604L'+x+' 680',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},$('share'));mk('path',{d:PL,class:'ink',transform:'translate('+x+' 715) scale(.5)'},$('share'))});
+const CR=[180,280,380,480,580].map((x,i)=>{const g=mk('g',{},$('crowd'));fig(g,x,580,22,'ink');if(i%2===0){mk('path',{d:'M'+x+' 558V520',stroke:'var(--ink)','stroke-width':5},g);mk('rect',{x:x-50,y:470,width:100,height:50,rx:8,class:'gain'},g);mk('text',{x:x,y:502,'font-size':18,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},g).textContent='SAFER'}return g});
+const LB=['SAFETY','AUDITS','CHIPS','MAKERS','LAWS','CULTURE','PUBLIC'],TY=[380,470,560],TS=[2,4,6];
+const SLB=LB.map((s,i)=>{const x=760+i*105,g=mk('g',{},$('slabs'));mk('rect',{x:x,y:300,width:50,height:340,rx:10,fill:'var(--gain)','fill-opacity':.35,stroke:'var(--gain)','stroke-width':4},g);
+TY.forEach((y,j)=>{if(i<TS[j])mk('circle',{cx:x+25,cy:y,r:18,fill:'var(--stage)'},g)});
+mk('circle',{cx:x+25,cy:i%2?330:610,r:14,fill:'var(--stage)'},g);
+mk('text',{x:x+25,y:690,'font-size':18,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+const THR=TY.map(y=>mk('circle',{cy:y,r:13,class:'loss'},$('threats')));
+const QR=[60,100,140,180].map(r=>mk('circle',{cx:1250,cy:460,r:r,fill:'none',stroke:'var(--line)','stroke-width':8},$('qr')));
+mk('circle',{cx:1250,cy:460,r:22,class:'gain'},$('qr'));

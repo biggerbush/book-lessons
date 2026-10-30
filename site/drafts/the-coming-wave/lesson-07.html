@@ -1,0 +1,352 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Coming Wave Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of The Coming Wave: No single fix will work, but many layered measures, from safety research and audits to laws, alliances and culture, can together keep the wave in check. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE COMING WAVE · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Walking the narrow path</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">to containment.</text>
+<text class="b" x="120" y="600" font-size="32">Many imperfect safeguards, layered together,</text>
+<text class="b" x="120" y="644" font-size="32">can keep powerful technology in check.</text>
+<g id="rope0">
+<path class="s-ink" d="M1200 300V720M1460 300V720" stroke-width="8" stroke-linecap="round"/>
+<path class="s-ink" d="M1200 330Q1330 400 1460 330" fill="none" stroke-width="5"/>
+<text class="m" x="1180" y="770" font-size="20" style="fill:var(--loss)">CATASTROPHE</text>
+<text class="m" x="1480" y="770" font-size="20" text-anchor="end" style="fill:var(--loss)">DYSTOPIA</text>
+</g>
+<g id="walker"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No silver bullet.</text>
+<text class="b" x="120" y="176" font-size="32">No single law, invention or treaty will contain the wave.</text>
+<g id="wand">
+<path class="s-ink" d="M200 560L420 340" stroke-width="16" stroke-linecap="round"/>
+<path class="gain" d="M440 270l12 26 28 3-21 19 6 28-25-14-25 14 6-28-21-19 28-3z"/>
+<text class="m" x="120" y="650" font-size="22">ONE LAW?</text>
+<text class="m" x="120" y="690" font-size="22">ONE INVENTION?</text>
+<text class="m" x="120" y="730" font-size="22">ONE TREATY?</text>
+</g>
+<path id="wandx" class="s-loss" d="M180 260L520 600M520 260L180 600" stroke-width="10" stroke-linecap="round" fill="none" opacity="0"/>
+<g id="rings"></g>
+<g id="core"><circle class="gain" cx="1120" cy="480" r="52"/><text class="m" x="1120" y="488" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">TECH</text></g>
+<g id="hold"><text class="d5" x="120" y="820" font-size="40">Each ring imperfect. Together, they hold.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Start in the lab.</text>
+<text class="b" x="120" y="176" font-size="32">The innermost ring: technical safety, built into the code.</text>
+<g id="lab">
+<circle class="ink" cx="180" cy="430" r="30"/><path class="ink" d="M135 560v-40a45 45 0 0 1 90 0v40z"/>
+<rect class="s-ink" x="260" y="270" width="300" height="200" rx="12" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M410 470v60M350 530h120M130 560h460" stroke-width="6" stroke-linecap="round"/>
+<path class="s-line" d="M290 310h110M290 350h150M290 390h80M290 430h130" stroke-width="8" stroke-linecap="round"/>
+</g>
+<path id="shield" class="gain" d="M510 300l36 14v34c0 28-18 44-36 52-18-8-36-24-36-52v-34z"/>
+<g id="safe"><text class="d5" x="120" y="650" font-size="36">Safety built in,</text><text class="d5" x="120" y="696" font-size="36">not an afterthought.</text></g>
+<g id="bars">
+<text class="m" x="680" y="260" font-size="20">SAFETY RESEARCH</text>
+<path class="s-ink" d="M670 700h320" stroke-width="5"/>
+<rect class="ink" x="690" y="660" width="110" height="40"/>
+<text class="m" x="745" y="735" font-size="20" text-anchor="middle">TODAY</text>
+<text class="m" x="915" y="735" font-size="20" text-anchor="middle" style="fill:var(--gain)">APOLLO-STYLE</text>
+</g>
+<rect id="bigbar" class="gain" x="860" y="700" width="110" height="0"/>
+<g id="audit">
+<text class="m" x="1080" y="300" font-size="22" style="fill:var(--gain)">AUDITS</text>
+<text class="m" x="1080" y="336" font-size="20">OUTSIDERS CHECK WHAT</text>
+<text class="m" x="1080" y="366" font-size="20">POWERFUL SYSTEMS CAN DO</text>
+<rect class="s-ink" x="1100" y="420" width="360" height="240" rx="16" fill="var(--stage)" stroke-width="6"/>
+<g id="cells"></g>
+<text class="m" x="1280" y="700" font-size="20" text-anchor="middle">POWERFUL SYSTEM</text>
+<g id="lens"><circle class="s-ink" r="56" fill="none" stroke-width="12"/><path class="s-ink" d="M40 40l50 50" stroke-width="16" stroke-linecap="round"/></g>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Squeeze the choke points.</text>
+<text class="b" x="120" y="176" font-size="32">A few hard-to-make parts that a whole technology depends on.</text>
+<g id="chip"><g id="pins"></g><rect class="ink" x="200" y="330" width="180" height="180" rx="14"/><rect x="240" y="370" width="100" height="100" rx="6" fill="var(--stage)"/><rect class="gain" x="265" y="395" width="50" height="50" rx="4"/>
+<text class="m" x="290" y="600" font-size="20" text-anchor="middle">ADVANCED CHIPS</text></g>
+<path id="ar1" class="s-muted" d="M420 420h110m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="fabs"></g>
+<g id="fabT"><text class="m" x="740" y="600" font-size="20" text-anchor="middle">ONLY A HANDFUL CAN MAKE THEM</text></g>
+<path id="ar2" class="s-muted" d="M1010 470h120m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="hg">
+<polygon id="sandT" class="gain"/><polygon id="sandB" class="gain"/><path id="sandS" class="s-gain" stroke-width="4"/>
+<path class="s-ink" d="M1200 300L1300 460L1200 620M1400 300L1300 460L1400 620" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M1180 300h240M1180 620h240" stroke-width="12" stroke-linecap="round"/>
+<text class="m" x="1300" y="680" font-size="20" text-anchor="middle">CONTROL THE CHOKE POINT</text>
+<text class="m" x="1300" y="712" font-size="20" text-anchor="middle" style="fill:var(--gain)">BUY PRECIOUS TIME</text>
+</g>
+<g id="exp"><text class="d5" x="120" y="800" font-size="36">Like US chip export limits on China.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Build it, and build it right.</text>
+<text class="b" x="120" y="176" font-size="32">Worried makers should build. Companies must balance profit and purpose.</text>
+<path class="s-line" d="M120 700h580" stroke-width="5"/>
+<g id="blk"></g><g id="bld"></g>
+<g id="bcap"><text class="m" x="120" y="760" font-size="22">HELP BUILD IT, NOT JUST CRITICISE IT</text></g>
+<g id="scale"><path class="s-ink" d="M1120 360V700M1030 700h180" stroke-width="8" stroke-linecap="round"/><line id="beam" class="s-ink" x1="960" y1="360" x2="1280" y2="360" stroke-width="8" stroke-linecap="round"/><circle class="ink" cx="1120" cy="360" r="14"/></g>
+<g id="bcap2"><text class="d5" x="120" y="830" font-size="36">Balance profit with purpose, not growth alone.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Laws, alliances and treaties.</text>
+<text class="b" x="120" y="176" font-size="32">Governments must understand the tools. Nations must agree.</text>
+<g id="cap"><path class="s-ink" d="M310 370v-40" stroke-width="5"/><path class="ink" d="M240 444a70 70 0 0 1 140 0z"/><path class="ink" d="M170 484L310 444L450 484z"/><path class="s-ink" d="M192 496v90M240 496v90M288 496v90M332 496v90M380 496v90M428 496v90" stroke-width="14"/><rect class="ink" x="166" y="590" width="288" height="24" rx="4"/>
+<text class="m" x="310" y="680" font-size="20" text-anchor="middle">UNDERSTAND THE TOOLS,</text><text class="m" x="310" y="710" font-size="20" text-anchor="middle">BUILD SKILLS TO REGULATE</text></g>
+<g id="ally"><text class="m" x="790" y="250" font-size="20" text-anchor="middle">THE WAVE CROSSES BORDERS</text><path class="s-muted" d="M790 280V640" stroke-width="4" stroke-dasharray="10 12"/><path class="s-ink" d="M620 600V320M960 600V320" stroke-width="6" stroke-linecap="round"/><rect class="ink" x="626" y="322" width="84" height="56"/><rect class="ink" x="870" y="322" width="84" height="56" fill-opacity=".45"/><path id="wave5" class="s-loss" fill="none" stroke-width="6" stroke-linecap="round"/><text class="m" x="790" y="680" font-size="20" text-anchor="middle">ALLIANCES &amp; TREATIES</text></g>
+<g id="shake"><path class="s-gain" d="M626 570Q700 548 776 552" fill="none" stroke-width="16" stroke-linecap="round"/><path class="s-ink" d="M954 570Q880 548 804 552" fill="none" stroke-width="16" stroke-linecap="round"/><circle class="gain" cx="790" cy="552" r="20"/></g>
+<g id="nuke"><path class="ink" d="M1280 300q30 30 30 80h-60q0-50 30-80z"/><rect class="ink" x="1250" y="380" width="60" height="190"/><path class="ink" d="M1250 510l-32 70h32zM1310 510l32 70h-32z"/>
+<text class="m" x="1280" y="680" font-size="20" text-anchor="middle">NUCLEAR ARMS CONTROL</text><text class="m" x="1280" y="712" font-size="20" text-anchor="middle" style="fill:var(--gain)">RIVALS CAN AGREE TO LIMITS</text></g>
+<g id="lock"><path class="s-gain" d="M1230 440h100M1230 530h100" stroke-width="12" stroke-linecap="round"/><path class="s-gain" d="M1264 470v-12a16 16 0 0 1 32 0v12" fill="none" stroke-width="7"/><rect class="gain" x="1254" y="468" width="52" height="40" rx="6"/></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Learn from every failure.</text>
+<text class="b" x="120" y="176" font-size="32">Aviation studies what went wrong, and shares the lessons widely.</text>
+<g id="plane"></g>
+<g id="bbox"><rect class="gain" x="250" y="440" width="160" height="100" rx="10"/><text class="m" x="330" y="498" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">BLACK BOX</text><text class="m" x="330" y="580" font-size="20" text-anchor="middle">STUDY WHAT WENT WRONG</text></g>
+<g id="share"><text class="m" x="350" y="790" font-size="20" text-anchor="middle">SHARED WIDELY</text></g>
+<g id="chart"><path class="s-ink" d="M760 300V640H1100" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="776" y="316" font-size="18">SAFETY</text><text class="m" x="930" y="690" font-size="20" text-anchor="middle">FLYING GOT SAFER</text></g>
+<path id="curve6" class="s-gain" d="M780 610C880 600 920 430 1090 330" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1 1" opacity="0"/>
+<g id="admit"><path class="s-muted" d="M1110 430h50m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-ink" x="1180" y="300" width="280" height="240" rx="16" fill="var(--stage)" stroke-width="6"/><text class="d" x="1320" y="430" font-size="72" text-anchor="middle">&lt;/&gt;</text><text class="m" x="1320" y="500" font-size="20" text-anchor="middle">TECH BUILDERS</text><text class="m" x="1320" y="600" font-size="22" text-anchor="middle" style="fill:var(--gain)">ADMIT FAILURES</text><text class="m" x="1320" y="634" font-size="22" text-anchor="middle" style="fill:var(--gain)">THE SAME WAY</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">People power.</text>
+<text class="b" x="120" y="176" font-size="32">Ordinary citizens demanding safer technology.</text>
+<g id="crowd"></g>
+<g id="ccap"><text class="m" x="380" y="760" font-size="20" text-anchor="middle">THE OUTERMOST RING</text></g>
+<g id="stk"><text class="m" x="760" y="260" font-size="20">ALL THE RINGS, STACKED</text></g>
+<g id="slabs"></g><g id="threats"></g>
+<g id="miss"><text class="d5" x="120" y="830" font-size="36">Each layer catches what the others miss.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="360" font-size="88" letter-spacing="-2">Which ring could</text></g>
+<g id="qb"><text class="d" x="136" y="470" font-size="88" letter-spacing="-2">you strengthen?</text></g>
+<g id="qc"><text class="m" x="143" y="590" font-size="26">AT WORK · IN YOUR VOTE · IN A CONVERSATION</text></g>
+<g id="qd"><text class="d5" x="140" y="700" font-size="44" style="fill:var(--gain)">Pick one, and start this week.</text></g>
+<g id="qr"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="134" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:14</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Walking the Narrow Path to Containment&rdquo;, from <em>The Coming Wave</em> by Mustafa Suleyman with Michael Bhaskar. Examples as reported in the book: the call for an Apollo-style safety program, United States chip export limits on China, nuclear arms control, and aviation&#x27;s culture of learning from failure. The tightrope, rings and stacked layers are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=134, SC=[[0.0, 8.1], [8.1, 24.5], [24.5, 45.9], [45.9, 61.9], [61.9, 74.6], [74.6, 91.1], [91.1, 109.9], [109.9, 123.5], [123.5, 134.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Narrow Path", "No Silver Bullet", "Start in the Lab", "Squeeze Choke Points", "Makers and Companies", "Laws and Treaties", "Learn From Failure", "People Power", "Your Next Step"];
+const TM={"tightrope": 0.0, "magic_wand": 8.4, "circles": 14.72, "engineer": 24.8, "magnifier": 40.16, "microchip": 46.16, "factory": 51.84, "hourglass": 55.12, "builder": 62.16, "balance": 69.2, "capitol": 74.88, "handshake": 80.32, "warhead": 85.36, "airplane": 91.36, "black_box": 94.88, "crowd": 110.16, "stack": 116.48, "mirror": 123.76};
+const fig=(g,x,y,r,cls)=>[mk('circle',{cx:x,cy:y,r:r,class:cls},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)];
+const wk=mk('g',{},$('walker'));
+mk('path',{d:'M-14 0L0-50L14 0M0-50V-108M-60-88L0-100L60-88',fill:'none',stroke:'var(--ink)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},wk);
+mk('path',{d:'M-120-88H120',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},wk);
+mk('circle',{cx:0,cy:-130,r:20,class:'gain'},wk);
+const RAD=[95,140,185,230,275];
+const RR=RAD.map((r,i)=>{const C=2*Math.PI*r;return mk('circle',{cx:1120,cy:480,r:r,fill:'none',stroke:'var(--line)','stroke-width':8,'stroke-linecap':'round','stroke-dasharray':(C*.86).toFixed(0)+' '+(C*.14).toFixed(0),transform:'rotate('+(i*77)+' 1120 480)'},$('rings'))});
+const SPK=[];for(let i=0;i<8;i++)SPK.push(mk('circle',{r:9,class:'loss'},$('rings')));
+const CEL=[];for(let i=0;i<8;i++)CEL.push(mk('rect',{x:1140+(i%4)*80,y:470+Math.floor(i/4)*90,width:50,height:50,rx:8,fill:'var(--line)'},$('cells')));
+for(let i=0;i<5;i++){const q=222+i*34;[[q,306,12,24],[q,510,12,24],[176,q+130,24,12],[380,q+130,24,12]].forEach(a=>mk('rect',{x:a[0],y:a[1],width:a[2],height:a[3],class:'ink'},$('pins')))}
+const FAB=[560,710,860].map(x=>{const g=mk('g',{},$('fabs'));mk('rect',{x:x+10,y:390,width:18,height:70,class:'ink'},g);mk('path',{d:'M'+x+' 540V440l40 30v-30l40 30v-30l40 30V540z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},g);mk('rect',{x:x+44,y:495,width:32,height:30,class:'gain'},g);return g});
+const BL=[[420,650],[495,650],[570,650],[457,600],[532,600],[495,550]].map(b=>mk('rect',{x:b[0],y:b[1],width:70,height:46,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('blk')));
+const BG=mk('g',{},$('bld')),BP=fig(BG,0,608,22,''),BB=mk('g',{},BG);
+mk('rect',{x:30,y:500,width:50,height:44,rx:10,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},BB);
+mk('text',{x:55,y:533,'font-size':30,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},BB).textContent='!';
+const PAN=[['PROFIT','ink'],['PURPOSE','gain']].map(a=>{const g=mk('g',{},$('scale'));mk('path',{d:'M0 0L-70 80M0 0L70 80',stroke:'var(--muted)','stroke-width':3},g);mk('circle',{cx:0,cy:64,r:16,class:a[1]},g);mk('path',{d:'M-80 80a80 40 0 0 0 160 0z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);mk('text',{x:0,y:160,'font-size':22,'text-anchor':'middle',class:'m'},g).textContent=a[0];return g});
+const PL='M-90-8h140q30 0 30 8t-30 8h-140zM-10 4l-30 46h22l44-46zM-10-4l-20-34h16l34 34zM-90-8l-12-30h14l24 30z';
+const PLN=mk('path',{d:PL,class:'ink'},$('plane'));
+[170,290,410,530].forEach(x=>{mk('path',{d:'M330 604L'+x+' 680',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},$('share'));mk('path',{d:PL,class:'ink',transform:'translate('+x+' 715) scale(.5)'},$('share'))});
+const CR=[180,280,380,480,580].map((x,i)=>{const g=mk('g',{},$('crowd'));fig(g,x,580,22,'ink');if(i%2===0){mk('path',{d:'M'+x+' 558V520',stroke:'var(--ink)','stroke-width':5},g);mk('rect',{x:x-50,y:470,width:100,height:50,rx:8,class:'gain'},g);mk('text',{x:x,y:502,'font-size':18,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},g).textContent='SAFER'}return g});
+const LB=['SAFETY','AUDITS','CHIPS','MAKERS','LAWS','CULTURE','PUBLIC'],TY=[380,470,560],TS=[2,4,6];
+const SLB=LB.map((s,i)=>{const x=760+i*105,g=mk('g',{},$('slabs'));mk('rect',{x:x,y:300,width:50,height:340,rx:10,fill:'var(--gain)','fill-opacity':.35,stroke:'var(--gain)','stroke-width':4},g);
+TY.forEach((y,j)=>{if(i<TS[j])mk('circle',{cx:x+25,cy:y,r:18,fill:'var(--stage)'},g)});
+mk('circle',{cx:x+25,cy:i%2?330:610,r:14,fill:'var(--stage)'},g);
+mk('text',{x:x+25,y:690,'font-size':18,'text-anchor':'middle',class:'m'},g).textContent=s;return g});
+const THR=TY.map(y=>mk('circle',{cy:y,r:13,class:'loss'},$('threats')));
+const QR=[60,100,140,180].map(r=>mk('circle',{cx:1250,cy:460,r:r,fill:'none',stroke:'var(--line)','stroke-width':8},$('qr')));
+mk('circle',{cx:1250,cy:460,r:22,class:'gain'},$('qr'));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('rope0'),p(u,TM.tightrope,TM.tightrope+.6)); rise($('walker'),p(u,TM.tightrope+.4,TM.tightrope+1));
+const sw=Math.sin(t*1.6)*(3+5*p(u,TM.tightrope+5.8,TM.tightrope+7));
+wk.setAttribute('transform','translate(1330 365) rotate('+sw.toFixed(2)+')');
+
+rise($('wand'),p(u,TM.magic_wand,TM.magic_wand+.5)); $('wandx').setAttribute('opacity',p(u,TM.magic_wand+3,TM.magic_wand+3.6));
+const H=TM.circles+6.2;
+RR.forEach((c,i)=>{c.setAttribute('opacity',p(u,TM.circles+i*.3,TM.circles+i*.3+.4)); c.setAttribute('stroke',u>=H?'var(--gain)':'var(--line)')});
+rise($('core'),p(u,TM.circles,TM.circles+.4));
+SPK.forEach((s,i)=>{const a=i*Math.PI/4+.2,k=(t*.3+i*.37)%1;let r=60+260*k,o=1-lin(k,.8,1);if(u>=H){r=Math.min(r,RAD[i%5]-14);o=1}
+  s.setAttribute('cx',(1120+r*Math.cos(a)).toFixed(1)); s.setAttribute('cy',(480+r*Math.sin(a)).toFixed(1)); s.setAttribute('opacity',u>=TM.circles+1?o:0)});
+rise($('hold'),p(u,H,H+.6));
+
+rise($('lab'),p(u,TM.engineer,TM.engineer+.5));
+const A=TM.engineer+5.8; rise($('bars'),p(u,A,A+.5)); const bh=400*p(u,A+.3,A+2.3);
+$('bigbar').setAttribute('y',(700-bh).toFixed(1)); $('bigbar').setAttribute('height',bh.toFixed(1));
+const N=TM.magnifier-4.9; rise($('shield'),p(u,N,N+.5)); rise($('safe'),p(u,N+.2,N+.7));
+rise($('audit'),p(u,TM.magnifier,TM.magnifier+.5));
+const lx=1265+95*Math.sin(t*.9),ly=540+25*Math.sin(t*1.7); $('lens').setAttribute('transform','translate('+lx.toFixed(1)+' '+ly.toFixed(1)+')');
+CEL.forEach((c,i)=>{const cx=1165+(i%4)*80,cy=495+Math.floor(i/4)*90; c.setAttribute('fill',u>=TM.magnifier&&Math.hypot(cx-lx,cy-ly)<70?'var(--gain)':'var(--line)')});
+
+rise($('chip'),p(u,TM.microchip,TM.microchip+.5));
+FAB.forEach((g,i)=>rise(g,p(u,TM.factory+i*.3,TM.factory+i*.3+.4))); rise($('fabT'),p(u,TM.factory+.9,TM.factory+1.4));
+$('ar1').setAttribute('opacity',p(u,TM.factory,TM.factory+.5)); $('ar2').setAttribute('opacity',p(u,TM.hourglass,TM.hourglass+.5));
+rise($('hg'),p(u,TM.hourglass,TM.hourglass+.5));
+const f=p(u,TM.hourglass+.5,TM.hourglass+7.5),L=340+120*f,h=100*(460-L)/160,B=620-80*f,h2=100*(B-460)/160;
+$('sandT').setAttribute('points',(1300-h).toFixed(1)+','+L.toFixed(1)+' '+(1300+h).toFixed(1)+','+L.toFixed(1)+' 1300,460');
+$('sandB').setAttribute('points','1206,616 1394,616 '+(1300+h2).toFixed(1)+','+B.toFixed(1)+' '+(1300-h2).toFixed(1)+','+B.toFixed(1));
+$('sandS').setAttribute('d','M1300 460V'+B.toFixed(1)); $('sandS').setAttribute('opacity',f>0&&f<1?1:0);
+rise($('exp'),p(u,TM.hourglass+2,TM.hourglass+2.6));
+
+rise($('bld'),p(u,TM.builder,TM.builder+.5)); const w=p(u,TM.builder+1,TM.builder+3);
+BG.setAttribute('transform','translate('+(170+170*w).toFixed(1)+' 0)'); BP.forEach(e=>e.style.fill=w>.5?'var(--gain)':'var(--muted)'); BB.setAttribute('opacity',1-w);
+BL.forEach((b,i)=>rise(b,p(u,TM.builder+2.6+i*.4,TM.builder+3+i*.4))); rise($('bcap'),p(u,TM.builder+1,TM.builder+1.6));
+const ag=-12*(1-p(u,TM.balance+1.5,TM.balance+3))*Math.PI/180;
+[-1,1].forEach((s,i)=>{const ex=1120+s*160*Math.cos(ag),ey=360+s*160*Math.sin(ag);
+  $('beam').setAttribute(i?'x2':'x1',ex.toFixed(1)); $('beam').setAttribute(i?'y2':'y1',ey.toFixed(1)); PAN[i].setAttribute('transform','translate('+ex.toFixed(1)+' '+ey.toFixed(1)+')')});
+rise($('scale'),p(u,TM.balance,TM.balance+.5)); rise($('bcap2'),p(u,TM.balance+1.5,TM.balance+2.1));
+
+rise($('cap'),p(u,TM.capitol,TM.capitol+.5));
+rise($('ally'),p(u,TM.handshake,TM.handshake+.5)); rise($('shake'),p(u,TM.handshake+1.2,TM.handshake+1.7));
+let wv='M600 450'; for(let x=600;x<=980;x+=20)wv+='L'+x+' '+(450+14*Math.sin(x/30-t*3)).toFixed(1); $('wave5').setAttribute('d',wv);
+rise($('nuke'),p(u,TM.warhead,TM.warhead+.5)); rise($('lock'),p(u,TM.warhead+1.2,TM.warhead+1.7));
+
+rise($('plane'),p(u,TM.airplane,TM.airplane+.5));
+PLN.setAttribute('transform','translate('+(330+8*Math.sin(t*.7)).toFixed(1)+' '+(300+6*Math.sin(t*1.3)).toFixed(1)+') scale(1.6)');
+rise($('bbox'),p(u,TM.black_box,TM.black_box+.5)); rise($('share'),p(u,TM.black_box+2.5,TM.black_box+3.1));
+const C6=TM.black_box+7; rise($('chart'),p(u,C6,C6+.5));
+$('curve6').setAttribute('stroke-dashoffset',(1-p(u,C6+.3,C6+2)).toFixed(3)); $('curve6').setAttribute('opacity',u>=C6+.3?1:0);
+rise($('admit'),p(u,TM.black_box+10.8,TM.black_box+11.4));
+
+rise($('crowd'),p(u,TM.crowd,TM.crowd+.5)); rise($('ccap'),p(u,TM.crowd+.6,TM.crowd+1.1));
+CR.forEach((g,i)=>g.setAttribute('transform','translate(0 '+(5*Math.sin(t*3+i)).toFixed(1)+')'));
+rise($('stk'),p(u,TM.stack,TM.stack+.5)); SLB.forEach((g,i)=>rise(g,p(u,TM.stack+i*.25,TM.stack+i*.25+.4)));
+const M=TM.stack+5.4; rise($('miss'),p(u,M,M+.6));
+THR.forEach((c,j)=>{const k=(((u-M)*.35+j*.33)%1+1)%1,sx=760+TS[j]*105-14;
+  c.setAttribute('cx',(690+(sx-690)*Math.min(1,k*1.5)).toFixed(1)); c.setAttribute('opacity',u<M?0:1-lin(k,.85,1))});
+
+rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9)); rise($('qc'),p(u,TM.mirror+1.2,TM.mirror+1.7));
+const Q=TM.mirror+5.8; rise($('qd'),p(u,Q,Q+.6)); rise($('qr'),p(u,TM.mirror,TM.mirror+.6));
+const qi=u>=Q?2:Math.floor(t)%4;
+QR.forEach((c,i)=>{c.setAttribute('stroke',i===qi?'var(--gain)':'var(--line)'); c.setAttribute('stroke-width',i===qi?(u>=Q?14+4*Math.sin(t*4):14).toFixed(1):8)});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:130.8;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

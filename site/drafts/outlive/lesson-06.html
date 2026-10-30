@@ -1,0 +1,412 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Outlive Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Outlive: No single diet suits everyone, so adjust what you eat to your own body, with enough protein to protect muscle, and treat sleep as a pillar of health. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">OUTLIVE · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Eat and sleep</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">with purpose.</text>
+<text class="b" x="120" y="600" font-size="32">Personalize your plate, protect your muscle, and guard your sleep.</text>
+<g id="t_plate">
+<path class="s-ink" d="M895 280v50M925 280v50M895 330h30M910 330v110M1210 280q30 40 0 90v70" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="s-ink" cx="1060" cy="360" r="110" fill="var(--stage)" stroke-width="7"/>
+<circle class="s-line" cx="1060" cy="360" r="74" fill="none" stroke-width="4"/>
+<path class="gain" d="M1060 360L1060 300A60 60 0 0 1 1112 390Z"/>
+<circle cx="1028" cy="388" r="22" fill="var(--line)"/>
+</g>
+<g id="t_bed">
+<g id="t_moon"><circle class="gain" cx="1390" cy="260" r="40"/><text class="d" x="1300" y="262" font-size="40">Z</text><text class="d" x="1336" y="216" font-size="28">z</text></g>
+<rect class="s-ink" x="1250" y="380" width="220" height="90" rx="45" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M1240 490H1480M1250 490v40M1470 490v40" stroke-width="7" stroke-linecap="round"/>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">No perfect diet.</text>
+<text class="b" x="120" y="176" font-size="32">Two people can eat the same meal and respond very differently.</text>
+<g id="signs"></g>
+<g id="ppl">
+<path class="s-line" d="M410 430V580H650M950 430V580H1190" fill="none" stroke-width="3"/>
+<path class="s-muted" d="M660 505H722M878 505H940" stroke-width="4" stroke-dasharray="8 8"/>
+<circle class="s-ink" cx="800" cy="505" r="70" fill="var(--stage)" stroke-width="7"/>
+<circle class="gain" cx="790" cy="495" r="30"/><circle cx="820" cy="525" r="18" fill="var(--line)"/>
+<text class="m" x="800" y="610" font-size="20" text-anchor="middle">SAME MEAL</text>
+<text class="m" x="290" y="600" font-size="20" text-anchor="middle">PERSON A</text>
+<text class="m" x="1310" y="600" font-size="20" text-anchor="middle">PERSON B</text>
+</g>
+<g id="nosingle"><text class="d" x="120" y="720" font-size="48">No single plan wins for everyone.</text></g>
+<g id="exper"><text class="m" x="120" y="790" font-size="22" style="fill:var(--gain)">TREAT FOOD LIKE AN EXPERIMENT, TESTED ON YOUR OWN BODY</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Three levers.</text>
+<text class="b" x="120" y="176" font-size="32">Three main ways to change how you eat.</text>
+<g id="lvf"></g>
+<g id="ic0"><circle class="s-ink" cx="340" cy="420" r="100" fill="var(--stage)" stroke-width="7"/><circle id="por" class="gain" cx="340" cy="420" r="70"/></g>
+<g id="ic1"><circle class="s-ink" cx="800" cy="420" r="100" fill="var(--stage)" stroke-width="7"/><circle class="gain" cx="760" cy="390" r="26"/><circle class="gain" cx="840" cy="390" r="26"/><circle class="loss" cx="800" cy="460" r="26"/><path id="x1" d="M776 436l48 48M824 436l-48 48" stroke="var(--ink)" stroke-width="7" stroke-linecap="round"/></g>
+<g id="ic2"><circle class="s-ink" cx="1260" cy="420" r="100" fill="var(--stage)" stroke-width="7"/><path id="win" class="gain"/><path class="s-ink" d="M1260 420V350M1260 420H1305" stroke-width="7" stroke-linecap="round"/><circle class="ink" cx="1260" cy="420" r="10"/></g>
+<g id="mix"><text class="d" x="120" y="820" font-size="44">The best mix depends on your body and goals.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Measure, not guess.</text>
+<text class="b" x="120" y="176" font-size="32">A small sensor on the arm shows how meals move blood sugar.</text>
+<g id="armg">
+<rect class="ink" x="200" y="260" width="150" height="440" rx="75"/>
+<circle class="gain" cx="275" cy="400" r="38" stroke="var(--stage)" stroke-width="6"/>
+<circle cx="275" cy="400" r="12" fill="var(--on-gain)"/>
+<g id="sig"></g>
+<text class="m" x="275" y="740" font-size="20" text-anchor="middle">GLUCOSE SENSOR</text>
+</g>
+<g id="chart">
+<path class="s-ink" d="M600 250V660H1460" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="620" y="262" font-size="20">BLOOD SUGAR</text>
+<text class="m" x="1460" y="700" font-size="20" text-anchor="end">TIME</text>
+<g id="curves"></g>
+<text id="lA" class="m" x="930" y="290" font-size="20" style="fill:var(--loss)">MEAL A</text>
+<text id="lB" class="m" x="1320" y="548" font-size="20" style="fill:var(--gain)">MEAL B</text>
+</g>
+<g id="fb"><text class="d" x="120" y="810" font-size="44">Feedback turns vague rules into personal choices.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Protein protects.</text>
+<text class="b" x="120" y="176" font-size="32">As we age, muscle quietly melts away unless we fight for it.</text>
+<g id="mbars"></g>
+<text class="m" x="150" y="610" font-size="18">MUSCLE WITH AGE (ILLUSTRATION)</text>
+<g id="gauge">
+<path class="s-line" d="M670 450A130 130 0 0 1 930 450" fill="none" stroke-width="18" stroke-linecap="round"/>
+<path id="gz" class="s-gain" fill="none" stroke-width="18" stroke-linecap="round"/>
+<line id="ndl" x1="800" y1="450" x2="800" y2="340" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="800" cy="450" r="14"/>
+<text class="m" x="800" y="500" font-size="20" text-anchor="middle">PROTEIN INTAKE</text>
+<text class="m" x="800" y="530" font-size="20" text-anchor="middle" style="fill:var(--loss)">OFTEN TOO LOW</text>
+</g>
+<g id="dose">
+<text class="m" x="1040" y="280" font-size="22">A STARTING POINT</text>
+<text id="dosev" class="d" x="1032" y="410" font-size="130" letter-spacing="-3" style="fill:var(--gain)">1.6 g</text>
+<text class="m" x="1040" y="456" font-size="20">PER KG OF BODY WEIGHT, EACH DAY</text>
+</g>
+<g id="dbl">
+<text class="m" x="1040" y="520" font-size="18">STANDARD</text>
+<rect x="1040" y="532" width="170" height="22" rx="4" fill="var(--line)"/>
+<text class="m" x="1040" y="588" font-size="18">ROUGHLY DOUBLE</text>
+<rect id="dblbar" class="gain" x="1040" y="600" width="170" height="22" rx="4"/>
+<text class="d" x="1396" y="621" font-size="30">2×</text>
+</g>
+<g id="mealt"><text class="d5" x="120" y="770" font-size="34">Spread across meals</text><text class="m" x="120" y="810" font-size="20">TO BUILD AND REPAIR MUSCLE</text></g>
+<g id="meals"></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A lesson learned.</text>
+<text class="b" x="120" y="176" font-size="32">Long fasts could cost too much precious muscle.</text>
+<g id="fclock">
+<circle class="s-ink" cx="360" cy="470" r="150" fill="var(--stage)" stroke-width="8"/>
+<path id="fw" class="loss" fill-opacity=".85"/>
+<line id="fh" x1="360" y1="470" x2="360" y2="350" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="360" cy="470" r="12"/>
+<text class="m" x="360" y="680" font-size="22" text-anchor="middle">LONG FASTS</text>
+</g>
+<g id="farm">
+<path class="s-muted" d="M535 470h80m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="armbig"></g>
+<text class="m" x="780" y="680" font-size="22" text-anchor="middle">MUSCLE</text>
+<rect x="660" y="705" width="240" height="20" rx="6" fill="none" stroke="var(--line)" stroke-width="3"/>
+<rect id="mbar" class="loss" x="660" y="705" width="240" height="20" rx="6"/>
+</g>
+<g id="turn">
+<path class="s-muted" d="M1000 560L1200 640" stroke-width="5" stroke-dasharray="10 10" stroke-linecap="round"/>
+<path id="newp" class="s-gain" d="M1000 560C1150 560 1250 480 1380 330" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1"/>
+<path id="ahd" class="s-gain" d="M1354 330L1392 316L1384 356" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="ink" cx="1000" cy="560" r="12"/>
+<text class="m" x="1000" y="700" font-size="20" style="fill:var(--gain)">PROTEIN AND MUSCLE FIRST</text>
+</g>
+<g id="course"><text class="d" x="120" y="810" font-size="44">So he changed course.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Sleep is a pillar.</text>
+<text class="b" x="120" y="176" font-size="32">Not optional: it holds up nearly everything else.</text>
+<g id="surg">
+<text class="m" x="300" y="515" font-size="20" text-anchor="middle">SURGEON IN TRAINING</text>
+<text class="d5" x="300" y="570" font-size="32" text-anchor="middle">“Sleep is optional.”</text>
+<line id="sstk" x1="130" y1="559" x2="130" y2="559" stroke="var(--loss)" stroke-width="6" stroke-linecap="round"/>
+</g>
+<g id="temple">
+<g id="roof"><polygon class="s-ink" points="700,300 1080,220 1460,300" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><rect class="ink" x="720" y="300" width="720" height="24"/></g>
+<rect class="ink" x="790" y="324" width="70" height="206"/>
+<rect class="ink" x="1325" y="324" width="70" height="206"/>
+<rect x="1045" y="324" width="70" height="206" fill="none" stroke="var(--muted)" stroke-width="4" stroke-dasharray="10 8"/>
+<rect id="spg" class="gain" x="1045" y="324" width="70" height="206"/>
+<rect class="ink" x="700" y="530" width="760" height="26"/>
+<text class="m" x="825" y="595" font-size="20" text-anchor="middle">EXERCISE</text>
+<text class="m" x="1080" y="595" font-size="20" text-anchor="middle" style="fill:var(--gain)">SLEEP</text>
+<text class="m" x="1360" y="595" font-size="20" text-anchor="middle">NUTRITION</text>
+</g>
+<text id="riskh" class="m" x="120" y="662" font-size="20">POOR SLEEP IS LINKED TO</text>
+<g id="risk"></g>
+<g id="slp"><text class="d" x="120" y="830" font-size="40">Good sleep supports nearly everything else.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Protect your night.</text>
+<text class="b" x="120" y="176" font-size="32">Practical habits for better sleep.</text>
+<g id="nights"></g>
+<g id="nc0"><rect class="ink" x="190" y="320" width="180" height="160" rx="8"/><path d="M280 320V480M190 400H370" stroke="var(--stage)" stroke-width="6"/><circle class="gain" cx="325" cy="360" r="22"/></g>
+<g id="nc1"><circle class="s-ink" cx="626" cy="400" r="80" fill="var(--stage)" stroke-width="7"/><path class="s-ink" d="M626 400h38" stroke-width="7" stroke-linecap="round"/><line id="ck" x1="626" y1="400" x2="626" y2="338" stroke="var(--ink)" stroke-width="6" stroke-linecap="round"/><circle class="ink" cx="626" cy="400" r="9"/></g>
+<g id="nc2"><path class="s-ink" d="M927 330h90q0 90-45 90q-45 0-45-90z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><path class="loss" d="M933 362h78q-6 50-39 50q-33 0-39-50z"/><path class="s-ink" d="M972 420v50M942 470h60" stroke-width="6" stroke-linecap="round"/><path id="nos" d="M902 480L1042 320" stroke="var(--ink)" stroke-width="10" stroke-linecap="round"/></g>
+<g id="nc3"><rect class="s-ink" x="1268" y="320" width="100" height="170" rx="16" fill="var(--stage)" stroke-width="7"/><rect id="scr" class="gain" x="1280" y="340" width="76" height="120" rx="4"/></g>
+<g id="addup"><text class="d5" x="120" y="772" font-size="34">Small habits add up</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="q0"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Which change will you</text></g>
+<g id="q1"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">test on your own body</text></g>
+<g id="q2"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">this week?</text></g>
+<g id="chal"><text class="m" x="143" y="700" font-size="26">TONIGHT: CHECK YOUR PROTEIN · SET A FIXED BEDTIME</text></g>
+<g id="endg"><circle class="s-ink" cx="1290" cy="700" r="60" fill="var(--stage)" stroke-width="7"/><path class="gain" d="M1290 700L1290 660A40 40 0 0 1 1325 720Z"/><circle class="gain" cx="1420" cy="640" r="30"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="138" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:18</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Eat and Sleep with Purpose&rdquo;, from <em>Outlive</em> by Peter Attia, with Bill Gifford. Attia&#x27;s three eating levers, his use of a continuous glucose monitor, his move away from long fasts, his protein target and his early neglect of sleep are as reported in the book. The glucose spike chart and the shrinking arm are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=138, SC=[[0.0, 7.4], [7.4, 23.9], [23.9, 42.5], [42.5, 56.2], [56.2, 79.7], [79.7, 92.3], [92.3, 109.3], [109.3, 127.0], [127.0, 138.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Eat and Sleep", "No Perfect Diet", "Three Levers", "Measure, Not Guess", "Protein Protects", "A Lesson Learned", "Sleep Is a Pillar", "Protect Your Night", "Your Next Step"];
+const TM={"plate_and_bed": 0.0, "diet_signs": 7.68, "two_people": 12.6, "lever_one": 24.16, "lever_two": 31.28, "lever_three": 35.12, "glucose_patch": 42.77, "spike_chart": 47.6, "muscle_arm": 56.48, "scale_icon": 61.32, "protein_dose": 65.36, "meal_row": 75.28, "fasting_clock": 80.0, "shrinking_arm": 83.28, "surgeon": 92.64, "brain_clean": 99.84, "sleeper": 105.84, "dark_room": 109.6, "clock_steady": 113.84, "wine_glass": 116.4, "phone_off": 120.64, "challenge": 127.28};
+const T=(g,x,y,s,fs,cls,an,st)=>{const e=mk('text',{x:x,y:y,'font-size':fs,class:cls},g);if(an)e.setAttribute('text-anchor',an);if(st)e.setAttribute('style',st);e.textContent=s;return e};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+const draw=(el,k)=>{el.setAttribute('stroke-dasharray','1 1');el.setAttribute('stroke-dashoffset',(1-k).toFixed(3))};
+const pt=(cx,cy,r,a)=>[cx+r*Math.sin(a),cy-r*Math.cos(a)];
+const wedge=(cx,cy,r,a0,a1)=>{const q0=pt(cx,cy,r,a0),q1=pt(cx,cy,r,a1);return 'M'+cx+' '+cy+'L'+q0[0].toFixed(1)+' '+q0[1].toFixed(1)+'A'+r+' '+r+' 0 '+(a1-a0>Math.PI?1:0)+' 1 '+q1[0].toFixed(1)+' '+q1[1].toFixed(1)+'Z'};
+const setHand=(el,cx,cy,r,a)=>{const q=pt(cx,cy,r,a);el.setAttribute('x2',q[0].toFixed(1));el.setAttribute('y2',q[1].toFixed(1))};
+const poly=(f,x0,x1,cls,g)=>{let s='';for(let x=x0;x<=x1;x+=10)s+=x+','+f(x).toFixed(1)+' ';return mk('polyline',{points:s,fill:'none',class:cls,'stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round',pathLength:1},g)};
+// flexed arm icon (local frame ~255 x 240): arm + fist in ink, bicep bulge in colour
+const ARM='M0 240L180 240Q230 240 230 190L245 60L195 55L180 170Q165 180 150 175L20 175L0 170Z';
+const armIcon=(g,tr,bc)=>{const a=mk('g',{transform:tr},g);mk('path',{d:ARM,class:'ink'},a);
+  mk('rect',{x:185,y:0,width:70,height:60,rx:20,class:'ink'},a);
+  mk('path',{d:'M197 22h46M197 40h46',stroke:'var(--stage)','stroke-width':5,'stroke-linecap':'round'},a);
+  const b=mk('path',{d:'M20 175Q87 90 155 175Z',class:bc},a);return [a,b]};
+
+const SG=['ONE PERFECT DIET','WORKS FOR EVERYONE','THE ONLY PLAN'].map((s,i)=>{const x=160+i*460,g=mk('g',{},$('signs'));
+  mk('path',{d:'M'+(x+180)+' 290v30',stroke:'var(--ink)','stroke-width':6},g);
+  mk('rect',{x:x,y:220,width:360,height:70,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);T(g,x+180,263,s,22,'m','middle');
+  return [g,mk('path',{d:'M'+(x+20)+' 280L'+(x+340)+' 230',stroke:'var(--loss)','stroke-width':7,'stroke-linecap':'round',pathLength:1},$('signs'))]});
+fig($('ppl'),290,430,30,'ink');fig($('ppl'),1310,430,30,'ink');
+const spA=poly(x=>565-120*Math.exp(-(((x-540)/40)**2)),410,650,'s-loss',$('ppl'));
+const spB=poly(x=>540-12*Math.exp(-(((x-1070)/60)**2)),950,1190,'s-gain',$('ppl'));
+
+const KN=[['Eat less','CALORIE RESTRICTION'],['Cut certain foods','DIETARY RESTRICTION'],['Limit when','TIME RESTRICTION']].map((d,i)=>{const c=340+i*460,g=mk('g',{},$('lvf'));
+  mk('rect',{x:c-220,y:220,width:440,height:520,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  T(g,c-190,266,'LEVER '+(i+1),20,'m');T(g,c,590,d[0],36,'d5','middle');T(g,c,630,d[1],20,'m','middle');
+  mk('path',{d:'M'+(c-130)+' 690H'+(c+130),stroke:'var(--line)','stroke-width':12,'stroke-linecap':'round'},g);
+  g.appendChild($('ic'+i));return [g,mk('circle',{cx:c-130,cy:690,r:22},g),c]});
+
+const SIG=[70,100,130].map(r=>mk('path',{d:'M'+(275+r*.77)+' '+(400-r*.64)+'A'+r+' '+r+' 0 0 1 '+(275+r*.77)+' '+(400+r*.64),fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round'},$('sig')));
+const cA=poly(x=>610-300*Math.exp(-(((x-900)/80)**2))+40*Math.exp(-(((x-1080)/70)**2)),600,1440,'s-loss',$('curves'));
+const cB=poly(x=>600-50*Math.exp(-(((x-950)/150)**2)),600,1440,'s-gain',$('curves'));
+
+// muscle with age: bars topped by a flexed arm that gets smaller
+const MB=[280,250,210,170,130].map((h,i)=>{const g=mk('g',{},$('mbars')),cx=180+i*86,top=570-h,s=.24*h/280;
+  mk('rect',{x:150+i*86,y:top,width:60,height:h,rx:6,class:i?'loss':'ink'},g);
+  armIcon(g,'translate('+(cx-127.5*s).toFixed(1)+' '+(top-8-240*s).toFixed(1)+') scale('+s.toFixed(3)+')',i?'loss':'gain');return g});
+const gq=pt(800,450,130,Math.PI/6);$('gz').setAttribute('d','M'+gq[0].toFixed(1)+' '+gq[1].toFixed(1)+'A130 130 0 0 1 930 450');
+const PL=[0,1,2,3].map(i=>{const x=640+i*220,g=mk('g',{},$('meals'));mk('circle',{cx:x,cy:770,r:55,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);mk('path',{d:wedge(x,770,38,.2,2.2),class:'gain'},g);return g});
+
+// lesson learned: big flexed arm that shrinks
+const BA=armIcon($('armbig'),'translate(650 390)','gain');
+
+fig($('surg'),300,300,40,'ink');mk('path',{d:'M258 292a42 42 0 0 1 84 0z',class:'gain'},$('surg'));
+const RK=['WORSE BLOOD SUGAR CONTROL','WEAKER THINKING','HIGHER ALZHEIMER’S RISK'].map((s,i)=>{const x=120+i*460,g=mk('g',{},$('risk'));
+  mk('rect',{x:x,y:685,width:440,height:64,rx:32,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);T(g,x+220,724,s,20,'m','middle','fill:var(--loss)');return g});
+
+const NC=[['Dark & cool','COOL, DARK ROOM'],['Steady times','SAME TIMES DAILY'],['Less alcohol','ESPECIALLY LATE'],['Screens away','LONG BEFORE BED']].map((d,i)=>{const x=120+i*346,g=mk('g',{},$('nights'));
+  mk('rect',{x:x,y:240,width:320,height:420,rx:18,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},g);
+  T(g,x+160,590,d[0],34,'d5','middle');T(g,x+160,634,d[1],20,'m','middle');g.appendChild($('nc'+i));return g});
+const MN=[0,1,2,3,4,5,6].map(i=>mk('circle',{cx:640+i*120,cy:760,r:24},$('addup')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const P0=TM.plate_and_bed;
+rise($('t_plate'),p(u,P0,P0+.6)); rise($('t_bed'),p(u,P0+.6,P0+1.2));
+$('t_moon').setAttribute('transform','translate(0 '+(6*Math.sin(t*1.5)).toFixed(1)+')');
+
+SG.forEach((s,i)=>{const a=TM.diet_signs+i*.4;rise(s[0],p(u,a,a+.4));draw(s[1],p(u,a+2,a+2.5))});
+const W2=TM.two_people;
+rise($('ppl'),p(u,W2,W2+.5)); draw(spA,p(u,W2+.8,W2+2.2)); draw(spB,p(u,W2+.8,W2+2.2));
+rise($('nosingle'),p(u,W2+4.6,W2+5.2)); rise($('exper'),p(u,W2+7.2,W2+7.8));
+
+const LA=[TM.lever_one+4.2,TM.lever_two,TM.lever_three];
+KN.forEach((k,i)=>{const a=TM.lever_one+i*.3;rise(k[0],p(u,a,a+.5));const q=p(u,LA[i],LA[i]+.8);
+  k[1].setAttribute('cx',(k[2]-130+260*q).toFixed(1));k[1].setAttribute('fill',q>.5?'var(--gain)':'var(--ink)')});
+$('por').setAttribute('r',(70-32*p(u,LA[0],LA[0]+.8)).toFixed(1));
+$('x1').setAttribute('opacity',p(u,LA[1],LA[1]+.5));
+$('win').setAttribute('d',wedge(1260,420,92,0,Math.PI*(1.8-1.1*p(u,LA[2],LA[2]+.8))));
+rise($('mix'),p(u,TM.lever_three+4.6,TM.lever_three+5.2));
+
+const G=TM.glucose_patch,S=TM.spike_chart;
+rise($('armg'),p(u,G,G+.6));
+SIG.forEach((s,i)=>s.setAttribute('opacity',(u>=G+.6?.3+.7*Math.max(0,Math.sin(t*3-i*.8)):0).toFixed(2)));
+rise($('chart'),p(u,S,S+.5)); draw(cA,p(u,S+.4,S+2.2)); draw(cB,p(u,S+1.8,S+3.4));
+rise($('lA'),p(u,S+1.6,S+2)); rise($('lB'),p(u,S+3.2,S+3.6)); rise($('fb'),p(u,S+5.8,S+6.4));
+
+MB.forEach((b,i)=>{const a=TM.muscle_arm+i*.4;rise(b,p(u,a,a+.4))});
+rise($('gauge'),p(u,TM.scale_icon,TM.scale_icon+.5));
+const g1=p(u,TM.scale_icon+.4,TM.scale_icon+1.4),g2=p(u,TM.meal_row,TM.meal_row+1.2);
+setHand($('ndl'),800,450,110,-Math.PI/2+.7*g1+2.2*g2+.04*Math.sin(t*2));
+$('ndl').setAttribute('stroke',g2>.5?'var(--gain)':'var(--loss)');
+const D=TM.protein_dose;
+rise($('dose'),p(u,D,D+.5)); $('dosev').textContent=(1.6*p(u,D+.3,D+1.5)).toFixed(1)+' g';
+rise($('dbl'),p(u,D+6.6,D+7.1)); $('dblbar').setAttribute('width',(170+170*p(u,D+7,D+8)).toFixed(1));
+rise($('mealt'),p(u,TM.meal_row,TM.meal_row+.5));
+PL.forEach((g,i)=>{const a=TM.meal_row+.3+i*.3;rise(g,p(u,a,a+.4))});
+
+const F=TM.fasting_clock,R=TM.shrinking_arm;
+rise($('fclock'),p(u,F,F+.5));
+const fa=Math.PI*1.9*p(u,F+.3,F+2.6);
+$('fw').setAttribute('d',wedge(360,470,140,0,fa+.001)); setHand($('fh'),360,470,120,fa);
+rise($('farm'),p(u,R,R+.5));
+const sh=p(u,R+.5,R+3);
+BA[1].setAttribute('d','M20 175Q87 '+(90+70*sh).toFixed(1)+' 155 175Z'); BA[1].setAttribute('class',sh>.5?'loss':'gain');
+BA[0].setAttribute('opacity',(1-.45*sh).toFixed(2));
+$('mbar').setAttribute('width',(240-130*sh).toFixed(1));
+rise($('turn'),p(u,R+5.4,R+5.9)); draw($('newp'),p(u,R+5.6,R+7)); $('ahd').setAttribute('opacity',p(u,R+6.8,R+7.1));
+rise($('course'),p(u,R+5.6,R+6.2));
+
+const SU=TM.surgeon,SL=TM.sleeper;
+rise($('surg'),p(u,SU,SU+.5)); $('sstk').setAttribute('x2',(130+340*p(u,SU+4.5,SU+5.1)).toFixed(1));
+rise($('temple'),p(u,SU+.3,SU+.8));
+const sp=p(u,SL,SL+1); $('roof').setAttribute('transform','rotate('+(-5*(1-sp)).toFixed(2)+' 1080 300)'); $('spg').setAttribute('opacity',sp);
+rise($('riskh'),p(u,TM.brain_clean,TM.brain_clean+.4));
+RK.forEach((g,i)=>{const a=TM.brain_clean+i*1.2;rise(g,p(u,a,a+.4))});
+rise($('slp'),p(u,SL+.6,SL+1.2));
+
+[TM.dark_room,TM.clock_steady,TM.wine_glass,TM.phone_off].forEach((a,i)=>rise(NC[i],p(u,a,a+.5)));
+setHand($('ck'),626,400,62,t*.5);
+$('nos').setAttribute('opacity',p(u,TM.wine_glass+.6,TM.wine_glass+1));
+$('scr').setAttribute('fill-opacity',(1-.85*p(u,TM.phone_off+.6,TM.phone_off+1.4)).toFixed(2));
+rise($('addup'),p(u,TM.phone_off+3,TM.phone_off+3.5));
+MN.forEach((m,i)=>m.setAttribute('fill',u>=TM.phone_off+3.3+i*.25?'var(--gain)':'var(--line)'));
+
+const C=TM.challenge;
+rise($('chal'),p(u,C,C+.5)); rise($('endg'),p(u,C+.3,C+.8));
+['q0','q1','q2'].forEach((id,i)=>{const a=C+5+i*.4;rise($(id),p(u,a,a+.5))});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:134.88;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

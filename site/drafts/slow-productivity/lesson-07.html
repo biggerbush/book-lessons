@@ -1,0 +1,311 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slow Productivity Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Slow Productivity: Caring deeply about the quality of your work ties the three principles together, because excellent work earns the freedom to slow down. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SLOW PRODUCTIVITY · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Obsess over</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">quality.</text>
+<text class="b" x="120" y="600" font-size="32">Excellent work is your ticket to a calmer pace.</text>
+<ellipse class="s-line" cx="1300" cy="650" rx="130" ry="14" fill="none" stroke-width="4"/>
+<g id="tgem"></g><g id="tspk"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The keystone idea.</text>
+<text class="b" x="120" y="176" font-size="32">Quality is what holds the other two principles together.</text>
+<rect class="ink" x="300" y="740" width="1000" height="26" rx="6"/>
+<g id="pils">
+<g id="pl0"><rect class="s-ink" x="340" y="420" width="200" height="320" fill="var(--stage)" stroke-width="6"/><text class="m" x="440" y="570" font-size="22" text-anchor="middle">DO FEWER</text><text class="m" x="440" y="602" font-size="22" text-anchor="middle">THINGS</text></g>
+<g id="pl1"><rect class="s-ink" x="1060" y="420" width="200" height="320" fill="var(--stage)" stroke-width="6"/><text class="m" x="1160" y="570" font-size="22" text-anchor="middle">NATURAL</text><text class="m" x="1160" y="602" font-size="22" text-anchor="middle">PACE</text></g>
+<g id="arc"><polygon class="s-ink" points="340,420 540,420 720,390 690,280" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/><polygon class="s-ink" points="1260,420 1060,420 880,390 910,280" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/></g>
+</g>
+<g id="kst"><text class="m" x="800" y="250" font-size="20" text-anchor="middle" style="fill:var(--gain)">OBSESS OVER QUALITY</text><polygon class="gain" points="690,280 910,280 880,390 720,390"/><text class="d" x="800" y="348" font-size="28" text-anchor="middle" style="fill:var(--on-gain)">QUALITY</text></g>
+<g id="kcap"><text class="d5" x="120" y="840" font-size="36">Excellent work: the reason to slow down, and the way to do it.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A singer in a coffee shop.</text>
+<text class="b" x="120" y="176" font-size="32">Newport tells the story of Jewel, early in her career.</text>
+<rect class="s-line" x="120" y="230" width="780" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">COFFEE SHOP</text>
+<rect class="ink" x="150" y="600" width="320" height="18" rx="4"/>
+<g id="jw"></g><g id="notes"></g><g id="crowd2"></g><g id="lbls"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">She chose the smaller offer.</text>
+<text class="b" x="120" y="176" font-size="32">Less pressure bought her time to grow.</text>
+<g id="bc"><rect class="s-ink" x="120" y="240" width="520" height="170" rx="12" fill="var(--stage)" stroke-width="5"/><text class="m" x="150" y="290" font-size="22">HUGE SIGNING BONUS</text><text class="d" x="150" y="375" font-size="64">$$$$$$</text></g>
+<line id="bcs" class="s-loss" x1="130" y1="400" x2="130" y2="400" stroke-width="8" stroke-linecap="round"/>
+<g id="sc"><rect class="s-gain" x="120" y="450" width="380" height="130" rx="12" fill="var(--stage)" stroke-width="6"/><text class="m" x="150" y="495" font-size="22">SMALLER DEAL</text><text class="d" x="150" y="560" font-size="56" style="fill:var(--gain)">$$</text><circle class="gain" cx="560" cy="515" r="34"/><path d="M544 516l11 11 21-22" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="tg"><text class="m" x="120" y="650" font-size="22">TIME TO GROW</text><rect class="s-line" x="120" y="670" width="520" height="24" rx="12" fill="none" stroke-width="3"/><rect id="tgf" class="gain" x="120" y="670" width="0" height="24" rx="12"/></g>
+<g id="ch3"><path class="s-muted" d="M760 260V720H1460" fill="none" stroke-width="4"/><text class="m" x="770" y="250" font-size="20">SUCCESS</text><text class="m" x="1460" y="756" font-size="20" text-anchor="end">TIME</text><text class="m" x="770" y="756" font-size="20">DEBUT ALBUM</text></g>
+<path id="crv" class="s-gain" d="M780 700C1100 690 1250 640 1300 520S1400 300 1430 280" fill="none" stroke-width="8" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+<g id="slow"><text class="m" x="900" y="670" font-size="20">SLOW BUILD</text></g>
+<g id="alb"><circle class="gain" cx="1430" cy="280" r="34"/><circle cx="1430" cy="280" r="8" fill="var(--stage)"/><text class="m" x="1080" y="330" font-size="20" style="fill:var(--gain)">MASSIVE SUCCESS</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Quality needs room.</text>
+<text class="b" x="120" y="176" font-size="32">Excellence can’t happen while juggling twenty commitments.</text>
+<g id="ov"><rect class="s-line" x="120" y="230" width="640" height="490" rx="18" fill="var(--stage)" stroke-width="3"/><g id="jug"></g><g id="balls"></g><text class="m" x="120" y="760" font-size="20" style="fill:var(--loss)">TWENTY COMMITMENTS, FRANTIC SPEED</text></g>
+<g id="wb"><rect class="s-line" x="840" y="230" width="640" height="490" rx="18" fill="var(--stage)" stroke-width="3"/><rect class="ink" x="1060" y="580" width="360" height="18" rx="4"/><path class="s-ink" d="M1090 598v100M1390 598v100" stroke-width="8" stroke-linecap="round"/><g id="wbx"></g><g id="nos"></g><text class="m" x="840" y="760" font-size="20" style="fill:var(--gain)">ONE PROJECT, THE TIME IT DESERVES</text></g>
+<g id="fcap"><text class="d" x="120" y="840" font-size="40">So quality pulls you to fewer things and a gentler pace.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Quality buys freedom.</text>
+<text class="b" x="120" y="176" font-size="32">Valued work gives you leverage.</text>
+<path class="s-line" d="M380 620h360" stroke-width="5" stroke-linecap="round"/>
+<polygon class="ink" points="560,540 505,620 615,620"/>
+<line id="beam" class="s-ink" x1="200" y1="540" x2="920" y2="540" stroke-width="12" stroke-linecap="round"/>
+<g id="lgem"></g><g id="rcard"></g>
+<g id="mgr"></g>
+<g id="bub"><rect class="s-ink" x="1090" y="220" width="160" height="76" rx="20" fill="var(--stage)" stroke-width="5"/><path class="s-ink" d="M1250 252l40 14-40 8" fill="none" stroke-width="5" stroke-linejoin="round"/><text class="d" x="1170" y="272" font-size="40" text-anchor="middle">Yes.</text></g>
+<g id="bsy"><g id="bsyp"></g><rect class="loss" x="230" y="755" width="130" height="46" rx="23"/><text class="d" x="295" y="787" font-size="26" text-anchor="middle" style="fill:var(--stage)">BUSY</text><text class="d5" x="400" y="792" font-size="40">Anyone can look busy. That earns no respect.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Sharpen your taste.</text>
+<text class="b" x="120" y="176" font-size="32">Ira Glass: the frustrating gap between your taste and your skill.</text>
+<g id="ch6"><path class="s-muted" d="M160 250V760H1100" fill="none" stroke-width="4"/>
+<g id="gapg"><polygon id="gapf" class="loss" fill-opacity=".18"/><text id="gapt" class="m" x="1112" y="420" font-size="22" style="fill:var(--loss)">THE GAP</text></g>
+<g id="taste"><path class="s-gain" d="M160 330H1100" stroke-width="6" stroke-dasharray="16 10" stroke-linecap="round"/><text class="m" x="170" y="316" font-size="22" style="fill:var(--gain)">YOUR TASTE</text></g>
+<polyline id="skl" class="s-ink" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="180" y="740" font-size="22">YOUR SKILL</text></g>
+<g id="ira"><rect class="ink" x="1305" y="250" width="50" height="100" rx="25"/><path class="s-ink" d="M1285 320v10a45 45 0 0 0 90 0v-10M1330 375v40M1300 415h60" fill="none" stroke-width="6" stroke-linecap="round"/><text class="m" x="1330" y="460" font-size="20" text-anchor="middle">IRA GLASS</text><text class="m" x="1330" y="490" font-size="20" text-anchor="middle">RADIO HOST</text></g>
+<g id="bks"><rect class="ink" x="1240" y="560" width="180" height="34" rx="4"/><rect class="gain" x="1250" y="600" width="170" height="34" rx="4"/><rect class="ink" x="1235" y="640" width="190" height="34" rx="4"/><text class="m" x="1330" y="720" font-size="20" text-anchor="middle">STUDY GREAT WORK</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Bet on yourself, step by step.</text>
+<text class="b" x="120" y="176" font-size="32">Small bets on your own excellence, not reckless leaps.</text>
+<path class="s-ink" d="M120 760H480V620H860V480H1240V340H1480" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="st0"><ellipse class="gain" cx="300" cy="740" rx="50" ry="14" stroke="var(--stage)" stroke-width="3"/><ellipse class="gain" cx="300" cy="722" rx="50" ry="14" stroke="var(--stage)" stroke-width="3"/><ellipse class="gain" cx="300" cy="704" rx="50" ry="14" stroke="var(--stage)" stroke-width="3"/><text class="m" x="300" y="800" font-size="20" text-anchor="middle">SMALL BET</text></g>
+<g id="st1"><rect class="s-ink" x="580" y="520" width="110" height="90" rx="8" fill="var(--stage)" stroke-width="5"/><rect class="s-ink" x="606" y="506" width="110" height="90" rx="8" fill="var(--stage)" stroke-width="5"/><rect class="s-ink" x="632" y="492" width="110" height="90" rx="8" fill="var(--stage)" stroke-width="5"/><path class="gain" d="M687 515l7 15 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2z"/><text class="m" x="670" y="660" font-size="20" text-anchor="middle">TRACK RECORD</text></g>
+<g id="st2"><rect class="s-ink" x="930" y="330" width="180" height="140" rx="8" fill="var(--stage)" stroke-width="5"/><rect class="ink" x="930" y="330" width="180" height="28" rx="6"/><g id="cells"></g><text class="m" x="1020" y="520" font-size="20" text-anchor="middle">CALMER SCHEDULE</text></g>
+<g id="me7"></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="290" font-size="88" letter-spacing="-2">Which one piece of your work,</text></g>
+<g id="qb"><text class="d" x="136" y="390" font-size="88" letter-spacing="-2">if made truly excellent,</text></g>
+<g id="qc"><text class="d" x="136" y="490" font-size="88" letter-spacing="-2">would earn you the freedom</text></g>
+<g id="qd"><text class="d" x="136" y="590" font-size="88" letter-spacing="-2" style="fill:var(--gain)">to slow down?</text></g>
+<g id="qgem"></g>
+<text class="m" x="143" y="720" font-size="26">OBSESS OVER QUALITY</text>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="125" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:05</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Obsess Over Quality&rdquo;, from <em>Slow Productivity</em> by Cal Newport. Jewel&#x27;s record deal and Ira Glass&#x27;s idea about the gap between taste and skill are as reported in the book. The pillars, checks, bridge and calendar drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=125, SC=[[0.0, 3.9], [3.9, 23.9], [23.9, 38.0], [38.0, 55.3], [55.3, 72.2], [72.2, 86.8], [86.8, 101.3], [101.3, 115.1], [115.1, 125.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Busy Is Not Better", "The Keystone Idea", "A Singer in a Cafe", "The Smaller Offer", "Quality Needs Room", "Quality Buys Freedom", "Sharpen Your Taste", "Bet on Yourself", "Your Turn"];
+const TM={"title_card": 0.0, "three_pillars": 4.21, "keystone": 11.84, "jewel": 24.24, "coffee_shop": 28.4, "record_labels": 34.0, "big_check": 38.32, "small_check": 41.4, "album": 50.56, "overloaded": 55.56, "workbench": 60.88, "leverage": 72.48, "manager": 75.52, "busy_badge": 82.16, "ira_glass": 87.12, "gap_bridge": 94.48, "small_bet": 101.6, "portfolio": 107.28, "calendar": 110.24, "question": 115.44};
+const person=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const gem=(g,cx,cy,s,cls)=>{const f=(a,b)=>(cx+a*s).toFixed(1)+' '+(cy+b*s).toFixed(1);
+  mk('polygon',{points:[[-.6,-.5],[.6,-.5],[1,-.05],[0,1],[-1,-.05]].map(q=>f(q[0],q[1]).replace(' ',',')).join(' '),class:cls,stroke:'var(--ink)','stroke-width':5,'stroke-linejoin':'round'},g);
+  mk('path',{d:'M'+f(-1,-.05)+'L'+f(1,-.05)+'M'+f(-.6,-.5)+'L'+f(-.3,-.05)+'L'+f(0,1)+'L'+f(.3,-.05)+'L'+f(.6,-.5),fill:'none',stroke:'var(--ink)','stroke-width':3,'stroke-linejoin':'round'},g)};
+gem($('tgem'),1300,420,150,'gain');
+const SP0=[[1140,320],[1460,300],[1450,560],[1160,560]],SPK=SP0.map(()=>mk('path',{d:'M0 -20L6 -6 20 0 6 6 0 20 -6 6 -20 0 -6 -6Z',class:'gain'},$('tspk')));
+person($('jw'),300,470,28,'gain');
+mk('ellipse',{cx:322,cy:572,rx:28,ry:18,class:'ink'},$('jw'));mk('path',{d:'M340 562l40-30M380 600V500',fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-linecap':'round'},$('jw'));
+mk('circle',{cx:380,cy:490,r:12,class:'ink'},$('jw'));
+const jt=mk('text',{x:300,y:660,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--gain)'},$('jw'));jt.textContent='JEWEL';
+const NP=[[420,400],[220,380]],NT=NP.map(()=>{const g=mk('g',{},$('notes'));mk('path',{d:'M0 0v-36l24-8v36',fill:'none',stroke:'var(--ink)','stroke-width':4},g);mk('circle',{cx:-6,cy:0,r:8,class:'ink'},g);mk('circle',{cx:18,cy:-8,r:8,class:'ink'},g);return g});
+const CR=[];for(let i=0;i<15;i++){const g=mk('g',{},$('crowd2'));person(g,560+(i%5)*75,360+Math.floor(i/5)*110,14,'ink');CR.push(g)}
+const LB=[0,1,2].map(i=>{const y=250+i*170,g=mk('g',{},$('lbls'));
+  mk('rect',{x:980,y:y,width:500,height:140,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  mk('circle',{cx:1050,cy:y+70,r:40,class:'ink'},g);mk('circle',{cx:1050,cy:y+70,r:10,fill:'var(--stage)'},g);
+  const a=mk('text',{x:1110,y:y+58,'font-size':20,class:'m'},g);a.textContent='RECORD LABEL';
+  const b=mk('text',{x:1110,y:y+116,'font-size':48,class:'d',style:'fill:var(--gain)'},g);b.textContent='$$$';
+  mk('path',{d:'M970 '+(y+70)+'h-55l16-16m-16 16l16 16',fill:'none',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+person($('jug'),440,520,30,'ink');
+const BL=[];for(let i=0;i<20;i++)BL.push(mk('circle',{r:12,class:'loss'},$('balls')));
+person($('wbx'),1000,450,30,'gain');gem($('wbx'),1240,520,60,'gain');
+const NO=[[1260,260],[1350,330],[1260,400]].map(q=>{const g=mk('g',{},$('nos'));mk('rect',{x:q[0],y:q[1],width:90,height:48,rx:24,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  const tx=mk('text',{x:q[0]+45,y:q[1]+34,'font-size':26,'text-anchor':'middle',class:'d',style:'fill:var(--loss)'},g);tx.textContent='NO';return g});
+gem($('lgem'),0,-70,70,'gain');
+['FEWER MEETINGS','LONGER DEADLINES'].forEach((s,i)=>{mk('rect',{x:-140,y:-170+i*80,width:280,height:70,rx:14,class:'gain'},$('rcard'));
+  const tx=mk('text',{x:0,y:-127+i*80,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},$('rcard'));tx.textContent=s});
+person($('mgr'),1330,300,34,'ink');person($('bsyp'),180,730,20,'loss');
+const CEL=[],ORD=[0,5,10,3,6,9,1,11,4,2,8,7];
+for(let i=0;i<12;i++)CEL.push(mk('rect',{x:942+(i%4)*42,y:368+Math.floor(i/4)*32,width:34,height:24,rx:4,'stroke-width':3},$('cells')));
+gem($('st0'),300,650,30,'gain');person($('me7'),0,0,20,'gain');
+const P7=[[410,676],[790,536],[1170,396],[1360,256]];
+gem($('qgem'),1280,580,80,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('tgem').setAttribute('transform','translate(0 '+(8*Math.sin(t*1.5)).toFixed(1)+')');
+SPK.forEach((e,i)=>{const a=TM.title_card+.4+i*.2,s=(.5+.5*Math.abs(Math.sin(t*1.6+i*1.3)))*p(u,a,a+.5);e.setAttribute('transform','translate('+SP0[i][0]+' '+SP0[i][1]+') scale('+s.toFixed(3)+')')});
+
+rise($('pils'),p(u,TM.three_pillars,TM.three_pillars+.6));
+const kk=p(u,TM.keystone,TM.keystone+1),wo=(1-kk)*3*Math.sin(t*2.2);
+$('pl0').setAttribute('transform','rotate('+wo.toFixed(2)+' 440 740)');$('pl1').setAttribute('transform','rotate('+(-wo).toFixed(2)+' 1160 740)');
+$('arc').setAttribute('transform','translate(0 '+(24*(1-kk)).toFixed(1)+')');
+$('kst').setAttribute('opacity',kk.toFixed(2));$('kst').setAttribute('transform','translate(0 '+(-160*(1-kk)).toFixed(1)+')');
+rise($('kcap'),p(u,TM.keystone+6.6,TM.keystone+7.2));
+
+rise($('jw'),p(u,TM.jewel,TM.jewel+.5));
+NT.forEach((n,i)=>{const c=(t*.5+i*.5)%1;n.setAttribute('transform','translate('+(NP[i][0]+10*Math.sin(t*2+i)).toFixed(1)+' '+(NP[i][1]-40*c).toFixed(1)+')');n.setAttribute('opacity',(Math.sin(Math.PI*c)*p(u,TM.coffee_shop,TM.coffee_shop+.5)).toFixed(2))});
+CR.forEach((g,i)=>{const a=TM.coffee_shop+.3+i*.25;rise(g,p(u,a,a+.4))});
+LB.forEach((g,i)=>{const a=TM.record_labels+i*.5;rise(g,p(u,a,a+.4))});
+
+rise($('bc'),p(u,TM.big_check,TM.big_check+.5));
+const sk=p(u,TM.big_check+1.2,TM.big_check+1.8);$('bcs').setAttribute('x2',(130+500*sk).toFixed(1));$('bcs').setAttribute('y2',(400-150*sk).toFixed(1));
+rise($('sc'),p(u,TM.small_check,TM.small_check+.5));
+rise($('tg'),p(u,TM.small_check+6.6,TM.small_check+7.1));$('tgf').setAttribute('width',(520*p(u,TM.small_check+6.8,TM.small_check+10.5)).toFixed(1));
+rise($('ch3'),p(u,TM.album-.4,TM.album+.1));$('crv').setAttribute('stroke-dashoffset',(1-p(u,TM.album,TM.album+3)).toFixed(3));
+rise($('slow'),p(u,TM.album+.6,TM.album+1.1));rise($('alb'),p(u,TM.album+2.6,TM.album+3.2));
+
+rise($('ov'),p(u,TM.overloaded,TM.overloaded+.5));
+BL.forEach((c,i)=>{const a=t*3+i*Math.PI/10;c.setAttribute('cx',(440+220*Math.cos(a)).toFixed(1));c.setAttribute('cy',(370+100*Math.sin(a)).toFixed(1))});
+$('jug').setAttribute('transform','translate('+(3*Math.sin(t*20)).toFixed(1)+' 0)');
+rise($('wb'),p(u,TM.workbench,TM.workbench+.5));
+NO.forEach((n,i)=>{const a=TM.workbench+1.2+i*.5;rise(n,p(u,a,a+.4))});
+rise($('fcap'),p(u,TM.workbench+6.9,TM.workbench+7.5));
+
+const lv=p(u,TM.leverage,TM.leverage+1.2),la=-12*lv,lr=la*Math.PI/180;
+$('beam').setAttribute('transform','rotate('+la.toFixed(2)+' 560 540)');
+$('lgem').setAttribute('transform','translate('+(560-360*Math.cos(lr)).toFixed(1)+' '+(540-360*Math.sin(lr)).toFixed(1)+')');$('lgem').setAttribute('opacity',p(u,TM.leverage,TM.leverage+.4).toFixed(2));
+$('rcard').setAttribute('transform','translate('+(560+360*Math.cos(lr)).toFixed(1)+' '+(540+360*Math.sin(lr)).toFixed(1)+')');$('rcard').setAttribute('opacity',p(u,TM.manager+.6,TM.manager+1.1).toFixed(2));
+rise($('mgr'),p(u,TM.manager,TM.manager+.5));rise($('bub'),p(u,TM.manager+1.4,TM.manager+1.9));
+rise($('bsy'),p(u,TM.busy_badge,TM.busy_badge+.5));$('bsyp').setAttribute('transform','translate('+(2*Math.sin(t*25)).toFixed(1)+' 0)');
+
+rise($('ch6'),p(u,TM.ira_glass,TM.ira_glass+.5));rise($('ira'),p(u,TM.ira_glass+.3,TM.ira_glass+.8));
+const gb=p(u,TM.gap_bridge+.5,TM.gap_bridge+3.5),H=200+160*gb,ty=330-30*gb;let pts=[];
+for(let x=160;x<=1100;x+=20)pts.push(x+','+(700-H*Math.sqrt((x-160)/940)).toFixed(1));
+$('skl').setAttribute('points',pts.join(' '));$('taste').setAttribute('transform','translate(0 '+(ty-330).toFixed(1)+')');
+$('gapf').setAttribute('points','160,'+ty.toFixed(1)+' 1100,'+ty.toFixed(1)+' '+pts.slice().reverse().join(' '));
+$('gapt').setAttribute('y',((ty+700-H)/2+8).toFixed(1));$('gapg').setAttribute('opacity',p(u,TM.ira_glass+2,TM.ira_glass+2.6).toFixed(2));
+rise($('bks'),p(u,TM.gap_bridge,TM.gap_bridge+.5));
+
+rise($('st0'),p(u,TM.small_bet,TM.small_bet+.5));rise($('st1'),p(u,TM.portfolio,TM.portfolio+.5));rise($('st2'),p(u,TM.calendar,TM.calendar+.5));
+const nf=Math.round(8*p(u,TM.calendar+.8,TM.calendar+3.5));
+CEL.forEach((c,i)=>{const f=ORD.indexOf(i)<nf;c.setAttribute('fill',f?'var(--stage)':'var(--loss)');c.setAttribute('stroke',f?'var(--line)':'var(--loss)')});
+let mx=P7[0][0],my=P7[0][1];[p(u,TM.portfolio+.3,TM.portfolio+1.2),p(u,TM.calendar+.3,TM.calendar+1.2),p(u,TM.calendar+3.6,TM.calendar+4.5)].forEach((k,i)=>{mx+=(P7[i+1][0]-P7[i][0])*k;my+=(P7[i+1][1]-P7[i][1])*k-50*Math.sin(Math.PI*k)});
+$('me7').setAttribute('transform','translate('+mx.toFixed(1)+' '+my.toFixed(1)+')');$('me7').setAttribute('opacity',p(u,TM.small_bet+.4,TM.small_bet+.9).toFixed(2));
+
+['qa','qb','qc','qd'].forEach((id,i)=>{const a=TM.question+i*.4;rise($(id),p(u,a,a+.5))});
+$('qgem').setAttribute('opacity',p(u,TM.question+1.6,TM.question+2.2).toFixed(2));$('qgem').setAttribute('transform','rotate('+(4*Math.sin(t*1.4)).toFixed(2)+' 1280 600)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:121.44;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,349 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slow Productivity Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Slow Productivity: Every project brings an overhead tax of coordination and communication, so taking on fewer commitments lets each one move faster and better. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SLOW PRODUCTIVITY · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Do fewer things,</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">and do them well.</text>
+<text class="b" x="120" y="600" font-size="32">Why taking on less helps you accomplish more</text>
+<path class="s-line" d="M1080 768h360" stroke-width="5" stroke-linecap="round"/>
+<g id="stack"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Austen myth.</text>
+<text class="b" x="120" y="176" font-size="32">Writing in secret, in a busy family sitting room.</text>
+<path class="s-line" d="M120 700H1480" stroke-width="4"/>
+<g id="aus"><g id="ausP"></g>
+<rect class="ink" x="480" y="566" width="300" height="18" rx="4"/>
+<path class="s-ink" d="M500 584V700M760 584V700" stroke-width="7" stroke-linecap="round"/>
+<rect class="s-ink" x="662" y="476" width="80" height="90" fill="var(--stage)" stroke-width="4"/>
+<path class="s-line" d="M676 500h52M676 520h52M676 540h36" stroke-width="4" stroke-linecap="round"/></g>
+<g id="fam"><g id="famP"></g><rect x="870" y="589" width="340" height="50" rx="14" fill="var(--line)"/><text class="m" x="1040" y="740" font-size="18" text-anchor="middle">FAMILY</text></g>
+<g id="bub"></g>
+<g id="door"><rect class="s-ink" x="1290" y="420" width="150" height="280" fill="none" stroke-width="6"/><g id="visP"></g><text class="m" x="1365" y="740" font-size="18" text-anchor="middle">VISITOR</text></g>
+<g id="hide"><rect class="ink" x="654" y="468" width="96" height="98" rx="6"/><text class="m" x="702" y="740" font-size="18" text-anchor="middle">PAGES HIDDEN</text></g>
+<g id="m1"><text class="d" x="120" y="800" font-size="46">Great work can squeeze into any crowded day?</text></g>
+<g id="m2"><text class="m" x="120" y="850" font-size="22" style="fill:var(--loss)">BUT THE STORY LEAVES SOMETHING OUT</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A quieter cottage.</text>
+<text class="b" x="120" y="176" font-size="32">Chawton: the same genius, a lighter load.</text>
+<g id="cot">
+<rect class="s-ink" x="180" y="430" width="280" height="210" fill="var(--stage)" stroke-width="7"/>
+<path class="s-ink" d="M160 430L320 300L480 430Z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/>
+<rect class="ink" x="295" y="540" width="50" height="100"/>
+<rect class="s-ink" x="205" y="465" width="70" height="60" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="365" y="465" width="70" height="60" fill="var(--stage)" stroke-width="5"/>
+<circle class="gain" cx="240" cy="497" r="16"/>
+<text class="m" x="320" y="680" font-size="20" text-anchor="middle">CHAWTON</text></g>
+<g id="ch0"><rect x="540" y="330" width="320" height="60" rx="30" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="700" y="367" font-size="20" text-anchor="middle" style="fill:var(--loss)">HOUSEHOLD DUTIES</text></g>
+<g id="ch1"><rect x="540" y="430" width="320" height="60" rx="30" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="700" y="467" font-size="20" text-anchor="middle" style="fill:var(--loss)">SOCIAL OBLIGATIONS</text></g>
+<g id="free"><rect class="gain" x="540" y="540" width="320" height="60" rx="30"/><text class="m" x="700" y="577" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">TIME TO WRITE</text></g>
+<path class="s-ink" d="M900 640H1450" stroke-width="7" stroke-linecap="round"/>
+<g id="books"></g>
+<text class="m" x="900" y="680" font-size="20">NOVELS, IN QUICK SUCCESSION</text>
+<g id="g1"><text class="d" x="120" y="790" font-size="46">Her genius did not change.</text></g>
+<g id="g2"><text class="d" x="820" y="790" font-size="46" style="fill:var(--gain)">Her load did.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The overhead tax.</text>
+<text class="b" x="120" y="176" font-size="32">Every commitment carries a hidden cost.</text>
+<g id="gauge">
+<path class="s-line" d="M170 560A160 160 0 0 1 490 560" fill="none" stroke-width="22" stroke-linecap="round"/>
+<path id="garc" class="s-loss" d="M170 560A160 160 0 0 1 490 560" fill="none" stroke-width="22"/>
+<line id="ndl" class="s-ink" x1="330" y1="560" x2="200" y2="560" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="330" cy="560" r="16"/>
+<text class="m" x="330" y="620" font-size="22" text-anchor="middle">OVERHEAD TAX</text></g>
+<g id="proj"><rect class="gain" x="760" y="410" width="300" height="120" rx="16"/><text class="m" x="910" y="478" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">THE PROJECT</text></g>
+<g id="ovh"></g>
+<g id="notp"><path class="s-muted" d="M1110 670h330" stroke-width="4" stroke-linecap="round"/><text class="m" x="1110" y="710" font-size="20">NOT THE PROJECT ITSELF</text></g>
+<g id="price"><text class="d" x="120" y="810" font-size="46">It’s the price of keeping the project alive.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">When taxes stack up.</text>
+<text class="b" x="120" y="176" font-size="32">Coordination grows with every project you add.</text>
+<text class="m" x="120" y="270" font-size="20">PROJECTS</text>
+<g id="pj"></g>
+<g id="bar">
+<text class="m" x="120" y="440" font-size="20">YOUR WORKDAY</text>
+<rect id="ov" class="loss" x="120" y="460" width="0" height="120"/>
+<rect id="rw" class="gain" x="120" y="460" width="1060" height="120"/>
+<rect class="s-ink" x="120" y="460" width="1060" height="120" fill="none" stroke-width="5"/>
+<rect class="gain" x="120" y="618" width="28" height="28"/><text class="m" x="162" y="640" font-size="20">REAL WORK</text>
+<rect class="loss" x="360" y="618" width="28" height="28"/><text class="m" x="402" y="640" font-size="20">OVERHEAD</text></g>
+<g id="evg"><text class="m" x="1220" y="440" font-size="20">EVENINGS</text>
+<rect id="ev" class="gain" x="1220" y="460" width="0" height="120" fill-opacity=".7"/>
+<rect class="s-muted" x="1220" y="460" width="260" height="120" fill="none" stroke-width="4" stroke-dasharray="10 10"/></g>
+<g id="push"><text class="d" x="120" y="790" font-size="46">The real work gets pushed into evenings.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The overload trap.</text>
+<text class="b" x="120" y="176" font-size="32">Slow projects linger while new requests keep arriving.</text>
+<ellipse class="s-ink" cx="800" cy="710" rx="240" ry="36" fill="var(--stage)" stroke-width="6"/>
+<g id="pile"></g>
+<g id="nreq"><text class="m" x="960" y="290" font-size="20" style="fill:var(--loss)">NEW REQUESTS</text><path class="s-loss" d="M1000 304c-40 0-70 16-92 46M908 350l2-22M908 350l20-8" fill="none" stroke-width="4" stroke-linecap="round"/></g>
+<g id="snw"><g id="snail">
+<rect class="ink" x="-80" y="26" width="150" height="18" rx="9"/>
+<path class="s-ink" d="M60 30l14-30M66 32l24-24" fill="none" stroke-width="4" stroke-linecap="round"/>
+<circle class="s-ink" cx="-10" cy="0" r="36" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M-28 0a18 18 0 1 1 18 18" fill="none" stroke-width="5" stroke-linecap="round"/></g>
+<text class="m" x="120" y="800" font-size="20">EVERY PROJECT MOVES SLOWLY</text></g>
+<g id="stress"><g id="strP"></g>
+<circle cx="1262" cy="430" r="6" fill="var(--stage)"/><circle cx="1298" cy="430" r="6" fill="var(--stage)"/>
+<path d="M1260 470q20-16 40 0" fill="none" stroke="var(--stage)" stroke-width="5" stroke-linecap="round"/>
+<path id="drop" class="loss" d="M1350 380q12 16 0 24q-12-8 0-24z"/></g>
+<g id="exh"><text class="m" x="1280" y="700" font-size="20" text-anchor="middle">CAPABLE, AND EXHAUSTED</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fewer, faster, better.</text>
+<text class="b" x="120" y="176" font-size="32">Less overhead, more attention on the work itself.</text>
+<g id="shr"><text class="m" x="340" y="240" font-size="20" style="fill:var(--loss)">OVERHEAD SHRINKS</text></g>
+<g id="lanes"></g>
+<g id="gem">
+<polygon class="gain" points="1230,400 1260,360 1340,360 1370,400 1300,500"/>
+<path d="M1230 400h140M1280 360l-10 40 30 100 30-100-10-40" fill="none" stroke="var(--stage)" stroke-width="4" stroke-linejoin="round"/>
+<text class="m" x="1300" y="560" font-size="20" text-anchor="middle">REAL THOUGHT</text></g>
+<g id="soon"><text class="d" x="120" y="760" font-size="44">Finish sooner: as much, or more, over a year.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="64">Count the cost before you say yes.</text>
+<text class="b" x="120" y="176" font-size="32">Picture the meetings and messages, not just the work.</text>
+<g id="req"><rect class="s-ink" x="120" y="250" width="360" height="230" rx="16" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="150" y="300" font-size="22">NEW REQUEST</text>
+<path class="s-line" d="M150 350h280M150 395h280M150 440h180" stroke-width="8" stroke-linecap="round"/></g>
+<g id="tag"><g id="tagS"><path class="s-ink" d="M440 480q12 26 6 50" fill="none" stroke-width="3"/>
+<path d="M420 530l30-26h170v52h-170z" fill="var(--stage)" stroke="var(--loss)" stroke-width="5" stroke-linejoin="round"/>
+<circle class="loss" cx="446" cy="530" r="6"/>
+<text class="m" x="470" y="537" font-size="20" style="fill:var(--loss)">OVERHEAD?</text></g></g>
+<g id="cal"><rect class="s-ink" x="700" y="240" width="780" height="420" rx="16" fill="var(--stage)" stroke-width="5"/>
+<path class="s-ink" d="M700 300H1480" stroke-width="4"/><g id="days"></g><g id="blk"></g></g>
+<g id="leg"><text class="m" x="700" y="700" font-size="20" style="fill:var(--loss)">MEETINGS + MESSAGES</text><text class="m" x="1150" y="700" font-size="20" style="fill:var(--gain)">THE WORK ITSELF</text></g>
+<g id="no"><rect class="gain" x="120" y="600" width="420" height="96" rx="48"/>
+<text class="d" x="330" y="663" font-size="44" text-anchor="middle" style="fill:var(--on-gain)">A polite no.</text>
+<text class="m" x="120" y="745" font-size="20">PROTECTS EVERYTHING ELSE</text><text class="m" x="120" y="777" font-size="20">YOU CARE ABOUT</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">What’s one commitment</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">you could finish, hand off,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">or <tspan style="fill:var(--gain)">drop</tspan> this week?</text></g>
+<g id="lab1"><text class="m" x="143" y="700" font-size="26">PICK ONE: FINISH · HAND OFF · DROP</text></g>
+<g id="lab2"><text class="m" x="143" y="760" font-size="22" style="fill:var(--gain)">THEN NOTICE HOW MUCH LIGHTER THE REST FEELS</text></g>
+<g id="list"><rect class="s-ink" x="1060" y="580" width="380" height="200" rx="16" fill="var(--stage)" stroke-width="5"/><g id="lines"></g></g>
+<g id="scw"><g id="sc">
+<circle class="s-ink" cx="0" cy="-14" r="12" fill="none" stroke-width="5"/><circle class="s-ink" cx="0" cy="14" r="12" fill="none" stroke-width="5"/>
+<path id="sb1" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round"/><path id="sb2" class="s-ink" fill="none" stroke-width="6" stroke-linecap="round"/></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="132" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:12</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Do Fewer Things&rdquo;, from <em>Slow Productivity</em> by Cal Newport. The Jane Austen example is as reported in the book. The overhead meter, project stacks and shrinking time bar are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=132, SC=[[0.0, 5.1], [5.1, 22.0], [22.0, 40.3], [40.3, 58.5], [58.5, 73.1], [73.1, 86.4], [86.4, 103.4], [103.4, 118.5], [118.5, 132.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Do Fewer Things", "The Austen Myth", "A Quieter Cottage", "The Overhead Tax", "When Taxes Stack Up", "The Overload Trap", "Fewer, Faster, Better", "Count the Cost", "Your Challenge"];
+const TM={"overloaded": 0.0, "austen": 5.36, "blotter": 10.64, "cottage": 22.32, "chores": 26.44, "novels": 31.76, "tax_meter": 40.64, "email_pile": 46.24, "one_project": 58.8, "five_projects": 63.96, "shrink_bar": 67.88, "slow_snail": 73.36, "stress_face": 79.0, "short_list": 86.72, "finish_flag": 93.84, "gem": 99.84, "price_tag": 103.68, "calendar": 108.16, "scissors": 118.8};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const SB=[];for(let i=0;i<7;i++){const g=mk('g',{},$('stack'));SB.push([g,mk('rect',{x:1140,y:702-i*68,width:240,height:58,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g)])}
+fig($('ausP'),600,440,30,'gain');
+[920,1030,1140].forEach(x=>{fig($('famP'),x,480,26,'ink');mk('rect',{x:x-37,y:386,width:74,height:46,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('bub'));const tx=mk('text',{x:x,y:416,'font-size':30,'text-anchor':'middle',class:'d'},$('bub'));tx.textContent='...'});
+fig($('visP'),1365,500,24,'loss');
+const BK=[210,240,200,230,220,250].map((h,i)=>mk('rect',{x:930+i*84,y:640-h,width:60,height:h,rx:6,class:'ink'},$('books')));
+const OV=['EMAILS','CHECK-INS','DETAILS TO TRACK'].map((s,i)=>{const y=330+i*140,g=mk('g',{},$('ovh')),L={fill:'none',stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round'};
+  mk('path',Object.assign({d:`M1060 470C1090 470 1090 ${y} 1120 ${y}`,'stroke-dasharray':'8 8'},L),g);
+  mk('rect',{x:1120,y:y-26,width:64,height:52,rx:8,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  mk('path',Object.assign({d:[`M1126 ${y-20}l26 18 26-18`,`M1152 ${y-16}v16h14`,`M1132 ${y-10}h40M1132 ${y}h40M1132 ${y+10}h24`][i]},L),g);
+  const tx=mk('text',{x:1204,y:y+8,'font-size':22,class:'m'},g);tx.textContent=s;return g});
+const PJ=[];for(let i=0;i<7;i++)PJ.push(mk('rect',{x:120+i*110,y:290,width:80,height:80,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('pj')));
+const PB=[];for(let i=0;i<8;i++)PB.push(mk('rect',{x:720,y:626-i*54,width:160,height:48,rx:8,fill:'var(--stage)',stroke:i<3?'var(--ink)':'var(--loss)','stroke-width':5},$('pile')));
+fig($('strP'),1280,440,50,'loss');
+const LN=[0,1,2].map(i=>{const y=300+i*130,g=mk('g',{},$('lanes'));
+  mk('rect',{x:120,y:y-35,width:180,height:70,rx:35,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:210,y:y+8,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent='PROJECT '+'ABC'[i];
+  mk('rect',{x:340,y:y-14,width:700,height:28,rx:14,fill:'var(--line)'},g);
+  const tax=mk('rect',{x:340,y:y-14,width:0,height:28,rx:14,class:'loss'},g),pr=mk('rect',{x:340,y:y-14,width:0,height:28,rx:14,class:'gain'},g),fl=mk('g',{},g);
+  mk('path',{d:`M1080 ${y+35}V${y-40}`,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},fl);
+  mk('path',{d:`M1082 ${y-40}h50l-14 16 14 16h-50z`,class:'gain'},fl);return {g,tax,pr,fl}});
+['MON','TUE','WED','THU','FRI'].forEach((d,i)=>{const tx=mk('text',{x:778+i*156,y:282,'font-size':20,'text-anchor':'middle',class:'m'},$('days'));tx.textContent=d;if(i)mk('path',{d:`M${700+i*156} 300V660`,class:'s-line','stroke-width':3},$('days'))});
+const WK=[0,1,2,3,4].map(c=>mk('rect',{x:712+c*156,y:316,width:132,height:40,rx:8,class:'gain'},$('blk')));
+const MT=[[0,2],[1,1],[2,3],[3,2],[4,1],[0,4],[2,5],[1,4],[3,5],[4,4],[1,6],[3,1]].map(q=>mk('rect',{x:712+q[0]*156,y:316+q[1]*48,width:132,height:40,rx:8,class:'loss'},$('blk')));
+const LL=[0,1,2,3].map(i=>mk('path',{d:`M1100 ${620+i*42}h300`,fill:'none',stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('lines')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+SB.forEach((b,i)=>{rise(b[0],p(u,.1+i*.12,.5+i*.12));if(i>1){const a=TM.overloaded+1.4+(6-i)*.3,k=p(u,a,a+.6);b[1].setAttribute('x',(1140+140*k).toFixed(1));b[1].setAttribute('opacity',(1-k).toFixed(2))}else{const on=u>=TM.overloaded+3.6;b[1].setAttribute('fill',on?'var(--gain)':'var(--stage)');b[1].setAttribute('stroke',on?'var(--gain)':'var(--ink)')}});
+
+rise($('aus'),p(u,TM.austen,TM.austen+.5));rise($('fam'),p(u,TM.austen+1.2,TM.austen+1.7));rise($('bub'),p(u,TM.austen+2,TM.austen+2.5));
+rise($('door'),p(u,TM.blotter,TM.blotter+.5));rise($('hide'),p(u,TM.blotter+1.2,TM.blotter+1.7));
+rise($('m1'),p(u,TM.blotter+4.2,TM.blotter+4.8));rise($('m2'),p(u,TM.blotter+8.8,TM.blotter+9.3));
+
+rise($('cot'),p(u,TM.cottage,TM.cottage+.5));
+[0,1].forEach(i=>{const a=p(u,TM.cottage+1.5+i*.4,TM.cottage+2+i*.4),k=p(u,TM.chores+i*.6,TM.chores+1+i*.6),e=$('ch'+i);e.setAttribute('opacity',(a*(1-k)).toFixed(2));e.setAttribute('transform','translate('+(160*k).toFixed(1)+' '+(-90*k).toFixed(1)+')')});
+rise($('free'),p(u,TM.chores+1.6,TM.chores+2.1));
+BK.forEach((b,i)=>rise(b,p(u,TM.novels+i*.35,TM.novels+i*.35+.4)));
+rise($('g1'),p(u,TM.novels+5.3,TM.novels+5.8));rise($('g2'),p(u,TM.novels+7.5,TM.novels+8));
+
+const lv=.25*p(u,TM.tax_meter,TM.tax_meter+1.2)+.6*p(u,TM.email_pile,TM.email_pile+5.5),an=Math.PI*(1-lv);
+$('ndl').setAttribute('x2',(330+130*Math.cos(an)).toFixed(1));$('ndl').setAttribute('y2',(560-130*Math.sin(an)).toFixed(1));
+$('garc').setAttribute('stroke-dasharray',(503*lv).toFixed(1)+' 600');
+rise($('gauge'),p(u,TM.tax_meter,TM.tax_meter+.5));rise($('proj'),p(u,TM.tax_meter+.8,TM.tax_meter+1.3));
+OV.forEach((g,i)=>{const a=TM.email_pile+i*1.8;rise(g,p(u,a,a+.5))});
+rise($('notp'),p(u,TM.email_pile+6.6,TM.email_pile+7.1));rise($('price'),p(u,TM.email_pile+10,TM.email_pile+10.6));
+
+PJ.forEach((r,i)=>{const a=i<2?TM.one_project+i*.4:TM.five_projects+(i-2)*.5;rise(r,p(u,a,a+.4))});
+rise($('bar'),p(u,TM.one_project+.5,TM.one_project+1));
+const f=.12+.33*p(u,TM.five_projects,TM.five_projects+3)+.5*p(u,TM.shrink_bar,TM.shrink_bar+2.5);
+$('ov').setAttribute('width',(1060*f).toFixed(1));$('rw').setAttribute('x',(120+1060*f).toFixed(1));$('rw').setAttribute('width',(1060*(1-f)).toFixed(1));
+rise($('evg'),p(u,TM.shrink_bar,TM.shrink_bar+.5));$('ev').setAttribute('width',(260*p(u,TM.shrink_bar+1.5,TM.shrink_bar+3.5)).toFixed(1));
+rise($('push'),p(u,TM.shrink_bar+2,TM.shrink_bar+2.6));
+
+rise($('snw'),p(u,TM.slow_snail,TM.slow_snail+.5));
+$('snail').setAttribute('transform','translate('+(200+240*lin(u,TM.slow_snail,TM.slow_snail+14)).toFixed(1)+' 704)');
+PB.forEach((r,i)=>{if(i<3){rise(r,p(u,TM.slow_snail+i*.3,TM.slow_snail+i*.3+.4));return}const a=TM.stress_face+(i-3)*.6,k=p(u,a,a+.5);r.setAttribute('transform','translate(0 '+(-120*(1-k)).toFixed(1)+')');r.setAttribute('opacity',k.toFixed(2))});
+rise($('nreq'),p(u,TM.stress_face,TM.stress_face+.5));rise($('stress'),p(u,TM.stress_face+.6,TM.stress_face+1.1));
+$('drop').setAttribute('transform','translate(0 '+(30*((t*.8)%1)).toFixed(1)+')');
+rise($('exh'),p(u,TM.stress_face+3.8,TM.stress_face+4.3));
+
+LN.forEach((l,i)=>{rise(l.g,p(u,TM.short_list+i*.3,TM.short_list+i*.3+.4));const tw=120-95*p(u,TM.short_list+1.8,TM.short_list+3.2),a=TM.finish_flag+i*.5,q=.3*p(u,TM.short_list+2.6,TM.short_list+4.2)+.7*p(u,a,a+1.8);
+  l.tax.setAttribute('width',tw.toFixed(1));l.pr.setAttribute('x',(340+tw).toFixed(1));l.pr.setAttribute('width',((700-tw)*q).toFixed(1));l.fl.setAttribute('opacity',(.25+.75*p(u,a+1.6,a+2)).toFixed(2))});
+rise($('shr'),p(u,TM.short_list+1.8,TM.short_list+2.3));rise($('soon'),p(u,TM.finish_flag+2.5,TM.finish_flag+3.1));rise($('gem'),p(u,TM.gem,TM.gem+.6));
+
+rise($('req'),p(u,TM.price_tag,TM.price_tag+.5));rise($('tag'),p(u,TM.price_tag+.8,TM.price_tag+1.3));
+$('tagS').setAttribute('transform','rotate('+(6*Math.sin(t*2)).toFixed(2)+' 440 480)');
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5));rise($('leg'),p(u,TM.calendar+1,TM.calendar+1.5));
+WK.forEach((r,i)=>rise(r,p(u,TM.calendar+.4+i*.1,TM.calendar+.8+i*.1)));
+MT.forEach((r,i)=>{const a=TM.calendar+1.2+i*.35;rise(r,p(u,a,a+.3))});
+rise($('no'),p(u,TM.calendar+6.5,TM.calendar+7.1));
+
+rise($('qa'),p(u,TM.scissors,TM.scissors+.5));rise($('qb'),p(u,TM.scissors+.4,TM.scissors+.9));rise($('qc'),p(u,TM.scissors+.8,TM.scissors+1.3));
+rise($('lab1'),p(u,TM.scissors+1.2,TM.scissors+1.7));rise($('list'),p(u,TM.scissors+1.4,TM.scissors+1.9));rise($('scw'),p(u,TM.scissors+1.6,TM.scissors+2.1));
+const o=.5+.5*Math.sin(t*10);$('sb1').setAttribute('d','M0 -14L70 '+(10-30*o).toFixed(1));$('sb2').setAttribute('d','M0 14L70 '+(-10+30*o).toFixed(1));
+$('sc').setAttribute('transform','translate('+(1010+380*p(u,TM.scissors+2,TM.scissors+4.2)).toFixed(1)+' 704)');
+const kc=p(u,TM.scissors+4.2,TM.scissors+5),lt=u>=TM.scissors+7.3;
+LL.forEach((l,i)=>{if(i===2){l.setAttribute('transform','translate(0 '+(20*kc).toFixed(1)+')');l.setAttribute('opacity',(1-kc).toFixed(2))}else l.setAttribute('stroke',lt?'var(--gain)':'var(--ink)')});
+rise($('lab2'),p(u,TM.scissors+7.3,TM.scissors+7.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:128.8;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,25 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const SB=[];for(let i=0;i<7;i++){const g=mk('g',{},$('stack'));SB.push([g,mk('rect',{x:1140,y:702-i*68,width:240,height:58,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g)])}
+fig($('ausP'),600,440,30,'gain');
+[920,1030,1140].forEach(x=>{fig($('famP'),x,480,26,'ink');mk('rect',{x:x-37,y:386,width:74,height:46,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('bub'));const tx=mk('text',{x:x,y:416,'font-size':30,'text-anchor':'middle',class:'d'},$('bub'));tx.textContent='...'});
+fig($('visP'),1365,500,24,'loss');
+const BK=[210,240,200,230,220,250].map((h,i)=>mk('rect',{x:930+i*84,y:640-h,width:60,height:h,rx:6,class:'ink'},$('books')));
+const OV=['EMAILS','CHECK-INS','DETAILS TO TRACK'].map((s,i)=>{const y=330+i*140,g=mk('g',{},$('ovh')),L={fill:'none',stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round'};
+  mk('path',Object.assign({d:`M1060 470C1090 470 1090 ${y} 1120 ${y}`,'stroke-dasharray':'8 8'},L),g);
+  mk('rect',{x:1120,y:y-26,width:64,height:52,rx:8,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);
+  mk('path',Object.assign({d:[`M1126 ${y-20}l26 18 26-18`,`M1152 ${y-16}v16h14`,`M1132 ${y-10}h40M1132 ${y}h40M1132 ${y+10}h24`][i]},L),g);
+  const tx=mk('text',{x:1204,y:y+8,'font-size':22,class:'m'},g);tx.textContent=s;return g});
+const PJ=[];for(let i=0;i<7;i++)PJ.push(mk('rect',{x:120+i*110,y:290,width:80,height:80,rx:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('pj')));
+const PB=[];for(let i=0;i<8;i++)PB.push(mk('rect',{x:720,y:626-i*54,width:160,height:48,rx:8,fill:'var(--stage)',stroke:i<3?'var(--ink)':'var(--loss)','stroke-width':5},$('pile')));
+fig($('strP'),1280,440,50,'loss');
+const LN=[0,1,2].map(i=>{const y=300+i*130,g=mk('g',{},$('lanes'));
+  mk('rect',{x:120,y:y-35,width:180,height:70,rx:35,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=mk('text',{x:210,y:y+8,'font-size':22,'text-anchor':'middle',class:'m'},g);tx.textContent='PROJECT '+'ABC'[i];
+  mk('rect',{x:340,y:y-14,width:700,height:28,rx:14,fill:'var(--line)'},g);
+  const tax=mk('rect',{x:340,y:y-14,width:0,height:28,rx:14,class:'loss'},g),pr=mk('rect',{x:340,y:y-14,width:0,height:28,rx:14,class:'gain'},g),fl=mk('g',{},g);
+  mk('path',{d:`M1080 ${y+35}V${y-40}`,class:'s-ink','stroke-width':5,'stroke-linecap':'round'},fl);
+  mk('path',{d:`M1082 ${y-40}h50l-14 16 14 16h-50z`,class:'gain'},fl);return {g,tax,pr,fl}});
+['MON','TUE','WED','THU','FRI'].forEach((d,i)=>{const tx=mk('text',{x:778+i*156,y:282,'font-size':20,'text-anchor':'middle',class:'m'},$('days'));tx.textContent=d;if(i)mk('path',{d:`M${700+i*156} 300V660`,class:'s-line','stroke-width':3},$('days'))});
+const WK=[0,1,2,3,4].map(c=>mk('rect',{x:712+c*156,y:316,width:132,height:40,rx:8,class:'gain'},$('blk')));
+const MT=[[0,2],[1,1],[2,3],[3,2],[4,1],[0,4],[2,5],[1,4],[3,5],[4,4],[1,6],[3,1]].map(q=>mk('rect',{x:712+q[0]*156,y:316+q[1]*48,width:132,height:40,rx:8,class:'loss'},$('blk')));
+const LL=[0,1,2,3].map(i=>mk('path',{d:`M1100 ${620+i*42}h300`,fill:'none',stroke:'var(--ink)','stroke-width':8,'stroke-linecap':'round'},$('lines')));

@@ -1,0 +1,317 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Slow Productivity Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Slow Productivity: Limit missions, projects and daily tasks, and use systems that pull in new work only when you have capacity, instead of letting requests pile on. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">SLOW PRODUCTIVITY · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Contain the</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">small stuff.</text>
+<text class="b" x="120" y="600" font-size="32">Stop letting new requests pile up and pull work in instead.</text>
+<path class="s-ink" d="M1160 460v70h300v-70" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<g id="flood"></g>
+<g id="notyet"><rect class="gain" x="1180" y="270" width="260" height="84" rx="16" transform="rotate(-6 1310 312)"/><text class="d" x="1310" y="330" font-size="44" text-anchor="middle" transform="rotate(-6 1310 312)" style="fill:var(--on-gain)">NOT YET</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The pile-up.</text>
+<text class="b" x="120" y="176" font-size="32">Colleagues keep tossing new requests onto her desk.</text>
+<g id="cols"></g>
+<g id="worker"></g>
+<rect class="ink" x="600" y="640" width="440" height="18" rx="4"/>
+<path class="s-ink" d="M630 658v110M1010 658v110" stroke-width="8" stroke-linecap="round"/>
+<g id="cap"><path class="s-loss" d="M830 500h170" stroke-width="4" stroke-dasharray="10 8"/><text class="m" x="1010" y="507" font-size="20" style="fill:var(--loss)">HER TIME</text></g>
+<g id="pile"></g>
+<g id="push"><text class="d" x="120" y="830" font-size="44">A push system: work lands, room or not.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Limit work at every scale.</text>
+<text class="b" x="120" y="176" font-size="32">Newport’s fix works on three levels.</text>
+<g id="lv0"><rect class="gain" x="580" y="230" width="360" height="90" rx="16"/><text class="d" x="760" y="290" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">Mission</text><text class="m" x="1250" y="272" font-size="22">MISSIONS</text><text class="b" x="1250" y="306" font-size="24">few big aims</text></g>
+<g id="lv1"><g id="projs"></g><text class="m" x="1250" y="446" font-size="22">PROJECTS</text><text class="b" x="1250" y="480" font-size="24">serve the missions</text></g>
+<g id="lv2"><g id="tasks"></g><text class="m" x="1250" y="608" font-size="22">DAILY TASKS</text><text class="b" x="1250" y="642" font-size="24">finish today</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Fewer at each level.</text>
+<text class="b" x="120" y="176" font-size="32">Cap how much is active, at every scale.</text>
+<g id="rows3"></g>
+<g id="wish"><text class="d" x="120" y="810" font-size="48">A short list, not a wish list.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Corral the small stuff.</text>
+<text class="b" x="120" y="176" font-size="32">Quick replies, little favors, tiny chores.</text>
+<text id="chlbl" class="m" x="120" y="250" font-size="20">TINY CHORES</text>
+<text class="m" x="120" y="384" font-size="20">YOUR DAY</text>
+<rect class="s-ink" x="120" y="400" width="1360" height="140" rx="16" fill="var(--stage)" stroke-width="5"/>
+<g id="focus"><rect class="gain" x="140" y="420" width="1036" height="100" rx="10"/><text class="d" x="658" y="484" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">Focused work</text></g>
+<g id="pen"><rect class="s-gain" x="1196" y="416" width="270" height="108" rx="10" fill="none" stroke-width="5" stroke-dasharray="12 8"/><text class="m" x="1466" y="572" font-size="20" text-anchor="end" style="fill:var(--gain)">TINY CHORES · SET BLOCK</text></g>
+<text id="broken" class="m" x="120" y="580" font-size="22" style="fill:var(--loss)">FOCUS BROKEN ALL DAY</text>
+<g id="chores"></g>
+<g id="herd"><text class="d" x="120" y="720" font-size="46">Herd them into set blocks of time.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Pull, don’t push.</text>
+<text class="b" x="120" y="176" font-size="32">Take on new work only when you have room.</text>
+<text class="m" x="120" y="226" font-size="22">WAITING</text>
+<rect class="s-line" x="120" y="240" width="320" height="500" rx="18" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="770" y="226" font-size="22">ACTIVE</text>
+<rect class="s-ink" x="770" y="240" width="360" height="460" rx="18" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-line" x="790" y="280" width="320" height="110" rx="12" fill="none" stroke-width="3" stroke-dasharray="8 6"/>
+<rect class="s-line" x="790" y="420" width="320" height="110" rx="12" fill="none" stroke-width="3" stroke-dasharray="8 6"/>
+<rect class="s-line" x="790" y="560" width="320" height="110" rx="12" fill="none" stroke-width="3" stroke-dasharray="8 6"/>
+<g id="doneG">
+<text class="m" x="1190" y="226" font-size="22">DONE</text>
+<rect class="s-line" x="1190" y="240" width="290" height="110" rx="18" fill="var(--stage)" stroke-width="4"/>
+<path class="s-ink" d="M1138 380C1160 380 1170 370 1172 352m-12 10 12-10 10 12" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1190" y="390" font-size="20">FINISHED · SLOT FREES UP</text>
+</g>
+<g id="pullA"><path class="s-gain" d="M450 315H772" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round"/><path class="s-gain" d="M756 299l18 16-18 16" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="560" y="294" font-size="22" style="fill:var(--gain)">PULL</text></g>
+<g id="queue"></g>
+<g id="active"></g>
+<g id="askG"></g>
+<g id="askX"><path class="s-loss" d="M1160 460l30 30M1190 460l-30 30" stroke-width="7" stroke-linecap="round"/><text class="m" x="1220" y="550" font-size="20" style="fill:var(--loss)">NO ROOM YET</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">How software teams do it.</text>
+<text class="b" x="120" y="176" font-size="32">As reported in the book, many teams already work this way.</text>
+<g id="tank"><text class="m" x="340" y="262" font-size="22" text-anchor="middle">HOLDING TANK</text><path class="s-ink" d="M140 290V680q0 40 40 40h320q40 0 40-40V290" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="devs"></g>
+<path id="pull6" class="s-gain" d="M560 480C620 420 660 420 700 480m-24-6 24 6 4-24" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="tickets"></g>
+<g id="teamline"><text class="d" x="120" y="810" font-size="40">Each developer pulls the next item when a slot opens.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Build your own holding tank.</text>
+<text class="b" x="120" y="176" font-size="32">Two lists: one waiting, one active.</text>
+<g id="padW"><rect class="s-ink" x="120" y="230" width="460" height="530" rx="18" fill="var(--stage)" stroke-width="5"/><text class="m" x="150" y="284" font-size="22">WAITING</text></g>
+<g id="padA"><rect class="s-ink" x="660" y="230" width="420" height="300" rx="18" fill="var(--stage)" stroke-width="5"/><text class="m" x="690" y="284" font-size="22" style="fill:var(--gain)">ACTIVE</text></g>
+<g id="rowsW"></g>
+<g id="rowsA"></g>
+<g id="asker"></g>
+<g id="say"><rect class="s-gain" x="660" y="600" width="600" height="140" rx="22" fill="var(--stage)" stroke-width="5"/><text class="d5" x="690" y="662" font-size="40">It’s in my queue.</text><text class="m" x="690" y="708" font-size="20">AND ROUGHLY WHEN I’LL REACH IT</text></g>
+<rect id="newAsk" class="loss" width="260" height="20" rx="10"/>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Choose your limit for</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">active projects.</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2" style="fill:var(--gain)">Write it down.</text></g>
+<g id="qd"><text class="m" x="143" y="700" font-size="26">NEW WORK WAITS IN THE TANK · PULL IT IN WHEN A SLOT OPENS</text></g>
+<g id="g8">
+<rect class="gain" x="1240" y="300" width="200" height="60" rx="12"/>
+<rect class="gain" x="1240" y="380" width="200" height="60" rx="12"/>
+<rect class="s-ink" x="1240" y="460" width="200" height="60" rx="12" fill="none" stroke-width="4" stroke-dasharray="10 8"/>
+<path class="s-ink" d="M1240 590v60q0 20 20 20h160q20 0 20-20v-60" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect id="c8" class="gain" x="1260" y="610" width="160" height="40" rx="10"/>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="120" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:00</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Contain the Small Stuff&rdquo;, from <em>Slow Productivity</em> by Cal Newport. The software team pull system is an example as reported in the book. The desk worker, the request pile and the personal lists are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=120, SC=[[0.0, 7.9], [7.9, 24.0], [24.0, 42.7], [42.7, 54.7], [54.7, 69.2], [69.2, 78.6], [78.6, 93.4], [93.4, 107.0], [107.0, 120.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Say Not Yet", "The Pile Up", "Three Levels", "Fewer at Each Level", "Corral the Small", "Push Versus Pull", "The Software Team", "Your Own Tank", "Your Challenge"];
+const TM={"inbox_flood": 0.0, "desk_worker": 8.16, "request_pile": 13.68, "mission_box": 28.08, "project_boxes": 33.36, "task_list": 38.0, "mission_count": 43.04, "project_cap": 47.6, "daily_cap": 50.88, "scattered_dots": 59.32, "batch_block": 63.8, "pull_arrow": 69.48, "full_hands": 74.88, "dev_team": 78.88, "holding_tank": 83.36, "active_board": 88.24, "personal_list": 93.72, "waiting_list": 96.64};
+const who=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const F=[];for(let i=0;i<6;i++)F.push(mk('rect',{x:1210,y:200,width:200,height:14,rx:4,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':3},$('flood')));
+const CX=[220,380,1250,1400];CX.forEach(x=>who($('cols'),x,470,24,'ink'));who($('worker'),720,500,30,'ink');
+const SH=[];for(let i=0;i<14;i++)SH.push(mk('rect',{width:100,height:14,rx:3,'stroke-width':3},$('pile')));
+[330,630,930].forEach(x=>{mk('path',{d:'M760 320L'+(x+130)+' 410',class:'s-line','stroke-width':4},$('projs'));
+  mk('rect',{x:x,y:410,width:260,height:80,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('projs'));
+  mk('text',{x:x+130,y:460,'font-size':30,'text-anchor':'middle',class:'d5'},$('projs')).textContent='Project';
+  [0,140].forEach(o=>{const cx=x+o,g=$('tasks');mk('path',{d:'M'+(x+130)+' 490L'+(cx+60)+' 590',class:'s-line','stroke-width':3},g);
+    mk('rect',{x:cx,y:590,width:120,height:50,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+    mk('rect',{x:cx+14,y:605,width:20,height:20,rx:4,fill:'none',stroke:'var(--gain)','stroke-width':4},g);
+    mk('path',{d:'M'+(cx+46)+' 615h58',class:'s-muted','stroke-width':5,'stroke-linecap':'round'},g)})});
+// limit rows: items slightly narrower, limit bar shifted left so it clears both neighbours
+const R3=['Missions','Projects','Today'].map((s,r)=>{const cy=300+r*180,g=mk('g',{},$('rows3')),k=[2,3,4][r],wx=500+k*120-64;
+  mk('text',{x:120,y:cy+14,'font-size':40,class:'d5'},g).textContent=s;const it=[];
+  for(let i=0;i<8;i++){const cx=500+i*120,h=r==2?44:70;it.push(r?mk('rect',{x:cx-40,y:cy-h/2,width:80,height:h,rx:12,'stroke-width':4},g):mk('circle',{cx:cx,cy:cy,r:32,'stroke-width':4},g))}
+  const w=mk('g',{},g);mk('path',{d:'M'+wx+' '+(cy-56)+'V'+(cy+56),class:'s-ink','stroke-width':8,'stroke-linecap':'round'},w);
+  mk('text',{x:wx,y:cy-70,'font-size':20,'text-anchor':'middle',class:'m'},w).textContent='LIMIT';return {g,it,k,w}});
+const DT=[];for(let i=0;i<14;i++)DT.push(mk('circle',{r:12,class:'loss'},$('chores')));
+const card=(g,f,s)=>{const c=mk('g',{},g);mk('rect',{width:260,height:70,rx:12,fill:f,stroke:s,'stroke-width':4},c);mk('path',{d:'M24 28h150M24 46h100',stroke:'var(--muted)','stroke-width':5,'stroke-linecap':'round'},c);return c};
+const QC=[];for(let i=0;i<5;i++)QC.push(card($('queue'),'var(--stage)','var(--ink)'));
+const AC=[300,440,580].map(y=>{const c=card($('active'),'var(--gain)','var(--gain)');c.setAttribute('transform','translate(820 '+y+')');return c});
+const ASK=card($('askG'),'var(--loss)','var(--loss)');
+const DX=[820,1060,1300];DX.forEach(x=>{who($('devs'),x,300,26,'ink');mk('rect',{x:x-100,y:440,width:200,height:210,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('devs'));
+  [470,560].forEach(y=>mk('rect',{x:x-85,y:y,width:170,height:70,rx:10,fill:'none',stroke:'var(--line)','stroke-width':3,'stroke-dasharray':'8 6'},$('devs')))});
+mk('text',{x:720,y:694,'font-size':20,class:'m'},$('devs')).textContent='EACH WORKS ON A FEW ITEMS';
+const TK=[];for(let k=0;k<12;k++)TK.push(mk('rect',{width:90,height:40,rx:8,'stroke-width':4},$('tickets')));
+const RW=[];for(let i=0;i<8;i++)RW.push(mk('rect',{x:150,y:316+i*48,width:260+(i*67)%120,height:20,rx:10,fill:'var(--line)'},$('rowsW')));
+const RA=[];for(let i=0;i<3;i++)RA.push(mk('rect',{x:690,y:316+i*68,width:360,height:40,rx:10,class:'gain'},$('rowsA')));
+who($('asker'),1380,300,26,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+F.forEach((r,i)=>{const a=TM.inbox_flood+i*.8,f=p(u,a,a+.6);r.setAttribute('y',(200+(510-i*18-200)*f).toFixed(1));r.setAttribute('opacity',u>=a?1:0)});
+  rise($('notyet'),p(u,TM.inbox_flood+7,TM.inbox_flood+7.5));
+
+  rise($('cols'),p(u,TM.desk_worker,TM.desk_worker+.5));rise($('worker'),p(u,TM.desk_worker,TM.desk_worker+.5));
+  SH.forEach((r,i)=>{const a=i<6?TM.desk_worker+1+i*.8:TM.request_pile+(i-6)*.4,f=p(u,a,a+.6),sx=CX[i%4],ty=622-i*16,over=ty<500&&f>=1;
+    r.setAttribute('x',(sx-50+(900-sx)*f).toFixed(1));r.setAttribute('y',(520+(ty-520)*f-160*Math.sin(Math.PI*f)).toFixed(1));r.setAttribute('opacity',u>=a?1:0);
+    r.setAttribute('fill',over?'var(--loss)':'var(--stage)');r.setAttribute('stroke',over?'var(--loss)':'var(--ink)')});
+  rise($('cap'),p(u,TM.request_pile,TM.request_pile+.5));rise($('push'),p(u,TM.request_pile+4.2,TM.request_pile+4.8));
+
+  rise($('lv0'),p(u,TM.mission_box,TM.mission_box+.5));rise($('lv1'),p(u,TM.project_boxes,TM.project_boxes+.5));rise($('lv2'),p(u,TM.task_list,TM.task_list+.5));
+
+  R3.forEach((R,r)=>{const a=[TM.mission_count,TM.project_cap,TM.daily_cap][r],q=p(u,a+1,a+2);rise(R.g,p(u,a,a+.5));
+    R.it.forEach((e,i)=>{const on=i<R.k&&q>0;e.setAttribute('fill',on?'var(--gain)':'var(--stage)');e.setAttribute('stroke',on?'var(--gain)':'var(--ink)');e.setAttribute('opacity',i<R.k?1:1-.85*q)});
+    R.w.setAttribute('opacity',q)});
+  rise($('wish'),p(u,TM.daily_cap+2,TM.daily_cap+2.6));
+
+  const S4=SC[4][0]/K,sc=p(u,TM.scattered_dots,TM.scattered_dots+1.2),hd=p(u,TM.batch_block,TM.batch_block+1.4);
+  DT.forEach((c,i)=>{const x0=140+i*40,y0=290,x1=170+(i*373)%1260,y1=440+(i*37)%60,x2=1222+(i%7)*36,y2=450+Math.floor(i/7)*40,x=x0+(x1-x0)*sc,y=y0+(y1-y0)*sc;
+    c.setAttribute('cx',(x+(x2-x)*hd).toFixed(1));c.setAttribute('cy',(y+(y2-y)*hd).toFixed(1));c.setAttribute('opacity',p(u,S4+.3+i*.08,S4+.6+i*.08))});
+  $('chlbl').setAttribute('opacity',(p(u,S4+.2,S4+.6)*(1-p(u,TM.scattered_dots,TM.scattered_dots+.6))).toFixed(3));
+  $('broken').setAttribute('opacity',p(u,TM.scattered_dots+1,TM.scattered_dots+1.5)*(1-p(u,TM.batch_block,TM.batch_block+.5)));
+  rise($('pen'),p(u,TM.batch_block,TM.batch_block+.5));rise($('focus'),p(u,TM.batch_block+1.2,TM.batch_block+1.8));rise($('herd'),p(u,TM.batch_block+1.8,TM.batch_block+2.4));
+
+  const pa=TM.pull_arrow,q1=p(u,pa+.6,pa+1.4),q2=p(u,pa+1.6,pa+2.8),q3=p(u,pa+3,pa+3.6);
+  rise($('doneG'),p(u,pa,pa+.5));
+  AC[0].setAttribute('transform','translate('+(820+385*q1).toFixed(1)+' '+(300-40*q1).toFixed(1)+')');
+  QC.forEach((c,i)=>{const x=i?150:150+670*q2,y=i?280+i*90-90*q3:280+20*q2;c.setAttribute('transform','translate('+x.toFixed(1)+' '+y.toFixed(1)+')')});
+  QC[0].firstChild.setAttribute('fill',q2>.5?'var(--gain)':'var(--stage)');QC[0].firstChild.setAttribute('stroke',q2>.5?'var(--gain)':'var(--ink)');
+  rise($('pullA'),p(u,pa+1.2,pa+1.7));
+  const fh=TM.full_hands;ASK.setAttribute('transform','translate('+(1220-80*Math.sin(Math.PI*p(u,fh+.3,fh+1.1))).toFixed(1)+' 440)');ASK.setAttribute('opacity',p(u,fh,fh+.3));rise($('askX'),p(u,fh+1.1,fh+1.5));
+
+  const A6=TM.active_board;
+  TK.forEach((r,k)=>{const tx=180+(k%3)*120,ty=430+Math.floor(k/3)*70,a=TM.holding_tank+(11-k)*.15,f=p(u,a,a+.5);let x=tx,y=290+(ty-290)*f,m=0,o=u>=a?1:0;
+    if(k<7){const s=k==6?1:k,d=s%3,row=Math.floor(s/3),b=k==6?A6+5:A6+.3+k*.3;m=p(u,b,b+.8);x=tx+(DX[d]-45-tx)*m;y=y+(485+row*90-y)*m}
+    if(k==1)o*=1-p(u,A6+4,A6+4.5);
+    r.setAttribute('x',x.toFixed(1));r.setAttribute('y',y.toFixed(1));r.setAttribute('opacity',o);r.setAttribute('fill',m>.5?'var(--gain)':'var(--stage)');r.setAttribute('stroke',m>.5?'var(--gain)':'var(--ink)')});
+  rise($('devs'),p(u,TM.dev_team,TM.dev_team+.5));rise($('tank'),p(u,TM.holding_tank,TM.holding_tank+.5));
+  $('pull6').setAttribute('opacity',p(u,A6,A6+.5));rise($('teamline'),p(u,A6+5.5,A6+6));
+
+  rise($('padW'),p(u,TM.personal_list,TM.personal_list+.5));rise($('padA'),p(u,TM.personal_list+.6,TM.personal_list+1.1));
+  const W7=TM.waiting_list;RW.forEach((r,i)=>r.setAttribute('opacity',p(u,W7+i*.2,W7+i*.2+.3)));RA.forEach((r,i)=>r.setAttribute('opacity',p(u,W7+2.4+i*.4,W7+2.7+i*.4)));
+  const S7=W7+5.8,f7=p(u,S7+.5,S7+1.5),na=$('newAsk');rise($('asker'),p(u,S7,S7+.5));
+  na.setAttribute('x',(1200-1050*f7).toFixed(1));na.setAttribute('y',(420+280*f7-180*Math.sin(Math.PI*f7)).toFixed(1));na.setAttribute('opacity',p(u,S7+.3,S7+.5));
+  rise($('say'),p(u,S7+1.4,S7+1.9));
+
+  const S8=SC[8][0]/K;rise($('qa'),p(u,S8+.3,S8+.8));rise($('qb'),p(u,S8+.7,S8+1.2));rise($('qc'),p(u,S8+1.1,S8+1.6));
+  rise($('g8'),p(u,S8+.6,S8+1.2));rise($('qd'),p(u,S8+5,S8+5.6));$('c8').setAttribute('y',(610-140*p(u,S8+5.6,S8+6.8)).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:116.64;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

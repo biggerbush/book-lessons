@@ -1,0 +1,16 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const FA=[];for(let i=0;i<6;i++)FA.push(mk('rect',{x:1130+i*56,y:590,width:40,height:40,rx:6,fill:'var(--muted)'},$('facts')));
+const VX=[200,320,440,560];VX.forEach(x=>fig($('vols'),x,400,24,'ink'));
+const COINS=VX.map(x=>mk('circle',{cx:x,cy:350,r:14,class:'gain'},$('coins')));
+const FB=[120,180,90,200,150,170,110].map((h,i)=>[mk('rect',{x:870+i*62,width:44,y:620,height:0,class:'loss'},$('fbars')),h]);
+fig($('photo'),330,380,56,'gain');
+fig($('cf'),280,360,40,'gain');
+for(let r=0;r<4;r++)for(let c=0;c<3;c++)mk('rect',{x:1124+c*60,y:344+r*46,width:48,height:34,rx:6,fill:'var(--line)'},$('cbtn'));
+const CD=[];for(let r=0;r<9;r++)for(let c=0;c<16;c++)CD.push(mk('circle',{cx:156+c*34,cy:270+r*34,r:10,fill:'var(--muted)'},$('crowd')));
+fig($('one'),1100,330,56,'gain');
+fig($('mirror'),290,390,36,'ink');
+fig($('colA'),1060,500,26,'ink');
+fig($('colB'),1360,500,26,'gain');
+fig($('p3'),1290,360,34,'gain');
+fig($('m0'),340,470,30,'gain');
+fig($('qg'),1340,640,24,'gain');

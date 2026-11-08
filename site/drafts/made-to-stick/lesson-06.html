@@ -1,0 +1,348 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made to Stick Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Made to Stick: People care about one person more than a crowd and about what matters to them personally, so connect your idea to feelings and self-interest. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MADE TO STICK · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Emotional:</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">make people care.</text>
+<text class="b" x="120" y="600" font-size="32">Why one face moves us more than a million numbers</text>
+<g id="facts"></g>
+<g id="th" transform="translate(1300 390)"><path class="gain" d="M0 100C-140 10-150-90-70-105C-30-112-6-86 0-64C6-86 30-112 70-105C150-90 140 10 0 100Z"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The hunger flyer.</text>
+<text class="b" x="120" y="176" font-size="32">Carnegie Mellon paid volunteers, then asked them to donate.</text>
+<g id="vols"></g>
+<g id="coins"></g>
+<g id="box"><rect class="s-ink" x="320" y="620" width="220" height="140" rx="10" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="390" y="612" width="80" height="12" rx="4"/><text class="m" x="430" y="800" font-size="22" text-anchor="middle">CHARITY</text></g>
+<g id="flyer">
+<rect class="s-ink" x="820" y="240" width="520" height="560" rx="12" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="860" y="296" font-size="22">SOUTHERN AFRICA</text>
+<text class="d" x="860" y="360" font-size="52">Millions hungry</text>
+<g id="fbars"></g>
+<path class="s-line" d="M860 670h440M860 710h360M860 750h260" stroke-width="8" stroke-linecap="round"/>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meet Rokia.</text>
+<text class="b" x="120" y="176" font-size="32">One girl, seven years old, from Mali.</text>
+<g id="photo"><rect class="s-ink" x="120" y="230" width="420" height="470" rx="14" fill="var(--stage)" stroke-width="6"/><circle class="ink" cx="270" cy="350" r="22"/><circle class="ink" cx="390" cy="350" r="22"/><text class="m" x="330" y="670" font-size="22" text-anchor="middle">ROKIA · AGE 7 · MALI</text></g>
+<g id="bowl"><path class="s-ink" d="M640 480h260a130 90 0 0 1-260 0z" fill="none" stroke-width="7" stroke-linejoin="round"/><path class="s-muted" d="M700 450l120-60" stroke-width="7" stroke-linecap="round"/><text class="m" x="770" y="630" font-size="18" text-anchor="middle">DESPERATELY POOR,</text><text class="m" x="770" y="658" font-size="18" text-anchor="middle">FACING HUNGER</text></g>
+<g id="jars">
+<rect class="s-ink" x="1050" y="300" width="170" height="400" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="1290" y="300" width="170" height="400" rx="14" fill="var(--stage)" stroke-width="6"/>
+<rect id="jf0" x="1058" width="154" rx="8" fill="var(--muted)"/>
+<rect id="jf1" class="gain" x="1298" width="154" rx="8"/>
+<text class="m" x="1135" y="740" font-size="20" text-anchor="middle">STATISTICS</text>
+<text class="m" x="1375" y="740" font-size="20" text-anchor="middle" style="fill:var(--gain)">ROKIA</text>
+</g>
+<g id="two"><text class="d" x="1375" y="276" font-size="52" text-anchor="middle" style="fill:var(--gain)">~2×</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">More facts, less care.</text>
+<text class="b" x="120" y="176" font-size="32">Rokia’s story and the statistics, side by side.</text>
+<g id="both">
+<g transform="rotate(-5 280 440)"><rect class="s-ink" x="140" y="260" width="280" height="360" rx="10" fill="var(--stage)" stroke-width="5"/><g id="cf"></g><text class="m" x="280" y="590" font-size="20" text-anchor="middle">ROKIA</text></g>
+<rect class="s-ink" x="260" y="330" width="280" height="360" rx="10" fill="var(--stage)" stroke-width="5"/>
+<path class="loss" d="M300 620v-80h36v80zM356 620v-150h36v150zM412 620v-110h36v110zM468 620v-190h36v190z"/>
+<text class="m" x="400" y="664" font-size="20" text-anchor="middle">STATISTICS</text>
+</g>
+<g id="cmp">
+<rect class="gain" x="640" y="340" width="120" height="360" rx="6"/>
+<rect id="cmpB" x="820" width="120" rx="6" fill="var(--muted)"/>
+<path class="s-line" d="M610 700h360" stroke-width="4"/>
+<text class="m" x="700" y="740" font-size="20" text-anchor="middle">ROKIA ONLY</text>
+<text class="m" x="880" y="740" font-size="20" text-anchor="middle">ROKIA + STATS</text>
+</g>
+<g id="calc">
+<rect class="s-ink" x="1100" y="240" width="220" height="300" rx="18" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1124" y="264" width="172" height="60" rx="6"/>
+<g id="cbtn"></g>
+<text class="m" x="1210" y="586" font-size="20" text-anchor="middle">ANALYTICAL MODE</text>
+<g transform="translate(1210 680) scale(.6)"><path id="chp" class="s-ink" stroke-width="7" d="M0 100C-140 10-150-90-70-105C-30-112-6-86 0-64C6-86 30-112 70-105C150-90 140 10 0 100Z" style="fill:var(--gain)"/></g>
+<text class="m" x="1210" y="800" font-size="20" text-anchor="middle">ANALYSIS COOLS FEELINGS</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One face, not a crowd.</text>
+<g id="crowd"></g>
+<g id="crowdL"><text class="m" x="140" y="610" font-size="20">MILLIONS · A PROBLEM TOO BIG TO TOUCH</text></g>
+<g id="one"><circle class="s-gain" cx="1100" cy="430" r="210" fill="none" stroke-width="6" stroke-dasharray="14 12"/><text class="m" x="1100" y="690" font-size="22" text-anchor="middle" style="fill:var(--gain)">SOMEONE WE COULD HELP</text></g>
+<g id="quote"><text class="d" x="120" y="790" font-size="52">“If I look at the one, I will.”</text><text class="m" x="124" y="846" font-size="22">— MOTHER TERESA</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">What’s in it for me?</text>
+<text class="b" x="120" y="176" font-size="32">People care about what an idea will do for them.</text>
+<g id="mirror"><path class="s-ink" d="M290 640v50M220 690h140" stroke-width="7" stroke-linecap="round"/><ellipse class="s-ink" cx="290" cy="460" rx="130" ry="180" fill="var(--stage)" stroke-width="7"/><text class="m" x="290" y="750" font-size="22" text-anchor="middle">SELF-INTEREST</text></g>
+<g id="house">
+<path class="s-ink" d="M560 380L720 270L880 380" fill="none" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+<rect class="s-ink" x="580" y="380" width="280" height="260" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="620" y="500" width="70" height="140"/>
+<rect class="gain" x="730" y="440" width="100" height="70" rx="6"/>
+<path class="s-ink" d="M760 440l20-22 20 22" fill="none" stroke-width="4"/>
+<text class="m" x="720" y="690" font-size="20" text-anchor="middle">TEMPE, ARIZONA · CABLE TV</text>
+</g>
+<g id="colA">
+<rect class="s-ink" x="960" y="280" width="200" height="150" rx="12" fill="var(--stage)" stroke-width="4"/>
+<text class="m" x="1060" y="312" font-size="18" text-anchor="middle">BENEFITS</text>
+<path class="s-line" d="M990 350h140M990 380h110M990 410h80" stroke-width="7" stroke-linecap="round"/>
+<rect id="barA" x="960" y="650" height="34" rx="6" fill="var(--muted)"/>
+<text class="m" x="1060" y="730" font-size="20" text-anchor="middle">TOLD BENEFITS</text>
+</g>
+<g id="colB">
+<circle cx="1320" cy="360" r="50" fill="var(--line)"/><circle cx="1380" cy="340" r="60" fill="var(--line)"/><circle cx="1430" cy="378" r="45" fill="var(--line)"/><circle cx="1360" cy="400" r="45" fill="var(--line)"/>
+<rect class="gain" x="1340" y="335" width="80" height="54" rx="6"/>
+<circle cx="1352" cy="456" r="7" fill="var(--line)"/>
+<rect id="barB" class="gain" x="1260" y="650" height="34" rx="6"/>
+<text class="m" x="1360" y="730" font-size="20" text-anchor="middle" style="fill:var(--gain)">IMAGINED IT</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Sell the benefit of the benefit.</text>
+<g id="p0"><text class="m" x="270" y="230" font-size="18" text-anchor="middle">WHAT THEY BUY</text><rect class="s-line" x="120" y="260" width="300" height="360" rx="16" fill="var(--stage)" stroke-width="3"/>
+<rect class="ink" x="180" y="400" width="150" height="64" rx="16"/><rect class="ink" x="200" y="460" width="44" height="96" rx="10"/><path class="s-ink" d="M330 432h70" stroke-width="8" stroke-linecap="round"/>
+<text class="d5" x="270" y="680" font-size="32" text-anchor="middle">A drill</text></g>
+<line id="dstk" class="s-loss" x1="130" y1="270" x2="130" y2="270" stroke-width="7" stroke-linecap="round"/>
+<g id="p1"><path class="s-muted" d="M424 440h28m-12-12 12 12-12 12" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="610" y="230" font-size="18" text-anchor="middle">WHAT THEY WANT</text><rect class="s-line" x="460" y="260" width="300" height="360" rx="16" fill="var(--stage)" stroke-width="3"/>
+<circle class="s-gain" cx="610" cy="440" r="64" fill="none" stroke-width="4" stroke-dasharray="10 8"/><circle class="ink" cx="610" cy="440" r="26"/>
+<text class="d5" x="610" y="680" font-size="32" text-anchor="middle">A hole</text></g>
+<g id="bob"><text class="m" x="950" y="230" font-size="18" text-anchor="middle" style="fill:var(--gain)">BENEFIT OF THE BENEFIT</text></g>
+<g id="p2"><path class="s-muted" d="M764 440h28m-12-12 12 12-12 12" fill="none" stroke-width="5" stroke-linecap="round"/><rect class="s-line" x="800" y="260" width="300" height="360" rx="16" fill="var(--stage)" stroke-width="3"/>
+<circle class="ink" cx="950" cy="320" r="6"/><path class="s-ink" d="M890 380L950 320L1010 380" fill="none" stroke-width="4"/>
+<rect class="s-ink" x="870" y="380" width="160" height="130" fill="var(--stage)" stroke-width="7"/>
+<g transform="translate(950 448) scale(.42)"><path class="gain" d="M0 100C-140 10-150-90-70-105C-30-112-6-86 0-64C6-86 30-112 70-105C150-90 140 10 0 100Z"/></g>
+<text class="d5" x="950" y="680" font-size="32" text-anchor="middle">A photo you love</text></g>
+<g id="p3"><path class="s-muted" d="M1104 440h28m-12-12 12 12-12 12" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="1290" y="230" font-size="18" text-anchor="middle">SAY “YOU”</text><rect class="s-line" x="1140" y="260" width="300" height="360" rx="16" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="1290" y="590" font-size="64" text-anchor="middle" style="fill:var(--gain)">YOU</text>
+<text class="d5" x="1290" y="680" font-size="32" text-anchor="middle">You, picturing it</text></g>
+<g id="direct"><text class="d" x="120" y="800" font-size="40">Talk to the listener directly.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make it personal.</text>
+<text class="b" x="120" y="176" font-size="32">Swap the big number for one real person.</text>
+<g id="m0"><text class="d" x="150" y="340" font-size="88" style="fill:var(--muted)">Millions</text><path class="s-muted" d="M340 365v40m-14-14 14 14 14-14" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="340" y="650" font-size="20" text-anchor="middle" style="fill:var(--gain)">ONE REAL PERSON</text></g>
+<line id="mstk" class="s-loss" x1="140" y1="312" x2="140" y2="312" stroke-width="7" stroke-linecap="round"/>
+<g id="m1"><rect class="s-ink" x="620" y="260" width="400" height="360" rx="16" fill="var(--stage)" stroke-width="5"/><text class="m" x="650" y="310" font-size="20">EVERY LISTENER ASKS</text><text class="d" x="650" y="380" font-size="40">Why should</text><text class="d" x="650" y="432" font-size="40">I care?</text>
+<g id="ans"><rect class="gain" x="650" y="480" width="340" height="90" rx="12"/><text class="d5" x="670" y="535" font-size="28" style="fill:var(--on-gain)">Here’s what you get.</text></g></g>
+<g id="m2"><circle class="gain" cx="1280" cy="440" r="140"/><circle cx="1235" cy="405" r="14" fill="var(--on-gain)"/><circle cx="1325" cy="405" r="14" fill="var(--on-gain)"/><path id="smile" d="M1210 480q70 0 140 0" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round"/><text class="m" x="1280" y="650" font-size="20" text-anchor="middle">FEELINGS FIRST</text></g>
+<g id="ff"><text class="d" x="120" y="790" font-size="48">Feelings first, figures second.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="320" font-size="80" letter-spacing="-2">Whose single face,</text></g>
+<g id="qb"><text class="d" x="136" y="420" font-size="80" letter-spacing="-2">and which <tspan style="fill:var(--gain)">personal benefit</tspan>,</text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="80" letter-spacing="-2">could make them truly care?</text></g>
+<g id="ql"><text class="m" x="143" y="700" font-size="26">ONE MESSAGE · ONE FACE · ONE BENEFIT</text></g>
+<g id="qg"><g transform="translate(1430 650) scale(.35)"><path class="gain" d="M0 100C-140 10-150-90-70-105C-30-112-6-86 0-64C6-86 30-112 70-105C150-90 140 10 0 100Z"/></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Emotional: Make People Care&rdquo;, from <em>Made to Stick</em> by Chip Heath and Dan Heath. The Rokia donation study at Carnegie Mellon and the cable television study in Tempe, Arizona, are as reported in the book. The donation jar, coins and hanging photo are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 8.8], [8.8, 20.6], [20.6, 34.7], [34.7, 49.9], [49.9, 63.0], [63.0, 81.9], [81.9, 100.9], [100.9, 116.9], [116.9, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Why Should I Care", "The Hunger Flyer", "Meet Rokia", "More Facts, Less Care", "One Face, Not a Crowd", "What's In It for Me", "Sell the Benefit", "Make It Personal", "Your Challenge"];
+const TM={"title_heart": 0.0, "researchers": 9.12, "stats_flyer": 15.04, "rokia_photo": 20.88, "hungry_bowl": 26.76, "donation_jar": 30.36, "both_flyers": 35.04, "shrink_coins": 39.2, "calculator": 43.76, "crowd": 50.24, "single_face": 54.32, "teresa_quote": 57.92, "mirror": 63.28, "cable_box": 69.52, "imagine_cloud": 75.36, "drill": 82.16, "hung_picture": 92.32, "you_word": 96.04, "one_person": 101.16, "benefit_card": 106.24, "smile_face": 111.68, "challenge": 120.4};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const FA=[];for(let i=0;i<6;i++)FA.push(mk('rect',{x:1130+i*56,y:590,width:40,height:40,rx:6,fill:'var(--muted)'},$('facts')));
+const VX=[200,320,440,560];VX.forEach(x=>fig($('vols'),x,400,24,'ink'));
+const COINS=VX.map(x=>mk('circle',{cx:x,cy:350,r:14,class:'gain'},$('coins')));
+const FB=[120,180,90,200,150,170,110].map((h,i)=>[mk('rect',{x:870+i*62,width:44,y:620,height:0,class:'loss'},$('fbars')),h]);
+fig($('photo'),330,380,56,'gain');
+fig($('cf'),280,360,40,'gain');
+for(let r=0;r<4;r++)for(let c=0;c<3;c++)mk('rect',{x:1124+c*60,y:344+r*46,width:48,height:34,rx:6,fill:'var(--line)'},$('cbtn'));
+const CD=[];for(let r=0;r<9;r++)for(let c=0;c<16;c++)CD.push(mk('circle',{cx:156+c*34,cy:270+r*34,r:10,fill:'var(--muted)'},$('crowd')));
+fig($('one'),1100,330,56,'gain');
+fig($('mirror'),290,390,36,'ink');
+fig($('colA'),1060,500,26,'ink');
+fig($('colB'),1360,500,26,'gain');
+fig($('p3'),1290,360,34,'gain');
+fig($('m0'),340,470,30,'gain');
+fig($('qg'),1340,640,24,'gain');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const h0=p(u,TM.title_heart,TM.title_heart+.8),hb=1+.06*Math.pow(Math.abs(Math.sin(t*3.2)),6);
+$('th').setAttribute('transform','translate(1300 390) scale('+(1.2*(.6+.4*h0)*hb).toFixed(3)+')');$('th').setAttribute('opacity',h0.toFixed(2));
+FA.forEach((r,i)=>r.setAttribute('opacity',(1-.75*p(u,TM.title_heart+4.4+i*.1,TM.title_heart+5+i*.1)).toFixed(2)));
+
+rise($('vols'),p(u,TM.researchers,TM.researchers+.5));
+COINS.forEach((c,i)=>{const a=TM.researchers+.8+i*.2;c.setAttribute('opacity',p(u,a,a+.3).toFixed(2));c.setAttribute('cy',(350+5*Math.sin(t*2+i)).toFixed(1))});
+rise($('box'),p(u,TM.researchers+1.6,TM.researchers+2.1));
+rise($('flyer'),p(u,TM.stats_flyer,TM.stats_flyer+.5));
+FB.forEach(([r,h],i)=>{const k=h*p(u,TM.stats_flyer+.4+i*.12,TM.stats_flyer+1+i*.12);r.setAttribute('y',(620-k).toFixed(1));r.setAttribute('height',k.toFixed(1))});
+
+rise($('photo'),p(u,TM.rokia_photo,TM.rokia_photo+.5));
+rise($('bowl'),p(u,TM.hungry_bowl,TM.hungry_bowl+.5));
+rise($('jars'),p(u,TM.donation_jar,TM.donation_jar+.5));
+const j0=150*p(u,TM.donation_jar+.5,TM.donation_jar+1.5),j1=300*p(u,TM.donation_jar+1,TM.donation_jar+2.6);
+$('jf0').setAttribute('y',(692-j0).toFixed(1));$('jf0').setAttribute('height',j0.toFixed(1));
+$('jf1').setAttribute('y',(692-j1).toFixed(1));$('jf1').setAttribute('height',j1.toFixed(1));
+rise($('two'),p(u,TM.donation_jar+2.4,TM.donation_jar+2.9));
+
+rise($('both'),p(u,TM.both_flyers,TM.both_flyers+.5));
+rise($('cmp'),p(u,TM.shrink_coins,TM.shrink_coins+.5));
+const hB=360-160*p(u,TM.shrink_coins+.8,TM.shrink_coins+2);
+$('cmpB').setAttribute('y',(700-hB).toFixed(1));$('cmpB').setAttribute('height',hB.toFixed(1));
+rise($('calc'),p(u,TM.calculator,TM.calculator+.5));
+$('chp').style.fill=p(u,TM.calculator+1,TM.calculator+2)>.5?'var(--ice)':'var(--gain)';
+
+const cdim=1-.6*p(u,TM.single_face,TM.single_face+.8);
+CD.forEach((c,i)=>{const a=TM.crowd+i*.008;c.setAttribute('opacity',(p(u,a,a+.3)*cdim).toFixed(2))});
+rise($('crowdL'),p(u,TM.crowd+1,TM.crowd+1.5));
+rise($('one'),p(u,TM.single_face,TM.single_face+.6));
+rise($('quote'),p(u,TM.teresa_quote,TM.teresa_quote+.6));
+
+rise($('mirror'),p(u,TM.mirror,TM.mirror+.5));
+rise($('house'),p(u,TM.cable_box,TM.cable_box+.5));
+rise($('colA'),p(u,TM.imagine_cloud,TM.imagine_cloud+.5));
+rise($('colB'),p(u,TM.imagine_cloud+.6,TM.imagine_cloud+1.1));
+$('barA').setAttribute('width',(70*p(u,TM.imagine_cloud+1.4,TM.imagine_cloud+2.2)).toFixed(1));
+$('barB').setAttribute('width',(220*p(u,TM.imagine_cloud+1.6,TM.imagine_cloud+2.8)).toFixed(1));
+
+rise($('p0'),p(u,TM.drill,TM.drill+.5));
+const dk=p(u,TM.drill+1.2,TM.drill+1.8);$('dstk').setAttribute('x2',(130+280*dk).toFixed(1));$('dstk').setAttribute('y2',(270+340*dk).toFixed(1));$('dstk').setAttribute('opacity',dk>0?1:0);
+rise($('p1'),p(u,TM.drill+2.4,TM.drill+2.9));
+rise($('bob'),p(u,TM.hung_picture-5.6,TM.hung_picture-5.1));
+rise($('p2'),p(u,TM.hung_picture,TM.hung_picture+.5));
+rise($('p3'),p(u,TM.you_word,TM.you_word+.5));
+rise($('direct'),p(u,TM.you_word+.6,TM.you_word+1.1));
+
+rise($('m0'),p(u,TM.one_person,TM.one_person+.5));
+const mk2=p(u,TM.one_person+.8,TM.one_person+1.4);$('mstk').setAttribute('x2',(140+400*mk2).toFixed(1));$('mstk').setAttribute('opacity',mk2>0?1:0);
+rise($('m1'),p(u,TM.benefit_card,TM.benefit_card+.5));
+rise($('ans'),p(u,TM.benefit_card+1.2,TM.benefit_card+1.7));
+rise($('m2'),p(u,TM.smile_face,TM.smile_face+.5));
+$('smile').setAttribute('d','M1210 480q70 '+(60*p(u,TM.smile_face+.3,TM.smile_face+1.1)).toFixed(1)+' 140 0');
+rise($('ff'),p(u,TM.smile_face+.6,TM.smile_face+1.1));
+
+const s8=SC[8][0]/K;
+rise($('ql'),p(u,s8+.4,s8+.9));rise($('qg'),p(u,s8+.8,s8+1.3));
+$('qg').setAttribute('opacity',(p(u,s8+.8,s8+1.3)).toFixed(2));
+rise($('qa'),p(u,TM.challenge,TM.challenge+.5));rise($('qb'),p(u,TM.challenge+.4,TM.challenge+.9));rise($('qc'),p(u,TM.challenge+.8,TM.challenge+1.3));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:125.68;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

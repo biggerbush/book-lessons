@@ -1,0 +1,324 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made to Stick Lesson 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 2 of Made to Stick: Strip an idea down to its single most important point, the way the military&#x27;s Commander&#x27;s Intent tells soldiers what really matters when plans fall apart. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MADE TO STICK · LESSON 2</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Simple:</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">find the core.</text>
+<text class="b" x="120" y="600" font-size="32">Find the one thing that matters when the plan falls apart.</text>
+<text class="m" x="960" y="184" font-size="20">EVERYTHING YOU COULD SAY</text>
+<g id="msg"></g>
+<g id="fun0"><path class="s-line" d="M960 372H1480L1270 444H1170z" fill="none" stroke-width="5" stroke-linejoin="round"/></g>
+<g id="pill0"><rect class="gain" x="1000" y="462" width="440" height="80" rx="40"/><text class="d" x="1220" y="516" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">THE CORE</text></g>
+<path id="lk0" class="s-gain" d="M1220 542L1078 660" fill="none" stroke-width="4" stroke-dasharray="10 8" stroke-linecap="round" opacity="0"/>
+<path id="lk1" class="s-gain" d="M1220 542L1340 702" fill="none" stroke-width="4" stroke-dasharray="10 8" stroke-linecap="round" opacity="0"/>
+<g id="arm0"><path class="ink" d="M1034 688a26 26 0 0 1 52 0h6v7h-64v-7z"/><text class="m" x="1060" y="806" font-size="20" text-anchor="middle">THE ARMY</text></g>
+<g id="air0"><polygon class="ink" points="1296,716 1318,716 1302,686 1286,686"/><rect class="ink" x="1286" y="710" width="150" height="28" rx="14"/><polygon class="ink" points="1350,726 1392,726 1352,772 1330,772"/><text class="m" x="1360" y="806" font-size="20" text-anchor="middle">THE AIRLINE</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">When plans break.</text>
+<text class="b" x="120" y="176" font-size="32">A detailed plan: every move drawn on the map, step by step.</text>
+<g id="sold"><text class="m" x="290" y="670" font-size="20" text-anchor="middle">THE UNIT</text></g>
+<rect id="map1" x="520" y="230" width="960" height="560" rx="18" fill="var(--stage)" stroke="var(--line)" stroke-width="3" opacity="0"/>
+<g id="route"></g>
+<g id="goal1"><path class="s-ink" d="M1380 330V250" stroke-width="5" stroke-linecap="round"/><path class="gain" d="M1380 250l60 20-60 20z"/></g>
+<g id="storm"><circle cx="730" cy="300" r="30" fill="var(--muted)"/><circle cx="770" cy="290" r="38" fill="var(--muted)"/><circle cx="810" cy="305" r="28" fill="var(--muted)"/><path class="s-muted" d="M700 350l-12 36M728 350l-12 36M756 350l-12 36M784 350l-12 36M812 350l-12 36" stroke-width="4" stroke-linecap="round"/></g>
+<g id="boom"></g>
+<g id="contact"><text class="d" x="120" y="850" font-size="40">Planners expect plans to break on contact.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Commander’s Intent.</text>
+<text class="b" x="120" y="176" font-size="32">A short statement at the top of the orders.</text>
+<g id="ord"><rect x="120" y="230" width="520" height="580" rx="14" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><g id="ordl"></g></g>
+<g id="band"><rect class="gain" x="150" y="260" width="460" height="150" rx="10"/><text class="m" x="180" y="308" font-size="22" style="fill:var(--on-gain)">COMMANDER’S INTENT</text><text class="d5" x="180" y="372" font-size="32" style="fill:var(--on-gain)">The goal, no matter what.</text></g>
+<g id="hill"><path class="s-line" d="M700 780H1480" stroke-width="4"/><path d="M1000 780C1100 560 1300 560 1400 780z" fill="var(--line)"/><path class="s-ink" d="M1200 616V470" stroke-width="6" stroke-linecap="round"/><path class="gain" d="M1200 470l80 25-80 25z"/><text class="m" x="1200" y="446" font-size="20" text-anchor="middle">THE GOAL</text></g>
+<g id="plan2"><text class="m" x="800" y="350" font-size="20">THE PLAN</text><polyline id="pl2" points="800,450 880,390 960,430 1040,370 1110,410" fill="none" stroke="var(--ink)" stroke-width="5" stroke-dasharray="12 10" stroke-linejoin="round"/></g>
+<path id="imp" class="s-gain" d="M790 770Q1000 790 1192 622" fill="none" stroke-width="6" stroke-dasharray="14 10" stroke-linecap="round" opacity="0"/>
+<g id="sol2"></g>
+<g id="think"><circle class="ink" cx="800" cy="662" r="6"/><circle class="s-ink" cx="850" cy="600" r="42" fill="var(--stage)" stroke-width="4"/><path class="s-ink" d="M836 625V578" stroke-width="4"/><path class="gain" d="M836 578l30 10-30 10z"/></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two questions find the core.</text>
+<g id="q1"><rect x="120" y="210" width="660" height="210" rx="16" fill="var(--stage)" stroke="var(--line)" stroke-width="3"/><text class="m" x="150" y="256" font-size="22">QUESTION 1</text><g id="q1t"><text class="d5" x="150" y="320" font-size="34">If we do nothing else tomorrow,</text><text class="d5" x="150" y="370" font-size="34">what must we do?</text></g></g>
+<g id="q2"><rect x="820" y="210" width="660" height="210" rx="16" fill="var(--stage)" stroke="var(--line)" stroke-width="3"/><text class="m" x="850" y="256" font-size="22">QUESTION 2</text><text class="d5" x="850" y="320" font-size="34">What is the single most</text><text class="d5" x="850" y="370" font-size="34">important thing?</text></g>
+<g id="ideas"></g>
+<g id="pen" opacity="0"><polygon class="loss" points="0,0 8,-22 50,-75 64,-65 22,-12"/></g>
+<g id="keep"><text class="d" x="980" y="640" font-size="44" style="fill:var(--gain)">Keep only</text><text class="d" x="980" y="696" font-size="44" style="fill:var(--gain)">the core.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">One line of strategy.</text>
+<text class="b" x="120" y="176" font-size="32">Southwest Airlines had its own Commander’s Intent.</text>
+<g id="plane"><g id="planeB"><polygon class="ink" points="180,388 220,388 190,310 160,310"/><rect class="ink" x="160" y="380" width="420" height="64" rx="32"/><polygon class="ink" points="330,412 410,412 330,520 290,520"/></g><text class="m" x="150" y="580" font-size="20">SOUTHWEST AIRLINES</text></g>
+<g id="kel"><text class="m" x="760" y="500" font-size="20" text-anchor="middle">HERB KELLEHER</text></g>
+<g id="quote"><rect x="880" y="240" width="600" height="220" rx="20" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><polygon class="ink" points="880,330 840,360 880,372"/><text class="d" x="920" y="330" font-size="52">“We are the</text><text class="d" x="920" y="410" font-size="52"><tspan style="fill:var(--gain)">low-fare</tspan> airline.”</text></g>
+<g id="tag"><polygon class="gain" points="120,640 440,640 500,700 440,760 120,760"/><circle cx="450" cy="700" r="12" fill="var(--stage)"/><text class="d" x="150" y="718" font-size="48" style="fill:var(--on-gain)">LOW FARE</text></g>
+<g id="rul"><rect x="600" y="650" width="880" height="70" rx="8" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><g id="ticks"></g><path id="mk4" class="gain" d="M0 0l-14-24h28z"/><text class="b" x="600" y="800" font-size="32">Every decision is measured against those six words.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The salad test.</text>
+<text class="b" x="120" y="176" font-size="32">Every idea meets one question.</text>
+<g id="mkt"><rect x="290" y="240" width="380" height="80" rx="16" fill="var(--stage)" stroke="var(--ink)" stroke-width="4"/><polygon class="ink" points="300,320 270,345 324,320"/><text class="m" x="480" y="288" font-size="22" text-anchor="middle">ADD A CHICKEN SALAD?</text></g>
+<g id="sal"><circle class="gain" cx="430" cy="425" r="20"/><circle class="ink" cx="470" cy="415" r="18"/><circle class="gain" cx="510" cy="420" r="20"/><circle class="gain" cx="540" cy="430" r="14"/><path class="ink" d="M400 430a80 80 0 0 0 160 0z"/><text class="m" x="480" y="560" font-size="20" text-anchor="middle">LOVELY IDEA</text></g>
+<g id="gate"><path class="s-muted" d="M590 430h240m-24-24 24 24-24 24" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect x="860" y="360" width="320" height="140" rx="16" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><text class="m" x="1020" y="438" font-size="22" text-anchor="middle">STAYS LOW-FARE?</text></g>
+<g id="no5"><path class="s-muted" d="M1190 430h60" stroke-width="6" stroke-linecap="round"/><circle class="loss" cx="1340" cy="430" r="70"/><text class="d" x="1340" y="448" font-size="52" text-anchor="middle" style="fill:var(--stage)">NO</text></g>
+<g id="emp"><text class="d" x="120" y="810" font-size="40">Any employee can make that call.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Say less.</text>
+<text class="b" x="120" y="176" font-size="32">1992: James Carville kept Clinton’s whole team focused on the economy.</text>
+<g id="pod"><polygon class="ink" points="230,440 390,440 370,640 250,640"/><rect class="gain" x="150" y="680" width="320" height="64" rx="32"/><text class="m" x="310" y="720" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">THE ECONOMY</text></g>
+<g id="jug"><path class="s-line" d="M610 640H970" stroke-width="4"/><g id="juggler"></g><g id="balls"></g><text class="m" x="790" y="690" font-size="20" text-anchor="middle">THREE MESSAGES</text></g>
+<g id="none6"><text class="m" x="790" y="730" font-size="22" text-anchor="middle" style="fill:var(--loss)">LANDS NONE</text></g>
+<g id="tgt"><circle cx="1270" cy="430" r="150" fill="var(--stage)" stroke="var(--ink)" stroke-width="6"/><circle cx="1270" cy="430" r="100" fill="none" stroke="var(--ink)" stroke-width="6"/><circle class="gain" cx="1270" cy="430" r="50"/><text class="m" x="1270" y="690" font-size="20" text-anchor="middle">ONE PRIORITY</text></g>
+<g id="arw" opacity="0"><path class="s-ink" d="M-150 -72L-10 -5" stroke-width="8" stroke-linecap="round"/><polygon class="ink" points="0,0 -30,-2 -18,-26"/><path class="s-loss" d="M-150 -72l-6 26M-150 -72l24 -14" stroke-width="6" stroke-linecap="round"/></g>
+<g id="extra"><text class="d" x="120" y="820" font-size="40">Every extra priority weakens the one that counts.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Simple is not dumb.</text>
+<text class="b" x="120" y="176" font-size="32">It is the core, packed tightly.</text>
+<g id="book"><path d="M340 300C280 280 190 280 140 300V520C190 500 280 500 340 520z" fill="var(--stage)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><path d="M340 300C400 280 490 280 540 300V520C490 500 400 500 340 520z" fill="var(--stage)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><g id="bkm"></g><g id="bkg"></g></g>
+<g id="lab7"><text class="m" x="140" y="580" font-size="20">A PROVERB: FEW WORDS, DEEP WISDOM</text></g>
+<g id="card"><g transform="rotate(-3 870 410)"><rect x="640" y="260" width="460" height="300" rx="12" fill="var(--stage)" stroke="var(--ink)" stroke-width="5"/><text class="m" x="670" y="310" font-size="20">YOUR CORE MESSAGE</text><rect class="gain" x="670" y="352" width="380" height="16" rx="8"/><g id="cardx"></g></g></g>
+<g id="scr"></g>
+<g id="can"><rect class="ink" x="1220" y="380" width="220" height="20" rx="6"/><path d="M1240 410L1260 600H1400L1420 410z" fill="var(--stage)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/><path class="s-line" d="M1290 440l6 130M1330 440v130M1370 440l-6 130" stroke-width="5" stroke-linecap="round"/></g>
+<g id="cut7"><text class="d" x="120" y="780" font-size="44">Write the core. Cut what doesn’t serve it.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="88" letter-spacing="-2">What is the one thing</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="88" letter-spacing="-2">your team must get right,</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="88" letter-spacing="-2">even if every plan</text></g>
+<g id="qd"><text class="d" x="136" y="600" font-size="88" letter-spacing="-2" style="fill:var(--gain)">falls apart?</text></g>
+<g id="wr"><text class="m" x="143" y="720" font-size="26">WRITE THAT SENTENCE DOWN TODAY, AND SHARE IT.</text></g>
+<g id="fl8"><path class="s-ink" d="M1380 640V420" stroke-width="7" stroke-linecap="round"/><path id="flg" class="gain"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="135" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:15</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Simple: Find the Core&rdquo;, from <em>Made to Stick</em> by Chip Heath and Dan Heath. Examples as reported in the book: the Army&#x27;s Commander&#x27;s Intent, Southwest Airlines under Herb Kelleher, and James Carville&#x27;s focus in the 1992 Clinton campaign. The salad scene is a hypothetical from the book, and the drawings of maps, scales and arrows are illustrations rather than data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-02.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=135, SC=[[0.0, 9.2], [9.2, 26.7], [26.7, 43.9], [43.9, 60.5], [60.5, 76.4], [76.4, 91.6], [91.6, 106.5], [106.5, 122.9], [122.9, 135.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "When Plans Break", "Commander's Intent", "Two Questions", "The Airline", "The Salad Test", "Saying Less", "Simple Is Not Dumb", "Your Challenge"];
+const TM={"title_card": 0.0, "soldiers": 9.48, "battle_map": 12.88, "explosion": 16.68, "order_sheet": 27.04, "flag_hill": 33.2, "soldier_think": 38.56, "question_one": 44.24, "question_two": 51.92, "red_pencil": 56.16, "plane": 60.8, "kelleher": 64.48, "price_tag": 69.52, "marketer": 76.72, "salad": 81.52, "scale": 83.6, "podium": 91.92, "three_balls": 98.68, "one_arrow": 102.8, "proverb_book": 106.8, "note_card": 115.36, "trash_can": 120.32, "challenge": 123.2};
+const fig=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g);return g};
+const T=(g,x,y,s,c,txt,a)=>{const e=mk('text',{x:x,y:y,'font-size':s,class:c},g);if(a)e.setAttribute('text-anchor',a);e.textContent=txt;return e};
+// title: long message bars compress into the core
+const B0=[[980,204,480],[980,236,400],[980,268,460],[980,300,360],[980,332,430]];
+const BR=B0.map(b=>mk('rect',{x:b[0],y:b[1],width:b[2],height:14,rx:7,fill:'var(--muted)',opacity:0},$('msg')));
+fig($('arm0'),1060,690,18,'ink');$('arm0').appendChild($('arm0').firstElementChild);
+// plan breaks
+[200,290,380].forEach(x=>fig($('sold'),x,520,22,'ink'));
+const P=[[600,720],[760,640],[900,680],[1060,520],[1200,560],[1380,330]];
+const SG=P.slice(1).map((q,i)=>mk('path',{d:'M'+P[i]+'L'+q,fill:'none',stroke:'var(--ink)','stroke-width':6,'stroke-dasharray':'14 12','stroke-linecap':'round'},$('route')));
+const WP=P.slice(1,5).map((q,i)=>{const g=mk('g',{},$('route'));mk('circle',{cx:q[0],cy:q[1],r:30,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  const n=T(g,q[0],q[1]+10,28,'d',''+(i+1),'middle');n.setAttribute('style','font-size:28px');return g});
+let bp='';for(let i=0;i<16;i++){const r=i%2?38:92,a=i*Math.PI/8;bp+=(r*Math.cos(a)).toFixed(1)+','+(r*Math.sin(a)).toFixed(1)+' '}
+mk('polygon',{points:bp,class:'loss'},$('boom'));
+for(let i=0;i<8;i++)mk('path',{d:'M160 '+(460+i*42)+'h'+(300+((i*7)%4)*40),class:'s-line','stroke-width':8,'stroke-linecap':'round'},$('ordl'));
+fig($('sol2'),760,696,20,'ink');
+// two questions: idea rows (no strike on the core row)
+const IR=['NICE TO HAVE','ALSO GOOD','THE ONE THING','WORTH DOING','INTERESTING'].map((s,i)=>{const y=470+i*66,g=mk('g',{},$('ideas'));
+  const r=mk('rect',{x:120,y:y,width:760,height:50,rx:25,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  const tx=T(g,150,y+34,24,'m',s);
+  const k=i===2?null:mk('line',{x1:140,y1:y+26,x2:140,y2:y+26,stroke:'var(--loss)','stroke-width':3,'stroke-linecap':'round',opacity:0},g);return [g,r,tx,k,y]});
+// southwest
+for(let i=0;i<6;i++)mk('circle',{cx:300+i*40,cy:402,r:7,fill:'var(--stage)'},$('planeB'));
+fig($('kel'),760,300,34,'gain');
+for(let i=0;i<22;i++)mk('path',{d:'M'+(620+i*40)+' 650v'+(i%5?20:40),class:'s-ink','stroke-width':3},$('ticks'));
+fig($('mkt'),220,340,30,'ink');
+for(let i=0;i<7;i++)fig($('emp'),300+i*130,640,18,'ink');
+fig($('pod'),310,330,30,'ink');$('pod').appendChild($('pod').firstElementChild);
+// juggler with three balls
+fig($('juggler'),790,520,26,'ink');
+mk('path',{d:'M760 606L714 560M820 606L866 560',class:'s-ink','stroke-width':8,'stroke-linecap':'round'},$('juggler'));
+[[714,560],[866,560]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:11,class:'ink'},$('juggler')));
+const JB=[0,1,2].map(()=>mk('circle',{r:22,class:'loss'},$('balls'))), LAND=[645,705,935];
+// proverb, card, trash
+for(let i=0;i<8;i++){const l=i<4,y=340+(i%4)*40;mk('path',{d:'M'+(l?170:370)+' '+y+'h140',class:'s-muted','stroke-width':4,'stroke-linecap':'round'},$('bkm'))}
+[[190,370],[190,430],[390,370],[390,430]].forEach(q=>mk('path',{d:'M'+q[0]+' '+q[1]+'h100',class:'s-gain','stroke-width':14,'stroke-linecap':'round'},$('bkg')));
+const XL=[360,300,330].map((w,i)=>mk('rect',{x:670,y:410+i*45,width:w,height:12,rx:6,fill:'var(--line)'},$('cardx')));
+const SCR=[0,1,2].map(()=>mk('rect',{x:-14,y:-14,width:28,height:28,rx:6,fill:'var(--muted)',opacity:0},$('scr')));
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d)),A=(e,k,v)=>e.setAttribute(k,v);
+  // title: many lines squeezed into one core
+  BR.forEach((b,i)=>{const q=B0[i],a=TM.title_card+.2+i*.15,inn=p(u,a,a+.4),c=TM.title_card+1.6+i*.2,k=p(u,c,c+.9),w=q[2]+(60-q[2])*k;
+    A(b,'x',(q[0]+(1220-w/2-q[0])*k).toFixed(1));A(b,'y',(q[1]+(424-q[1])*k).toFixed(1));A(b,'width',w.toFixed(1));A(b,'opacity',(inn*(1-p(u,c+.6,c+.9))).toFixed(2))});
+  R('fun0',TM.title_card+1.2);R('pill0',TM.title_card+2.9);
+  const lk=p(u,TM.title_card+3.4,TM.title_card+3.9);[$('lk0'),$('lk1')].forEach(l=>{A(l,'opacity',lk.toFixed(2));A(l,'stroke-dashoffset',(-t*30).toFixed(0))});
+  R('arm0',TM.title_card+3.6);R('air0',TM.title_card+4);
+
+  R('sold',TM.soldiers);
+  A($('map1'),'opacity',p(u,TM.battle_map,TM.battle_map+.5));
+  SG.forEach((s,i)=>{A(s,'opacity',p(u,TM.battle_map+.4+i*.5,TM.battle_map+.8+i*.5));const br=i>=3&&u>=TM.explosion+.3;A(s,'stroke',br?'var(--loss)':'var(--ink)');A(s,'transform',br?'translate('+(8*Math.sin(t*5+i)).toFixed(1)+' '+(10*Math.cos(t*4+i)).toFixed(1)+')':'')});
+  WP.forEach((w,i)=>rise(w,p(u,TM.battle_map+.6+i*.5,TM.battle_map+1+i*.5)));
+  R('goal1',TM.battle_map+2.6);
+  const ex=p(u,TM.explosion,TM.explosion+.4);A($('boom'),'transform','translate(1060 520) scale('+(ex*(1+.06*Math.sin(t*6))).toFixed(3)+')');
+  R('storm',TM.explosion+1.2);R('contact',TM.explosion+4.9,.6);
+
+  R('ord',TM.order_sheet);R('band',TM.order_sheet+5.4);R('hill',TM.flag_hill);R('sol2',TM.flag_hill+.6);
+  const st=p(u,TM.soldier_think,TM.soldier_think+.8);
+  A($('plan2'),'opacity',(p(u,TM.flag_hill+.6,TM.flag_hill+1.1)*(1-.7*st)).toFixed(2));
+  A($('plan2'),'transform','translate(0 '+(70*st).toFixed(1)+') rotate('+(8*st).toFixed(1)+' 950 410)');
+  A($('pl2'),'stroke',st>0?'var(--loss)':'var(--ink)');
+  rise($('think'),st);
+  A($('imp'),'opacity',p(u,TM.soldier_think+.6,TM.soldier_think+1.4));A($('imp'),'stroke-dashoffset',(-t*40).toFixed(0));
+
+  R('q1',TM.question_one);R('q1t',TM.question_one+4.6);R('q2',TM.question_two);
+  IR.forEach((r,i)=>rise(r[0],p(u,TM.red_pencil-.6+i*.15,TM.red_pencil-.1+i*.15)));
+  let px=0,py=0;[0,1,3,4].forEach((j,n)=>{const a=TM.red_pencil+.8+n*.7,k=p(u,a,a+.5),r=IR[j];A(r[3],'opacity',u>=a?.85:0);A(r[3],'x2',(140+720*k).toFixed(1));A(r[2],'fill-opacity',(1-.4*k).toFixed(2));if(u>=a){px=140+720*k;py=r[4]+26}});
+  A($('pen'),'transform','translate('+px.toFixed(1)+' '+py+')');A($('pen'),'opacity',(p(u,TM.red_pencil+.8,TM.red_pencil+1)*(1-p(u,TM.red_pencil+3.4,TM.red_pencil+3.8))).toFixed(2));
+  const es=u>=TM.red_pencil+3.6;A(IR[2][1],'fill',es?'var(--gain)':'var(--stage)');A(IR[2][1],'stroke',es?'var(--gain)':'var(--ink)');IR[2][2].style.fill=es?'var(--on-gain)':'var(--ink)';
+  R('keep',TM.red_pencil+3.6);
+
+  R('plane',TM.plane,.6);A($('planeB'),'transform','translate('+(10*Math.sin(t*.9)).toFixed(1)+' '+(8*Math.sin(t*1.7)).toFixed(1)+')');
+  R('kel',TM.kelleher);R('quote',TM.price_tag);R('tag',TM.price_tag+.5);R('rul',TM.price_tag+3.4);
+  A($('mk4'),'transform','translate('+(640+800*(.5+.5*Math.sin(t*1.2))).toFixed(1)+' 646)');
+
+  R('mkt',TM.marketer);R('sal',TM.salad);R('gate',TM.scale);R('no5',TM.scale+1.8);R('emp',TM.scale+3.7,.6);
+
+  // say less: juggler drops three messages
+  R('pod',TM.podium);R('jug',TM.three_balls);
+  const fl=p(u,TM.three_balls+2.5,TM.three_balls+3.3),ta=Math.min(u,TM.three_balls+2.5)*2.6;
+  JB.forEach((b,i)=>{const a=ta+i*2.094,x=790+110*Math.cos(a),y=380-90*Math.sin(a);A(b,'cx',(x+(LAND[i]-x)*fl).toFixed(1));A(b,'cy',(y+(618-y)*fl).toFixed(1))});
+  R('none6',TM.three_balls+3);R('tgt',TM.one_arrow-.4);
+  const ak=p(u,TM.one_arrow,TM.one_arrow+.6);A($('arw'),'opacity',u>=TM.one_arrow?1:0);
+  A($('arw'),'transform','translate('+(1270-250*(1-ak)).toFixed(1)+' '+(430-120*(1-ak)).toFixed(1)+')');
+  R('extra',TM.one_arrow+1.2,.6);
+
+  R('book',TM.proverb_book);const pk=p(u,TM.proverb_book+2.5,TM.proverb_book+3.3);A($('bkm'),'opacity',(1-pk).toFixed(2));A($('bkg'),'opacity',pk.toFixed(2));R('lab7',TM.proverb_book+2.5);
+  R('card',TM.note_card);R('can',TM.trash_can);
+  SCR.forEach((s,i)=>{const a=TM.trash_can+.4+i*.3,k=p(u,a,a+.8),y0=416+i*45;A(XL[i],'opacity',u>=a?0:1);A(s,'opacity',u>=a&&k<1?1:0);
+    A(s,'transform','translate('+(860+470*k).toFixed(1)+' '+(y0+(470-y0)*k-180*Math.sin(Math.PI*k)).toFixed(1)+') rotate('+(k*300).toFixed(0)+')')});
+  R('cut7',TM.trash_can+1.4,.6);
+
+  ['qa','qb','qc','qd'].forEach((id,i)=>R(id,TM.challenge+i*.4));
+  R('fl8',TM.challenge+1.6);R('wr',TM.challenge+6.6);
+  const w=8*Math.sin(t*3);A($('flg'),'d','M1380 420Q1420 '+(400+w).toFixed(1)+' 1470 '+(430-w*.5).toFixed(1)+'V490Q1420 '+(470+w).toFixed(1)+' 1380 480z');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:131.44;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

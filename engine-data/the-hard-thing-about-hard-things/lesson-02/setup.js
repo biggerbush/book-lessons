@@ -1,0 +1,31 @@
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const bulb=(g,x,y)=>{mk('circle',{cx:x,cy:y,r:20,class:'gain'},g);mk('rect',{x:x-8,y:y+20,width:16,height:10,class:'ink'},g)};
+// customers: figures standing on the line, linked to the cloud
+const CU=[...Array(8)].map((_,i)=>{const x=360+i*44,r=12,y=746;
+  const ln=mk('path',{d:'M505 432L'+x+' 720',stroke:'var(--line)','stroke-width':3,fill:'none'},$('custlinks'));
+  const g=mk('g',{},$('custs'));
+  const hd=mk('circle',{cx:x,cy:y,r:r,fill:'var(--ink)'},g);
+  const bd=mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v'+(-r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',fill:'var(--ink)'},g);
+  const xm=mk('path',{d:'M'+(x-8)+' 696l16 16m0-16l-16 16',stroke:'var(--loss)','stroke-width':4,'stroke-linecap':'round',fill:'none',opacity:0},$('custs'));
+  return {x,ln,g,hd,bd,xm}});
+fig($('team1'),1000,470,26,'gain');
+[1220,1310,1400].forEach(x=>{fig($('team1'),x,470,22,'ink');mk('text',{x:x,y:428,class:'m','font-size':26,'text-anchor':'middle'},$('team1')).textContent='?'});
+fig($('ldr2'),400,420,32,'ink');
+[1120,1220,1320].forEach(x=>fig($('calm'),x,470,24,'ink'));
+const SN=[950,1050,1150,1250].map(x=>{const g=mk('g',{},$('suns'));mk('circle',{cx:x,cy:320,r:16,class:'gain'},g);mk('circle',{cx:x,cy:320,r:28,fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'4 7'},g);return g});
+const BL=[...Array(14)].map((_,i)=>{const a=(-90+i*360/14)*Math.PI/180,c=Math.cos(a),s=Math.sin(a),g=mk('g',{},$('bulbs'));
+  mk('path',{d:'M'+(800+c*90).toFixed(1)+' '+(500+s*90).toFixed(1)+'L'+(800+c*232).toFixed(1)+' '+(500+s*232).toFixed(1),class:'s-gain','stroke-width':3,'stroke-dasharray':'6 8'},g);
+  bulb(g,800+c*260,500+s*260);return g});
+const RS=[390,480,570].map(x=>{const g=mk('g',{},$('raisers'));fig(g,x,640,18,'ink');mk('circle',{cx:x,cy:592,r:16,class:'loss'},g);
+  mk('text',{x:x,y:601,'font-size':24,'text-anchor':'middle',class:'d',style:'fill:var(--stage)'},g).textContent='!';return g});
+['What’s wrong','Why','The plan','Your ideas'].forEach((s,i)=>{const g=$('k'+i),x=120+i*350;
+  mk('rect',{x:x,y:240,width:310,height:420,rx:18,fill:'none',stroke:'var(--line)','stroke-width':3},g);
+  mk('text',{x:x+30,y:330,'font-size':72,class:'d'},g).textContent=String(i+1);
+  mk('text',{x:x+30,y:600,'font-size':36,class:'d5'},g).textContent=s});
+[1250,1325,1400].forEach(x=>bulb($('k3'),x,450));
+for(let i=0;i<7;i++)mk('rect',{x:134+i*64,y:350,width:52,height:60,rx:8,fill:i===2?'var(--gain)':'none',stroke:i===2?'var(--gain)':'var(--line)','stroke-width':3},$('days'));
+// table seats: top figure fully above the table, bottom fully below
+const SEAT=[[1060,250],[1346,425],[1346,615],[1060,660],[774,615],[774,425]];
+SEAT.forEach(q=>fig($('seat'),q[0],q[1],20,'ink'));
+const BTT=[-90,-30,30,90,150,210].map(d=>[1060+175*Math.cos(d*Math.PI/180),520+70*Math.sin(d*Math.PI/180)]);
+const BT=BTT.map(()=>mk('circle',{cx:1060,cy:520,r:14,class:'loss',opacity:0},$('bits')));

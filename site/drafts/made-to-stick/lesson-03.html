@@ -1,0 +1,330 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made to Stick Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Made to Stick: Surprise grabs attention and curiosity gaps hold it, so open a gap in what people know before you fill it. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MADE TO STICK · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Unexpected:</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">Break the pattern.</text>
+<text class="b" x="120" y="600" font-size="32">Surprise grabs attention, and curiosity gaps keep people listening.</text>
+<g id="grid"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Patterns put us to sleep.</text>
+<text class="b" x="120" y="176" font-size="32">Your brain is a pattern machine. Expected things get tuned out.</text>
+<g id="brs" opacity="0"></g>
+<g id="brn"><path id="brp" class="s-ink" d="M190 540a70 70 0 0 1-10-130a80 80 0 0 1 130-70a80 80 0 0 1 130 40a70 70 0 0 1 20 140a60 60 0 0 1-90 40h-110a60 60 0 0 1-70-20z" fill="var(--stage)" stroke-width="7" stroke-linejoin="round"/><path class="s-ink" d="M310 350v200M240 430q35 25 70 0M310 480q45 25 85-15" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="320" y="630" font-size="22" text-anchor="middle">YOUR BRAIN</text></g>
+<g id="zz"><text class="d5" x="470" y="330" font-size="40" style="fill:var(--muted)">z z z</text></g>
+<path id="pat" class="s-muted" fill="none" stroke-width="6" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+<path id="spk" class="s-gain" d="M1200 430L1250 290L1310 640L1360 470H1440" fill="none" stroke-width="8" stroke-linejoin="round" stroke-linecap="round" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1.02"/>
+<g id="rt"><text class="m" x="540" y="620" font-size="22">SAME, SAME, SAME · SAFETY TALK, FLIGHT 100</text></g>
+<g id="snap"><text class="d" x="120" y="790" font-size="52">Break the pattern. Attention snaps back.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Surprise is an alarm.</text>
+<text class="b" x="120" y="176" font-size="32">When a pattern breaks, we stop to figure out what we got wrong.</text>
+<circle class="s-ink" cx="480" cy="500" r="190" fill="var(--stage)" stroke-width="7"/>
+<path id="br0" class="s-ink" d="M370 410q40-24 80 0" fill="none" stroke-width="8" stroke-linecap="round"/>
+<path id="br1" class="s-ink" d="M510 410q40-24 80 0" fill="none" stroke-width="8" stroke-linecap="round"/>
+<circle id="ey0" class="ink" cx="410" cy="470" r="14"/><circle id="ey1" class="ink" cx="550" cy="470" r="14"/>
+<circle id="mo" class="s-ink" cx="480" cy="590" r="12" fill="none" stroke-width="7"/>
+<g id="qm"><text class="d" x="800" y="560" font-size="240" text-anchor="middle" style="fill:var(--gain)">?</text><g id="qr"></g></g>
+<g id="eb0"><circle class="gain" cx="972" cy="402" r="10"/><text class="m" x="1000" y="410" font-size="26">EYEBROWS LIFT</text></g>
+<g id="eb1"><circle class="gain" cx="972" cy="472" r="10"/><text class="m" x="1000" y="480" font-size="26">EYES WIDEN</text></g>
+<g id="eb2"><circle class="gain" cx="972" cy="542" r="10"/><text class="m" x="1000" y="550" font-size="26">WE STOP TO FIGURE IT OUT</text></g>
+<g id="teach"><text class="d" x="120" y="800" font-size="52">That pause is your chance to teach.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The missing school day.</text>
+<text class="b" x="120" y="176" font-size="32">Nora Ephron remembered a high school journalism assignment.</text>
+<g id="np"><rect class="s-ink" x="120" y="230" width="560" height="540" rx="14" fill="var(--stage)" stroke-width="6"/><g id="rings"></g>
+<text class="m" x="160" y="310" font-size="22">THE TEACHER’S FACTS</text>
+<g id="fx">
+<g id="f0"><circle class="ink" cx="172" cy="390" r="7"/><text class="d5" x="192" y="400" font-size="30">Faculty travel next Thursday</text></g>
+<g id="f1"><circle class="ink" cx="172" cy="470" r="7"/><text class="d5" x="192" y="480" font-size="30">To a conference</text></g>
+<g id="f2"><circle class="ink" cx="172" cy="550" r="7"/><text class="d5" x="192" y="560" font-size="30">To hear famous speakers</text></g>
+</g></g>
+<g id="stu"></g>
+<g id="sum"><text class="m" x="760" y="450" font-size="24">SUMMARY: WHO · WHAT · WHERE</text></g>
+<g id="hl"><rect class="gain" x="760" y="520" width="720" height="220" rx="16"/><text class="m" x="800" y="575" font-size="22" style="fill:var(--on-gain)">THE REAL LEAD</text>
+<text class="d" x="800" y="645" font-size="46" style="fill:var(--on-gain)">There will be no school</text><text class="d" x="800" y="705" font-size="46" style="fill:var(--on-gain)">next Thursday.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Surprise with a point.</text>
+<text class="b" x="120" y="176" font-size="32">A surprise must point back to your core message.</text>
+<g id="lp"><rect class="s-line" x="120" y="230" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="rays"></g><circle class="gain" cx="260" cy="420" r="70"/><rect class="ink" x="235" y="490" width="50" height="40" rx="6"/>
+<text class="d5" x="150" y="700" font-size="36">Surprise with a point</text></g>
+<g id="tg"><path class="s-gain" d="M345 420H490m-20-20 20 20-20 20" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle class="s-ink" cx="600" cy="420" r="90" fill="none" stroke-width="6"/><circle class="s-ink" cx="600" cy="420" r="58" fill="none" stroke-width="6"/><circle class="gain" cx="600" cy="420" r="26"/>
+<text class="m" x="150" y="630" font-size="20">SHOWS WHAT MATTERS TO THE READER</text></g>
+<g id="rp"><rect class="s-loss" x="840" y="230" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="4" stroke-dasharray="12 10"/>
+<g id="ga"></g><circle class="loss" cx="1160" cy="420" r="30"/>
+<text class="m" x="870" y="630" font-size="20" style="fill:var(--loss)">GIMMICK: UNEXPECTED FOR ITS OWN SAKE</text></g>
+<g id="cf"><text class="d5" x="870" y="700" font-size="36">Just confuses people.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Curiosity gaps.</text>
+<text class="b" x="120" y="176" font-size="32">Surprise grabs attention, but curiosity holds it.</text>
+<g id="bar"><text class="m" x="120" y="350" font-size="22">WHAT YOU KNOW</text><text class="m" x="1140" y="350" font-size="22" text-anchor="middle" style="fill:var(--loss)">THE GAP</text>
+<rect class="ink" x="120" y="370" width="860" height="90" rx="12"/><rect class="ink" x="1300" y="370" width="180" height="90" rx="12"/>
+<rect id="gp" class="s-loss" x="1000" y="370" width="280" height="90" rx="12" fill="none" stroke-width="6" stroke-dasharray="14 10"/>
+<text class="d" x="1140" y="438" font-size="60" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+<g id="itc" opacity="0"></g>
+<g id="sci"><g id="scp"></g><text class="m" x="280" y="600" font-size="22">ECONOMIST GEORGE LOEWENSTEIN</text><text class="d5" x="280" y="660" font-size="36">Curiosity appears when we notice a gap.</text></g>
+<g id="itx"><text class="d" x="120" y="800" font-size="46">That gap feels like an itch we must scratch.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="64">What are Saturn’s rings made of?</text>
+<text class="b" x="120" y="176" font-size="32">Robert Cialdini: the best science writing opened like a mystery.</text>
+<g id="sat"><circle class="gain" cx="400" cy="500" r="110"/><ellipse id="rng" class="s-ink" cx="400" cy="500" rx="230" ry="56" fill="none" stroke-width="8" transform="rotate(-14 400 500)"/></g>
+<g id="dst" opacity="0"></g>
+<g id="det"><g id="mag"><circle class="s-ink" r="44" fill="var(--stage)" fill-opacity=".3" stroke-width="8"/><path class="s-ink" d="M31 31L70 70" stroke-width="12" stroke-linecap="round"/></g></g>
+<g id="cd0"><rect class="s-loss" x="780" y="250" width="460" height="90" rx="14" fill="var(--stage)" stroke-width="4"/><text class="m" x="810" y="304" font-size="22">TEAM 1: ONE ANSWER</text></g>
+<g id="cd1"><rect class="s-loss" x="780" y="370" width="460" height="90" rx="14" fill="var(--stage)" stroke-width="4"/><text class="m" x="810" y="424" font-size="22">TEAM 2: A DIFFERENT ANSWER</text></g>
+<g id="cd2"><rect class="s-loss" x="780" y="490" width="460" height="90" rx="14" fill="var(--stage)" stroke-width="4"/><text class="m" x="810" y="544" font-size="22">TEAM 3: ANOTHER ONE</text></g>
+<g id="ans"><rect class="gain" x="780" y="640" width="700" height="120" rx="16"/><text class="m" x="810" y="682" font-size="20" style="fill:var(--on-gain)">THE ANSWER</text><text class="d" x="810" y="738" font-size="46" style="fill:var(--on-gain)">Ice-covered dust.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Open the gap first.</text>
+<text class="b" x="120" y="176" font-size="32">Most of us give answers before anyone has asked the question.</text>
+<g id="usual"><text class="m" x="120" y="262" font-size="20">THE USUAL WAY</text>
+<rect class="s-loss" x="120" y="280" width="280" height="80" rx="14" fill="var(--stage)" stroke-width="5"/><text class="d5" x="260" y="331" font-size="30" text-anchor="middle" style="fill:var(--loss)">Answer</text>
+<path class="s-muted" d="M420 320h60m-16-16 16 16-16 16" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="s-muted" x="500" y="280" width="300" height="80" rx="14" fill="none" stroke-width="4" stroke-dasharray="10 8"/><text class="d5" x="650" y="331" font-size="30" text-anchor="middle" style="fill:var(--muted)">Question?</text>
+<text class="m" x="830" y="328" font-size="22" style="fill:var(--loss)">NOBODY ASKED YET</text></g>
+<g id="dor"><text class="m" x="120" y="430" font-size="22" style="fill:var(--gain)">OPEN THE GAP FIRST</text>
+<rect class="s-ink" x="120" y="450" width="200" height="300" fill="var(--stage)" stroke-width="7"/>
+<text class="d" x="220" y="660" font-size="130" text-anchor="middle" style="fill:var(--gain)">?</text>
+<rect id="dp" class="ink" x="124" y="454" width="192" height="292"/></g>
+<g id="pz0"><circle class="gain" cx="370" cy="512" r="8"/><text class="m" x="390" y="520" font-size="22">ASK A QUESTION</text></g>
+<g id="pz1"><circle class="gain" cx="370" cy="582" r="8"/><text class="m" x="390" y="590" font-size="22">POSE A PUZZLE</text></g>
+<g id="pz2"><circle class="gain" cx="370" cy="652" r="8"/><text class="m" x="390" y="660" font-size="22">ADMIT WHAT EXPERTS</text><text class="m" x="390" y="692" font-size="22">STILL ARGUE ABOUT</text></g>
+<g id="slt"><rect class="s-muted" x="920" y="450" width="560" height="300" rx="14" fill="none" stroke-width="4" stroke-dasharray="12 10"/>
+<text id="sq" class="d" x="1200" y="640" font-size="110" text-anchor="middle" style="fill:var(--muted)">?</text><g id="pcs"></g></g>
+<g id="fil"><text class="m" x="920" y="800" font-size="22" style="fill:var(--gain)">THEN FILL THE GAP, ONE PIECE AT A TIME</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="320" font-size="88" letter-spacing="-2">Before your next talk,</text></g>
+<g id="qb"><text class="d" x="136" y="420" font-size="88" letter-spacing="-2">what is <tspan style="fill:var(--gain)">surprising</tspan></text></g>
+<g id="qc"><text class="d" x="136" y="520" font-size="88" letter-spacing="-2">about your message?</text></g>
+<g id="hkm"><text class="m" x="143" y="700" font-size="26">OPEN WITH THE GAP. LET PEOPLE LEAN IN.</text></g>
+<g id="hk"><circle class="gain" cx="1340" cy="700" r="80"/><text class="d" x="1340" y="736" font-size="100" text-anchor="middle" style="fill:var(--on-gain)">?</text><g id="ln"></g></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="131" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:11</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Unexpected: Break the Pattern&rdquo;, from <em>Made to Stick</em> by Chip Heath and Dan Heath. Nora Ephron&#x27;s journalism teacher, George Loewenstein&#x27;s gap theory of curiosity, and Robert Cialdini&#x27;s look at science writing about Saturn&#x27;s rings are as reported in the book. Drawings of brains, alarms, gaps and itches are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=131, SC=[[0.0, 8.3], [8.3, 21.4], [21.4, 33.2], [33.2, 52.5], [52.5, 69.2], [69.2, 82.7], [82.7, 103.3], [103.3, 119.5], [119.5, 131.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Title", "Patterns Put Us to Sleep", "Surprise Grabs", "The Missing School Day", "Surprise With a Point", "Curiosity Gaps", "Saturn's Rings", "Open the Gap First", "Your Turn"];
+const TM={"title_card": 0.0, "brain": 8.56, "routine": 10.88, "alarm_bell": 17.44, "question_mark": 21.68, "eyebrows": 25.12, "notepad": 33.52, "fact_list": 37.32, "students": 43.84, "headline": 47.84, "lightbulb": 52.84, "gimmick": 59.76, "gap": 69.52, "scientist": 73.44, "itch": 79.28, "saturn": 82.96, "detective": 87.56, "dust": 98.88, "map": 103.56, "open_door": 107.76, "puzzle": 111.12, "key": 116.56, "mirror": 119.76, "hook_sign": 124.56};
+const fig=(g,x,y,r,c)=>[mk('circle',{cx:x,cy:y,r:r,class:c},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)];
+const ray=(g,cx,cy,r0,r1,a,cls,w)=>{const c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(cx+r0*c).toFixed(1)+' '+(cy+r0*s).toFixed(1)+'L'+(cx+r1*c).toFixed(1)+' '+(cy+r1*s).toFixed(1),class:cls,'stroke-width':w,'stroke-linecap':'round'},g)};
+let ODD;for(let i=0;i<16;i++){const c=mk('circle',{cx:1170+(i%4)*90,cy:250+Math.floor(i/4)*80,r:24,class:i===9?'gain':'ink'},$('grid'));if(i===9)ODD=c}
+let pd='M540 470';for(let i=1;i<=15;i++)pd+='L'+(540+i*44)+' '+(i%2?430:510);$('pat').setAttribute('d',pd);
+for(let i=0;i<5;i++)ray($('brs'),320,450,175,215,-Math.PI*5/6+i*Math.PI/6,'s-gain',8);
+for(let i=0;i<4;i++)ray($('qr'),800,470,150,185,-Math.PI*3/4+i*Math.PI/6,'s-gain',7);
+for(let i=0;i<6;i++)mk('circle',{cx:180+i*88,cy:230,r:12,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('rings'));
+const ST=[0,1,2,3].map(i=>fig($('stu'),820+i*100,290,22,'ink')[0]);
+for(let i=0;i<5;i++)ray($('rays'),260,420,88,112,-Math.PI*5/6+i*Math.PI/6,'s-gain',6);
+const GA=[];for(let i=0;i<6;i++){const g=mk('g',{},$('ga')),a=i*1.05+.3,L=60+(i*37)%55,c=Math.cos(a),s=Math.sin(a);ray(g,1160,420,45,45+L,a,'s-loss',6);mk('circle',{cx:(1160+(53+L)*c).toFixed(1),cy:(420+(53+L)*s).toFixed(1),r:8,class:'loss'},g);GA.push(g)}
+const IT=[0,1,2].map(i=>mk('path',{d:'M'+(1040+i*85)+' 520l12-14 12 14 12-14 12 14 12-14',class:'s-loss',fill:'none','stroke-width':4,'stroke-linecap':'round','stroke-linejoin':'round'},$('itc')));
+fig($('scp'),190,580,26,'ink');
+const DU=[];for(let i=0;i<44;i++)DU.push([mk('circle',{r:3+(i%3)*1.5,class:i%4?'ink':'gain'},$('dst')),i*2*Math.PI/44,1+((i*7)%5-2)*.04]);
+const PC=[0,1,2,3].map(i=>mk('rect',{x:935+(i%2)*270,y:465+Math.floor(i/2)*140,width:260,height:130,rx:12,class:'gain'},$('pcs')));
+fig($('ln'),1160,650,24,'ink');
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+rise($('grid'),p(u,TM.title_card,TM.title_card+.6));
+ODD.setAttribute('cy',(410-34*Math.abs(Math.sin(t*2.4))*p(u,TM.title_card+4.6,TM.title_card+5.4)).toFixed(1));
+
+rise($('brn'),p(u,TM.brain,TM.brain+.5));
+$('pat').style.strokeDashoffset=(1.02*(1-p(u,TM.brain+.6,TM.routine+1.5))).toFixed(3);
+rise($('zz'),p(u,TM.routine,TM.routine+.5)*(1-p(u,TM.alarm_bell,TM.alarm_bell+.3)));
+rise($('rt'),p(u,TM.routine+.6,TM.routine+1.1));
+const al=p(u,TM.alarm_bell,TM.alarm_bell+.6);
+$('spk').style.strokeDashoffset=(1.02*(1-al)).toFixed(3);
+$('brp').style.fill=u>=TM.alarm_bell?'var(--gain)':'var(--stage)';
+$('brs').setAttribute('opacity',(al*(.6+.4*Math.sin(t*6))).toFixed(2));
+rise($('snap'),p(u,TM.alarm_bell+.8,TM.alarm_bell+1.4));
+
+rise($('qm'),p(u,TM.question_mark,TM.question_mark+.5));
+$('qr').setAttribute('opacity',(.5+.5*Math.sin(t*5)).toFixed(2));
+const lf=p(u,TM.eyebrows,TM.eyebrows+.6);
+['br0','br1'].forEach(k=>$(k).setAttribute('transform','translate(0 '+(-30*lf).toFixed(1)+')'));
+['ey0','ey1'].forEach(k=>$(k).setAttribute('r',(14+14*lf).toFixed(1)));
+$('mo').setAttribute('r',(12+18*lf).toFixed(1));
+[0,1,2].forEach(i=>{const a=TM.eyebrows+i*1.4;rise($('eb'+i),p(u,a,a+.5))});
+rise($('teach'),p(u,TM.eyebrows+6.2,TM.eyebrows+6.8));
+
+rise($('np'),p(u,TM.notepad,TM.notepad+.5));
+[0,1,2].forEach(i=>{const a=TM.fact_list+i*1.8;rise($('f'+i),p(u,a,a+.5))});
+$('fx').setAttribute('opacity',(1-.55*p(u,TM.headline,TM.headline+.6)).toFixed(2));
+rise($('stu'),p(u,TM.students,TM.students+.5)); rise($('sum'),p(u,TM.students+.6,TM.students+1.1));
+ST.forEach(c=>c.setAttribute('class',u>=TM.headline+.4?'gain':'ink'));
+rise($('hl'),p(u,TM.headline,TM.headline+.6));
+
+rise($('lp'),p(u,TM.lightbulb,TM.lightbulb+.5));
+$('rays').setAttribute('opacity',(.5+.5*Math.sin(t*4)).toFixed(2));
+rise($('tg'),p(u,TM.lightbulb+2.5,TM.lightbulb+3));
+rise($('rp'),p(u,TM.gimmick,TM.gimmick+.5));
+GA.forEach((g,i)=>g.setAttribute('transform','rotate('+(14*Math.sin(t*3+i*1.7)).toFixed(1)+' 1160 420)'));
+rise($('cf'),p(u,TM.gimmick+5,TM.gimmick+5.6));
+
+rise($('bar'),p(u,TM.gap,TM.gap+.6));
+$('gp').style.strokeDashoffset=(-t*24).toFixed(1);
+rise($('sci'),p(u,TM.scientist,TM.scientist+.5));
+$('itc').setAttribute('opacity',p(u,TM.itch,TM.itch+.4));
+IT.forEach((q,i)=>q.setAttribute('transform','translate('+(3*Math.sin(t*14+i*2)).toFixed(1)+' '+(3*Math.cos(t*11+i)).toFixed(1)+')'));
+rise($('itx'),p(u,TM.itch+.3,TM.itch+.9));
+
+rise($('sat'),p(u,TM.saturn,TM.saturn+.6));
+rise($('det'),p(u,TM.detective,TM.detective+.5));
+$('mag').setAttribute('transform','translate('+(560+50*Math.sin(t*.7)).toFixed(1)+' '+(440+30*Math.sin(t*1.1)).toFixed(1)+')');
+[0,1,2].forEach(i=>{const a=TM.detective+5+i*.8;rise($('cd'+i),p(u,a,a+.5))});
+const dk=p(u,TM.dust,TM.dust+.8),cs=Math.cos(-.244),sn=Math.sin(-.244);
+DU.forEach(([c,a0,rr])=>{const a=a0+t*.15,x=270*rr*Math.cos(a),y=70*rr*Math.sin(a);c.setAttribute('cx',(400+x*cs-y*sn).toFixed(1));c.setAttribute('cy',(500+x*sn+y*cs).toFixed(1))});
+$('dst').setAttribute('opacity',dk); $('rng').setAttribute('opacity',(1-.7*dk).toFixed(2));
+rise($('ans'),p(u,TM.dust+.3,TM.dust+.9));
+
+rise($('usual'),p(u,TM.map,TM.map+.6));
+rise($('dor'),p(u,TM.open_door,TM.open_door+.5));
+const dsw=p(u,TM.open_door+.5,TM.open_door+1.5);
+$('dp').setAttribute('transform','translate(124 0) scale('+(1-.85*dsw).toFixed(3)+' 1) translate(-124 0)');
+rise($('slt'),p(u,TM.open_door+.8,TM.open_door+1.3));
+[0,1,2].forEach(i=>{const a=TM.puzzle+i*1.6;rise($('pz'+i),p(u,a,a+.5))});
+PC.forEach((r,i)=>{const k=p(u,TM.key+i*.7,TM.key+i*.7+.5);r.setAttribute('opacity',k);r.setAttribute('transform','translate(0 '+(-60*(1-k)).toFixed(1)+')')});
+$('sq').setAttribute('opacity',(1-p(u,TM.key,TM.key+2.6)).toFixed(2));
+rise($('fil'),p(u,TM.key+.3,TM.key+.9));
+
+rise($('qa'),p(u,TM.mirror,TM.mirror+.5)); rise($('qb'),p(u,TM.mirror+.4,TM.mirror+.9)); rise($('qc'),p(u,TM.mirror+.8,TM.mirror+1.3));
+rise($('hkm'),p(u,TM.hook_sign,TM.hook_sign+.5)); rise($('hk'),p(u,TM.hook_sign+.3,TM.hook_sign+.8));
+$('ln').setAttribute('transform','rotate('+(10+5*Math.sin(t*2)).toFixed(1)+' 1160 750)');
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:127.76;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

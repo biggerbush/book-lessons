@@ -239,7 +239,8 @@ function wireForm(){
     const btn=$("#go");btn.disabled=true;
     try{
       await dispatch("create-book.yml",{title:title,author:$("#author").value.trim(),lessons:String(n),notes:$("#notes").value.trim(),mode:mode});
-      say($("#formmsg"),'Started "'+title+'"'+(mode==="dry"?" (dry run)":"")+". It appears under Activity in a few seconds.","good");
+      say($("#formmsg"),'Started "'+title+'"'+(mode==="dry"?" (dry run)":"")+". Progress is shown at the top of the page.","good");
+      watchBuild({label:'Building "'+title+'"',titles:[title],lessons:n,par:1,workflows:["Create book"]});
       $("#form").reset();setTimeout(loadRuns,4000);
     }catch(err){say($("#formmsg"),err.message,"err")}
     btn.disabled=false;
@@ -269,7 +270,8 @@ function wireBulk(){
     const btn=$("#bgo");btn.disabled=true;
     try{
       await dispatch("bulk-books.yml",{books:lines.join("\n"),lessons:String(L),parallel:String(par),mode:mode});
-      say($("#bmsg"),"Started "+n+" book"+(n===1?"":"s")+" ("+par+" at a time). Watch Activity and Drafts below.","good");
+      say($("#bmsg"),"Started "+n+" book"+(n===1?"":"s")+" ("+par+" at a time). Progress is shown at the top of the page.","good");
+      watchBuild({label:"Building "+n+" book"+(n===1?"":"s"),titles:lines.map(l=>l.split("|")[0].trim()),lessons:L,par:par,workflows:["Bulk add books"]});
       setTimeout(loadRuns,5000);
     }catch(err){say($("#bmsg"),err.message,"err")}
     btn.disabled=false;
@@ -284,7 +286,7 @@ function wireBulk(){
     b.disabled=true;
     try{
       await dispatch("bulk-books.yml",{books:todo.map(d=>(d.input_title||d.title)+" | "+(d.author||"").replace(/\|/g," ")+" | "+d.planned).join("\n"),lessons:"10",parallel:"3",mode:"real"});
-      watch({label:"Resuming "+todo.length+" unfinished book"+(todo.length>1?"s":""),workflow:"Bulk add books",has:"",deploy:false,doing:"Building the missing lessons (can take hours)"});
+      watchBuild({label:"Resuming "+todo.length+" unfinished book"+(todo.length>1?"s":""),titles:todo.map(d=>d.input_title||d.title),lessons:10,par:3,workflows:["Bulk add books"]});
       b.textContent="Resume unfinished";b.disabled=false;setTimeout(loadRuns,5000);
     }catch(err){alert(err.message);b.disabled=false}
   });
@@ -292,18 +294,18 @@ function wireBulk(){
     if(!confirm("Publish every finished draft to the public library?\n\nDry runs and unfinished drafts are left alone."))return;
     const b=e.currentTarget;busy(b,"Publishing…");
     try{await dispatch("review-book.yml",{slug:"all",action:"approve"});
-      watch({label:"Publishing every finished draft",pct:true,workflow:"Review book",has:": all",deploy:true,doing:"Publishing: covers, categories, library"});setTimeout(loadRuns,4000)}
+      watch({label:"Publishing every finished draft",pct:true,books:Math.max(1,lastDrafts.filter(d=>d.status==="ready"&&!d.dry).length),workflow:"Review book",has:": all",deploy:true,doing:"Publishing: covers, categories, library"});setTimeout(loadRuns,4000)}
     catch(err){alert(err.message);b.disabled=false;b.textContent="Approve all finished"}
   });
 }
 
 /* ---------------------------------------------------------------- progress banner */
 /* After a click, follow the GitHub run it started: starting -> working -> (publishing the site) -> done or failed. */
-const jobs=[];
+const jobs=[];let lastDrafts=[];
 const mmss=ms=>{const s=Math.floor(ms/1000);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};
 function renderJobs(){
   $("#jobs").innerHTML=jobs.map((j,i)=>'<div class="job '+(j.state||"")+'">'+(j.state?(j.state==="ok"?"<span>✓</span>":"<span>!</span>"):'<span class="spin"></span>')+
-    '<div class="jt"><b>'+esc(j.label)+'</b><span>'+esc(j.msg)+(j.state?"":" · "+mmss(Date.now()-j.t0))+'</span>'+
+    '<div class="jt"><b>'+esc(j.label)+'</b><span>'+esc(j.msg)+(j.state?"":" · "+mmss(Date.now()-j.t0)+(j.left?" · "+fmtLeft(j.left):""))+'</span>'+
       (j.pct!=null&&!j.state?'<div class="bar"><i style="width:'+j.pct+'%"></i></div>':"")+'</div>'+
     (j.pct!=null&&!j.state?'<span class="pct">'+j.pct+'%</span>':"")+
     (j.url&&j.state==="bad"?'<a href="'+esc(j.url)+'" target="_blank" rel="noopener">View log</a>':"")+
@@ -315,20 +317,26 @@ setInterval(()=>{if(jobs.some(j=>!j.state))renderJobs()},1000);
 /* % complete: GitHub lists the steps of each run; weight them by how long they usually take. The bar only moves forward and
    holds below 100 until the run really finishes. */
 const STEP_W=[[/set up job|checkout|setup|post |complete job|initialize|configure|upload/i,3],[/cover|tools/i,40],[/apply/i,40],[/deploy/i,50]];
-const stepW=n=>{for(const [rx,w] of STEP_W)if(rx.test(n))return w;return 5};
-async function stepFrac(run){
+const stepW=(n,books)=>{for(const [rx,w] of STEP_W)if(rx.test(n))return /apply/i.test(n)?w*books:w;return 5};
+async function stepFrac(run,books){
   try{
     const r=await gh("/actions/runs/"+run.id+"/jobs");if(!r.ok)return null;
     let tot=0,done=0;
     ((await r.json()).jobs||[]).forEach(job=>(job.steps||[]).forEach(st=>{
-      const w=stepW(st.name);tot+=w;
+      const w=stepW(st.name,books||1);tot+=w;
       if(st.status==="completed")done+=w;
-      else if(st.status==="in_progress"&&st.started_at)done+=w*Math.min(.9,(Date.now()-new Date(st.started_at))/(w*1500));
+      else if(st.status==="in_progress"&&st.started_at){
+        /* keeps creeping forward (never sits still) and slows down as it nears the end of the step */
+        const exp=w*1.5,t=(Date.now()-new Date(st.started_at))/1000;
+        done+=w*(t<.85*exp?t/exp:.85+.14*(1-Math.exp(-(t-.85*exp)/exp)));
+      }
     }));
     return tot?done/tot:null;
   }catch(e){return null}
 }
-function setPct(j,v){if(v==null)return;v=Math.max(0,Math.min(97,Math.round(v)));if(j.pct==null||v>j.pct)j.pct=v}
+function setPct(j,v){if(v==null)return;v=Math.max(0,Math.min(97,Math.round(v)));if(j.pct==null||v>j.pct)j.pct=v;
+  const el=(Date.now()-j.t0)/1000;if(j.pct>=8&&el>15)j.left=el*(100-j.pct)/j.pct}
+const fmtLeft=sec=>sec<75?"about 1 min left":sec<5400?"about "+Math.round(sec/60)+" min left":"about "+Math.floor(sec/3600)+" h "+Math.round(sec%3600/60)+" min left";
 function watch(opts){
   const j={label:opts.label,msg:"Starting…",t0:Date.now(),state:"",url:"",pct:opts.pct?0:null};
   jobs.push(j);renderJobs();
@@ -343,13 +351,13 @@ function watch(opts){
       const span=opts.deploy?50:100;
       if(run.status!=="completed"){
         j.msg=run.status==="queued"?"Queued on GitHub…":opts.doing||"Working…";
-        if(opts.pct){if(run.status==="queued")setPct(j,1);else setPct(j,span*(await stepFrac(run)||0))}
+        if(opts.pct){if(run.status==="queued")setPct(j,1);else setPct(j,span*(await stepFrac(run,opts.books)||0))}
         renderJobs();continue}
       if(run.conclusion!=="success"){j.state="bad";j.msg=run.conclusion==="cancelled"?"Cancelled.":"It didn't finish. Nothing was changed on the live site.";break}
       if(!opts.deploy){j.state="ok";j.msg="Done.";break}
       const sites=runs.filter(r=>r.name==="Publish site"&&new Date(r.created_at)>=new Date(run.created_at)-5000);
       if(sites.some(r=>r.status!=="completed")){siteSeen=1;j.msg="Saved. Updating the live site…";
-        if(opts.pct){const act=sites.find(r=>r.status==="in_progress");setPct(j,50+50*(act?(await stepFrac(act)||0):0))}
+        if(opts.pct){const act=sites.find(r=>r.status==="in_progress");setPct(j,50+50*(act?(await stepFrac(act,1)||0):0))}
         renderJobs();continue}
       if(sites.some(r=>r.conclusion==="success")){j.state="ok";j.msg="Live on the site.";break}
       if(++idle>8||siteSeen){j.state=siteSeen?"bad":"ok";j.msg=siteSeen?"Saved, but the site update failed. Re-run it from GitHub Actions (Publish site).":"Saved. The site refreshes in a minute or two.";if(siteSeen)j.url="https://github.com/"+OWNER+"/"+REPO+"/actions/workflows/pages.yml";break}
@@ -362,6 +370,60 @@ function watch(opts){
 }
 function busy(b,text){b.disabled=true;b.innerHTML='<span class="spin"></span> '+esc(text)}
 
+/* Book builds: the engine saves each lesson as it finishes, so progress = lessons built / lessons planned, read from the drafts list. */
+const norm=t=>String(t||"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function freshDrafts(){
+  try{const r=await fetch(API+"/contents/site/drafts/index.json?ref=main&t="+Date.now(),{headers:{Accept:"application/vnd.github.raw+json",Authorization:"Bearer "+token},cache:"no-store"});
+    if(r.ok)return (await r.json()).drafts||[]}catch(e){}
+  const j=await fetchJson([RAW+"drafts/index.json"]);return (j&&j.drafts)||[];
+}
+const sameBook=(d,t)=>{const a=norm(t);return a&&[d.input_title,d.title,d.slug&&d.slug.replace(/-/g," ")].some(x=>{x=norm(x);return x&&(x===a||x.startsWith(a)||a.startsWith(x))})};
+const bookFrac=d=>!d?0:d.status==="ready"?1:d.lessons?.05+.93*Math.min(1,d.lessons/(d.planned||1)):(d.status==="planning"||d.status==="working")?.03:0;
+/* opts: label, titles (books being built), lessons (per book, if not yet planned), par (books at a time), workflows (run names) */
+function watchBuild(opts){
+  const j={label:opts.label,msg:"Starting…",t0:Date.now(),state:"",url:"",pct:0};
+  jobs.push(j);renderJobs();
+  (async()=>{
+    const n=opts.titles.length,t0=j.t0-20000;
+    const snap=async()=>{const dr=await freshDrafts();return opts.titles.map(t=>dr.find(d=>sameBook(d,t)))};
+    let mine=await snap();
+    const base=mine.reduce((a,d)=>a+(d?d.lessons:0),0);
+    let run=null,final=false;
+    for(let k=0;k<2000&&!j.state;k++){
+      await sleep(k<2?5000:15000);
+      let runs=[];try{const r=await gh("/actions/runs?per_page=40");if(r.ok)runs=(await r.json()).workflow_runs||[]}catch(e){}
+      run=runs.find(r=>opts.workflows.includes(r.name)&&new Date(r.created_at)>=t0)||run;
+      mine=await snap();
+      const built=mine.reduce((a,d)=>a+(d?d.lessons:0),0);
+      const planned=mine.reduce((a,d)=>a+(d&&d.planned?d.planned:opts.lessons),0);
+      const doneBooks=mine.filter(d=>d&&d.status==="ready").length;
+      const stopped=mine.filter(d=>d&&(d.status==="failed"||d.status==="needs_source"));
+      const pct=Math.round(100*mine.reduce((a,d)=>a+bookFrac(d),0)/n);
+      if(pct>j.pct)j.pct=Math.min(pct,99);
+      if(run)j.url=run.html_url;
+      const el=(Date.now()-t0)/1000,fresh=built-base;
+      let left=null;
+      if(fresh>=1)left=(planned-built)*(el/fresh);else if(built<planned)left=(planned-built)*360/Math.max(1,Math.min(n,opts.par||1));
+      j.left=left;
+      const where=n===1?(built?"Lesson "+built+" of "+planned+" built":"Planning the lessons…"):doneBooks+" of "+n+" books done · "+built+" of "+planned+" lessons built";
+      j.msg=(run&&run.status==="queued"?"Queued on GitHub… ":"")+where+(stopped.length?" · "+stopped.length+" stopped":"");
+      renderJobs();
+      if(run&&run.status==="completed"){
+        if(final)break;final=true;continue;                    /* one more pass so the last checkpoint is counted */
+      }
+    }
+    mine=await snap();
+    const ready=mine.filter(d=>d&&d.status==="ready").length,bad=mine.filter(d=>d&&(d.status==="failed"||d.status==="needs_source"));
+    if(!j.state){
+      if(run&&run.conclusion==="cancelled"){j.state="bad";j.msg="Cancelled. What was built so far is kept."}
+      else if(ready===n){j.state="ok";j.msg=n===1?"Built. Ready for you to review in Drafts.":"All "+n+" books built. Review and publish them in Drafts."}
+      else if(bad.length||ready<n){j.state="bad";j.msg=ready+" of "+n+" built. "+(bad.length?bad.map(d=>d.title+(d.status==="needs_source"?" needs source notes":" stopped")).join(", ")+". Use Resume.":"The rest did not finish. Use Resume unfinished.")}
+    }
+    j.left=null;j.pct=j.state==="ok"?100:j.pct;renderJobs();loadDrafts();loadRuns();
+  })();
+}
+
 /* ---------------------------------------------------------------- drafts */
 async function fetchJson(urls){
   for(const u of urls){try{const r=await fetch(u+(u.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});if(r.ok)return await r.json()}catch(e){}}
@@ -371,7 +433,7 @@ const SB={ready:["ok","Ready to review"],working:["run","Working"],planning:["ru
 async function loadDrafts(){
   const el=$("#draftlist");
   const j=await fetchJson([RAW+"drafts/index.json","../drafts/index.json"]);
-  const list=j&&j.drafts||[];
+  const list=j&&j.drafts||[];lastDrafts=list;
   if(!list.length){el.innerHTML='<p class="empty">No drafts. Create a book above and it will appear here when it is ready for review.</p>';return}
   el.innerHTML=list.map(d=>{
     const sb=SB[d.status]||["", d.status];
@@ -402,7 +464,7 @@ async function draftAction(b){
       watch({label:'Rejecting "'+title+'"',pct:true,workflow:"Review book",has:": "+slug,deploy:false,doing:"Removing the draft"});
     }else{
       busy(b,"Resuming…");await dispatch("create-book.yml",{title:title,author:"",lessons:b.dataset.n,notes:"",mode:b.dataset.dry==="1"?"dry":"real"});
-      watch({label:'Resuming "'+title+'"',workflow:"Create book",has:title,deploy:false,doing:"Building the missing lessons (can take an hour)"});
+      watchBuild({label:'Resuming "'+title+'"',titles:[title],lessons:+b.dataset.n||10,par:1,workflows:["Create book"]});
     }
     setTimeout(loadRuns,4000);
   }catch(err){alert(err.message);b.disabled=false;b.textContent=act==="approve"?"Approve & publish":act==="reject"?"Reject":"Resume"}

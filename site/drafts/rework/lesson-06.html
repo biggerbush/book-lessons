@@ -1,0 +1,399 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rework Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of Rework: Real work needs long stretches of uninterrupted time, so protect your team from needless meetings and constant pings. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">REWORK · LESSON 6</text>
+<text class="d" x="116" y="330" font-size="84" letter-spacing="-2">Meetings and</text>
+<text class="d" x="116" y="426" font-size="84" letter-spacing="-2">interruptions kill</text>
+<text class="d" x="116" y="522" font-size="84" letter-spacing="-2" style="fill:var(--gain)">real work.</text>
+<text class="b" x="120" y="620" font-size="32">Why your best work needs long, quiet, uninterrupted stretches of time.</text>
+<g id="who"></g>
+<rect class="s-ink" x="1240" y="470" width="110" height="76" rx="6" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1110 556h360" stroke-width="8" stroke-linecap="round"/>
+<g id="pings0"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Work moments.</text>
+<g id="icons"></g>
+<g id="bar1"></g>
+<g id="frag"><text class="d" x="120" y="790" font-size="52">Deep work can’t happen in fragments.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The alone zone.</text>
+<text class="b" x="120" y="176" font-size="32">When do people do their best work?</text>
+<g id="z0">
+<rect x="120" y="420" width="360" height="140" rx="16" fill="var(--gain)" fill-opacity=".15" stroke="var(--gain)" stroke-width="4"/>
+<path class="gain" d="M250 380a50 50 0 0 1 100 0z"/><path class="s-gain" d="M230 380h140" stroke-width="5" stroke-linecap="round"/>
+<g id="lone0"></g>
+<text class="m" x="300" y="610" font-size="20" text-anchor="middle">EARLY MORNING</text>
+</g>
+<g id="z1">
+<rect x="500" y="420" width="600" height="140" rx="16" fill="var(--loss)" fill-opacity=".12" stroke="var(--loss)" stroke-width="4"/>
+<g id="crowd2"></g>
+<text class="m" x="800" y="610" font-size="20" text-anchor="middle">THE BUSY DAY · EVERYONE AROUND</text>
+</g>
+<g id="z2">
+<rect x="1120" y="420" width="360" height="140" rx="16" fill="var(--gain)" fill-opacity=".15" stroke="var(--gain)" stroke-width="4"/>
+<circle class="ink" cx="1300" cy="340" r="36"/><circle cx="1318" cy="328" r="30" fill="var(--stage)"/>
+<g id="lone2"></g>
+<text class="m" x="1300" y="610" font-size="20" text-anchor="middle">LATE AT NIGHT</text>
+</g>
+<g id="az">
+<path class="s-gain" d="M120 640v20h360v-20M1120 640v20h360v-20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d" x="120" y="770" font-size="52">Real progress lives in the <tspan style="fill:var(--gain)">alone zone</tspan>.</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Check-ins aren’t teamwork.</text>
+<g id="tapL">
+<rect class="s-line" x="120" y="210" width="640" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="260" font-size="22" style="fill:var(--loss)">CONSTANT CHECK-INS</text>
+<rect class="s-ink" x="180" y="420" width="90" height="70" rx="6" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M225 490v30M160 520h340" stroke-width="7" stroke-linecap="round"/>
+<g id="wk3"></g><g id="tp3"></g>
+<path class="s-loss" d="M560 460L398 456" stroke-width="9" stroke-linecap="round"/>
+<circle id="bang" class="loss" cx="430" cy="320" r="24"/>
+<text class="d" x="430" y="331" font-size="30" text-anchor="middle" style="fill:var(--stage)">!</text>
+</g>
+<g id="mailR">
+<rect class="s-line" x="840" y="210" width="640" height="420" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="260" font-size="22" style="fill:var(--gain)">PASSIVE TOOLS, LIKE EMAIL</text>
+<g id="env">
+<rect class="s-ink" x="1040" y="320" width="240" height="150" rx="8" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1040 320l120 85l120-85" fill="none" stroke-width="6" stroke-linejoin="round"/>
+<circle class="gain" cx="1290" cy="320" r="30"/>
+<path d="M1276 320l10 10l18-20" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text class="m" x="1160" y="560" font-size="22" text-anchor="middle">ANSWER AT A NATURAL BREAK</text>
+</g>
+<g id="blunt">
+<text class="d" x="120" y="730" font-size="46">Interruption is not collaboration.</text>
+<text class="m" x="120" y="790" font-size="22" style="fill:var(--loss)">IT’S JUST INTERRUPTION</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Meetings are toxic.</text>
+<g id="room4"><g id="ppl4"></g>
+<rect class="s-ink" x="220" y="520" width="540" height="80" rx="40" fill="var(--stage)" stroke-width="6"/></g>
+<g id="wc"></g>
+<g id="wcl"><text class="m" x="220" y="670" font-size="22">WORDS AND ABSTRACT IDEAS, NOT REAL THINGS</text></g>
+<g id="dr">
+<text class="m" x="1240" y="214" font-size="20" text-anchor="middle" style="fill:var(--gain)">THE TOPIC</text>
+<circle class="s-gain" cx="1240" cy="300" r="70" fill="none" stroke-width="6"/>
+<circle class="gain" cx="1240" cy="300" r="26"/>
+<path id="dpath" class="s-loss" d="M940 720C1000 520 1120 420 1190 380S1330 600 1450 690" fill="none" stroke-width="7" stroke-linecap="round"/>
+<circle id="dhead" class="loss" r="14"/>
+<text class="m" x="1460" y="760" font-size="20" text-anchor="end" style="fill:var(--loss)">DRIFTS OFF TOPIC</text>
+</g>
+<g id="prep">
+<rect class="s-ink" x="120" y="760" width="40" height="40" rx="6" fill="none" stroke-width="5"/>
+<text class="m" x="180" y="790" font-size="22">PREPARATION NOBODY ACTUALLY DOES</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The real cost.</text>
+<g id="clock5">
+<circle class="s-ink" cx="290" cy="440" r="130" fill="var(--stage)" stroke-width="8"/>
+<g id="ticks5"></g>
+<path class="s-ink" d="M290 440l-50 30" stroke-width="8" stroke-linecap="round"/>
+<path id="mh5" class="s-gain" d="M290 440V340" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="290" cy="440" r="10"/>
+<text class="m" x="290" y="630" font-size="24" text-anchor="middle">1 HOUR</text>
+</g>
+<g id="ten"></g>
+<g id="lab10"><text class="m" x="780" y="630" font-size="24" text-anchor="middle">10 PEOPLE</text></g>
+<g id="stk"></g>
+<g id="stkl"><text id="hrs" class="m" x="1320" y="690" font-size="24" text-anchor="middle" style="fill:var(--gain)">0 HOURS</text></g>
+<g id="eq5">
+<text class="d" x="120" y="780" font-size="44">10 people × 1 hour = <tspan style="fill:var(--gain)">10 hours</tspan> of working time.</text>
+<text class="m" x="120" y="836" font-size="22" style="fill:var(--loss)">TRADED FOR ONE HOUR OF TALK</text>
+</g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">If you must meet…</text>
+<g id="c60">
+<rect class="s-line" x="120" y="220" width="420" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="tmr">
+<rect class="ink" x="310" y="286" width="40" height="28" rx="6"/>
+<rect class="ink" x="300" y="276" width="60" height="14" rx="5"/>
+<path class="s-ink" d="M410 322l18-18" stroke-width="10" stroke-linecap="round"/>
+<circle class="s-ink" cx="330" cy="420" r="110" fill="var(--stage)" stroke-width="8"/>
+<path id="tsec" class="gain"/>
+<g id="tticks"></g>
+<path id="thand" class="s-ink" d="M330 420V340" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="330" cy="420" r="11"/>
+</g>
+<g id="tring">
+<path class="s-gain" d="M286 278l-22-18M276 298l-28-6M374 278l22-18M384 298l28-6" stroke-width="6" stroke-linecap="round"/>
+</g>
+<text class="m" x="330" y="630" font-size="22" text-anchor="middle">SET A TIMER</text>
+<text class="m" x="330" y="666" font-size="22" text-anchor="middle">END WHEN IT RINGS</text>
+</g>
+<g id="c61">
+<rect class="s-line" x="590" y="220" width="420" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-loss" x="740" y="290" width="120" height="80" rx="10" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="800" y="348" font-size="48" text-anchor="middle" style="fill:var(--loss)">?</text>
+<g id="few6"></g>
+<text class="m" x="800" y="630" font-size="22" text-anchor="middle">FEW PEOPLE</text>
+<text class="m" x="800" y="666" font-size="22" text-anchor="middle">ONE CLEAR PROBLEM</text>
+</g>
+<g id="c62">
+<rect class="s-line" x="1060" y="220" width="420" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="own6"></g>
+<g id="badge6">
+<rect class="gain" x="1225" y="487" width="90" height="30" rx="8"/>
+<text class="m" x="1270" y="508" font-size="18" text-anchor="middle" style="fill:var(--on-gain)">OWNER</text>
+<circle class="gain" cx="1390" cy="320" r="34"/>
+<path d="M1374 320l11 11l21-22" fill="none" stroke="var(--on-gain)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text class="m" x="1270" y="630" font-size="22" text-anchor="middle">A SOLUTION</text>
+<text class="m" x="1270" y="666" font-size="22" text-anchor="middle">ONE NAMED OWNER</text>
+</g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make quiet time a rule.</text>
+<g id="sign7">
+<rect class="ink" x="230" y="370" width="140" height="90" rx="20"/>
+<path class="ink" d="M260 455l-10 30l40-30z"/>
+<circle class="s-loss" cx="300" cy="420" r="110" fill="none" stroke-width="12"/>
+<path class="s-loss" d="M222 342L378 498" stroke-width="12" stroke-linecap="round"/>
+<text class="m" x="300" y="590" font-size="20" text-anchor="middle">HALF THE DAY ALONE</text>
+</g>
+<g id="qh">
+<rect x="560" y="330" width="920" height="60" rx="30" fill="var(--line)"/>
+<rect id="qr" class="gain" x="760" y="330" width="520" height="60"/>
+<rect x="1000" y="330" width="60" height="60" fill="var(--stage)"/>
+<text class="m" x="1030" y="312" font-size="20" text-anchor="middle">LUNCH</text>
+<text class="m" x="760" y="430" font-size="22" text-anchor="middle">10 AM</text>
+<text class="m" x="1280" y="430" font-size="22" text-anchor="middle">2 PM</text>
+</g>
+<g id="cal"></g>
+<g id="ntd"><text class="m" x="1020" y="670" font-size="22" text-anchor="middle" style="fill:var(--gain)">NO-TALK DAY</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Block out one long,</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2" style="fill:var(--gain)">protected stretch</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">of time this week.</text></g>
+<g id="qm"><text class="m" x="143" y="700" font-size="26">SILENCE THE PINGS · SKIP OPTIONAL MEETINGS</text></g>
+<g id="sh8">
+<path class="gain" d="M1320 260L1440 300V420C1440 500 1380 550 1320 580C1260 550 1200 500 1200 420V300Z"/>
+<path d="M1280 420l28 28l52-56" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="pg8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="130" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:10</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Meetings and Interruptions Kill Real Work&rdquo;, from <em>Rework</em> by Jason Fried and David Heinemeier Hansson. The ten-person meeting math, the meeting rules and the 10 to 2 quiet-hours idea are as reported in the book. The broken workday bar and the stacked hours are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=130, SC=[[0.0, 8.9], [8.9, 27.5], [27.5, 43.4], [43.4, 59.9], [59.9, 73.1], [73.1, 85.5], [85.5, 100.0], [100.0, 115.1], [115.1, 130.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Where Did the Day Go", "Work Moments", "The Alone Zone", "Not Collaboration", "Meetings Are Toxic", "The Real Cost", "If You Must Meet", "Quiet Hours", "Your Challenge"];
+const TM={"busy_desk": 0.0, "workday_bar": 9.2, "ping_icons": 12.8, "broken_bar": 18.0, "night_owl": 27.84, "quiet_room": 32.8, "shoulder_tap": 43.68, "email_inbox": 54.56, "meeting_room": 60.24, "word_cloud": 64.0, "drift_arrow": 68.88, "wall_clock": 73.36, "ten_people": 75.68, "hour_stack": 80.08, "kitchen_timer": 85.84, "small_group": 90.48, "owner_badge": 95.52, "no_talk_sign": 100.32, "calendar": 112.0, "shield": 115.44};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const T=(g,x,y,s,txt,cls,a)=>{const e=mk('text',{x:x,y:y,'font-size':s,class:cls,'text-anchor':a},g);e.textContent=txt;return e};
+fig($('who'),1290,380,34,'ink');
+const P0=[[1150,300],[1430,290],[1140,450],[1450,440],[1290,250]].map(([x,y])=>{const g=mk('g',{},$('pings0'));const c=mk('circle',{cx:x,cy:y,r:26,class:'loss'},g);T(g,x,y+11,30,'!','d','middle').style.fill='var(--stage)';return [g,c]});
+const PC=[];for(let i=0;i<12;i++)PC.push(mk('rect',{x:120+i*113.33,y:380,width:113.33,height:80,class:'gain'},$('bar1')));
+const ST={fill:'none',stroke:'var(--stage)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'};
+const IC=[[460,'QUESTION'],[687,'CALL'],[1027,'MESSAGE'],[1253,'TAP']].map(([x,s],i)=>{const g=mk('g',{},$('icons'));
+  mk('path',{d:'M'+x+' 326V378',class:'s-loss','stroke-width':4,'stroke-dasharray':'6 6'},g);mk('circle',{cx:x,cy:290,r:34,class:'loss'},g);T(g,x,240,20,s,'m','middle');
+  if(i==0)T(g,x,303,38,'?','d','middle').style.fill='var(--stage)';
+  if(i==1)mk('rect',Object.assign({x:x-11,y:272,width:22,height:36,rx:5},ST),g);
+  if(i==2)mk('path',Object.assign({d:'M'+(x-17)+' 276h34v22h-18l-10 9v-9h-6z'},ST),g);
+  if(i==3)mk('path',Object.assign({d:'M'+(x-6)+' 308v-30a6 6 0 0 1 12 0v14l10 4v12'},ST),g);
+  return g});
+fig($('lone0'),300,440,20,'gain');fig($('lone2'),1300,440,20,'gain');
+for(let i=0;i<7;i++)fig($('crowd2'),540+i*85,445,16,'loss');
+fig($('wk3'),340,380,28,'ink');fig($('tp3'),600,370,28,'loss');
+[300,420,540,660].forEach(x=>fig($('ppl4'),x,430,22,'ink'));
+const WC=[['IDEAS',300,270],['WORDS',560,250],['ABSTRACT',420,350],['TALK',660,350]].map(([s,x,y])=>{const g=mk('g',{},$('wc'));mk('rect',{x:x-80,y:y-26,width:160,height:52,rx:26,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':4},g);T(g,x,y+7,20,s,'m','middle');return g});
+const DP=$('dpath'),DL=DP.getTotalLength();DP.setAttribute('stroke-dasharray',DL);
+for(let i=0;i<12;i++){const a=i*Math.PI/6;mk('path',{d:'M'+(290+108*Math.sin(a)).toFixed(1)+' '+(440-108*Math.cos(a)).toFixed(1)+'L'+(290+120*Math.sin(a)).toFixed(1)+' '+(440-120*Math.cos(a)).toFixed(1),class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('ticks5'))}
+// timer tick marks (outside the amber sector, inside the rim)
+for(let i=0;i<12;i++){const a=i*Math.PI/6,r0=i%3==0?92:96;mk('path',{d:'M'+(330+r0*Math.sin(a)).toFixed(1)+' '+(420-r0*Math.cos(a)).toFixed(1)+'L'+(330+103*Math.sin(a)).toFixed(1)+' '+(420-103*Math.cos(a)).toFixed(1),class:'s-ink','stroke-width':i%3==0?6:4,'stroke-linecap':'round'},$('tticks'))}
+const TP=[],SB=[];for(let i=0;i<10;i++){const g=mk('g',{},$('ten'));fig(g,560+(i%5)*110,290+Math.floor(i/5)*160,22,'ink');TP.push(g);
+  SB.push(mk('rect',{x:1200,y:606-i*42,width:240,height:34,rx:6,class:'gain'},$('stk')))}
+[680,800,920].forEach((x,i)=>fig($('few6'),x,460+(i==1?20:0),20,'gain'));
+fig($('own6'),1270,380,34,'ink');
+const sector=(cx,cy,r,f)=>{if(f<=0)return '';f=Math.min(f,.9999);const a=2*Math.PI*f;return 'M'+cx+' '+cy+'V'+(cy-r)+'A'+r+' '+r+' 0 '+(f>.5?1:0)+' 1 '+(cx+r*Math.sin(a)).toFixed(1)+' '+(cy-r*Math.cos(a)).toFixed(1)+'Z'};
+const CC=['M','T','W','T','F'].map((s,i)=>{const x=560+i*187.5,g=mk('g',{},$('cal'));const r=mk('rect',{x:x,y:500,width:170,height:120,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);const tx=T(g,x+85,580,48,s,'d','middle');return [g,r,tx]});
+const PG=[[1150,280],[1465,330],[1160,520],[1460,520],[1320,215]].map(([x,y])=>[mk('circle',{cx:x,cy:y,r:12,class:'loss'},$('pg8')),x,y]);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const bd=TM.busy_desk,fix=p(u,bd+7,bd+7.6);
+P0.forEach((q,i)=>{const a=bd+.6+i*.6;q[0].setAttribute('opacity',(p(u,a,a+.3)*(1-fix)).toFixed(3));q[1].setAttribute('r',(26+3*Math.sin(t*5+i)).toFixed(1))});
+for(const c of $('who').children)c.setAttribute('class',u>=bd+7?'gain':'ink');
+
+rise($('bar1'),p(u,TM.workday_bar,TM.workday_bar+.6));
+IC.forEach((g,i)=>{const a=TM.ping_icons+i*1.4;rise(g,p(u,a,a+.4))});
+PC.forEach((r,i)=>{const a=TM.broken_bar+i*.25,k=p(u,a,a+.8),x0=120+i*113.33;r.setAttribute('x',(x0+15*k).toFixed(1));r.setAttribute('width',(113.33-30*k).toFixed(1));
+  r.setAttribute('transform','translate('+((i-5.5)*4*k).toFixed(1)+' '+((90+(i*7%5)*35)*k).toFixed(1)+') rotate('+(((i*5)%7-3)*6*k).toFixed(1)+' '+(x0+56).toFixed(1)+' 420)');r.setAttribute('class',k>.5?'loss':'gain')});
+rise($('frag'),p(u,TM.broken_bar+6.3,TM.broken_bar+6.9));
+
+rise($('z0'),p(u,TM.night_owl,TM.night_owl+.5));rise($('z2'),p(u,TM.night_owl+.6,TM.night_owl+1.1));
+rise($('z1'),p(u,TM.quiet_room,TM.quiet_room+.5));rise($('az'),p(u,TM.quiet_room+3.6,TM.quiet_room+4.2));
+
+rise($('tapL'),p(u,TM.shoulder_tap,TM.shoulder_tap+.5));$('bang').setAttribute('r',(24+5*Math.abs(Math.sin(t*4))).toFixed(1));
+rise($('blunt'),p(u,TM.shoulder_tap+2.9,TM.shoulder_tap+3.5));
+rise($('mailR'),p(u,TM.email_inbox,TM.email_inbox+.5));$('env').setAttribute('transform','translate(0 '+(6*Math.sin(t*2)).toFixed(1)+')');
+
+rise($('room4'),p(u,TM.meeting_room,TM.meeting_room+.5));
+WC.forEach((g,i)=>{const a=TM.word_cloud+i*.5;rise(g,p(u,a,a+.4))});rise($('wcl'),p(u,TM.word_cloud+2,TM.word_cloud+2.5));
+rise($('dr'),p(u,TM.drift_arrow,TM.drift_arrow+.4));
+const dk=p(u,TM.drift_arrow+.2,TM.drift_arrow+2.4),dp=DP.getPointAtLength(DL*dk);DP.setAttribute('stroke-dashoffset',(DL*(1-dk)).toFixed(1));
+$('dhead').setAttribute('cx',dp.x.toFixed(1));$('dhead').setAttribute('cy',dp.y.toFixed(1));
+rise($('prep'),p(u,TM.drift_arrow+2,TM.drift_arrow+2.5));
+
+rise($('clock5'),p(u,TM.wall_clock,TM.wall_clock+.5));$('mh5').setAttribute('transform','rotate('+(360*p(u,TM.wall_clock+.3,TM.wall_clock+2.5)).toFixed(1)+' 290 440)');
+TP.forEach((g,i)=>{const a=TM.ten_people+i*.25;rise(g,p(u,a,a+.4))});rise($('lab10'),p(u,TM.ten_people+2.8,TM.ten_people+3.3));
+SB.forEach((r,i)=>{const a=TM.hour_stack+i*.25;rise(r,p(u,a,a+.4))});
+rise($('stkl'),p(u,TM.hour_stack,TM.hour_stack+.4));$('hrs').textContent=Math.round(10*p(u,TM.hour_stack,TM.hour_stack+2.5))+' HOURS';
+rise($('eq5'),p(u,TM.hour_stack+2.6,TM.hour_stack+3.2));
+
+rise($('c60'),p(u,TM.kitchen_timer,TM.kitchen_timer+.5));
+const tk=p(u,TM.kitchen_timer+.5,TM.kitchen_timer+4.5),ring=u>TM.kitchen_timer+4.5&&u<TM.kitchen_timer+5.5;
+$('tsec').setAttribute('d',sector(330,420,88,1-tk));
+$('thand').setAttribute('transform','rotate('+(360*(1-tk)).toFixed(1)+' 330 420)');
+$('tmr').setAttribute('transform',ring?'rotate('+(4*Math.sin(t*40)).toFixed(1)+' 330 420)':'');
+$('tring').setAttribute('opacity',(u>TM.kitchen_timer+4.5?(ring?.6+.4*Math.abs(Math.sin(t*20)):1):0).toFixed(2));
+rise($('c61'),p(u,TM.small_group,TM.small_group+.5));
+rise($('c62'),p(u,TM.owner_badge,TM.owner_badge+.5));rise($('badge6'),p(u,TM.owner_badge+.8,TM.owner_badge+1.3));
+
+rise($('sign7'),p(u,TM.no_talk_sign,TM.no_talk_sign+.5));
+rise($('qh'),p(u,TM.no_talk_sign+6,TM.no_talk_sign+6.5));$('qr').setAttribute('width',(520*p(u,TM.no_talk_sign+6.3,TM.no_talk_sign+7.5)).toFixed(1));
+CC.forEach((c,i)=>{const a=TM.calendar+i*.15;rise(c[0],p(u,a,a+.4))});
+const nt=i=>i==2&&u>=TM.calendar+1.2;CC.forEach((c,i)=>{c[1].setAttribute('fill',nt(i)?'var(--gain)':'var(--stage)');c[1].setAttribute('stroke',nt(i)?'var(--gain)':'var(--ink)');c[2].style.fill=nt(i)?'var(--on-gain)':''});
+rise($('ntd'),p(u,TM.calendar+1.2,TM.calendar+1.7));
+
+rise($('qa'),p(u,TM.shield,TM.shield+.5));rise($('qb'),p(u,TM.shield+.4,TM.shield+.9));rise($('qc'),p(u,TM.shield+.8,TM.shield+1.3));
+rise($('sh8'),p(u,TM.shield+.2,TM.shield+.8));rise($('qm'),p(u,TM.shield+6,TM.shield+6.6));
+const sil=1-p(u,TM.shield+6,TM.shield+6.6);
+PG.forEach((q,i)=>{const dx=1320-q[1],dy=420-q[2],d=Math.hypot(dx,dy),k=12*Math.abs(Math.sin(t*3+i));q[0].setAttribute('cx',(q[1]+dx/d*k).toFixed(1));q[0].setAttribute('cy',(q[2]+dy/d*k).toFixed(1));q[0].setAttribute('opacity',sil.toFixed(3))});
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.16;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

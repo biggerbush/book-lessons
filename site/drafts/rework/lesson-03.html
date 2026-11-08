@@ -1,0 +1,286 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rework Lesson 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 3 of Rework: The best products come from solving a problem you have yourself, and ideas mean little until you actually start making something. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">REWORK · LESSON 3</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Scratch your</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">own itch.</text>
+<text class="b" x="120" y="600" font-size="32">Great products start with a problem that bugs you personally.</text>
+<g id="tfig"></g>
+<g id="tarm"><path class="s-ink" d="M1368 432Q1424 340 1362 274" fill="none" stroke-width="18" stroke-linecap="round"/><circle class="gain" cx="1360" cy="270" r="18"/></g>
+<g id="spark"><path class="s-gain" d="M1232 252l-26-18M1226 296h-32M1246 214l-14-26M1300 196v-30" fill="none" stroke-width="7" stroke-linecap="round"/></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Be your own customer.</text>
+<text class="b" x="120" y="176" font-size="32">Make something you want to use.</text>
+<g id="desk"><g id="mk1"></g><rect class="ink" x="200" y="560" width="440" height="16" rx="4"/><path class="s-ink" d="M230 576v120M610 576v120" stroke-width="8" stroke-linecap="round"/><rect class="s-ink" x="440" y="474" width="130" height="80" rx="6" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="420" y="552" width="170" height="8" rx="3"/><text class="m" x="330" y="750" font-size="22" text-anchor="middle">MAKER</text></g>
+<g id="bub1"><circle class="s-ink" cx="400" cy="318" r="8" fill="var(--stage)" stroke-width="4"/><circle class="s-ink" cx="428" cy="288" r="13" fill="var(--stage)" stroke-width="4"/><rect class="s-gain" x="450" y="210" width="340" height="100" rx="50" fill="var(--stage)" stroke-width="6"/><text class="m" x="620" y="268" font-size="22" text-anchor="middle" style="fill:var(--gain)">THIS BUGS ME</text></g>
+<g id="mir"><text class="d" x="820" y="500" font-size="96" text-anchor="middle" style="fill:var(--muted)">=</text><rect class="s-ink" x="960" y="240" width="380" height="480" rx="24" fill="var(--stage)" stroke-width="7"/><path class="s-line" d="M990 320l70-50M990 370l110-80" stroke-width="6" stroke-linecap="round"/><g id="mk2"></g><text class="m" x="1150" y="680" font-size="22" text-anchor="middle" style="fill:var(--gain)">CUSTOMER</text><text class="d" x="120" y="830" font-size="44">You already know exactly what’s missing.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">How Basecamp began.</text>
+<text class="b" x="120" y="176" font-size="32">37signals started as a small web design firm.</text>
+<g id="stu"><rect class="s-ink" x="140" y="380" width="260" height="300" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="140" y="330" width="260" height="56"/><text class="m" x="270" y="366" font-size="20" text-anchor="middle" style="fill:var(--stage)">37SIGNALS</text><g id="win"></g><rect class="ink" x="245" y="600" width="50" height="80"/><text class="m" x="270" y="730" font-size="20" text-anchor="middle">WEB DESIGN FIRM</text></g>
+<g id="mailg"><g id="mail"></g><text class="m" x="700" y="730" font-size="20" text-anchor="middle" style="fill:var(--loss)">MESSY EMAIL · LOST FILES</text></g>
+<g id="app"><path class="s-muted" d="M905 480h55m-18-18 18 18-18 18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><rect class="s-ink" x="980" y="280" width="480" height="400" rx="16" fill="var(--stage)" stroke-width="7"/><rect class="gain" x="980" y="280" width="480" height="56" rx="16"/><rect class="gain" x="980" y="310" width="480" height="26"/><text class="m" x="1010" y="318" font-size="22" style="fill:var(--on-gain)">BASECAMP</text><g id="rows"></g>
+<text id="own" class="m" x="1220" y="730" font-size="20" text-anchor="middle">JUST FOR THEMSELVES</text><text id="main" class="m" x="1220" y="730" font-size="20" text-anchor="middle" style="fill:var(--gain)">THEIR MAIN PRODUCT</text></g>
+<g id="ppl"></g>
+<g id="cap2"><text class="d" x="120" y="830" font-size="40">Other people had the same headache.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Instant feedback.</text>
+<text class="b" x="120" y="176" font-size="32">Build for yourself and you know right away if it works.</text>
+<g id="ok3"><circle class="gain" cx="300" cy="420" r="120"/><path d="M240 424l42 42 82-92" fill="none" stroke="var(--on-gain)" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="ok3b"><text class="m" x="300" y="600" font-size="20" text-anchor="middle">WORKS? YOU KNOW AT ONCE</text></g>
+<g id="gs3"><g id="ghost"></g><text class="d" x="740" y="320" font-size="64" text-anchor="middle" style="fill:var(--muted)">?</text><text class="m" x="740" y="610" font-size="20" text-anchor="middle">IMAGINARY CUSTOMER</text><path id="x3" class="s-loss" d="M660 360l160 200M820 360l-160 200" stroke-width="8" stroke-linecap="round"/></g>
+<g id="lp3"><circle class="s-line" cx="1220" cy="430" r="160" fill="none" stroke-width="6"/><circle id="dot3" class="gain" r="16"/><g id="nodes"></g></g>
+<g id="lp3c"><text class="d" x="120" y="800" font-size="40">You use it, feel what’s wrong, and fix it.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The dusty vacuum.</text>
+<text class="b" x="120" y="176" font-size="32">James Dyson’s vacuum cleaner kept losing suction.</text>
+<g id="vac"><path class="s-ink" d="M330 290v260M300 290h60" fill="none" stroke-width="12" stroke-linecap="round"/><rect class="s-ink" x="270" y="540" width="120" height="160" rx="24" fill="var(--stage)" stroke-width="7"/><rect class="ink" x="220" y="700" width="220" height="30" rx="10"/><g id="dust"></g><rect class="s-ink" x="520" y="300" width="44" height="400" rx="10" fill="none" stroke-width="5"/><rect id="suck" class="loss" x="528" width="28" rx="5"/><text class="m" x="542" y="770" font-size="20" text-anchor="middle">SUCTION</text></g>
+<g id="ws"><g id="dys"></g><rect class="ink" x="820" y="620" width="620" height="18" rx="4"/><path class="s-ink" d="M850 638v120M1410 638v120" stroke-width="8" stroke-linecap="round"/><path class="gain" d="M1200 470h140l-46 150h-48z"/><path d="M1214 510h112M1228 556h84" stroke="var(--stage)" stroke-width="6"/><path class="s-ink" d="M1060 612l70-40" stroke-width="14" stroke-linecap="round"/><circle class="s-ink" cx="1138" cy="567" r="14" fill="none" stroke-width="7"/><text class="m" x="1130" y="700" font-size="20" text-anchor="middle">BUILD A BETTER ONE</text></g>
+<g id="bulb"><circle class="gain" cx="960" cy="330" r="42"/><rect class="ink" x="946" y="374" width="28" height="22" rx="4"/><path class="s-gain" d="M960 262v-26M900 290l-20-16M1020 290l20-16M890 340h-26M1030 340h26" stroke-width="6" stroke-linecap="round"/></g>
+<g id="cap4"><text class="d" x="120" y="840" font-size="40">Frustration gave him the idea and the motivation.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Ideas are cheap.</text>
+<text class="b" x="120" y="176" font-size="32">What matters is who actually starts making something.</text>
+<g id="pile"></g>
+<g id="tag"><rect class="s-loss" x="180" y="700" width="320" height="56" rx="10" fill="var(--stage)" stroke-width="5"/><text class="m" x="340" y="736" font-size="20" text-anchor="middle" style="fill:var(--loss)">WORTH VERY LITTLE</text></g>
+<g id="crowd5"></g>
+<g id="cr5l"><text class="m" x="815" y="760" font-size="20" text-anchor="middle">SAME BRILLIANT THOUGHT</text></g>
+<g id="bld"><g id="bfig"></g><path class="s-line" d="M1120 600h350" stroke-width="5"/><g id="blocks"></g><g id="ham"><path class="s-ink" d="M0 0l60-60" stroke-width="10" stroke-linecap="round"/><rect class="ink" x="40" y="-90" width="50" height="26" rx="4" transform="rotate(45 65 -77)"/></g><text class="m" x="1290" y="760" font-size="20" text-anchor="middle" style="fill:var(--gain)">THE ONE WHO BUILDS</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stop waiting for the right moment.</text>
+<text class="b" x="120" y="176" font-size="32">Even a few hours a week, at night or on weekends, adds up.</text>
+<g id="cal"><rect class="s-ink" x="120" y="240" width="434" height="360" rx="14" fill="var(--stage)" stroke-width="6"/><rect class="ink" x="120" y="240" width="434" height="56" rx="14"/><g id="cells"></g></g>
+<g id="exc"><text class="m" x="172" y="676" font-size="26" style="fill:var(--loss)">“NO TIME”</text><text class="m" x="172" y="736" font-size="26" style="fill:var(--loss)">“NOT THE RIGHT MOMENT”</text></g>
+<g id="x6a"><path class="s-gain" d="M128 652l24 24M152 652l-24 24" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="x6b"><path class="s-gain" d="M128 712l24 24M152 712l-24 24" fill="none" stroke-width="6" stroke-linecap="round"/></g>
+<g id="clk"><circle class="s-ink" cx="760" cy="420" r="110" fill="var(--stage)" stroke-width="7"/><path id="hh" class="s-ink" stroke-width="10" stroke-linecap="round"/><path id="mh" class="s-ink" stroke-width="6" stroke-linecap="round"/><path class="loss" d="M900 250a36 36 0 1 0 34 48a28 28 0 1 1 -34 -48z"/><rect class="s-line" x="640" y="580" width="240" height="28" rx="14" fill="none" stroke-width="4"/><rect id="bar6" class="gain" x="640" y="580" height="28" rx="14"/><text class="m" x="760" y="660" font-size="20" text-anchor="middle">ADDS UP</text></g>
+<g id="cl6"><g id="cl6c"><circle class="s-muted" cx="1150" cy="330" r="50" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><circle class="s-muted" cx="1300" cy="330" r="50" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/><circle class="s-muted" cx="1225" cy="300" r="62" fill="var(--stage)" stroke-width="4" stroke-dasharray="8 8"/></g><text class="m" x="1225" y="422" font-size="22" text-anchor="middle" style="fill:var(--muted)">A YEAR OF DAYDREAMING</text></g>
+<g id="rb6"><path class="s-gain" d="M1100 490l120-8 118 10-6 150-114 6-122-8z" fill="none" stroke-width="7" stroke-linejoin="round"/><path class="s-ink" d="M1130 520l60 40M1250 600l50-40" stroke-width="6" stroke-linecap="round"/><text class="m" x="1220" y="710" font-size="20" text-anchor="middle" style="fill:var(--gain)">ROUGH FIRST VERSION</text></g>
+<g id="cap6"><text class="d" x="120" y="830" font-size="40">A rough first version teaches you more.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your first step.</text>
+<text class="b" x="120" y="176" font-size="32">For one week, write down every small problem that bugs you.</text>
+<g id="nb"><rect class="s-ink" x="160" y="240" width="460" height="560" rx="14" fill="var(--stage)" stroke-width="6"/><g id="rings"></g><text class="m" x="200" y="310" font-size="20">THINGS THAT BUG ME</text></g>
+<g id="items"></g>
+<ellipse id="ring7" class="s-gain" cx="390" cy="578" rx="215" ry="42" fill="none" stroke-width="6" pathLength="1" stroke-dasharray="1 1"/>
+<g id="pay"><text class="m" x="650" y="586" font-size="20" style="fill:var(--gain)">WOULD HAPPILY PAY</text></g>
+<g id="tb"><path class="s-gain" d="M900 560Q960 500 1030 540" fill="none" stroke-width="5" stroke-dasharray="10 10"/><path class="s-ink" d="M1100 490l-30-60M1300 490l20-70" stroke-width="12" stroke-linecap="round"/><path class="s-ink" d="M1130 470v-30h140v30" fill="none" stroke-width="10" stroke-linejoin="round"/><rect class="gain" x="1040" y="470" width="320" height="40" rx="8"/><rect class="s-ink" x="1040" y="510" width="320" height="150" rx="10" fill="var(--stage)" stroke-width="7"/><text class="m" x="1200" y="720" font-size="20" text-anchor="middle">MAKE THE SMALLEST THING</text><text class="d" x="1200" y="800" font-size="44" text-anchor="middle">Even badly.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">What itch are you</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">scratching every day,</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">and what could you start</text></g>
+<g id="qd"><text class="d" x="136" y="600" font-size="80" letter-spacing="-2">building <tspan style="fill:var(--gain)">tonight</tspan> to fix it?</text></g>
+<text class="m" x="143" y="720" font-size="26">SCRATCH YOUR OWN ITCH</text>
+<g id="qm"><circle class="gain" cx="1360" cy="720" r="70"/><text class="d" x="1360" y="748" font-size="80" text-anchor="middle" style="fill:var(--on-gain)">?</text><path class="s-gain" d="M1270 650l-24-20M1450 650l24-20M1270 790l-24 20M1450 790l24 20" stroke-width="7" stroke-linecap="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="124" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:04</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Scratch Your Own Itch&rdquo;, from <em>Rework</em> by Jason Fried and David Heinemeier Hansson. Examples as reported in the book: the origin of Basecamp at 37signals and James Dyson&#x27;s frustration with his vacuum cleaner. Drawings of the idea pile, crowd and notebook are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-03.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=124, SC=[[0.0, 6.4], [6.4, 22.5], [22.5, 43.1], [43.1, 57.3], [57.3, 73.3], [73.3, 87.3], [87.3, 101.9], [101.9, 115.1], [115.1, 124.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Scratch Your Own Itch", "Be Your Own Customer", "How Basecamp Began", "Instant Feedback", "The Dusty Vacuum", "Ideas Are Cheap", "Stop Waiting", "Your First Step", "Your Challenge"];
+const TM={"title_itch": 0.0, "narrator_desk": 6.72, "itch_bubble": 14.64, "mirror": 17.72, "design_studio": 22.8, "client_emails": 28.52, "basecamp_app": 33.28, "thumbs_up": 43.36, "guess_cloud": 49.68, "test_loop": 53.44, "vacuum": 57.6, "workshop": 63.6, "lightbulb": 68.0, "idea_pile": 73.6, "crowd_heads": 79.36, "builder": 82.96, "calendar": 87.6, "clock_evening": 92.64, "prototype": 97.6, "notebook": 102.24, "circle_one": 107.84, "toolbox": 111.12, "question_mark": 115.44};
+const fig=(g,x,y,r,a)=>{mk('circle',Object.assign({cx:x,cy:y,r:r},a),g);mk('path',Object.assign({d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},a),g)};
+const I={class:'ink'},G={class:'gain'};
+fig($('tfig'),1300,300,50,I);fig($('mk1'),330,380,40,I);fig($('mk2'),1150,400,40,G);
+for(let r=0;r<2;r++)for(let c=0;c<3;c++)mk('rect',{x:170+c*80,y:420+r*90,width:50,height:60,class:'s-ink',fill:'none','stroke-width':5},$('win'));
+const ENV=[[560,360,-12],[700,330,8],[830,400,-6],[600,500,10],[760,520,-14],[660,620,6],[830,610,12]].map(e=>{const g=mk('g',{},$('mail'));
+  mk('rect',{x:-55,y:-36,width:110,height:72,rx:6,fill:'var(--stage)',stroke:'var(--loss)','stroke-width':5},g);
+  mk('path',{d:'M-55 -36L0 6L55 -36',fill:'none',stroke:'var(--loss)','stroke-width':5,'stroke-linejoin':'round'},g);return [g,e]});
+for(let c=0;c<3;c++)for(let r=0;r<4;r++){const x=1010+c*150,y=376+r*70;mk('rect',{x:x,y:y,width:24,height:24,rx:4,class:'gain'},$('rows'));mk('path',{d:'M'+(x+36)+' '+(y+12)+'h84',class:'s-line','stroke-width':8,'stroke-linecap':'round'},$('rows'))}
+const PP=[];for(let i=0;i<8;i++){const g=mk('g',{},$('ppl'));fig(g,1000+i*60,770,12,I);PP.push(g)}
+fig($('ghost'),740,400,40,{fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-dasharray':'8 8'});
+[['USE',-90],['FEEL',30],['FIX',150]].forEach(n=>{const a=n[1]*Math.PI/180,x=1220+160*Math.cos(a),y=430+160*Math.sin(a);
+  mk('rect',{x:x-75,y:y-28,width:150,height:56,rx:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nodes'));
+  mk('text',{x:x,y:y+8,'font-size':22,'text-anchor':'middle',class:'m',style:'fill:var(--ink)'},$('nodes')).textContent=n[0]});
+fig($('dys'),960,480,36,I);
+for(let i=0;i<6;i++)mk('circle',{cx:240+i*36,cy:752+(i%2)*10,r:6,fill:'var(--muted)'},$('dust'));
+const BL=[];for(let k=0;k<5;k++)for(let i=0;i<5-k;i++){const x=340+(i-(4-k)/2)*70,y=640-k*62,g=mk('g',{},$('pile'));
+  mk('circle',{cx:x,cy:y,r:24,class:'s-muted',fill:'var(--stage)','stroke-width':4},g);mk('rect',{x:x-8,y:y+22,width:16,height:12,fill:'var(--muted)'},g);BL.push(g)}
+const CR=[];for(let r=0;r<3;r++)for(let c=0;c<4;c++){const x=650+c*110,y=400+r*120,g=mk('g',{},$('crowd5'));fig(g,x,y,14,I);mk('circle',{cx:x,cy:y-36,r:9,class:'gain'},g);CR.push(g)}
+fig($('bfig'),1180,450,32,G);
+const BK=[];for(let i=0;i<4;i++)BK.push(mk('rect',{x:1320,y:560-i*42,width:110,height:38,rx:4,class:i%2?'gain':'ink'},$('blocks')));
+const CE=[];for(let r=0;r<4;r++)for(let c=0;c<7;c++)CE.push(mk('rect',{x:136+c*58,y:316+r*68,width:46,height:54,rx:6,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},$('cells')));
+for(let i=0;i<7;i++)mk('circle',{cx:200+i*60,cy:240,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('rings'));
+const IT=[300,220,340,260,310,200].map((w,i)=>{const y=380+i*66,g=mk('g',{},$('items'));mk('circle',{cx:210,cy:y,r:7,class:'ink'},g);
+  mk('path',{d:'M240 '+y+'h'+w,class:'s-line','stroke-width':8,'stroke-linecap':'round'},g);return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+$('tarm').setAttribute('transform','translate('+(4*Math.sin(t*18)).toFixed(1)+' '+(3*Math.cos(t*18)).toFixed(1)+')');
+rise($('spark'),p(u,TM.title_itch,TM.title_itch+.5)*(.6+.4*Math.sin(t*6)));
+
+rise($('desk'),p(u,TM.narrator_desk,TM.narrator_desk+.5));rise($('bub1'),p(u,TM.itch_bubble,TM.itch_bubble+.5));rise($('mir'),p(u,TM.mirror,TM.mirror+.6));
+
+rise($('stu'),p(u,TM.design_studio,TM.design_studio+.5));rise($('mailg'),p(u,TM.client_emails,TM.client_emails+.4));
+ENV.forEach(([g,e],i)=>{const a=TM.client_emails+i*.25;g.setAttribute('opacity',p(u,a,a+.3));g.setAttribute('transform','translate('+(e[0]+3*Math.sin(t*3+i)).toFixed(1)+' '+e[1]+') rotate('+(e[2]+4*Math.sin(t*2+i)).toFixed(1)+')')});
+const ob=TM.basecamp_app+5.4;rise($('app'),p(u,TM.basecamp_app,TM.basecamp_app+.6));
+$('own').setAttribute('opacity',1-p(u,ob,ob+.4));$('main').setAttribute('opacity',p(u,ob,ob+.4));
+PP.forEach((g,i)=>rise(g,p(u,ob+i*.12,ob+i*.12+.4)));rise($('cap2'),p(u,ob+.3,ob+.9));
+
+rise($('ok3'),p(u,TM.thumbs_up,TM.thumbs_up+.5));rise($('ok3b'),p(u,TM.thumbs_up+3,TM.thumbs_up+3.5));
+rise($('gs3'),p(u,TM.guess_cloud,TM.guess_cloud+.5));$('x3').setAttribute('opacity',p(u,TM.guess_cloud+1,TM.guess_cloud+1.4));
+rise($('lp3'),p(u,TM.test_loop,TM.test_loop+.5));const da=-Math.PI/2+t*1.6;$('dot3').setAttribute('cx',(1220+160*Math.cos(da)).toFixed(1));$('dot3').setAttribute('cy',(430+160*Math.sin(da)).toFixed(1));
+rise($('lp3c'),p(u,TM.test_loop+1,TM.test_loop+1.6));
+
+rise($('vac'),p(u,TM.vacuum,TM.vacuum+.5));const sh=384-334*p(u,TM.vacuum+.8,TM.vacuum+4.5);$('suck').setAttribute('height',sh.toFixed(1));$('suck').setAttribute('y',(692-sh).toFixed(1));
+rise($('ws'),p(u,TM.workshop,TM.workshop+.6));rise($('bulb'),p(u,TM.lightbulb,TM.lightbulb+.5)*(.8+.2*Math.sin(t*5)));rise($('cap4'),p(u,TM.lightbulb+.6,TM.lightbulb+1.2));
+
+BL.forEach((g,i)=>rise(g,p(u,TM.idea_pile+i*.08,TM.idea_pile+i*.08+.3)));rise($('tag'),p(u,TM.idea_pile+3.4,TM.idea_pile+3.9));
+CR.forEach((g,i)=>rise(g,p(u,TM.crowd_heads+i*.1,TM.crowd_heads+i*.1+.3)));rise($('cr5l'),p(u,TM.crowd_heads+1,TM.crowd_heads+1.5));
+rise($('bld'),p(u,TM.builder,TM.builder+.5));BK.forEach((b,i)=>b.setAttribute('opacity',p(u,TM.builder+.8+i*.6,TM.builder+1+i*.6)));
+$('ham').setAttribute('transform','translate(1240 540) rotate('+(-20+25*Math.sin(t*6)).toFixed(1)+')');
+
+rise($('cal'),p(u,TM.calendar,TM.calendar+.5));rise($('exc'),p(u,TM.calendar+2,TM.calendar+2.5));
+rise($('x6a'),p(u,TM.clock_evening,TM.clock_evening+.4));rise($('x6b'),p(u,TM.clock_evening+.4,TM.clock_evening+.8));
+let j=0;CE.forEach((c,i)=>{if(i%7>=5){const a=TM.clock_evening+.6+j*.4;j++;c.style.fill=u>=a?'var(--gain)':'var(--stage)'}});
+rise($('clk'),p(u,TM.clock_evening,TM.clock_evening+.5));const ha=t*.5,ma=t*3;
+$('hh').setAttribute('d','M760 420L'+(760+55*Math.sin(ha)).toFixed(1)+' '+(420-55*Math.cos(ha)).toFixed(1));$('mh').setAttribute('d','M760 420L'+(760+85*Math.sin(ma)).toFixed(1)+' '+(420-85*Math.cos(ma)).toFixed(1));
+$('bar6').setAttribute('width',(240*p(u,TM.clock_evening+.5,TM.clock_evening+4)).toFixed(1));
+rise($('cl6'),p(u,TM.prototype,TM.prototype+.5));$('cl6c').setAttribute('opacity',(1-.6*p(u,TM.prototype+2,TM.prototype+2.6)).toFixed(2));
+rise($('rb6'),p(u,TM.prototype+1,TM.prototype+1.5));rise($('cap6'),p(u,TM.prototype+1.6,TM.prototype+2.2));
+
+rise($('nb'),p(u,TM.notebook,TM.notebook+.5));IT.forEach((g,i)=>rise(g,p(u,TM.notebook+1.4+i*.6,TM.notebook+1.4+i*.6+.4)));
+$('ring7').setAttribute('stroke-dashoffset',(1-p(u,TM.circle_one,TM.circle_one+.8)).toFixed(3));rise($('pay'),p(u,TM.circle_one+.6,TM.circle_one+1.1));
+rise($('tb'),p(u,TM.toolbox,TM.toolbox+.6));
+
+rise($('qa'),p(u,TM.question_mark,TM.question_mark+.5));rise($('qb'),p(u,TM.question_mark+.4,TM.question_mark+.9));
+rise($('qc'),p(u,TM.question_mark+.8,TM.question_mark+1.3));rise($('qd'),p(u,TM.question_mark+1.2,TM.question_mark+1.7));
+rise($('qm'),p(u,TM.question_mark+1.6,TM.question_mark+2.1)*(.85+.15*Math.sin(t*3)));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:120.8;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

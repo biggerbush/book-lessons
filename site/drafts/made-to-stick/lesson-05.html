@@ -1,0 +1,278 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made to Stick Lesson 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 5 of Made to Stick: Ideas become believable through vivid details, human-scale statistics and testable claims that let the audience check the truth for themselves. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MADE TO STICK · LESSON 5</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Credible: let people</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">test it.</text>
+<text class="b" x="120" y="600" font-size="32">Make your idea prove itself, so people believe it for themselves.</text>
+<circle id="ring" class="s-line" cx="1320" cy="390" r="130" fill="none" stroke-width="6" stroke-dasharray="14 12"/>
+<g id="qm"><path class="s-gain" d="M1272 344a48 48 0 1 1 68 44c-14 8-20 18-20 34v12" fill="none" stroke-width="18" stroke-linecap="round"/><circle class="gain" cx="1320" cy="470" r="12"/></g>
+<path id="ck0" class="s-gain" d="M1252 392l46 46 82-92" fill="none" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Borrowed trust.</text>
+<text class="b" x="120" y="176" font-size="32">Where does our belief usually come from?</text>
+<g id="ex"><circle class="gain" cx="440" cy="470" r="32"/><path d="M426 470l10 10 18-20" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="340" y="640" font-size="20" text-anchor="middle">EXPERTS · CELEBRITIES · SEALS</text></g>
+<g id="ch"><g id="yu"></g><path class="s-muted" d="M800 400v130h80M800 530v80M880 530v80" fill="none" stroke-width="7" stroke-dasharray="12 10" stroke-linecap="round"/><text class="m" x="790" y="640" font-size="20" text-anchor="middle">NO EXPERT BESIDE YOU</text></g>
+<g id="gl"><g id="rays"></g><circle class="gain" cx="1260" cy="420" r="80"/><rect class="ink" x="1228" y="505" width="64" height="40" rx="8"/><path d="M1222 420l26 26 50-56" fill="none" stroke="var(--on-gain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><text class="m" x="1260" y="640" font-size="20" text-anchor="middle">CREDIBILITY INSIDE THE IDEA</text></g>
+<g id="g1t"><text class="d" x="120" y="780" font-size="44">An idea can carry its own credibility.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A custody case.</text>
+<text class="b" x="120" y="176" font-size="32">Mock jurors heard about a mother and her young son.</text>
+<g id="jb"><g id="jur"></g><rect class="s-ink" x="140" y="540" width="460" height="180" rx="10" fill="var(--stage)" stroke-width="7"/><text class="m" x="370" y="640" font-size="22" text-anchor="middle">MOCK JURORS</text></g>
+<g id="cA"><rect class="s-line" x="700" y="240" width="360" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="730" y="290" font-size="20">VERSION A</text><path class="s-line" d="M730 340h280M730 390h280M730 440h280M730 490h200" stroke-width="10" stroke-linecap="round"/></g>
+<g id="cB"><rect class="s-line" x="1100" y="240" width="380" height="520" rx="18" fill="var(--stage)" stroke-width="3"/><text class="m" x="1130" y="290" font-size="20">VERSION B</text><path class="s-line" d="M1130 340h300M1130 390h300M1130 440h300M1130 490h220" stroke-width="10" stroke-linecap="round"/></g>
+<g id="vd"><path class="s-gain" d="M1130 540h300" stroke-width="10" stroke-linecap="round"/><text class="m" x="1130" y="580" font-size="18" style="fill:var(--gain)">+ SMALL, VIVID DETAILS</text></g>
+<g id="tb"><rect class="ink" x="1150" y="640" width="220" height="22" rx="11"/><rect class="ink" x="1340" y="620" width="70" height="24" rx="6"/><path class="s-gain" d="M1346 618v-22M1360 618v-22M1374 618v-22M1388 618v-22M1402 618v-22" stroke-width="6" stroke-linecap="round"/><text class="m" x="1290" y="710" font-size="20" text-anchor="middle">DARTH VADER TOOTHBRUSH</text></g>
+<g id="sa"><text class="m" x="1080" y="810" font-size="20" text-anchor="middle">SAME ARGUMENTS IN BOTH</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Details persuade.</text>
+<text class="b" x="120" y="176" font-size="32">Even when those details prove nothing.</text>
+<g id="sc">
+<path class="s-ink" d="M460 330V720M360 730h200" stroke-width="8" stroke-linecap="round" fill="none"/>
+<path id="beam" class="s-ink" d="M240 320h440" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="460" cy="320" r="14"/>
+<g id="panL"><path class="s-muted" d="M0 0L-60 120M0 0L60 120" stroke-width="3" fill="none"/><path class="ink" d="M-70 120h140l-20 26h-100z"/><rect class="s-line" x="-30" y="88" width="60" height="30" fill="none" stroke-width="4"/><text class="m" x="0" y="184" font-size="20" text-anchor="middle">PLAIN</text></g>
+<g id="panR"><path class="s-muted" d="M0 0L-60 120M0 0L60 120" stroke-width="3" fill="none"/><path class="ink" d="M-70 120h140l-20 26h-100z"/><rect class="gain" x="-30" y="70" width="60" height="48" rx="6"/><text class="m" x="0" y="184" font-size="20" text-anchor="middle" style="fill:var(--gain)">VIVID</text></g>
+</g>
+<g id="lean"><text class="m" x="120" y="810" font-size="20">JURORS LEANED TOWARD THE VIVID SIDE</text></g>
+<g id="mg"><path class="s-line" d="M1020 350h160M1020 430h120" stroke-width="8" stroke-linecap="round"/><path class="s-gain" d="M1030 390h140" stroke-width="14" stroke-linecap="round"/><circle class="s-ink" cx="1100" cy="390" r="110" fill="none" stroke-width="10"/><path class="s-ink" d="M1178 468l70 70" stroke-width="22" stroke-linecap="round"/><text class="m" x="900" y="610" font-size="20">A SHARP DETAIL SIGNALS REAL KNOWLEDGE</text></g>
+<g id="vg"><text class="d5" x="900" y="700" font-size="40" fill-opacity=".5">Vague feels thin.</text><text class="d" x="900" y="770" font-size="40" style="fill:var(--gain)">Precise feels witnessed.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Numbers need scale.</text>
+<text class="b" x="120" y="176" font-size="32">Huge numbers slide right past our feelings.</text>
+<g id="cells"></g>
+<g id="fly"></g>
+<g id="ht"><path id="hp" class="loss" d="M0 72C-90 12-96-54-45-66C-21-72-5-55 0-42C5-55 21-72 45-66C96-54 90 12 0 72Z" transform="translate(790 480)"/><text class="m" x="790" y="610" font-size="20" text-anchor="middle">OUR FEELINGS</text></g>
+<g id="ru"><path class="s-muted" d="M900 480h70m-20-20 20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><g id="rp"></g><rect class="gain" x="1300" y="290" width="54" height="220" rx="6"/><g id="tk2"></g>
+<path class="s-ink" d="M1060 620q40-34 80 0q-40 34-80 0z" fill="none" stroke-width="5"/><circle class="ink" cx="1100" cy="620" r="11"/><text class="m" x="1100" y="680" font-size="20" text-anchor="middle">SEE IT</text>
+<path class="ink" d="M1300 606h14l18-16v60l-18-16h-14z"/><path class="s-ink" d="M1346 606q12 14 0 28M1360 596q22 24 0 48" fill="none" stroke-width="5" stroke-linecap="round"/><text class="m" x="1340" y="680" font-size="20" text-anchor="middle">HEAR IT</text></g>
+<g id="tr"><text class="d" x="120" y="800" font-size="44">Translate it into something human-sized.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The bucket of BBs.</text>
+<text class="b" x="120" y="176" font-size="32">Activists made a huge number audible.</text>
+<g id="bk"><path class="s-muted" d="M330 360q170-170 340 0" fill="none" stroke-width="5"/><g id="bbs"></g><circle id="bb1" class="gain" cx="500" cy="684" r="10"/><path class="s-ink" d="M320 360L360 700h280L680 360" fill="none" stroke-width="8" stroke-linejoin="round"/><path class="s-ink" d="M300 360h400" stroke-width="10" stroke-linecap="round"/></g>
+<path id="wv" class="s-muted" d="M720 520q20 40 0 80M750 500q34 60 0 120M280 520q-20 40 0 80M250 500q-34 60 0 120" fill="none" stroke-width="5" stroke-linecap="round"/>
+<g id="l1"><circle class="gain" cx="880" cy="386" r="14"/><text class="d" x="910" y="402" font-size="48">One BB</text><text class="m" x="880" y="450" font-size="20">STANDS FOR THE HIROSHIMA BOMB</text></g>
+<g id="l2"><circle class="ink" cx="872" cy="572" r="7"/><circle class="ink" cx="888" cy="572" r="7"/><circle class="ink" cx="880" cy="558" r="7"/><text class="d" x="910" y="582" font-size="48">Thousands more</text><text class="m" x="880" y="630" font-size="20">THE WORLD’S NUCLEAR ARSENAL</text></g>
+<g id="hr"><text class="d" x="120" y="810" font-size="44">They didn’t just learn the number. They heard it.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Let them test it.</text>
+<text class="b" x="120" y="176" font-size="32">Ronald Reagan, 1980 debate.</text>
+<g id="db"><g id="rg"></g><rect class="ink" x="200" y="520" width="160" height="200" rx="8"/><rect class="s-ink" x="400" y="260" width="260" height="130" rx="16" fill="var(--stage)" stroke-width="5"/><path class="s-line" d="M430 300h200M430 330h200M430 360h140" stroke-width="8" stroke-linecap="round"/></g>
+<g id="nx"><path class="s-loss" d="M420 272l220 106M640 272l-220 106" stroke-width="8" stroke-linecap="round"/><text class="m" x="400" y="436" font-size="20">SKIPPED THE STATISTICS</text></g>
+<g id="qq"><text class="d" x="760" y="300" font-size="44">“Are you better off than you</text><text class="d" x="760" y="360" font-size="44">were four years ago?”</text></g>
+<g id="crowd"></g><g id="cks"></g>
+<g id="chk"><text class="m" x="760" y="740" font-size="20">THEY CHECKED THEIR OWN LIVES</text></g>
+<g id="own"><text class="d" x="120" y="820" font-size="44">Their own discovery, not his claim.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Your toolkit.</text>
+<text class="b" x="120" y="176" font-size="32">Before your next pitch, three moves.</text>
+<g id="tk"></g>
+<g id="ic0"><circle class="s-ink" cx="1330" cy="300" r="36" fill="none" stroke-width="8"/><circle class="gain" cx="1330" cy="300" r="12"/><path class="s-ink" d="M1356 326l30 30" stroke-width="12" stroke-linecap="round"/></g>
+<g id="ic1"><rect id="big" class="s-line" x="1250" y="440" width="80" height="80" fill="none" stroke-width="6"/><path class="s-muted" d="M1345 480h40m-14-14 14 14-14 14" fill="none" stroke-width="5" stroke-linecap="round"/><circle class="gain" cx="1420" cy="480" r="12"/></g>
+<g id="ic2"><rect class="s-ink" x="1270" y="615" width="130" height="80" rx="6" fill="var(--stage)" stroke-width="6"/><path class="s-ink" d="M1270 615l65 45 65-45" fill="none" stroke-width="6" stroke-linejoin="round"/><circle class="gain" cx="1410" cy="620" r="20"/></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">What claim are you making</text></g>
+<g id="qb"><text class="d" x="136" y="400" font-size="80" letter-spacing="-2">this week that people simply</text></g>
+<g id="qc"><text class="d" x="136" y="500" font-size="80" letter-spacing="-2">have to take on <tspan style="fill:var(--loss)">faith</tspan>?</text></g>
+<g id="qd"><text class="m" x="143" y="640" font-size="26">HOW COULD YOU LET THEM CHECK IT?</text></g>
+<g id="hd"><rect class="s-ink" x="1020" y="590" width="280" height="170" rx="18" fill="var(--stage)" stroke-width="6"/><text class="m" x="1052" y="636" font-size="20">YOUR CLAIM</text><path class="s-line" d="M1052 676h170M1052 716h120" stroke-width="10" stroke-linecap="round"/></g>
+<g id="rg2"><circle class="gain" cx="1290" cy="596" r="40"/><path d="M1272 596l12 13 24-27" fill="none" stroke="var(--on-gain)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Credible: Let People Test It&rdquo;, from <em>Made to Stick</em> by Chip Heath and Dan Heath. Examples as reported in the book: a mock-jury custody study, an anti-nuclear BB pellet demonstration, and Ronald Reagan&#x27;s 1980 debate question. The scales, bucket and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-05.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 9.3], [9.3, 23.1], [23.1, 39.7], [39.7, 56.3], [56.3, 67.9], [67.9, 89.0], [89.0, 104.2], [104.2, 116.0], [116.0, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Can You Prove It?", "Borrowed Trust", "A Custody Case", "Details Persuade", "Numbers Need Scale", "The Bucket of BBs", "Test It Yourself", "Your Toolkit", "Your Turn"];
+const TM={"question_mark": 0.0, "expert": 9.6, "empty_chair": 14.72, "glowing_idea": 18.48, "jury_box": 23.36, "two_scales": 29.76, "toothbrush": 35.52, "tilted_scale": 40.0, "magnifier": 46.32, "spreadsheet": 56.56, "ruler": 62.24, "metal_bucket": 68.24, "single_bb": 73.04, "bb_avalanche": 78.24, "debate_stage": 89.28, "mirror": 94.32, "nodding_crowd": 98.56, "checklist": 104.48, "small_object": 108.8, "invitation": 112.8, "open_hand": 116.32};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g);return g};
+fig($('ex'),340,370,36,'ink'); fig($('yu'),700,400,30,'ink'); fig($('rp'),1180,330,40,'ink'); fig($('rg'),280,410,34,'ink');
+const RY=[];for(let i=0;i<7;i++){const a=Math.PI+i*Math.PI/6,c=Math.cos(a),s=Math.sin(a);RY.push(mk('path',{d:'M'+(1260+100*c).toFixed(0)+' '+(420+100*s).toFixed(0)+'L'+(1260+130*c).toFixed(0)+' '+(420+130*s).toFixed(0),class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('rays')))}
+for(let i=0;i<6;i++)fig($('jur'),190+i*72,470,24,'ink');
+const CR=[];for(let r=0;r<7;r++){const g=mk('g',{},$('cells'));CR.push(g);for(let c=0;c<6;c++){mk('rect',{x:120+c*80,y:260+r*52,width:80,height:52,fill:r?'var(--stage)':'var(--line)',stroke:'var(--line)','stroke-width':2},g);if(r&&c)mk('path',{d:'M'+(134+c*80)+' '+(286+r*52)+'h'+(30+(r*7+c*3)%4*8),stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round'},g)}}
+const FL=[0,1,2,3].map(()=>mk('rect',{x:0,y:296,width:46,height:28,rx:4,fill:'var(--stage)',stroke:'var(--muted)','stroke-width':3},$('fly')));
+for(let i=0;i<9;i++)mk('path',{d:'M1300 '+(302+i*24)+'h'+(i%2?14:26),stroke:'var(--on-gain)','stroke-width':4},$('tk2'));
+const N=160,fr=v=>v-Math.floor(v),BB=[];for(let i=0;i<N;i++){const ty=688-i/N*110-fr(Math.sin(i*7.3)*999)*8,hw=140+(700-ty)*40/340-14,tx=500+(fr(Math.sin(i*12.9898)*43758.5)*2-1)*hw;BB.push([mk('circle',{cx:500,cy:250,r:6,fill:'var(--muted)'},$('bbs')),tx,ty])}
+const CW=[],CK=[];for(let i=0;i<7;i++){const x=800+i*105;CW.push(fig(mk('g',{},$('crowd')),x,570,26,'ink'));const g=mk('g',{},$('cks'));mk('circle',{cx:x,cy:480,r:22,class:'gain'},g);mk('path',{d:'M'+(x-10)+' 480l7 8 13-15',fill:'none',stroke:'var(--on-gain)','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);CK.push(g)}
+const TK=[['Add one vivid, true detail.','SPECIFIC BEATS VAGUE'],['Shrink your biggest number.','INTO SOMETHING PEOPLE CAN PICTURE OR HEAR'],['Hand them a test.','ONE THEY CAN RUN THEMSELVES']].map((s,i)=>{const c=310+i*170,g=mk('g',{},$('tk'));mk('rect',{x:120,y:c-40,width:80,height:80,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6},g);const ck=mk('path',{d:'M138 '+c+'l18 18 34-38',fill:'none',stroke:'var(--gain)','stroke-width':10,'stroke-linecap':'round','stroke-linejoin':'round'},g);const a=mk('text',{x:240,y:c+4,'font-size':44,class:'d'},g);a.textContent=s[0];const b=mk('text',{x:240,y:c+44,'font-size':20,class:'m'},g);b.textContent=s[1];return [g,ck]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const q0=TM.question_mark;
+$('ring').setAttribute('transform','rotate('+(t*10%360).toFixed(1)+' 1320 390)');
+rise($('qm'),p(u,q0,q0+.5)*(1-p(u,q0+6.6,q0+7.1))); rise($('ck0'),p(u,q0+6.7,q0+7.3));
+
+rise($('ex'),p(u,TM.expert,TM.expert+.5)); rise($('ch'),p(u,TM.empty_chair,TM.empty_chair+.5)); rise($('gl'),p(u,TM.glowing_idea,TM.glowing_idea+.5));
+RY.forEach((r,i)=>r.setAttribute('opacity',(.5+.5*Math.sin(t*3+i)).toFixed(2))); rise($('g1t'),p(u,TM.glowing_idea+1,TM.glowing_idea+1.6));
+
+rise($('jb'),p(u,TM.jury_box,TM.jury_box+.5));
+const ts=TM.two_scales; rise($('cA'),p(u,ts,ts+.5)); rise($('cB'),p(u,ts+.4,ts+.9)); rise($('sa'),p(u,ts+.8,ts+1.3)); rise($('vd'),p(u,ts+1.6,ts+2.1));
+rise($('tb'),p(u,TM.toothbrush,TM.toothbrush+.5));
+
+const tl=TM.tilted_scale; rise($('sc'),p(u,tl,tl+.5));
+const ang=12*p(u,tl+.8,tl+2.4)+1.2*Math.sin(t*2)*p(u,tl+2.4,tl+3),rd=ang*Math.PI/180,cx=220*Math.cos(rd),cy=220*Math.sin(rd);
+$('beam').setAttribute('transform','rotate('+ang.toFixed(2)+' 460 320)');
+$('panL').setAttribute('transform','translate('+(460-cx).toFixed(1)+' '+(320-cy).toFixed(1)+')'); $('panR').setAttribute('transform','translate('+(460+cx).toFixed(1)+' '+(320+cy).toFixed(1)+')');
+rise($('lean'),p(u,tl+2,tl+2.6)); rise($('mg'),p(u,TM.magnifier,TM.magnifier+.5)); rise($('vg'),p(u,TM.magnifier+5,TM.magnifier+5.6));
+
+const sp=TM.spreadsheet; CR.forEach((g,i)=>rise(g,p(u,sp+i*.12,sp+i*.12+.4)));
+const fk=p(u,sp+1,sp+1.5); FL.forEach((f,i)=>{const c=(t*.5+i/4)%1;f.setAttribute('x',(630+c*330).toFixed(1));f.setAttribute('opacity',(Math.sin(c*Math.PI)*fk).toFixed(2))});
+rise($('ht'),p(u,sp+1,sp+1.5)); $('hp').setAttribute('transform','translate(790 480) scale('+(1+.05*Math.pow(Math.abs(Math.sin(t*2)),6)).toFixed(3)+')');
+rise($('ru'),p(u,TM.ruler,TM.ruler+.5)); rise($('tr'),p(u,TM.ruler+1.6,TM.ruler+2.2));
+
+rise($('bk'),p(u,TM.metal_bucket,TM.metal_bucket+.5));
+$('bb1').setAttribute('cy',(250+434*p(u,TM.single_bb,TM.single_bb+.8)).toFixed(1)); $('bb1').setAttribute('opacity',u>=TM.single_bb?1:0);
+rise($('l1'),p(u,TM.single_bb+.6,TM.single_bb+1.1));
+const av=TM.bb_avalanche; BB.forEach((b,i)=>{const a=av+i*5/N,k=p(u,a,a+.35);b[0].setAttribute('cx',(500+(b[1]-500)*k).toFixed(1));b[0].setAttribute('cy',(250+(b[2]-250)*k).toFixed(1));b[0].setAttribute('opacity',u>=a?1:0)});
+$('wv').setAttribute('opacity',(u>=av&&u<av+5.5?.3+.7*Math.abs(Math.sin(t*9)):0).toFixed(2));
+rise($('l2'),p(u,av+.4,av+.9)); rise($('hr'),p(u,av+6.1,av+6.7));
+
+rise($('db'),p(u,TM.debate_stage,TM.debate_stage+.5)); rise($('nx'),p(u,TM.debate_stage+1.5,TM.debate_stage+2));
+rise($('qq'),p(u,TM.mirror,TM.mirror+.6));
+const nd=TM.nodding_crowd; CK.forEach((g,i)=>rise(g,p(u,nd+i*.3,nd+i*.3+.4)));
+CW.forEach((g,i)=>g.setAttribute('transform','translate(0 '+(u>=nd?4*Math.sin(t*5+i):0).toFixed(1)+')'));
+rise($('chk'),p(u,nd,nd+.5)); rise($('own'),p(u,nd+1.5,nd+2.1));
+
+[TM.checklist,TM.small_object,TM.invitation].forEach((a,i)=>{rise(TK[i][0],p(u,a,a+.5));TK[i][1].setAttribute('opacity',p(u,a+.6,a+1));rise($('ic'+i),p(u,a+.3,a+.8))});
+const sh=p(u,TM.small_object+.8,TM.small_object+1.8),sz=80-50*sh; $('big').setAttribute('x',(1290-sz/2).toFixed(1)); $('big').setAttribute('y',(480-sz/2).toFixed(1)); $('big').setAttribute('width',sz.toFixed(1)); $('big').setAttribute('height',sz.toFixed(1));
+
+const oh=TM.open_hand; rise($('qa'),p(u,oh,oh+.5)); rise($('qb'),p(u,oh+.4,oh+.9)); rise($('qc'),p(u,oh+.8,oh+1.3));
+rise($('hd'),p(u,oh+1.2,oh+1.8)); rise($('qd'),p(u,oh+6.2,oh+6.8)); rise($('rg2'),p(u,oh+6.4,oh+7));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.04;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

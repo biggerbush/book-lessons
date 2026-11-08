@@ -1,0 +1,375 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made to Stick Lesson 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 1 of Made to Stick: Once you know something, you struggle to imagine not knowing it, which is why experts explain things badly and why the Heaths&#x27; six principles are needed. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MADE TO STICK · LESSON 1</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">The Curse</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">of Knowledge.</text>
+<text class="b" x="120" y="600" font-size="32">Why knowing too much makes you explain things badly.</text>
+<g id="t0n"></g>
+<g id="t0g"></g>
+<g id="t0q"><text class="d" x="1390" y="410" font-size="80" text-anchor="middle" style="fill:var(--loss)">?</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A simple game.</text>
+<g id="s1sub"><text class="b" x="120" y="176" font-size="32">Elizabeth Newton, Stanford graduate student, 1990.</text></g>
+<g id="s1p">
+<rect class="s-line" x="120" y="240" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect class="s-line" x="840" y="240" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="290" font-size="22">TAPPER</text>
+<text class="m" x="870" y="290" font-size="22">LISTENER</text>
+</g>
+<g id="s1a"></g>
+<g id="s1b"></g>
+<g id="s1song">
+<rect class="gain" x="420" y="330" width="300" height="70" rx="35"/>
+<text class="m" x="570" y="374" font-size="24" text-anchor="middle" style="fill:var(--on-gain)">HAPPY BIRTHDAY</text>
+<text class="d5" x="150" y="710" font-size="34">Knocks out the rhythm.</text>
+</g>
+<g id="s1k"></g>
+<g id="s1q">
+<rect class="s-loss" x="1240" y="280" width="200" height="100" rx="20" fill="var(--stage)" stroke-width="5"/>
+<path class="s-loss" d="M1260 380l-30 34 60-34" fill="var(--stage)" stroke-width="5" stroke-linejoin="round"/>
+<text class="d" x="1340" y="354" font-size="64" text-anchor="middle" style="fill:var(--loss)">?</text>
+<text class="d5" x="870" y="710" font-size="34">Names the song.</text>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Expectation vs. reality.</text>
+<text class="b" x="120" y="176" font-size="32">How often listeners named the song.</text>
+<rect id="s2bp" class="s-ink" x="300" y="740" width="220" height="0" fill="var(--stage)" stroke-width="5"/>
+<rect id="s2ba" class="loss" x="640" y="740" width="220" height="0"/>
+<path class="s-ink" d="M260 740H900" stroke-width="5" stroke-linecap="round"/>
+<text class="m" x="410" y="780" font-size="22" text-anchor="middle">PREDICTED</text>
+<text class="m" x="750" y="780" font-size="22" text-anchor="middle">ACTUAL</text>
+<g id="s2pl"><text class="m" x="410" y="470" font-size="24" text-anchor="middle">ABOUT HALF</text></g>
+<g id="s2al"><text class="d" x="750" y="705" font-size="44" text-anchor="middle" style="fill:var(--loss)">2.5 of 120</text></g>
+<g id="s2r1"><text class="m" x="980" y="320" font-size="22">ROUGHLY</text><text class="d" x="980" y="420" font-size="96" style="fill:var(--loss)">1 in 40</text></g>
+<g id="s2gap">
+<path class="s-muted" d="M520 490H900M860 730H900" stroke-width="3" stroke-dasharray="6 8"/>
+<path class="s-gain" d="M900 500V722M884 518l16-18 16 18M884 704l16 18 16-18" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text id="s2x" class="d" x="980" y="640" font-size="140" style="fill:var(--gain)">20×</text>
+<text class="m" x="980" y="690" font-size="20">MORE SUCCESS EXPECTED THAN REAL</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The melody is only in your head.</text>
+<g id="s3a"><text class="m" x="380" y="785" font-size="20" text-anchor="middle">TAPPER HEARS A MELODY</text></g>
+<g id="s3dots"></g>
+<g id="s3b"><text class="m" x="1220" y="785" font-size="20" text-anchor="middle">LISTENER HEARS KNOCKS</text></g>
+<g id="s3c">
+<text class="d" x="462" y="600" font-size="80" style="fill:var(--loss)">?!</text>
+<text class="d" x="120" y="845" font-size="44">“How could anyone miss this tune?”</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<g id="s4h">
+<text class="d" x="120" y="124" font-size="68">The Curse of Knowledge.</text>
+<text class="b" x="120" y="176" font-size="32">Named by Chip and Dan Heath.</text>
+</g>
+<g id="s4r">
+<rect class="s-muted" x="160" y="260" width="520" height="380" rx="18" fill="none" stroke-width="4" stroke-dasharray="12 10"/>
+<text class="m" x="190" y="310" font-size="22">NOT KNOWING</text>
+<g id="s4g"></g>
+<rect class="s-ink" x="920" y="260" width="520" height="380" rx="18" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="950" y="310" font-size="22" style="fill:var(--gain)">KNOWING</text>
+<g id="s4k"></g>
+</g>
+<g id="s4f"><path class="s-gain" d="M700 400H896M876 382l20 18-20 18" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g id="s4l">
+<path class="s-loss" d="M900 530H704M724 512l-20 18 20 18" fill="none" stroke-width="6" stroke-dasharray="12 10" stroke-linecap="round" stroke-linejoin="round"/>
+<path class="s-loss" d="M786 520v-12a14 14 0 0 1 28 0v12" fill="none" stroke-width="6"/>
+<rect class="loss" x="774" y="518" width="52" height="42" rx="6"/>
+</g>
+<g id="s4cap"><text class="d" x="120" y="740" font-size="44">Once you know it, you can’t un-know it.</text></g>
+<g id="s4m"><text class="m" x="120" y="800" font-size="22">WE CAN NO LONGER RECREATE THE LISTENER’S STATE OF MIND</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Same curse, every expert.</text>
+<g id="s5c"></g>
+<g id="s5a"><text class="d5" x="470" y="400" font-size="34">“Maximize shareholder value.”</text></g>
+<g id="s5s"></g>
+<g id="s5q"></g>
+<g id="s5j"></g>
+<g id="s5cap"><text class="d" x="120" y="840" font-size="36">Abstract expert language: knocks without the tune.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two ways to beat the curse.</text>
+<g id="s6d0"><rect class="s-ink" x="160" y="220" width="150" height="250" fill="var(--stage)" stroke-width="6"/><circle class="ink" cx="290" cy="350" r="7"/></g>
+<g id="s6x">
+<path class="s-loss" d="M150 210L320 480M320 210L150 480" stroke-width="8" stroke-linecap="round"/>
+<text class="d5" x="340" y="320" font-size="34">Never learn anything.</text>
+<text class="m" x="340" y="365" font-size="22" style="fill:var(--loss)">HELPS NOBODY</text>
+</g>
+<g id="s6d1"><rect class="s-ink" x="820" y="220" width="150" height="250" fill="var(--stage)" stroke-width="6"/></g>
+<g id="s6o">
+<path class="gain" d="M820 220L900 250V500L820 470z"/>
+<text class="d5" x="1010" y="320" font-size="34">Transform your ideas</text>
+<text class="d5" x="1010" y="365" font-size="34">so outsiders grasp them.</text>
+</g>
+<g id="s6t"></g>
+<g id="s6s"><text class="d" x="1330" y="660" font-size="64" style="fill:var(--gain)">s</text></g>
+<g id="s6cap"><text class="d" x="120" y="810" font-size="40">Six principles that make ideas stick.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Hear the knocks.</text>
+<text class="b" x="120" y="176" font-size="32">Catch the curse before it reaches your listener.</text>
+<g id="s7c0">
+<rect class="s-line" x="120" y="230" width="440" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22">1 · CATCH YOURSELF</text>
+<ellipse class="s-ink" cx="340" cy="430" rx="90" ry="115" fill="var(--stage)" stroke-width="6"/>
+<path class="s-gain" d="M340 545v40M300 585h80" stroke-width="7" stroke-linecap="round"/>
+<g id="s7me"></g>
+<text class="d5" x="150" y="650" font-size="34">Pause mid-tap.</text>
+</g>
+<g id="s7c1">
+<rect class="s-line" x="580" y="230" width="440" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="610" y="280" font-size="22">2 · ASK WHAT THEY HEAR</text>
+<g id="s7n"></g>
+<path class="s-loss" d="M700 380L790 470" stroke-width="7" stroke-linecap="round"/>
+<circle class="ink" cx="830" cy="440" r="9"/><circle class="ink" cx="860" cy="440" r="9"/><circle class="ink" cx="905" cy="440" r="9"/><circle class="ink" cx="935" cy="440" r="9"/>
+<text class="d5" x="610" y="650" font-size="34">Knocks, not music.</text>
+</g>
+<g id="s7c2">
+<rect class="s-line" x="1040" y="230" width="440" height="470" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1070" y="280" font-size="22">3 · TEST ON SOMEONE NEW</text>
+<circle class="s-ink" cx="1260" cy="430" r="100" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="1225" cy="410" r="10"/><circle class="ink" cx="1295" cy="410" r="10"/>
+<path id="s7m" class="s-ink" fill="none" stroke-width="7" stroke-linecap="round"/>
+<text class="d5" x="1070" y="650" font-size="34">Watch their face.</text>
+</g>
+<g id="s7cap"><text class="d" x="120" y="800" font-size="40">Hear what they hear, not the music in your head.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="300" font-size="80" letter-spacing="-2">One idea you explained</text></g>
+<g id="qb"><text class="d" x="136" y="395" font-size="80" letter-spacing="-2">this week fell flat.</text></g>
+<g id="qc"><text class="d" x="136" y="530" font-size="80" letter-spacing="-2" style="fill:var(--gain)">Were you hearing a melody</text></g>
+<g id="qd"><text class="d" x="136" y="625" font-size="80" letter-spacing="-2">your listener never heard?</text></g>
+<g id="s8g"><text class="m" x="143" y="770" font-size="24">HEAR THE KNOCKS, NOT THE MELODY</text><g id="s8n"></g>
+<circle class="ink" cx="1200" cy="760" r="10"/><circle class="ink" cx="1240" cy="760" r="10"/><circle class="ink" cx="1300" cy="760" r="10"/></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="138" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:18</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;The Curse of Knowledge&rdquo;, from <em>Made to Stick</em> by Chip Heath and Dan Heath. The tappers and listeners study by Elizabeth Newton at Stanford is as reported in the book. The leader, staff and toolbox drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-01.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=138, SC=[[0.0, 11.5], [11.5, 30.1], [30.1, 47.8], [47.8, 62.7], [62.7, 73.7], [73.7, 92.3], [92.3, 114.5], [114.5, 128.3], [128.3, 138.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Curse", "A Simple Game", "The Big Gap", "Inside Your Head", "The Curse Named", "Experts Everywhere", "The Way Out", "Hear the Knocks", "Your Turn"];
+const TM={"tapper_desk": 0.0, "stanford": 11.84, "two_roles": 18.0, "song_list": 22.4, "prediction": 30.4, "real_result": 34.8, "gap_arrow": 43.28, "thought_cloud": 48.08, "knock_marks": 53.36, "puzzled_face": 58.0, "curse_label": 62.96, "lock_key": 66.0, "ceo_podium": 74.0, "staff_faces": 81.28, "jargon_cloud": 86.16, "two_doors": 92.64, "toolbox": 99.28, "success_word": 104.08, "mirror": 114.8, "listener_view": 117.44, "test_friend": 122.96};
+const person=(g,x,y,r,cls)=>{const e=mk('g',{},g);mk('circle',{cx:x,cy:y,r:r,class:cls},e);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},e);return e};
+const note=(g,x,y,c)=>{const e=mk('g',{},g);mk('ellipse',{cx:x,cy:y,rx:13,ry:10,fill:c,transform:'rotate(-20 '+x+' '+y+')'},e);mk('path',{d:'M'+(x+11)+' '+(y-3)+'V'+(y-46)+'l16 10',fill:'none',stroke:c,'stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},e);return e};
+const cloud=(g,cx,cy,rx,ry,b)=>{mk('ellipse',{cx:cx,cy:cy,rx:rx,ry:ry,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);b.forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g))};
+const tx=(g,a,s)=>{const e=mk('text',a,g);e.textContent=s;return e};
+const GN='var(--gain)';
+
+const T0=$('t0g');person(T0,1110,470,34,'ink');person(T0,1390,470,34,'ink');
+mk('rect',{x:1030,y:622,width:440,height:14,class:'ink'},T0);
+mk('path',{d:'M1060 636v110M1440 636v110',class:'s-ink','stroke-width':8,'stroke-linecap':'round'},T0);
+const ARM=mk('path',{class:'s-ink','stroke-width':12,'stroke-linecap':'round',fill:'none'},T0);
+const HAND=mk('circle',{cx:1205,r:13,class:'ink'},T0);
+const N0=[1070,1120,1170].map(x=>note($('t0n'),x,410,GN));
+
+person($('s1a'),300,440,40,'ink');mk('rect',{x:180,y:620,width:540,height:14,class:'ink'},$('s1a'));
+person($('s1b'),1160,440,40,'ink');
+const KB=[40,40,70,70,40,90,40,70].map((h,i)=>mk('rect',{x:400+i*38,y:600-h,width:22,height:h,rx:6,class:'gain'},$('s1k')));
+
+cloud($('s3a'),400,320,220,100,[[392,446,14],[386,482,9]]);person($('s3a'),380,560,44,'gain');
+const N3=[270,340,410,480,550].map((x,i)=>note($('s3a'),x,i%2?340:370,GN));
+cloud($('s3b'),1220,320,220,100,[[1212,446,14],[1206,482,9]]);person($('s3b'),1220,560,44,'ink');
+const KM=[[1110,330],[1160,300],[1190,355],[1260,315],[1300,350],[1340,300]].map(q=>mk('path',{d:'M'+q[0]+' '+(q[1]-18)+'v36',class:'s-ink','stroke-width':9,'stroke-linecap':'round'},$('s3b')));
+const DT=[];for(let i=0;i<8;i++)DT.push(mk('circle',{cy:690,r:8,class:'ink'},$('s3dots')));
+
+person($('s4g'),420,430,40,'ink');person($('s4k'),1180,430,40,'gain');note($('s4k'),1340,400,GN);
+
+cloud($('s5c'),330,230,170,64,[[318,308,10],[310,328,6]]);
+[20,35,50,65].forEach((h,i)=>mk('rect',{x:240+i*46,y:270-h,width:32,height:h,class:'gain'},$('s5c')));
+mk('path',{d:'M236 250L420 196',class:'s-ink','stroke-width':5,'stroke-linecap':'round'},$('s5c'));
+person($('s5a'),300,380,36,'ink');mk('path',{d:'M220 500h160l-16 110h-128z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},$('s5a'));
+[1100,1210,1320,1430].forEach(x=>{person($('s5s'),x,420,26,'ink');tx($('s5q'),{x:x,y:380,'font-size':40,'text-anchor':'middle',class:'d',style:'fill:var(--muted)'},'?')});
+const JC=['DOCTORS','TEACHERS','ENGINEERS'].map((s,i)=>{const x=120+i*460,g=mk('g',{},$('s5j'));
+  mk('rect',{x:x,y:630,width:440,height:130,rx:16,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);
+  tx(g,{x:x+30,y:680,'font-size':24,class:'m'},s);
+  let d='';for(let k=0;k<2;k++){d+='M'+(x+30)+' '+(712+k*26);for(let j=0;j<9;j++)d+='q20 '+(j%2?12:-12)+' 40 0'}
+  mk('path',{d:d,fill:'none',stroke:'var(--muted)','stroke-width':4,'stroke-linecap':'round'},g);return g});
+
+const TL=['SIMPLE','UNEXPECTED','CONCRETE','CREDIBLE','EMOTIONAL','STORIES'].map((w,i)=>{const x=120+i*200,g=mk('g',{},$('s6t'));
+  mk('rect',{x:x,y:560,width:180,height:120,rx:16,class:'gain'},g);
+  tx(g,{x:x+90,y:650,'font-size':80,'text-anchor':'middle',class:'d',style:'fill:var(--on-gain)'},w[0]);
+  tx(g,{x:x+90,y:720,'font-size':20,'text-anchor':'middle',class:'m'},w);return g});
+
+person($('s7me'),340,400,26,'ink');note($('s7n'),740,440,GN);note($('s8n'),1380,770,GN);
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const T=TM.tapper_desk;
+rise($('t0g'),p(u,T,T+.6));
+const hy=606-16*Math.abs(Math.sin(t*5));HAND.setAttribute('cy',hy.toFixed(1));ARM.setAttribute('d','M1150 560L1205 '+hy.toFixed(1));
+N0.forEach((n,i)=>{const c=(t*.4+i/3)%1;n.setAttribute('transform','translate(0 '+(-140*c).toFixed(1)+')');n.setAttribute('opacity',(Math.sin(c*Math.PI)*p(u,T+.6,T+1.2)).toFixed(2))});
+rise($('t0q'),p(u,T+7,T+7.5));
+
+rise($('s1sub'),p(u,TM.stanford,TM.stanford+.5));rise($('s1p'),p(u,TM.stanford+.4,TM.stanford+.9));
+rise($('s1a'),p(u,TM.two_roles,TM.two_roles+.5));rise($('s1b'),p(u,TM.two_roles+.5,TM.two_roles+1));
+rise($('s1song'),p(u,TM.song_list,TM.song_list+.5));
+KB.forEach((b,i)=>b.setAttribute('opacity',u<TM.song_list+.8?0:(Math.floor(t*4)%8===i?1:.3)));
+rise($('s1q'),p(u,TM.song_list+6.5,TM.song_list+7));
+
+const ph=250*p(u,TM.prediction,TM.prediction+1);$('s2bp').setAttribute('y',(740-ph).toFixed(1));$('s2bp').setAttribute('height',ph.toFixed(1));
+const ah=10.4*p(u,TM.real_result,TM.real_result+.8);$('s2ba').setAttribute('y',(740-ah).toFixed(1));$('s2ba').setAttribute('height',ah.toFixed(1));
+rise($('s2pl'),p(u,TM.prediction+.8,TM.prediction+1.3));rise($('s2al'),p(u,TM.real_result+.5,TM.real_result+1));
+rise($('s2r1'),p(u,TM.real_result+4.1,TM.real_result+4.6));rise($('s2gap'),p(u,TM.gap_arrow,TM.gap_arrow+.5));
+$('s2x').textContent=Math.round(20*p(u,TM.gap_arrow,TM.gap_arrow+1.2))+'×';
+
+rise($('s3a'),p(u,TM.thought_cloud,TM.thought_cloud+.5));
+N3.forEach((n,i)=>n.setAttribute('transform','translate(0 '+(8*Math.sin(t*3+i)).toFixed(1)+')'));
+rise($('s3b'),p(u,TM.knock_marks,TM.knock_marks+.5));rise($('s3dots'),p(u,TM.knock_marks+.3,TM.knock_marks+.8));
+KM.forEach((m,i)=>m.setAttribute('opacity',Math.floor(t*3+i*1.7)%3===0?1:.25));
+DT.forEach((d,i)=>{const k=(i*80+t*120)%640;d.setAttribute('cx',(480+k).toFixed(1));d.setAttribute('opacity',Math.sin(k/640*Math.PI).toFixed(2))});
+rise($('s3c'),p(u,TM.puzzled_face,TM.puzzled_face+.5));
+
+rise($('s4h'),p(u,TM.curse_label,TM.curse_label+.5));rise($('s4r'),p(u,TM.curse_label+.5,TM.curse_label+1));
+rise($('s4f'),p(u,TM.curse_label+1.2,TM.curse_label+1.7));rise($('s4l'),p(u,TM.lock_key,TM.lock_key+.5));
+rise($('s4cap'),p(u,TM.lock_key+.6,TM.lock_key+1.1));rise($('s4m'),p(u,TM.lock_key+5.4,TM.lock_key+5.9));
+$('s4g').setAttribute('opacity',(1-.8*p(u,TM.lock_key+5.4,TM.lock_key+6.4)).toFixed(2));
+
+rise($('s5a'),p(u,TM.ceo_podium,TM.ceo_podium+.5));rise($('s5c'),p(u,TM.ceo_podium+3.8,TM.ceo_podium+4.3));
+rise($('s5s'),p(u,TM.staff_faces,TM.staff_faces+.5));rise($('s5q'),p(u,TM.staff_faces+.6,TM.staff_faces+1.1));
+JC.forEach((g,i)=>{const a=TM.jargon_cloud+i*.5;rise(g,p(u,a,a+.4))});rise($('s5cap'),p(u,TM.jargon_cloud+2,TM.jargon_cloud+2.5));
+
+rise($('s6d0'),p(u,TM.two_doors,TM.two_doors+.5));rise($('s6d1'),p(u,TM.two_doors+.4,TM.two_doors+.9));
+rise($('s6x'),p(u,TM.two_doors+3.8,TM.two_doors+4.3));rise($('s6o'),p(u,TM.toolbox,TM.toolbox+.5));
+TL.forEach((g,i)=>{const a=TM.success_word+i*.5;rise(g,p(u,a,a+.4))});
+rise($('s6s'),p(u,TM.success_word+3,TM.success_word+3.4));rise($('s6cap'),p(u,TM.success_word+3.5,TM.success_word+4));
+
+rise($('s7c0'),p(u,TM.mirror,TM.mirror+.5));rise($('s7c1'),p(u,TM.listener_view,TM.listener_view+.5));rise($('s7c2'),p(u,TM.test_friend,TM.test_friend+.5));
+$('s7m').setAttribute('d','M1215 470Q1260 '+(470+36*p(u,TM.test_friend+1.5,TM.test_friend+2.3)).toFixed(1)+' 1305 470');
+rise($('s7cap'),p(u,TM.test_friend+3,TM.test_friend+3.5));
+
+const a8=SC[8][0]/K;
+rise($('qa'),p(u,a8+.3,a8+.8));rise($('qb'),p(u,a8+.7,a8+1.2));rise($('qc'),p(u,a8+4.5,a8+5));rise($('qd'),p(u,a8+4.9,a8+5.4));rise($('s8g'),p(u,a8+5.5,a8+6));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:134.72;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,380 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Hard Thing About Hard Things Lesson 6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 6 of The Hard Thing About Hard Things: Calm times call for a broad, consensus-building leader, while existential threats call for a focused, decisive one, and great leaders know which moment they are in. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE HARD THING ABOUT HARD THINGS · LESSON 6</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Peacetime CEO</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">versus wartime CEO.</text>
+<text class="b" x="120" y="600" font-size="32">Great leaders know whether they are at peace or at war.</text>
+<g id="pg"><rect id="pgb" class="s-line" x="1130" y="230" width="350" height="200" rx="18" fill="var(--stage)" stroke-width="4"/><text class="m" x="1305" y="412" font-size="18" text-anchor="middle">BATTLE BY COMMITTEE</text></g>
+<g id="pc"><rect id="pcb" class="s-line" x="1130" y="470" width="350" height="200" rx="18" fill="var(--stage)" stroke-width="4"/><text class="m" x="1305" y="652" font-size="18" text-anchor="middle">ORCHESTRA BY ORDERS</text></g>
+<g id="wm"><text class="m" x="1305" y="720" font-size="22" text-anchor="middle" style="fill:var(--loss)">WRONG MOMENT</text></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two kinds of times.</text>
+<text class="b" x="120" y="176" font-size="32">Every company lives in one of two states.</text>
+<g id="cs">
+<rect class="s-line" x="120" y="230" width="660" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect x="122" y="600" width="656" height="150" fill="var(--loss)" fill-opacity=".08"/>
+<text class="m" x="150" y="280" font-size="24" style="fill:var(--gain)">PEACETIME</text>
+<path id="w0" class="s-loss" fill="none" stroke-width="4"/>
+<g id="b0"></g>
+<g id="gc"><text class="m" x="150" y="320" font-size="20">LEAD THE MARKET · GROW IT</text></g>
+</g>
+<g id="ss">
+<rect class="s-line" x="820" y="230" width="660" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<rect x="822" y="600" width="656" height="150" fill="var(--loss)" fill-opacity=".14"/>
+<text class="m" x="850" y="280" font-size="24" style="fill:var(--loss)">WARTIME</text>
+<text class="m" x="850" y="320" font-size="20">A THREAT THAT COULD KILL IT</text>
+<circle class="ink" cx="1160" cy="410" r="36"/><circle class="ink" cx="1220" cy="395" r="46"/><circle class="ink" cx="1280" cy="412" r="34"/>
+<polygon id="bolt" class="loss" points="1210,440 1180,510 1210,510 1190,570 1250,490 1220,490 1240,440"/>
+<path id="w1" class="s-loss" fill="none" stroke-width="5"/>
+<g id="b1"></g>
+</g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The peacetime CEO.</text>
+<text class="b" x="120" y="176" font-size="32">Thinks big, widens the field, builds agreement.</text>
+<g id="tb"><ellipse class="s-ink" cx="640" cy="530" rx="280" ry="100" fill="var(--stage)" stroke-width="6"/><text class="m" x="300" y="620" font-size="20" text-anchor="middle" style="fill:var(--gain)">CEO</text></g>
+<g id="tm"></g>
+<g id="ids"></g>
+<g id="agr"><text class="m" x="120" y="820" font-size="22">EMPOWER · INVITE IDEAS · BUILD AGREEMENT</text></g>
+<g id="cb">
+<path class="s-ink" d="M1250 360c-50-25-130-25-180-10v230c50-15 130-15 180 10z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<path class="s-ink" d="M1250 360c50-25 130-25 180-10v230c-50-15-130-15-180 10z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<g id="cbl"></g>
+<text class="m" x="1250" y="650" font-size="22" text-anchor="middle" style="fill:var(--gain)">CULTURE BY DESIGN</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The wartime CEO.</text>
+<text class="b" x="120" y="176" font-size="32">Everything narrows to one goal: survival.</text>
+<g id="fn">
+<polygon points="300,280 980,470 980,530 300,720" fill="var(--loss)" fill-opacity=".08" stroke="var(--ink)" stroke-width="5" stroke-linejoin="round"/>
+<g id="dts"></g>
+<text class="m" x="180" y="580" font-size="20" text-anchor="middle">CEO</text>
+</g>
+<g id="tgt">
+<path class="s-gain" d="M985 500h95" stroke-width="6" stroke-linecap="round"/>
+<circle class="s-ink" cx="1200" cy="500" r="110" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="1200" cy="500" r="70" fill="none" stroke-width="6"/>
+<circle class="gain" cx="1200" cy="500" r="30"/>
+<text class="m" x="1200" y="650" font-size="24" text-anchor="middle" style="fill:var(--gain)">SURVIVAL</text>
+</g>
+<g id="mg">
+<circle class="s-ink" cx="1360" cy="320" r="48" fill="var(--stage)" stroke-width="8"/>
+<circle id="spk" class="loss" cx="1360" cy="320" r="5"/>
+<path class="s-ink" d="M1394 286l40-40" stroke-width="12" stroke-linecap="round"/>
+<text class="m" x="1360" y="400" font-size="20" text-anchor="middle">TINIEST DETAIL</text>
+</g>
+<g id="c0"><rect x="120" y="760" width="400" height="64" rx="32" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="320" y="800" font-size="22" text-anchor="middle" style="fill:var(--loss)">NO WAITING FOR CONSENSUS</text></g>
+<g id="c1"><rect x="560" y="760" width="400" height="64" rx="32" fill="var(--stage)" stroke="var(--loss)" stroke-width="4"/><text class="m" x="760" y="800" font-size="22" text-anchor="middle" style="fill:var(--loss)">NO DRIFTING FROM THE PLAN</text></g>
+<g id="c2"><rect class="gain" x="1000" y="760" width="480" height="64" rx="32"/><text class="m" x="1240" y="800" font-size="22" text-anchor="middle" style="fill:var(--on-gain)">THE FIGHT SHAPES THE CULTURE</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Breaking the rules.</text>
+<text class="b" x="120" y="176" font-size="32">Horowitz sums up the difference in one sharp line.</text>
+<g id="bk"><text class="m" x="160" y="234" font-size="20">THE RULEBOOK</text><g id="bkL"></g><g id="bkR"></g></g>
+<g id="qcard">
+<rect class="s-line" x="600" y="250" width="880" height="240" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="d" x="640" y="340" font-size="44">“Wartime CEO violates protocol</text>
+<text class="d" x="640" y="400" font-size="44" style="fill:var(--gain)">in order to win.”</text>
+<text class="m" x="640" y="455" font-size="20">— BEN HOROWITZ</text>
+</g>
+<g id="r0"><text class="m" x="600" y="592" font-size="20" style="fill:var(--gain)">PEACETIME</text><g id="st0"></g>
+<path class="s-gain" d="M1160 585l14 14 26-28" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="1215" y="592" font-size="20" style="fill:var(--gain)">PROCESS WINS</text></g>
+<g id="r1"><text class="m" x="600" y="712" font-size="20" style="fill:var(--loss)">WARTIME</text><g id="st1"></g>
+<path class="s-loss" d="M1162 692l28 28M1190 692l-28 28" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1215" y="712" font-size="20" style="fill:var(--loss)">LOSES THE COMPANY</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Google changes gear.</text>
+<text class="b" x="120" y="176" font-size="32">Horowitz’s example of a deliberate switch.</text>
+<g id="hq"><rect class="s-ink" x="160" y="300" width="300" height="400" fill="var(--stage)" stroke-width="6"/><g id="win"></g><rect class="ink" x="280" y="620" width="60" height="80"/>
+<text class="d5" x="310" y="750" font-size="36" text-anchor="middle">Google</text></g>
+<g id="ps"><text class="m" x="620" y="520" font-size="20" text-anchor="middle">ERIC SCHMIDT</text><text class="m" x="620" y="550" font-size="18" text-anchor="middle" style="fill:var(--gain)">PEACETIME</text></g>
+<g id="pl"><text class="m" x="820" y="520" font-size="20" text-anchor="middle">LARRY PAGE</text><text class="m" x="820" y="550" font-size="18" text-anchor="middle" style="fill:var(--loss)">2011 · WARTIME</text></g>
+<g id="gg">
+<path d="M1000 560A200 200 0 0 1 1200 360" fill="none" stroke="var(--gain)" stroke-width="14"/>
+<path d="M1200 360A200 200 0 0 1 1400 560" fill="none" stroke="var(--loss)" stroke-width="14"/>
+<line id="ndl" x1="1200" y1="560" x2="1040" y2="502" stroke="var(--ink)" stroke-width="8" stroke-linecap="round"/>
+<circle class="ink" cx="1200" cy="560" r="18"/>
+<text class="m" x="1010" y="610" font-size="20" text-anchor="middle" style="fill:var(--gain)">PEACETIME</text>
+<text class="m" x="1390" y="610" font-size="20" text-anchor="middle" style="fill:var(--loss)">WARTIME</text>
+</g>
+<g id="cmp"><g id="chev"></g><text class="m" x="1370" y="750" font-size="20" text-anchor="middle" style="fill:var(--loss)">COMPETITION</text>
+<text class="d" x="120" y="820" font-size="40">Serious competition coming. Sharper focus.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Intel leaves memory.</text>
+<text class="b" x="120" y="176" font-size="32">Andy Grove at Intel, the 1980s.</text>
+<g id="gr"><text class="m" x="200" y="480" font-size="20" text-anchor="middle">ANDY GROVE</text><text class="m" x="200" y="510" font-size="20" text-anchor="middle">INTEL · 1980S</text></g>
+<g id="mc"><g id="mpins"></g><rect id="mcr" class="s-ink" x="440" y="440" width="240" height="240" rx="16" fill="var(--stage)" stroke-width="6"/>
+<text id="mct" class="d" x="560" y="572" font-size="34" text-anchor="middle">Memory</text></g>
+<g id="pr"><rect x="400" y="0" width="320" height="70" rx="8" fill="var(--stage)" stroke="var(--loss)" stroke-width="6"/><text class="m" x="560" y="44" font-size="20" text-anchor="middle" style="fill:var(--loss)">JAPANESE COMPETITORS</text>
+<path class="s-loss" d="M480 78v26M560 78v26M640 78v26" fill="none" stroke-width="6" stroke-linecap="round"/>
+<polygon class="loss" points="468,100 492,100 480,114"/><polygon class="loss" points="548,100 572,100 560,114"/><polygon class="loss" points="628,100 652,100 640,114"/></g>
+<g id="ex"><path id="exa" class="s-gain" d="M720 560H1050" fill="none" stroke-width="6" stroke-dasharray="14 10"/><path class="s-gain" d="M1030 540l20 20-20 20" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect class="gain" x="780" y="380" width="200" height="70" rx="10"/><text class="d" x="880" y="430" font-size="40" text-anchor="middle" style="fill:var(--on-gain)">EXIT</text></g>
+<g id="cpu"><g id="cpins"></g><rect class="gain" x="1110" y="430" width="260" height="260" rx="16"/>
+<text class="d" x="1240" y="550" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">MICRO-</text><text class="d" x="1240" y="592" font-size="34" text-anchor="middle" style="fill:var(--on-gain)">PROCESSORS</text>
+<text class="m" x="1240" y="750" font-size="22" text-anchor="middle" style="fill:var(--gain)">BET THE COMPANY</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Know your moment.</text>
+<text class="b" x="120" y="176" font-size="32">One leader can wear both hats, though it is very hard.</text>
+<g id="ht">
+<g id="hp"></g><g id="hA"></g><g id="hB"></g><g id="harr"></g>
+<text class="m" x="190" y="374" font-size="20" text-anchor="middle" style="fill:var(--gain)">PEACE</text>
+<text class="m" x="372" y="432" font-size="20" style="fill:var(--loss)">WAR</text>
+</g>
+<g id="hard"><text class="m" x="300" y="680" font-size="20" text-anchor="middle">VERY HARD</text></g>
+<g id="vn"><path class="s-ink" d="M800 372V700M740 700h120" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="va"><path class="s-ink" d="M-150 0H130" stroke-width="7" stroke-linecap="round"/><polygon class="ink" points="152,0 120,-22 120,22"/><polygon class="gain" points="-150,-26 -110,0 -150,26"/></g>
+<polygon class="ink" points="800,362 822,396 778,396"/>
+<text class="m" x="650" y="480" font-size="20" text-anchor="middle" style="fill:var(--gain)">PEACE</text><text class="m" x="950" y="480" font-size="20" text-anchor="middle" style="fill:var(--loss)">WAR</text>
+<text class="m" x="800" y="760" font-size="22" text-anchor="middle">READ THE MOMENT</text></g>
+<g id="sw"><rect class="s-ink" x="1140" y="420" width="300" height="100" rx="50" fill="var(--stage)" stroke-width="6"/><circle id="kn" cx="1190" cy="470" r="38"/>
+<text class="m" x="1190" y="580" font-size="20" text-anchor="middle" style="fill:var(--gain)">PEACE</text><text class="m" x="1390" y="580" font-size="20" text-anchor="middle" style="fill:var(--loss)">WAR</text>
+<text class="m" x="1290" y="650" font-size="22" text-anchor="middle">ON PURPOSE</text></g>
+<g id="dr"><text class="d" x="120" y="820" font-size="40">Lead a war like peace, and you drift toward <tspan style="fill:var(--loss)">defeat.</tspan></text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Look at your team today.</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">Peacetime or wartime?</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">Are you <tspan style="fill:var(--gain)">leading like it?</tspan></text></g>
+<text class="m" x="143" y="700" font-size="26">KNOW WHICH MOMENT YOU ARE IN</text>
+<g id="qt"><rect class="s-ink" x="1180" y="660" width="240" height="80" rx="40" fill="var(--stage)" stroke-width="5"/><circle id="qk" class="gain" cx="1300" cy="700" r="30"/>
+<text class="m" x="1220" y="786" font-size="22" text-anchor="middle" style="fill:var(--gain)">PEACE</text><text class="m" x="1380" y="786" font-size="22" text-anchor="middle" style="fill:var(--loss)">WAR</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="137" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:17</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Peacetime CEO Versus Wartime CEO&rdquo;, from <em>The Hard Thing About Hard Things</em> by Ben Horowitz. Examples of Google under Eric Schmidt and Larry Page, and Andy Grove at Intel, are as reported in the book. The generals, seas, hats and weather vane are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-06.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=137, SC=[[0.0, 10.5], [10.5, 24.4], [24.4, 38.0], [38.0, 56.4], [56.4, 73.9], [73.9, 94.9], [94.9, 109.6], [109.6, 126.5], [126.5, 137.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Wrong Leader, Wrong Time", "Two Kinds of Times", "The Peacetime CEO", "The Wartime CEO", "Breaking the Rules", "Google Changes Gear", "Intel Leaves Memory", "Know Your Moment", "Your Challenge"];
+const TM={"general": 0.0, "wrong_moment": 6.72, "calm_sea": 10.8, "growth_chart": 15.04, "storm_sea": 19.84, "open_table": 24.72, "team_ideas": 28.8, "culture_book": 34.48, "narrow_beam": 38.32, "dust_speck": 43.84, "war_culture": 52.56, "rulebook": 56.72, "quote_card": 60.32, "torn_page": 65.28, "google_hq": 74.24, "schmidt": 77.12, "larry_page": 82.96, "intel_chip": 95.2, "memory_chip": 99.6, "exit_sign": 103.96, "two_hats": 109.88, "weather_vane": 114.8, "style_switch": 118.24, "question": 126.8};
+const fig=(g,x,y,r,c)=>[mk('circle',{cx:x,cy:y,r:r,class:c},g),mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:c},g)];
+const S=(d,c,w,g,o={})=>mk('path',Object.assign({d:d,fill:'none',stroke:c,'stroke-width':w,'stroke-linecap':'round','stroke-linejoin':'round'},o),g);
+const wv=(el,x0,x1,y,A,t,s)=>{let d='M'+x0+' '+y;for(let x=x0;x<=x1;x+=20)d+='L'+x+' '+(y+A*Math.sin(x/50+t*s)).toFixed(1);el.setAttribute('d',d)};
+
+fig($('pg'),1200,290,20,'ink');mk('path',{d:'M1174 288a26 26 0 0 1 52 0h6v6h-64v-6z',class:'loss'},$('pg'));
+[1320,1375,1430].forEach(x=>{fig($('pg'),x,320,12,'ink');S('M'+(x+14)+' 352l8-44','var(--ink)',5,$('pg'))});
+fig($('pc'),1200,530,20,'ink');S('M1232 590l40-60','var(--ink)',5,$('pc'));
+S('M1290 520l18 8-18 8 18 8-18 8','var(--loss)',5,$('pc'));
+[1350,1395,1440].forEach(x=>fig($('pc'),x,565,12,'ink'));
+
+const BR=[0,1,2,3].map(i=>mk('rect',{x:480+i*65,y:560,width:50,height:0,rx:4,class:'gain'},$('gc')));
+S('M470 470L720 320m-30 4 30-4-6 30','var(--ink)',5,$('gc'));
+['b0','b1'].forEach((id,i)=>{const g=$(id);mk('path',{d:'M-70 0h140l-30 36h-80z',class:'ink'},g);S('M0 0v-100','var(--ink)',5,g);mk('path',{d:'M8 -96V-12h62z',class:i?'loss':'gain'},g)});
+
+fig($('tb'),300,470,26,'gain');
+const TP=[[520,330],[640,330],[760,330],[520,660],[640,660],[760,660]],SP2=[[560,505],[640,495],[720,505],[560,555],[640,565],[720,555]],TMG=[],TH=[],ID=[];
+TP.forEach(([x,y])=>{const g=mk('g',{},$('tm'));TMG.push(g);TH.push(...fig(g,x,y,22,'ink'));ID.push(mk('circle',{cx:x,cy:y,r:12,class:'gain',stroke:'var(--ink)','stroke-width':3},$('ids')))});
+const CL=[];for(let i=0;i<5;i++)[[1095,1225],[1275,1405]].forEach(([a,b])=>CL.push([mk('line',{x1:a,y1:400+i*35,x2:a,y2:400+i*35,stroke:'var(--muted)','stroke-width':6,'stroke-linecap':'round'},$('cbl')),a,b]));
+
+const DT=[];for(let i=0;i<12;i++)DT.push([mk('circle',{r:10,class:'ink'},$('dts')),320+(i%3)*20,305+i*33]);
+fig($('fn'),180,420,28,'ink');
+
+const zz='L310 300L345 350L315 400L345 450L310 500L345 550L315 600L345 650L330 710';
+['bkL','bkR'].forEach((id,i)=>mk('path',{d:'M'+(i?500:160)+' 250H330'+zz+'H'+(i?500:160)+'z',fill:'var(--stage)',stroke:'var(--ink)','stroke-width':6,'stroke-linejoin':'round'},$(id)));
+for(let i=0;i<6;i++){const y=330+i*64;mk('rect',{x:190,y:y-12,width:24,height:24,rx:4,fill:'none',stroke:'var(--ink)','stroke-width':3},$('bkL'));S('M232 '+y+'H295','var(--line)',6,$('bkL'));S('M365 '+y+'H470','var(--line)',6,$('bkR'))}
+['st0','st1'].forEach((id,r)=>{const y=r?675:555;[0,1,2].forEach(i=>{const x=780+i*120;mk('rect',{x:x,y:y,width:90,height:60,rx:10,fill:'var(--stage)',stroke:r?'var(--loss)':'var(--ink)','stroke-width':4},$(id));const tx=mk('text',{x:x+45,y:y+40,'font-size':28,'text-anchor':'middle',class:'d5'},$(id));tx.textContent=i+1;if(i<2)S('M'+(x+96)+' '+(y+30)+'h20','var(--muted)',4,$(id))})});
+
+const WN=[];for(let j=0;j<4;j++)for(let i=0;i<4;i++)WN.push(mk('rect',{x:190+i*65,y:330+j*70,width:40,height:40,rx:4,fill:'var(--line)'},$('win')));
+fig($('ps'),620,350,30,'ink');fig($('pl'),820,350,30,'gain');
+const CV=[0,1,2].map(()=>S('M0 -18l-18 18 18 18','var(--loss)',7,$('chev')));
+
+fig($('gr'),200,330,26,'ink');
+// memory chip pins: one line per pin, repositioned each frame as the chip is crushed
+const MP=[];for(let i=0;i<5;i++){const y=480+i*40;MP.push([S('M410 '+y+'h30','var(--ink)',6,$('mpins')),S('M680 '+y+'h30','var(--ink)',6,$('mpins')),i]);S('M1080 '+(y-10)+'h30M1370 '+(y-10)+'h30','var(--gain)',6,$('cpins'))}
+
+// two hats: amber floating upper-left, indigo on the head
+fig($('hp'),300,470,36,'ink');
+mk('path',{d:'M-44 0a44 36 0 0 1 88 0z',class:'gain'},$('hA'));S('M-58 0h116','var(--gain)',8,$('hA'));
+mk('path',{d:'M-46 0a46 46 0 0 1 92 0z',class:'loss'},$('hB'));S('M-54 0h108','var(--loss)',10,$('hB'));
+$('hB').setAttribute('transform','translate(300 434)');
+S('M250 296Q320 286 334 372','var(--gain)',4,$('harr'),{'stroke-dasharray':'8 8'});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(id,a,d=.5)=>rise($(id),p(u,a,a+d));
+  R('pg',TM.general);R('pc',TM.general+3.5);R('wm',TM.wrong_moment);
+  $('pgb').style.stroke=$('pcb').style.stroke=u>=TM.wrong_moment?'var(--loss)':'var(--line)';
+
+  R('cs',TM.calm_sea);R('gc',TM.growth_chart);R('ss',TM.storm_sea);
+  wv($('w0'),124,776,600,4,t,1.2);wv($('w1'),824,1476,600,22,t,3);
+  $('b0').setAttribute('transform','translate(300 '+(598+3*Math.sin(t*1.2)).toFixed(1)+')');
+  $('b1').setAttribute('transform','translate(1000 '+(596+14*Math.sin(t*3+1)).toFixed(1)+') rotate('+(14*Math.sin(t*3)).toFixed(1)+')');
+  BR.forEach((b,i)=>{const a=TM.growth_chart+i*.3,h=[50,90,140,200][i]*p(u,a,a+.6);b.setAttribute('y',(560-h).toFixed(1));b.setAttribute('height',h.toFixed(1))});
+  $('bolt').setAttribute('opacity',Math.sin(t*5)>.6?1:.25);
+
+  R('tb',TM.open_table);
+  TP.forEach(([x,y],i)=>{const a=TM.team_ideas+i*.25,k=p(u,a+.6,a+1.4);rise(TMG[i],p(u,a,a+.4));ID[i].setAttribute('cx',(x+(SP2[i][0]-x)*k).toFixed(1));ID[i].setAttribute('cy',(y+(SP2[i][1]-y)*k).toFixed(1));ID[i].setAttribute('opacity',u>=a+.6?1:0)});
+  TH.forEach(e=>e.setAttribute('class',u>=TM.team_ideas+3.5?'gain':'ink'));R('agr',TM.team_ideas+3.5);
+  R('cb',TM.culture_book);CL.forEach(([l,a,b],i)=>l.setAttribute('x2',(a+(b-a)*p(u,TM.culture_book+.5+i*.15,TM.culture_book+.9+i*.15)).toFixed(1)));
+
+  R('fn',TM.narrow_beam);R('tgt',TM.narrow_beam+1.2);
+  DT.forEach(([d,x,y],i)=>{const c=(t*.3+i/12)%1;d.setAttribute('cx',(x+(985-x)*c).toFixed(1));d.setAttribute('cy',(y+(500-y)*c).toFixed(1));d.setAttribute('opacity',(1-c*c).toFixed(2))});
+  R('mg',TM.dust_speck);$('spk').setAttribute('r',(5+3*Math.abs(Math.sin(t*4))).toFixed(1));
+  R('c0',TM.dust_speck+4.5);R('c1',TM.dust_speck+6.5);R('c2',TM.war_culture);
+
+  R('bk',TM.rulebook);R('qcard',TM.quote_card);R('r0',TM.torn_page);R('r1',TM.torn_page+3.8);
+  const tr=p(u,TM.torn_page+4.3,TM.torn_page+5.3);$('bkR').setAttribute('transform','translate('+(20*tr).toFixed(1)+' 0) rotate('+(6*tr).toFixed(1)+' 330 710)');
+  $('st1').setAttribute('opacity',(1-.65*p(u,TM.torn_page+4.5,TM.torn_page+6.5)).toFixed(2));
+
+  R('hq',TM.google_hq);R('gg',TM.google_hq+.8);R('ps',TM.schmidt);R('pl',TM.larry_page);R('cmp',TM.larry_page+6.2);
+  WN.forEach((w,i)=>w.setAttribute('fill',u>=TM.schmidt+1+i*.2?'var(--gain)':'var(--line)'));
+  const sw=p(u,TM.larry_page+1,TM.larry_page+2.5),an=(160-140*sw+2*Math.sin(t*5)*sw)*Math.PI/180;
+  $('ndl').setAttribute('x2',(1200+170*Math.cos(an)).toFixed(1));$('ndl').setAttribute('y2',(560-170*Math.sin(an)).toFixed(1));
+  CV.forEach((c,i)=>c.setAttribute('transform','translate('+(1460-(t*50+i*60)%180).toFixed(1)+' 690)'));
+
+  // Intel: competitors press down on the memory chip with indigo arrows, keeping a clear gap
+  R('gr',TM.intel_chip);R('mc',TM.intel_chip+1);
+  const ma=p(u,TM.memory_chip,TM.memory_chip+1.5),mb=p(u,TM.memory_chip+1.5,TM.memory_chip+3),mh=240-120*mb,mtop=680-mh;
+  $('mcr').setAttribute('y',mtop.toFixed(1));$('mcr').setAttribute('height',mh.toFixed(1));
+  $('mcr').style.stroke=mb>0?'var(--loss)':'var(--ink)';
+  MP.forEach(([a,b,i])=>{const y=(mtop+mh*(40+i*40)/240).toFixed(1);a.setAttribute('d','M410 '+y+'h30');b.setAttribute('d','M680 '+y+'h30')});
+  $('mct').setAttribute('y',(mtop+mh/2+12).toFixed(1));
+  $('pr').setAttribute('transform','translate(0 '+(mtop-120-80*(1-ma)).toFixed(1)+')');$('pr').setAttribute('opacity',p(u,TM.memory_chip,TM.memory_chip+.4));
+  R('ex',TM.exit_sign);$('exa').setAttribute('stroke-dashoffset',(-t*40).toFixed(1));R('cpu',TM.exit_sign+1.2);
+
+  R('ht',TM.two_hats);R('hard',TM.two_hats+2);
+  $('hA').setAttribute('transform','translate(190 '+(330-6*Math.abs(Math.sin(t*1.5))).toFixed(1)+')');
+  $('harr').setAttribute('opacity',p(u,TM.two_hats+1,TM.two_hats+1.6));
+  R('vn',TM.weather_vane);$('va').setAttribute('transform','translate(800 360) rotate('+(16*Math.sin(t*.9)).toFixed(1)+')');
+  R('sw',TM.style_switch);const ks=p(u,TM.style_switch+.6,TM.style_switch+1.4);
+  $('kn').setAttribute('cx',(1190+200*ks).toFixed(1));$('kn').style.fill=ks>.5?'var(--loss)':'var(--gain)';
+  R('dr',TM.style_switch+4.1);
+
+  R('qa',TM.question);R('qb',TM.question+2.9);R('qc',TM.question+3.5);R('qt',TM.question+.6);
+  $('qk').setAttribute('cx',(1300+80*Math.sin(t*1.5)).toFixed(1));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:133.36;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

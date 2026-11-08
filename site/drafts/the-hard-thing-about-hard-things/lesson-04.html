@@ -1,0 +1,342 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Hard Thing About Hard Things Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of The Hard Thing About Hard Things: If you must cut jobs, move fast, own the decision yourself, and treat every departing person with respect, because everyone who stays is watching. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">THE HARD THING ABOUT HARD THINGS · LESSON 4</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Lay people off</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">the right way.</text>
+<g id="sub0"><text class="b" x="120" y="600" font-size="32">How you let people go shapes everyone who stays.</text></g>
+<g id="desks"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Loudcloud shrinks.</text>
+<text class="b" x="120" y="176" font-size="32">The dot-com bubble bursts, and customers vanish.</text>
+<rect class="s-line" x="120" y="230" width="520" height="440" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="276" font-size="20">CUSTOMERS</text>
+<path class="s-muted" d="M170 630H610M170 630V300" fill="none" stroke-width="4" stroke-linecap="round"/>
+<path id="cline" class="s-ink" d="M180 580L260 540L340 490L420 400L470 360L520 540L600 610" pathLength="1" stroke-dasharray="1 1" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<circle id="bub" class="s-gain" cx="470" cy="320" r="26" fill="none" stroke-width="5"/>
+<g id="staff"></g>
+<g id="benl"><text class="m" x="920" y="700" font-size="22">BEN HOROWITZ CUTS JOBS TO SURVIVE</text></g>
+<g id="judge"><text class="d" x="120" y="800" font-size="40">People who stay judge you by how you treat those who leave.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Get your own head right.</text>
+<text class="b" x="120" y="176" font-size="32">Don’t rush past the pain. Stay present.</text>
+<ellipse class="s-ink" cx="380" cy="430" rx="150" ry="200" fill="var(--stage)" stroke-width="8"/>
+<path class="s-ink" d="M380 630V680M300 680H460" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="refl"></g>
+<text class="m" x="380" y="730" font-size="20" text-anchor="middle">LOOK AT YOURSELF FIRST</text>
+<g id="rush">
+<text class="m" x="890" y="280" font-size="20" text-anchor="middle">RUSH PAST THE PAIN?</text>
+<path class="s-muted" d="M600 330H1190" fill="none" stroke-width="5" stroke-dasharray="12 10"/>
+<path class="s-muted" d="M1170 312l20 18-20 18" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="sun"><circle class="gain" cx="1300" cy="330" r="46"/><g id="rays"></g><text class="m" x="1300" y="440" font-size="20" text-anchor="middle">BRIGHT FUTURE</text></g>
+</g>
+<path id="nox" class="s-loss" d="M860 300l60 60M920 300l-60 60" stroke-width="9" stroke-linecap="round"/>
+<g id="hrt">
+<g id="hb" transform="translate(820 560)"><path class="gain" d="M0 60C-75 10-80-45-38-55C-18-60-4-46 0-35C4-46 18-60 38-55C80-45 75 10 0 60Z"/></g>
+<g id="hurt"></g>
+<text class="m" x="1150" y="680" font-size="20" text-anchor="middle">THE PEOPLE YOU ARE ABOUT TO HURT</text>
+</g>
+<g id="pres"><text class="d" x="120" y="820" font-size="40">Stay fully present for the people you will hurt.</text></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Move fast.</text>
+<text class="b" x="120" y="176" font-size="32">Once you decide, act quickly.</text>
+<rect class="ink" x="120" y="240" width="500" height="50" rx="10"/>
+<g id="cal"></g>
+<g id="go"><text class="m" x="120" y="620" font-size="22" style="fill:var(--gain)">ACT QUICKLY</text></g>
+<g id="wait"><text class="m" x="120" y="655" font-size="22" style="fill:var(--loss)">EVERY DAY OF WAITING</text></g>
+<g id="bld">
+<rect class="s-ink" x="760" y="290" width="260" height="300" rx="10" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="820" y="390" width="140" height="90" rx="6" fill="none" stroke-width="5"/>
+<path class="s-ink" d="M820 390l70 50 70-50" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<path class="s-loss" d="M860 590l15-24 15 24" fill="none" stroke-width="5" stroke-linejoin="round"/>
+<text class="m" x="890" y="750" font-size="20" text-anchor="middle">NEWS LEAKS</text>
+</g>
+<g id="drops"></g>
+<g id="cloud">
+<path class="s-loss" d="M1150 430a55 55 0 0 1 40-95a75 75 0 0 1 140-10a55 55 0 0 1 40 105z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<text class="d" x="1215" y="410" font-size="52" style="fill:var(--loss)">?</text><text class="d" x="1265" y="390" font-size="52" style="fill:var(--loss)">?</text><text class="d" x="1315" y="410" font-size="52" style="fill:var(--loss)">?</text>
+</g>
+<g id="worried"></g>
+<g id="guess"><text class="d" x="120" y="810" font-size="44">Days spent guessing instead of working.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Own the reason.</text>
+<text class="b" x="120" y="176" font-size="32">A missed plan is a failure of leadership.</text>
+<circle class="s-ink" cx="300" cy="440" r="130" fill="var(--stage)" stroke-width="6"/>
+<circle class="s-ink" cx="300" cy="440" r="85" fill="none" stroke-width="6"/>
+<circle class="s-ink" cx="300" cy="440" r="40" fill="none" stroke-width="6"/>
+<circle class="ink" cx="300" cy="440" r="12"/>
+<text class="m" x="300" y="620" font-size="20" text-anchor="middle">THE PLAN</text>
+<g id="arw"><path class="s-loss" d="M470 300L590 220M590 220l-6-26M590 220l26 4" fill="none" stroke-width="7" stroke-linecap="round"/><circle class="loss" cx="470" cy="300" r="7"/></g>
+<g id="missd"><text class="m" x="490" y="350" font-size="22" style="fill:var(--loss)">MISSED</text></g>
+<g id="notp"><text class="m" x="640" y="380" font-size="26">NOT THE PEOPLE LEAVING</text></g>
+<line id="stk" class="s-ink" x1="632" y1="371" x2="632" y2="371" stroke-width="5" stroke-linecap="round"/>
+<g id="lead1"><text class="d" x="640" y="470" font-size="48" style="fill:var(--gain)">Leadership failed.</text></g>
+<g id="pod"><g id="lead"></g><path class="ink" d="M1215 400H1365L1345 540H1235Z"/></g>
+<g id="aud"></g>
+<g id="clear"><text class="d" x="120" y="790" font-size="44">Say it clearly, to the whole company.</text></g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Managers tell their own people.</text>
+<text class="b" x="120" y="176" font-size="32">Not HR. Not a stranger.</text>
+<g id="pL">
+<rect class="s-line" x="120" y="230" width="640" height="400" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="280" font-size="22" style="fill:var(--gain)">YOUR MANAGER</text>
+<g id="pl"></g>
+<rect class="s-gain" x="380" y="300" width="120" height="60" rx="20" fill="var(--stage)" stroke-width="5"/>
+<g id="dots"></g>
+<text class="m" x="440" y="600" font-size="20" text-anchor="middle">FACE TO FACE</text>
+</g>
+<g id="pR">
+<rect class="s-line" x="840" y="230" width="640" height="400" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="870" y="280" font-size="22">HR OR A STRANGER</text>
+<g id="pr"></g>
+<path class="loss" d="M1080 450v-12h44l8 12z"/><rect class="loss" x="1080" y="450" width="120" height="90" rx="6"/>
+<text class="m" x="1160" y="600" font-size="20" text-anchor="middle">HANDED OFF</text>
+</g>
+<g id="cruel"><text class="m" x="1180" y="350" font-size="20" text-anchor="middle" style="fill:var(--loss)">NOT WORTH MY BOSS’S TIME?</text></g>
+<g id="chk"></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Stay visible.</text>
+<text class="b" x="120" y="176" font-size="32">Be out among people, not behind a closed door.</text>
+<rect class="s-ink" x="200" y="260" width="220" height="380" fill="var(--stage)" stroke-width="7"/>
+<g id="ldr"></g>
+<rect id="door" class="s-ink" x="204" y="264" width="212" height="372" fill="var(--line)" stroke-width="5"/>
+<text class="m" x="310" y="690" font-size="20" text-anchor="middle">NO CLOSED DOOR</text>
+<g id="others" opacity=".5"></g>
+<g id="lvrg"><g id="lvr"></g></g>
+<g id="shake"><path class="s-gain" d="M760 495H858" stroke-width="12" stroke-linecap="round"/><path class="s-ink" d="M950 495H866" stroke-width="12" stroke-linecap="round"/></g>
+<g id="thx"><rect class="s-gain" x="790" y="280" width="160" height="60" rx="20" fill="var(--stage)" stroke-width="5"/><text class="m" x="870" y="318" font-size="20" text-anchor="middle" style="fill:var(--gain)">THANK YOU</text></g>
+<g id="mat"><text class="d" x="120" y="790" font-size="44">Showing up says their work truly mattered.</text></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Everyone who stays is watching.</text>
+<text class="b" x="120" y="176" font-size="32">Trust is the bridge between them and you.</text>
+<g id="exit"><rect class="s-loss" x="120" y="240" width="140" height="50" rx="8" fill="var(--stage)" stroke-width="4"/><text class="m" x="190" y="273" font-size="22" text-anchor="middle" style="fill:var(--loss)">← EXIT</text></g>
+<path d="M120 560H460V740Q460 760 440 760H140Q120 760 120 740Z" fill="var(--line)"/>
+<path d="M1140 560H1480V740Q1480 760 1460 760H1160Q1140 760 1140 740Z" fill="var(--line)"/>
+<rect class="s-ink" x="1230" y="380" width="160" height="180" fill="var(--stage)" stroke-width="6"/>
+<path class="s-ink" d="M1265 420h30M1325 420h30M1265 470h30M1325 470h30" stroke-width="10"/>
+<text class="m" x="1310" y="620" font-size="20" text-anchor="middle">COMPANY</text>
+<g id="surv"></g>
+<g id="brg">
+<rect id="bl" x="460" y="556" width="340" height="14" fill="var(--gain)"/>
+<rect id="br" x="800" y="556" width="340" height="14" fill="var(--gain)"/>
+<text id="trl" class="m" x="800" y="530" font-size="22" text-anchor="middle" style="fill:var(--gain)">TRUST</text>
+</g>
+<g id="tA"><text class="d" x="800" y="810" font-size="36" text-anchor="middle">They’ll treat us fairly too.</text></g>
+<g id="tB"><text class="d" x="800" y="810" font-size="36" text-anchor="middle" style="fill:var(--loss)">Best people look for the exit.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="340" font-size="88" letter-spacing="-2">Will you deliver it</text></g>
+<g id="qb"><text class="d" x="136" y="450" font-size="88" letter-spacing="-2">yourself, quickly,</text></g>
+<g id="qc"><text class="d" x="136" y="560" font-size="88" letter-spacing="-2">and <tspan style="fill:var(--gain)">face to face</tspan>?</text></g>
+<g id="env"><g id="envb"><rect class="gain" x="1220" y="360" width="220" height="150" rx="10"/><path d="M1220 364l110 80 110-80" fill="none" stroke="var(--on-gain)" stroke-width="6" stroke-linejoin="round"/></g></g>
+<g id="think"><text class="m" x="143" y="700" font-size="26">THINK OF THE HARDEST MESSAGE YOU MIGHT DELIVER</text></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="127" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:07</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Lay People Off the Right Way&rdquo;, from <em>The Hard Thing About Hard Things</em> by Ben Horowitz. The Loudcloud layoffs after the dot-com crash and the steps for handling them are as reported in the book. The office, bridge, eyes and other drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=127, SC=[[0.0, 10.6], [10.6, 25.5], [25.5, 38.3], [38.3, 50.7], [50.7, 64.4], [64.4, 85.1], [85.1, 101.0], [101.0, 116.2], [116.2, 127.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["The Hardest Day", "Loudcloud Shrinks", "Get Your Head Right", "Move Fast", "Own the Reason", "Managers Do It", "Stay Visible", "Why It Matters", "Your Challenge"];
+const TM={"empty_desk": 0.0, "dotcom_crash": 10.88, "ben": 15.6, "survivors": 20.24, "mirror": 25.76, "heart": 33.44, "calendar": 38.64, "leak": 42.4, "rumour_cloud": 45.2, "missed_target": 50.96, "podium": 59.92, "manager": 64.72, "hr_folder": 68.64, "training": 78.28, "open_door": 85.44, "handshake": 91.2, "watching_eyes": 101.28, "trust_bridge": 105.12, "cracked_bridge": 110.64};
+const person=(par,x,y,r,c)=>{const g=mk('g',{fill:'var(--'+c+')'},par);mk('circle',{cx:x,cy:y,r:r},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z'},g);return g};
+const DK=[];for(let i=0;i<9;i++){const x=1120+(i%3)*140,y=260+Math.floor(i/3)*130;DK.push(person($('desks'),x,y,18,'ink'));mk('rect',{x:x-58,y:y+58,width:116,height:18,rx:4,class:'ink'},$('desks'))}
+const ST=[];for(let i=0;i<15;i++)ST.push(person($('staff'),920+(i%5)*120,280+Math.floor(i/5)*130,18,'ink'));const LV=[1,3,6,8,10,13];
+person($('refl'),380,360,40,'ink');
+[1020,1150,1280].forEach(x=>person($('hurt'),x,520,22,'ink'));
+for(let i=0;i<8;i++){const a=i*Math.PI/4,c=Math.cos(a),s=Math.sin(a);mk('path',{d:'M'+(1300+58*c).toFixed(1)+' '+(330+58*s).toFixed(1)+'L'+(1300+74*c).toFixed(1)+' '+(330+74*s).toFixed(1),class:'s-gain','stroke-width':6,'stroke-linecap':'round'},$('rays'))}
+const CAL=[];for(let i=0;i<28;i++)CAL.push(mk('rect',{x:125+(i%7)*70,y:305+Math.floor(i/7)*70,width:60,height:60,rx:8,fill:'var(--stage)',stroke:'var(--line)','stroke-width':3},$('cal')));
+const DR=[0,1,2].map(i=>mk('circle',{cx:866+i*12,cy:600,r:7,class:'loss'},$('drops')));
+const WR=[1180,1290,1400].map(x=>person($('worried'),x,540,22,'ink'));
+person($('lead'),1290,320,26,'gain');for(let i=0;i<6;i++)person($('aud'),1130+i*62,620,14,'ink');
+person($('pl'),300,420,30,'gain');person($('pl'),580,420,30,'ink');person($('pr'),980,420,30,'muted');person($('pr'),1360,420,30,'ink');
+const DT=[410,440,470].map(x=>mk('circle',{cx:x,cy:330,r:6,class:'gain'},$('dots')));
+const TK=['PREPARE MANAGERS','EXPLAIN CLEARLY','KNOW THE SUPPORT OFFERED'].map((s,i)=>{const x=120+i*440,g=mk('g',{},$('chk'));mk('rect',{x:x,y:690,width:40,height:40,rx:8,fill:'none',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:'M'+(x+8)+' 710l10 10 16-20',fill:'none',stroke:'var(--gain)','stroke-width':6,'stroke-linecap':'round','stroke-linejoin':'round'},g);const tx=mk('text',{x:x+60,y:719,'font-size':22,class:'m'},g);tx.textContent=s;return g});
+const LDR=person($('ldr'),0,420,32,'gain');
+[1180,1340].forEach(x=>person($('others'),x,420,32,'ink'));person($('lvr'),1000,420,32,'ink');
+const SV=[220,310,400].map(x=>{const g=mk('g',{},$('surv'));person(g,x,470,20,'ink');const e=mk('g',{},g);mk('ellipse',{cx:x,cy:400,rx:26,ry:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},e);const pu=mk('circle',{cx:x,cy:400,r:7,class:'ink'},e);return [g,e,pu,x]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const R=(e,c,d=.5)=>rise(typeof e=='string'?$(e):e,p(u,c,c+d));
+
+DK.forEach((g,i)=>{const a=TM.empty_desk+1+i*.25;g.setAttribute('opacity',[1,3,5,7].includes(i)?(1-.85*p(u,a,a+.5)).toFixed(2):1)});
+R('sub0',TM.empty_desk+6.4);
+
+$('cline').style.strokeDashoffset=(1-p(u,TM.dotcom_crash,TM.dotcom_crash+3)).toFixed(3);
+const bk=p(u,TM.dotcom_crash+1.9,TM.dotcom_crash+2.4);$('bub').setAttribute('r',(26+34*bk).toFixed(1));$('bub').setAttribute('opacity',(p(u,TM.dotcom_crash+.6,TM.dotcom_crash+1.2)*(1-bk)).toFixed(2));
+R('staff',TM.dotcom_crash+.4);
+ST.forEach((g,i)=>{const j=LV.indexOf(i);if(j>=0){const a=TM.ben+.8+j*.25,k=p(u,a,a+.4);g.setAttribute('fill',k>0?'var(--loss)':'var(--ink)');g.setAttribute('opacity',(1-.7*k).toFixed(2))}else g.setAttribute('fill',u>=TM.survivors?'var(--gain)':'var(--ink)')});
+R('benl',TM.ben);R('judge',TM.survivors+.4);
+
+R('refl',TM.mirror);R('rush',TM.mirror+4.2);R('nox',TM.heart);
+$('sun').setAttribute('opacity',(1-.6*p(u,TM.heart,TM.heart+.5)).toFixed(2));
+R('hrt',TM.heart+.3);R('pres',TM.heart+1.2);
+$('hb').setAttribute('transform','translate(820 560) scale('+(1+.07*Math.abs(Math.sin(t*3))).toFixed(3)+')');
+
+CAL.forEach((c,i)=>c.setAttribute('fill',i==0&&u>=TM.calendar?'var(--gain)':(i>0&&i<14&&u>=TM.leak+i*.2?'var(--loss)':'var(--stage)')));
+R('go',TM.calendar);R('wait',TM.leak);R('bld',TM.leak);
+DR.forEach((d,i)=>{const c=(t*.8+i/3)%1;d.setAttribute('cy',(600+110*c).toFixed(1));d.setAttribute('opacity',(u>=TM.leak+.5?1-c:0).toFixed(2))});
+R('cloud',TM.rumour_cloud);R('worried',TM.rumour_cloud+.4);R('guess',TM.rumour_cloud+1.5);
+WR.forEach((g,i)=>g.setAttribute('transform','translate(0 '+(4*Math.sin(t*5+i*2)).toFixed(1)+')'));
+
+const ak=p(u,TM.missed_target,TM.missed_target+.6);$('arw').setAttribute('transform','translate('+(120*(1-ak)).toFixed(1)+' '+(-60*(1-ak)).toFixed(1)+')');$('arw').setAttribute('opacity',ak.toFixed(2));
+R('missd',TM.missed_target+.6);R('notp',TM.missed_target+3.8);
+const sk=p(u,TM.missed_target+4.6,TM.missed_target+5.2);$('stk').setAttribute('x2',(632+370*sk).toFixed(1));$('stk').setAttribute('opacity',sk>0?1:0);
+R('lead1',TM.missed_target+5.2);R('pod',TM.podium);R('aud',TM.podium+.6);R('clear',TM.podium+1.4);
+
+R('pL',TM.manager);R('pR',TM.hr_folder);R('cruel',TM.hr_folder+5.4);
+DT.forEach((d,i)=>d.setAttribute('opacity',(.4+.6*Math.abs(Math.sin(t*2-i*.6))).toFixed(2)));
+TK.forEach((g,i)=>R(g,TM.training+i*1.6));
+
+const dk=p(u,TM.open_door,TM.open_door+1);$('door').setAttribute('width',(212-180*dk).toFixed(1));
+LDR.setAttribute('transform','translate('+(310+410*p(u,TM.open_door+.6,TM.open_door+2.2)).toFixed(1)+' 0)');
+R('lvrg',TM.open_door+1.2);R('others',TM.open_door+1.6);
+R('shake',TM.handshake);R('thx',TM.handshake+.8);R('mat',TM.handshake+6.6);
+
+const ck=p(u,TM.cracked_bridge,TM.cracked_bridge+.8),gk=p(u,TM.cracked_bridge+1.2,TM.cracked_bridge+2.5);
+SV.forEach(s=>{R(s[1],TM.watching_eyes);s[2].setAttribute('cx',(s[3]+12-24*ck+2*Math.sin(t*1.5)).toFixed(1));s[0].setAttribute('transform','translate('+(-60*gk).toFixed(1)+' 0)');s[0].setAttribute('opacity',(1-.5*gk).toFixed(2))});
+R('brg',TM.trust_bridge,.8);
+['bl','br'].forEach((id,i)=>{$(id).setAttribute('transform','rotate('+((i?-22:22)*ck).toFixed(1)+' '+(i?1140:460)+' 563)');$(id).setAttribute('fill',ck>0?'var(--loss)':'var(--gain)')});
+$('trl').textContent=ck>0?'TRUST CRACKS':'TRUST';$('trl').style.fill=ck>0?'var(--loss)':'var(--gain)';
+rise($('tA'),p(u,TM.trust_bridge+.6,TM.trust_bridge+1.1)*(1-p(u,TM.cracked_bridge,TM.cracked_bridge+.4)));
+R('tB',TM.cracked_bridge+.5);R('exit',TM.cracked_bridge+.8);
+
+const s8=SC[8][0]/K;R('think',s8+.3);R('env',s8+.8);
+$('envb').setAttribute('transform','translate(0 '+(8*Math.sin(t*1.6)).toFixed(1)+')');
+R('qa',s8+5);R('qb',s8+5.4);R('qc',s8+5.8);
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:123.84;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

@@ -1,0 +1,477 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made to Stick Lesson 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 4 of Made to Stick: Abstract ideas slip away, while concrete images and examples, like a man on the moon within a decade, give the mind something to hold onto. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MADE TO STICK · LESSON 4</text>
+<text class="d" x="116" y="330" font-size="84" letter-spacing="-2">Concrete: make it</text>
+<text class="d" x="116" y="426" font-size="84" letter-spacing="-2">something you</text>
+<text class="d" x="116" y="522" font-size="84" letter-spacing="-2">can picture.</text>
+<text class="b" x="120" y="610" font-size="32">Why ideas you can picture stick, and fuzzy ones fade.</text>
+<path class="s-ink" d="M1180 220q120 40 300 10" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="tgr" fill="var(--gain)"></g>
+<path class="s-line" d="M1060 720h420" stroke-width="5" stroke-linecap="round"/>
+<g id="tfox"></g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Abstract slips away.</text>
+<text class="b" x="120" y="176" font-size="32">Fuzzy words give the mind nothing to hold.</text>
+<g id="a0">
+<rect class="s-line" x="120" y="230" width="620" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="276" font-size="22" style="fill:var(--loss)">ABSTRACT</text>
+<g id="fog" opacity=".6"></g>
+</g>
+<text id="w0" class="d5" x="430" y="375" font-size="36" text-anchor="middle" style="fill:var(--muted)">quality</text>
+<text id="w1" class="d5" x="430" y="425" font-size="36" text-anchor="middle" style="fill:var(--muted)">value</text>
+<text id="w2" class="d5" x="430" y="475" font-size="36" text-anchor="middle" style="fill:var(--muted)">innovation</text>
+<g id="ah">
+<path class="s-ink" d="M310 570c0 70 50 100 120 100s120-30 120-100M310 570l-14-30M550 570l14-30" fill="none" stroke-width="10" stroke-linecap="round"/>
+<text class="m" x="430" y="712" font-size="20" text-anchor="middle">NOTHING TO GRAB</text>
+</g>
+<g id="a1">
+<rect class="s-line" x="860" y="230" width="620" height="500" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="890" y="276" font-size="22" style="fill:var(--gain)">CONCRETE</text>
+<path class="gain" d="M1170 330l100 50-100 50-100-50z"/>
+<path class="gain" d="M1070 380l100 50v110l-100-50z" fill-opacity=".75"/>
+<path class="gain" d="M1270 380l-100 50v110l100-50z" fill-opacity=".5"/>
+<path class="s-ink" d="M1050 550c0 70 50 100 120 100s120-30 120-100M1050 550l-14-30M1290 550l14-30" fill="none" stroke-width="10" stroke-linecap="round"/>
+<text class="m" x="1170" y="712" font-size="20" text-anchor="middle">SOMETHING TO HOLD</text>
+</g>
+<g id="a2"><text class="d" x="120" y="820" font-size="52">The cure: make ideas concrete.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The fox and the grapes.</text>
+<text class="b" x="120" y="176" font-size="32">An old fable you can still see.</text>
+<g id="vin">
+<path class="s-ink" d="M140 230q200 40 520 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="fgr" fill="var(--gain)"></g>
+<path class="s-line" d="M140 702h620" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="f2"><g id="f2m"><g id="f2i"></g></g></g>
+<g id="sour"><text class="m" x="440" y="440" font-size="22" text-anchor="middle" style="fill:var(--loss)">“PROBABLY SOUR ANYWAY.”</text></g>
+<g id="sc">
+<rect class="s-ink" x="900" y="262" width="520" height="250" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="880" y="244" width="560" height="26" rx="13"/>
+<rect class="ink" x="880" y="500" width="560" height="26" rx="13"/>
+<text class="m" x="1160" y="318" font-size="22" text-anchor="middle">AESOP’S FABLE · ABOUT</text>
+<text id="yrs" class="d" x="1160" y="428" font-size="92" text-anchor="middle" style="fill:var(--gain)">2,500</text>
+<text class="m" x="1160" y="486" font-size="20" text-anchor="middle">YEARS</text>
+</g>
+<g id="bub">
+<path class="s-ink" d="M970 720l-40 86 110-86z" fill="var(--stage)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="s-ink" x="900" y="590" width="540" height="150" rx="40" fill="var(--stage)" stroke-width="6"/>
+<text class="d" x="1170" y="688" font-size="60" text-anchor="middle">“Sour grapes.”</text>
+</g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Two space missions.</text>
+<text class="b" x="120" y="176" font-size="32">One goal you can’t picture. One you can.</text>
+<g id="lp">
+<rect class="s-line" x="120" y="220" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<g id="doc">
+<rect class="s-ink" x="200" y="260" width="300" height="230" fill="var(--stage)" stroke-width="5"/>
+<path class="s-line" d="M230 310h240M230 350h240M230 390h200M230 430h220" stroke-width="8" stroke-linecap="round"/>
+</g>
+<path class="gain" d="M620 400c22 22 26 64 14 100h-28c-12-36-8-78 14-100zM606 470l-18 30h18zM634 470l18 30h-18z"/>
+<rect class="ink" x="160" y="500" width="560" height="16" rx="4"/>
+<path class="s-ink" d="M190 516v60M690 516v60" stroke-width="8" stroke-linecap="round"/>
+<text class="m" x="160" y="626" font-size="22">“LEAD THE INDUSTRY THROUGH</text>
+<text class="m" x="160" y="658" font-size="22">TEAM-CENTERED INNOVATION.”</text>
+</g>
+<g id="qm">
+<text class="d" x="350" y="450" font-size="180" text-anchor="middle" style="fill:var(--loss)">?</text>
+<text class="m" x="160" y="712" font-size="20" style="fill:var(--loss)">NOBODY PICTURES IT. NOBODY REMEMBERS IT.</text>
+</g>
+<g id="rp">
+<rect class="s-line" x="840" y="220" width="640" height="520" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="880" y="280" font-size="22">1961 · PRESIDENT KENNEDY</text>
+<circle class="gain" cx="1360" cy="330" r="70"/>
+<circle cx="1335" cy="310" r="14" fill="var(--on-gain)" fill-opacity=".2"/><circle cx="1385" cy="355" r="10" fill="var(--on-gain)" fill-opacity=".2"/>
+<circle class="s-ink" cx="930" cy="640" r="48" fill="var(--ice)" stroke-width="5"/>
+<path id="rt" pathLength="1" class="s-gain" d="M960 600C1020 420 1180 300 1290 330" fill="none" stroke-width="6" stroke-linecap="round"/>
+<path id="rt2" pathLength="1" class="s-gain" d="M1320 400C1240 560 1080 660 980 650" fill="none" stroke-width="6" stroke-linecap="round"/>
+<circle id="ship" class="ink" r="12"/>
+</g>
+<g id="g3">
+<text class="d5" x="840" y="792" font-size="32">A man on the moon, home safely,</text>
+<text class="d5" x="840" y="836" font-size="32" style="fill:var(--gain)">within the decade.</text>
+</g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why the moon works.</text>
+<text class="b" x="120" y="176" font-size="32">A goal you can see, check and share.</text>
+<g id="c0">
+<rect class="s-line" x="120" y="230" width="414" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path d="M140 600q187-70 374 0v60H140z" fill="var(--line)"/>
+<g id="fp"></g>
+<g id="astro">
+<circle class="s-ink" cx="327" cy="380" r="44" fill="var(--stage)" stroke-width="6"/>
+<rect class="gain" x="300" y="366" width="54" height="26" rx="13"/>
+<rect class="ink" x="287" y="428" width="80" height="100" rx="24"/>
+<path class="s-ink" d="M307 528v44M347 528v44" stroke-width="14" stroke-linecap="round"/>
+</g>
+<text class="d5" x="150" y="700" font-size="44">See it.</text>
+<text class="m" x="150" y="740" font-size="20">ASTRONAUT ON GRAY DUST</text>
+</g>
+<g id="c1">
+<rect class="s-line" x="593" y="230" width="414" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="800" y="300" font-size="20" text-anchor="middle">GOAL MET?</text>
+<rect class="s-ink" x="720" y="330" width="160" height="160" rx="16" fill="none" stroke-width="8"/>
+<path id="chk" pathLength="1" class="s-gain" d="M748 410l38 40 70-90" fill="none" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="d5" x="623" y="700" font-size="44">Check it.</text>
+<text class="m" x="623" y="740" font-size="20">YOU CAN TELL FOR CERTAIN</text>
+</g>
+<g id="c2">
+<rect class="s-line" x="1066" y="230" width="414" height="540" rx="18" fill="var(--stage)" stroke-width="3"/>
+<circle class="gain" cx="1273" cy="320" r="46"/>
+<g id="lks"></g><g id="crw"></g>
+<text class="d5" x="1096" y="700" font-size="44">Share it.</text>
+<text class="m" x="1096" y="740" font-size="20">ONE PICTURE FOR EVERYONE</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">The Boeing 727.</text>
+<text class="b" x="120" y="176" font-size="32">Three targets every engineer could picture.</text>
+<g id="pl"><g id="plm">
+<path class="ink" d="M10 4L4-70h46l50 74z"/>
+<rect class="ink" x="-6" y="-80" width="94" height="12" rx="6"/>
+<rect class="ink" x="0" y="0" width="460" height="44" rx="22"/>
+<rect class="ink" x="96" y="-16" width="80" height="22" rx="11"/>
+<path class="gain" d="M210 30l-70 80h56l110-80z"/>
+<g id="plw"></g>
+</g></g>
+<g id="k0">
+<rect class="s-line" x="120" y="420" width="414" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="150" y="466" font-size="22">SEATS</text>
+<g id="seat"></g>
+<text id="cnt" class="d" x="150" y="722" font-size="88" style="fill:var(--gain)">131</text>
+<text class="m" x="330" y="720" font-size="20">PASSENGERS</text>
+</g>
+<g id="k1">
+<rect class="s-line" x="593" y="420" width="414" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="623" y="466" font-size="22">NONSTOP</text>
+<path id="rte" pathLength="1" class="s-gain" d="M660 690C690 590 780 530 930 520" fill="none" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="660" cy="690" r="10"/><circle class="ink" cx="930" cy="520" r="10"/>
+<text class="m" x="684" y="700" font-size="20">MIAMI</text>
+<text class="m" x="930" y="498" font-size="20" text-anchor="middle">NEW YORK</text>
+<circle id="mdot" class="gain" r="12"/>
+</g>
+<g id="k2">
+<rect class="s-line" x="1066" y="420" width="414" height="340" rx="18" fill="var(--stage)" stroke-width="3"/>
+<text class="m" x="1096" y="466" font-size="22">SHORT RUNWAY · LAGUARDIA</text>
+<rect class="ink" x="1110" y="640" width="240" height="40"/>
+<path d="M1126 660h208" stroke="var(--stage)" stroke-width="4" stroke-dasharray="16 12"/>
+<path class="s-gain" d="M1110 710h240M1110 700v20M1350 700v20" stroke-width="4"/>
+<text class="m" x="1230" y="746" font-size="20" text-anchor="middle">SHORT</text>
+<g id="lnd"><rect class="gain" x="-36" y="-7" width="72" height="14" rx="7"/><path class="gain" d="M0 0l-12 18h12l16-18zM24-7l10-14h6l-4 14z"/></g>
+</g>
+<g id="sx"><text class="d" x="120" y="830" font-size="44">Every engineer knew what success looked like.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Memory is like Velcro.</text>
+<text class="b" x="120" y="176" font-size="32">Concrete ideas have hooks. Abstract ones don’t.</text>
+<g id="vp">
+<rect x="760" y="220" width="90" height="560" fill="var(--line)"/>
+<g id="loops"></g>
+<text class="m" x="805" y="824" font-size="20" text-anchor="middle">VELCRO · YOUR MIND</text>
+</g>
+<g id="abl">
+<text class="m" x="360" y="552" font-size="20" text-anchor="middle" style="fill:var(--loss)">NO HOOKS</text>
+</g>
+<g id="abs">
+<path class="s-muted" d="M680 430V600" fill="none" stroke-width="5" stroke-dasharray="10 12" stroke-linecap="round"/>
+<path class="s-muted" d="M540 470v190m-22-22 22 22 22-22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text class="m" x="510" y="560" font-size="20" text-anchor="end" style="fill:var(--loss)">SLIDES OFF</text>
+</g>
+<g id="abw"><g id="abm">
+<circle r="80" fill="var(--line)"/>
+<path d="M-48-30a56 56 0 0 1 30-30" fill="none" stroke="var(--stage)" stroke-width="7" stroke-linecap="round"/>
+<text class="m" y="7" font-size="20" text-anchor="middle" style="fill:var(--ink)">ABSTRACT</text>
+</g></g>
+<g id="cbw"><g id="cbm">
+<g id="cbh"></g>
+<circle class="gain" r="80"/>
+<text class="m" y="7" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">CONCRETE</text>
+<g id="cbl">
+<text class="m" y="-132" font-size="20" text-anchor="middle">SIGHTS</text>
+<text class="m" x="128" y="8" font-size="20">SOUNDS</text>
+<text class="m" y="150" font-size="20" text-anchor="middle">FEELINGS</text>
+</g>
+</g></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Make it concrete.</text>
+<text class="b" x="120" y="176" font-size="32">Before you speak, ask what it would look like on camera.</text>
+<g id="cam">
+<rect class="ink" x="190" y="240" width="60" height="24" rx="6"/>
+<rect class="ink" x="160" y="260" width="200" height="130" rx="16"/>
+<circle cx="260" cy="325" r="40" fill="var(--stage)"/><circle class="gain" cx="260" cy="325" r="22"/>
+</g>
+<g id="frm">
+<path class="s-ink" d="M720 290v-60h60M1400 230h60v60M1460 580v60h-60M780 640h-60v-60" fill="none" stroke-width="8" stroke-linecap="round"/>
+<circle id="rec" class="loss" cx="770" cy="276" r="10"/>
+<text class="m" x="790" y="284" font-size="20">REC</text>
+<rect class="s-line" x="1300" y="330" width="120" height="240" fill="none" stroke-width="5"/>
+<path class="s-line" d="M760 570h660" stroke-width="4"/>
+</g>
+<g id="ab7">
+<text class="m" x="160" y="470" font-size="22" style="fill:var(--loss)">ABSTRACT</text>
+<g id="ab7t">
+<text class="d5" x="160" y="530" font-size="36">“Improve customer</text>
+<text class="d5" x="160" y="576" font-size="36">service.”</text>
+</g>
+<path class="s-muted" d="M540 520h130m-22-22 22 22-22 22" fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="shw"><g id="shp">
+<g id="shf"></g>
+<path class="s-gain" d="M968 536v34M992 536v34M1015 480h30" stroke-width="10" stroke-linecap="round"/>
+<path d="M968 418q12 10 24 0" fill="none" stroke="var(--on-gain)" stroke-width="4" stroke-linecap="round"/>
+<path class="ink" d="M1040 430h40l14 40h-68z"/>
+<path class="s-ink" d="M1060 470v50" stroke-width="6"/>
+<rect class="ink" x="1042" y="518" width="36" height="8" rx="3"/>
+</g></g>
+<g id="chips"></g>
+<path id="kd" pathLength="1" class="s-gain" d="M276 660a26 26 0 1 1-52 0a26 26 0 1 1 52 0M250 686v50M220 706h60M250 736l-24 34M250 736l24 34M424 650a24 24 0 1 1-48 0a24 24 0 1 1 48 0" fill="none" stroke-width="6" stroke-linecap="round"/>
+<g id="kt"><text class="d" x="120" y="836" font-size="44">If a child could draw it, it will stick.</text></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="136" y="330" font-size="88" letter-spacing="-2">Pick one goal.</text></g>
+<g id="qb"><text class="d" x="136" y="440" font-size="88" letter-spacing="-2">Could you see it,</text></g>
+<g id="qc"><text class="d" x="136" y="550" font-size="88" letter-spacing="-2">or <tspan style="fill:var(--gain)">check it off?</tspan></text></g>
+<g id="sh8"><text class="m" x="143" y="700" font-size="26">THEN SHARE THAT VERSION INSTEAD</text></g>
+<g id="card8">
+<rect class="s-ink" x="1080" y="250" width="360" height="320" rx="18" fill="var(--stage)" stroke-width="6"/>
+<rect class="s-ink" x="1120" y="300" width="40" height="40" rx="6" fill="none" stroke-width="5"/>
+<rect class="s-ink" x="1120" y="390" width="40" height="40" rx="6" fill="none" stroke-width="5"/>
+<rect class="s-ink" x="1120" y="480" width="40" height="40" rx="6" fill="none" stroke-width="5"/>
+<path class="s-line" d="M1190 320h210M1190 410h170M1190 500h190" stroke-width="10" stroke-linecap="round"/>
+<path id="chk8" pathLength="1" class="s-gain" d="M1126 322l12 12 22-26" fill="none" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="pen"><path class="gain" d="M0 0l10-30 60-60 20 20-60 60z"/><path class="ink" d="M0 0l10-30 20 20z"/></g>
+</g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="136" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:16</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Concrete: Make It Something You Can Picture&rdquo;, from <em>Made to Stick</em> by Chip Heath and Dan Heath. Aesop&#x27;s sour grapes fable, Kennedy&#x27;s moon goal, the Boeing 727 design target and the Velcro theory of memory are as reported in the book. The fog, the vague space agency slogan and the lamp shopper are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-04.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=136, SC=[[0.0, 5.4], [5.4, 20.0], [20.0, 38.3], [38.3, 57.0], [57.0, 69.1], [69.1, 88.3], [88.3, 105.7], [105.7, 125.1], [125.1, 136.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Made to Stick", "Abstract Slips Away", "The Fox and the Grapes", "Two Space Missions", "Why the Moon Works", "The Boeing 727", "Velcro Memory", "Make It Concrete", "Your Turn"];
+const TM={"fox": 0.0, "fog_cloud": 5.68, "empty_hands": 11.12, "grapes": 20.32, "scroll": 27.84, "speech_bubble": 32.96, "rocket_desk": 38.56, "moon": 48.08, "astronaut": 57.28, "checkmark": 60.64, "crowd": 64.0, "airplane": 69.36, "seats": 74.24, "map_route": 77.68, "runway": 80.8, "velcro": 88.56, "hooks": 91.44, "slide_off": 101.28, "camera": 106.0, "lamp_shopper": 110.2, "child_drawing": 122.08, "pencil": 125.36};
+const fig=(g,x,y,r,cls)=>{mk('circle',{cx:x,cy:y,r:r,class:cls},g);mk('path',{d:'M'+(x-r*1.5)+' '+(y+r*4.2)+'v-'+(r*1.3)+'a'+(r*1.5)+' '+(r*1.5)+' 0 0 1 '+(r*3)+' 0v'+(r*1.3)+'z',class:cls},g)};
+const fox=g=>{mk('path',{d:'M-66-6q-60-10-70-50q30 20 64 26z',class:'gain'},g);
+  mk('path',{d:'M-40 24v36M-12 28v32M28 28v32M52 22v38',stroke:'var(--gain)','stroke-width':9,'stroke-linecap':'round'},g);
+  mk('ellipse',{cx:0,cy:0,rx:70,ry:32,class:'gain'},g);mk('circle',{cx:66,cy:-36,r:26,class:'gain'},g);
+  mk('path',{d:'M48-54l6-30 18 20zM70-60l14-26 8 26zM86-46l32 10-30 12z',class:'gain'},g);
+  mk('circle',{cx:76,cy:-42,r:4,fill:'var(--on-gain)'},g)};
+const grp=(g,x,y)=>{mk('path',{d:'M'+x+' '+(y-10)+'v24',stroke:'var(--ink)','stroke-width':5,fill:'none'},g);
+  [4,3,2,1].forEach((n,r)=>{for(let i=0;i<n;i++)mk('circle',{cx:x+(i-(n-1)/2)*26,cy:y+24+r*24,r:14},g)})};
+const dr=(el,k)=>{el.setAttribute('stroke-dasharray',k.toFixed(3)+' 1');el.setAttribute('opacity',k>0?1:0)};
+const bz=(P,k)=>{const q=1-k;return[0,1].map(j=>q*q*q*P[0][j]+3*q*q*k*P[1][j]+3*q*k*k*P[2][j]+k*k*k*P[3][j])};
+fox($('tfox'));fox($('f2i'));grp($('tgr'),1400,240);grp($('fgr'),560,256);
+[[330,380,70],[430,340,90],[540,380,70],[430,420,70],[340,430,50],[530,430,55]].forEach(c=>mk('circle',{cx:c[0],cy:c[1],r:c[2],fill:'var(--line)'},$('fog')));
+const R1=[[960,600],[1020,420],[1180,300],[1290,330]],R2=[[1320,400],[1240,560],[1080,660],[980,650]],MR=[[660,690],[690,590],[780,530],[930,520]];
+const FP=[[190,628],[230,640],[430,640],[470,628]].map(q=>mk('ellipse',{cx:q[0],cy:q[1],rx:10,ry:5,fill:'var(--ink)'},$('fp')));
+for(let i=0;i<5;i++){const x=1130+i*72;fig($('crw'),x,520,18,'ink');mk('path',{d:'M'+x+' 498L1273 372',class:'s-line','stroke-width':3,'stroke-dasharray':'6 8'},$('lks'))}
+for(let i=0;i<12;i++)mk('circle',{cx:200+i*20,cy:16,r:5,fill:'var(--stage)'},$('plw'));
+const ST=[];for(let i=0;i<32;i++)ST.push(mk('rect',{x:160+(i%8)*34,y:500+Math.floor(i/8)*30,width:24,height:22,rx:5,fill:'var(--line)'},$('seat')));
+for(let y=236;y<=750;y+=24){mk('path',{d:'M760 '+y+'a9 9 0 0 0 0 16',fill:'none',stroke:'var(--ink)','stroke-width':4},$('loops'));mk('path',{d:'M850 '+y+'a9 9 0 0 1 0 16',fill:'none',stroke:'var(--ink)','stroke-width':4},$('loops'))}
+const HK=[];for(let i=0;i<12;i++)HK.push(mk('path',{d:'M80 0h18a7 7 0 0 1 0 14',fill:'none',stroke:'var(--ink)','stroke-width':5,'stroke-linecap':'round',transform:'rotate('+(i*30)+')'},$('cbh')));
+fig($('shf'),980,410,30,'gain');
+const CP=['REAL PERSON','REAL OBJECT','REAL ACTION'].map((s,i)=>{const g=mk('g',{},$('chips')),x=720+i*255;mk('rect',{x:x,y:680,width:230,height:56,rx:28,class:'gain'},g);
+  const tx=mk('text',{x:x+115,y:716,'font-size':20,'text-anchor':'middle',class:'m',style:'fill:var(--on-gain)'},g);tx.textContent=s;return g});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const tj=p(u,TM.fox,TM.fox+.6)*Math.abs(Math.sin(t*2.2))*100;
+$('tfox').setAttribute('transform','translate(1200 '+(660-tj).toFixed(1)+')');
+
+rise($('a0'),p(u,TM.fog_cloud,TM.fog_cloud+.5));
+const dft=p(u,TM.empty_hands+.4,TM.empty_hands+2.4);
+['w0','w1','w2'].forEach((id,i)=>{const e=$(id),k=p(u,TM.fog_cloud+.5+i*.4,TM.fog_cloud+.9+i*.4);e.setAttribute('opacity',(k*(1-dft)).toFixed(3));e.setAttribute('transform','translate('+(dft*(160+i*60)).toFixed(1)+' '+(-dft*(40+i*20)).toFixed(1)+')')});
+rise($('ah'),p(u,TM.empty_hands,TM.empty_hands+.5));
+rise($('a1'),p(u,TM.empty_hands+4.6,TM.empty_hands+5.1)); rise($('a2'),p(u,TM.empty_hands+5,TM.empty_hands+5.6));
+
+const so=TM.grapes+4.2, jp=u<so;
+rise($('vin'),p(u,TM.grapes,TM.grapes+.5)); rise($('f2'),p(u,TM.grapes,TM.grapes+.5));
+$('f2m').setAttribute('transform','translate(360 '+(640-(jp?Math.abs(Math.sin(t*2.6))*110:0)).toFixed(1)+')');
+$('f2i').setAttribute('transform',jp?'scale(1 1)':'scale(-1 1)');
+$('fgr').style.fill=jp?'var(--gain)':'var(--loss)';
+rise($('sour'),p(u,so+.3,so+.8));
+rise($('sc'),p(u,TM.scroll,TM.scroll+.5)); $('yrs').textContent=Math.round(2500*p(u,TM.scroll+.3,TM.scroll+1.8)).toLocaleString('en-US');
+rise($('bub'),p(u,TM.speech_bubble,TM.speech_bubble+.5));
+
+rise($('lp'),p(u,TM.rocket_desk,TM.rocket_desk+.5));
+const nb=p(u,TM.rocket_desk+5.4,TM.rocket_desk+6); $('doc').setAttribute('opacity',(1-.65*nb).toFixed(3)); rise($('qm'),nb);
+rise($('rp'),p(u,TM.moon,TM.moon+.5));
+const k1=p(u,TM.moon+3.8,TM.moon+5.3),k2=p(u,TM.moon+5.3,TM.moon+6.5); dr($('rt'),k1); dr($('rt2'),k2);
+const sp=k2>0?bz(R2,k2):bz(R1,k1); $('ship').setAttribute('cx',sp[0].toFixed(1)); $('ship').setAttribute('cy',sp[1].toFixed(1)); $('ship').setAttribute('opacity',k1>0?1:0);
+rise($('g3'),p(u,TM.moon+3.8,TM.moon+4.4));
+
+rise($('c0'),p(u,TM.astronaut,TM.astronaut+.5)); $('astro').setAttribute('transform','translate(0 '+(-8*Math.abs(Math.sin(t*1.6))).toFixed(1)+')');
+FP.forEach((e,i)=>e.setAttribute('opacity',(.5*p(u,TM.astronaut+.6+i*.3,TM.astronaut+.9+i*.3)).toFixed(3)));
+rise($('c1'),p(u,TM.checkmark,TM.checkmark+.5)); dr($('chk'),p(u,TM.checkmark+.5,TM.checkmark+1.2));
+rise($('c2'),p(u,TM.crowd,TM.crowd+.5)); $('lks').setAttribute('opacity',p(u,TM.crowd+.6,TM.crowd+1.4));
+
+rise($('pl'),p(u,TM.airplane,TM.airplane+.6)); $('plm').setAttribute('transform','translate(960 '+(250+6*Math.sin(t*1.5)).toFixed(1)+')');
+rise($('k0'),p(u,TM.seats,TM.seats+.5));
+ST.forEach((s,i)=>s.setAttribute('fill',u>=TM.seats+.3+i*.04?'var(--gain)':'var(--line)'));
+$('cnt').textContent=Math.round(131*p(u,TM.seats+.3,TM.seats+1.6));
+rise($('k1'),p(u,TM.map_route,TM.map_route+.5));
+const mr=p(u,TM.map_route+.4,TM.map_route+1.8), mp=bz(MR,mr); dr($('rte'),mr);
+$('mdot').setAttribute('cx',mp[0].toFixed(1)); $('mdot').setAttribute('cy',mp[1].toFixed(1)); $('mdot').setAttribute('opacity',mr>0?1:0);
+rise($('k2'),p(u,TM.runway,TM.runway+.5));
+const l1=p(u,TM.runway+.5,TM.runway+2),l2=p(u,TM.runway+2,TM.runway+3);
+$('lnd').setAttribute('transform','translate('+(1430-190*l1-60*l2).toFixed(1)+' '+(500+118*l1).toFixed(1)+')');
+rise($('sx'),p(u,TM.runway+5,TM.runway+5.6));
+
+// velcro: concrete sticks on the right, abstract slides off on the left
+rise($('vp'),p(u,TM.velcro,TM.velcro+.5));
+rise($('cbw'),p(u,TM.velcro+.8,TM.velcro+1.3)); rise($('abw'),p(u,TM.velcro+1.2,TM.velcro+1.7)); rise($('abl'),p(u,TM.velcro+1.4,TM.velcro+1.9));
+HK.forEach((h,i)=>h.setAttribute('opacity',p(u,TM.hooks+i*.12,TM.hooks+i*.12+.3)));
+rise($('cbl'),p(u,TM.hooks+1,TM.hooks+1.5));
+const cm=p(u,TM.hooks+5,TM.hooks+6.2); $('cbm').setAttribute('transform','translate('+(1240-290*cm).toFixed(1)+' 420)');
+const b1=p(u,TM.slide_off,TM.slide_off+1),b2=p(u,TM.slide_off+1,TM.slide_off+2.2);
+$('abm').setAttribute('transform','translate('+(360+320*b1).toFixed(1)+' '+(420+270*b2).toFixed(1)+')');
+$('abm').setAttribute('opacity',(1-.5*b2).toFixed(3));
+rise($('abs'),b2);
+
+rise($('cam'),p(u,TM.camera,TM.camera+.5)); rise($('frm'),p(u,TM.camera+.6,TM.camera+1.1));
+$('rec').setAttribute('opacity',Math.sin(t*5)>0?1:.25);
+rise($('ab7'),p(u,TM.lamp_shopper,TM.lamp_shopper+.5)); $('ab7t').setAttribute('opacity',(1-.6*p(u,TM.lamp_shopper+1.6,TM.lamp_shopper+2.2)).toFixed(3));
+rise($('shw'),p(u,TM.lamp_shopper+1,TM.lamp_shopper+1.5));
+const wk=p(u,TM.lamp_shopper+1.5,TM.lamp_shopper+4.5);
+$('shp').setAttribute('transform','translate('+(160*wk).toFixed(1)+' '+(wk>0&&wk<1?-4*Math.abs(Math.sin(t*6)):0).toFixed(1)+')');
+CP.forEach((c,i)=>rise(c,p(u,TM.lamp_shopper+6.1+i*.6,TM.lamp_shopper+6.6+i*.6)));
+dr($('kd'),p(u,TM.child_drawing,TM.child_drawing+1.2)); rise($('kt'),p(u,TM.child_drawing+.3,TM.child_drawing+.9));
+
+rise($('qa'),p(u,TM.pencil,TM.pencil+.5)); rise($('card8'),p(u,TM.pencil+.2,TM.pencil+.7));
+const ck=p(u,TM.pencil+.8,TM.pencil+1.6); dr($('chk8'),ck);
+const s1=cl(ck/.33),s2=cl((ck-.33)/.67), px=ck<.33?1126+12*s1:1138+22*s2, py=ck<.33?322+12*s1:334-26*s2;
+$('pen').setAttribute('transform','translate('+px.toFixed(1)+' '+py.toFixed(1)+')');
+rise($('qb'),p(u,TM.pencil+2.6,TM.pencil+3.1)); rise($('qc'),p(u,TM.pencil+3,TM.pencil+3.5)); rise($('sh8'),p(u,TM.pencil+3.4,TM.pencil+3.9));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:132.08;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

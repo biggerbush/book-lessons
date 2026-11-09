@@ -1,0 +1,28 @@
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const T=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+const pills=(id,L,y)=>L.map((s,i)=>{const x=120+i*490,g=mk('g',{},$(id));mk('rect',{x:x,y:y,width:380,height:64,rx:32,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);T(g,x+190,y+41,s,{class:'m','font-size':22,'text-anchor':'middle'});if(i<2)mk('path',{d:`M${x+400} ${y+32}h70m-18-18 18 18-18 18`,fill:'none',class:'s-muted','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+P($('fire'),1170,600,24,'ink');P($('fire'),1440,600,24,'ink');
+P($('lis'),300,500,40,'ink');[[380,430,8],[430,395,12],[490,360,16]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('lis')));
+const CD=[0,1,2].map(i=>{const g=mk('g',{},$('cards'));mk('rect',{x:130+i*130,y:246,width:112,height:66,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);T(g,186+i*130,287,'FACT',{class:'m','font-size':20,'text-anchor':'middle',style:'fill:var(--ink)'});return g});
+for(let i=0;i<14;i++)[240,686].forEach(y=>mk('rect',{x:625+i*60,y:y,width:24,height:14,rx:3,fill:'var(--line)'},$('holes')));
+const MG=mk('g',{},$('mini'));P(MG,0,-59,14,'gain');
+P($('pil'),440,470,22,'ink');
+const ST2=pills('steps',['PRACTISE','FACE IT','ACT'],740);
+P($('stu'),220,300,24,'ink');P($('stu'),220,560,24,'ink');
+for(let i=0;i<4;i++)mk('rect',{x:320+i*80,y:630-i*30,width:80,height:30+i*30,fill:'var(--line)',stroke:'var(--ink)','stroke-width':4},$('stp'));
+P($('den'),200,430,28,'ink');[470,560,650].forEach(x=>P($('col'),x,480,20,'ink'));P($('wk'),1160,520,26,'ink');
+[50,80,40,100].forEach((h,i)=>mk('rect',{x:330+i*50,y:390-h,width:30,height:h,class:'ink'},$('brd')));
+const BL=[],VS=[];[200,330,460,590,720].forEach((x,i)=>{P($('ppl'),x,560,24,'ink');BL.push(mk('circle',{cx:x,cy:450,r:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('ppl')));mk('rect',{x:x-12,y:480,width:24,height:16,class:'ink'},$('ppl'));
+  const g=mk('g',{},$('vers')),c=i%2?'ink':'gain';mk('rect',{x:x-50,y:270,width:100,height:84,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:`M${x-30} 306l30-22 30 22z`,class:c},g);for(let k=0;k<3;k++)mk('rect',{x:x-26+k*20,y:310,width:12,height:28,class:c},g);VS.push(g)});
+const NM=['Simple','Unexpected','Concrete','Credible','Emotional','Stories'],NT=['SHARING KNOWLEDGE CAN SAVE LIVES','A REMOTE WORKER FINDS HELP ONLINE','A REAL PERSON','REAL PATIENTS','LIVES AT STAKE','ALL OF IT ARRIVES TOGETHER'],RW=[],CK=[];
+NM.forEach((s,i)=>{const y=280+i*84,g=mk('g',{},$('rows'));mk('rect',{x:120,y:y-36,width:44,height:44,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  CK.push(mk('path',{d:`M130 ${y-14}l10 12 18-24`,fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g));T(g,190,y,s,{class:'d5','font-size':38});T(g,470,y-4,NT[i],{class:'m','font-size':18});RW.push(g)});
+const SCT=[[960,250],[1300,260],[1110,330],[1380,420],[980,560],[1220,620]],TL='SUCCES'.split('').map(s=>{const g=mk('g',{},$('tiles'));mk('rect',{x:0,y:0,width:70,height:70,rx:10,class:'gain'},g);T(g,35,50,s,{class:'d','font-size':40,'text-anchor':'middle',style:'fill:var(--on-gain)'});return g});
+for(let i=0;i<5;i++)mk('path',{d:`M200 ${460+i*45}H460`,class:'s-line','stroke-width':4},$('nbl'));
+for(let i=0;i<6;i++)mk('circle',{cx:200+i*52,cy:240,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nb'));
+for(let i=0;i<8;i++)P($('crowd'),720+(i%4)*220,i<4?330:540,20,'ink');
+mk('circle',{cx:1160,cy:570,r:62,fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},$('hit'));P($('hit'),1160,540,20,'gain');
+const ST7=pills('steps7',['NOTICE','COLLECT','RETELL'],760);
+// closing scene: storyteller and listeners
+P($('tel8'),1380,554,30,'gain');
+const L8=[960,1080,1200].map(x=>{const g=mk('g',{},$('lis8'));const h=mk('circle',{cx:x,cy:588,r:22,class:'ink'},g);mk('path',{d:`M${x-33} 680v-29a33 33 0 0 1 66 0v29z`,class:'ink'},g);return [g,h]});

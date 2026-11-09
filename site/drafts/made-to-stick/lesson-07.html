@@ -1,0 +1,445 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made to Stick Lesson 7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one 16:9 stage that plays five scenes, with a transport bar beneath it. */
+:root{
+  --bg:#E9EEF2; --stage:#F6F8FA; --ink:#12233A; --muted:#5C6B7E; --line:#C5CFD9;
+  --gain:#C97F00; --loss:#5562C4; --ice:#BFDDF0; --on-gain:#12233A;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"DM Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0B1524; --stage:#101E33; --ink:#EAF0F7; --muted:#93A3B8; --line:#2A3B55;
+  --gain:#FFC233; --loss:#9AA5FF; --ice:#3E6E92; --on-gain:#101E33; color-scheme:dark }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:28px 40px;display:flex;flex-direction:column;gap:14px}
+@keyframes wmmove{0%{transform:translate(0,0)}25%{transform:translate(-1330px,0)}50%{transform:translate(-1330px,-812px)}75%{transform:translate(0,-812px)}}
+.wmc{animation:wmmove 80s step-end infinite}
+@media (prefers-reduced-motion:reduce){.wmc{animation:none}}
+#stageBox{background:var(--stage);border:1px solid var(--line);border-radius:6px;overflow:hidden;aspect-ratio:16/9;max-width:100%}
+#stageBox:fullscreen{border:0;border-radius:0;aspect-ratio:auto;display:flex;align-items:center}
+svg{display:block;width:100%;height:100%}
+.d{font-family:var(--display);font-weight:800;fill:var(--ink)}
+.d5{font-family:var(--display);font-weight:500;fill:var(--ink)}
+.b{font-family:var(--body);fill:var(--muted)}
+.m{font-family:var(--mono);fill:var(--muted);letter-spacing:.04em}
+.ink{fill:var(--ink)} .gain{fill:var(--gain)} .loss{fill:var(--loss)}
+.s-ink{stroke:var(--ink)} .s-line{stroke:var(--line)} .s-gain{stroke:var(--gain)} .s-loss{stroke:var(--loss)} .s-muted{stroke:var(--muted)}
+
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+button{font:600 14px var(--body);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:4px;padding:8px 14px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gain);outline-offset:2px}
+#play{background:var(--ink);color:var(--stage);border-color:var(--ink);min-width:86px}
+#seek{flex:1 1 220px;min-width:0;accent-color:var(--gain)}
+#clock{font:14px var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.chapters{display:flex;flex-wrap:wrap;gap:8px}
+.chapters button{font-weight:400;font-size:13px;padding:6px 10px;color:var(--muted)}
+.chapters button[aria-current="true"]{color:var(--ink);border-color:var(--ink)}
+.note{color:var(--muted);font-size:14px;max-width:65ch;margin:4px 0 0}
+</style>
+
+<div class="wrap">
+  <div id="stageBox">
+    <svg viewBox="0 0 1600 900" role="img" aria-label="Animated summary of lesson 7 of Made to Stick: Stories act like mental flight simulators that move people to act, and they naturally combine all six principles into one memorable message. 9 scenes with narration.">
+      <defs>
+        <pattern id="dots" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1.6" fill="var(--line)"/></pattern>
+      </defs>
+      <rect width="1600" height="900" fill="var(--stage)"/>
+      <rect width="1600" height="900" fill="url(#dots)" opacity=".7"/>
+<g id="s0">
+<text class="m" x="120" y="150" font-size="28">MADE TO STICK · LESSON 7</text>
+<text class="d" x="116" y="400" font-size="84" letter-spacing="-2">Stories: putting</text>
+<text class="d" x="116" y="496" font-size="84" letter-spacing="-2">SUCCESs together.</text>
+<text class="b" x="120" y="600" font-size="32">Stories let people rehearse your idea before they act on it.</text>
+<g id="fire">
+<path class="s-ink" d="M1250 732l120-28M1250 704l120 28" stroke-width="12" stroke-linecap="round"/>
+<path id="fl0" class="gain"/><path id="fl1" fill="var(--stage)"/>
+</g>
+<g id="tale">
+<path d="M1290 426l16 40 14-40" fill="var(--stage)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="s-ink" x="1190" y="280" width="240" height="150" rx="24" fill="var(--stage)" stroke-width="6"/>
+<path class="gain" d="M1288 318l52 37-52 37z"/>
+</g>
+</g>
+
+<g id="s1" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why stories work.</text>
+<text class="b" x="120" y="176" font-size="32">A story is not just information. It is a movie you are inside.</text>
+<g id="cards"></g>
+<g id="lis"></g>
+<g id="scr">
+<rect class="s-ink" x="600" y="230" width="860" height="480" rx="20" fill="var(--stage)" stroke-width="6"/>
+<g id="holes"></g>
+<path class="s-ink" d="M640 600H960" stroke-width="5" stroke-linecap="round"/>
+</g>
+<g id="fork">
+<path class="s-ink" d="M960 600Q1150 600 1360 380M960 600Q1150 600 1360 630" fill="none" stroke-width="5" stroke-linecap="round"/>
+<path class="s-ink" d="M1370 380V300" stroke-width="5" stroke-linecap="round"/>
+<path class="gain" d="M1370 300h50l-14 18 14 18h-50z"/>
+<ellipse class="loss" cx="1390" cy="642" rx="34" ry="12"/>
+<text class="m" x="960" y="642" font-size="20" text-anchor="middle">CHOICE</text>
+<text class="m" x="1440" y="508" font-size="20" text-anchor="end">STAKES</text>
+</g>
+<g id="mini"></g>
+<g id="feel"><text class="d" x="120" y="800" font-size="44">You feel the stakes as if they were yours.</text></g>
+</g>
+
+<g id="s2" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A flight simulator for the mind.</text>
+<text class="b" x="120" y="176" font-size="32">Practise a situation before you face it.</text>
+<g id="sim">
+<path class="s-ink" d="M270 570l-40 90M440 570v90M610 570l40 90M180 660H700" fill="none" stroke-width="8" stroke-linecap="round"/>
+<g id="cab">
+<rect class="s-ink" x="200" y="230" width="480" height="340" rx="40" fill="var(--stage)" stroke-width="7"/>
+<rect class="s-ink" x="240" y="260" width="400" height="160" rx="16" fill="var(--stage)" stroke-width="5"/>
+<line id="hz0" class="s-gain" x1="260" y1="340" x2="620" y2="340" stroke-width="6" stroke-linecap="round"/>
+<g id="pil"></g>
+</g>
+<text class="m" x="440" y="710" font-size="22" text-anchor="middle">SIMULATOR</text>
+</g>
+<g id="mind">
+<text class="d" x="830" y="450" font-size="120" text-anchor="middle" style="fill:var(--muted)">=</text>
+<circle class="s-ink" cx="1160" cy="410" r="180" fill="var(--stage)" stroke-width="8"/>
+<rect class="s-ink" x="1070" y="350" width="180" height="110" rx="10" fill="var(--stage)" stroke-width="5"/>
+<line id="hz1" class="s-gain" x1="1085" y1="405" x2="1235" y2="405" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="1160" y="710" font-size="22" text-anchor="middle">A STORY</text>
+</g>
+<g id="steps"></g>
+</g>
+
+<g id="s3" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Rehearse the path, not the prize.</text>
+<text class="b" x="120" y="176" font-size="32">Students preparing for an exam imagined different things.</text>
+<g id="stu"></g>
+<g id="res">
+<circle class="s-ink" cx="268" cy="282" r="6" fill="var(--stage)" stroke-width="4"/>
+<circle class="s-ink" cx="296" cy="266" r="9" fill="var(--stage)" stroke-width="4"/>
+<rect class="s-ink" x="330" y="240" width="300" height="150" rx="30" fill="var(--stage)" stroke-width="5"/>
+<rect class="s-ink" x="440" y="262" width="84" height="110" fill="var(--stage)" stroke-width="5"/>
+<text class="d" x="482" y="342" font-size="64" text-anchor="middle" style="fill:var(--gain)">A</text>
+<text class="m" x="660" y="320" font-size="22">THE RESULT</text>
+</g>
+<g id="pro">
+<g id="stp"></g>
+<circle id="clm" class="gain" r="14"/>
+<text class="m" x="660" y="600" font-size="22">THE PROCESS</text>
+</g>
+<g id="chart">
+<path class="s-ink" d="M900 660H1420" stroke-width="5" stroke-linecap="round"/>
+<rect id="bR" class="loss" x="960" width="160"/>
+<rect id="bP" class="gain" x="1200" width="160"/>
+<text class="m" x="1040" y="700" font-size="20" text-anchor="middle">RESULT</text>
+<text class="m" x="1280" y="700" font-size="20" text-anchor="middle">PROCESS</text>
+</g>
+<g id="note3"><text class="m" x="1280" y="296" font-size="20" text-anchor="middle" style="fill:var(--gain)">STUDIED MORE · DID BETTER</text></g>
+<g id="cap3"><text class="d" x="120" y="800" font-size="44">Rehearsing the path beats dreaming of the finish line.</text></g>
+</g>
+
+<g id="s4" opacity="0">
+<text class="d" x="120" y="124" font-size="68">A springboard story.</text>
+<text class="b" x="120" y="176" font-size="32">Stephen Denning, a manager at the World Bank.</text>
+<g id="den"><text class="m" x="120" y="600" font-size="20">STEPHEN DENNING</text></g>
+<g id="col"></g>
+<g id="brd">
+<rect class="s-ink" x="300" y="240" width="300" height="170" rx="10" fill="var(--stage)" stroke-width="5"/>
+<circle class="s-ink" cx="540" cy="320" r="40" fill="none" stroke-width="5"/>
+<path class="gain" d="M540 320V280A40 40 0 0 1 580 320z"/>
+</g>
+<g id="no">
+<path class="s-loss" d="M310 250L590 400M590 250L310 400" stroke-width="8" stroke-linecap="round"/>
+<text class="d" x="470" y="450" font-size="40" text-anchor="middle" style="fill:var(--loss)">?</text>
+<text class="d" x="560" y="450" font-size="40" text-anchor="middle" style="fill:var(--loss)">?</text>
+<text class="d" x="650" y="450" font-size="40" text-anchor="middle" style="fill:var(--loss)">?</text>
+<text class="m" x="420" y="630" font-size="20" style="fill:var(--loss)">GOT HIM NOWHERE</text>
+</g>
+<g id="zam">
+<rect class="s-line" x="800" y="230" width="680" height="480" rx="18" fill="var(--stage)" stroke-width="3"/>
+<path class="s-line" d="M830 640H1450" stroke-width="4"/>
+<polygon class="ink" points="840,520 950,440 1060,520"/>
+<rect class="s-ink" x="860" y="520" width="180" height="120" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="930" y="580" width="40" height="60"/>
+<g id="wk"></g>
+<text class="m" x="830" y="688" font-size="20">A SMALL TOWN IN ZAMBIA</text>
+</g>
+<g id="lap">
+<text class="d" x="830" y="330" font-size="64" style="fill:var(--gain)">1995</text>
+<path class="s-ink" d="M1220 620H1420M1240 620v20M1400 620v20" stroke-width="5" stroke-linecap="round"/>
+<rect class="s-ink" x="1250" y="520" width="140" height="84" rx="6" fill="var(--stage)" stroke-width="6"/>
+<rect class="ink" x="1236" y="604" width="168" height="10" rx="4"/>
+</g>
+<g id="ans">
+<path class="s-gain" d="M1320 514V482" stroke-width="5" stroke-dasharray="6 6"/>
+<rect class="gain" x="1200" y="400" width="260" height="80" rx="16"/>
+<text class="m" x="1330" y="448" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">MALARIA ANSWER</text>
+</g>
+</g>
+
+<g id="s5" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Why it landed.</text>
+<text class="b" x="120" y="176" font-size="32">Listeners could picture what the bank might become.</text>
+<g id="ppl"></g>
+<g id="vers"></g>
+<g id="spr">
+<path class="s-line" d="M780 700H1240" stroke-width="4"/>
+<rect class="ink" x="800" y="636" width="50" height="64" rx="4"/>
+<polygon class="ink" points="976,700 1024,700 1000,622"/>
+<path id="brdP" class="s-ink" fill="none" stroke-width="10" stroke-linecap="round"/>
+<text class="m" x="1000" y="740" font-size="20" text-anchor="middle">THE STORY</text>
+<path class="s-gain" d="M1160 564Q1250 170 1380 300" fill="none" stroke-width="4" stroke-dasharray="10 10" stroke-linecap="round"/>
+<circle class="s-gain" cx="1380" cy="300" r="56" fill="var(--stage)" stroke-width="5" stroke-dasharray="8 8"/>
+<text class="m" x="1380" y="222" font-size="22" text-anchor="middle" style="fill:var(--gain)">NEW IDEAS</text>
+</g>
+<g id="bulb">
+<circle class="gain" cx="1380" cy="290" r="22"/>
+<rect class="ink" x="1369" y="312" width="22" height="14" rx="3"/>
+</g>
+<circle id="jump" class="gain" r="22"/>
+<g id="cap5"><text class="d" x="120" y="830" font-size="44">Springboard stories launch people toward new ideas.</text></g>
+</g>
+
+<g id="s6" opacity="0">
+<text class="d" x="120" y="124" font-size="68">All six principles in one story.</text>
+<text class="b" x="120" y="176" font-size="32">Hold the Zambia story up to the SUCCESs checklist.</text>
+<g id="rows"></g>
+<g id="card">
+<rect class="s-gain" x="940" y="360" width="520" height="200" rx="20" fill="var(--stage)" stroke-width="5"/>
+<text class="m" x="1200" y="600" font-size="22" text-anchor="middle" style="fill:var(--gain)">ONE STORY · ALL AT ONCE</text>
+</g>
+<g id="tiles"></g>
+</g>
+
+<g id="s7" opacity="0">
+<text class="d" x="120" y="124" font-size="68">Spot stories. Don’t invent them.</text>
+<text class="b" x="120" y="176" font-size="32">The best ones are already happening around you.</text>
+<g id="nb">
+<rect class="s-ink" x="160" y="240" width="340" height="440" rx="14" fill="var(--stage)" stroke-width="6"/>
+<g id="nbl"></g>
+<g id="pen"><path class="gain" d="M0 0l90-90 20 20-90 90-28 8z"/></g>
+</g>
+<g id="col7">
+<rect class="gain" x="190" y="300" width="280" height="100" rx="12"/>
+<text class="m" x="330" y="360" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">A REAL MOMENT</text>
+</g>
+<g id="crowd"></g>
+<g id="hit"></g>
+<g id="mag">
+<circle class="s-ink" cx="0" cy="0" r="70" fill="none" stroke-width="10"/>
+<path class="s-ink" d="M50 50l55 55" stroke-width="18" stroke-linecap="round"/>
+</g>
+<g id="steps7"></g>
+</g>
+
+<g id="s8" opacity="0">
+<g id="qa"><text class="d" x="120" y="300" font-size="60" letter-spacing="-1">Think of one real</text></g>
+<g id="qb"><text class="d" x="120" y="380" font-size="60" letter-spacing="-1">moment that shows</text></g>
+<g id="qc"><text class="d" x="120" y="460" font-size="60" letter-spacing="-1">your idea working.</text></g>
+<g id="qd"><text class="d" x="120" y="560" font-size="60" letter-spacing="-1" style="fill:var(--gain)">Tell that story.</text></g>
+<g id="fin">
+<text class="m" x="122" y="690" font-size="22">THIS WEEK: TELL THE STORY,</text>
+<text class="m" x="122" y="724" font-size="22">DON’T EXPLAIN THE IDEA</text>
+</g>
+<g id="sl8">
+<rect class="s-ink" x="900" y="240" width="240" height="160" rx="12" fill="var(--stage)" stroke-width="6"/>
+<circle class="ink" cx="932" cy="284" r="7"/><path class="s-line" d="M952 284H1110" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="932" cy="320" r="7"/><path class="s-line" d="M952 320H1090" stroke-width="6" stroke-linecap="round"/>
+<circle class="ink" cx="932" cy="356" r="7"/><path class="s-line" d="M952 356H1100" stroke-width="6" stroke-linecap="round"/>
+<text class="m" x="900" y="440" font-size="20">EXPLAINING</text>
+</g>
+<g id="x8"><path class="s-loss" d="M910 250L1130 390M1130 250L910 390" stroke-width="8" stroke-linecap="round"/></g>
+<g id="bub8">
+<path d="M1340 396l30 92 10-92" fill="var(--stage)" stroke="var(--ink)" stroke-width="6" stroke-linejoin="round"/>
+<rect class="s-ink" x="1180" y="240" width="290" height="160" rx="26" fill="var(--stage)" stroke-width="6"/>
+<path d="M1344 394h34" stroke="var(--stage)" stroke-width="8"/>
+<text class="m" x="1190" y="440" font-size="20" style="fill:var(--gain)">TELLING</text>
+</g>
+<g id="mc8">
+<rect class="gain" x="1210" y="285" width="230" height="70" rx="12"/>
+<text class="m" x="1325" y="327" font-size="20" text-anchor="middle" style="fill:var(--on-gain)">A REAL MOMENT</text>
+</g>
+<path class="s-line" d="M900 682H1470" stroke-width="4" stroke-linecap="round"/>
+<g id="tel8"></g>
+<g id="lis8"></g>
+</g>
+      <g id="wm" aria-hidden="true" pointer-events="none">
+        <defs><pattern id="wmtile" width="560" height="360" patternUnits="userSpaceOnUse" patternTransform="rotate(-24)"><text x="24" y="190" font-family="DM Mono,monospace" font-size="34" font-weight="500" fill="var(--ink)" opacity=".06">visualgrowth.app</text></pattern></defs>
+        <rect width="1600" height="900" fill="url(#wmtile)"/>
+        <g class="wmc"><text x="1564" y="868" text-anchor="end" font-family="DM Mono,monospace" font-size="30" font-weight="500" fill="var(--ink)" stroke="var(--stage)" stroke-width="6" paint-order="stroke" opacity=".62">visualgrowth.app</text></g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="bar">
+    <button id="play" type="button">Play</button>
+    <input id="seek" type="range" min="0" max="129" step="0.01" value="0" aria-label="Position in the animation">
+    <span id="clock">0:00 / 2:09</span>
+    <button id="mute" type="button" aria-pressed="false">Sound on</button>
+    <button id="full" type="button">Full screen</button>
+  </div>
+  <div class="chapters" id="chapters"></div>
+  <p class="note">A paraphrased summary of &ldquo;Stories: Putting SUCCESs Together&rdquo;, from <em>Made to Stick</em> by Chip Heath and Dan Heath. Examples as reported in the book: the student exam-visualisation study and Stephen Denning&#x27;s springboard story about a health worker in Zambia. The pilot, cockpit, campfire and checklist drawings are illustrations, not data. Drawings are illustrative. Narration is an AI voice generated with ElevenLabs.</p>
+</div>
+
+<audio id="vo" preload="auto" src="lesson-07.mp3"></audio>
+<script>
+(function(){
+const $=id=>document.getElementById(id), NS='http://www.w3.org/2000/svg';
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);parent.appendChild(e);return e};
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+const lin=(t,a,b)=>cl((t-a)/(b-a));
+const ease=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const p=(t,a,b)=>ease(lin(t,a,b));
+// K scales the scene timings to the narration length
+const K=1, DUR=129, SC=[[0.0, 5.1], [5.1, 16.8], [16.8, 30.3], [30.3, 51.5], [51.5, 71.4], [71.4, 84.2], [84.2, 106.7], [106.7, 118.0], [118.0, 129.0]].map(a=>[a[0]*K,a[1]*K]);
+const NAMES=["Stories", "Why Stories Work", "Flight Simulator", "The Study Test", "A Springboard Story", "Why It Landed", "All Six at Once", "Spot, Don't Invent", "Your Challenge"];
+const TM={"campfire": 0.0, "listener": 5.36, "mind_movie": 9.52, "pilot": 17.12, "cockpit": 21.6, "students": 30.56, "grade_a": 36.08, "desk_study": 39.84, "manager": 51.84, "charts": 57.84, "health_worker": 60.64, "laptop": 65.68, "light_bulb": 71.68, "checklist": 84.48, "surprise": 92.4, "notebook": 107.04, "magnifier": 110.56, "story_card": 118.28};
+const P=(g,x,y,r,c)=>{mk('circle',{cx:x,cy:y,r:r,class:c},g);mk('path',{d:`M${x-r*1.5} ${y+r*4.2}v-${r*1.3}a${r*1.5} ${r*1.5} 0 0 1 ${r*3} 0v${r*1.3}z`,class:c},g)};
+const T=(g,x,y,s,a)=>{const e=mk('text',Object.assign({x:x,y:y},a),g);e.textContent=s;return e};
+const pills=(id,L,y)=>L.map((s,i)=>{const x=120+i*490,g=mk('g',{},$(id));mk('rect',{x:x,y:y,width:380,height:64,rx:32,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);T(g,x+190,y+41,s,{class:'m','font-size':22,'text-anchor':'middle'});if(i<2)mk('path',{d:`M${x+400} ${y+32}h70m-18-18 18 18-18 18`,fill:'none',class:'s-muted','stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},g);return g});
+P($('fire'),1170,600,24,'ink');P($('fire'),1440,600,24,'ink');
+P($('lis'),300,500,40,'ink');[[380,430,8],[430,395,12],[490,360,16]].forEach(q=>mk('circle',{cx:q[0],cy:q[1],r:q[2],fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('lis')));
+const CD=[0,1,2].map(i=>{const g=mk('g',{},$('cards'));mk('rect',{x:130+i*130,y:246,width:112,height:66,rx:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);T(g,186+i*130,287,'FACT',{class:'m','font-size':20,'text-anchor':'middle',style:'fill:var(--ink)'});return g});
+for(let i=0;i<14;i++)[240,686].forEach(y=>mk('rect',{x:625+i*60,y:y,width:24,height:14,rx:3,fill:'var(--line)'},$('holes')));
+const MG=mk('g',{},$('mini'));P(MG,0,-59,14,'gain');
+P($('pil'),440,470,22,'ink');
+const ST2=pills('steps',['PRACTISE','FACE IT','ACT'],740);
+P($('stu'),220,300,24,'ink');P($('stu'),220,560,24,'ink');
+for(let i=0;i<4;i++)mk('rect',{x:320+i*80,y:630-i*30,width:80,height:30+i*30,fill:'var(--line)',stroke:'var(--ink)','stroke-width':4},$('stp'));
+P($('den'),200,430,28,'ink');[470,560,650].forEach(x=>P($('col'),x,480,20,'ink'));P($('wk'),1160,520,26,'ink');
+[50,80,40,100].forEach((h,i)=>mk('rect',{x:330+i*50,y:390-h,width:30,height:h,class:'ink'},$('brd')));
+const BL=[],VS=[];[200,330,460,590,720].forEach((x,i)=>{P($('ppl'),x,560,24,'ink');BL.push(mk('circle',{cx:x,cy:450,r:28,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},$('ppl')));mk('rect',{x:x-12,y:480,width:24,height:16,class:'ink'},$('ppl'));
+  const g=mk('g',{},$('vers')),c=i%2?'ink':'gain';mk('rect',{x:x-50,y:270,width:100,height:84,rx:14,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},g);mk('path',{d:`M${x-30} 306l30-22 30 22z`,class:c},g);for(let k=0;k<3;k++)mk('rect',{x:x-26+k*20,y:310,width:12,height:28,class:c},g);VS.push(g)});
+const NM=['Simple','Unexpected','Concrete','Credible','Emotional','Stories'],NT=['SHARING KNOWLEDGE CAN SAVE LIVES','A REMOTE WORKER FINDS HELP ONLINE','A REAL PERSON','REAL PATIENTS','LIVES AT STAKE','ALL OF IT ARRIVES TOGETHER'],RW=[],CK=[];
+NM.forEach((s,i)=>{const y=280+i*84,g=mk('g',{},$('rows'));mk('rect',{x:120,y:y-36,width:44,height:44,rx:8,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':5},g);
+  CK.push(mk('path',{d:`M130 ${y-14}l10 12 18-24`,fill:'none',stroke:'var(--gain)','stroke-width':7,'stroke-linecap':'round','stroke-linejoin':'round'},g));T(g,190,y,s,{class:'d5','font-size':38});T(g,470,y-4,NT[i],{class:'m','font-size':18});RW.push(g)});
+const SCT=[[960,250],[1300,260],[1110,330],[1380,420],[980,560],[1220,620]],TL='SUCCES'.split('').map(s=>{const g=mk('g',{},$('tiles'));mk('rect',{x:0,y:0,width:70,height:70,rx:10,class:'gain'},g);T(g,35,50,s,{class:'d','font-size':40,'text-anchor':'middle',style:'fill:var(--on-gain)'});return g});
+for(let i=0;i<5;i++)mk('path',{d:`M200 ${460+i*45}H460`,class:'s-line','stroke-width':4},$('nbl'));
+for(let i=0;i<6;i++)mk('circle',{cx:200+i*52,cy:240,r:10,fill:'var(--stage)',stroke:'var(--ink)','stroke-width':4},$('nb'));
+for(let i=0;i<8;i++)P($('crowd'),720+(i%4)*220,i<4?330:540,20,'ink');
+mk('circle',{cx:1160,cy:570,r:62,fill:'none',stroke:'var(--gain)','stroke-width':4,'stroke-dasharray':'8 8'},$('hit'));P($('hit'),1160,540,20,'gain');
+const ST7=pills('steps7',['NOTICE','COLLECT','RETELL'],760);
+// closing scene: storyteller and listeners
+P($('tel8'),1380,554,30,'gain');
+const L8=[960,1080,1200].map(x=>{const g=mk('g',{},$('lis8'));const h=mk('circle',{cx:x,cy:588,r:22,class:'ink'},g);mk('path',{d:`M${x-33} 680v-29a33 33 0 0 1 66 0v29z`,class:'ink'},g);return [g,h]});
+
+function vis(t,i){const[a,b]=SC[i],last=i===SC.length-1;
+  if(t<a||(t>=b&&!last))return 0;
+  return Math.min(i===0?1:lin(t,a,a+.6), last?1:1-lin(t,b-.5,b));}
+function rise(el,k){el.setAttribute('opacity',k);el.setAttribute('transform','translate(0 '+((1-k)*22).toFixed(1)+')')}
+
+function render(t){
+  const u=t/K;
+  for(let i=0;i<SC.length;i++)$('s'+i).setAttribute('opacity',vis(t,i).toFixed(3));
+const f=Math.sin(t*7),g2=Math.sin(t*11+1);
+  $('fl0').setAttribute('d',`M1268 712C1250 660 ${(1288+6*f).toFixed(1)} 640 ${(1310+8*g2).toFixed(1)} ${(560+10*f).toFixed(1)}C${(1332+4*g2).toFixed(1)} 640 1372 660 1352 712Z`);
+  $('fl1').setAttribute('d',`M1292 712C1284 684 1300 672 ${(1310+5*g2).toFixed(1)} ${(630+6*f).toFixed(1)}C1320 672 1336 684 1328 712Z`);
+  rise($('fire'),p(u,TM.campfire,TM.campfire+.6)); rise($('tale'),p(u,TM.campfire+2.6,TM.campfire+3.2));
+
+  rise($('lis'),p(u,TM.listener,TM.listener+.5));
+  CD.forEach((c,i)=>{const a=TM.listener+.6+i*.4; rise(c,p(u,a,a+.4)*(1-.45*p(u,TM.mind_movie,TM.mind_movie+.6)))});
+  rise($('scr'),p(u,TM.mind_movie,TM.mind_movie+.6));
+  const w=p(u,TM.mind_movie+.8,TM.mind_movie+4);
+  MG.setAttribute('transform',`translate(${(690+250*w).toFixed(1)} 600)`); MG.setAttribute('opacity',p(u,TM.mind_movie+.4,TM.mind_movie+.9));
+  rise($('fork'),p(u,TM.mind_movie+5,TM.mind_movie+5.6)); rise($('feel'),p(u,TM.mind_movie+5.4,TM.mind_movie+6));
+
+  rise($('sim'),p(u,TM.pilot,TM.pilot+.6));
+  $('cab').setAttribute('transform',`translate(0 ${(5*Math.sin(t*2)).toFixed(1)})`);
+  const hz=(6*Math.sin(t*1.3)).toFixed(1);
+  $('hz0').setAttribute('transform',`rotate(${hz} 440 340)`); $('hz1').setAttribute('transform',`rotate(${hz} 1160 405)`);
+  rise($('mind'),p(u,TM.cockpit,TM.cockpit+.6));
+  ST2.forEach((g,i)=>{const a=TM.cockpit+5+i*.6; rise(g,p(u,a,a+.4))});
+
+  rise($('stu'),p(u,TM.students,TM.students+.5)); rise($('res'),p(u,TM.grade_a,TM.grade_a+.5)); rise($('pro'),p(u,TM.desk_study,TM.desk_study+.5));
+  const c=p(u,TM.desk_study+.6,TM.desk_study+3.6);
+  $('clm').setAttribute('cx',(360+240*c).toFixed(1)); $('clm').setAttribute('cy',(616-90*c).toFixed(1));
+  rise($('chart'),p(u,TM.desk_study+4.4,TM.desk_study+4.9));
+  const gb=p(u,TM.desk_study+4.6,TM.desk_study+6);
+  $('bR').setAttribute('height',(140*gb).toFixed(1)); $('bR').setAttribute('y',(660-140*gb).toFixed(1));
+  $('bP').setAttribute('height',(330*gb).toFixed(1)); $('bP').setAttribute('y',(660-330*gb).toFixed(1));
+  rise($('note3'),p(u,TM.desk_study+5.6,TM.desk_study+6.1)); rise($('cap3'),p(u,TM.desk_study+8,TM.desk_study+8.6));
+
+  rise($('den'),p(u,TM.manager,TM.manager+.5)); rise($('col'),p(u,TM.manager+.6,TM.manager+1.1));
+  rise($('brd'),p(u,TM.charts,TM.charts+.5)); rise($('no'),p(u,TM.charts+1.2,TM.charts+1.7));
+  rise($('zam'),p(u,TM.health_worker,TM.health_worker+.6)); rise($('lap'),p(u,TM.laptop,TM.laptop+.5)); rise($('ans'),p(u,TM.laptop+1.5,TM.laptop+2));
+
+  rise($('ppl'),p(u,TM.light_bulb-.6,TM.light_bulb));
+  BL.forEach((b,i)=>{b.style.fill=u>=TM.light_bulb+.4+i*.3?'var(--gain)':'var(--stage)'});
+  VS.forEach((g,i)=>{const a=TM.light_bulb+4.2+i*.3; rise(g,p(u,a,a+.4))});
+  const sp=p(u,TM.light_bulb+7.6,TM.light_bulb+8.2); rise($('spr'),sp);
+  const bd=26*Math.sin(Math.PI*p(u,TM.light_bulb+8.2,TM.light_bulb+8.9)), L=p(u,TM.light_bulb+8.6,TM.light_bulb+10);
+  $('brdP').setAttribute('d',`M810 632Q1000 ${(622+bd*.3).toFixed(1)} 1170 ${(590+bd).toFixed(1)}`);
+  const sy=564+bd*(1-L), q=1-L;
+  $('jump').setAttribute('cx',(q*q*1160+2*q*L*1250+L*L*1380).toFixed(1));
+  $('jump').setAttribute('cy',(q*q*sy+2*q*L*170+L*L*300).toFixed(1));
+  $('jump').setAttribute('opacity',(sp*(1-p(u,TM.light_bulb+10,TM.light_bulb+10.3))).toFixed(2));
+  rise($('bulb'),p(u,TM.light_bulb+10,TM.light_bulb+10.4));
+  rise($('cap5'),p(u,TM.light_bulb+8.8,TM.light_bulb+9.4));
+
+  RW.forEach((g,i)=>{const a=TM.checklist+.4+i*.25; rise(g,p(u,a,a+.4))});
+  const J=p(u,TM.surprise+9.5,TM.surprise+11);
+  [TM.checklist+3.8,TM.surprise,TM.surprise+4.1,TM.surprise+4.6,TM.surprise+5.1,TM.surprise+9.5].forEach((a,i)=>{const k=p(u,a,a+.4),s=SCT[i];
+    CK[i].setAttribute('opacity',k); TL[i].setAttribute('opacity',k);
+    TL[i].setAttribute('transform',`translate(${(s[0]+(970+i*80-s[0])*J).toFixed(1)} ${(s[1]+(420-s[1])*J).toFixed(1)})`)});
+  rise($('card'),p(u,TM.surprise+10.6,TM.surprise+11.2));
+
+  rise($('nb'),p(u,TM.notebook,TM.notebook+.5));
+  $('pen').setAttribute('transform',`translate(380 ${(620+8*Math.sin(t*3)).toFixed(1)})`);
+  rise($('crowd'),p(u,TM.magnifier-.4,TM.magnifier+.2));
+  const m=p(u,TM.magnifier+.3,TM.magnifier+2.3);
+  $('mag').setAttribute('transform',`translate(${(760+400*m).toFixed(1)} ${(370+200*m).toFixed(1)})`); $('mag').setAttribute('opacity',p(u,TM.magnifier,TM.magnifier+.4));
+  rise($('hit'),p(u,TM.magnifier+2.3,TM.magnifier+2.8));
+  ST7.forEach((g,i)=>{const a=TM.magnifier+3.8+i*1.1; rise(g,p(u,a,a+.4))});
+  rise($('col7'),p(u,TM.magnifier+4.9,TM.magnifier+5.5));
+
+  // close: explaining is crossed out, the storyteller shares a real moment
+  const S=TM.story_card;
+  rise($('qa'),p(u,S,S+.5)); rise($('qb'),p(u,S+.4,S+.9)); rise($('qc'),p(u,S+.8,S+1.3)); rise($('qd'),p(u,S+1.2,S+1.7));
+  rise($('tel8'),p(u,S+.3,S+.8));
+  L8.forEach((l,i)=>{const a=S+.5+i*.2; rise(l[0],p(u,a,a+.4)); l[1].setAttribute('class',u>=S+3.6+i*.3?'gain':'ink')});
+  rise($('sl8'),p(u,S+1.4,S+1.9)); rise($('x8'),p(u,S+2.2,S+2.6));
+  rise($('bub8'),p(u,S+2.8,S+3.3)); rise($('mc8'),p(u,S+3.2,S+3.7));
+  $('mc8').setAttribute('transform',`translate(0 ${(-14*(1-p(u,S+3.2,S+3.7))+3*Math.sin(t*2)).toFixed(1)})`);
+  rise($('fin'),p(u,S+4.2,S+4.8));
+}
+// transport: the narration is the master clock while it is playing
+const au=$('vo');
+const alen=()=>isFinite(au.duration)&&au.duration>0?au.duration:126.0;
+const chap=$('chapters'), cbtns=NAMES.map((n,i)=>{const b=document.createElement('button');b.type='button';b.textContent=n;
+  b.addEventListener('click',()=>{t=SC[i][0]+(i?0.01:0);start()});chap.appendChild(b);return b});
+let t=0, playing=false, prev=null;
+const fmt=s=>Math.floor(s/60)+':'+String(Math.floor(s%60)).padStart(2,'0');
+function sync(){
+  render(t); $('seek').value=t; $('clock').textContent=fmt(t)+' / '+fmt(DUR);
+  $('play').textContent=playing?'Pause':(t>=DUR?'Replay':'Play');
+  cbtns.forEach((b,i)=>b.setAttribute('aria-current',t>=SC[i][0]&&(t<SC[i][1]||i===SC.length-1)?'true':'false'));
+}
+function start(){
+  if(t>=DUR)t=0; playing=true;
+  if(t<alen()-.05){try{au.currentTime=t;const r=au.play();if(r&&r.catch)r.catch(()=>{})}catch(e){}}
+  sync();
+}
+function stop(){playing=false;try{au.pause()}catch(e){} sync()}
+function frame(now){
+  if(playing&&prev!==null){
+    if(!au.paused&&!au.ended&&au.readyState>2)t=au.currentTime; else t+=Math.min(.1,(now-prev)/1000);
+    if(t>=DUR){t=DUR;playing=false;try{au.pause()}catch(e){}}
+    sync();
+  }
+  prev=now; requestAnimationFrame(frame);
+}
+$('play').addEventListener('click',()=>playing?stop():start());
+$('seek').addEventListener('input',e=>{t=+e.target.value;stop()});
+$('mute').addEventListener('click',e=>{au.muted=!au.muted;e.target.textContent=au.muted?'Sound off':'Sound on';e.target.setAttribute('aria-pressed',au.muted)});
+$('full').addEventListener('click',()=>{const el=$('stageBox');
+  try{const r=document.fullscreenElement?document.exitFullscreen():el.requestFullscreen&&el.requestFullscreen();if(r&&r.catch)r.catch(()=>{})}catch(e){}});
+sync(); requestAnimationFrame(frame);
+})();
+</script>
+</html>

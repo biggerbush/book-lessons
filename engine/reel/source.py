@@ -37,6 +37,16 @@ def load(book: str, n: int) -> dict:
             mime = "image/png" if name.endswith("png") else "image/svg+xml"
             cover = f"data:{mime};base64," + base64.b64encode(f.read_bytes()).decode()
             break
+    book_art = ""                                                   # the jacket alone (no tile background), for carousel covers
+    sv = SITE / (st.get("dir") or slug) / "cover.svg"
+    if sv.exists():
+        txt = sv.read_text(encoding="utf8")
+        txt = re.sub(r'<rect width="400" height="320" fill="[^"]*"/>', "", txt)
+        txt = re.sub(r'<circle cx="200" cy="330" r="170"[^>]*/>', "", txt)
+        txt = re.sub(r'<rect x="117" y="35" width="176" height="264" rx="5" fill="#000" opacity=".12"/>', "", txt)
+        txt = txt.replace('viewBox="0 0 400 320"', 'viewBox="112 28 176 264"', 1)
+        if 'viewBox="112 28 176 264"' in txt:
+            book_art = "data:image/svg+xml;base64," + base64.b64encode(txt.encode()).decode()
     return {"slug": slug, "book": st.get("title") or plan.get("title") or book, "author": st.get("author") or plan.get("author") or "",
             "n": n, "lesson_title": lesson.get("title", ""), "key_idea": lesson.get("key_idea", ""), "summary": plan.get("summary", ""),
-            "subtitle": meta.get("subtitle", ""), "script": "\n".join(parts).strip(), "cover": cover}
+            "subtitle": meta.get("subtitle", ""), "script": "\n".join(parts).strip(), "cover": cover, "book_art": book_art}

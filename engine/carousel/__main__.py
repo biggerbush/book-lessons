@@ -32,7 +32,7 @@ def page(plan: dict, src: dict, n: int) -> str:
     css = (STAGE / ("micro.css" if micro else "carousel.css")).read_text(encoding="utf8")
     for key, f in FONTS:
         css = css.replace(key, "data:font/woff2;base64," + base64.b64encode((STAGE / "fonts" / f).read_bytes()).decode())
-    data = {"book": src["book"], "author": src.get("author", ""), "lesson": n, "cover": src.get("cover", ""), "slides": plan["slides"]}
+    data = {"book": src["book"], "author": src.get("author", ""), "lesson": n, "cover": src.get("cover", ""), "book_art": src.get("book_art", ""), "slides": plan["slides"]}
     libs = (REEL_STAGE / "icons.js").read_text(encoding="utf8") if micro else (STAGE / "rough.js").read_text(encoding="utf8")
     return ("<!doctype html><html><head><meta charset=utf-8><style>" + css + "</style></head><body><div id=deck></div><script>"
             + "window.CAROUSEL=" + json.dumps(data).replace("</", "<\\/") + ";\n" + libs

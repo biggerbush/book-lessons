@@ -15,8 +15,9 @@ SYSTEM = """You write Instagram carousels for VisualGrowth (animated book lesson
 creators. Every slide = one on-brand graphic (navy + gold infographic, never cartoons) + a bold 2-line title + a few short serif lines.
 
 STORY ARC (11-14 slides):
-1. cover: "title" = the book or the core concept in 1-3 words (shown huge), "sub" = a curiosity line (shown in brackets, e.g. "why your busiest days feel empty"),
-   "role" = the author's role, "chips" = 3 short concept chips with icons.
+1. cover: "title" = a HOOK headline, 4-8 words, Title Case, that names the reader's problem or a surprising claim, with one word in _italics_
+   (e.g. "Why Your Busiest Days Feel _Unproductive_", "Why Smart People Make _“Crazy”_ Money Choices"). Shown huge above the book.
+   Under it the page adds "A lesson from <book>". "role" = the author's role, "chips" = 3 short concept chips with icons (1-2 words each).
 2. THE PROBLEM, felt by the reader (no tag): their everyday experience, ending with a turn like "Here's why, and how to fix it."
 3..: micro-lessons, each tagged {"n":1,"label":"2-3 words"} and each moving the story ONE step:
    what's really going on (the book's concept) -> why it happens (the research/mechanism) -> how it spirals ("For example:" + arrow list) ->

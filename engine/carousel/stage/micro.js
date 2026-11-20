@@ -32,7 +32,8 @@ G.day = d => {      // a working day chopped into chips, one tiny gold slot of r
     x += cw + gap;
     if (i === gi) { out += RR(x, y - 16, gw, hh + 32, 14, M.gold2, 'filter="url(#sh)"'); gx = x + gw / 2; x += gw + gap; }
   });
-  out += arrowL(gx, 470, gx, y + hh + 30, true) + pill(gx, 488, d.gold || 'the real work', M.ink, M.white, 26);
+  const gl = d.gold || 'the real work', pw = Math.max(90, gl.length * 26 * .58 + 44), px = Math.min(Math.max(gx, pw / 2 + 24), PW - pw / 2 - 24);
+  out += `<path d="M${px} 458 Q ${px} ${y + hh + 60} ${gx} ${y + hh + 30}" stroke="${M.gold}" stroke-width="5" fill="none" stroke-linecap="round" marker-end="url(#ahg)"/>` + pill(px, 488, gl, M.ink, M.white, 26);
   if (d.caption) out += T(x0, 92, d.caption, { a: 'start', s: 26, c: M.muted, ls: 3 });
   return svg(out);
 };
@@ -69,6 +70,16 @@ G.dips = d => {     // focus level with a dip after every "quick check"
   out += `<path d="${path} L${R} ${B} L${L} ${B}Z" fill="${M.blue}"/><path d="${path}" fill="none" stroke="${M.ink}" stroke-width="7" stroke-linejoin="round"/>`;
   checks.forEach(c => { const x = L + (R - L) * c; out += disc(x, top - 30, 32, M.white) + ic(d.icon || 'mail', x, top - 30, 40, M.ink, 7) + `<line x1="${x}" x2="${x}" y1="${top + 4}" y2="${B}" stroke="${M.ink}" stroke-width="2" stroke-dasharray="3 8" opacity=".4"/>`; });
   out += T(L, B + 40, d.x0 || '9:00', { a: 'start', s: 22, c: M.muted }) + T(R, B + 40, d.x1 || '12:00', { a: 'end', s: 22, c: M.muted });
+  return svg(out);
+};
+
+G.stat = d => {     // one big number with a split bar
+  const share = Math.min(.95, Math.max(.05, (d.share || 40) / 100)); let out = '';
+  out += card(60, 60, 848, 250, M.white) + T(PW / 2, 160, d.value || '40%', { s: 130, w: 800, c: M.ink, f: 'News' }) + T(PW / 2, 262, d.label || '', { s: 28, w: 700, c: M.muted });
+  const bx = 60, bw = 848, by = 360;
+  out += RR(bx, by, bw, 80, 40, M.blue2) + RR(bx, by, bw * share, 80, 40, M.gold2) + RR(bx + bw * share - 40, by, 40, 80, 0, M.gold2);
+  out += T(bx + 30, by + 41, d.left || 'habits', { a: 'start', s: 28, w: 800 }) + T(bx + bw - 30, by + 41, d.right || 'decisions', { a: 'end', s: 28, w: 800 });
+  if (d.caption) out += T(PW / 2, 500, d.caption, { s: 22, c: M.muted, w: 600 });
   return svg(out);
 };
 
@@ -176,7 +187,7 @@ function fitFont(e, prop, max, min, ok) { let f = max; e.style[prop] = f + 'px';
 
 /* ------------------------------------------------------------ slides */
 const SL = {};
-SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big book inside the ring with "what's inside" chips
+SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big book inside the ring
   const t = h('cv-title', { fontSize: '104px', lineHeight: '1.0', left: '70px', width: '940px', top: '74px' }, md(s.title || D.book));
   el.append(t); fitFont(t, 'fontSize', 104, 66, () => t.offsetHeight <= 320);
   const y1 = 74 + t.offsetHeight + 24;
@@ -190,12 +201,6 @@ SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big bo
   book.append(h('', { position: 'absolute', left: '16px', top: '12px', width: bw + 'px', height: bh - 8 + 'px', borderRadius: '10px', background: 'repeating-linear-gradient(90deg,#fff 0 3px,#E6E9EF 3px 4px)', boxShadow: '0 60px 80px -34px rgba(11,31,58,.55)' }));
   const im = document.createElement('img'); im.src = D.book_art || D.cover || ''; Object.assign(im.style, { position: 'absolute', left: 0, top: 0, width: bw + 'px', height: bh + 'px', objectFit: D.book_art ? 'fill' : 'cover', borderRadius: '10px', boxShadow: '0 30px 50px -24px rgba(11,31,58,.45)' });
   book.append(im); el.append(book);
-  const slots = [{ left: '44px', top: cy - 190 }, { right: '44px', top: cy - 250 }, { left: '44px', top: cy + 130 }];
-  (s.chips || []).slice(0, 3).forEach((ch, i) => {
-    const sl = slots[i];
-    el.append(h('', Object.assign({ position: 'absolute', top: sl.top + 'px', background: i === 1 ? M.gold2 : '#fff', color: M.ink, fontFamily: 'Sans', fontWeight: 800, fontSize: '26px', padding: '13px 22px', borderRadius: '999px', boxShadow: '0 16px 30px -14px rgba(11,31,58,.35)', display: 'flex', alignItems: 'center', gap: '10px', whiteSpace: 'nowrap', maxWidth: '360px' }, sl.left ? { left: sl.left } : { right: sl.right }),
-      `<span style="display:inline-flex;width:32px;height:32px;color:${M.ink}">${iconSVG(ch.icon || 'star', 32, 8)}</span>${esc(ch.t)}`));
-  });
   el.append(h('', { position: 'absolute', right: '44px', top: cy + 200 + 'px', display: 'flex', alignItems: 'center', gap: '14px', background: M.ink, color: '#fff', fontFamily: 'Sans', fontWeight: 800, fontSize: '27px', padding: '15px 16px 15px 24px', borderRadius: '999px', boxShadow: `0 18px 34px -16px rgba(11,31,58,.6)` },
     `${esc(s.swipe || 'Swipe to fix it')}<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:${M.gold2};color:${M.ink};align-items:center;justify-content:center;font-size:24px">→</span>`));
 };

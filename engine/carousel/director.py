@@ -9,7 +9,7 @@ from ..config import log
 
 EXAMPLE = Path(__file__).parent / "examples" / "deep-work-1.micro.json"
 TYPES = ("cover", "lesson")
-KINDS = ("checklist", "questions", "floorplan", "pairs", "tracks", "hours", "iceberg", "tally", "prompt", "stat", "day", "compare", "residue", "dips", "cards", "converge", "gap", "formula", "flow", "calendar", "tracker", "chain", "book")
+KINDS = ("puzzle", "dilemma", "bet", "wall", "spectrum", "checklist", "questions", "floorplan", "pairs", "tracks", "hours", "iceberg", "tally", "prompt", "stat", "day", "compare", "residue", "dips", "cards", "converge", "gap", "formula", "flow", "calendar", "tracker", "chain", "book")
 
 SYSTEM = """You write Instagram carousels for VisualGrowth (animated book lessons). Style: a STORY told in MICRO-LESSONS, like the best educational
 creators. Every slide = one on-brand graphic (navy + gold infographic, never cartoons) + a bold 2-line title + a few short serif lines.
@@ -47,6 +47,9 @@ questions {"items":[2-4 short questions],"note"} | floorplan {"left","left_note"
 pairs {"pairs":[[icon,icon] x3],"picks":[0|1 x3],"line1","line2"} | tracks {"top","top_note","bottom","bottom_note","train"} |
 hours {"total":16,"filled":n,"center","center_label","r1","r3","r4","note"} | iceberg {"top","items":[4 short],"bottom"} |
 tally {"title","time","rows":[4],"example","total"} | prompt {"q":"one question","note"} |
+puzzle {"label","q":"a gut-check puzzle, \n for lines","first","second","answer":"small answer line"} | dilemma {"options":[{"t","icon"} x2],"facts":[3 identical facts],"q"} |
+bet {"options":[{"t","icon","items":[3]} x2],"q":"Who wins? Pick one, then swipe."} (reveal the result on the NEXT slide) | wall {"left","facts":[3],"left_note","right","right_note"} |
+spectrum {"zones":[3],"subs":[3],"you_at":x 100-860,"you","q"} |
 day {"caption","segments":[4-7],"gold_at":i,"gold":"label"} | compare {"left":{"t","icon","items":[3]},"right":{...}} |
 residue {"a","a_icon","b","b_icon","share":10-80,"left_label","right_label","caption"} | dips {"checks":[0-1 x2-4],"icon","full","x0","x1"} |
 cards {"items":[{"t","icon","sub","hl"} x2-3]} | stat {"value":"40%","label","share":0-100,"left","right","caption"} | converge {"inputs":[2-3 short],"result","icon"} | gap {"up","down","gap"} |

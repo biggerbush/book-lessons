@@ -250,7 +250,7 @@ G.tally = d => {      // a worksheet the reader can screenshot and use
   const rows = (d.rows || ['Picked up phone', 'Opened an app', 'Snacked', 'Checked email']).slice(0, 4); let out = card(60, 40, 848, 480, M.white);
   out += T(100, 95, d.title || 'ONE-HOUR WATCH', { a: 'start', s: 28, w: 800, ls: 2 }) + T(868, 95, d.time || '__:__ to __:__', { a: 'end', s: 26, w: 700, c: M.muted });
   out += `<line x1="100" x2="868" y1="130" y2="130" stroke="${M.ink}" stroke-width="3"/>`;
-  rows.forEach((r, i) => { const y = 180 + i * 72; out += T(100, y, r, { a: 'start', s: 27, w: 700, c: M.ink2 }) + `<line x1="470" x2="868" y1="${y + 18}" y2="${y + 18}" stroke="${M.blue2}" stroke-width="3" stroke-dasharray="8 10"/>`; if (i === 0) out += T(480, y - 2, d.example || '|||| ||', { a: 'start', s: 32, w: 800, c: '#8A5A00' }); });
+  rows.forEach((r, i) => { const y = 180 + i * 72; out += T(100, y, r, { a: 'start', s: 27, w: 700, c: M.ink2 }) + `<line x1="470" x2="868" y1="${y + 18}" y2="${y + 18}" stroke="${M.blue2}" stroke-width="3" stroke-dasharray="8 10"/>`; if (i === 0) out += T(480, y - 2, d.example != null ? d.example : '|||| ||', { a: 'start', s: 32, w: 800, c: '#8A5A00' }); });
   out += RR(100, 450, 768, 52, 14, M.goldwash) + T(124, 477, d.total || 'Done before I decided: ____', { a: 'start', s: 26, w: 800 });
   return svg(out);
 };
@@ -259,8 +259,58 @@ G.prompt = d => {     // one question to sit with
   let out = card(60, 60, 848, 440, M.ink) + T(130, 150, '“', { s: 160, w: 800, f: 'News', c: M.gold2 });
   const words = String(d.q || '').split(' '), lines = []; let cur = '';
   words.forEach(w => { if ((cur + ' ' + w).trim().length > 30) { lines.push(cur.trim()); cur = w; } else cur += ' ' + w; }); if (cur.trim()) lines.push(cur.trim());
-  lines.slice(0, 4).forEach((l, i) => { out += T(150, 220 + i * 62, l, { a: 'start', s: 46, w: 800, f: 'News', c: M.white }); });
-  if (d.note) out += T(150, 460, d.note, { a: 'start', s: 24, w: 700, c: M.gold2 });
+  lines.slice(0, 4).forEach((l, i) => { out += T(150, 205 + i * 58, l, { a: 'start', s: 46, w: 800, f: 'News', c: M.white }); });
+  if (d.note) out += T(150, 474, d.note, { a: 'start', s: 24, w: 700, c: M.gold2 });
+  return svg(out);
+};
+
+G.puzzle = d => {     // a gut-check puzzle: the fast answer is wrong
+  let out = card(60, 50, 848, 250, M.white) + T(110, 105, d.label || 'QUICK, ANSWER IN 3 SECONDS', { a: 'start', s: 22, w: 800, c: M.muted, ls: 2 });
+  String(d.q || '').split('\n').forEach((l, i) => { out += T(110, 160 + i * 48, l, { a: 'start', s: 34, w: 800, f: 'News' }); });
+  out += card(60, 330, 410, 170, M.goldwash) + T(265, 385, d.first || 'Your first answer:', { s: 26, w: 800 }) + `<line x1="140" x2="390" y1="455" y2="455" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/>`;
+  out += card(498, 330, 410, 170, M.ink) + T(703, 385, d.second || 'Now check it slowly:', { s: 26, w: 800, c: M.white }) + `<line x1="578" x2="828" y1="455" y2="455" stroke="${M.gold2}" stroke-width="3" stroke-dasharray="10 10"/>`;
+  if (d.answer) out += T(PW - 30, 538, d.answer, { a: 'end', s: 20, w: 600, c: M.muted });
+  return svg(out);
+};
+
+G.dilemma = d => {    // decide with logic alone: identical options
+  const o = (d.options || [{ t: 'Option A', icon: 'coin' }, { t: 'Option B', icon: 'coin' }]).slice(0, 2), facts = d.facts || []; let out = '';
+  o.forEach((c, i) => { const x = 60 + i * 444; out += card(x, 50, 404, 380, M.white) + disc(x + 202, 130, 52, M.blue) + ic(c.icon || 'star', x + 202, 130, 60, M.ink, 7) + T(x + 202, 215, c.t, { s: 32, w: 800 });
+    facts.forEach((ft, k) => { out += T(x + 50, 280 + k * 46, '= ' + ft, { a: 'start', s: 25, w: 700, c: M.ink2 }); }); });
+  out += disc(PW / 2, 240, 44, M.gold2) + T(PW / 2, 242, '?', { s: 52, w: 800, f: 'News' });
+  out += RR(60, 460, 848, 64, 18, M.ink) + T(PW / 2, 493, d.q || 'Choose using logic only. Can you?', { s: 26, w: 800, c: M.white });
+  return svg(out);
+};
+
+G.bet = d => {        // a cliffhanger: who would you bet on?
+  const o = (d.options || []).slice(0, 2); let out = '';
+  o.forEach((c, i) => { const x = 60 + i * 444, gold = i === 1;
+    out += card(x, 50, 404, 400, gold ? M.goldwash : M.white) + T(x + 40, 100, i ? 'B' : 'A', { a: 'start', s: 54, w: 800, f: 'News', c: gold ? '#8A5A00' : M.blue2 });
+    out += ic(c.icon || 'people', x + 202, 170, 80, M.ink, 6) + T(x + 202, 265, c.t || '', { s: 30, w: 800 });
+    (c.items || []).slice(0, 3).forEach((it, k) => { out += T(x + 202, 305 + k * 36, it, { s: 23, w: 600, c: M.ink2 }); });
+    out += `<circle cx="${x + 202}" cy="${425}" r="18" fill="#fff" stroke="${M.ink}" stroke-width="4"/>`; });
+  out += T(PW / 2, 515, d.q || 'Who wins? Pick one, then swipe.', { s: 26, w: 800 });
+  return svg(out);
+};
+
+G.wall = d => {       // facts bounce off; listening gets through
+  let out = card(50, 50, 420, 460, M.white) + T(260, 95, d.left || 'ARGUE', { s: 24, w: 800, ls: 2, c: M.muted });
+  for (let k = 0; k < 6; k++) out += RR(330, 130 + k * 55, 90, 48, 6, '#C9B79A');
+  (d.facts || ['fact', 'fact', 'fact']).slice(0, 3).forEach((ft, i) => { const y = 170 + i * 110; out += pill(170, y, ft, M.blue, M.ink, 22) + arrowL(230, y, 318, y) + `<path d="M318 ${y + 12} q -40 30 -70 34" stroke="${M.red}" stroke-width="4" fill="none" marker-end="url(#ah)"/>`; });
+  out += T(260, 480, d.left_note || 'they dig in', { s: 24, w: 800, c: M.red });
+  out += card(498, 50, 420, 460, M.goldwash) + T(708, 95, d.right || 'LISTEN', { s: 24, w: 800, ls: 2, c: '#8A5A00' });
+  out += disc(610, 270, 64, M.gold2) + ic('eye', 610, 270, 70, M.ink, 6) + arrowL(690, 270, 780, 270, true);
+  out += `<rect x="790" y="170" width="80" height="200" rx="6" fill="none" stroke="${M.ink}" stroke-width="5"/><path d="M790 170 L740 195 L740 395 L790 370 Z" fill="${M.white}" stroke="${M.ink}" stroke-width="5" stroke-linejoin="round"/>`;
+  out += T(708, 480, d.right_note || 'their guard comes down', { s: 24, w: 800, c: '#8A5A00' });
+  return svg(out);
+};
+
+G.spectrum = d => {   // where do you land?
+  const z = d.zones || ['Argue', 'Tactical empathy', 'Give in'], subs = d.subs || []; let out = '';
+  out += RR(80, 230, 808, 70, 35, M.blue2) + RR(80 + 808 / 3, 230, 808 / 3, 70, 0, M.gold2);
+  z.forEach((t, i) => { const cx = 80 + 808 / 6 + i * 808 / 3; out += T(cx, 266, t, { s: 26, w: 800 }); if (subs[i]) out += T(cx, 340, subs[i], { s: 22, w: 600, c: M.muted }); });
+  out += `<path d="M${d.you_at || 200} 160 l0 50" stroke="${M.ink}" stroke-width="5" marker-end="url(#ah)"/>` + pill(d.you_at || 200, 130, d.you || 'you, usually?', M.white, M.ink, 24);
+  out += T(PW / 2, 450, d.q || 'Where did you land in your last argument?', { s: 28, w: 800 });
   return svg(out);
 };
 
@@ -286,7 +336,7 @@ SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big bo
   const t = h('cv-title', { fontSize: '104px', lineHeight: '1.0', left: '70px', width: '940px', top: '74px' }, md(s.title || D.book));
   el.append(t); fitFont(t, 'fontSize', 104, 66, () => t.offsetHeight <= 320);
   const y1 = 74 + t.offsetHeight + 24;
-  const credit = s.sub ? md(s.sub) : `A ${esc(s.minutes || 2)}-minute lesson from <b style="font-style:normal;color:${M.ink}">${esc(D.book)}</b>${D.author ? ` by ${esc(D.author)}` : ''}`;
+  const credit = s.sub ? md(s.sub) : `A ${esc(s.minutes || 2)}-minute lesson from <b style="font-style:normal;color:${M.ink}">${esc(D.book)}</b>${D.author ? ` by ${esc(String(D.author).split(/ with | and |, /)[0])}` : ''}`;
   const sub = h('cv-sub', { top: y1 + 'px', fontSize: '33px', left: '60px', width: '960px' }, credit); el.append(sub);
   const R = 360, cy = Math.max(880, y1 + sub.offsetHeight + 60 + R);
   el.append(h('', { position: 'absolute', left: 540 - 470 + 'px', top: cy - 470 + 'px', width: '940px', height: '940px', borderRadius: '50%', background: `radial-gradient(circle, ${M.goldwash} 0%, rgba(255,243,209,0) 64%)` }));

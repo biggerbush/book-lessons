@@ -1,0 +1,42 @@
+/* Icon set: simple stroked drawings on a 100x100 grid (our own, so they match the VisualGrowth look). */
+const ICONS = {
+  bulb: '<path d="M50 14a24 24 0 0 0-14 43c3 3 4 6 4 10h20c0-4 1-7 4-10a24 24 0 0 0-14-43z"/><path d="M40 78h20M43 88h14"/>',
+  clock: '<circle cx="50" cy="50" r="34"/><path d="M50 28v24l16 10"/>',
+  target: '<circle cx="50" cy="50" r="36"/><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="7" fill="currentColor"/>',
+  brain: '<path d="M50 20c-6-8-20-4-20 8-9 2-12 14-4 20-3 9 5 18 14 14 3 5 10 5 10 0 0 5 7 5 10 0 9 4 17-5 14-14 8-6 5-18-4-20 0-12-14-16-20-8z"/><path d="M50 22v56M38 40c4 0 8 3 12 3M62 40c-4 0-8 3-12 3M36 60c5 0 9-3 14-3M64 60c-5 0-9-3-14-3"/>',
+  fire: '<path d="M50 12c4 14 20 22 20 42a20 20 0 0 1-40 0c0-10 5-14 9-20 1 6 4 9 7 10-2-12 0-22 4-32z"/><path d="M50 82c-6 0-10-4-10-9 0-6 6-8 10-14 4 6 10 8 10 14 0 5-4 9-10 9z"/>',
+  lock: '<rect x="24" y="44" width="52" height="40" rx="8"/><path d="M34 44V32a16 16 0 0 1 32 0v12"/><circle cx="50" cy="64" r="5" fill="currentColor"/>',
+  key: '<circle cx="34" cy="50" r="16"/><path d="M50 50h38M76 50v12M66 50v9"/>',
+  heart: '<path d="M50 84C20 62 14 44 20 32c6-12 22-12 30 0 8-12 24-12 30 0 6 12 0 30-30 52z"/>',
+  rocket: '<path d="M50 10c14 10 20 28 16 50H34c-4-22 2-40 16-50z"/><circle cx="50" cy="38" r="7"/><path d="M34 58l-12 14 14-2M66 58l12 14-14-2M44 72l6 14 6-14"/>',
+  chart: '<path d="M16 84h70M24 70l18-20 14 12 24-34"/><path d="M62 28h18v18"/>',
+  shield: '<path d="M50 12l32 12v24c0 20-14 32-32 40-18-8-32-20-32-40V24z"/><path d="M36 50l10 10 20-22"/>',
+  book: '<path d="M50 28c-8-8-22-10-34-8v56c12-2 26 0 34 8 8-8 22-10 34-8V20c-12-2-26 0-34 8z"/><path d="M50 28v56"/>',
+  eye: '<path d="M8 50c12-20 28-30 42-30s30 10 42 30c-12 20-28 30-42 30S20 70 8 50z"/><circle cx="50" cy="50" r="13"/><circle cx="50" cy="50" r="4" fill="currentColor"/>',
+  phone: '<rect x="30" y="10" width="40" height="80" rx="9"/><path d="M44 20h12"/><circle cx="50" cy="78" r="4"/>',
+  coin: '<circle cx="50" cy="50" r="36"/><circle cx="50" cy="50" r="26"/><path d="M50 34v32M42 42c0-6 16-6 16 0s-16 6-16 12 16 6 16 0"/>',
+  mountain: '<path d="M8 82L36 32l16 24 12-16 28 42z"/><path d="M28 46l8 8 8-6"/>',
+  check: '<circle cx="50" cy="50" r="38"/><path d="M32 52l13 13 24-28"/>',
+  cross: '<circle cx="50" cy="50" r="38"/><path d="M36 36l28 28M64 36L36 64"/>',
+  star: '<path d="M50 10l12 27 29 3-22 20 7 29-26-15-26 15 7-29L9 40l29-3z"/>',
+  calendar: '<rect x="14" y="20" width="72" height="64" rx="9"/><path d="M14 40h72M32 12v14M68 12v14"/><path d="M34 56l9 9 17-18"/>',
+  sun: '<circle cx="50" cy="50" r="18"/><path d="M50 10v12M50 78v12M10 50h12M78 50h12M22 22l9 9M69 69l9 9M78 22l-9 9M31 69l-9 9"/>',
+  seed: '<path d="M50 88V48"/><path d="M50 56C34 56 24 46 24 30c16 0 26 8 26 26z"/><path d="M50 44C50 28 60 18 78 18c0 16-10 26-28 26z"/>',
+  cloud: '<path d="M28 72a18 18 0 0 1 2-36 22 22 0 0 1 42 6 15 15 0 0 1-2 30z"/><path d="M30 84h40M38 92h24" opacity=".6"/>',
+  mail: '<rect x="12" y="24" width="76" height="54" rx="9"/><path d="M14 30l36 26 36-26"/>',
+  laptop: '<rect x="22" y="22" width="56" height="40" rx="6"/><path d="M10 74h80l-6 8H16z"/>',
+  bolt: '<path d="M56 8L22 56h24l-6 36 38-50H54z"/>',
+  flag: '<path d="M26 90V12"/><path d="M26 16h50l-12 16 12 16H26"/>',
+  people: '<circle cx="36" cy="34" r="13"/><circle cx="68" cy="38" r="10"/><path d="M12 82c0-18 10-28 24-28s24 10 24 28zM60 62c14-2 28 4 28 20H64"/>',
+  door: '<rect x="26" y="10" width="48" height="80" rx="4"/><circle cx="62" cy="52" r="4" fill="currentColor"/><path d="M10 90h80"/>',
+  hourglass: '<path d="M26 12h48M26 88h48M30 12c0 20 12 28 20 38-8 10-20 18-20 38M70 12c0 20-12 28-20 38 8 10 20 18 20 38"/><path d="M40 78h20" opacity=".6"/>',
+  magnet: '<path d="M22 14v34a28 28 0 0 0 56 0V14H62v34a12 12 0 0 1-24 0V14z"/><path d="M22 28h16M62 28h16"/>',
+  compass: '<circle cx="50" cy="50" r="38"/><path d="M64 36L56 56 36 64l8-20z"/>',
+  pencil: '<path d="M16 84l6-20 46-46 14 14-46 46z"/><path d="M60 26l14 14"/>',
+  stairs: '<path d="M12 84h22V66h22V48h22V30h10"/><path d="M12 84v0"/>',
+  scale: '<path d="M50 14v70M24 84h52M18 32h64"/><path d="M18 32l-10 24h20zM82 32l-10 24h20z"/>',
+};
+function iconSVG(name, size, stroke) {
+  const d = ICONS[name] || ICONS.star;
+  return `<svg viewBox="0 0 100 100" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="${stroke || 5}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+}

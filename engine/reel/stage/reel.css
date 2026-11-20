@@ -1,0 +1,35 @@
+/* Reel stage: one 1080x1920 canvas. Everything is positioned by script from the clock (seek(t)), so frames are deterministic. */
+@font-face{font-family:"Bricolage Grotesque";font-weight:800;src:url(__F_BR800__) format("woff2")}
+@font-face{font-family:"Bricolage Grotesque";font-weight:500;src:url(__F_BR500__) format("woff2")}
+@font-face{font-family:"Instrument Sans";font-weight:600;src:url(__F_IS600__) format("woff2")}
+@font-face{font-family:"DM Mono";font-weight:500;src:url(__F_DM500__) format("woff2")}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0B1524}
+body{font-family:"Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+#canvas{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:hidden;background:#0B1524;transform-origin:0 0}
+#scenes{position:absolute;inset:0;perspective:2600px}
+.scene{position:absolute;inset:0;overflow:hidden;display:none;will-change:transform}
+.scene .cam{position:absolute;inset:0;transform-origin:50% 42%}
+.scene .bgfx{position:absolute;inset:-120px;pointer-events:none}
+.disp{font-family:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;font-weight:800;letter-spacing:-.025em;line-height:.98}
+.disp5{font-family:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;font-weight:500;letter-spacing:-.01em}
+.body{font-family:"Instrument Sans",system-ui,sans-serif;font-weight:600;line-height:1.18}
+.mono{font-family:"DM Mono",ui-monospace,monospace;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.abs{position:absolute}
+.ctr{position:absolute;left:0;width:1080px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.word{display:inline-block;will-change:transform,opacity}
+.mask{display:inline-block;overflow:hidden;vertical-align:top;padding:.06em .02em .12em;margin:-.06em -.02em -.12em}
+
+/* captions */
+#caps{position:absolute;left:60px;width:960px;top:1290px;height:200px;display:flex;align-items:center;justify-content:center;text-align:center;pointer-events:none;z-index:50}
+#caps .g{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .38em;font-family:"Bricolage Grotesque",Arial,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:1.02;color:#fff;
+  -webkit-text-stroke:0;paint-order:stroke fill;text-shadow:0 6px 0 rgba(8,16,30,.55),0 0 28px rgba(8,16,30,.55)}
+#caps .cw{display:inline-block;-webkit-text-stroke:12px #0B1524;paint-order:stroke fill;transform-origin:50% 70%;will-change:transform}
+#tag{position:absolute;left:0;width:1080px;top:1560px;text-align:center;z-index:49;font-size:26px;color:#EAF0F7;opacity:.55;pointer-events:none}
+
+/* overlays */
+#grain{position:absolute;inset:-60px;z-index:60;pointer-events:none;opacity:.10;mix-blend-mode:overlay}
+#vig{position:absolute;inset:0;z-index:58;pointer-events:none;background:radial-gradient(ellipse at 50% 46%,rgba(0,0,0,0) 55%,rgba(5,10,20,.42) 100%)}
+#leak{position:absolute;inset:0;z-index:55;pointer-events:none;opacity:0;mix-blend-mode:screen;background:radial-gradient(ellipse 70% 45% at 85% 20%,rgba(255,194,51,.95),rgba(255,194,51,0) 70%),radial-gradient(ellipse 50% 40% at 10% 80%,rgba(255,120,60,.7),rgba(255,120,60,0) 70%)}
+#flash{position:absolute;inset:0;z-index:57;pointer-events:none;opacity:0;background:#fff}

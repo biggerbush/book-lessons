@@ -91,3 +91,7 @@ A book without a cover falls back to its first lesson frame. The site draws the 
 
 ### Covers for new books
 Approving a book now makes its jacket cover automatically (`engine/publish.py` → `tools/make_covers.ensure`). Claude draws the picture when the draft finishes (`engine/cover_art.py`, stored as `cover_art` in the draft); drafts without one are drawn at approval; if that fails the book gets a generic illustration. To hand-draw one, add a function to `COVERS` in `tools/make_covers.py`. `python3 tools/make_covers.py` fills in any book that has no cover yet.
+
+## Reels (TikTok / Instagram)
+
+`python -m engine.reel --book deep-work --lesson 1` turns one lesson into a ~60s 9:16 video: Claude directs (16-22 beats, each a spoken line + animated scene + transition), the same ElevenLabs voice narrates in **one** generation (saved in `engine-data/<book>/reels/lesson-NN/`), a Playwright-driven animation stage is rendered frame by frame and encoded with ffmpeg, with synthesised whooshes/pops mixed under the voice. `--dry` is free (example plan, silent audio). Run it from Actions → "Create reel"; the result lands at `site/reels/<book>-<n>/` (mp4 + preview page).

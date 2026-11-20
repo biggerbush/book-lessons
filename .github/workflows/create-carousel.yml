@@ -1,0 +1,33 @@
+name: Create carousel
+run-name: "Create carousel: ${{ inputs.book }} lesson ${{ inputs.lesson }}"
+# One lesson -> 9-12 static Instagram slides (1080x1350 PNGs) in site/carousels/<book>-<lesson>/. Claude writes it (no voice credits).
+on:
+  workflow_dispatch:
+    inputs:
+      book: {description: "Book slug (e.g. deep-work)", required: true, type: string}
+      lesson: {description: Lesson number, required: true, type: string, default: "1"}
+permissions: {contents: write, actions: write}
+jobs:
+  carousel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip, cache-dependency-path: engine/requirements.txt}
+      - run: |
+          pip install -r engine/requirements.txt
+          python -m playwright install --with-deps chromium
+      - env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_WORKSPACE_ID: ${{ secrets.ANTHROPIC_WORKSPACE_ID }}
+        run: python -m engine.carousel --book "${{ inputs.book }}" --lesson "${{ inputs.lesson }}"
+      - if: ${{ always() }}
+        run: |
+          git config user.name "book-engine"; git config user.email "book-engine@users.noreply.github.com"
+          mkdir -p site/carousels; git add engine-data site/carousels
+          git diff --cached --quiet || git commit -m "Carousel: ${{ inputs.book }} lesson ${{ inputs.lesson }}"
+          git pull --rebase -q origin main || true; git push || true
+      - if: ${{ always() }}
+        env: {GH_TOKEN: "${{ github.token }}"}
+        run: gh workflow run pages.yml --ref main

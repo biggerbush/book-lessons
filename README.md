@@ -95,3 +95,7 @@ Approving a book now makes its jacket cover automatically (`engine/publish.py` �
 ## Reels (TikTok / Instagram)
 
 `python -m engine.reel --book deep-work --lesson 1` turns one lesson into a ~60s 9:16 video: Claude directs (16-22 beats, each a spoken line + animated scene + transition), the same ElevenLabs voice narrates in **one** generation (saved in `engine-data/<book>/reels/lesson-NN/`), a Playwright-driven animation stage is rendered frame by frame and encoded with ffmpeg, with synthesised whooshes/pops mixed under the voice. `--dry` is free (example plan, silent audio). Run it from Actions → "Create reel"; the result lands at `site/reels/<book>-<n>/` (mp4 + preview page).
+
+## Carousels (Instagram)
+
+`python -m engine.carousel --book deep-work --lesson 1` turns one lesson into 9-12 static 1080x1350 slides (white, navy + gold): Claude writes the slides (insight-first, mostly graphics), Playwright renders each to PNG in `site/carousels/<book>-<n>/` with a swipe-through preview page. `--dry` uses the Deep Work example. Actions → "Create carousel".

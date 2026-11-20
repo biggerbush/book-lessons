@@ -9,7 +9,7 @@ from ..config import log
 
 EXAMPLE = Path(__file__).parent / "examples" / "deep-work-1.carousel.json"
 TYPES = ("cover", "story", "define", "item", "action", "cta")
-KINDS = ("fragments", "curves", "converge", "pie", "formula", "flow", "split", "calendar")
+KINDS = ("bars", "fragments", "curves", "converge", "pie", "formula", "flow", "split", "calendar")
 
 SYSTEM = """You write Instagram carousels for VisualGrowth (book lessons) in the style of the best educational creators: an editorial, grid-paper look with
 heavy serif headlines, highlighter titles and hand-drawn sketch diagrams. People must want to SAVE and SHARE it.
@@ -21,14 +21,15 @@ STRUCTURE (8-11 slides):
 3. define (optional) or story: name the book's idea / introduce the author's answer, so the list has a frame.
    The define/setup headline must NAME THE PROBLEM in plain words (e.g. "The problem isn't you. It's _shallow work_."), not announce that a name exists. Use "tag" on each term for a handwritten aside (e.g. "where most days go").
 4..N. item slides, numbered 1..N (3-7 items; the cover's number must equal N): "title" (max 9 words) that DESCRIBES THE PROBLEM OR TENSION concretely, so it works on its own (good: "Long hours won't save distracted work", "Everyone's distracted, so focus is now a superpower", "\"Quick checks\" quietly drain your focus"; bad, too abstract: "Focus is rare and valuable", "Quality = time × intensity"), "what" (1-2 sentences, max 38 words, the idea in plain English),
-   "try" (one concrete action or a question in _italics_), and a "diagram". Each item must be a distinct, useful idea from the lesson, ordered so they build.
+   "try" (one concrete action or a question in _italics_). No "What it is" label: "what" is shown as a plain paragraph, and a "diagram". Each item must be a distinct, useful idea from the lesson, ordered so they build.
 N+1. action: what to do tomorrow (head, 2-3 "steps", optional "challenge" question) with a calendar or other sketch.
 Last. cta: a question that invites comments (e.g. "Which one hit _hardest_?"), body asking to save/send to a specific kind of person.
 
 TEXT: **bold**, *highlighter* (1-2 key phrases per slide), _italic_. Spoken, warm, specific. Paraphrase; never quote more than a few words. Use only facts from the lesson text.
 
 DIAGRAMS ({"kind": ...}):
-fragments {"caption","segments":[4-7 short labels],"gold":"label for the tiny gold slot"}   - a day/process chopped into pieces
+fragments {"caption","segments":[4-7 short labels],"gold":"label for the tiny gold slot","gold_at":index}   - a day/history/process chopped into pieces
+bars      {"bars":[{"label","value","top":"handwritten value"} x2-4],"note":"small source/caveat"}   - compare real numbers from the lesson
 curves    {"up":"label","down":"label","gap":"handwritten point"}   - two trends diverging
 converge  {"inputs":["2-3 short labels, use \\n to break"],"result":"label"}
 pie       {"share":10-90,"main":"label","label":"handwritten note, \\n allowed"}

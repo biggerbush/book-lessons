@@ -43,11 +43,12 @@ DIAGRAMS.fragments = d => {      // a day chopped into pieces, with one tiny slo
   segs.forEach((lab, i) => {
     const sw = w * ws[i] / tot;
     s.append(rc.rectangle(x, y0, sw, hh, opt({ fill: i % 2 ? '#E7EDF5' : K.blue, fillStyle: 'solid', strokeWidth: 2.4 })));
-    txt(s, x + sw / 2, y0 + hh / 2, sw < 95 ? lab.split('').join('') : lab, { size: sw < 80 ? 22 : sw < 110 ? 26 : 30 });
-    if (i === Math.floor(segs.length / 2)) {
+    txt(s, x + sw / 2, y0 + hh / 2, lab, { size: Math.max(16, Math.min(30, (sw - 14) / (String(lab).length * 0.56 * 1.12))) });
+    if (i === (d.gold_at != null ? Math.min(segs.length - 1, d.gold_at) : Math.floor(segs.length / 2))) {
       const gw = w * 0.35 / tot; s.append(rc.rectangle(x + sw, y0, gw, hh, opt({ fill: K.gold, fillStyle: 'solid', strokeWidth: 2.4 })));
-      arrow(s, rc, x + sw + gw / 2 + 120, y0 + hh + 110, x + sw + gw / 2 + 6, y0 + hh + 14, { bend: -0.25 });
-      txt(s, x + sw + gw / 2 + 130, y0 + hh + 112, d.gold || 'the actual work', { anchor: 'start', font: 'Hand', size: 40, weight: 700 });
+      const gc = x + sw + gw / 2, right = gc > W * 0.6;
+      arrow(s, rc, gc + (right ? -120 : 120), y0 + hh + 110, gc + (right ? -4 : 6), y0 + hh + 14, { bend: right ? 0.25 : -0.25 });
+      txt(s, gc + (right ? -130 : 130), y0 + hh + 112, d.gold || 'the actual work', { anchor: right ? 'end' : 'start', font: 'Hand', size: 40, weight: 700 });
       x += gw;
     }
     x += sw;
@@ -70,6 +71,20 @@ DIAGRAMS.curves = d => {         // one line climbs, one line falls, the gap is 
   s.insertBefore(rc.polygon(poly, opt({ stroke: 'none', fill: K.gold, fillStyle: 'hachure', hachureGap: 12, fillWeight: 2.5, hachureAngle: -40 })), s.firstChild);
   txt(s, L + 40, T + 20, d.gap || 'the gap = your edge', { anchor: 'start', font: 'Hand', size: 42, weight: 700 });
   arrow(s, rc, L + 200, T + 64, gx + 30, (gy1 + gy2) / 2 + 10, { bend: 0.3 });
+  return s;
+};
+
+DIAGRAMS.bars = d => {           // two-to-four hand-drawn bars, last/gold one is the point
+  const b = (d.bars || []).slice(0, 4), n = b.length || 1, W = 760, H = 440, { s, rc } = stage(W, H), B = 360, mx = Math.max(...b.map(x => +x.value || 0)) || 1;
+  const bw = Math.min(200, (W - 120) / n - 60);
+  s.append(rc.line(40, B, W - 20, B, opt()));
+  b.forEach((x, i) => {
+    const cx = 80 + (i + .5) * (W - 120) / n, hh = Math.max(14, (+x.value || 0) / mx * 240), gold = x.hl || (i === n - 1 && !b.some(y => y.hl));
+    s.append(rc.rectangle(cx - bw / 2, B - hh, bw, hh, opt({ fill: gold ? K.gold : K.blue, fillStyle: gold ? 'solid' : 'hachure', hachureGap: 9, fillWeight: 2.5 })));
+    txt(s, cx, B - hh - 34, x.top || '', { font: 'Hand', size: 44, weight: 700 });
+    txt(s, cx, B + 40, x.label || '', { size: 32 });
+  });
+  if (d.note) txt(s, W - 20, 30, d.note, { anchor: 'end', size: 26, fill: K.muted });
   return s;
 };
 
@@ -189,7 +204,7 @@ SLIDES.define = (el, s, D) => {
 SLIDES.item = (el, s, D) => {
   const col = h('col');
   col.append(h('title', null, `<span class="hlb">${esc(s.n ? s.n + '. ' : '')}${esc(s.title)}</span>`));
-  if (s.what) col.append(h('p', null, `<b>${esc(s.what_label || 'What it is')}:</b> ${md(s.what)}`));
+  if (s.what) col.append(h('p', null, s.what_label ? `<b>${esc(s.what_label)}:</b> ${md(s.what)}` : md(s.what)));
   if (s.try) col.append(h('p', { marginTop: '26px' }, `<b>${esc(s.try_label || 'Try this')}:</b> ${md(s.try)}`));
   const f = figure(s.diagram); if (f) col.append(f);
   centreCol(el, col); handle(el, D);

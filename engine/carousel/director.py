@@ -19,7 +19,8 @@ STRUCTURE (8-11 slides):
    "7 Money Habits Rich People Never Talk About", "This Is How to _Actually_ Stop Procrastinating". One word in _italics_ for voice. "note" = a short handwritten aside (e.g. "from Deep Work\\nby Cal Newport").
 2. story: build tension BEFORE any answer. A short punchy serif headline about the reader's life ("You've never been busier."), 2 short paragraphs, and a sketch that makes the problem visible.
 3. define (optional) or story: name the book's idea / introduce the author's answer, so the list has a frame.
-4..N. item slides, numbered 1..N (3-7 items; the cover's number must equal N): "title" (max 6 words, a punchy claim), "what" (1-2 sentences, max 38 words, the idea in plain English),
+   The define/setup headline must NAME THE PROBLEM in plain words (e.g. "The problem isn't you. It's _shallow work_."), not announce that a name exists. Use "tag" on each term for a handwritten aside (e.g. "where most days go").
+4..N. item slides, numbered 1..N (3-7 items; the cover's number must equal N): "title" (max 9 words) that DESCRIBES THE PROBLEM OR TENSION concretely, so it works on its own (good: "Long hours won't save distracted work", "Everyone's distracted, so focus is now a superpower", "\"Quick checks\" quietly drain your focus"; bad, too abstract: "Focus is rare and valuable", "Quality = time × intensity"), "what" (1-2 sentences, max 38 words, the idea in plain English),
    "try" (one concrete action or a question in _italics_), and a "diagram". Each item must be a distinct, useful idea from the lesson, ordered so they build.
 N+1. action: what to do tomorrow (head, 2-3 "steps", optional "challenge" question) with a calendar or other sketch.
 Last. cta: a question that invites comments (e.g. "Which one hit _hardest_?"), body asking to save/send to a specific kind of person.

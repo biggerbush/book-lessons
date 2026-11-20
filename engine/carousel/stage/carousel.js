@@ -66,9 +66,10 @@ DIAGRAMS.curves = d => {         // one line climbs, one line falls, the gap is 
   txt(s, Rt - 10, up[12][1] - 34, d.up || 'value of focus', { anchor: 'end', size: 32, fill: '#9A6B00' });
   txt(s, Rt - 10, dn[12][1] + 40, d.down || 'people who can do it', { anchor: 'end', size: 32 });
   const gx = L + 20 + (Rt - L - 20) * 0.72, gy1 = B - 120 - Math.pow(.72, 2.2) * 210, gy2 = B - 120 + (1 - Math.pow(.28, 2)) * 80 - 40 * .72;
-  s.append(rc.line(gx, gy1 + 10, gx, gy2 - 10, opt({ strokeWidth: 2.5, strokeLineDash: [8, 10] })));
+  const poly = up.slice(7).concat(dn.slice(7).reverse());
+  s.insertBefore(rc.polygon(poly, opt({ stroke: 'none', fill: K.gold, fillStyle: 'hachure', hachureGap: 12, fillWeight: 2.5, hachureAngle: -40 })), s.firstChild);
   txt(s, L + 40, T + 20, d.gap || 'the gap = your edge', { anchor: 'start', font: 'Hand', size: 42, weight: 700 });
-  arrow(s, rc, L + 190, T + 60, gx - 14, (gy1 + gy2) / 2, { bend: 0.25 });
+  arrow(s, rc, L + 200, T + 64, gx + 30, (gy1 + gy2) / 2 + 10, { bend: 0.3 });
   return s;
 };
 
@@ -174,7 +175,9 @@ SLIDES.define = (el, s, D) => {
   const col = h('col');
   col.append(h('serif', { fontWeight: 800, fontSize: '76px', lineHeight: '1.06', letterSpacing: '-.015em' }, md(s.head)));
   (s.terms || []).forEach((t, i) => {
-    const e = h('', { marginTop: i ? '40px' : '64px', padding: '34px 40px', border: `3px ${i ? 'dashed' : 'solid'} ${K.ink}`, background: i ? 'rgba(255,255,255,.5)' : '#FFF6D8', borderRadius: '6px' },
+    const last = i === (s.terms.length - 1);
+    if (t.tag) col.append(h('hand', { fontSize: '44px', marginTop: i ? '40px' : '56px', marginBottom: '6px', alignSelf: 'flex-end', transform: `rotate(${i ? -1.5 : 1.5}deg)`, color: last ? '#9A6B00' : K.ink2 }, esc(t.tag) + (last ? ' ↓' : ' ↓')));
+    const e = h('', { marginTop: t.tag ? '0' : (i ? '40px' : '64px'), padding: '34px 40px', border: `3px ${last ? 'solid' : 'dashed'} ${K.ink}`, background: last ? '#FFF1C4' : 'rgba(255,255,255,.5)', borderRadius: '6px' },
       `<div class="serif" style="font-size:58px;font-weight:800">${esc(t.word)} <span style="font-weight:400;font-style:italic;font-size:36px;color:${K.muted}">(${esc(t.pos || 'noun')})</span></div>
        <div class="serif" style="font-size:38px;line-height:1.35;margin-top:12px">${md(t.def)}</div>`);
     col.append(e);

@@ -13,7 +13,7 @@ from ..reel import source
 HERE = Path(__file__).parent
 STAGE = HERE / "stage"
 REEL_STAGE = HERE.parent / "reel" / "stage"
-EXAMPLE = HERE / "examples" / "deep-work-1.carousel.json"
+EXAMPLE = HERE / "examples" / "deep-work-1.micro.json"
 FONTS = (("__F_NR400__", "newsreader-latin-400-normal.woff2"), ("__F_NR400I__", "newsreader-latin-400-italic.woff2"),
          ("__F_NR500I__", "newsreader-latin-500-italic.woff2"), ("__F_NR700__", "newsreader-latin-700-normal.woff2"),
          ("__F_NR800__", "newsreader-latin-800-normal.woff2"), ("__F_NR800I__", "newsreader-latin-800-italic.woff2"),
@@ -28,13 +28,15 @@ PREVIEW = """<!doctype html><meta charset=utf-8><meta name=viewport content="wid
 
 
 def page(plan: dict, src: dict, n: int) -> str:
-    css = (STAGE / "carousel.css").read_text(encoding="utf8")
+    micro = plan.get("style", "micro") == "micro"           # "micro" = story in micro-lessons (default); "editorial" = grid-paper listicle
+    css = (STAGE / ("micro.css" if micro else "carousel.css")).read_text(encoding="utf8")
     for key, f in FONTS:
         css = css.replace(key, "data:font/woff2;base64," + base64.b64encode((STAGE / "fonts" / f).read_bytes()).decode())
     data = {"book": src["book"], "author": src.get("author", ""), "lesson": n, "cover": src.get("cover", ""), "slides": plan["slides"]}
+    libs = (REEL_STAGE / "icons.js").read_text(encoding="utf8") if micro else (STAGE / "rough.js").read_text(encoding="utf8")
     return ("<!doctype html><html><head><meta charset=utf-8><style>" + css + "</style></head><body><div id=deck></div><script>"
-            + "window.CAROUSEL=" + json.dumps(data).replace("</", "<\\/") + ";\n" + (STAGE / "rough.js").read_text(encoding="utf8")
-            + "\n" + (STAGE / "carousel.js").read_text(encoding="utf8") + "</script></body></html>")
+            + "window.CAROUSEL=" + json.dumps(data).replace("</", "<\\/") + ";\n" + libs
+            + "\n" + (STAGE / ("micro.js" if micro else "carousel.js")).read_text(encoding="utf8") + "</script></body></html>")
 
 
 def render(html: str, out_dir: Path) -> list[Path]:

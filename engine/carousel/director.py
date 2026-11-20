@@ -1,4 +1,4 @@
-"""Claude writes the carousel in the proven 'listicle story' format: hook cover -> relatable setup -> name the idea -> N numbered truths (what it is / try this + sketch) -> action -> save/share."""
+"""Claude writes the carousel as a story in micro-lessons: cover -> the reader's problem -> one step per slide (concept, mechanism, spiral, turn, technique, framework, example, plan) -> recap/save."""
 from __future__ import annotations
 
 import json
@@ -7,39 +7,40 @@ from pathlib import Path
 from ..brain import parse_json
 from ..config import log
 
-EXAMPLE = Path(__file__).parent / "examples" / "deep-work-1.carousel.json"
-TYPES = ("cover", "story", "define", "item", "action", "cta")
-KINDS = ("bars", "fragments", "curves", "converge", "pie", "formula", "flow", "split", "calendar")
+EXAMPLE = Path(__file__).parent / "examples" / "deep-work-1.micro.json"
+TYPES = ("cover", "lesson")
+KINDS = ("day", "compare", "residue", "dips", "cards", "converge", "gap", "formula", "flow", "calendar", "tracker", "chain", "book")
 
-SYSTEM = """You write Instagram carousels for VisualGrowth (book lessons) in the style of the best educational creators: an editorial, grid-paper look with
-heavy serif headlines, highlighter titles and hand-drawn sketch diagrams. People must want to SAVE and SHARE it.
+SYSTEM = """You write Instagram carousels for VisualGrowth (animated book lessons). Style: a STORY told in MICRO-LESSONS, like the best educational
+creators. Every slide = one on-brand graphic (navy + gold infographic, never cartoons) + a bold 2-line title + a few short serif lines.
 
-STRUCTURE (8-11 slides):
-1. cover: a numbered listicle hook, 6-11 words, title case, curiosity + payoff. e.g. "5 Truths About Focus That Will _Quietly_ Change Your Career",
-   "7 Money Habits Rich People Never Talk About", "This Is How to _Actually_ Stop Procrastinating". One word in _italics_ for voice. "note" = a short handwritten aside (e.g. "from Deep Work\\nby Cal Newport").
-2. story: build tension BEFORE any answer. A short punchy serif headline about the reader's life ("You've never been busier."), 2 short paragraphs, and a sketch that makes the problem visible.
-3. define (optional) or story: name the book's idea / introduce the author's answer, so the list has a frame.
-   The define/setup headline must NAME THE PROBLEM in plain words (e.g. "The problem isn't you. It's _shallow work_."), not announce that a name exists. Use "tag" on each term for a handwritten aside (e.g. "where most days go").
-4..N. item slides, numbered 1..N (3-7 items; the cover's number must equal N): "title" (max 9 words) that DESCRIBES THE PROBLEM OR TENSION concretely, so it works on its own (good: "Long hours won't save distracted work", "Everyone's distracted, so focus is now a superpower", "\"Quick checks\" quietly drain your focus"; bad, too abstract: "Focus is rare and valuable", "Quality = time × intensity"), "what" (1-2 sentences, max 38 words, the idea in plain English),
-   "try" (one concrete action or a question in _italics_). No "What it is" label: "what" is shown as a plain paragraph, and a "diagram". Each item must be a distinct, useful idea from the lesson, ordered so they build.
-N+1. action: what to do tomorrow (head, 2-3 "steps", optional "challenge" question) with a calendar or other sketch.
-Last. cta: a question that invites comments (e.g. "Which one hit _hardest_?"), body asking to save/send to a specific kind of person.
+STORY ARC (11-14 slides):
+1. cover: "title" = the book or the core concept in 1-3 words (shown huge), "sub" = a curiosity line (shown in brackets, e.g. "why your busiest days feel empty"),
+   "role" = the author's role, "chips" = 3 short concept chips with icons.
+2. THE PROBLEM, felt by the reader (no tag): their everyday experience, ending with a turn like "Here's why, and how to fix it."
+3..: micro-lessons, each tagged {"n":1,"label":"2-3 words"} and each moving the story ONE step:
+   what's really going on (the book's concept) -> why it happens (the research/mechanism) -> how it spirals ("For example:" + arrow list) ->
+   the bigger picture / why it matters -> the turn (the opportunity) -> the technique ("instead"/"try") -> a framework or formula ->
+   a real example from the book -> a specific plan (IF ... THEN ...) -> how to track or repeat it.
+Last: a save/recap slide with a "chain" graphic of the story's steps, a one-line takeaway in bold, and "Follow for lesson 2 ... visualgrowth.app".
 
-TEXT: **bold**, *highlighter* (1-2 key phrases per slide), _italic_. Spoken, warm, specific. Paraphrase; never quote more than a few words. Use only facts from the lesson text.
+WRITING:
+- Titles: 3-8 words, Title Case, each a clear claim that moves the story ("Every Switch Leaves Something Behind", "So Your Focus Never Fully Arrives",
+  "Use The Focus Formula", "Example: From Spreadsheets To Software"). No vague labels.
+- Body: 2-4 short blocks. Short sentences. One idea per slide. **bold** the key phrase, *highlight* at most one phrase, _italic_ for named terms.
+  Blocks can be: "a sentence", {"list":[...],"style":"bullet|arrow|num"}, {"instead":"...","try":"..."}, {"big":"a rule or quote to remember"}.
+- Paraphrase; never quote more than a few words. Use only facts from the lesson text. Illustrative graphics say "(illustration)" or "(example)".
 
-DIAGRAMS ({"kind": ...}):
-fragments {"caption","segments":[4-7 short labels],"gold":"label for the tiny gold slot","gold_at":index}   - a day/history/process chopped into pieces
-bars      {"bars":[{"label","value","top":"handwritten value"} x2-4],"note":"small source/caveat"}   - compare real numbers from the lesson
-curves    {"up":"label","down":"label","gap":"handwritten point"}   - two trends diverging
-converge  {"inputs":["2-3 short labels, use \\n to break"],"result":"label"}
-pie       {"share":10-90,"main":"label","label":"handwritten note, \\n allowed"}
-formula   {"parts":["result","a","b"],"ops":["=","×"]}
-flow      {"steps":[{"t":"short","sub":"handwritten"} x2-4]}   - a story or process, last step is the payoff
-split     {"columns":[{"t":"SHALLOW","items":[3-5]},{"t":"DEEP","items":[3-5]}]}
-calendar  {"hours":["8:00",...5],"block":1,"label":"DEEP WORK","other":{"0":"email",...}}
-Labels inside diagrams: max 18 characters per line.
+GRAPHICS ({"kind": ...}) - pick the one that SHOWS the slide's idea:
+day {"caption","segments":[4-7],"gold_at":i,"gold":"label"} | compare {"left":{"t","icon","items":[3]},"right":{...}} |
+residue {"a","a_icon","b","b_icon","share":10-80,"left_label","right_label","caption"} | dips {"checks":[0-1 x2-4],"icon","full","x0","x1"} |
+cards {"items":[{"t","icon","sub","hl"} x2-3]} | converge {"inputs":[2-3 short],"result","icon"} | gap {"up","down","gap"} |
+formula {"parts":[result,a,b],"icons":[3],"note"} | flow {"steps":[{"t","sub","icon"} x2-4]} |
+calendar {"hours":[5],"block":i,"label","other":{"i":"label"},"rules":[3 short]} | tracker {"values":[5],"target","target_label","caption"} |
+chain {"steps":[4-6 short]} | book {"chip"}
+Icons: bulb clock target brain fire lock key heart rocket chart shield book eye phone coin mountain check cross star calendar sun seed cloud mail laptop bolt flag people door hourglass magnet compass pencil stairs scale
 
-Output ONLY JSON: {"title":"...","slides":[...]} - same shape as the example."""
+Output ONLY JSON: {"style":"micro","title":"...","slides":[...]} - same shape as the example."""
 
 
 def plan_for(src: dict, llm) -> dict:
@@ -47,14 +48,13 @@ def plan_for(src: dict, llm) -> dict:
     user = (f"BOOK: {src['book']} by {src.get('author', '')}\nLESSON {src['n']}: {src.get('lesson_title', '')}\nKEY IDEA: {src.get('key_idea', '')}\n\n"
             f"LESSON TEXT (use only facts from here):\n{src['script'][:9000]}\n\nEXAMPLE (a different lesson; copy the format and quality, not the content):\n{example}")
     plan = parse_json(llm.ask(SYSTEM, user, 7000, "writing the carousel"))
-    slides = [s for s in plan.get("slides", []) if isinstance(s, dict) and s.get("type") in TYPES]
+    slides = [s for s in plan.get("slides", []) if isinstance(s, dict) and s.get("type", "lesson") in TYPES]
     for s in slides:
-        if isinstance(s.get("diagram"), dict) and s["diagram"].get("kind") not in KINDS:
-            s.pop("diagram")
+        if isinstance(s.get("graphic"), dict) and s["graphic"].get("kind") not in KINDS:
+            s.pop("graphic")
     if not slides or slides[0]["type"] != "cover":
-        slides.insert(0, {"type": "cover", "head": src.get("lesson_title") or src["book"], "note": f"from {src['book']}"})
-    if slides[-1]["type"] != "cta":
-        slides.append({"type": "cta", "head": "Which one hit _hardest_?", "body": "Save this, and send it to someone who needs it.", "link": "visualgrowth.app"})
-    plan["slides"] = slides[:14]
+        slides.insert(0, {"type": "cover", "title": src["book"], "sub": src.get("lesson_title", "")})
+    plan["slides"] = slides[:15]
+    plan["style"] = "micro"
     log(f"  carousel: {len(plan['slides'])} slides")
     return plan

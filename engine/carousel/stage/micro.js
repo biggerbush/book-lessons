@@ -194,15 +194,19 @@ SL.cover = (el, s, D) => {
   el.append(h('brand', null, 'VisualGrowth · book lessons'));
 };
 
-SL.lesson = (el, s, D) => {
-  const p = h('panel'); el.append(p);
-  const g = s.graphic && G[s.graphic.kind]; if (g) p.innerHTML = g(s.graphic, D);
-  if (s.tag) el.append(h('tag', null, s.tag.n != null ? `<b>#${s.tag.n}</b>${esc(s.tag.label || '')}` : esc(s.tag.label || s.tag)));
-  const t = h('ttl', { top: '668px' }, md(s.title || '')); el.append(t);
+SL.lesson = (el, s, D) => {     // text on top, graphic panel underneath, whole stack centred
+  const t = h('ttl', { top: '0px' }, md(s.title || '')); el.append(t);
   fitFont(t, 'fontSize', 64, 44, () => t.offsetHeight <= 150);
-  const b = h('bd', { top: 668 + t.offsetHeight + 30 + 'px' }, bodyHTML(s.body)); el.append(b);
-  const room = 1300 - (668 + t.offsetHeight + 30);
+  const b = h('bd', { top: '0px' }, bodyHTML(s.body)); el.append(b);
+  const g = s.graphic && G[s.graphic.kind], p = g ? h('panel') : null;
+  if (p) { p.innerHTML = g(s.graphic, D); el.append(p); }
+  const ph = p ? PH : 0, gapTB = 30, gapBP = 48, M0 = 70;
+  const room = 1350 - 2 * M0 - t.offsetHeight - gapTB - (p ? ph + gapBP : 0);
   fitFont(b, 'fontSize', 42, 27, () => b.offsetHeight <= room);
+  const total = t.offsetHeight + gapTB + b.offsetHeight + (p ? gapBP + ph : 0), y0 = Math.max(M0, (1350 - total) / 2);
+  t.style.top = y0 + 'px';
+  b.style.top = y0 + t.offsetHeight + gapTB + 'px';
+  if (p) p.style.top = y0 + t.offsetHeight + gapTB + b.offsetHeight + gapBP + 'px';
 };
 
 window.buildDeck = async () => {

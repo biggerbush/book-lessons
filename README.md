@@ -100,6 +100,6 @@ Approving a book now makes its jacket cover automatically (`engine/publish.py` â
 
 `python -m engine.carousel --book deep-work --lesson 1` turns one lesson into 11-14 static 1080x1350 slides that tell a story in micro-lessons:
 cover (the concept, huge) -> the reader's problem -> one step per slide (concept, mechanism, spiral, turn, technique, framework, real example, plan, tracking) -> recap/save.
-Each slide is an on-brand navy + gold infographic panel with a "#n" tag, a bold title and short serif lines. Claude writes it (no voice credits); Playwright renders PNGs to
+Each slide is a bold title and short serif lines with an on-brand navy + gold infographic panel underneath, centred on the slide. Claude writes it (no voice credits); Playwright renders PNGs to
 `site/carousels/<book>-<n>/` with a swipe-through preview page. `--dry` uses the Deep Work example. A plan with `"style": "editorial"` uses the older grid-paper listicle look.
 Actions -> "Create carousel".

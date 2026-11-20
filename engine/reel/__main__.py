@@ -64,7 +64,7 @@ def main(argv=None) -> int:
 
     mp3, words, real = voice.make(text, work, a.dry)
     usage["tts_chars"] = len(text) if real and not (work / "align.json").exists() else usage["tts_chars"]
-    reel = build.timeline(plan, words, src.get("cover", ""), src["book"], a.lesson)
+    reel = build.timeline(plan, words, src.get("cover", ""), src["book"], a.lesson, src.get("author", ""))
     log(f"timeline: {reel['dur']:.1f}s")
 
     tmp = Path(tempfile.mkdtemp(prefix="reel-"))

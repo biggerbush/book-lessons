@@ -94,7 +94,10 @@ const groups = [];
 (function mkGroups() {
   let cur = [];
   const flush = () => { if (cur.length) { groups.push(cur); cur = []; } };
+  const quiet = new Set();   // the intro shows the hook as a headline, so no captions underneath it
+  (R.beats || []).forEach(b => { if (b.scene === 'intro') (b.words || []).forEach(w => quiet.add(w.s)); });
   R.words.forEach((w, i) => {
+    if (quiet.has(w.s)) { flush(); return; }
     cur.push(w);
     const chars = cur.map(x => x.w).join(' ').length;
     const end = /[.!?]$/.test(w.w) || /[,;:—-]$/.test(w.w) || cur.length >= 3 || chars >= 17;

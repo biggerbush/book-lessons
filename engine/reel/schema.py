@@ -5,7 +5,9 @@ from __future__ import annotations
 
 import re
 
-SCENES = ("slam", "stat", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "cta")
+SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "cta")
+GRAPHS = ("stat", "dots", "meter", "donut", "chart")              # data graphics
+VISUAL = GRAPHS + ("versus", "timeline", "icon", "cycle", "list")  # anything that is a picture, not just words
 THEMES = ("dark", "amber", "light")
 TRANSITIONS = ("whip_left", "whip_right", "whip_up", "push_up", "zoom_through", "circle", "wipe_diag", "glitch", "flip", "scale_back", "cut")
 ICONS = ("bulb clock target brain fire lock key heart rocket chart shield book eye phone coin mountain check cross star calendar sun seed "
@@ -13,6 +15,7 @@ ICONS = ("bulb clock target brain fire lock key heart rocket chart shield book e
 
 # what the director is told about each scene (also the contract normalise() enforces)
 SCENE_DOCS = """
+intro     ALWAYS the FIRST beat. The book card flies in ("A LESSON FROM <book>") and the hook lands under it as a headline. {"hook":"THE SKILL NOBODY PRACTISES","accent":["NOBODY"]}   hook max 48 chars = the punchiest version of the spoken hook line.
 slam      Huge words slam onto the screen one by one. {"lines":["MOST VALUABLE","SKILL AT WORK"],"accent":["VALUABLE"],"sub":"optional small line","glyph":"?"}
           1-4 lines, each max 16 characters (they are upper-cased). accent = words to colour. glyph = optional giant faint symbol behind (e.g. "?" or "1").
 stat      A number counts up inside a ring. {"value":37,"decimals":0,"prefix":"","suffix":"x","label":"BETTER IN A YEAR","sub":"small line","ring":0.8}
@@ -20,10 +23,14 @@ list      2-4 cards fly in, the newest lights up. {"title":"SMALL TITLE","items"
 versus    Two panels collide (top vs bottom). {"left":{"t":"DEEP","sub":"hard thinking","icon":"brain"},"right":{"t":"SHALLOW","sub":"busywork","icon":"mail"},"win":"left|right|none"}   t max 16 chars, sub max 40. "left" is the TOP panel and is introduced first.
 timeline  A line draws down through 3-5 numbered steps. {"title":"SMALL TITLE","items":[{"t":"Finance job","sub":"spreadsheets","on":"jason"},...]}   t max 24 chars.
 chart     kind "compound": one curve explodes while another fades. {"kind":"compound","title":"","up_label":"WHAT IT'S WORTH","down_label":"HOW MANY DO IT","up_end":"MORE","down_end":"LESS","caption":"short line"}   up_end max 7 chars, down_end max 9.
+          kind "line": any shape from 2-8 points. {"kind":"line","points":[1,3,2,6,12],"labels":["Mon","","","","Fri"],"end_label":"12x","caption":"short line"}   (forgetting curves, plateaus then breakthrough, etc.)
           kind "bars": {"kind":"bars","bars":[{"label":"Day 1","value":1},{"label":"Day 365","value":38,"hl":true}],"suffix":"x"}   2-5 bars, real numbers only.
 quote     A line of text rises out of masks. {"text":"max 110 characters","by":"who/where from","accent":["word"]}   Only for real quotes or the lesson's own punchline; never invent a quote for a real person.
 icon      One big symbol with keywords orbiting. {"icon":"bulb","title":"ATTENTION RESIDUE","sub":"one short line","chips":["Pings","Tabs","Inbox"]}   title max 20 chars; chips max 4, each max 14 chars.
 cycle     A loop of 3-5 steps with a dot running round it. {"title":"","center":"HABIT LOOP","nodes":["Cue","Craving","Response","Reward"]}   nodes max 12 chars.
+dots      A grid of people; some light up. {"total":10|20|50|100,"hl":3,"big":"3 IN 10","label":"SHORT LABEL","sub":"one line","note":"illustration"}   Great for "most people", "one in five", proportions.
+meter     2-4 horizontal bars fill and count. {"title":"SMALL TITLE","rows":[{"label":"Distracted hour","value":20},{"label":"Focused hour","value":100,"hl":true}],"suffix":"%","max":100,"note":"illustration"}   Great for before/after and comparisons.
+donut     A ring split into 2-4 shares. {"title":"WHERE THE DAY GOES","center":"60%","segments":[{"label":"Shallow work","value":60},{"label":"Deep work","value":40}],"suffix":"%","note":"illustration"}
 cta       The end card with the book cover. {"line1":"Want the full lesson?","line2":"Watch it as an animated summary.","handle":"visualgrowth.app"}   Always the LAST beat.
 """
 
@@ -92,6 +99,14 @@ def _clean_params(scene: str, p: dict) -> dict:
                     pass
             if len(bars) >= 2:
                 return {"kind": "bars", "title": _s(p.get("title"), 40, True), "bars": bars, "suffix": _s(p.get("suffix"), 4)}
+        if p.get("kind") == "line":
+            try:
+                pts = [float(v) for v in (p.get("points") or [])[:8]]
+            except (TypeError, ValueError):
+                pts = []
+            if len(pts) >= 2:
+                return {"kind": "line", "title": _s(p.get("title"), 40, True), "points": pts, "labels": [_s(x, 10) for x in (p.get("labels") or [])[:8]],
+                        "end_label": _s(p.get("end_label"), 8, True), "caption": _s(p.get("caption"), 60)}
         return {"kind": "compound", "title": _s(p.get("title"), 40, True), "up_label": _s(p.get("up_label"), 34, True), "down_label": _s(p.get("down_label"), 34, True),
                 "up_end": _s(p.get("up_end"), 7, True), "down_end": _s(p.get("down_end"), 9, True), "caption": _s(p.get("caption"), 60)}
     if scene == "quote":
@@ -101,6 +116,38 @@ def _clean_params(scene: str, p: dict) -> dict:
     if scene == "cycle":
         nodes = [_s(n, 12) for n in (p.get("nodes") or [])[:5] if _s(n, 12)]
         return {"title": _s(p.get("title"), 40, True), "center": _s(p.get("center"), 22), "nodes": nodes if len(nodes) >= 3 else ["Start", "Do", "Repeat"]}
+    if scene == "intro":
+        return {"hook": _s(p.get("hook") or p.get("text") or " ".join(p.get("lines") or []), 48, True), "accent": [_s(a, 18, True) for a in (p.get("accent") or [])[:3]]}
+    if scene == "dots":
+        total = p.get("total") if p.get("total") in (10, 20, 50, 100) else 10
+        try:
+            hl = max(0, min(total, int(round(float(p.get("hl", 1))))))
+        except (TypeError, ValueError):
+            hl = 1
+        return {"total": total, "hl": hl, "big": _s(p.get("big"), 12, True), "label": _s(p.get("label"), 34, True), "sub": _s(p.get("sub"), 64), "note": _s(p.get("note"), 40)}
+    if scene == "meter":
+        rows = []
+        for r in (p.get("rows") or [])[:4]:
+            try:
+                rows.append({"label": _s(r.get("label"), 26), "value": float(r.get("value", 0)), "hl": bool(r.get("hl"))})
+            except (TypeError, ValueError, AttributeError):
+                pass
+        rows = rows or [{"label": "Before", "value": 30}, {"label": "After", "value": 90, "hl": True}]
+        try:
+            mx = float(p.get("max") or 0) or max(r["value"] for r in rows) or 1
+        except (TypeError, ValueError):
+            mx = max(r["value"] for r in rows) or 1
+        return {"title": _s(p.get("title"), 40, True), "rows": rows, "suffix": _s(p.get("suffix"), 4), "max": mx, "note": _s(p.get("note"), 40)}
+    if scene == "donut":
+        segs = []
+        for g in (p.get("segments") or [])[:4]:
+            try:
+                segs.append({"label": _s(g.get("label"), 24), "value": max(0.0, float(g.get("value", 0)))})
+            except (TypeError, ValueError, AttributeError):
+                pass
+        if len(segs) < 2 or sum(g["value"] for g in segs) <= 0:
+            segs = [{"label": "This", "value": 70}, {"label": "That", "value": 30}]
+        return {"title": _s(p.get("title"), 40, True), "center": _s(p.get("center"), 8), "segments": segs, "suffix": _s(p.get("suffix"), 3), "note": _s(p.get("note"), 40)}
     if scene == "cta":
         return {"line1": _s(p.get("line1"), 30) or "Want the full lesson?", "line2": _s(p.get("line2"), 60) or "Watch it as an animated book summary.", "handle": _s(p.get("handle"), 28) or "visualgrowth.app"}
     return p
@@ -130,6 +177,13 @@ def normalise(plan: dict) -> dict:
         beats.append({"say": say, "scene": scene, "theme": theme, "transition": tr, "p": _clean_params(scene, b.get("p") or b.get("params") or {})})
     if not beats:
         raise ValueError("the plan has no usable beats")
+    if beats[0]["scene"] != "intro":                          # the reel always opens on the book, with the hook under it
+        b0 = beats[0]
+        hook = " ".join(b0["p"].get("lines") or []) if b0["scene"] == "slam" else b0["say"]
+        b0["scene"], b0["p"] = "intro", _clean_params("intro", {"hook": hook, "accent": b0["p"].get("accent") or []})
+    for b in beats[1:]:
+        if b["scene"] == "intro":
+            b["scene"] = "slam"; b["p"] = _clean_params("slam", {"lines": [b["p"].get("hook", "")[:16]]})
     if beats[-1]["scene"] != "cta":
         beats.append({"say": "Follow for the full lesson.", "scene": "cta", "theme": "dark", "transition": "circle" if prev_tr != "circle" else "whip_up", "p": _clean_params("cta", {})})
     for b in beats[:-1]:
@@ -160,6 +214,16 @@ def problems(plan: dict) -> list[str]:
         if run >= 3:
             out.append(f"three '{b['scene']}' scenes in a row; vary the scenes")
             break
+    mid = beats[1:-1]
+    g = sum(b["scene"] in GRAPHS for b in mid)
+    v = sum(b["scene"] in VISUAL for b in mid)
+    s = sum(b["scene"] in ("slam", "quote") for b in mid)
+    if g < 4:
+        out.append(f"only {g} data graphics (stat, dots, meter, donut, chart); use at least 4-5, each with a different look")
+    if mid and v < 0.7 * len(mid):
+        out.append(f"only {v} of {len(mid)} middle beats are graphics; at least 70% should be pictures, not words")
+    if s > 3:
+        out.append(f"{s} text-only beats (slam/quote); keep it to 3 at most")
     for i, b in enumerate(beats):
         if len(b["say"].split()) > 22:
             out.append(f"beat {i + 1} has a long line ({len(b['say'].split())} words); split it")

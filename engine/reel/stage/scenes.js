@@ -370,18 +370,18 @@ SCENES.intro = (cam, p, ctx) => {
   const acc = (p.accent || []).map(x => String(x).toUpperCase().replace(/[^A-Z0-9%×]/g, ''));
   const ws = hookWords(hook, p.hook || '', acc, th, ctx);
   fit(hook, 960, 330, 104, 56);
-  ctx.events.push({ at: 0.0, kind: 'riser' }, { at: 0.55, kind: 'thud' }, ...ws.map(w => ({ at: w.tk + 0.06, kind: 'pop' })));
+  ctx.events.push({ at: 0.0, kind: 'riser' }, { at: 0.4, kind: 'thud' }, ...ws.map(w => ({ at: w.tk + 0.06, kind: 'pop' })));
   return { update(lt) {
-    const a = E.spring(clamp(lt / 0.85));
+    const a = E.spring(clamp(lt / 0.6));
     card.style.transform = `translateY(${lerp(900, 0, a)}px) rotateX(${lerp(55, 6, a) - 6 + Math.sin(lt * 1.6) * 2}deg) rotateY(${lerp(-38, 0, a) + Math.sin(lt * 1.1) * 4}deg) rotateZ(${lerp(-10, -2, a)}deg) scale(${lerp(0.6, 1, a)})`;
-    sheen.style.left = lerp(-40, 120, E.inOut3(clamp((lt - 0.55) / 0.7))) + '%';
+    sheen.style.left = lerp(-40, 120, E.inOut3(clamp((lt - 0.4) / 0.6))) + '%';
     glow.style.opacity = 0.9 * clamp((lt - 0.3) / 0.5); glow.style.transform = `scale(${0.9 + 0.05 * Math.sin(lt * 2)})`;
     raySvg.style.transform = `rotate(${lt * 4}deg)`; raySvg.style.opacity = clamp((lt - 0.2) / 0.5);
-    tf(kick, { y: lerp(20, 0, E.out3(clamp((lt - 0.35) / 0.35))), o: clamp((lt - 0.35) / 0.2) });
-    tf(title, { s: lerp(0.7, 1, E.back(clamp((lt - 0.45) / 0.4))), o: clamp((lt - 0.45) / 0.15) });
-    tf(by, { o: clamp((lt - 0.65) / 0.3) });
+    tf(kick, { y: lerp(20, 0, E.out3(clamp((lt - 0.2) / 0.3))), o: clamp((lt - 0.2) / 0.15) });
+    tf(title, { s: lerp(0.7, 1, E.back(clamp((lt - 0.28) / 0.35))), o: clamp((lt - 0.28) / 0.12) });
+    tf(by, { o: clamp((lt - 0.45) / 0.25) });
     ws.forEach(w => { const d = lt - w.tk; tf(w.sp, { s: lerp(2.2, 1, E.back(clamp(d / 0.26))), o: clamp(d / 0.06), blur: lerp(12, 0, clamp(d / 0.16)) }); });
-    camera(cam, lt, ctx, [0.55], 0.06);
+    camera(cam, lt, ctx, [0.4], 0.06);
   } };
 };
 

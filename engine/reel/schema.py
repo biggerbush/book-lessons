@@ -214,6 +214,10 @@ def problems(plan: dict) -> list[str]:
         if run >= 3:
             out.append(f"three '{b['scene']}' scenes in a row; vary the scenes")
             break
+    if len(beats) > 1 and beats[1]["scene"] not in GRAPHS:
+        out.append("beat 2 must be a data graphic (chart, stat, dots, meter or donut) that shows the core insight right after the hook")
+    if beats and len(beats[0]["say"].split()) > 13:
+        out.append(f"the hook (beat 1) is {len(beats[0]['say'].split())} words; keep it to 8-12 so the insight lands by ~3 seconds")
     mid = beats[1:-1]
     g = sum(b["scene"] in GRAPHS for b in mid)
     v = sum(b["scene"] in VISUAL for b in mid)

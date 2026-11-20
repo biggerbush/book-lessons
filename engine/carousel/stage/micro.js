@@ -314,6 +314,80 @@ G.spectrum = d => {   // where do you land?
   return svg(out);
 };
 
+G.choices = d => {    // multiple choice: what would YOU say? (also used as a spot-the-answer quiz)
+  const o = (d.options || []).slice(0, 4), n = o.length || 1, top = d.prompt ? 150 : 60, hh = Math.min(110, (440 - top - 14 * (n - 1)) / n + 40); let out = '';
+  if (d.prompt) out += card(60, 40, 848, 90, M.ink) + T(100, 86, d.prompt, { a: 'start', s: Math.min(30, 760 / (d.prompt.length * .5)), w: 800, c: M.white, f: 'News' });
+  o.forEach((c, i) => { const y = top + i * (hh + 14), hl = c.hl;
+    out += card(60, y, 848, hh, hl ? M.goldwash : M.white) + disc(115, y + hh / 2, 30, hl ? M.gold2 : M.blue) + T(115, y + hh / 2 + 2, c.k || 'ABCD'[i], { s: 28, w: 800 });
+    out += T(170, y + hh / 2 - (c.sub ? 14 : 0), c.t, { a: 'start', s: 28, w: 800, f: 'News' }); if (c.sub) out += T(170, y + hh / 2 + 22, c.sub, { a: 'start', s: 21, w: 600, c: M.muted }); });
+  if (d.q) out += T(PW / 2, 528, d.q, { s: 24, w: 800 });
+  return svg(out);
+};
+
+G.chat = d => {       // a short exchange with the echoed words highlighted
+  const m = (d.messages || []).slice(0, 4); let out = '', y = 50;
+  m.forEach(msg => {
+    const me = msg.who === 'me', txt = msg.t || '', hl = msg.hl || '', w = Math.min(640, txt.length * 17 + 80), x = me ? 908 - w : 60, hh = 92;
+    out += T(me ? 908 : 60, y + 6, msg.name || (me ? 'YOU' : 'THEM'), { a: me ? 'end' : 'start', s: 18, w: 800, c: M.muted, ls: 2 });
+    out += RR(x, y + 22, w, hh, 30, me ? M.ink : M.white, 'filter="url(#sh)"');
+    const parts = hl && txt.includes(hl) ? txt.split(hl) : [txt];
+    out += `<text x="${x + 32}" y="${y + 22 + hh / 2}" dominant-baseline="middle" font-family="News" font-weight="700" font-size="30" fill="${me ? M.white : M.ink}">${esc(parts[0])}${parts.length > 1 ? `<tspan fill="${me ? M.gold2 : '#8A5A00'}" font-weight="800">${esc(hl)}</tspan>${esc(parts[1])}` : ''}</text>`;
+    y += hh + 54;
+  });
+  if (d.note) out += T(PW / 2, 528, d.note, { s: 22, w: 700, c: M.muted });
+  return svg(out);
+};
+
+G.balance = d => {    // who's talking: before vs after
+  const rows = d.rows || [{ t: 'Arguing back', you: 70 }, { t: 'Mirroring', you: 25 }]; let out = '';
+  out += T(100, 70, d.left || 'you talk', { a: 'start', s: 24, w: 800 }) + T(868, 70, d.right || 'they talk', { a: 'end', s: 24, w: 800, c: '#8A5A00' });
+  rows.slice(0, 3).forEach((r, i) => { const y = 120 + i * 150, k = r.you / 100;
+    out += T(100, y, r.t, { a: 'start', s: 26, w: 800, c: M.ink2 }) + RR(100, y + 30, 768, 70, 35, M.gold2) + RR(100, y + 30, 768 * k, 70, 35, M.ink) + RR(100 + 768 * k - 35, y + 30, 35, 70, 0, M.ink);
+    out += T(130, y + 66, Math.round(r.you) + '%', { a: 'start', s: 24, w: 800, c: M.white }) + T(838, y + 66, (100 - Math.round(r.you)) + '%', { a: 'end', s: 24, w: 800 }); });
+  if (d.note) out += T(PW / 2, 528, d.note, { s: 22, w: 600, c: M.muted });
+  return svg(out);
+};
+
+G.receipts = d => {   // guess-the-result: two receipts
+  const r = (d.items || []).slice(0, 2); let out = '';
+  r.forEach((c, i) => { const x = 110 + i * 420, gold = c.hl;
+    out += `<path d="M${x} 50 h330 v360 l-27 18 l-28 -18 l-27 18 l-28 -18 l-27 18 l-28 -18 l-27 18 l-28 -18 l-27 18 l-28 -18 l-27 18 l-28 -18 Z" fill="${M.white}" filter="url(#sh)"/>`;
+    out += T(x + 165, 95, c.name || (i ? 'WAITER B' : 'WAITER A'), { s: 22, w: 800, ls: 3, c: M.muted }) + `<line x1="${x + 30}" x2="${x + 300}" y1="122" y2="122" stroke="${M.ink}" stroke-width="2" stroke-dasharray="4 6"/>`;
+    out += T(x + 165, 185, c.says || '', { s: 25, w: 700, f: 'News' }) + T(x + 165, 225, c.says2 || '', { s: 25, w: 700, f: 'News' });
+    out += `<line x1="${x + 30}" x2="${x + 300}" y1="275" y2="275" stroke="${M.ink}" stroke-width="2" stroke-dasharray="4 6"/>` + T(x + 40, 330, 'TIP', { a: 'start', s: 26, w: 800 }) + T(x + 290, 330, '£ ? ?', { a: 'end', s: 34, w: 800, f: 'News', c: gold ? '#8A5A00' : M.ink });
+  });
+  out += T(PW / 2, 500, d.q || 'Which waiter earned bigger tips?', { s: 27, w: 800 });
+  return svg(out);
+};
+
+G.voice = d => {      // say it two ways: pitch rising vs falling
+  const r = (d.ways || [{ t: 'Two copies?', label: 'rising: sounds anxious or combative', up: true }, { t: 'Two copies.', label: 'late-night DJ: deep, slow, calm', up: false }]).slice(0, 2); let out = '';
+  r.forEach((w, i) => { const y = 60 + i * 230, gold = !w.up;
+    out += card(60, y, 848, 200, gold ? M.goldwash : M.white) + T(110, y + 70, w.t, { a: 'start', s: 44, w: 800, f: 'News' }) + T(110, y + 150, w.label, { a: 'start', s: 23, w: 700, c: M.muted });
+    const pts = []; for (let k = 0; k <= 30; k++) { const t = k / 30; pts.push([600 + t * 270, y + 100 + (w.up ? 40 - Math.pow(t, 2.4) * 80 : -30 + Math.pow(t, 1.6) * 70) + Math.sin(k * 1.3) * 6]); }
+    out += `<path d="M${pts.map(p => p.join(' ')).join(' L')}" fill="none" stroke="${gold ? M.gold : M.ink}" stroke-width="8" stroke-linecap="round" marker-end="url(#${gold ? 'ahg' : 'ah'})"/>`; });
+  out += T(PW / 2, 528, d.q || 'Say both out loud. Hear the difference?', { s: 24, w: 800 });
+  return svg(out);
+};
+
+G.silence = d => {    // count the pause
+  const n = d.seconds || 4; let out = card(60, 50, 848, 380, M.white);
+  for (let i = 0; i < n; i++) { const cx = 200 + i * (568 / Math.max(1, n - 1)); out += `<circle cx="${cx}" cy="210" r="70" fill="${i === n - 1 ? M.gold2 : M.blue}"/>` + T(cx, 214, String(i + 1), { s: 64, w: 800, f: 'News' }); if (i < n - 1) out += `<line x1="${cx + 80}" x2="${cx + 568 / (n - 1) - 80}" y1="210" y2="210" stroke="${M.blue2}" stroke-width="5" stroke-dasharray="4 10"/>`; }
+  out += T(PW / 2, 350, d.label || 'say nothing', { s: 30, w: 800 }) + T(PW / 2, 395, d.sub || 'count it now. it feels long.', { s: 24, w: 700, c: M.muted });
+  if (d.q) out += T(PW / 2, 495, d.q, { s: 25, w: 800 });
+  return svg(out);
+};
+
+G.practice = d => {   // fill in the blank: the reader writes the mirror
+  const it = (d.items || []).slice(0, 3); let out = '';
+  it.forEach((c, i) => { const y = 40 + i * 150;
+    out += card(60, y, 848, 128, i === 0 ? M.goldwash : M.white) + T(100, y + 44, `“${c.they}”`, { a: 'start', s: 28, w: 700, f: 'News' });
+    out += T(100, y + 92, 'You:', { a: 'start', s: 24, w: 800, c: M.muted }) + `<line x1="170" x2="${i === 0 && c.example ? 170 : 560}" y1="${y + 104}" y2="${y + 104}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/>`;
+    if (i === 0 && c.example) out += T(172, y + 92, c.example, { a: 'start', s: 27, w: 800, c: '#8A5A00', f: 'News' }); });
+  if (d.answers) out += T(PW - 60, 520, d.answers, { a: 'end', s: 19, w: 600, c: M.muted });
+  return svg(out);
+};
+
 G.book = (d, D) => `<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 55%,${M.goldwash},${M.panel} 60%)"></div>
   <div class="card" style="left:254px;top:70px;width:460px;height:368px;transform:rotate(-3deg)"><img src="${D.cover || ''}"></div>
   ${d.chip ? `<div style="position:absolute;left:0;right:0;top:470px;text-align:center"><span style="display:inline-block;background:${M.ink};color:#fff;font-family:Sans;font-weight:800;font-size:26px;padding:12px 26px;border-radius:999px">${esc(d.chip)}</span></div>` : ''}`;

@@ -9,7 +9,7 @@ from ..config import log
 
 EXAMPLE = Path(__file__).parent / "examples" / "deep-work-1.micro.json"
 TYPES = ("cover", "lesson")
-KINDS = ("puzzle", "dilemma", "bet", "wall", "spectrum", "checklist", "questions", "floorplan", "pairs", "tracks", "hours", "iceberg", "tally", "prompt", "stat", "day", "compare", "residue", "dips", "cards", "converge", "gap", "formula", "flow", "calendar", "tracker", "chain", "book")
+KINDS = ("choices", "chat", "balance", "receipts", "voice", "silence", "practice", "puzzle", "dilemma", "bet", "wall", "spectrum", "checklist", "questions", "floorplan", "pairs", "tracks", "hours", "iceberg", "tally", "prompt", "stat", "day", "compare", "residue", "dips", "cards", "converge", "gap", "formula", "flow", "calendar", "tracker", "chain", "book")
 
 SYSTEM = """You write Instagram carousels for VisualGrowth (animated book lessons). Style: a STORY told in MICRO-LESSONS, like the best educational
 creators. Every slide = one on-brand graphic (navy + gold infographic, never cartoons) + a bold 2-line title + a few short serif lines.
@@ -50,6 +50,10 @@ tally {"title","time","rows":[4],"example","total"} | prompt {"q":"one question"
 puzzle {"label","q":"a gut-check puzzle, \n for lines","first","second","answer":"small answer line"} | dilemma {"options":[{"t","icon"} x2],"facts":[3 identical facts],"q"} |
 bet {"options":[{"t","icon","items":[3]} x2],"q":"Who wins? Pick one, then swipe."} (reveal the result on the NEXT slide) | wall {"left","facts":[3],"left_note","right","right_note"} |
 spectrum {"zones":[3],"subs":[3],"you_at":x 100-860,"you","q"} |
+choices {"prompt":"the situation","options":[{"k":"A","t":"a reply","sub":"what happens","hl":bool} x2-4],"q"} (what would you say? / spot the right one) |
+chat {"messages":[{"who":"them|me","name","t","hl":"echoed words"} x2-3],"note"} | balance {"left","right","rows":[{"t","you":0-100} x2-3],"note"} |
+receipts {"items":[{"name","says","says2","hl"} x2],"q"} (guess the result) | voice {"ways":[{"t","label","up":bool} x2],"q"} (say it out loud) |
+silence {"seconds":4,"label","sub","q"} | practice {"items":[{"they":"a line","example":"only on the first"} x3],"answers":"small answer line"} (reader fills in) |
 day {"caption","segments":[4-7],"gold_at":i,"gold":"label"} | compare {"left":{"t","icon","items":[3]},"right":{...}} |
 residue {"a","a_icon","b","b_icon","share":10-80,"left_label","right_label","caption"} | dips {"checks":[0-1 x2-4],"icon","full","x0","x1"} |
 cards {"items":[{"t","icon","sub","hl"} x2-3]} | stat {"value":"40%","label","share":0-100,"left","right","caption"} | converge {"inputs":[2-3 short],"result","icon"} | gap {"up","down","gap"} |

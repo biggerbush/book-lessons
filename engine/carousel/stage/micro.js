@@ -176,29 +176,28 @@ function fitFont(e, prop, max, min, ok) { let f = max; e.style[prop] = f + 'px';
 
 /* ------------------------------------------------------------ slides */
 const SL = {};
-SL.cover = (el, s, D) => {      // hook headline, "a lesson from" line, then the book alone inside the ring with concept chips
-  const t = h('cv-title', { fontSize: '112px', lineHeight: '1.0', left: '70px', width: '940px', top: '80px' }, md(s.title || D.book));
-  t.querySelectorAll('i').forEach(e => { e.style.fontStyle = 'italic'; });
-  el.append(t); fitFont(t, 'fontSize', 112, 70, () => t.offsetHeight <= 360);
-  const y1 = 80 + t.offsetHeight + 22;
-  el.append(h('cv-sub', { top: y1 + 'px', fontSize: '34px' }, s.sub ? md(s.sub) : `A lesson from <b style="font-style:normal;color:${M.ink}">${esc(D.book)}</b>`));
-  const cy = Math.max(860, y1 + 470), R = 330;                       // ring centre
-  el.append(h('', { position: 'absolute', left: 540 - 420 + 'px', top: cy - 420 + 'px', width: '840px', height: '840px', borderRadius: '50%', background: `radial-gradient(circle, ${M.goldwash} 0%, rgba(255,243,209,0) 66%)` }));
+SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big book inside the ring with "what's inside" chips
+  const t = h('cv-title', { fontSize: '104px', lineHeight: '1.0', left: '70px', width: '940px', top: '74px' }, md(s.title || D.book));
+  el.append(t); fitFont(t, 'fontSize', 104, 66, () => t.offsetHeight <= 320);
+  const y1 = 74 + t.offsetHeight + 24;
+  const credit = s.sub ? md(s.sub) : `A ${esc(s.minutes || 2)}-minute lesson from <b style="font-style:normal;color:${M.ink}">${esc(D.book)}</b>${D.author ? ` by ${esc(D.author)}` : ''}`;
+  const sub = h('cv-sub', { top: y1 + 'px', fontSize: '33px', left: '60px', width: '960px' }, credit); el.append(sub);
+  const R = 360, cy = Math.max(880, y1 + sub.offsetHeight + 60 + R);
+  el.append(h('', { position: 'absolute', left: 540 - 470 + 'px', top: cy - 470 + 'px', width: '940px', height: '940px', borderRadius: '50%', background: `radial-gradient(circle, ${M.goldwash} 0%, rgba(255,243,209,0) 64%)` }));
   el.append(h('', { position: 'absolute', left: 540 - R + 'px', top: cy - R + 'px', width: 2 * R + 'px', height: 2 * R + 'px', borderRadius: '50%', border: `3px dashed ${M.blue2}` }));
-  // the book: jacket art alone, with a page block and a soft shadow
-  const bw = 300, bh = 450, bx = 540 - bw / 2, by = cy - bh / 2;
+  const bw = 380, bh = 570, bx = 540 - bw / 2, by = cy - bh / 2;
   const book = h('', { position: 'absolute', left: bx + 'px', top: by + 'px', width: bw + 'px', height: bh + 'px', transform: 'rotate(-4deg)' });
-  book.append(h('', { position: 'absolute', left: '14px', top: '10px', width: bw + 'px', height: bh - 6 + 'px', borderRadius: '8px', background: 'repeating-linear-gradient(90deg,#fff 0 3px,#E6E9EF 3px 4px)', boxShadow: '0 50px 70px -30px rgba(11,31,58,.55)' }));
-  const im = document.createElement('img'); im.src = D.book_art || D.cover || ''; Object.assign(im.style, { position: 'absolute', left: 0, top: 0, width: bw + 'px', height: bh + 'px', objectFit: D.book_art ? 'fill' : 'cover', borderRadius: '8px', boxShadow: '0 30px 50px -24px rgba(11,31,58,.45)' });
+  book.append(h('', { position: 'absolute', left: '16px', top: '12px', width: bw + 'px', height: bh - 8 + 'px', borderRadius: '10px', background: 'repeating-linear-gradient(90deg,#fff 0 3px,#E6E9EF 3px 4px)', boxShadow: '0 60px 80px -34px rgba(11,31,58,.55)' }));
+  const im = document.createElement('img'); im.src = D.book_art || D.cover || ''; Object.assign(im.style, { position: 'absolute', left: 0, top: 0, width: bw + 'px', height: bh + 'px', objectFit: D.book_art ? 'fill' : 'cover', borderRadius: '10px', boxShadow: '0 30px 50px -24px rgba(11,31,58,.45)' });
   book.append(im); el.append(book);
+  const slots = [{ left: '44px', top: cy - 190 }, { right: '44px', top: cy - 250 }, { left: '44px', top: cy + 130 }];
   (s.chips || []).slice(0, 3).forEach((ch, i) => {
-    const ang = [-150, -25, 82][i] * Math.PI / 180, x = 540 + Math.cos(ang) * R, y = cy + Math.sin(ang) * R;
-    const c = h('', { position: 'absolute', left: x + 'px', top: y + 'px', transform: 'translate(-50%,-50%)', background: i === 1 ? M.gold2 : '#fff', color: M.ink, fontFamily: 'Sans', fontWeight: 800, fontSize: '28px', padding: '14px 26px', borderRadius: '999px', boxShadow: '0 16px 30px -14px rgba(11,31,58,.35)', display: 'flex', alignItems: 'center', gap: '12px', whiteSpace: 'nowrap' }, `<span style="display:inline-flex;width:36px;height:36px;color:${M.ink}">${iconSVG(ch.icon || 'star', 36, 8)}</span>${esc(ch.t)}`);
-    el.append(c);
+    const sl = slots[i];
+    el.append(h('', Object.assign({ position: 'absolute', top: sl.top + 'px', background: i === 1 ? M.gold2 : '#fff', color: M.ink, fontFamily: 'Sans', fontWeight: 800, fontSize: '26px', padding: '13px 22px', borderRadius: '999px', boxShadow: '0 16px 30px -14px rgba(11,31,58,.35)', display: 'flex', alignItems: 'center', gap: '10px', whiteSpace: 'nowrap', maxWidth: '360px' }, sl.left ? { left: sl.left } : { right: sl.right }),
+      `<span style="display:inline-flex;width:32px;height:32px;color:${M.ink}">${iconSVG(ch.icon || 'star', 32, 8)}</span>${esc(ch.t)}`));
   });
-  el.append(h('', { position: 'absolute', left: '70px', top: cy + 120 + 'px', fontFamily: 'News', fontSize: '32px', lineHeight: '1.15', color: M.ink }, `${esc(D.author || '')}<br><i style="font-size:25px;color:${M.muted}">${esc(s.role || 'Author')}</i>`));
-  el.append(h('', { position: 'absolute', left: '110px', top: cy + 210 + 'px' }, `<svg width="160" height="90"><path d="M10 0 C 10 50, 60 70, 140 40" fill="none" stroke="${M.ink}" stroke-width="3" stroke-dasharray="4 9" marker-end="url(#a1)"/><defs><marker id="a1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="${M.ink}"/></marker></defs></svg>`));
-  el.append(h('swipe', { top: cy + 150 + 'px' }, `Swipe <i>→</i>`));
+  el.append(h('', { position: 'absolute', right: '44px', top: cy + 200 + 'px', display: 'flex', alignItems: 'center', gap: '14px', background: M.ink, color: '#fff', fontFamily: 'Sans', fontWeight: 800, fontSize: '27px', padding: '15px 16px 15px 24px', borderRadius: '999px', boxShadow: `0 18px 34px -16px rgba(11,31,58,.6)` },
+    `${esc(s.swipe || 'Swipe to fix it')}<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:${M.gold2};color:${M.ink};align-items:center;justify-content:center;font-size:24px">→</span>`));
 };
 
 SL.lesson = (el, s, D) => {     // text on top, graphic panel underneath, whole stack centred

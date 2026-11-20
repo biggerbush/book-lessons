@@ -10,7 +10,7 @@ from .voice import PAD, TAIL
 STAGE = Path(__file__).parent / "stage"
 
 
-def timeline(plan: dict, words: list[dict], cover: str, book: str, lesson: int, author: str = "") -> dict:
+def timeline(plan: dict, words: list[dict], cover: str, book: str, lesson: int, author: str = "", look: str = "white") -> dict:
     """Beats get their spoken words (counted, since the narration is the beats' lines joined), shifted by PAD."""
     out, i = [], 0
     allw = [{"w": w["w"], "s": round(w["s"] + PAD, 3), "e": round(w["e"] + PAD, 3)} for w in words]
@@ -21,7 +21,7 @@ def timeline(plan: dict, words: list[dict], cover: str, book: str, lesson: int, 
         out.append({**b, "start": ws[0]["s"] if ws else (out[-1]["start"] + 2 if out else PAD), "end": ws[-1]["e"] if ws else 0, "words": ws})
     dur = round(max(allw[-1]["e"] + TAIL, 8.0), 2)
     return {"dur": dur, "beats": [{"say": b["say"], "scene": b["scene"], "p": b["p"], "theme": b["theme"], "tr": b["transition"], "start": b["start"], "end": b["end"], "words": b["words"]} for b in out],
-            "words": allw, "book": book, "author": author, "lesson": lesson, "cover": cover}
+            "words": allw, "book": book, "author": author, "look": look, "lesson": lesson, "cover": cover}
 
 
 def page(reel: dict) -> str:

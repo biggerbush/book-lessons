@@ -119,14 +119,14 @@ SCENES.list = (cam, p, ctx) => {
 SCENES.versus = (cam, p, ctx) => {
   const th = ctx.th, L = p.left || {}, Rr = p.right || {}, win = p.win || 'right';
   const mk = (o, top, bg, fg, ic) => {
-    const panel = el('', { position: 'absolute', left: '90px', top: top + 'px', width: '900px', height: '410px', borderRadius: '56px', background: bg, color: fg, display: 'flex', alignItems: 'center', gap: '40px', padding: '0 54px', boxShadow: '0 30px 60px -28px rgba(0,0,0,.55)' });
+    const panel = el('', { position: 'absolute', left: '90px', top: top + 'px', width: '900px', height: '410px', borderRadius: '56px', background: bg, color: fg, display: 'flex', alignItems: 'center', gap: '40px', padding: '0 54px', boxShadow: WHITE ? '0 30px 60px -30px rgba(11,31,58,.35)' : '0 30px 60px -28px rgba(0,0,0,.55)' });
     const ico = el('', { width: '150px', flex: 'none', opacity: .95 }, iconSVG(o.icon || ic, 150, 5));
     const col = el('', { flex: 1, display: 'flex', flexDirection: 'column', gap: '14px' });
     const t = el('disp', { fontSize: '88px' }, esc(o.t || '')), s = el('body', { fontSize: '42px', opacity: .85 }, esc(o.sub || ''));
     col.append(t, s); panel.append(ico, col); cam.append(panel); return { panel, t, s };
   };
   const a = mk(L, 270, th.alt, th.onAlt, 'cross'), b = mk(Rr, 800, th.accent, th.onAccent, 'check');
-  const vs = el('disp', { position: 'absolute', left: '440px', top: '660px', width: '200px', height: '200px', borderRadius: '50%', background: th === THEMES.dark ? '#fff' : th.fg, color: th === THEMES.dark ? '#0B1524' : th.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '84px', zIndex: 5, boxShadow: '0 0 0 14px rgba(0,0,0,.18)' }, esc(p.vs || 'VS'));
+  const vs = el('disp', { position: 'absolute', left: '440px', top: '660px', width: '200px', height: '200px', borderRadius: '50%', background: WHITE ? th.fg : th === THEMES.dark ? '#fff' : th.fg, color: WHITE ? th.accent : th === THEMES.dark ? '#0B1524' : th.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '84px', zIndex: 5, boxShadow: '0 0 0 14px rgba(0,0,0,.18)' }, esc(p.vs || 'VS'));
   cam.append(vs);
   [a, b].forEach(o => { fit(o.t, 560, 190, 88, 40); });
   ctx.events.push({ at: 0.05, kind: 'whoosh' }, { at: 0.45, kind: 'whoosh' }, { at: 0.7, kind: 'thud' });
@@ -317,7 +317,7 @@ SCENES.cycle = (cam, p, ctx) => {
 /* ---------------------------------------------------------------- cta: the end card */
 SCENES.cta = (cam, p, ctx) => {
   const th = ctx.th;
-  const card = el('', { position: 'absolute', left: '240px', top: '250px', width: '600px', height: '480px', borderRadius: '44px', overflow: 'hidden', boxShadow: '0 50px 90px -30px rgba(0,0,0,.65)', background: '#fff' });
+  const card = el('', { position: 'absolute', left: '240px', top: '250px', width: '600px', height: '480px', borderRadius: '44px', overflow: 'hidden', boxShadow: WHITE ? '0 50px 90px -30px rgba(11,31,58,.45), 0 0 0 2px rgba(11,31,58,.06)' : '0 50px 90px -30px rgba(0,0,0,.65)', background: '#fff' });
   const img = document.createElement('img'); img.src = ctx.R.cover || ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block'; card.append(img);
   const l1 = el('disp', { position: 'absolute', left: '80px', width: '920px', top: '790px', textAlign: 'center', fontSize: '98px', color: th.fg }, esc(p.line1 || 'Want the full lesson?'));
   const l2 = el('body', { position: 'absolute', left: '110px', width: '860px', top: '1010px', textAlign: 'center', fontSize: '48px', color: th.muted }, esc(p.line2 || 'Watch it as an animated book summary.'));
@@ -353,10 +353,10 @@ function hookWords(box, text, acc, th, ctx, size) {   // words that pop in as th
 SCENES.intro = (cam, p, ctx) => {
   const th = ctx.th, R = ctx.R;
   const glow = el('', { position: 'absolute', left: '40px', top: '30px', width: '1000px', height: '1000px', borderRadius: '50%', background: `radial-gradient(circle, ${th.accent}66 0%, ${th.accent}00 62%)`, opacity: 0 });
-  let rays = ''; for (let j = 0; j < 24; j++) { const a = j * Math.PI * 2 / 24; rays += `<path d="M540 530 L${540 + Math.cos(a - 0.05) * 1500} ${530 + Math.sin(a - 0.05) * 1500} L${540 + Math.cos(a + 0.05) * 1500} ${530 + Math.sin(a + 0.05) * 1500}Z" fill="${th.fg}" opacity="${0.025 + rnd(j) * 0.03}"/>`; }
+  let rays = ''; for (let j = 0; j < 24; j++) { const a = j * Math.PI * 2 / 24; rays += `<path d="M540 530 L${540 + Math.cos(a - 0.05) * 1500} ${530 + Math.sin(a - 0.05) * 1500} L${540 + Math.cos(a + 0.05) * 1500} ${530 + Math.sin(a + 0.05) * 1500}Z" fill="${th.fg}" opacity="${(0.025 + rnd(j) * 0.03) * (WHITE ? 0.6 : 1)}"/>`; }
   const raySvg = svgEl(1080, 1920, rays); raySvg.style.transformOrigin = '540px 530px';
   const holder = el('', { position: 'absolute', left: '130px', top: '200px', width: '820px', height: '656px', perspective: '1600px' });
-  const card = el('', { position: 'absolute', inset: 0, borderRadius: '40px', overflow: 'hidden', background: '#fff', boxShadow: '0 70px 110px -30px rgba(0,0,0,.7)', transformOrigin: '50% 60%' });
+  const card = el('', { position: 'absolute', inset: 0, borderRadius: '40px', overflow: 'hidden', background: '#fff', boxShadow: WHITE ? '0 60px 100px -30px rgba(11,31,58,.45), 0 0 0 2px rgba(11,31,58,.06)' : '0 70px 110px -30px rgba(0,0,0,.7)', transformOrigin: '50% 60%' });
   const img = document.createElement('img'); img.src = R.cover || ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
   const sheen = el('', { position: 'absolute', top: '-30%', height: '160%', width: '34%', left: 0, background: 'linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.6),rgba(255,255,255,0))', transform: 'rotate(12deg)' });
   card.append(img, sheen); holder.append(card);
@@ -391,7 +391,7 @@ SCENES.dots = (cam, p, ctx) => {
   const cols = total <= 20 ? 5 : 10, rows = Math.ceil(total / cols), cell = Math.min(860 / cols, 640 / rows), gx = 540 - cols * cell / 2, gy = 420 + (640 - rows * cell) / 2;
   const person = (x, y, s) => `<circle cx="${x}" cy="${y - s * 0.2}" r="${s * 0.17}"/><path d="M${x - s * 0.28} ${y + s * 0.36}a${s * 0.28} ${s * 0.3} 0 0 1 ${s * 0.56} 0z"/>`;
   let g = '';
-  for (let i = 0; i < total; i++) { const c = i % cols, r = Math.floor(i / cols), x = gx + (c + 0.5) * cell, y = gy + (r + 0.5) * cell; g += `<g id="d${i}" fill="${th.soft}" stroke="${th.line}" stroke-width="2" style="transform-origin:${x}px ${y}px">${person(x, y, cell * 0.9)}</g>`; }
+  for (let i = 0; i < total; i++) { const c = i % cols, r = Math.floor(i / cols), x = gx + (c + 0.5) * cell, y = gy + (r + 0.5) * cell; g += `<g id="d${i}" fill="${WHITE ? 'rgba(11,31,58,.16)' : th.soft}" stroke="${th.line}" stroke-width="2" style="transform-origin:${x}px ${y}px">${person(x, y, cell * 0.9)}</g>`; }
   const svg = svgEl(1080, 1920, g);
   const big = el('disp', { position: 'absolute', left: 0, width: '1080px', top: '215px', textAlign: 'center', fontSize: '150px', color: th.accent, opacity: 0 }, esc(p.big || `${hl} IN ${total}`));
   const label = el('disp', { position: 'absolute', left: '90px', width: '900px', top: '1085px', textAlign: 'center', fontSize: '64px', color: th.fg, opacity: 0 }, esc(p.label || ''));
@@ -404,7 +404,7 @@ SCENES.dots = (cam, p, ctx) => {
   ctx.events.push({ at: 0.1, kind: 'riser' }); hlT.slice(0, 12).forEach((d, k) => ctx.events.push({ at: t1 + k * Math.min(0.08, 0.9 / Math.max(1, hl)), kind: 'pop' }));
   return { update(lt) {
     ds.forEach((d, i) => { const c = i % cols, r = Math.floor(i / cols), at = 0.08 + (c + r) * 0.025, k = E.back(clamp((lt - at) / 0.3)); d.style.transform = `scale(${Math.max(0.001, k)})`; });
-    hlT.forEach((i, k) => { const at = t1 + k * Math.min(0.08, 0.9 / Math.max(1, hl)), on = lt >= at; const d = ds[i]; d.setAttribute('fill', on ? th.accent : th.soft); d.setAttribute('stroke', on ? th.accent : th.line); if (on) { const q = E.back(clamp((lt - at) / 0.3)); d.style.transform = `scale(${lerp(1.6, 1, q)})`; } });
+    hlT.forEach((i, k) => { const at = t1 + k * Math.min(0.08, 0.9 / Math.max(1, hl)), on = lt >= at; const d = ds[i]; d.setAttribute('fill', on ? th.accent : (WHITE ? 'rgba(11,31,58,.16)' : th.soft)); d.setAttribute('stroke', on ? th.accent : th.line); if (on) { const q = E.back(clamp((lt - at) / 0.3)); d.style.transform = `scale(${lerp(1.6, 1, q)})`; } });
     tf(big, { s: lerp(0.5, 1, E.back(clamp((lt - t1) / 0.4))), o: clamp((lt - t1) / 0.12) });
     tf(label, { y: lerp(30, 0, E.out3(clamp((lt - 1.4) / 0.4))), o: clamp((lt - 1.4) / 0.3) });
     tf(sub, { y: lerp(30, 0, E.out3(clamp((lt - 1.6) / 0.4))), o: clamp((lt - 1.6) / 0.3) });

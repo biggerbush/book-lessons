@@ -49,11 +49,20 @@ function backdrop(th, seed) {
   const d = el('bgfx');
   d.style.background = `radial-gradient(ellipse 80% 55% at 50% 38%, ${th.bg2}, ${th.bg} 70%)`;
   const dots = el('', { position: 'absolute', inset: 0, opacity: 0.55, backgroundImage: `radial-gradient(${th.line} 2px, transparent 2.5px)`, backgroundSize: '64px 64px' });
-  const b1 = el('', { position: 'absolute', width: '900px', height: '900px', borderRadius: '50%', left: '-200px', top: '-120px', background: `radial-gradient(circle, ${th === THEMES.dark ? 'rgba(85,98,196,.35)' : 'rgba(255,255,255,.55)'}, transparent 65%)` });
-  const b2 = el('', { position: 'absolute', width: '800px', height: '800px', borderRadius: '50%', right: '-260px', bottom: '120px', background: `radial-gradient(circle, ${th === THEMES.dark ? 'rgba(255,194,51,.14)' : 'rgba(255,255,255,.4)'}, transparent 65%)` });
+  const b1 = el('', { position: 'absolute', width: '900px', height: '900px', borderRadius: '50%', left: '-200px', top: '-120px', background: `radial-gradient(circle, ${WHITE ? 'rgba(23,48,90,.07)' : th === THEMES.dark ? 'rgba(85,98,196,.35)' : 'rgba(255,255,255,.55)'}, transparent 65%)` });
+  const b2 = el('', { position: 'absolute', width: '800px', height: '800px', borderRadius: '50%', right: '-260px', bottom: '120px', background: `radial-gradient(circle, ${WHITE ? 'rgba(242,169,0,.12)' : th === THEMES.dark ? 'rgba(255,194,51,.14)' : 'rgba(255,255,255,.4)'}, transparent 65%)` });
   d.append(dots, b2, b1);
   d.upd = lt => { dots.style.transform = `translate(${-(lt * 14) % 64}px,${-(lt * 22) % 64}px)`; b1.style.transform = `translate(${Math.sin(lt * .7 + seed) * 60}px,${Math.cos(lt * .5 + seed) * 50}px)`; b2.style.transform = `translate(${Math.cos(lt * .6 + seed) * 70}px,${Math.sin(lt * .8 + seed) * 40}px)`; };
   return d;
+}
+
+/* ---- looks: "white" puts every scene on white with navy + gold (the themes keep their rhythm through soft washes) ---- */
+const WHITE = ((window.REEL || {}).look || 'white') === 'white';
+if (WHITE) {
+  const base = { bg: '#FFFFFF', fg: '#0B1F3A', accent: '#F2A900', onAccent: '#0B1F3A', soft: 'rgba(11,31,58,.055)', line: 'rgba(11,31,58,.14)', muted: '#5C6B7E', alt: '#17305A', onAlt: '#FFFFFF' };
+  Object.assign(THEMES.dark, base, { bg2: '#EAF0F8' });
+  Object.assign(THEMES.amber, base, { bg2: '#FFF1CC' });
+  Object.assign(THEMES.light, base, { bg2: '#F4F6F9' });
 }
 
 /* ---- the scene registry; scenes.js fills it ---- */
@@ -126,7 +135,7 @@ function updCaps(t) {
     g.forEach((x, k) => {
       const n = capNodes[k], on = t >= x.s, pop = ramp(t, x.s, 0.2, E.back);
       const active = on && t < (g[k + 1] ? g[k + 1].s : x.e + 0.3);
-      n.style.color = active ? '#FFC233' : '#fff'; n.style.opacity = on ? 1 : 0.5;
+      if (WHITE) { n.style.color = '#0B1F3A'; n.style.background = active ? '#F2A900' : 'transparent'; n.style.opacity = on ? 1 : 0.35; } else { n.style.color = active ? '#FFC233' : '#fff'; n.style.opacity = on ? 1 : 0.5; }
       n.style.transform = `scale(${active ? 1 + 0.07 * pop : 1})`;
     });
   }
@@ -202,6 +211,7 @@ window.sfxEvents = () => {
   return out.sort((a, b) => a.t - b.t);
 };
 window.startReel = async () => {
+  if (WHITE) document.body.classList.add('look-white');
   await Promise.all(['800 100px "Bricolage Grotesque"', '500 40px "Bricolage Grotesque"', '600 40px "Instrument Sans"', '500 30px "DM Mono"'].map(f => document.fonts.load(f)));
   await document.fonts.ready;
   buildAll();

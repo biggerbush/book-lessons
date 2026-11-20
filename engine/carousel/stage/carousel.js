@@ -1,188 +1,226 @@
-/* Carousel stage: builds every slide of window.CAROUSEL into #deck. Static: what you see is the final frame. */
-const C = { navy: '#0B1F3A', navy2: '#17305A', gold: '#F2A900', gold2: '#FFD25E', wash: '#FFF4D6', blue: '#EAF0F8', muted: '#5C6B7E', line: 'rgba(11,31,58,.14)', soft: 'rgba(11,31,58,.06)' };
+/* Editorial carousel stage. Builds every slide of window.CAROUSEL into #deck (static frames). Diagrams are hand-drawn with rough.js. */
+const K = { ink: '#0E1A2B', ink2: '#2B3A50', muted: '#6A7486', gold: '#FFC233', hl: '#FFD45C', blue: '#CFE0F5', paper: '#F7F6F2' };
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const mark = s => esc(s).replace(/\*([^*]+)\*/g, '<span class="hl">$1</span>');   // *word* -> gold highlighter
+// **bold**  *highlighter*  _italic_
+const md = s => esc(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\*([^*]+)\*/g, '<span class="hl">$1</span>').replace(/(^|[\s(“"'])_([^_]+)_/g, '$1<i>$2</i>');
 const h = (cls, css, html) => { const d = document.createElement('div'); if (cls) d.className = cls; if (css) Object.assign(d.style, css); if (html != null) d.innerHTML = html; return d; };
-const svg = (w, hh, inner, css) => { const d = h('abs', Object.assign({ left: 0, top: 0, width: w + 'px', height: hh + 'px' }, css || {})); d.innerHTML = `<svg width="${w}" height="${hh}" viewBox="0 0 ${w} ${hh}" xmlns="http://www.w3.org/2000/svg">${inner}</svg>`; return d; };
-const num = (v, suf) => (Math.round(v * 10) / 10).toLocaleString('en-GB') + (suf || '');
-function textW(e) { const r = document.createRange(); r.selectNodeContents(e); return r.getBoundingClientRect().width; }
-function fit(e, maxH, max, min) {      // shrink font until the block fits its height
-  let f = max; e.style.fontSize = f + 'px';
-  while (f > min && e.scrollHeight > maxH + 2) { f -= 2; e.style.fontSize = f + 'px'; }
-  return f;
+const NS = 'http://www.w3.org/2000/svg';
+let SEED = 7;
+const R = () => ({ roughness: 1.3, bowing: 1.2, stroke: K.ink, strokeWidth: 3.2, seed: SEED++ });
+const opt = o => Object.assign(R(), o || {});
+
+function stage(w, hh) { const s = document.createElementNS(NS, 'svg'); s.setAttribute('width', w); s.setAttribute('height', hh); s.setAttribute('viewBox', `0 0 ${w} ${hh}`); s.style.overflow = 'visible'; return { s, rc: rough.svg(s) }; }
+function txt(s, x, y, t, o) {
+  o = o || {}; const e = document.createElementNS(NS, 'text');
+  e.setAttribute('x', x); e.setAttribute('y', y); e.setAttribute('text-anchor', o.anchor || 'middle'); e.setAttribute('dominant-baseline', 'middle');
+  e.setAttribute('font-family', o.font || 'Marker'); e.setAttribute('font-size', (o.size || 34) * 1.12); e.setAttribute('fill', o.fill || K.ink);
+  if (o.weight) e.setAttribute('font-weight', o.weight);
+  const lines = String(t).split('\n');
+  if (lines.length === 1) e.textContent = t;
+  else lines.forEach((ln, i) => { const ts = document.createElementNS(NS, 'tspan'); ts.setAttribute('x', x); ts.setAttribute('dy', i ? (o.size || 34) * 1.15 : -(lines.length - 1) * (o.size || 34) * 0.575); ts.textContent = ln; e.append(ts); });
+  s.append(e); return e;
+}
+function arrow(s, rc, x1, y1, x2, y2, o) {      // sketchy arrow with a little head
+  o = o || {}; const bend = o.bend || 0, mx = (x1 + x2) / 2 - (y2 - y1) * bend, my = (y1 + y2) / 2 + (x2 - x1) * bend;
+  s.append(rc.path(`M${x1} ${y1} Q${mx} ${my} ${x2} ${y2}`, opt({ strokeWidth: o.w || 3 })));
+  const a = Math.atan2(y2 - my, x2 - mx), L = 22;
+  s.append(rc.linearPath([[x2 - L * Math.cos(a - .45), y2 - L * Math.sin(a - .45)], [x2, y2], [x2 - L * Math.cos(a + .45), y2 - L * Math.sin(a + .45)]], opt({ strokeWidth: o.w || 3 })));
+}
+function box(s, rc, x, y, w, hh, label, o) {
+  o = o || {};
+  s.append(rc.rectangle(x, y, w, hh, opt({ fill: o.fill || K.blue, fillStyle: o.fillStyle || 'solid', strokeWidth: 3 })));
+  if (label) txt(s, x + w / 2, y + hh / 2, label, { size: o.size || 34 });
 }
 
-/* ------------------------------------------------------------ chrome shared by every slide */
-function frame(s, i, n, D) {
-  const el = h('slide'); el.id = 's' + (i + 1);
-  const wash = [C.blue, C.wash, '#F4F6F9'][i % 3];
-  const bg = h('bg'); bg.append(h('dots'));
-  bg.append(h('b1', { width: '900px', height: '900px', left: '-260px', top: '-260px', background: `radial-gradient(circle, ${wash}, rgba(255,255,255,0) 65%)` }));
-  bg.append(h('b2', { width: '760px', height: '760px', right: '-260px', bottom: '-200px', background: `radial-gradient(circle, ${i % 2 ? C.blue : C.wash}, rgba(255,255,255,0) 65%)` }));
-  el.append(bg);
-  el.append(h('top mono', null, `<span><b>${esc(D.book)}</b> · lesson ${D.lesson}</span><span>${String(i + 1).padStart(2, '0')} / ${String(n).padStart(2, '0')}</span>`));
-  const last = i === n - 1;
-  el.append(h('foot mono', null, `<span>visualgrowth.app</span>${last ? '<span class="sw">save · share</span>' : '<span class="sw">swipe <i>→</i></span>'}`));
-  el.append(h('prog', null, `<s style="width:${((i + 1) / n * 100).toFixed(1)}%"></s>`));
-  return el;
-}
-function headline(el, s, top, size, maxH) {
-  const hd = h('head disp', { top: (top || 150) + 'px' }, mark(s.head || ''));
-  el.append(hd); fit(hd, maxH || 260, size || 80, 50);
-  let y = (top || 150) + hd.offsetHeight + 26;
-  if (s.body) { const b = h('body', { top: y + 'px' }, mark(s.body)); el.append(b); fit(b, 150, 36, 28); y += b.offsetHeight; }
-  return y;
-}
-const centre = (y0, hgt) => Math.round(y0 + Math.max(40, (1215 - y0 - hgt) / 2));
-function note(el, s, y) { if (s.note) el.append(h('note mono', { top: (y || 1175) + 'px' }, esc(s.note))); }
+/* ------------------------------------------------------------ diagrams (each returns an <svg>) */
+const DIAGRAMS = {};
 
-/* ------------------------------------------------------------ slide types */
+DIAGRAMS.fragments = d => {      // a day chopped into pieces, with one tiny slot of real work
+  const W = 780, H = 400, { s, rc } = stage(W, H), segs = (d.segments || ['email', 'chat', 'meeting', 'email', 'tabs', 'meeting']).slice(0, 7);
+  const x0 = 10, y0 = 140, w = W - 20, hh = 130; let x = x0;
+  const ws = segs.map((_, i) => 0.6 + ((i * 37) % 7) / 6), tot = ws.reduce((a, b) => a + b, 0) + 0.35;
+  txt(s, x0, 112, d.start || '9:00', { anchor: 'start', size: 28, fill: K.muted }); txt(s, x0 + w, 112, d.end || '17:00', { anchor: 'end', size: 28, fill: K.muted });
+  segs.forEach((lab, i) => {
+    const sw = w * ws[i] / tot;
+    s.append(rc.rectangle(x, y0, sw, hh, opt({ fill: i % 2 ? '#E7EDF5' : K.blue, fillStyle: 'solid', strokeWidth: 2.4 })));
+    txt(s, x + sw / 2, y0 + hh / 2, sw < 95 ? lab.split('').join('') : lab, { size: sw < 80 ? 22 : sw < 110 ? 26 : 30 });
+    if (i === Math.floor(segs.length / 2)) {
+      const gw = w * 0.35 / tot; s.append(rc.rectangle(x + sw, y0, gw, hh, opt({ fill: K.gold, fillStyle: 'solid', strokeWidth: 2.4 })));
+      arrow(s, rc, x + sw + gw / 2 + 120, y0 + hh + 110, x + sw + gw / 2 + 6, y0 + hh + 14, { bend: -0.25 });
+      txt(s, x + sw + gw / 2 + 130, y0 + hh + 112, d.gold || 'the actual work', { anchor: 'start', font: 'Hand', size: 40, weight: 700 });
+      x += gw;
+    }
+    x += sw;
+  });
+  if (d.caption) txt(s, 20, 40, d.caption, { anchor: 'start', font: 'Hand', size: 42, weight: 700 });
+  return s;
+};
+
+DIAGRAMS.curves = d => {         // one line climbs, one line falls, the gap is the point
+  const W = 760, H = 440, { s, rc } = stage(W, H), L = 70, B = 380, Rt = 700, T = 40;
+  s.append(rc.line(L, T, L, B, opt())); s.append(rc.line(L, B, Rt + 20, B, opt()));
+  txt(s, Rt, B + 36, d.x || 'time', { anchor: 'end', size: 28, fill: K.muted });
+  const up = [], dn = [];
+  for (let i = 0; i <= 12; i++) { const t = i / 12, x = L + 20 + (Rt - L - 20) * t; up.push([x, B - 120 - Math.pow(t, 2.2) * 210]); dn.push([x, B - 120 + (1 - Math.pow(1 - t, 2)) * 80 - 40 * t]); }
+  s.append(rc.curve(up, opt({ stroke: '#C98F00', strokeWidth: 6 }))); s.append(rc.curve(dn, opt({ strokeWidth: 6 })));
+  txt(s, Rt - 10, up[12][1] - 34, d.up || 'value of focus', { anchor: 'end', size: 32, fill: '#9A6B00' });
+  txt(s, Rt - 10, dn[12][1] + 40, d.down || 'people who can do it', { anchor: 'end', size: 32 });
+  const gx = L + 20 + (Rt - L - 20) * 0.72, gy1 = B - 120 - Math.pow(.72, 2.2) * 210, gy2 = B - 120 + (1 - Math.pow(.28, 2)) * 80 - 40 * .72;
+  s.append(rc.line(gx, gy1 + 10, gx, gy2 - 10, opt({ strokeWidth: 2.5, strokeLineDash: [8, 10] })));
+  txt(s, L + 40, T + 20, d.gap || 'the gap = your edge', { anchor: 'start', font: 'Hand', size: 42, weight: 700 });
+  arrow(s, rc, L + 190, T + 60, gx - 14, (gy1 + gy2) / 2, { bend: 0.25 });
+  return s;
+};
+
+DIAGRAMS.converge = d => {       // two boxes feed one result
+  const W = 760, H = 420, { s, rc } = stage(W, H), a = d.inputs || ['input one', 'input two'];
+  a.slice(0, 3).forEach((t, i) => { const y = 40 + i * (a.length > 2 ? 120 : 190); box(s, rc, 10, y, 330, 120, t, { size: 32 }); arrow(s, rc, 350, y + 60, 470, 215, { bend: i ? 0.12 : -0.12 }); });
+  s.append(rc.ellipse(600, 215, 270, 200, opt({ fill: K.gold, fillStyle: 'solid' })));
+  txt(s, 600, 215, d.result || 'result', { size: 36 });
+  return s;
+};
+
+DIAGRAMS.pie = d => {            // attention split between this task and the last one
+  const W = 760, H = 420, { s, rc } = stage(W, H), CX = 220, CY = 210, r = 180, f = Math.min(.9, Math.max(.1, (d.share || 40) / 100));
+  s.append(rc.circle(CX, CY, r * 2, opt({ fill: K.blue, fillStyle: 'solid' })));
+  s.append(rc.arc(CX, CY, r * 2, r * 2, -Math.PI / 2, -Math.PI / 2 + f * Math.PI * 2, true, opt({ fill: K.gold, fillStyle: 'hachure', hachureGap: 10, fillWeight: 3 })));
+  txt(s, CX - 60, CY + 50, d.main || 'this task', { size: 30 });
+  arrow(s, rc, 455, 120, CX + 100, CY - 70, { bend: 0.2 });
+  txt(s, 465, 70, d.label || 'still on the\nlast task', { anchor: 'start', font: 'Hand', size: 42, weight: 700 });
+  return s;
+};
+
+DIAGRAMS.formula = d => {        // Result = A x B
+  const W = 780, H = 400, { s, rc } = stage(W, H), p = d.parts || ['Result', 'A', 'B'];
+  box(s, rc, 170, 10, 440, 120, p[0], { fill: K.gold, size: 38 });
+  txt(s, 390, 175, d.ops ? d.ops[0] : '=', { size: 64, font: 'Sans', weight: 800 });
+  box(s, rc, 20, 230, 310, 120, p[1], { size: 34 });
+  txt(s, 390, 290, d.ops ? (d.ops[1] || '×') : '×', { size: 64, font: 'Sans', weight: 800 });
+  box(s, rc, 450, 230, 310, 120, p[2], { size: 34 });
+  if (d.note) txt(s, 390, 390, d.note, { font: 'Hand', size: 38, weight: 700 });
+  return s;
+};
+
+DIAGRAMS.flow = d => {           // A -> B -> C (last one gold)
+  const st = (d.steps || []).slice(0, 4), n = st.length || 1, W = 800, bw = (W - (n - 1) * 70) / n, H = 300, { s, rc } = stage(W, H);
+  st.forEach((t, i) => {
+    const x = i * (bw + 70), last = i === n - 1;
+    box(s, rc, x, 60, bw, 180, '', { fill: last ? K.gold : K.blue });
+    txt(s, x + bw / 2, 150, t.t || t, { size: 32 }); if (t.sub) txt(s, x + bw / 2, 278, t.sub, { font: 'Hand', size: 32, weight: 700, fill: K.ink2 });
+    if (i < n - 1) arrow(s, rc, x + bw + 8, 150, x + bw + 62, 150);
+  });
+  return s;
+};
+
+DIAGRAMS.split = d => {          // two columns (e.g. shallow vs deep)
+  const W = 760, H = 420, { s, rc } = stage(W, H), cols = d.columns || [];
+  cols.slice(0, 2).forEach((c, i) => {
+    const x = i * 390, gold = i === 1;
+    s.append(rc.rectangle(x, 10, 370, 400, opt({ fill: gold ? '#FFE9A8' : '#fff', fillStyle: 'solid' })));
+    txt(s, x + 185, 60, c.t, { font: 'Sans', weight: 800, size: 34 });
+    s.append(rc.line(x + 40, 98, x + 330, 98, opt({ strokeWidth: 2 })));
+    (c.items || []).slice(0, 5).forEach((it, k) => { txt(s, x + 40, 150 + k * 58, (gold ? '✓ ' : '• ') + it, { anchor: 'start', size: 32 }); });
+  });
+  return s;
+};
+
+DIAGRAMS.calendar = d => {       // a day with one protected block
+  const W = 700, H = 470, { s, rc } = stage(W, H), hrs = d.hours || ['8:00', '9:00', '10:00', '11:00', '12:00'], blk = d.block || 1, other = d.other || {};
+  s.append(rc.rectangle(10, 10, W - 20, H - 20, opt({ fill: '#fff', fillStyle: 'solid' })));
+  const rowH = (H - 60) / hrs.length;
+  hrs.forEach((t, i) => {
+    const y = 40 + i * rowH;
+    txt(s, 40, y + 12, t, { anchor: 'start', size: 28, fill: K.muted });
+    s.append(rc.line(130, y, W - 30, y, opt({ strokeWidth: 1.6, stroke: '#9AA6B8' })));
+    if (i === blk) { s.append(rc.rectangle(140, y + 8, W - 180, rowH - 16, opt({ fill: K.gold, fillStyle: 'solid' }))); txt(s, 140 + (W - 180) / 2, y + rowH / 2, d.label || 'DEEP WORK', { font: 'Sans', weight: 800, size: 34 }); }
+    else if (other[i]) txt(s, 170, y + rowH / 2, other[i], { anchor: 'start', size: 30, fill: K.ink2 });
+  });
+  if (d.note) { arrow(s, rc, W + 40, 90, W - 60, 40 + blk * rowH + 20, { bend: -0.25 }); txt(s, W + 30, 60, d.note, { anchor: 'start', font: 'Hand', size: 40, weight: 700 }); }
+  return s;
+};
+
+/* ------------------------------------------------------------ slides */
+function slide(i) { const el = h('slide'); el.id = 's' + (i + 1); return el; }
+function centreCol(el, col, top, bottom) { el.append(col); const hh = col.offsetHeight; col.style.top = Math.max(top || 90, ((bottom || 1270) + (top || 90)) / 2 - hh / 2) + 'px'; }
+function fitText(e, maxH, max, min) { let f = max; e.style.fontSize = f + 'px'; while (f > min && e.offsetHeight > maxH) { f -= 2; e.style.fontSize = f + 'px'; } }
+function figure(d, framed) { if (!d || !DIAGRAMS[d.kind]) return null; const f = h('fig' + (framed === false ? '' : ' box')); f.append(DIAGRAMS[d.kind](d)); return f; }
+function handle(el, D) { el.append(h('handle', null, esc(D.handle || 'visualgrowth.app'))); }
+
 const SLIDES = {};
 
 SLIDES.cover = (el, s, D) => {
-  const card = h('card', { left: '170px', top: '150px', width: '740px', height: '592px', transform: 'rotate(-3deg)' });
-  const img = document.createElement('img'); img.src = D.cover || ''; card.append(img);
-  let rays = ''; for (let j = 0; j < 22; j++) { const a = j * Math.PI * 2 / 22; rays += `<path d="M540 450 L${540 + Math.cos(a - .05) * 1300} ${450 + Math.sin(a - .05) * 1300} L${540 + Math.cos(a + .05) * 1300} ${450 + Math.sin(a + .05) * 1300}Z" fill="${C.navy}" opacity="${0.018 + (j % 3) * 0.01}"/>`; }
-  el.append(svg(1080, 1350, `<defs><radialGradient id="g"><stop offset="0" stop-color="${C.gold2}" stop-opacity=".55"/><stop offset="1" stop-color="${C.gold2}" stop-opacity="0"/></radialGradient></defs>${rays}<circle cx="540" cy="450" r="520" fill="url(#g)"/>`));
-  el.append(card);
-  const kick = h('abs mono', { left: 0, width: '1080px', top: '800px', textAlign: 'center', fontSize: '26px', color: C.gold, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px' }, `<span style="width:50px;height:3px;background:${C.gold}"></span>A lesson from ${esc(D.book)}${D.author ? ' · ' + esc(D.author) : ''}<span style="width:50px;height:3px;background:${C.gold}"></span>`);
-  const hd = h('abs disp', { left: '70px', width: '940px', top: '856px', textAlign: 'center', fontSize: '96px' }, mark(s.head || ''));
-  el.append(kick, hd); fit(hd, 300, 96, 56);
+  const hd = h('abs serif', { left: '110px', top: '150px', width: '860px', fontWeight: 800, fontSize: '118px', lineHeight: '1.02', letterSpacing: '-.02em' }, md(s.head));
+  hd.querySelectorAll('i').forEach(e => { e.style.fontWeight = 800; e.style.fontStyle = 'italic'; });
+  el.append(hd); fitText(hd, 640, 118, 72);
+  const yb = 150 + hd.offsetHeight + 40;
+  el.append(h('abs serif', { left: '114px', top: yb + 'px', fontSize: '34px', color: K.muted }, `<i>Written by</i> ${esc(D.writer || 'VisualGrowth')}`));
+  const card = h('card', { left: '560px', top: '820px', width: '420px', height: '336px', transform: 'rotate(4deg)' });
+  const img = document.createElement('img'); img.src = D.cover || ''; card.append(img); el.append(card);
+  const { s: sv, rc } = stage(480, 300); sv.style.cssText = 'position:absolute;left:110px;top:860px;overflow:visible';
+  txt(sv, 0, 40, s.note || `from ${D.book}`, { anchor: 'start', font: 'Hand', size: 46, weight: 700 });
+  arrow(sv, rc, 230, 110, 430, 190, { bend: -0.25 });
+  el.append(sv);
 };
 
-SLIDES.chart = (el, s) => {
-  const y0 = headline(el, s), T = Math.max(y0 + 90, 520), B = 1080, L = 110, R = 970, W = R - L, Ht = B - T;
-  let g = '';
-  for (let k = 1; k <= 3; k++) g += `<line x1="${L}" x2="${R}" y1="${T + Ht * k / 4}" y2="${T + Ht * k / 4}" stroke="${C.line}" stroke-width="2" stroke-dasharray="4 12"/>`;
-  g += `<line x1="${L}" x2="${R}" y1="${B}" y2="${B}" stroke="${C.line}" stroke-width="5"/>`;
-  if (s.kind === 'line' && (s.points || []).length >= 2) {
-    const pts = s.points, n = pts.length, lo = Math.min(0, ...pts), hi = Math.max(...pts) || 1;
-    const P = i => [L + W * i / (n - 1), B - (pts[i] - lo) / (hi - lo) * (Ht - 70)];
-    let d = ''; for (let i = 0; i < n; i++) { const [x, y] = P(i); if (!i) d = `M${x} ${y}`; else { const [px, py] = P(i - 1), mx = (px + x) / 2; d += ` C${mx} ${py} ${mx} ${y} ${x} ${y}`; } }
-    g += `<defs><linearGradient id="ar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${C.gold}" stop-opacity=".35"/><stop offset="1" stop-color="${C.gold}" stop-opacity="0"/></linearGradient></defs>`;
-    g += `<path d="${d} L${R} ${B} L${L} ${B}Z" fill="url(#ar)"/><path d="${d}" fill="none" stroke="${C.gold}" stroke-width="12" stroke-linecap="round"/>`;
-    pts.forEach((v, i) => { const [x, y] = P(i); g += `<circle cx="${x}" cy="${y}" r="14" fill="#fff" stroke="${C.gold}" stroke-width="7"/>`; });
-    (s.labels || []).forEach((t, i) => { if (t) { const [x, y] = P(i); g += `<text x="${x}" y="${B + 44}" text-anchor="middle" font-family="DM Mono" font-size="24" letter-spacing="3" fill="${C.muted}">${esc(t)}</text><line x1="${x}" x2="${x}" y1="${y + 22}" y2="${B}" stroke="${C.navy}" stroke-width="3" stroke-dasharray="3 9" opacity=".5"/>`; } });
-    el.append(svg(1080, 1350, g));
-    if (s.end_label) { const [ex, ey] = P(n - 1); el.append(h('abs disp', { right: '100px', top: Math.max(T - 110, ey - 130) + 'px', fontSize: '84px', color: C.gold }, esc(s.end_label))); }
-  } else {      // compound: one curve climbs, the other sinks
-    const N = 60; let up = '', dn = '';
-    for (let i = 0; i <= N; i++) { const x = L + W * i / N, t = i / N; up += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + (B - 120 - (Math.pow(t, 2.6)) * (Ht - 200)).toFixed(1) + ' '; dn += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + (B - 120 + (1 - Math.pow(1 - t, 2)) * 90).toFixed(1) + ' '; }
-    g += `<line x1="${L}" x2="${R}" y1="${B - 120}" y2="${B - 120}" stroke="${C.navy}" stroke-width="3" stroke-dasharray="6 10" opacity=".35"/>`;
-    g += `<path d="${up}" fill="none" stroke="${C.gold}" stroke-width="14" stroke-linecap="round"/><path d="${dn}" fill="none" stroke="${C.navy}" stroke-width="14" stroke-linecap="round"/>`;
-    g += `<circle cx="${R}" cy="${B - 120 - (Ht - 200)}" r="16" fill="${C.gold}"/><circle cx="${R}" cy="${B - 30}" r="16" fill="${C.navy}"/>`;
-    el.append(svg(1080, 1350, g));
-    el.append(h('abs mono', { left: L + 'px', top: T + 'px', fontSize: '26px', color: C.gold }, esc(s.up_label || '')));
-    el.append(h('abs mono', { left: L + 'px', top: B + 24 + 'px', fontSize: '26px', color: C.navy }, esc(s.down_label || '')));
-    el.append(h('abs disp', { right: '150px', top: T - 20 + 'px', fontSize: '88px', color: C.gold }, esc(s.up_end || '')));
-    el.append(h('abs disp', { right: '110px', top: B + 10 + 'px', fontSize: '64px', color: C.navy }, esc(s.down_end || '')));
-  }
-  note(el, s, 1222);
+SLIDES.story = (el, s, D) => {
+  const col = h('col');
+  const hd = h('serif', { fontWeight: 800, fontSize: '84px', lineHeight: '1.05', letterSpacing: '-.015em' }, md(s.head)); col.append(hd);
+  (s.body || []).forEach(p => col.append(h('p', null, md(p))));
+  const f = figure(s.diagram, false); if (f) col.append(f);
+  centreCol(el, col); handle(el, D);
 };
 
-SLIDES.dots = (el, s) => {
-  const y0 = headline(el, s), total = [10, 20, 50, 100].includes(+s.total) ? +s.total : 10, hl = Math.min(total, +s.hl || 0);
-  const cols = total <= 20 ? 5 : 10, rows = Math.ceil(total / cols), bigH = s.big ? 120 : 0, cell = Math.min(860 / cols, (1190 - y0 - bigH - 60) / rows, 190), top = centre(y0 + bigH, rows * cell) + 10, gx = 540 - cols * cell / 2;
-  let g = '';
-  for (let i = 0; i < total; i++) {
-    const c = i % cols, r = Math.floor(i / cols), x = gx + (c + .5) * cell, y = top + (r + .5) * cell, sz = cell * .86, on = i < hl;
-    g += `<g fill="${on ? C.gold : 'rgba(11,31,58,.14)'}"><circle cx="${x}" cy="${y - sz * .2}" r="${sz * .17}"/><path d="M${x - sz * .28} ${y + sz * .36}a${sz * .28} ${sz * .3} 0 0 1 ${sz * .56} 0z"/></g>`;
-  }
-  el.append(svg(1080, 1350, g));
-  if (s.big) el.append(h('abs disp', { left: 0, width: '1080px', textAlign: 'center', top: top - 130 + 'px', fontSize: '96px', color: C.gold }, esc(s.big)));
-  note(el, s, 1222);
-};
-
-SLIDES.donut = (el, s) => {
-  headline(el, s);
-  const segs = s.segments || [], tot = segs.reduce((a, g) => a + (+g.value || 0), 0) || 1, cols = [C.gold, C.navy, C.navy2, C.muted];
-  const CX = 330, CY = 830, Rr = 190, Cc = 2 * Math.PI * Rr;
-  let acc = 0, g = `<circle cx="${CX}" cy="${CY}" r="${Rr}" fill="none" stroke="${C.soft}" stroke-width="96"/>`;
-  segs.forEach((sg, i) => { const f = (+sg.value || 0) / tot; g += `<circle cx="${CX}" cy="${CY}" r="${Rr}" fill="none" stroke="${cols[i]}" stroke-width="96" stroke-dasharray="${Math.max(0, f * Cc - 6)} ${Cc}" transform="rotate(${-90 + acc * 360} ${CX} ${CY})"/>`; acc += f; });
-  el.append(svg(1080, 1350, g));
-  if (s.center) el.append(h('abs disp', { left: CX - 130 + 'px', top: CY - 40 + 'px', width: '260px', textAlign: 'center', fontSize: '64px' }, esc(s.center)));
-  const leg = h('abs', { left: '600px', top: CY - 120 + 'px', width: '400px', display: 'flex', flexDirection: 'column', gap: '34px' });
-  segs.forEach((sg, i) => leg.append(h('', { display: 'flex', flexDirection: 'column', gap: '6px' }, `<span class="disp" style="font-size:76px;color:${i ? C.navy : C.gold}">${num(+sg.value || 0, s.suffix)}</span><span style="display:flex;gap:14px;align-items:center;font-size:32px"><i style="width:26px;height:26px;border-radius:8px;background:${cols[i]}"></i>${esc(sg.label)}</span>`)));
-  el.append(leg);
-  note(el, s, 1222);
-};
-
-SLIDES.meter = (el, s) => {
-  const y0 = headline(el, s), rows = s.rows || [], mx = +s.max || Math.max(1, ...rows.map(r => +r.value || 0)), gap = Math.min(270, 640 / Math.max(1, rows.length)), top = centre(y0, rows.length * gap - (gap - 170));
-  rows.forEach((r, i) => {
-    const y = top + i * gap, k = Math.max(0.02, (+r.value || 0) / mx), on = !!r.hl;
-    el.append(h('abs', { left: '80px', top: y + 'px', fontSize: '40px', width: '650px' }, esc(r.label)));
-    el.append(h('abs disp', { right: '80px', top: y - 18 + 'px', fontSize: '72px', color: on ? C.gold : C.navy }, num(+r.value || 0, s.suffix)));
-    el.append(h('abs', { left: '80px', top: y + 74 + 'px', width: '920px', height: '96px', borderRadius: '48px', background: C.soft, border: `2px solid ${C.line}`, overflow: 'hidden' }, `<div style="height:100%;width:${(k * 100).toFixed(1)}%;border-radius:48px;background:${on ? C.gold : C.navy}"></div>`));
+SLIDES.define = (el, s, D) => {
+  const col = h('col');
+  col.append(h('serif', { fontWeight: 800, fontSize: '76px', lineHeight: '1.06', letterSpacing: '-.015em' }, md(s.head)));
+  (s.terms || []).forEach((t, i) => {
+    const e = h('', { marginTop: i ? '40px' : '64px', padding: '34px 40px', border: `3px ${i ? 'dashed' : 'solid'} ${K.ink}`, background: i ? 'rgba(255,255,255,.5)' : '#FFF6D8', borderRadius: '6px' },
+      `<div class="serif" style="font-size:58px;font-weight:800">${esc(t.word)} <span style="font-weight:400;font-style:italic;font-size:36px;color:${K.muted}">(${esc(t.pos || 'noun')})</span></div>
+       <div class="serif" style="font-size:38px;line-height:1.35;margin-top:12px">${md(t.def)}</div>`);
+    col.append(e);
   });
-  note(el, s, 1222);
+  if (s.note) col.append(h('hand', { fontSize: '46px', marginTop: '34px', alignSelf: 'flex-end', transform: 'rotate(-2deg)' }, esc(s.note)));
+  centreCol(el, col); handle(el, D);
 };
 
-SLIDES.formula = (el, s) => {
-  const y0 = headline(el, s), parts = s.parts || [], ops = s.ops || [], top = Math.max(y0 + 80, 470);
-  const col = h('abs', { left: '120px', width: '840px', top: top + 'px', display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: '0' });
-  parts.forEach((p, i) => {
-    if (i) col.append(h('disp', { textAlign: 'center', fontSize: '84px', color: C.gold, lineHeight: '1.1' }, esc(ops[i - 1] || '×')));
-    const on = i === 0;
-    col.append(h('row', { background: on ? C.navy : '#fff', color: on ? '#fff' : C.navy, borderColor: on ? C.navy : C.line }, `<div class="ic" style="background:${on ? C.gold : C.wash};color:${C.navy}">${iconSVG(p.icon || 'star', 58, 7)}</div><div class="disp" style="font-size:58px">${esc(p.t)}</div>`));
-  });
-  el.append(col); col.style.top = centre(y0, col.offsetHeight) + 'px';
+SLIDES.item = (el, s, D) => {
+  const col = h('col');
+  col.append(h('title', null, `<span class="hlb">${esc(s.n ? s.n + '. ' : '')}${esc(s.title)}</span>`));
+  if (s.what) col.append(h('p', null, `<b>${esc(s.what_label || 'What it is')}:</b> ${md(s.what)}`));
+  if (s.try) col.append(h('p', { marginTop: '26px' }, `<b>${esc(s.try_label || 'Try this')}:</b> ${md(s.try)}`));
+  const f = figure(s.diagram); if (f) col.append(f);
+  centreCol(el, col); handle(el, D);
+  // keep the figure inside the slide: shrink it if the column is too tall
+  if (f && col.offsetHeight > 1180) { const k = Math.max(.6, (1180 - (col.offsetHeight - f.offsetHeight)) / f.offsetHeight); f.style.transform = `scale(${k})`; f.style.transformOrigin = '50% 0'; f.style.marginBottom = -(1 - k) * f.offsetHeight + 'px'; centreCol(el, col); }
 };
 
-SLIDES.versus = (el, s) => {
-  const y0 = headline(el, s), top = centre(y0, 660), L = s.left || {}, Rr = s.right || {}, win = s.win || 'left';
-  const mk = (o, y, bg, fg, ic, faded) => el.append(h('row', { position: 'absolute', left: '80px', width: '920px', top: y + 'px', height: '300px', background: bg, color: fg, borderColor: bg, opacity: faded ? .92 : 1 },
-    `<div style="flex:none;color:${fg === '#fff' ? C.gold : C.navy}">${iconSVG(o.icon || ic, 130, 5)}</div><div style="display:flex;flex-direction:column;gap:12px"><div class="disp" style="font-size:76px">${esc(o.t)}</div><div style="font-size:36px;opacity:.85">${esc(o.sub)}</div></div>`));
-  mk(L, top, win === 'left' ? C.navy : C.wash, win === 'left' ? '#fff' : C.navy, 'check');
-  mk(Rr, top + 360, win === 'left' ? C.wash : C.navy, win === 'left' ? C.navy : '#fff', 'cross');
-  el.append(h('abs disp', { left: '470px', top: top + 255 + 'px', width: '140px', height: '140px', borderRadius: '50%', background: C.gold, color: C.navy, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '56px', boxShadow: '0 0 0 12px #fff' }, 'VS'));
-};
-
-SLIDES.steps = (el, s) => {
-  const y0 = headline(el, s), items = s.items || [], gap = Math.min(250, 660 / Math.max(1, items.length)), top = centre(y0, (items.length - 1) * gap + 110);
-  el.append(h('abs', { left: '139px', top: top + 40 + 'px', width: '6px', height: (items.length - 1) * gap + 'px', background: `linear-gradient(${C.gold}, ${C.gold2})`, borderRadius: '3px' }));
-  items.forEach((it, i) => {
-    const y = top + i * gap, last = i === items.length - 1;
-    el.append(h('abs disp', { left: '92px', top: y + 'px', width: '100px', height: '100px', borderRadius: '50%', background: last ? C.navy : C.gold, color: last ? C.gold : C.navy, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '50px', boxShadow: '0 0 0 10px #fff' }, String(i + 1)));
-    el.append(h('abs', { left: '240px', top: y + 2 + 'px', width: '760px' }, `<div class="disp" style="font-size:60px">${esc(it.t)}</div><div style="font-size:34px;color:${C.muted};margin-top:8px">${esc(it.sub)}</div>`));
-  });
-};
-
-SLIDES.big = (el, s) => {
-  if (s.glyph) el.append(h('abs disp', { right: '-40px', top: '260px', fontSize: '900px', color: C.gold2, opacity: .45, lineHeight: '1' }, esc(s.glyph)));
-  const hd = h('abs disp', { left: '80px', width: '920px', top: '0', fontSize: '120px' }, mark(s.head || ''));
-  el.append(hd); fit(hd, 640, 120, 64);
-  hd.style.top = (640 - hd.offsetHeight / 2) + 'px';
-  if (s.body) el.append(h('body', { top: 640 + hd.offsetHeight / 2 + 40 + 'px' }, mark(s.body)));
-};
-
-SLIDES.tips = (el, s) => {
-  const y0 = headline(el, s), items = s.items || [], top = Math.max(y0 + 70, 440);
-  const col = h('abs', { left: '80px', width: '920px', top: top + 'px', display: 'flex', flexDirection: 'column', gap: '30px' });
-  items.forEach((it, i) => col.append(h('row', null, `<div class="ic" style="background:${i ? C.wash : C.gold};color:${C.navy}">${iconSVG(it.icon || 'check', 58, 7)}</div><div><div class="disp" style="font-size:52px">${esc(it.t)}</div>${it.sub ? `<div style="font-size:32px;color:${C.muted};margin-top:6px">${esc(it.sub)}</div>` : ''}</div>`)));
-  el.append(col); col.style.top = centre(y0, col.offsetHeight) + 'px';
+SLIDES.action = (el, s, D) => {
+  const col = h('col');
+  col.append(h('title', null, `<span class="hlb">${esc(s.head)}</span>`));
+  const f = figure(s.diagram, false); if (f) { f.style.marginTop = '50px'; f.style.alignSelf = 'flex-start'; col.append(f); }
+  (s.steps || []).forEach((t, i) => col.append(h('p', { marginTop: i ? '14px' : '40px' }, `<b>${i + 1}.</b> ${md(t)}`)));
+  if (s.challenge) col.append(h('p', { marginTop: '36px', fontStyle: 'italic', color: K.ink2 }, md(s.challenge)));
+  centreCol(el, col); handle(el, D);
 };
 
 SLIDES.cta = (el, s, D) => {
-  const card = h('card', { left: '290px', top: '170px', width: '500px', height: '400px', transform: 'rotate(3deg)' });
-  const img = document.createElement('img'); img.src = D.cover || ''; card.append(img); el.append(card);
-  const hd = h('abs disp', { left: '80px', width: '920px', top: '650px', textAlign: 'center', fontSize: '90px' }, mark(s.head || 'Want the *full lesson*?'));
-  el.append(hd); fit(hd, 200, 90, 56);
-  el.append(h('abs', { left: '120px', width: '840px', top: 650 + hd.offsetHeight + 30 + 'px', textAlign: 'center', fontSize: '38px', color: C.muted, lineHeight: '1.3' }, mark(s.body || '')));
-  const acts = h('abs', { left: 0, width: '1080px', top: '1030px', display: 'flex', justifyContent: 'center', gap: '22px' });
-  (s.actions || ['Save', 'Share', 'Follow']).forEach((a, i) => acts.append(h('chip disp', { fontSize: '34px', background: i === 0 ? C.gold : '#fff', borderColor: i === 0 ? C.gold : C.line }, esc(a))));
-  el.append(acts);
+  const col = h('col', { alignItems: 'center', textAlign: 'center' });
+  col.append(h('serif', { fontWeight: 800, fontSize: '96px', lineHeight: '1.04', letterSpacing: '-.015em' }, md(s.head)));
+  if (s.body) col.append(h('p', { textAlign: 'center' }, md(s.body)));
+  const wrap = h('', { position: 'relative', width: '420px', height: '336px', marginTop: '60px' });
+  const card = h('card', { left: 0, top: 0, width: '420px', height: '336px', transform: 'rotate(-3deg)' });
+  const img = document.createElement('img'); img.src = D.cover || ''; card.append(img); wrap.append(card); col.append(wrap);
+  col.append(h('hand', { fontSize: '46px', marginTop: '44px' }, esc(s.link_note || 'the full animated lesson:')));
+  col.append(h('sans', { fontWeight: 800, fontSize: '40px', marginTop: '8px', background: K.hl, padding: '6px 22px', borderRadius: '10px' }, esc(s.link || 'visualgrowth.app')));
+  centreCol(el, col);
 };
 
 /* ------------------------------------------------------------ build */
 window.buildDeck = async () => {
-  const D = window.CAROUSEL, deck = document.getElementById('deck'), n = D.slides.length;
+  const D = window.CAROUSEL, deck = document.getElementById('deck');
   await document.fonts.ready;
-  for (const f of ['800 40px "Bricolage Grotesque"', '500 40px "Bricolage Grotesque"', '600 40px "Instrument Sans"', '500 40px "DM Mono"']) await document.fonts.load(f);
-  D.slides.forEach((s, i) => {
-    const el = frame(s, i, n, D); deck.append(el);
-    (SLIDES[s.type] || SLIDES.big)(el, s, D, i);
-  });
+  for (const f of ['800 40px News', 'italic 800 40px News', '400 40px News', 'italic 400 40px News', '700 40px News', '800 40px Sans', '700 40px Hand', '400 40px Marker']) await document.fonts.load(f);
+  D.slides.forEach((s, i) => { SEED = 11 + i * 50; const el = slide(i); deck.append(el); (SLIDES[s.type] || SLIDES.story)(el, s, D, i); });
   await Promise.all([...document.images].map(im => im.complete ? 0 : new Promise(r => { im.onload = im.onerror = r; })));
-  return n;
+  return D.slides.length;
 };

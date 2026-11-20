@@ -14,8 +14,11 @@ HERE = Path(__file__).parent
 STAGE = HERE / "stage"
 REEL_STAGE = HERE.parent / "reel" / "stage"
 EXAMPLE = HERE / "examples" / "deep-work-1.carousel.json"
-FONTS = (("__F_BR800__", "bricolage-grotesque-latin-800-normal.woff2"), ("__F_BR500__", "bricolage-grotesque-latin-500-normal.woff2"),
-         ("__F_IS600__", "instrument-sans-latin-600-normal.woff2"), ("__F_DM500__", "dm-mono-latin-500-normal.woff2"))
+FONTS = (("__F_NR400__", "newsreader-latin-400-normal.woff2"), ("__F_NR400I__", "newsreader-latin-400-italic.woff2"),
+         ("__F_NR500I__", "newsreader-latin-500-italic.woff2"), ("__F_NR700__", "newsreader-latin-700-normal.woff2"),
+         ("__F_NR800__", "newsreader-latin-800-normal.woff2"), ("__F_NR800I__", "newsreader-latin-800-italic.woff2"),
+         ("__F_IN700__", "inter-latin-700-normal.woff2"), ("__F_IN800__", "inter-latin-800-normal.woff2"),
+         ("__F_CV700__", "caveat-latin-700-normal.woff2"), ("__F_PH400__", "patrick-hand-latin-400-normal.woff2"))
 
 PREVIEW = """<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>%(title)s · carousel</title>
 <style>body{margin:0;background:#EEF2F7;font:16px system-ui;color:#0B1F3A;padding:20px}h3{margin:0 0 14px}
@@ -27,10 +30,10 @@ PREVIEW = """<!doctype html><meta charset=utf-8><meta name=viewport content="wid
 def page(plan: dict, src: dict, n: int) -> str:
     css = (STAGE / "carousel.css").read_text(encoding="utf8")
     for key, f in FONTS:
-        css = css.replace(key, "data:font/woff2;base64," + base64.b64encode((REEL_STAGE / "fonts" / f).read_bytes()).decode())
+        css = css.replace(key, "data:font/woff2;base64," + base64.b64encode((STAGE / "fonts" / f).read_bytes()).decode())
     data = {"book": src["book"], "author": src.get("author", ""), "lesson": n, "cover": src.get("cover", ""), "slides": plan["slides"]}
     return ("<!doctype html><html><head><meta charset=utf-8><style>" + css + "</style></head><body><div id=deck></div><script>"
-            + "window.CAROUSEL=" + json.dumps(data).replace("</", "<\\/") + ";\n" + (REEL_STAGE / "icons.js").read_text(encoding="utf8")
+            + "window.CAROUSEL=" + json.dumps(data).replace("</", "<\\/") + ";\n" + (STAGE / "rough.js").read_text(encoding="utf8")
             + "\n" + (STAGE / "carousel.js").read_text(encoding="utf8") + "</script></body></html>")
 
 

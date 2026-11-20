@@ -98,4 +98,4 @@ Approving a book now makes its jacket cover automatically (`engine/publish.py` �
 
 ## Carousels (Instagram)
 
-`python -m engine.carousel --book deep-work --lesson 1` turns one lesson into 9-12 static 1080x1350 slides (white, navy + gold): Claude writes the slides (insight-first, mostly graphics), Playwright renders each to PNG in `site/carousels/<book>-<n>/` with a swipe-through preview page. `--dry` uses the Deep Work example. Actions → "Create carousel".
+`python -m engine.carousel --book deep-work --lesson 1` turns one lesson into 8-11 static 1080x1350 slides in an editorial listicle format (grid paper, serif headlines, highlighter titles, rough.js hand-drawn diagrams): hook cover -> relatable setup -> the book's idea -> numbered truths (what it is / try this + sketch) -> action -> save/share. Claude writes it, Playwright renders each to PNG in `site/carousels/<book>-<n>/` with a swipe-through preview page. `--dry` uses the Deep Work example. Actions → "Create carousel".

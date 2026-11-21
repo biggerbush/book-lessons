@@ -74,6 +74,7 @@ const root = document.getElementById('scenes');
 const beats = R.beats.map((b, i) => {
   const th = THEMES[b.theme] || THEMES.dark;
   const w = el('scene'); const cam = el('cam');
+  if (!R.captions) { cam.style.top = '170px'; cam.style.bottom = '-170px'; cam.style.overflow = 'visible'; }   // no caption band: centre the picture in the frame
   const bg = backdrop(th, i * 1.7);
   w.append(bg, cam); root.append(w);
   b.t0 = i === 0 ? 0 : b.start - LEAD;
@@ -117,6 +118,7 @@ const groups = [];
 })();
 let capIdx = -2, capNodes = [];
 function updCaps(t) {
+  if (!R.captions) return;                 // captions are off by default: the graphics carry the words
   let gi = -1;
   for (let i = 0; i < groups.length; i++) { const g = groups[i]; const nextS = i + 1 < groups.length ? groups[i + 1][0].s : 1e9; if (t >= g[0].s - 0.02 && t < Math.min(g[g.length - 1].e + 0.35, nextS)) { gi = i; break; } }
   if (gi !== capIdx) {

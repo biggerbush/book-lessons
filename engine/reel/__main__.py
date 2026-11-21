@@ -33,6 +33,7 @@ def main(argv=None) -> int:
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--out", help="where to write reel.mp4 (default site/reels/<slug>-<n>/)")
     ap.add_argument("--no-sfx", action="store_true")
+    ap.add_argument("--captions", action="store_true", help="burn in word-by-word captions (off by default)")
     ap.add_argument("--look", choices=["white", "dark"], default="white", help="white = white backgrounds, navy + gold (default); dark = the navy look")
     a = ap.parse_args(argv)
 
@@ -65,7 +66,7 @@ def main(argv=None) -> int:
 
     mp3, words, real = voice.make(text, work, a.dry)
     usage["tts_chars"] = len(text) if real and not (work / "align.json").exists() else usage["tts_chars"]
-    reel = build.timeline(plan, words, src.get("cover", ""), src["book"], a.lesson, src.get("author", ""), a.look)
+    reel = build.timeline(plan, words, src.get("cover", ""), src["book"], a.lesson, src.get("author", ""), a.look, a.captions)
     log(f"timeline: {reel['dur']:.1f}s")
 
     tmp = Path(tempfile.mkdtemp(prefix="reel-"))

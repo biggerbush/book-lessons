@@ -324,17 +324,25 @@ G.choices = d => {    // multiple choice: what would YOU say? (also used as a sp
   return svg(out);
 };
 
-G.chat = d => {       // a short exchange with the echoed words highlighted
-  const m = (d.messages || []).slice(0, 4); let out = '', y = 50;
+G.chat = d => {       // a short exchange with the echoed words highlighted (bubbles wrap to 2 lines)
+  const m = (d.messages || []).slice(0, 4), CW = 15.2, MAXC = 38; let out = '', y = 40;
+  const wrap = t => { if (t.length <= MAXC) return [t]; const cut = t.lastIndexOf(' ', Math.min(t.length - 6, Math.ceil(t.length / 2) + 6)); return [t.slice(0, cut), t.slice(cut + 1)]; };
+  const line = (t, hl, me, full) => {   // highlight the echoed phrase, even when it wraps across lines
+    if (!hl) return esc(t);
+    const start = full.indexOf(hl), end = start + hl.length, off = full.indexOf(t);
+    if (start < 0) return esc(t);
+    const a = Math.max(0, start - off), b = Math.min(t.length, end - off);
+    if (b <= 0 || a >= t.length) return esc(t);
+    return `${esc(t.slice(0, a))}<tspan fill="${me ? M.gold2 : '#8A5A00'}" font-weight="800">${esc(t.slice(a, b))}</tspan>${esc(t.slice(b))}`;
+  };
   m.forEach(msg => {
-    const me = msg.who === 'me', txt = msg.t || '', hl = msg.hl || '', w = Math.min(640, txt.length * 17 + 80), x = me ? 908 - w : 60, hh = 92;
+    const me = msg.who === 'me', lines = wrap(msg.t || ''), w = Math.min(820, Math.max(...lines.map(l => l.length)) * CW + 70), x = me ? 908 - w : 60, hh = lines.length > 1 ? 128 : 84;
     out += T(me ? 908 : 60, y + 6, msg.name || (me ? 'YOU' : 'THEM'), { a: me ? 'end' : 'start', s: 18, w: 800, c: M.muted, ls: 2 });
     out += RR(x, y + 22, w, hh, 30, me ? M.ink : M.white, 'filter="url(#sh)"');
-    const parts = hl && txt.includes(hl) ? txt.split(hl) : [txt];
-    out += `<text x="${x + 32}" y="${y + 22 + hh / 2}" dominant-baseline="middle" font-family="News" font-weight="700" font-size="30" fill="${me ? M.white : M.ink}">${esc(parts[0])}${parts.length > 1 ? `<tspan fill="${me ? M.gold2 : '#8A5A00'}" font-weight="800">${esc(hl)}</tspan>${esc(parts[1])}` : ''}</text>`;
-    y += hh + 54;
+    lines.forEach((l, i) => { out += `<text x="${x + 32}" y="${y + 22 + hh / 2 + (lines.length > 1 ? (i ? 22 : -20) : 0)}" dominant-baseline="middle" font-family="News" font-weight="700" font-size="29" fill="${me ? M.white : M.ink}">${line(l, msg.hl, me, msg.t || '')}</text>`; });
+    y += hh + 48;
   });
-  if (d.note) out += T(PW / 2, 528, d.note, { s: 22, w: 700, c: M.muted });
+  if (d.note) out += T(PW / 2, 532, d.note, { s: 22, w: 700, c: M.muted });
   return svg(out);
 };
 

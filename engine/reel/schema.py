@@ -5,9 +5,10 @@ from __future__ import annotations
 
 import re
 
-SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "cta")
+SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "choices", "chat", "countdown", "cta")
 GRAPHS = ("stat", "dots", "meter", "donut", "chart")              # data graphics
-VISUAL = GRAPHS + ("versus", "timeline", "icon", "cycle", "list")  # anything that is a picture, not just words
+THINK = ("choices", "chat", "countdown")                           # scenes that put the viewer inside the problem
+VISUAL = GRAPHS + THINK + ("versus", "timeline", "icon", "cycle", "list")  # anything that is a picture, not just words
 THEMES = ("dark", "amber", "light")
 TRANSITIONS = ("whip_left", "whip_right", "whip_up", "push_up", "zoom_through", "circle", "wipe_diag", "glitch", "flip", "scale_back", "cut")
 ICONS = ("bulb clock target brain fire lock key heart rocket chart shield book eye phone coin mountain check cross star calendar sun seed "
@@ -31,6 +32,9 @@ cycle     A loop of 3-5 steps with a dot running round it. {"title":"","center":
 dots      A grid of people; some light up. {"total":10|20|50|100,"hl":3,"big":"3 IN 10","label":"SHORT LABEL","sub":"one line","note":"illustration"}   Great for "most people", "one in five", proportions.
 meter     2-4 horizontal bars fill and count. {"title":"SMALL TITLE","rows":[{"label":"Distracted hour","value":20},{"label":"Focused hour","value":100,"hl":true}],"suffix":"%","max":100,"note":"illustration"}   Great for before/after and comparisons.
 donut     A ring split into 2-4 shares. {"title":"WHERE THE DAY GOES","center":"60%","segments":[{"label":"Shallow work","value":60},{"label":"Deep work","value":40}],"suffix":"%","note":"illustration"}
+choices   THINKING SCENE. A scenario box, then 2-3 options fly in; the viewer picks, then the answer lights up. {"label":"IT'S 5PM","prompt":"I need the whole deck redone by tomorrow morning.","options":[{"k":"A","t":"Sure, I'll do it","on":"sure"},{"k":"B","t":"That's impossible"},{"k":"C","t":"?","hl":true}],"reveal":"word spoken when the answer lights","q":"What do you say?"}   prompt max 90 chars; option t max 30; at most ONE option has hl (the answer; leave all unmarked for a pure open question).
+chat      THINKING SCENE. 2-4 chat bubbles pop in; the highlighted phrase shows what is being repeated or noticed. {"messages":[{"who":"them","name":"BOSS","t":"I need it by tomorrow morning.","hl":"by tomorrow morning"},{"who":"me","name":"YOU","t":"By tomorrow morning?","hl":"by tomorrow morning"}],"note":"optional payoff line"}   each t max 70 chars; who = them|me.
+countdown THINKING SCENE. A ring drains while the seconds count up: silence, waiting, a pause made visible. {"seconds":4,"label":"SAY NOTHING","sub":"it feels long"}   seconds 2-9.
 cta       The end card with the book cover. {"line1":"Want the full lesson?","line2":"Watch it as an animated summary.","handle":"visualgrowth.app"}   Always the LAST beat.
 """
 
@@ -148,6 +152,32 @@ def _clean_params(scene: str, p: dict) -> dict:
         if len(segs) < 2 or sum(g["value"] for g in segs) <= 0:
             segs = [{"label": "This", "value": 70}, {"label": "That", "value": 30}]
         return {"title": _s(p.get("title"), 40, True), "center": _s(p.get("center"), 8), "segments": segs, "suffix": _s(p.get("suffix"), 3), "note": _s(p.get("note"), 40)}
+    if scene == "choices":
+        opts = []
+        for i, o in enumerate((p.get("options") or [])[:3]):
+            o = o if isinstance(o, dict) else {"t": o}
+            if _s(o.get("t"), 30):
+                opts.append({"k": _s(o.get("k"), 2, True) or "ABC"[i], "t": _s(o.get("t"), 30), "hl": bool(o.get("hl")), "on": _s(o.get("on"), 24)})
+        if len(opts) < 2:
+            opts = [{"k": "A", "t": "Say yes", "hl": False, "on": ""}, {"k": "B", "t": "Say no", "hl": False, "on": ""}]
+        seen = False
+        for o in opts:                                        # only one answer can be the answer
+            if o["hl"] and seen:
+                o["hl"] = False
+            seen = seen or o["hl"]
+        return {"label": _s(p.get("label"), 22, True) or "YOUR MOVE", "prompt": _s(p.get("prompt"), 90), "options": opts, "reveal": _s(p.get("reveal"), 24), "q": _s(p.get("q"), 50)}
+    if scene == "chat":
+        msgs = []
+        for m in (p.get("messages") or [])[:4]:
+            if isinstance(m, dict) and _s(m.get("t"), 70):
+                msgs.append({"who": "me" if m.get("who") == "me" else "them", "name": _s(m.get("name"), 10, True), "t": _s(m.get("t"), 70), "hl": _s(m.get("hl"), 40), "on": _s(m.get("on"), 24)})
+        return {"messages": msgs or [{"who": "them", "name": "THEM", "t": "Hello.", "hl": "", "on": ""}], "note": _s(p.get("note"), 60)}
+    if scene == "countdown":
+        try:
+            sec = max(2, min(9, int(round(float(p.get("seconds", 4))))))
+        except (TypeError, ValueError):
+            sec = 4
+        return {"seconds": sec, "label": _s(p.get("label"), 20, True) or "SAY NOTHING", "sub": _s(p.get("sub"), 60)}
     if scene == "cta":
         return {"line1": _s(p.get("line1"), 30) or "Want the full lesson?", "line2": _s(p.get("line2"), 60) or "Watch it as an animated book summary.", "handle": _s(p.get("handle"), 28) or "visualgrowth.app"}
     return p
@@ -206,22 +236,25 @@ def problems(plan: dict) -> list[str]:
         out.append(f"narration is only {n} words; it needs 130-150 to fill about a minute")
     if n > 165:
         out.append(f"narration is {n} words; it needs 130-150 to fit about a minute")
-    if len(beats) < 14:
-        out.append(f"only {len(beats)} beats; use 16-22 so the picture changes every 2-4 seconds")
+    if len(beats) < 12:
+        out.append(f"only {len(beats)} beats; use 12-18 so the picture changes every 2-4 seconds")
     run = 1
     for a, b in zip(beats, beats[1:]):
         run = run + 1 if a["scene"] == b["scene"] else 1
         if run >= 3:
             out.append(f"three '{b['scene']}' scenes in a row; vary the scenes")
             break
-    if len(beats) > 1 and beats[1]["scene"] not in GRAPHS:
-        out.append("beat 2 must be a data graphic (chart, stat, dots, meter or donut) that shows the core insight right after the hook")
+    if len(beats) > 1 and beats[1]["scene"] not in GRAPHS + THINK:
+        out.append("beat 2 must put the viewer in the problem (choices or chat) or show the core insight as data (chart, stat, dots, meter or donut) right after the hook")
     if beats and len(beats[0]["say"].split()) > 13:
         out.append(f"the hook (beat 1) is {len(beats[0]['say'].split())} words; keep it to 8-12 so the insight lands by ~3 seconds")
     mid = beats[1:-1]
-    g = sum(b["scene"] in GRAPHS for b in mid)
+    g = sum(b["scene"] in GRAPHS + THINK for b in mid)
     v = sum(b["scene"] in VISUAL for b in mid)
     s = sum(b["scene"] in ("slam", "quote") for b in mid)
+    t = sum(b["scene"] in THINK for b in mid)
+    if t < 2:
+        out.append(f"only {t} thinking scenes (choices, chat, countdown); use at least 2 that make the viewer decide, predict or feel the problem")
     if g < 4:
         out.append(f"only {g} data graphics (stat, dots, meter, donut, chart); use at least 4-5, each with a different look")
     if mid and v < 0.7 * len(mid):

@@ -215,7 +215,8 @@ window.startReel = async () => {
   await Promise.all(['800 100px "Bricolage Grotesque"', '500 40px "Bricolage Grotesque"', '600 40px "Instrument Sans"', '500 30px "DM Mono"'].map(f => document.fonts.load(f)));
   await document.fonts.ready;
   buildAll();
-  document.getElementById('tag').textContent = `${R.book} · lesson ${R.lesson} · visualgrowth.app`;
+  const tg = document.getElementById('tag'); tg.textContent = `${R.book} · lesson ${R.lesson} · visualgrowth.app`;
+  if (tg.scrollWidth > 960 || tg.textContent.length > 48) tg.textContent = `${R.book.length > 26 ? R.book.slice(0, 25).trim() + '…' : R.book} · visualgrowth.app`;
   window.seek(0, 0);
   return true;
 };

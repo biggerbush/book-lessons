@@ -460,3 +460,83 @@ SCENES.donut = (cam, p, ctx) => {
     camera(cam, lt, ctx, [0.25], 0.03);
   } };
 };
+
+/* ---------------------------------------------------------------- choices: a scenario + options; the viewer picks, then the answer lights up */
+SCENES.choices = (cam, p, ctx) => {
+  const th = ctx.th, opts = (p.options || []).slice(0, 3), n = Math.max(1, opts.length), cardH = n === 3 ? 176 : 200, gap = 24;
+  const top0 = 640;
+  const box = el('', { position: 'absolute', left: '90px', top: '240px', width: '900px', height: '340px', borderRadius: '56px', background: th.alt, color: th.onAlt, padding: '44px 54px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '16px', boxShadow: WHITE ? '0 30px 60px -30px rgba(11,31,58,.35)' : '0 30px 60px -28px rgba(0,0,0,.55)' });
+  const lab = el('mono', { fontSize: '30px', opacity: .8 }, esc(p.label || 'YOUR MOVE'));
+  const q = el('disp', { fontSize: '64px', lineHeight: 1.08 }, esc(p.prompt || ''));
+  box.append(lab, q); cam.append(box); fit(q, 790, 220, 64, 34);
+  const ts = times(ctx, opts.map(() => null), 0.8, ctx.dur * 0.62);
+  const ans = opts.findIndex(o => o.hl);
+  const tAns = ans >= 0 ? Math.max(ts[ts.length - 1] + 0.7, (p.reveal && ctx.wt(p.reveal) != null) ? ctx.wt(p.reveal) : 0, ctx.dur * 0.68) : 1e9;
+  const els = opts.map((o, i) => {
+    const hl = el('', { position: 'absolute', inset: 0, borderRadius: '46px', background: th.accent, opacity: 0 });
+    const card = el('', { position: 'absolute', left: '90px', width: '900px', height: cardH + 'px', top: top0 + i * (cardH + gap) + 'px', borderRadius: '46px', background: th.soft, border: `3px solid ${th.line}`, display: 'flex', alignItems: 'center', gap: '34px', padding: '0 40px', overflow: 'hidden' });
+    const badge = el('disp', { width: '100px', height: '100px', borderRadius: '50%', background: th.fg, color: th.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 'none', fontSize: '58px', position: 'relative' }, esc(o.k || 'ABC'[i]));
+    const txt = el('disp', { position: 'relative', flex: 1, fontSize: '56px', lineHeight: 1.08, color: th.fg }, esc(o.t || ''));
+    card.append(hl, badge, txt); cam.append(card); txt.style.maxWidth = '700px'; fit(txt, 700, cardH - 40, 56, 30);
+    ctx.events.push({ at: ts[i] + 0.04, kind: 'pop' });
+    return { card, hl, txt, badge, t: ts[i], dir: i % 2 ? 1 : -1, win: i === ans };
+  });
+  if (ans >= 0) ctx.events.push({ at: tAns, kind: 'thud' });
+  const foot = p.q ? el('body', { position: 'absolute', left: '90px', width: '900px', top: top0 + n * (cardH + gap) + 10 + 'px', textAlign: 'center', fontSize: '42px', color: th.muted, opacity: 0 }, esc(p.q)) : null; if (foot) cam.append(foot);
+  return { update(lt) {
+    tf(box, { y: lerp(-60, 0, E.out3(clamp(lt / 0.45))), s: lerp(0.94, 1, E.back(clamp(lt / 0.5))), o: clamp(lt / 0.18) });
+    els.forEach(o => {
+      const d = lt - o.t, a = E.back(clamp(d / 0.4)), act = o.win ? clamp((lt - tAns) / 0.25) : 0, dim = ans >= 0 && !o.win ? 0.42 * clamp((lt - tAns) / 0.3) : 0;
+      tf(o.card, { x: lerp(o.dir * 1200, 0, a), s: 1 + 0.035 * act, o: clamp(d / 0.08) * (1 - dim), blur: lerp(12, 0, clamp(d / 0.2)) });
+      o.hl.style.opacity = act; o.txt.style.color = mix(th.fg, th.onAccent, act);
+    });
+    if (foot) tf(foot, { o: clamp((lt - 1.2) / 0.3) * (ans >= 0 && lt > tAns ? 0 : 1), y: lerp(20, 0, E.out3(clamp((lt - 1.2) / 0.3))) });
+    camera(cam, lt, ctx, ans >= 0 ? [tAns] : [], 0.03);
+  } };
+};
+
+/* ---------------------------------------------------------------- chat: a short exchange; the phrase being mirrored is picked out */
+SCENES.chat = (cam, p, ctx) => {
+  const th = ctx.th, msgs = (p.messages || []).slice(0, 4), W0 = 820;
+  const hlS = (me) => me ? `background:${th.fg};color:${th.accent};padding:0 .14em;border-radius:.22em` : `background:${th.accent};color:${th.onAccent};padding:0 .14em;border-radius:.22em`;
+  const render = (t, hl, me) => { t = String(t || ''); if (!hl || t.indexOf(hl) < 0) return esc(t); const i = t.indexOf(hl); return esc(t.slice(0, i)) + `<span style="${hlS(me)}">${esc(hl)}</span>` + esc(t.slice(i + hl.length)); };
+  const ts = times(ctx, msgs.map(m => m.on), 0.35, ctx.dur * 0.78);
+  let y = 300; const els = [];
+  msgs.forEach((m, i) => {
+    const me = m.who === 'me';
+    const wrap = el('', { position: 'absolute', left: (me ? 1080 - 90 - W0 : 90) + 'px', top: y + 'px', width: W0 + 'px', display: 'flex', flexDirection: 'column', alignItems: me ? 'flex-end' : 'flex-start', gap: '10px' });
+    const nm = el('mono', { fontSize: '28px', color: th.muted }, esc(m.name || (me ? 'YOU' : 'THEM')));
+    const b = el('body', { maxWidth: W0 + 'px', boxSizing: 'border-box', padding: '34px 44px', borderRadius: me ? '48px 48px 12px 48px' : '48px 48px 48px 12px', background: me ? th.accent : th.soft, color: me ? th.onAccent : th.fg, border: me ? 'none' : `3px solid ${th.line}`, fontSize: '54px', lineHeight: 1.18, fontWeight: 700 }, render(m.t, m.hl, me));
+    wrap.append(nm, b); cam.append(wrap);
+    const h = wrap.offsetHeight || 220; y += h + 34;
+    els.push({ wrap, t: ts[i], me });
+    ctx.events.push({ at: ts[i] + 0.04, kind: 'pop' });
+  });
+  const note = p.note ? el('disp', { position: 'absolute', left: '90px', width: '900px', top: Math.min(y + 10, 1200) + 'px', textAlign: 'center', fontSize: '46px', color: th.accent, opacity: 0 }, esc(p.note)) : null; if (note) cam.append(note);
+  const tn = ts[ts.length - 1] + 0.9;
+  return { update(lt) {
+    els.forEach(o => { const d = lt - o.t; tf(o.wrap, { x: lerp(o.me ? 160 : -160, 0, E.out3(clamp(d / 0.35))), y: lerp(40, 0, E.out3(clamp(d / 0.35))), s: lerp(0.86, 1, E.back(clamp(d / 0.4))), o: clamp(d / 0.12) }); });
+    if (note) tf(note, { y: lerp(24, 0, E.out3(clamp((lt - tn) / 0.4))), o: clamp((lt - tn) / 0.3) });
+    camera(cam, lt, ctx, [], 0.03);
+  } };
+};
+
+/* ---------------------------------------------------------------- countdown: silence made visible (a ring that drains while the seconds tick up) */
+SCENES.countdown = (cam, p, ctx) => {
+  const th = ctx.th, N = Math.max(2, Math.min(9, +p.seconds || 4)), C = 2 * Math.PI * 330, t0 = 0.45, step = Math.min(1, Math.max(0.5, (ctx.dur - t0 - 0.7) / N));
+  const svg = svgEl(760, 760, `<circle cx="380" cy="380" r="330" fill="none" stroke="${th.soft}" stroke-width="38"/><circle id="arc" cx="380" cy="380" r="330" fill="none" stroke="${th.accent}" stroke-width="38" stroke-linecap="round" transform="rotate(-90 380 380)" stroke-dasharray="${C}" stroke-dashoffset="${C}"/>`, { left: '160px', top: '250px' });
+  const num = el('disp', { position: 'absolute', left: '160px', top: '250px', width: '760px', height: '760px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: th.fg, fontSize: '360px' }, '');
+  const label = el('disp', { position: 'absolute', left: '90px', top: '1040px', width: '900px', textAlign: 'center', fontSize: '80px', color: th.fg, opacity: 0 }, esc(p.label || 'SAY NOTHING'));
+  const sub = el('body', { position: 'absolute', left: '110px', top: '1150px', width: '860px', textAlign: 'center', fontSize: '44px', color: th.muted, opacity: 0 }, esc(p.sub || ''));
+  cam.append(svg, num, label, sub);
+  for (let i = 0; i < N; i++) ctx.events.push({ at: t0 + i * step, kind: 'pop' });
+  const arc = svg.querySelector('#arc');
+  return { update(lt) {
+    const k = clamp((lt - t0) / (step * N)), cur = lt < t0 ? 0 : Math.min(N, Math.floor((lt - t0) / step) + 1), since = (lt - t0) - (cur - 1) * step;
+    arc.setAttribute('stroke-dashoffset', C * (1 - E.lin(k)));
+    num.textContent = cur ? String(cur) : '';
+    tf(num, { s: cur ? lerp(1.18, 1, E.out3(clamp(since / 0.25))) : 0.6, o: cur ? 1 : 0 });
+    tf(label, { y: lerp(40, 0, E.out3(clamp((lt - 0.2) / 0.4))), o: clamp((lt - 0.2) / 0.3) }); tf(sub, { y: lerp(30, 0, E.out3(clamp((lt - 0.5) / 0.4))), o: clamp((lt - 0.5) / 0.3) });
+    camera(cam, lt, ctx, [], 0.03);
+  } };
+};

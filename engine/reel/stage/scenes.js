@@ -14,6 +14,24 @@ function times(ctx, keys, from, to) {   // when each item appears: the moment it
   return keys.map((k, i) => { let t = k ? ctx.wt(k) : null; t = t != null ? Math.max(0.05, t - 0.06) : even[i]; t = Math.max(t, prev + 0.2); prev = t; return t; });
 }
 
+
+const _nw = x => String(x || '').toLowerCase().replace(/[^a-z0-9%]/g, '');
+const _STOP = new Set(['the', 'a', 'an', 'and', 'or', 'to', 'of', 'it', 'is']);
+function cueSeq(ctx, phrases, from, to) {   // when the narrator starts reading each phrase, in order; unmatched phrases fall back to even spacing
+  const W = ctx.words || [], words = W.map(x => _nw(x.w)), even = spread(phrases.length, from, Math.max(from + 0.3, to));
+  let at = 0, prev = -1;
+  return phrases.map((ph, i) => {
+    const toks = String(ph || '').split(/\s+/).map(_nw).filter(Boolean), keys = toks.filter(t => !_STOP.has(t));
+    let hit = -1;
+    const seq = toks.slice(0, 2);
+    for (let j = at; j < words.length && hit < 0; j++) if (seq.length && words[j] === seq[0] && (seq.length < 2 || words[j + 1] === seq[1])) hit = j;
+    for (let j = at; j < words.length && hit < 0 && keys.length; j++) if (words[j] === keys[0]) hit = j;
+    let t = even[i];
+    if (hit >= 0) { t = Math.max(0.05, W[hit].s - 0.08); at = hit + 1; }
+    t = Math.max(t, prev + 0.2); prev = t; return t;
+  });
+}
+
 /* ---------------------------------------------------------------- slam: huge words hit the screen */
 SCENES.slam = (cam, p, ctx) => {
   const th = ctx.th;
@@ -129,14 +147,15 @@ SCENES.versus = (cam, p, ctx) => {
   const vs = el('disp', { position: 'absolute', left: '440px', top: '660px', width: '200px', height: '200px', borderRadius: '50%', background: WHITE ? th.fg : th === THEMES.dark ? '#fff' : th.fg, color: WHITE ? th.accent : th === THEMES.dark ? '#0B1524' : th.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '84px', zIndex: 5, boxShadow: '0 0 0 14px rgba(0,0,0,.18)' }, esc(p.vs || 'VS'));
   cam.append(vs);
   [a, b].forEach(o => { fit(o.t, 560, 190, 88, 40); });
-  ctx.events.push({ at: 0.05, kind: 'whoosh' }, { at: 0.45, kind: 'whoosh' }, { at: 0.7, kind: 'thud' });
+  const [ta, tb] = cueSeq(ctx, [L.t, Rr.t], 0.05, 0.42), tw = Math.max(tb + 0.9, 1.3);
+  ctx.events.push({ at: ta, kind: 'whoosh' }, { at: tb, kind: 'whoosh' }, { at: tb + 0.28, kind: 'thud' });
   return { update(lt) {
-    const da = lt - 0.05, db = lt - 0.42, emph = clamp((lt - 1.3) / 0.35);
+    const da = lt - ta, db = lt - tb, emph = clamp((lt - tw) / 0.35);
     const aw = win === 'left' ? 1 : win === 'none' ? 0 : -1, bw = win === 'right' ? 1 : win === 'none' ? 0 : -1;
     tf(a.panel, { x: lerp(-1300, 0, E.back(clamp(da / 0.45))), r: lerp(-6, 0, E.out3(clamp(da / 0.45))), s: 1 + 0.045 * emph * aw, o: (1 - 0.45 * emph * (aw < 0 ? 1 : 0)), blur: lerp(14, 0, clamp(da / 0.2)) });
     tf(b.panel, { x: lerp(1300, 0, E.back(clamp(db / 0.45))), r: lerp(6, 0, E.out3(clamp(db / 0.45))), s: 1 + 0.045 * emph * bw, o: (1 - 0.45 * emph * (bw < 0 ? 1 : 0)), blur: lerp(14, 0, clamp(db / 0.2)) });
-    const dv = lt - 0.62; tf(vs, { s: lerp(0, 1, E.back(clamp(dv / 0.4))), r: lerp(300, 0, E.out3(clamp(dv / 0.5))), o: clamp(dv / 0.05) });
-    camera(cam, lt, ctx, [0.7], 0.03);
+    const dv = lt - (tb + 0.2); tf(vs, { s: lerp(0, 1, E.back(clamp(dv / 0.4))), r: lerp(300, 0, E.out3(clamp(dv / 0.5))), o: clamp(dv / 0.05) });
+    camera(cam, lt, ctx, [tb + 0.28], 0.03);
   } };
 };
 
@@ -144,7 +163,7 @@ SCENES.versus = (cam, p, ctx) => {
 SCENES.timeline = (cam, p, ctx) => {
   const th = ctx.th, items = (p.items || []).slice(0, 5), n = Math.max(1, items.length);
   const y0 = 380, y1 = 1130, ys = n === 1 ? [y0] : spread(n, y0, y1), X = 170;
-  const ts = times(ctx, items.map(x => x.on), 0.25, ctx.dur * 0.72);
+  const ts = items.some(x => x.on) ? times(ctx, items.map(x => x.on), 0.25, ctx.dur * 0.72) : cueSeq(ctx, items.map(x => x.t), 0.25, ctx.dur * 0.72);
   if (p.title) cam.append(el('mono', { position: 'absolute', left: '100px', top: '250px', fontSize: '38px', color: th.muted, width: '880px' }, esc(p.title)));
   const track = el('', { position: 'absolute', left: X - 5 + 'px', top: y0 + 'px', width: '10px', height: (y1 - y0) + 'px', background: th.line, borderRadius: '5px' });
   const prog = el('', { position: 'absolute', left: X - 5 + 'px', top: y0 + 'px', width: '10px', height: '0px', background: th.accent, borderRadius: '5px' });
@@ -352,24 +371,22 @@ function hookWords(box, text, acc, th, ctx, size) {   // words that pop in as th
 /* ---------------------------------------------------------------- intro: the book arrives, then the hook lands under it */
 SCENES.intro = (cam, p, ctx) => {
   const th = ctx.th, R = ctx.R;
-  const glow = el('', { position: 'absolute', left: '40px', top: '30px', width: '1000px', height: '1000px', borderRadius: '50%', background: `radial-gradient(circle, ${th.accent}66 0%, ${th.accent}00 62%)`, opacity: 0 });
-  let rays = ''; for (let j = 0; j < 24; j++) { const a = j * Math.PI * 2 / 24; rays += `<path d="M540 530 L${540 + Math.cos(a - 0.05) * 1500} ${530 + Math.sin(a - 0.05) * 1500} L${540 + Math.cos(a + 0.05) * 1500} ${530 + Math.sin(a + 0.05) * 1500}Z" fill="${th.fg}" opacity="${(0.025 + rnd(j) * 0.03) * (WHITE ? 0.6 : 1)}"/>`; }
-  const raySvg = svgEl(1080, 1920, rays); raySvg.style.transformOrigin = '540px 530px';
-  const holder = el('', { position: 'absolute', left: '130px', top: '200px', width: '820px', height: '656px', perspective: '1600px' });
+  const glow = el('', { position: 'absolute', left: '40px', top: '470px', width: '1000px', height: '1000px', borderRadius: '50%', background: `radial-gradient(circle, ${th.accent}66 0%, ${th.accent}00 62%)`, opacity: 0 });
+  let rays = ''; for (let j = 0; j < 24; j++) { const a = j * Math.PI * 2 / 24; rays += `<path d="M540 970 L${540 + Math.cos(a - 0.05) * 1500} ${970 + Math.sin(a - 0.05) * 1500} L${540 + Math.cos(a + 0.05) * 1500} ${970 + Math.sin(a + 0.05) * 1500}Z" fill="${th.fg}" opacity="${(0.025 + rnd(j) * 0.03) * (WHITE ? 0.6 : 1)}"/>`; }
+  const raySvg = svgEl(1080, 1920, rays); raySvg.style.transformOrigin = '540px 970px';
+  const holder = el('', { position: 'absolute', left: '150px', top: '660px', width: '780px', height: '624px', perspective: '1600px' });
   const card = el('', { position: 'absolute', inset: 0, borderRadius: '40px', overflow: 'hidden', background: '#fff', boxShadow: WHITE ? '0 60px 100px -30px rgba(11,31,58,.45), 0 0 0 2px rgba(11,31,58,.06)' : '0 70px 110px -30px rgba(0,0,0,.7)', transformOrigin: '50% 60%' });
   const img = document.createElement('img'); img.src = R.cover || ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block';
   const sheen = el('', { position: 'absolute', top: '-30%', height: '160%', width: '34%', left: 0, background: 'linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.6),rgba(255,255,255,0))', transform: 'rotate(12deg)' });
   card.append(img, sheen); holder.append(card);
-  const col = el('', { position: 'absolute', left: '60px', width: '960px', top: '895px', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' });
-  const kick = el('mono', { fontSize: '32px', color: th.accent, opacity: 0, display: 'flex', alignItems: 'center', gap: '18px' }, `<span style="width:60px;height:4px;background:${th.accent}"></span>A LESSON FROM<span style="width:60px;height:4px;background:${th.accent}"></span>`);
-  const title = el('disp', { fontSize: '92px', color: th.fg, marginTop: '16px', width: '960px' }, esc(R.book || ''));
-  const by = el('body', { fontSize: '38px', color: th.muted, marginTop: '6px' }, esc(R.author ? 'by ' + R.author : ''));
-  const hook = el('disp', { marginTop: '56px', fontSize: '104px', lineHeight: 1.02, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', width: '960px' });
-  col.append(kick, title, by, hook); cam.append(glow, raySvg, holder, col);
-  fit(title, 960, 190, 92, 50);
+  const col = el('', { position: 'absolute', left: '60px', width: '960px', top: '190px', height: '430px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', textAlign: 'center' });
+  const hook = el('disp', { fontSize: '112px', lineHeight: 1.02, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', width: '960px' });
+  const kick = el('mono', { fontSize: '30px', color: th.accent, opacity: 0, display: 'flex', alignItems: 'center', gap: '18px', marginTop: '34px' }, `<span style="width:60px;height:4px;background:${th.accent}"></span>A LESSON FROM<span style="width:60px;height:4px;background:${th.accent}"></span>`);
+  col.append(hook, kick); cam.append(glow, raySvg, holder, col);
+  const title = el(''), by = el('');
   const acc = (p.accent || []).map(x => String(x).toUpperCase().replace(/[^A-Z0-9%×]/g, ''));
   const ws = hookWords(hook, p.hook || '', acc, th, ctx);
-  fit(hook, 960, 330, 104, 56);
+  fit(hook, 960, 360, 112, 56);
   ctx.events.push({ at: 0.0, kind: 'riser' }, { at: 0.4, kind: 'thud' }, ...ws.map(w => ({ at: w.tk + 0.06, kind: 'pop' })));
   return { update(lt) {
     const a = E.spring(clamp(lt / 0.6));
@@ -417,7 +434,7 @@ SCENES.dots = (cam, p, ctx) => {
 SCENES.meter = (cam, p, ctx) => {
   const th = ctx.th, rows = (p.rows || []).slice(0, 4), n = Math.max(1, rows.length), mx = +p.max || Math.max(1, ...rows.map(r => +r.value || 0));
   if (p.title) cam.append(el('mono', { position: 'absolute', left: '110px', top: '260px', fontSize: '36px', color: th.muted, width: '860px' }, esc(p.title)));
-  const top0 = 380, gap = Math.min(220, 760 / n);
+  const top0 = 380, gap = Math.min(220, 760 / n), cue = cueSeq(ctx, rows.map(r => r.label), 0.25, 0.25 + (n - 1) * 0.32);
   const els = rows.map((r, i) => {
     const y = top0 + i * gap, hl = !!r.hl;
     const lab = el('body', { position: 'absolute', left: '110px', top: y + 'px', fontSize: '46px', color: th.fg, opacity: 0, width: '640px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }, esc(r.label || ''));
@@ -425,7 +442,7 @@ SCENES.meter = (cam, p, ctx) => {
     const track = el('', { position: 'absolute', left: '110px', top: y + 74 + 'px', width: '860px', height: '64px', borderRadius: '32px', background: th.soft, border: `2px solid ${th.line}`, overflow: 'hidden' });
     const fill = el('', { position: 'absolute', left: 0, top: 0, bottom: 0, width: '100%', borderRadius: '32px', background: hl ? th.accent : th.alt, transformOrigin: '0 50%' });
     track.append(fill); cam.append(lab, val, track);
-    const at = 0.25 + i * 0.32; ctx.events.push({ at, kind: 'whoosh' }, { at: at + 0.75, kind: 'pop' });
+    const at = cue[i]; ctx.events.push({ at, kind: 'whoosh' }, { at: at + 0.75, kind: 'pop' });
     return { lab, val, fill, at, v: +r.value || 0, k: clamp((+r.value || 0) / mx) };
   });
   const note = noteEl(p, th, 1215); if (note) cam.append(note);
@@ -469,9 +486,10 @@ SCENES.choices = (cam, p, ctx) => {
   const lab = el('mono', { fontSize: '30px', opacity: .8 }, esc(p.label || 'YOUR MOVE'));
   const q = el('disp', { fontSize: '64px', lineHeight: 1.08 }, esc(p.prompt || ''));
   box.append(lab, q); cam.append(box); fit(q, 790, 220, 64, 34);
-  const ts = times(ctx, opts.map(() => null), 0.8, ctx.dur * 0.62);
+  const ts = cueSeq(ctx, opts.map(o => o.on || o.t), 0.8, ctx.dur * 0.62);
   const ans = opts.findIndex(o => o.hl);
-  const tAns = ans >= 0 ? Math.max(ts[ts.length - 1] + 0.7, (p.reveal && ctx.wt(p.reveal) != null) ? ctx.wt(p.reveal) : 0, ctx.dur * 0.68) : 1e9;
+  const rv = p.reveal ? cueSeq(ctx, [...opts.map(o => o.on || o.t), p.reveal], 0, 0).pop() : null;
+  const tAns = ans >= 0 ? (rv != null && rv > ts[ts.length - 1] ? rv : Math.max(ts[ts.length - 1] + 0.7, ctx.dur * 0.68)) : 1e9;
   const els = opts.map((o, i) => {
     const hl = el('', { position: 'absolute', inset: 0, borderRadius: '46px', background: th.accent, opacity: 0 });
     const card = el('', { position: 'absolute', left: '90px', width: '900px', height: cardH + 'px', top: top0 + i * (cardH + gap) + 'px', borderRadius: '46px', background: th.soft, border: `3px solid ${th.line}`, display: 'flex', alignItems: 'center', gap: '34px', padding: '0 40px', overflow: 'hidden' });
@@ -500,7 +518,7 @@ SCENES.chat = (cam, p, ctx) => {
   const th = ctx.th, msgs = (p.messages || []).slice(0, 4), W0 = 820;
   const hlS = (me) => me ? `background:${th.fg};color:${th.accent};padding:0 .14em;border-radius:.22em` : `background:${th.accent};color:${th.onAccent};padding:0 .14em;border-radius:.22em`;
   const render = (t, hl, me) => { t = String(t || ''); if (!hl || t.indexOf(hl) < 0) return esc(t); const i = t.indexOf(hl); return esc(t.slice(0, i)) + `<span style="${hlS(me)}">${esc(hl)}</span>` + esc(t.slice(i + hl.length)); };
-  const ts = times(ctx, msgs.map(m => m.on), 0.35, ctx.dur * 0.78);
+  const ts = cueSeq(ctx, msgs.map(m => m.on || m.t), 0.35, ctx.dur * 0.78);
   let y = 300; const els = [];
   msgs.forEach((m, i) => {
     const me = m.who === 'me';

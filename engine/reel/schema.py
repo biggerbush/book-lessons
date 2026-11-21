@@ -228,6 +228,39 @@ def narration(plan: dict) -> str:
     return " ".join(b["say"] for b in plan["beats"])
 
 
+_STOP = {"the", "a", "an", "and", "or", "to", "of", "it", "is", "you", "i", "your", "my", "we", "they"}
+
+
+def _toks(t: str) -> list[str]:
+    return [w for w in (re.sub(r"[^a-z0-9% ]", " ", str(t).lower().replace("'", "")).split()) if w]
+
+
+def _on_screen(b: dict) -> list[str]:
+    """The text in a text-based graphic that the viewer has to read (options, bubbles, steps, labels)."""
+    p, sc = b["p"], b["scene"]
+    if sc == "choices":
+        return [o["t"] for o in p.get("options", []) if o["t"].strip("?“”\" ")]
+    if sc == "chat":
+        return [m["t"] for m in p.get("messages", []) if m.get("who") == "me"] + [m["t"] for m in p.get("messages", [])[1:] if m.get("who") != "me"]
+    if sc in ("timeline", "list"):
+        return [i["t"] for i in p.get("items", [])]
+    if sc == "versus":
+        return [p["left"]["t"], p["right"]["t"]]
+    if sc == "meter":
+        return [r["label"] for r in p.get("rows", [])]
+    return []
+
+
+def _read(text: str, say: str) -> bool:
+    """True when the narration reads this text: most of its meaningful words are spoken."""
+    want = [w for w in _toks(text) if w not in _STOP] or _toks(text)
+    have = set(_toks(say))
+    if not want:
+        return True
+    hit = sum(1 for w in want if w in have or any(h.startswith(w[:4]) for h in have if len(w) > 4))
+    return hit >= max(1, round(len(want) * 0.6))
+
+
 def problems(plan: dict) -> list[str]:
     """Things worth a second look (used to ask Claude for one repair, and printed in the log)."""
     out, beats = [], plan["beats"]
@@ -262,6 +295,9 @@ def problems(plan: dict) -> list[str]:
     if s > 3:
         out.append(f"{s} text-only beats (slam/quote); keep it to 3 at most")
     for i, b in enumerate(beats):
-        if len(b["say"].split()) > 22:
+        unread = [t for t in _on_screen(b) if not _read(t, b["say"])]
+        if unread:
+            out.append(f"beat {i + 1} ({b['scene']}) shows text the narrator never reads: " + "; ".join(f'"{t}"' for t in unread[:3]) + ". Read every option/bubble/step out loud, in order, or change the text to match the words spoken")
+        if len(b["say"].split()) > (28 if b["scene"] in THINK else 22):
             out.append(f"beat {i + 1} has a long line ({len(b['say'].split())} words); split it")
     return out

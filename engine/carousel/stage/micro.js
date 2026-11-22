@@ -535,6 +535,25 @@ SL.lesson = (el, s, D) => {     // title, then text + graphic (or graphic + text
   else { b.style.top = y + 'px'; y += b.offsetHeight + gapBP; if (p) p.style.top = y + 'px'; }
 };
 
+SL.explain = (el, s, D) => {    // title, a one-line explainer, the graphic, then the advice (centred stack)
+  const t = h('ttl', { top: '0px' }, md(s.title || '')); el.append(t);
+  fitFont(t, 'fontSize', 64, 44, () => t.offsetHeight <= 150);
+  const sb = s.sub ? h('bd', { top: '0px', fontSize: '38px', lineHeight: '1.3', color: M.ink2 }, md(s.sub)) : null; if (sb) el.append(sb);
+  const g = s.graphic && G[s.graphic.kind], p = g ? h('panel') : null;
+  if (p) { p.innerHTML = g(s.graphic, D); el.append(p); }
+  const b = h('bd', { top: '0px' }, bodyHTML(s.body)); el.append(b);
+  const M0 = 66, g1 = 16, g2 = 40, g3 = 40, ph = p ? PH : 0;
+  if (sb) fitFont(sb, 'fontSize', 38, 28, () => sb.offsetHeight <= 160);
+  const room = 1350 - 2 * M0 - t.offsetHeight - (sb ? g1 + sb.offsetHeight : 0) - (p ? g2 + ph : 0) - g3;
+  fitFont(b, 'fontSize', 38, 27, () => b.offsetHeight <= room);
+  const total = t.offsetHeight + (sb ? g1 + sb.offsetHeight : 0) + (p ? g2 + ph : 0) + g3 + b.offsetHeight;
+  let y = Math.max(M0, (1350 - total) / 2);
+  t.style.top = y + 'px'; y += t.offsetHeight;
+  if (sb) { y += g1; sb.style.top = y + 'px'; y += sb.offsetHeight; }
+  if (p) { y += g2; p.style.top = y + 'px'; y += ph; }
+  y += g3; b.style.top = y + 'px';
+};
+
 window.buildDeck = async () => {
   const D = window.CAROUSEL, deck = document.getElementById('deck');
   await document.fonts.ready;

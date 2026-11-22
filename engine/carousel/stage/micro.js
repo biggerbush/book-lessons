@@ -523,14 +523,16 @@ SL.coverToggle = (el, s, top) => {   // a game-style settings card: "Life diffic
      <div style="display:flex;gap:10px;margin-top:34px;height:128px;padding:10px;background:#EEF1F6;border-radius:30px;font-family:Sans;font-weight:800;font-size:42px">${segs}</div>
      ${icons ? `<div style="display:flex;justify-content:space-between;margin-top:40px">${icons}</div><div style="font-family:Sans;font-weight:700;font-size:28px;color:${M.muted};text-align:center;margin-top:20px">${md(T.note || '')}</div>` : ''}`);
   el.append(card);
-  y0 += Math.max(0, (1300 - y0 - (card.offsetHeight + 126)) / 2); card.style.top = y0 + 'px';   // centre card + pill in the space left
+  const ch = card.offsetHeight; y0 += Math.max(0, (1300 - y0 - (ch + 126)) / 2);
+  const pillTop = Math.min(y0 + ch + 56, 1350 - 110);
+  y0 = top + (pillTop - top - ch) / 2; card.style.top = y0 + 'px';   // card sits midway between the subtitle and the swipe pill
   el.insertBefore(h('', { position: 'absolute', left: '40px', top: y0 - 140 + 'px', width: '1000px', height: card.offsetHeight + 280 + 'px', borderRadius: '50%', background: `radial-gradient(ellipse, ${M.goldwash} 0%, rgba(255,243,209,0) 66%)` }), card);
   // a pointer tapping the chosen option
   const segW = (W - 92 - 20 - (opts.length - 1) * 10) / opts.length, px = x0 + 46 + 10 + on * (segW + 10) + segW * 0.84, py = y0 + 44 + 34 + 20 + 72 * 1.05 + 34 + 70;
   el.append(h('', { position: 'absolute', left: px + 'px', top: py + 'px', filter: 'drop-shadow(0 10px 12px rgba(11,31,58,.35))' },
     `<svg width="62" height="75" viewBox="0 0 24 29"><path d="M3 2 L3 22 L8 17.5 L11.5 26 L15 24.5 L11.6 16.2 L18 16 Z" fill="${M.ink}" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>`));
   const cb = y0 + card.offsetHeight;
-  el.append(h('', { position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: Math.min(cb + 56, 1350 - 110) + 'px', display: 'flex', alignItems: 'center', gap: '14px', background: M.ink, color: '#fff', fontFamily: 'Sans', fontWeight: 800, fontSize: '27px', padding: '15px 16px 15px 24px', borderRadius: '999px', boxShadow: `0 18px 34px -16px rgba(11,31,58,.6)` },
+  el.append(h('', { position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: pillTop + 'px', display: 'flex', alignItems: 'center', gap: '14px', background: M.ink, color: '#fff', fontFamily: 'Sans', fontWeight: 800, fontSize: '27px', padding: '15px 16px 15px 24px', borderRadius: '999px', boxShadow: `0 18px 34px -16px rgba(11,31,58,.6)` },
     `${esc(s.swipe || 'Swipe to fix it')}<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:${M.gold2};color:${M.ink};align-items:center;justify-content:center;font-size:24px">→</span>`));
 };
 

@@ -79,10 +79,10 @@ const beats = R.beats.map((b, i) => {
   w.append(bg, cam); root.append(w);
   let badge = null;
   if (b.num) {                               // list reels: big number + a 10-step progress bar, drawn over the scene
-    badge = el('', { position: 'absolute', left: '0', top: '0', width: '1080px', height: '330px', pointerEvents: 'none' });
+    badge = el('', { position: 'absolute', left: '0', top: '0', width: '1080px', height: '480px', pointerEvents: 'none' });
     const bar = Array.from({ length: R.of || 10 }, (_, k) => `<div style="flex:1;height:12px;border-radius:6px;background:${k < b.num ? '#F2A900' : (WHITE ? 'rgba(11,31,58,.12)' : 'rgba(255,255,255,.18)')};${k === b.num - 1 ? 'box-shadow:0 0 0 3px rgba(242,169,0,.25)' : ''}"></div>`).join('');
     badge.innerHTML = `<div style="position:absolute;left:90px;right:90px;top:120px;display:flex;gap:12px">${bar}</div>
-      <div class="bn" style="position:absolute;left:90px;top:170px;display:flex;align-items:baseline;gap:14px"><span class="disp" style="font-size:150px;line-height:1;color:${WHITE ? '#0B1F3A' : '#fff'}">${b.num}</span><span class="disp" style="font-size:64px;color:#F2A900">/${R.of || 10}</span>${b.name ? `<span class="disp" style="font-size:60px;margin-left:22px;color:${WHITE ? '#0B1F3A' : '#fff'}">${String(b.name).replace(/[&<>"]/g, "")}</span>` : ''}</div>`;
+      <div class="bn" style="position:absolute;left:90px;top:170px;display:flex;align-items:baseline;gap:14px"><span class="disp" style="font-size:150px;line-height:1;color:${WHITE ? '#0B1F3A' : '#fff'}">${b.num}</span><span class="disp" style="font-size:64px;color:#F2A900">/${R.of || 10}</span>${b.name ? `<span class="disp" style="font-size:60px;margin-left:22px;color:${WHITE ? '#0B1F3A' : '#fff'}">${String(b.name).replace(/[&<>"]/g, "")}</span>` : ''}</div>${b.sub ? `<div class="body" style="position:absolute;left:90px;width:900px;top:345px;font-size:40px;line-height:1.25;color:${WHITE ? '#2B3A50' : '#C9D3E0'}">${String(b.sub).replace(/[&<>"]/g, "")}</div>` : ''}`;
     w.append(badge);
   }
   b.t0 = i === 0 ? 0 : b.start - LEAD;

@@ -733,7 +733,7 @@ SCENES.toggle = (cam, p, ctx) => {
    as the narrator reaches each cue (p.cues[N-1]). Animations: draw (strokes draw on), pop, drop / slide (children stagger), grow (bar fills), type, fade. */
 SCENES.illus = (cam, p, ctx) => {
   const th = ctx.th, G = window.MG && window.MG.G[p.kind];
-  const VB = [50, 16, 868, 528], W = 1050, H = Math.round(W * VB[3] / VB[2]), X = 15, Y = Math.round(p.top || 470);   // trim the carousel margins so the picture fills the frame
+  const VB = [50, 16, 868, 528], W = 1050, H = Math.round(W * VB[3] / VB[2]), X = 15, Y = Math.round(p.top || 520);   // trim the carousel margins so the picture fills the frame
   const panel = el('', { position: 'absolute', left: X - 10 + 'px', top: Y - 30 + 'px', width: W + 20 + 'px', height: H + 60 + 'px', borderRadius: '44px', background: '#F3F5F8', boxShadow: '0 50px 90px -50px rgba(11,31,58,.35)' });
   const hold = el('', { position: 'absolute', left: X + 'px', top: Y + 'px', width: W + 'px', height: H + 'px' }, G ? G(p.data || {}).replace(/id="(sh|ah|ahg)"/g, `id="$1_${ctx.i}"`).replace(/url\(#(sh|ah|ahg)\)/g, `url(#$1_${ctx.i})`) : '');   // per-beat ids: hidden beats can't lend their filters
   cam.append(panel, hold);

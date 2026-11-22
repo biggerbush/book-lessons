@@ -244,6 +244,8 @@ def normalise(plan: dict) -> dict:
                 nb["num"] = int(b["num"])
                 if b.get("name"):
                     nb["name"] = _s(b["name"], 22)
+                if b.get("sub"):
+                    nb["sub"] = _s(b["sub"], 90)
         except (TypeError, ValueError):
             pass
         beats.append(nb)

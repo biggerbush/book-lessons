@@ -541,8 +541,8 @@ SL.explain = (el, s, D) => {    // title, a one-line explainer, the graphic, the
   const sb = s.sub ? h('bd', { top: '0px', fontSize: '38px', lineHeight: '1.3', color: M.ink2 }, md(s.sub)) : null; if (sb) el.append(sb);
   const g = s.graphic && G[s.graphic.kind], p = g ? h('panel') : null;
   if (p) { p.innerHTML = g(s.graphic, D); el.append(p); }
-  const b = h('bd', { top: '0px' }, bodyHTML(s.body)); el.append(b);
-  const M0 = 66, g1 = 16, g2 = 40, g3 = 40, ph = p ? PH : 0;
+  const nobody = !(s.body && s.body.length), b = h('bd', { top: '0px' }, nobody ? '' : bodyHTML(s.body)); el.append(b);
+  const M0 = 66, g1 = 16, g2 = 40, g3 = nobody ? 0 : 40, ph = p ? PH : 0;
   if (sb) fitFont(sb, 'fontSize', 38, 28, () => sb.offsetHeight <= 160);
   const room = 1350 - 2 * M0 - t.offsetHeight - (sb ? g1 + sb.offsetHeight : 0) - (p ? g2 + ph : 0) - g3;
   fitFont(b, 'fontSize', 38, 27, () => b.offsetHeight <= room);

@@ -29,8 +29,12 @@ def page(reel: dict) -> str:
     for key, f in (("__F_BR800__", "bricolage-grotesque-latin-800-normal.woff2"), ("__F_BR500__", "bricolage-grotesque-latin-500-normal.woff2"),
                    ("__F_IS600__", "instrument-sans-latin-600-normal.woff2"), ("__F_DM500__", "dm-mono-latin-500-normal.woff2")):
         css = css.replace(key, "data:font/woff2;base64," + base64.b64encode((STAGE / "fonts" / f).read_bytes()).decode())
-    html = (STAGE / "reel.html").read_text(encoding="utf8")
+    html = (STAGE / "reel.html").read_text(encoding="utf8").replace("<script>/*__RUNTIME__*/", "<script>/*__MICRO__*/</script>\n<script>/*__RUNTIME__*/", 1)
     for key, f in (("/*__ICONS__*/", "icons.js"), ("/*__RUNTIME__*/", "reel.js"), ("/*__SCENES__*/", "scenes.js")):
         html = html.replace(key, (STAGE / f).read_text(encoding="utf8"))
+    cf = STAGE.parent.parent / "carousel" / "stage"                # the carousel's illustrations (G.*), so reels can animate the same pictures
+    for fam, w, f in (("News", 700, "newsreader-latin-700-normal.woff2"), ("News", 800, "newsreader-latin-800-normal.woff2"), ("Sans", 700, "inter-latin-700-normal.woff2"), ("Sans", 800, "inter-latin-800-normal.woff2")):
+        css += '@font-face{font-family:"%s";font-weight:%d;src:url(data:font/woff2;base64,%s) format("woff2")}\n' % (fam, w, base64.b64encode((cf / "fonts" / f).read_bytes()).decode())
+    html = html.replace("/*__MICRO__*/", "(() => {\n" + (cf / "micro.js").read_text(encoding="utf8") + "\n})();", 1)
     html = html.replace("/*__CSS__*/", css).replace("/*__REEL__*/null", json.dumps(reel).replace("</", "<\\/"))
     return html

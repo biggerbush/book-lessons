@@ -21,6 +21,7 @@ const pill = (cx, cy, t, fill, color, s) => { const w = Math.max(90, String(t).l
 
 /* ------------------------------------------------------------ graphics */
 const G = {};
+const S = (n, a, html, st) => `<g data-s="${n}" data-a="${a}"${st ? ` data-st="${st}"` : ''}>${html}</g>`;   // a step the reel animates (ignored by the carousel)
 
 G.day = d => {      // a working day chopped into chips, one tiny gold slot of real work
   const segs = d.segments || ['email', 'meeting', 'chat', 'email', 'tabs', 'meeting'], gi = d.gold_at != null ? d.gold_at : Math.floor(segs.length / 2);
@@ -316,11 +317,11 @@ G.spectrum = d => {   // where do you land?
 
 G.choices = d => {    // multiple choice: what would YOU say? (also used as a spot-the-answer quiz)
   const o = (d.options || []).slice(0, 4), n = o.length || 1, top = d.prompt ? 150 : 60, hh = Math.min(110, (440 - top - 14 * (n - 1)) / n + 40); let out = '';
-  if (d.prompt) out += card(60, 40, 848, 90, M.ink) + T(100, 86, d.prompt, { a: 'start', s: Math.min(30, 760 / (d.prompt.length * .5)), w: 800, c: M.white, f: 'News' });
-  o.forEach((c, i) => { const y = top + i * (hh + 14), hl = c.hl;
-    out += card(60, y, 848, hh, hl ? M.goldwash : M.white) + disc(115, y + hh / 2, 30, hl ? M.gold2 : M.blue) + T(115, y + hh / 2 + 2, c.k || 'ABCD'[i], { s: 28, w: 800 });
-    out += T(170, y + hh / 2 - (c.sub ? 14 : 0), c.t, { a: 'start', s: 28, w: 800, f: 'News' }); if (c.sub) out += T(170, y + hh / 2 + 22, c.sub, { a: 'start', s: 21, w: 600, c: M.muted }); });
-  if (d.q) out += T(PW / 2, 528, d.q, { s: 24, w: 800 });
+  if (d.prompt) out += S(1, 'pop', card(60, 40, 848, 90, M.ink) + T(100, 86, d.prompt, { a: 'start', s: Math.min(30, 760 / (d.prompt.length * .5)), w: 800, c: M.white, f: 'News' }));
+  const row = (c, i, y, hl) => card(60, y, 848, hh, hl ? M.goldwash : M.white) + disc(115, y + hh / 2, 30, hl ? M.gold2 : M.blue) + T(115, y + hh / 2 + 2, c.k || 'ABCD'[i], { s: 28, w: 800 })
+    + T(170, y + hh / 2 - (c.sub ? 14 : 0), c.t, { a: 'start', s: 28, w: 800, f: 'News' }) + (c.sub ? T(170, y + hh / 2 + 22, c.sub, { a: 'start', s: 21, w: 600, c: M.muted }) : '');
+  o.forEach((c, i) => { const y = top + i * (hh + 14); out += S(2 + i, 'slide', row(c, i, y, false)); if (c.hl) out += S(2 + n, 'pop', row(c, i, y, true)); });
+  if (d.q) out += S(3 + n, 'fade', T(PW / 2, 528, d.q, { s: 24, w: 800 }));
   return svg(out);
 };
 
@@ -397,33 +398,36 @@ G.practice = d => {   // fill in the blank: the reader writes the mirror
 };
 
 G.ifthen = d => {     // a plan the reader fills in: when X happens, I will Y (first row is the example)
-  const it = (d.items || [{}, {}, {}]).slice(0, 3); let out = '';
+  const it = (d.items || [{}, {}, {}]).slice(0, 3); let out = '', rest = '';
   it.forEach((c, i) => { const y = 40 + i * 155, ex = i === 0 && c.when;
-    out += card(60, y, 848, 132, ex ? M.goldwash : M.white);
-    out += T(100, y + 50, d.a || 'When', { a: 'start', s: 26, w: 800, c: M.muted }) + T(100, y + 104, d.b || 'I will', { a: 'start', s: 26, w: 800, c: M.muted });
-    if (ex) out += T(190, y + 50, c.when, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' }) + T(200, y + 104, c.will, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' });
-    else out += `<line x1="190" x2="860" y1="${y + 60}" y2="${y + 60}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/><line x1="200" x2="860" y1="${y + 114}" y2="${y + 114}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/>`; });
-  if (d.note) out += T(PW / 2, 528, d.note, { s: 22, w: 600, c: M.muted });
+    const base = card(60, y, 848, 132, ex ? M.goldwash : M.white) + T(100, y + 50, d.a || 'When', { a: 'start', s: 26, w: 800, c: M.muted }) + T(100, y + 104, d.b || 'I will', { a: 'start', s: 26, w: 800, c: M.muted });
+    if (ex) out += S(1, 'pop', base) + S(2, 'type', T(190, y + 50, c.when, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' })) + S(3, 'type', T(200, y + 104, c.will, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' }));
+    else rest += `<g>${base}<line x1="190" x2="860" y1="${y + 60}" y2="${y + 60}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/><line x1="200" x2="860" y1="${y + 114}" y2="${y + 114}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/></g>`; });
+  out += S(4, 'drop', rest, '0.15');
+  if (d.note) out += S(5, 'fade', T(PW / 2, 528, d.note, { s: 22, w: 600, c: M.muted }));
   return svg(out);
 };
 
 G.tangle = d => {     // a tangle of thoughts -> one clearly written problem
   let pts = ''; for (let i = 0; i <= 260; i++) { const t = i / 10; pts += `${i ? 'L' : 'M'}${(230 + 135 * Math.sin(t * 1.31) * Math.cos(t * 0.47) + 20 * Math.sin(t * 5.3)).toFixed(1)} ${(250 + 130 * Math.sin(t * 0.83 + 1) * Math.cos(t * 0.29) + 18 * Math.cos(t * 4.1)).toFixed(1)}`; }
-  let out = `<path d="${pts}" fill="none" stroke="${M.ink}" stroke-width="5" stroke-linejoin="round" opacity=".85"/>` + pill(230, 470, d.left || 'in your head', M.white, M.ink, 24);
-  out += arrowL(410, 260, 500, 260, true);
-  out += card(520, 50, 390, 420, M.white) + T(560, 100, d.head || 'WRITTEN DOWN', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted });
-  (d.lines || []).slice(0, 3).forEach((l, i) => { out += disc(572, 168 + i * 72, 9, M.blue2) + T(596, 170 + i * 72, l, { a: 'start', s: 26, w: 700, f: 'News' }); });
-  out += RR(544, 380, 342, 64, 16, M.goldwash) + T(566, 413, d.last || 'The real problem is…', { a: 'start', s: 25, w: 800, c: '#8A5A00' });
+  let out = S(1, 'draw', `<path d="${pts}" fill="none" stroke="${M.ink}" stroke-width="5" stroke-linejoin="round" opacity=".85"/>`) + S(1, 'pop', pill(230, 470, d.left || 'in your head', M.white, M.ink, 24));
+  out += S(2, 'draw', arrowL(410, 260, 500, 260, true));
+  out += S(2, 'pop', card(520, 50, 390, 420, M.white) + T(560, 100, d.head || 'WRITTEN DOWN', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted }));
+  (d.lines || []).slice(0, 3).forEach((l, i) => { out += S(3 + i, 'type', disc(572, 168 + i * 72, 9, M.blue2) + T(596, 170 + i * 72, l, { a: 'start', s: 26, w: 700, f: 'News' })); });
+  out += S(3 + Math.min(3, (d.lines || []).length), 'pop', RR(544, 380, 342, 64, 16, M.goldwash) + T(566, 413, d.last || 'The real problem is…', { a: 'start', s: 25, w: 800, c: '#8A5A00' }));
   return svg(out);
 };
 
 G.pareto = d => {     // ten efforts, two of them gold, feeding most of the result
-  const gold = d.gold || [2, 7]; let out = T(60, 60, d.top || 'EFFORT', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted });
-  for (let i = 0; i < 10; i++) { const x = 60 + i * 85, g = gold.includes(i); out += RR(x, 90, 76, 76, 16, g ? M.gold2 : M.white, 'filter="url(#sh)"') + T(x + 38, 129, String(i + 1), { s: 26, w: 800, c: g ? M.ink : M.muted }); }
-  out += T(60, 300, d.bottom || 'RESULTS', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted });
-  out += RR(60, 330, 848, 84, 20, M.blue) + RR(60, 330, 678, 84, 20, M.gold2) + T(399, 373, d.big || '80% of the results', { s: 30, w: 800 }) + T(823, 373, d.small || '20%', { s: 26, w: 800, c: M.muted });
-  gold.forEach(i => { const x = 98 + i * 85; out += `<path d="M${x} 176 C ${x} 250, 399 250, 399 322" stroke="${M.gold}" stroke-width="5" fill="none" marker-end="url(#ahg)"/>`; });
-  if (d.q) out += T(PW / 2, 500, d.q, { s: 27, w: 800 });
+  const gold = d.gold || [2, 7]; let tiles = '', gl = '';
+  for (let i = 0; i < 10; i++) { const x = 60 + i * 85; tiles += `<g>${RR(x, 90, 76, 76, 16, M.white, 'filter="url(#sh)"') + T(x + 38, 129, String(i + 1), { s: 26, w: 800, c: M.muted })}</g>`;
+    if (gold.includes(i)) gl += `<g>${RR(x, 90, 76, 76, 16, M.gold2) + T(x + 38, 129, String(i + 1), { s: 26, w: 800, c: M.ink })}</g>`; }
+  let out = S(1, 'fade', T(60, 60, d.top || 'EFFORT', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted })) + S(1, 'drop', tiles, '0.05') + S(2, 'pop', gl, '0.12');
+  let ar = ''; gold.forEach(i => { const x = 98 + i * 85; ar += `<path d="M${x} 176 C ${x} 250, 399 250, 399 322" stroke="${M.gold}" stroke-width="5" fill="none" marker-end="url(#ahg)"/>`; });
+  out += S(3, 'draw', ar);
+  out += S(3, 'fade', T(60, 300, d.bottom || 'RESULTS', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted }) + RR(60, 330, 848, 84, 20, M.blue) + T(823, 373, d.small || '20%', { s: 26, w: 800, c: M.muted }));
+  out += S(4, 'grow', RR(60, 330, 678, 84, 20, M.gold2)) + S(4, 'type', T(399, 373, d.big || '80% of the results', { s: 30, w: 800 }));
+  if (d.q) out += S(5, 'fade', T(PW / 2, 500, d.q, { s: 27, w: 800 }));
   return svg(out);
 };
 
@@ -432,35 +436,35 @@ G.curve = d => {      // skill compounds first; the payoff follows later
   const sk = Array.from({ length: 41 }, (_, i) => { const t = i / 40; return [X0 + t * (X1 - X0), Y0 - 330 * Math.pow(t, 1.6)]; });
   const mo = Array.from({ length: 41 }, (_, i) => { const t = i / 40; return [X0 + t * (X1 - X0), Y0 - 260 * Math.pow(Math.max(0, (t - 0.35) / 0.65), 2.2)]; });
   const P = a => a.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ');
-  let out = `<path d="${P(sk)} L${[...mo].reverse().map(p => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' L')} Z" fill="${M.goldwash}"/>`;
-  out += `<line x1="${X0}" y1="${Y0}" x2="${X1 + 20}" y2="${Y0}" stroke="${M.ink}" stroke-width="4"/>` + T(X1 + 10, Y0 + 34, d.x || 'time', { a: 'end', s: 22, w: 700, c: M.muted });
-  out += `<path d="${P(sk)}" fill="none" stroke="${M.ink}" stroke-width="8" stroke-linecap="round"/><path d="${P(mo)}" fill="none" stroke="${M.gold}" stroke-width="8" stroke-linecap="round"/>`;
-  out += pill(640, 90, d.a || 'what you know', M.ink, '#fff', 24) + pill(790, 385, d.b || 'what you earn', M.gold2, M.ink, 24);
-  out += T(430, 300, d.gap || 'the lag', { s: 26, w: 800, f: 'News', c: '#8A5A00' });
-  if (d.q) out += T(PW / 2, 515, d.q, { s: 25, w: 800 });
+  let out = S(4, 'fade', `<path d="${P(sk)} L${[...mo].reverse().map(p => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' L')} Z" fill="${M.goldwash}"/>`);
+  out += S(1, 'draw', `<line x1="${X0}" y1="${Y0}" x2="${X1 + 20}" y2="${Y0}" stroke="${M.ink}" stroke-width="4"/>`) + S(1, 'fade', T(X1 + 10, Y0 + 34, d.x || 'time', { a: 'end', s: 22, w: 700, c: M.muted }));
+  out += S(2, 'draw', `<path d="${P(sk)}" fill="none" stroke="${M.ink}" stroke-width="8" stroke-linecap="round"/>`) + S(3, 'draw', `<path d="${P(mo)}" fill="none" stroke="${M.gold}" stroke-width="8" stroke-linecap="round"/>`);
+  out += S(2, 'pop', pill(640, 90, d.a || 'what you know', M.ink, '#fff', 24)) + S(3, 'pop', pill(790, 385, d.b || 'what you earn', M.gold2, M.ink, 24));
+  out += S(4, 'type', T(430, 300, d.gap || 'the lag', { s: 26, w: 800, f: 'News', c: '#8A5A00' }));
+  if (d.q) out += S(5, 'fade', T(PW / 2, 515, d.q, { s: 25, w: 800 }));
   return svg(out);
 };
 
 G.fork = d => {       // a yes/no fork: the question first, two very different paths
-  let out = card(184, 30, 600, 104, M.ink) + T(484, 83, d.q || 'Does this need deciding today?', { s: 30, w: 800, f: 'News', c: '#fff' });
-  out += `<path d="M420 140 C 420 210, 245 200, 245 268" stroke="${M.ink}" stroke-width="5" fill="none" marker-end="url(#ah)"/><path d="M548 140 C 548 210, 723 200, 723 268" stroke="${M.gold}" stroke-width="5" fill="none" marker-end="url(#ahg)"/>`;
-  out += pill(300, 196, 'YES', M.white, M.ink, 22) + pill(668, 196, 'NO', M.gold2, M.ink, 22);
+  let out = S(1, 'pop', card(184, 30, 600, 104, M.ink) + T(484, 83, d.q || 'Does this need deciding today?', { s: 30, w: 800, f: 'News', c: '#fff' }));
+  out += S(2, 'draw', `<path d="M420 140 C 420 210, 245 200, 245 268" stroke="${M.ink}" stroke-width="5" fill="none" marker-end="url(#ah)"/>`) + S(4, 'draw', `<path d="M548 140 C 548 210, 723 200, 723 268" stroke="${M.gold}" stroke-width="5" fill="none" marker-end="url(#ahg)"/>`);
+  out += S(2, 'pop', pill(300, 196, 'YES', M.white, M.ink, 22)) + S(4, 'pop', pill(668, 196, 'NO', M.gold2, M.ink, 22));
   const side = (x, c, gold) => { let o = card(x, 280, 370, 220, gold ? M.goldwash : M.white) + ic(c.icon || 'check', x + 70, 345, 62, M.ink, 6) + T(x + 120, 348, c.t || '', { a: 'start', s: 30, w: 800 });
     (c.items || []).slice(0, 3).forEach((it, k) => { o += T(x + 40, 410 + k * 36, (gold ? '✓  ' : '•  ') + it, { a: 'start', s: 23, w: 600, c: M.ink2 }); }); return o; };
-  out += side(60, d.yes || {}, false) + side(538, d.no || {}, true);
+  out += S(3, 'pop', side(60, d.yes || {}, false)) + S(5, 'pop', side(538, d.no || {}, true));
   return svg(out);
 };
 
 G.hick = d => {       // many options = a long wait; few options = a quick pick
-  const pal = [M.blue2, M.gold2, '#E9B3AE', '#BFD9C8', M.blue, '#D9CCE8'], N = d.many || 24; let out = '';
-  out += T(240, 50, `${N} OPTIONS`, { s: 24, w: 800, ls: 2, c: M.muted }) + T(728, 50, `${d.few || 3} OPTIONS`, { s: 24, w: 800, ls: 2, c: M.muted });
-  for (let i = 0; i < N; i++) { const c = i % 6, r = Math.floor(i / 6); out += RR(70 + c * 58, 90 + r * 58, 46, 46, 10, pal[(i * 5) % 6]); }
-  for (let i = 0; i < (d.few || 3); i++) out += RR(588 + i * 98, 120, 82, 82, 18, i === 1 ? M.gold2 : M.blue2, 'filter="url(#sh)"') + (i === 1 ? ic('check', 629 + i * 98 - 98 + 98, 161, 46, M.ink, 8) : '');
-  out += `<line x1="484" y1="80" x2="484" y2="420" stroke="${M.blue2}" stroke-width="3" stroke-dasharray="8 10"/>`;
-  out += RR(70, 360, 340, 34, 17, M.blue) + RR(70, 360, 340, 34, 17, M.ink, 'opacity=".9"') + T(240, 430, d.slow || 'slow, doubtful', { s: 25, w: 800 });
-  out += RR(588, 360, 280, 34, 17, M.blue) + RR(588, 360, 70, 34, 17, M.gold2) + T(728, 430, d.fast || 'fast, confident', { s: 25, w: 800 });
-  out += T(240, 330, 'time to choose', { s: 20, w: 700, c: M.muted }) + T(728, 330, 'time to choose', { s: 20, w: 700, c: M.muted });
-  if (d.q) out += T(PW / 2, 512, d.q, { s: 26, w: 800 });
+  const pal = [M.blue2, M.gold2, '#E9B3AE', '#BFD9C8', M.blue, '#D9CCE8'], N = d.many || 24; let grid = '', few = '';
+  for (let i = 0; i < N; i++) { const c = i % 6, r = Math.floor(i / 6); grid += `<g>${RR(70 + c * 58, 90 + r * 58, 46, 46, 10, pal[(i * 5) % 6])}</g>`; }
+  for (let i = 0; i < (d.few || 3); i++) few += `<g>${RR(588 + i * 98, 120, 82, 82, 18, i === 1 ? M.gold2 : M.blue2, 'filter="url(#sh)"') + (i === 1 ? ic('check', 629 + i * 98 - 98 + 98, 161, 46, M.ink, 8) : '')}</g>`;
+  let out = S(1, 'fade', T(240, 50, `${N} OPTIONS`, { s: 24, w: 800, ls: 2, c: M.muted })) + S(1, 'drop', grid, '0.03');
+  out += S(1, 'fade', `<line x1="484" y1="80" x2="484" y2="420" stroke="${M.blue2}" stroke-width="3" stroke-dasharray="8 10"/>`);
+  out += S(2, 'fade', RR(70, 360, 340, 34, 17, M.blue) + T(240, 330, 'time to choose', { s: 20, w: 700, c: M.muted })) + S(2, 'grow', RR(70, 360, 340, 34, 17, M.ink, 'opacity=".9"')) + S(2, 'type', T(240, 430, d.slow || 'slow, doubtful', { s: 25, w: 800 }));
+  out += S(3, 'fade', T(728, 50, `${d.few || 3} OPTIONS`, { s: 24, w: 800, ls: 2, c: M.muted })) + S(3, 'pop', few, '0.12');
+  out += S(4, 'fade', RR(588, 360, 280, 34, 17, M.blue) + T(728, 330, 'time to choose', { s: 20, w: 700, c: M.muted })) + S(4, 'grow', RR(588, 360, 70, 34, 17, M.gold2)) + S(4, 'type', T(728, 430, d.fast || 'fast, confident', { s: 25, w: 800 }));
+  if (d.q) out += S(5, 'fade', T(PW / 2, 512, d.q, { s: 26, w: 800 }));
   return svg(out);
 };
 
@@ -582,6 +586,7 @@ SL.explain = (el, s, D) => {    // title, a one-line explainer, the graphic, the
   y += g3; b.style.top = y + 'px';
 };
 
+if (typeof window !== 'undefined') window.MG = { G, M, PW, PH };
 window.buildDeck = async () => {
   const D = window.CAROUSEL, deck = document.getElementById('deck');
   await document.fonts.ready;

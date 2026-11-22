@@ -12,6 +12,9 @@ TYPES = ("cover", "lesson")
 KINDS = ("choices", "chat", "balance", "receipts", "voice", "silence", "practice", "puzzle", "dilemma", "bet", "wall", "spectrum", "checklist", "questions", "floorplan", "pairs", "tracks", "hours", "iceberg", "tally", "prompt", "stat", "day", "compare", "residue", "dips", "cards", "converge", "gap", "formula", "flow", "calendar", "tracker", "chain", "book")
 
 SYSTEM = """You write Instagram carousels for VisualGrowth (animated book lessons). Style: a STORY told in MICRO-LESSONS, like the best educational
+
+ILLUSTRATION RULE (most important): for every idea, pick or design the illustration that BEST represents that specific idea. Never reuse a scene just because a previous reel, carousel or template used it. Ask "what picture makes this idea obvious?" (a tangle for messy thinking, a decision tree for a choice, a crowded grid vs three options for too many choices) and draw that. When a carousel of the same content exists, its illustrations are the starting point: design a new graphic (a new G.<kind>) when no existing one fits, rather than forcing the idea into a template.
+
 creators. Every slide = one on-brand graphic (navy + gold infographic, never cartoons) + a bold 2-line title + a few short serif lines.
 
 STORY ARC (11-14 slides):

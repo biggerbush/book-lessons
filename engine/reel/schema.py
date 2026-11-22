@@ -5,8 +5,8 @@ from __future__ import annotations
 
 import re
 
-SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "choices", "chat", "countdown", "day", "tracks", "iceberg", "tally", "toggle", "cta")
-GRAPHS = ("stat", "dots", "meter", "donut", "chart", "day", "tracks", "iceberg", "tally", "toggle")              # data graphics
+SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "choices", "chat", "countdown", "day", "tracks", "iceberg", "tally", "toggle", "illus", "cta")
+GRAPHS = ("stat", "dots", "meter", "donut", "chart", "day", "tracks", "iceberg", "tally", "toggle", "illus")              # data graphics
 THINK = ("choices", "chat", "countdown")                           # scenes that put the viewer inside the problem
 VISUAL = GRAPHS + THINK + ("versus", "timeline", "icon", "cycle", "list")  # anything that is a picture, not just words
 THEMES = ("dark", "amber", "light")
@@ -40,6 +40,7 @@ tracks    GRAPHIC. Two signal lanes run side by side; at the "break" word the to
 iceberg   GRAPHIC. A small tip above water ("top"), then the huge hidden mass is revealed and the items surface inside it as they are named. {"top":"What you notice","items":["Phone checks","Snacking","Same route"]}   items max 4, each max 16 chars, read out in order.
 tally     GRAPHIC. A clock sweeps one hour while tally marks stack up in fives and a counter climbs. {"title":"ONE HOUR","marks":12,"start":"mark","label":"times on autopilot"}   For counting, tracking, a self-experiment. "start" = word when marks begin.
 toggle    GRAPHIC HOOK. A game-style settings card: a selector slides across 2-3 options as each is said and lands on the last. {"hook":"SMART PEOPLE DON'T WORK HARDER","label":"Life","kicker":"SETTINGS","options":["Hard","Normal","Easy"]}   read each option out loud, in order.
+illus     GRAPHIC. Any of the carousel's illustrations (G.<kind> in engine/carousel/stage/micro.js: tangle, pareto, ifthen, curve, choices, fork, hick, ...), animated part by part. {"kind":"tangle","data":{...same data as the carousel graphic...},"cues":["word for step 1","word for step 2",...]}   cues = the spoken word that brings in each step of the picture. Read every text on the picture out loud, in order.
 cta       The end card with the book cover. {"line1":"Want the full lesson?","line2":"Watch it as an animated summary.","handle":"visualgrowth.app"}   Always the LAST beat.
 """
 
@@ -200,6 +201,13 @@ def _clean_params(scene: str, p: dict) -> dict:
         except (TypeError, ValueError):
             mk = 12
         return {"title": _s(p.get("title"), 24, True), "marks": mk, "start": _s(p.get("start"), 20), "label": _s(p.get("label"), 28)}
+    if scene == "illus":
+        kind = re.sub(r"[^a-z]", "", str(p.get("kind") or ""))[:16]
+        cues = [_s(c, 40) for c in (p.get("cues") or [])][:8]
+        out = {"kind": kind, "data": p.get("data") if isinstance(p.get("data"), dict) else {}, "cues": cues}
+        if p.get("top"):
+            out["top"] = max(300, min(700, int(p["top"])))
+        return out
     if scene == "toggle":
         opts = [_s(o, 10) for o in (p.get("options") or ["Hard", "Normal", "Easy"]) if _s(o, 10)][:3] or ["Hard", "Normal", "Easy"]
         return {"hook": _s(p.get("hook"), 48), "accent": [_s(a, 16, True) for a in (p.get("accent") or [])][:3], "label": _s(p.get("label"), 14) or "Life", "kicker": _s(p.get("kicker"), 14, True) or "SETTINGS", "options": opts}
@@ -305,6 +313,11 @@ def _read(text: str, say: str) -> bool:
     return hit >= max(1, round(len(want) * 0.6))
 
 
+def _kind(b: dict) -> str:
+    """A scene's visual kind: each carousel illustration counts as its own kind."""
+    return "illus:" + b["p"].get("kind", "") if b["scene"] == "illus" else b["scene"]
+
+
 def problems(plan: dict) -> list[str]:
     """Things worth a second look (used to ask Claude for one repair, and printed in the log)."""
     out, beats = [], plan["beats"]
@@ -325,7 +338,7 @@ def problems(plan: dict) -> list[str]:
         for b in beats:
             if b.get("num") and b["scene"] in ("slam", "quote", "intro", "cta"):
                 out.append(f"thing {b['num']} uses a text scene ({b['scene']}); every numbered thing needs an animated graphic")
-        kinds = {b["scene"] for b in beats if b.get("num")}
+        kinds = {_kind(b) for b in beats if b.get("num")}
         if len(kinds) < min(7, plan.get("of") or 10):
             out.append(f"the 10 things use only {len(kinds)} kinds of scene; use at least 7 different ones")
     bi = [i for i, b in enumerate(beats) if b["scene"] == "intro"]
@@ -335,7 +348,7 @@ def problems(plan: dict) -> list[str]:
         out.append("beat 1 is the hook and must be a graphic (stat, dots, donut, chart, day, iceberg...), not text or the book card")
     run = 1
     for a, b in zip(beats, beats[1:]):
-        run = run + 1 if a["scene"] == b["scene"] else 1
+        run = run + 1 if _kind(a) == _kind(b) else 1
         if run >= 3:
             out.append(f"three '{b['scene']}' scenes in a row; vary the scenes")
             break

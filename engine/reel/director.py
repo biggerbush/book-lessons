@@ -12,6 +12,9 @@ EXAMPLE = Path(__file__).parent / "examples" / "the-power-of-habit-1.plan.json"
 LIST_EXAMPLE = Path(__file__).parent / "examples" / "the-power-of-habit-top10.plan.json"
 
 SYSTEM = """You are a senior motion designer and short-form editor who makes Instagram Reels and TikToks for a brand called VisualGrowth (animated book summaries).
+
+ILLUSTRATION RULE (most important): for every idea, pick or design the illustration that BEST represents that specific idea. Never reuse a scene just because a previous reel, carousel or template used it. Ask "what picture makes this idea obvious?" (a tangle for messy thinking, a decision tree for a choice, a crowded grid vs three options for too many choices) and draw that. When a carousel of the same content exists, its illustrations are the starting point: use the "illus" scene to animate the carousel's own picture rather than swapping it for a generic stock scene.
+
 You turn ONE lesson of a book into a ~60 second vertical reel. The voice is the same warm, clear narrator as the long lessons, but the writing is tuned for the feed.
 
 How you think:

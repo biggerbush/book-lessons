@@ -222,7 +222,7 @@ window.sfxEvents = () => {
 };
 window.startReel = async () => {
   if (WHITE) document.body.classList.add('look-white');
-  await Promise.all(['800 100px "Bricolage Grotesque"', '500 40px "Bricolage Grotesque"', '600 40px "Instrument Sans"', '500 30px "DM Mono"'].map(f => document.fonts.load(f)));
+  await Promise.all(['800 100px "Bricolage Grotesque"', '500 40px "Bricolage Grotesque"', '600 40px "Instrument Sans"', '500 30px "DM Mono"', '800 30px News', '700 30px News', '800 30px Sans', '700 30px Sans'].map(f => document.fonts.load(f)));
   await document.fonts.ready;
   buildAll();
   const tg = document.getElementById('tag'); tg.textContent = R.lesson === '' ? `${R.book} · visualgrowth.app` : `${R.book} · ${R.lesson === 'top10' ? '10 things' : 'lesson ' + R.lesson} · visualgrowth.app`;

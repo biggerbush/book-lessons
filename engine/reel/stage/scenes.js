@@ -728,3 +728,54 @@ SCENES.toggle = (cam, p, ctx) => {
     camera(cam, lt, ctx, done > 0 ? [ts[on]] : [], 0.035);
   } };
 };
+
+/* illus: one of the carousel's own illustrations, animated part by part. The picture's <g data-s=N data-a=...> steps come in
+   as the narrator reaches each cue (p.cues[N-1]). Animations: draw (strokes draw on), pop, drop / slide (children stagger), grow (bar fills), type, fade. */
+SCENES.illus = (cam, p, ctx) => {
+  const th = ctx.th, G = window.MG && window.MG.G[p.kind];
+  const VB = [50, 16, 868, 528], W = 1050, H = Math.round(W * VB[3] / VB[2]), X = 15, Y = Math.round(p.top || 470);   // trim the carousel margins so the picture fills the frame
+  const panel = el('', { position: 'absolute', left: X - 10 + 'px', top: Y - 30 + 'px', width: W + 20 + 'px', height: H + 60 + 'px', borderRadius: '44px', background: '#F3F5F8', boxShadow: '0 50px 90px -50px rgba(11,31,58,.35)' });
+  const hold = el('', { position: 'absolute', left: X + 'px', top: Y + 'px', width: W + 'px', height: H + 'px' }, G ? G(p.data || {}).replace(/id="(sh|ah|ahg)"/g, `id="$1_${ctx.i}"`).replace(/url\(#(sh|ah|ahg)\)/g, `url(#$1_${ctx.i})`) : '');   // per-beat ids: hidden beats can't lend their filters
+  cam.append(panel, hold);
+  const sv = hold.querySelector('svg'); if (sv) { sv.setAttribute('width', W); sv.setAttribute('height', H); sv.setAttribute('viewBox', VB.join(' ')); sv.style.overflow = 'visible'; }
+  const groups = [...hold.querySelectorAll('[data-s]')], nSteps = Math.max(1, ...groups.map(g => +g.dataset.s));
+  const cues = p.cues || [], ts = cueSeq(ctx, Array.from({ length: nSteps }, (_, i) => cues[i] || ''), 0.5, ctx.dur * 0.82);
+  const A = groups.map(g => {
+    const a = g.dataset.a || 'fade', st = +(g.dataset.st || 0), t = ts[+g.dataset.s - 1];
+    const parts = st ? [...g.children] : [g];
+    parts.forEach(e => { e.style.transformBox = 'fill-box'; e.style.transformOrigin = a === 'grow' ? '0% 50%' : '50% 50%'; });
+    let strokes = [];
+    if (a === 'draw') strokes = [...g.querySelectorAll('path,line,polyline')].filter(s => !s.getAttribute('stroke-dasharray')).map(s => {
+      let L = 1; try { L = s.getTotalLength(); } catch (e) {}
+      const mk = s.getAttribute('marker-end'); if (mk) s.removeAttribute('marker-end');
+      s.style.strokeDasharray = `${L} ${L}`; s.style.strokeDashoffset = L; return { s, L, mk };
+    });
+    return { g, a, st, t, parts, strokes, len: a === 'draw' ? Math.min(1.8, 0.5 + Math.max(...strokes.map(x => x.L), 0) / 900) : 0.45 };
+  });
+  [...new Set(A.map(o => o.t))].forEach((t, i, arr) => ctx.events.push({ at: t, kind: i === arr.length - 1 && arr.length > 2 ? 'shimmer' : (A.find(o => o.t === t && o.a !== 'draw') ? 'pop' : 'whoosh') }));
+  return { update(lt) {
+    const a0 = E.out3(clamp(lt / 0.45));
+    tf(panel, { y: lerp(60, 0, a0), o: a0 }); hold.style.opacity = a0;
+    A.forEach(o => {
+      const d = lt - o.t;
+      if (o.a === 'draw') {
+        const q = clamp(d / o.len), k = q < 0.5 ? 4 * q * q * q : 1 - Math.pow(-2 * q + 2, 3) / 2;
+        o.g.style.opacity = d > 0 ? 1 : 0;
+        o.strokes.forEach(x => { x.s.style.strokeDashoffset = x.L * (1 - k); if (x.mk) { if (k > 0.97) x.s.setAttribute('marker-end', x.mk); else x.s.removeAttribute('marker-end'); } });
+        return;
+      }
+      o.parts.forEach((e, j) => {
+        const k = clamp((d - j * o.st) / o.len);
+        let tr = '', op = k > 0 ? 1 : 0;
+        if (o.a === 'pop') { const s = lerp(0.55, 1, E.back(k)); tr = `scale(${s.toFixed(3)})`; op = clamp(k / 0.3); }
+        else if (o.a === 'drop') { tr = `translate(0px,${lerp(-70, 0, E.out3(k)).toFixed(1)}px)`; op = clamp(k / 0.4); }
+        else if (o.a === 'slide') { tr = `translate(${lerp(-120, 0, E.out3(k)).toFixed(1)}px,0px)`; op = clamp(k / 0.4); }
+        else if (o.a === 'grow') { tr = `scale(${Math.max(0.001, E.out3(clamp((d - j * o.st) / 0.9))).toFixed(3)},1)`; op = d > 0 ? 1 : 0; }
+        else if (o.a === 'type') { tr = `translate(${lerp(-24, 0, E.out3(k)).toFixed(1)}px,0px)`; op = clamp(k / 0.6); }
+        else { op = clamp(k / 0.6); }
+        e.style.transform = tr; e.style.opacity = op;
+      });
+    });
+    camera(cam, lt, ctx, [], 0.025);
+  } };
+};

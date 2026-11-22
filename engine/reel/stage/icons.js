@@ -34,6 +34,10 @@ const ICONS = {
   compass: '<circle cx="50" cy="50" r="38"/><path d="M64 36L56 56 36 64l8-20z"/>',
   pencil: '<path d="M16 84l6-20 46-46 14 14-46 46z"/><path d="M60 26l14 14"/>',
   stairs: '<path d="M12 84h22V66h22V48h22V30h10"/><path d="M12 84v0"/>',
+  coffee: '<path d="M22 40h44v22a20 20 0 0 1-20 20h-4a20 20 0 0 1-20-20z"/><path d="M66 46h6a10 10 0 0 1 0 20h-7"/><path d="M36 16c-4 6 4 10 0 16M50 16c-4 6 4 10 0 16"/>',
+  car: '<path d="M14 66V54l10-20h52l10 20v12z"/><path d="M14 54h72"/><circle cx="30" cy="70" r="8"/><circle cx="70" cy="70" r="8"/>',
+  fork: '<path d="M36 14v24a8 8 0 0 0 16 0V14M44 14v72"/><path d="M68 14c-8 8-8 26 0 32v40"/>',
+  bed: '<path d="M12 74V30M12 58h76v16M88 58V48a10 10 0 0 0-10-10H44v20"/><circle cx="28" cy="48" r="8"/>',
   scale: '<path d="M50 14v70M24 84h52M18 32h64"/><path d="M18 32l-10 24h20zM82 32l-10 24h20z"/>',
 };
 function iconSVG(name, size, stroke) {

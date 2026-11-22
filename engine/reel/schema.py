@@ -5,8 +5,8 @@ from __future__ import annotations
 
 import re
 
-SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "choices", "chat", "countdown", "cta")
-GRAPHS = ("stat", "dots", "meter", "donut", "chart")              # data graphics
+SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "choices", "chat", "countdown", "day", "tracks", "iceberg", "tally", "cta")
+GRAPHS = ("stat", "dots", "meter", "donut", "chart", "day", "tracks", "iceberg", "tally")              # data graphics
 THINK = ("choices", "chat", "countdown")                           # scenes that put the viewer inside the problem
 VISUAL = GRAPHS + THINK + ("versus", "timeline", "icon", "cycle", "list")  # anything that is a picture, not just words
 THEMES = ("dark", "amber", "light")
@@ -16,7 +16,7 @@ ICONS = ("bulb clock target brain fire lock key heart rocket chart shield book e
 
 # what the director is told about each scene (also the contract normalise() enforces)
 SCENE_DOCS = """
-intro     ALWAYS the FIRST beat. The book card flies in ("A LESSON FROM <book>") and the hook lands under it as a headline. {"hook":"THE SKILL NOBODY PRACTISES","accent":["NOBODY"]}   hook max 48 chars = the punchiest version of the spoken hook line.
+intro     The BOOK CARD. Use it as beat 2 or 3, right after the hook: the book flies in under "A LESSON FROM" while the narrator names the author and book. {"hook":""}   Leave hook empty (the hook belongs to beat 1, as a graphic).
 slam      Huge words slam onto the screen one by one. {"lines":["MOST VALUABLE","SKILL AT WORK"],"accent":["VALUABLE"],"sub":"optional small line","glyph":"?"}
           1-4 lines, each max 16 characters (they are upper-cased). accent = words to colour. glyph = optional giant faint symbol behind (e.g. "?" or "1").
 stat      A number counts up inside a ring. {"value":37,"decimals":0,"prefix":"","suffix":"x","label":"BETTER IN A YEAR","sub":"small line","ring":0.8}
@@ -35,6 +35,10 @@ donut     A ring split into 2-4 shares. {"title":"WHERE THE DAY GOES","center":"
 choices   THINKING SCENE. A scenario box, then 2-3 options fly in; the viewer picks, then the answer lights up. {"label":"IT'S 5PM","prompt":"I need the whole deck redone by tomorrow morning.","options":[{"k":"A","t":"Sure, I'll do it","on":"sure"},{"k":"B","t":"That's impossible"},{"k":"C","t":"?","hl":true}],"reveal":"word spoken when the answer lights","q":"What do you say?"}   prompt max 90 chars; option t max 30; at most ONE option has hl (the answer; leave all unmarked for a pure open question).
 chat      THINKING SCENE. 2-4 chat bubbles pop in; the highlighted phrase shows what is being repeated or noticed. {"messages":[{"who":"them","name":"BOSS","t":"I need it by tomorrow morning.","hl":"by tomorrow morning"},{"who":"me","name":"YOU","t":"By tomorrow morning?","hl":"by tomorrow morning"}],"note":"optional payoff line"}   each t max 70 chars; who = them|me.
 countdown THINKING SCENE. A ring drains while the seconds count up: silence, waiting, a pause made visible. {"seconds":4,"label":"SAY NOTHING","sub":"it feels long"}   seconds 2-9.
+day       GRAPHIC. A ring of everyday actions: each segment lights and its icon pops as it is named, then a word lands in the centre. {"title":"A NORMAL MORNING","items":[{"t":"Alarm","icon":"clock"},{"t":"Phone","icon":"phone"},{"t":"Coffee","icon":"coffee"},{"t":"Commute","icon":"car"}],"center":"AUTOPILOT","sub":"optional line"}   3-6 items, t max 10 chars, read each one out in order.
+tracks    GRAPHIC. Two signal lanes run side by side; at the "break" word the top lane cracks and stops while the bottom one keeps flowing. {"top":"MEMORY","bottom":"HABIT","break":"lose","top_after":"gone","bottom_after":"still running"}   For two systems where one fails and the other carries on.
+iceberg   GRAPHIC. A small tip above water ("top"), then the huge hidden mass is revealed and the items surface inside it as they are named. {"top":"What you notice","items":["Phone checks","Snacking","Same route"]}   items max 4, each max 16 chars, read out in order.
+tally     GRAPHIC. A clock sweeps one hour while tally marks stack up in fives and a counter climbs. {"title":"ONE HOUR","marks":12,"start":"mark","label":"times on autopilot"}   For counting, tracking, a self-experiment. "start" = word when marks begin.
 cta       The end card with the book cover. {"line1":"Want the full lesson?","line2":"Watch it as an animated summary.","handle":"visualgrowth.app"}   Always the LAST beat.
 """
 
@@ -178,6 +182,23 @@ def _clean_params(scene: str, p: dict) -> dict:
         except (TypeError, ValueError):
             sec = 4
         return {"seconds": sec, "label": _s(p.get("label"), 20, True) or "SAY NOTHING", "sub": _s(p.get("sub"), 60)}
+    if scene == "day":
+        items = []
+        for o in (p.get("items") or [])[:6]:
+            o = o if isinstance(o, dict) else {"t": o}
+            if _s(o.get("t"), 10):
+                items.append({"t": _s(o.get("t"), 10), "icon": _s(o.get("icon"), 12) or "star"})
+        return {"title": _s(p.get("title"), 30, True), "items": items or [{"t": "Wake", "icon": "sun"}, {"t": "Phone", "icon": "phone"}, {"t": "Work", "icon": "laptop"}], "center": _s(p.get("center"), 14, True), "sub": _s(p.get("sub"), 60)}
+    if scene == "tracks":
+        return {"top": _s(p.get("top"), 14, True) or "MEMORY", "bottom": _s(p.get("bottom"), 14, True) or "HABIT", "break": _s(p.get("break"), 20), "top_after": _s(p.get("top_after"), 24), "bottom_after": _s(p.get("bottom_after"), 24), "note": _s(p.get("note"), 60)}
+    if scene == "iceberg":
+        return {"top": _s(p.get("top"), 24), "items": [_s(x, 16) for x in (p.get("items") or [])[:4] if _s(x, 16)]}
+    if scene == "tally":
+        try:
+            mk = max(3, min(15, int(p.get("marks", 12))))
+        except (TypeError, ValueError):
+            mk = 12
+        return {"title": _s(p.get("title"), 24, True), "marks": mk, "start": _s(p.get("start"), 20), "label": _s(p.get("label"), 28)}
     if scene == "cta":
         return {"line1": _s(p.get("line1"), 30) or "Want the full lesson?", "line2": _s(p.get("line2"), 60) or "Watch it as an animated book summary.", "handle": _s(p.get("handle"), 28) or "visualgrowth.app"}
     return p
@@ -207,12 +228,9 @@ def normalise(plan: dict) -> dict:
         beats.append({"say": say, "scene": scene, "theme": theme, "transition": tr, "p": _clean_params(scene, b.get("p") or b.get("params") or {})})
     if not beats:
         raise ValueError("the plan has no usable beats")
-    if beats[0]["scene"] != "intro":                          # the reel always opens on the book, with the hook under it
-        b0 = beats[0]
-        hook = " ".join(b0["p"].get("lines") or []) if b0["scene"] == "slam" else b0["say"]
-        b0["scene"], b0["p"] = "intro", _clean_params("intro", {"hook": hook, "accent": b0["p"].get("accent") or []})
-    for b in beats[1:]:
-        if b["scene"] == "intro":
+    first = next((i for i, b in enumerate(beats) if b["scene"] == "intro"), None)   # one book card, early on
+    for i, b in enumerate(beats):
+        if b["scene"] == "intro" and (i != first or i > 2):
             b["scene"] = "slam"; b["p"] = _clean_params("slam", {"lines": [b["p"].get("hook", "")[:16]]})
     if beats[-1]["scene"] != "cta":
         beats.append({"say": "Follow for the full lesson.", "scene": "cta", "theme": "dark", "transition": "circle" if prev_tr != "circle" else "whip_up", "p": _clean_params("cta", {})})
@@ -246,6 +264,10 @@ def _on_screen(b: dict) -> list[str]:
         return [i["t"] for i in p.get("items", [])]
     if sc == "versus":
         return [p["left"]["t"], p["right"]["t"]]
+    if sc in ("day",):
+        return [i["t"] for i in p.get("items", [])]
+    if sc == "iceberg":
+        return list(p.get("items", []))
     if sc == "meter":
         return [r["label"] for r in p.get("rows", [])]
     return []
@@ -269,27 +291,30 @@ def problems(plan: dict) -> list[str]:
         out.append(f"narration is only {n} words; it needs 130-150 to fill about a minute")
     if n > 165:
         out.append(f"narration is {n} words; it needs 130-150 to fit about a minute")
-    if len(beats) < 12:
-        out.append(f"only {len(beats)} beats; use 12-18 so the picture changes every 2-4 seconds")
+    if len(beats) < 9:
+        out.append(f"only {len(beats)} beats; use 9-14")
+    bi = [i for i, b in enumerate(beats) if b["scene"] == "intro"]
+    if not bi or bi[0] not in (1, 2):
+        out.append("the book card ('intro' scene, hook empty) must be beat 2 or 3, straight after the hook")
+    if beats and beats[0]["scene"] not in GRAPHS:
+        out.append("beat 1 is the hook and must be a graphic (stat, dots, donut, chart, day, iceberg...), not text or the book card")
     run = 1
     for a, b in zip(beats, beats[1:]):
         run = run + 1 if a["scene"] == b["scene"] else 1
         if run >= 3:
             out.append(f"three '{b['scene']}' scenes in a row; vary the scenes")
             break
-    if len(beats) > 1 and beats[1]["scene"] not in GRAPHS + THINK:
-        out.append("beat 2 must put the viewer in the problem (choices or chat) or show the core insight as data (chart, stat, dots, meter or donut) right after the hook")
     if beats and len(beats[0]["say"].split()) > 13:
         out.append(f"the hook (beat 1) is {len(beats[0]['say'].split())} words; keep it to 8-12 so the insight lands by ~3 seconds")
     mid = beats[1:-1]
-    g = sum(b["scene"] in GRAPHS + THINK for b in mid)
+    g = sum(b["scene"] in GRAPHS for b in beats[:-1])
     v = sum(b["scene"] in VISUAL for b in mid)
     s = sum(b["scene"] in ("slam", "quote") for b in mid)
     t = sum(b["scene"] in THINK for b in mid)
-    if t < 2:
-        out.append(f"only {t} thinking scenes (choices, chat, countdown); use at least 2 that make the viewer decide, predict or feel the problem")
-    if g < 4:
-        out.append(f"only {g} data graphics (stat, dots, meter, donut, chart); use at least 4-5, each with a different look")
+    if t > 1:
+        out.append(f"{t} text-card scenes (choices, chat, countdown); use one at most and let animated graphics carry the reel")
+    if g < 5:
+        out.append(f"only {g} animated graphics; use at least 5, each a different kind")
     if mid and v < 0.7 * len(mid):
         out.append(f"only {v} of {len(mid)} middle beats are graphics; at least 70% should be pictures, not words")
     if s > 3:

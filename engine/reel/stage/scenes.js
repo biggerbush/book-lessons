@@ -387,6 +387,7 @@ SCENES.intro = (cam, p, ctx) => {
   const acc = (p.accent || []).map(x => String(x).toUpperCase().replace(/[^A-Z0-9%×]/g, ''));
   const ws = hookWords(hook, p.hook || '', acc, th, ctx);
   fit(hook, 960, 360, 112, 56);
+  if (!p.hook) { holder.style.top = '400px'; col.style.top = '150px'; col.style.height = '210px'; raySvg.style.top = '-260px'; glow.style.top = '210px'; }
   ctx.events.push({ at: 0.0, kind: 'riser' }, { at: 0.4, kind: 'thud' }, ...ws.map(w => ({ at: w.tk + 0.06, kind: 'pop' })));
   return { update(lt) {
     const a = E.spring(clamp(lt / 0.6));
@@ -556,5 +557,133 @@ SCENES.countdown = (cam, p, ctx) => {
     tf(num, { s: cur ? lerp(1.18, 1, E.out3(clamp(since / 0.25))) : 0.6, o: cur ? 1 : 0 });
     tf(label, { y: lerp(40, 0, E.out3(clamp((lt - 0.2) / 0.4))), o: clamp((lt - 0.2) / 0.3) }); tf(sub, { y: lerp(30, 0, E.out3(clamp((lt - 0.5) / 0.4))), o: clamp((lt - 0.5) / 0.3) });
     camera(cam, lt, ctx, [], 0.03);
+  } };
+};
+
+
+/* ================================================================ graphics-led scenes (no text cards) */
+function arcD(cx, cy, r, a, b) { const L = b - a > Math.PI ? 1 : 0; return `M${(cx + r * Math.cos(a)).toFixed(1)} ${(cy + r * Math.sin(a)).toFixed(1)} A${r} ${r} 0 ${L} 1 ${(cx + r * Math.cos(b)).toFixed(1)} ${(cy + r * Math.sin(b)).toFixed(1)}`; }
+
+/* day: a ring of everyday actions; each segment lights and its icon pops as it is named */
+SCENES.day = (cam, p, ctx) => {
+  const th = ctx.th, items = (p.items || []).slice(0, 6), n = Math.max(1, items.length), CX = 540, CY = 720, R = 230, a0 = -Math.PI / 2, span = 2 * Math.PI / n, gap = 0.16;
+  const ts = cueSeq(ctx, items.map(o => o.t), 0.5, ctx.dur * 0.68);
+  let segs = '';
+  items.forEach((o, i) => { segs += `<path class="sg" d="${arcD(CX, CY, R, a0 + i * span + gap / 2, a0 + (i + 1) * span - gap / 2)}" fill="none" stroke="${th.accent}" stroke-width="46" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`; });
+  const svg = svgEl(1080, 1500, `<circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="${th.soft}" stroke-width="46"/>${segs}`);
+  cam.append(svg);
+  const sg = [...svg.querySelectorAll('.sg')];
+  if (p.title) cam.append(el('mono', { position: 'absolute', left: '90px', width: '900px', top: CY - R - 190 + 'px', textAlign: 'center', fontSize: '32px', color: th.muted }, esc(p.title)));
+  const els = items.map((o, i) => {
+    const a = a0 + (i + 0.5) * span, bx = CX + R * Math.cos(a), by = CY + R * Math.sin(a), c = Math.cos(a), sn = Math.sin(a);
+    const bub = el('', { position: 'absolute', left: bx - 66 + 'px', top: by - 66 + 'px', width: '132px', height: '132px', borderRadius: '50%', background: th.fg, color: th.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 18px 36px -16px rgba(11,31,58,.5)' }, iconSVG(o.icon, 78, 6));
+    const lx = CX + (R + 108) * c, ly = CY + (R + 108) * sn;
+    const st = Math.abs(c) > 0.3 ? (c > 0 ? { left: lx - 8 + 'px', textAlign: 'left' } : { left: lx - 252 + 'px', textAlign: 'right' }) : { left: lx - 160 + 'px', textAlign: 'center' };
+    const lab = el('disp', Object.assign({ position: 'absolute', width: Math.abs(c) > 0.3 ? '260px' : '320px', top: ly - 28 + (Math.abs(c) <= 0.3 ? (sn > 0 ? 20 : -20) : 0) + 'px', fontSize: '42px', color: th.fg, whiteSpace: 'nowrap' }, st), esc(o.t || ''));
+    cam.append(bub, lab);
+    ctx.events.push({ at: ts[i], kind: 'pop' });
+    return { bub, lab, t: ts[i], seg: sg[i] };
+  });
+  const tc = ts[ts.length - 1] + 0.55;
+  const cen = el('disp', { position: 'absolute', left: CX - 170 + 'px', width: '340px', top: CY - 70 + 'px', height: '140px', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', fontSize: '60px', lineHeight: 1, color: th.fg, opacity: 0 }, esc(p.center || ''));
+  const sub = p.sub ? el('body', { position: 'absolute', left: '90px', width: '900px', top: CY + R + 175 + 'px', textAlign: 'center', fontSize: '44px', color: th.muted, opacity: 0 }, esc(p.sub)) : null;
+  cam.append(cen); if (sub) cam.append(sub); fit(cen, 330, 140, 60, 30);
+  if (p.center) ctx.events.push({ at: tc, kind: 'thud' });
+  return { update(lt) {
+    els.forEach(o => { const d = lt - o.t; o.seg.setAttribute('stroke-dashoffset', 1 - E.out3(clamp(d / 0.45))); tf(o.bub, { s: lerp(0.2, 1, E.back(clamp(d / 0.35))), o: clamp(d / 0.1) }); tf(o.lab, { o: clamp((d - 0.08) / 0.2), y: lerp(16, 0, E.out3(clamp((d - 0.08) / 0.3))) }); });
+    tf(cen, { s: lerp(0.6, 1, E.back(clamp((lt - tc) / 0.4))), o: clamp((lt - tc) / 0.2) });
+    if (sub) tf(sub, { o: clamp((lt - tc - 0.3) / 0.3), y: lerp(20, 0, E.out3(clamp((lt - tc - 0.3) / 0.35))) });
+    camera(cam, lt, ctx, p.center ? [tc] : [], 0.03);
+  } };
+};
+
+/* tracks: two signal lanes; the top one breaks, the bottom one keeps running */
+SCENES.tracks = (cam, p, ctx) => {
+  const th = ctx.th, X0 = 160, X1 = 920, Y = [540, 930], MID = 560;
+  const tB = cueSeq(ctx, [p.break || '~~'], ctx.dur * 0.5, ctx.dur * 0.5)[0];
+  const svg = svgEl(1080, 1500, `
+    ${Y.map((y, k) => `<line x1="${X0}" y1="${y}" x2="${X1}" y2="${y}" stroke="${th.soft}" stroke-width="30" stroke-linecap="round"/><line class="ln" x1="${X0}" y1="${y}" x2="${X1}" y2="${y}" stroke="${k ? th.accent : th.fg}" stroke-width="12" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`).join('')}
+    <g id="crack" opacity="0"><path d="M${MID - 10} ${Y[0] - 60} l22 30 -24 22 26 30 -18 34" fill="none" stroke="${th.bg}" stroke-width="30" stroke-linejoin="round"/><path d="M${MID - 10} ${Y[0] - 60} l22 30 -24 22 26 30 -18 34" fill="none" stroke="#C0392B" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/></g>
+    ${[0, 1].map(k => [0, 1, 2, 3].map(j => `<circle class="pl${k}" r="17" cy="${Y[k]}" cx="${X0}" fill="${k ? th.accent : th.fg}"/>`).join('')).join('')}`);
+  cam.append(svg);
+  const lns = [...svg.querySelectorAll('.ln')], pl = [0, 1].map(k => [...svg.querySelectorAll('.pl' + k)]), crack = svg.querySelector('#crack');
+  const lab = (t, y, c) => { const e = el('mono', { position: 'absolute', left: X0 + 'px', top: y - 110 + 'px', fontSize: '38px', color: c, opacity: 0 }, esc(t)); cam.append(e); return e; };
+  const L = [lab(p.top || 'MEMORY', Y[0], th.fg), lab(p.bottom || 'HABIT', Y[1], th.accent)];
+  const after = (t, y, c) => { if (!t) return null; const e = el('disp', { position: 'absolute', left: '140px', width: '800px', top: y + 54 + 'px', textAlign: 'right', fontSize: '50px', color: c, opacity: 0 }, esc(t)); cam.append(e); return e; };
+  const A = [after(p.top_after, Y[0], th.muted), after(p.bottom_after, Y[1], th.accent)];
+  const note = p.note ? el('body', { position: 'absolute', left: '90px', width: '900px', top: Y[1] + 210 + 'px', textAlign: 'center', fontSize: '42px', color: th.muted, opacity: 0 }, esc(p.note)) : null; if (note) cam.append(note);
+  ctx.events.push({ at: 0.1, kind: 'whoosh' }, { at: tB, kind: 'thud' });
+  return { update(lt) {
+    lns.forEach((l, k) => l.setAttribute('stroke-dashoffset', 1 - E.out3(clamp((lt - 0.1 - k * 0.2) / 0.6))));
+    L.forEach((e, k) => tf(e, { o: clamp((lt - 0.15 - k * 0.2) / 0.3), x: lerp(-30, 0, E.out3(clamp((lt - 0.15 - k * 0.2) / 0.4))) }));
+    const br = clamp((lt - tB) / 0.3);
+    lns[0].setAttribute('opacity', 1 - 0.65 * br);
+    crack.setAttribute('opacity', br); crack.setAttribute('transform', `translate(0 ${(1 - E.back(br)) * -20})`);
+    [0, 1].forEach(k => pl[k].forEach((c, j) => {
+      const W = X1 - X0, x = X0 + ((Math.max(0, lt - 0.5) * 300 + j * W / 4) % W);
+      let o = clamp((lt - 0.5) / 0.3) * (x < X0 + 30 ? (x - X0) / 30 : x > X1 - 30 ? (X1 - x) / 30 : 1);
+      if (k === 0 && lt > tB) o *= x < MID - 30 ? 0.6 : 0;
+      c.setAttribute('cx', k === 0 && lt > tB && x > MID - 30 ? MID - 30 : x); c.setAttribute('opacity', Math.max(0, o));
+    }));
+    A.forEach(e => e && tf(e, { o: br, y: lerp(20, 0, E.out3(br)) }));
+    if (note) tf(note, { o: clamp((lt - tB - 0.6) / 0.3) });
+    camera(cam, lt, ctx, [tB], 0.03);
+  } };
+};
+
+/* iceberg: the tip you notice, the mass you don't; items surface inside the hidden part as they are named */
+SCENES.iceberg = (cam, p, ctx) => {
+  const th = ctx.th, items = (p.items || []).slice(0, 4), W = 520, id = 'ib' + ctx.i;
+  const ts = cueSeq(ctx, items.map(o => o), 0.9, ctx.dur * 0.8);
+  const tip = '430,520 492,400 540,350 600,410 650,520', body = '240,520 830,520 900,760 830,1050 640,1230 420,1190 230,980 180,740';
+  const svg = svgEl(1080, 1500, `<defs><clipPath id="${id}"><rect id="${id}r" x="0" y="${W}" width="1080" height="0"/></clipPath></defs>
+    <rect x="-200" y="${W}" width="1480" height="1200" fill="${WHITE ? '#E8EEF6' : 'rgba(255,255,255,.06)'}"/>
+    <g id="${id}g"><polygon points="${tip}" fill="${th.fg}"/><polygon points="${body}" fill="${WHITE ? '#1E3557' : th.fg}" opacity=".92" clip-path="url(#${id})"/></g>
+    <path id="${id}w" d="" fill="none" stroke="${WHITE ? '#9FB3CC' : th.line}" stroke-width="6"/>`);
+  cam.append(svg);
+  const rr = svg.querySelector('#' + id + 'r'), g = svg.querySelector('#' + id + 'g'), wv = svg.querySelector('#' + id + 'w');
+  const topL = el('disp', { position: 'absolute', left: '680px', top: '360px', width: '340px', fontSize: '44px', lineHeight: 1.05, color: th.fg, opacity: 0 }, esc(p.top || ''));
+  cam.append(topL);
+  const els = items.map((t, i) => { const e = el('disp', { position: 'absolute', left: '240px', width: '600px', top: 610 + i * 135 + 'px', textAlign: 'center', fontSize: '50px', color: '#fff', opacity: 0 }, esc(t)); cam.append(e); ctx.events.push({ at: ts[i], kind: 'pop' }); return e; });
+  ctx.events.push({ at: 0.6, kind: 'riser' });
+  return { update(lt) {
+    const rv = E.out3(clamp((lt - 0.6) / 1.1));
+    rr.setAttribute('height', 760 * rv);
+    const bob = Math.sin(lt * 1.6) * 6; g.setAttribute('transform', `translate(0 ${bob.toFixed(1)})`);
+    let d = `M-100 ${W}`; for (let x = -100; x <= 1180; x += 40) d += ` L${x} ${(W + Math.sin(x / 60 + lt * 2.2) * 6).toFixed(1)}`; wv.setAttribute('d', d);
+    tf(topL, { o: clamp((lt - 0.25) / 0.3), x: lerp(30, 0, E.out3(clamp((lt - 0.25) / 0.4))) });
+    els.forEach((e, i) => { const k = lt - ts[i]; tf(e, { o: clamp(k / 0.2) * clamp((rv - 0.2) * 3), y: lerp(30, 0, E.out3(clamp(k / 0.35))) + bob }); });
+    camera(cam, lt, ctx, [], 0.03);
+  } };
+};
+
+/* tally: an hour on the clock, marks stacking up in fives */
+SCENES.tally = (cam, p, ctx) => {
+  const th = ctx.th, N = Math.max(3, Math.min(15, +p.marks || 12)), CX = 540, CY = 470, R = 175;
+  const t0 = cueSeq(ctx, [p.start || '~~'], ctx.dur * 0.3, ctx.dur * 0.3)[0], t1 = ctx.dur * 0.88;
+  let ticks = ''; for (let i = 0; i < 12; i++) { const a = i / 12 * 2 * Math.PI; ticks += `<line x1="${CX + Math.cos(a) * (R - 14)}" y1="${CY + Math.sin(a) * (R - 14)}" x2="${CX + Math.cos(a) * (R - (i % 3 ? 30 : 44))}" y2="${CY + Math.sin(a) * (R - (i % 3 ? 30 : 44))}" stroke="${th.fg}" stroke-width="${i % 3 ? 5 : 9}" stroke-linecap="round"/>`; }
+  const groups = Math.ceil(N / 5), cols = Math.min(3, groups), GW = 230, gx0 = CX - cols * GW / 2 + 40;
+  let marks = '';
+  for (let i = 0; i < N; i++) {
+    const gI = Math.floor(i / 5), j = i % 5, gx = gx0 + (gI % cols) * GW, gy = 800 + Math.floor(gI / cols) * 190, wob = ((i * 37) % 7 - 3);
+    marks += j < 4 ? `<line class="mk" x1="${gx + j * 38 + wob}" y1="${gy}" x2="${gx + j * 38 - wob}" y2="${gy + 130}" stroke="${th.fg}" stroke-width="13" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`
+                   : `<line class="mk" x1="${gx - 22}" y1="${gy + 112}" x2="${gx + 3 * 38 + 22}" y2="${gy + 18}" stroke="${th.accent}" stroke-width="13" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>`;
+  }
+  const svg = svgEl(1080, 1500, `<circle cx="${CX}" cy="${CY}" r="${R}" fill="${th.bg}" stroke="${th.fg}" stroke-width="12"/><path id="sw" d="" fill="${th.accent}" opacity=".28"/>${ticks}<line id="hand" x1="${CX}" y1="${CY}" x2="${CX}" y2="${CY - R + 40}" stroke="${th.accent}" stroke-width="12" stroke-linecap="round"/><circle cx="${CX}" cy="${CY}" r="14" fill="${th.fg}"/>${marks}`);
+  cam.append(svg);
+  const hand = svg.querySelector('#hand'), sw = svg.querySelector('#sw'), mk = [...svg.querySelectorAll('.mk')];
+  if (p.title) cam.append(el('mono', { position: 'absolute', left: '90px', width: '900px', top: CY - R - 100 + 'px', textAlign: 'center', fontSize: '32px', color: th.muted }, esc(p.title)));
+  const rows = Math.ceil(groups / cols), cnt = el('disp', { position: 'absolute', left: '90px', width: '900px', top: 800 + rows * 190 + 10 + 'px', textAlign: 'center', fontSize: '58px', color: th.fg, opacity: 0 }, '');
+  cam.append(cnt);
+  const mt = Array.from({ length: N }, (_, i) => t0 + (t1 - t0) * Math.pow(i / Math.max(1, N - 1), 0.85));
+  mt.forEach(t => ctx.events.push({ at: t, kind: 'tick' }));
+  return { update(lt) {
+    const k = clamp(lt / (ctx.dur * 0.95)), a = k * 2 * Math.PI - Math.PI / 2;
+    hand.setAttribute('x2', CX + Math.cos(a) * (R - 40)); hand.setAttribute('y2', CY + Math.sin(a) * (R - 40));
+    sw.setAttribute('d', k > 0.001 ? `M${CX} ${CY} L${CX} ${CY - R + 8} ${arcD(CX, CY, R - 8, -Math.PI / 2, a).replace(/^M[^A]*/, '')} Z` : '');
+    let c = 0; mk.forEach((m, i) => { const d = clamp((lt - mt[i]) / 0.12); m.setAttribute('stroke-dashoffset', 1 - d); if (lt >= mt[i]) c++; });
+    cnt.innerHTML = c ? `${c} <span style="font-size:.6em;color:${th.muted}">${esc(p.label || 'times on autopilot')}</span>` : '';
+    tf(cnt, { o: c ? 1 : 0 });
+    camera(cam, lt, ctx, [], 0.02);
   } };
 };

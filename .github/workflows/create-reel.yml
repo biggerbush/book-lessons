@@ -22,9 +22,9 @@ on:
         options: [lesson, list]
         default: lesson
       mode:
-        description: "real = Claude + ElevenLabs credits. plan = Claude writes the plan only (no voice). dry = free test (silent, example plan)."
+        description: "real = Claude + ElevenLabs credits. voice = the voice only (render elsewhere). plan = Claude writes the plan only (no voice). dry = free test (silent, example plan)."
         type: choice
-        options: [real, plan, dry]
+        options: [real, voice, plan, dry]
         default: real
 
 permissions:
@@ -65,6 +65,7 @@ jobs:
           else args=(--book "$BOOK" --lesson "$LESSON" --format "${FORMAT:-lesson}"); fi
           [ "$MODE" = "dry" ] && args+=(--dry --scale 0.5 --fps 24)
           [ "$MODE" = "plan" ] && args+=(--plan-only)
+          [ "$MODE" = "voice" ] && args+=(--voice-only)
           python -m engine.reel "${args[@]}"
       - name: Save audio, plan and video
         if: ${{ always() }}

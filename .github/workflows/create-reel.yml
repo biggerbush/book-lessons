@@ -70,7 +70,14 @@ jobs:
         if: ${{ always() }}
         run: |
           git config user.name "book-engine"; git config user.email "book-engine@users.noreply.github.com"
-          mkdir -p site/reels; git add engine-data site/reels
+          # the paid-for voice goes up first, on its own, so a failed video push can never lose it
+          git add engine-data
+          git diff --cached --quiet || git commit -m "Reel voice + plan: ${{ inputs.book }} ${{ inputs.lesson }}"
+          git pull --rebase -q origin main || true
+          git push || true
+          mkdir -p site/reels
+          find site/reels -name '*.mp4' -size +95M -exec echo "::warning::{} is over 95MB and will not be pushed" \; -exec rm {} \;
+          git add site/reels
           git diff --cached --quiet || git commit -m "Reel: ${{ inputs.book }} lesson ${{ inputs.lesson }}"
           git pull --rebase -q origin main || true
           git push || true

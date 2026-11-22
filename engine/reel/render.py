@@ -52,11 +52,11 @@ def frames(html: Path, out_dir: Path, dur: float, fps: int = 30, scale: float = 
     return fdir
 
 
-def encode(fdir: Path, audio: Path | None, out_mp4: Path, fps: int = 30, crf: int = 18) -> None:
+def encode(fdir: Path, audio: Path | None, out_mp4: Path, fps: int = 30, crf: int = 20) -> None:
     cmd = ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps), "-i", str(fdir / "%05d.jpg")]
     if audio:
         cmd += ["-i", str(audio)]
-    cmd += ["-c:v", "libx264", "-preset", "medium", "-crf", str(crf), "-maxrate", "10M", "-bufsize", "20M", "-pix_fmt", "yuv420p", "-r", str(fps), "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2"]
+    cmd += ["-c:v", "libx264", "-preset", "medium", "-crf", str(crf), "-maxrate", "6M", "-bufsize", "12M", "-pix_fmt", "yuv420p", "-r", str(fps), "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2"]
     if audio:
         cmd += ["-c:a", "aac", "-b:a", "192k", "-shortest"]
     cmd += ["-movflags", "+faststart", str(out_mp4)]

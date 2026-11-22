@@ -381,7 +381,7 @@ SCENES.intro = (cam, p, ctx) => {
   card.append(img, sheen); holder.append(card);
   const col = el('', { position: 'absolute', left: '60px', width: '960px', top: '190px', height: '430px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', textAlign: 'center' });
   const hook = el('disp', { fontSize: '112px', lineHeight: 1.02, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', width: '960px' });
-  const kick = el('mono', { fontSize: '30px', color: th.accent, opacity: 0, display: 'flex', alignItems: 'center', gap: '18px', marginTop: '34px' }, `<span style="width:60px;height:4px;background:${th.accent}"></span>A LESSON FROM<span style="width:60px;height:4px;background:${th.accent}"></span>`);
+  const kick = el('mono', { fontSize: '30px', color: th.accent, opacity: 0, display: 'flex', alignItems: 'center', gap: '18px', marginTop: '34px' }, `<span style="width:60px;height:4px;background:${th.accent}"></span>${R.lesson === 'top10' ? '10 THINGS FROM' : 'A LESSON FROM'}<span style="width:60px;height:4px;background:${th.accent}"></span>`);
   col.append(hook, kick); cam.append(glow, raySvg, holder, col);
   const title = el(''), by = el('');
   const acc = (p.accent || []).map(x => String(x).toUpperCase().replace(/[^A-Z0-9%×]/g, ''));

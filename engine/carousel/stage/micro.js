@@ -420,6 +420,20 @@ G.favourite = d => {  // closing slide: pick your favourite (numbered list of ev
   return svg(out);
 };
 
+G.calmnoise = d => {  // two ideas side by side: calm rings vs a noisy burst
+  const L = 242, R = 726, C = 250; let out = '';
+  out += S(1, 'draw', `<circle cx="${L}" cy="${C}" r="168" fill="none" stroke="${M.blue2}" stroke-width="5"/>`) + S(1, 'draw', `<circle cx="${L}" cy="${C}" r="70" fill="none" stroke="${M.gold2}" stroke-width="12"/>`);
+  out += S(2, 'draw', `<line x1="484" y1="60" x2="484" y2="520" stroke="${M.blue2}" stroke-width="2"/>`);
+  let sp = ''; const n = d.spikes || 64;
+  for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, r0 = 70, r1 = i % 2 ? 150 : 178, w = 0.045;
+    const P = (r, t) => `${(R + r * Math.cos(t)).toFixed(1)} ${(C + r * Math.sin(t)).toFixed(1)}`;
+    sp += `<path d="M${P(r0, a - w)} L${P(r1, a)} L${P(r0, a + w)} Z" fill="${M.ink}"/>`; }
+  out += S(3, 'pop', sp + `<circle cx="${R}" cy="${C}" r="70" fill="${M.white}"/>`);
+  out += S(1, 'type', T(L, 486, d.a || 'Confidence is calm', { s: 32, w: 800 })) + S(3, 'type', T(R, 486, d.b || 'Ego makes a lot of noise', { s: 32, w: 800 }));
+  return svg(out);
+};
+
+
 G.tangle = d => {     // a tangle of thoughts -> one clearly written problem
   let pts = ''; for (let i = 0; i <= 260; i++) { const t = i / 10; pts += `${i ? 'L' : 'M'}${(230 + 135 * Math.sin(t * 1.31) * Math.cos(t * 0.47) + 20 * Math.sin(t * 5.3)).toFixed(1)} ${(250 + 130 * Math.sin(t * 0.83 + 1) * Math.cos(t * 0.29) + 18 * Math.cos(t * 4.1)).toFixed(1)}`; }
   let out = S(1, 'draw', `<path d="${pts}" fill="none" stroke="${M.ink}" stroke-width="5" stroke-linejoin="round" opacity=".85"/>`) + S(1, 'pop', pill(230, 470, d.left || 'in your head', M.white, M.ink, 24));
@@ -601,6 +615,15 @@ SL.explain = (el, s, D) => {    // title, a one-line explainer, the graphic, the
   if (sb) { y += g1; sb.style.top = y + 'px'; y += sb.offsetHeight; }
   if (p) { y += g2; p.style.top = y + 'px'; y += ph; }
   y += g3; b.style.top = y + 'px';
+};
+
+SL.poster = (el, s, D) => {     // one picture fills the slide; optional title above
+  const t = s.title ? h('ttl', { top: '0px', textAlign: 'center', left: '90px', width: '900px' }, md(s.title)) : null; if (t) el.append(t);
+  const g = G[s.graphic.kind], sc = 1040 / PW, w = 1040, hh = Math.round(PH * sc);
+  const p = h('', { position: 'absolute', left: '20px', width: w + 'px', height: hh + 'px' }, g(s.graphic, D));
+  const sv = p.querySelector('svg'); sv.setAttribute('width', w); sv.setAttribute('height', hh); el.append(p);
+  const total = (t ? t.offsetHeight + 50 : 0) + hh; let y = (1350 - total) / 2;
+  if (t) { t.style.top = y + 'px'; y += t.offsetHeight + 50; } p.style.top = y + 'px';
 };
 
 if (typeof window !== 'undefined') window.MG = { G, M, PW, PH };

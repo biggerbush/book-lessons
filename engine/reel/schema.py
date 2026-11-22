@@ -5,8 +5,8 @@ from __future__ import annotations
 
 import re
 
-SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "choices", "chat", "countdown", "day", "tracks", "iceberg", "tally", "cta")
-GRAPHS = ("stat", "dots", "meter", "donut", "chart", "day", "tracks", "iceberg", "tally")              # data graphics
+SCENES = ("intro", "slam", "stat", "dots", "meter", "donut", "list", "versus", "timeline", "chart", "quote", "icon", "cycle", "choices", "chat", "countdown", "day", "tracks", "iceberg", "tally", "toggle", "cta")
+GRAPHS = ("stat", "dots", "meter", "donut", "chart", "day", "tracks", "iceberg", "tally", "toggle")              # data graphics
 THINK = ("choices", "chat", "countdown")                           # scenes that put the viewer inside the problem
 VISUAL = GRAPHS + THINK + ("versus", "timeline", "icon", "cycle", "list")  # anything that is a picture, not just words
 THEMES = ("dark", "amber", "light")
@@ -39,6 +39,7 @@ day       GRAPHIC. A ring of everyday actions: each segment lights and its icon 
 tracks    GRAPHIC. Two signal lanes run side by side; at the "break" word the top lane cracks and stops while the bottom one keeps flowing. {"top":"MEMORY","bottom":"HABIT","break":"lose","top_after":"gone","bottom_after":"still running"}   For two systems where one fails and the other carries on.
 iceberg   GRAPHIC. A small tip above water ("top"), then the huge hidden mass is revealed and the items surface inside it as they are named. {"top":"What you notice","items":["Phone checks","Snacking","Same route"]}   items max 4, each max 16 chars, read out in order.
 tally     GRAPHIC. A clock sweeps one hour while tally marks stack up in fives and a counter climbs. {"title":"ONE HOUR","marks":12,"start":"mark","label":"times on autopilot"}   For counting, tracking, a self-experiment. "start" = word when marks begin.
+toggle    GRAPHIC HOOK. A game-style settings card: a selector slides across 2-3 options as each is said and lands on the last. {"hook":"SMART PEOPLE DON'T WORK HARDER","label":"Life","kicker":"SETTINGS","options":["Hard","Normal","Easy"]}   read each option out loud, in order.
 cta       The end card with the book cover. {"line1":"Want the full lesson?","line2":"Watch it as an animated summary.","handle":"visualgrowth.app"}   Always the LAST beat.
 """
 
@@ -199,8 +200,12 @@ def _clean_params(scene: str, p: dict) -> dict:
         except (TypeError, ValueError):
             mk = 12
         return {"title": _s(p.get("title"), 24, True), "marks": mk, "start": _s(p.get("start"), 20), "label": _s(p.get("label"), 28)}
+    if scene == "toggle":
+        opts = [_s(o, 10) for o in (p.get("options") or ["Hard", "Normal", "Easy"]) if _s(o, 10)][:3] or ["Hard", "Normal", "Easy"]
+        return {"hook": _s(p.get("hook"), 48), "accent": [_s(a, 16, True) for a in (p.get("accent") or [])][:3], "label": _s(p.get("label"), 14) or "Life", "kicker": _s(p.get("kicker"), 14, True) or "SETTINGS", "options": opts}
     if scene == "cta":
-        return {"line1": _s(p.get("line1"), 30) or "Want the full lesson?", "line2": _s(p.get("line2"), 60) or "Watch it as an animated book summary.", "handle": _s(p.get("handle"), 28) or "visualgrowth.app"}
+        return {"big": _s(p.get("big"), 3), "label": _s(p.get("label"), 10, True),
+                "line1": _s(p.get("line1"), 30) or "Want the full lesson?", "line2": _s(p.get("line2"), 60) or "Watch it as an animated book summary.", "handle": _s(p.get("handle"), 28) or "visualgrowth.app"}
     return p
 
 
@@ -229,6 +234,8 @@ def normalise(plan: dict) -> dict:
         try:
             if b.get("num") is not None and 1 <= int(b["num"]) <= 10:
                 nb["num"] = int(b["num"])
+                if b.get("name"):
+                    nb["name"] = _s(b["name"], 22)
         except (TypeError, ValueError):
             pass
         beats.append(nb)
@@ -246,6 +253,9 @@ def normalise(plan: dict) -> dict:
     out = {"title": _s(plan.get("title"), 60), "beats": beats}
     if plan.get("format") == "list":
         out["format"] = "list"
+        out["of"] = max(3, min(10, int(plan.get("of") or 10)))
+    if plan.get("standalone"):
+        out["standalone"] = True
     out["words"] = sum(len(b["say"].split()) for b in beats)
     return out
 
@@ -278,6 +288,10 @@ def _on_screen(b: dict) -> list[str]:
         return list(p.get("items", []))
     if sc == "meter":
         return [r["label"] for r in p.get("rows", [])]
+    if sc == "toggle":
+        return list(p.get("options", []))
+    if b.get("name"):
+        return [b["name"]]
     return []
 
 
@@ -305,16 +319,17 @@ def problems(plan: dict) -> list[str]:
         out.append(f"{len(beats)} beats is too many")
     if plan.get("format") == "list":
         nums = [b.get("num") for b in beats if b.get("num")]
-        if nums != list(range(1, 11)):
-            out.append(f"the list must be 10 beats numbered 1 to 10 in order (\"num\"), found {nums}")
+        N = plan.get("of") or 10
+        if nums != list(range(1, N + 1)):
+            out.append(f"the list must be {N} beats numbered 1 to {N} in order (\"num\"), found {nums}")
         for b in beats:
             if b.get("num") and b["scene"] in ("slam", "quote", "intro", "cta"):
                 out.append(f"thing {b['num']} uses a text scene ({b['scene']}); every numbered thing needs an animated graphic")
         kinds = {b["scene"] for b in beats if b.get("num")}
-        if len(kinds) < 7:
+        if len(kinds) < min(7, plan.get("of") or 10):
             out.append(f"the 10 things use only {len(kinds)} kinds of scene; use at least 7 different ones")
     bi = [i for i, b in enumerate(beats) if b["scene"] == "intro"]
-    if not bi or bi[0] not in (1, 2):
+    if not plan.get("standalone") and (not bi or bi[0] not in (1, 2)):
         out.append("the book card ('intro' scene, hook empty) must be beat 2 or 3, straight after the hook")
     if beats and beats[0]["scene"] not in GRAPHS:
         out.append("beat 1 is the hook and must be a graphic (stat, dots, donut, chart, day, iceberg...), not text or the book card")

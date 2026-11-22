@@ -337,7 +337,11 @@ SCENES.cycle = (cam, p, ctx) => {
 SCENES.cta = (cam, p, ctx) => {
   const th = ctx.th;
   const card = el('', { position: 'absolute', left: '240px', top: '250px', width: '600px', height: '480px', borderRadius: '44px', overflow: 'hidden', boxShadow: WHITE ? '0 50px 90px -30px rgba(11,31,58,.45), 0 0 0 2px rgba(11,31,58,.06)' : '0 50px 90px -30px rgba(0,0,0,.65)', background: '#fff' });
-  const img = document.createElement('img'); img.src = ctx.R.cover || ''; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block'; card.append(img);
+  if (ctx.R.cover) { const img = document.createElement('img'); img.src = ctx.R.cover; img.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block'; card.append(img); }
+  else {                                      // no book: a navy emblem with the deck's number
+    Object.assign(card.style, { left: '310px', width: '460px', height: '460px', borderRadius: '50%', background: '#0B1F3A', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' });
+    card.innerHTML = `<div class="disp" style="font-size:250px;line-height:.9;color:#FFC233">${esc(p.big || ctx.R.of || '')}</div><div class="mono" style="font-size:44px;letter-spacing:.2em;color:#fff;margin-top:8px">${esc(p.label || 'LAWS')}</div>`;
+  }
   const l1 = el('disp', { position: 'absolute', left: '80px', width: '920px', top: '790px', textAlign: 'center', fontSize: '98px', color: th.fg }, esc(p.line1 || 'Want the full lesson?'));
   const l2 = el('body', { position: 'absolute', left: '110px', width: '860px', top: '1010px', textAlign: 'center', fontSize: '48px', color: th.muted }, esc(p.line2 || 'Watch it as an animated book summary.'));
   const pill = el('disp', { position: 'absolute', left: '220px', width: '640px', top: '1120px', height: '112px', borderRadius: '56px', background: th.accent, color: th.onAccent, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '50px', letterSpacing: '0' }, esc(p.handle || 'visualgrowth.app'));
@@ -685,5 +689,42 @@ SCENES.tally = (cam, p, ctx) => {
     cnt.innerHTML = c ? `${c} <span style="font-size:.6em;color:${th.muted}">${esc(p.label || 'times on autopilot')}</span>` : '';
     tf(cnt, { o: c ? 1 : 0 });
     camera(cam, lt, ctx, [], 0.02);
+  } };
+};
+
+/* toggle: a game-style settings card ("Life": Hard / Normal / Easy). The selector slides to each option as it is said and lands on the last. */
+SCENES.toggle = (cam, p, ctx) => {
+  const th = ctx.th, opts = (p.options || ['Hard', 'Normal', 'Easy']).slice(0, 3), n = opts.length, on = p.on == null ? n - 1 : Math.min(n - 1, +p.on);
+  const hook = el('disp', { position: 'absolute', left: '90px', width: '900px', top: '320px', textAlign: 'center', fontSize: '86px', lineHeight: '1.04', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' });
+  const hw = p.hook ? hookWords(hook, p.hook, (p.accent || []).map(x => String(x).toUpperCase()), th, ctx) : [];
+  const X = 110, Y = 720, W = 860, TW = W - 92, TY = Y + 260, TH = 150, segW = (TW - 20 - (n - 1) * 10) / n;
+  const card = el('', { position: 'absolute', left: X + 'px', top: Y + 'px', width: W + 'px', height: '470px', borderRadius: '44px', background: '#fff', boxShadow: '0 60px 100px -40px rgba(11,31,58,.5), 0 0 0 2px rgba(11,31,58,.07)' });
+  const gear = `<svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>`;
+  card.innerHTML = `<div class="mono" style="position:absolute;left:50px;top:52px;display:flex;align-items:center;gap:14px;font-size:30px;letter-spacing:.2em;color:#667085">${gear}${esc(p.kicker || 'SETTINGS')}</div>
+    <div class="disp" style="position:absolute;left:48px;top:112px;font-size:104px;line-height:1;color:#0B1F3A;letter-spacing:-.01em">${esc(p.label || 'Life')}</div>
+    <div style="position:absolute;left:46px;top:260px;width:${TW}px;height:${TH}px;border-radius:34px;background:#EEF1F6"></div>`;
+  const pill = el('', { position: 'absolute', left: X + 46 + 10 + 'px', top: TY + 10 + 'px', width: segW + 'px', height: TH - 20 + 'px', borderRadius: '26px', background: '#FFC233', boxShadow: '0 18px 30px -12px rgba(11,31,58,.45)' });
+  const labs = opts.map((o, i) => el('disp', { position: 'absolute', left: X + 46 + 10 + i * (segW + 10) + 'px', top: TY + 10 + 'px', width: segW + 'px', height: TH - 20 + 'px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '50px', color: '#0B1F3A' }, esc(o)));
+  const strike = el('', { position: 'absolute', left: X + 46 + 10 + segW * 0.18 + 'px', top: TY + TH / 2 - 3 + 'px', width: segW * 0.64 + 'px', height: '6px', borderRadius: '3px', background: '#667085', transformOrigin: '0 50%' });
+  const tick = el('', { position: 'absolute', width: '58px', height: '58px', borderRadius: '50%', background: '#0B1F3A', color: '#FFC233', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '34px', fontFamily: 'sans-serif', fontWeight: 900 }, '✓');
+  const ptr = el('', { position: 'absolute', left: 0, top: 0, filter: 'drop-shadow(0 12px 14px rgba(11,31,58,.35))' }, `<svg width="80" height="97" viewBox="0 0 24 29"><path d="M3 2 L3 22 L8 17.5 L11.5 26 L15 24.5 L11.6 16.2 L18 16 Z" fill="#0B1F3A" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>`);
+  cam.append(hook, card, pill, ...labs, strike, tick, ptr);
+  const ts = cueSeq(ctx, opts, 1.0, ctx.dur * 0.8), segX = i => X + 46 + 10 + i * (segW + 10);
+  ts.forEach((t, i) => ctx.events.push({ at: t, kind: i === on ? 'thud' : 'pop' }));
+  return { update(lt) {
+    hw.forEach(({ sp, tk }) => tf(sp, { y: lerp(50, 0, E.out3(clamp((lt - tk) / 0.3))), o: clamp((lt - tk) / 0.15), s: lerp(1.25, 1, E.out3(clamp((lt - tk) / 0.3))) }));
+    const a = E.spring(clamp((lt - 0.15) / 0.7));
+    [card, pill, ...labs].forEach(e => tf(e, { y: lerp(900, 0, a), o: clamp((lt - 0.15) / 0.2) }));
+    let pos = 0; ts.forEach((t, i) => { if (i && lt > t) { const k = E.out3(clamp((lt - t) / 0.35)); pos = (i - 1) + k; } });
+    pos = Math.min(pos, on); const cur = Math.round(pos);
+    pill.style.left = lerp(segX(0), segX(on), on ? pos / on : 0) + 'px';
+    labs.forEach((l, i) => { l.style.color = Math.abs(pos - i) < 0.5 ? '#0B1F3A' : '#8A94A6'; });
+    tf(strike, { sx: clamp((pos - 0.6) / 0.4), o: lt > (ts[1] || 99) ? 1 : 0, y: lerp(900, 0, a) });
+    const done = lt - ts[on], tx = segX(on) + segW - 40, ty = TY - 18;
+    tick.style.left = tx + 'px'; tick.style.top = ty + 'px';
+    tf(tick, { s: done > 0 ? E.back(clamp(done / 0.35)) : 0, o: done > 0 ? 1 : 0 });
+    const px = segX(0) + segW * 0.72 + (segX(on) - segX(0)) * (on ? pos / on : 0), py = TY + TH * 0.72 + (cur === on && done > 0 ? Math.sin(clamp(done / 0.25) * Math.PI) * 10 : 0);
+    tf(ptr, { x: px, y: py + lerp(700, 0, E.out3(clamp((lt - 0.6) / 0.5))), o: clamp((lt - 0.6) / 0.2) });
+    camera(cam, lt, ctx, done > 0 ? [ts[on]] : [], 0.035);
   } };
 };

@@ -20,8 +20,8 @@ def timeline(plan: dict, words: list[dict], cover: str, book: str, lesson: int, 
         i += n
         out.append({**b, "start": ws[0]["s"] if ws else (out[-1]["start"] + 2 if out else PAD), "end": ws[-1]["e"] if ws else 0, "words": ws})
     dur = round(max(allw[-1]["e"] + TAIL, 8.0), 2)
-    return {"dur": dur, "beats": [{"say": b["say"], "scene": b["scene"], "p": b["p"], "theme": b["theme"], "tr": b["transition"], "start": b["start"], "end": b["end"], "words": b["words"], "num": b.get("num")} for b in out],
-            "words": allw, "book": book, "author": author, "look": look, "captions": captions, "lesson": lesson, "cover": cover}
+    return {"dur": dur, "beats": [{"say": b["say"], "scene": b["scene"], "p": b["p"], "theme": b["theme"], "tr": b["transition"], "start": b["start"], "end": b["end"], "words": b["words"], "num": b.get("num"), "name": b.get("name")} for b in out],
+            "words": allw, "book": book, "author": author, "look": look, "captions": captions, "lesson": lesson, "cover": cover, "of": plan.get("of", 10)}
 
 
 def page(reel: dict) -> str:

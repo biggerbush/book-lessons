@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       book:
-        description: Book slug (e.g. deep-work)
+        description: Book slug (e.g. deep-work), or a standalone reel name saved under engine-data/topics (e.g. 7-laws)
         required: true
         type: string
       lesson:
@@ -61,7 +61,8 @@ jobs:
           MODE: ${{ inputs.mode }}
           FORMAT: ${{ inputs.format }}
         run: |
-          args=(--book "$BOOK" --lesson "$LESSON" --format "${FORMAT:-lesson}")
+          if [ -d "engine-data/topics/$BOOK" ]; then args=(--name "$BOOK")    # standalone reel (no book): plan saved in engine-data/topics/<name>/reels
+          else args=(--book "$BOOK" --lesson "$LESSON" --format "${FORMAT:-lesson}"); fi
           [ "$MODE" = "dry" ] && args+=(--dry --scale 0.5 --fps 24)
           [ "$MODE" = "plan" ] && args+=(--plan-only)
           python -m engine.reel "${args[@]}"

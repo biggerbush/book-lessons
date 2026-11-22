@@ -488,6 +488,7 @@ SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big bo
   const y1 = 74 + t.offsetHeight + 24;
   const credit = s.sub ? md(s.sub) : `${D.lesson === 'top10' ? `${D.of || 10} things to do from` : `A ${esc(s.minutes || 2)}-minute lesson from`} <b style="font-style:normal;color:${M.ink}">${esc(D.book)}</b>${D.author ? ` by ${esc(String(D.author).split(/ with | and |, /)[0])}` : ''}`;
   const sub = h('cv-sub', { top: y1 + 'px', fontSize: '33px', left: '60px', width: '960px' }, credit); el.append(sub);
+  if (s.toggle) { SL.coverToggle(el, s, y1 + sub.offsetHeight); return; }
   const R = 360, cy = Math.max(880, y1 + sub.offsetHeight + 60 + R);
   el.append(h('', { position: 'absolute', left: 540 - 470 + 'px', top: cy - 470 + 'px', width: '940px', height: '940px', borderRadius: '50%', background: `radial-gradient(circle, ${M.goldwash} 0%, rgba(255,243,209,0) 64%)` }));
   el.append(h('', { position: 'absolute', left: 540 - R + 'px', top: cy - R + 'px', width: 2 * R + 'px', height: 2 * R + 'px', borderRadius: '50%', border: `3px dashed ${M.blue2}` }));
@@ -505,6 +506,31 @@ SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big bo
   book.append(im); el.append(book);
   }
   el.append(h('', { position: 'absolute', right: s.emblem ? '' : '44px', left: s.emblem ? '50%' : '', transform: s.emblem ? 'translateX(-50%)' : '', top: (s.emblem ? cy + 360 + 40 : cy + 200) + 'px', display: 'flex', alignItems: 'center', gap: '14px', background: M.ink, color: '#fff', fontFamily: 'Sans', fontWeight: 800, fontSize: '27px', padding: '15px 16px 15px 24px', borderRadius: '999px', boxShadow: `0 18px 34px -16px rgba(11,31,58,.6)` },
+    `${esc(s.swipe || 'Swipe to fix it')}<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:${M.gold2};color:${M.ink};align-items:center;justify-content:center;font-size:24px">→</span>`));
+};
+
+SL.coverToggle = (el, s, top) => {   // a game-style settings card: "Life difficulty" switched from HARD to EASY
+  const T = s.toggle, opts = T.options || ['Hard', 'Normal', 'Easy'], on = T.on == null ? opts.length - 1 : T.on;
+  const W = 900, x0 = 90; let y0 = top + 70;
+  const gear = `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="${M.muted}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>`;
+  const segs = opts.map((o, i) => i === on
+    ? `<div style="flex:1;display:flex;align-items:center;justify-content:center;gap:12px;background:${M.gold2};color:${M.ink};border-radius:22px;box-shadow:0 16px 26px -12px rgba(11,31,58,.45)">${esc(o)}<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:${M.ink};color:${M.gold2};align-items:center;justify-content:center;font-size:24px">✓</span></div>`
+    : `<div style="flex:1;display:flex;align-items:center;justify-content:center;color:${M.muted};${i === 0 ? 'text-decoration:line-through;text-decoration-thickness:4px;' : ''}">${esc(o)}</div>`).join('');
+  const icons = (T.icons || []).slice(0, 8).map(nm => `<div style="width:84px;height:84px;border-radius:50%;background:${M.goldwash};display:flex;align-items:center;justify-content:center;color:${M.ink}">${iconSVG(nm, 46, 6)}</div>`).join('');
+  const card = h('', { position: 'absolute', left: x0 + 'px', top: y0 + 'px', width: W + 'px', boxSizing: 'border-box', padding: '44px 46px 46px', background: '#fff', borderRadius: '40px', boxShadow: '0 60px 90px -40px rgba(11,31,58,.45), 0 0 0 2px #E6E9EF' },
+    `<div style="display:flex;align-items:center;gap:12px;font-family:Sans;font-weight:800;font-size:26px;letter-spacing:.2em;color:${M.muted}">${gear}${esc(T.kicker || 'SETTINGS')}</div>
+     <div style="font-family:News;font-weight:800;font-size:72px;line-height:1.05;color:${M.ink};margin-top:20px">${esc(T.label || 'Life difficulty')}</div>
+     <div style="display:flex;gap:10px;margin-top:34px;height:128px;padding:10px;background:#EEF1F6;border-radius:30px;font-family:Sans;font-weight:800;font-size:42px">${segs}</div>
+     ${icons ? `<div style="display:flex;justify-content:space-between;margin-top:40px">${icons}</div><div style="font-family:Sans;font-weight:700;font-size:28px;color:${M.muted};text-align:center;margin-top:20px">${md(T.note || '')}</div>` : ''}`);
+  el.append(card);
+  y0 += Math.max(0, (1300 - y0 - (card.offsetHeight + 126)) / 2); card.style.top = y0 + 'px';   // centre card + pill in the space left
+  el.insertBefore(h('', { position: 'absolute', left: '40px', top: y0 - 140 + 'px', width: '1000px', height: card.offsetHeight + 280 + 'px', borderRadius: '50%', background: `radial-gradient(ellipse, ${M.goldwash} 0%, rgba(255,243,209,0) 66%)` }), card);
+  // a pointer tapping the chosen option
+  const segW = (W - 92 - 20 - (opts.length - 1) * 10) / opts.length, px = x0 + 46 + 10 + on * (segW + 10) + segW * 0.84, py = y0 + 44 + 34 + 20 + 72 * 1.05 + 34 + 70;
+  el.append(h('', { position: 'absolute', left: px + 'px', top: py + 'px', filter: 'drop-shadow(0 10px 12px rgba(11,31,58,.35))' },
+    `<svg width="62" height="75" viewBox="0 0 24 29"><path d="M3 2 L3 22 L8 17.5 L11.5 26 L15 24.5 L11.6 16.2 L18 16 Z" fill="${M.ink}" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>`));
+  const cb = y0 + card.offsetHeight;
+  el.append(h('', { position: 'absolute', left: '50%', transform: 'translateX(-50%)', top: Math.min(cb + 56, 1350 - 110) + 'px', display: 'flex', alignItems: 'center', gap: '14px', background: M.ink, color: '#fff', fontFamily: 'Sans', fontWeight: 800, fontSize: '27px', padding: '15px 16px 15px 24px', borderRadius: '999px', boxShadow: `0 18px 34px -16px rgba(11,31,58,.6)` },
     `${esc(s.swipe || 'Swipe to fix it')}<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:${M.gold2};color:${M.ink};align-items:center;justify-content:center;font-size:24px">→</span>`));
 };
 

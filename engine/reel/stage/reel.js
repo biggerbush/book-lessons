@@ -77,10 +77,18 @@ const beats = R.beats.map((b, i) => {
   if (!R.captions) { cam.style.top = '170px'; cam.style.bottom = '-170px'; cam.style.overflow = 'visible'; }   // no caption band: centre the picture in the frame
   const bg = backdrop(th, i * 1.7);
   w.append(bg, cam); root.append(w);
+  let badge = null;
+  if (b.num) {                               // list reels: big number + a 10-step progress bar, drawn over the scene
+    badge = el('', { position: 'absolute', left: '0', top: '0', width: '1080px', height: '330px', pointerEvents: 'none' });
+    const bar = Array.from({ length: 10 }, (_, k) => `<div style="flex:1;height:12px;border-radius:6px;background:${k < b.num ? '#F2A900' : (WHITE ? 'rgba(11,31,58,.12)' : 'rgba(255,255,255,.18)')};${k === b.num - 1 ? 'box-shadow:0 0 0 3px rgba(242,169,0,.25)' : ''}"></div>`).join('');
+    badge.innerHTML = `<div style="position:absolute;left:90px;right:90px;top:120px;display:flex;gap:12px">${bar}</div>
+      <div class="bn" style="position:absolute;left:90px;top:170px;display:flex;align-items:baseline;gap:14px"><span class="disp" style="font-size:150px;line-height:1;color:${WHITE ? '#0B1F3A' : '#fff'}">${b.num}</span><span class="mono" style="font-size:34px;color:#F2A900">/ 10</span></div>`;
+    w.append(badge);
+  }
   b.t0 = i === 0 ? 0 : b.start - LEAD;
   const nextStart = i + 1 < R.beats.length ? R.beats[i + 1].start - LEAD : R.dur;
   b.dur = Math.max(0.6, nextStart - b.t0);
-  return { b, w, cam, bg, th, inst: null, events: [] };
+  return { b, w, cam, bg, th, badge, inst: null, events: [] };
 });
 function wordTime(b, text) {              // time (relative to the beat's clock) a given spoken word starts
   if (!text) return null;
@@ -217,7 +225,7 @@ window.startReel = async () => {
   await Promise.all(['800 100px "Bricolage Grotesque"', '500 40px "Bricolage Grotesque"', '600 40px "Instrument Sans"', '500 30px "DM Mono"'].map(f => document.fonts.load(f)));
   await document.fonts.ready;
   buildAll();
-  const tg = document.getElementById('tag'); tg.textContent = `${R.book} · lesson ${R.lesson} · visualgrowth.app`;
+  const tg = document.getElementById('tag'); tg.textContent = `${R.book} · ${R.lesson === 'top10' ? '10 things' : 'lesson ' + R.lesson} · visualgrowth.app`;
   if (tg.scrollWidth > 960 || tg.textContent.length > 48) tg.textContent = `${R.book.length > 26 ? R.book.slice(0, 25).trim() + '…' : R.book} · visualgrowth.app`;
   window.seek(0, 0);
   return true;

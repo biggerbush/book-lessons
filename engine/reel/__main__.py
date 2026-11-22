@@ -26,6 +26,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="engine.reel")
     ap.add_argument("--book", required=True)
     ap.add_argument("--lesson", type=int, default=1)
+    ap.add_argument("--format", choices=["lesson", "list"], default="lesson", help="lesson = one lesson; list = '10 things to do' from the whole book")
     ap.add_argument("--dry", action="store_true", help="free: example plan, silent audio, estimated timing")
     ap.add_argument("--plan", help="use this plan JSON instead of asking Claude")
     ap.add_argument("--scale", type=float, default=1.0)
@@ -39,9 +40,11 @@ def main(argv=None) -> int:
     a = ap.parse_args(argv)
 
     t0 = time.time()
-    src = source.load(a.book, a.lesson)
+    LIST = a.format == "list"
+    src = source.load_book(a.book) if LIST else source.load(a.book, a.lesson)
     slug = src["slug"]
-    work = DATA / slug / "reels" / f"lesson-{a.lesson:02d}"          # plan + voice live here so a re-render never pays for audio again
+    tag = "top10" if LIST else a.lesson                              # used in folder names and the footer
+    work = DATA / slug / "reels" / ("top10" if LIST else f"lesson-{a.lesson:02d}")          # plan + voice live here so a re-render never pays for audio again
     if a.dry:
         work = work / "dry"
     work.mkdir(parents=True, exist_ok=True)
@@ -54,11 +57,12 @@ def main(argv=None) -> int:
         log("plan: reusing the saved plan.json")
         plan = schema.normalise(json.loads(plan_file.read_text(encoding="utf8")))
     elif a.dry:
-        plan = schema.normalise(json.loads(EXAMPLE.read_text(encoding="utf8")))
+        ex = director_examples()[1 if LIST else 0]
+        plan = schema.normalise(json.loads(ex.read_text(encoding="utf8")))
     else:
         from ..llm import LLM
         from . import director
-        plan = director.plan_for(src, LLM(usage))
+        plan = director.plan_list(src, LLM(usage)) if LIST else director.plan_for(src, LLM(usage))
     for p in schema.problems(plan):
         log("  note: " + p)
     plan_file.write_text(json.dumps(plan, indent=1), encoding="utf8")
@@ -70,7 +74,7 @@ def main(argv=None) -> int:
 
     mp3, words, real = voice.make(text, work, a.dry)
     usage["tts_chars"] = len(text) if real and not (work / "align.json").exists() else usage["tts_chars"]
-    reel = build.timeline(plan, words, src.get("cover", ""), src["book"], a.lesson, src.get("author", ""), a.look, a.captions)
+    reel = build.timeline(plan, words, src.get("cover", ""), src["book"], tag, src.get("author", ""), a.look, a.captions)
     log(f"timeline: {reel['dur']:.1f}s")
 
     tmp = Path(tempfile.mkdtemp(prefix="reel-"))
@@ -82,17 +86,22 @@ def main(argv=None) -> int:
             ev = render.sfx_events(html)
             audio = sfx.mix(mp3, sfx.build(ev, reel["dur"], tmp / "sfx.wav"), tmp / "mix.m4a")
         fdir = render.frames(html, tmp, reel["dur"], fps=a.fps, scale=a.scale, workers=a.workers)
-        out_dir = Path(a.out) if a.out else SITE / "reels" / f"{slug}-{a.lesson}{'-dry' if a.dry else ''}"
+        out_dir = Path(a.out) if a.out else SITE / "reels" / f"{slug}-{tag}{'-dry' if a.dry else ''}"
         out_dir.mkdir(parents=True, exist_ok=True)
         render.encode(fdir, audio, out_dir / "reel.mp4", fps=a.fps)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
     meta = f"{reel['dur']:.0f}s · {len(plan['beats'])} scenes · {'real voice' if real else 'silent test'}"
-    (out_dir / "index.html").write_text(PREVIEW % {"title": f"{src['book']} · lesson {a.lesson}", "meta": meta}, encoding="utf8")
-    _index(slug, a.lesson, src, reel, real, a.dry)
+    (out_dir / "index.html").write_text(PREVIEW % {"title": f"{src['book']} · {'10 things' if LIST else 'lesson %s' % a.lesson}", "meta": meta}, encoding="utf8")
+    _index(slug, tag, src, reel, real, a.dry)
     log(f"done in {time.time() - t0:.0f}s -> {out_dir / 'reel.mp4'}")
     return 0
+
+
+def director_examples():
+    from . import director
+    return director.EXAMPLE, (director.LIST_EXAMPLE if director.LIST_EXAMPLE.exists() else director.EXAMPLE)
 
 
 def _index(slug, n, src, reel, real, dry):

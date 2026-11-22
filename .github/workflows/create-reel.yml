@@ -1,5 +1,5 @@
 name: Create reel
-run-name: "Create reel: ${{ inputs.book }} lesson ${{ inputs.lesson }}${{ inputs.mode == 'dry' && ' (dry run)' || inputs.mode == 'plan' && ' (plan only)' || '' }}"
+run-name: "Create reel: ${{ inputs.book }} ${{ inputs.format == 'list' && '10 things' || format('lesson {0}', inputs.lesson) }}${{ inputs.mode == 'dry' && ' (dry run)' || inputs.mode == 'plan' && ' (plan only)' || '' }}"
 
 # Turns one lesson of a book into a ~60s vertical reel (Instagram / TikTok). Output: site/reels/<book>-<lesson>/reel.mp4
 # real = Claude directs + ONE ElevenLabs generation (saved, so re-renders never pay for audio again). dry = free test.
@@ -16,6 +16,11 @@ on:
         required: true
         type: string
         default: "1"
+      format:
+        description: "lesson = one lesson. list = '10 things to do' from the whole book (lesson is ignored)."
+        type: choice
+        options: [lesson, list]
+        default: lesson
       mode:
         description: "real = Claude + ElevenLabs credits. plan = Claude writes the plan only (no voice). dry = free test (silent, example plan)."
         type: choice
@@ -27,7 +32,7 @@ permissions:
   actions: write
 
 concurrency:
-  group: reel-${{ inputs.book }}-${{ inputs.lesson }}
+  group: reel-${{ inputs.book }}-${{ inputs.format }}-${{ inputs.lesson }}
   cancel-in-progress: false
 
 jobs:
@@ -54,8 +59,9 @@ jobs:
           BOOK: ${{ inputs.book }}
           LESSON: ${{ inputs.lesson }}
           MODE: ${{ inputs.mode }}
+          FORMAT: ${{ inputs.format }}
         run: |
-          args=(--book "$BOOK" --lesson "$LESSON")
+          args=(--book "$BOOK" --lesson "$LESSON" --format "${FORMAT:-lesson}")
           [ "$MODE" = "dry" ] && args+=(--dry --scale 0.5 --fps 24)
           [ "$MODE" = "plan" ] && args+=(--plan-only)
           python -m engine.reel "${args[@]}"

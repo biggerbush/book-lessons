@@ -8,7 +8,8 @@ from ..brain import parse_json
 from ..config import log
 from . import schema
 
-EXAMPLE = Path(__file__).parent / "examples" / "never-split-the-difference-2.plan.json"
+EXAMPLE = Path(__file__).parent / "examples" / "the-power-of-habit-1.plan.json"
+LIST_EXAMPLE = Path(__file__).parent / "examples" / "the-power-of-habit-top10.plan.json"
 
 SYSTEM = """You are a senior motion designer and short-form editor who makes Instagram Reels and TikToks for a brand called VisualGrowth (animated book summaries).
 You turn ONE lesson of a book into a ~60 second vertical reel. The voice is the same warm, clear narrator as the long lessons, but the writing is tuned for the feed.
@@ -55,5 +56,44 @@ def plan_for(src: dict, llm) -> dict:
             if len(schema.problems(fixed)) <= len(issues):
                 plan = fixed
         except Exception as e:                                   # keep the first plan rather than fail the reel
+            log(f"  director: repair failed ({e}); keeping the first plan")
+    return plan
+
+
+LIST_RULES = """THIS REEL IS A LIST: "10 things to do from <book>". It covers the WHOLE book, not one lesson.
+- STRUCTURE: beat 1 = the hook as a graphic (the book's most surprising number or claim, 8-12 spoken words) -> beat 2 = the book card ('intro' scene, empty hook) while the narrator says "Ten things to do from <book> by <author>." -> beats 3-12 = the 10 things, each with "num": 1..10 -> the 'cta' end card.
+- EACH THING IS AN ACTION the viewer can take this week, said as an instruction ("Write down your cue.", "Keep the routine, swap the reward."), followed by the why in a few words. 10-14 spoken words per thing. The narrator says the number first: "One. ...", "Two. ...".
+- Pick the 10 most useful, concrete actions across all the lessons, in a sensible order (understand -> change -> keep it going). No stories, no characters, no case studies, no history. If a famous study backs an action, half a sentence at most.
+- EVERY THING GETS ITS OWN ANIMATED GRAPHIC that shows the action or its effect (day, tracks, iceberg, tally, cycle, meter, versus, donut, chart, dots, icon, stat, timeline, countdown...). Never slam, quote or intro for a numbered thing. At least 7 different scene kinds across the 10; never the same scene twice in a row.
+- READ IT OUT LOUD still applies: words on a graphic are spoken in that beat, in order.
+- The number badge and progress bar are drawn automatically from "num"; don't put the number in the graphic.
+- 135-160 words in total (about 65 seconds). End card: "Pick one and start today. Follow for more."
+Output JSON as usual, plus "format":"list" at the top level and "num" on each of the 10 thing beats."""
+
+
+def direct_list(src: dict, llm, feedback: list[str] | None = None) -> dict:
+    ex = LIST_EXAMPLE if LIST_EXAMPLE.exists() else EXAMPLE
+    example = json.dumps(json.loads(ex.read_text(encoding="utf8")), indent=1)
+    body = "\n\n".join(f"LESSON {l['n']}: {l['title']}\nKEY IDEA: {l['key_idea']}\n{l['script'][:3500]}" for l in src["lessons"])
+    user = (f"BOOK: {src['book']} by {src.get('author', '')}\n\nTHE BOOK'S LESSONS (use only facts from here):\n{body[:30000]}\n\n"
+            f"EXAMPLE OF THE VISUAL STYLE AND FORMAT (scenes and params; do not copy its content):\n{example}\n\nNow write the '10 things to do' reel plan for this book.")
+    if feedback:
+        user += "\n\nYour previous attempt had problems, fix all of them:\n- " + "\n- ".join(feedback)
+    raw = llm.ask(SYSTEM + "\n" + LIST_RULES, user, 10000, "directing the list reel")
+    plan = parse_json(raw)
+    plan["format"] = "list"
+    return schema.normalise(plan)
+
+
+def plan_list(src: dict, llm) -> dict:
+    plan = direct_list(src, llm)
+    issues = schema.problems(plan)
+    if issues:
+        log("  director: asking for one repair: " + "; ".join(issues))
+        try:
+            fixed = direct_list(src, llm, issues)
+            if len(schema.problems(fixed)) <= len(issues):
+                plan = fixed
+        except Exception as e:
             log(f"  director: repair failed ({e}); keeping the first plan")
     return plan

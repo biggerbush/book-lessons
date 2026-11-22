@@ -225,7 +225,13 @@ def normalise(plan: dict) -> dict:
             tr = next(t for t in TRANSITIONS[k % len(TRANSITIONS):] + TRANSITIONS if t != prev_tr)
             k += 3
         prev_tr = tr
-        beats.append({"say": say, "scene": scene, "theme": theme, "transition": tr, "p": _clean_params(scene, b.get("p") or b.get("params") or {})})
+        nb = {"say": say, "scene": scene, "theme": theme, "transition": tr, "p": _clean_params(scene, b.get("p") or b.get("params") or {})}
+        try:
+            if b.get("num") is not None and 1 <= int(b["num"]) <= 10:
+                nb["num"] = int(b["num"])
+        except (TypeError, ValueError):
+            pass
+        beats.append(nb)
     if not beats:
         raise ValueError("the plan has no usable beats")
     first = next((i for i, b in enumerate(beats) if b["scene"] == "intro"), None)   # one book card, early on
@@ -238,6 +244,8 @@ def normalise(plan: dict) -> dict:
         if b["scene"] == "cta":
             b["scene"] = "slam"; b["p"] = _clean_params("slam", {"lines": [b["say"][:16]]})
     out = {"title": _s(plan.get("title"), 60), "beats": beats}
+    if plan.get("format") == "list":
+        out["format"] = "list"
     out["words"] = sum(len(b["say"].split()) for b in beats)
     return out
 
@@ -293,6 +301,18 @@ def problems(plan: dict) -> list[str]:
         out.append(f"narration is {n} words; it needs 130-150 to fit about a minute")
     if len(beats) < 9:
         out.append(f"only {len(beats)} beats; use 9-14")
+    if len(beats) > (14 if plan.get("format") == "list" else 15):
+        out.append(f"{len(beats)} beats is too many")
+    if plan.get("format") == "list":
+        nums = [b.get("num") for b in beats if b.get("num")]
+        if nums != list(range(1, 11)):
+            out.append(f"the list must be 10 beats numbered 1 to 10 in order (\"num\"), found {nums}")
+        for b in beats:
+            if b.get("num") and b["scene"] in ("slam", "quote", "intro", "cta"):
+                out.append(f"thing {b['num']} uses a text scene ({b['scene']}); every numbered thing needs an animated graphic")
+        kinds = {b["scene"] for b in beats if b.get("num")}
+        if len(kinds) < 7:
+            out.append(f"the 10 things use only {len(kinds)} kinds of scene; use at least 7 different ones")
     bi = [i for i, b in enumerate(beats) if b["scene"] == "intro"]
     if not bi or bi[0] not in (1, 2):
         out.append("the book card ('intro' scene, hook empty) must be beat 2 or 3, straight after the hook")

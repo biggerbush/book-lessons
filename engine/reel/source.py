@@ -50,3 +50,17 @@ def load(book: str, n: int) -> dict:
     return {"slug": slug, "book": st.get("title") or plan.get("title") or book, "author": st.get("author") or plan.get("author") or "",
             "n": n, "lesson_title": lesson.get("title", ""), "key_idea": lesson.get("key_idea", ""), "summary": plan.get("summary", ""),
             "subtitle": meta.get("subtitle", ""), "script": "\n".join(parts).strip(), "cover": cover, "book_art": book_art}
+
+
+def load_book(book: str) -> dict:
+    """Every lesson of a book, for whole-book reels (e.g. '10 things to do')."""
+    slug = slugify(book)
+    st = json.loads((DATA / slug / "state.json").read_text(encoding="utf8"))
+    ns = sorted(l["n"] for l in st.get("lessons", []) if (DATA / slug / f"lesson-{l['n']:02d}" / "script.txt").exists())
+    if not ns:
+        raise SystemExit(f"No lesson scripts saved for '{book}'.")
+    first = load(book, ns[0])
+    lessons = [load(book, n) for n in ns]
+    first.update({"n": 0, "lesson_title": "10 things to do", "key_idea": "",
+                  "lessons": [{"n": l["n"], "title": l["lesson_title"], "key_idea": l["key_idea"], "script": l["script"]} for l in lessons]})
+    return first

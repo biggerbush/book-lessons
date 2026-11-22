@@ -408,6 +408,18 @@ G.ifthen = d => {     // a plan the reader fills in: when X happens, I will Y (f
   return svg(out);
 };
 
+G.favourite = d => {  // closing slide: pick your favourite (numbered list of everything in the deck), then save / follow
+  const it = (d.items || []).slice(0, 8), rows = Math.ceil((it.length + 1) / 2); let out = '';
+  [...it, null].forEach((c, i) => { const col = i < rows ? 0 : 1, r = i < rows ? i : i - rows, x = 60 + col * 438, y = 26 + r * 96;
+    if (!c) { out += RR(x, y, 410, 80, 20, M.goldwash, `stroke="${M.gold2}" stroke-width="3" stroke-dasharray="9 8"`) + T(x + 205, y + 41, d.yours || 'Your pick? Comment it', { s: 25, w: 800, c: '#8A5A00' }); return; }
+    out += card(x, y, 410, 80, M.white) + disc(x + 42, y + 40, 24, M.blue) + T(x + 42, y + 41, String(i + 1), { s: 24, w: 800 })
+      + T(x + 82, y + 41, c.t, { a: 'start', s: 26, w: 700, f: 'News' }) + (c.icon ? ic(c.icon, x + 372, y + 40, 34, M.muted, 6) : ''); });
+  const by = 26 + rows * 96 + 22, bm = `<path d="M0 0 h22 v30 l-11 -8 l-11 8 Z" fill="${M.ink}"/>`;
+  out += RR(60, by, 410, 84, 42, M.gold2) + `<g transform="translate(128 ${by + 27})">${bm}</g>` + T(290, by + 43, d.save || 'Save for later', { s: 28, w: 800 });
+  out += RR(498, by, 410, 84, 42, M.ink) + T(560, by + 43, '+', { s: 40, w: 800, c: M.gold2 }) + T(720, by + 43, d.follow || 'Follow for more', { s: 28, w: 800, c: '#fff' });
+  return svg(out);
+};
+
 G.tangle = d => {     // a tangle of thoughts -> one clearly written problem
   let pts = ''; for (let i = 0; i <= 260; i++) { const t = i / 10; pts += `${i ? 'L' : 'M'}${(230 + 135 * Math.sin(t * 1.31) * Math.cos(t * 0.47) + 20 * Math.sin(t * 5.3)).toFixed(1)} ${(250 + 130 * Math.sin(t * 0.83 + 1) * Math.cos(t * 0.29) + 18 * Math.cos(t * 4.1)).toFixed(1)}`; }
   let out = S(1, 'draw', `<path d="${pts}" fill="none" stroke="${M.ink}" stroke-width="5" stroke-linejoin="round" opacity=".85"/>`) + S(1, 'pop', pill(230, 470, d.left || 'in your head', M.white, M.ink, 24));

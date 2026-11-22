@@ -62,7 +62,8 @@ def render(html: str, out_dir: Path) -> list[Path]:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="engine.carousel")
-    ap.add_argument("--book", required=True)
+    ap.add_argument("--book", help="a book from the engine; leave out for a standalone deck (needs --plan and --name)")
+    ap.add_argument("--name", help="standalone deck name, e.g. 7-laws")
     ap.add_argument("--lesson", type=int, default=1)
     ap.add_argument("--format", choices=["lesson", "list"], default="lesson", help="list = '10 things to do' from the whole book")
     ap.add_argument("--plan")
@@ -70,6 +71,18 @@ def main(argv=None) -> int:
     ap.add_argument("--out")
     a = ap.parse_args(argv)
     LIST = a.format == "list"
+    if not a.book:                                                  # a standalone deck: not tied to a book
+        if not (a.plan and a.name):
+            raise SystemExit("A deck without --book needs --plan and --name.")
+        from ..config import slugify
+        plan = json.loads(Path(a.plan).read_text(encoding="utf8"))
+        src = {"slug": slugify(a.name), "book": "", "author": "", "cover": "", "book_art": ""}
+        out = Path(a.out) if a.out else SITE / "carousels" / src["slug"]
+        files = render(page(plan, src, a.name), out)
+        imgs = "".join(f'<a href="{f.name}" download><img src="{f.name}" alt="slide {i + 1}"></a>' for i, f in enumerate(files))
+        (out / "index.html").write_text(PREVIEW % {"title": plan.get("title", a.name), "imgs": imgs}, encoding="utf8")
+        log(f"carousel: {len(files)} slides -> {out}")
+        return 0
     src = source.load_book(a.book) if LIST else source.load(a.book, a.lesson)
     tag = "top10" if LIST else a.lesson
     work = DATA / src["slug"] / "carousels" / ("top10" if LIST else f"lesson-{a.lesson:02d}")

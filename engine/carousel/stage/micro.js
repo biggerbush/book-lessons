@@ -400,10 +400,67 @@ G.ifthen = d => {     // a plan the reader fills in: when X happens, I will Y (f
   const it = (d.items || [{}, {}, {}]).slice(0, 3); let out = '';
   it.forEach((c, i) => { const y = 40 + i * 155, ex = i === 0 && c.when;
     out += card(60, y, 848, 132, ex ? M.goldwash : M.white);
-    out += T(100, y + 50, 'When', { a: 'start', s: 26, w: 800, c: M.muted }) + T(100, y + 104, 'I will', { a: 'start', s: 26, w: 800, c: M.muted });
+    out += T(100, y + 50, d.a || 'When', { a: 'start', s: 26, w: 800, c: M.muted }) + T(100, y + 104, d.b || 'I will', { a: 'start', s: 26, w: 800, c: M.muted });
     if (ex) out += T(190, y + 50, c.when, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' }) + T(200, y + 104, c.will, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' });
     else out += `<line x1="190" x2="860" y1="${y + 60}" y2="${y + 60}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/><line x1="200" x2="860" y1="${y + 114}" y2="${y + 114}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/>`; });
   if (d.note) out += T(PW / 2, 528, d.note, { s: 22, w: 600, c: M.muted });
+  return svg(out);
+};
+
+G.tangle = d => {     // a tangle of thoughts -> one clearly written problem
+  let pts = ''; for (let i = 0; i <= 260; i++) { const t = i / 10; pts += `${i ? 'L' : 'M'}${(230 + 135 * Math.sin(t * 1.31) * Math.cos(t * 0.47) + 20 * Math.sin(t * 5.3)).toFixed(1)} ${(250 + 130 * Math.sin(t * 0.83 + 1) * Math.cos(t * 0.29) + 18 * Math.cos(t * 4.1)).toFixed(1)}`; }
+  let out = `<path d="${pts}" fill="none" stroke="${M.ink}" stroke-width="5" stroke-linejoin="round" opacity=".85"/>` + pill(230, 470, d.left || 'in your head', M.white, M.ink, 24);
+  out += arrowL(410, 260, 500, 260, true);
+  out += card(520, 50, 390, 420, M.white) + T(560, 100, d.head || 'WRITTEN DOWN', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted });
+  (d.lines || []).slice(0, 3).forEach((l, i) => { out += disc(572, 168 + i * 72, 9, M.blue2) + T(596, 170 + i * 72, l, { a: 'start', s: 26, w: 700, f: 'News' }); });
+  out += RR(544, 380, 342, 64, 16, M.goldwash) + T(566, 413, d.last || 'The real problem is…', { a: 'start', s: 25, w: 800, c: '#8A5A00' });
+  return svg(out);
+};
+
+G.pareto = d => {     // ten efforts, two of them gold, feeding most of the result
+  const gold = d.gold || [2, 7]; let out = T(60, 60, d.top || 'EFFORT', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted });
+  for (let i = 0; i < 10; i++) { const x = 60 + i * 85, g = gold.includes(i); out += RR(x, 90, 76, 76, 16, g ? M.gold2 : M.white, 'filter="url(#sh)"') + T(x + 38, 129, String(i + 1), { s: 26, w: 800, c: g ? M.ink : M.muted }); }
+  out += T(60, 300, d.bottom || 'RESULTS', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted });
+  out += RR(60, 330, 848, 84, 20, M.blue) + RR(60, 330, 678, 84, 20, M.gold2) + T(399, 373, d.big || '80% of the results', { s: 30, w: 800 }) + T(823, 373, d.small || '20%', { s: 26, w: 800, c: M.muted });
+  gold.forEach(i => { const x = 98 + i * 85; out += `<path d="M${x} 176 C ${x} 250, 399 250, 399 322" stroke="${M.gold}" stroke-width="5" fill="none" marker-end="url(#ahg)"/>`; });
+  if (d.q) out += T(PW / 2, 500, d.q, { s: 27, w: 800 });
+  return svg(out);
+};
+
+G.curve = d => {      // skill compounds first; the payoff follows later
+  const X0 = 90, X1 = 880, Y0 = 440;
+  const sk = Array.from({ length: 41 }, (_, i) => { const t = i / 40; return [X0 + t * (X1 - X0), Y0 - 330 * Math.pow(t, 1.6)]; });
+  const mo = Array.from({ length: 41 }, (_, i) => { const t = i / 40; return [X0 + t * (X1 - X0), Y0 - 260 * Math.pow(Math.max(0, (t - 0.35) / 0.65), 2.2)]; });
+  const P = a => a.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ');
+  let out = `<path d="${P(sk)} L${[...mo].reverse().map(p => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' L')} Z" fill="${M.goldwash}"/>`;
+  out += `<line x1="${X0}" y1="${Y0}" x2="${X1 + 20}" y2="${Y0}" stroke="${M.ink}" stroke-width="4"/>` + T(X1 + 10, Y0 + 34, d.x || 'time', { a: 'end', s: 22, w: 700, c: M.muted });
+  out += `<path d="${P(sk)}" fill="none" stroke="${M.ink}" stroke-width="8" stroke-linecap="round"/><path d="${P(mo)}" fill="none" stroke="${M.gold}" stroke-width="8" stroke-linecap="round"/>`;
+  out += pill(640, 90, d.a || 'what you know', M.ink, '#fff', 24) + pill(790, 385, d.b || 'what you earn', M.gold2, M.ink, 24);
+  out += T(430, 300, d.gap || 'the lag', { s: 26, w: 800, f: 'News', c: '#8A5A00' });
+  if (d.q) out += T(PW / 2, 515, d.q, { s: 25, w: 800 });
+  return svg(out);
+};
+
+G.fork = d => {       // a yes/no fork: the question first, two very different paths
+  let out = card(184, 30, 600, 104, M.ink) + T(484, 83, d.q || 'Does this need deciding today?', { s: 30, w: 800, f: 'News', c: '#fff' });
+  out += `<path d="M420 140 C 420 210, 245 200, 245 268" stroke="${M.ink}" stroke-width="5" fill="none" marker-end="url(#ah)"/><path d="M548 140 C 548 210, 723 200, 723 268" stroke="${M.gold}" stroke-width="5" fill="none" marker-end="url(#ahg)"/>`;
+  out += pill(300, 196, 'YES', M.white, M.ink, 22) + pill(668, 196, 'NO', M.gold2, M.ink, 22);
+  const side = (x, c, gold) => { let o = card(x, 280, 370, 220, gold ? M.goldwash : M.white) + ic(c.icon || 'check', x + 70, 345, 62, M.ink, 6) + T(x + 120, 348, c.t || '', { a: 'start', s: 30, w: 800 });
+    (c.items || []).slice(0, 3).forEach((it, k) => { o += T(x + 40, 410 + k * 36, (gold ? '✓  ' : '•  ') + it, { a: 'start', s: 23, w: 600, c: M.ink2 }); }); return o; };
+  out += side(60, d.yes || {}, false) + side(538, d.no || {}, true);
+  return svg(out);
+};
+
+G.hick = d => {       // many options = a long wait; few options = a quick pick
+  const pal = [M.blue2, M.gold2, '#E9B3AE', '#BFD9C8', M.blue, '#D9CCE8'], N = d.many || 24; let out = '';
+  out += T(240, 50, `${N} OPTIONS`, { s: 24, w: 800, ls: 2, c: M.muted }) + T(728, 50, `${d.few || 3} OPTIONS`, { s: 24, w: 800, ls: 2, c: M.muted });
+  for (let i = 0; i < N; i++) { const c = i % 6, r = Math.floor(i / 6); out += RR(70 + c * 58, 90 + r * 58, 46, 46, 10, pal[(i * 5) % 6]); }
+  for (let i = 0; i < (d.few || 3); i++) out += RR(588 + i * 98, 120, 82, 82, 18, i === 1 ? M.gold2 : M.blue2, 'filter="url(#sh)"') + (i === 1 ? ic('check', 629 + i * 98 - 98 + 98, 161, 46, M.ink, 8) : '');
+  out += `<line x1="484" y1="80" x2="484" y2="420" stroke="${M.blue2}" stroke-width="3" stroke-dasharray="8 10"/>`;
+  out += RR(70, 360, 340, 34, 17, M.blue) + RR(70, 360, 340, 34, 17, M.ink, 'opacity=".9"') + T(240, 430, d.slow || 'slow, doubtful', { s: 25, w: 800 });
+  out += RR(588, 360, 280, 34, 17, M.blue) + RR(588, 360, 70, 34, 17, M.gold2) + T(728, 430, d.fast || 'fast, confident', { s: 25, w: 800 });
+  out += T(240, 330, 'time to choose', { s: 20, w: 700, c: M.muted }) + T(728, 330, 'time to choose', { s: 20, w: 700, c: M.muted });
+  if (d.q) out += T(PW / 2, 512, d.q, { s: 26, w: 800 });
   return svg(out);
 };
 
@@ -434,17 +491,25 @@ SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big bo
   const R = 360, cy = Math.max(880, y1 + sub.offsetHeight + 60 + R);
   el.append(h('', { position: 'absolute', left: 540 - 470 + 'px', top: cy - 470 + 'px', width: '940px', height: '940px', borderRadius: '50%', background: `radial-gradient(circle, ${M.goldwash} 0%, rgba(255,243,209,0) 64%)` }));
   el.append(h('', { position: 'absolute', left: 540 - R + 'px', top: cy - R + 'px', width: 2 * R + 'px', height: 2 * R + 'px', borderRadius: '50%', border: `3px dashed ${M.blue2}` }));
+  if (s.emblem) {               // no book: a numbered emblem with icons orbiting the ring
+    const e = s.emblem, icons = (e.icons || []).slice(0, 10), n = icons.length;
+    el.append(h('', { position: 'absolute', left: 540 - 190 + 'px', top: cy - 190 + 'px', width: '380px', height: '380px', borderRadius: '50%', background: M.ink, boxShadow: '0 50px 80px -30px rgba(11,31,58,.55)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
+      `<div style="font-family:News;font-weight:800;font-size:230px;line-height:.9;color:${M.gold2}">${esc(e.big || '')}</div><div style="font-family:Sans;font-weight:800;font-size:40px;letter-spacing:.18em;color:#fff;margin-top:6px">${esc(e.label || '')}</div>`));
+    icons.forEach((nm, i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n, x = 540 + R * Math.cos(a), y = cy + R * Math.sin(a);
+      el.append(h('', { position: 'absolute', left: x - 62 + 'px', top: y - 62 + 'px', width: '124px', height: '124px', borderRadius: '50%', background: i % 3 === 0 ? M.gold2 : '#fff', boxShadow: '0 18px 30px -14px rgba(11,31,58,.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: M.ink }, iconSVG(nm, 72, 6))); });
+  } else {
   const bw = 380, bh = 570, bx = 540 - bw / 2, by = cy - bh / 2;
   const book = h('', { position: 'absolute', left: bx + 'px', top: by + 'px', width: bw + 'px', height: bh + 'px', transform: 'rotate(-4deg)' });
   book.append(h('', { position: 'absolute', left: '16px', top: '12px', width: bw + 'px', height: bh - 8 + 'px', borderRadius: '10px', background: 'repeating-linear-gradient(90deg,#fff 0 3px,#E6E9EF 3px 4px)', boxShadow: '0 60px 80px -34px rgba(11,31,58,.55)' }));
   const im = document.createElement('img'); im.src = D.book_art || D.cover || ''; Object.assign(im.style, { position: 'absolute', left: 0, top: 0, width: bw + 'px', height: bh + 'px', objectFit: D.book_art ? 'fill' : 'cover', borderRadius: '10px', boxShadow: '0 30px 50px -24px rgba(11,31,58,.45)' });
   book.append(im); el.append(book);
-  el.append(h('', { position: 'absolute', right: '44px', top: cy + 200 + 'px', display: 'flex', alignItems: 'center', gap: '14px', background: M.ink, color: '#fff', fontFamily: 'Sans', fontWeight: 800, fontSize: '27px', padding: '15px 16px 15px 24px', borderRadius: '999px', boxShadow: `0 18px 34px -16px rgba(11,31,58,.6)` },
+  }
+  el.append(h('', { position: 'absolute', right: s.emblem ? '' : '44px', left: s.emblem ? '50%' : '', transform: s.emblem ? 'translateX(-50%)' : '', top: (s.emblem ? cy + 360 + 40 : cy + 200) + 'px', display: 'flex', alignItems: 'center', gap: '14px', background: M.ink, color: '#fff', fontFamily: 'Sans', fontWeight: 800, fontSize: '27px', padding: '15px 16px 15px 24px', borderRadius: '999px', boxShadow: `0 18px 34px -16px rgba(11,31,58,.6)` },
     `${esc(s.swipe || 'Swipe to fix it')}<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:${M.gold2};color:${M.ink};align-items:center;justify-content:center;font-size:24px">→</span>`));
 };
 
 SL.lesson = (el, s, D) => {     // title, then text + graphic (or graphic + text when order is 'graphic'), whole stack centred
-  const gf = (s.order || D.order) === 'graphic';
+  const ord = s.order || D.order, gf = ord === 'graphic', imf = ord === 'image';
   let nb = null;
   if (s.num) {                  // list decks: "3/10" and a ten-step progress bar above the title
     const segs = Array.from({ length: D.of || 10 }, (_, k) => `<div style="flex:1;height:10px;border-radius:5px;background:${k < s.num ? M.gold2 : '#E3E8EF'}"></div>`).join('');
@@ -457,14 +522,16 @@ SL.lesson = (el, s, D) => {     // title, then text + graphic (or graphic + text
   const b = h('bd', { top: '0px' }, bodyHTML(s.body)); el.append(b);
   const g = s.graphic && G[s.graphic.kind], p = g ? h('panel') : null;
   if (p) { p.innerHTML = g(s.graphic, D); el.append(p); }
-  const ph = p ? PH : 0, gNB = nb ? 34 : 0, nbh = nb ? 64 : 0, gapTB = gf ? 40 : 30, gapBP = gf ? 44 : 48, M0 = 70;
+  const ph = p ? PH : 0, gNB = nb ? (imf ? 26 : 34) : 0, nbh = nb ? 64 : 0, gapTB = gf ? 40 : (imf ? 26 : 30), gapBP = gf || imf ? 44 : 48, M0 = 70;
   const room = 1350 - 2 * M0 - nbh - gNB - t.offsetHeight - gapTB - (p ? ph + gapBP : 0);
   fitFont(b, 'fontSize', 42, 27, () => b.offsetHeight <= room);
   const total = nbh + gNB + t.offsetHeight + gapTB + b.offsetHeight + (p ? gapBP + ph : 0);
   let y = Math.max(M0, (1350 - total) / 2);
+  if (imf && p) { p.style.top = y + 'px'; y += ph + gapBP; }
   if (nb) { nb.style.top = y + 'px'; y += nbh + gNB; }
   t.style.top = y + 'px'; y += t.offsetHeight + gapTB;
-  if (gf && p) { p.style.top = y + 'px'; y += ph + gapBP; b.style.top = y + 'px'; }
+  if (imf) { b.style.top = y + 'px'; }
+  else if (gf && p) { p.style.top = y + 'px'; y += ph + gapBP; b.style.top = y + 'px'; }
   else { b.style.top = y + 'px'; y += b.offsetHeight + gapBP; if (p) p.style.top = y + 'px'; }
 };
 

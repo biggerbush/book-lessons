@@ -32,7 +32,8 @@ def page(plan: dict, src: dict, n: int) -> str:
     css = (STAGE / ("micro.css" if micro else "carousel.css")).read_text(encoding="utf8")
     for key, f in FONTS:
         css = css.replace(key, "data:font/woff2;base64," + base64.b64encode((STAGE / "fonts" / f).read_bytes()).decode())
-    data = {"book": src["book"], "author": src.get("author", ""), "lesson": n, "cover": src.get("cover", ""), "book_art": src.get("book_art", ""), "slides": plan["slides"]}
+    data = {"book": src["book"], "author": src.get("author", ""), "lesson": n, "cover": src.get("cover", ""), "book_art": src.get("book_art", ""), "slides": plan["slides"],
+            "order": plan.get("order", ""), "of": plan.get("of", 10)}
     libs = (REEL_STAGE / "icons.js").read_text(encoding="utf8") if micro else (STAGE / "rough.js").read_text(encoding="utf8")
     return ("<!doctype html><html><head><meta charset=utf-8><style>" + css + "</style></head><body><div id=deck></div><script>"
             + "window.CAROUSEL=" + json.dumps(data).replace("</", "<\\/") + ";\n" + libs
@@ -63,18 +64,23 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="engine.carousel")
     ap.add_argument("--book", required=True)
     ap.add_argument("--lesson", type=int, default=1)
+    ap.add_argument("--format", choices=["lesson", "list"], default="lesson", help="list = '10 things to do' from the whole book")
     ap.add_argument("--plan")
     ap.add_argument("--dry", action="store_true", help="free: use the example plan")
     ap.add_argument("--out")
     a = ap.parse_args(argv)
-    src = source.load(a.book, a.lesson)
-    work = DATA / src["slug"] / "carousels" / f"lesson-{a.lesson:02d}"
+    LIST = a.format == "list"
+    src = source.load_book(a.book) if LIST else source.load(a.book, a.lesson)
+    tag = "top10" if LIST else a.lesson
+    work = DATA / src["slug"] / "carousels" / ("top10" if LIST else f"lesson-{a.lesson:02d}")
     saved = work / "plan.json"
     if a.plan:
         plan = json.loads(Path(a.plan).read_text(encoding="utf8"))
     elif a.dry:
         plan = json.loads(EXAMPLE.read_text(encoding="utf8"))
-    elif saved.exists():
+    elif saved.exists() or LIST:
+        if not saved.exists():
+            raise SystemExit("List carousels need a plan (--plan) for now.")
         plan = json.loads(saved.read_text(encoding="utf8"))
     else:
         from ..llm import LLM
@@ -83,10 +89,10 @@ def main(argv=None) -> int:
     if not a.dry:
         work.mkdir(parents=True, exist_ok=True)
         saved.write_text(json.dumps(plan, indent=1), encoding="utf8")
-    out = Path(a.out) if a.out else SITE / "carousels" / f"{src['slug']}-{a.lesson}"
-    files = render(page(plan, src, a.lesson), out)
+    out = Path(a.out) if a.out else SITE / "carousels" / f"{src['slug']}-{tag}"
+    files = render(page(plan, src, tag), out)
     imgs = "".join(f'<a href="{f.name}" download><img src="{f.name}" alt="slide {i + 1}"></a>' for i, f in enumerate(files))
-    (out / "index.html").write_text(PREVIEW % {"title": f"{src['book']} · lesson {a.lesson}", "imgs": imgs}, encoding="utf8")
+    (out / "index.html").write_text(PREVIEW % {"title": f"{src['book']} · {'10 things' if LIST else 'lesson %s' % a.lesson}", "imgs": imgs}, encoding="utf8")
     log(f"carousel: {len(files)} slides -> {out}")
     return 0
 

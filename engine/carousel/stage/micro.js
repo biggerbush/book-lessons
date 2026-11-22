@@ -396,6 +396,17 @@ G.practice = d => {   // fill in the blank: the reader writes the mirror
   return svg(out);
 };
 
+G.ifthen = d => {     // a plan the reader fills in: when X happens, I will Y (first row is the example)
+  const it = (d.items || [{}, {}, {}]).slice(0, 3); let out = '';
+  it.forEach((c, i) => { const y = 40 + i * 155, ex = i === 0 && c.when;
+    out += card(60, y, 848, 132, ex ? M.goldwash : M.white);
+    out += T(100, y + 50, 'When', { a: 'start', s: 26, w: 800, c: M.muted }) + T(100, y + 104, 'I will', { a: 'start', s: 26, w: 800, c: M.muted });
+    if (ex) out += T(190, y + 50, c.when, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' }) + T(200, y + 104, c.will, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' });
+    else out += `<line x1="190" x2="860" y1="${y + 60}" y2="${y + 60}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/><line x1="200" x2="860" y1="${y + 114}" y2="${y + 114}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/>`; });
+  if (d.note) out += T(PW / 2, 528, d.note, { s: 22, w: 600, c: M.muted });
+  return svg(out);
+};
+
 G.book = (d, D) => `<div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 55%,${M.goldwash},${M.panel} 60%)"></div>
   <div class="card" style="left:254px;top:70px;width:460px;height:368px;transform:rotate(-3deg)"><img src="${D.cover || ''}"></div>
   ${d.chip ? `<div style="position:absolute;left:0;right:0;top:470px;text-align:center"><span style="display:inline-block;background:${M.ink};color:#fff;font-family:Sans;font-weight:800;font-size:26px;padding:12px 26px;border-radius:999px">${esc(d.chip)}</span></div>` : ''}`;
@@ -418,7 +429,7 @@ SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big bo
   const t = h('cv-title', { fontSize: '104px', lineHeight: '1.0', left: '70px', width: '940px', top: '74px' }, md(s.title || D.book));
   el.append(t); fitFont(t, 'fontSize', 104, 66, () => t.offsetHeight <= 320);
   const y1 = 74 + t.offsetHeight + 24;
-  const credit = s.sub ? md(s.sub) : `A ${esc(s.minutes || 2)}-minute lesson from <b style="font-style:normal;color:${M.ink}">${esc(D.book)}</b>${D.author ? ` by ${esc(String(D.author).split(/ with | and |, /)[0])}` : ''}`;
+  const credit = s.sub ? md(s.sub) : `${D.lesson === 'top10' ? `${D.of || 10} things to do from` : `A ${esc(s.minutes || 2)}-minute lesson from`} <b style="font-style:normal;color:${M.ink}">${esc(D.book)}</b>${D.author ? ` by ${esc(String(D.author).split(/ with | and |, /)[0])}` : ''}`;
   const sub = h('cv-sub', { top: y1 + 'px', fontSize: '33px', left: '60px', width: '960px' }, credit); el.append(sub);
   const R = 360, cy = Math.max(880, y1 + sub.offsetHeight + 60 + R);
   el.append(h('', { position: 'absolute', left: 540 - 470 + 'px', top: cy - 470 + 'px', width: '940px', height: '940px', borderRadius: '50%', background: `radial-gradient(circle, ${M.goldwash} 0%, rgba(255,243,209,0) 64%)` }));
@@ -432,19 +443,29 @@ SL.cover = (el, s, D) => {      // hook headline, one credit line, then a big bo
     `${esc(s.swipe || 'Swipe to fix it')}<span style="display:inline-flex;width:40px;height:40px;border-radius:50%;background:${M.gold2};color:${M.ink};align-items:center;justify-content:center;font-size:24px">→</span>`));
 };
 
-SL.lesson = (el, s, D) => {     // text on top, graphic panel underneath, whole stack centred
+SL.lesson = (el, s, D) => {     // title, then text + graphic (or graphic + text when order is 'graphic'), whole stack centred
+  const gf = (s.order || D.order) === 'graphic';
+  let nb = null;
+  if (s.num) {                  // list decks: "3/10" and a ten-step progress bar above the title
+    const segs = Array.from({ length: D.of || 10 }, (_, k) => `<div style="flex:1;height:10px;border-radius:5px;background:${k < s.num ? M.gold2 : '#E3E8EF'}"></div>`).join('');
+    nb = h('', { position: 'absolute', left: '80px', width: '920px', top: '0px', height: '64px', display: 'flex', alignItems: 'center', gap: '22px' },
+      `<div style="font-family:Sans;font-weight:800;font-size:56px;line-height:1;color:${M.ink};white-space:nowrap">${s.num}<span style="color:${M.gold2};font-size:34px">/${D.of || 10}</span></div><div style="flex:1;display:flex;gap:8px">${segs}</div>`);
+    el.append(nb);
+  }
   const t = h('ttl', { top: '0px' }, md(s.title || '')); el.append(t);
   fitFont(t, 'fontSize', 64, 44, () => t.offsetHeight <= 150);
   const b = h('bd', { top: '0px' }, bodyHTML(s.body)); el.append(b);
   const g = s.graphic && G[s.graphic.kind], p = g ? h('panel') : null;
   if (p) { p.innerHTML = g(s.graphic, D); el.append(p); }
-  const ph = p ? PH : 0, gapTB = 30, gapBP = 48, M0 = 70;
-  const room = 1350 - 2 * M0 - t.offsetHeight - gapTB - (p ? ph + gapBP : 0);
+  const ph = p ? PH : 0, gNB = nb ? 34 : 0, nbh = nb ? 64 : 0, gapTB = gf ? 40 : 30, gapBP = gf ? 44 : 48, M0 = 70;
+  const room = 1350 - 2 * M0 - nbh - gNB - t.offsetHeight - gapTB - (p ? ph + gapBP : 0);
   fitFont(b, 'fontSize', 42, 27, () => b.offsetHeight <= room);
-  const total = t.offsetHeight + gapTB + b.offsetHeight + (p ? gapBP + ph : 0), y0 = Math.max(M0, (1350 - total) / 2);
-  t.style.top = y0 + 'px';
-  b.style.top = y0 + t.offsetHeight + gapTB + 'px';
-  if (p) p.style.top = y0 + t.offsetHeight + gapTB + b.offsetHeight + gapBP + 'px';
+  const total = nbh + gNB + t.offsetHeight + gapTB + b.offsetHeight + (p ? gapBP + ph : 0);
+  let y = Math.max(M0, (1350 - total) / 2);
+  if (nb) { nb.style.top = y + 'px'; y += nbh + gNB; }
+  t.style.top = y + 'px'; y += t.offsetHeight + gapTB;
+  if (gf && p) { p.style.top = y + 'px'; y += ph + gapBP; b.style.top = y + 'px'; }
+  else { b.style.top = y + 'px'; y += b.offsetHeight + gapBP; if (p) p.style.top = y + 'px'; }
 };
 
 window.buildDeck = async () => {

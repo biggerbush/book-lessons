@@ -33,6 +33,7 @@ def main(argv=None) -> int:
     ap.add_argument("--workers", type=int, default=2)
     ap.add_argument("--out", help="where to write reel.mp4 (default site/reels/<slug>-<n>/)")
     ap.add_argument("--no-sfx", action="store_true")
+    ap.add_argument("--plan-only", action="store_true", help="ask Claude for the plan, save it, and stop (no voice, no render)")
     ap.add_argument("--captions", action="store_true", help="burn in word-by-word captions (off by default)")
     ap.add_argument("--look", choices=["white", "dark"], default="white", help="white = white backgrounds, navy + gold (default); dark = the navy look")
     a = ap.parse_args(argv)
@@ -63,6 +64,9 @@ def main(argv=None) -> int:
     plan_file.write_text(json.dumps(plan, indent=1), encoding="utf8")
     text = schema.narration(plan)
     log(f"plan: {len(plan['beats'])} beats, {plan['words']} words")
+    if a.plan_only:
+        log(f"plan only: saved {plan_file}")
+        return 0
 
     mp3, words, real = voice.make(text, work, a.dry)
     usage["tts_chars"] = len(text) if real and not (work / "align.json").exists() else usage["tts_chars"]

@@ -1,5 +1,5 @@
 name: Create reel
-run-name: "Create reel: ${{ inputs.book }} lesson ${{ inputs.lesson }}${{ inputs.mode == 'dry' && ' (dry run)' || '' }}"
+run-name: "Create reel: ${{ inputs.book }} lesson ${{ inputs.lesson }}${{ inputs.mode == 'dry' && ' (dry run)' || inputs.mode == 'plan' && ' (plan only)' || '' }}"
 
 # Turns one lesson of a book into a ~60s vertical reel (Instagram / TikTok). Output: site/reels/<book>-<lesson>/reel.mp4
 # real = Claude directs + ONE ElevenLabs generation (saved, so re-renders never pay for audio again). dry = free test.
@@ -17,9 +17,9 @@ on:
         type: string
         default: "1"
       mode:
-        description: "real = Claude + ElevenLabs credits. dry = free test (silent, example plan)."
+        description: "real = Claude + ElevenLabs credits. plan = Claude writes the plan only (no voice). dry = free test (silent, example plan)."
         type: choice
-        options: [real, dry]
+        options: [real, plan, dry]
         default: real
 
 permissions:
@@ -57,6 +57,7 @@ jobs:
         run: |
           args=(--book "$BOOK" --lesson "$LESSON")
           [ "$MODE" = "dry" ] && args+=(--dry --scale 0.5 --fps 24)
+          [ "$MODE" = "plan" ] && args+=(--plan-only)
           python -m engine.reel "${args[@]}"
       - name: Save audio, plan and video
         if: ${{ always() }}

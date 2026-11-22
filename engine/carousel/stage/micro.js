@@ -3,7 +3,7 @@
 const M = { ink: '#0B1F3A', ink2: '#2B3A50', muted: '#667085', gold: '#F2A900', gold2: '#FFC233', goldwash: '#FFF3D1', blue: '#EAF0F8', blue2: '#C9D8EE', panel: '#F3F5F8', white: '#FFFFFF', red: '#D92D20' };
 const PW = 968, PH = 560;
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const md = s => esc(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\*([^*]+)\*/g, '<span class="hl">$1</span>').replace(/(^|[\s(“"'])_([^_]+)_/g, '$1<i>$2</i>');
+const md = s => esc(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\*([^*]+)\*/g, '<span class="hl">$1</span>').replace(/(^|[\s(“"'])_([^_]+)_/g, '$1<i>$2</i>').replace(/~([^~]+)~/g, '<span class="ul">$1</span>');
 const h = (cls, css, html) => { const d = document.createElement('div'); if (cls) d.className = cls; if (css) Object.assign(d.style, css); if (html != null) d.innerHTML = html; return d; };
 
 /* ------------------------------------------------------------ svg helpers (all coordinates in the 968x560 panel) */

@@ -399,7 +399,7 @@ G.practice = d => {   // fill in the blank: the reader writes the mirror
 
 G.ifthen = d => {     // a plan the reader fills in: when X happens, I will Y (first row is the example)
   const it = (d.items || [{}, {}, {}]).slice(0, 3); let out = '', rest = '';
-  it.forEach((c, i) => { const y = 40 + i * 155, ex = i === 0 && c.when;
+  it.forEach((c, i) => { const y = 40 + i * 155, ex = !!c.when;
     const base = card(60, y, 848, 132, ex ? M.goldwash : M.white) + T(100, y + 50, d.a || 'When', { a: 'start', s: 26, w: 800, c: M.muted }) + T(100, y + 104, d.b || 'I will', { a: 'start', s: 26, w: 800, c: M.muted });
     if (ex) out += S(1, 'pop', base) + S(2, 'type', T(190, y + 50, c.when, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' })) + S(3, 'type', T(200, y + 104, c.will, { a: 'start', s: 28, w: 700, f: 'News', c: '#8A5A00' }));
     else rest += `<g>${base}<line x1="190" x2="860" y1="${y + 60}" y2="${y + 60}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/><line x1="200" x2="860" y1="${y + 114}" y2="${y + 114}" stroke="${M.ink}" stroke-width="3" stroke-dasharray="10 10"/></g>`; });
@@ -413,8 +413,13 @@ G.tangle = d => {     // a tangle of thoughts -> one clearly written problem
   let out = S(1, 'draw', `<path d="${pts}" fill="none" stroke="${M.ink}" stroke-width="5" stroke-linejoin="round" opacity=".85"/>`) + S(1, 'pop', pill(230, 470, d.left || 'in your head', M.white, M.ink, 24));
   out += S(2, 'draw', arrowL(410, 260, 500, 260, true));
   out += S(2, 'pop', card(520, 50, 390, 420, M.white) + T(560, 100, d.head || 'WRITTEN DOWN', { a: 'start', s: 22, w: 800, ls: 2, c: M.muted }));
-  (d.lines || []).slice(0, 3).forEach((l, i) => { out += S(3 + i, 'type', disc(572, 168 + i * 72, 9, M.blue2) + T(596, 170 + i * 72, l, { a: 'start', s: 26, w: 700, f: 'News' })); });
-  out += S(3 + Math.min(3, (d.lines || []).length), 'pop', RR(544, 380, 342, 64, 16, M.goldwash) + T(566, 413, d.last || 'The real problem is…', { a: 'start', s: 25, w: 800, c: '#8A5A00' }));
+  const L = (d.lines || []).slice(0, 4), done = d.done == null ? -1 : +d.done, gap = 76, y0 = 250 - (L.length - 1) * gap / 2 + 20;
+  L.forEach((l, i) => { const y = y0 + i * gap, isDone = i === done;   // a to-do list: one item ticked and crossed off
+    out += S(3 + i, 'type', RR(562, y - 20, 38, 38, 9, isDone ? M.gold2 : M.white, `stroke="${isDone ? M.gold2 : M.blue2}" stroke-width="3"`)
+      + T(624, y + 1, l, { a: 'start', s: 27, w: 700, f: 'News', c: isDone ? M.muted : M.ink })); });
+  if (done >= 0 && done < L.length) { const y = y0 + done * gap, w = Math.min(250, L[done].length * 13.5);
+    out += S(3 + L.length, 'pop', ic('check', 581, y - 1, 26, M.ink, 9)) + S(3 + L.length, 'grow', `<rect x="618" y="${y - 2}" width="${w + 12}" height="4" rx="2" fill="${M.ink}"/>`); }
+  if (d.last) out += S(4 + L.length, 'pop', RR(544, 380, 342, 64, 16, M.goldwash) + T(566, 413, d.last, { a: 'start', s: 25, w: 800, c: '#8A5A00' }));
   return svg(out);
 };
 
